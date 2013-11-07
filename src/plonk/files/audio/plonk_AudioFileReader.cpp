@@ -47,7 +47,8 @@ AudioFileReaderInternal::AudioFileReaderInternal() throw()
     newPositionOnNextRead (-1),
     hitEndOfFile (false),
     numChannelsChanged (false),
-    defaultNumChannels (0)
+    defaultNumChannels (0),
+    metaData (0)
 {
     pl_AudioFileReader_Init (getPeerRef());
 }
@@ -58,7 +59,8 @@ AudioFileReaderInternal::AudioFileReaderInternal (const char* path, const int bu
     newPositionOnNextRead (-1),
     hitEndOfFile (false),
     numChannelsChanged (false),
-    defaultNumChannels (0)
+    defaultNumChannels (0),
+    metaData (0)
 {
     init (path, readMetaData);
 }
@@ -100,7 +102,8 @@ AudioFileReaderInternal::AudioFileReaderInternal (ByteArray const& bytes, const 
     newPositionOnNextRead (-1),
     hitEndOfFile (false),
     numChannelsChanged (false),
-    defaultNumChannels (0)
+    defaultNumChannels (0),
+    metaData (0)
 {
     init (bytes, readMetaData);
 }
@@ -112,7 +115,8 @@ AudioFileReaderInternal::AudioFileReaderInternal (FilePathArray const& fileArray
     newPositionOnNextRead (-1),
     hitEndOfFile (false),
     numChannelsChanged (false),
-    defaultNumChannels (0)
+    defaultNumChannels (0),
+    metaData (0)
 {
     pl_AudioFileReader_Init (getPeerRef());
     
@@ -135,7 +139,8 @@ AudioFileReaderInternal::AudioFileReaderInternal (FilePathArray const& fileArray
     hitEndOfFile (false),
     numChannelsChanged (false),
     nextMultiIndexRef (indexRef),
-    defaultNumChannels (0)
+    defaultNumChannels (0),
+    metaData (0)
 {
     pl_AudioFileReader_Init (getPeerRef());
     
@@ -157,7 +162,8 @@ AudioFileReaderInternal::AudioFileReaderInternal (AudioFileReaderArray const& au
     newPositionOnNextRead (-1),
     hitEndOfFile (false),
     numChannelsChanged (false),
-    defaultNumChannels (0)
+    defaultNumChannels (0),
+    metaData (0)
 {
     pl_AudioFileReader_Init (getPeerRef());
         
@@ -189,7 +195,8 @@ AudioFileReaderInternal::AudioFileReaderInternal (FilePathQueue const& fileQueue
     newPositionOnNextRead (-1),
     hitEndOfFile (false),
     numChannelsChanged (false),
-    defaultNumChannels (0)
+    defaultNumChannels (0),
+    metaData (0)
 {
     pl_AudioFileReader_Init (getPeerRef());
     
@@ -234,7 +241,8 @@ AudioFileReaderInternal::AudioFileReaderInternal (AudioFileReaderQueue const& au
     newPositionOnNextRead (-1),
     hitEndOfFile (false),
     numChannelsChanged (false),
-    defaultNumChannels (0)
+    defaultNumChannels (0),
+    metaData (0)
 {
     pl_AudioFileReader_Init (getPeerRef());
     
@@ -256,7 +264,8 @@ AudioFileReaderInternal::AudioFileReaderInternal (AudioFileReaderQueue const& au
 //    newPositionOnNextRead (-1),
 //    hitEndOfFile (false),
 //    numChannelsChanged (false),
-//    defaultNumChannels (0)
+//    defaultNumChannels (0),
+//    metaData (0)
 //{
 //    pl_AudioFileReader_Init (getPeerRef());
 //    
@@ -271,7 +280,7 @@ AudioFileReaderInternal::AudioFileReaderInternal (AudioFileReaderQueue const& au
 //    }
 //}
 
-class AudioFileReaderRegion
+class AudioFileReaderRegion : public PlonkBase
 {
 public:
     AudioFileReaderRegion() throw()
@@ -332,7 +341,8 @@ AudioFileReaderInternal::AudioFileReaderInternal (AudioFileReader const& origina
     newPositionOnNextRead (-1),
     hitEndOfFile (false),
     numChannelsChanged (false),
-    defaultNumChannels (0)
+    defaultNumChannels (0),
+    metaData (0)
 {
     pl_AudioFileReader_Init (getPeerRef());
     
@@ -355,6 +365,7 @@ AudioFileReaderInternal::AudioFileReaderInternal (AudioFileReader const& origina
 
 AudioFileReaderInternal::~AudioFileReaderInternal()
 {
+    delete metaData;
     pl_AudioFileReader_DeInit (getPeerRef());
 }
 
@@ -615,6 +626,14 @@ Text AudioFileReaderInternal::getName() const throw()
     return pl_AudioFileReader_GetName (getPeerRef());
 }
 
+AudioFileMetaData& AudioFileReaderInternal::getMetaData() throw()
+{
+    if (!metaData)
+        metaData = new AudioFileMetaData (pl_AudioFileReader_GetMetaData (&peer));
+    
+    return *metaData;
+}
+
 AudioFileReaderArray AudioFileReader::regionsFromMetaData (const int metaDataOption, const int bufferSize) throw()
 {
     AudioFileReaderArray regionReaderArray;
@@ -627,7 +646,7 @@ AudioFileReaderArray AudioFileReader::regionsFromMetaData (const int metaDataOpt
             pl_AudioFileMetaData_ConvertCuePointsToRegions (metaData, getNumFrames(), metaDataOption & AudioFile::RemoveCuePoints);
      
         PlankDynamicArrayRef regions = pl_AudioFileMetaData_GetRegions (metaData);
-        const int numRegions = pl_DynamicArray_GetSize (regions);
+        const int numRegions = (int)pl_DynamicArray_GetSize (regions);
         
         if (numRegions > 0)
         {
@@ -635,7 +654,7 @@ AudioFileReaderArray AudioFileReader::regionsFromMetaData (const int metaDataOpt
             regionReaderArray.clear();
             PlankAudioFileRegion* regionArray = static_cast<PlankAudioFileRegion*> (pl_DynamicArray_GetArray (regions));
             
-            for (int i = 0; i < numRegions; ++i)
+            for (PlankL i = 0; i < numRegions; ++i)
             {
                 AudioFileReader reader = AudioFileReader (*this,
                                                           pl_AudioFileRegion_GetStartPosition (&regionArray[i]),

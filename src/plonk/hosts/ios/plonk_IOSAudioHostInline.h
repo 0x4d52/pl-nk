@@ -36,13 +36,7 @@
  -------------------------------------------------------------------------------
  */
 
-//#define kOutputBus 0
-//#define kInputBus 1
-
 #if PLANK_INLINING_FUNCTIONS
-
-//static const plonk::Text categoryKey    = "category";
-//static const plonk::Text modeKey        = "mode";
 
 BEGIN_PLONK_NAMESPACE
 
@@ -69,15 +63,6 @@ static void PropertyListener (void *                  inClientData,
                               const void *            inPropertyValue)
 {	
 	IOSAudioHostBase<SampleType> *host = (IOSAudioHostBase<SampleType> *)inClientData;
-//#if PLONK_DEBUG
-//    const char* idstring = pl_FourCharCode2String (inID).string; (void)idstring;
-//    pl_SwapEndianUI ((PlankUI*)idstring);
-//    const int valueint = *(int*)inPropertyValue; (void)valueint;
-//    const UInt32 valueuint = *(UInt32*)inPropertyValue; (void)valueuint;
-//    const float valuefloat = *(float*)inPropertyValue; (void)valuefloat;
-//    const char* valuestring = (const char*)inPropertyValue; (void)valuestring;
-//    const char* valueptr = *(const char**)inPropertyValue; (void)valueptr;
-//#endif
     host->propertyCallback (inID, inDataSize, inPropertyValue);
 }
 
@@ -102,8 +87,6 @@ static inline void audioTypeToShortChannels (SrcType * const src[], AudioBufferL
 	for (UInt32 channel = 0; channel < numChannels; ++channel)
 	{
         AudioBuffer* const audioBuffer = dst->mBuffers + channel;
-//        audioBuffer->mNumberChannels = 1;
-//        audioBuffer->mDataByteSize = length * sizeof (AudioSampleType);
 		AudioSampleType* const audioUnitSamples = (AudioSampleType*)audioBuffer->mData;
 		audioTypeToShort (src[channel], audioUnitSamples, length);
 	}
@@ -248,28 +231,7 @@ void IOSAudioHostBase<SampleType>::startHost() throw()
         // session
         AudioSessionInitialize (NULL, NULL, InterruptionListener<SampleType>, this);
         AudioSessionSetActive (true);
-        
-//        NSLog(@"kAudioSessionCategory_AmbientSound %d", kAudioSessionCategory_AmbientSound);
-//        NSLog(@"kAudioSessionCategory_SoloAmbientSound %d", kAudioSessionCategory_SoloAmbientSound);
-//        NSLog(@"kAudioSessionCategory_MediaPlayback %d", kAudioSessionCategory_MediaPlayback);
-//        NSLog(@"kAudioSessionCategory_RecordAudio %d", kAudioSessionCategory_RecordAudio);
-//        NSLog(@"kAudioSessionCategory_PlayAndRecord %d", kAudioSessionCategory_PlayAndRecord);
-//        NSLog(@"kAudioSessionCategory_AudioProcessing%d", kAudioSessionCategory_AudioProcessing);
-        
-        
-//        UInt32 audioCategory = kAudioSessionCategory_PlayAndRecord; 
-//            
-//        if (this->getOtherOptions().containsKey (categoryKey))
-//            audioCategory = (UInt32)this->getOtherOptions().at (categoryKey).template asUnchecked<IntVariable>();
-//        
-//        AudioSessionSetProperty (kAudioSessionProperty_AudioCategory, sizeof (audioCategory), &audioCategory);
-//        
-//        if (this->getOtherOptions().containsKey (modeKey))
-//        {
-//            UInt32 mode = (UInt32)this->getOtherOptions().at (modeKey).template asUnchecked<IntVariable>();
-//            AudioSessionSetProperty (kAudioSessionProperty_Mode, sizeof (mode), &mode);
-//        }
-        
+                
         AudioSessionAddPropertyListener (kAudioSessionProperty_AudioRouteChange, PropertyListener<SampleType>, this);
         AudioSessionAddPropertyListener (kAudioSessionProperty_InterruptionType, PropertyListener<SampleType>, this);
         AudioSessionAddPropertyListener (kAudioSessionProperty_AudioCategory, PropertyListener<SampleType>, this);
@@ -294,27 +256,6 @@ void IOSAudioHostBase<SampleType>::startHost() throw()
         AudioUnitGetProperty (rioUnit, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Output, 1, &format, &size);
     }    
 }
-
-//template<class SampleType>
-//void IOSAudioHostBase<SampleType>::pauseHost() throw()
-//{
-//    if (this->getIsRunning())
-//    {
-//        this->hostPaused();
-//        AudioOutputUnitStop (rioUnit);
-//        //AudioSessionSetActive (false);
-//
-//        dispatch_after (dispatch_time (DISPATCH_TIME_NOW, NSEC_PER_SEC / 4),
-//                        dispatch_get_main_queue(), ^{
-//            this->setIsPaused (true);
-//        });
-//    }
-//    else
-//    {
-//        this->setIsPaused (true);
-//        this->hostPaused();
-//    }
-//}
 
 template<class SampleType>
 void IOSAudioHostBase<SampleType>::pauseHost() throw()
@@ -374,43 +315,20 @@ int IOSAudioHostBase<SampleType>::setupRemoteIO() throw()
 	OSStatus status;
 	const UInt32 one = 1;
 
-//    if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1)
-//    {
-//        // up to iOS just enable the Mic anyway?
-////        AudioUnitSetProperty (rioUnit, kAudioOutputUnitProperty_EnableIO, kAudioUnitScope_Input, 1, &one, sizeof (one));
-////        AudioUnitSetProperty (rioUnit, kAudioUnitProperty_SetRenderCallback, kAudioUnitScope_Input, 0, &inputProc, sizeof (inputProc));
-////        
-////        AudioUnitSetProperty (rioUnit, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Input, 0, &format, sizeof (format));
-////        AudioUnitSetProperty (rioUnit, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Output, 1, &format, sizeof (format));
-//        
-//        status = AudioUnitSetProperty (rioUnit, kAudioOutputUnitProperty_EnableIO, kAudioUnitScope_Output, 0, &one, sizeof (one));
-//        status = AudioUnitSetProperty (rioUnit, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Input, 0, &format, sizeof (format));
-//        
-//        if (this->getNumInputs() > 0)
-//        {
-//            status = AudioUnitSetProperty (rioUnit, kAudioOutputUnitProperty_EnableIO, kAudioUnitScope_Input, 1, &one, sizeof (one));
-////            status = AudioUnitSetProperty (rioUnit, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Input, 1, &format, sizeof (format));
-//        }
-//        
-//        status = AudioUnitSetProperty (rioUnit, kAudioUnitProperty_SetRenderCallback, kAudioUnitScope_Global, 0, &inputProc, sizeof (inputProc));
-//    }
-//    else
-//    {
-        status = AudioUnitSetProperty (rioUnit, kAudioOutputUnitProperty_EnableIO, kAudioUnitScope_Output, 0, &one, sizeof (one));
-        status = AudioUnitSetProperty (rioUnit, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Input, 0, &format, sizeof (format));
+    status = AudioUnitSetProperty (rioUnit, kAudioOutputUnitProperty_EnableIO, kAudioUnitScope_Output, 0, &one, sizeof (one));
+    status = AudioUnitSetProperty (rioUnit, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Input, 0, &format, sizeof (format));
 
-        if (this->getNumInputs() > 0)
-        {
-            status = AudioUnitSetProperty (rioUnit, kAudioOutputUnitProperty_EnableIO, kAudioUnitScope_Input, 1, &one, sizeof (one));
-            status = AudioUnitSetProperty (rioUnit, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Input, 1, &format, sizeof (format));
-        }
-        
-        status = AudioUnitSetProperty (rioUnit, kAudioUnitProperty_SetRenderCallback, kAudioUnitScope_Global, 0, &inputProc, sizeof (inputProc));
-//    }
+    if (this->getNumInputs() > 0)
+    {
+        status = AudioUnitSetProperty (rioUnit, kAudioOutputUnitProperty_EnableIO, kAudioUnitScope_Input, 1, &one, sizeof (one));
+        status = AudioUnitSetProperty (rioUnit, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Input, 1, &format, sizeof (format));
+    }
+    
+    status = AudioUnitSetProperty (rioUnit, kAudioUnitProperty_SetRenderCallback, kAudioUnitScope_Global, 0, &inputProc, sizeof (inputProc));
     
 	AudioUnitInitialize (rioUnit);
 	
-    NSLog(@"setupRemoteIO complete");
+//    NSLog(@"setupRemoteIO complete");
     
 	return 0;	
 }
@@ -558,9 +476,6 @@ void IOSAudioHostBase<SampleType>::propertyCallback (AudioSessionPropertyID inID
             
             this->fixAudioRouteIfSetToReceiver();
         }
-
-//        if (!this->getIsRunning())
-//            restart();
     }
     else if (inID == kAudioSessionProperty_AudioCategory)
     {
@@ -607,34 +522,6 @@ void IOSAudioHostBase<SampleType>::resetIO() throw()
                                                     this->getNumInputs()),
                            false);        
 }
-
-//template<class SampleType>
-//void IOSAudioHostBase<SampleType>::interruptionCallback (UInt32 inInterruption) throw()
-//{
-//    if (inInterruption == kAudioSessionBeginInterruption)
-//    {
-//        OSStatus err = AudioOutputUnitStop (rioUnit);
-//        this->setIsPaused (true);
-//        this->setIsRunning (false);
-//		//AudioSessionSetActive (false);
-//        this->hostPaused();
-//        NSLog (@"Interruption %s: err = %ld", inInterruption ? "begin" : "end", err);
-//    }
-//    else if (inInterruption == kAudioSessionEndInterruption)
-//    {
-//        dispatch_after (dispatch_time (DISPATCH_TIME_NOW, NSEC_PER_SEC / 4),
-//                        dispatch_get_main_queue(), ^{
-//                            this->hostResuming();
-//                            this->setIsPaused (false);
-//                            this->setIsRunning (true);
-//                            //AudioOutputUnitStart (rioUnit);
-//                            //this->killRemoteIO();
-//                            OSStatus err = AudioSessionSetActive (true);
-//                            this->restart();
-//                            NSLog (@"Interruption %s: err = %ld", inInterruption ? "begin" : "end", err);
-//                        });
-//	}
-//}
 
 template<class SampleType>
 void IOSAudioHostBase<SampleType>::interruptionCallback (UInt32 inInterruption) throw()

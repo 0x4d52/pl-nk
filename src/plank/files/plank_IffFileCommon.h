@@ -151,7 +151,7 @@ static inline PlankResult pl_IffFile_InitID (PlankIffFileRef p, const char* stri
     }
     else
     {
-        length = strlen (string);
+        length = (int)strlen (string);
         
         switch (length)
         {

@@ -97,6 +97,7 @@
 #include "../files/plonk_BinaryFile.h"
 #include "../files/plonk_FilePath.h"
 
+#include "../files/audio/plonk_AudioFileMetaData.h"
 #include "../files/audio/plonk_AudioFileReader.h"
 #include "../files/audio/plonk_AudioFileWriter.h"
 

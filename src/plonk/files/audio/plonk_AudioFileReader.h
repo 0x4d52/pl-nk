@@ -47,7 +47,7 @@
 #include "../../containers/plonk_Text.h"
 #include "../../core/plonk_Sender.h"
 #include "plonk_AudioFile.h"
-
+#include "plonk_AudioFileMetaData.h"
 
 
 class AudioFileReaderInternal : public SmartPointer
@@ -126,6 +126,8 @@ public:
     void setName (Text const& name) throw();
     Text getName() const throw();
     
+    AudioFileMetaData& getMetaData() throw();
+    
     inline PlankAudioFileReaderRef getPeerRef() { return static_cast<PlankAudioFileReaderRef> (&peer); }
     inline const PlankAudioFileReaderRef getPeerRef() const { return const_cast<const PlankAudioFileReaderRef> (&peer); }
 
@@ -154,6 +156,7 @@ private:
     IntVariable nextMultiIndexRef;
     int defaultNumChannels;
     double defaultSampleRate;
+    AudioFileMetaData* metaData;
 };
 
 //------------------------------------------------------------------------------
@@ -219,7 +222,7 @@ void AudioFileReaderInternal::readFrames (NumericalArray<SampleType>& data,
         
         int framesRead;
         const int framesToRead = plonk::min (dataRemaining / channels, numFramesPerBuffer);
-        result = pl_AudioFileReader_ReadFrames (getPeerRef(), framesToRead, readBufferArray, &framesRead);
+        result = pl_AudioFileReader_ReadFrames (getPeerRef(), PLANK_FALSE, framesToRead, readBufferArray, &framesRead);
         plonk_assert ((result == PlankResult_OK) || (result == PlankResult_FileEOF) || (result == PlankResult_AudioFileFrameFormatChanged));
         
         if (framesRead > 0)
@@ -819,6 +822,11 @@ public:
         return getInternal()->getName();
     }
 
+    AudioFileMetaData& getMetaData() throw()
+    {
+        return this->getInternal()->getMetaData();
+    }
+
 private:
     // these could be currently dangerous across threads, need to look at a safer way to open
     // a new file once one is already running...
@@ -831,7 +839,7 @@ private:
     ResultCode open (Text const& path) throw()
     {
         return getInternal()->open (path.getArray(), 0, false);
-    }
+    }    
 };
 
 

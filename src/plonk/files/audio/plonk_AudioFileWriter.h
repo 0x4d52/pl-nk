@@ -46,6 +46,7 @@
 #include "../../core/plonk_SmartPointerContainer.h"
 #include "../../containers/plonk_Text.h"
 #include "plonk_AudioFile.h"
+#include "plonk_AudioFileMetaData.h"
 
 
 template<class SampleType>
@@ -70,7 +71,8 @@ public:
     
     AudioFileWriterInternal (const int bufferSize) throw()
     :   buffer (Buffer::withSize (bufferSize > 0 ? bufferSize : AudioFile::DefaultBufferSize, false)),
-        ready (false)
+        ready (false),
+        metaData (0)
     {
         pl_AudioFileWriter_Init (&peer);
     }
@@ -427,6 +429,7 @@ public:
     
     ~AudioFileWriterInternal()
     {
+        delete metaData;
         pl_AudioFileWriter_DeInit (&peer);
     }
     
@@ -442,14 +445,14 @@ public:
     
     bool writeFrames (const int numFrames, const SampleType* frameData) throw()
     {
-        return pl_AudioFileWriter_WriteFrames (&peer, numFrames, frameData) == PlankResult_OK;
+        return pl_AudioFileWriter_WriteFrames (&peer, true, numFrames, frameData) == PlankResult_OK;
     }
     
     bool writeFrames (Buffer const& frames) throw()
     {
         const int numChannels = peer.formatInfo.numChannels;
         plonk_assert ((frames.length() % numChannels) == 0);
-        return pl_AudioFileWriter_WriteFrames (&peer, frames.length() / numChannels, frames.getArray()) == PlankResult_OK;
+        return pl_AudioFileWriter_WriteFrames (&peer, true, frames.length() / numChannels, frames.getArray()) == PlankResult_OK;
     }
     
     template<class OtherType>
@@ -470,7 +473,7 @@ public:
         {
             const int numSamplesThisTime = plonk::min (nativeSamplesLength, numSamplesRemainaing);
             NumericalArrayConverter<SampleType, OtherType>::convertScaled (nativeSamples, sourceSamples, numSamplesThisTime);
-            success = pl_AudioFileWriter_WriteFrames (&peer, numSamplesThisTime / numChannels, nativeSamples) == PlankResult_OK;
+            success = pl_AudioFileWriter_WriteFrames (&peer, true, numSamplesThisTime / numChannels, nativeSamples) == PlankResult_OK;
             
             if (!success) break;
             
@@ -495,7 +498,7 @@ public:
         {
             do
             {
-                reader.readFrames (buffer, false);
+                reader.readFrames (buffer);
                 framesRead = buffer.length() / numChannels;
             
                 if (framesRead == 0) break;
@@ -511,7 +514,7 @@ public:
             do
             {
                 buffer.setSize (plonk::min (numFramesRemaining * numChannels, bufferLength), false);
-                reader.readFrames (buffer, false);
+                reader.readFrames (buffer);
                 framesRead = buffer.length() / numChannels;
                 
                 if (framesRead == 0) break;
@@ -527,13 +530,23 @@ public:
         
         return true;
     }
-        
+
+    AudioFileMetaData& getMetaData() throw()
+    {
+        if (!metaData)
+            metaData = new AudioFileMetaData (pl_AudioFileWriter_GetMetaData (&peer));
+
+        return *metaData;
+    }
+
+    
     friend class AudioFileWriter<SampleType>;
     
 private:
     PlankAudioFileWriter peer;
     Buffer buffer;
     bool ready;
+    AudioFileMetaData* metaData;
 };
 
 
@@ -637,6 +650,11 @@ public:
     bool writeFrames (NumericalArray<OtherType> const& frames) throw()
     {
         return this->getInternal()->writeFrames (frames);
+    }
+    
+    AudioFileMetaData& getMetaData() throw()
+    {
+        return this->getInternal()->getMetaData();
     }
 };
 

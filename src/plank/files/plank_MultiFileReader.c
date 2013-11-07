@@ -65,7 +65,7 @@ PlankResult pl_MultiFileReaderArraySequenceOnceNextIndexFunction (PlankMulitFile
     int arraySize;
     
     array = (PlankDynamicArrayRef)p->source;
-    arraySize = pl_DynamicArray_GetSize (array);
+    arraySize = (int)pl_DynamicArray_GetSize (array);
     
     p->index = p->index + 1;
     
@@ -83,7 +83,7 @@ PlankResult pl_MultiFileReaderArraySequenceLoopNextIndexFunction (PlankMulitFile
     int arraySize;
     
     array = (PlankDynamicArrayRef)p->source;
-    arraySize = pl_DynamicArray_GetSize (array);
+    arraySize = (int)pl_DynamicArray_GetSize (array);
     
     p->index = p->index + 1;
     
@@ -101,7 +101,7 @@ PlankResult pl_MultiFileReaderArrayRandomNextIndexFunction (PlankMulitFileReader
     int arraySize;
     
     array = (PlankDynamicArrayRef)p->source;
-    arraySize = pl_DynamicArray_GetSize (array);
+    arraySize = (int)pl_DynamicArray_GetSize (array);
     
     p->index = pl_RNG_NextInt (pl_RNGGlobal(), arraySize);
     
@@ -116,7 +116,7 @@ PlankResult pl_MultiFileReaderArrayRandomNoRepeatNextIndexFunction (PlankMulitFi
     int arraySize, index;
     
     array = (PlankDynamicArrayRef)p->source;
-    arraySize = pl_DynamicArray_GetSize (array);
+    arraySize = (int)pl_DynamicArray_GetSize (array);
     
     if (arraySize < 2)
     {
@@ -143,7 +143,7 @@ PlankResult pl_MultiFileReaderArrayRefNextIndexFunction (PlankMulitFileReaderRef
     int arraySize, *indexRef;
     
     array = (PlankDynamicArrayRef)p->source;
-    arraySize = pl_DynamicArray_GetSize (array);
+    arraySize = (int)pl_DynamicArray_GetSize (array);
     
     indexRef = (int*)p->otherRef;
     p->index = indexRef ? *indexRef : 0;
@@ -166,7 +166,7 @@ PlankResult pl_MultiFileReaderArrayNextFunction (PlankMulitFileReaderRef p)
 
     file = (PlankFileRef)PLANK_NULL;
     array = (PlankDynamicArrayRef)p->source;
-    arraySize = pl_DynamicArray_GetSize (array);
+    arraySize = (int)pl_DynamicArray_GetSize (array);
 
     if (p->nextIndexFunction)
         result = (p->nextIndexFunction) (p);
@@ -532,7 +532,7 @@ PlankResult pl_MultiFileReader_SetIndex (PlankMulitFileReaderRef p, const int in
     
     file = (PlankFileRef)PLANK_NULL;
     array = (PlankDynamicArrayRef)p->source;
-    arraySize = pl_DynamicArray_GetSize (array);
+    arraySize = (int)pl_DynamicArray_GetSize (array);
     
     if (index != p->index)
     {

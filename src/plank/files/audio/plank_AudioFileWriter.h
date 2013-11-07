@@ -111,11 +111,11 @@ PlankResult pl_AudioFileWriter_Close (PlankAudioFileWriterRef p);
 
 PlankResult pl_AudioFileWriter_WriteHeader (PlankAudioFileWriterRef p);
 
-PlankResult pl_AudioFileWriter_WriteFrames (PlankAudioFileWriterRef p, const int numFrames, const void* data);
+PlankResult pl_AudioFileWriter_WriteFrames (PlankAudioFileWriterRef p, const PlankB convertByteOrder, const int numFrames, const void* data);
 
 PlankB pl_AudioFileWriter_IsEncodingNativeEndian (PlankAudioFileWriterRef p);
 
-PlankResult pl_AudioFileWriter_SetHeaderPad (PlankAudioFileWriterRef p, const PlankLL headerPad);
+PlankResult pl_AudioFileWriter_SetHeaderPad (PlankAudioFileWriterRef p, const PlankUI headerPad);
 
 
 /** @} */
@@ -131,7 +131,11 @@ typedef struct PlankAudioFileWriter
     PlankLL numFrames;
     PlankLL dataPosition;
     PlankLL metaDataChunkPosition;
-    PlankLL headerPad;
+    PlankUI headerPad;
+    PlankUC dataOffset; // into data chunk
+    PlankUC reserved1;
+    PlankUC reserved2;
+    PlankUC reserved3;
     
     PlankAudioFileMetaDataRef metaData;
     

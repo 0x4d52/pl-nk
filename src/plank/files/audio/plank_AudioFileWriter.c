@@ -51,46 +51,46 @@
 // private
 
 typedef PlankResult (*PlankAudioFileWriterWriteHeaderFunction)(PlankAudioFileWriterRef);
-typedef PlankResult (*PlankAudioFileWriterWriteFramesFunction)(PlankAudioFileWriterRef, const int, const void*);
+typedef PlankResult (*PlankAudioFileWriterWriteFramesFunction)(PlankAudioFileWriterRef, const PlankB, const int, const void*);
 
 PlankResult pl_AudioFileWriter_WAV_Open (PlankAudioFileWriterRef p, const char* filepath);
 PlankResult pl_AudioFileWriter_WAV_OpenWithFile (PlankAudioFileWriterRef p, PlankFileRef file);
 PlankResult pl_AudioFileWriter_WAV_WriteHeader (PlankAudioFileWriterRef p);
 PlankResult pl_AudioFileWriter_WAVEXT_WriteHeader (PlankAudioFileWriterRef p);
 PlankResult pl_AudioFileWriter_WAVRF64_WriteHeader (PlankAudioFileWriterRef p);
-PlankResult pl_AudioFileWriter_WAV_WriteFrames (PlankAudioFileWriterRef p, const int numFrames, const void* data);
+PlankResult pl_AudioFileWriter_WAV_WriteFrames (PlankAudioFileWriterRef p, const PlankB convertByteOrder,  const int numFrames, const void* data);
 
 PlankResult pl_AudioFileWriter_AIFF_Open (PlankAudioFileWriterRef p, const char* filepath);
 PlankResult pl_AudioFileWriter_AIFF_OpenWithFile (PlankAudioFileWriterRef p, PlankFileRef file);
 PlankResult pl_AudioFileWriter_AIFF_WriteHeader (PlankAudioFileWriterRef p);
-PlankResult pl_AudioFileWriter_AIFF_WriteFrames (PlankAudioFileWriterRef p, const int numFrames, const void* data);
+PlankResult pl_AudioFileWriter_AIFF_WriteFrames (PlankAudioFileWriterRef p, const PlankB convertByteOrder, const int numFrames, const void* data);
 
 PlankResult pl_AudioFileWriter_AIFC_Open (PlankAudioFileWriterRef p, const char* filepath);
 PlankResult pl_AudioFileWriter_AIFC_OpenWithFile (PlankAudioFileWriterRef p, PlankFileRef file);
 PlankResult pl_AudioFileWriter_AIFC_WriteHeader (PlankAudioFileWriterRef p);
-PlankResult pl_AudioFileWriter_AIFC_WriteFrames (PlankAudioFileWriterRef p, const int numFrames, const void* data);
+PlankResult pl_AudioFileWriter_AIFC_WriteFrames (PlankAudioFileWriterRef p, const PlankB convertByteOrder, const int numFrames, const void* data);
 
 PlankResult pl_AudioFileWriter_CAF_Open (PlankAudioFileWriterRef p, const char* filepath);
 PlankResult pl_AudioFileWriter_CAF_OpenWithFile (PlankAudioFileWriterRef p, PlankFileRef file);
 PlankResult pl_AudioFileWriter_CAF_WriteHeader (PlankAudioFileWriterRef p);
-PlankResult pl_AudioFileWriter_CAF_WriteFrames (PlankAudioFileWriterRef p, const int numFrames, const void* data);
+PlankResult pl_AudioFileWriter_CAF_WriteFrames (PlankAudioFileWriterRef p, const PlankB convertByteOrder, const int numFrames, const void* data);
 
 PlankResult pl_AudioFileWriter_W64_Open (PlankAudioFileWriterRef p, const char* filepath);
 PlankResult pl_AudioFileWriter_W64_OpenWithFile (PlankAudioFileWriterRef p, PlankFileRef file);
 PlankResult pl_AudioFileWriter_W64_WriteHeader (PlankAudioFileWriterRef p);
-PlankResult pl_AudioFileWriter_W64_WriteFrames (PlankAudioFileWriterRef p, const int numFrames, const void* data);
+PlankResult pl_AudioFileWriter_W64_WriteFrames (PlankAudioFileWriterRef p, const PlankB convertByteOrder, const int numFrames, const void* data);
 
-PlankResult pl_AudioFileWriter_Iff_WriteFrames (PlankAudioFileWriterRef p, const char* chunkID, const int numFrames, const void* data);
+PlankResult pl_AudioFileWriter_Iff_WriteFrames (PlankAudioFileWriterRef p, const PlankB convertByteOrder, const char* chunkID, const int numFrames, const void* data);
 
 PlankResult pl_AudioFileWriter_OggVorbis_Open (PlankAudioFileWriterRef p, const char* filepath);
 PlankResult pl_AudioFileWriter_OggVorbis_OpenWithFile (PlankAudioFileWriterRef p, PlankFileRef file);
 PlankResult pl_AudioFileWriter_OggVorbis_Close (PlankAudioFileWriterRef p);
-PlankResult pl_AudioFileWriter_OggVorbis_WriteFrames (PlankAudioFileWriterRef p, const int numFrames, const void* data);
+PlankResult pl_AudioFileWriter_OggVorbis_WriteFrames (PlankAudioFileWriterRef p, const PlankB convertByteOrder, const int numFrames, const void* data);
 
 PlankResult pl_AudioFileWriter_Opus_Open (PlankAudioFileWriterRef p, const char* filepath);
 PlankResult pl_AudioFileWriter_Opus_OpenWithFile (PlankAudioFileWriterRef p, PlankFileRef file);
 PlankResult pl_AudioFileWriter_Opus_Close (PlankAudioFileWriterRef p);
-PlankResult pl_AudioFileWriter_Opus_WriteFrames (PlankAudioFileWriterRef p, const int numFrames, const void* data);
+PlankResult pl_AudioFileWriter_Opus_WriteFrames (PlankAudioFileWriterRef p, const PlankB convertByteOrder, const int numFrames, const void* data);
 
 PlankResult pl_AudioFileWriter_WAV_WriteMetaData (PlankAudioFileWriterRef p);
 PlankResult pl_AudioFileWriter_AIFFAIFC_WriteMetaData (PlankAudioFileWriterRef p);
@@ -322,6 +322,7 @@ PlankResult pl_AudioFileWriter_SetFormatWAV (PlankAudioFileWriterRef p, const in
     p->formatInfo.maximumBitRate    = p->formatInfo.nominalBitRate;
     p->formatInfo.frameDuration     = 1.0 / p->formatInfo.sampleRate;
     p->formatInfo.quality           = p->formatInfo.bitsPerSample / 64.f;
+    p->dataOffset                   = 0;
 
     return PlankResult_OK;
 }
@@ -342,6 +343,7 @@ PlankResult pl_AudioFileWriter_SetFormatAIFF (PlankAudioFileWriterRef p, const i
     p->formatInfo.maximumBitRate    = p->formatInfo.nominalBitRate;
     p->formatInfo.frameDuration     = 1.0 / p->formatInfo.sampleRate;
     p->formatInfo.quality           = p->formatInfo.bitsPerSample / 64.f;
+    p->dataOffset                   = 8;
     
     return PlankResult_OK;
 }
@@ -371,6 +373,7 @@ PlankResult pl_AudioFileWriter_SetFormatAIFC (PlankAudioFileWriterRef p, const i
     p->formatInfo.maximumBitRate    = p->formatInfo.nominalBitRate;
     p->formatInfo.frameDuration     = 1.0 / p->formatInfo.sampleRate;
     p->formatInfo.quality           = p->formatInfo.bitsPerSample / 64.f;
+    p->dataOffset                   = 8;
     
     return PlankResult_OK;
 }
@@ -404,6 +407,7 @@ PlankResult pl_AudioFileWriter_SetFormatCAF (PlankAudioFileWriterRef p, const in
     p->formatInfo.maximumBitRate    = p->formatInfo.nominalBitRate;
     p->formatInfo.frameDuration     = 1.0 / p->formatInfo.sampleRate;
     p->formatInfo.quality           = p->formatInfo.bitsPerSample / 64.f;
+    p->dataOffset                   = 4;
     
     return PlankResult_OK;
 }
@@ -430,6 +434,7 @@ PlankResult pl_AudioFileWriter_SetFormatW64 (PlankAudioFileWriterRef p, const in
     p->formatInfo.maximumBitRate    = p->formatInfo.nominalBitRate;
     p->formatInfo.frameDuration     = 1.0 / p->formatInfo.sampleRate;
     p->formatInfo.quality           = p->formatInfo.bitsPerSample / 64.f;
+    p->dataOffset                   = 0;
     
     return PlankResult_OK;    
 }
@@ -452,6 +457,7 @@ PlankResult pl_AudioFileWriter_SetFormatOggVorbis (PlankAudioFileWriterRef p, co
     p->formatInfo.maximumBitRate    = 0;
     p->formatInfo.frameDuration     = 0.f;
     p->formatInfo.quality           = pl_ClipF (quality, 0., 10.f);
+    p->dataOffset                   = 0;
     
     return PlankResult_OK;
 }
@@ -478,6 +484,7 @@ PlankResult pl_AudioFileWriter_SetFormatOggVorbisManaged (PlankAudioFileWriterRe
     p->formatInfo.maximumBitRate    = max;
     p->formatInfo.frameDuration     = 0.f;
     p->formatInfo.quality           = 0.f;
+    p->dataOffset                   = 0;
     
     return PlankResult_OK;
 }
@@ -502,6 +509,7 @@ PlankResult pl_AudioFileWriter_SetFormatOpus (PlankAudioFileWriterRef p, const f
     p->formatInfo.maximumBitRate    = 0;
     p->formatInfo.frameDuration     = frameDuration;
     p->formatInfo.quality           = pl_ClipF (quality, 0., 10.f);
+    p->dataOffset                   = 0;
 
     return PlankResult_OK;
 }
@@ -525,6 +533,7 @@ PlankResult pl_AudioFileWriter_SetFormatOpusManaged (PlankAudioFileWriterRef p, 
     p->formatInfo.maximumBitRate    = nominalBitRate;
     p->formatInfo.frameDuration     = frameDuration;
     p->formatInfo.quality           = 0.f;
+    p->dataOffset                   = 0;
     
     return PlankResult_OK;
 }
@@ -676,7 +685,7 @@ exit:
     return result;
 }
 
-PlankResult pl_AudioFileWriter_WriteFrames (PlankAudioFileWriterRef p, const int numFrames, const void* data)
+PlankResult pl_AudioFileWriter_WriteFrames (PlankAudioFileWriterRef p, const PlankB convertByteOrder, const int numFrames, const void* data)
 {
     PlankResult result = PlankResult_OK;
     
@@ -686,7 +695,7 @@ PlankResult pl_AudioFileWriter_WriteFrames (PlankAudioFileWriterRef p, const int
         goto exit;
     }
     
-    result = ((PlankAudioFileWriterWriteFramesFunction)p->writeFramesFunction) (p, numFrames, data);
+    result = ((PlankAudioFileWriterWriteFramesFunction)p->writeFramesFunction) (p, convertByteOrder, numFrames, data);
     
     if (result == PlankResult_OK)
         p->numFrames += numFrames;
@@ -718,11 +727,8 @@ PlankResult pl_AudioFileWriter_WriteHeader (PlankAudioFileWriterRef p)
     return PlankResult_OK;
 }
 
-PlankResult pl_AudioFileWriter_SetHeaderPad (PlankAudioFileWriterRef p, const PlankLL headerPad)
+PlankResult pl_AudioFileWriter_SetHeaderPad (PlankAudioFileWriterRef p, const PlankUI headerPad)
 {
-    if (headerPad < 0)
-        return PlankResult_ItemCountInvalid;
-    
     p->headerPad = headerPad;
     return PlankResult_OK;
 }
@@ -854,7 +860,7 @@ PlankResult pl_AudioFileWriter_WAV_WriteHeader (PlankAudioFileWriterRef p)
         if ((result = pl_IffFileWriter_SeekChunk ((PlankIffFileWriterRef)iff, 0, fmt, &chunkInfo, 0)) != PlankResult_OK) goto exit;
         
         p->metaDataChunkPosition = chunkInfo->chunkPos + PLANKAUDIOFILE_WAV_HEADER_LENGTH;
-        p->dataPosition = p->metaDataChunkPosition + (p->headerPad > 0 ? p->headerPad + 8 : 0) + 8;
+        p->dataPosition = p->metaDataChunkPosition + (p->headerPad > 0 ? p->headerPad + 8 : 0) + p->dataOffset;
         
         if (!chunkInfo)
         {
@@ -939,7 +945,7 @@ PlankResult pl_AudioFileWriter_WAVEXT_WriteHeader (PlankAudioFileWriterRef p)
         if ((result = pl_IffFileWriter_SeekChunk (iff, 0, fmt, &chunkInfo, 0)) != PlankResult_OK) goto exit;
         
         p->metaDataChunkPosition = chunkInfo->chunkPos + PLANKAUDIOFILE_WAV_HEADER_LENGTH;
-        p->dataPosition = p->metaDataChunkPosition + (p->headerPad > 0 ? p->headerPad + 8 : 0) + 8;
+        p->dataPosition = p->metaDataChunkPosition + (p->headerPad > 0 ? p->headerPad + 8 : 0) + p->dataOffset;
 
         if (!chunkInfo)
         {
@@ -1077,7 +1083,7 @@ exit:
     return result;
 }
 
-PlankResult pl_AudioFileWriter_WAV_WriteFrames (PlankAudioFileWriterRef p, const int numFrames, const void* data)
+PlankResult pl_AudioFileWriter_WAV_WriteFrames (PlankAudioFileWriterRef p, const PlankB convertByteOrder, const int numFrames, const void* data)
 {
     PlankResult result;
     PlankIffFileWriterRef iff;
@@ -1085,7 +1091,7 @@ PlankResult pl_AudioFileWriter_WAV_WriteFrames (PlankAudioFileWriterRef p, const
     result = PlankResult_OK;
     iff  = (PlankIffFileWriterRef)p->peer;
     
-    if ((result = pl_AudioFileWriter_Iff_WriteFrames (p, "data", numFrames, data)) != PlankResult_OK) goto exit;
+    if ((result = pl_AudioFileWriter_Iff_WriteFrames (p, convertByteOrder, "data", numFrames, data)) != PlankResult_OK) goto exit;
     
     if (iff->common.headerInfo.mainLength > 0xffffffff)
     {
@@ -1201,7 +1207,7 @@ PlankResult pl_AudioFileWriter_AIFF_WriteHeader (PlankAudioFileWriterRef p)
         if ((result = pl_IffFileWriter_SeekChunk (iff, 0, COMM, &chunkInfo, 0)) != PlankResult_OK) goto exit;
         
         p->metaDataChunkPosition = chunkInfo->chunkPos + PLANKAUDIOFILE_AIFF_COMM_LENGTH;
-        p->dataPosition = p->metaDataChunkPosition + (p->headerPad > 0 ? p->headerPad + 8 : 0) + 8 + 8; // plus blocksize and offset values
+        p->dataPosition = p->metaDataChunkPosition + (p->headerPad > 0 ? p->headerPad + 8 : 0) + 8 + p->dataOffset; // plus blocksize and offset values
         
         if (!chunkInfo)
         {
@@ -1246,9 +1252,9 @@ exit:
     return result;    
 }
 
-PlankResult pl_AudioFileWriter_AIFF_WriteFrames (PlankAudioFileWriterRef p, const int numFrames, const void* data)
+PlankResult pl_AudioFileWriter_AIFF_WriteFrames (PlankAudioFileWriterRef p, const PlankB convertByteOrder, const int numFrames, const void* data)
 {
-    return pl_AudioFileWriter_Iff_WriteFrames (p, "SSND", numFrames, data);
+    return pl_AudioFileWriter_Iff_WriteFrames (p, convertByteOrder, "SSND", numFrames, data);
 }
 
 static PlankResult pl_AudioFileWriter_AIFC_OpenInternal (PlankAudioFileWriterRef p, const char* filepath, PlankFileRef file)
@@ -1382,7 +1388,7 @@ PlankResult pl_AudioFileWriter_AIFC_WriteHeader (PlankAudioFileWriterRef p)
         if ((result = pl_IffFileWriter_SeekChunk (iff, 0, COMM, &chunkInfo, 0)) != PlankResult_OK) goto exit;
         
         p->metaDataChunkPosition = chunkInfo->chunkPos + PLANKAUDIOFILE_AIFF_COMM_LENGTH;
-        p->dataPosition = p->metaDataChunkPosition + (p->headerPad > 0 ? p->headerPad + 8 : 0) + 8 + 8; // plus blocksize and offset values
+        p->dataPosition = p->metaDataChunkPosition + (p->headerPad > 0 ? p->headerPad + 8 : 0) + 8 + p->dataOffset; // plus blocksize and offset values
 
         if (!chunkInfo)
         {
@@ -1449,9 +1455,9 @@ exit:
     return result;
 }
 
-PlankResult pl_AudioFileWriter_AIFC_WriteFrames (PlankAudioFileWriterRef p, const int numFrames, const void* data)
+PlankResult pl_AudioFileWriter_AIFC_WriteFrames (PlankAudioFileWriterRef p, const PlankB convertByteOrder, const int numFrames, const void* data)
 {
-    return pl_AudioFileWriter_Iff_WriteFrames (p, "SSND", numFrames, data);
+    return pl_AudioFileWriter_Iff_WriteFrames (p, convertByteOrder, "SSND", numFrames, data);
 }
 
 static PlankResult pl_AudioFileWriter_CAF_OpenInternal (PlankAudioFileWriterRef p, const char* filepath, PlankFileRef file)
@@ -1547,19 +1553,30 @@ PlankResult pl_AudioFileWriter_CAF_WriteHeader (PlankAudioFileWriterRef p)
     PlankIffFileWriterRef iff;
     const char* desc;
     const char* data;
+    const char* free;
     PlankUI formatFlags;
     
     result = PlankResult_OK;
     iff    = (PlankIffFileWriterRef)p->peer;
     desc   = "desc";
     data   = "data";
+    free   = "free";
     
     if ((result = pl_IffFileWriter_SeekChunk (iff, 0, desc, &chunkInfo, 0)) != PlankResult_OK) goto exit;
     
     if (!chunkInfo)
     {
-        if ((result = pl_IffFileWriter_WriteChunk (iff, 0, desc, 0, PLANKAUDIOFILE_CAF_DESC_LENGTH + p->headerPad, PLANKIFFFILEWRITER_MODEAPPEND)) != PlankResult_OK) goto exit;
+        if ((result = pl_IffFileWriter_WriteChunk (iff, 0, desc, 0, PLANKAUDIOFILE_CAF_DESC_LENGTH, PLANKIFFFILEWRITER_MODEAPPEND)) != PlankResult_OK) goto exit;
+        
+        if (p->headerPad > 0)
+        {
+            if ((result = pl_IffFileWriter_WriteChunk ((PlankIffFileWriterRef)iff, 0, free, 0, p->headerPad, PLANKIFFFILEWRITER_MODEAPPEND)) != PlankResult_OK) goto exit;
+        }
+
         if ((result = pl_IffFileWriter_SeekChunk (iff, 0, desc, &chunkInfo, 0)) != PlankResult_OK) goto exit;
+        
+        p->metaDataChunkPosition = chunkInfo->chunkPos + PLANKAUDIOFILE_CAF_DESC_LENGTH;
+        p->dataPosition = p->metaDataChunkPosition + (p->headerPad > 0 ? p->headerPad + 8 : 0) + 8 + p->dataOffset; // plus edit count
         
         if (!chunkInfo)
         {
@@ -1607,9 +1624,9 @@ exit:
     return result;    
 }
 
-PlankResult pl_AudioFileWriter_CAF_WriteFrames (PlankAudioFileWriterRef p, const int numFrames, const void* data)
+PlankResult pl_AudioFileWriter_CAF_WriteFrames (PlankAudioFileWriterRef p, const PlankB convertByteOrder, const int numFrames, const void* data)
 {
-    return pl_AudioFileWriter_Iff_WriteFrames (p, "data", numFrames, data);
+    return pl_AudioFileWriter_Iff_WriteFrames (p, convertByteOrder, "data", numFrames, data);
 }
 
 static PlankResult pl_AudioFileWriter_W64_OpenInternal (PlankAudioFileWriterRef p, const char* filepath, PlankFileRef file)
@@ -1752,12 +1769,12 @@ exit:
     return result;    
 }
 
-PlankResult pl_AudioFileWriter_W64_WriteFrames (PlankAudioFileWriterRef p, const int numFrames, const void* data)
+PlankResult pl_AudioFileWriter_W64_WriteFrames (PlankAudioFileWriterRef p, const PlankB convertByteOrder, const int numFrames, const void* data)
 {
-    return pl_AudioFileWriter_Iff_WriteFrames (p, PLANKAUDIOFILE_W64_DATA_ID, numFrames, data);
+    return pl_AudioFileWriter_Iff_WriteFrames (p, convertByteOrder, PLANKAUDIOFILE_W64_DATA_ID, numFrames, data);
 }
 
-PlankResult pl_AudioFileWriter_Iff_WriteFrames (PlankAudioFileWriterRef p, const char* chunkID, const int numFrames, const void* data)
+PlankResult pl_AudioFileWriter_Iff_WriteFrames (PlankAudioFileWriterRef p,  const PlankB convertByteOrder, const char* chunkID, const int numFrames, const void* data)
 {
     PlankUC buffer[PLANKAUDIOFILEWRITER_BUFFERLENGTH];
     PlankIffFileWriterChunkInfoRef chunkInfo;
@@ -1792,12 +1809,15 @@ PlankResult pl_AudioFileWriter_Iff_WriteFrames (PlankAudioFileWriterRef p, const
                     numBytes = numSamplesThisTime * bytesPerSample;
                     pl_MemoryCopy (buffer, ptr, numBytes);
                     
-                    swapPtr = buffer;
-                    
-                    for (i = 0; i < numSamplesThisTime; ++i)
+                    if (convertByteOrder)
                     {
-                        pl_SwapEndianS ((PlankS*)swapPtr);
-                        swapPtr += 2;
+                        swapPtr = buffer;
+                        
+                        for (i = 0; i < numSamplesThisTime; ++i)
+                        {
+                            pl_SwapEndianS ((PlankS*)swapPtr);
+                            swapPtr += 2;
+                        }
                     }
                     
                     result = pl_IffFileWriter_WriteChunk (iff, 0, chunkID, buffer, numBytes, PLANKIFFFILEWRITER_MODEAPPEND);
@@ -1815,13 +1835,17 @@ PlankResult pl_AudioFileWriter_Iff_WriteFrames (PlankAudioFileWriterRef p, const
                     pl_MemoryCopy (buffer, ptr, numBytes);
                     
                     // not sure why!
-//                    swapPtr = buffer;
-//                    
-//                    for (i = 0; i < numSamplesThisTime; ++i)
-//                    {
-//                        pl_SwapEndianI24 ((PlankI24*)swapPtr);
-//                        swapPtr += 3;
-//                    }
+                    
+                    if (convertByteOrder)
+                    {
+                        swapPtr = buffer;
+                        
+                        for (i = 0; i < numSamplesThisTime; ++i)
+                        {
+                            pl_SwapEndianI24 ((PlankI24*)swapPtr);
+                            swapPtr += 3;
+                        }
+                    }
                     
                     result = pl_IffFileWriter_WriteChunk (iff, 0, chunkID, buffer, numBytes, PLANKIFFFILEWRITER_MODEAPPEND);
                     if (result != PlankResult_OK) goto exit;
@@ -1837,12 +1861,15 @@ PlankResult pl_AudioFileWriter_Iff_WriteFrames (PlankAudioFileWriterRef p, const
                     numBytes = numSamplesThisTime * bytesPerSample;
                     pl_MemoryCopy (buffer, ptr, numBytes);
                     
-                    swapPtr = buffer;
-                    
-                    for (i = 0; i < numSamplesThisTime; ++i)
+                    if (convertByteOrder)
                     {
-                        pl_SwapEndianI ((PlankI*)swapPtr);
-                        swapPtr += 4;
+                        swapPtr = buffer;
+                        
+                        for (i = 0; i < numSamplesThisTime; ++i)
+                        {
+                            pl_SwapEndianI ((PlankI*)swapPtr);
+                            swapPtr += 4;
+                        }
                     }
                     
                     result = pl_IffFileWriter_WriteChunk (iff, 0, chunkID, buffer, numBytes, PLANKIFFFILEWRITER_MODEAPPEND);
@@ -1859,12 +1886,15 @@ PlankResult pl_AudioFileWriter_Iff_WriteFrames (PlankAudioFileWriterRef p, const
                     numBytes = numSamplesThisTime * bytesPerSample;
                     pl_MemoryCopy (buffer, ptr, numBytes);
                     
-                    swapPtr = buffer;
-                    
-                    for (i = 0; i < numSamplesThisTime; ++i)
+                    if (convertByteOrder)
                     {
-                        pl_SwapEndianLL ((PlankLL*)swapPtr);
-                        swapPtr += 8;
+                        swapPtr = buffer;
+                        
+                        for (i = 0; i < numSamplesThisTime; ++i)
+                        {
+                            pl_SwapEndianLL ((PlankLL*)swapPtr);
+                            swapPtr += 8;
+                        }
                     }
                     
                     result = pl_IffFileWriter_WriteChunk (iff, 0, chunkID, buffer, numBytes, PLANKIFFFILEWRITER_MODEAPPEND);
@@ -2152,7 +2182,7 @@ exit:
     return result;
 }
 
-PlankResult pl_AudioFileWriter_OggVorbis_WriteFrames (PlankAudioFileWriterRef p, const int numFrames, const void* data)
+PlankResult pl_AudioFileWriter_OggVorbis_WriteFrames (PlankAudioFileWriterRef p, const PlankB convertByteOrder, const int numFrames, const void* data)
 {
     PlankResult result;
     PlankOggVorbisFileWriterRef ogg;
@@ -2160,6 +2190,8 @@ PlankResult pl_AudioFileWriter_OggVorbis_WriteFrames (PlankAudioFileWriterRef p,
     float* dst;
     const float* src;
     int channel, i, numChannels;
+    
+    (void)convertByteOrder;
     
     result = PlankResult_OK;
     ogg = (PlankOggVorbisFileWriterRef)p->peer;
@@ -2594,7 +2626,7 @@ exit:
     return result;    
 }
 
-PlankResult pl_AudioFileWriter_Opus_WriteFrames (PlankAudioFileWriterRef p, const int numFrames, const void* data)
+PlankResult pl_AudioFileWriter_Opus_WriteFrames (PlankAudioFileWriterRef p, const PlankB convertByteOrder, const int numFrames, const void* data)
 {
     PlankResult result;
     PlankOpusFileWriterRef opus;
@@ -2602,6 +2634,8 @@ PlankResult pl_AudioFileWriter_Opus_WriteFrames (PlankAudioFileWriterRef p, cons
     const float* src;
     int bufferLength, bufferRemaining, numSamplesRemaining, bufferThisTime;
     int numChannels, numSamples;
+    
+    (void)convertByteOrder;
     
     result = PlankResult_OK;
     opus = (PlankOpusFileWriterRef)p->peer;
@@ -2667,7 +2701,7 @@ static PlankResult pl_AudioFileWriter_WAV_WriteChunk_bext (PlankAudioFileWriterR
     
     if ((string = pl_AudioFileMetaData_GetDescriptionComment (p->metaData, 0)))
     {
-        stringLength = strlen (string);
+        stringLength = (int)strlen (string);
         
         if (stringLength)
             pl_MemoryCopy (description, string, pl_MinI (stringLength, 256));
@@ -2675,7 +2709,7 @@ static PlankResult pl_AudioFileWriter_WAV_WriteChunk_bext (PlankAudioFileWriterR
 
     if ((string = pl_AudioFileMetaData_GetOriginatorArtist (p->metaData)))
     {
-        stringLength = strlen (string);
+        stringLength = (int)strlen (string);
         
         if (stringLength)
             pl_MemoryCopy (originator, string, pl_MinI (stringLength, 32));
@@ -2683,7 +2717,7 @@ static PlankResult pl_AudioFileWriter_WAV_WriteChunk_bext (PlankAudioFileWriterR
 
     if ((string = pl_AudioFileMetaData_GetOriginatorRef (p->metaData)))
     {
-        stringLength = strlen (string);
+        stringLength = (int)strlen (string);
         
         if (stringLength)
             pl_MemoryCopy (originatorRef, string, pl_MinI (stringLength, 32));
@@ -2691,7 +2725,7 @@ static PlankResult pl_AudioFileWriter_WAV_WriteChunk_bext (PlankAudioFileWriterR
     
     if ((string = pl_AudioFileMetaData_GetOriginationDate (p->metaData)))
     {
-        stringLength = strlen (string);
+        stringLength = (int)strlen (string);
         
         if (stringLength)
             pl_MemoryCopy (originationDate, string, pl_MinI (stringLength, 10));
@@ -2699,7 +2733,7 @@ static PlankResult pl_AudioFileWriter_WAV_WriteChunk_bext (PlankAudioFileWriterR
 
     if ((string = pl_AudioFileMetaData_GetOriginationTime (p->metaData)))
     {
-        stringLength = strlen (string);
+        stringLength = (int)strlen (string);
         
         if (stringLength)
             pl_MemoryCopy (originationTime, string, pl_MinI (stringLength, 8));
@@ -2713,7 +2747,7 @@ static PlankResult pl_AudioFileWriter_WAV_WriteChunk_bext (PlankAudioFileWriterR
         chunkSize = 256 + 32 + 32 + 10 + 8 + 4 + 4 + 4 + 64 + 190;
         
         codingHistory       = pl_AudioFileMetaData_GetCodingHistory (p->metaData);
-        codingHistoryLength = codingHistory ? strlen (codingHistory) + 1 : 0;
+        codingHistoryLength = codingHistory ? (int)strlen (codingHistory) + 1 : 0;
         chunkSize          += codingHistoryLength;
 
         if ((result = pl_IffFileWriter_PrepareChunk (iff, p->metaDataChunkPosition, bext, 0, chunkSize)) != PlankResult_OK) goto exit;
@@ -2769,7 +2803,7 @@ static PlankResult pl_AudioFileWriter_WAV_WriteChunk_smpl (PlankAudioFileWriterR
     iff  = (PlankIffFileWriterRef)p->peer;
 
     loopPoints = pl_AudioFileMetaData_GetLoopPoints (p->metaData);
-    numLoops   = pl_DynamicArray_GetSize (loopPoints);
+    numLoops   = (PlankUI)pl_DynamicArray_GetSize (loopPoints);
     
     if ((result = pl_AudioFileMetaData_GetSamplerData (p->metaData, &manufacturer, &product, &samplePeriod, &smpteFormat, &smpteOffset)) != PlankResult_OK) goto exit;
     if ((result = pl_AudioFileMetaData_GetInstrumentData (p->metaData, &baseNote, &detune, 0, 0, 0, 0, 0)) != PlankResult_OK) goto exit;
@@ -2779,7 +2813,7 @@ static PlankResult pl_AudioFileWriter_WAV_WriteChunk_smpl (PlankAudioFileWriterR
         smpl = "smpl";
         
         extraSamplerData = pl_AudioFileMetaData_GetExtraSamplerData (p->metaData);
-        extraSamplerDataSize = pl_DynamicArray_GetSize (extraSamplerData);
+        extraSamplerDataSize = (PlankUI)pl_DynamicArray_GetSize (extraSamplerData);
         
         smplChunkSize = 36 + (numLoops * 24) + extraSamplerDataSize;
 
@@ -2796,7 +2830,7 @@ static PlankResult pl_AudioFileWriter_WAV_WriteChunk_smpl (PlankAudioFileWriterR
         if ((result = pl_File_WriteUI ((PlankFileRef)iff, smpteFormat)) != PlankResult_OK) goto exit;
         if ((result = pl_File_WriteUI ((PlankFileRef)iff, smpteOffset)) != PlankResult_OK) goto exit;
         if ((result = pl_File_WriteUI ((PlankFileRef)iff, numLoops)) != PlankResult_OK) goto exit;
-        if ((result = pl_File_WriteUI ((PlankFileRef)iff, 0)) != PlankResult_OK) goto exit; // sampler data
+        if ((result = pl_File_WriteUI ((PlankFileRef)iff, extraSamplerDataSize)) != PlankResult_OK) goto exit; // sampler data
 
         loopArray = (PlankAudioFileRegion*)pl_DynamicArray_GetArray (loopPoints);
 
@@ -2812,7 +2846,7 @@ static PlankResult pl_AudioFileWriter_WAV_WriteChunk_smpl (PlankAudioFileWriterR
 
         if (extraSamplerDataSize > 0)
         {
-            if ((result = pl_File_Write ((PlankFileRef)iff, pl_DynamicArray_GetSize (extraSamplerData), extraSamplerDataSize)) != PlankResult_OK) goto exit;
+            if ((result = pl_File_Write ((PlankFileRef)iff, pl_DynamicArray_GetArray (extraSamplerData), extraSamplerDataSize)) != PlankResult_OK) goto exit;
             
             if (extraSamplerDataSize & 1)
             {
@@ -2850,13 +2884,13 @@ static PlankResult pl_AudioFileWriter_WAV_WriteChunk_inst (PlankAudioFileWriterR
 
         if ((result = pl_IffFileWriter_PrepareChunk (iff, p->metaDataChunkPosition, inst, 0, instChunkSize)) != PlankResult_OK) goto exit;
         
-        if ((result = pl_File_ReadC ((PlankFileRef)iff, (PlankC)pl_ClipI (baseNote, 0, 127))) != PlankResult_OK) goto exit;
-        if ((result = pl_File_ReadC ((PlankFileRef)iff, (PlankC)pl_ClipI (detune, -50, 50))) != PlankResult_OK) goto exit;
-        if ((result = pl_File_ReadC ((PlankFileRef)iff, (PlankC)pl_ClipI (gain, -64, 64))) != PlankResult_OK) goto exit;
-        if ((result = pl_File_ReadC ((PlankFileRef)iff, (PlankC)pl_ClipI (lowNote, 0, 127))) != PlankResult_OK) goto exit;
-        if ((result = pl_File_ReadC ((PlankFileRef)iff, (PlankC)pl_ClipI (highNote, 0, 127))) != PlankResult_OK) goto exit;
-        if ((result = pl_File_ReadC ((PlankFileRef)iff, (PlankC)pl_ClipI (lowVelocity, 0, 127))) != PlankResult_OK) goto exit;
-        if ((result = pl_File_ReadC ((PlankFileRef)iff, (PlankC)pl_ClipI (highVelocity, 0, 127))) != PlankResult_OK) goto exit;
+        if ((result = pl_File_WriteC ((PlankFileRef)iff, (PlankC)pl_ClipI (baseNote, 0, 127))) != PlankResult_OK) goto exit;
+        if ((result = pl_File_WriteC ((PlankFileRef)iff, (PlankC)pl_ClipI (detune, -50, 50))) != PlankResult_OK) goto exit;
+        if ((result = pl_File_WriteC ((PlankFileRef)iff, (PlankC)pl_ClipI (gain, -64, 64))) != PlankResult_OK) goto exit;
+        if ((result = pl_File_WriteC ((PlankFileRef)iff, (PlankC)pl_ClipI (lowNote, 0, 127))) != PlankResult_OK) goto exit;
+        if ((result = pl_File_WriteC ((PlankFileRef)iff, (PlankC)pl_ClipI (highNote, 0, 127))) != PlankResult_OK) goto exit;
+        if ((result = pl_File_WriteC ((PlankFileRef)iff, (PlankC)pl_ClipI (lowVelocity, 0, 127))) != PlankResult_OK) goto exit;
+        if ((result = pl_File_WriteC ((PlankFileRef)iff, (PlankC)pl_ClipI (highVelocity, 0, 127))) != PlankResult_OK) goto exit;
         
         if ((result = pl_File_WriteUC ((PlankFileRef)iff, 0)) != PlankResult_OK) goto exit; // align to 8 bytes
         
@@ -2877,7 +2911,7 @@ static PlankResult pl_AudioFileWriter_WAV_WriteChunk_cue (PlankAudioFileWriterRe
     PlankAudioFileRegion* regionArray;
     PlankDynamicArrayRef loopPoints;
     PlankAudioFileRegion* loopArray;
-    PlankLL cueChunkSize;
+    PlankUI cueChunkSize;
     int numCues, numRegions, numLoops, totalCues, i;
     const char* cue;
     PlankFourCharCode dataID;
@@ -2888,11 +2922,11 @@ static PlankResult pl_AudioFileWriter_WAV_WriteChunk_cue (PlankAudioFileWriterRe
     iff  = (PlankIffFileWriterRef)p->peer;
     
     cuePoints  = pl_AudioFileMetaData_GetCuePoints (p->metaData);
-    numCues    = pl_DynamicArray_GetSize (cuePoints);
+    numCues    = (int)pl_DynamicArray_GetSize (cuePoints);
     regions    = pl_AudioFileMetaData_GetRegions (p->metaData);
-    numRegions = pl_DynamicArray_GetSize (regions);
+    numRegions = (int)pl_DynamicArray_GetSize (regions);
     loopPoints = pl_AudioFileMetaData_GetLoopPoints (p->metaData);
-    numLoops   = pl_DynamicArray_GetSize (loopPoints);
+    numLoops   = (int)pl_DynamicArray_GetSize (loopPoints);
     totalCues  = numCues + numRegions + numLoops;
         
     if (totalCues > 0)
@@ -2959,14 +2993,14 @@ static PlankResult pl_AudioFileWriter_WAV_WriteChunk_list (PlankAudioFileWriterR
     PlankAudioFileRegion* regionArray;
     PlankDynamicArray chunkData;
     PlankFile chunkStream;
-    PlankLL listChunkSize;
+    PlankUI listChunkSize;
     int numCues, numRegions, i;
     const char* list;
     const char* adtl;
     const char* labl;
     const char* ltxt;
     const char* string;
-    unsigned int stringSize;
+    PlankUI stringSize;
     
     if (!p->metaData)
         goto exit;
@@ -2979,9 +3013,9 @@ static PlankResult pl_AudioFileWriter_WAV_WriteChunk_list (PlankAudioFileWriterR
     iff  = (PlankIffFileWriterRef)p->peer;
     
     cuePoints  = pl_AudioFileMetaData_GetCuePoints (p->metaData);
-    numCues    = pl_DynamicArray_GetSize (cuePoints);
+    numCues    = (int)pl_DynamicArray_GetSize (cuePoints);
     regions    = pl_AudioFileMetaData_GetRegions (p->metaData);
-    numRegions = pl_DynamicArray_GetSize (regions);
+    numRegions = (int)pl_DynamicArray_GetSize (regions);
     
     if ((numCues + numRegions) > 0)
     {
@@ -2999,7 +3033,7 @@ static PlankResult pl_AudioFileWriter_WAV_WriteChunk_list (PlankAudioFileWriterR
             string = pl_AudioFileCuePoint_GetLabel (&cueArray[i]);
             if (!string) continue;
             
-            stringSize = strlen (string) + 1;
+            stringSize = (PlankUI)strlen (string) + 1;
             if (!stringSize) continue;
             
             if ((result = pl_File_WriteFourCharCode (&chunkStream, pl_FourCharCode (labl))) != PlankResult_OK) goto exit;
@@ -3020,7 +3054,7 @@ static PlankResult pl_AudioFileWriter_WAV_WriteChunk_list (PlankAudioFileWriterR
             string = pl_AudioFileRegion_GetLabel (&regionArray[i]);
             if (!string) continue;
             
-            stringSize = strlen (string) + 1;
+            stringSize = (PlankUI)strlen (string) + 1;
             if (!stringSize) continue;
             
             if ((result = pl_File_WriteFourCharCode (&chunkStream, pl_FourCharCode (ltxt))) != PlankResult_OK) goto exit;
@@ -3040,7 +3074,7 @@ static PlankResult pl_AudioFileWriter_WAV_WriteChunk_list (PlankAudioFileWriterR
             }
         }
         
-        listChunkSize = pl_DynamicArray_GetSize (&chunkData);
+        listChunkSize = (PlankUI)pl_DynamicArray_GetSize (&chunkData);
         
         if ((result = pl_IffFileWriter_PrepareChunk (iff, p->metaDataChunkPosition, list, pl_DynamicArray_GetArray (&chunkData), listChunkSize)) != PlankResult_OK) goto exit;
                 
@@ -3103,7 +3137,7 @@ static PlankResult pl_AudioFileWriter_AIFFAIFC_WriteChunk_MARK (PlankAudioFileWr
     PlankDynamicArrayRef cuePoints;
     PlankAudioFileCuePoint* cueArray;
     PlankAudioFileCuePointRef cue;
-    PlankLL markChunkSize;
+    PlankUI markChunkSize;
     PlankDynamicArray chunkData;
     PlankFile chunkStream;
     int numCues, i;
@@ -3117,7 +3151,7 @@ static PlankResult pl_AudioFileWriter_AIFFAIFC_WriteChunk_MARK (PlankAudioFileWr
     iff  = (PlankIffFileWriterRef)p->peer;
     
     cuePoints  = pl_AudioFileMetaData_GetCuePoints (p->metaData);
-    numCues    = pl_DynamicArray_GetSize (cuePoints);
+    numCues    = (int)pl_DynamicArray_GetSize (cuePoints);
     
     if (numCues > 0)
     {
@@ -3154,7 +3188,7 @@ static PlankResult pl_AudioFileWriter_AIFFAIFC_WriteChunk_MARK (PlankAudioFileWr
             }
         }
         
-        markChunkSize = pl_DynamicArray_GetSize (&chunkData);
+        markChunkSize = (PlankUI)pl_DynamicArray_GetSize (&chunkData);
         
         if ((result = pl_IffFileWriter_PrepareChunk (iff, p->metaDataChunkPosition, MARK, pl_DynamicArray_GetArray (&chunkData), markChunkSize)) != PlankResult_OK) goto exit;
         
@@ -3195,7 +3229,7 @@ PlankResult pl_AudioFileWriter_AIFFAIFC_WriteMetaData (PlankAudioFileWriterRef p
     
     if (chunkInfo)
     {
-        metaDataJunkSize = p->dataPosition - p->metaDataChunkPosition - 8 - 8 - 8; // eight each for junk & SSND headers and 8 for offset into SSND
+        metaDataJunkSize = p->dataPosition - p->metaDataChunkPosition - 8 - 8 - p->dataOffset; // eight each for junk & SSND headers and 8 for offset into SSND
         
         if ((result = pl_IffFileWriter_ResizeChunk (iff, p->metaDataChunkPosition, free, metaDataJunkSize, PLANK_TRUE)) != PlankResult_OK) goto exit;
     }
@@ -3224,7 +3258,7 @@ static PlankResult pl_AudioFileWriter_CAF_WriteChunk_mark (PlankAudioFileWriterR
     PlankDynamicArrayRef cuePoints;
     PlankAudioFileCuePoint* cueArray;
     PlankAudioFileCuePointRef cue;
-    PlankLL markChunkSize;
+    PlankUI markChunkSize;
     PlankDynamicArray chunkData;
     PlankFile chunkStream;
     PlankUI numCues, i;
@@ -3236,7 +3270,7 @@ static PlankResult pl_AudioFileWriter_CAF_WriteChunk_mark (PlankAudioFileWriterR
     iff  = (PlankIffFileWriterRef)p->peer;
     
     cuePoints  = pl_AudioFileMetaData_GetCuePoints (p->metaData);
-    numCues    = pl_DynamicArray_GetSize (cuePoints);
+    numCues    = (PlankUI)pl_DynamicArray_GetSize (cuePoints);
     
     pl_File_Init (&chunkStream);
     pl_DynamicArray_Init (&chunkData);
@@ -3272,7 +3306,7 @@ static PlankResult pl_AudioFileWriter_CAF_WriteChunk_mark (PlankAudioFileWriterR
             if ((result = pl_File_WriteUI (&chunkStream, 0)) != PlankResult_OK) goto exit; // channel
         }
         
-        markChunkSize = pl_DynamicArray_GetSize (&chunkData);
+        markChunkSize = (PlankUI)pl_DynamicArray_GetSize (&chunkData);
         
         if ((result = pl_IffFileWriter_WriteChunk(iff, 0, mark, pl_DynamicArray_GetArray (&chunkData), markChunkSize, PLANKIFFFILEWRITER_MODEAPPEND)) != PlankResult_OK) goto exit;
     }
@@ -3290,7 +3324,7 @@ static PlankResult pl_AudioFileWriter_CAF_WriteChunk_strg (PlankAudioFileWriterR
     PlankIffFileWriterRef iff;
     PlankCAFStringID* stringIndicesArray;
     PlankUI stringsDataSize, numStrings, i;
-    PlankLL strgChunkSize;
+    PlankUI strgChunkSize;
     PlankDynamicArray chunkData;
     PlankFile chunkStream;
     const char* stringsData;
@@ -3305,13 +3339,13 @@ static PlankResult pl_AudioFileWriter_CAF_WriteChunk_strg (PlankAudioFileWriterR
     pl_DynamicArray_Init (&chunkData);
 
     stringIndicesArray = (PlankCAFStringID*)pl_DynamicArray_GetArray (stringIndices);
-    numStrings = pl_DynamicArray_GetSize (stringIndices);
+    numStrings = (PlankUI)pl_DynamicArray_GetSize (stringIndices);
     
     if (numStrings > 0)
     {
         strg = "strg";
         stringsData = (const char*)pl_DynamicArray_GetArray (strings);
-        stringsDataSize = pl_DynamicArray_GetSize (strings);
+        stringsDataSize = (PlankUI)pl_DynamicArray_GetSize (strings);
 
         // size here is only approximate and should slightly over-budget
         if ((result = pl_DynamicArray_InitWithItemSizeAndCapacity (&chunkData, 1, stringsDataSize + numStrings * sizeof (PlankCAFStringID))) != PlankResult_OK) goto exit;
@@ -3328,7 +3362,7 @@ static PlankResult pl_AudioFileWriter_CAF_WriteChunk_strg (PlankAudioFileWriterR
         
         if ((result = pl_File_Write (&chunkStream, stringsData, stringsDataSize)) != PlankResult_OK) goto exit;
 
-        strgChunkSize = pl_DynamicArray_GetSize (&chunkData);
+        strgChunkSize = (PlankUI)pl_DynamicArray_GetSize (&chunkData);
 
         if ((result = pl_IffFileWriter_WriteChunk (iff, 0, strg, pl_DynamicArray_GetArray (&chunkData), strgChunkSize, PLANKIFFFILEWRITER_MODEAPPEND)) != PlankResult_OK) goto exit;
     }
@@ -3366,11 +3400,11 @@ PlankResult pl_AudioFileWriter_CAF_WritePostDataMetaData (PlankAudioFileWriterRe
     iff  = (PlankIffFileWriterRef)p->peer;
     
     cuePoints  = pl_AudioFileMetaData_GetCuePoints (p->metaData);
-    numCues    = pl_DynamicArray_GetSize (cuePoints);
+    numCues    = (PlankUI)pl_DynamicArray_GetSize (cuePoints);
     regions    = pl_AudioFileMetaData_GetRegions (p->metaData);
-    numRegions = pl_DynamicArray_GetSize (regions);
+    numRegions = (PlankUI)pl_DynamicArray_GetSize (regions);
     loopPoints = pl_AudioFileMetaData_GetLoopPoints (p->metaData);
-    numLoops   = pl_DynamicArray_GetSize (loopPoints);
+    numLoops   = (PlankUI)pl_DynamicArray_GetSize (loopPoints);
     totalCues  = numCues + numRegions + numLoops;
     
     if (totalCues > 0)
@@ -3387,7 +3421,7 @@ PlankResult pl_AudioFileWriter_CAF_WritePostDataMetaData (PlankAudioFileWriterRe
         {
             if ((label = pl_AudioFileCuePoint_GetLabel (&cueArray[i])))
             {
-                if ((labelLength = strlen (label)) > 0)
+                if ((labelLength = (PlankUI)strlen (label)) > 0)
                 {
                     stringEntry.stringID = cueArray[i].cueID + 1;
                     pl_File_GetPosition (&stringsDataStream, &stringEntry.offset);
@@ -3401,7 +3435,7 @@ PlankResult pl_AudioFileWriter_CAF_WritePostDataMetaData (PlankAudioFileWriterRe
         {
             if ((label = pl_AudioFileRegion_GetLabel (&regionArray[i])))
             {
-                if ((labelLength = strlen (label)) > 0)
+                if ((labelLength = (PlankUI)strlen (label)) > 0)
                 {
                     stringEntry.stringID = regionArray[i].anchor.cueID + 1;
                     pl_File_GetPosition (&stringsDataStream, &stringEntry.offset);
@@ -3415,7 +3449,7 @@ PlankResult pl_AudioFileWriter_CAF_WritePostDataMetaData (PlankAudioFileWriterRe
         {
             if ((label = pl_AudioFileRegion_GetLabel (&loopArray[i])))
             {
-                if ((labelLength = strlen (label)) > 0)
+                if ((labelLength = (PlankUI)strlen (label)) > 0)
                 {
                     stringEntry.stringID = loopArray[i].anchor.cueID + 1;
                     pl_File_GetPosition (&stringsDataStream, &stringEntry.offset);

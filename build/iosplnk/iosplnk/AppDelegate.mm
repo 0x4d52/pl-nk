@@ -87,7 +87,6 @@
     self.window.rootViewController = self.tabBarController;
     [self.window makeKeyAndVisible];
         
-    
     NSLog(@"Host: %@", host.hostName);
     NSLog(@"Native: %@", host.nativeHostName);
     NSLog(@"Input: %@", host.inputName);

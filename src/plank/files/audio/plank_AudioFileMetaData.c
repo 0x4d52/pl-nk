@@ -157,7 +157,7 @@ PlankResult pl_AudioFileMetaData_InitCopy (PlankAudioFileMetaDataRef p, PlankAud
     PlankAudioFileRegion *loopArray, *originalLoops;
     PlankSimpleLinkedListElementRef list;
     PlankDynamicArrayRef block;
-    int numItems, i;
+    PlankL numItems, i;
     
     pl_MemoryCopy (p, original, sizeof (PlankAudioFileMetaData));
     
@@ -742,7 +742,7 @@ PlankResult pl_AudioFileMetaData_GetNextCueID (PlankAudioFileMetaDataRef p, Plan
     PlankResult result = PlankResult_OK;
     PlankUI nextCueID;
     PlankAudioFileCuePoint* cueArray;
-    int numCues, i;
+    PlankL numCues, i;
 
     nextCueID = 1;
     numCues = pl_DynamicArray_GetSize (&p->cuePoints);
@@ -797,7 +797,7 @@ PlankResult pl_AudioFileMetaData_ConvertCuePointsToRegions (PlankAudioFileMetaDa
     PlankAudioFileCuePointRef regionAnchorCue;
     PlankAudioFileCuePointRef regionStartCue;
     PlankAudioFileCuePointRef regionEndCue;
-    int numCues, i;
+    PlankL numCues, i;
     PlankUI cueID;
     PlankLL start, end;
     

@@ -181,7 +181,7 @@ PlankResult pl_AudioFileReader_GetFramePosition (PlankAudioFileReaderRef p, Plan
 /** 
  @param p The <i>Plank AudioFileReader</i> object. 
  @return A result code which will be PlankResult_OK if the operation was completely successful. */
-PlankResult pl_AudioFileReader_ReadFrames (PlankAudioFileReaderRef p, const int numFrames, void* data, int* framesRead);
+PlankResult pl_AudioFileReader_ReadFrames (PlankAudioFileReaderRef p, const PlankB convertByteOrder, const int numFrames, void* data, int* framesRead);
 
 PlankAudioFileMetaDataRef pl_AudioFileReader_GetMetaData (PlankAudioFileReaderRef p);
 

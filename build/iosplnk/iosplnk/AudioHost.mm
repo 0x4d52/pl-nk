@@ -37,51 +37,12 @@
  -------------------------------------------------------------------------------
  */
 
-//#import "AudioHost.h"
-//
-//@implementation AudioHost
-//
-//// override constructGraph to return your own unit graph, 
-//// inputs can be accessed via Busses
-//
-//- (Unit)constructGraph
-//{        
-//    Unit input = BusRead::ar (Bus ("0"));   // busses 0 and 1 are left and right
-//    Unit mod = Sine::ar (500);              // 500Hz sine
-//    return input * mod;                     // ringmod
-//}
-//
-//@end
-
-//#include "AudioHost.h"
-
-//AudioHost::AudioHost()
-//{
-//}
-//
-//Unit AudioHost::constructGraph()
-//{
-////    Unit input = BusRead::ar (Bus ("0"));   // busses 0 and 1 are left and right
-////    Unit mod = Sine::ar (500);              // 500Hz sine
-////    return input * mod;                     // ringmod
-//    
-////    return Sine::ar (1000, 0.25);
-//    
-//    Unit input = BusRead::ar (Bus ("0"));   // busses 0 and 1 are left and right
-//    Unit mod = Sine::ar (500);              // 500Hz sine
-//    Unit ringmod = input * mod;             // ringmod
-//    Unit fmod = Sine::ar (0.2).linexp (500, 7500); 
-//    Unit filter = RLPF::ar (ringmod, fmod, 5);
-//    return filter;
-//}
-
 #import "AudioHost.h"
 
 @implementation AudioHost
 
 PLONK_OBJC_PROPERTY_SYNTH (float,freq);
 PLONK_OBJC_PROPERTY_SYNTH (float,amp);
-
 
 - (id)init
 {
