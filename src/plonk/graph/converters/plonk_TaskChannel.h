@@ -54,6 +54,44 @@ PLONK_CHANNELDATA_DECLARE(InputTaskChannelInternal,SampleType)
 
 //------------------------------------------------------------------------------
 
+struct TaskMessage
+{
+    Text message;
+    Dynamic payload;
+};
+
+template<class SampleType>
+class TaskBufferInternal : public SmartPointer
+{
+public:
+    typedef NumericalArray<SampleType> Buffer;
+    typedef ObjectArray<TaskMessage> TaskMessages;
+    
+    TaskBufferInternal (const int size) throw()
+    :   buffer (Buffer::newClear (size))
+    {
+    }
+    
+    Buffer buffer;
+    TaskMessages messages;
+};
+
+template<class SampleType>
+class TaskBufferBase : public SmartPointerContainer< TaskBufferInternal<SampleType> >
+{
+public:
+    TaskBufferBase() throw()
+    :   SmartPointerContainer< TaskBufferInternal<SampleType> > (static_cast< TaskBufferInternal<SampleType>* > (0))
+    {
+    }
+    
+    TaskBufferBase (const int size) throw()
+    :   SmartPointerContainer< TaskBufferInternal<SampleType> > (new TaskBufferInternal<SampleType> (size))
+    {
+    }
+};
+
+
 /** Defer a unit's processing to a separate task, thread, process or core. */
 template<class SampleType>
 class InputTaskChannelInternal
@@ -68,13 +106,16 @@ public:
     typedef UnitBase<SampleType>                                        UnitType;
     typedef InputDictionary                                             Inputs;
     typedef NumericalArray<SampleType>                                  Buffer;
-
+//    typedef void Buffer;
+    typedef TaskBufferBase<SampleType>                                  TaskBuffer;
+    
+    
     //--------------------------------------------------------------------------
     
     class InputTask : public Threading::Thread
     {
     public:
-        typedef LockFreeQueue<Buffer> BufferQueue;
+        typedef LockFreeQueue<TaskBuffer> BufferQueue;
         
         InputTask (InputTaskChannelInternal* o) throw()
         :   Threading::Thread (Text ("InputTaskChannelInternal::Thread[" + Text (*(LongLong*)&o) + Text ("]"))),
@@ -98,7 +139,7 @@ public:
             const int bufferSize = numChannels * owner->getBlockSize().getValue();
             
             for (int i = 0; i < numBuffers; ++i)
-                activeBuffers.push (Buffer::newClear (bufferSize));
+                activeBuffers.push (TaskBuffer (bufferSize));
             
             Threading::yield();
             
@@ -112,7 +153,8 @@ public:
                     UnitType& inputUnit (owner->getInputAsUnit (IOKey::Generic));
                     plonk_assert (inputUnit.channelsHaveSameBlockSize());
                     
-                    Buffer buffer = freeBuffers.pop(); // nothing else pops so must be still available
+                    TaskBuffer taskBuffer = freeBuffers.pop(); // nothing else pops so must be still available
+                    Buffer& buffer = taskBuffer.getInternal()->buffer;
                     buffer.setSize (blockSize * numChannels, false);
                     
                     SampleType* bufferSamples = buffer.getArray();
@@ -129,7 +171,7 @@ public:
                         bufferSamples += inputBufferLength;
                     }
                     
-                    activeBuffers.push (buffer);
+                    activeBuffers.push (taskBuffer);
 
                     plonk_assert (inputUnit.channelsHaveSameSampleRate());
                     info.offsetTimeStamp (owner->getSampleRate().getSampleDurationInTicks() * blockSize);
@@ -153,13 +195,14 @@ public:
                 Threading::sleep (0.0001); // will block!
         }
     
-        inline bool pop (Buffer& buffer) throw()
+        inline bool pop (TaskBuffer& buffer) throw()
         {
             return activeBuffers.pop (buffer);
         }
     
-        inline void push (Buffer const& buffer) throw()
+        inline void push (TaskBuffer const& buffer) throw()
         {
+            buffer.getInternal()->messages.clear();
             freeBuffers.push (buffer);
             event.signal();
         }
@@ -213,13 +256,16 @@ public:
     {                
         const int numChannels = this->getNumChannels();
         
-        // prevent memory alloc
-        Buffer buffer (static_cast<typename Buffer::Internal*> (0));
+//        // prevent memory alloc
+//        Buffer buffer (static_cast<typename Buffer::Internal*> (0));
 
-        if (task.pop (buffer)) 
+        TaskBuffer taskBuffer;
+        
+        if (task.pop (taskBuffer)) 
         {
             // could be smarter in here in case the buffer size changes
             
+            Buffer& buffer = taskBuffer.getInternal()->buffer;
             SampleType* bufferSamples = buffer.getArray();
             
             for (int channel = 0; channel < numChannels; ++channel)
@@ -235,7 +281,7 @@ public:
             }
             
             buffer.zero();
-            task.push (buffer);
+            task.push (taskBuffer);
         }
         else
         {            

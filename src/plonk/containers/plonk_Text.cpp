@@ -473,6 +473,11 @@ const Text& Text::getMessageTrigger() throw()
 	return t;
 }
 
+const Text& Text::getMessageEvent() throw()
+{
+    static const Text t = "event";
+	return t;
+}
 
 /* add a toBinary function?
  for (int i = 31; i >= 0; --i)
