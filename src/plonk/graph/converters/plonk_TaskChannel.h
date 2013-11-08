@@ -42,22 +42,64 @@
 #include "../channel/plonk_ChannelInternalCore.h"
 #include "../plonk_GraphForwardDeclarations.h"
 
-template<class SampleType> class InputTaskChannelInternal;
+template<class SampleType, Interp::TypeCode InterpTypeCode> class InputTaskChannelInternal;
 
-PLONK_CHANNELDATA_DECLARE(InputTaskChannelInternal,SampleType)
-{    
+template<class SampleType,Interp::TypeCode InterpTypeCode>
+struct ChannelData< InputTaskChannelInternal<SampleType,InterpTypeCode> >
+{
     ChannelInternalCore::Data base;
     int numChannels;
     int numBuffers;
     int priority;
+    bool resampleInput;
 };      
 
 //------------------------------------------------------------------------------
 
-struct TaskMessage
+class TaskMessageInternal : public SmartPointer
 {
-    Text message;
-    Dynamic payload;
+public:
+    TaskMessageInternal() throw()
+    {
+    }
+    
+    TaskMessageInternal (Text const& t)
+    :   message (t)
+    {
+    }
+    
+    TaskMessageInternal (Text const& t, Dynamic const& d)
+    :   message (t), payload (d)
+    {
+    }
+    
+    friend class TaskMessage;
+    
+private:
+    const Text message;
+    const Dynamic payload;
+};
+
+class TaskMessage : public SmartPointerContainer<TaskMessageInternal>
+{
+public:
+    TaskMessage() throw()
+    :   SmartPointerContainer<TaskMessageInternal> (static_cast<TaskMessageInternal*> (0))
+    {
+    }
+    
+    TaskMessage (Text const& t)
+    :   SmartPointerContainer<TaskMessageInternal> (new TaskMessageInternal (t, Dynamic::getNull()))
+    {
+    }
+    
+    TaskMessage (Text const& t, Dynamic const& d)
+    :   SmartPointerContainer<TaskMessageInternal> (new TaskMessageInternal (t, d))
+    {
+    }
+    
+    inline const Text& getMessage() const throw()    { return this->getInternal()->message; }
+    inline const Dynamic& getPayload() const throw() { return this->getInternal()->payload; }
 };
 
 template<class SampleType>
@@ -65,7 +107,7 @@ class TaskBufferInternal : public SmartPointer
 {
 public:
     typedef NumericalArray<SampleType> Buffer;
-    typedef ObjectArray<TaskMessage> TaskMessages;
+    typedef LockFreeQueue<TaskMessage> TaskMessages;
     
     TaskBufferInternal (const int size) throw()
     :   buffer (Buffer::newClear (size))
@@ -89,30 +131,39 @@ public:
     :   SmartPointerContainer< TaskBufferInternal<SampleType> > (new TaskBufferInternal<SampleType> (size))
     {
     }
+    
+    static const TaskBufferBase& getNull() throw()
+    {
+        static TaskBufferBase null;
+        return null;
+    }
 };
 
 
 /** Defer a unit's processing to a separate task, thread, process or core. */
-template<class SampleType>
+template<class SampleType, Interp::TypeCode InterpTypeCode>
 class InputTaskChannelInternal
-:   public ProxyOwnerChannelInternal<SampleType, PLONK_CHANNELDATA_NAME(InputTaskChannelInternal,SampleType)>
+//:   public ProxyOwnerChannelInternal<SampleType, PLONK_CHANNELDATA_NAME(InputTaskChannelInternal,SampleType)>
+:  public ProxyOwnerChannelInternal<SampleType, ChannelData< InputTaskChannelInternal<SampleType,InterpTypeCode> > >
 {
 public:
-    typedef PLONK_CHANNELDATA_NAME(InputTaskChannelInternal,SampleType) Data;
+//    typedef PLONK_CHANNELDATA_NAME(InputTaskChannelInternal,SampleType) Data;
+   
+    typedef InputTaskChannelInternal<SampleType,InterpTypeCode>         TaskInternal;
+    typedef ChannelData<TaskInternal>                                   Data;
     typedef ChannelBase<SampleType>                                     ChannelType;
     typedef ObjectArray<ChannelType>                                    ChannelArrayType;
-    typedef InputTaskChannelInternal<SampleType>                        TaskInternal;
     typedef ProxyOwnerChannelInternal<SampleType,Data>                  Internal;
     typedef UnitBase<SampleType>                                        UnitType;
     typedef InputDictionary                                             Inputs;
     typedef NumericalArray<SampleType>                                  Buffer;
-//    typedef void Buffer;
     typedef TaskBufferBase<SampleType>                                  TaskBuffer;
-    
+    typedef ResampleUnit<SampleType,InterpTypeCode>                     ResampleType;
+
     
     //--------------------------------------------------------------------------
     
-    class InputTask : public Threading::Thread
+    class InputTask :  public Threading::Thread, public Channel::Receiver
     {
     public:
         typedef LockFreeQueue<TaskBuffer> BufferQueue;
@@ -123,6 +174,12 @@ public:
             info (owner->getProcessInfo()),
             event (Lock::MutexLock)
         {
+        }
+        
+        void changed (ChannelType const& source, Text const& message, Dynamic const& payload) throw()
+        {
+            TaskMessage tm (message, payload);
+            currentTaskBuffer.getInternal()->messages.push (tm);
         }
                 
         ResultCode run() throw()
@@ -153,8 +210,8 @@ public:
                     UnitType& inputUnit (owner->getInputAsUnit (IOKey::Generic));
                     plonk_assert (inputUnit.channelsHaveSameBlockSize());
                     
-                    TaskBuffer taskBuffer = freeBuffers.pop(); // nothing else pops so must be still available
-                    Buffer& buffer = taskBuffer.getInternal()->buffer;
+                    currentTaskBuffer = freeBuffers.pop(); // nothing else pops so must be still available
+                    Buffer& buffer = currentTaskBuffer.getInternal()->buffer;
                     buffer.setSize (blockSize * numChannels, false);
                     
                     SampleType* bufferSamples = buffer.getArray();
@@ -165,13 +222,22 @@ public:
                         const SampleType* inputSamples = inputBuffer.getArray();
                         const int inputBufferLength = inputBuffer.length();
                         
-                        plonk_assert (buffer.length() == (numChannels * inputBufferLength));
+//                        plonk_assert (buffer.length() == (numChannels * inputBufferLength));
                         
-                        NumericalArray<SampleType>::copyData (bufferSamples, inputSamples, inputBufferLength);   
-                        bufferSamples += inputBufferLength;
+                        if (buffer.length() == (numChannels * inputBufferLength))
+                        {
+                            NumericalArray<SampleType>::copyData (bufferSamples, inputSamples, inputBufferLength);
+                            bufferSamples += inputBufferLength;
+                        }
+                        else
+                        {
+                            buffer.zero();
+                            break;
+                        }
                     }
                     
-                    activeBuffers.push (taskBuffer);
+                    activeBuffers.push (currentTaskBuffer);
+                    currentTaskBuffer = TaskBuffer::getNull();
 
                     plonk_assert (inputUnit.channelsHaveSameSampleRate());
                     info.offsetTimeStamp (owner->getSampleRate().getSampleDurationInTicks() * blockSize);
@@ -213,6 +279,7 @@ public:
         RNG rng;
         BufferQueue activeBuffers;
         BufferQueue freeBuffers;
+        TaskBuffer currentTaskBuffer;
         Lock event;
     };
     
@@ -227,13 +294,21 @@ public:
                   inputs, data, blockSize, sampleRate,
                   channels),
         task (this)
-    {        
+    {
+        UnitType& inputUnit (this->getInputAsUnit (IOKey::Generic));
+        inputUnit.addReceiverToChannels (&task);
+        
+        if (data.resampleInput)
+            inputUnit = ResampleType::ar (inputUnit, 1, blockSize, sampleRate);
+        
         task.start();
     }
     
     ~InputTaskChannelInternal()
     {
         task.end();
+        UnitType& inputUnit (this->getInputAsUnit (IOKey::Generic));
+        inputUnit.removeReceiverFromChannels (&task);
     }
             
     Text getName() const throw()
@@ -256,9 +331,6 @@ public:
     {                
         const int numChannels = this->getNumChannels();
         
-//        // prevent memory alloc
-//        Buffer buffer (static_cast<typename Buffer::Internal*> (0));
-
         TaskBuffer taskBuffer;
         
         if (task.pop (taskBuffer)) 
@@ -281,6 +353,12 @@ public:
             }
             
             buffer.zero();
+            
+            TaskMessage taskMessage;
+            
+            while (taskBuffer.getInternal()->messages.pop (taskMessage))
+                this->update (taskMessage.getMessage(), taskMessage.getPayload());
+            
             task.push (taskBuffer);
         }
         else
@@ -333,14 +411,14 @@ template<class SampleType, Interp::TypeCode InterpTypeCode>
 class InputTaskUnit
 {
 public:    
-    typedef InputTaskChannelInternal<SampleType>            TaskInternal;
-    typedef typename TaskInternal::Data                     Data;
-    typedef ChannelBase<SampleType>                         ChannelType;
-    typedef ChannelInternal<SampleType,Data>                Internal;
-    typedef UnitBase<SampleType>                            UnitType;
-    typedef InputDictionary                                 Inputs;
-    typedef ResampleUnit<SampleType,InterpTypeCode>         ResampleType;
-    typedef InputTaskUnit<SampleType,Interp::Lagrange3>     HQ;
+    typedef InputTaskChannelInternal<SampleType,InterpTypeCode>     TaskInternal;
+    typedef typename TaskInternal::Data                             Data;
+    typedef ChannelBase<SampleType>                                 ChannelType;
+    typedef ChannelInternal<SampleType,Data>                        Internal;
+    typedef UnitBase<SampleType>                                    UnitType;
+    typedef InputDictionary                                         Inputs;
+    typedef ResampleUnit<SampleType,InterpTypeCode>                 ResampleType;
+    typedef InputTaskUnit<SampleType,Interp::Lagrange3>             HQ;
     
     static inline UnitInfos getInfo() throw()
     {
@@ -377,9 +455,10 @@ public:
         // could avoid the resample if we added the function the check if all bs/sr are the same in each channel
         
         Inputs inputs;
-        inputs.put (IOKey::Generic, ResampleType::ar (input, 1, blockSize, sampleRate));
-                        
-        Data data = { { -1.0, -1.0 }, 0, numBuffers, priority };
+//        inputs.put (IOKey::Generic, ResampleType::ar (input, 1, blockSize, sampleRate));
+        inputs.put (IOKey::Generic, input);
+        
+        Data data = { { -1.0, -1.0 }, 0, numBuffers, priority, true };
         
         return UnitType::template proxiesFromInputs<TaskInternal> (inputs, 
                                                                    data, 
@@ -401,7 +480,7 @@ public:
         Inputs inputs;
         inputs.put (IOKey::Generic, input);
         
-        Data data = { { -1.0, -1.0 }, 0, numBuffers, priority };
+        Data data = { { -1.0, -1.0 }, 0, numBuffers, priority, false };
         
         return UnitType::template proxiesFromInputs<TaskInternal> (inputs,
                                                                    data,

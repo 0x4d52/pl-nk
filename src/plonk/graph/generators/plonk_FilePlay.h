@@ -163,9 +163,13 @@ public:
                         outputSamples[i] = SampleType (0);
                 }
                 
-                data.done = true;
+                if (!data.done)
+                {
+                    data.done = true;
+                    this->update (Text::getMessageDone(), Dynamic::getNull());
+                }
+                
                 done = true;
-                this->update (Text::getMessageDone(), Dynamic::getNull());
             }
             else if (changedNumChannels)
             {
