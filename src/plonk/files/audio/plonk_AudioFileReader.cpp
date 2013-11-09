@@ -74,6 +74,14 @@ ResultCode AudioFileReaderInternal::init (const char* path, const bool readMetaD
     
     if (result == PlankResult_OK)
         numFramesPerBuffer = readBuffer.length() / getBytesPerFrame();
+        
+    if (readMetaData)
+    {
+        PlankAudioFileMetaDataRef metaData = pl_AudioFileReader_GetMetaData (getPeerRef());
+        
+        if (metaData)
+            result = pl_AudioFileMetaData_SortCuePoints(metaData);
+    }
     
     return result;
 }
@@ -89,6 +97,15 @@ ResultCode AudioFileReaderInternal::init (ByteArray const& bytes, const bool rea
         if (pl_AudioFileReader_OpenWithFile (getPeerRef(), &file, readMetaData) == PlankResult_OK)
         {
             numFramesPerBuffer = readBuffer.length() / getBytesPerFrame();
+            
+            if (readMetaData)
+            {
+                PlankAudioFileMetaDataRef metaData = pl_AudioFileReader_GetMetaData (getPeerRef());
+                
+                if (metaData)
+                    pl_AudioFileMetaData_SortCuePoints (metaData);
+            }
+
             return PlankResult_OK;
         }
     }
@@ -626,12 +643,52 @@ Text AudioFileReaderInternal::getName() const throw()
     return pl_AudioFileReader_GetName (getPeerRef());
 }
 
+bool AudioFileReaderInternal::hasMetaData() const throw()
+{
+    return pl_AudioFileReader_GetMetaData (getPeerRef()) != 0;
+}
+
 AudioFileMetaData& AudioFileReaderInternal::getMetaData() throw()
 {
     if (!metaData)
-        metaData = new AudioFileMetaData (pl_AudioFileReader_GetMetaData (&peer));
+        metaData = new AudioFileMetaData (pl_AudioFileReader_GetMetaData (getPeerRef()));
     
     return *metaData;
+}
+
+int AudioFileReaderInternal::getNumCuePoints() const throw()
+{
+    PlankAudioFileMetaDataRef metaData = pl_AudioFileReader_GetMetaData (getPeerRef());
+    
+    return metaData ? pl_DynamicArray_GetSize (pl_AudioFileMetaData_GetCuePoints (metaData)) : 0;
+}
+
+bool AudioFileReaderInternal::getCuePointAtIndex (const int index, UnsignedInt& cueID, Text& label, LongLong& position) const throw()
+{
+    if (index < 0)
+        return false;
+    
+    PlankAudioFileMetaDataRef metaData = pl_AudioFileReader_GetMetaData (getPeerRef());
+
+    if (!metaData)
+        return false;
+    
+    PlankDynamicArrayRef cuePoints = pl_AudioFileMetaData_GetCuePoints (metaData);
+    const int numCues = pl_DynamicArray_GetSize (cuePoints);
+    
+    if (!numCues)
+        return false;
+    
+    if (index >= numCues)
+        return false;
+    
+    PlankAudioFileCuePoint* cueArray = static_cast<PlankAudioFileCuePoint*> (pl_DynamicArray_GetArray (cuePoints));
+    
+    cueID    = pl_AudioFileCuePoint_GetID (&cueArray[index]);
+    label    = pl_AudioFileCuePoint_GetLabel (&cueArray[index]);
+    position = pl_AudioFileCuePoint_GetPosition (&cueArray[index]);
+    
+    return true;
 }
 
 AudioFileReaderArray AudioFileReader::regionsFromMetaData (const int metaDataOption, const int bufferSize) throw()

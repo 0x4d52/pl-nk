@@ -48,6 +48,7 @@ PLONK_CHANNELDATA_DECLARE(FilePlayChannelInternal,SampleType)
 {    
     ChannelInternalCore::Data base;
     int numChannels;
+    int cueIndex;
     
     bool done:1;
     bool deleteWhenDone:1;
@@ -120,9 +121,7 @@ public:
 
     void process (ProcessInfo& info, const int /*channel*/) throw()
     {
-        Data& data = this->getState();
-        AudioFileReader& file = this->getInputAsAudioFileReader (IOKey::AudioFileReader);
-        
+        Data& data = this->getState();        
 //        plonk_assert (file.getOwner() == this);
         
         IntVariable& loopCount (this->template getInputAs<IntVariable> (IOKey::LoopCount));
@@ -132,11 +131,49 @@ public:
         
         while (!done)
         {
+            AudioFileReader& file = this->getInputAsAudioFileReader (IOKey::AudioFileReader);
+
             const int numChannels = this->getNumChannels();
             const int fileNumChannels = file.getNumChannels();
-            const int bufferSize = this->getBlockSize().getValue() * fileNumChannels;
+            const int blockSize = this->getBlockSize().getValue();
+            int bufferSize = blockSize * fileNumChannels;
+            
+            if (file.hasMetaData())
+            {
+                UnsignedInt cueID;
+                Text cueLabel;
+                LongLong cuePosition;
+                bool renderToNextCue = false;
+                
+                if (file.getCuePointAtIndex (data.cueIndex, cueID, cueLabel, cuePosition))
+                {
+                    const LongLong filePosition = file.getFramePosition();
+                    
+                    if (cuePosition == filePosition)
+                    {
+                        this->update (Text::getMessageCuePoint(), cueLabel);
+                        
+                        ++data.cueIndex;
+                        
+                        if (file.getCuePointAtIndex (data.cueIndex, cueID, cueLabel, cuePosition))
+                            renderToNextCue = true;
+                    }
+                    else
+                    {
+                        renderToNextCue = true;
+                    }
+                    
+                    if (renderToNextCue)
+                    {
+                        const LongLong framesToNextCue = cuePosition - filePosition;
+                        
+                        if (framesToNextCue < (LongLong)blockSize)
+                            bufferSize = (int)framesToNextCue * fileNumChannels;
+                    }
+                }
+            }
+            
             buffer.setSize (bufferSize, false);
-
             file.readFrames (buffer, loopCount);
             
             const bool hitEOF = file.didHitEOF();
@@ -209,7 +246,7 @@ public:
                 }
                 
                 done = true;
-            }
+            }            
         }
         
         if (data.done && data.deleteWhenDone)
@@ -310,7 +347,7 @@ public:
             inputs.put (IOKey::Multiply, mul);
             inputs.put (IOKey::Add, add);
                             
-            Data data = { { -1.0, -1.0 }, file.getDefaultNumChannels(), false, deleteWhenDone };
+            Data data = { { -1.0, -1.0 }, file.getDefaultNumChannels(), 0, false, deleteWhenDone };
             
             return UnitType::template proxiesFromInputs<FilePlayInternal> (inputs, 
                                                                            data, 

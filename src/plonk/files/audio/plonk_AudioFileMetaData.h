@@ -39,12 +39,31 @@
 #ifndef PLONK_AUDIOFILEWMETADATA_H
 #define PLONK_AUDIOFILEWMETADATA_H
 
+class AudioFileCuePoint : public PlonkBase
+{
+private:
+    AudioFileCuePoint (PlankAudioFileCuePoint* p = 0) throw();
+    AudioFileCuePoint (AudioFileCuePoint const&); // = 0
+    
+public:    
+    friend class AudioFileReaderInternal;
+    template<class SampleType> friend class AudioFileWriterInternal;
+    
+    bool isValid() const throw();
+    LongLong getPosition() const throw();
+    Text getLabel() const throw();
+    Text getComment() const throw();
+    UnsignedInt getID() const throw();
+    
+private:
+    PlankAudioFileCuePoint* peer;
+};
+
 
 class AudioFileMetaData : public PlonkBase
 {
 private:
     AudioFileMetaData (PlankAudioFileMetaData* p) throw();
-    ~AudioFileMetaData();
     AudioFileMetaData (AudioFileMetaData const&); // = 0
     
 public:

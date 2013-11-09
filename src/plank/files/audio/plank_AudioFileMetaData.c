@@ -868,6 +868,40 @@ exit:
     return result;
 }
 
+PlankResult pl_AudioFileMetaData_SortCuePoints (PlankAudioFileMetaDataRef p)
+{
+    PlankResult result = PlankResult_OK;
+    PlankAudioFileCuePoint* cueArray;
+    PlankAudioFileCuePoint temp;
+    PlankL numCues, i, j;
+    PlankB swapped;
+    
+    numCues = pl_DynamicArray_GetSize (&p->cuePoints);
+    cueArray = (PlankAudioFileCuePoint*)pl_DynamicArray_GetArray (&p->cuePoints);
+    
+    for (i = numCues; --i >= 0;)
+    {
+        swapped = PLANK_FALSE;
+        
+        for (j = 0; j < i; j++)
+        {
+            if (cueArray[j].position > cueArray[j + 1].position)
+            {
+                pl_MemoryCopy (&temp, &cueArray[j], sizeof (PlankAudioFileCuePoint));
+                pl_MemoryCopy (&cueArray[j], &cueArray[j + 1], sizeof (PlankAudioFileCuePoint));
+                pl_MemoryCopy (&cueArray[j + 1], &temp, sizeof (PlankAudioFileCuePoint));
+                swapped = PLANK_TRUE;
+            }
+        }
+        
+        if (!swapped)
+            goto exit;
+    }
+    
+exit:
+    return result;
+}
+
 PlankResult pl_AudioFileMetaData_AddLoopPoint (PlankAudioFileMetaDataRef p, PlankAudioFileRegionRef region)
 {
     PlankResult result = PlankResult_OK;

@@ -231,6 +231,7 @@ public:
                         }
                         else
                         {
+                            // probably got deleted..
                             buffer.zero();
                             break;
                         }
@@ -355,7 +356,6 @@ public:
             buffer.zero();
             
             TaskMessage taskMessage;
-            
             while (taskBuffer.getInternal()->messages.pop (taskMessage))
                 this->update (taskMessage.getMessage(), taskMessage.getPayload());
             

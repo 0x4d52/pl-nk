@@ -126,7 +126,10 @@ public:
     void setName (Text const& name) throw();
     Text getName() const throw();
     
+    bool hasMetaData() const throw();
     AudioFileMetaData& getMetaData() throw();
+    int getNumCuePoints() const throw();
+    bool getCuePointAtIndex (const int index, UnsignedInt& cueID, Text& label, LongLong& position) const throw();
     
     inline PlankAudioFileReaderRef getPeerRef() { return static_cast<PlankAudioFileReaderRef> (&peer); }
     inline const PlankAudioFileReaderRef getPeerRef() const { return const_cast<const PlankAudioFileReaderRef> (&peer); }
@@ -822,10 +825,26 @@ public:
         return getInternal()->getName();
     }
 
+    bool hasMetaData() const throw()
+    {
+        return this->getInternal()->hasMetaData();
+    }
+    
     AudioFileMetaData& getMetaData() throw()
     {
         return this->getInternal()->getMetaData();
     }
+    
+    int getNumCuePoints() const throw()
+    {
+        return this->getInternal()->getNumCuePoints();
+    }
+    
+    bool getCuePointAtIndex (const int index, UnsignedInt& cueID, Text& label, LongLong& position) const throw()
+    {
+        return this->getInternal()->getCuePointAtIndex (index, cueID, label, position);
+    }
+
 
 private:
     // these could be currently dangerous across threads, need to look at a safer way to open

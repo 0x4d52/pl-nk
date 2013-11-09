@@ -479,6 +479,12 @@ const Text& Text::getMessageEvent() throw()
 	return t;
 }
 
+const Text& Text::getMessageCuePoint() throw()
+{
+    static const Text t = "cue.point";
+	return t;
+}
+
 /* add a toBinary function?
  for (int i = 31; i >= 0; --i)
  {

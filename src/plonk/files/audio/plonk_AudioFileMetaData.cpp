@@ -42,12 +42,39 @@ BEGIN_PLONK_NAMESPACE
 
 #include "../../core/plonk_Headers.h"
 
-AudioFileMetaData::AudioFileMetaData (PlankAudioFileMetaData* p) throw()
+AudioFileCuePoint::AudioFileCuePoint (PlankAudioFileCuePoint* p) throw()
 :   peer (p)
 {
 }
 
-AudioFileMetaData::~AudioFileMetaData()
+bool AudioFileCuePoint::isValid() const throw()
+{
+    return peer != 0;
+}
+
+LongLong AudioFileCuePoint::getPosition() const throw()
+{
+    return peer ? pl_AudioFileCuePoint_GetPosition (peer) : 0;
+}
+
+Text AudioFileCuePoint::getLabel() const throw()
+{
+    return peer ? Text (pl_AudioFileCuePoint_GetLabel (peer)) : Text::getEmpty();
+}
+
+Text AudioFileCuePoint::getComment() const throw()
+{
+    return peer ? Text (pl_AudioFileCuePoint_GetComment (peer)) : Text::getEmpty();
+}
+
+UnsignedInt AudioFileCuePoint::getID() const throw()
+{
+    return peer ? pl_AudioFileCuePoint_GetID (peer) : 0;
+}
+
+
+AudioFileMetaData::AudioFileMetaData (PlankAudioFileMetaData* p) throw()
+:   peer (p)
 {
 }
 

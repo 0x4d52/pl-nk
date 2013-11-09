@@ -184,6 +184,9 @@ PlankResult pl_AudioFileMetaData_AddRegion (PlankAudioFileMetaDataRef p, PlankAu
  @return The result code for the operation. */
 PlankResult pl_AudioFileMetaData_ConvertCuePointsToRegions (PlankAudioFileMetaDataRef p, const PlankLL numFrames, const PlankB removeCuePoints);
 
+PlankResult pl_AudioFileMetaData_SortCuePoints (PlankAudioFileMetaDataRef p);
+
+
 /** Adds a loop.
  Copies the data from another region. The source region is zeroed on return to help avoid memory allocation/deallocation issues. */
 PlankResult pl_AudioFileMetaData_AddLoopPoint (PlankAudioFileMetaDataRef p, PlankAudioFileRegionRef region);
