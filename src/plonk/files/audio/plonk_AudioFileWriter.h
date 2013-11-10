@@ -564,6 +564,11 @@ public:
     typedef SmartPointerContainer<Internal>     Base;
     typedef NumericalArray<SampleType>          Buffer;
 
+    AudioFileWriter (const int bufferSize = AudioFile::DefaultBufferSize) throw()
+    :   Base (new Internal (bufferSize))
+    {
+    }
+    
     AudioFileWriter (FilePath const& path, const int numChannels, const double sampleRate,
                      const int bufferSize = AudioFile::DefaultBufferSize) throw()
 	:	Base (Internal::createPCM (path, numChannels, sampleRate, bufferSize))
@@ -603,7 +608,41 @@ public:
 	:	Base (Internal::createCompressedManaged (bytes, format, numChannels, sampleRate, minBitRate, nominalBitRate, maxBitRate, frameDuration, bufferSize))
 	{
 	}
-
+    
+    bool initPCM (const AudioFile::Format format, const int numChannels, const double sampleRate,
+                  const int bufferSize = AudioFile::DefaultBufferSize) throw()
+	{
+        return this->getInternal()->initPCM (format, numChannels, sampleRate, bufferSize);
+	}
+    
+    bool initCompressedVBR (const AudioFile::Format format, const int numChannels, const double sampleRate,
+                            const float quality,
+                            const double frameDuration = 0.0, const int bufferSize = AudioFile::DefaultBufferSize) throw()
+	{
+        return this->getInternal()->initCompressedVBR (format, numChannels, sampleRate, quality, frameDuration, bufferSize);
+	}
+    
+    bool initCompressedManaged (const AudioFile::Format format, const int numChannels, const double sampleRate,
+                                const int minBitRate, const int nominalBitRate, const int maxBitRate,
+                                const double frameDuration = 0.0, const int bufferSize = AudioFile::DefaultBufferSize) throw()
+	{
+        return this->getInternal()->initCompressedManaged (format, numChannels, sampleRate, minBitRate, nominalBitRate, maxBitRate, frameDuration, bufferSize);
+	}
+    
+    bool openPath (FilePath const& path) throw()
+    {
+        bool result = this->getInternal()->openPath (path);
+        this->getInternal()->ready = result;
+        return result;
+    }
+    
+    bool openBytes (ByteArray const& bytes) throw()
+    {
+        bool result = this->getInternal()->openBytes (bytes);
+        this->getInternal()->ready = result;
+        return result;
+    }
+    
     void writeHeader() throw()
     {
         this->getInternal()->writeHeader();

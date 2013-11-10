@@ -2081,8 +2081,15 @@ PlankResult pl_AudioFileWriter_OggVorbis_OpenInternal (PlankAudioFileWriterRef p
     
     if (!err)
     {
+        p->peer = ogg;
+
         vorbis_comment_init (&ogg->vc);
         pl_AudioFileWriter_OggVorbis_CommentAddTag (ogg, "ENCODER", "Plink|Plonk|Plank");
+        
+        if (p->metaData)
+        {
+            if ((result = pl_AudioFileWriter_OggVorbis_WriteMetaData (p)) != PlankResult_OK) goto exit;
+        }
         
         vorbis_analysis_init (&ogg->vd, &ogg->vi);
         vorbis_block_init (&ogg->vd, &ogg->vb);
@@ -2103,9 +2110,7 @@ PlankResult pl_AudioFileWriter_OggVorbis_OpenInternal (PlankAudioFileWriterRef p
                 if ((result = pl_AudioFileWriter_Ogg_WritePage ((PlankFileRef)ogg, &ogg->og)) != PlankResult_OK) goto exit;
             }
         } while (err != 0);
-        
-        p->peer = ogg;
-        
+                
         p->writeFramesFunction = pl_AudioFileWriter_OggVorbis_WriteFrames;
         p->writeHeaderFunction = 0;
     }
@@ -3479,7 +3484,58 @@ PlankResult pl_AudioFileWriter_W64_WriteMetaData (PlankAudioFileWriterRef p)
 #if PLANK_OGGVORBIS
 PlankResult pl_AudioFileWriter_OggVorbis_WriteMetaData (PlankAudioFileWriterRef p)
 {
-    return PlankResult_UnknownError;
+    PlankResult result = PlankResult_OK;
+    PlankOggVorbisFileWriterRef ogg;
+    PlankDynamicArrayRef cuePoints;
+    PlankAudioFileCuePoint* cueArray;
+    int numCues, i;
+    PlankUI chapter;
+    char tag[256];
+    char timeText[64];
+    const char* label;
+    double time;
+    int hours, minutes, seconds, millis;
+    
+    if (!p->metaData)
+        goto exit;
+    
+    ogg        = (PlankOggVorbisFileWriterRef)p->peer;
+    cuePoints  = pl_AudioFileMetaData_GetCuePoints (p->metaData);
+    numCues    = (int)pl_DynamicArray_GetSize (cuePoints);
+    
+    if (numCues > 0)
+    {
+        cueArray = (PlankAudioFileCuePoint*)pl_DynamicArray_GetArray (cuePoints);
+
+        for (i = 0; i < numCues; ++i)
+        {
+            chapter = pl_AudioFileCuePoint_GetID (&cueArray[i]) + 1;
+            time = pl_AudioFileCuePoint_GetPosition (&cueArray[i]) / p->formatInfo.sampleRate;
+            
+            hours = (int)(time / 3600.0);
+            
+            if (hours > 99)
+                continue;
+            
+            time -= hours;
+            minutes = (int)(time / 60.0);
+            time -= minutes;
+            seconds = (int)time;
+            time -= seconds;
+            millis = (int)(time * 1000.0);
+            
+            snprintf (tag, 256, "CHAPTER%03u", chapter);
+            snprintf (timeText, 64, "%02d:%02d:%02d.%03d", hours, minutes, seconds, millis);            
+            pl_AudioFileWriter_OggVorbis_CommentAddTag (ogg, tag, timeText);
+            
+            snprintf (tag, 256, "CHAPTER%03uNAME", chapter);
+            label =  pl_AudioFileCuePoint_GetLabel (&cueArray[i]);
+            pl_AudioFileWriter_OggVorbis_CommentAddTag (ogg, tag, label ? label : "");
+        }
+    }
+
+exit:
+    return result;
 }
 #endif // PLANK_OGGVORBIS
 

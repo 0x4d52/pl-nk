@@ -323,10 +323,10 @@ PlankResult pl_DynamicArray_SetAsText (PlankDynamicArrayRef p, const char* text)
     PlankL length;
     
     if (!text)
-        goto exit;
+        return pl_DynamicArray_SetAsClearText (p, 0);
     
     if (text[0] == '\0')
-        goto exit;
+        return pl_DynamicArray_SetAsClearText (p, 0);
     
     if (p->itemSize == 0)
         pl_DynamicArray_InitWithItemSize (p, 1);
