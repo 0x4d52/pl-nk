@@ -42,6 +42,132 @@
 #include "plank_AudioFileCuePoint.h"
 #include "../../maths/plank_Maths.h"
 
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_BLUES 0 //.Blues
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_CLASSICROCk 1 //.Classic Rock
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 2//.Country
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 3//.Dance
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 4//.Disco
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 5//.Funk
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 6//.Grunge
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 7//.Hip-Hop
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 8//.Jazz
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 9//.Metal
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 10//.New Age
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 11//.Oldies
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 12//.Other
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 13//.Pop
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 14//.R&B
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 15//.Rap
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 16//.Reggae
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 17//.Rock
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 18//.Techno
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 19//.Industrial
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 20//.Alternative
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 21//.Ska
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 22//.Death Metal
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 23//.Pranks
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 24//.Soundtrack
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 25//.Euro-Techno
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 26//.Ambient
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 27//.Trip-Hop
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 28//.Vocal
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 29//.Jazz+Funk
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 30//.Fusion
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 31//.Trance
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 32//.Classical
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 33//.Instrumental
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 34//.Acid
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 35.House
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 36.Game
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 37.Sound Clip
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 38.Gospel
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 39.Noise
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 40.AlternRock
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 41.Bass
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 42.Soul
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 43.Punk
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 44.Space
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 45.Meditative
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 46.Instrumental Pop
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 47.Instrumental Rock
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 48.Ethnic
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 49.Gothic
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 50.Darkwave
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 51.Techno-Industrial
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 52.Electronic
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 53.Pop-Folk
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 54.Eurodance
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 55.Dream
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 56.Southern Rock
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 57.Comedy
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 58.Cult
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 59.Gangsta
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 60.Top 40
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 61.Christian Rap
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 62.Pop/Funk
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 63.Jungle
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 64.Native American
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 65.Cabaret
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 66.New Wave
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 67.Psychadelic
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 68.Rave
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 69.Showtunes
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 70.Trailer
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 71.Lo-Fi
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 72.Tribal
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 73.Acid Punk
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 74.Acid Jazz
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 75.Polka
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 76.Retro
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 77.Musical
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 78.Rock & Roll
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 79.Hard Rock
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 80.Folk
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 81.Folk-Rock
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 82.National Folk
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 83.Swing
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 84.Fast Fusion
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 85.Bebob
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 86.Latin
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 87.Revival
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 88.Celtic
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 89.Bluegrass
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 90.Avantgarde
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 91.Gothic Rock
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 92.Progressive Rock
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 93.Psychedelic Rock
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 94.Symphonic Rock
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 95.Slow Rock
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 96.Big Band
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 97.Chorus
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 98.Easy Listening
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 99.Acoustic
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 100.Humour
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 101.Speech
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 102.Chanson
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 103.Opera
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 104.Chamber Music
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 105.Sonata
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 106.Symphony
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 107.Booty Bass
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 108.Primus
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 109.Porn Groove
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 110.Satire
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 111.Slow Jam
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 112.Club
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 113.Tango
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 114.Samba
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 115.Folklore
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 116.Ballad
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 117.Power Ballad
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 118.Rhythmic Soul
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 119.Freestyle
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 120.Duet
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 121.Punk Rock
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 122.Drum Solo
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 123.Acapella
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 124.Euro-House
+//#define PLANKAUDIOFILEMETADATA_ID3GENRE_ 125.Dance Hall
 /*
  
  Should support the LEVL WAV chunk somehow as BBC are moving towards supporting it
@@ -151,7 +277,6 @@ exit:
 PlankResult pl_AudioFileMetaData_InitCopy (PlankAudioFileMetaDataRef p, PlankAudioFileMetaDataRef original)
 {
     PlankResult result = PlankResult_OK;
-    PlankDynamicArray *commentArray, *originalComments;
     PlankAudioFileCuePoint *cueArray, *originalCues;
     PlankAudioFileRegion *regionArray, *originalRegions;
     PlankAudioFileRegion *loopArray, *originalLoops;
@@ -161,25 +286,15 @@ PlankResult pl_AudioFileMetaData_InitCopy (PlankAudioFileMetaDataRef p, PlankAud
     
     pl_MemoryCopy (p, original, sizeof (PlankAudioFileMetaData));
     
-    pl_SimpleLinkedList_SetFreeElementDataFunction (&p->formatSpecific, pl_AudioFileMetaDataFormatSpecificFree);
-    
-    pl_DynamicArray_Init (&p->descriptionComments);
+    pl_SimpleLinkedList_SetFreeElementDataFunction (&p->formatSpecific, pl_AudioFileMetaDataFormatSpecificFree);    
     pl_SimpleLinkedList_Init (&p->formatSpecific);
     
-    if ((numItems = pl_DynamicArray_GetSize (&original->descriptionComments)) > 0)
-    {
-        pl_DynamicArray_InitWithItemSizeAndSize (&p->descriptionComments, sizeof (PlankDynamicArray), numItems, PLANK_TRUE);
-        commentArray = (PlankDynamicArray*)pl_DynamicArray_GetArray (&p->descriptionComments);
-        originalComments = (PlankDynamicArray*)pl_DynamicArray_GetArray (&original->descriptionComments);
-        
-        for (i = 0; i < numItems; ++i)
-            pl_DynamicArray_InitCopy (&commentArray[i], &originalComments[i]);
-    }
-    
+    pl_DynamicArray_InitCopy (&p->descriptionComment, &original->descriptionComment);
     pl_DynamicArray_InitCopy (&p->originatorArtist, &original->originatorArtist);
     pl_DynamicArray_InitCopy (&p->originatorRef, &original->originatorRef);
     pl_DynamicArray_InitCopy (&p->originationDate, &original->originationDate);
     pl_DynamicArray_InitCopy (&p->originationTime, &original->originationTime);
+    pl_DynamicArray_InitCopy (&p->performer, &original->performer);
     pl_DynamicArray_InitCopy (&p->title, &original->title);
     pl_DynamicArray_InitCopy (&p->album, &original->album);
     pl_DynamicArray_InitCopy (&p->genre, &original->genre);
@@ -285,13 +400,13 @@ PlankResult pl_AudioFileMetaData_DeInit (PlankAudioFileMetaDataRef p)
         goto exit;
     }
     
-    if ((result = pl_AudioFileMetaData_ClearDescriptionComments (p)) != PlankResult_OK) goto exit;
-    
+    if ((result = pl_DynamicArray_DeInit (&p->descriptionComment)) != PlankResult_OK) goto exit;
     if ((result = pl_DynamicArray_DeInit (&p->originatorArtist)) != PlankResult_OK) goto exit;
     if ((result = pl_DynamicArray_DeInit (&p->originatorRef)) != PlankResult_OK) goto exit;
     if ((result = pl_DynamicArray_DeInit (&p->originationDate)) != PlankResult_OK) goto exit;
     if ((result = pl_DynamicArray_DeInit (&p->originationTime)) != PlankResult_OK) goto exit;
 
+    if ((result = pl_DynamicArray_DeInit (&p->performer)) != PlankResult_OK) goto exit;
     if ((result = pl_DynamicArray_DeInit (&p->title)) != PlankResult_OK) goto exit;
     if ((result = pl_DynamicArray_DeInit (&p->album)) != PlankResult_OK) goto exit;
     if ((result = pl_DynamicArray_DeInit (&p->genre)) != PlankResult_OK) goto exit;
@@ -421,58 +536,9 @@ PlankDynamicArrayRef pl_AudioFileMetaData_GetExtraSamplerData (PlankAudioFileMet
     return &p->samplerData;
 }
 
-PlankResult pl_AudioFileMetaData_ClearDescriptionComments (PlankAudioFileMetaDataRef p)
+PlankResult pl_AudioFileMetaData_SetDescriptionComment (PlankAudioFileMetaDataRef p, const char* text)
 {
-    PlankResult result = PlankResult_OK;
-    int i, numComments;
-    PlankDynamicArray* comments;
-        
-    numComments = pl_AudioFileMetaData_GetDescriptionCommentsCount (p);
-    comments = (PlankDynamicArray*)pl_DynamicArray_GetArray (&p->descriptionComments);
-    
-    for (i = 0; i < numComments; ++i)
-    {
-        if ((result = pl_DynamicArray_DeInit (&comments[i])) != PlankResult_OK) goto exit;
-    }
-    
-    if ((result = pl_DynamicArray_DeInit (&p->descriptionComments)) != PlankResult_OK) goto exit;
-        
-exit:
-    return result;
-    
-}
-
-PlankResult pl_AudioFileMetaData_AddDescriptionComment (PlankAudioFileMetaDataRef p, const char* text)
-{
-    PlankResult result = PlankResult_OK;
-    PlankDynamicArray comment;
-    
-    if (pl_DynamicArray_GetItemSize (&p->descriptionComments) == 0)
-        pl_DynamicArray_InitWithItemSize (&p->descriptionComments, sizeof (PlankDynamicArray));
-    
-    if ((result = pl_DynamicArray_Init (&comment)) != PlankResult_OK) goto exit;
-    if ((result = pl_DynamicArray_SetAsText (&comment, text)) != PlankResult_OK) goto exit;
-
-    if ((result = pl_DynamicArray_AddItem (&p->descriptionComments, &comment)) != PlankResult_OK) goto exit;
-
-exit:
-    return result;
-}
-
-int pl_AudioFileMetaData_GetDescriptionCommentsCount (PlankAudioFileMetaDataRef p)
-{
-    return (int)pl_DynamicArray_GetSize (&p->descriptionComments);
-}
-
-const char* pl_AudioFileMetaData_GetDescriptionComment (PlankAudioFileMetaDataRef p, const int index)
-{
-    int size;
-    PlankDynamicArray* comments;
-    
-    size = (int)pl_DynamicArray_GetSize (&p->descriptionComments);
-    comments = (PlankDynamicArray*)pl_DynamicArray_GetArray (&p->descriptionComments);
-
-    return comments ? pl_DynamicArray_GetArray (&comments[index]) : 0;
+    return pl_DynamicArray_SetAsText (&p->descriptionComment, text);
 }
 
 PlankResult pl_AudioFileMetaData_SetOriginatorArtist (PlankAudioFileMetaDataRef p, const char* text)
@@ -495,6 +561,11 @@ PlankResult pl_AudioFileMetaData_SetOriginationTime (PlankAudioFileMetaDataRef p
     return pl_DynamicArray_SetAsText (&p->originationTime, text);
 }
 
+const char* pl_AudioFileMetaData_GetDescriptionComment (PlankAudioFileMetaDataRef p)
+{
+    return pl_DynamicArray_GetArray (&p->descriptionComment);
+}
+
 const char* pl_AudioFileMetaData_GetOriginatorArtist (PlankAudioFileMetaDataRef p)
 {
     return pl_DynamicArray_GetArray (&p->originatorArtist);
@@ -513,6 +584,11 @@ const char* pl_AudioFileMetaData_GetOriginationDate (PlankAudioFileMetaDataRef p
 const char* pl_AudioFileMetaData_GetOriginationTime (PlankAudioFileMetaDataRef p)
 {
     return pl_DynamicArray_GetArray (&p->originationTime);
+}
+
+PlankResult pl_AudioFileMetaData_SetPerformer (PlankAudioFileMetaDataRef p, const char* text)
+{
+    return pl_DynamicArray_SetAsText (&p->performer, text);
 }
 
 PlankResult pl_AudioFileMetaData_SetTitle (PlankAudioFileMetaDataRef p, const char* text)
@@ -545,6 +621,11 @@ PlankResult pl_AudioFileMetaData_SetISRC (PlankAudioFileMetaDataRef p, const cha
     return pl_DynamicArray_SetAsText (&p->isrc, text);
 }
 
+const char* pl_AudioFileMetaData_GetPerformer (PlankAudioFileMetaDataRef p)
+{
+    return pl_DynamicArray_GetArray (&p->performer);
+}
+
 const char* pl_AudioFileMetaData_GetTitle (PlankAudioFileMetaDataRef p)
 {
     return pl_DynamicArray_GetArray (&p->title);
@@ -573,6 +654,31 @@ const char* pl_AudioFileMetaData_GetVendor (PlankAudioFileMetaDataRef p)
 const char* pl_AudioFileMetaData_GetISRC (PlankAudioFileMetaDataRef p)
 {
     return pl_DynamicArray_GetArray (&p->isrc);
+}
+
+PlankResult pl_AudioFileMetaData_AddPerformer (PlankAudioFileMetaDataRef p, const char* text)
+{
+    return pl_DynamicArray_AppendTextLineCRLF (&p->performer, text);
+}
+
+PlankResult pl_AudioFileMetaData_AddDescriptionComment (PlankAudioFileMetaDataRef p, const char* text)
+{
+    return pl_DynamicArray_AppendTextLineCRLF (&p->descriptionComment, text);
+}
+
+PlankResult pl_AudioFileMetaData_AddOriginatorArtist (PlankAudioFileMetaDataRef p, const char* text)
+{
+    return pl_DynamicArray_AppendTextLineCRLF (&p->originatorArtist, text);
+}
+
+PlankResult pl_AudioFileMetaData_AddOriginatorRef (PlankAudioFileMetaDataRef p, const char* text)
+{
+    return pl_DynamicArray_AppendTextLineCRLF (&p->originatorRef, text);
+}
+
+PlankResult pl_AudioFileMetaData_AddGenre (PlankAudioFileMetaDataRef p, const char* text)
+{
+    return pl_DynamicArray_AppendTextLineCRLF (&p->genre, text);
 }
 
 PlankResult pl_AudioFileMetaData_SetArt (PlankAudioFileMetaDataRef p, PlankConstantP data, const PlankL size)
@@ -921,8 +1027,7 @@ exit:
 
 PlankResult pl_AudioFileMetaData_AddCodingHistory (PlankAudioFileMetaDataRef p, const char* text)
 {
-    pl_DynamicArray_AppendTextLineCRLF (&p->codingHistory, text);
-    return 0;
+    return pl_DynamicArray_AppendTextLineCRLF (&p->codingHistory, text);
 }
 
 const char* pl_AudioFileMetaData_GetCodingHistory (PlankAudioFileMetaDataRef p)

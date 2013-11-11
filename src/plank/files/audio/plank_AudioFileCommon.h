@@ -359,6 +359,7 @@ the stream is 7.1 surround. channel order: front left, center, front right, side
     #define PLANKAUDIOFILE_OPUS_MAXSAMPLERATE                             192000
     #define PLANKAUDIOFILE_OPUS_DEFAULTSAMPLERATE                          48000
     #define PLANKAUDIOFILE_OPUS_HEAD                                  "OpusHead"
+    #define PLANKAUDIOFILE_OPUS_TAGS                                  "OpusTags"
     #define PLANKAUDIOFILE_OPUS_HEAD_LEN                                       8
     #define PLANKAUDIOFILE_OPUS_PREROLL_MS                                    80
     #define PALNKAUDIOFILE_OPUS_HEADERNUMSEGSPOS                              26

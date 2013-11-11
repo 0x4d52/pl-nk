@@ -107,22 +107,19 @@ PlankResult pl_AudioFileMetaData_GetSamplerData (PlankAudioFileMetaDataRef p,
 
 PlankDynamicArrayRef pl_AudioFileMetaData_GetExtraSamplerData (PlankAudioFileMetaDataRef p);
 
-
-PlankResult pl_AudioFileMetaData_ClearDescriptionComments (PlankAudioFileMetaDataRef p);
-PlankResult pl_AudioFileMetaData_AddDescriptionComment (PlankAudioFileMetaDataRef p, const char* text);
-int pl_AudioFileMetaData_GetDescriptionCommentsCount (PlankAudioFileMetaDataRef p);
-const char* pl_AudioFileMetaData_GetDescriptionComment (PlankAudioFileMetaDataRef p, const int index);
-
+PlankResult pl_AudioFileMetaData_SetDescriptionComment (PlankAudioFileMetaDataRef p, const char* text);
 PlankResult pl_AudioFileMetaData_SetOriginatorArtist (PlankAudioFileMetaDataRef p, const char* text);
 PlankResult pl_AudioFileMetaData_SetOriginatorRef (PlankAudioFileMetaDataRef p, const char* text);
 PlankResult pl_AudioFileMetaData_SetOriginationDate (PlankAudioFileMetaDataRef p, const char* text);
 PlankResult pl_AudioFileMetaData_SetOriginationTime (PlankAudioFileMetaDataRef p, const char* text);
 
+const char* pl_AudioFileMetaData_GetDescriptionComment (PlankAudioFileMetaDataRef p);
 const char* pl_AudioFileMetaData_GetOriginatorArtist (PlankAudioFileMetaDataRef p);
 const char* pl_AudioFileMetaData_GetOriginatorRef (PlankAudioFileMetaDataRef p);
 const char* pl_AudioFileMetaData_GetOriginationDate (PlankAudioFileMetaDataRef p);
 const char* pl_AudioFileMetaData_GetOriginationTime (PlankAudioFileMetaDataRef p);
 
+PlankResult pl_AudioFileMetaData_SetPerformer (PlankAudioFileMetaDataRef p, const char* text);
 PlankResult pl_AudioFileMetaData_SetTitle (PlankAudioFileMetaDataRef p, const char* text);
 PlankResult pl_AudioFileMetaData_SetAlbum (PlankAudioFileMetaDataRef p, const char* text);
 PlankResult pl_AudioFileMetaData_SetGenre (PlankAudioFileMetaDataRef p, const char* text);
@@ -130,12 +127,19 @@ PlankResult pl_AudioFileMetaData_SetLyrics (PlankAudioFileMetaDataRef p, const c
 PlankResult pl_AudioFileMetaData_SetVendor (PlankAudioFileMetaDataRef p, const char* text);
 PlankResult pl_AudioFileMetaData_SetISRC (PlankAudioFileMetaDataRef p, const char* text);
 
+const char* pl_AudioFileMetaData_GetPerformer (PlankAudioFileMetaDataRef p);
 const char* pl_AudioFileMetaData_GetTitle (PlankAudioFileMetaDataRef p);
 const char* pl_AudioFileMetaData_GetAlbum (PlankAudioFileMetaDataRef p);
 const char* pl_AudioFileMetaData_GetGenre (PlankAudioFileMetaDataRef p);
 const char* pl_AudioFileMetaData_GetLyrics (PlankAudioFileMetaDataRef p);
 const char* pl_AudioFileMetaData_GetVendor (PlankAudioFileMetaDataRef p);
 const char* pl_AudioFileMetaData_GetISRC (PlankAudioFileMetaDataRef p);
+
+PlankResult pl_AudioFileMetaData_AddPerformer (PlankAudioFileMetaDataRef p, const char* text);
+PlankResult pl_AudioFileMetaData_AddDescriptionComment (PlankAudioFileMetaDataRef p, const char* text);
+PlankResult pl_AudioFileMetaData_AddOriginatorArtist (PlankAudioFileMetaDataRef p, const char* text);
+PlankResult pl_AudioFileMetaData_AddOriginatorRef (PlankAudioFileMetaDataRef p, const char* text);
+PlankResult pl_AudioFileMetaData_AddGenre (PlankAudioFileMetaDataRef p, const char* text);
 
 PlankResult pl_AudioFileMetaData_SetArt (PlankAudioFileMetaDataRef p, PlankConstantP data, const PlankL size);
 PlankResult pl_AudioFileMetaData_GetArt (PlankAudioFileMetaDataRef p, PlankConstantP* data, PlankL* size);
@@ -238,12 +242,13 @@ typedef struct PlankAudioFileMetaData
     
     PlankUI textEncoding;
 
-    PlankDynamicArray descriptionComments; // an array of comments to allow for Ogg comments
+    PlankDynamicArray descriptionComment;
     PlankDynamicArray originatorArtist;
     PlankDynamicArray originatorRef;
     PlankDynamicArray originationDate;
     PlankDynamicArray originationTime;
     
+    PlankDynamicArray performer;
     PlankDynamicArray title;
     PlankDynamicArray album;
     PlankDynamicArray genre;
@@ -251,6 +256,7 @@ typedef struct PlankAudioFileMetaData
     
     PlankDynamicArray vendor;
     PlankDynamicArray isrc;
+    PlankDynamicArray copyright;
 
     PlankDynamicArray art;
     PlankDynamicArray samplerData;

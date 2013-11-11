@@ -98,13 +98,13 @@ PlankResult pl_AudioFileReader_OggVorbis_SetFramePosition (PlankAudioFileReaderR
 PlankResult pl_AudioFileReader_OggVorbis_GetFramePosition (PlankAudioFileReaderRef p, PlankLL *frameIndex);
 PlankResult pl_AudioFileReader_OggVorbis_ParseMetaData (PlankAudioFileReaderRef p);
 
-
 PlankResult pl_AudioFileReader_Opus_Open  (PlankAudioFileReaderRef p, const char* filepath);
 PlankResult pl_AudioFileReader_Opus_OpenWithFile  (PlankAudioFileReaderRef p, PlankFileRef file);
 PlankResult pl_AudioFileReader_Opus_Close (PlankAudioFileReaderRef p);
 PlankResult pl_AudioFileReader_Opus_ReadFrames (PlankAudioFileReaderRef p, const PlankB convertByteOrder, const int numFrames, void* data, int *framesRead);
 PlankResult pl_AudioFileReader_Opus_SetFramePosition (PlankAudioFileReaderRef p, const PlankLL frameIndex);
 PlankResult pl_AudioFileReader_Opus_GetFramePosition (PlankAudioFileReaderRef p, PlankLL *frameIndex);
+PlankResult pl_AudioFileReader_Opus_ParseMetaData (PlankAudioFileReaderRef p);
 
 PlankResult pl_AudioFileReader_Multi_Open (PlankAudioFileReaderRef p, PlankFileRef file);
 PlankResult pl_AudioFileReader_Multi_Close (PlankAudioFileReaderRef p);
@@ -926,8 +926,7 @@ static PlankResult pl_AudioFileReader_WAV_ParseChunk_bext (PlankAudioFileReaderR
     if ((result = pl_File_Read ((PlankFileRef)iff, umid, 64, PLANK_NULL)) != PlankResult_OK) goto exit;
     if ((result = pl_File_Read ((PlankFileRef)iff, reserved, 190, PLANK_NULL)) != PlankResult_OK) goto exit;
     
-    if ((result = pl_AudioFileMetaData_ClearDescriptionComments (p->metaData)) != PlankResult_OK) goto exit;
-    if ((result = pl_AudioFileMetaData_AddDescriptionComment (p->metaData, description)) != PlankResult_OK) goto exit;
+    if ((result = pl_AudioFileMetaData_SetDescriptionComment (p->metaData, description)) != PlankResult_OK) goto exit;
     if ((result = pl_AudioFileMetaData_SetOriginatorArtist (p->metaData, originator)) != PlankResult_OK) goto exit;
     if ((result = pl_AudioFileMetaData_SetOriginatorRef (p->metaData, originatorRef)) != PlankResult_OK) goto exit;
     if ((result = pl_AudioFileMetaData_SetOriginationDate (p->metaData, originationDate)) != PlankResult_OK) goto exit;
@@ -2340,18 +2339,56 @@ static PlankResult pl_AudioFileReader_OggFile_ParseComment (PlankAudioFileReader
     const char* value1;
     const char* value2;
     PlankUI chapterNumber, cueID;
-    double time;
-    PlankLL frame;
+    double doubleValue;
+    PlankLL bigIntValue;
+    int intValue;
     
-    if ((value1 = pl_OggTagCompare (comment, "ARTIST=")) != 0)
+    if ((value1 = pl_OggTagCompare (comment, "TITLE=")) != 0)
     {
-        pl_AudioFileMetaData_SetOriginatorArtist (p->metaData, value1);
+        pl_AudioFileMetaData_SetTitle (p->metaData, value1);
+    }
+    else if ((value1 = pl_OggTagCompare (comment, "ALBUM=")) != 0)
+    {
+        pl_AudioFileMetaData_SetAlbum (p->metaData, value1);
+    }
+    else if ((value1 = pl_OggTagCompare (comment, "TRACKNUMBER=")) != 0)
+    {
+        sscanf (value1, "%d", &intValue);
+        pl_AudioFileMetaData_SetTrackInfo (p->metaData, intValue, 0);
+    }
+    else if ((value1 = pl_OggTagCompare (comment, "ARTIST=")) != 0)
+    {
+        pl_AudioFileMetaData_AddOriginatorArtist (p->metaData, value1);
+    }
+    else if ((value1 = pl_OggTagCompare (comment, "PERFORMER=")) != 0)
+    {
+        pl_AudioFileMetaData_AddPerformer (p->metaData, value1);
     }
     else if ((value1 = pl_OggTagCompare (comment, "TITLE=")) != 0)
     {
         pl_AudioFileMetaData_SetTitle (p->metaData, value1);
     }
-    // etc //
+    else if ((value1 = pl_OggTagCompare (comment, "DESCRIPTION=")) != 0)
+    {
+        pl_AudioFileMetaData_AddDescriptionComment (p->metaData, value1);
+    }
+    else if ((value1 = pl_OggTagCompare (comment, "GENRE=")) != 0)
+    {
+        pl_AudioFileMetaData_AddGenre (p->metaData, value1);
+    }
+    else if ((value1 = pl_OggTagCompare (comment, "DATE=")) != 0)
+    {
+        pl_AudioFileMetaData_SetOriginationDate (p->metaData, value1);
+    }
+    else if ((value1 = pl_OggTagCompare (comment, "ISRC=")) != 0)
+    {
+        pl_AudioFileMetaData_SetISRC (p->metaData, value1);
+    }
+    else if ((value1 = pl_OggTagCompare (comment, "ORGANIZATION=")) != 0)
+    {
+        pl_AudioFileMetaData_SetVendor (p->metaData, value1);
+    }
+    // etc // missing COPYRIGHT, VERSION, LICENSE, LOCATION, CONTACT
     else if ((value1 = pl_OggTagCompare (comment, "CHAPTER")) != 0)
     {
         if (isdigit (value1[0]) &&
@@ -2369,23 +2406,23 @@ static PlankResult pl_AudioFileReader_OggFile_ParseComment (PlankAudioFileReader
                 isdigit (value2[6]) && isdigit (value2[7]) && (value2[8] == '.') &&
                 isdigit (value2[9]) && isdigit (value2[10]) && isdigit (value2[11]))
             {
-                time = (value2[0] - '0') * 36000.0 + (value2[1] - '0') * 3600.0 +
+                doubleValue = (value2[0] - '0') * 36000.0 + (value2[1] - '0') * 3600.0 +
                        (value2[3] - '0') * 600.0   + (value2[4] - '0') * 60.0 +
                        (value2[6] - '0') * 10.0    + (value2[7] - '0') * 1.0 +
                        (value2[9] - '0') * 0.1     + (value2[10] - '0') * 0.01 + (value2[11] - '0') * 0.001;
-                frame = (PlankLL)(time * p->formatInfo.sampleRate + 0.5);
+                bigIntValue = (PlankLL)(doubleValue * p->formatInfo.sampleRate + 0.5);
                 
                 pl_AudioFileMetaData_FindCuePointWithID (p->metaData, cueID, &existingCuePoint, 0);
                 
                 if (existingCuePoint)
                 {
-                    pl_AudioFileCuePoint_SetPosition (existingCuePoint, frame);
+                    pl_AudioFileCuePoint_SetPosition (existingCuePoint, bigIntValue);
                 }
                 else
                 {
                     pl_AudioFileCuePoint_Init (&newCuePoint);
                     pl_AudioFileCuePoint_SetID (&newCuePoint, cueID);
-                    pl_AudioFileCuePoint_SetPosition (&newCuePoint, frame);
+                    pl_AudioFileCuePoint_SetPosition (&newCuePoint, bigIntValue);
                     pl_AudioFileMetaData_AddCuePoint (p->metaData, &newCuePoint);
                 }
             }
@@ -2455,7 +2492,6 @@ PlankResult pl_AudioFileReader_OggVorbis_Open  (PlankAudioFileReaderRef p, const
     
     int err;
     vorbis_info* info;
-//    vorbis_comment* comment;
     
     m = pl_MemoryGlobal();
     
@@ -2500,7 +2536,6 @@ PlankResult pl_AudioFileReader_OggVorbis_Open  (PlankAudioFileReaderRef p, const
     }
     
     info = ov_info (&ogg->oggVorbisFile, -1);
-//    comment = ov_comment (&ogg->oggVorbisFile, -1);
     
     p->formatInfo.numChannels       = info->channels;
     p->formatInfo.sampleRate        = info->rate;
@@ -2826,7 +2861,6 @@ PlankResult pl_AudioFileReader_OggVorbis_GetFramePosition (PlankAudioFileReaderR
     return PlankResult_OK;
 }
 
-
 PlankResult pl_AudioFileReader_OggVorbis_ParseMetaData (PlankAudioFileReaderRef p)
 {
     PlankResult result = PlankResult_OK;
@@ -3000,7 +3034,7 @@ PlankResult pl_AudioFileReader_Opus_Open  (PlankAudioFileReaderRef p, const char
     opus->callbacks.seek  = &pl_OpusFileReader_SeekCallback;
     opus->callbacks.close = &pl_OpusFileReader_CloseCallback;
     opus->callbacks.tell  = &pl_OpusFileReader_TellCallback;
-        
+    
     opus->oggOpusFile = op_open_callbacks (p, &opus->callbacks, NULL, 0, &err);
     
     if (err != 0)
@@ -3036,6 +3070,11 @@ PlankResult pl_AudioFileReader_Opus_Open  (PlankAudioFileReaderRef p, const char
     p->setFramePositionFunction = pl_AudioFileReader_Opus_SetFramePosition;
     p->getFramePositionFunction = pl_AudioFileReader_Opus_GetFramePosition;
     
+    if (p->metaData)
+    {
+        if ((result = pl_AudioFileReader_Opus_ParseMetaData (p)) != PlankResult_OK) goto exit;
+    }
+
 exit:
     return result;
 }
@@ -3049,7 +3088,7 @@ PlankResult pl_AudioFileReader_Opus_OpenWithFile  (PlankAudioFileReaderRef p, Pl
     PlankLL numFrames;
     PlankL bufferSize;
     PlankI bytesPerSample;
-    const OpusTags* tags;
+//    const OpusTags* tags;
     
     int err, mode;
     
@@ -3113,7 +3152,7 @@ PlankResult pl_AudioFileReader_Opus_OpenWithFile  (PlankAudioFileReaderRef p, Pl
         goto exit;
     }
     
-    tags = op_tags (opus->oggOpusFile, -1);
+//    tags = op_tags (opus->oggOpusFile, -1);
     
     p->formatInfo.numChannels       = op_channel_count (opus->oggOpusFile, -1);
     p->formatInfo.sampleRate        = PLANKAUDIOFILE_OPUS_DEFAULTSAMPLERATE;
@@ -3292,6 +3331,28 @@ PlankResult pl_AudioFileReader_Opus_GetFramePosition (PlankAudioFileReaderRef p,
     *frameIndex = pos;
     
     return PlankResult_OK;
+}
+
+PlankResult pl_AudioFileReader_Opus_ParseMetaData (PlankAudioFileReaderRef p)
+{
+    PlankResult result = PlankResult_OK;
+    PlankOpusFileReaderRef opus;
+    const OpusTags* tags;
+    int i;
+    
+    if (!p->metaData)
+        goto exit;
+    
+    opus = (PlankOpusFileReaderRef)p->peer;
+    tags = op_tags (opus->oggOpusFile, -1);
+    
+    for (i = 0; i < tags->comments; ++i)
+    {
+        if ((result = pl_AudioFileReader_OggFile_ParseComment (p, tags->user_comments[i])) != PlankResult_OK) goto exit;
+    }
+    
+exit:
+    return result;
 }
 
 #if PLANK_APPLE
