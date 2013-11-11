@@ -2462,10 +2462,13 @@ static PlankResult pl_AudioFileWriter_Opus_OpenInternal (PlankAudioFileWriterRef
     opus->header.preskip           = delay * 48000 / sampleRate;
     opus->header.input_sample_rate = sampleRate;
     opus->header.gain              = 0;
-    opus->header.channel_mapping   = 0;
     opus->header.nb_streams        = streamCount;
     opus->header.nb_coupled        = coupledStreamCount;
-        
+
+//    header.channel_mapping = header.channels > 8 ? 255 : header.nb_streams > 1;
+//    opus->header.channel_mapping   = 0;
+    opus->header.channel_mapping = opus->header.channels > 8 ? 255 : opus->header.nb_streams > 1; //??
+    
     rng = pl_RNGGlobal();
     err = ogg_stream_init (&opus->os, pl_RNG_Next (rng));
 
@@ -2583,9 +2586,8 @@ static PlankResult pl_AudioFileWriter_Opus_WriteBuffer (PlankOpusFileWriterRef o
     packetData     = (unsigned char*)pl_DynamicArray_GetArray (&opus->packet);
     packetLength   = (opus_int32)pl_DynamicArray_GetSize (&opus->packet);
     sampleRate     = opus->header.input_sample_rate;
-
-//    opus->totalPCMFrames += opus->bufferPos; ?? bug samples not frames?
     framesThisTime = opus->bufferPos / opus->header.channels;
+
     opus->totalPCMFrames += framesThisTime;
     
     if (opus->bufferPos < bufferLength)
@@ -2594,8 +2596,6 @@ static PlankResult pl_AudioFileWriter_Opus_WriteBuffer (PlankOpusFileWriterRef o
         pl_MemoryZero (buffer + opus->bufferPos, (bufferLength - opus->bufferPos) * sizeof (float));
     }
 
-    // another bug 3rd arg should be num frames no samples...
-//    ret = opus_multistream_encode_float (opus->oe, (float*)buffer, bufferLength, packetData, packetLength);
     ret = opus_multistream_encode_float (opus->oe, (float*)buffer, opus->frameSize, packetData, packetLength);
     
     if (ret < 0)
