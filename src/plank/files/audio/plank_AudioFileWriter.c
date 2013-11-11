@@ -2467,7 +2467,8 @@ static PlankResult pl_AudioFileWriter_Opus_OpenInternal (PlankAudioFileWriterRef
 
 //    header.channel_mapping = header.channels > 8 ? 255 : header.nb_streams > 1;
 //    opus->header.channel_mapping   = 0;
-    opus->header.channel_mapping = opus->header.channels > 8 ? 255 : opus->header.nb_streams > 1; //??
+    opus->header.channel_mapping = opus->header.channels > 8 ? 255 : (opus->header.nb_streams > 1) ? 1 : 0; // from opusenc
+//    opus->header.channel_mapping = opus->header.channels > 1 ? 255 : 0; // mono=0, 2+ channels are just uncoupled streams. nope, FIREFOX complains.
     
     rng = pl_RNGGlobal();
     err = ogg_stream_init (&opus->os, pl_RNG_Next (rng));
