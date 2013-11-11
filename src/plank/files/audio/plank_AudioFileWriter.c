@@ -2577,12 +2577,12 @@ static PlankResult pl_AudioFileWriter_Opus_WriteBuffer (PlankOpusFileWriterRef o
     
     maxOggDelay = PLANKAUDIOFILE_OPUS_MAXFRAMESIZE;  // for now
     
-    result       = PlankResult_OK;
-    buffer       = (float*)pl_DynamicArray_GetArray (&opus->buffer);
-    bufferLength = (int)pl_DynamicArray_GetSize (&opus->buffer);
-    packetData   = (unsigned char*)pl_DynamicArray_GetArray (&opus->packet);
-    packetLength = (opus_int32)pl_DynamicArray_GetSize (&opus->packet);
-    sampleRate   = opus->header.input_sample_rate;
+    result         = PlankResult_OK;
+    buffer         = (float*)pl_DynamicArray_GetArray (&opus->buffer);
+    bufferLength   = (int)pl_DynamicArray_GetSize (&opus->buffer);
+    packetData     = (unsigned char*)pl_DynamicArray_GetArray (&opus->packet);
+    packetLength   = (opus_int32)pl_DynamicArray_GetSize (&opus->packet);
+    sampleRate     = opus->header.input_sample_rate;
 
 //    opus->totalPCMFrames += opus->bufferPos; ?? bug samples not frames?
     framesThisTime = opus->bufferPos / opus->header.channels;
@@ -2594,7 +2594,9 @@ static PlankResult pl_AudioFileWriter_Opus_WriteBuffer (PlankOpusFileWriterRef o
         pl_MemoryZero (buffer + opus->bufferPos, (bufferLength - opus->bufferPos) * sizeof (float));
     }
 
-    ret = opus_multistream_encode_float (opus->oe, (float*)buffer, bufferLength, packetData, packetLength);
+    // another bug 3rd arg should be num frames no samples...
+//    ret = opus_multistream_encode_float (opus->oe, (float*)buffer, bufferLength, packetData, packetLength);
+    ret = opus_multistream_encode_float (opus->oe, (float*)buffer, opus->frameSize, packetData, packetLength);
     
     if (ret < 0)
     {
@@ -2618,7 +2620,7 @@ static PlankResult pl_AudioFileWriter_Opus_WriteBuffer (PlankOpusFileWriterRef o
     opus->op.b_o_s      = 0;
     opus->op.e_o_s      = opus->bufferPos < bufferLength ? 1 : 0;
     opus->op.granulepos = opus->op.e_o_s ? ((opus->totalPCMFrames * 48000 + sampleRate - 1) / sampleRate) + opus->header.preskip : opus->currentGranulePos;
-        
+    
     opus->op.packetno++;
     ogg_stream_packetin (&opus->os, &opus->op);
     opus->totalNumSegments += numSegments;
