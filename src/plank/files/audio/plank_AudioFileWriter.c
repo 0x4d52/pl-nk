@@ -2504,7 +2504,7 @@ static PlankResult pl_AudioFileWriter_Opus_OpenInternal (PlankAudioFileWriterRef
     
     if (p->metaData)
     {
-//        if ((result = pl_AudioFileWriter_Opus_WriteMetaData (p)) != PlankResult_OK) goto exit;
+        if ((result = pl_AudioFileWriter_Opus_WriteMetaData (p)) != PlankResult_OK) goto exit;
     }
     
     opus->op.packet     = (unsigned char *)pl_DynamicArray_GetArray (&opus->comments);
