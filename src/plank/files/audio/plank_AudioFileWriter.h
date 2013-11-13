@@ -117,6 +117,9 @@ PlankB pl_AudioFileWriter_IsEncodingNativeEndian (PlankAudioFileWriterRef p);
 
 PlankResult pl_AudioFileWriter_SetHeaderPad (PlankAudioFileWriterRef p, const PlankUI headerPad);
 
+PlankResult pl_AudioFileWriter_SetChannelItentifier (PlankAudioFileWriterRef p, const int channel, const PlankUI channelIdentifier);
+PlankUI pl_AudioFileWriter_GetChannelItentifier (PlankAudioFileWriterRef p, const int channel);
+
 
 /** @} */
 

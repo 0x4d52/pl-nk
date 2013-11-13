@@ -422,7 +422,7 @@ PlankResult pl_AudioFileMetaData_DeInit (PlankAudioFileMetaDataRef p)
     if ((result = pl_AudioFileMetaDataDeInitCuePoints (&p->cuePoints)) != PlankResult_OK) goto exit;
     if ((result = pl_AudioFileMetaDataDeInitRegions (&p->loopPoints)) != PlankResult_OK) goto exit;
     if ((result = pl_AudioFileMetaDataDeInitRegions (&p->regions)) != PlankResult_OK) goto exit;
-
+    
     // this should free any extra data stored as dynamic arrays in the linked list
     if ((result = pl_SimpleLinkedList_Clear (&p->formatSpecific)) != PlankResult_OK) goto exit;
 
@@ -1215,4 +1215,22 @@ exit:
     return result;
 }
 
+//PlankResult pl_AudioFileMetaData_SetChannelItentifier (PlankAudioFileMetaDataRef p, const int channel, const PlankUI channelIdentifier)
+//{
+//    PlankResult result;
+//    result = PlankResult_OK;
+//    
+//    result = pl_DynamicArray_SetItem (&p->channelIdentifiers, channel, (void*)&channelIdentifier);
+//    
+//exit:
+//    return result;
+//}
+//
+//PlankUI pl_AudioFileMetaData_GetChannelItentifier (PlankAudioFileMetaDataRef p, const int channel)
+//{
+//    PlankUI channelIdentifier;
+//    channelIdentifier = 0;
+//    pl_DynamicArray_GetItem (&p->channelIdentifiers, channel, &channelIdentifier);
+//    return channelIdentifier;
+//}
 

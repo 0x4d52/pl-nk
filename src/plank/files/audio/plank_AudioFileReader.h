@@ -112,7 +112,8 @@ PlankResult pl_AudioFileReader_OpenWithCustomNextFunction (PlankAudioFileReaderR
 
 PlankResult pl_AudioFileReader_OpenWithRegion (PlankAudioFileReaderRef p, PlankAudioFileReaderRef original, PlankAudioFileRegionRef region);
 
-PlankResult pl_AudioFileReader_OpenCopyWithoutMetaData (PlankAudioFileReaderRef p, PlankAudioFileReaderRef original);
+//PlankResult pl_AudioFileReader_OpenCopy (PlankAudioFileReaderRef p, PlankAudioFileReaderRef original);
+//PlankResult pl_AudioFileReader_OpenCopyWithoutMetaData (PlankAudioFileReaderRef p, PlankAudioFileReaderRef original);
 
 
 /** 
@@ -187,6 +188,8 @@ PlankAudioFileMetaDataRef pl_AudioFileReader_GetMetaData (PlankAudioFileReaderRe
 
 PlankResult pl_AudioFileReader_SetName (PlankAudioFileReaderRef p, const char* text);
 const char* pl_AudioFileReader_GetName (PlankAudioFileReaderRef p);
+
+PlankUI pl_AudioFileReader_GetChannelItentifier (PlankAudioFileReaderRef p, const int channel);
 
 
 /** @} */

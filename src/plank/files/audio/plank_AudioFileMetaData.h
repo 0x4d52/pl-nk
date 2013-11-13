@@ -208,6 +208,7 @@ PlankResult pl_AudioFileMetaData_InsertFrames (PlankAudioFileMetaDataRef p, cons
 PlankResult pl_AudioFileMetaData_RemoveFrames (PlankAudioFileMetaDataRef p, const PlankLL start, const PlankLL length);
 
 
+
 /** @} */
 
 PLANK_END_C_LINKAGE
@@ -274,7 +275,7 @@ typedef struct PlankAudioFileMetaData
 	PlankDynamicArray cuePoints;
     PlankDynamicArray loopPoints;
     PlankDynamicArray regions;
-    
+        
     // just a list of unparsed data - if we write the same format
     // wih no change this can be simply piped out
     PlankSimpleLinkedList formatSpecific;

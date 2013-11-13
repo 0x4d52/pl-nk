@@ -42,7 +42,7 @@
 #include "../plank_IffFileCommon.h"
 
 #define PLANKAUDIOFILE_CHARBITS                       8
-#define PLANKAUDIOFILE_CHANNELMAPLENGTH             256
+//#define PLANKAUDIOFILE_CHANNELMAPLENGTH             256
 
 #define PLANKAUDIOFILE_FORMAT_INVALID                -1
 #define PLANKAUDIOFILE_FORMAT_UNKNOWN                 0
@@ -116,26 +116,8 @@ static inline const char* pl_PlankAudioFileGetFormatName (int format)
 //#define PLANKAUDIOFILE_WAVEXT_JUNK_LENGTH             PLANKAUDIOFILE_WAV_DS64_LENGTH
 #define PLANKAUDIOFILE_WAV_HEADER_LENGTH              (PLANKAUDIOFILE_WAV_FMT_EXTENSIBLE_LENGTH + PLANKAUDIOFILE_WAV_DS64_MINIMUMLENGTH + 8)
 
-/*
-1.	Front Left - FL
-2.	Front Right - FR
-3.	Front Center - FC
-4.	Low Frequency - LF
-5.	Back Left - BL
-6.	Back Right - BR
-7.	Front Left of Center - FLC
-8.	Front Right of Center - FRC
-9.	Back Center - BC
-10.	Side Left - SL
-11.	Side Right - SR
-12.	Top Center - TC
-13.	Top Front Left - TFL
-14.	Top Front Center - TFC
-15.	Top Front Right - TFR
-16.	Top Back Left - TBL
-17.	Top Back Center - TBC
-18.	Top Back Right - TBR
-*/
+
+// from WAV and CAF
 
 #define PLANKAUDIOFILE_CHANNEL_NONE                         0
 #define PLANKAUDIOFILE_CHANNEL_FRONT_LEFT                   1 //   1.	Front Left - FL
@@ -156,6 +138,37 @@ static inline const char* pl_PlankAudioFileGetFormatName (int format)
 #define PLANKAUDIOFILE_CHANNEL_TOP_BACK_LEFT                16 // 16.	Top Back Left - TBL
 #define PLANKAUDIOFILE_CHANNEL_TOP_BACK_CENTER              17 // 17.	Top Back Center - TBC
 #define PLANKAUDIOFILE_CHANNEL_TOP_BACK_RIGHT               18 // 18.	Top Back Right - TBR
+
+// CAF
+#define PLANKAUDIOFILE_CHANNEL_REARSURROUNDLEFT             33
+#define PLANKAUDIOFILE_CHANNEL_REARSURROUNDRIGHT            34
+#define PLANKAUDIOFILE_CHANNEL_LEFTWIDE                     35
+#define PLANKAUDIOFILE_CHANNEL_RIGHTWIDE                    36
+#define PLANKAUDIOFILE_CHANNEL_LFE2                         37
+#define PLANKAUDIOFILE_CHANNEL_LEFTTOTAL                    38           // matrix encoded 4 channels
+#define PLANKAUDIOFILE_CHANNEL_RIGHTTOTAL                   39           // matrix encoded 4 channels
+#define PLANKAUDIOFILE_CHANNEL_HEARINGIMPAIRED              40
+#define PLANKAUDIOFILE_CHANNEL_NARRATION                    41
+#define PLANKAUDIOFILE_CHANNEL_MONO                         42
+#define PLANKAUDIOFILE_CHANNEL_DIALOGCENTRICMIX             43
+#define PLANKAUDIOFILE_CHANNEL_CENTERSURROUNDDIRECT         44           // back center non diffuse
+#define PLANKAUDIOFILE_CHANNEL_HAPTIC                       45
+
+#define PLANKAUDIOFILE_CHANNEL_AMBISONIC_W                  200
+#define PLANKAUDIOFILE_CHANNEL_AMBISONIC_X                  201
+#define PLANKAUDIOFILE_CHANNEL_AMBISONIC_Y                  202
+#define PLANKAUDIOFILE_CHANNEL_AMBISONIC_Z                  203
+#define PLANKAUDIOFILE_CHANNEL_MS_MID                       204
+#define PLANKAUDIOFILE_CHANNEL_MS_SIDE                      205
+#define PLANKAUDIOFILE_CHANNEL_XY_X                         206
+#define PLANKAUDIOFILE_CHANNEL_XY_Y                         207
+#define PLANKAUDIOFILE_CHANNEL_HEADPHONESLEFT               301
+#define PLANKAUDIOFILE_CHANNEL_HEADPHONESRIGHT              302
+#define PLANKAUDIOFILE_CHANNEL_CLICKTRACK                   304
+#define PLANKAUDIOFILE_CHANNEL_FOREIGNLANGUAGE              305
+#define PLANKAUDIOFILE_CHANNEL_DISCRETE                     400
+
+#define PLANKAUDIOFILE_CHANNEL_DISCRETE_N                (1<<16) // OR with 0-based channel index 0-65535
 
 
 // EBU-TECH 3306
@@ -280,6 +293,133 @@ typedef struct PlankCAFStringID {
 #define PLANKAUDIOFILE_CAF_MARKERTYPE_RELEASELOOPSTART     pl_FourCharCode ("rlbg")
 #define PLANKAUDIOFILE_CAF_MARKERTYPE_RELEASELOOPEND       pl_FourCharCode ("rlen")
 
+
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_USECHANNELDESCRIPTIONS    ((0<<16) | 0)
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_USECHANNELBITMAP          ((1<<16) | 0)
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_MONO                      ((100<<16) | 1)
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_STEREO                    ((101<<16) | 2)
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_STEREOHEADPHONES          ((102<<16) | 2)
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_MATRIXSTEREO              ((103<<16) | 2)
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_MIDSIDE                   ((104<<16) | 2)
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_XY                        ((105<<16) | 2)
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_BINAURAL                  ((106<<16) | 2)
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_AMBISONIC_B_FORMAT        ((107<<16) | 4)
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_QUADRAPHONIC              ((108<<16) | 4)
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_PENTAGONAL                ((109<<16) | 5)
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_HEXAGONAL                 ((110<<16) | 6)
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_OCTAGONAL                 ((111<<16) | 8)
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_CUBE                      ((112<<16) | 8)
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_MPEG_1_0                  PLANKAUDIOFILE_CAF_LAYOUTTAG_MONO         //  C
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_MPEG_2_0                  PLANKAUDIOFILE_CAF_LAYOUTTAG_STEREO       //  L R
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_MPEG_3_0_A                ((113<<16) | 3)                      //  L R C
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_MPEG_3_0_B                ((114<<16) | 3)                      //  C L R
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_MPEG_4_0_A                ((115<<16) | 4)                       //  L R C Cs
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_MPEG_4_0_B                ((116<<16) | 4)                       //  C L R Cs
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_MPEG_5_0_A                ((117<<16) | 5)                       //  L R C Ls Rs
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_MPEG_5_0_B                ((118<<16) | 5)                       //  L R Ls Rs C
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_MPEG_5_0_C                ((119<<16) | 5)                       //  L C R Ls Rs
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_MPEG_5_0_D                ((120<<16) | 5)                       //  C L R Ls Rs
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_MPEG_5_1_A                ((121<<16) | 6)                       //  L R C LFE Ls Rs
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_MPEG_5_1_B                ((122<<16) | 6)                       //  L R Ls Rs C LFE
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_MPEG_5_1_C                ((123<<16) | 6)                       //  L C R Ls Rs LFE
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_MPEG_5_1_D                ((124<<16) | 6)                       //  C L R Ls Rs LFE
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_MPEG_6_1_A                ((125<<16) | 7)                       //  L R C LFE Ls Rs Cs
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_MPEG_7_1_A                ((126<<16) | 8)                       //  L R C LFE Ls Rs Lc Rc
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_MPEG_7_1_B                ((127<<16) | 8)                       //  C Lc Rc L R Ls Rs LFE 
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_MPEG_7_1_C                ((128<<16) | 8)                       //  L R C LFE Ls Rs Rls Rrs
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_EMAGIC_DEFAULT_7_1        ((129<<16) | 8)                       //  L R Ls Rs C LFE Lc Rc
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_SMPTE_DTV                 ((130<<16) | 8)                       //  L R C LFE Ls Rs Lt Rt
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_ITU_1_0                   PLANKAUDIOFILE_CAF_LAYOUTTAG_MONO         //  C
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_ITU_2_0                   PLANKAUDIOFILE_CAF_LAYOUTTAG_STEREO       //  L R
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_ITU_2_1                   ((131<<16) | 3)                       //  L R Cs
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_ITU_2_2                   ((132<<16) | 4)                       //  L R Ls Rs
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_ITU_3_0                   PLANKAUDIOFILE_CAF_LAYOUTTAG_MPEG_3_0_A   //  L R C
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_ITU_3_1                   PLANKAUDIOFILE_CAF_LAYOUTTAG_MPEG_4_0_A   //  L R C Cs
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_ITU_3_2                   PLANKAUDIOFILE_CAF_LAYOUTTAG_MPEG_5_0_A   //  L R C Ls Rs
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_ITU_3_2_1                 PLANKAUDIOFILE_CAF_LAYOUTTAG_MPEG_5_1_A   //  L R C LFE Ls Rs
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_ITU_3_4_1                 PLANKAUDIOFILE_CAF_LAYOUTTAG_MPEG_7_1_C   //  L R C LFE Ls Rs Rls Rrs
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_DVD_0                     PLANKAUDIOFILE_CAF_LAYOUTTAG_MONO         // C (mono)
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_DVD_1                     PLANKAUDIOFILE_CAF_LAYOUTTAG_STEREO       // L R
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_DVD_2                     PLANKAUDIOFILE_CAF_LAYOUTTAG_ITU_2_1      // L R Cs
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_DVD_3                     PLANKAUDIOFILE_CAF_LAYOUTTAG_ITU_2_2      // L R Ls Rs
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_DVD_4                     ((133<<16) | 3)                       // L R LFE
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_DVD_5                     ((134<<16) | 4)                       // L R LFE Cs
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_DVD_6                     ((135<<16) | 5)                       // L R LFE Ls Rs
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_DVD_7                     PLANKAUDIOFILE_CAF_LAYOUTTAG_MPEG_3_0_A   // L R C
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_DVD_8                     PLANKAUDIOFILE_CAF_LAYOUTTAG_MPEG_4_0_A   // L R C Cs
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_DVD_9                     PLANKAUDIOFILE_CAF_LAYOUTTAG_MPEG_5_0_A   // L R C Ls Rs
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_DVD_10                    ((136<<16) | 4)                       // L R C LFE
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_DVD_11                    ((137<<16) | 5)                       // L R C LFE Cs
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_DVD_12                    PLANKAUDIOFILE_CAF_LAYOUTTAG_MPEG_5_1_A   // L R C LFE Ls Rs
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_DVD_13                    PLANKAUDIOFILE_CAF_LAYOUTTAG_DVD_8        // L R C Cs
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_DVD_14                    PLANKAUDIOFILE_CAF_LAYOUTTAG_DVD_9        // L R C Ls Rs
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_DVD_15                    PLANKAUDIOFILE_CAF_LAYOUTTAG_DVD_10       // L R C LFE
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_DVD_16                    PLANKAUDIOFILE_CAF_LAYOUTTAG_DVD_11       // L R C LFE Cs
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_DVD_17                    PLANKAUDIOFILE_CAF_LAYOUTTAG_DVD_12       // L R C LFE Ls Rs
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_DVD_18                    ((138<<16) | 5)                       // L R Ls Rs LFE
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_DVD_19                    PLANKAUDIOFILE_CAF_LAYOUTTAG_MPEG_5_0_B   // L R Ls Rs C
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_DVD_20                    PLANKAUDIOFILE_CAF_LAYOUTTAG_MPEG_5_1_B   // L R Ls Rs C LFE
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_AUDIOUNIT_4               PLANKAUDIOFILE_CAF_LAYOUTTAG_QUADRAPHONIC
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_AUDIOUNIT_5               PLANKAUDIOFILE_CAF_LAYOUTTAG_PENTAGONAL
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_AUDIOUNIT_6               PLANKAUDIOFILE_CAF_LAYOUTTAG_HEXAGONAL
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_AUDIOUNIT_8               PLANKAUDIOFILE_CAF_LAYOUTTAG_OCTAGONAL
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_AUDIOUNIT_5_0             PLANKAUDIOFILE_CAF_LAYOUTTAG_MPEG_5_0_B   // L R Ls Rs C
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_AUDIOUNIT_6_0             ((139<<16) | 6)                       // L R Ls Rs C Cs
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_AUDIOUNIT_7_0             ((140<<16) | 7)                       // L R Ls Rs C Rls Rrs
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_AUDIOUNIT_7_0_FRONT       ((148<<16) | 7)                       // L R Ls Rs C Lc Rc
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_AUDIOUNIT_5_1             PLANKAUDIOFILE_CAF_LAYOUTTAG_MPEG_5_1_A   // L R C LFE Ls Rs
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_AUDIOUNIT_6_1             PLANKAUDIOFILE_CAF_LAYOUTTAG_MPEG_6_1_A   // L R C LFE Ls Rs Cs
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_AUDIOUNIT_7_1             PLANKAUDIOFILE_CAF_LAYOUTTAG_MPEG_7_1_C   // L R C LFE Ls Rs Rls Rrs
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_AUDIOUNIT_7_1_FRONT       PLANKAUDIOFILE_CAF_LAYOUTTAG_MPEG_7_1_A   // L R C LFE Ls Rs Lc Rc
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_AAC_3_0                   PLANKAUDIOFILE_CAF_LAYOUTTAG_MPEG_3_0_B   // C L R
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_AAC_QUADRAPHONIC          PLANKAUDIOFILE_CAF_LAYOUTTAG_QUADRAPHONIC // L R Ls Rs
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_AAC_4_0                   PLANKAUDIOFILE_CAF_LAYOUTTAG_MPEG_4_0_B   // C L R Cs
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_AAC_5_0                   PLANKAUDIOFILE_CAF_LAYOUTTAG_MPEG_5_0_D   // C L R Ls Rs
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_AAC_5_1                   PLANKAUDIOFILE_CAF_LAYOUTTAG_MPEG_5_1_D   // C L R Ls Rs Lfe
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_AAC_6_0                   ((141<<16) | 6)                       // C L R Ls Rs Cs
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_AAC_6_1                   ((142<<16) | 7)                       // C L R Ls Rs Cs Lfe
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_AAC_7_0                   ((143<<16) | 7)                       // C L R Ls Rs Rls Rrs
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_AAC_7_1                   PLANKAUDIOFILE_CAF_LAYOUTTAG_MPEG_7_1_B   // C Lc Rc L R Ls Rs Lfe
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_AAC_OCTAGONAL             ((144<<16) | 8)                       // C L R Ls Rs Rls Rrs Cs
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_TMH_10_2_STD              ((145<<16) | 16)                      // L R C Vhc Lsd Rsd Ls Rs Vhl Vhr Lw Rw Csd Cs LFE1 LFE2
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_TMH_10_2_FULL             ((146<<16) | 21)                      // TMH_10_2_std plus: Lc Rc HI VI Haptic
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_AC3_1_0_1                 ((149<<16) | 2)                       // C LFE
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_AC3_3_0                   ((150<<16) | 3)                       // L C R
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_AC3_3_1                   ((151<<16) | 4)                       // L C R Cs
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_AC3_3_0_1                 ((152<<16) | 4)                       // L C R LFE
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_AC3_2_1_1                 ((153<<16) | 4)                       // L R Cs LFE
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_AC3_3_1_1                 ((154<<16) | 5)                       // L C R Cs LFE
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_EAC_6_0_A                 ((155<<16) | 6)                       // L C R Ls Rs Cs
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_EAC_7_0_A                 ((156<<16) | 7)                       // L C R Ls Rs Rls Rrs
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_EAC3_6_1_A                ((157<<16) | 7)                       // L C R Ls Rs LFE Cs
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_EAC3_6_1_B                ((158<<16) | 7)                       // L C R Ls Rs LFE Ts
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_EAC3_6_1_C                ((159<<16) | 7)                       // L C R Ls Rs LFE Vhc
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_EAC3_7_1_A                ((160<<16) | 8)                       // L C R Ls Rs LFE Rls Rrs
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_EAC3_7_1_B                ((161<<16) | 8)                       // L C R Ls Rs LFE Lc Rc
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_EAC3_7_1_C                ((162<<16) | 8)                       // L C R Ls Rs LFE Lsd Rsd
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_EAC3_7_1_D                ((163<<16) | 8)                       // L C R Ls Rs LFE Lw Rw
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_EAC3_7_1_E                ((164<<16) | 8)                       // L C R Ls Rs LFE Vhl Vhr
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_EAC3_7_1_F                ((165<<16) | 8)                        // L C R Ls Rs LFE Cs Ts
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_EAC3_7_1_G                ((166<<16) | 8)                        // L C R Ls Rs LFE Cs Vhc
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_EAC3_7_1_H                ((167<<16) | 8)                        // L C R Ls Rs LFE Ts Vhc
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_DTS_3_1                   ((168<<16) | 4)                        // C L R LFE
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_DTS_4_1                   ((169<<16) | 5)                        // C L R Cs LFE
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_DTS_6_0_A                 ((170<<16) | 6)                        // Lc Rc L R Ls Rs
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_DTS_6_0_B                 ((171<<16) | 6)                        // C L R Rls Rrs Ts
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_DTS_6_0_C                 ((172<<16) | 6)                        // C Cs L R Rls Rrs
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_DTS_6_1_A                 ((173<<16) | 7)                        // Lc Rc L R Ls Rs LFE
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_DTS_6_1_B                 ((174<<16) | 7)                        // C L R Rls Rrs Ts LFE
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_DTS_6_1_C                 ((175<<16) | 7)                        // C Cs L R Rls Rrs LFE
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_DTS_7_0                   ((176<<16) | 7)                        // Lc C Rc L R Ls Rs
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_DTS_7_1                   ((177<<16) | 8)                        // Lc C Rc L R Ls Rs LFE
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_DTS_8_0_A                 ((178<<16) | 8)                        // Lc Rc L R Ls Rs Rls Rrs
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_DTS_8_0_B                 ((179<<16) | 8)                        // Lc C Rc L R Ls Cs Rs
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_DTS_8_1_A                 ((180<<16) | 9)                        // Lc Rc L R Ls Rs Rls Rrs LFE
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_DTS_8_1_B                 ((181<<16) | 9)                        // Lc C Rc L R Ls Cs Rs LFE
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_DTS_6_1_D                 ((182<<16) | 7)                        // C L R Ls Rs LFE Cs
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_DISCRETEINORDER           ((147<<16) | 0)                        // needs to be ORed with the actual number of channels
+#define PLANKAUDIOFILE_CAF_LAYOUTTAG_UNKNOWN                   0xFFFF0000                             // needs to be ORed with the actual number of channels
+
 #define PLANKAUDIOFILEMETADATA_TEXTENCODING_ASCII   0
 #define PLANKAUDIOFILEMETADATA_TEXTENCODING_UTF8    1
 #define PLANKAUDIOFILEMETADATA_TEXTENCODING_UTF16   2
@@ -324,22 +464,50 @@ typedef struct PlankCAFStringID {
     #include "../../../../ext/vorbis/vorbis/vorbisfile.h"
 
 /*
-one channel
+ 
+                      Num-coupled   Force narrow     The channel map
+one channel : 1     { 0,            0,               0               },
 the stream is monophonic
-two channels
+ 
+two channels : 2    { 1,            0,               0,1             },
 the stream is stereo. channel order: left, right
-three channels
+
+three channels : 3  { 1,            0,               0,2,1           },
 the stream is a 1d-surround encoding. channel order: left, center, right
-four channels
+
+four channels : 4   { 2,            0,               0,1,2,3         },
 the stream is quadraphonic surround. channel order: front left, front right, rear left, rear right
-five channels
+
+five channels : 5   { 2,            0,               0,4,1,2,3       },
 the stream is five-channel surround. channel order: front left, center, front right, rear left, rear right
-six channels
+
+six channels : 6    { 2,            1<<3,            0,4,1,2,3,5     },
 the stream is 5.1 surround. channel order: front left, center, front right, rear left, rear right, LFE
-seven channels
+
+seven channels : 7  { 2,            1<<4,            0,4,1,2,3,5,6   },
 the stream is 6.1 surround. channel order: front left, center, front right, side left, side right, rear center, LFE
-eight channels
+
+eight channels : 8  { 3,            1<<4,            0,6,1,2,3,4,5,7 }
 the stream is 7.1 surround. channel order: front left, center, front right, side left, side right, rear left, rear right, LFE
+ 
+ 
+ Stream count 'N'
+ 
+ This field indicates the total number of streams so the decoder can correctly parse the packed Opus packets inside the Ogg packet.
+ 
+ For channel mapping family 0, this value defaults to 1, and is not coded.
+ 
+ A multi-channel Opus file is composed of one or more individual Opus streams, each of which produce one or two channels of decoded data. Each Ogg packet contains one Opus packet from each stream. The first N-1 Opus packets are packed using the self-delimiting framing from Appendix B of the Opus Specification. The remaining Opus packet is packed using the regular, undelimited framing from Section 3 of the Opus Specification. All the Opus packets in a single Ogg packet MUST be constrained to produce the same number of decoded samples. A decoder SHOULD treat any Opus packet whose duration is different from that of the first Opus packet in an Ogg packet as if it were an Opus packet with an illegal TOC sequence.
+ 
+ Two-channel stream count 'M'
+ 
+ Describes the number of streams whose decoders should be configured to produce two channels. This must be no larger than the number of total streams.
+ 
+ For channel mapping family 0, this value defaults to c-1 (i.e., 0 for mono and 1 for stereo), and is not coded.
+ 
+ Each packet in an Opus stream has an internal channel count of 1 or 2, which can change from packet to packet. This is selected by the encoder depending on the bitrate and the contents being encoded. The original channel count of the encoder input is not preserved by the lossy compression.
+ 
+ Regardless of the internal channel count, any Opus stream may be decoded as mono (a single channel) or stereo (two channels) by appropriate initialization of the decoder. The "two-channel stream count" field indicates that the first M Opus decoders should be initialized in stereo mode, and the remaining N-M decoders should be initialized in mono mode. The total number of decoded channels (M+N) MUST be no larger than 255, as there is no way to index more channels than that in the channel mapping.
 */
 
 #endif
@@ -376,28 +544,455 @@ typedef struct PlankAudioFileFormatInfo
     PlankI minimumBitRate;
     PlankI maximumBitRate;
     PlankI nominalBitRate;
-    PlankI numChannels;
+//    PlankI numChannels;
     PlankD sampleRate;
     PlankD frameDuration;
     PlankF quality;
-    
-    PlankUC channelMap[PLANKAUDIOFILE_CHANNELMAPLENGTH];
+        
+    PlankDynamicArray channelIdentifiers;
+    PlankDynamicArray channelCoords;
 
 } PlankAudioFileFormatInfo;
 
 
-static inline PlankB pl_AudioFileFormatInfo_IsChannelMapClear (const PlankAudioFileFormatInfo* info)
+//static inline PlankB pl_AudioFileFormatInfo_IsChannelMapClear (const PlankAudioFileFormatInfo* info)
+//{
+//    int i;
+//    
+//    for (i = 0; i < info->numChannels; ++i)
+//    {
+//        if (info->channelMap[i] != PLANKAUDIOFILE_CHANNEL_NONE)
+//            return PLANK_FALSE;
+//    }
+//    
+//    return PLANK_TRUE;
+//}
+
+
+static void pl_AudioFileFormatInfo_WAVCAF_ChannelMaskToIdentifiers (PlankAudioFileFormatInfo* formatInfo, const PlankUI channelMask)
 {
-    int i;
+    PlankUI bit, mask;
+    PlankUI* channelIdentfiers;
+    int channel, numChannels;
     
-    for (i = 0; i < info->numChannels; ++i)
+    numChannels = (int)pl_DynamicArray_GetSize (&formatInfo->channelIdentifiers);
+    
+    if (numChannels > 0)
+    {    
+        channelIdentfiers = (PlankUI*)pl_DynamicArray_GetArray (&formatInfo->channelIdentifiers);
+        
+        pl_MemoryZero (channelIdentfiers, numChannels * sizeof (PlankUI));
+
+        bit     = 0;
+        channel = 0;
+        
+        while ((bit < 32) && (channel < numChannels))
+        {
+            mask = ((PlankUI)1) << bit;
+            
+            if (mask & channelMask)
+            {
+                channelIdentfiers[channel] = bit;
+                ++channel;
+            }
+            
+            ++bit;
+        }
+    }
+}
+
+static char* pl_AudioFileFormatInfoChannelIdentifierToName (const PlankUI identifier, char* name, const int nameLength)
+{
+    // just get the uppercase chars only for the abbreviations
+    static const char* names[] = {
+        "None",
+        "Front Left",
+        "Front Right",
+        "Front Center",
+        "Low Frequency",
+        "Back Left",
+        "Back Right",
+        "Front Left of Center",
+        "Front Right of Center",
+        "Back Center",
+        "Side Left",
+        "Side Right",
+        "Top Center",
+        "Top Front Left",
+        "Top Front Center",
+        "Top Front Right",
+        "Top Back Left",
+        "Top Back Center",
+        "Top Back Right", // 18
+        "Unknown","Unknown","Unknown","Unknown","Unknown","Unknown","Unknown","Unknown","Unknown","Unknown","Unknown","Unknown","Unknown","Unknown",
+        "Rear Surround Left", // 33
+        "Rear Surround Right", 
+        "Left Wide", 
+        "Right Wide", 
+        "Low Frequency 2", 
+        "Left Total", 
+        "Right Total", 
+        "Hearing Impaired", 
+        "Voice Over", // PLANKAUDIOFILE_CHANNEL_NARRATION
+        "Mono", 
+        "Dialogue Centric Mix", 
+        "Center Surround Direct", 
+        "Vibration" // PLANKAUDIOFILE_CHANNEL_HAPTIC
+    };
+        
+    if (identifier <= PLANKAUDIOFILE_CHANNEL_HAPTIC)
     {
-        if (info->channelMap[i] != PLANKAUDIOFILE_CHANNEL_NONE)
-            return PLANK_FALSE;
+        return strncpy (name, names[identifier], nameLength);
+    }
+    else if ((identifier & 0xFFFF0000) == PLANKAUDIOFILE_CHANNEL_DISCRETE_N)
+    {
+        snprintf (name, nameLength, "Discrete %u", identifier & 0x0000FFFF);
+        return name;
+    }
+    else
+    {
+        switch (identifier)
+        {
+            case PLANKAUDIOFILE_CHANNEL_AMBISONIC_W:        return strncpy (name, "Ambisonic W", nameLength);
+            case PLANKAUDIOFILE_CHANNEL_AMBISONIC_X:        return strncpy (name, "Ambisonic X", nameLength);
+            case PLANKAUDIOFILE_CHANNEL_AMBISONIC_Y:        return strncpy (name, "Ambisonic Y", nameLength);
+            case PLANKAUDIOFILE_CHANNEL_AMBISONIC_Z:        return strncpy (name, "Ambisonic Z", nameLength);
+            case PLANKAUDIOFILE_CHANNEL_MS_MID:             return strncpy (name, "MS M", nameLength);
+            case PLANKAUDIOFILE_CHANNEL_MS_SIDE:            return strncpy (name, "MS S", nameLength);
+            case PLANKAUDIOFILE_CHANNEL_XY_X:               return strncpy (name, "XY X", nameLength);
+            case PLANKAUDIOFILE_CHANNEL_XY_Y:               return strncpy (name, "XY Y", nameLength);
+            case PLANKAUDIOFILE_CHANNEL_HEADPHONESLEFT:     return strncpy (name, "Head-Phones L", nameLength);
+            case PLANKAUDIOFILE_CHANNEL_HEADPHONESRIGHT:    return strncpy (name, "Head-Phones R", nameLength);
+            case PLANKAUDIOFILE_CHANNEL_CLICKTRACK:         return strncpy (name, "Click Track", nameLength);
+            case PLANKAUDIOFILE_CHANNEL_FOREIGNLANGUAGE:    return strncpy (name, "Foreign Language", nameLength);
+            case PLANKAUDIOFILE_CHANNEL_DISCRETE:           return strncpy (name, "Discrete", nameLength);
+        }
     }
     
-    return PLANK_TRUE;
+    
+    return strncpy (name, "Unknown", nameLength);
 }
+
+static char* pl_AudioFileFormatInfoAbbreviateIdentifierName (const char* name, char* abbrev, const int abbrevLength)
+{
+    int i, length;
+    
+    i = 0;
+    length = strlen (name);
+    
+    while ((i < length) && (i < (abbrevLength - 1)))
+    {
+        if (isupper (name[i]) || isdigit (name[i]))
+            abbrev[i++] = name[i];
+    }
+    
+    abbrev[i] = '\0';
+    
+    return abbrev;
+}
+
+static PlankResult pl_AudioFileFormatInfo_CAF_LayoutTagToChannelMap (PlankAudioFileFormatInfo* formatInfo, const PlankUI channelLayoutTag)
+{
+    PlankResult result = PlankResult_OK;
+    PlankUI* channelIdentifiers;
+    
+    channelIdentifiers = (PlankUI*)pl_DynamicArray_GetArray (&formatInfo->channelIdentifiers);
+    
+    switch (channelLayoutTag)
+    {
+        case PLANKAUDIOFILE_CAF_LAYOUTTAG_MONO:
+            channelIdentifiers[0] = PLANKAUDIOFILE_CHANNEL_MONO;
+            break;
+        case PLANKAUDIOFILE_CAF_LAYOUTTAG_STEREO:
+            channelIdentifiers[0] = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
+            channelIdentifiers[1] = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
+            break;
+        case PLANKAUDIOFILE_CAF_LAYOUTTAG_STEREOHEADPHONES:
+            channelIdentifiers[0] = PLANKAUDIOFILE_CHANNEL_HEADPHONESLEFT;
+            channelIdentifiers[1] = PLANKAUDIOFILE_CHANNEL_HEADPHONESRIGHT;
+            break;
+        case PLANKAUDIOFILE_CAF_LAYOUTTAG_MATRIXSTEREO:
+            channelIdentifiers[0] = PLANKAUDIOFILE_CHANNEL_LEFTTOTAL;
+            channelIdentifiers[1] = PLANKAUDIOFILE_CHANNEL_RIGHTTOTAL;
+            break;
+        case PLANKAUDIOFILE_CAF_LAYOUTTAG_MIDSIDE:
+            channelIdentifiers[0] = PLANKAUDIOFILE_CHANNEL_MS_MID;
+            channelIdentifiers[1] = PLANKAUDIOFILE_CHANNEL_MS_SIDE;
+            break;
+        case PLANKAUDIOFILE_CAF_LAYOUTTAG_XY:
+            channelIdentifiers[0] = PLANKAUDIOFILE_CHANNEL_XY_X;
+            channelIdentifiers[1] = PLANKAUDIOFILE_CHANNEL_XY_Y;
+            break;
+        case PLANKAUDIOFILE_CAF_LAYOUTTAG_BINAURAL:
+            channelIdentifiers[0] = PLANKAUDIOFILE_CHANNEL_HEADPHONESLEFT;
+            channelIdentifiers[1] = PLANKAUDIOFILE_CHANNEL_HEADPHONESRIGHT;
+            break;
+        case PLANKAUDIOFILE_CAF_LAYOUTTAG_AMBISONIC_B_FORMAT:
+            channelIdentifiers[0] = PLANKAUDIOFILE_CHANNEL_AMBISONIC_W;
+            channelIdentifiers[1] = PLANKAUDIOFILE_CHANNEL_AMBISONIC_X;
+            channelIdentifiers[2] = PLANKAUDIOFILE_CHANNEL_AMBISONIC_Y;
+            channelIdentifiers[3] = PLANKAUDIOFILE_CHANNEL_AMBISONIC_Z;
+            break;
+        case PLANKAUDIOFILE_CAF_LAYOUTTAG_QUADRAPHONIC:
+            channelIdentifiers[0] = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
+            channelIdentifiers[1] = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
+            channelIdentifiers[2] = PLANKAUDIOFILE_CHANNEL_BACK_LEFT;
+            channelIdentifiers[3] = PLANKAUDIOFILE_CHANNEL_BACK_RIGHT;
+            break;
+        case PLANKAUDIOFILE_CAF_LAYOUTTAG_PENTAGONAL:
+            channelIdentifiers[0] = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
+            channelIdentifiers[1] = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
+            channelIdentifiers[2] = PLANKAUDIOFILE_CHANNEL_BACK_LEFT;
+            channelIdentifiers[3] = PLANKAUDIOFILE_CHANNEL_BACK_RIGHT;
+            channelIdentifiers[4] = PLANKAUDIOFILE_CHANNEL_FRONT_CENTER;
+            break;
+        case PLANKAUDIOFILE_CAF_LAYOUTTAG_HEXAGONAL:
+            channelIdentifiers[0] = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
+            channelIdentifiers[1] = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
+            channelIdentifiers[2] = PLANKAUDIOFILE_CHANNEL_BACK_LEFT;
+            channelIdentifiers[3] = PLANKAUDIOFILE_CHANNEL_BACK_RIGHT;
+            channelIdentifiers[4] = PLANKAUDIOFILE_CHANNEL_FRONT_CENTER;
+            channelIdentifiers[5] = PLANKAUDIOFILE_CHANNEL_BACK_CENTER;
+            break;
+        case PLANKAUDIOFILE_CAF_LAYOUTTAG_OCTAGONAL:
+            channelIdentifiers[0] = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
+            channelIdentifiers[1] = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
+            channelIdentifiers[2] = PLANKAUDIOFILE_CHANNEL_BACK_LEFT;
+            channelIdentifiers[3] = PLANKAUDIOFILE_CHANNEL_BACK_RIGHT;
+            channelIdentifiers[4] = PLANKAUDIOFILE_CHANNEL_FRONT_CENTER;
+            channelIdentifiers[5] = PLANKAUDIOFILE_CHANNEL_BACK_CENTER;
+            channelIdentifiers[6] = PLANKAUDIOFILE_CHANNEL_SIDE_LEFT;
+            channelIdentifiers[7] = PLANKAUDIOFILE_CHANNEL_SIDE_RIGHT;
+            break;
+        case PLANKAUDIOFILE_CAF_LAYOUTTAG_CUBE:
+            //Label.Left, Label.Right, Label.LeftSurround, Label.RightSurround, Label.TopBackLeft, Label.TopBackRight, Label.TopBackCenter, Label.TopCenterSurround
+            break;
+        case PLANKAUDIOFILE_CAF_LAYOUTTAG_MPEG_3_0_A:
+            //Label.Left, Label.Right, Label.Center),
+            break;
+        case PLANKAUDIOFILE_CAF_LAYOUTTAG_MPEG_3_0_B:
+            //Label.Center, Label.Left, Label.Right),
+            break;
+        case PLANKAUDIOFILE_CAF_LAYOUTTAG_MPEG_4_0_A:
+            //Label.Left, Label.Right, Label.Center, Label.CenterSurround),
+            break;
+        case PLANKAUDIOFILE_CAF_LAYOUTTAG_MPEG_4_0_B:
+            //Label.Center, Label.Left, Label.Right, Label.CenterSurround),
+            break;
+        case PLANKAUDIOFILE_CAF_LAYOUTTAG_MPEG_5_0_A:
+            //Label.Left, Label.Right, Label.Center, Label.LeftSurround, Label.RightSurround),
+            break;
+        case PLANKAUDIOFILE_CAF_LAYOUTTAG_MPEG_5_0_B:
+            //Label.Left, Label.Right, Label.LeftSurround, Label.RightSurround, Label.Center),
+            break;
+        case PLANKAUDIOFILE_CAF_LAYOUTTAG_MPEG_5_0_C:
+            //Label.Left, Label.Center, Label.Right, Label.LeftSurround, Label.RightSurround),
+            break;
+        case PLANKAUDIOFILE_CAF_LAYOUTTAG_MPEG_5_0_D:
+            //Label.Center, Label.Left, Label.Right, Label.LeftSurround, Label.RightSurround),
+            break;
+        case PLANKAUDIOFILE_CAF_LAYOUTTAG_MPEG_5_1_A:
+            //Label.Left, Label.Right, Label.Center, Label.LFEScreen, Label.LeftSurround, Label.RightSurround),
+            break;
+        case PLANKAUDIOFILE_CAF_LAYOUTTAG_MPEG_5_1_B:
+            //Label.Left, Label.Right, Label.LeftSurround, Label.RightSurround, Label.Center, Label.LFEScreen),
+            break;
+        case PLANKAUDIOFILE_CAF_LAYOUTTAG_MPEG_5_1_C:
+            //Label.Left, Label.Center, Label.Right, Label.LeftSurround, Label.RightSurround, Label.LFEScreen),
+            break;
+        case PLANKAUDIOFILE_CAF_LAYOUTTAG_MPEG_5_1_D:
+            //Label.Center, Label.Left, Label.Right, Label.LeftSurround, Label.RightSurround, Label.LFEScreen),
+            break;
+        case PLANKAUDIOFILE_CAF_LAYOUTTAG_MPEG_6_1_A:
+            //Label.Left, Label.Right, Label.Center, Label.LFEScreen, Label.LeftSurround, Label.RightSurround, Label.Right),
+            break;
+        case PLANKAUDIOFILE_CAF_LAYOUTTAG_MPEG_7_1_A:
+            //Label.Left, Label.Right, Label.Center, Label.LFEScreen, Label.LeftSurround, Label.RightSurround, Label.LeftCenter, Label.RightCenter),
+            break;
+        case PLANKAUDIOFILE_CAF_LAYOUTTAG_MPEG_7_1_B:
+            //Label.Center, Label.LeftCenter, Label.RightCenter, Label.Left,Label.Right, Label.LeftSurround, Label.RightSurround, Label.LFEScreen),
+            break;
+        case PLANKAUDIOFILE_CAF_LAYOUTTAG_MPEG_7_1_C:
+            //Label.Left, Label.Right, Label.Center, Label.LFEScreen, Label.LeftSurround, Label.RightSurround, Label.RearSurroundLeft, Label.RearSurroundRight),
+            break;
+        case PLANKAUDIOFILE_CAF_LAYOUTTAG_EMAGIC_DEFAULT_7_1:
+            //Label.Left, Label.Right, Label.LeftSurround, Label.RightSurround, Label.Center, Label.LFEScreen, Label.LeftCenter, Label.RightCenter),
+            break;
+        case PLANKAUDIOFILE_CAF_LAYOUTTAG_SMPTE_DTV:
+            //Label.Left, Label.Right, Label.Center, Label.LFEScreen, Label.LeftSurround, Label.RightSurround, Label.LeftTotal, Label.RightTotal),
+            break;
+        case PLANKAUDIOFILE_CAF_LAYOUTTAG_ITU_2_1:
+            //Label.Left, Label.Right, Label.CenterSurround),
+            break;
+        case PLANKAUDIOFILE_CAF_LAYOUTTAG_ITU_2_2:
+            //Label.Left, Label.Right, Label.LeftSurround, Label.RightSurround),
+            break;
+        case PLANKAUDIOFILE_CAF_LAYOUTTAG_DVD_4:
+            //Label.Left, Label.Right, Label.LFEScreen),
+            break;
+        case PLANKAUDIOFILE_CAF_LAYOUTTAG_DVD_5:
+            //Label.Left, Label.Right, Label.LFEScreen, Label.CenterSurround),
+            break;
+        case PLANKAUDIOFILE_CAF_LAYOUTTAG_DVD_6:
+            //Label.Left, Label.Right, Label.LFEScreen, Label.LeftSurround, Label.RightSurround),
+            break;
+        case PLANKAUDIOFILE_CAF_LAYOUTTAG_DVD_10:
+            //Label.Left, Label.Right, Label.Center, Label.LFEScreen),
+            break;
+        case PLANKAUDIOFILE_CAF_LAYOUTTAG_DVD_11:
+            //Label.Left, Label.Right, Label.Center, Label.LFEScreen,Label.CenterSurround),
+            break;
+        case PLANKAUDIOFILE_CAF_LAYOUTTAG_DVD_18:
+            //Label.Left, Label.Right, Label.LeftSurround, Label.RightSurround,Label.LFEScreen),
+            break;
+        case PLANKAUDIOFILE_CAF_LAYOUTTAG_AUDIOUNIT_6_0:
+            // Label.Left, Label.Right, Label.LeftSurround, Label.RightSurround, Label.Center, Label.CenterSurround),
+            break;
+        case PLANKAUDIOFILE_CAF_LAYOUTTAG_AUDIOUNIT_7_0:
+            //Label.Left, Label.Right, Label.LeftSurround,Label.RightSurround, Label.Center, Label.RearSurroundLeft, Label.RearSurroundRight),
+            break;
+        case PLANKAUDIOFILE_CAF_LAYOUTTAG_AUDIOUNIT_7_0_FRONT:
+            //// L R Ls Rs C Lc Rc
+            break;
+        case PLANKAUDIOFILE_CAF_LAYOUTTAG_AAC_6_0:
+            //Label.Center, Label.Left, Label.Right, Label.LeftSurround,Label.RightSurround, Label.CenterSurround),
+            break;
+        case PLANKAUDIOFILE_CAF_LAYOUTTAG_AAC_6_1:
+            //Label.Center, Label.Left, Label.Right, Label.LeftSurround, Label.RightSurround, Label.CenterSurround, Label.LFEScreen),
+            break;
+        case PLANKAUDIOFILE_CAF_LAYOUTTAG_AAC_7_0:
+            //Label.Center, Label.Left, Label.Right, Label.LeftSurround,Label.RightSurround, Label.RearSurroundLeft, Label.RearSurroundRight),
+            break;
+        case PLANKAUDIOFILE_CAF_LAYOUTTAG_AAC_OCTAGONAL:
+            //Label.Center, Label.Left, Label.Right, Label.LeftSurround,Label.RightSurround, Label.RearSurroundLeft, Label.RearSurroundRight, Label.CenterSurround),
+            break;
+        case PLANKAUDIOFILE_CAF_LAYOUTTAG_TMH_10_2_STD:
+            //abel.Left, Label.Right, Label.Center, Label.Mono, Label.Mono,
+            //Label.Mono, Label.LeftSurround, Label.RightSurround, Label.Mono, Label.Mono, Label.Mono, Label.Mono,
+            //Label.Mono, Label.CenterSurround, Label.LFEScreen, Label.LFE2),
+            break;
+        case PLANKAUDIOFILE_CAF_LAYOUTTAG_TMH_10_2_FULL:
+            //Label.LeftCenter, Label.RightCenter, Label.Mono, Label.Mono, Label.Mono), ??
+            break;
+        case PLANKAUDIOFILE_CAF_LAYOUTTAG_AC3_1_0_1:
+            // C LFE
+            break;
+        case PLANKAUDIOFILE_CAF_LAYOUTTAG_AC3_3_0:
+            // L C R
+            break;
+        case PLANKAUDIOFILE_CAF_LAYOUTTAG_AC3_3_1:
+            // L C R Cs
+            break;
+        case PLANKAUDIOFILE_CAF_LAYOUTTAG_AC3_3_0_1:
+            // L C R LFE
+            break;
+        case PLANKAUDIOFILE_CAF_LAYOUTTAG_AC3_2_1_1:
+            // L R Cs LFE
+            break;
+        case PLANKAUDIOFILE_CAF_LAYOUTTAG_AC3_3_1_1:
+            // L C R Cs LFE
+            break;
+        case PLANKAUDIOFILE_CAF_LAYOUTTAG_EAC_6_0_A:
+            // L C R Ls Rs Cs
+            break;
+        case PLANKAUDIOFILE_CAF_LAYOUTTAG_EAC_7_0_A:
+            // L C R Ls Rs Rls Rrs
+            break;
+        case PLANKAUDIOFILE_CAF_LAYOUTTAG_EAC3_6_1_A:
+            // L C R Ls Rs LFE Cs
+            break;
+        case PLANKAUDIOFILE_CAF_LAYOUTTAG_EAC3_6_1_B:
+            // L C R Ls Rs LFE Ts
+            break;
+        case PLANKAUDIOFILE_CAF_LAYOUTTAG_EAC3_6_1_C:
+            // L C R Ls Rs LFE Vhc
+            break;
+        case PLANKAUDIOFILE_CAF_LAYOUTTAG_EAC3_7_1_A:
+            // L C R Ls Rs LFE Rls Rrs
+            break;
+        case PLANKAUDIOFILE_CAF_LAYOUTTAG_EAC3_7_1_B:
+            // L C R Ls Rs LFE Lc Rc
+            break;
+        case PLANKAUDIOFILE_CAF_LAYOUTTAG_EAC3_7_1_C:
+            // L C R Ls Rs LFE Lsd Rsd
+            break;
+        case PLANKAUDIOFILE_CAF_LAYOUTTAG_EAC3_7_1_D:
+            // L C R Ls Rs LFE Lw Rw
+            break;
+        case PLANKAUDIOFILE_CAF_LAYOUTTAG_EAC3_7_1_E:
+            // L C R Ls Rs LFE Vhl Vhr
+            break;
+        case PLANKAUDIOFILE_CAF_LAYOUTTAG_EAC3_7_1_F:
+            // L C R Ls Rs LFE Cs Ts
+            break;
+        case PLANKAUDIOFILE_CAF_LAYOUTTAG_EAC3_7_1_G:
+            // L C R Ls Rs LFE Cs Vhc
+            break;
+        case PLANKAUDIOFILE_CAF_LAYOUTTAG_EAC3_7_1_H:
+            // L C R Ls Rs LFE Ts Vhc
+            break;
+        case PLANKAUDIOFILE_CAF_LAYOUTTAG_DTS_3_1:
+            // C L R LFE
+            break;
+        case PLANKAUDIOFILE_CAF_LAYOUTTAG_DTS_4_1:
+            // C L R Cs LFE
+            break;
+        case PLANKAUDIOFILE_CAF_LAYOUTTAG_DTS_6_0_A:
+            // Lc Rc L R Ls Rs
+            break;
+        case PLANKAUDIOFILE_CAF_LAYOUTTAG_DTS_6_0_B:
+            // C L R Rls Rrs Ts
+            break;
+        case PLANKAUDIOFILE_CAF_LAYOUTTAG_DTS_6_0_C:
+            // C Cs L R Rls Rrs
+            break;
+        case PLANKAUDIOFILE_CAF_LAYOUTTAG_DTS_6_1_A:
+            // Lc Rc L R Ls Rs LFE
+            break;
+        case PLANKAUDIOFILE_CAF_LAYOUTTAG_DTS_6_1_B:
+            // C L R Rls Rrs Ts LFE
+            break;
+        case PLANKAUDIOFILE_CAF_LAYOUTTAG_DTS_6_1_C:
+            // C Cs L R Rls Rrs LFE
+            break;
+        case PLANKAUDIOFILE_CAF_LAYOUTTAG_DTS_7_0:
+            // Lc C Rc L R Ls Rs
+            break;
+        case PLANKAUDIOFILE_CAF_LAYOUTTAG_DTS_7_1:
+            // Lc C Rc L R Ls Rs LFE
+            break;
+        case PLANKAUDIOFILE_CAF_LAYOUTTAG_DTS_8_0_A:
+            // Lc Rc L R Ls Rs Rls Rrs
+            break;
+        case PLANKAUDIOFILE_CAF_LAYOUTTAG_DTS_8_0_B:
+            // Lc C Rc L R Ls Cs Rs
+            break;
+        case PLANKAUDIOFILE_CAF_LAYOUTTAG_DTS_8_1_A:
+            // Lc Rc L R Ls Rs Rls Rrs LFE
+            break;
+        case PLANKAUDIOFILE_CAF_LAYOUTTAG_DTS_8_1_B:
+            // Lc C Rc L R Ls Cs Rs LFE
+            break;
+        case PLANKAUDIOFILE_CAF_LAYOUTTAG_DTS_6_1_D:
+            // C L R Ls Rs LFE Cs
+            break;
+    }
+    
+exit:
+    return result;
+}
+
+
+#define PLANKAUDIOFILE_CHANNELFLAGS_ALLOFF                  0
+#define PLANKAUDIOFILE_CHANNELFLAGS_RECTANGULARCOORDINATES  (1<<0)
+#define PLANKAUDIOFILE_CHANNELFLAGS_SPHERICALCOORDINATES    (1<<1)
+#define PLANKAUDIOFILE_CHANNELFLAGS_METERS                  (1<<2)
+
+typedef struct PlankSpeakerPosition
+{
+    PlankUI flags;
+    PlankVec3F coords;
+} PlankSpeakerPosition;
 
 
 /** An opaque reference to the <i>Plank AudioFileMetaData</i> object. */
@@ -409,46 +1004,5 @@ typedef struct PlankAudioFileCuePoint* PlankAudioFileCuePointRef;
 /** An opaque reference to the <i>Plank AudioFileRegion</i> object. */
 typedef struct PlankAudioFileRegion* PlankAudioFileRegionRef;
 
-//static inline PlankGUID* pl_AudioFileWAVExtensible_GetPCMGUID()
-//{
-//    static PlankGUID data;
-//    static PlankB firstTime = PLANK_TRUE;
-//    
-//    if (firstTime)
-//    {
-//        firstTime = PLANK_FALSE;
-//        pl_GUID_InitString (&data, "00000001-0000-0010-8000-00aa00389b71");
-//    }
-//    
-//    return &data;
-//}
-//
-//static inline PlankGUID* pl_AudioFileWAVExtensible_GetFloatGUID()
-//{
-//    static PlankGUID data;
-//    static PlankB firstTime = PLANK_TRUE;
-//    
-//    if (firstTime)
-//    {
-//        firstTime = PLANK_FALSE;
-//        pl_GUID_InitString (&data, "00000003-0000-0010-8000-00aa00389b71");
-//    }
-//    
-//    return &data;
-//}
-//
-//static inline PlankGUID* pl_AudioFileWAVExtensible_GetAmbisonicGUID()
-//{
-//    static PlankGUID data;
-//    static PlankB firstTime = PLANK_TRUE;
-//    
-//    if (firstTime)
-//    {
-//        firstTime = PLANK_FALSE;
-//        pl_GUID_InitString (&data, "00000001-0721-11d3-8644-c8c1ca000000");
-//    }
-//    
-//    return &data;
-//}
 
 #endif // PLANK_AUDIOFILECOMMON_H

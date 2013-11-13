@@ -224,7 +224,10 @@ PlankResult pl_AudioFileWriter_Init (PlankAudioFileWriterRef p)
     p->formatInfo.encoding         = PLANKAUDIOFILE_ENCODING_INVALID;
     p->formatInfo.bitsPerSample    = 0;
     p->formatInfo.bytesPerFrame    = 0;
-    p->formatInfo.numChannels      = 0;
+    
+//    p->formatInfo.numChannels      = 0;
+//    pl_DynamicArray_DeInit (&p->formatInfo.channelIdentifiers);
+    
     p->formatInfo.sampleRate       = 0.0;
     
     p->numFrames                   = 0;
@@ -250,7 +253,9 @@ PlankResult pl_AudioFileWriter_DeInit (PlankAudioFileWriterRef p)
     }
     
     if ((result = pl_AudioFileWriter_Close (p)) != PlankResult_OK) goto exit;
-    
+    if ((result = pl_DynamicArray_DeInit (&p->formatInfo.channelIdentifiers)) != PlankResult_OK) goto exit;
+    if ((result = pl_DynamicArray_DeInit (&p->formatInfo.channelCoords)) != PlankResult_OK) goto exit;
+
     pl_MemoryZero (p, sizeof (PlankAudioFileWriter));
     
 exit:
@@ -311,13 +316,17 @@ PlankResult pl_AudioFileWriter_SetFormatWAV (PlankAudioFileWriterRef p, const in
             return PlankResult_AudioFileInavlidType;
     }
     
+    
     p->formatInfo.format            = PLANKAUDIOFILE_FORMAT_WAV;
     p->formatInfo.encoding          = isFloat ? PLANKAUDIOFILE_ENCODING_FLOAT_LITTLEENDIAN : PLANKAUDIOFILE_ENCODING_PCM_LITTLEENDIAN;
     p->formatInfo.bitsPerSample     = bitsPerSample;
-    p->formatInfo.numChannels       = numChannels;
+//    p->formatInfo.numChannels       = numChannels;
+    pl_DynamicArray_DeInit (&p->formatInfo.channelIdentifiers);
+    pl_DynamicArray_InitWithItemSizeAndSize (&p->formatInfo.channelIdentifiers, sizeof (PlankUI), numChannels, PLANK_TRUE);
+    
     p->formatInfo.sampleRate        = sampleRate;
     p->formatInfo.bytesPerFrame     = (PlankI) (((bitsPerSample + (0x00000008 - 1)) & ~(0x00000008 - 1)) * numChannels / 8);
-    p->formatInfo.nominalBitRate    = (int)(p->formatInfo.bytesPerFrame * p->formatInfo.sampleRate * p->formatInfo.numChannels * PLANKAUDIOFILE_CHARBITS);
+    p->formatInfo.nominalBitRate    = (int)(p->formatInfo.bytesPerFrame * p->formatInfo.sampleRate * numChannels * PLANKAUDIOFILE_CHARBITS);
     p->formatInfo.minimumBitRate    = p->formatInfo.nominalBitRate;
     p->formatInfo.maximumBitRate    = p->formatInfo.nominalBitRate;
     p->formatInfo.frameDuration     = 1.0 / p->formatInfo.sampleRate;
@@ -335,10 +344,13 @@ PlankResult pl_AudioFileWriter_SetFormatAIFF (PlankAudioFileWriterRef p, const i
     p->formatInfo.format            = PLANKAUDIOFILE_FORMAT_AIFF;
     p->formatInfo.encoding          = PLANKAUDIOFILE_ENCODING_PCM_BIGENDIAN;
     p->formatInfo.bitsPerSample     = bitsPerSample;
-    p->formatInfo.numChannels       = numChannels;
+//    p->formatInfo.numChannels       = numChannels;
+    pl_DynamicArray_DeInit (&p->formatInfo.channelIdentifiers);
+    pl_DynamicArray_InitWithItemSizeAndSize (&p->formatInfo.channelIdentifiers, sizeof (PlankUI), numChannels, PLANK_TRUE);
+
     p->formatInfo.sampleRate        = sampleRate;
     p->formatInfo.bytesPerFrame     = (PlankI) (((bitsPerSample + (0x00000008 - 1)) & ~(0x00000008 - 1)) * numChannels / 8);
-    p->formatInfo.nominalBitRate    = (int)(p->formatInfo.bytesPerFrame * p->formatInfo.sampleRate * p->formatInfo.numChannels * PLANKAUDIOFILE_CHARBITS);
+    p->formatInfo.nominalBitRate    = (int)(p->formatInfo.bytesPerFrame * p->formatInfo.sampleRate * numChannels * PLANKAUDIOFILE_CHARBITS);
     p->formatInfo.minimumBitRate    = p->formatInfo.nominalBitRate;
     p->formatInfo.maximumBitRate    = p->formatInfo.nominalBitRate;
     p->formatInfo.frameDuration     = 1.0 / p->formatInfo.sampleRate;
@@ -365,10 +377,13 @@ PlankResult pl_AudioFileWriter_SetFormatAIFC (PlankAudioFileWriterRef p, const i
     p->formatInfo.format            = PLANKAUDIOFILE_FORMAT_AIFC;
     p->formatInfo.encoding          = isFloat ? PLANKAUDIOFILE_ENCODING_FLOAT_BIGENDIAN : isLittleEndian ? PLANKAUDIOFILE_ENCODING_PCM_LITTLEENDIAN : PLANKAUDIOFILE_ENCODING_PCM_BIGENDIAN;
     p->formatInfo.bitsPerSample     = bitsPerSample;
-    p->formatInfo.numChannels       = numChannels;
+//    p->formatInfo.numChannels       = numChannels;
+    pl_DynamicArray_DeInit (&p->formatInfo.channelIdentifiers);
+    pl_DynamicArray_InitWithItemSizeAndSize (&p->formatInfo.channelIdentifiers, sizeof (PlankUI), numChannels, PLANK_TRUE);
+
     p->formatInfo.sampleRate        = sampleRate;
     p->formatInfo.bytesPerFrame     = (PlankI) (((bitsPerSample + (0x00000008 - 1)) & ~(0x00000008 - 1)) * numChannels / 8);
-    p->formatInfo.nominalBitRate    = (int)(p->formatInfo.bytesPerFrame * p->formatInfo.sampleRate * p->formatInfo.numChannels * PLANKAUDIOFILE_CHARBITS);
+    p->formatInfo.nominalBitRate    = (int)(p->formatInfo.bytesPerFrame * p->formatInfo.sampleRate * numChannels * PLANKAUDIOFILE_CHARBITS);
     p->formatInfo.minimumBitRate    = p->formatInfo.nominalBitRate;
     p->formatInfo.maximumBitRate    = p->formatInfo.nominalBitRate;
     p->formatInfo.frameDuration     = 1.0 / p->formatInfo.sampleRate;
@@ -399,10 +414,13 @@ PlankResult pl_AudioFileWriter_SetFormatCAF (PlankAudioFileWriterRef p, const in
         p->formatInfo.encoding     |= PLANKAUDIOFILE_ENCODING_BIGENDIAN_FLAG;
     
     p->formatInfo.bitsPerSample     = bitsPerSample;
-    p->formatInfo.numChannels       = numChannels;
+//    p->formatInfo.numChannels       = numChannels;
+    pl_DynamicArray_DeInit (&p->formatInfo.channelIdentifiers);
+    pl_DynamicArray_InitWithItemSizeAndSize (&p->formatInfo.channelIdentifiers, sizeof (PlankUI), numChannels, PLANK_TRUE);
+
     p->formatInfo.sampleRate        = sampleRate;
     p->formatInfo.bytesPerFrame     = (PlankI) (((bitsPerSample + (0x00000008 - 1)) & ~(0x00000008 - 1)) * numChannels / 8);
-    p->formatInfo.nominalBitRate    = (int)(p->formatInfo.bytesPerFrame * p->formatInfo.sampleRate * p->formatInfo.numChannels * PLANKAUDIOFILE_CHARBITS);
+    p->formatInfo.nominalBitRate    = (int)(p->formatInfo.bytesPerFrame * p->formatInfo.sampleRate * numChannels * PLANKAUDIOFILE_CHARBITS);
     p->formatInfo.minimumBitRate    = p->formatInfo.nominalBitRate;
     p->formatInfo.maximumBitRate    = p->formatInfo.nominalBitRate;
     p->formatInfo.frameDuration     = 1.0 / p->formatInfo.sampleRate;
@@ -426,10 +444,13 @@ PlankResult pl_AudioFileWriter_SetFormatW64 (PlankAudioFileWriterRef p, const in
     p->formatInfo.format            = PLANKAUDIOFILE_FORMAT_W64;
     p->formatInfo.encoding          = isFloat ? PLANKAUDIOFILE_ENCODING_FLOAT_LITTLEENDIAN : PLANKAUDIOFILE_ENCODING_PCM_LITTLEENDIAN;
     p->formatInfo.bitsPerSample     = bitsPerSample;
-    p->formatInfo.numChannels       = numChannels;
+//    p->formatInfo.numChannels       = numChannels;
+    pl_DynamicArray_DeInit (&p->formatInfo.channelIdentifiers);
+    pl_DynamicArray_InitWithItemSizeAndSize (&p->formatInfo.channelIdentifiers, sizeof (PlankUI), numChannels, PLANK_TRUE);
+
     p->formatInfo.sampleRate        = sampleRate;
     p->formatInfo.bytesPerFrame     = (PlankI) (((bitsPerSample + (0x00000008 - 1)) & ~(0x00000008 - 1)) * numChannels / 8);
-    p->formatInfo.nominalBitRate    = (int)(p->formatInfo.bytesPerFrame * p->formatInfo.sampleRate * p->formatInfo.numChannels * PLANKAUDIOFILE_CHARBITS);
+    p->formatInfo.nominalBitRate    = (int)(p->formatInfo.bytesPerFrame * p->formatInfo.sampleRate * numChannels * PLANKAUDIOFILE_CHARBITS);
     p->formatInfo.minimumBitRate    = p->formatInfo.nominalBitRate;
     p->formatInfo.maximumBitRate    = p->formatInfo.nominalBitRate;
     p->formatInfo.frameDuration     = 1.0 / p->formatInfo.sampleRate;
@@ -449,7 +470,10 @@ PlankResult pl_AudioFileWriter_SetFormatOggVorbis (PlankAudioFileWriterRef p, co
     p->formatInfo.format            = PLANKAUDIOFILE_FORMAT_OGGVORBIS;
     p->formatInfo.encoding          = PLANK_BIGENDIAN ? PLANKAUDIOFILE_ENCODING_FLOAT_BIGENDIAN : PLANKAUDIOFILE_ENCODING_FLOAT_LITTLEENDIAN;
     p->formatInfo.bitsPerSample     = bitsPerSample;
-    p->formatInfo.numChannels       = numChannels;
+//    p->formatInfo.numChannels       = numChannels;
+    pl_DynamicArray_DeInit (&p->formatInfo.channelIdentifiers);
+    pl_DynamicArray_InitWithItemSizeAndSize (&p->formatInfo.channelIdentifiers, sizeof (PlankUI), numChannels, PLANK_TRUE);
+
     p->formatInfo.sampleRate        = sampleRate;
     p->formatInfo.bytesPerFrame     = (PlankI) (((bitsPerSample + (0x00000008 - 1)) & ~(0x00000008 - 1)) * numChannels / 8);
     p->formatInfo.nominalBitRate    = 0;
@@ -476,7 +500,10 @@ PlankResult pl_AudioFileWriter_SetFormatOggVorbisManaged (PlankAudioFileWriterRe
     p->formatInfo.format            = PLANKAUDIOFILE_FORMAT_OGGVORBIS;
     p->formatInfo.encoding          = PLANK_BIGENDIAN ? PLANKAUDIOFILE_ENCODING_FLOAT_BIGENDIAN : PLANKAUDIOFILE_ENCODING_FLOAT_LITTLEENDIAN;
     p->formatInfo.bitsPerSample     = bitsPerSample;
-    p->formatInfo.numChannels       = numChannels;
+//    p->formatInfo.numChannels       = numChannels;
+    pl_DynamicArray_DeInit (&p->formatInfo.channelIdentifiers);
+    pl_DynamicArray_InitWithItemSizeAndSize (&p->formatInfo.channelIdentifiers, sizeof (PlankUI), numChannels, PLANK_TRUE);
+
     p->formatInfo.sampleRate        = sampleRate;
     p->formatInfo.bytesPerFrame     = (PlankI) (((bitsPerSample + (0x00000008 - 1)) & ~(0x00000008 - 1)) * numChannels / 8);
     p->formatInfo.nominalBitRate    = ((nominal < min) || (nominal > max)) ? (min + max) / 2 : nominal;
@@ -501,7 +528,10 @@ PlankResult pl_AudioFileWriter_SetFormatOpus (PlankAudioFileWriterRef p, const f
     p->formatInfo.encoding          = PLANK_BIGENDIAN ? PLANKAUDIOFILE_ENCODING_FLOAT_BIGENDIAN : PLANKAUDIOFILE_ENCODING_FLOAT_LITTLEENDIAN;
     p->formatInfo.bitsPerSample     = bitsPerSample;
     p->formatInfo.frameDuration     = frameDuration;
-    p->formatInfo.numChannels       = numChannels;
+//    p->formatInfo.numChannels       = numChannels;
+    pl_DynamicArray_DeInit (&p->formatInfo.channelIdentifiers);
+    pl_DynamicArray_InitWithItemSizeAndSize (&p->formatInfo.channelIdentifiers, sizeof (PlankUI), numChannels, PLANK_TRUE);
+
     p->formatInfo.sampleRate        = sampleRate;
     p->formatInfo.bytesPerFrame     = (PlankI) (((bitsPerSample + (0x00000008 - 1)) & ~(0x00000008 - 1)) * numChannels / 8);
     p->formatInfo.nominalBitRate    = 0;
@@ -525,7 +555,10 @@ PlankResult pl_AudioFileWriter_SetFormatOpusManaged (PlankAudioFileWriterRef p, 
     p->formatInfo.encoding          = PLANK_BIGENDIAN ? PLANKAUDIOFILE_ENCODING_FLOAT_BIGENDIAN : PLANKAUDIOFILE_ENCODING_FLOAT_LITTLEENDIAN;
     p->formatInfo.bitsPerSample     = bitsPerSample;
     p->formatInfo.frameDuration     = frameDuration;
-    p->formatInfo.numChannels       = numChannels;
+//    p->formatInfo.numChannels       = numChannels;
+    pl_DynamicArray_DeInit (&p->formatInfo.channelIdentifiers);
+    pl_DynamicArray_InitWithItemSizeAndSize (&p->formatInfo.channelIdentifiers, sizeof (PlankUI), numChannels, PLANK_TRUE);
+
     p->formatInfo.sampleRate        = sampleRate;
     p->formatInfo.bytesPerFrame     = (PlankI) (((bitsPerSample + (0x00000008 - 1)) & ~(0x00000008 - 1)) * numChannels / 8);
     p->formatInfo.nominalBitRate    = nominalBitRate;
@@ -733,6 +766,59 @@ PlankResult pl_AudioFileWriter_SetHeaderPad (PlankAudioFileWriterRef p, const Pl
     return PlankResult_OK;
 }
 
+PlankResult pl_AudioFileWriter_SetChannelItentifier (PlankAudioFileWriterRef p, const int channel, const PlankUI channelIdentifier)
+{
+    PlankResult result;
+    
+    result = pl_DynamicArray_SetItem (&p->formatInfo.channelIdentifiers, channel, (void*)&channelIdentifier);
+    
+exit:
+    return result;
+}
+
+PlankUI pl_AudioFileWriter_GetChannelItentifier (PlankAudioFileWriterRef p, const int channel)
+{
+    PlankUI channelIdentifier;
+    channelIdentifier = 0;
+    pl_DynamicArray_GetItem (&p->formatInfo.channelIdentifiers, channel, &channelIdentifier);
+    return channelIdentifier;
+}
+
+//int pl_AudioFileWriter_GetChannelIdentifier (PlankAudioFileWriterRef p, const int channelIndex)
+//{
+//    return ((channelIndex < 0) || (channelIndex >= pl_MinI (p->formatInfo.numChannels, 255)))
+//            ? PLANKAUDIOFILE_CHANNEL_NONE
+//            : p->formatInfo.channelMap[channelIndex];
+//}
+//
+//PlankResult pl_AudioFileWriter_SetChannelIdentifier (PlankAudioFileWriterRef p, const int channelIndex, const int identifier)
+//{
+//    PlankResult result = PlankResult_OK;
+//    
+//    if (channelIndex < 0)
+//    {
+//        result = PlankResult_UnknownError;
+//        goto exit;
+//    }
+//    
+//    if (channelIndex > pl_MinI (p->formatInfo.numChannels, 255))
+//    {
+//        result = PlankResult_UnknownError;
+//        goto exit;
+//    }
+//    
+//    if ((identifier < 0) || (identifier > 255))
+//    {
+//        result = PlankResult_UnknownError;
+//        goto exit;
+//    }
+//    
+//    p->formatInfo.channelMap[channelIndex] = identifier;
+//    
+//exit:
+//    return result;
+//}
+
 static PlankResult pl_AudioFileWriter_WAV_OpenInternal (PlankAudioFileWriterRef p, const char* filepath, PlankFileRef file)
 {
     PlankResult result = PlankResult_OK;
@@ -751,7 +837,7 @@ static PlankResult pl_AudioFileWriter_WAV_OpenInternal (PlankAudioFileWriterRef 
         goto exit;
     }
     
-    if (p->formatInfo.numChannels < 1)
+    if (pl_DynamicArray_GetSize (&p->formatInfo.channelIdentifiers) < 1)
     {
         result = PlankResult_AudioFileInavlidType;
         goto exit;
@@ -831,10 +917,13 @@ PlankResult pl_AudioFileWriter_WAV_WriteHeader (PlankAudioFileWriterRef p)
     PlankIffAudioFileWriterRef iff;
     const char* fmt;
     PlankUS encoding;
+    PlankUS numChannels;
     
     iff = (PlankIffAudioFileWriterRef)p->peer;
     
-    if ((p->formatInfo.numChannels > 2) || (iff->iff.common.headerInfo.mainLength > 0xffffffff))
+    numChannels = (PlankUS)pl_DynamicArray_GetSize (&p->formatInfo.channelIdentifiers);
+    
+    if ((numChannels > 2) || (iff->iff.common.headerInfo.mainLength > 0xffffffff))
         return pl_AudioFileWriter_WAVEXT_WriteHeader (p);
     
     fmt = "fmt ";
@@ -872,7 +961,7 @@ PlankResult pl_AudioFileWriter_WAV_WriteHeader (PlankAudioFileWriterRef p)
     if ((result = pl_IffFileWriter_ResizeChunk ((PlankIffFileWriterRef)iff, 0, fmt, PLANKAUDIOFILE_WAV_FMT_LENGTH, PLANK_FALSE)) != PlankResult_OK) goto exit;
     
     if ((result = pl_File_WriteUS ((PlankFileRef)iff, encoding)) != PlankResult_OK) goto exit;
-    if ((result = pl_File_WriteUS ((PlankFileRef)iff, (PlankUS)p->formatInfo.numChannels)) != PlankResult_OK) goto exit;
+    if ((result = pl_File_WriteUS ((PlankFileRef)iff, numChannels)) != PlankResult_OK) goto exit;
     if ((result = pl_File_WriteUI ((PlankFileRef)iff, (PlankUI)p->formatInfo.sampleRate)) != PlankResult_OK) goto exit;
     if ((result = pl_File_WriteUI ((PlankFileRef)iff, (PlankUI)(p->formatInfo.bytesPerFrame * (int)p->formatInfo.sampleRate))) != PlankResult_OK) goto exit;
     if ((result = pl_File_WriteUS ((PlankFileRef)iff, (PlankUS)p->formatInfo.bytesPerFrame)) != PlankResult_OK) goto exit;
@@ -887,15 +976,18 @@ exit:
 
 static PlankUI pl_AudioFileWriter_WAVEXTChannelMapToMask (const PlankAudioFileFormatInfo* formatInfo)
 {
-    PlankUI channelMask, channelCode, lastChannelCode;
+    PlankUI channelMask, channelCode, lastChannelCode, numChannels;
+    PlankUI* channelIdentifiers;
     int i;
     
-    channelMask     = 0x00000000;
-    lastChannelCode = 0;
+    channelMask        = 0x00000000;
+    lastChannelCode    = 0;
+    numChannels        = (PlankUI)pl_DynamicArray_GetSize ((PlankDynamicArrayRef)&formatInfo->channelIdentifiers);
+    channelIdentifiers = (PlankUI*)pl_DynamicArray_GetArray ((PlankDynamicArrayRef)&formatInfo->channelIdentifiers);
     
-    for (i = 0; i < formatInfo->numChannels; ++i)
+    for (i = 0; i < numChannels; ++i)
     {
-        channelCode = formatInfo->channelMap[i];
+        channelCode = channelIdentifiers[i];
         
         if ((channelCode <= lastChannelCode) || // must be in order
             (channelCode > 18))                 // but could look for the addition RF64 ones...
@@ -958,7 +1050,7 @@ PlankResult pl_AudioFileWriter_WAVEXT_WriteHeader (PlankAudioFileWriterRef p)
     
     // regular WAV fmt
     if ((result = pl_File_WriteUS ((PlankFileRef)iff, (PlankUS)PLANKAUDIOFILE_WAV_COMPRESSION_EXTENSIBLE)) != PlankResult_OK) goto exit;
-    if ((result = pl_File_WriteUS ((PlankFileRef)iff, (PlankUS)p->formatInfo.numChannels)) != PlankResult_OK) goto exit;
+    if ((result = pl_File_WriteUS ((PlankFileRef)iff, (PlankUS)pl_DynamicArray_GetSize (&p->formatInfo.channelIdentifiers))) != PlankResult_OK) goto exit;
     if ((result = pl_File_WriteUI ((PlankFileRef)iff, (PlankUI)p->formatInfo.sampleRate)) != PlankResult_OK) goto exit;
     if ((result = pl_File_WriteUI ((PlankFileRef)iff, (PlankUI)(p->formatInfo.bytesPerFrame * (int)p->formatInfo.sampleRate))) != PlankResult_OK) goto exit;
     if ((result = pl_File_WriteUS ((PlankFileRef)iff, (PlankUS)p->formatInfo.bytesPerFrame)) != PlankResult_OK) goto exit;
@@ -1067,7 +1159,7 @@ PlankResult pl_AudioFileWriter_WAVRF64_WriteHeader (PlankAudioFileWriterRef p)
     
     // regular WAV fmt
     if ((result = pl_File_WriteUS ((PlankFileRef)iff, (PlankUS)PLANKAUDIOFILE_WAV_COMPRESSION_EXTENSIBLE)) != PlankResult_OK) goto exit;
-    if ((result = pl_File_WriteUS ((PlankFileRef)iff, (PlankUS)p->formatInfo.numChannels)) != PlankResult_OK) goto exit;
+    if ((result = pl_File_WriteUS ((PlankFileRef)iff, (PlankUS)pl_DynamicArray_GetSize (&p->formatInfo.channelIdentifiers))) != PlankResult_OK) goto exit;
     if ((result = pl_File_WriteUI ((PlankFileRef)iff, (PlankUI)p->formatInfo.sampleRate)) != PlankResult_OK) goto exit;
     if ((result = pl_File_WriteUI ((PlankFileRef)iff, (PlankUI)(p->formatInfo.bytesPerFrame * (int)p->formatInfo.sampleRate))) != PlankResult_OK) goto exit;
     if ((result = pl_File_WriteUS ((PlankFileRef)iff, (PlankUS)p->formatInfo.bytesPerFrame)) != PlankResult_OK) goto exit;
@@ -1119,7 +1211,7 @@ static PlankResult pl_AudioFileWriter_AIFF_OpenInternal (PlankAudioFileWriterRef
         goto exit;
     }
     
-    if (p->formatInfo.numChannels < 1)
+    if (pl_DynamicArray_GetSize (&p->formatInfo.channelIdentifiers) < 1)
     {
         result = PlankResult_AudioFileInavlidType;
         goto exit;
@@ -1226,7 +1318,7 @@ PlankResult pl_AudioFileWriter_AIFF_WriteHeader (PlankAudioFileWriterRef p)
     
     sampleRate = pl_I2F80 ((PlankUI)p->formatInfo.sampleRate);
     
-    if ((result = pl_File_WriteS  ((PlankFileRef)iff, (PlankS)p->formatInfo.numChannels)) != PlankResult_OK) goto exit;
+    if ((result = pl_File_WriteS  ((PlankFileRef)iff, (PlankS)pl_DynamicArray_GetSize (&p->formatInfo.channelIdentifiers))) != PlankResult_OK) goto exit;
     if ((result = pl_File_WriteUI ((PlankFileRef)iff, (PlankUI)p->numFrames)) != PlankResult_OK) goto exit;
     if ((result = pl_File_WriteS  ((PlankFileRef)iff, (PlankS)p->formatInfo.bitsPerSample)) != PlankResult_OK) goto exit;
     if ((result = pl_File_Write   ((PlankFileRef)iff, sampleRate.data, sizeof (sampleRate))) != PlankResult_OK) goto exit;
@@ -1269,7 +1361,7 @@ static PlankResult pl_AudioFileWriter_AIFC_OpenInternal (PlankAudioFileWriterRef
         goto exit;
     }
 
-    if (p->formatInfo.numChannels < 1)
+    if (pl_DynamicArray_GetSize (&p->formatInfo.channelIdentifiers) < 1)
     {
         result = PlankResult_AudioFileInavlidType;
         goto exit;
@@ -1426,7 +1518,7 @@ PlankResult pl_AudioFileWriter_AIFC_WriteHeader (PlankAudioFileWriterRef p)
     
     if ((result = pl_IffFileWriter_ResizeChunk (iff, 0, COMM, PLANKAUDIOFILE_AIFC_COMM_LENGTH, PLANK_FALSE)) != PlankResult_OK) goto exit;
     
-    if ((result = pl_File_WriteS  ((PlankFileRef)iff, (PlankS)p->formatInfo.numChannels)) != PlankResult_OK) goto exit;
+    if ((result = pl_File_WriteS  ((PlankFileRef)iff, (PlankS)pl_DynamicArray_GetSize (&p->formatInfo.channelIdentifiers))) != PlankResult_OK) goto exit;
     if ((result = pl_File_WriteUI ((PlankFileRef)iff, (PlankUI)p->numFrames)) != PlankResult_OK) goto exit;
     if ((result = pl_File_WriteS  ((PlankFileRef)iff, (PlankS)p->formatInfo.bitsPerSample)) != PlankResult_OK) goto exit;
     if ((result = pl_File_Write   ((PlankFileRef)iff, sampleRate.data, sizeof (sampleRate))) != PlankResult_OK) goto exit;
@@ -1472,7 +1564,7 @@ static PlankResult pl_AudioFileWriter_CAF_OpenInternal (PlankAudioFileWriterRef 
         goto exit;
     }
     
-    if (p->formatInfo.numChannels < 1)
+    if (pl_DynamicArray_GetSize (&p->formatInfo.channelIdentifiers) < 1)
     {
         result = PlankResult_AudioFileInavlidType;
         goto exit;
@@ -1600,7 +1692,7 @@ PlankResult pl_AudioFileWriter_CAF_WriteHeader (PlankAudioFileWriterRef p)
     if ((result = pl_File_WriteUI ((PlankFileRef)iff, formatFlags)) != PlankResult_OK) goto exit;
     if ((result = pl_File_WriteUI ((PlankFileRef)iff, p->formatInfo.bytesPerFrame)) != PlankResult_OK) goto exit;
     if ((result = pl_File_WriteUI ((PlankFileRef)iff, 1)) != PlankResult_OK) goto exit; // frames per packet
-    if ((result = pl_File_WriteUI ((PlankFileRef)iff, p->formatInfo.numChannels)) != PlankResult_OK) goto exit;
+    if ((result = pl_File_WriteUI ((PlankFileRef)iff, (PlankUI)pl_DynamicArray_GetSize (&p->formatInfo.channelIdentifiers))) != PlankResult_OK) goto exit;
     if ((result = pl_File_WriteUI ((PlankFileRef)iff, p->formatInfo.bitsPerSample)) != PlankResult_OK) goto exit;
 
     if ((result = pl_AudioFileWriter_CAF_WritePreDataMetaData (p)) != PlankResult_OK) goto exit;
@@ -1647,7 +1739,7 @@ static PlankResult pl_AudioFileWriter_W64_OpenInternal (PlankAudioFileWriterRef 
         goto exit;
     }
     
-    if (p->formatInfo.numChannels < 1)
+    if (pl_DynamicArray_GetSize (&p->formatInfo.channelIdentifiers) < 1)
     {
         result = PlankResult_AudioFileInavlidType;
         goto exit;
@@ -1753,7 +1845,7 @@ PlankResult pl_AudioFileWriter_W64_WriteHeader (PlankAudioFileWriterRef p)
     
     // regular WAV fmt
     if ((result = pl_File_WriteUS ((PlankFileRef)iff, (PlankUS)PLANKAUDIOFILE_WAV_COMPRESSION_EXTENSIBLE)) != PlankResult_OK) goto exit;
-    if ((result = pl_File_WriteUS ((PlankFileRef)iff, (PlankUS)p->formatInfo.numChannels)) != PlankResult_OK) goto exit;
+    if ((result = pl_File_WriteUS ((PlankFileRef)iff, (PlankUS)pl_DynamicArray_GetSize (&p->formatInfo.channelIdentifiers))) != PlankResult_OK) goto exit;
     if ((result = pl_File_WriteUI ((PlankFileRef)iff, (PlankUI)p->formatInfo.sampleRate)) != PlankResult_OK) goto exit;
     if ((result = pl_File_WriteUI ((PlankFileRef)iff, (PlankUI)(p->formatInfo.bytesPerFrame * (int)p->formatInfo.sampleRate))) != PlankResult_OK) goto exit;
     if ((result = pl_File_WriteUS ((PlankFileRef)iff, (PlankUS)p->formatInfo.bytesPerFrame)) != PlankResult_OK) goto exit;
@@ -1785,7 +1877,7 @@ PlankResult pl_AudioFileWriter_Iff_WriteFrames (PlankAudioFileWriterRef p,  cons
     int numSamplesRemaining, numSamplesThisTime, numBufferSamples, bytesPerSample, numBytes, i, numChannels;
     
     iff = (PlankIffFileWriterRef)p->peer;
-    numChannels = p->formatInfo.numChannels;
+    numChannels = (int)pl_DynamicArray_GetSize (&p->formatInfo.channelIdentifiers);//p->formatInfo.numChannels;
     bytesPerSample = p->formatInfo.bytesPerFrame / numChannels;
 
     if ((bytesPerSample == 1) || pl_AudioFileWriter_IsEncodingNativeEndian (p))
@@ -1795,8 +1887,8 @@ PlankResult pl_AudioFileWriter_Iff_WriteFrames (PlankAudioFileWriterRef p,  cons
     }
     else
     {
-        numBufferSamples = (PLANKAUDIOFILEWRITER_BUFFERLENGTH / p->formatInfo.bytesPerFrame) * p->formatInfo.numChannels;
-        numSamplesRemaining = numFrames * p->formatInfo.numChannels;
+        numBufferSamples = (PLANKAUDIOFILEWRITER_BUFFERLENGTH / p->formatInfo.bytesPerFrame) * numChannels;
+        numSamplesRemaining = numFrames * numChannels;
         ptr = (PlankUC*)data;
         
         // this is unrolled to help optimisation as this is slower than we want anyway: having to swap endianness...!
@@ -1996,7 +2088,7 @@ PlankResult pl_AudioFileWriter_OggVorbis_OpenInternal (PlankAudioFileWriterRef p
     PlankOggVorbisFileWriterRef ogg;
     PlankRNGRef rng;
     PlankMemoryRef m;    
-    int err, mode;
+    int err, mode, numChannels;
     
     result = PlankResult_OK;
     
@@ -2006,7 +2098,10 @@ PlankResult pl_AudioFileWriter_OggVorbis_OpenInternal (PlankAudioFileWriterRef p
         goto exit;
     }
     
-    if ((p->formatInfo.numChannels < 1) || (p->formatInfo.numChannels > 2))
+    numChannels = (int)pl_DynamicArray_GetSize (&p->formatInfo.channelIdentifiers);
+    
+    // should look into multichannel vorbis...
+    if ((numChannels < 1) || (numChannels > 2))
     {
         result = PlankResult_AudioFileInavlidType;
         goto exit;
@@ -2071,7 +2166,7 @@ PlankResult pl_AudioFileWriter_OggVorbis_OpenInternal (PlankAudioFileWriterRef p
     if (p->formatInfo.nominalBitRate != 0)
     {
         err = vorbis_encode_init (&ogg->vi,
-                                  p->formatInfo.numChannels,
+                                  numChannels,
                                   (int)p->formatInfo.sampleRate,
                                   p->formatInfo.maximumBitRate,
                                   p->formatInfo.nominalBitRate,
@@ -2080,7 +2175,7 @@ PlankResult pl_AudioFileWriter_OggVorbis_OpenInternal (PlankAudioFileWriterRef p
     else
     {
         err = vorbis_encode_init_vbr (&ogg->vi,
-                                      p->formatInfo.numChannels,
+                                      numChannels,
                                       (int)p->formatInfo.sampleRate,
                                       pl_ClipF (p->formatInfo.quality, 0.f, 1.f));
     }
@@ -2210,7 +2305,7 @@ PlankResult pl_AudioFileWriter_OggVorbis_WriteFrames (PlankAudioFileWriterRef p,
     if (numFrames > 0)
     {
         buffer = vorbis_analysis_buffer (&ogg->vd, numFrames);
-        numChannels = (int)p->formatInfo.numChannels;
+        numChannels = (int)pl_DynamicArray_GetSize (&p->formatInfo.channelIdentifiers);
         
         for (channel = 0; channel < numChannels; ++channel)
         {
@@ -2323,7 +2418,7 @@ static PlankResult pl_AudioFileWriter_Opus_OpenInternal (PlankAudioFileWriterRef
     PlankOpusFileWriterRef opus;
     PlankRNGRef rng;
     PlankMemoryRef m;
-    int err, delay, bitRate, streamCount, coupledStreamCount, quality, headerPacketSize, i, mode;
+    int err, delay, bitRate, streamCount, coupledStreamCount, quality, headerPacketSize, i, mode, numChannels;
     opus_int32 sampleRate;
     
     result = PlankResult_OK;
@@ -2334,7 +2429,9 @@ static PlankResult pl_AudioFileWriter_Opus_OpenInternal (PlankAudioFileWriterRef
         goto exit;
     }
     
-    if ((p->formatInfo.numChannels < 1) || (p->formatInfo.numChannels > 255))
+    numChannels = (int)pl_DynamicArray_GetSize (&p->formatInfo.channelIdentifiers);
+    
+    if ((numChannels < 1) || (numChannels > 255))
     {
         result = PlankResult_AudioFileInavlidType;
         goto exit;
@@ -2409,17 +2506,19 @@ static PlankResult pl_AudioFileWriter_Opus_OpenInternal (PlankAudioFileWriterRef
             p->formatInfo.frameDuration = 0.02f;
     }
     
-    streamCount             = p->formatInfo.numChannels;
+    streamCount             = numChannels;
     coupledStreamCount      = 0; // for now
     opus->frameSize         = opus->frameSize48kHz * sampleRate / 48000;
     quality                 = (int)p->formatInfo.quality;
     
     // for now..
-    for (i = 0; i < p->formatInfo.numChannels; ++i)
+    for (i = 0; i < numChannels; ++i)
         opus->header.stream_map[i] = i;
     
+//    OPUS_BANDWIDTH_NARROWBAND for LFE?
+    
     if ((result = pl_DynamicArray_InitWithItemSizeAndSize (&opus->packet, 1, PLANKAUDIOFILE_OPUS_MAXPACKETSIZE * streamCount, PLANK_FALSE)) != PlankResult_OK) goto exit;
-    if ((result = pl_DynamicArray_InitWithItemSizeAndSize (&opus->buffer, sizeof (float), p->formatInfo.numChannels * opus->frameSize, PLANK_FALSE)) != PlankResult_OK) goto exit;
+    if ((result = pl_DynamicArray_InitWithItemSizeAndSize (&opus->buffer, sizeof (float), numChannels * opus->frameSize, PLANK_FALSE)) != PlankResult_OK) goto exit;
     
     opus->bufferPos          = 0;
     opus->totalPCMFrames     = 0;
@@ -2428,9 +2527,9 @@ static PlankResult pl_AudioFileWriter_Opus_OpenInternal (PlankAudioFileWriterRef
     opus->lastPageGranulePos = opus->currentGranulePos;
     
     opus->oe = opus_multistream_encoder_create (sampleRate,
-                                                p->formatInfo.numChannels,  // channels
-                                                p->formatInfo.numChannels,  // streams
-                                                0,                          // coupled streams
+                                                numChannels,  // channels
+                                                numChannels,  // streams
+                                                0,            // coupled streams
                                                 opus->header.stream_map,
                                                 OPUS_APPLICATION_AUDIO,
                                                 &err);
@@ -2458,7 +2557,7 @@ static PlankResult pl_AudioFileWriter_Opus_OpenInternal (PlankAudioFileWriterRef
     if ((err = opus_multistream_encoder_ctl (opus->oe, OPUS_GET_LOOKAHEAD (&delay))) != 0) { result = PlankResult_UnknownError; goto exit; }
 
     opus->header.version           = 1;
-    opus->header.channels          = p->formatInfo.numChannels;
+    opus->header.channels          = numChannels;
     opus->header.preskip           = delay * 48000 / sampleRate;
     opus->header.input_sample_rate = sampleRate;
     opus->header.gain              = 0;
@@ -2672,7 +2771,7 @@ PlankResult pl_AudioFileWriter_Opus_WriteFrames (PlankAudioFileWriterRef p, cons
     result = PlankResult_OK;
     opus = (PlankOpusFileWriterRef)p->peer;
     
-    numChannels         = p->formatInfo.numChannels;
+    numChannels         = (int)pl_DynamicArray_GetSize (&p->formatInfo.channelIdentifiers);
     buffer              = (float*)pl_DynamicArray_GetArray (&opus->buffer);
     bufferLength        = (int)pl_DynamicArray_GetSize (&opus->buffer);
     bufferRemaining     = bufferLength - opus->bufferPos;

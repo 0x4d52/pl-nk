@@ -181,6 +181,36 @@ static inline PlankI pl_ConvertI24ToI (const PlankI24 i24)
 #endif
 }
 
+typedef struct PlankVec2F
+{
+    float values[2];
+} PlankVec2F;
+
+typedef struct PlankVec3F
+{
+    float values[3];
+} PlankVec3F;
+
+typedef struct PlankVec4F
+{
+    float values[4];
+} PlankVec4F;
+
+typedef struct PlankVec2D
+{
+    double values[2];
+} PlankVec2D;
+
+typedef struct PlankVec3D
+{
+    double values[3];
+} PlankVec3D;
+
+typedef struct PlankVec4D
+{
+    double values[4];
+} PlankVec4D;
+
 /** @defgroup PlankBitwiseFunctions Plank bitwise functions
  @ingroup PlankFunctions
  @{
