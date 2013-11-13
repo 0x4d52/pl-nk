@@ -1674,13 +1674,18 @@ PlankResult pl_AudioFileReader_AIFC_ParseData (PlankAudioFileReaderRef p, const 
 #pragma mark CAF Functions
 #endif
 
+PlankResult pl_AudioFileReader_CAF_ParseChunk_chan (PlankAudioFileReaderRef p, const PlankUI chunkLength, const PlankLL chunkEnd);
+
 PlankResult pl_AudioFileReader_CAF_ParseFormat (PlankAudioFileReaderRef p, const PlankLL chunkLength, const PlankLL chunkDataPos)
 {
+    PlankLL chanChunkLength, chanChunkPos;
+    PlankD sampleRate;
+    PlankUI* channelIdentifiers;
     PlankResult result = PlankResult_OK;
     PlankFourCharCode formatID;
     PlankUI formatFlags, bytesPerPacket, framesPerPacket, numChannels, bitsPerChannel;
-    PlankD sampleRate;
     
+        
     if ((result = pl_File_ReadD ((PlankFileRef)p->peer, &sampleRate)) != PlankResult_OK) goto exit;
     if ((result = pl_File_ReadFourCharCode ((PlankFileRef)p->peer, &formatID)) != PlankResult_OK) goto exit;
     if ((result = pl_File_ReadUI ((PlankFileRef)p->peer, &formatFlags)) != PlankResult_OK) goto exit;
@@ -1691,7 +1696,7 @@ PlankResult pl_AudioFileReader_CAF_ParseFormat (PlankAudioFileReaderRef p, const
 
     if (formatID != pl_FourCharCode ("lpcm"))
     {
-        result = PlankResult_AudioFileUnsupportedType;
+        result = PlankResult_AudioFileUnsupportedType; // only PCM for this implementation
         goto exit;
     }
     
@@ -1724,7 +1729,7 @@ PlankResult pl_AudioFileReader_CAF_ParseFormat (PlankAudioFileReaderRef p, const
     
     p->numFrames                    = -1;
     p->formatInfo.sampleRate        = sampleRate;
-//    p->formatInfo.numChannels       = (PlankI)numChannels;
+
     pl_DynamicArray_DeInit (&p->formatInfo.channelIdentifiers);
     pl_DynamicArray_InitWithItemSizeAndSize (&p->formatInfo.channelIdentifiers, sizeof (PlankUI), numChannels, PLANK_TRUE);
 
@@ -1736,11 +1741,43 @@ PlankResult pl_AudioFileReader_CAF_ParseFormat (PlankAudioFileReaderRef p, const
     p->formatInfo.frameDuration     = 1.0 / p->formatInfo.sampleRate;
     p->formatInfo.quality           = p->formatInfo.bitsPerSample / 64.f;
     
+    result = pl_IffFileReader_SeekChunk ((PlankIffFileReaderRef)p->peer, -1, "chan", &chanChunkLength, &chanChunkPos);
+    
+    if (result == PlankResult_IffFileReaderChunkNotFound)
+    {
+        result = PlankResult_OK;
+        channelIdentifiers = (PlankUI*)pl_DynamicArray_GetArray (&p->formatInfo.channelIdentifiers);
+        
+        if (numChannels == 1)
+        {
+            channelIdentifiers[0] = PLANKAUDIOFILE_CHANNEL_MONO;
+        }
+        else if (numChannels == 2)
+        {
+            channelIdentifiers[0] = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
+            channelIdentifiers[1] = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
+        }
+        else
+        {
+            // 2+ channels needs a 'chan' chunk
+            result = PlankResult_AudioFileInavlidType;
+            goto exit;
+        }
+    }
+    else if (result == PlankResult_OK)
+    {
+        if ((result = pl_AudioFileReader_CAF_ParseChunk_chan (p, chanChunkLength, chanChunkPos + chanChunkLength)) != PlankResult_OK) goto exit;
+    }
+    else
+    {
+        goto exit;
+    }
+    
 	(void)chunkDataPos;
 	(void)chunkLength;
     
 exit:
-    return PlankResult_OK;
+    return result;
 }
 
 static PlankResult pl_AudioFileReader_CAF_ParseChunk_mark (PlankAudioFileReaderRef p, const PlankUI chunkLength, const PlankLL chunkEnd, PlankDynamicArrayRef stringIndices, PlankDynamicArrayRef strings)
@@ -1810,11 +1847,16 @@ static PlankResult pl_AudioFileReader_CAF_ParseChunk_mark (PlankAudioFileReaderR
         }
     }
     
+    
+    (void)chunkEnd;
+	(void)chunkLength;
+
 exit:
     return result;
 }
 
-static PlankResult pl_AudioFileReader_CAF_ParseChunk_chan (PlankAudioFileReaderRef p, const PlankUI chunkLength, const PlankLL chunkEnd)
+// required for 2+ channel files
+PlankResult pl_AudioFileReader_CAF_ParseChunk_chan (PlankAudioFileReaderRef p, const PlankUI chunkLength, const PlankLL chunkEnd)
 {
     PlankResult result = PlankResult_OK;
     PlankIffFileReaderRef iff;
@@ -1849,7 +1891,7 @@ static PlankResult pl_AudioFileReader_CAF_ParseChunk_chan (PlankAudioFileReaderR
     
         if (numDescriptions > 255)
         {
-            result = PlankResult_AudioFileInavlidType;
+            result = PlankResult_AudioFileUnsupportedType;
             goto exit;
         }
         
@@ -1886,6 +1928,7 @@ static PlankResult pl_AudioFileReader_CAF_ParseChunk_chan (PlankAudioFileReaderR
     {
         if ((channelLayoutTag & 0x0000FFFF) != numChannels)
         {
+            // low 16 bits should match the channel count
             result = PlankResult_AudioFileInavlidType;
             goto exit;
         }
@@ -1902,6 +1945,9 @@ static PlankResult pl_AudioFileReader_CAF_ParseChunk_chan (PlankAudioFileReaderR
             result = pl_AudioFileFormatInfo_CAF_LayoutTagToChannelMap (&p->formatInfo, channelLayoutTag);
         }
     }
+    
+    (void)chunkEnd;
+	(void)chunkLength;
 
 exit:
     return result;
@@ -1967,10 +2013,11 @@ PlankResult pl_AudioFileReader_CAF_ParseMetaData (PlankAudioFileReaderRef p)
         {
             if ((result = pl_AudioFileReader_CAF_ParseChunk_mark (p, readChunkLength, readChunkEnd, &stringIndices, &strings)) != PlankResult_OK) goto exit;
         }
-        else if (readChunkID.fcc == pl_FourCharCode ("chan"))
-        {
-            if ((result = pl_AudioFileReader_CAF_ParseChunk_chan (p, readChunkLength, readChunkEnd)) != PlankResult_OK) goto exit;
-        }
+//        else if (readChunkID.fcc == pl_FourCharCode ("chan"))
+//        {
+//            // perhaps move to the main header parser?
+//            if ((result = pl_AudioFileReader_CAF_ParseChunk_chan (p, readChunkLength, readChunkEnd)) != PlankResult_OK) goto exit;
+//        }
         else if (readChunkID.fcc == pl_FourCharCode ("ovvw"))
         {
             goto next;

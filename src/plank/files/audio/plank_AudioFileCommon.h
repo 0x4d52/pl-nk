@@ -140,18 +140,18 @@ static inline const char* pl_PlankAudioFileGetFormatName (int format)
 #define PLANKAUDIOFILE_CHANNEL_TOP_BACK_RIGHT               18 // 18.	Top Back Right - TBR
 
 // CAF
-#define PLANKAUDIOFILE_CHANNEL_REARSURROUNDLEFT             33
-#define PLANKAUDIOFILE_CHANNEL_REARSURROUNDRIGHT            34
-#define PLANKAUDIOFILE_CHANNEL_LEFTWIDE                     35
-#define PLANKAUDIOFILE_CHANNEL_RIGHTWIDE                    36
-#define PLANKAUDIOFILE_CHANNEL_LFE2                         37
-#define PLANKAUDIOFILE_CHANNEL_LEFTTOTAL                    38           // matrix encoded 4 channels
-#define PLANKAUDIOFILE_CHANNEL_RIGHTTOTAL                   39           // matrix encoded 4 channels
-#define PLANKAUDIOFILE_CHANNEL_HEARINGIMPAIRED              40
+#define PLANKAUDIOFILE_CHANNEL_REAR_SURROUND_LEFT           33
+#define PLANKAUDIOFILE_CHANNEL_REAR_SURROUND_RIGHT          34
+#define PLANKAUDIOFILE_CHANNEL_LEFT_WIDE                    35
+#define PLANKAUDIOFILE_CHANNEL_RIGHT_WIDE                   36
+#define PLANKAUDIOFILE_CHANNEL_LOW_FREQUENCY_EXTRA          37
+#define PLANKAUDIOFILE_CHANNEL_LEFT_TOTAL                   38           // matrix encoded 4 channels
+#define PLANKAUDIOFILE_CHANNEL_RIGHT_TOTAL                  39           // matrix encoded 4 channels
+#define PLANKAUDIOFILE_CHANNEL_HEARING_IMPAIRED             40
 #define PLANKAUDIOFILE_CHANNEL_NARRATION                    41
 #define PLANKAUDIOFILE_CHANNEL_MONO                         42
 #define PLANKAUDIOFILE_CHANNEL_DIALOGCENTRICMIX             43
-#define PLANKAUDIOFILE_CHANNEL_CENTERSURROUNDDIRECT         44           // back center non diffuse
+#define PLANKAUDIOFILE_CHANNEL_CENTERSURROUND_DIRECT        44           // back center non diffuse
 #define PLANKAUDIOFILE_CHANNEL_HAPTIC                       45
 
 #define PLANKAUDIOFILE_CHANNEL_AMBISONIC_W                  200
@@ -162,10 +162,10 @@ static inline const char* pl_PlankAudioFileGetFormatName (int format)
 #define PLANKAUDIOFILE_CHANNEL_MS_SIDE                      205
 #define PLANKAUDIOFILE_CHANNEL_XY_X                         206
 #define PLANKAUDIOFILE_CHANNEL_XY_Y                         207
-#define PLANKAUDIOFILE_CHANNEL_HEADPHONESLEFT               301
-#define PLANKAUDIOFILE_CHANNEL_HEADPHONESRIGHT              302
-#define PLANKAUDIOFILE_CHANNEL_CLICKTRACK                   304
-#define PLANKAUDIOFILE_CHANNEL_FOREIGNLANGUAGE              305
+#define PLANKAUDIOFILE_CHANNEL_HEADPHONES_LEFT              301
+#define PLANKAUDIOFILE_CHANNEL_HEADPHONES_RIGHT             302
+#define PLANKAUDIOFILE_CHANNEL_CLICK_TRACK                  304
+#define PLANKAUDIOFILE_CHANNEL_FOREIGN_LANGUAGE             305
 #define PLANKAUDIOFILE_CHANNEL_DISCRETE                     400
 
 #define PLANKAUDIOFILE_CHANNEL_DISCRETE_N                (1<<16) // OR with 0-based channel index 0-65535
@@ -661,10 +661,10 @@ static char* pl_AudioFileFormatInfoChannelIdentifierToName (const PlankUI identi
             case PLANKAUDIOFILE_CHANNEL_MS_SIDE:            return strncpy (name, "MS S", nameLength);
             case PLANKAUDIOFILE_CHANNEL_XY_X:               return strncpy (name, "XY X", nameLength);
             case PLANKAUDIOFILE_CHANNEL_XY_Y:               return strncpy (name, "XY Y", nameLength);
-            case PLANKAUDIOFILE_CHANNEL_HEADPHONESLEFT:     return strncpy (name, "Head-Phones L", nameLength);
-            case PLANKAUDIOFILE_CHANNEL_HEADPHONESRIGHT:    return strncpy (name, "Head-Phones R", nameLength);
-            case PLANKAUDIOFILE_CHANNEL_CLICKTRACK:         return strncpy (name, "Click Track", nameLength);
-            case PLANKAUDIOFILE_CHANNEL_FOREIGNLANGUAGE:    return strncpy (name, "Foreign Language", nameLength);
+            case PLANKAUDIOFILE_CHANNEL_HEADPHONES_LEFT:    return strncpy (name, "Head Phones L", nameLength);
+            case PLANKAUDIOFILE_CHANNEL_HEADPHONES_RIGHT:   return strncpy (name, "Head Phones R", nameLength);
+            case PLANKAUDIOFILE_CHANNEL_CLICK_TRACK:        return strncpy (name, "Click Track", nameLength);
+            case PLANKAUDIOFILE_CHANNEL_FOREIGN_LANGUAGE:   return strncpy (name, "Foreign Language", nameLength);
             case PLANKAUDIOFILE_CHANNEL_DISCRETE:           return strncpy (name, "Discrete", nameLength);
         }
     }
@@ -708,12 +708,12 @@ static PlankResult pl_AudioFileFormatInfo_CAF_LayoutTagToChannelMap (PlankAudioF
             channelIdentifiers[1] = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
             break;
         case PLANKAUDIOFILE_CAF_LAYOUTTAG_STEREOHEADPHONES:
-            channelIdentifiers[0] = PLANKAUDIOFILE_CHANNEL_HEADPHONESLEFT;
-            channelIdentifiers[1] = PLANKAUDIOFILE_CHANNEL_HEADPHONESRIGHT;
+            channelIdentifiers[0] = PLANKAUDIOFILE_CHANNEL_HEADPHONES_LEFT;
+            channelIdentifiers[1] = PLANKAUDIOFILE_CHANNEL_HEADPHONES_RIGHT;
             break;
         case PLANKAUDIOFILE_CAF_LAYOUTTAG_MATRIXSTEREO:
-            channelIdentifiers[0] = PLANKAUDIOFILE_CHANNEL_LEFTTOTAL;
-            channelIdentifiers[1] = PLANKAUDIOFILE_CHANNEL_RIGHTTOTAL;
+            channelIdentifiers[0] = PLANKAUDIOFILE_CHANNEL_LEFT_TOTAL;
+            channelIdentifiers[1] = PLANKAUDIOFILE_CHANNEL_RIGHT_TOTAL;
             break;
         case PLANKAUDIOFILE_CAF_LAYOUTTAG_MIDSIDE:
             channelIdentifiers[0] = PLANKAUDIOFILE_CHANNEL_MS_MID;
@@ -724,8 +724,8 @@ static PlankResult pl_AudioFileFormatInfo_CAF_LayoutTagToChannelMap (PlankAudioF
             channelIdentifiers[1] = PLANKAUDIOFILE_CHANNEL_XY_Y;
             break;
         case PLANKAUDIOFILE_CAF_LAYOUTTAG_BINAURAL:
-            channelIdentifiers[0] = PLANKAUDIOFILE_CHANNEL_HEADPHONESLEFT;
-            channelIdentifiers[1] = PLANKAUDIOFILE_CHANNEL_HEADPHONESRIGHT;
+            channelIdentifiers[0] = PLANKAUDIOFILE_CHANNEL_HEADPHONES_LEFT;
+            channelIdentifiers[1] = PLANKAUDIOFILE_CHANNEL_HEADPHONES_RIGHT;
             break;
         case PLANKAUDIOFILE_CAF_LAYOUTTAG_AMBISONIC_B_FORMAT:
             channelIdentifiers[0] = PLANKAUDIOFILE_CHANNEL_AMBISONIC_W;
@@ -792,7 +792,12 @@ static PlankResult pl_AudioFileFormatInfo_CAF_LayoutTagToChannelMap (PlankAudioF
             //Label.Center, Label.Left, Label.Right, Label.LeftSurround, Label.RightSurround),
             break;
         case PLANKAUDIOFILE_CAF_LAYOUTTAG_MPEG_5_1_A:
-            //Label.Left, Label.Right, Label.Center, Label.LFEScreen, Label.LeftSurround, Label.RightSurround),
+            channelIdentifiers[0] = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
+            channelIdentifiers[1] = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
+            channelIdentifiers[2] = PLANKAUDIOFILE_CHANNEL_FRONT_CENTER;
+            channelIdentifiers[3] = PLANKAUDIOFILE_CHANNEL_LOW_FREQUENCY;
+            channelIdentifiers[4] = PLANKAUDIOFILE_CHANNEL_BACK_LEFT;
+            channelIdentifiers[5] = PLANKAUDIOFILE_CHANNEL_BACK_RIGHT;
             break;
         case PLANKAUDIOFILE_CAF_LAYOUTTAG_MPEG_5_1_B:
             //Label.Left, Label.Right, Label.LeftSurround, Label.RightSurround, Label.Center, Label.LFEScreen),

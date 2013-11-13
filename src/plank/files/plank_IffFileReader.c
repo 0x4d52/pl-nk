@@ -400,7 +400,7 @@ PlankResult pl_IffFileReader_SeekChunk (PlankIffFileReaderRef p, const PlankLL s
     result = PlankResult_IffFileReaderChunkNotFound;
     
 exit:
-    return result;
+    return result == PlankResult_FileEOF ? PlankResult_IffFileReaderChunkNotFound : result;
 }
 
 
@@ -412,7 +412,12 @@ PlankResult pl_IffFileReader_ParseChunkHeader (PlankIffFileReaderRef p, char* ch
     
     result = PlankResult_OK;
     
+    if ((result = pl_File_GetPosition        ((PlankFileRef)p, &pos)) != PlankResult_OK) goto exit;
     if ((result = pl_IffFile_ReadChunkID     ((PlankIffFileRef)p, &cid)) != PlankResult_OK) goto exit;
+    
+    // TODO should check here for a valid ChunkID and step slowly until one is found
+    // the cid.fcc field should ALWAYS be four alphanumeric chars or a space 
+    
     if ((result = pl_IffFile_ReadChunkLength ((PlankIffFileRef)p, &len)) != PlankResult_OK) goto exit;
     if ((result = pl_File_GetPosition        ((PlankFileRef)p, &pos)) != PlankResult_OK) goto exit;
     
