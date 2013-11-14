@@ -576,7 +576,7 @@ typedef struct PlankAudioFileFormatInfo
     PlankF quality;
         
     PlankDynamicArray channelIdentifiers;
-    PlankDynamicArray channelMap;
+//    PlankDynamicArray channelMap;
     PlankDynamicArray channelCoords;
 
 } PlankAudioFileFormatInfo;
@@ -607,7 +607,7 @@ static PlankResult pl_AudioFileFormatInfo_Init (PlankAudioFileFormatInfoRef form
 static PlankResult pl_AudioFileFormatInfo_DeInit (PlankAudioFileFormatInfoRef formatInfo)
 {
     pl_DynamicArray_DeInit (&formatInfo->channelIdentifiers);
-    pl_DynamicArray_DeInit (&formatInfo->channelMap);
+//    pl_DynamicArray_DeInit (&formatInfo->channelMap);
     pl_DynamicArray_DeInit (&formatInfo->channelCoords);
     pl_MemoryZero (formatInfo, sizeof (PlankAudioFileFormatInfo));
     return PlankResult_OK;
@@ -618,10 +618,10 @@ static PlankUI* pl_AudioFileFormatInfo_GetChannelIdentifiers (PlankAudioFileForm
     return (PlankUI*)pl_DynamicArray_GetArray (&formatInfo->channelIdentifiers);
 }
 
-static PlankUS* pl_AudioFileFormatInfo_GetChannelMap (PlankAudioFileFormatInfoRef formatInfo)
-{
-    return (PlankUS*)pl_DynamicArray_GetArray (&formatInfo->channelMap);
-}
+//static PlankUS* pl_AudioFileFormatInfo_GetChannelMap (PlankAudioFileFormatInfoRef formatInfo)
+//{
+//    return (PlankUS*)pl_DynamicArray_GetArray (&formatInfo->channelMap);
+//}
 
 static PlankSpeakerPosition* pl_AudioFileFormatInfo_GetChannelCoords (PlankAudioFileFormatInfoRef formatInfo)
 {
@@ -646,13 +646,13 @@ exit:
     return result;
 }
 
-static PlankUS pl_AudioFileFormatInfo_GetChannelMapForChannel (PlankAudioFileFormatInfoRef formatInfo, const int channel)
-{
-    PlankUS map;
-    map = 0xFFFF;
-    pl_DynamicArray_GetItem (&formatInfo->channelMap, channel, &map);
-    return map;
-}
+//static PlankUS pl_AudioFileFormatInfo_GetChannelMapForChannel (PlankAudioFileFormatInfoRef formatInfo, const int channel)
+//{
+//    PlankUS map;
+//    map = 0xFFFF;
+//    pl_DynamicArray_GetItem (&formatInfo->channelMap, channel, &map);
+//    return map;
+//}
 
 static int pl_AudioFileFormatInfo_GetNumChannels (PlankAudioFileFormatInfoRef formatInfo)
 {
@@ -661,8 +661,8 @@ static int pl_AudioFileFormatInfo_GetNumChannels (PlankAudioFileFormatInfoRef fo
 
 static PlankResult pl_AudioFileFormatInfo_SetNumChannels (PlankAudioFileFormatInfoRef formatInfo, const int numChannels, const PlankB useCoords)
 {
-    int original, i;
-    PlankUS* map;
+//    int original, i;
+//    PlankUS* map;
     
     // resize identifiers
     if (formatInfo->channelIdentifiers.itemSize)
@@ -670,27 +670,27 @@ static PlankResult pl_AudioFileFormatInfo_SetNumChannels (PlankAudioFileFormatIn
     else
         pl_DynamicArray_InitWithItemSizeAndSize (&formatInfo->channelIdentifiers, sizeof(PlankUI), numChannels, PLANK_TRUE);
     
-    // resize map
-    if (formatInfo->channelMap.itemSize)
-    {
-        original = (int)pl_DynamicArray_GetSize (&formatInfo->channelMap);
-        pl_DynamicArray_SetSize (&formatInfo->channelMap, numChannels);
-        
-        if (original < numChannels)
-        {
-            map = pl_AudioFileFormatInfo_GetChannelMap (formatInfo);
-            for (i = original; i < numChannels; ++i)
-                map[i] = (PlankUS)i;
-        }
-    }
-    else
-    {
-        pl_DynamicArray_InitWithItemSizeAndSize (&formatInfo->channelMap, sizeof (PlankUS), numChannels, PLANK_FALSE);
-        map = (PlankUS*)pl_DynamicArray_GetArray (&formatInfo->channelMap);
-        
-        for (i = 0; i < numChannels; ++i)
-            map[i] = (PlankUS)i;
-    }
+//    // resize map
+//    if (formatInfo->channelMap.itemSize)
+//    {
+//        original = (int)pl_DynamicArray_GetSize (&formatInfo->channelMap);
+//        pl_DynamicArray_SetSize (&formatInfo->channelMap, numChannels);
+//        
+//        if (original < numChannels)
+//        {
+//            map = pl_AudioFileFormatInfo_GetChannelMap (formatInfo);
+//            for (i = original; i < numChannels; ++i)
+//                map[i] = (PlankUS)i;
+//        }
+//    }
+//    else
+//    {
+//        pl_DynamicArray_InitWithItemSizeAndSize (&formatInfo->channelMap, sizeof (PlankUS), numChannels, PLANK_FALSE);
+//        map = (PlankUS*)pl_DynamicArray_GetArray (&formatInfo->channelMap);
+//        
+//        for (i = 0; i < numChannels; ++i)
+//            map[i] = (PlankUS)i;
+//    }
     
     if (useCoords)
     {

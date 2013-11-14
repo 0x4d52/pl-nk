@@ -4843,19 +4843,19 @@ PlankResult pl_AudioFileReader_UpdateFormat (PlankAudioFileReaderRef p, const Pl
         goto exit;
     }
     
-    if (pl_DynamicArray_GetSize (&p->formatInfo.channelMap) !=
-        pl_DynamicArray_GetSize ((PlankDynamicArrayRef)&newFormat->channelMap))
-    {
-        changed = PLANK_TRUE;
-        goto exit;
-    }
-    else if (!pl_MemoryCompare (pl_DynamicArray_GetArray (&p->formatInfo.channelMap),
-                                pl_DynamicArray_GetArray ((PlankDynamicArrayRef)&newFormat->channelMap),
-                                pl_DynamicArray_GetSize (&p->formatInfo.channelMap) * pl_DynamicArray_GetItemSize (&p->formatInfo.channelMap)))
-    {
-        changed = PLANK_TRUE;
-        goto exit;
-    }
+//    if (pl_DynamicArray_GetSize (&p->formatInfo.channelMap) !=
+//        pl_DynamicArray_GetSize ((PlankDynamicArrayRef)&newFormat->channelMap))
+//    {
+//        changed = PLANK_TRUE;
+//        goto exit;
+//    }
+//    else if (!pl_MemoryCompare (pl_DynamicArray_GetArray (&p->formatInfo.channelMap),
+//                                pl_DynamicArray_GetArray ((PlankDynamicArrayRef)&newFormat->channelMap),
+//                                pl_DynamicArray_GetSize (&p->formatInfo.channelMap) * pl_DynamicArray_GetItemSize (&p->formatInfo.channelMap)))
+//    {
+//        changed = PLANK_TRUE;
+//        goto exit;
+//    }
     
     if (pl_DynamicArray_GetSize (&p->formatInfo.channelCoords) !=
         pl_DynamicArray_GetSize ((PlankDynamicArrayRef)&newFormat->channelCoords))
@@ -4888,7 +4888,7 @@ exit:
     {
         pl_MemoryCopy (&p->formatInfo, newFormat, sizeof (PlankAudioFileFormatInfo));
         pl_DynamicArray_InitCopy (&p->formatInfo.channelIdentifiers, (PlankDynamicArrayRef)&newFormat->channelIdentifiers);
-        pl_DynamicArray_InitCopy (&p->formatInfo.channelMap, (PlankDynamicArrayRef)&newFormat->channelMap);
+//        pl_DynamicArray_InitCopy (&p->formatInfo.channelMap, (PlankDynamicArrayRef)&newFormat->channelMap);
         pl_DynamicArray_InitCopy (&p->formatInfo.channelCoords, (PlankDynamicArrayRef)&newFormat->channelCoords);
     }
     
