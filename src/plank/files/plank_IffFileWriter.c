@@ -147,8 +147,8 @@ static PlankResult pl_IffFileWriter_ParseMainInfo (PlankIffFileWriterRef p, cons
             p->common.headerInfo.initMainLength     = 4;
             p->common.headerInfo.junkID.fcc         = pl_FourCharCode ("JUNK");
             p->common.headerInfo.lengthSize         = 4;
-            p->common.headerInfo.mainHeaderEnd      = 4 + 4 + 4;
-            p->common.headerInfo.headerLength       = 4 + 4;
+            p->common.headerInfo.mainHeaderEnd      = 4 + p->common.headerInfo.lengthSize + 4;
+            p->common.headerInfo.headerLength       = 4 + p->common.headerInfo.lengthSize;
             p->common.headerInfo.alignment          = 2;
         }
         else if (p->common.headerInfo.mainID.fcc == pl_FourCharCode ("FORM"))
@@ -156,8 +156,8 @@ static PlankResult pl_IffFileWriter_ParseMainInfo (PlankIffFileWriterRef p, cons
             p->common.headerInfo.initMainLength     = 4;
             p->common.headerInfo.junkID.fcc         = pl_FourCharCode ("    "); // Iff junk ID is four spaces
             p->common.headerInfo.lengthSize         = 4;
-            p->common.headerInfo.mainHeaderEnd      = 4 + 4 + 4;
-            p->common.headerInfo.headerLength       = 4 + 4;
+            p->common.headerInfo.mainHeaderEnd      = 4 + p->common.headerInfo.lengthSize + 4;
+            p->common.headerInfo.headerLength       = 4 + p->common.headerInfo.lengthSize;
             p->common.headerInfo.alignment          = 2;
         }
         else if (p->common.headerInfo.mainID.fcc == pl_FourCharCode ("caff"))
@@ -166,7 +166,7 @@ static PlankResult pl_IffFileWriter_ParseMainInfo (PlankIffFileWriterRef p, cons
             p->common.headerInfo.junkID.fcc         = pl_FourCharCode ("free");
             p->common.headerInfo.lengthSize         = 8;
             p->common.headerInfo.mainHeaderEnd      = 4 + 2 + 2;
-            p->common.headerInfo.headerLength       = 4 + 4;
+            p->common.headerInfo.headerLength       = 4 + p->common.headerInfo.lengthSize;
             p->common.headerInfo.alignment          = 2;
         }
         else
@@ -174,8 +174,8 @@ static PlankResult pl_IffFileWriter_ParseMainInfo (PlankIffFileWriterRef p, cons
             p->common.headerInfo.initMainLength     = 4;
             p->common.headerInfo.junkID.fcc         = pl_FourCharCode ("JUNK");
             p->common.headerInfo.lengthSize         = 4;
-            p->common.headerInfo.mainHeaderEnd      = 4 + 4 + 4;
-            p->common.headerInfo.headerLength       = 4 + 4;
+            p->common.headerInfo.mainHeaderEnd      = 4 + p->common.headerInfo.lengthSize + 4;
+            p->common.headerInfo.headerLength       = 4 + p->common.headerInfo.lengthSize;
             p->common.headerInfo.alignment          = 2;
         }
     }
@@ -192,7 +192,7 @@ static PlankResult pl_IffFileWriter_ParseMainInfo (PlankIffFileWriterRef p, cons
             p->common.headerInfo.initMainLength     = 16;
             p->common.headerInfo.lengthSize         = 8;
             p->common.headerInfo.mainHeaderEnd      = 16 + 8 + 16;
-            p->common.headerInfo.headerLength       = 8 + 16;
+            p->common.headerInfo.headerLength       = 16 + p->common.headerInfo.lengthSize;
             p->common.headerInfo.alignment          = 8;
         }
         else
@@ -201,7 +201,7 @@ static PlankResult pl_IffFileWriter_ParseMainInfo (PlankIffFileWriterRef p, cons
             p->common.headerInfo.initMainLength     = 16;
             p->common.headerInfo.lengthSize         = 8;
             p->common.headerInfo.mainHeaderEnd      = 16 + 8 + 16;
-            p->common.headerInfo.headerLength       = 8 + 16;
+            p->common.headerInfo.headerLength       = 16 + p->common.headerInfo.lengthSize;
             p->common.headerInfo.alignment          = 8;
         }
     }
@@ -397,7 +397,8 @@ PlankResult pl_IffFileWriter_WriteChunk (PlankIffFileWriterRef p, const PlankLL 
         originalChunkLength = 0;
                 
         // for 64-bit actually we don't need to seek the last chunk, just seek to the end from the main length!
-        chunkStartPos = p->common.headerInfo.mainLength + p->common.headerInfo.headerLength;// - p->common.headerInfo.mainLengthOffset;
+//        chunkStartPos = p->common.headerInfo.mainLength + p->common.headerInfo.headerLength; // - p->common.headerInfo.mainLengthOffset;
+        chunkStartPos = p->common.headerInfo.mainLength + p->common.headerInfo.mainHeaderEnd - p->common.headerInfo.initMainLength;
 
         chunkDataPos  = chunkStartPos + idLength + p->common.headerInfo.lengthSize;
         isLastChunk   = PLANK_TRUE;

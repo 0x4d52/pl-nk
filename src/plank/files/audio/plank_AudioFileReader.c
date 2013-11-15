@@ -841,7 +841,7 @@ const char* pl_AudioFileReader_GetName (PlankAudioFileReaderRef p)
     return pl_DynamicArray_GetArray (&p->name);
 }
 
-PlankUI pl_AudioFileReader_GetChannelItentifier (PlankAudioFileReaderRef p, const int channel)
+PlankChannelIdentifier pl_AudioFileReader_GetChannelItentifier (PlankAudioFileReaderRef p, const int channel)
 {
     return pl_AudioFileFormatInfo_GetChannelItentifier (&p->formatInfo, channel);
 }
@@ -907,7 +907,7 @@ PlankResult pl_AudioFileReader_WAV_ParseFormat (PlankAudioFileReaderRef p, const
         else
             goto invalid;
         
-        pl_AudioFileFormatInfo_WAVCAF_ChannelMaskToIdentifiers (&p->formatInfo, channelMask);
+        pl_AudioFileFormatInfo_WAV_ChannelMaskToIdentifiers (&p->formatInfo, channelMask);
     }
     else goto invalid;
     
@@ -1841,9 +1841,10 @@ PlankResult pl_AudioFileReader_CAF_ParseChunk_chan (PlankAudioFileReaderRef p, c
 {
     PlankResult result = PlankResult_OK;
     PlankIffFileReaderRef iff;
-    PlankUI channelLayoutTag, channelMask, numDescriptions, i;
+    PlankChannelLayout channelLayoutTag;
+    PlankUI channelMask, numDescriptions, i;
     PlankUI channelLabel, channelFlags, numChannels;
-    PlankUI* channelIdentifiers;
+    PlankChannelIdentifier* channelIdentifiers;
     PlankSpeakerPosition* channelCoords;
     float coords[3];
     
@@ -1860,7 +1861,7 @@ PlankResult pl_AudioFileReader_CAF_ParseChunk_chan (PlankAudioFileReaderRef p, c
     if (channelLayoutTag == PLANKAUDIOFILE_LAYOUT_USECHANNELBITMAP)
     {
         // use the bitmap / mask
-        pl_AudioFileFormatInfo_WAVCAF_ChannelMaskToIdentifiers (&p->formatInfo, channelMask);
+        pl_AudioFileFormatInfo_CAF_ChannelMaskToIdentifiers (&p->formatInfo, channelMask);
     }
     else if (channelLayoutTag == PLANKAUDIOFILE_LAYOUT_USECHANNELDESCRIPTIONS)
     {
@@ -1887,7 +1888,14 @@ PlankResult pl_AudioFileReader_CAF_ParseChunk_chan (PlankAudioFileReaderRef p, c
             
             channelIdentifiers[i] = channelLabel;
             
-            if ((channelFlags != PLANKAUDIOFILE_CHANNELFLAGS_ALLOFF) &&
+//            if ((channelFlags != PLANKAUDIOFILE_CHANNELFLAGS_ALLOFF) &&
+//                (pl_DynamicArray_GetSize (&p->formatInfo.channelCoords) != numChannels))
+//            {
+//                pl_AudioFileFormatInfo_SetNumChannels (&p->formatInfo, numChannels, PLANK_TRUE);
+//                channelCoords  = (PlankSpeakerPosition*)pl_AudioFileFormatInfo_GetChannelCoords (&p->formatInfo);
+//            }
+
+            if ((channelLabel == PLANKAUDIOFILE_CHANNEL_USE_COORDS) &&
                 (pl_DynamicArray_GetSize (&p->formatInfo.channelCoords) != numChannels))
             {
                 pl_AudioFileFormatInfo_SetNumChannels (&p->formatInfo, numChannels, PLANK_TRUE);
@@ -2778,7 +2786,6 @@ PlankResult pl_AudioFileReader_OggVorbis_OpenWithFile  (PlankAudioFileReaderRef 
     
     int err, mode;
     vorbis_info* info;
-    vorbis_comment* comment;
     
     m = pl_MemoryGlobal();
     
@@ -2841,7 +2848,6 @@ PlankResult pl_AudioFileReader_OggVorbis_OpenWithFile  (PlankAudioFileReaderRef 
     }
     
     info = ov_info (&ogg->oggVorbisFile, -1);
-    comment = ov_comment (&ogg->oggVorbisFile, -1);
     
     pl_AudioFileFormatInfo_SetNumChannels (&p->formatInfo, info->channels, PLANK_FALSE);
     pl_AudioFileFormatInfo_OggVorbis_SetDefaultLayout (&p->formatInfo);
@@ -2907,7 +2913,6 @@ PlankResult pl_AudioFileReader_OggVorbis_Close (PlankAudioFileReaderRef p)
 
     pl_Memory_Free (m, ogg);
     p->peer = PLANK_NULL;
-
 
 exit:
     return result;
@@ -4843,20 +4848,6 @@ PlankResult pl_AudioFileReader_UpdateFormat (PlankAudioFileReaderRef p, const Pl
         goto exit;
     }
     
-//    if (pl_DynamicArray_GetSize (&p->formatInfo.channelMap) !=
-//        pl_DynamicArray_GetSize ((PlankDynamicArrayRef)&newFormat->channelMap))
-//    {
-//        changed = PLANK_TRUE;
-//        goto exit;
-//    }
-//    else if (!pl_MemoryCompare (pl_DynamicArray_GetArray (&p->formatInfo.channelMap),
-//                                pl_DynamicArray_GetArray ((PlankDynamicArrayRef)&newFormat->channelMap),
-//                                pl_DynamicArray_GetSize (&p->formatInfo.channelMap) * pl_DynamicArray_GetItemSize (&p->formatInfo.channelMap)))
-//    {
-//        changed = PLANK_TRUE;
-//        goto exit;
-//    }
-    
     if (pl_DynamicArray_GetSize (&p->formatInfo.channelCoords) !=
         pl_DynamicArray_GetSize ((PlankDynamicArrayRef)&newFormat->channelCoords))
     {
@@ -4888,7 +4879,6 @@ exit:
     {
         pl_MemoryCopy (&p->formatInfo, newFormat, sizeof (PlankAudioFileFormatInfo));
         pl_DynamicArray_InitCopy (&p->formatInfo.channelIdentifiers, (PlankDynamicArrayRef)&newFormat->channelIdentifiers);
-//        pl_DynamicArray_InitCopy (&p->formatInfo.channelMap, (PlankDynamicArrayRef)&newFormat->channelMap);
         pl_DynamicArray_InitCopy (&p->formatInfo.channelCoords, (PlankDynamicArrayRef)&newFormat->channelCoords);
     }
     

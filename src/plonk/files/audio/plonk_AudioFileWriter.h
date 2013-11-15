@@ -361,7 +361,8 @@ public:
         }
         else if (format == AudioFile::FormatCAF)
         {
-            if ((result = pl_AudioFileWriter_SetFormatCAF (&peer, sizeof (SampleType) * 8, numChannels, sampleRate, this->isFloat, PLANK_LITTLEENDIAN)) != PlankResult_OK) goto exit;;
+            if ((result = pl_AudioFileWriter_SetFormatCAF (&peer, sizeof (SampleType) * 8, numChannels, sampleRate, this->isFloat, PLANK_LITTLEENDIAN)) != PlankResult_OK) goto exit;
+            this->setHeaderPad (AudioFile::CAFDefaultHeaderPad);
         }
         else if (format == AudioFile::FormatW64)
         {
@@ -431,6 +432,11 @@ public:
     {
         delete metaData;
         pl_AudioFileWriter_DeInit (&peer);
+    }
+    
+    void setHeaderPad (const UnsignedInt bytes) throw()
+    {
+        pl_AudioFileWriter_SetHeaderPad (&peer, bytes);
     }
     
     void writeHeader() throw()
@@ -641,6 +647,11 @@ public:
         bool result = this->getInternal()->openBytes (bytes);
         this->getInternal()->ready = result;
         return result;
+    }
+    
+    void setHeaderPad (const UnsignedInt bytes) throw()
+    {
+        this->getInternal()->setHeaderPad (bytes);
     }
     
     void writeHeader() throw()

@@ -117,8 +117,8 @@ PlankB pl_AudioFileWriter_IsEncodingNativeEndian (PlankAudioFileWriterRef p);
 
 PlankResult pl_AudioFileWriter_SetHeaderPad (PlankAudioFileWriterRef p, const PlankUI headerPad);
 
-PlankResult pl_AudioFileWriter_SetChannelItentifier (PlankAudioFileWriterRef p, const int channel, const PlankUI channelIdentifier);
-PlankUI pl_AudioFileWriter_GetChannelItentifier (PlankAudioFileWriterRef p, const int channel);
+PlankResult pl_AudioFileWriter_SetChannelItentifier (PlankAudioFileWriterRef p, const int channel, const PlankChannelIdentifier channelIdentifier);
+PlankChannelIdentifier pl_AudioFileWriter_GetChannelItentifier (PlankAudioFileWriterRef p, const int channel);
 
 
 /** @} */
@@ -133,8 +133,8 @@ typedef struct PlankAudioFileWriter
     
     PlankLL numFrames;
     PlankLL dataPosition;
-    PlankLL metaDataChunkPosition;
-    PlankUI headerPad;
+    PlankLL metaDataChunkPosition;  // this is the position of the chunk header of the first optional metadata chunk after
+    PlankUI headerPad;              // this is the number of bytes exlcuding the chunk header to pad the header with
     PlankUC dataOffset; // into data chunk
     PlankUC reserved1;
     PlankUC reserved2;

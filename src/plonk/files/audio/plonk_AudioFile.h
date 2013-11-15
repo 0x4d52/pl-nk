@@ -96,6 +96,11 @@ public:
         CompressionExtensible       = PLANKAUDIOFILE_WAV_COMPRESSION_EXTENSIBLE
     };
     
+    enum CAFOption
+    {
+        CAFDefaultHeaderPad         = PLANKAUDIOFILE_CAF_DEFAULTHEADERPAD
+    };
+    
     enum AIFFOption
     {
         AIFCVersion                 = PLANKAUDIOFILE_AIFC_VERSION
