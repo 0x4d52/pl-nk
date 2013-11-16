@@ -907,7 +907,7 @@ PlankResult pl_AudioFileReader_WAV_ParseFormat (PlankAudioFileReaderRef p, const
         else
             goto invalid;
         
-        pl_AudioFileFormatInfo_WAV_ChannelMaskToIdentifiers (&p->formatInfo, channelMask);
+        pl_AudioFileFormatInfo_WAV_ChannelMaskToFormat (&p->formatInfo, channelMask);
     }
     else goto invalid;
     
@@ -1861,7 +1861,7 @@ PlankResult pl_AudioFileReader_CAF_ParseChunk_chan (PlankAudioFileReaderRef p, c
     if (channelLayoutTag == PLANKAUDIOFILE_LAYOUT_USECHANNELBITMAP)
     {
         // use the bitmap / mask
-        pl_AudioFileFormatInfo_CAF_ChannelMaskToIdentifiers (&p->formatInfo, channelMask);
+        pl_AudioFileFormatInfo_CAF_ChannelMaskToFormat (&p->formatInfo, channelMask);
     }
     else if (channelLayoutTag == PLANKAUDIOFILE_LAYOUT_USECHANNELDESCRIPTIONS)
     {
@@ -1887,13 +1887,6 @@ PlankResult pl_AudioFileReader_CAF_ParseChunk_chan (PlankAudioFileReaderRef p, c
             if ((result = pl_File_ReadF  ((PlankFileRef)p->peer, &coords[2])) != PlankResult_OK) goto exit;
             
             channelIdentifiers[i] = channelLabel;
-            
-//            if ((channelFlags != PLANKAUDIOFILE_CHANNELFLAGS_ALLOFF) &&
-//                (pl_DynamicArray_GetSize (&p->formatInfo.channelCoords) != numChannels))
-//            {
-//                pl_AudioFileFormatInfo_SetNumChannels (&p->formatInfo, numChannels, PLANK_TRUE);
-//                channelCoords  = (PlankSpeakerPosition*)pl_AudioFileFormatInfo_GetChannelCoords (&p->formatInfo);
-//            }
 
             if ((channelLabel == PLANKAUDIOFILE_CHANNEL_USE_COORDS) &&
                 (pl_DynamicArray_GetSize (&p->formatInfo.channelCoords) != numChannels))
@@ -1927,7 +1920,7 @@ PlankResult pl_AudioFileReader_CAF_ParseChunk_chan (PlankAudioFileReaderRef p, c
         }
         else
         {
-            result = pl_AudioFileFormatInfo_CAF_LayoutTagToChannelMap (&p->formatInfo, channelLayoutTag);
+            result = pl_AudioFileFormatInfo_LayoutToFormatChannelIdentifiers (&p->formatInfo, channelLayoutTag);
         }
     }
     
