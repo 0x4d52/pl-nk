@@ -660,7 +660,7 @@ int AudioFileReaderInternal::getNumCuePoints() const throw()
 {
     PlankAudioFileMetaDataRef metaData = pl_AudioFileReader_GetMetaData (getPeerRef());
     
-    return metaData ? pl_DynamicArray_GetSize (pl_AudioFileMetaData_GetCuePoints (metaData)) : 0;
+    return metaData ? (int)pl_DynamicArray_GetSize (pl_AudioFileMetaData_GetCuePoints (metaData)) : 0;
 }
 
 bool AudioFileReaderInternal::getCuePointAtIndex (const int index, UnsignedInt& cueID, Text& label, LongLong& position) const throw()

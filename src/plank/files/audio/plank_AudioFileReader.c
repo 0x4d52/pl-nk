@@ -1522,7 +1522,7 @@ PlankResult pl_AudioFileReader_AIFF_ParseFormat (PlankAudioFileReaderRef p, cons
     p->formatInfo.bytesPerFrame     = (PlankI) (((bitsPerSample + (0x00000008 - 1)) & ~(0x00000008 - 1)) * numChannels / 8); // round up to whole bytes
 
     pl_AudioFileFormatInfo_SetNumChannels (&p->formatInfo, numChannels, PLANK_FALSE);
-    pl_AudioFileFormatInfo_SetSimpleLayout (&p->formatInfo);
+    pl_AudioFileFormatInfo_AIFF_SetDefaultLayout (&p->formatInfo);
     
     p->formatInfo.sampleRate        = (PlankD) pl_F802I (sampleRate);
     p->numFrames                    = (PlankLL) numFrames;
@@ -1836,7 +1836,6 @@ exit:
     return result;
 }
 
-// required for 2+ channel files
 PlankResult pl_AudioFileReader_CAF_ParseChunk_chan (PlankAudioFileReaderRef p, const PlankUI chunkLength, const PlankLL chunkEnd)
 {
     PlankResult result = PlankResult_OK;
@@ -1871,11 +1870,13 @@ PlankResult pl_AudioFileReader_CAF_ParseChunk_chan (PlankAudioFileReaderRef p, c
             goto exit;
         }
     
-        if (numDescriptions > 255)
+        if (numDescriptions > 65535)
         {
             result = PlankResult_AudioFileUnsupportedType;
             goto exit;
         }
+        
+        p->formatInfo.channelLayout = PLANKAUDIOFILE_LAYOUT_UNDEFINED;
         
         // use the descriptions
         for (i = 0; i < numDescriptions; ++i)
@@ -1917,10 +1918,12 @@ PlankResult pl_AudioFileReader_CAF_ParseChunk_chan (PlankAudioFileReaderRef p, c
         {
             for (i = 0; i < numChannels; ++i)
                 channelIdentifiers = PLANKAUDIOFILE_CHANNEL_NONE;
+            
+            p->formatInfo.channelLayout = PLANKAUDIOFILE_LAYOUT_UNDEFINED;
         }
         else
         {
-            result = pl_AudioFileFormatInfo_LayoutToFormatChannelIdentifiers (&p->formatInfo, channelLayoutTag);
+            pl_AudioFileFormatInfo_LayoutToFormatChannelIdentifiers (&p->formatInfo, channelLayoutTag);
         }
     }
     
@@ -1991,11 +1994,6 @@ PlankResult pl_AudioFileReader_CAF_ParseMetaData (PlankAudioFileReaderRef p)
         {
             if ((result = pl_AudioFileReader_CAF_ParseChunk_mark (p, readChunkLength, readChunkEnd, &stringIndices, &strings)) != PlankResult_OK) goto exit;
         }
-//        else if (readChunkID.fcc == pl_FourCharCode ("chan"))
-//        {
-//            // perhaps move to the main header parser?
-//            if ((result = pl_AudioFileReader_CAF_ParseChunk_chan (p, readChunkLength, readChunkEnd)) != PlankResult_OK) goto exit;
-//        }
         else if (readChunkID.fcc == pl_FourCharCode ("ovvw"))
         {
             goto next;

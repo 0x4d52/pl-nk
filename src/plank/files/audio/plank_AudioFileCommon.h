@@ -202,6 +202,7 @@ typedef PlankUI PlankChannelIdentifier;
 #define PLANKAUDIOFILE_WAV_SPEAKER_ANY                      0xffffffff
 
 #define PLANKAUDIOFILE_WAV_SPEAKER_VALIDBITS                0xF783FFFF
+#define PLANKAUDIOFILE_CAF_SPEAKER_VALIDBITS                0x0003FFFF
 
 
 #define PLANKAUDIOFILE_W64_RIFF_ID          PLANKIFFFILE_W64_RIFF_ID
@@ -243,15 +244,6 @@ COMM = 1296912195
 #define PLANKAUDIOFILE_AIFF_COMM_LENGTH             18
 #define PLANKAUDIOFILE_AIFC_VERSION                 0xA2805140
 #define PLANKAUDIOFILE_AIFC_COMM_LENGTH             24
-
-/* AIFF spec channel maps
-1: left
-2: left, right
-3: left, right, centre
-4: left, right, rear left, rear right
-5: left, centre, right, surround
-6: left, left centre, centre, right, right centre, surround
-*/
 
 typedef struct PlankCAFStringID {
     
@@ -426,6 +418,12 @@ typedef PlankUI PlankChannelLayout;
 #define PLANKAUDIOFILE_LAYOUT_DISCRETE                  ((147<<16) | 0)                        // needs to be ORed with the actual number of channels
 #define PLANKAUDIOFILE_LAYOUT_UNKNOWN                   0xFFFF0000                             // needs to be ORed with the actual number of channels
 
+#define PLANKAUDIOFILE_LAYOUT_OGGVORBIS_6_1           ((32768<<16) | 7) // front left, center, front right, side left, side right, rear center, LFE
+#define PLANKAUDIOFILE_LAYOUT_OGGVORBIS_7_1           ((32769<<16) | 8) // front left, center, front right, side left, side right, rear left, rear right, LFE
+#define PLANKAUDIOFILE_LAYOUT_AIFF_6_0                ((32770<<16) | 6) // left, left centre, centre, right, right centre, surround
+
+// custom ones.. non-CAF standard may need to update these in the future is CAF adds need formats
+
 #define PLANKAUDIOFILE_LAYOUT_MAXSTANDARDCHANNELS       21
 
 #define PLANKAUDIOFILEMETADATA_TEXTENCODING_ASCII   0
@@ -570,11 +568,10 @@ typedef struct PlankAudioFileFormatInfo
     PlankChannelLayout channelLayout;
     PlankDynamicArray channelIdentifiers;
     PlankDynamicArray channelCoords;
-
+    
 } PlankAudioFileFormatInfo;
 
 typedef struct PlankAudioFileFormatInfo* PlankAudioFileFormatInfoRef;
-
 
 //PlankB pl_AudioFileFormatInfo_IsChannelMapClear (const PlankAudioFileFormatInfo* info);
 
@@ -584,6 +581,7 @@ PlankChannelIdentifier* pl_AudioFileFormatInfo_GetChannelIdentifiers (PlankAudio
 PlankSpeakerPosition* pl_AudioFileFormatInfo_GetChannelCoords (PlankAudioFileFormatInfoRef formatInfo);
 PlankChannelIdentifier pl_AudioFileFormatInfo_GetChannelItentifier (PlankAudioFileFormatInfoRef formatInfo, const int channel);
 PlankResult pl_AudioFileFormatInfo_SetChannelItentifier (PlankAudioFileFormatInfoRef formatInfo, const int channel, const PlankChannelIdentifier channelIdentifier);
+PlankChannelLayout pl_AudioFileFormatInfo_GetChannelLayout (PlankAudioFileFormatInfoRef formatInfo);
 int pl_AudioFileFormatInfo_GetNumChannels (PlankAudioFileFormatInfoRef formatInfo);
 PlankResult pl_AudioFileFormatInfo_SetNumChannels (PlankAudioFileFormatInfoRef formatInfo, const int numChannels, const PlankB useCoords);
 void pl_AudioFileFormatInfo_CAF_ChannelMaskToFormat (PlankAudioFileFormatInfoRef formatInfo, const PlankUI channelMask);
@@ -592,14 +590,15 @@ const char* pl_AudioFileFormatInfoDiscreteIndexToName (const PlankUS discreteInd
 const char* pl_AudioFileFormatInfoChannelIdentifierToName (const PlankChannelIdentifier identifier);
 char* pl_AudioFileFormatInfoAbbreviateIdentifierName (const char* name, char* abbrev, const int abbrevLength);
 const char* pl_AudioFileFormatInfoChannelLayoutToName (const PlankChannelLayout channelLayoutTag);
-PlankResult pl_AudioFileFormatInfoLayoutToFormatChannelIdentifiers (PlankChannelIdentifier* channelIdentifiers, const PlankChannelLayout channelLayoutTag);
-PlankResult pl_AudioFileFormatInfo_LayoutToFormatChannelIdentifiers (PlankAudioFileFormatInfoRef formatInfo, const PlankChannelLayout channelLayoutTag);
-inline PlankB pl_AudioFileFormatInfo_ChannelIdentifiersMatchesLayout (PlankAudioFileFormatInfoRef formatInfo, const PlankChannelLayout channelLayoutTag);
+PlankB pl_AudioFileFormatInfoLayoutToFormatChannelIdentifiers (PlankChannelIdentifier* channelIdentifiers, const PlankChannelLayout channelLayoutTag);
+PlankB pl_AudioFileFormatInfo_LayoutToFormatChannelIdentifiers (PlankAudioFileFormatInfoRef formatInfo, const PlankChannelLayout channelLayoutTag);
+PlankB pl_AudioFileFormatInfo_ChannelIdentifiersMatchesLayout (PlankAudioFileFormatInfoRef formatInfo, const PlankChannelLayout channelLayoutTag);
 PlankChannelLayout pl_AudioFileFormatInfo_ChannelIdentifiersToLayout (PlankAudioFileFormatInfoRef formatInfo);
 PlankB pl_AudioFileFormatInfoIsPair (const PlankChannelIdentifier A, const PlankChannelIdentifier B);
 void pl_AudioFileFormatInfo_SetDiscreteLayout (PlankAudioFileFormatInfoRef formatInfo);
-void pl_AudioFileFormatInfo_SetSimpleLayout (PlankAudioFileFormatInfo* formatInfo);
+void pl_AudioFileFormatInfo_SetSimpleLayout (PlankAudioFileFormatInfoRef formatInfo);
 void pl_AudioFileFormatInfo_WAV_SetDefaultLayout (PlankAudioFileFormatInfoRef formatInfo);
+void pl_AudioFileFormatInfo_AIFF_SetDefaultLayout (PlankAudioFileFormatInfoRef formatInfo);
 void pl_AudioFileFormatInfo_OggVorbis_SetDefaultLayout (PlankAudioFileFormatInfoRef formatInfo);
 void pl_AudioFileFormatInfo_Opus_SetDefaultLayout (PlankAudioFileFormatInfoRef formatInfo);
 

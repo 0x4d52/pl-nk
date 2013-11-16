@@ -39,7 +39,6 @@
 #include "../../core/plank_StandardHeader.h"
 #include "plank_AudioFileCommon.h"
 
-
 const char* pl_PlankAudioFileGetFormatName (int format)
 {
     switch (format)
@@ -116,9 +115,15 @@ PlankResult pl_AudioFileFormatInfo_SetChannelItentifier (PlankAudioFileFormatInf
     PlankResult result;
     
     result = pl_DynamicArray_SetItem (&formatInfo->channelIdentifiers, channel, (void*)&channelIdentifier);
+    formatInfo->channelLayout = pl_AudioFileFormatInfo_ChannelIdentifiersToLayout (formatInfo);
     
 exit:
     return result;
+}
+
+PlankChannelLayout pl_AudioFileFormatInfo_GetChannelLayout (PlankAudioFileFormatInfoRef formatInfo)
+{
+    return formatInfo->channelLayout;
 }
 
 int pl_AudioFileFormatInfo_GetNumChannels (PlankAudioFileFormatInfoRef formatInfo)
@@ -142,6 +147,8 @@ PlankResult pl_AudioFileFormatInfo_SetNumChannels (PlankAudioFileFormatInfoRef f
             pl_DynamicArray_InitWithItemSizeAndSize (&formatInfo->channelCoords, sizeof (PlankUI), numChannels, PLANK_TRUE);
     }
     
+    formatInfo->channelLayout = pl_AudioFileFormatInfo_ChannelIdentifiersToLayout (formatInfo);
+    
     return PlankResult_OK;
 }
 
@@ -153,7 +160,8 @@ void pl_AudioFileFormatInfo_CAF_ChannelMaskToFormat (PlankAudioFileFormatInfoRef
     int channel, numChannels;
     
     numChannels = (int)pl_AudioFileFormatInfo_GetNumChannels (formatInfo);
-    
+    formatInfo->channelLayout = PLANKAUDIOFILE_LAYOUT_UNDEFINED;
+
     if (numChannels > 0)
     {
         channelIdentfiers = (PlankUI*)pl_AudioFileFormatInfo_GetChannelIdentifiers (formatInfo);
@@ -167,15 +175,20 @@ void pl_AudioFileFormatInfo_CAF_ChannelMaskToFormat (PlankAudioFileFormatInfoRef
         {
             mask = ((PlankUI)1) << bit;
             
-            if (mask & channelMask)
+            if (mask & PLANKAUDIOFILE_CAF_SPEAKER_VALIDBITS)
             {
-                channelIdentfier = bit + 1;
-                channelIdentfiers[channel] = channelIdentfier;
-                ++channel;
+                if (mask & channelMask)
+                {
+                    channelIdentfier = bit + 1;
+                    channelIdentfiers[channel] = channelIdentfier;
+                    ++channel;
+                }
             }
             
             ++bit;
         }
+        
+        formatInfo->channelLayout = pl_AudioFileFormatInfo_ChannelIdentifiersToLayout (formatInfo);
     }
 }
 
@@ -187,6 +200,7 @@ void pl_AudioFileFormatInfo_WAV_ChannelMaskToFormat (PlankAudioFileFormatInfoRef
     int channel, numChannels;
     
     numChannels = (int)pl_AudioFileFormatInfo_GetNumChannels (formatInfo);
+    formatInfo->channelLayout = PLANKAUDIOFILE_LAYOUT_UNDEFINED;
     
     if (numChannels > 0)
     {
@@ -198,18 +212,23 @@ void pl_AudioFileFormatInfo_WAV_ChannelMaskToFormat (PlankAudioFileFormatInfoRef
         channel = 0;
         
         while ((bit < 31) && (channel < numChannels))
-        {
+        {            
             mask = ((PlankUI)1) << bit;
             
-            if (mask & channelMask)
+            if (mask & PLANKAUDIOFILE_WAV_SPEAKER_VALIDBITS)
             {
-                channelIdentfier = bit + 1;
-                channelIdentfiers[channel] = channelIdentfier;
-                ++channel;
+                if (mask & channelMask)
+                {
+                    channelIdentfier = bit + 1;
+                    channelIdentfiers[channel] = channelIdentfier;
+                    ++channel;
+                }
             }
             
             ++bit;
         }
+        
+        formatInfo->channelLayout = pl_AudioFileFormatInfo_ChannelIdentifiersToLayout (formatInfo);
     }
 }
 
@@ -303,7 +322,7 @@ char* pl_AudioFileFormatInfoAbbreviateIdentifierName (const char* name, char* ab
     int i, length;
     
     i = 0;
-    length = strlen (name);
+    length = (int)strlen (name);
     
     while ((i < length) && (i < (abbrevLength - 1)))
     {
@@ -320,6 +339,9 @@ const char* pl_AudioFileFormatInfoChannelLayoutToName (const PlankChannelLayout 
 {    
     switch (channelLayoutTag)
     {
+        case PLANKAUDIOFILE_LAYOUT_OGGVORBIS_6_1: return "Vorbis 6.1";
+        case PLANKAUDIOFILE_LAYOUT_OGGVORBIS_7_1: return "Vorbis 7.1";
+
         case PLANKAUDIOFILE_LAYOUT_MONO: return "Mono";
         case PLANKAUDIOFILE_LAYOUT_STEREO: return "Stereo";
         case PLANKAUDIOFILE_LAYOUT_STEREOHEADPHONES: return "Stereo Headphones";
@@ -404,402 +426,471 @@ const char* pl_AudioFileFormatInfoChannelLayoutToName (const PlankChannelLayout 
         case PLANKAUDIOFILE_LAYOUT_DTS_6_1_D: return "DTS 6.1D";
     }
     
-    return "Unknown";
+    return "None";
 }
 
-PlankResult pl_AudioFileFormatInfoLayoutToFormatChannelIdentifiers (PlankChannelIdentifier* channelIdentifiers, const PlankChannelLayout channelLayoutTag)
+PlankB pl_AudioFileFormatInfo_LayoutToFormatChannelIdentifiers (PlankAudioFileFormatInfoRef formatInfo, const PlankChannelLayout channelLayoutTag)
 {
-    PlankResult result = PlankResult_OK;
+    PlankChannelIdentifier* channelIdentifiers;
+    int numChannels;
+    
+    numChannels = (int)pl_AudioFileFormatInfo_GetNumChannels (formatInfo);
+    
+    if (numChannels > 0)
+    {
+        channelIdentifiers = pl_AudioFileFormatInfo_GetChannelIdentifiers (formatInfo);
+        
+        if (pl_AudioFileFormatInfoLayoutToFormatChannelIdentifiers (channelIdentifiers, channelLayoutTag))
+        {
+            formatInfo->channelLayout = channelLayoutTag;
+            return PLANK_TRUE;
+        }
+    }
+    
+    return PLANK_FALSE;
+}
 
+PlankB pl_AudioFileFormatInfoLayoutToFormatChannelIdentifiers (PlankChannelIdentifier* channelIdentifiers, const PlankChannelLayout channelLayoutTag)
+{    
     switch (channelLayoutTag)
     {
+        // custom ones first so they're easier to spot...
+        case PLANKAUDIOFILE_LAYOUT_OGGVORBIS_6_1:
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_CENTER;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_SIDE_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_SIDE_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_BACK_CENTER;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_LOW_FREQUENCY;
+            break;
+        case PLANKAUDIOFILE_LAYOUT_OGGVORBIS_7_1:
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_CENTER;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_SIDE_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_SIDE_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_BACK_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_BACK_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_LOW_FREQUENCY;
+            break;
+        case PLANKAUDIOFILE_LAYOUT_AIFF_6_0:
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT_OF_CENTER;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_CENTER;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT_OF_CENTER;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_BACK_CENTER;
+            break;
+        // standard CAF
         case PLANKAUDIOFILE_LAYOUT_MONO:
-            channelIdentifiers[0] = PLANKAUDIOFILE_CHANNEL_MONO;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_MONO;
             break;
         case PLANKAUDIOFILE_LAYOUT_STEREO:
-            channelIdentifiers[0] = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
-            channelIdentifiers[1] = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
             break;
         case PLANKAUDIOFILE_LAYOUT_STEREOHEADPHONES:
-            channelIdentifiers[0] = PLANKAUDIOFILE_CHANNEL_HEADPHONES_LEFT;
-            channelIdentifiers[1] = PLANKAUDIOFILE_CHANNEL_HEADPHONES_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_HEADPHONES_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_HEADPHONES_RIGHT;
             break;
         case PLANKAUDIOFILE_LAYOUT_MATRIXSTEREO:
-            channelIdentifiers[0] = PLANKAUDIOFILE_CHANNEL_LEFT_TOTAL;
-            channelIdentifiers[1] = PLANKAUDIOFILE_CHANNEL_RIGHT_TOTAL;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_LEFT_TOTAL;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_RIGHT_TOTAL;
             break;
         case PLANKAUDIOFILE_LAYOUT_MIDSIDE:
-            channelIdentifiers[0] = PLANKAUDIOFILE_CHANNEL_MS_MID;
-            channelIdentifiers[1] = PLANKAUDIOFILE_CHANNEL_MS_SIDE;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_MS_MID;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_MS_SIDE;
             break;
         case PLANKAUDIOFILE_LAYOUT_XY:
-            channelIdentifiers[0] = PLANKAUDIOFILE_CHANNEL_XY_X;
-            channelIdentifiers[1] = PLANKAUDIOFILE_CHANNEL_XY_Y;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_XY_X;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_XY_Y;
             break;
         case PLANKAUDIOFILE_LAYOUT_BINAURAL:
-            channelIdentifiers[0] = PLANKAUDIOFILE_CHANNEL_HEADPHONES_LEFT;
-            channelIdentifiers[1] = PLANKAUDIOFILE_CHANNEL_HEADPHONES_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_HEADPHONES_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_HEADPHONES_RIGHT;
             break;
         case PLANKAUDIOFILE_LAYOUT_AMBISONIC_B_FORMAT:
-            channelIdentifiers[0] = PLANKAUDIOFILE_CHANNEL_AMBISONIC_W;
-            channelIdentifiers[1] = PLANKAUDIOFILE_CHANNEL_AMBISONIC_X;
-            channelIdentifiers[2] = PLANKAUDIOFILE_CHANNEL_AMBISONIC_Y;
-            channelIdentifiers[3] = PLANKAUDIOFILE_CHANNEL_AMBISONIC_Z;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_AMBISONIC_W;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_AMBISONIC_X;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_AMBISONIC_Y;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_AMBISONIC_Z;
             break;
         case PLANKAUDIOFILE_LAYOUT_QUADRAPHONIC:
-            channelIdentifiers[0] = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
-            channelIdentifiers[1] = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
-            channelIdentifiers[2] = PLANKAUDIOFILE_CHANNEL_BACK_LEFT;
-            channelIdentifiers[3] = PLANKAUDIOFILE_CHANNEL_BACK_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_BACK_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_BACK_RIGHT;
             break;
         case PLANKAUDIOFILE_LAYOUT_PENTAGONAL:
-            channelIdentifiers[0] = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
-            channelIdentifiers[1] = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
-            channelIdentifiers[2] = PLANKAUDIOFILE_CHANNEL_BACK_LEFT;
-            channelIdentifiers[3] = PLANKAUDIOFILE_CHANNEL_BACK_RIGHT;
-            channelIdentifiers[4] = PLANKAUDIOFILE_CHANNEL_FRONT_CENTER;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_BACK_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_BACK_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_CENTER;
             break;
         case PLANKAUDIOFILE_LAYOUT_HEXAGONAL:
-            channelIdentifiers[0] = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
-            channelIdentifiers[1] = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
-            channelIdentifiers[2] = PLANKAUDIOFILE_CHANNEL_BACK_LEFT;
-            channelIdentifiers[3] = PLANKAUDIOFILE_CHANNEL_BACK_RIGHT;
-            channelIdentifiers[4] = PLANKAUDIOFILE_CHANNEL_FRONT_CENTER;
-            channelIdentifiers[5] = PLANKAUDIOFILE_CHANNEL_BACK_CENTER;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_BACK_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_BACK_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_CENTER;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_BACK_CENTER;
             break;
         case PLANKAUDIOFILE_LAYOUT_OCTAGONAL:
-            channelIdentifiers[0] = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
-            channelIdentifiers[1] = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
-            channelIdentifiers[2] = PLANKAUDIOFILE_CHANNEL_BACK_LEFT;
-            channelIdentifiers[3] = PLANKAUDIOFILE_CHANNEL_BACK_RIGHT;
-            channelIdentifiers[4] = PLANKAUDIOFILE_CHANNEL_FRONT_CENTER;
-            channelIdentifiers[5] = PLANKAUDIOFILE_CHANNEL_BACK_CENTER;
-            channelIdentifiers[6] = PLANKAUDIOFILE_CHANNEL_SIDE_LEFT;
-            channelIdentifiers[7] = PLANKAUDIOFILE_CHANNEL_SIDE_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_BACK_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_BACK_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_CENTER;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_BACK_CENTER;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_SIDE_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_SIDE_RIGHT;
             break;
         case PLANKAUDIOFILE_LAYOUT_CUBE:
-            channelIdentifiers[0] = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
-            channelIdentifiers[1] = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
-            channelIdentifiers[2] = PLANKAUDIOFILE_CHANNEL_BACK_LEFT;
-            channelIdentifiers[3] = PLANKAUDIOFILE_CHANNEL_BACK_RIGHT;
-            channelIdentifiers[4] = PLANKAUDIOFILE_CHANNEL_TOP_FRONT_LEFT;
-            channelIdentifiers[5] = PLANKAUDIOFILE_CHANNEL_TOP_FRONT_RIGHT;
-            channelIdentifiers[6] = PLANKAUDIOFILE_CHANNEL_TOP_BACK_LEFT;
-            channelIdentifiers[7] = PLANKAUDIOFILE_CHANNEL_TOP_BACK_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_BACK_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_BACK_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_TOP_FRONT_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_TOP_FRONT_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_TOP_BACK_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_TOP_BACK_RIGHT;
             break;
         case PLANKAUDIOFILE_LAYOUT_MPEG_3_0_A:
-            channelIdentifiers[0] = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
-            channelIdentifiers[1] = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
-            channelIdentifiers[2] = PLANKAUDIOFILE_CHANNEL_FRONT_CENTER;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_CENTER;
             break;
         case PLANKAUDIOFILE_LAYOUT_MPEG_3_0_B:
-            channelIdentifiers[0] = PLANKAUDIOFILE_CHANNEL_FRONT_CENTER;
-            channelIdentifiers[1] = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
-            channelIdentifiers[2] = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_CENTER;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
             break;
         case PLANKAUDIOFILE_LAYOUT_MPEG_4_0_A:
-            channelIdentifiers[0] = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
-            channelIdentifiers[1] = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
-            channelIdentifiers[2] = PLANKAUDIOFILE_CHANNEL_FRONT_CENTER;
-            channelIdentifiers[3] = PLANKAUDIOFILE_CHANNEL_BACK_CENTER;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_CENTER;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_BACK_CENTER;
             break;
         case PLANKAUDIOFILE_LAYOUT_MPEG_4_0_B:
-            channelIdentifiers[0] = PLANKAUDIOFILE_CHANNEL_FRONT_CENTER;
-            channelIdentifiers[1] = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
-            channelIdentifiers[2] = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
-            channelIdentifiers[3] = PLANKAUDIOFILE_CHANNEL_BACK_CENTER;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_CENTER;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_BACK_CENTER;
             break;
         case PLANKAUDIOFILE_LAYOUT_MPEG_5_0_A:
-            channelIdentifiers[0] = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
-            channelIdentifiers[1] = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
-            channelIdentifiers[2] = PLANKAUDIOFILE_CHANNEL_FRONT_CENTER;
-            channelIdentifiers[3] = PLANKAUDIOFILE_CHANNEL_BACK_LEFT;
-            channelIdentifiers[4] = PLANKAUDIOFILE_CHANNEL_BACK_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_CENTER;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_BACK_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_BACK_RIGHT;
             break;
         case PLANKAUDIOFILE_LAYOUT_MPEG_5_0_B:
-            channelIdentifiers[0] = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
-            channelIdentifiers[1] = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
-            channelIdentifiers[2] = PLANKAUDIOFILE_CHANNEL_BACK_LEFT;
-            channelIdentifiers[3] = PLANKAUDIOFILE_CHANNEL_BACK_RIGHT;
-            channelIdentifiers[4] = PLANKAUDIOFILE_CHANNEL_FRONT_CENTER;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_BACK_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_BACK_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_CENTER;
             break;
         case PLANKAUDIOFILE_LAYOUT_MPEG_5_0_C:
-            channelIdentifiers[0] = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
-            channelIdentifiers[1] = PLANKAUDIOFILE_CHANNEL_FRONT_CENTER;
-            channelIdentifiers[2] = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
-            channelIdentifiers[3] = PLANKAUDIOFILE_CHANNEL_BACK_LEFT;
-            channelIdentifiers[4] = PLANKAUDIOFILE_CHANNEL_BACK_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_CENTER;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_BACK_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_BACK_RIGHT;
             break;
         case PLANKAUDIOFILE_LAYOUT_MPEG_5_0_D:
-            channelIdentifiers[0] = PLANKAUDIOFILE_CHANNEL_FRONT_CENTER;
-            channelIdentifiers[1] = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
-            channelIdentifiers[2] = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
-            channelIdentifiers[3] = PLANKAUDIOFILE_CHANNEL_BACK_LEFT;
-            channelIdentifiers[4] = PLANKAUDIOFILE_CHANNEL_BACK_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_CENTER;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_BACK_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_BACK_RIGHT;
             break;
         case PLANKAUDIOFILE_LAYOUT_MPEG_5_1_A:
-            channelIdentifiers[0] = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
-            channelIdentifiers[1] = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
-            channelIdentifiers[2] = PLANKAUDIOFILE_CHANNEL_FRONT_CENTER;
-            channelIdentifiers[3] = PLANKAUDIOFILE_CHANNEL_LOW_FREQUENCY;
-            channelIdentifiers[4] = PLANKAUDIOFILE_CHANNEL_BACK_LEFT;
-            channelIdentifiers[5] = PLANKAUDIOFILE_CHANNEL_BACK_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_CENTER;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_LOW_FREQUENCY;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_BACK_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_BACK_RIGHT;
             break;
         case PLANKAUDIOFILE_LAYOUT_MPEG_5_1_B:
-            channelIdentifiers[0] = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
-            channelIdentifiers[1] = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
-            channelIdentifiers[2] = PLANKAUDIOFILE_CHANNEL_BACK_LEFT;
-            channelIdentifiers[3] = PLANKAUDIOFILE_CHANNEL_BACK_RIGHT;
-            channelIdentifiers[4] = PLANKAUDIOFILE_CHANNEL_FRONT_CENTER;
-            channelIdentifiers[5] = PLANKAUDIOFILE_CHANNEL_LOW_FREQUENCY;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_BACK_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_BACK_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_CENTER;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_LOW_FREQUENCY;
             break;
         case PLANKAUDIOFILE_LAYOUT_MPEG_5_1_C:
-            channelIdentifiers[0] = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
-            channelIdentifiers[1] = PLANKAUDIOFILE_CHANNEL_FRONT_CENTER;
-            channelIdentifiers[2] = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
-            channelIdentifiers[3] = PLANKAUDIOFILE_CHANNEL_BACK_LEFT;
-            channelIdentifiers[4] = PLANKAUDIOFILE_CHANNEL_BACK_RIGHT;
-            channelIdentifiers[5] = PLANKAUDIOFILE_CHANNEL_LOW_FREQUENCY;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_CENTER;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_BACK_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_BACK_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_LOW_FREQUENCY;
             break;
         case PLANKAUDIOFILE_LAYOUT_MPEG_5_1_D:
-            channelIdentifiers[0] = PLANKAUDIOFILE_CHANNEL_FRONT_CENTER;
-            channelIdentifiers[1] = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
-            channelIdentifiers[2] = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
-            channelIdentifiers[3] = PLANKAUDIOFILE_CHANNEL_BACK_LEFT;
-            channelIdentifiers[4] = PLANKAUDIOFILE_CHANNEL_BACK_RIGHT;
-            channelIdentifiers[5] = PLANKAUDIOFILE_CHANNEL_LOW_FREQUENCY;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_CENTER;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_BACK_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_BACK_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_LOW_FREQUENCY;
             break;
         case PLANKAUDIOFILE_LAYOUT_MPEG_6_1_A:
-            channelIdentifiers[0] = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
-            channelIdentifiers[1] = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
-            channelIdentifiers[2] = PLANKAUDIOFILE_CHANNEL_FRONT_CENTER;
-            channelIdentifiers[3] = PLANKAUDIOFILE_CHANNEL_LOW_FREQUENCY;
-            channelIdentifiers[4] = PLANKAUDIOFILE_CHANNEL_BACK_LEFT;
-            channelIdentifiers[5] = PLANKAUDIOFILE_CHANNEL_BACK_RIGHT;
-            channelIdentifiers[6] = PLANKAUDIOFILE_CHANNEL_BACK_CENTER;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_CENTER;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_LOW_FREQUENCY;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_BACK_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_BACK_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_BACK_CENTER;
             break;
         case PLANKAUDIOFILE_LAYOUT_MPEG_7_1_A:
-            channelIdentifiers[0] = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
-            channelIdentifiers[1] = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
-            channelIdentifiers[2] = PLANKAUDIOFILE_CHANNEL_FRONT_CENTER;
-            channelIdentifiers[3] = PLANKAUDIOFILE_CHANNEL_LOW_FREQUENCY;
-            channelIdentifiers[4] = PLANKAUDIOFILE_CHANNEL_BACK_LEFT;
-            channelIdentifiers[5] = PLANKAUDIOFILE_CHANNEL_BACK_RIGHT;
-            channelIdentifiers[6] = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT_OF_CENTER;
-            channelIdentifiers[7] = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT_OF_CENTER;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_CENTER;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_LOW_FREQUENCY;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_BACK_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_BACK_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT_OF_CENTER;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT_OF_CENTER;
             break;
         case PLANKAUDIOFILE_LAYOUT_MPEG_7_1_B:
-            channelIdentifiers[0] = PLANKAUDIOFILE_CHANNEL_FRONT_CENTER;
-            channelIdentifiers[1] = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT_OF_CENTER;
-            channelIdentifiers[2] = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT_OF_CENTER;
-            channelIdentifiers[3] = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
-            channelIdentifiers[4] = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
-            channelIdentifiers[5] = PLANKAUDIOFILE_CHANNEL_BACK_LEFT;
-            channelIdentifiers[6] = PLANKAUDIOFILE_CHANNEL_BACK_RIGHT;
-            channelIdentifiers[7] = PLANKAUDIOFILE_CHANNEL_LOW_FREQUENCY;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_CENTER;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT_OF_CENTER;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT_OF_CENTER;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_BACK_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_BACK_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_LOW_FREQUENCY;
             break;
         case PLANKAUDIOFILE_LAYOUT_MPEG_7_1_C:
-            channelIdentifiers[0] = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
-            channelIdentifiers[1] = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
-            channelIdentifiers[2] = PLANKAUDIOFILE_CHANNEL_FRONT_CENTER;
-            channelIdentifiers[3] = PLANKAUDIOFILE_CHANNEL_LOW_FREQUENCY;
-            channelIdentifiers[4] = PLANKAUDIOFILE_CHANNEL_BACK_LEFT;
-            channelIdentifiers[5] = PLANKAUDIOFILE_CHANNEL_BACK_RIGHT;
-            channelIdentifiers[6] = PLANKAUDIOFILE_CHANNEL_REAR_SURROUND_LEFT;
-            channelIdentifiers[7] = PLANKAUDIOFILE_CHANNEL_REAR_SURROUND_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_CENTER;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_LOW_FREQUENCY;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_BACK_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_BACK_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_REAR_SURROUND_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_REAR_SURROUND_RIGHT;
             break;
         case PLANKAUDIOFILE_LAYOUT_EMAGIC_DEFAULT_7_1:
-            channelIdentifiers[0] = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
-            channelIdentifiers[1] = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
-            channelIdentifiers[2] = PLANKAUDIOFILE_CHANNEL_BACK_LEFT;
-            channelIdentifiers[3] = PLANKAUDIOFILE_CHANNEL_BACK_RIGHT;
-            channelIdentifiers[4] = PLANKAUDIOFILE_CHANNEL_FRONT_CENTER;
-            channelIdentifiers[5] = PLANKAUDIOFILE_CHANNEL_LOW_FREQUENCY;
-            channelIdentifiers[6] = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT_OF_CENTER;
-            channelIdentifiers[7] = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT_OF_CENTER;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_BACK_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_BACK_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_CENTER;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_LOW_FREQUENCY;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT_OF_CENTER;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT_OF_CENTER;
             break;
         case PLANKAUDIOFILE_LAYOUT_SMPTE_DTV:
-            channelIdentifiers[0] = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
-            channelIdentifiers[1] = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
-            channelIdentifiers[2] = PLANKAUDIOFILE_CHANNEL_FRONT_CENTER;
-            channelIdentifiers[3] = PLANKAUDIOFILE_CHANNEL_LOW_FREQUENCY;
-            channelIdentifiers[4] = PLANKAUDIOFILE_CHANNEL_BACK_LEFT;
-            channelIdentifiers[5] = PLANKAUDIOFILE_CHANNEL_BACK_RIGHT;
-            channelIdentifiers[6] = PLANKAUDIOFILE_CHANNEL_LEFT_TOTAL;
-            channelIdentifiers[7] = PLANKAUDIOFILE_CHANNEL_RIGHT_TOTAL;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_CENTER;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_LOW_FREQUENCY;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_BACK_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_BACK_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_LEFT_TOTAL;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_RIGHT_TOTAL;
             break;
         case PLANKAUDIOFILE_LAYOUT_ITU_2_1:
-            channelIdentifiers[0] = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
-            channelIdentifiers[1] = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
-            channelIdentifiers[2] = PLANKAUDIOFILE_CHANNEL_BACK_CENTER;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_BACK_CENTER;
             break;
         case PLANKAUDIOFILE_LAYOUT_ITU_2_2:
-            channelIdentifiers[0] = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
-            channelIdentifiers[1] = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
-            channelIdentifiers[2] = PLANKAUDIOFILE_CHANNEL_BACK_LEFT;
-            channelIdentifiers[3] = PLANKAUDIOFILE_CHANNEL_BACK_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_BACK_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_BACK_RIGHT;
             break;
         case PLANKAUDIOFILE_LAYOUT_DVD_4:
-            channelIdentifiers[0] = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
-            channelIdentifiers[1] = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
-            channelIdentifiers[2] = PLANKAUDIOFILE_CHANNEL_LOW_FREQUENCY;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_LOW_FREQUENCY;
             break;
         case PLANKAUDIOFILE_LAYOUT_DVD_5:
-            channelIdentifiers[0] = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
-            channelIdentifiers[1] = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
-            channelIdentifiers[2] = PLANKAUDIOFILE_CHANNEL_LOW_FREQUENCY;
-            channelIdentifiers[3] = PLANKAUDIOFILE_CHANNEL_BACK_CENTER;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_LOW_FREQUENCY;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_BACK_CENTER;
             break;
         case PLANKAUDIOFILE_LAYOUT_DVD_6:
-            channelIdentifiers[0] = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
-            channelIdentifiers[1] = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
-            channelIdentifiers[2] = PLANKAUDIOFILE_CHANNEL_LOW_FREQUENCY;
-            channelIdentifiers[3] = PLANKAUDIOFILE_CHANNEL_BACK_LEFT;
-            channelIdentifiers[4] = PLANKAUDIOFILE_CHANNEL_BACK_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_LOW_FREQUENCY;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_BACK_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_BACK_RIGHT;
             break;
         case PLANKAUDIOFILE_LAYOUT_DVD_10:
-            channelIdentifiers[0] = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
-            channelIdentifiers[1] = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
-            channelIdentifiers[2] = PLANKAUDIOFILE_CHANNEL_FRONT_CENTER;
-            channelIdentifiers[3] = PLANKAUDIOFILE_CHANNEL_LOW_FREQUENCY;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_CENTER;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_LOW_FREQUENCY;
             break;
         case PLANKAUDIOFILE_LAYOUT_DVD_11:
-            channelIdentifiers[0] = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
-            channelIdentifiers[1] = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
-            channelIdentifiers[2] = PLANKAUDIOFILE_CHANNEL_FRONT_CENTER;
-            channelIdentifiers[3] = PLANKAUDIOFILE_CHANNEL_LOW_FREQUENCY;
-            channelIdentifiers[4] = PLANKAUDIOFILE_CHANNEL_BACK_CENTER;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_CENTER;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_LOW_FREQUENCY;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_BACK_CENTER;
             break;
         case PLANKAUDIOFILE_LAYOUT_DVD_18:
-            channelIdentifiers[0] = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
-            channelIdentifiers[1] = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
-            channelIdentifiers[2] = PLANKAUDIOFILE_CHANNEL_BACK_LEFT;
-            channelIdentifiers[3] = PLANKAUDIOFILE_CHANNEL_BACK_RIGHT;
-            channelIdentifiers[4] = PLANKAUDIOFILE_CHANNEL_LOW_FREQUENCY;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_BACK_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_BACK_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_LOW_FREQUENCY;
             break;
         case PLANKAUDIOFILE_LAYOUT_AUDIOUNIT_6_0:
-            channelIdentifiers[0] = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
-            channelIdentifiers[1] = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
-            channelIdentifiers[2] = PLANKAUDIOFILE_CHANNEL_BACK_LEFT;
-            channelIdentifiers[3] = PLANKAUDIOFILE_CHANNEL_BACK_RIGHT;
-            channelIdentifiers[4] = PLANKAUDIOFILE_CHANNEL_FRONT_CENTER;
-            channelIdentifiers[5] = PLANKAUDIOFILE_CHANNEL_BACK_CENTER;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_BACK_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_BACK_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_CENTER;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_BACK_CENTER;
             break;
         case PLANKAUDIOFILE_LAYOUT_AUDIOUNIT_7_0:
-            channelIdentifiers[0] = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
-            channelIdentifiers[1] = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
-            channelIdentifiers[2] = PLANKAUDIOFILE_CHANNEL_BACK_LEFT;
-            channelIdentifiers[3] = PLANKAUDIOFILE_CHANNEL_BACK_RIGHT;
-            channelIdentifiers[4] = PLANKAUDIOFILE_CHANNEL_FRONT_CENTER;
-            channelIdentifiers[5] = PLANKAUDIOFILE_CHANNEL_REAR_SURROUND_LEFT;
-            channelIdentifiers[6] = PLANKAUDIOFILE_CHANNEL_REAR_SURROUND_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_BACK_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_BACK_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_CENTER;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_REAR_SURROUND_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_REAR_SURROUND_RIGHT;
             break;
         case PLANKAUDIOFILE_LAYOUT_AUDIOUNIT_7_0_FRONT:
-            channelIdentifiers[0] = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
-            channelIdentifiers[1] = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
-            channelIdentifiers[2] = PLANKAUDIOFILE_CHANNEL_BACK_LEFT;
-            channelIdentifiers[3] = PLANKAUDIOFILE_CHANNEL_BACK_RIGHT;
-            channelIdentifiers[4] = PLANKAUDIOFILE_CHANNEL_FRONT_CENTER;
-            channelIdentifiers[5] = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT_OF_CENTER;
-            channelIdentifiers[6] = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT_OF_CENTER;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_BACK_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_BACK_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_CENTER;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT_OF_CENTER;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT_OF_CENTER;
             break;
         case PLANKAUDIOFILE_LAYOUT_AAC_6_0:
-            channelIdentifiers[0] = PLANKAUDIOFILE_CHANNEL_FRONT_CENTER;
-            channelIdentifiers[1] = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
-            channelIdentifiers[2] = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
-            channelIdentifiers[3] = PLANKAUDIOFILE_CHANNEL_BACK_LEFT;
-            channelIdentifiers[4] = PLANKAUDIOFILE_CHANNEL_BACK_RIGHT;
-            channelIdentifiers[5] = PLANKAUDIOFILE_CHANNEL_BACK_CENTER;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_CENTER;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_BACK_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_BACK_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_BACK_CENTER;
             break;
         case PLANKAUDIOFILE_LAYOUT_AAC_6_1:
-            channelIdentifiers[0] = PLANKAUDIOFILE_CHANNEL_FRONT_CENTER;
-            channelIdentifiers[1] = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
-            channelIdentifiers[2] = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
-            channelIdentifiers[3] = PLANKAUDIOFILE_CHANNEL_BACK_LEFT;
-            channelIdentifiers[4] = PLANKAUDIOFILE_CHANNEL_BACK_RIGHT;
-            channelIdentifiers[5] = PLANKAUDIOFILE_CHANNEL_BACK_CENTER;
-            channelIdentifiers[6] = PLANKAUDIOFILE_CHANNEL_LOW_FREQUENCY;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_CENTER;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_BACK_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_BACK_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_BACK_CENTER;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_LOW_FREQUENCY;
             break;
         case PLANKAUDIOFILE_LAYOUT_AAC_7_0:
-            channelIdentifiers[0] = PLANKAUDIOFILE_CHANNEL_FRONT_CENTER;
-            channelIdentifiers[1] = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
-            channelIdentifiers[2] = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
-            channelIdentifiers[3] = PLANKAUDIOFILE_CHANNEL_BACK_LEFT;
-            channelIdentifiers[4] = PLANKAUDIOFILE_CHANNEL_BACK_RIGHT;
-            channelIdentifiers[5] = PLANKAUDIOFILE_CHANNEL_REAR_SURROUND_LEFT;
-            channelIdentifiers[6] = PLANKAUDIOFILE_CHANNEL_REAR_SURROUND_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_CENTER;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_BACK_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_BACK_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_REAR_SURROUND_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_REAR_SURROUND_RIGHT;
             break;
         case PLANKAUDIOFILE_LAYOUT_AAC_OCTAGONAL:
-            channelIdentifiers[0] = PLANKAUDIOFILE_CHANNEL_FRONT_CENTER;
-            channelIdentifiers[1] = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
-            channelIdentifiers[2] = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
-            channelIdentifiers[3] = PLANKAUDIOFILE_CHANNEL_BACK_LEFT;
-            channelIdentifiers[4] = PLANKAUDIOFILE_CHANNEL_BACK_RIGHT;
-            channelIdentifiers[5] = PLANKAUDIOFILE_CHANNEL_REAR_SURROUND_LEFT;
-            channelIdentifiers[6] = PLANKAUDIOFILE_CHANNEL_REAR_SURROUND_RIGHT;
-            channelIdentifiers[7] = PLANKAUDIOFILE_CHANNEL_BACK_CENTER;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_CENTER;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_BACK_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_BACK_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_REAR_SURROUND_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_REAR_SURROUND_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_BACK_CENTER;
             break;
         case PLANKAUDIOFILE_LAYOUT_TMH_10_2_STD:
-            channelIdentifiers[ 0] = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
-            channelIdentifiers[ 1] = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
-            channelIdentifiers[ 2] = PLANKAUDIOFILE_CHANNEL_FRONT_CENTER;
-            channelIdentifiers[ 3] = PLANKAUDIOFILE_CHANNEL_TOP_FRONT_CENTER;
-            channelIdentifiers[ 4] = PLANKAUDIOFILE_CHANNEL_REAR_SURROUND_LEFT;
-            channelIdentifiers[ 5] = PLANKAUDIOFILE_CHANNEL_REAR_SURROUND_RIGHT;
-            channelIdentifiers[ 6] = PLANKAUDIOFILE_CHANNEL_BACK_LEFT;
-            channelIdentifiers[ 7] = PLANKAUDIOFILE_CHANNEL_BACK_RIGHT;
-            channelIdentifiers[ 8] = PLANKAUDIOFILE_CHANNEL_TOP_FRONT_LEFT;
-            channelIdentifiers[ 9] = PLANKAUDIOFILE_CHANNEL_TOP_FRONT_RIGHT;
-            channelIdentifiers[10] = PLANKAUDIOFILE_CHANNEL_LEFT_WIDE;
-            channelIdentifiers[11] = PLANKAUDIOFILE_CHANNEL_RIGHT_WIDE;
-            channelIdentifiers[12] = PLANKAUDIOFILE_CHANNEL_CENTERSURROUND_DIRECT;
-            channelIdentifiers[13] = PLANKAUDIOFILE_CHANNEL_BACK_CENTER;
-            channelIdentifiers[14] = PLANKAUDIOFILE_CHANNEL_LOW_FREQUENCY;
-            channelIdentifiers[15] = PLANKAUDIOFILE_CHANNEL_LOW_FREQUENCY_EXTRA;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_CENTER;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_TOP_FRONT_CENTER;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_REAR_SURROUND_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_REAR_SURROUND_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_BACK_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_BACK_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_TOP_FRONT_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_TOP_FRONT_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_LEFT_WIDE;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_RIGHT_WIDE;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_CENTERSURROUND_DIRECT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_BACK_CENTER;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_LOW_FREQUENCY;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_LOW_FREQUENCY_EXTRA;
             break;
         case PLANKAUDIOFILE_LAYOUT_TMH_10_2_FULL:
-            channelIdentifiers[ 0] = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
-            channelIdentifiers[ 1] = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
-            channelIdentifiers[ 2] = PLANKAUDIOFILE_CHANNEL_FRONT_CENTER;
-            channelIdentifiers[ 3] = PLANKAUDIOFILE_CHANNEL_TOP_FRONT_CENTER;
-            channelIdentifiers[ 4] = PLANKAUDIOFILE_CHANNEL_REAR_SURROUND_LEFT;
-            channelIdentifiers[ 5] = PLANKAUDIOFILE_CHANNEL_REAR_SURROUND_RIGHT;
-            channelIdentifiers[ 6] = PLANKAUDIOFILE_CHANNEL_BACK_LEFT;
-            channelIdentifiers[ 7] = PLANKAUDIOFILE_CHANNEL_BACK_RIGHT;
-            channelIdentifiers[ 8] = PLANKAUDIOFILE_CHANNEL_TOP_FRONT_LEFT;
-            channelIdentifiers[ 9] = PLANKAUDIOFILE_CHANNEL_TOP_FRONT_RIGHT;
-            channelIdentifiers[10] = PLANKAUDIOFILE_CHANNEL_LEFT_WIDE;
-            channelIdentifiers[11] = PLANKAUDIOFILE_CHANNEL_RIGHT_WIDE;
-            channelIdentifiers[12] = PLANKAUDIOFILE_CHANNEL_CENTERSURROUND_DIRECT;
-            channelIdentifiers[13] = PLANKAUDIOFILE_CHANNEL_BACK_CENTER;
-            channelIdentifiers[14] = PLANKAUDIOFILE_CHANNEL_LOW_FREQUENCY;
-            channelIdentifiers[15] = PLANKAUDIOFILE_CHANNEL_LOW_FREQUENCY_EXTRA;
-            channelIdentifiers[16] = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT_OF_CENTER;
-            channelIdentifiers[17] = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT_OF_CENTER;
-            channelIdentifiers[18] = PLANKAUDIOFILE_CHANNEL_HEARING_IMPAIRED;  // HI=HearingImpaired???
-            channelIdentifiers[19] = PLANKAUDIOFILE_CHANNEL_NARRATION;         // VI=VisionImpaired???
-            channelIdentifiers[20] = PLANKAUDIOFILE_CHANNEL_HAPTIC;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_CENTER;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_TOP_FRONT_CENTER;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_REAR_SURROUND_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_REAR_SURROUND_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_BACK_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_BACK_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_TOP_FRONT_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_TOP_FRONT_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_LEFT_WIDE;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_RIGHT_WIDE;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_CENTERSURROUND_DIRECT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_BACK_CENTER;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_LOW_FREQUENCY;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_LOW_FREQUENCY_EXTRA;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT_OF_CENTER;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT_OF_CENTER;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_HEARING_IMPAIRED;  // HI=HearingImpaired???
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_NARRATION;         // VI=VisionImpaired???
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_HAPTIC;
             break;
         case PLANKAUDIOFILE_LAYOUT_AC3_1_0_1:
-            // C LFE
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_CENTER;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_LOW_FREQUENCY;
             break;
         case PLANKAUDIOFILE_LAYOUT_AC3_3_0:
-            // L C R
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_CENTER;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
             break;
         case PLANKAUDIOFILE_LAYOUT_AC3_3_1:
-            // L C R Cs
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_CENTER;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_BACK_CENTER;
             break;
         case PLANKAUDIOFILE_LAYOUT_AC3_3_0_1:
-            // L C R LFE
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_CENTER;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_LOW_FREQUENCY;
             break;
         case PLANKAUDIOFILE_LAYOUT_AC3_2_1_1:
-            // L R Cs LFE
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_BACK_CENTER;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_LOW_FREQUENCY;
             break;
         case PLANKAUDIOFILE_LAYOUT_AC3_3_1_1:
-            // L C R Cs LFE
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_CENTER;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_BACK_CENTER;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_LOW_FREQUENCY;
             break;
         case PLANKAUDIOFILE_LAYOUT_EAC_6_0_A:
-            // L C R Ls Rs Cs
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_CENTER;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_BACK_LEFT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_BACK_RIGHT;
+            *channelIdentifiers++ = PLANKAUDIOFILE_CHANNEL_BACK_CENTER;
             break;
         case PLANKAUDIOFILE_LAYOUT_EAC_7_0_A:
             // L C R Ls Rs Rls Rrs
@@ -882,47 +973,188 @@ PlankResult pl_AudioFileFormatInfoLayoutToFormatChannelIdentifiers (PlankChannel
         case PLANKAUDIOFILE_LAYOUT_DTS_6_1_D:
             // C L R Ls Rs LFE Cs
             break;
+        default:
+            return PLANK_FALSE;
     }
     
-exit:
-    return result;
+    return PLANK_TRUE;
 }
 
-PlankResult pl_AudioFileFormatInfo_LayoutToFormatChannelIdentifiers (PlankAudioFileFormatInfoRef formatInfo, const PlankChannelLayout channelLayoutTag)
+PlankB pl_AudioFileFormatInfo_ChannelIdentifiersAreDiscrete (PlankAudioFileFormatInfoRef formatInfo)
 {
-    PlankChannelIdentifier* channelIdentifiers;    
-    channelIdentifiers = (PlankChannelIdentifier*)pl_AudioFileFormatInfo_GetChannelIdentifiers (formatInfo);
-    return pl_AudioFileFormatInfoLayoutToFormatChannelIdentifiers (channelIdentifiers, channelLayoutTag);
+    PlankChannelIdentifier* channelIdentifiers;
+    PlankUI numChannels, i;
+        
+    numChannels = (PlankUI)pl_AudioFileFormatInfo_GetNumChannels (formatInfo);
+    
+    if (!numChannels)
+        return PLANK_FALSE;
+
+    channelIdentifiers = pl_AudioFileFormatInfo_GetChannelIdentifiers (formatInfo);
+
+    for (i = 0; i < numChannels; ++i)
+    {
+        if (channelIdentifiers[i] != (PLANKAUDIOFILE_CHANNEL_DISCRETE_N & i))
+            return PLANK_FALSE;
+    }
+    
+    return PLANK_TRUE;
 }
 
-inline PlankB pl_AudioFileFormatInfo_ChannelIdentifiersMatchesLayout (PlankAudioFileFormatInfoRef formatInfo, const PlankChannelLayout channelLayoutTag)
+PlankB pl_AudioFileFormatInfo_ChannelIdentifiersMatchesLayout (PlankAudioFileFormatInfoRef formatInfo, const PlankChannelLayout channelLayoutTag)
 {
     PlankChannelIdentifier standardLayout[PLANKAUDIOFILE_LAYOUT_MAXSTANDARDCHANNELS];
     PlankChannelIdentifier* channelIdentifiers;
     int numChannels;
-    
-    pl_AudioFileFormatInfoLayoutToFormatChannelIdentifiers (channelIdentifiers, channelLayoutTag);
+
+    pl_MemoryZero (standardLayout, PLANKAUDIOFILE_LAYOUT_MAXSTANDARDCHANNELS * sizeof (PlankChannelIdentifier));
+    pl_AudioFileFormatInfoLayoutToFormatChannelIdentifiers (standardLayout, channelLayoutTag);
+
     numChannels = pl_AudioFileFormatInfo_GetNumChannels (formatInfo);
     channelIdentifiers = pl_AudioFileFormatInfo_GetChannelIdentifiers (formatInfo);
-    
+        
     return pl_MemoryCompare (standardLayout, channelIdentifiers, numChannels * sizeof (PlankChannelIdentifier));
 }
 
-
+// evil macro but less error prone that type all this boilerplate!
 #define PLANKAUDIOFILE_CHECKLAYOUT(FORMAT,LAYOUT) if (pl_AudioFileFormatInfo_ChannelIdentifiersMatchesLayout (FORMAT, LAYOUT)) return LAYOUT;
 
 PlankChannelLayout pl_AudioFileFormatInfo_ChannelIdentifiersToLayout (PlankAudioFileFormatInfoRef formatInfo)
 {
-    PlankChannelLayout layout;
-        
+    PlankUI numChannels;
+    
+    numChannels = (PlankUI)pl_AudioFileFormatInfo_GetNumChannels (formatInfo);
+
+    // need to check for duplicates
+    
     PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_MONO) else
     PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_STEREO) else
-        // etc
-    layout = PLANKAUDIOFILE_LAYOUT_UNKNOWN | (PlankUI)pl_AudioFileFormatInfo_GetNumChannels (formatInfo);
-    
-    /// but need to check the discreter ons.
-    
-    return layout;
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_STEREOHEADPHONES) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_MATRIXSTEREO) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_MIDSIDE) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_XY) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_BINAURAL) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_AMBISONIC_B_FORMAT) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_QUADRAPHONIC) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_PENTAGONAL) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_HEXAGONAL) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_OCTAGONAL) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_CUBE) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_MPEG_1_0) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_MPEG_2_0) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_MPEG_3_0_A) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_MPEG_3_0_B) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_MPEG_4_0_A) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_MPEG_4_0_B) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_MPEG_5_0_A) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_MPEG_5_0_B) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_MPEG_5_0_C) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_MPEG_5_0_D) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_MPEG_5_1_A) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_MPEG_5_1_B) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_MPEG_5_1_C) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_MPEG_5_1_D) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_MPEG_6_1_A) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_MPEG_7_1_A) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_MPEG_7_1_B) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_MPEG_7_1_C) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_EMAGIC_DEFAULT_7_1) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_SMPTE_DTV) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_ITU_1_0) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_ITU_2_0) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_ITU_2_1) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_ITU_2_2) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_ITU_3_0) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_ITU_3_1) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_ITU_3_2) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_ITU_3_2_1) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_ITU_3_4_1) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_DVD_0) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_DVD_1) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_DVD_2) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_DVD_3) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_DVD_4) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_DVD_5) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_DVD_6) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_DVD_7) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_DVD_8) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_DVD_9) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_DVD_10) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_DVD_11) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_DVD_12) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_DVD_13) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_DVD_14) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_DVD_15) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_DVD_16) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_DVD_17) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_DVD_18) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_DVD_19) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_DVD_20) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_AUDIOUNIT_4) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_AUDIOUNIT_5) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_AUDIOUNIT_6) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_AUDIOUNIT_8) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_AUDIOUNIT_5_0) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_AUDIOUNIT_6_0) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_AUDIOUNIT_7_0) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_AUDIOUNIT_7_0_FRONT) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_AUDIOUNIT_5_1) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_AUDIOUNIT_6_1) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_AUDIOUNIT_7_1) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_AUDIOUNIT_7_1_FRONT) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_AAC_3_0) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_AAC_QUADRAPHONIC) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_AAC_4_0) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_AAC_5_0) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_AAC_5_1) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_AAC_6_0) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_AAC_6_1) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_AAC_7_0) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_AAC_7_1) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_AAC_OCTAGONAL) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_TMH_10_2_STD) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_TMH_10_2_FULL) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_AC3_1_0_1) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_AC3_3_0) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_AC3_3_1) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_AC3_3_0_1) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_AC3_2_1_1) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_AC3_3_1_1) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_EAC_6_0_A) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_EAC_7_0_A) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_EAC3_6_1_A) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_EAC3_6_1_B) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_EAC3_6_1_C) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_EAC3_7_1_A) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_EAC3_7_1_B) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_EAC3_7_1_C) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_EAC3_7_1_D) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_EAC3_7_1_E) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_EAC3_7_1_F) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_EAC3_7_1_G) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_EAC3_7_1_H) else
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_DTS_3_1) else                
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_DTS_4_1) else                
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_DTS_6_0_A) else              
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_DTS_6_0_B) else              
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_DTS_6_0_C) else              
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_DTS_6_1_A) else              
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_DTS_6_1_B) else              
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_DTS_6_1_C) else              
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_DTS_7_0) else                
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_DTS_7_1) else                
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_DTS_8_0_A) else              
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_DTS_8_0_B) else              
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_DTS_8_1_A) else              
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_DTS_8_1_B) else              
+    PLANKAUDIOFILE_CHECKLAYOUT (formatInfo, PLANKAUDIOFILE_LAYOUT_DTS_6_1_D)
+    else
+    {
+        if (pl_AudioFileFormatInfo_ChannelIdentifiersAreDiscrete (formatInfo))
+            return PLANKAUDIOFILE_LAYOUT_DISCRETE | numChannels;
+    }
+        
+    return PLANKAUDIOFILE_LAYOUT_UNKNOWN | numChannels;
 }
 
 #undef PLANKAUDIOFILE_CHECKLAYOUT
@@ -976,14 +1208,16 @@ void pl_AudioFileFormatInfo_SetDiscreteLayout (PlankAudioFileFormatInfoRef forma
     PlankChannelIdentifier* channelIdentfiers;
     PlankUI numChannels, i;
     
-    numChannels = pl_AudioFileFormatInfo_GetNumChannels (formatInfo);//(int)pl_DynamicArray_GetSize (&formatInfo->channelIdentifiers);
+    numChannels = pl_AudioFileFormatInfo_GetNumChannels (formatInfo);
     
     if (numChannels > 0)
     {
-        channelIdentfiers = pl_AudioFileFormatInfo_GetChannelIdentifiers (formatInfo);// (PlankChannelIdentifier*)pl_DynamicArray_GetArray (&formatInfo->channelIdentifiers);
+        channelIdentfiers = pl_AudioFileFormatInfo_GetChannelIdentifiers (formatInfo);
         
         for (i = 0; i < numChannels; ++i)
             channelIdentfiers[i] = PLANKAUDIOFILE_CHANNEL_DISCRETE_N | i;
+        
+        formatInfo->channelLayout = PLANKAUDIOFILE_LAYOUT_DISCRETE | numChannels;
     }
 }
 
@@ -992,17 +1226,19 @@ void pl_AudioFileFormatInfo_SetSimpleLayout (PlankAudioFileFormatInfo* formatInf
     PlankChannelIdentifier* channelIdentfiers;
     PlankUI numChannels;
     
-    numChannels = pl_AudioFileFormatInfo_GetNumChannels (formatInfo); //(int)pl_DynamicArray_GetSize (&formatInfo->channelIdentifiers);
-    channelIdentfiers = pl_AudioFileFormatInfo_GetChannelIdentifiers (formatInfo); //(PlankChannelIdentifier*)pl_DynamicArray_GetArray (&formatInfo->channelIdentifiers);
+    numChannels = pl_AudioFileFormatInfo_GetNumChannels (formatInfo);
+    channelIdentfiers = pl_AudioFileFormatInfo_GetChannelIdentifiers (formatInfo);
     
     switch (numChannels)
     {
         case 1:
             channelIdentfiers[0] = PLANKAUDIOFILE_CHANNEL_MONO;
+            formatInfo->channelLayout = PLANKAUDIOFILE_LAYOUT_MONO;
             break;
         case 2:
             channelIdentfiers[0] = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
             channelIdentfiers[1] = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
+            formatInfo->channelLayout = PLANKAUDIOFILE_LAYOUT_STEREO;
             break;
         default:
             pl_AudioFileFormatInfo_SetDiscreteLayout (formatInfo);
@@ -1015,7 +1251,7 @@ void pl_AudioFileFormatInfo_WAV_SetDefaultLayout (PlankAudioFileFormatInfoRef fo
     PlankChannelIdentifier channelIdentfier;
     PlankUI numChannels, i;
     
-    numChannels = pl_AudioFileFormatInfo_GetNumChannels (formatInfo);//(int)pl_DynamicArray_GetSize (&formatInfo->channelIdentifiers);
+    numChannels = pl_AudioFileFormatInfo_GetNumChannels (formatInfo);
     
     if (numChannels > 0)
     {
@@ -1032,6 +1268,32 @@ void pl_AudioFileFormatInfo_WAV_SetDefaultLayout (PlankAudioFileFormatInfoRef fo
                 channelIdentfier = i + 1;
                 channelIdentfiers[i] = channelIdentfier;
             }
+            
+            formatInfo->channelLayout = pl_AudioFileFormatInfo_ChannelIdentifiersToLayout (formatInfo);
+        }
+    }
+}
+
+void pl_AudioFileFormatInfo_AIFF_SetDefaultLayout (PlankAudioFileFormatInfoRef formatInfo)
+{
+    PlankChannelIdentifier* channelIdentifiers;
+    PlankUI numChannels;
+    
+    numChannels = pl_AudioFileFormatInfo_GetNumChannels (formatInfo);
+    
+    if (numChannels > 0)
+    {
+        channelIdentifiers = pl_AudioFileFormatInfo_GetChannelIdentifiers (formatInfo);
+        
+        switch (numChannels)
+        {
+            case 1:  pl_AudioFileFormatInfoLayoutToFormatChannelIdentifiers (channelIdentifiers, formatInfo->channelLayout = PLANKAUDIOFILE_LAYOUT_MONO); break;
+            case 2:  pl_AudioFileFormatInfoLayoutToFormatChannelIdentifiers (channelIdentifiers, formatInfo->channelLayout = PLANKAUDIOFILE_LAYOUT_STEREO); break;
+            case 3:  pl_AudioFileFormatInfoLayoutToFormatChannelIdentifiers (channelIdentifiers, formatInfo->channelLayout = PLANKAUDIOFILE_LAYOUT_MPEG_3_0_A); break;
+            case 4:  pl_AudioFileFormatInfoLayoutToFormatChannelIdentifiers (channelIdentifiers, formatInfo->channelLayout = PLANKAUDIOFILE_LAYOUT_QUADRAPHONIC); break;
+            case 5:  pl_AudioFileFormatInfoLayoutToFormatChannelIdentifiers (channelIdentifiers, formatInfo->channelLayout = PLANKAUDIOFILE_LAYOUT_MPEG_5_0_A); break; //?? not specified!!
+            case 6:  pl_AudioFileFormatInfoLayoutToFormatChannelIdentifiers (channelIdentifiers, formatInfo->channelLayout = PLANKAUDIOFILE_LAYOUT_AIFF_6_0); break;
+            default: pl_AudioFileFormatInfo_SetDiscreteLayout (formatInfo);
         }
     }
 }
@@ -1041,7 +1303,7 @@ void pl_AudioFileFormatInfo_OggVorbis_SetDefaultLayout (PlankAudioFileFormatInfo
     PlankChannelIdentifier* channelIdentifiers;
     PlankUI numChannels;
     
-    numChannels = (int)pl_AudioFileFormatInfo_GetNumChannels (formatInfo);
+    numChannels = pl_AudioFileFormatInfo_GetNumChannels (formatInfo);
     
     if (numChannels > 0)
     {
@@ -1049,60 +1311,15 @@ void pl_AudioFileFormatInfo_OggVorbis_SetDefaultLayout (PlankAudioFileFormatInfo
         
         switch (numChannels)
         {
-            case 1:
-                channelIdentifiers[0] = PLANKAUDIOFILE_CHANNEL_MONO;
-                break;
-            case 2:
-                channelIdentifiers[0] = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
-                channelIdentifiers[1] = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
-                break;
-            case 3: // AC3 3.0
-                channelIdentifiers[0] = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
-                channelIdentifiers[1] = PLANKAUDIOFILE_CHANNEL_FRONT_CENTER;
-                channelIdentifiers[2] = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
-                break;
-            case 4: // QUAD
-                channelIdentifiers[0] = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
-                channelIdentifiers[1] = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
-                channelIdentifiers[2] = PLANKAUDIOFILE_CHANNEL_BACK_LEFT;
-                channelIdentifiers[3] = PLANKAUDIOFILE_CHANNEL_BACK_RIGHT;
-                break;
-            case 5: // MPEG 5.0C
-                channelIdentifiers[0] = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
-                channelIdentifiers[1] = PLANKAUDIOFILE_CHANNEL_FRONT_CENTER;
-                channelIdentifiers[2] = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
-                channelIdentifiers[3] = PLANKAUDIOFILE_CHANNEL_BACK_LEFT;
-                channelIdentifiers[4] = PLANKAUDIOFILE_CHANNEL_BACK_RIGHT;
-                break;
-            case 6: // MPEG 5.1C
-                channelIdentifiers[0] = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
-                channelIdentifiers[1] = PLANKAUDIOFILE_CHANNEL_FRONT_CENTER;
-                channelIdentifiers[2] = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
-                channelIdentifiers[3] = PLANKAUDIOFILE_CHANNEL_BACK_LEFT;
-                channelIdentifiers[4] = PLANKAUDIOFILE_CHANNEL_BACK_RIGHT;
-                channelIdentifiers[5] = PLANKAUDIOFILE_CHANNEL_LOW_FREQUENCY;
-                break;
-            case 7:
-                channelIdentifiers[0] = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
-                channelIdentifiers[1] = PLANKAUDIOFILE_CHANNEL_FRONT_CENTER;
-                channelIdentifiers[2] = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
-                channelIdentifiers[3] = PLANKAUDIOFILE_CHANNEL_SIDE_LEFT;
-                channelIdentifiers[4] = PLANKAUDIOFILE_CHANNEL_SIDE_RIGHT;
-                channelIdentifiers[5] = PLANKAUDIOFILE_CHANNEL_BACK_CENTER;
-                channelIdentifiers[6] = PLANKAUDIOFILE_CHANNEL_LOW_FREQUENCY;
-                break;
-            case 8:
-                channelIdentifiers[0] = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT;
-                channelIdentifiers[1] = PLANKAUDIOFILE_CHANNEL_FRONT_CENTER;
-                channelIdentifiers[2] = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT;
-                channelIdentifiers[3] = PLANKAUDIOFILE_CHANNEL_SIDE_LEFT;
-                channelIdentifiers[4] = PLANKAUDIOFILE_CHANNEL_SIDE_RIGHT;
-                channelIdentifiers[5] = PLANKAUDIOFILE_CHANNEL_BACK_LEFT;
-                channelIdentifiers[6] = PLANKAUDIOFILE_CHANNEL_BACK_RIGHT;
-                channelIdentifiers[7] = PLANKAUDIOFILE_CHANNEL_LOW_FREQUENCY;
-                break;
-            default:
-                pl_AudioFileFormatInfo_SetDiscreteLayout (formatInfo);
+            case 1:  pl_AudioFileFormatInfoLayoutToFormatChannelIdentifiers (channelIdentifiers, formatInfo->channelLayout = PLANKAUDIOFILE_LAYOUT_MONO); break;
+            case 2:  pl_AudioFileFormatInfoLayoutToFormatChannelIdentifiers (channelIdentifiers, formatInfo->channelLayout = PLANKAUDIOFILE_LAYOUT_STEREO); break;
+            case 3:  pl_AudioFileFormatInfoLayoutToFormatChannelIdentifiers (channelIdentifiers, formatInfo->channelLayout = PLANKAUDIOFILE_LAYOUT_AC3_3_0); break;
+            case 4:  pl_AudioFileFormatInfoLayoutToFormatChannelIdentifiers (channelIdentifiers, formatInfo->channelLayout = PLANKAUDIOFILE_LAYOUT_QUADRAPHONIC); break;
+            case 5:  pl_AudioFileFormatInfoLayoutToFormatChannelIdentifiers (channelIdentifiers, formatInfo->channelLayout = PLANKAUDIOFILE_LAYOUT_MPEG_5_0_C); break;
+            case 6:  pl_AudioFileFormatInfoLayoutToFormatChannelIdentifiers (channelIdentifiers, formatInfo->channelLayout = PLANKAUDIOFILE_LAYOUT_MPEG_5_1_C); break;
+            case 7:  pl_AudioFileFormatInfoLayoutToFormatChannelIdentifiers (channelIdentifiers, formatInfo->channelLayout = PLANKAUDIOFILE_LAYOUT_OGGVORBIS_6_1); break;
+            case 8:  pl_AudioFileFormatInfoLayoutToFormatChannelIdentifiers (channelIdentifiers, formatInfo->channelLayout = PLANKAUDIOFILE_LAYOUT_OGGVORBIS_7_1); break;
+            default: pl_AudioFileFormatInfo_SetDiscreteLayout (formatInfo);
         }
     }
 }
