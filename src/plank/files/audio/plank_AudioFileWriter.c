@@ -2403,7 +2403,7 @@ static PlankResult pl_AudioFileWriter_Opus_OpenInternal (PlankAudioFileWriterRef
     int err, delay, bitRate, streamCount, coupledStreamCount, quality, headerPacketSize, i, mode, numChannels;
     opus_int32 sampleRate;
     PlankChannelIdentifier* channelIdentifiers;
-//    OpusEncoder *oeStream;
+    OpusEncoder *oeStream;
 
     result = PlankResult_OK;
     
@@ -2639,8 +2639,9 @@ static PlankResult pl_AudioFileWriter_Opus_OpenInternal (PlankAudioFileWriterRef
                                                 streamCount,
                                                 coupledStreamCount,
                                                 opus->header.stream_map,
-                                                OPUS_APPLICATION_AUDIO,
-                                                &err);
+                                                opus->frameSize < 480 / (48000 / sampleRate) ? OPUS_APPLICATION_RESTRICTED_LOWDELAY : OPUS_APPLICATION_AUDIO,
+                                                &err);    
+
     if (err)
     {
         result = PlankResult_UnknownError;
@@ -2662,18 +2663,28 @@ static PlankResult pl_AudioFileWriter_Opus_OpenInternal (PlankAudioFileWriterRef
         if ((err = opus_multistream_encoder_ctl (opus->oe, OPUS_SET_COMPLEXITY (quality))) != 0) { result = PlankResult_UnknownError; goto exit; }
     }
     
-//    // use low bandwidth for the LFE and haptic channels
-//    for (i = 0; i < numChannels; ++i)
-//    {
-//        if ((channelIdentifiers[i] == PLANKAUDIOFILE_CHANNEL_LOW_FREQUENCY) ||
-//            (channelIdentifiers[i] == PLANKAUDIOFILE_CHANNEL_LOW_FREQUENCY_EXTRA) ||
-//            (channelIdentifiers[i] == PLANKAUDIOFILE_CHANNEL_HAPTIC))
-//        {
-//            oeStream = PLANK_NULL;
-//            opus_multistream_encoder_ctl (opus->oe, OPUS_MULTISTREAM_GET_ENCODER_STATE (i, &oeStream));
-//            if ((err = opus_encoder_ctl (oeStream, OPUS_SET_MAX_BANDWIDTH (OPUS_BANDWIDTH_NARROWBAND))) != 0) { result = PlankResult_UnknownError; goto exit; }
-//        }
-//    }
+    // use low bandwidth for the LFE and haptic channels
+    for (i = 0; i < numChannels; ++i)
+    {
+        if ((channelIdentifiers[i] == PLANKAUDIOFILE_CHANNEL_LOW_FREQUENCY) ||
+            (channelIdentifiers[i] == PLANKAUDIOFILE_CHANNEL_LOW_FREQUENCY_EXTRA) ||
+            (channelIdentifiers[i] == PLANKAUDIOFILE_CHANNEL_HAPTIC))
+        {
+            oeStream = PLANK_NULL;
+            
+            if ((err = opus_multistream_encoder_ctl (opus->oe, OPUS_MULTISTREAM_GET_ENCODER_STATE (opus->header.stream_map[i] - coupledStreamCount, &oeStream))) != 0)
+            {
+                result = PlankResult_UnknownError;
+                goto exit;
+            }
+            
+            if ((err = opus_encoder_ctl (oeStream, OPUS_SET_MAX_BANDWIDTH (OPUS_BANDWIDTH_NARROWBAND))) != 0)
+            {
+                result = PlankResult_UnknownError;
+                goto exit;
+            }
+        }
+    }
     
     if ((err = opus_multistream_encoder_ctl (opus->oe, OPUS_GET_LOOKAHEAD (&delay))) != 0) { result = PlankResult_UnknownError; goto exit; }
 
@@ -2684,11 +2695,6 @@ static PlankResult pl_AudioFileWriter_Opus_OpenInternal (PlankAudioFileWriterRef
     opus->header.gain              = 0;
     opus->header.nb_streams        = streamCount;
     opus->header.nb_coupled        = coupledStreamCount;
-
-//    header.channel_mapping = header.channels > 8 ? 255 : header.nb_streams > 1;
-//    opus->header.channel_mapping   = 0;
-//    opus->header.channel_mapping = opus->header.channels > 8 ? 255 : (opus->header.nb_streams > 1) ? 1 : 0; // from opusenc
-//    opus->header.channel_mapping = opus->header.channels > 1 ? 255 : 0; // mono=0, 2+ channels are just uncoupled streams. nope, FIREFOX complains. as it should according to spec
     
     rng = pl_RNGGlobal();
     err = ogg_stream_init (&opus->os, pl_RNG_Next (rng));
