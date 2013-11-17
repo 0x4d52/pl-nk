@@ -841,9 +841,16 @@ const char* pl_AudioFileReader_GetName (PlankAudioFileReaderRef p)
     return pl_DynamicArray_GetArray (&p->name);
 }
 
-PlankChannelIdentifier pl_AudioFileReader_GetChannelItentifier (PlankAudioFileReaderRef p, const int channel)
+PlankResult pl_AudioFileReader_GetChannelItentifier (PlankAudioFileReaderRef p, const int channel, PlankChannelIdentifier* identifier)
 {
-    return pl_AudioFileFormatInfo_GetChannelItentifier (&p->formatInfo, channel);
+    *identifier = pl_AudioFileFormatInfo_GetChannelItentifier (&p->formatInfo, channel);
+    return PlankResult_OK;
+}
+
+PlankResult pl_AudioFileReader_GetChanneLayout (PlankAudioFileReaderRef p, PlankChannelLayout* layout)
+{
+    *layout = pl_AudioFileFormatInfo_GetChannelLayout (&p->formatInfo);
+    return PlankResult_OK;
 }
 
 // -- WAV Functions -- /////////////////////////////////////////////////////////
@@ -1850,7 +1857,7 @@ PlankResult pl_AudioFileReader_CAF_ParseChunk_chan (PlankAudioFileReaderRef p, c
     iff = (PlankIffFileReaderRef)p->peer;
     
     numChannels = (PlankUI)pl_AudioFileFormatInfo_GetNumChannels (&p->formatInfo);
-    channelIdentifiers = (PlankUI*)pl_AudioFileFormatInfo_GetChannelIdentifiers (&p->formatInfo);
+    channelIdentifiers = pl_AudioFileFormatInfo_GetChannelIdentifiers (&p->formatInfo);
     channelCoords  = (PlankSpeakerPosition*)pl_AudioFileFormatInfo_GetChannelCoords (&p->formatInfo);
     
     if ((result = pl_File_ReadUI ((PlankFileRef)p->peer, &channelLayoutTag)) != PlankResult_OK) goto exit;

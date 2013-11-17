@@ -766,9 +766,16 @@ PlankResult pl_AudioFileWriter_SetChannelItentifier (PlankAudioFileWriterRef p, 
     return pl_AudioFileFormatInfo_SetChannelItentifier (&p->formatInfo, channel, channelIdentifier);
 }
 
-PlankChannelIdentifier pl_AudioFileWriter_GetChannelItentifier (PlankAudioFileWriterRef p, const int channel)
+PlankResult pl_AudioFileWriter_GetChannelItentifier (PlankAudioFileWriterRef p, const int channel, PlankChannelIdentifier* identifier)
 {
-    return pl_AudioFileFormatInfo_GetChannelItentifier (&p->formatInfo, channel);
+    *identifier = pl_AudioFileFormatInfo_GetChannelItentifier (&p->formatInfo, channel);
+    return PlankResult_OK;
+}
+
+PlankResult pl_AudioFileWriter_GetChanneLayout (PlankAudioFileWriterRef p, PlankChannelLayout* layout)
+{
+    *layout = pl_AudioFileFormatInfo_GetChannelLayout (&p->formatInfo);
+    return PlankResult_OK;
 }
 
 static PlankResult pl_AudioFileWriter_WAV_OpenInternal (PlankAudioFileWriterRef p, const char* filepath, PlankFileRef file)
@@ -2074,10 +2081,9 @@ PlankResult pl_AudioFileWriter_OggVorbis_OpenInternal (PlankAudioFileWriterRef p
         goto exit;
     }
     
-    numChannels = (int)pl_AudioFileFormatInfo_GetNumChannels (&p->formatInfo);
+    numChannels = pl_AudioFileFormatInfo_GetNumChannels (&p->formatInfo);
     
-    // should look into multichannel vorbis...
-    if ((numChannels < 1) || (numChannels > 2))
+    if ((numChannels < 1) || (numChannels > 255))
     {
         result = PlankResult_AudioFileInavlidType;
         goto exit;
@@ -2153,7 +2159,7 @@ PlankResult pl_AudioFileWriter_OggVorbis_OpenInternal (PlankAudioFileWriterRef p
         err = vorbis_encode_init_vbr (&ogg->vi,
                                       numChannels,
                                       (int)p->formatInfo.sampleRate,
-                                      pl_ClipF (p->formatInfo.quality, 0.f, 1.f));
+                                      pl_ClipF (p->formatInfo.quality * 0.1f, -0.1f, 1.f));
     }
     
     if (!err)
@@ -2396,7 +2402,9 @@ static PlankResult pl_AudioFileWriter_Opus_OpenInternal (PlankAudioFileWriterRef
     PlankMemoryRef m;
     int err, delay, bitRate, streamCount, coupledStreamCount, quality, headerPacketSize, i, mode, numChannels;
     opus_int32 sampleRate;
-    
+    PlankChannelIdentifier* channelIdentifiers;
+//    OpusEncoder *oeStream;
+
     result = PlankResult_OK;
     
     if (((filepath) && (file)) || ((filepath == 0) && (file == 0)))
@@ -2471,7 +2479,7 @@ static PlankResult pl_AudioFileWriter_Opus_OpenInternal (PlankAudioFileWriterRef
         pl_MemoryZero (file, sizeof (PlankFile));
     }
     
-    p->formatInfo.frameDuration = p->formatInfo.frameDuration == 0.f ? 0.02f : p->formatInfo.frameDuration;
+    p->formatInfo.frameDuration = p->formatInfo.frameDuration == 0.f ? 0.02 : p->formatInfo.frameDuration;
     opus->frameSize48kHz        = (int)(p->formatInfo.frameDuration * 48000.f);
     
     switch (opus->frameSize48kHz) {
@@ -2479,20 +2487,144 @@ static PlankResult pl_AudioFileWriter_Opus_OpenInternal (PlankAudioFileWriterRef
             break;
         default:
             opus->frameSize48kHz = 960;
-            p->formatInfo.frameDuration = 0.02f;
+            p->formatInfo.frameDuration = 0.02;
     }
     
-    streamCount             = numChannels;
-    coupledStreamCount      = 0; // for now
+    channelIdentifiers = pl_AudioFileFormatInfo_GetChannelIdentifiers (&p->formatInfo);
+    
+    if ((numChannels == 1) &&
+        (channelIdentifiers[0] == PLANKAUDIOFILE_CHANNEL_MONO))
+    {
+        streamCount                  = 1;
+        coupledStreamCount           = 0;
+        opus->header.stream_map[0]   = 0;
+        opus->header.channel_mapping = 0; // RTP
+    }
+    else if ((numChannels == 2) &&
+             (channelIdentifiers[0] == PLANKAUDIOFILE_CHANNEL_FRONT_LEFT) &&
+             (channelIdentifiers[1] == PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT))
+    {
+        streamCount                  = 1;
+        coupledStreamCount           = 1;
+        opus->header.stream_map[0]   = 0;
+        opus->header.stream_map[1]   = 1;
+        opus->header.channel_mapping = 0; // RTP
+    }
+    else if ((numChannels == 3) &&
+             (channelIdentifiers[0] == PLANKAUDIOFILE_CHANNEL_FRONT_LEFT) &&
+             (channelIdentifiers[1] == PLANKAUDIOFILE_CHANNEL_FRONT_CENTER) &&
+             (channelIdentifiers[2] == PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT))
+    {
+        streamCount                  = 1;
+        coupledStreamCount           = 1;
+        opus->header.stream_map[0]   = 0;
+        opus->header.stream_map[1]   = 2;
+        opus->header.stream_map[2]   = 1;
+        opus->header.channel_mapping = 1; // Vorbis mapping
+    }
+    else if ((numChannels == 4) &&
+             (channelIdentifiers[0] == PLANKAUDIOFILE_CHANNEL_FRONT_LEFT) &&
+             (channelIdentifiers[1] == PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT) &&
+             (channelIdentifiers[2] == PLANKAUDIOFILE_CHANNEL_BACK_LEFT) &&
+             (channelIdentifiers[3] == PLANKAUDIOFILE_CHANNEL_BACK_RIGHT))
+    {
+        streamCount                  = 2;
+        coupledStreamCount           = 2;
+        opus->header.stream_map[0]   = 0;
+        opus->header.stream_map[1]   = 1;
+        opus->header.stream_map[2]   = 2;
+        opus->header.stream_map[3]   = 3;
+        opus->header.channel_mapping = 1; // Vorbis mapping
+    }
+    else if ((numChannels == 5) &&
+             (channelIdentifiers[0] == PLANKAUDIOFILE_CHANNEL_FRONT_LEFT) &&
+             (channelIdentifiers[1] == PLANKAUDIOFILE_CHANNEL_FRONT_CENTER) &&
+             (channelIdentifiers[2] == PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT) &&
+             (channelIdentifiers[3] == PLANKAUDIOFILE_CHANNEL_BACK_LEFT) &&
+             (channelIdentifiers[4] == PLANKAUDIOFILE_CHANNEL_BACK_RIGHT))
+    {
+        streamCount                  = 3;
+        coupledStreamCount           = 2;
+        opus->header.stream_map[0]   = 0;
+        opus->header.stream_map[1]   = 4;
+        opus->header.stream_map[2]   = 1;
+        opus->header.stream_map[3]   = 2;
+        opus->header.stream_map[4]   = 3;
+        opus->header.channel_mapping = 1; // Vorbis mapping
+    }
+    else if ((numChannels == 6) &&
+             (channelIdentifiers[0] == PLANKAUDIOFILE_CHANNEL_FRONT_LEFT) &&
+             (channelIdentifiers[1] == PLANKAUDIOFILE_CHANNEL_FRONT_CENTER) &&
+             (channelIdentifiers[2] == PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT) &&
+             (channelIdentifiers[3] == PLANKAUDIOFILE_CHANNEL_BACK_LEFT) &&
+             (channelIdentifiers[4] == PLANKAUDIOFILE_CHANNEL_BACK_RIGHT) &&
+             (channelIdentifiers[5] == PLANKAUDIOFILE_CHANNEL_LOW_FREQUENCY))
+    {
+        streamCount                  = 4;
+        coupledStreamCount           = 2;
+        opus->header.stream_map[0]   = 0;
+        opus->header.stream_map[1]   = 4;
+        opus->header.stream_map[2]   = 1;
+        opus->header.stream_map[3]   = 2;
+        opus->header.stream_map[4]   = 3;
+        opus->header.stream_map[5]   = 5;
+        opus->header.channel_mapping = 1; // Vorbis mapping
+    }
+    else if ((numChannels == 7) &&
+             (channelIdentifiers[0] == PLANKAUDIOFILE_CHANNEL_FRONT_LEFT) &&
+             (channelIdentifiers[1] == PLANKAUDIOFILE_CHANNEL_FRONT_CENTER) &&
+             (channelIdentifiers[2] == PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT) &&
+             (channelIdentifiers[3] == PLANKAUDIOFILE_CHANNEL_SIDE_LEFT) &&
+             (channelIdentifiers[4] == PLANKAUDIOFILE_CHANNEL_SIDE_RIGHT) &&
+             (channelIdentifiers[5] == PLANKAUDIOFILE_CHANNEL_BACK_CENTER) &&
+             (channelIdentifiers[6] == PLANKAUDIOFILE_CHANNEL_LOW_FREQUENCY))
+    {
+        streamCount                  = 5;
+        coupledStreamCount           = 2;
+        opus->header.stream_map[0]   = 0;
+        opus->header.stream_map[1]   = 4;
+        opus->header.stream_map[2]   = 1;
+        opus->header.stream_map[3]   = 2;
+        opus->header.stream_map[4]   = 3;
+        opus->header.stream_map[5]   = 5;
+        opus->header.stream_map[6]   = 6;
+        opus->header.channel_mapping = 1; // Vorbis mapping
+    }
+    else if ((numChannels == 8) &&
+             (channelIdentifiers[0] == PLANKAUDIOFILE_CHANNEL_FRONT_LEFT) &&
+             (channelIdentifiers[1] == PLANKAUDIOFILE_CHANNEL_FRONT_CENTER) &&
+             (channelIdentifiers[2] == PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT) &&
+             (channelIdentifiers[3] == PLANKAUDIOFILE_CHANNEL_SIDE_LEFT) &&
+             (channelIdentifiers[4] == PLANKAUDIOFILE_CHANNEL_SIDE_RIGHT) &&
+             (channelIdentifiers[5] == PLANKAUDIOFILE_CHANNEL_BACK_CENTER) &&
+             (channelIdentifiers[6] == PLANKAUDIOFILE_CHANNEL_LOW_FREQUENCY) &&
+             (channelIdentifiers[7] == PLANKAUDIOFILE_CHANNEL_LOW_FREQUENCY))
+    {
+        streamCount                  = 5;
+        coupledStreamCount           = 3;
+        opus->header.stream_map[0]   = 0;
+        opus->header.stream_map[1]   = 6;
+        opus->header.stream_map[2]   = 1;
+        opus->header.stream_map[3]   = 2;
+        opus->header.stream_map[4]   = 3;
+        opus->header.stream_map[5]   = 4;
+        opus->header.stream_map[6]   = 5;
+        opus->header.stream_map[7]   = 7;
+        opus->header.channel_mapping = 1; // Vorbis mapping
+    }
+    else
+    {
+        streamCount                  = numChannels;
+        coupledStreamCount           = 0; // for now - but can check for pairs
+        opus->header.channel_mapping = 255;
+        
+        for (i = 0; i < numChannels; ++i)
+            opus->header.stream_map[i] = i;
+    }
+    
     opus->frameSize         = opus->frameSize48kHz * sampleRate / 48000;
-    quality                 = (int)p->formatInfo.quality;
-    
-    // for now..
-    for (i = 0; i < numChannels; ++i)
-        opus->header.stream_map[i] = i;
-    
-//    OPUS_BANDWIDTH_NARROWBAND for LFE?
-    
+    quality                 = pl_ClipI ((int)p->formatInfo.quality, 0, 10);
+        
     if ((result = pl_DynamicArray_InitWithItemSizeAndSize (&opus->packet, 1, PLANKAUDIOFILE_OPUS_MAXPACKETSIZE * streamCount, PLANK_FALSE)) != PlankResult_OK) goto exit;
     if ((result = pl_DynamicArray_InitWithItemSizeAndSize (&opus->buffer, sizeof (float), numChannels * opus->frameSize, PLANK_FALSE)) != PlankResult_OK) goto exit;
     
@@ -2503,9 +2635,9 @@ static PlankResult pl_AudioFileWriter_Opus_OpenInternal (PlankAudioFileWriterRef
     opus->lastPageGranulePos = opus->currentGranulePos;
     
     opus->oe = opus_multistream_encoder_create (sampleRate,
-                                                numChannels,  // channels
-                                                numChannels,  // streams
-                                                0,            // coupled streams
+                                                numChannels,
+                                                streamCount,
+                                                coupledStreamCount,
                                                 opus->header.stream_map,
                                                 OPUS_APPLICATION_AUDIO,
                                                 &err);
@@ -2530,6 +2662,19 @@ static PlankResult pl_AudioFileWriter_Opus_OpenInternal (PlankAudioFileWriterRef
         if ((err = opus_multistream_encoder_ctl (opus->oe, OPUS_SET_COMPLEXITY (quality))) != 0) { result = PlankResult_UnknownError; goto exit; }
     }
     
+//    // use low bandwidth for the LFE and haptic channels
+//    for (i = 0; i < numChannels; ++i)
+//    {
+//        if ((channelIdentifiers[i] == PLANKAUDIOFILE_CHANNEL_LOW_FREQUENCY) ||
+//            (channelIdentifiers[i] == PLANKAUDIOFILE_CHANNEL_LOW_FREQUENCY_EXTRA) ||
+//            (channelIdentifiers[i] == PLANKAUDIOFILE_CHANNEL_HAPTIC))
+//        {
+//            oeStream = PLANK_NULL;
+//            opus_multistream_encoder_ctl (opus->oe, OPUS_MULTISTREAM_GET_ENCODER_STATE (i, &oeStream));
+//            if ((err = opus_encoder_ctl (oeStream, OPUS_SET_MAX_BANDWIDTH (OPUS_BANDWIDTH_NARROWBAND))) != 0) { result = PlankResult_UnknownError; goto exit; }
+//        }
+//    }
+    
     if ((err = opus_multistream_encoder_ctl (opus->oe, OPUS_GET_LOOKAHEAD (&delay))) != 0) { result = PlankResult_UnknownError; goto exit; }
 
     opus->header.version           = 1;
@@ -2542,8 +2687,8 @@ static PlankResult pl_AudioFileWriter_Opus_OpenInternal (PlankAudioFileWriterRef
 
 //    header.channel_mapping = header.channels > 8 ? 255 : header.nb_streams > 1;
 //    opus->header.channel_mapping   = 0;
-    opus->header.channel_mapping = opus->header.channels > 8 ? 255 : (opus->header.nb_streams > 1) ? 1 : 0; // from opusenc
-//    opus->header.channel_mapping = opus->header.channels > 1 ? 255 : 0; // mono=0, 2+ channels are just uncoupled streams. nope, FIREFOX complains.
+//    opus->header.channel_mapping = opus->header.channels > 8 ? 255 : (opus->header.nb_streams > 1) ? 1 : 0; // from opusenc
+//    opus->header.channel_mapping = opus->header.channels > 1 ? 255 : 0; // mono=0, 2+ channels are just uncoupled streams. nope, FIREFOX complains. as it should according to spec
     
     rng = pl_RNGGlobal();
     err = ogg_stream_init (&opus->os, pl_RNG_Next (rng));

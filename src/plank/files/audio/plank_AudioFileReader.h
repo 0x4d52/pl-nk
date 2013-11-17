@@ -189,7 +189,8 @@ PlankAudioFileMetaDataRef pl_AudioFileReader_GetMetaData (PlankAudioFileReaderRe
 PlankResult pl_AudioFileReader_SetName (PlankAudioFileReaderRef p, const char* text);
 const char* pl_AudioFileReader_GetName (PlankAudioFileReaderRef p);
 
-PlankChannelIdentifier pl_AudioFileReader_GetChannelItentifier (PlankAudioFileReaderRef p, const int channel);
+PlankResult pl_AudioFileReader_GetChannelItentifier (PlankAudioFileReaderRef p, const int channel, PlankChannelIdentifier* identifier);
+PlankResult pl_AudioFileReader_GetChanneLayout (PlankAudioFileReaderRef p, PlankChannelLayout* layout);
 
 
 /** @} */

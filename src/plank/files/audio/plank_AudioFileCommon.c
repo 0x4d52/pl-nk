@@ -159,36 +159,43 @@ void pl_AudioFileFormatInfo_CAF_ChannelMaskToFormat (PlankAudioFileFormatInfoRef
     PlankChannelIdentifier  channelIdentfier;
     int channel, numChannels;
     
-    numChannels = (int)pl_AudioFileFormatInfo_GetNumChannels (formatInfo);
-    formatInfo->channelLayout = PLANKAUDIOFILE_LAYOUT_UNDEFINED;
-
-    if (numChannels > 0)
+    if (!channelMask)
     {
-        channelIdentfiers = (PlankUI*)pl_AudioFileFormatInfo_GetChannelIdentifiers (formatInfo);
-        
-        pl_MemoryZero (channelIdentfiers, numChannels * sizeof (PlankUI));
-        
-        bit     = 0;
-        channel = 0;
-        
-        while ((bit < 31) && (channel < numChannels))
+        pl_AudioFileFormatInfo_SetSimpleLayout (formatInfo);
+    }
+    else
+    {
+        numChannels = (int)pl_AudioFileFormatInfo_GetNumChannels (formatInfo);
+        formatInfo->channelLayout = PLANKAUDIOFILE_LAYOUT_UNDEFINED;
+
+        if (numChannels > 0)
         {
-            mask = ((PlankUI)1) << bit;
+            channelIdentfiers = (PlankUI*)pl_AudioFileFormatInfo_GetChannelIdentifiers (formatInfo);
             
-            if (mask & PLANKAUDIOFILE_CAF_SPEAKER_VALIDBITS)
+            pl_MemoryZero (channelIdentfiers, numChannels * sizeof (PlankUI));
+            
+            bit     = 0;
+            channel = 0;
+            
+            while ((bit < 31) && (channel < numChannels))
             {
-                if (mask & channelMask)
+                mask = ((PlankUI)1) << bit;
+                
+                if (mask & PLANKAUDIOFILE_CAF_SPEAKER_VALIDBITS)
                 {
-                    channelIdentfier = bit + 1;
-                    channelIdentfiers[channel] = channelIdentfier;
-                    ++channel;
+                    if (mask & channelMask)
+                    {
+                        channelIdentfier = bit + 1;
+                        channelIdentfiers[channel] = channelIdentfier;
+                        ++channel;
+                    }
                 }
+                
+                ++bit;
             }
             
-            ++bit;
+            formatInfo->channelLayout = pl_AudioFileFormatInfo_ChannelIdentifiersToLayout (formatInfo);
         }
-        
-        formatInfo->channelLayout = pl_AudioFileFormatInfo_ChannelIdentifiersToLayout (formatInfo);
     }
 }
 
@@ -199,46 +206,54 @@ void pl_AudioFileFormatInfo_WAV_ChannelMaskToFormat (PlankAudioFileFormatInfoRef
     PlankChannelIdentifier  channelIdentfier;
     int channel, numChannels;
     
-    numChannels = (int)pl_AudioFileFormatInfo_GetNumChannels (formatInfo);
-    formatInfo->channelLayout = PLANKAUDIOFILE_LAYOUT_UNDEFINED;
-    
-    if (numChannels > 0)
+    if (!channelMask)
     {
-        channelIdentfiers = (PlankUI*)pl_AudioFileFormatInfo_GetChannelIdentifiers (formatInfo);
+        pl_AudioFileFormatInfo_SetSimpleLayout (formatInfo);
+    }
+    else
+    {
+        numChannels = (int)pl_AudioFileFormatInfo_GetNumChannels (formatInfo);
+        formatInfo->channelLayout = PLANKAUDIOFILE_LAYOUT_UNDEFINED;
         
-        pl_MemoryZero (channelIdentfiers, numChannels * sizeof (PlankUI));
-        
-        bit     = 0;
-        channel = 0;
-        
-        while ((bit < 31) && (channel < numChannels))
-        {            
-            mask = ((PlankUI)1) << bit;
+        if (numChannels > 0)
+        {
+            channelIdentfiers = (PlankUI*)pl_AudioFileFormatInfo_GetChannelIdentifiers (formatInfo);
             
-            if (mask & PLANKAUDIOFILE_WAV_SPEAKER_VALIDBITS)
-            {
-                if (mask & channelMask)
+            pl_MemoryZero (channelIdentfiers, numChannels * sizeof (PlankUI));
+            
+            bit     = 0;
+            channel = 0;
+            
+            while ((bit < 31) && (channel < numChannels))
+            {            
+                mask = ((PlankUI)1) << bit;
+                
+                if (mask & PLANKAUDIOFILE_WAV_SPEAKER_VALIDBITS)
                 {
-                    channelIdentfier = bit + 1;
-                    channelIdentfiers[channel] = channelIdentfier;
-                    ++channel;
+                    if (mask & channelMask)
+                    {
+                        channelIdentfier = bit + 1;
+                        channelIdentfiers[channel] = channelIdentfier;
+                        ++channel;
+                    }
                 }
+                
+                ++bit;
             }
             
-            ++bit;
+            formatInfo->channelLayout = pl_AudioFileFormatInfo_ChannelIdentifiersToLayout (formatInfo);
         }
-        
-        formatInfo->channelLayout = pl_AudioFileFormatInfo_ChannelIdentifiersToLayout (formatInfo);
     }
 }
 
 const char* pl_AudioFileFormatInfoDiscreteIndexToName (const PlankUS discreteIndex)
 {
-    static char names[512][16];
+    static char names[PLANKAUDIOFILE_CHANNEL_MAXINDEXSTRINGS + 1][16];
     
-    if (discreteIndex >= 512)
+    if (discreteIndex >= PLANKAUDIOFILE_CHANNEL_MAXINDEXSTRINGS)
     {
-        return "Discrete 512+";
+        snprintf (names[PLANKAUDIOFILE_CHANNEL_MAXINDEXSTRINGS], 16, "Discrete %d+", PLANKAUDIOFILE_CHANNEL_MAXINDEXSTRINGS);
+        return names[PLANKAUDIOFILE_CHANNEL_MAXINDEXSTRINGS];
     }
     else
     {
@@ -246,6 +261,23 @@ const char* pl_AudioFileFormatInfoDiscreteIndexToName (const PlankUS discreteInd
         return names[discreteIndex];
     }
 }
+
+const char* pl_AudioFileFormatInfoUnknownIndexToName (const PlankUS unknownIndex)
+{
+    static char names[PLANKAUDIOFILE_CHANNEL_MAXINDEXSTRINGS + 1][16];
+    
+    if (unknownIndex >= PLANKAUDIOFILE_CHANNEL_MAXINDEXSTRINGS)
+    {
+        snprintf (names[PLANKAUDIOFILE_CHANNEL_MAXINDEXSTRINGS], 16, "Unknown %d+", PLANKAUDIOFILE_CHANNEL_MAXINDEXSTRINGS);
+        return names[PLANKAUDIOFILE_CHANNEL_MAXINDEXSTRINGS];
+    }
+    else
+    {
+        snprintf (names[unknownIndex], 16, "Unknown %d", unknownIndex);
+        return names[unknownIndex];
+    }
+}
+
 
 const char* pl_AudioFileFormatInfoChannelIdentifierToName (const PlankChannelIdentifier identifier)
 {
@@ -336,94 +368,105 @@ char* pl_AudioFileFormatInfoAbbreviateIdentifierName (const char* name, char* ab
 }
 
 const char* pl_AudioFileFormatInfoChannelLayoutToName (const PlankChannelLayout channelLayoutTag)
-{    
-    switch (channelLayoutTag)
+{
+    if ((channelLayoutTag & 0xFFFF0000) == PLANKAUDIOFILE_LAYOUT_UNKNOWN)
     {
-        case PLANKAUDIOFILE_LAYOUT_OGGVORBIS_6_1: return "Vorbis 6.1";
-        case PLANKAUDIOFILE_LAYOUT_OGGVORBIS_7_1: return "Vorbis 7.1";
+        return pl_AudioFileFormatInfoUnknownIndexToName (channelLayoutTag & 0x0000FFFF);
+    }
+    else if ((channelLayoutTag & PLANKAUDIOFILE_LAYOUT_DISCRETE) == PLANKAUDIOFILE_LAYOUT_DISCRETE)
+    {
+        return pl_AudioFileFormatInfoDiscreteIndexToName (channelLayoutTag & 0x0000FFFF);
+    }
+    else
+    {
+        switch (channelLayoutTag)
+        {
+            case PLANKAUDIOFILE_LAYOUT_OGGVORBIS_6_1: return "Vorbis 6.1";
+            case PLANKAUDIOFILE_LAYOUT_OGGVORBIS_7_1: return "Vorbis 7.1";
 
-        case PLANKAUDIOFILE_LAYOUT_MONO: return "Mono";
-        case PLANKAUDIOFILE_LAYOUT_STEREO: return "Stereo";
-        case PLANKAUDIOFILE_LAYOUT_STEREOHEADPHONES: return "Stereo Headphones";
-        case PLANKAUDIOFILE_LAYOUT_MATRIXSTEREO: return "Matrix Stereo";
-        case PLANKAUDIOFILE_LAYOUT_MIDSIDE: return "Mid Side";
-        case PLANKAUDIOFILE_LAYOUT_XY: return "XY";
-        case PLANKAUDIOFILE_LAYOUT_BINAURAL: return "Binaural";
-        case PLANKAUDIOFILE_LAYOUT_AMBISONIC_B_FORMAT: return "B-Format";
-        case PLANKAUDIOFILE_LAYOUT_QUADRAPHONIC: return "Quadraphonic";
-        case PLANKAUDIOFILE_LAYOUT_PENTAGONAL: return "Pentagonal";
-        case PLANKAUDIOFILE_LAYOUT_HEXAGONAL: return "Hexagonal";
-        case PLANKAUDIOFILE_LAYOUT_OCTAGONAL: return "Octagonal";
-        case PLANKAUDIOFILE_LAYOUT_CUBE: return "Cube";
-        case PLANKAUDIOFILE_LAYOUT_MPEG_3_0_A: return "MPEG 3.0A";
-        case PLANKAUDIOFILE_LAYOUT_MPEG_3_0_B: return "MPEG 3.0B";
-        case PLANKAUDIOFILE_LAYOUT_MPEG_4_0_A: return "MPEG 4.0A";
-        case PLANKAUDIOFILE_LAYOUT_MPEG_4_0_B: return "MPEG 4.0B";
-        case PLANKAUDIOFILE_LAYOUT_MPEG_5_0_A: return "MPEG 5.0A";
-        case PLANKAUDIOFILE_LAYOUT_MPEG_5_0_B: return "MPEG 5.0B";
-        case PLANKAUDIOFILE_LAYOUT_MPEG_5_0_C: return "MPEG 5.0C";
-        case PLANKAUDIOFILE_LAYOUT_MPEG_5_0_D: return "MPEG 5.0D";
-        case PLANKAUDIOFILE_LAYOUT_MPEG_5_1_A: return "MPEG 5.1A";
-        case PLANKAUDIOFILE_LAYOUT_MPEG_5_1_B: return "MPEG 5.1B";
-        case PLANKAUDIOFILE_LAYOUT_MPEG_5_1_C: return "MPEG 5.1C";
-        case PLANKAUDIOFILE_LAYOUT_MPEG_5_1_D: return "MPEG 5.1D";
-        case PLANKAUDIOFILE_LAYOUT_MPEG_6_1_A: return "MPEG 6.1A";
-        case PLANKAUDIOFILE_LAYOUT_MPEG_7_1_A: return "MPEG 7.1A";
-        case PLANKAUDIOFILE_LAYOUT_MPEG_7_1_B: return "MPEG 7.1B";
-        case PLANKAUDIOFILE_LAYOUT_MPEG_7_1_C: return "MPEG 7.1C";
-        case PLANKAUDIOFILE_LAYOUT_EMAGIC_DEFAULT_7_1: return "Emagic 7.1";
-        case PLANKAUDIOFILE_LAYOUT_SMPTE_DTV: return "SMPTE DTV";
-        case PLANKAUDIOFILE_LAYOUT_ITU_2_1: return "ITU 2.1";
-        case PLANKAUDIOFILE_LAYOUT_ITU_2_2: return "ITU 2.2";
-        case PLANKAUDIOFILE_LAYOUT_DVD_4: return "DVD 4";
-        case PLANKAUDIOFILE_LAYOUT_DVD_5: return "DVD 5";
-        case PLANKAUDIOFILE_LAYOUT_DVD_6: return "DVD 6";
-        case PLANKAUDIOFILE_LAYOUT_DVD_10: return "DVD 10";
-        case PLANKAUDIOFILE_LAYOUT_DVD_11: return "DVD 11";
-        case PLANKAUDIOFILE_LAYOUT_DVD_18: return "DVD 18";
-        case PLANKAUDIOFILE_LAYOUT_AUDIOUNIT_6_0: return "AudioUnit 6.0";
-        case PLANKAUDIOFILE_LAYOUT_AUDIOUNIT_7_0: return "AudioUnit 7.0";
-        case PLANKAUDIOFILE_LAYOUT_AUDIOUNIT_7_0_FRONT: return "AudioUnit 7.0 Front";
-        case PLANKAUDIOFILE_LAYOUT_AAC_6_0: return "AAC 6.0";
-        case PLANKAUDIOFILE_LAYOUT_AAC_6_1: return "AAC 6.1";
-        case PLANKAUDIOFILE_LAYOUT_AAC_7_0: return "AAC 7.0";
-        case PLANKAUDIOFILE_LAYOUT_AAC_OCTAGONAL: return "AAC Octagonal";
-        case PLANKAUDIOFILE_LAYOUT_TMH_10_2_STD: return "TMH 10.2 Standard";
-        case PLANKAUDIOFILE_LAYOUT_TMH_10_2_FULL: return "TMH 10.2 Full";
-        case PLANKAUDIOFILE_LAYOUT_AC3_1_0_1: return "AC3 1.0.1";
-        case PLANKAUDIOFILE_LAYOUT_AC3_3_0: return "AC3 3.0";
-        case PLANKAUDIOFILE_LAYOUT_AC3_3_1: return "AC3 3.1";
-        case PLANKAUDIOFILE_LAYOUT_AC3_3_0_1: return "AC3 3.0.1";
-        case PLANKAUDIOFILE_LAYOUT_AC3_2_1_1: return "AC3 2.1.1";
-        case PLANKAUDIOFILE_LAYOUT_AC3_3_1_1: return "AC3 3.1.1";
-        case PLANKAUDIOFILE_LAYOUT_EAC_6_0_A: return "EAC 6.0A";
-        case PLANKAUDIOFILE_LAYOUT_EAC_7_0_A: return "EAC 7.0A";
-        case PLANKAUDIOFILE_LAYOUT_EAC3_6_1_A: return "EAC3 6.1A";
-        case PLANKAUDIOFILE_LAYOUT_EAC3_6_1_B: return "EAC3 6.1B";
-        case PLANKAUDIOFILE_LAYOUT_EAC3_6_1_C: return "EAC3 6.1C";
-        case PLANKAUDIOFILE_LAYOUT_EAC3_7_1_A: return "EAC3 7.1A";
-        case PLANKAUDIOFILE_LAYOUT_EAC3_7_1_B: return "EAC3 7.1B";
-        case PLANKAUDIOFILE_LAYOUT_EAC3_7_1_C: return "EAC3 7.1C";
-        case PLANKAUDIOFILE_LAYOUT_EAC3_7_1_D: return "EAC3 7.1D";
-        case PLANKAUDIOFILE_LAYOUT_EAC3_7_1_E: return "EAC3 7.1E";
-        case PLANKAUDIOFILE_LAYOUT_EAC3_7_1_F: return "EAC3 6.1A";
-        case PLANKAUDIOFILE_LAYOUT_EAC3_7_1_G: return "EAC3 7.1G";
-        case PLANKAUDIOFILE_LAYOUT_EAC3_7_1_H: return "EAC3 7.1H";
-        case PLANKAUDIOFILE_LAYOUT_DTS_3_1: return "DTS 3.1";
-        case PLANKAUDIOFILE_LAYOUT_DTS_4_1: return "DTS 4.1";
-        case PLANKAUDIOFILE_LAYOUT_DTS_6_0_A: return "DTS 6.0A";
-        case PLANKAUDIOFILE_LAYOUT_DTS_6_0_B: return "DTS 6.0B";
-        case PLANKAUDIOFILE_LAYOUT_DTS_6_0_C: return "DTS 6.0C";
-        case PLANKAUDIOFILE_LAYOUT_DTS_6_1_A: return "DTS 6.1A";
-        case PLANKAUDIOFILE_LAYOUT_DTS_6_1_B: return "DTS 6.1B";
-        case PLANKAUDIOFILE_LAYOUT_DTS_6_1_C: return "DTS 6.1C";
-        case PLANKAUDIOFILE_LAYOUT_DTS_7_0: return "DTS 7.0";
-        case PLANKAUDIOFILE_LAYOUT_DTS_7_1: return "DTS 7.1";
-        case PLANKAUDIOFILE_LAYOUT_DTS_8_0_A: return "DTS 8.0A";
-        case PLANKAUDIOFILE_LAYOUT_DTS_8_0_B: return "DTS 8.0B";
-        case PLANKAUDIOFILE_LAYOUT_DTS_8_1_A: return "DTS 8.1A";
-        case PLANKAUDIOFILE_LAYOUT_DTS_8_1_B: return "DTS 8.1B";
-        case PLANKAUDIOFILE_LAYOUT_DTS_6_1_D: return "DTS 6.1D";
+            case PLANKAUDIOFILE_LAYOUT_MONO: return "Mono";
+            case PLANKAUDIOFILE_LAYOUT_STEREO: return "Stereo";
+            case PLANKAUDIOFILE_LAYOUT_STEREOHEADPHONES: return "Stereo Headphones";
+            case PLANKAUDIOFILE_LAYOUT_MATRIXSTEREO: return "Matrix Stereo";
+            case PLANKAUDIOFILE_LAYOUT_MIDSIDE: return "Mid Side";
+            case PLANKAUDIOFILE_LAYOUT_XY: return "XY";
+            case PLANKAUDIOFILE_LAYOUT_BINAURAL: return "Binaural";
+            case PLANKAUDIOFILE_LAYOUT_AMBISONIC_B_FORMAT: return "B-Format";
+            case PLANKAUDIOFILE_LAYOUT_QUADRAPHONIC: return "Quadraphonic";
+            case PLANKAUDIOFILE_LAYOUT_PENTAGONAL: return "Pentagonal";
+            case PLANKAUDIOFILE_LAYOUT_HEXAGONAL: return "Hexagonal";
+            case PLANKAUDIOFILE_LAYOUT_OCTAGONAL: return "Octagonal";
+            case PLANKAUDIOFILE_LAYOUT_CUBE: return "Cube";
+            case PLANKAUDIOFILE_LAYOUT_MPEG_3_0_A: return "MPEG 3.0A";
+            case PLANKAUDIOFILE_LAYOUT_MPEG_3_0_B: return "MPEG 3.0B";
+            case PLANKAUDIOFILE_LAYOUT_MPEG_4_0_A: return "MPEG 4.0A";
+            case PLANKAUDIOFILE_LAYOUT_MPEG_4_0_B: return "MPEG 4.0B";
+            case PLANKAUDIOFILE_LAYOUT_MPEG_5_0_A: return "MPEG 5.0A";
+            case PLANKAUDIOFILE_LAYOUT_MPEG_5_0_B: return "MPEG 5.0B";
+            case PLANKAUDIOFILE_LAYOUT_MPEG_5_0_C: return "MPEG 5.0C";
+            case PLANKAUDIOFILE_LAYOUT_MPEG_5_0_D: return "MPEG 5.0D";
+            case PLANKAUDIOFILE_LAYOUT_MPEG_5_1_A: return "MPEG 5.1A";
+            case PLANKAUDIOFILE_LAYOUT_MPEG_5_1_B: return "MPEG 5.1B";
+            case PLANKAUDIOFILE_LAYOUT_MPEG_5_1_C: return "MPEG 5.1C";
+            case PLANKAUDIOFILE_LAYOUT_MPEG_5_1_D: return "MPEG 5.1D";
+            case PLANKAUDIOFILE_LAYOUT_MPEG_6_1_A: return "MPEG 6.1A";
+            case PLANKAUDIOFILE_LAYOUT_MPEG_7_1_A: return "MPEG 7.1A";
+            case PLANKAUDIOFILE_LAYOUT_MPEG_7_1_B: return "MPEG 7.1B";
+            case PLANKAUDIOFILE_LAYOUT_MPEG_7_1_C: return "MPEG 7.1C";
+            case PLANKAUDIOFILE_LAYOUT_EMAGIC_DEFAULT_7_1: return "Emagic 7.1";
+            case PLANKAUDIOFILE_LAYOUT_SMPTE_DTV: return "SMPTE DTV";
+            case PLANKAUDIOFILE_LAYOUT_ITU_2_1: return "ITU 2.1";
+            case PLANKAUDIOFILE_LAYOUT_ITU_2_2: return "ITU 2.2";
+            case PLANKAUDIOFILE_LAYOUT_DVD_4: return "DVD 4";
+            case PLANKAUDIOFILE_LAYOUT_DVD_5: return "DVD 5";
+            case PLANKAUDIOFILE_LAYOUT_DVD_6: return "DVD 6";
+            case PLANKAUDIOFILE_LAYOUT_DVD_10: return "DVD 10";
+            case PLANKAUDIOFILE_LAYOUT_DVD_11: return "DVD 11";
+            case PLANKAUDIOFILE_LAYOUT_DVD_18: return "DVD 18";
+            case PLANKAUDIOFILE_LAYOUT_AUDIOUNIT_6_0: return "AudioUnit 6.0";
+            case PLANKAUDIOFILE_LAYOUT_AUDIOUNIT_7_0: return "AudioUnit 7.0";
+            case PLANKAUDIOFILE_LAYOUT_AUDIOUNIT_7_0_FRONT: return "AudioUnit 7.0 Front";
+            case PLANKAUDIOFILE_LAYOUT_AAC_6_0: return "AAC 6.0";
+            case PLANKAUDIOFILE_LAYOUT_AAC_6_1: return "AAC 6.1";
+            case PLANKAUDIOFILE_LAYOUT_AAC_7_0: return "AAC 7.0";
+            case PLANKAUDIOFILE_LAYOUT_AAC_OCTAGONAL: return "AAC Octagonal";
+            case PLANKAUDIOFILE_LAYOUT_TMH_10_2_STD: return "TMH 10.2 Standard";
+            case PLANKAUDIOFILE_LAYOUT_TMH_10_2_FULL: return "TMH 10.2 Full";
+            case PLANKAUDIOFILE_LAYOUT_AC3_1_0_1: return "AC3 1.0.1";
+            case PLANKAUDIOFILE_LAYOUT_AC3_3_0: return "AC3 3.0";
+            case PLANKAUDIOFILE_LAYOUT_AC3_3_1: return "AC3 3.1";
+            case PLANKAUDIOFILE_LAYOUT_AC3_3_0_1: return "AC3 3.0.1";
+            case PLANKAUDIOFILE_LAYOUT_AC3_2_1_1: return "AC3 2.1.1";
+            case PLANKAUDIOFILE_LAYOUT_AC3_3_1_1: return "AC3 3.1.1";
+            case PLANKAUDIOFILE_LAYOUT_EAC_6_0_A: return "EAC 6.0A";
+            case PLANKAUDIOFILE_LAYOUT_EAC_7_0_A: return "EAC 7.0A";
+            case PLANKAUDIOFILE_LAYOUT_EAC3_6_1_A: return "EAC3 6.1A";
+            case PLANKAUDIOFILE_LAYOUT_EAC3_6_1_B: return "EAC3 6.1B";
+            case PLANKAUDIOFILE_LAYOUT_EAC3_6_1_C: return "EAC3 6.1C";
+            case PLANKAUDIOFILE_LAYOUT_EAC3_7_1_A: return "EAC3 7.1A";
+            case PLANKAUDIOFILE_LAYOUT_EAC3_7_1_B: return "EAC3 7.1B";
+            case PLANKAUDIOFILE_LAYOUT_EAC3_7_1_C: return "EAC3 7.1C";
+            case PLANKAUDIOFILE_LAYOUT_EAC3_7_1_D: return "EAC3 7.1D";
+            case PLANKAUDIOFILE_LAYOUT_EAC3_7_1_E: return "EAC3 7.1E";
+            case PLANKAUDIOFILE_LAYOUT_EAC3_7_1_F: return "EAC3 6.1A";
+            case PLANKAUDIOFILE_LAYOUT_EAC3_7_1_G: return "EAC3 7.1G";
+            case PLANKAUDIOFILE_LAYOUT_EAC3_7_1_H: return "EAC3 7.1H";
+            case PLANKAUDIOFILE_LAYOUT_DTS_3_1: return "DTS 3.1";
+            case PLANKAUDIOFILE_LAYOUT_DTS_4_1: return "DTS 4.1";
+            case PLANKAUDIOFILE_LAYOUT_DTS_6_0_A: return "DTS 6.0A";
+            case PLANKAUDIOFILE_LAYOUT_DTS_6_0_B: return "DTS 6.0B";
+            case PLANKAUDIOFILE_LAYOUT_DTS_6_0_C: return "DTS 6.0C";
+            case PLANKAUDIOFILE_LAYOUT_DTS_6_1_A: return "DTS 6.1A";
+            case PLANKAUDIOFILE_LAYOUT_DTS_6_1_B: return "DTS 6.1B";
+            case PLANKAUDIOFILE_LAYOUT_DTS_6_1_C: return "DTS 6.1C";
+            case PLANKAUDIOFILE_LAYOUT_DTS_7_0: return "DTS 7.0";
+            case PLANKAUDIOFILE_LAYOUT_DTS_7_1: return "DTS 7.1";
+            case PLANKAUDIOFILE_LAYOUT_DTS_8_0_A: return "DTS 8.0A";
+            case PLANKAUDIOFILE_LAYOUT_DTS_8_0_B: return "DTS 8.0B";
+            case PLANKAUDIOFILE_LAYOUT_DTS_8_1_A: return "DTS 8.1A";
+            case PLANKAUDIOFILE_LAYOUT_DTS_8_1_B: return "DTS 8.1B";
+            case PLANKAUDIOFILE_LAYOUT_DTS_6_1_D: return "DTS 6.1D";
+        }
     }
     
     return "None";

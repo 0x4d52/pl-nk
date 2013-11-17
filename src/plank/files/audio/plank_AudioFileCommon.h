@@ -167,6 +167,11 @@ typedef PlankUI PlankChannelIdentifier;
 
 #define PLANKAUDIOFILE_CHANNEL_UNKNOWN                      0xFFFFFFFF
 
+// the table of strings for unknown and discrete layouts/channels
+// can be overrided with a preprocessor macro
+#ifndef PLANKAUDIOFILE_CHANNEL_MAXINDEXSTRINGS      
+#define PLANKAUDIOFILE_CHANNEL_MAXINDEXSTRINGS 128
+#endif
 
 
 // EBU-TECH 3306
