@@ -299,6 +299,9 @@ typedef PlankUI PlankChannelLayout;
 #define PLANKAUDIOFILE_LAYOUT_UNDEFINED                 0
 #define PLANKAUDIOFILE_LAYOUT_USECHANNELDESCRIPTIONS    ((0<<16) | 0)
 #define PLANKAUDIOFILE_LAYOUT_USECHANNELBITMAP          ((1<<16) | 0)
+
+#define PLANKAUDIOFILE_LAYOUT_STANARDMINIMUM            PLANKAUDIOFILE_LAYOUT_USECHANNELBITMAP
+
 #define PLANKAUDIOFILE_LAYOUT_MONO                      ((100<<16) | 1)
 #define PLANKAUDIOFILE_LAYOUT_STEREO                    ((101<<16) | 2)
 #define PLANKAUDIOFILE_LAYOUT_STEREOHEADPHONES          ((102<<16) | 2)
@@ -426,6 +429,9 @@ typedef PlankUI PlankChannelLayout;
 #define PLANKAUDIOFILE_LAYOUT_OGGVORBIS_6_1           ((32768<<16) | 7) // front left, center, front right, side left, side right, rear center, LFE
 #define PLANKAUDIOFILE_LAYOUT_OGGVORBIS_7_1           ((32769<<16) | 8) // front left, center, front right, side left, side right, rear left, rear right, LFE
 #define PLANKAUDIOFILE_LAYOUT_AIFF_6_0                ((32770<<16) | 6) // left, left centre, centre, right, right centre, surround
+
+#define PLANKAUDIOFILE_LAYOUT_STEREOPAIRS               0xFFFE0000                             // needs to be ORed with the actual number of channels
+
 
 // custom ones.. non-CAF standard may need to update these in the future is CAF adds need formats
 
@@ -599,7 +605,7 @@ PlankB pl_AudioFileFormatInfoLayoutToFormatChannelIdentifiers (PlankChannelIdent
 PlankB pl_AudioFileFormatInfo_LayoutToFormatChannelIdentifiers (PlankAudioFileFormatInfoRef formatInfo, const PlankChannelLayout channelLayoutTag);
 PlankB pl_AudioFileFormatInfo_ChannelIdentifiersMatchesLayout (PlankAudioFileFormatInfoRef formatInfo, const PlankChannelLayout channelLayoutTag);
 PlankChannelLayout pl_AudioFileFormatInfo_ChannelIdentifiersToLayout (PlankAudioFileFormatInfoRef formatInfo);
-PlankB pl_AudioFileFormatInfoIsPair (const PlankChannelIdentifier A, const PlankChannelIdentifier B);
+PlankB pl_AudioFileFormatInfoChannelIdentifiersArePair (const PlankChannelIdentifier A, const PlankChannelIdentifier B);
 void pl_AudioFileFormatInfo_SetDiscreteLayout (PlankAudioFileFormatInfoRef formatInfo);
 void pl_AudioFileFormatInfo_SetSimpleLayout (PlankAudioFileFormatInfoRef formatInfo);
 void pl_AudioFileFormatInfo_WAV_SetDefaultLayout (PlankAudioFileFormatInfoRef formatInfo);

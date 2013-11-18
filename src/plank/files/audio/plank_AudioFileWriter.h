@@ -91,15 +91,15 @@ const PlankAudioFileFormatInfo* pl_AudioFileWriter_GetFormatInfoReadOnly (PlankA
 PlankAudioFileMetaDataRef pl_AudioFileWriter_GetMetaData (PlankAudioFileWriterRef p);
 
 
-PlankResult pl_AudioFileWriter_SetFormatWAV (PlankAudioFileWriterRef p, const int bitsPerSample, const int numChannels, const double sampleRate, const PlankB isFloat);
-PlankResult pl_AudioFileWriter_SetFormatAIFF (PlankAudioFileWriterRef p, const int bitsPerSample, const int numChannels, const double sampleRate);
-PlankResult pl_AudioFileWriter_SetFormatAIFC (PlankAudioFileWriterRef p, const int bitsPerSample, const int numChannels, const double sampleRate, const PlankB isFloat, const PlankB isLittleEndian);
-PlankResult pl_AudioFileWriter_SetFormatCAF (PlankAudioFileWriterRef p, const int bitsPerSample, const int numChannels, const double sampleRate, const PlankB isFloat, const PlankB isLittleEndian);
-PlankResult pl_AudioFileWriter_SetFormatW64 (PlankAudioFileWriterRef p, const int bitsPerSample, const int numChannels, const double sampleRate, const PlankB isFloat);
-PlankResult pl_AudioFileWriter_SetFormatOggVorbis (PlankAudioFileWriterRef p, const float quality, const int numChannels, const double sampleRate);
-PlankResult pl_AudioFileWriter_SetFormatOggVorbisManaged (PlankAudioFileWriterRef p, const int minBitRate, const int nominalBitRate, const int maxBitRate, const int numChannels, const double sampleRate);
-PlankResult pl_AudioFileWriter_SetFormatOpus (PlankAudioFileWriterRef p, const float quality, const int numChannels, const double sampleRate, const double frameDuration);
-PlankResult pl_AudioFileWriter_SetFormatOpusManaged (PlankAudioFileWriterRef p, const int nominalBitRate, const int numChannels, const double sampleRate, const double frameDuration);
+PlankResult pl_AudioFileWriter_SetFormatWAV (PlankAudioFileWriterRef p, const int bitsPerSample, const PlankChannelLayout channelLayout, const double sampleRate, const PlankB isFloat);
+PlankResult pl_AudioFileWriter_SetFormatAIFF (PlankAudioFileWriterRef p, const int bitsPerSample, const PlankChannelLayout channelLayout, const double sampleRate);
+PlankResult pl_AudioFileWriter_SetFormatAIFC (PlankAudioFileWriterRef p, const int bitsPerSample, const PlankChannelLayout channelLayout, const double sampleRate, const PlankB isFloat, const PlankB isLittleEndian);
+PlankResult pl_AudioFileWriter_SetFormatCAF (PlankAudioFileWriterRef p, const int bitsPerSample, const PlankChannelLayout channelLayout, const double sampleRate, const PlankB isFloat, const PlankB isLittleEndian);
+PlankResult pl_AudioFileWriter_SetFormatW64 (PlankAudioFileWriterRef p, const int bitsPerSample, const PlankChannelLayout channelLayout, const double sampleRate, const PlankB isFloat);
+PlankResult pl_AudioFileWriter_SetFormatOggVorbis (PlankAudioFileWriterRef p, const float quality, const PlankChannelLayout channelLayout, const double sampleRate);
+PlankResult pl_AudioFileWriter_SetFormatOggVorbisManaged (PlankAudioFileWriterRef p, const int minBitRate, const int nominalBitRate, const int maxBitRate, const PlankChannelLayout channelLayout, const double sampleRate);
+PlankResult pl_AudioFileWriter_SetFormatOpus (PlankAudioFileWriterRef p, const float quality, const PlankChannelLayout channelLayout, const double sampleRate, const double frameDuration);
+PlankResult pl_AudioFileWriter_SetFormatOpusManaged (PlankAudioFileWriterRef p, const int nominalBitRate, const PlankChannelLayout channelLayout, const double sampleRate, const double frameDuration);
 
 /** */
 PlankResult pl_AudioFileWriter_Open (PlankAudioFileWriterRef p, const char* filepath);
@@ -119,6 +119,7 @@ PlankResult pl_AudioFileWriter_SetHeaderPad (PlankAudioFileWriterRef p, const Pl
 
 PlankResult pl_AudioFileWriter_SetChannelItentifier (PlankAudioFileWriterRef p, const int channel, const PlankChannelIdentifier channelIdentifier);
 PlankResult pl_AudioFileWriter_GetChannelItentifier (PlankAudioFileWriterRef p, const int channel, PlankChannelIdentifier* identifier);
+PlankResult pl_AudioFileWriter_SetChanneLayout (PlankAudioFileWriterRef p, const PlankChannelLayout layout);
 PlankResult pl_AudioFileWriter_GetChanneLayout (PlankAudioFileWriterRef p, PlankChannelLayout* layout);
 
 
