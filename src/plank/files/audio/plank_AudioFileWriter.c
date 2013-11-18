@@ -301,6 +301,12 @@ PlankAudioFileMetaDataRef pl_AudioFileWriter_GetMetaData (PlankAudioFileWriterRe
     return p->metaData;
 }
 
+PlankResult pl_AudioFileWriter_GetNumChannels (PlankAudioFileWriterRef p, int* numChannels)
+{
+    *numChannels = pl_AudioFileFormatInfo_GetNumChannels (&p->formatInfo);
+    return PlankResult_OK;
+}
+
 PlankResult pl_AudioFileWriter_SetFormatWAV (PlankAudioFileWriterRef p, const int bitsPerSample, const PlankChannelLayout channelLayout, const double sampleRate, const PlankB isFloat)
 {
     PlankUI numChannels;
@@ -846,7 +852,7 @@ PlankResult pl_AudioFileWriter_SetChanneLayout (PlankAudioFileWriterRef p, const
     return pl_AudioFileFormatInfo_LayoutToFormatChannelIdentifiers (&p->formatInfo, layout);
 }
 
-PlankResult pl_AudioFileWriter_GetChanneLayout (PlankAudioFileWriterRef p, PlankChannelLayout* layout)
+PlankResult pl_AudioFileWriter_GetChannelLayout (PlankAudioFileWriterRef p, PlankChannelLayout* layout)
 {
     *layout = pl_AudioFileFormatInfo_GetChannelLayout (&p->formatInfo);
     return PlankResult_OK;
@@ -1934,7 +1940,7 @@ PlankResult pl_AudioFileWriter_Iff_WriteFrames (PlankAudioFileWriterRef p, const
     int numSamplesRemaining, numSamplesThisTime, numBufferSamples, bytesPerSample, numBytes, i, numChannels;
     
     iff = (PlankIffFileWriterRef)p->peer;
-    numChannels = (int)pl_AudioFileFormatInfo_GetNumChannels (&p->formatInfo);
+    numChannels = pl_AudioFileFormatInfo_GetNumChannels (&p->formatInfo);
     bytesPerSample = p->formatInfo.bytesPerFrame / numChannels;
 
     if ((bytesPerSample == 1) || pl_AudioFileWriter_IsEncodingNativeEndian (p))
@@ -2738,12 +2744,12 @@ static PlankResult pl_AudioFileWriter_Opus_OpenInternal (PlankAudioFileWriterRef
         (p->formatInfo.nominalBitRate == p->formatInfo.minimumBitRate) &&
         (p->formatInfo.nominalBitRate == p->formatInfo.maximumBitRate))
     {
-        if ((err = opus_multistream_encoder_ctl (opus->oe, OPUS_SET_BITRATE (bitRate))) != 0) { result = PlankResult_UnknownError; goto exit; }
+        if ((err = opus_multistream_encoder_ctl (opus->oe, OPUS_SET_BITRATE (bitRate))) != 0) { result = PlankResult_AudioFileUnsupportedType; goto exit; }
         if ((err = opus_multistream_encoder_ctl (opus->oe, OPUS_SET_VBR (0))) != 0) { result = PlankResult_UnknownError; goto exit; }
     }
     else
     {
-        if ((err = opus_multistream_encoder_ctl (opus->oe, OPUS_SET_BITRATE (bitRate))) != 0) { result = PlankResult_UnknownError; goto exit; }
+        if ((err = opus_multistream_encoder_ctl (opus->oe, OPUS_SET_BITRATE (bitRate))) != 0) { result = PlankResult_AudioFileUnsupportedType; goto exit; }
         if ((err = opus_multistream_encoder_ctl (opus->oe, OPUS_SET_COMPLEXITY (quality))) != 0) { result = PlankResult_UnknownError; goto exit; }
     }
     

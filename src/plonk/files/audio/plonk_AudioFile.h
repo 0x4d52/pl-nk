@@ -142,7 +142,272 @@ public:
         RemoveCuePoints = 2,
         ConvertCuePointsToRegionsRemovingCuePoints = 3
     };
+    
+    enum ChannelIdentifiers
+    {
+        ChannelNone = PLANKAUDIOFILE_CHANNEL_NONE,
+        ChannelFrontLeft = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT,
+        ChannelFrontRight = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT,
+        ChannelFrontCenter = PLANKAUDIOFILE_CHANNEL_FRONT_CENTER,
+        ChannelLowFrequency = PLANKAUDIOFILE_CHANNEL_LOW_FREQUENCY,
+        ChannelBackLeft = PLANKAUDIOFILE_CHANNEL_BACK_LEFT,
+        ChannelBackRight = PLANKAUDIOFILE_CHANNEL_BACK_RIGHT,
+        ChannelFrontLeftOfCenter = PLANKAUDIOFILE_CHANNEL_FRONT_LEFT_OF_CENTER,
+        ChannelFrontRightOfCenter = PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT_OF_CENTER,
+        ChannelBackCenter = PLANKAUDIOFILE_CHANNEL_BACK_CENTER,
+        ChannelSideLeft = PLANKAUDIOFILE_CHANNEL_SIDE_LEFT,
+        ChannelSideRight = PLANKAUDIOFILE_CHANNEL_SIDE_RIGHT,
+        ChannelTopCenter = PLANKAUDIOFILE_CHANNEL_TOP_CENTER,
+        ChannelTopFrontLeft = PLANKAUDIOFILE_CHANNEL_TOP_FRONT_LEFT,
+        ChannelTopFrontCenter = PLANKAUDIOFILE_CHANNEL_TOP_FRONT_CENTER,
+        ChannelTopFrontRight = PLANKAUDIOFILE_CHANNEL_TOP_FRONT_RIGHT,
+        ChannelTopBackLeft = PLANKAUDIOFILE_CHANNEL_TOP_BACK_LEFT,
+        ChannelTopBackCenter = PLANKAUDIOFILE_CHANNEL_TOP_BACK_CENTER,
+        ChannelTopBackRight = PLANKAUDIOFILE_CHANNEL_TOP_BACK_RIGHT,
+        ChannelUNUSED0 = PLANKAUDIOFILE_CHANNEL_UNUSED0,
+        ChannelUNUSED1 = PLANKAUDIOFILE_CHANNEL_UNUSED1,
+        ChannelUNUSED2 = PLANKAUDIOFILE_CHANNEL_UNUSED2,
+        ChannelUNUSED3 = PLANKAUDIOFILE_CHANNEL_UNUSED3,
+        ChannelUNUSED4 = PLANKAUDIOFILE_CHANNEL_UNUSED4,
+        ChannelBitStream1Left = PLANKAUDIOFILE_CHANNEL_BITSTREAM_1_LEFT,
+        ChannelBitStream1Right = PLANKAUDIOFILE_CHANNEL_BITSTREAM_1_RIGHT,
+        ChannelBitStream2Left = PLANKAUDIOFILE_CHANNEL_BITSTREAM_2_LEFT,
+        ChannelBitStream2Right = PLANKAUDIOFILE_CHANNEL_BITSTREAM_2_RIGHT,
+        ChannelStereoLeft = PLANKAUDIOFILE_CHANNEL_STEREO_LEFT,
+        ChannelStereoRight = PLANKAUDIOFILE_CHANNEL_STEREO_RIGHT,
+        ChannelReserved = PLANKAUDIOFILE_CHANNEL_RESERVED,
+        ChannelRearSurroundLeft = PLANKAUDIOFILE_CHANNEL_REAR_SURROUND_LEFT,
+        ChannelRearSurroundRight = PLANKAUDIOFILE_CHANNEL_REAR_SURROUND_RIGHT,
+        ChannelLeftWide = PLANKAUDIOFILE_CHANNEL_LEFT_WIDE,
+        ChannelRightWide = PLANKAUDIOFILE_CHANNEL_RIGHT_WIDE,
+        ChannelLowFrequencyExtra = PLANKAUDIOFILE_CHANNEL_LOW_FREQUENCY_EXTRA,
+        ChannelLeftTotal = PLANKAUDIOFILE_CHANNEL_LEFT_TOTAL,
+        ChannelRightTotal = PLANKAUDIOFILE_CHANNEL_RIGHT_TOTAL,
+        ChannelHearingImpaired = PLANKAUDIOFILE_CHANNEL_HEARING_IMPAIRED,
+        ChannelNarration = PLANKAUDIOFILE_CHANNEL_NARRATION,
+        ChannelMono = PLANKAUDIOFILE_CHANNEL_MONO,
+        ChannelDialogueCentricMix = PLANKAUDIOFILE_CHANNEL_DIALOGCENTRICMIX,
+        ChannelCenterSurroundDirect = PLANKAUDIOFILE_CHANNEL_CENTERSURROUND_DIRECT,
+        ChannelHaptic = PLANKAUDIOFILE_CHANNEL_HAPTIC,
+        ChannelUseCooords = PLANKAUDIOFILE_CHANNEL_USE_COORDS,
+        ChannelAmbisonicW = PLANKAUDIOFILE_CHANNEL_AMBISONIC_W,
+        ChannelAmbisonicX = PLANKAUDIOFILE_CHANNEL_AMBISONIC_X,
+        ChannelAmbisonicY = PLANKAUDIOFILE_CHANNEL_AMBISONIC_Y,
+        ChannelAmbisonicZ = PLANKAUDIOFILE_CHANNEL_AMBISONIC_Z,
+        ChannelMSMid = PLANKAUDIOFILE_CHANNEL_MS_MID,
+        ChannelMSSide = PLANKAUDIOFILE_CHANNEL_MS_SIDE,
+        ChannelXYX = PLANKAUDIOFILE_CHANNEL_XY_X,
+        ChannelXYY = PLANKAUDIOFILE_CHANNEL_XY_Y,
+        ChannelHeadphonesLeft = PLANKAUDIOFILE_CHANNEL_HEADPHONES_LEFT,
+        ChannelHeadphonesRight = PLANKAUDIOFILE_CHANNEL_HEADPHONES_RIGHT,
+        ChannelClickTrack = PLANKAUDIOFILE_CHANNEL_CLICK_TRACK,
+        ChannelForeignLanguage = PLANKAUDIOFILE_CHANNEL_FOREIGN_LANGUAGE,
+        ChannelDiscrete = PLANKAUDIOFILE_CHANNEL_DISCRETE,
+        ChannelDiscreteN = PLANKAUDIOFILE_CHANNEL_DISCRETE_N,
+        ChannelUnknown = PLANKAUDIOFILE_CHANNEL_UNKNOWN
+    };
+    
+    enum ChannelLayouts
+    {
+        LayoutUndeifine = PLANKAUDIOFILE_LAYOUT_UNDEFINED,
+        LayoutUseChannelBitMap = PLANKAUDIOFILE_LAYOUT_USECHANNELBITMAP,
+        LayoutStandardMinimum = PLANKAUDIOFILE_LAYOUT_STANARDMINIMUM,
+        LayoutMono = PLANKAUDIOFILE_LAYOUT_MONO,
+        LayoutStereo = PLANKAUDIOFILE_LAYOUT_STEREO,
+        LayoutStereoHeadphones = PLANKAUDIOFILE_LAYOUT_STEREOHEADPHONES,
+        LayoutMatrixStereo = PLANKAUDIOFILE_LAYOUT_MATRIXSTEREO,
+        LayoutMidSide = PLANKAUDIOFILE_LAYOUT_MIDSIDE,
+        LayoutXY = PLANKAUDIOFILE_LAYOUT_XY,
+        LayoutBinaural = PLANKAUDIOFILE_LAYOUT_BINAURAL,
+        LayoutAmbisonicBFormat = PLANKAUDIOFILE_LAYOUT_AMBISONIC_B_FORMAT,
+        LayoutQuadraphonic = PLANKAUDIOFILE_LAYOUT_QUADRAPHONIC,
+        LayoutPentagonal = PLANKAUDIOFILE_LAYOUT_PENTAGONAL,
+        LayoutHexagonal = PLANKAUDIOFILE_LAYOUT_HEXAGONAL,
+        LayoutOctagonal = PLANKAUDIOFILE_LAYOUT_OCTAGONAL,
+        LayoutCube = PLANKAUDIOFILE_LAYOUT_CUBE,
+        LayoutMPEG_1_0 = PLANKAUDIOFILE_LAYOUT_MPEG_1_0,
+        LayoutMPEG_2_0 = PLANKAUDIOFILE_LAYOUT_MPEG_2_0,
+        LayoutMPEG_3_0_A = PLANKAUDIOFILE_LAYOUT_MPEG_3_0_A,
+        LayoutMPEG_3_0_B = PLANKAUDIOFILE_LAYOUT_MPEG_3_0_B,
+        LayoutMPEG_4_0_A = PLANKAUDIOFILE_LAYOUT_MPEG_4_0_A,
+        LayoutMPEG_4_0_B = PLANKAUDIOFILE_LAYOUT_MPEG_4_0_B,
+        LayoutMPEG_5_0_A = PLANKAUDIOFILE_LAYOUT_MPEG_5_0_A,
+        LayoutMPEG_5_0_B = PLANKAUDIOFILE_LAYOUT_MPEG_5_0_B,
+        LayoutMPEG_5_0_C = PLANKAUDIOFILE_LAYOUT_MPEG_5_0_C,
+        LayoutMPEG_5_0_D = PLANKAUDIOFILE_LAYOUT_MPEG_5_0_D,
+        LayoutMPEG_5_1_A = PLANKAUDIOFILE_LAYOUT_MPEG_5_1_A,
+        LayoutMPEG_5_1_B = PLANKAUDIOFILE_LAYOUT_MPEG_5_1_B,
+        LayoutMPEG_5_1_C = PLANKAUDIOFILE_LAYOUT_MPEG_5_1_C,
+        LayoutMPEG_5_1_D = PLANKAUDIOFILE_LAYOUT_MPEG_5_1_D,
+        LayoutMPEG_6_1_A = PLANKAUDIOFILE_LAYOUT_MPEG_6_1_A,
+        LayoutMPEG_7_1_A = PLANKAUDIOFILE_LAYOUT_MPEG_7_1_A,
+        LayoutMPEG_7_1_B = PLANKAUDIOFILE_LAYOUT_MPEG_7_1_B,
+        LayoutMPEG_7_1_C = PLANKAUDIOFILE_LAYOUT_MPEG_7_1_C,
+        LayoutEmagicDefault_7_1 = PLANKAUDIOFILE_LAYOUT_EMAGIC_DEFAULT_7_1,
+        LayoutSMPTE_DTV = PLANKAUDIOFILE_LAYOUT_SMPTE_DTV,
+        LayoutITU_1_0 = PLANKAUDIOFILE_LAYOUT_ITU_1_0,
+        LayoutITU_2_0 = PLANKAUDIOFILE_LAYOUT_ITU_2_0,
+        LayoutITU_2_1 = PLANKAUDIOFILE_LAYOUT_ITU_2_1,
+        LayoutITU_2_2 = PLANKAUDIOFILE_LAYOUT_ITU_2_2,
+        LayoutITU_3_0 = PLANKAUDIOFILE_LAYOUT_ITU_3_0,
+        LayoutITU_3_1 = PLANKAUDIOFILE_LAYOUT_ITU_3_1,
+        LayoutITU_3_2 = PLANKAUDIOFILE_LAYOUT_ITU_3_2,
+        LayoutITU_3_2_1 = PLANKAUDIOFILE_LAYOUT_ITU_3_2_1,
+        LayoutITU_3_4_1 = PLANKAUDIOFILE_LAYOUT_ITU_3_4_1,
+        LayoutDVD_0 = PLANKAUDIOFILE_LAYOUT_DVD_0,
+        LayoutDVD_1 = PLANKAUDIOFILE_LAYOUT_DVD_1,
+        LayoutDVD_2 = PLANKAUDIOFILE_LAYOUT_DVD_2,
+        LayoutDVD_3 = PLANKAUDIOFILE_LAYOUT_DVD_3,
+        LayoutDVD_4 = PLANKAUDIOFILE_LAYOUT_DVD_4,
+        LayoutDVD_5 = PLANKAUDIOFILE_LAYOUT_DVD_5,
+        LayoutDVD_6 = PLANKAUDIOFILE_LAYOUT_DVD_6,
+        LayoutDVD_7 = PLANKAUDIOFILE_LAYOUT_DVD_7,
+        LayoutDVD_8 = PLANKAUDIOFILE_LAYOUT_DVD_8,
+        LayoutDVD_9 = PLANKAUDIOFILE_LAYOUT_DVD_9,
+        LayoutDVD_10 = PLANKAUDIOFILE_LAYOUT_DVD_10,
+        LayoutDVD_11 = PLANKAUDIOFILE_LAYOUT_DVD_11,
+        LayoutDVD_12 = PLANKAUDIOFILE_LAYOUT_DVD_12,
+        LayoutDVD_13 = PLANKAUDIOFILE_LAYOUT_DVD_13,
+        LayoutDVD_14 = PLANKAUDIOFILE_LAYOUT_DVD_14,
+        LayoutDVD_15 = PLANKAUDIOFILE_LAYOUT_DVD_15,
+        LayoutDVD_16 = PLANKAUDIOFILE_LAYOUT_DVD_16,
+        LayoutDVD_17 = PLANKAUDIOFILE_LAYOUT_DVD_17,
+        LayoutDVD_18 = PLANKAUDIOFILE_LAYOUT_DVD_18,
+        LayoutDVD_19 = PLANKAUDIOFILE_LAYOUT_DVD_19,
+        LayoutDVD_20 = PLANKAUDIOFILE_LAYOUT_DVD_20,
+        LayoutAudioUnit_4 = PLANKAUDIOFILE_LAYOUT_AUDIOUNIT_4,
+        LayoutAudioUnit_5 = PLANKAUDIOFILE_LAYOUT_AUDIOUNIT_5,
+        LayoutAudioUnit_6 = PLANKAUDIOFILE_LAYOUT_AUDIOUNIT_6,
+        LayoutAudioUnit_8 = PLANKAUDIOFILE_LAYOUT_AUDIOUNIT_8,
+        LayoutAudioUnit_5_0 = PLANKAUDIOFILE_LAYOUT_AUDIOUNIT_5_0,
+        LayoutAudioUnit_6_0 = PLANKAUDIOFILE_LAYOUT_AUDIOUNIT_6_0,
+        LayoutAudioUnit_7_0 = PLANKAUDIOFILE_LAYOUT_AUDIOUNIT_7_0,
+        LayoutAudioUnit_7_0_Front = PLANKAUDIOFILE_LAYOUT_AUDIOUNIT_7_0_FRONT,
+        LayoutAudioUnit_5_1 = PLANKAUDIOFILE_LAYOUT_AUDIOUNIT_5_1,
+        LayoutAudioUnit_6_1 = PLANKAUDIOFILE_LAYOUT_AUDIOUNIT_6_1,
+        LayoutAudioUnit_7_1 = PLANKAUDIOFILE_LAYOUT_AUDIOUNIT_7_1,
+        LayoutAudioUnit_7_1_Front = PLANKAUDIOFILE_LAYOUT_AUDIOUNIT_7_1_FRONT,
+        LayoutAAC_3_0 = PLANKAUDIOFILE_LAYOUT_AAC_3_0,
+        LayoutAAC_Quadraphonic = PLANKAUDIOFILE_LAYOUT_AAC_QUADRAPHONIC,
+        LayoutAAC_4_0 = PLANKAUDIOFILE_LAYOUT_AAC_4_0,
+        LayoutAAC_5_0 = PLANKAUDIOFILE_LAYOUT_AAC_5_0,
+        LayoutAAC_5_1 = PLANKAUDIOFILE_LAYOUT_AAC_5_1,
+        LayoutAAC_6_0 = PLANKAUDIOFILE_LAYOUT_AAC_6_0,
+        LayoutAAC_6_1 = PLANKAUDIOFILE_LAYOUT_AAC_6_1,
+        LayoutAAC_7_0 = PLANKAUDIOFILE_LAYOUT_AAC_7_0,
+        LayoutAAC_7_1 = PLANKAUDIOFILE_LAYOUT_AAC_7_1,
+        LayoutAAC_Octagonal = PLANKAUDIOFILE_LAYOUT_AAC_OCTAGONAL,
+        LayoutTMH_10_2_STD = PLANKAUDIOFILE_LAYOUT_TMH_10_2_STD,
+        LayoutTMH_10_2_Full = PLANKAUDIOFILE_LAYOUT_TMH_10_2_FULL,
+        LayoutAC3_1_0_1 = PLANKAUDIOFILE_LAYOUT_AC3_1_0_1,
+        LayoutAC3_3_0 = PLANKAUDIOFILE_LAYOUT_AC3_3_0,
+        LayoutAC3_3_1 = PLANKAUDIOFILE_LAYOUT_AC3_3_1,
+        LayoutAC3_3_0_1 = PLANKAUDIOFILE_LAYOUT_AC3_3_0_1,
+        LayoutAC3_2_1_1 = PLANKAUDIOFILE_LAYOUT_AC3_2_1_1,
+        LayoutAC3_3_1_1 = PLANKAUDIOFILE_LAYOUT_AC3_3_1_1,
+        LayoutEAC_6_0_A = PLANKAUDIOFILE_LAYOUT_EAC_6_0_A,
+        LayoutEAC_7_0_A = PLANKAUDIOFILE_LAYOUT_EAC_7_0_A,
+        LayoutEAC3_6_1_A = PLANKAUDIOFILE_LAYOUT_EAC3_6_1_A,
+        LayoutEAC3_6_1_B = PLANKAUDIOFILE_LAYOUT_EAC3_6_1_B,
+        LayoutEAC3_6_1_C = PLANKAUDIOFILE_LAYOUT_EAC3_6_1_C,
+        LayoutEAC3_7_1_A = PLANKAUDIOFILE_LAYOUT_EAC3_7_1_A,
+        LayoutEAC3_7_1_B = PLANKAUDIOFILE_LAYOUT_EAC3_7_1_B,
+        LayoutEAC3_7_1_C = PLANKAUDIOFILE_LAYOUT_EAC3_7_1_C,
+        LayoutEAC3_7_1_D = PLANKAUDIOFILE_LAYOUT_EAC3_7_1_D,
+        LayoutEAC3_7_1_E = PLANKAUDIOFILE_LAYOUT_EAC3_7_1_E,
+        LayoutEAC3_7_1_F = PLANKAUDIOFILE_LAYOUT_EAC3_7_1_F,
+        LayoutEAC3_7_1_G = PLANKAUDIOFILE_LAYOUT_EAC3_7_1_G,
+        LayoutEAC3_7_1_H = PLANKAUDIOFILE_LAYOUT_EAC3_7_1_H,
+        LayoutDTS_3_1 = PLANKAUDIOFILE_LAYOUT_DTS_3_1,
+        LayoutDTS_4_1 = PLANKAUDIOFILE_LAYOUT_DTS_4_1,
+        LayoutDTS_6_0_A = PLANKAUDIOFILE_LAYOUT_DTS_6_0_A,
+        LayoutDTS_6_0_B = PLANKAUDIOFILE_LAYOUT_DTS_6_0_B,
+        LayoutDTS_6_0_C = PLANKAUDIOFILE_LAYOUT_DTS_6_0_C,
+        LayoutDTS_6_1_A = PLANKAUDIOFILE_LAYOUT_DTS_6_1_A,
+        LayoutDTS_6_1_B = PLANKAUDIOFILE_LAYOUT_DTS_6_1_B,
+        LayoutDTS_6_1_C = PLANKAUDIOFILE_LAYOUT_DTS_6_1_C,
+        LayoutDTS_7_0 = PLANKAUDIOFILE_LAYOUT_DTS_7_0,
+        LayoutDTS_7_1 = PLANKAUDIOFILE_LAYOUT_DTS_7_1,
+        LayoutDTS_8_0_A = PLANKAUDIOFILE_LAYOUT_DTS_8_0_A,
+        LayoutDTS_8_0_B = PLANKAUDIOFILE_LAYOUT_DTS_8_0_B,
+        LayoutDTS_8_1_A = PLANKAUDIOFILE_LAYOUT_DTS_8_1_A,
+        LayoutDTS_8_1_B = PLANKAUDIOFILE_LAYOUT_DTS_8_1_B,
+        LayoutDTS_6_1_D = PLANKAUDIOFILE_LAYOUT_DTS_6_1_D,
+        LayoutDiscrete = PLANKAUDIOFILE_LAYOUT_DISCRETE,
+        LayoutUnknown = PLANKAUDIOFILE_LAYOUT_UNKNOWN,
+        LayoutOggVorbis_6_1 = PLANKAUDIOFILE_LAYOUT_OGGVORBIS_6_1,
+        LayoutOggVorbis_7_1 = PLANKAUDIOFILE_LAYOUT_OGGVORBIS_7_1,
+        LayoutAIFF_6_0 = PLANKAUDIOFILE_LAYOUT_AIFF_6_0,
+        LayoutStereoPairs = PLANKAUDIOFILE_LAYOUT_STEREOPAIRS
+    };
 
 };
+
+
+
+class ChannelLayout : public PlonkBase
+{
+public:
+    ChannelLayout (PlankChannelLayout const& value) throw()
+    :   peer (value)
+    {
+    }
+    
+    operator const UnsignedInt& () const throw()
+    {
+        return static_cast<const UnsignedInt&> (peer);
+    }
+    
+    const UnsignedInt& getValue() const throw()
+    {
+        return static_cast<const UnsignedInt&> (peer);
+    }
+    
+    Text getName() const throw()
+    {
+        return pl_AudioFileFormatInfoChannelLayoutToName (peer);
+    }
+    
+    UnsignedInt getNumChannels() const throw()
+    {
+        return static_cast<UnsignedInt> (peer) & 0x0000FFFF;
+    }
+    
+private:
+    PlankChannelLayout peer;
+};
+
+class ChannelIdentifier : public PlonkBase
+{
+public:
+    ChannelIdentifier (PlankChannelIdentifier const& value) throw()
+    :   peer (value)
+    {
+    }
+    
+    operator const UnsignedInt& () const throw()
+    {
+        return static_cast<const UnsignedInt&> (peer);
+    }
+    
+    const UnsignedInt& getValue() const throw()
+    {
+        return static_cast<const UnsignedInt&> (peer);
+    }
+    
+    Text getName() const throw()
+    {
+        return pl_AudioFileFormatInfoChannelIdentifierToName (peer);
+    }
+    
+    bool isPairWith (ChannelIdentifier const& other) const throw()
+    {
+        return pl_AudioFileFormatInfoChannelIdentifiersArePair (peer, other.peer);
+    }
+    
+private:
+    PlankChannelIdentifier peer;
+};
+
 
 #endif // PLONK_AUDIOFILE_H

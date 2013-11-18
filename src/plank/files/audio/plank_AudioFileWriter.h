@@ -120,7 +120,8 @@ PlankResult pl_AudioFileWriter_SetHeaderPad (PlankAudioFileWriterRef p, const Pl
 PlankResult pl_AudioFileWriter_SetChannelItentifier (PlankAudioFileWriterRef p, const int channel, const PlankChannelIdentifier channelIdentifier);
 PlankResult pl_AudioFileWriter_GetChannelItentifier (PlankAudioFileWriterRef p, const int channel, PlankChannelIdentifier* identifier);
 PlankResult pl_AudioFileWriter_SetChanneLayout (PlankAudioFileWriterRef p, const PlankChannelLayout layout);
-PlankResult pl_AudioFileWriter_GetChanneLayout (PlankAudioFileWriterRef p, PlankChannelLayout* layout);
+PlankResult pl_AudioFileWriter_GetChannelLayout (PlankAudioFileWriterRef p, PlankChannelLayout* layout);
+PlankResult pl_AudioFileWriter_GetNumChannels (PlankAudioFileWriterRef p, int* numChannels);
 
 
 /** @} */

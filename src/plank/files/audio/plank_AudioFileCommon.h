@@ -479,54 +479,6 @@ typedef PlankUI PlankChannelLayout;
     #include "../../../../ext/vorbis/vorbis/vorbisenc.h"
     #include "../../../../ext/vorbis/vorbis/codec.h"
     #include "../../../../ext/vorbis/vorbis/vorbisfile.h"
-
-/*
- 
-                      Num-coupled   Force narrow     The channel map
-one channel : 1     { 0,            0,               0               },
-the stream is monophonic
- 
-two channels : 2    { 1,            0,               0,1             },
-the stream is stereo. channel order: left, right
-
-three channels : 3  { 1,            0,               0,2,1           },
-the stream is a 1d-surround encoding. channel order: left, center, right
-
-four channels : 4   { 2,            0,               0,1,2,3         },
-the stream is quadraphonic surround. channel order: front left, front right, rear left, rear right
-
-five channels : 5   { 2,            0,               0,4,1,2,3       },
-the stream is five-channel surround. channel order: front left, center, front right, rear left, rear right
-
-six channels : 6    { 2,            1<<3,            0,4,1,2,3,5     },
-the stream is 5.1 surround. channel order: front left, center, front right, rear left, rear right, LFE
-
-seven channels : 7  { 2,            1<<4,            0,4,1,2,3,5,6   },
-the stream is 6.1 surround. channel order: front left, center, front right, side left, side right, rear center, LFE
-
-eight channels : 8  { 3,            1<<4,            0,6,1,2,3,4,5,7 }
-the stream is 7.1 surround. channel order: front left, center, front right, side left, side right, rear left, rear right, LFE
- 
- 
- Stream count 'N'
- 
- This field indicates the total number of streams so the decoder can correctly parse the packed Opus packets inside the Ogg packet.
- 
- For channel mapping family 0, this value defaults to 1, and is not coded.
- 
- A multi-channel Opus file is composed of one or more individual Opus streams, each of which produce one or two channels of decoded data. Each Ogg packet contains one Opus packet from each stream. The first N-1 Opus packets are packed using the self-delimiting framing from Appendix B of the Opus Specification. The remaining Opus packet is packed using the regular, undelimited framing from Section 3 of the Opus Specification. All the Opus packets in a single Ogg packet MUST be constrained to produce the same number of decoded samples. A decoder SHOULD treat any Opus packet whose duration is different from that of the first Opus packet in an Ogg packet as if it were an Opus packet with an illegal TOC sequence.
- 
- Two-channel stream count 'M'
- 
- Describes the number of streams whose decoders should be configured to produce two channels. This must be no larger than the number of total streams.
- 
- For channel mapping family 0, this value defaults to c-1 (i.e., 0 for mono and 1 for stereo), and is not coded.
- 
- Each packet in an Opus stream has an internal channel count of 1 or 2, which can change from packet to packet. This is selected by the encoder depending on the bitrate and the contents being encoded. The original channel count of the encoder input is not preserved by the lossy compression.
- 
- Regardless of the internal channel count, any Opus stream may be decoded as mono (a single channel) or stereo (two channels) by appropriate initialization of the decoder. The "two-channel stream count" field indicates that the first M Opus decoders should be initialized in stereo mode, and the remaining N-M decoders should be initialized in mono mode. The total number of decoded channels (M+N) MUST be no larger than 255, as there is no way to index more channels than that in the channel mapping.
-*/
-
 #endif
 
 #if PLANK_OPUS

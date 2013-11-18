@@ -138,36 +138,39 @@ static inline void pl_VectorAbsF_NN (float *result, const float* a, PlankUL N)
 }
 
 
-#ifdef PLANK_IOS
-// no vForce on iOS
-static inline void pl_VectorReciprocalF_NN (float *result, const float* a, PlankUL N) 
-{ 
-    float one = 1.f;
-    vDSP_vfill (&one, result, 1, N); 
-    vDSP_vdiv (result, 1, (float*)a, 1, result, 1, N); 
-}
+//#ifdef PLANK_IOS
+//// no vForce on iOS
+//static inline void pl_VectorReciprocalF_NN (float *result, const float* a, PlankUL N) 
+//{ 
+//    float one = 1.f;
+//    vDSP_vfill (&one, result, 1, N); 
+//    vDSP_vdiv (result, 1, (float*)a, 1, result, 1, N); 
+//}
+//
+//PLANK_VECTORUNARYOP_DEFINE(Log2,F)
+//PLANK_VECTORUNARYOP_DEFINE(Sin,F)
+//PLANK_VECTORUNARYOP_DEFINE(Cos,F)
+//PLANK_VECTORUNARYOP_DEFINE(Tan,F)
+//PLANK_VECTORUNARYOP_DEFINE(Asin,F)
+//PLANK_VECTORUNARYOP_DEFINE(Acos,F)
+//PLANK_VECTORUNARYOP_DEFINE(Atan,F)
+//PLANK_VECTORUNARYOP_DEFINE(Sinh,F)
+//PLANK_VECTORUNARYOP_DEFINE(Cosh,F)
+//PLANK_VECTORUNARYOP_DEFINE(Tanh,F)
+//PLANK_VECTORUNARYOP_DEFINE(Sqrt,F)
+//PLANK_VECTORUNARYOP_DEFINE(Log,F)
+//PLANK_VECTORUNARYOP_DEFINE(Log10,F)
+//PLANK_VECTORUNARYOP_DEFINE(Exp,F)
+//PLANK_VECTORUNARYOP_DEFINE(Ceil,F)
+//PLANK_VECTORUNARYOP_DEFINE(Floor,F)
+//
+//PLANK_VECTORBINARYOP_DEFINE(Pow,F)
+//PLANK_VECTORBINARYOP_DEFINE(Atan2,F)
+//#else
+//// use vForce on MacOS
 
-PLANK_VECTORUNARYOP_DEFINE(Log2,F)
-PLANK_VECTORUNARYOP_DEFINE(Sin,F)
-PLANK_VECTORUNARYOP_DEFINE(Cos,F)
-PLANK_VECTORUNARYOP_DEFINE(Tan,F)
-PLANK_VECTORUNARYOP_DEFINE(Asin,F)
-PLANK_VECTORUNARYOP_DEFINE(Acos,F)
-PLANK_VECTORUNARYOP_DEFINE(Atan,F)
-PLANK_VECTORUNARYOP_DEFINE(Sinh,F)
-PLANK_VECTORUNARYOP_DEFINE(Cosh,F)
-PLANK_VECTORUNARYOP_DEFINE(Tanh,F)
-PLANK_VECTORUNARYOP_DEFINE(Sqrt,F)
-PLANK_VECTORUNARYOP_DEFINE(Log,F)
-PLANK_VECTORUNARYOP_DEFINE(Log10,F)
-PLANK_VECTORUNARYOP_DEFINE(Exp,F)
-PLANK_VECTORUNARYOP_DEFINE(Ceil,F)
-PLANK_VECTORUNARYOP_DEFINE(Floor,F)
+// vForce on MacOS and iOS as of iOS5
 
-PLANK_VECTORBINARYOP_DEFINE(Pow,F)
-PLANK_VECTORBINARYOP_DEFINE(Atan2,F)
-#else
-// use vForce on MacOS
 static inline void pl_VectorReciprocalF_NN (float *result, const float* a, PlankUL N)   { const int n = (int)N; vvrecf (result, a, &n); }
 PLANK_VECTORUNARYOP_DEFINE(Log2,F)
 static inline void pl_VectorSinF_NN (float *result, const float* a, PlankUL N)          { const int n = (int)N; vvsinf (result, a, &n); }
@@ -225,7 +228,7 @@ static inline void pl_VectorAtan2F_N1N (float *result, float a, const float* b, 
     vDSP_vfill (&a, result, 1, N); 
     vvatan2f (result, result, b, &n); 
 }
-#endif
+//#endif
 
 PLANK_VECTORBINARYOP_DEFINE(IsEqualTo,F)
 PLANK_VECTORBINARYOP_DEFINE(IsNotEqualTo,F)
@@ -652,36 +655,39 @@ static inline void pl_VectorAbsD_NN (double *result, const double* a, PlankUL N)
 }
 
 
-#ifdef PLANK_IOS
-// no vForce on iOS
-static inline void pl_VectorReciprocalD_NN (double *result, const double* a, PlankUL N) 
-{ 
-    double one = 1.0;
-    vDSP_vfillD (&one, result, 1, N); 
-    vDSP_vdivD (result, 1, (double*)a, 1, result, 1, N); 
-}
+//#ifdef PLANK_IOS 
+//// no vForce on iOS
+//static inline void pl_VectorReciprocalD_NN (double *result, const double* a, PlankUL N) 
+//{ 
+//    double one = 1.0;
+//    vDSP_vfillD (&one, result, 1, N); 
+//    vDSP_vdivD (result, 1, (double*)a, 1, result, 1, N); 
+//}
+//
+//PLANK_VECTORUNARYOP_DEFINE(Log2,D)
+//PLANK_VECTORUNARYOP_DEFINE(Sin,D)
+//PLANK_VECTORUNARYOP_DEFINE(Cos,D)
+//PLANK_VECTORUNARYOP_DEFINE(Tan,D)
+//PLANK_VECTORUNARYOP_DEFINE(Asin,D)
+//PLANK_VECTORUNARYOP_DEFINE(Acos,D)
+//PLANK_VECTORUNARYOP_DEFINE(Atan,D)
+//PLANK_VECTORUNARYOP_DEFINE(Sinh,D)
+//PLANK_VECTORUNARYOP_DEFINE(Cosh,D)
+//PLANK_VECTORUNARYOP_DEFINE(Tanh,D)
+//PLANK_VECTORUNARYOP_DEFINE(Sqrt,D)
+//PLANK_VECTORUNARYOP_DEFINE(Log,D)
+//PLANK_VECTORUNARYOP_DEFINE(Log10,D)
+//PLANK_VECTORUNARYOP_DEFINE(Exp,D)
+//PLANK_VECTORUNARYOP_DEFINE(Ceil,D)
+//PLANK_VECTORUNARYOP_DEFINE(Floor,D)
+//
+//PLANK_VECTORBINARYOP_DEFINE(Pow,D)
+//PLANK_VECTORBINARYOP_DEFINE(Atan2,D)
+//#else
+//// use vForce on MacOS
 
-PLANK_VECTORUNARYOP_DEFINE(Log2,D)
-PLANK_VECTORUNARYOP_DEFINE(Sin,D)
-PLANK_VECTORUNARYOP_DEFINE(Cos,D)
-PLANK_VECTORUNARYOP_DEFINE(Tan,D)
-PLANK_VECTORUNARYOP_DEFINE(Asin,D)
-PLANK_VECTORUNARYOP_DEFINE(Acos,D)
-PLANK_VECTORUNARYOP_DEFINE(Atan,D)
-PLANK_VECTORUNARYOP_DEFINE(Sinh,D)
-PLANK_VECTORUNARYOP_DEFINE(Cosh,D)
-PLANK_VECTORUNARYOP_DEFINE(Tanh,D)
-PLANK_VECTORUNARYOP_DEFINE(Sqrt,D)
-PLANK_VECTORUNARYOP_DEFINE(Log,D)
-PLANK_VECTORUNARYOP_DEFINE(Log10,D)
-PLANK_VECTORUNARYOP_DEFINE(Exp,D)
-PLANK_VECTORUNARYOP_DEFINE(Ceil,D)
-PLANK_VECTORUNARYOP_DEFINE(Floor,D)
+// vForce on MacOS and iPhone as of iOS5
 
-PLANK_VECTORBINARYOP_DEFINE(Pow,D)
-PLANK_VECTORBINARYOP_DEFINE(Atan2,D)
-#else
-// use vForce on MacOS
 static inline void pl_VectorReciprocalD_NN (double *result, const double* a, PlankUL N)   { const int n = (int)N; vvrec (result, a, &n); }
 PLANK_VECTORUNARYOP_DEFINE(Log2,D)
 static inline void pl_VectorSinD_NN (double *result, const double* a, PlankUL N)          { const int n = (int)N; vvsin (result, a, &n); }
@@ -739,7 +745,7 @@ static inline void pl_VectorAtan2D_N1N (double *result, double a, const double* 
     vDSP_vfillD (&a, result, 1, N); 
     vvatan2 (result, result, b, &n); 
 }
-#endif
+//#endif
 
 PLANK_VECTORBINARYOP_DEFINE(IsEqualTo,D)
 PLANK_VECTORBINARYOP_DEFINE(IsNotEqualTo,D)
