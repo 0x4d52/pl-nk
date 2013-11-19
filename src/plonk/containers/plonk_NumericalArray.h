@@ -237,29 +237,17 @@ public:
         
         const CalcType typePeak (TypeUtility<NumericalType>::getTypePeak());
         const CalcType otherTypePeak (TypeUtility<OtherType>::getTypePeak());
-        const CalcType otherTypePeakFactor = Math<CalcType>::get1() / otherTypePeak;
         
 		UnsignedLong i;
         
-        if (typePeak == Math<CalcType>::get1())
+        for (i = 0; i < numItems; ++i)
         {
-            for (i = 0; i < numItems; ++i)
-            {
-                NumericalType temp;
-                NumericalConverter::roundCopy (src[i], temp);
-                dst[i] = NumericalType (CalcType (temp) * otherTypePeakFactor);
-            }
+            CalcType temp;
+            NumericalConverter::roundCopy (src[i], temp);
+            temp = NumericalType (temp * typePeak / otherTypePeak);
+            dst[i] = temp;
         }
-        else
-        {
-            for (i = 0; i < numItems; ++i)
-            {
-                NumericalType temp;
-                NumericalConverter::roundCopy (src[i], temp);
-                dst[i] = NumericalType (CalcType (temp) * typePeak * otherTypePeakFactor);
-            }
-        }
-    }        
+    }
 };
 
 template<class NumericalType>
@@ -340,6 +328,74 @@ public:
         convertDirect (dst, src, numItems);
         pl_VectorMulF_NN1 (dst, dst, 1.f / PLANK_INTPEAK_F, numItems);
     }    
+};
+
+template<>
+class NumericalArrayConverterBase<short, Int24>
+{
+public:
+    static inline void convertDirect (short* const dst, const Int24* const src, const UnsignedLong numItems) throw()
+    {
+        for (UnsignedLong i = 0; i < numItems; ++i)
+            dst[i] = short (src[i]);
+    }
+    
+    static inline void convertScaled (short* const dst, const Int24* const src, const UnsignedLong numItems) throw()
+    {
+        for (UnsignedLong i = 0; i < numItems; ++i)
+            dst[i] = short (int (src[i]) / 256);
+    }
+};
+
+template<>
+class NumericalArrayConverterBase<Int24, short>
+{
+public:
+    static inline void convertDirect (Int24* const dst, const short* const src, const UnsignedLong numItems) throw()
+    {
+        for (UnsignedLong i = 0; i < numItems; ++i)
+            dst[i] = Int24 (src[i]);
+    }
+    
+    static inline void convertScaled (Int24* const dst, const short* const src, const UnsignedLong numItems) throw()
+    {
+        for (UnsignedLong i = 0; i < numItems; ++i)
+            dst[i] = Int24 (int (src[i]) * 256);
+    }
+};
+
+template<>
+class NumericalArrayConverterBase<int, Int24>
+{
+public:
+    static inline void convertDirect (int* const dst, const Int24* const src, const UnsignedLong numItems) throw()
+    {
+        for (UnsignedLong i = 0; i < numItems; ++i)
+            dst[i] = int (src[i]);
+    }
+    
+    static inline void convertScaled (int* const dst, const Int24* const src, const UnsignedLong numItems) throw()
+    {
+        for (UnsignedLong i = 0; i < numItems; ++i)
+            dst[i] = int (src[i]) * 256;
+    }
+};
+
+template<>
+class NumericalArrayConverterBase<Int24, int>
+{
+public:
+    static inline void convertDirect (Int24* const dst, const int* const src, const UnsignedLong numItems) throw()
+    {
+        for (UnsignedLong i = 0; i < numItems; ++i)
+            dst[i] = Int24 (src[i]);
+    }
+    
+    static inline void convertScaled (Int24* const dst, const int* const src, const UnsignedLong numItems) throw()
+    {
+        for (UnsignedLong i = 0; i < numItems; ++i)
+            dst[i] = Int24 (int (src[i]) / 256);
+    }
 };
 
 template<class SrcType>

@@ -506,7 +506,7 @@ public:
             {
                 reader.readFrames (buffer);
                 framesRead = buffer.length() / numChannels;
-            
+                            
                 if (framesRead == 0) break;
                 
                 this->writeFrames (buffer);

@@ -81,8 +81,11 @@ public:
     void setDefaultNumChannels (const int numChannels) throw();
     void setDefaultSampleRate (const double sampleRate) throw();
     double getDefaultSampleRate() const throw();
-
     double getSampleRate() const throw();
+    
+    ChannelLayout getChannelLayout() const throw();
+    ChannelIdentifier getChannelIdentifier (const int channel) const throw();
+    
     LongLong getNumFrames() const throw();
     LongLong getFramePosition() const throw();
     
@@ -223,8 +226,12 @@ void AudioFileReaderInternal::readFrames (NumericalArray<SampleType>& data,
             plonk_assert (result == PlankResult_OK); // just continue though in release
         }
         
-        int framesRead;
         const int framesToRead = plonk::min (dataRemaining / channels, numFramesPerBuffer);
+        
+        if (framesToRead == 0)
+            break; // not enough data left for one frame
+
+        int framesRead;
         result = pl_AudioFileReader_ReadFrames (getPeerRef(), PLANK_FALSE, framesToRead, readBufferArray, &framesRead);
         plonk_assert ((result == PlankResult_OK) || (result == PlankResult_FileEOF) || (result == PlankResult_AudioFileFrameFormatChanged));
         
@@ -844,6 +851,17 @@ public:
     {
         return this->getInternal()->getCuePointAtIndex (index, cueID, label, position);
     }
+    
+    inline ChannelLayout getChannelLayout() const throw()
+    {
+        return this->getInternal()->getChannelLayout();
+    }
+    
+    inline ChannelIdentifier getChannelIdentifier (const int channel) const throw()
+    {
+        return this->getInternal()->getChannelIdentifier (channel);
+    }
+
 
 
 private:

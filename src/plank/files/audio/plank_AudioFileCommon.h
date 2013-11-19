@@ -256,7 +256,7 @@ typedef struct PlankCAFStringID {
     PlankLL  offset;
 } PlankCAFStringID;
 
-#define PLANKAUDIOFILE_CAF_DEFAULTHEADERPAD         4028
+#define PLANKAUDIOFILE_CAF_DEFAULTHEADERPAD         4016 // 4028
 #define PLANKAUDIOFILE_CAF_DESC_LENGTH              32
 #define PLANKAUDIOFILE_CAF_FLOAT_FLAG               0x00000001 // (1L << 0)
 #define PLANKAUDIOFILE_CAF_LITTLEENDIAN_FLAG        0x00000002 // (1L << 1)

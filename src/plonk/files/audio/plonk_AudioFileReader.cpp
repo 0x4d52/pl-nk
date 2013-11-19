@@ -80,7 +80,7 @@ ResultCode AudioFileReaderInternal::init (const char* path, const bool readMetaD
         PlankAudioFileMetaDataRef metaData = pl_AudioFileReader_GetMetaData (getPeerRef());
         
         if (metaData)
-            result = pl_AudioFileMetaData_SortCuePoints(metaData);
+            result = pl_AudioFileMetaData_SortCuePoints (metaData);
     }
     
     return result;
@@ -554,6 +554,21 @@ double AudioFileReaderInternal::getSampleRate() const throw()
 #endif
     return value;
 }
+
+ChannelLayout AudioFileReaderInternal::getChannelLayout() const throw()
+{
+    PlankChannelLayout layout;
+    pl_AudioFileReader_GetChannelLayout (getPeerRef(), &layout);
+    return layout;
+}
+
+ChannelIdentifier AudioFileReaderInternal::getChannelIdentifier (const int channel) const throw()
+{
+    PlankChannelIdentifier identifier;
+    pl_AudioFileReader_GetChannelItentifier (getPeerRef(), channel, &identifier);
+    return identifier;
+}
+
 
 LongLong AudioFileReaderInternal::getNumFrames() const throw()
 {

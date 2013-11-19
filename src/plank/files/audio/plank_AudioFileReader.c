@@ -847,7 +847,7 @@ PlankResult pl_AudioFileReader_GetChannelItentifier (PlankAudioFileReaderRef p, 
     return PlankResult_OK;
 }
 
-PlankResult pl_AudioFileReader_GetChanneLayout (PlankAudioFileReaderRef p, PlankChannelLayout* layout)
+PlankResult pl_AudioFileReader_GetChannelLayout (PlankAudioFileReaderRef p, PlankChannelLayout* layout)
 {
     *layout = pl_AudioFileFormatInfo_GetChannelLayout (&p->formatInfo);
     return PlankResult_OK;

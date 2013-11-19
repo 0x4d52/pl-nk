@@ -343,7 +343,8 @@ public:
 
 };
 
-
+class ChannelLayout;
+class ChannelIdentifier;
 
 class ChannelLayout : public PlonkBase
 {
@@ -375,6 +376,8 @@ public:
     
 private:
     PlankChannelLayout peer;
+    
+    ChannelLayout (ChannelIdentifier const&);
 };
 
 class ChannelIdentifier : public PlonkBase
@@ -407,6 +410,8 @@ public:
     
 private:
     PlankChannelIdentifier peer;
+    
+    ChannelIdentifier (ChannelLayout const&);
 };
 
 
