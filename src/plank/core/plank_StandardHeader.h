@@ -222,6 +222,21 @@
     #define PLANK_ALIGN(amount)   __attribute__ ((aligned (amount)))
 #endif
 
+#if PLANK_32BIT
+#define PLANK_WORDBITS 32
+#define PLANK_HALFWORDBITS 16
+#define PLANK_WORDSIZE 4
+#define PLANK_WIDESIZE 8
+#endif
+
+#if PLANK_64BIT
+#define PLANK_WORDBITS 64
+#define PLANK_HALFWORDBITS 32
+#define PLANK_WORDSIZE 8
+#define PLANK_WIDESIZE 16
+#endif
+
+
 typedef float PlankF;
 typedef double PlankD;
 
