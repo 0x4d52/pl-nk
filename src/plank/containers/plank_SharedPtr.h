@@ -36,32 +36,37 @@
  -------------------------------------------------------------------------------
  */
 
-#ifndef PLANK_SHAREDPOINTER_H
-#define PLANK_SHAREDPOINTER_H
+#ifndef PLANK_SHAREDPTR_H
+#define PLANK_SHAREDPTR_H
 
 PLANK_BEGIN_C_LINKAGE
 
 /** A shared pointer.
  
- @defgroup PlankSharedPointerClass Plank SharedPointer class
+ @defgroup PlankSharedPtrClass Plank SharedPtr class
  @ingroup PlankClasses
  @{
  */
 
-typedef struct PlankSharedPointer* PlankSharedPointerRef;
-typedef struct PlankWeakPointer* PlankWeakPointerRef;
+typedef struct PlankSharedPtr* PlankSharedPtrRef;
+typedef struct PlankWeakPtr* PlankWeakPtrRef;
 
-typedef PlankResult (*PlankSharedPointerFreeFunction)(PlankP);
+typedef void (*PlankSharedPtrFreeFunction)(void*);
 
-PlankSharedPointerRef pl_SharedPointer_CreateAndInitWithPointerAndFreeFunction (PlankP ptr, PlankSharedPointerFreeFunction freeFunction);
-PlankResult pl_SharedPointer_DecrementRefCount (PlankSharedPointerRef p);
-PlankP pl_SharedPointer_GetPointerAndIncrementRefCount (PlankSharedPointerRef p);
-PlankWeakPointerRef pl_SharedPointer_GetWeakPointer (PlankSharedPointerRef p);
-PlankSharedPointerRef pl_WeakPointer_GetSharedPointer (PlankWeakPointerRef p);
+PlankSharedPtrRef pl_SharedPtr_CreateAndInitWithPtrAndFreeFunction (PlankP ptr, void* freeFunction);
+PlankResult pl_SharedPtr_IncrementRefCount (PlankSharedPtrRef p);
+PlankResult pl_SharedPtr_DecrementRefCount (PlankSharedPtrRef p);
+PlankResult pl_SharedPtr_DecrementWeakCount (PlankSharedPtrRef p);
+PlankP pl_SharedPtr_GetPtr (PlankSharedPtrRef p);
+PlankWeakPtrRef pl_SharedPtr_GetWeakPtr (PlankSharedPtrRef p);
+
+PlankSharedPtrRef pl_WeakPtr_GetSharedPtr (PlankWeakPtrRef p);
+PlankResult pl_WeakPtr_DecrementRefCount (PlankWeakPtrRef p);
 
 /** @} */
 
 PLANK_END_C_LINKAGE
 
+#define PLANK_SHAREDPTR_GETPTR(SP,TYPE) ((TYPE*)pl_SharedPtr_GetPtr(SP))
 
-#endif // PLANK_SHAREDPOINTER_H
+#endif // PLANK_SHAREDPTR_H

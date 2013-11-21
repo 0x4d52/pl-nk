@@ -65,6 +65,7 @@
 
 #include "containers/plank_ContainersMisc.h"
 #include "containers/plank_Atomic.h"
+#include "containers/plank_SharedPtr.h"
 #include "containers/plank_DynamicArray.h"
 #include "containers/plank_LockFreeDynamicArray.h"
 #include "containers/plank_LockFreeQueue.h"
