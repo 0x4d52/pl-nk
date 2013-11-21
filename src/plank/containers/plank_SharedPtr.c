@@ -337,9 +337,18 @@ PlankWeakPtrRef pl_SharedPtr_GetWeakPtr (PlankSharedPtrRef p)
     
     w = PLANK_NULL;
     
-    if ((result = pl_SharedPtr_IncrementWeakCount (p)) == PlankResult_OK)
+    if (p->weakPtr != PLANK_NULL)
+    {
+        if ((result = pl_SharedPtr_IncrementWeakCount (p)) != PlankResult_OK)
+            goto exit;
+            
+        if ((result = pl_SharedPtr_IncrementRefCount ((PlankSharedPtrRef)p->weakPtr)) != PlankResult_OK)
+            goto exit;
+            
         w = p->weakPtr;
-
+    }
+    
+exit:
     return w;
 }
 
@@ -353,6 +362,7 @@ PlankSharedPtrRef pl_WeakPtr_GetSharedPtr (PlankWeakPtrRef p)
 
 PlankResult pl_WeakPtr_DecrementRefCount (PlankWeakPtrRef p)
 {
+    pl_SharedPtrCounter_DecrementWeakCount (p->sharedCounter);
     return pl_SharedPtr_DecrementRefCount ((PlankSharedPtrRef)p);
 }
 
