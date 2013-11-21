@@ -39,7 +39,9 @@
 #include "../core/plank_StandardHeader.h"
 #include "plank_SharedPtr.h"
 
+#ifndef PLANKSHAREDPTR_DEBUG
 #define PLANKSHAREDPTR_DEBUG 0
+#endif
 
 //////////////////////////////// Helpers ///////////////////////////////////////
 
