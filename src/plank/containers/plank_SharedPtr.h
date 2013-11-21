@@ -54,7 +54,7 @@ typedef struct PlankWeakPtr* PlankWeakPtrRef;
 typedef void (*PlankSharedPtrFunction)(void*);
 
 PlankSharedPtrRef pl_SharedPtr_CreateAndInitWithSizeAndFunctions (const PlankL size, void* initFunction, void* deInitFunction);
-PlankResult pl_SharedPtr_IncrementRefCount (PlankSharedPtrRef p);
+PlankSharedPtrRef pl_SharefPtr_IncrementRefCountAndGetPtr (PlankSharedPtrRef p);
 PlankResult pl_SharedPtr_DecrementRefCount (PlankSharedPtrRef p);
 PlankResult pl_SharedPtr_DecrementWeakCount (PlankSharedPtrRef p);
 PlankWeakPtrRef pl_SharedPtr_GetWeakPtr (PlankSharedPtrRef p);
