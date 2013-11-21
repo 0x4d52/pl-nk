@@ -51,13 +51,12 @@ PLANK_BEGIN_C_LINKAGE
 typedef struct PlankSharedPtr* PlankSharedPtrRef;
 typedef struct PlankWeakPtr* PlankWeakPtrRef;
 
-typedef void (*PlankSharedPtrFreeFunction)(void*);
+typedef void (*PlankSharedPtrFunction)(void*);
 
-PlankSharedPtrRef pl_SharedPtr_CreateAndInitWithPtrAndFreeFunction (PlankP ptr, void* freeFunction);
+PlankSharedPtrRef pl_SharedPtr_CreateAndInitWithSizeAndFunctions (const PlankL size, void* initFunction, void* deInitFunction);
 PlankResult pl_SharedPtr_IncrementRefCount (PlankSharedPtrRef p);
 PlankResult pl_SharedPtr_DecrementRefCount (PlankSharedPtrRef p);
 PlankResult pl_SharedPtr_DecrementWeakCount (PlankSharedPtrRef p);
-PlankP pl_SharedPtr_GetPtr (PlankSharedPtrRef p);
 PlankWeakPtrRef pl_SharedPtr_GetWeakPtr (PlankSharedPtrRef p);
 
 PlankSharedPtrRef pl_WeakPtr_GetSharedPtr (PlankWeakPtrRef p);
@@ -67,6 +66,27 @@ PlankResult pl_WeakPtr_DecrementRefCount (PlankWeakPtrRef p);
 
 PLANK_END_C_LINKAGE
 
-#define PLANK_SHAREDPTR_GETPTR(SP,TYPE) ((TYPE*)pl_SharedPtr_GetPtr(SP))
+//////////////////////////////// /////// ///////////////////////////////////////
+
+typedef struct PlankSharedPtrCounter
+{
+    PlankAtomicPX atom;
+} PlankSharedPtrCounter;
+
+typedef struct PlankSharedPtrCounter* PlankSharedPtrCounterRef;
+
+typedef struct PlankSharedPtr
+{
+    PlankL size;
+    PlankSharedPtrCounterRef sharedCounter;
+    PlankSharedPtrFunction deInitFunction;
+    PlankWeakPtrRef weakPtr;
+} PlankSharedPtr;
+
+typedef struct PlankWeakPtr
+{
+    PlankSharedPtr sharedPtr;
+    PlankSharedPtrCounterRef sharedCounter;
+} PlankWeakPtr;
 
 #endif // PLANK_SHAREDPTR_H

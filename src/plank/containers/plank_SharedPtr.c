@@ -39,6 +39,8 @@
 #include "../core/plank_StandardHeader.h"
 #include "plank_SharedPtr.h"
 
+//////////////////////////////// Helpers ///////////////////////////////////////
+
 typedef struct PlankSharedPtrCounts
 {
     unsigned int refCount:PLANK_HALFWORDBITS;
@@ -47,14 +49,14 @@ typedef struct PlankSharedPtrCounts
 
 typedef struct PlankSharedPtrParts
 {
-    PlankP* ptr;
+    PlankSharedPtrRef ptr;
     PlankSharedPtrCounts counts;
 } PlankSharedPtrParts;
 
 typedef struct PlankSharedPtrHalves
 {
-    PlankP* ptr;
-    PlankL  extra;
+    PlankSharedPtrRef ptr;
+    PlankL extra;
 } PlankSharedPtrHalves;
 
 typedef union PlankSharedPtrElement
@@ -63,34 +65,21 @@ typedef union PlankSharedPtrElement
     PlankSharedPtrHalves halves;
 } PlankSharedPtrElement;
 
-typedef struct PlankSharedPtrCounter
-{
-    PlankAtomicPX atom;
-} PlankSharedPtrCounter;
+/////////////////////////////// Functions //////////////////////////////////////
 
-typedef struct PlankSharedPtrCounter* PlankSharedPtrCounterRef;
+static PlankSharedPtrCounterRef pl_SharedPtrCounter_CreateAndInitWithSharedPtr (PlankSharedPtrRef ptr);
+static PlankResult pl_SharedPtrCounter_Destroy (PlankSharedPtrCounterRef p);
+static PlankResult pl_SharedPtrCounter_IncrementRefCount (PlankSharedPtrCounterRef p);
+static PlankResult pl_SharedPtrCounter_DecrementRefCount (PlankSharedPtrCounterRef p);
+static PlankResult pl_SharedPtrCounter_IncrementWeakCount (PlankSharedPtrCounterRef p);
+static PlankResult pl_SharedPtrCounter_DecrementWeakCount (PlankSharedPtrCounterRef p);
 
-typedef struct PlankSharedPtr
-{
-    PlankSharedPtrCounterRef sharedCounter;
-    PlankWeakPtrRef weakPtr;
-    PlankSharedPtrFreeFunction freeFunction;
-} PlankSharedPtr;
-
-typedef struct PlankWeakPtr
-{
-    PlankSharedPtr sharedPtr;
-    PlankSharedPtrCounterRef sharedCounter;
-} PlankWeakPtr;
-
-
-static PlankResult pl_SharedPtr_DestroyPtr (PlankSharedPtrRef p, PlankP ptr);
-static PlankResult pl_SharedPtr_InitWithPtrAndFreeFunction (PlankSharedPtrRef p, PlankP ptr, void* freeFunction);
-static PlankResult pl_SharedPtr_DeInit (PlankSharedPtrRef p);
 static PlankResult pl_SharedPtr_Destroy (PlankSharedPtrRef p);
 static PlankResult pl_SharedPtr_IncrementWeakCount (PlankSharedPtrRef p);
 
-static PlankSharedPtrCounterRef pl_SharedPtrCounter_CreateAndInitWithPtr (PlankP ptr)
+//////////////////////////////// Counter ///////////////////////////////////////
+
+static PlankSharedPtrCounterRef pl_SharedPtrCounter_CreateAndInitWithSharedPtr (PlankSharedPtrRef ptr)
 {
     PlankMemoryRef m;
     PlankSharedPtrCounterRef p;
@@ -104,7 +93,7 @@ static PlankSharedPtrCounterRef pl_SharedPtrCounter_CreateAndInitWithPtr (PlankP
         pl_AtomicPX_Init (&p->atom);
         p->atom.ptr = ptr;
         
-        printf("pl_SharedPtrCounter_CreateAndInitWithPtr(%p) [%p]\n", p, ptr);
+        printf("Create Counter  %p ptr=%p", p, ptr);
     }
     
     return p;
@@ -124,364 +113,242 @@ static PlankResult pl_SharedPtrCounter_Destroy (PlankSharedPtrCounterRef p)
         goto exit;
     }
     
-    if ((result = pl_AtomicPX_DeInit (&p->atom)) != PlankResult_OK) goto exit;
+    printf("Destroy Counter %p ptr=%p\n", p, p->atom.ptr);
+    
+    if ((result = pl_AtomicPX_DeInit (&p->atom)) != PlankResult_OK)
+        goto exit;
     
     result = pl_Memory_Free (m, p);
     
-    printf("pl_SharedPtrCounter_Destroy(%p)\n", p);
-    
 exit:
     return result;
 }
 
-PlankSharedPtrRef pl_SharedPtr_CreateAndInitWithPtrAndFreeFunction (PlankP ptr, void* freeFunction)
+static PlankResult pl_SharedPtrCounter_IncrementRefCount (PlankSharedPtrCounterRef p)
 {
-    PlankMemoryRef m;
-    PlankSharedPtrRef p;
+    PlankSharedPtrElement oldElement, newElement;
+    PlankB success;
     
-    m = pl_MemoryGlobal();
-    p = (PlankSharedPtrRef)pl_Memory_AllocateBytes (m, sizeof (PlankSharedPtr));
-    
-    if (p != PLANK_NULL)
-    {        
-        if (pl_SharedPtr_InitWithPtrAndFreeFunction (p, ptr, freeFunction) != PlankResult_OK)
-        {
-            pl_Memory_Free (m, p);
-            return PLANK_NULL;
-        }        
-    }
-        
-    return p;
-}
-
-static PlankResult pl_SharedPtr_InitWithPtrAndFreeFunction (PlankSharedPtrRef p, PlankP ptr, void* freeFunction)
-{
-    PlankResult result;
-    PlankMemoryRef m;
-    PlankWeakPtrRef w;
-
-    result = PlankResult_OK;
-    
-    if (p == PLANK_NULL)
+    do
     {
-        result = PlankResult_MemoryError;
-        goto exit;
-    }
+        oldElement.halves.ptr = newElement.halves.ptr = p->atom.ptr;
+        oldElement.halves.extra = newElement.halves.extra = p->atom.extra;
+        ++newElement.parts.counts.refCount; // in multithreaded, we might be incrementing after the pointer was deleted and zereo'd
+                
+        success = pl_AtomicPX_CompareAndSwap ((PlankAtomicPXRef)p,
+                                              oldElement.halves.ptr, oldElement.halves.extra,
+                                              newElement.halves.ptr, newElement.halves.extra);
+    } while (!success);
     
-    pl_MemoryZero (p, sizeof (PlankSharedPtr));
-
-    p->sharedCounter = pl_SharedPtrCounter_CreateAndInitWithPtr (ptr);
-    
-    if (!p->sharedCounter)
-    {
-        result = PlankResult_MemoryError;
-        goto exit;
-    }
-            
-    if (freeFunction)
-    {
-        p->freeFunction = freeFunction;
-
-        // a null freeFunction indicates this contains a PlankWeakPtr so don't add another weak
-        // otherwise, allocate a PlankWeakPtr
-        
-        m = pl_MemoryGlobal();
-        w = (PlankWeakPtrRef)pl_Memory_AllocateBytes (m, sizeof (PlankWeakPtr));
-        
-        if (w != PLANK_NULL)
-        {
-            pl_MemoryZero (w, sizeof (PlankWeakPtr));
-            
-            pl_SharedPtr_InitWithPtrAndFreeFunction (&w->sharedPtr, w, PLANK_NULL);
-            
-            w->sharedCounter = p->sharedCounter;
-            pl_SharedPtr_IncrementWeakCount (&w->sharedPtr);
-//            pl_SharedPtr_IncrementWeakCount (p);
-            p->weakPtr = w;
-        }
-    }
-    
-    printf("pl_SharedPtr_InitWithPtrAndFreeFunction(%p) [%p] sharedCounter=%p %s\n", p, ptr, p->sharedCounter, p->freeFunction ? "" : "[weak]");
-
-    pl_SharedPtr_IncrementRefCount (p);
-    
-exit:
-    return result;
-}
-
-static PlankResult pl_SharedPtr_DestroyPtr (PlankSharedPtrRef p, PlankP ptr)
-{
-    PlankResult result;
-    PlankMemoryRef m;
-    
-    result = PlankResult_OK;
-    
-    printf("pl_SharedPtr_DestroyPtr(%p) [%p] sharedCounter=%p %s\n", p, ptr, p->sharedCounter, p->freeFunction ? "" : "[weak]");
-
-    if (ptr != PLANK_NULL)
-    {
-        if (p->freeFunction != PLANK_NULL)
-        {
-            (p->freeFunction) (ptr);
-            
-            if (ptr != p)
-            {
-                if ((result = pl_SharedPtr_Destroy (p)) != PlankResult_OK) goto exit;
-            }
-        }
-        else
-        {
-            m = pl_MemoryGlobal();
-            result = pl_Memory_Free (m, ptr);
-        }
-    }
-    
-exit:
     return PlankResult_OK;
 }
 
-static PlankResult pl_SharedPtr_DeInit (PlankSharedPtrRef p)
-{
-    PlankResult result;
-    PlankMemoryRef m;
-    PlankWeakPtrRef weakPtr;
-    
-    result = PlankResult_OK;
-    m = pl_MemoryGlobal();
-    
-    if (p == PLANK_NULL)
-    {
-        result = PlankResult_MemoryError;
-        goto exit;
-    }
-    
-    weakPtr = p->weakPtr;
-    
-    if (weakPtr)
-    {
-        p->weakPtr = 0;
-        pl_SharedPtr_DecrementWeakCount ((PlankSharedPtrRef)weakPtr);
-        pl_SharedPtr_DecrementRefCount ((PlankSharedPtrRef)weakPtr);
-    }
-    
-exit:
-    return result;
-}
-
-static PlankResult pl_SharedPtr_Destroy (PlankSharedPtrRef p)
-{
-    PlankResult result;
-    PlankMemoryRef m;
-    
-    result = PlankResult_OK;
-    m = pl_MemoryGlobal();
-    
-    if (p == PLANK_NULL)
-    {
-        result = PlankResult_MemoryError;
-        goto exit;
-    }
-    
-    if ((result = pl_SharedPtr_DeInit (p)) != PlankResult_OK)
-        goto exit;
-    
-    result = pl_Memory_Free (m, p);
-    
-    printf("pl_SharedPtr_Destroy(%p)\n", p);
-    
-exit:
-    return result;
-}
-
-PlankResult pl_SharedPtr_DecrementRefCount (PlankSharedPtrRef p)
+static PlankResult pl_SharedPtrCounter_DecrementRefCount (PlankSharedPtrCounterRef p)
 {
     PlankSharedPtrElement oldElement, newElement;
     PlankB success;
     PlankResult result;
-    PlankSharedPtrCounterRef sharedCounter;
     
     result = PlankResult_OK;
-    sharedCounter = p->sharedCounter;
-        
+    
     do
     {
-        oldElement.halves.ptr   = newElement.halves.ptr   = sharedCounter->atom.ptr;
-        oldElement.halves.extra = newElement.halves.extra = sharedCounter->atom.extra;
+        oldElement.halves.ptr = newElement.halves.ptr = p->atom.ptr;
+        oldElement.halves.extra = newElement.halves.extra = p->atom.extra;
         
         if (--newElement.parts.counts.refCount == 0)
             newElement.parts.ptr = 0;
         
-        success = pl_AtomicPX_CompareAndSwap (&sharedCounter->atom,
+        success = pl_AtomicPX_CompareAndSwap ((PlankAtomicPXRef)p,
                                               oldElement.halves.ptr, oldElement.halves.extra,
                                               newElement.halves.ptr, newElement.halves.extra);
     } while (!success);
     
     if (newElement.parts.counts.refCount == 0)
-    {
-        if ((result = pl_SharedPtr_DestroyPtr (p, oldElement.parts.ptr)) != PlankResult_OK) goto exit;
+    {        
+        if ((result = pl_SharedPtr_Destroy (oldElement.parts.ptr)) != PlankResult_OK) goto exit;
         
         if (newElement.parts.counts.weakCount == 0)
-        {
-            p->sharedCounter = PLANK_NULL;
-            result = pl_SharedPtrCounter_Destroy (sharedCounter);
-        }
+            result = pl_SharedPtrCounter_Destroy (p);
     }
-    
-    printf("pl_SharedPtr_DecrementRefCount(%p) sharedCounter=%p ref=%d weak=%d\n",
-           p, sharedCounter,
-           newElement.parts.counts.refCount,newElement.parts.counts.weakCount);
-    
+
 exit:
     return result;
 }
 
-PlankResult pl_SharedPtrDecrementSharedCounterWeakCount (PlankSharedPtrCounterRef *sharedCounterRef)
+static PlankResult pl_SharedPtrCounter_IncrementWeakCount (PlankSharedPtrCounterRef p)
+{
+    PlankSharedPtrElement oldElement, newElement;
+    PlankB success;
+    
+    do
+    {
+        oldElement.halves.ptr = newElement.halves.ptr = p->atom.ptr;
+        oldElement.halves.extra = newElement.halves.extra = p->atom.extra;
+        ++newElement.parts.counts.weakCount;
+                
+        success = pl_AtomicPX_CompareAndSwap ((PlankAtomicPXRef)p,
+                                              oldElement.halves.ptr, oldElement.halves.extra,
+                                              newElement.halves.ptr, newElement.halves.extra);
+    } while (!success);
+    
+    return PlankResult_OK;
+}
+
+static PlankResult pl_SharedPtrCounter_DecrementWeakCount (PlankSharedPtrCounterRef p)
 {
     PlankSharedPtrElement oldElement, newElement;
     PlankB success;
     PlankResult result;
-    PlankSharedPtrCounterRef sharedCounter;
     
     result = PlankResult_OK;
-    sharedCounter = *sharedCounterRef;
-
+    
     do
     {
-        oldElement.halves.ptr   = newElement.halves.ptr   = sharedCounter->atom.ptr;
-        oldElement.halves.extra = newElement.halves.extra = sharedCounter->atom.extra;
+        oldElement.halves.ptr = newElement.halves.ptr = p->atom.ptr;
+        oldElement.halves.extra = newElement.halves.extra = p->atom.extra;
         --newElement.parts.counts.weakCount;
         
-        success = pl_AtomicPX_CompareAndSwap (&sharedCounter->atom,
+        success = pl_AtomicPX_CompareAndSwap ((PlankAtomicPXRef)p,
                                               oldElement.halves.ptr, oldElement.halves.extra,
                                               newElement.halves.ptr, newElement.halves.extra);
     } while (!success);
     
     if ((newElement.parts.counts.refCount == 0) && (newElement.parts.counts.weakCount == 0))
-    {
-        *sharedCounterRef = PLANK_NULL;
-        result = pl_SharedPtrCounter_Destroy (sharedCounter);
-    }
-    
-    printf("pl_SharedPtrDecrementSharedCounterWeakCount() sharedCounter=%p ref=%d weak=%d\n",
-           sharedCounter,
-           newElement.parts.counts.refCount,newElement.parts.counts.weakCount);
-    
+        result = pl_SharedPtrCounter_Destroy (p);
+        
 exit:
     return result;
 }
 
-PlankResult pl_SharedPtr_DecrementWeakCount (PlankSharedPtrRef p)
-{
-    return pl_SharedPtrDecrementSharedCounterWeakCount (&p->sharedCounter);
-}
 
-static PlankResult pl_SharedPtrIncrementSharedCounterRefCount (PlankSharedPtrCounterRef* sharedCounterRef)
+/////////////////////////////// SharedPtr //////////////////////////////////////
+
+PlankSharedPtrRef pl_SharedPtr_CreateAndInitWithSizeAndFunctions (const PlankL size, void* initFunction, void* deInitFunction)
 {
-    PlankSharedPtrElement oldElement, newElement;
-    PlankB success;
+    PlankMemoryRef m;
+    PlankSharedPtrRef p;
+    PlankWeakPtrRef w;
     PlankSharedPtrCounterRef sharedCounter;
     
-    sharedCounter = *sharedCounterRef;
+    p = PLANK_NULL;
     
-    do
+    if (size > 0)
     {
-        oldElement.halves.ptr   = newElement.halves.ptr   = sharedCounter->atom.ptr;
-        oldElement.halves.extra = newElement.halves.extra = sharedCounter->atom.extra;
-        ++newElement.parts.counts.refCount; // in multithreaded, we might be incrementing after the pointer was deleted and zereo'd
+        m = pl_MemoryGlobal();
+        p = (PlankSharedPtrRef)pl_Memory_AllocateBytes (m, size);
         
-        success = pl_AtomicPX_CompareAndSwap (&sharedCounter->atom,
-                                              oldElement.halves.ptr, oldElement.halves.extra,
-                                              newElement.halves.ptr, newElement.halves.extra);
-    } while (!success);
-    
-    printf("pl_SharedPtrIncrementSharedCounterRefCount() sharedCounter=%p ref=%d weak=%d\n",
-           sharedCounter,
-           newElement.parts.counts.refCount,newElement.parts.counts.weakCount);
+        if (p != PLANK_NULL)
+        {
+            pl_MemoryZero (p, size);
+            p->size = size;
+            sharedCounter = pl_SharedPtrCounter_CreateAndInitWithSharedPtr (p);
+            
+            if (sharedCounter == PLANK_NULL)
+            {
+                pl_Memory_Free (m, p);
+                p = PLANK_NULL;
+                goto exit;
+            }
+            
+            p->sharedCounter = sharedCounter;
+            
+            if (deInitFunction == PLANK_NULL)
+            {
+                printf("[weak]\n");
+            }
+            else
+            {
+                printf("\n");
 
+                // not a WeakPtr
+                p->deInitFunction = deInitFunction;
+                
+                // allocate a WeakPtr
+                w = (PlankWeakPtrRef)pl_SharedPtr_CreateAndInitWithSizeAndFunctions (sizeof (PlankWeakPtr), PLANK_NULL, PLANK_NULL); // nulls say "I'm a WeakPtr"
+                
+                if (w == PLANK_NULL)
+                {
+                    pl_SharedPtr_Destroy (p);
+                    p = PLANK_NULL;
+                    goto exit;
+                }
+                
+                w->sharedCounter = sharedCounter;
+                pl_SharedPtr_IncrementWeakCount ((PlankSharedPtrRef)w);
+                p->weakPtr = w;
+            }
+            
+            pl_SharedPtr_IncrementRefCount (p);
+
+            if (initFunction != PLANK_NULL)
+                ((PlankSharedPtrFunction)initFunction) (p);
+        }
+    }
+    
+exit:
+    return p;
+}
+
+static PlankResult pl_SharedPtr_Destroy (PlankSharedPtrRef p)
+{
+    PlankMemoryRef m;
+
+    if (p->weakPtr != PLANK_NULL)
+    {
+        pl_SharedPtr_DecrementWeakCount ((PlankSharedPtrRef)p->weakPtr);
+        pl_SharedPtr_DecrementRefCount ((PlankSharedPtrRef)p->weakPtr);
+        p->weakPtr = PLANK_NULL;
+    }
+    
+    if (p->deInitFunction)    
+        (p->deInitFunction) (p);
+    
+    m = pl_MemoryGlobal();
+    pl_Memory_Free (m, p);
     
     return PlankResult_OK;
+}
+
+PlankResult pl_SharedPtr_DecrementRefCount (PlankSharedPtrRef p)
+{
+    return pl_SharedPtrCounter_DecrementRefCount (p->sharedCounter);
+}
+
+PlankResult pl_SharedPtr_DecrementWeakCount (PlankSharedPtrRef p)
+{
+    return pl_SharedPtrCounter_DecrementWeakCount (p->sharedCounter);
 }
 
 PlankResult pl_SharedPtr_IncrementRefCount (PlankSharedPtrRef p)
 {
-    return pl_SharedPtrIncrementSharedCounterRefCount (&p->sharedCounter);
-}
-
-static PlankResult pl_SharedPtrIncrementSharedCounterWeakCount (PlankSharedPtrCounterRef* sharedCounterRef)
-{
-    PlankSharedPtrElement oldElement, newElement;
-    PlankB success;
-    PlankSharedPtrCounterRef sharedCounter;
-
-    sharedCounter = *sharedCounterRef;
-
-    do
-    {
-        oldElement.halves.ptr   = newElement.halves.ptr   = sharedCounter->atom.ptr;
-        oldElement.halves.extra = newElement.halves.extra = sharedCounter->atom.extra;
-        ++newElement.parts.counts.weakCount;
-        
-        success = pl_AtomicPX_CompareAndSwap (&sharedCounter->atom,
-                                              oldElement.halves.ptr, oldElement.halves.extra,
-                                              newElement.halves.ptr, newElement.halves.extra);
-    } while (!success);
-    
-    printf("pl_SharedPtrIncrementSharedCounterWeakCount() sharedCounter=%p ref=%d weak=%d\n",
-           sharedCounter,
-           newElement.parts.counts.refCount, newElement.parts.counts.weakCount);
-    
-    return PlankResult_OK;
+    return pl_SharedPtrCounter_IncrementRefCount (p->sharedCounter);
 }
 
 static PlankResult pl_SharedPtr_IncrementWeakCount (PlankSharedPtrRef p)
 {
-    return pl_SharedPtrIncrementSharedCounterWeakCount (&p->sharedCounter);
-}
-
-PlankP pl_SharedPtr_GetPtr (PlankSharedPtrRef p)
-{
-    return pl_AtomicPX_Get (&p->sharedCounter->atom);
+    return pl_SharedPtrCounter_IncrementWeakCount (p->sharedCounter);
 }
 
 PlankWeakPtrRef pl_SharedPtr_GetWeakPtr (PlankSharedPtrRef p)
 {
-    if (p->weakPtr == PLANK_NULL)
-        return PLANK_NULL;
+    PlankResult result;
+    PlankWeakPtrRef w;
     
-    pl_SharedPtr_IncrementRefCount ((PlankSharedPtrRef)p->weakPtr);
+    w = PLANK_NULL;
     
-    return (PlankWeakPtrRef)p->weakPtr;
-}
+    if ((result = pl_SharedPtr_IncrementWeakCount (p)) == PlankResult_OK)
+        w = p->weakPtr;
 
-PlankUI pl_SharedPtr_GetRefCount (PlankSharedPtrRef p)
-{
-    PlankSharedPtrElement e;
-    e.halves.extra = pl_AtomicPX_GetExtra (&p->sharedCounter->atom); // could this be the unchecked version?
-    return e.parts.counts.refCount;
-}
-
-PlankUI pl_SharedPtr_GetWeakCount (PlankSharedPtrRef p)
-{
-    PlankSharedPtrElement e;
-    e.halves.extra = pl_AtomicPX_GetExtra (&p->sharedCounter->atom); // could this be the unchecked version?
-    return e.parts.counts.weakCount;
+    return w;
 }
 
 /////----
 
 PlankSharedPtrRef pl_WeakPtr_GetSharedPtr (PlankWeakPtrRef p)
 {
-    PlankSharedPtrRef sharedPtr = PLANK_NULL;
-
-    if (p != PLANK_NULL)
-    {
-        pl_SharedPtrIncrementSharedCounterRefCount (&p->sharedCounter);
-        pl_SharedPtr_IncrementRefCount ((PlankSharedPtrRef)p);
-        sharedPtr = pl_AtomicPX_Get (&p->sharedCounter->atom);
-        pl_SharedPtr_DecrementRefCount ((PlankSharedPtrRef)p);
-    }
-    
-    return sharedPtr;
+    pl_SharedPtrCounter_IncrementRefCount (p->sharedCounter);
+    return (PlankSharedPtrRef)p->sharedCounter->atom.ptr;
 }
 
 PlankResult pl_WeakPtr_DecrementRefCount (PlankWeakPtrRef p)
