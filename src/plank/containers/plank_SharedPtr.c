@@ -69,6 +69,19 @@ typedef union PlankSharedPtrElement
     PlankSharedPtrHalves halves;
 } PlankSharedPtrElement;
 
+typedef struct PlankSharedPtrCounter
+{
+    PlankAtomicPX atom;
+} PlankSharedPtrCounter;
+
+///////////////////////////////// Weak /////////////////////////////////////////
+
+typedef struct PlankWeakPtr
+{
+    PlankSharedPtr sharedPtr;
+    PlankSharedPtrCounterRef sharedCounter;
+} PlankWeakPtr;
+
 /////////////////////////////// Functions //////////////////////////////////////
 
 static PlankSharedPtrCounterRef pl_SharedPtrCounter_CreateAndInitWithSharedPtr (PlankSharedPtrRef ptr);
@@ -126,6 +139,7 @@ static PlankResult pl_SharedPtrCounter_Destroy (PlankSharedPtrCounterRef p)
     if ((result = pl_AtomicPX_DeInit (&p->atom)) != PlankResult_OK)
         goto exit;
     
+//    pl_MemoryZero (p, sizeof (PlankSharedPtrCounter));
     result = pl_Memory_Free (m, p);
     
 exit:
@@ -254,6 +268,7 @@ PlankSharedPtrRef pl_SharedPtr_CreateAndInitWithSizeAndFunctions (const PlankL s
     PlankSharedPtrRef p;
     PlankWeakPtrRef w;
     PlankSharedPtrCounterRef sharedCounter;
+    PlankResult result;
     
     p = PLANK_NULL;
     
@@ -309,7 +324,9 @@ PlankSharedPtrRef pl_SharedPtr_CreateAndInitWithSizeAndFunctions (const PlankL s
             pl_SharedPtr_IncrementRefCount (p);
 
             if (initFunction != PLANK_NULL)
-                ((PlankSharedPtrFunction)initFunction) (p);
+            {
+                result = ((PlankSharedPtrFunction)initFunction) (p);
+            }
             
         }
     }
@@ -326,6 +343,7 @@ PlankSharedPtrRef pl_SharefPtr_IncrementRefCountAndGetPtr (PlankSharedPtrRef p)
 static PlankResult pl_SharedPtr_Destroy (PlankSharedPtrRef p)
 {
     PlankMemoryRef m;
+    PlankResult result;
 
     if (p->weakPtr != PLANK_NULL)
     {
@@ -335,8 +353,10 @@ static PlankResult pl_SharedPtr_Destroy (PlankSharedPtrRef p)
     }
     
     if (p->deInitFunction)    
-        (p->deInitFunction) (p);
+        result = (p->deInitFunction) (p);
     
+    pl_MemoryZero (p, p->size);
+
     m = pl_MemoryGlobal();
     return pl_Memory_Free (m, p);
 }

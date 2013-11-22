@@ -40,6 +40,7 @@
 #define PLANK_AUDIOFILEMETADATA_H
 
 #include "plank_AudioFileCommon.h"
+#include "../../containers/plank_SharedPtr.h"
 #include "../../containers/plank_DynamicArray.h"
 #include "../../containers/plank_SimpleLinkedList.h"
 
@@ -55,20 +56,9 @@ PLANK_BEGIN_C_LINKAGE
 
 /** Create a <i>Plank AudioFileMetaData</i> object and return an oqaque reference to it.
  @return A <i>Plank AudioFileMetaData</i> object as an opaque reference or PLANK_NULL. */
-PlankAudioFileMetaDataRef pl_AudioFileMetaData_Create();
-
 PlankAudioFileMetaDataRef pl_AudioFileMetaData_CreateAndInit();
-
-
-/** Destroy a <i>Plank AudioFileMetaData</i> object. 
- @param p The <i>Plank AudioFileMetaData</i> object. */
-PlankResult pl_AudioFileMetaData_Destroy (PlankAudioFileMetaDataRef p);
-
-PlankResult pl_AudioFileMetaData_Init (PlankAudioFileMetaDataRef p);
-
-PlankResult pl_AudioFileMetaData_InitCopy (PlankAudioFileMetaDataRef p, PlankAudioFileMetaDataRef original);
-
-PlankResult pl_AudioFileMetaData_DeInit (PlankAudioFileMetaDataRef p);
+PlankAudioFileMetaDataRef pl_AudioFileMetaData_IncrementRefCountAndGet (PlankAudioFileMetaDataRef p);
+PlankResult pl_AudioFileMetaData_DecrementRefCount (PlankAudioFileMetaDataRef p);
 
 PlankResult pl_AudioFileMetaData_SetEditCount (PlankAudioFileMetaDataRef p, const PlankUI count);
 PlankUI pl_AudioFileMetaData_GetEditCount (PlankAudioFileMetaDataRef p);
@@ -224,6 +214,8 @@ PLANK_END_C_LINKAGE
 
 typedef struct PlankAudioFileMetaData
 {
+    PlankSharedPtr sharedHeader;
+    
     PlankUI editCount;
     
     // smpl / inst

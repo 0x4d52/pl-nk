@@ -780,7 +780,7 @@ PlankResult pl_AudioFileWriter_Close (PlankAudioFileWriterRef p)
     
     if (p->metaData != PLANK_NULL)
     {
-        if ((result = pl_AudioFileMetaData_Destroy (p->metaData)) != PlankResult_OK) goto exit;
+        if ((result = pl_AudioFileMetaData_DecrementRefCount (p->metaData)) != PlankResult_OK) goto exit;
         p->metaData = (PlankAudioFileMetaDataRef)PLANK_NULL;
     }
         
