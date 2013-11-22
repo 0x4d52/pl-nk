@@ -42,55 +42,75 @@ BEGIN_PLONK_NAMESPACE
 
 #include "../../core/plonk_Headers.h"
 
-AudioFileCuePoint::AudioFileCuePoint (PlankAudioFileCuePoint* p) throw()
-:   peer (p)
+//AudioFileCuePoint::AudioFileCuePoint (PlankAudioFileCuePoint* p) throw()
+//:   peer (p)
+//{
+//}
+//
+//bool AudioFileCuePoint::isValid() const throw()
+//{
+//    return peer != 0;
+//}
+//
+//LongLong AudioFileCuePoint::getPosition() const throw()
+//{
+//    return peer ? pl_AudioFileCuePoint_GetPosition (peer) : 0;
+//}
+//
+//Text AudioFileCuePoint::getLabel() const throw()
+//{
+//    return peer ? Text (pl_AudioFileCuePoint_GetLabel (peer)) : Text::getEmpty();
+//}
+//
+//Text AudioFileCuePoint::getComment() const throw()
+//{
+//    return peer ? Text (pl_AudioFileCuePoint_GetComment (peer)) : Text::getEmpty();
+//}
+//
+//UnsignedInt AudioFileCuePoint::getID() const throw()
+//{
+//    return peer ? pl_AudioFileCuePoint_GetID (peer) : 0;
+//}
+
+AudioFileMetaData::AudioFileMetaData() throw()
+:   peer (pl_AudioFileMetaData_CreateAndInit())
 {
 }
 
-bool AudioFileCuePoint::isValid() const throw()
-{
-    return peer != 0;
-}
-
-LongLong AudioFileCuePoint::getPosition() const throw()
-{
-    return peer ? pl_AudioFileCuePoint_GetPosition (peer) : 0;
-}
-
-Text AudioFileCuePoint::getLabel() const throw()
-{
-    return peer ? Text (pl_AudioFileCuePoint_GetLabel (peer)) : Text::getEmpty();
-}
-
-Text AudioFileCuePoint::getComment() const throw()
-{
-    return peer ? Text (pl_AudioFileCuePoint_GetComment (peer)) : Text::getEmpty();
-}
-
-UnsignedInt AudioFileCuePoint::getID() const throw()
-{
-    return peer ? pl_AudioFileCuePoint_GetID (peer) : 0;
-}
-
-
-AudioFileMetaData::AudioFileMetaData (PlankAudioFileMetaData* p) throw()
-:   peer (p)
+AudioFileMetaData::AudioFileMetaData (PlankAudioFileMetaDataRef p) throw()
+:   peer (p ? pl_AudioFileMetaData_IncrementRefCountAndGet (p) : static_cast<PlankAudioFileMetaDataRef> (0))
 {
 }
 
-void AudioFileMetaData::copyFrom (AudioFileMetaData const &other) throw()
+AudioFileMetaData::~AudioFileMetaData()
 {
-    if (peer != other.peer)
-    {
-        pl_AudioFileMetaData_DeInit (peer);
-        pl_AudioFileMetaData_InitCopy (peer, other.peer);
-    }
+    pl_AudioFileMetaData_DecrementRefCount (peer);
+    peer = static_cast<PlankAudioFileMetaDataRef> (0);
+}
+
+AudioFileMetaData::AudioFileMetaData (AudioFileMetaData const& copy) throw()
+:   peer (copy.peer ? pl_AudioFileMetaData_IncrementRefCountAndGet (copy.peer) : static_cast<PlankAudioFileMetaDataRef> (0))
+{
 }
 
 AudioFileMetaData& AudioFileMetaData::operator= (AudioFileMetaData const& other) throw()
 {
-    copyFrom (other);
+    if (this != &other)
+    {
+        PlankAudioFileMetaDataRef p = pl_AudioFileMetaData_IncrementRefCountAndGet (other.peer);
+        
+        if (peer)
+            pl_AudioFileMetaData_DecrementRefCount (peer);
+        
+        peer = p;
+    }
+    
     return *this;
+}
+
+PlankAudioFileMetaDataRef AudioFileMetaData::getPeerAndIncrementRefCount() throw()
+{
+    return pl_AudioFileMetaData_IncrementRefCountAndGet (peer);
 }
 
 END_PLONK_NAMESPACE

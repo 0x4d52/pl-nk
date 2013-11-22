@@ -64,6 +64,8 @@ PlankWeakPtrRef pl_SharedPtr_GetWeakPtr (PlankSharedPtrRef p);
 PlankSharedPtrRef pl_WeakPtr_GetSharedPtr (PlankWeakPtrRef p);
 PlankResult pl_WeakPtr_DecrementRefCount (PlankWeakPtrRef p);
 
+PlankResult pl_SharedPtrSwap (PlankSharedPtrRef* p1, PlankSharedPtrRef* p2);
+
 /** @} */
 
 PLANK_END_C_LINKAGE

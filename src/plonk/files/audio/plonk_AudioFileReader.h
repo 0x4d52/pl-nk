@@ -130,7 +130,7 @@ public:
     Text getName() const throw();
     
     bool hasMetaData() const throw();
-    AudioFileMetaData& getMetaData() throw();
+    AudioFileMetaData getMetaData() const throw();
     int getNumCuePoints() const throw();
     bool getCuePointAtIndex (const int index, UnsignedInt& cueID, Text& label, LongLong& position) const throw();
     
@@ -162,7 +162,6 @@ private:
     IntVariable nextMultiIndexRef;
     int defaultNumChannels;
     double defaultSampleRate;
-    AudioFileMetaData* metaData;
 };
 
 //------------------------------------------------------------------------------
@@ -837,7 +836,7 @@ public:
         return this->getInternal()->hasMetaData();
     }
     
-    AudioFileMetaData& getMetaData() throw()
+    AudioFileMetaData getMetaData() const throw()
     {
         return this->getInternal()->getMetaData();
     }

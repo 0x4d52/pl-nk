@@ -305,6 +305,11 @@ PlankResult pl_AudioFileReader_DeInit (PlankAudioFileReaderRef p)
     if ((result = pl_DynamicArray_DeInit (&p->name)) != PlankResult_OK) goto exit;
     if ((result = pl_AudioFileFormatInfo_DeInit (&p->formatInfo)) != PlankResult_OK) goto exit;
     
+    if (p->metaData)
+    {
+        if ((result = pl_AudioFileMetaData_DecrementRefCount (p->metaData)) != PlankResult_OK) goto exit;
+    }
+    
     pl_MemoryZero (p, sizeof (PlankAudioFileReader));
 
 exit:
@@ -699,12 +704,6 @@ PlankResult pl_AudioFileReader_Close (PlankAudioFileReaderRef p)
         goto exit;
     
     p->peer = PLANK_NULL;
-    
-    if (p->metaData != PLANK_NULL)
-    {
-        if ((result = pl_AudioFileMetaData_DecrementRefCount (p->metaData)) != PlankResult_OK) goto exit;
-        p->metaData = (PlankAudioFileMetaDataRef)PLANK_NULL;
-    }
     
 exit:
     return result;

@@ -231,7 +231,7 @@ PlankResult pl_AudioFileWriter_Init (PlankAudioFileWriterRef p)
     p->dataPosition                = -1;
     p->metaDataChunkPosition       = -1;
     p->headerPad                   = 0;
-    p->metaData                    = PLANK_NULL;
+    p->metaData                    = PLANK_NULL;    
     
     p->writeFramesFunction         = PLANK_NULL;
     p->writeHeaderFunction         = PLANK_NULL;
@@ -252,6 +252,7 @@ PlankResult pl_AudioFileWriter_DeInit (PlankAudioFileWriterRef p)
     if ((result = pl_AudioFileWriter_Close (p)) != PlankResult_OK) goto exit;
     if ((result = pl_AudioFileFormatInfo_DeInit (&p->formatInfo)) != PlankResult_OK) goto exit;
 
+    pl_AudioFileWriter_SetMetaData (p, PLANK_NULL); // don't check for error
     pl_MemoryZero (p, sizeof (PlankAudioFileWriter));
     
 exit:
@@ -294,11 +295,17 @@ const PlankAudioFileFormatInfo* pl_AudioFileWriter_GetFormatInfoReadOnly (PlankA
 }
 
 PlankAudioFileMetaDataRef pl_AudioFileWriter_GetMetaData (PlankAudioFileWriterRef p)
-{
+{    
     if (!p->metaData)
-        p->metaData = pl_AudioFileMetaData_CreateAndInit();
+        pl_AudioFileWriter_SetMetaData (p, pl_AudioFileMetaData_CreateAndInit());
     
     return p->metaData;
+}
+
+PlankResult pl_AudioFileWriter_SetMetaData (PlankAudioFileWriterRef p, PlankAudioFileMetaDataRef metaData)
+{    
+    pl_SharedPtrSwap ((PlankSharedPtrRef*)&p->metaData, (PlankSharedPtrRef*)&metaData);
+    return pl_AudioFileMetaData_DecrementRefCount (metaData);
 }
 
 PlankResult pl_AudioFileWriter_GetNumChannels (PlankAudioFileWriterRef p, int* numChannels)
@@ -777,13 +784,7 @@ PlankResult pl_AudioFileWriter_Close (PlankAudioFileWriterRef p)
         goto exit;
     
     p->peer = PLANK_NULL;
-    
-    if (p->metaData != PLANK_NULL)
-    {
-        if ((result = pl_AudioFileMetaData_DecrementRefCount (p->metaData)) != PlankResult_OK) goto exit;
-        p->metaData = (PlankAudioFileMetaDataRef)PLANK_NULL;
-    }
-        
+            
 exit:
     return result;
 }
@@ -3969,7 +3970,7 @@ static PlankResult pl_AudioFileWriter_Ogg_WriteMetaData (PlankAudioFileWriterRef
     const char* label;
     double time;
     int hours, minutes, seconds, millis;
-    
+        
     if (!p->metaData)
         goto exit;
     

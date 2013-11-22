@@ -100,7 +100,7 @@ PlankResult pl_IffFileWriter_DeInit (PlankIffFileWriterRef p)
     if ((result = pl_DynamicArray_DeInit (&p->chunkInfos)) != PlankResult_OK) goto exit;
 
 exit:
-    return PlankResult_UnknownError;
+    return result;
 }
 
 PlankResult pl_IffFileWriter_Destroy (PlankIffFileWriterRef p)

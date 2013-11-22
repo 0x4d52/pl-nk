@@ -71,8 +71,7 @@ public:
     
     AudioFileWriterInternal (const int bufferSize) throw()
     :   buffer (Buffer::withSize (bufferSize > 0 ? bufferSize : AudioFile::DefaultBufferSize, false)),
-        ready (false),
-        metaData (0)
+        ready (false)
     {
         pl_AudioFileWriter_Init (&peer);
     }
@@ -430,8 +429,9 @@ public:
     
     ~AudioFileWriterInternal()
     {
-        delete metaData;
-        pl_AudioFileWriter_DeInit (&peer);
+        PlankResult result = PlankResult_OK;
+        result = pl_AudioFileWriter_DeInit (&peer);
+        plonk_assert (result == PlankResult_OK);
     }
     
     void setHeaderPad (const UnsignedInt bytes) throw()
@@ -537,14 +537,16 @@ public:
         return true;
     }
 
-    AudioFileMetaData& getMetaData() throw()
+    AudioFileMetaData getMetaData() const throw()
     {
-        if (!metaData)
-            metaData = new AudioFileMetaData (pl_AudioFileWriter_GetMetaData (&peer));
-
-        return *metaData;
+        return AudioFileMetaData (pl_AudioFileWriter_GetMetaData (const_cast<PlankAudioFileWriter*> (&peer)));
     }
 
+    void setMetaData (AudioFileMetaData const& metaData) throw()
+    {
+        AudioFileMetaData m (metaData);
+        pl_AudioFileWriter_SetMetaData (&peer, m.getPeerAndIncrementRefCount());
+    }
     
     friend class AudioFileWriter<SampleType>;
     
@@ -552,7 +554,6 @@ private:
     PlankAudioFileWriter peer;
     Buffer buffer;
     bool ready;
-    AudioFileMetaData* metaData;
 };
 
 
@@ -721,10 +722,16 @@ public:
         return this->getInternal()->writeFrames (frames);
     }
     
-    AudioFileMetaData& getMetaData() throw()
+    AudioFileMetaData getMetaData() const throw()
     {
         return this->getInternal()->getMetaData();
     }
+    
+    void setMetaData (AudioFileMetaData const& metaData) throw()
+    {
+        return this->getInternal()->setMetaData (metaData);
+    }
+
 };
 
 #endif // PLONK_AUDIOFILEWRITER_H

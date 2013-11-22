@@ -363,22 +363,22 @@ static PlankResult pl_SharedPtr_Destroy (PlankSharedPtrRef p)
 
 PlankResult pl_SharedPtr_DecrementRefCount (PlankSharedPtrRef p)
 {
-    return p->sharedCounter ? pl_SharedPtrCounter_DecrementRefCount (p->sharedCounter) : PlankResult_NullPointerError;
+    return p ? (p->sharedCounter ? pl_SharedPtrCounter_DecrementRefCount (p->sharedCounter) : PlankResult_NullPointerError) : PlankResult_NullPointerError;
 }
 
 PlankResult pl_SharedPtr_DecrementWeakCount (PlankSharedPtrRef p)
 {
-    return p->sharedCounter ? pl_SharedPtrCounter_DecrementWeakCount (p->sharedCounter) : PlankResult_NullPointerError;
+    return p ? (p->sharedCounter ? pl_SharedPtrCounter_DecrementWeakCount (p->sharedCounter) : PlankResult_NullPointerError) : PlankResult_NullPointerError;
 }
 
 static PlankResult pl_SharedPtr_IncrementRefCount (PlankSharedPtrRef p)
 {
-    return p->sharedCounter ? pl_SharedPtrCounter_IncrementRefCount (p->sharedCounter) : PlankResult_NullPointerError;
+    return p ? (p->sharedCounter ? pl_SharedPtrCounter_IncrementRefCount (p->sharedCounter) : PlankResult_NullPointerError) : PlankResult_NullPointerError;
 }
 
 static PlankResult pl_SharedPtr_IncrementWeakCount (PlankSharedPtrRef p)
 {
-    return p->sharedCounter ? pl_SharedPtrCounter_IncrementWeakCount (p->sharedCounter) : PlankResult_NullPointerError;
+    return p ? (p->sharedCounter ? pl_SharedPtrCounter_IncrementWeakCount (p->sharedCounter) : PlankResult_NullPointerError) : PlankResult_NullPointerError;
 }
 
 PlankWeakPtrRef pl_SharedPtr_GetWeakPtr (PlankSharedPtrRef p)
@@ -417,4 +417,12 @@ PlankResult pl_WeakPtr_DecrementRefCount (PlankWeakPtrRef p)
     return result == PlankResult_OK ? pl_SharedPtr_DecrementRefCount ((PlankSharedPtrRef)p) : result;
 }
 
+PlankResult pl_SharedPtrSwap (PlankSharedPtrRef* p1, PlankSharedPtrRef* p2)
+{
+    PlankSharedPtrRef temp;
+    temp = *p2;
+    *p2 = *p1;
+    *p1 = temp;
+    return PlankResult_OK;
+}
 

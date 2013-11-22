@@ -213,9 +213,7 @@ PlankResult pl_AudioFileMetaData_Init (PlankAudioFileMetaDataRef p)
         result = PlankResult_NullPointerError;
         goto exit;
     }
-    
-    pl_MemoryZero (p + sizeof (PlankSharedPtr), sizeof (PlankAudioFileMetaData) - sizeof (PlankSharedPtr));
-    
+        
     // for some settings use -1 to indicate not set, others 0 is OK
     // but 0 should be checked for in some case to avoid errors (e.g., sample duration)
     p->baseNote         = -1;
@@ -235,81 +233,6 @@ PlankResult pl_AudioFileMetaData_Init (PlankAudioFileMetaDataRef p)
 exit:
     return result;
 }
-
-//PlankResult pl_AudioFileMetaData_InitCopy (PlankAudioFileMetaDataRef p, PlankAudioFileMetaDataRef original)
-//{
-//    PlankResult result = PlankResult_OK;
-//    PlankAudioFileCuePoint *cueArray, *originalCues;
-//    PlankAudioFileRegion *regionArray, *originalRegions;
-//    PlankAudioFileRegion *loopArray, *originalLoops;
-//    PlankSimpleLinkedListElementRef list;
-//    PlankDynamicArrayRef block;
-//    PlankL numItems, i;
-//    
-//    pl_MemoryCopy (p, original, sizeof (PlankAudioFileMetaData));
-//    
-//    pl_SimpleLinkedList_SetFreeElementDataFunction (&p->formatSpecific, pl_AudioFileMetaDataFormatSpecificFree);    
-//    pl_SimpleLinkedList_Init (&p->formatSpecific);
-//    
-//    pl_DynamicArray_InitCopy (&p->descriptionComment, &original->descriptionComment);
-//    pl_DynamicArray_InitCopy (&p->originatorArtist, &original->originatorArtist);
-//    pl_DynamicArray_InitCopy (&p->originatorRef, &original->originatorRef);
-//    pl_DynamicArray_InitCopy (&p->originationDate, &original->originationDate);
-//    pl_DynamicArray_InitCopy (&p->originationTime, &original->originationTime);
-//    pl_DynamicArray_InitCopy (&p->performer, &original->performer);
-//    pl_DynamicArray_InitCopy (&p->title, &original->title);
-//    pl_DynamicArray_InitCopy (&p->album, &original->album);
-//    pl_DynamicArray_InitCopy (&p->genre, &original->genre);
-//    pl_DynamicArray_InitCopy (&p->lyrics, &original->lyrics);
-//    pl_DynamicArray_InitCopy (&p->vendor, &original->vendor);
-//    pl_DynamicArray_InitCopy (&p->isrc, &original->isrc);
-//    pl_DynamicArray_InitCopy (&p->art, &original->art);
-//    pl_DynamicArray_InitCopy (&p->samplerData, &original->samplerData);
-//    pl_DynamicArray_InitCopy (&p->codingHistory, &original->codingHistory);
-//    
-//    if ((numItems = pl_DynamicArray_GetSize (&original->cuePoints)) > 0)
-//    {
-//        pl_DynamicArray_InitWithItemSizeAndSize (&p->cuePoints, sizeof (PlankAudioFileCuePoint), numItems, PLANK_TRUE);
-//        cueArray = (PlankAudioFileCuePoint*)pl_DynamicArray_GetArray (&p->cuePoints);
-//        originalCues = (PlankAudioFileCuePoint*)pl_DynamicArray_GetArray (&original->cuePoints);
-//        
-//        for (i = 0; i < numItems; ++i)
-//            pl_AudioFileCuePoint_InitCopy (&cueArray[i], &originalCues[i]);
-//    }
-//    
-//    if ((numItems = pl_DynamicArray_GetSize (&original->regions)) > 0)
-//    {
-//        pl_DynamicArray_InitWithItemSizeAndSize (&p->regions, sizeof (PlankAudioFileRegion), numItems, PLANK_TRUE);
-//        regionArray = (PlankAudioFileRegion*)pl_DynamicArray_GetArray (&p->regions);
-//        originalRegions = (PlankAudioFileRegion*)pl_DynamicArray_GetArray (&original->regions);
-//        
-//        for (i = 0; i < numItems; ++i)
-//            pl_AudioFileRegion_InitCopy (&regionArray[i], &originalRegions[i]);
-//    }
-//
-//    if ((numItems = pl_DynamicArray_GetSize (&original->loopPoints)) > 0)
-//    {
-//        pl_DynamicArray_InitWithItemSizeAndSize (&p->loopPoints, sizeof (PlankAudioFileRegion), numItems, PLANK_TRUE);
-//        loopArray = (PlankAudioFileRegion*)pl_DynamicArray_GetArray (&p->loopPoints);
-//        originalLoops = (PlankAudioFileRegion*)pl_DynamicArray_GetArray (&original->loopPoints);
-//        
-//        for (i = 0; i < numItems; ++i)
-//            pl_AudioFileRegion_InitCopy (&loopArray[i], &originalLoops[i]);
-//    }
-//        
-//    pl_SimpleLinkedList_GetFirst (&original->formatSpecific, &list);
-//    
-//    while (list)
-//    {
-//        block = pl_DynamicArray_Create();
-//        pl_DynamicArray_InitCopy (block, pl_SimpleLinkedListElement_GetData (list));
-//        pl_AudioFileMetaData_AddFormatSpecificBlock (p, block);
-//        list = pl_SimpleLinkedListElement_GetNext (list);
-//    }
-//    
-//exit:
-//    return result;
-//}
 
 static PlankResult pl_AudioFileMetaDataDeInitCuePoints (PlankDynamicArrayRef p)
 {
@@ -387,8 +310,6 @@ PlankResult pl_AudioFileMetaData_DeInit (PlankAudioFileMetaDataRef p)
     
     // this should free any extra data stored as dynamic arrays in the linked list
     if ((result = pl_SimpleLinkedList_Clear (&p->formatSpecific)) != PlankResult_OK) goto exit;
-
-    pl_MemoryZero (p + sizeof (PlankSharedPtr), sizeof (PlankAudioFileMetaData) - sizeof (PlankSharedPtr));
     
     printf("pl_AudioFileMetaData_DeInit (%p)\n", p);
     
