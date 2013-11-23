@@ -42,53 +42,73 @@
 
 
 
-PlankAudioFileRegionRef pl_AudioFileRegion_Create()
-{
-    return (PlankAudioFileRegionRef)PLANK_NULL;
-}
+//PlankAudioFileRegionRef pl_AudioFileRegion_Create()
+//{
+//    return (PlankAudioFileRegionRef)PLANK_NULL;
+//}
+//
+//PlankResult pl_AudioFileRegion_Destroy (PlankAudioFileRegionRef p)
+//{
+//	(void)p;
+//    return PlankResult_OK;
+//}
+//
+//PlankResult pl_AudioFileRegion_Init (PlankAudioFileRegionRef p)
+//{
+//    PlankResult result = PlankResult_OK;
+//    
+//    if (p == PLANK_NULL)
+//    {
+//        result = PlankResult_MemoryError;
+//        goto exit;
+//    }
+//    
+//    pl_MemoryZero (p, sizeof (PlankAudioFileRegion));
+//    
+//exit:
+//    return result;
+//}
+//
+//PlankResult pl_AudioFileRegion_InitCopy (PlankAudioFileRegionRef p, PlankAudioFileRegionRef original)
+//{
+//    PlankResult result = PlankResult_OK;
+//    
+//    if ((result = pl_AudioFileRegion_Init (p)) != PlankResult_OK)
+//        goto exit;
+//    
+//    if ((result = pl_AudioFileCuePoint_InitCopy (&p->anchor, &original->anchor)) != PlankResult_OK) goto exit;
+//    if ((result = pl_AudioFileCuePoint_InitCopy (&p->start, &original->start)) != PlankResult_OK) goto exit;
+//    if ((result = pl_AudioFileCuePoint_InitCopy (&p->end, &original->end)) != PlankResult_OK) goto exit;
+//
+//    p->regionType = original->regionType;
+//    p->fraction   = original->fraction;
+//    p->playCount  = original->playCount;
+//    
+//exit:
+//    return result;
+//}
 
-PlankResult pl_AudioFileRegion_Destroy (PlankAudioFileRegionRef p)
+static PlankResult pl_AudioFileRegion_Init (PlankAudioFileRegionRef p);
+static PlankResult pl_AudioFileRegion_DeInit (PlankAudioFileRegionRef p);
+
+PLANKSHAREDPTR_CREATEANDINIT_DEFINE(AudioFileRegion)
+PLANKSHAREDPTR_INCREMENTREFCOUNTANDGET_DEFINE(AudioFileRegion)
+PLANKSHAREDPTR_DECREMENTREFCOUNT_DEFINE(AudioFileRegion)
+
+static PlankResult pl_AudioFileRegion_Init (PlankAudioFileRegionRef p)
 {
-	(void)p;
+#if PLANKSHAREDPTR_DEBUG
+    printf("pl_AudioFileRegion_Init (%p)\n",p);
+#endif 
+    
+    p->anchor = pl_AudioFileCuePoint_CreateAndInit();
+    p->start  = pl_AudioFileCuePoint_CreateAndInit();
+    p->end    = pl_AudioFileCuePoint_CreateAndInit();
+    
     return PlankResult_OK;
 }
 
-PlankResult pl_AudioFileRegion_Init (PlankAudioFileRegionRef p)
-{
-    PlankResult result = PlankResult_OK;
-    
-    if (p == PLANK_NULL)
-    {
-        result = PlankResult_MemoryError;
-        goto exit;
-    }
-    
-    pl_MemoryZero (p, sizeof (PlankAudioFileRegion));
-    
-exit:
-    return result;
-}
-
-PlankResult pl_AudioFileRegion_InitCopy (PlankAudioFileRegionRef p, PlankAudioFileRegionRef original)
-{
-    PlankResult result = PlankResult_OK;
-    
-    if ((result = pl_AudioFileRegion_Init (p)) != PlankResult_OK)
-        goto exit;
-    
-    if ((result = pl_AudioFileCuePoint_InitCopy (&p->anchor, &original->anchor)) != PlankResult_OK) goto exit;
-    if ((result = pl_AudioFileCuePoint_InitCopy (&p->start, &original->start)) != PlankResult_OK) goto exit;
-    if ((result = pl_AudioFileCuePoint_InitCopy (&p->end, &original->end)) != PlankResult_OK) goto exit;
-
-    p->regionType = original->regionType;
-    p->fraction   = original->fraction;
-    p->playCount  = original->playCount;
-    
-exit:
-    return result;
-}
-
-PlankResult pl_AudioFileRegion_DeInit (PlankAudioFileRegionRef p)
+static PlankResult pl_AudioFileRegion_DeInit (PlankAudioFileRegionRef p)
 {
     PlankResult result = PlankResult_OK;
     
@@ -98,11 +118,13 @@ PlankResult pl_AudioFileRegion_DeInit (PlankAudioFileRegionRef p)
         goto exit;
     }
 
-    if ((result = pl_AudioFileCuePoint_DeInit (&p->anchor)) != PlankResult_OK) goto exit;
-    if ((result = pl_AudioFileCuePoint_DeInit (&p->start)) != PlankResult_OK) goto exit;
-    if ((result = pl_AudioFileCuePoint_DeInit (&p->end)) != PlankResult_OK) goto exit;
+#if PLANKSHAREDPTR_DEBUG
+    printf("pl_AudioFileRegion_DeInit (%p)\n",p);
+#endif 
     
-    pl_MemoryZero (p, sizeof (PlankAudioFileRegion));
+    if ((result = pl_AudioFileCuePoint_DecrementRefCount (p->anchor)) != PlankResult_OK) goto exit;
+    if ((result = pl_AudioFileCuePoint_DecrementRefCount (p->start)) != PlankResult_OK) goto exit;
+    if ((result = pl_AudioFileCuePoint_DecrementRefCount (p->end)) != PlankResult_OK) goto exit;
     
 exit:
     return result;
@@ -110,37 +132,37 @@ exit:
 
 PlankAudioFileCuePointRef pl_AudioFileRegion_GetAnchorCuePoint (PlankAudioFileRegionRef p)
 {
-    return &p->anchor;
+    return p->anchor;
 }
 
 PlankAudioFileCuePointRef pl_AudioFileRegion_GetStartCuePoint (PlankAudioFileRegionRef p)
 {
-    return &p->start;
+    return p->start;
 }
 
 PlankAudioFileCuePointRef pl_AudioFileRegion_GetEndCuePoint (PlankAudioFileRegionRef p)
 {
-    return &p->end;
+    return p->end;
 }
 
 PlankLL pl_AudioFileRegion_GetAnchorPosition (PlankAudioFileRegionRef p)
 {
-    return p->anchor.position;
+    return p->anchor->position;
 }
 
 PlankLL pl_AudioFileRegion_GetStartPosition (PlankAudioFileRegionRef p)
 {
-    return p->start.position;
+    return p->start->position;
 }
 
 PlankLL pl_AudioFileRegion_GetEndPosition (PlankAudioFileRegionRef p)
 {
-    return p->end.position;
+    return p->end->position;
 }
 
 PlankLL pl_AudioFileRegion_GetLength (PlankAudioFileRegionRef p)
 {
-    return p->end.position - p->start.position;
+    return p->end->position - p->start->position;
 }
 
 int pl_AudioFileRegion_GetType (PlankAudioFileRegionRef p)
@@ -165,49 +187,49 @@ PlankUI pl_AudioFileRegion_GetPlayCount (PlankAudioFileRegionRef p)
 
 const char* pl_AudioFileRegion_GetLabel (PlankAudioFileRegionRef p)
 {
-    return pl_AudioFileCuePoint_GetLabel (&p->anchor);
+    return pl_AudioFileCuePoint_GetLabel (p->anchor);
 }
 
 char* pl_AudioFileRegion_GetLabelWritable (PlankAudioFileRegionRef p)
 {
-    return pl_AudioFileCuePoint_GetLabelWritable (&p->anchor);
+    return pl_AudioFileCuePoint_GetLabelWritable (p->anchor);
 }
 
 const char* pl_AudioFileRegion_GetComment (PlankAudioFileRegionRef p)
 {
-    return pl_AudioFileCuePoint_GetComment (&p->anchor);
+    return pl_AudioFileCuePoint_GetComment (p->anchor);
 }
 
 char* pl_AudioFileRegion_GetCommentWritable (PlankAudioFileRegionRef p)
 {
-    return pl_AudioFileCuePoint_GetCommentWritable (&p->anchor);
+    return pl_AudioFileCuePoint_GetCommentWritable (p->anchor);
 }
 
 PlankResult pl_AudioFileRegion_SetAnchorPosition (PlankAudioFileRegionRef p, const PlankLL position)
 {
-    return pl_AudioFileCuePoint_SetPosition (&p->anchor, position);
+    return pl_AudioFileCuePoint_SetPosition (p->anchor, position);
 }
 
 PlankResult pl_AudioFileRegion_SetStartPosition (PlankAudioFileRegionRef p, const PlankLL position)
 {
-    return pl_AudioFileCuePoint_SetPosition (&p->start, position);
+    return pl_AudioFileCuePoint_SetPosition (p->start, position);
 }
 
 PlankResult pl_AudioFileRegion_SetEndPosition (PlankAudioFileRegionRef p, const PlankLL position)
 {
-    return pl_AudioFileCuePoint_SetPosition (&p->end, position);
+    return pl_AudioFileCuePoint_SetPosition (p->end, position);
 }
 
 PlankResult pl_AudioFileRegion_SetLength (PlankAudioFileRegionRef p, const PlankLL length)
 {
-    return pl_AudioFileCuePoint_SetPosition (&p->end, pl_AudioFileCuePoint_GetPosition (&p->start) + length);
+    return pl_AudioFileCuePoint_SetPosition (p->end, p->start->position + length);
 }
 
 PlankResult pl_AudioFileRegion_SetType (PlankAudioFileRegionRef p, const int type)
 {
-    p->start.type = PLANKAUDIOFILE_CUEPOINTTYPE_REGIONSTART;
-    p->end.type   = PLANKAUDIOFILE_CUEPOINTTYPE_REGIONEND;
-    p->regionType = type;
+    p->start->type = PLANKAUDIOFILE_CUEPOINTTYPE_REGIONSTART;
+    p->end->type   = PLANKAUDIOFILE_CUEPOINTTYPE_REGIONEND;
+    p->regionType  = type;
     return PlankResult_OK;
 }
 
@@ -231,24 +253,24 @@ PlankResult pl_AudioFileRegion_SetPlayCount (PlankAudioFileRegionRef p, const Pl
 
 PlankResult pl_AudioFileRegion_SetLabel (PlankAudioFileRegionRef p, const char* label)
 {
-    return pl_AudioFileCuePoint_SetLabel (&p->anchor, label);
+    return pl_AudioFileCuePoint_SetLabel (p->anchor, label);
 }
 
 PlankResult pl_AudioFileRegion_SetComment (PlankAudioFileRegionRef p, const char* comment)
 {
-    return pl_AudioFileCuePoint_SetComment (&p->anchor, comment);
+    return pl_AudioFileCuePoint_SetComment (p->anchor, comment);
 }
 
 PlankResult pl_AudioFileRegion_GetRegion (PlankAudioFileRegionRef p, PlankLL* start, PlankLL* end, PlankLL* anchor)
 {
     if (start != PLANK_NULL)
-        *start = p->start.position;
+        *start = p->start->position;
     
     if (end != PLANK_NULL)
-        *end = p->end.position;
+        *end = p->end->position;
     
     if (anchor != PLANK_NULL)
-        *anchor = p->anchor.position;
+        *anchor = p->anchor->position;
     
     return PlankResult_OK;
 }
@@ -257,12 +279,12 @@ PlankResult pl_AudioFileRegion_SetRegion (PlankAudioFileRegionRef p, const Plank
 {
     if (start >= 0)
     {
-        p->start.position = start;
-        p->anchor.position = start;
+        p->start->position = start;
+        p->anchor->position = start;
     }
     
     if (end >= 0)
-        p->end.position = end;
+        p->end->position = end;
     
     return PlankResult_OK;
 }
@@ -270,22 +292,22 @@ PlankResult pl_AudioFileRegion_SetRegion (PlankAudioFileRegionRef p, const Plank
 PlankResult pl_AudioFileRegion_SetRegionWithAnchor (PlankAudioFileRegionRef p, const PlankLL start, const PlankLL end, const PlankLL anchor)
 {
     if (start >= 0)
-        p->start.position = start;
+        p->start->position = start;
     
     if (end >= 0)
-        p->end.position = end;
+        p->end->position = end;
 
     if (anchor >= 0)
-        p->anchor.position = anchor;
+        p->anchor->position = anchor;
     
     return PlankResult_OK;
 }
 
 PlankResult pl_AudioFileRegion_OffsetPosition (PlankAudioFileRegionRef p, const PlankLL offset)
 {
-    p->start.position  += offset;
-    p->end.position    += offset;
-    p->anchor.position += offset;
+    p->start->position  += offset;
+    p->end->position    += offset;
+    p->anchor->position += offset;
     return PlankResult_OK;
 }
 

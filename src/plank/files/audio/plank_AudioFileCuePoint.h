@@ -40,6 +40,7 @@
 #define PLANK_AUDIOFILECUEPOINT_H
 
 #include "plank_AudioFileCommon.h"
+#include "../../containers/plank_SharedPtr.h"
 #include "../../containers/plank_DynamicArray.h"
 
 PLANK_BEGIN_C_LINKAGE
@@ -53,16 +54,11 @@ PLANK_BEGIN_C_LINKAGE
 
 /** Create a <i>Plank AudioFileCuePoint</i> object and return an oqaque reference to it.
  @return A <i>Plank AudioFileCuePoint</i> object as an opaque reference or PLANK_NULL. */
-PlankAudioFileCuePointRef pl_AudioFileCuePoint_Create();
+PlankAudioFileCuePointRef pl_AudioFileCuePoint_CreateAndInit();
+PlankAudioFileCuePointRef pl_AudioFileCuePoint_IncrementRefCountAndGet (PlankAudioFileCuePointRef p);
+PlankResult pl_AudioFileCuePoint_DecrementRefCount (PlankAudioFileCuePointRef p);
 
-/** Destroy a <i>Plank AudioFileCuePoint</i> object. 
- @param p The <i>Plank AudioFileCuePoint</i> object. */
-PlankResult pl_AudioFileCuePoint_Destroy (PlankAudioFileCuePointRef p);
-
-PlankResult pl_AudioFileCuePoint_Init (PlankAudioFileCuePointRef p);
-PlankResult pl_AudioFileCuePoint_InitCopy (PlankAudioFileCuePointRef p, PlankAudioFileCuePointRef source);
-
-PlankResult pl_AudioFileCuePoint_DeInit (PlankAudioFileCuePointRef p);
+PlankResult pl_AudioFileCuePoint_SetCopy (PlankAudioFileCuePointRef p, PlankAudioFileCuePointRef source);
 
 PlankResult pl_AudioFileCuePoint_SetPosition            (PlankAudioFileCuePointRef p, const PlankLL position);
 PlankResult pl_AudioFileCuePoint_SetID                  (PlankAudioFileCuePointRef p, const PlankUI cueID);
@@ -80,16 +76,10 @@ char* pl_AudioFileCuePoint_GetLabelWritable (PlankAudioFileCuePointRef p);
 const char* pl_AudioFileCuePoint_GetComment (PlankAudioFileCuePointRef p);
 char* pl_AudioFileCuePoint_GetCommentWritable (PlankAudioFileCuePointRef p);
 int pl_AudioFileCuePoint_GetType (PlankAudioFileCuePointRef p);
-
-//PlankUI pl_AudioFileCuePoint_GetLabelLength (PlankAudioFileCuePointRef p);
-//PlankUI pl_AudioFileCuePoint_GetCommentLength (PlankAudioFileCuePointRef p);
 PlankUI pl_AudioFileCuePoint_GetLabelSize (PlankAudioFileCuePointRef p);
 PlankUI pl_AudioFileCuePoint_GetCommentSize (PlankAudioFileCuePointRef p);
 
-
 PlankResult pl_AudioFileCuePoint_OffsetPosition (PlankAudioFileCuePointRef p, const PlankLL offset);
-
-
 
 /** @} */
 
@@ -107,6 +97,7 @@ typedef struct PlankAudioFileCuePointExtra
 
 typedef struct PlankAudioFileCuePoint
 {
+    PlankSharedPtr sharedHeader;
 	PlankLL position;
     PlankDynamicArray label;
     PlankDynamicArray comment;

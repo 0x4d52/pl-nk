@@ -39,40 +39,59 @@
 #include "../../core/plank_StandardHeader.h"
 #include "plank_AudioFileCuePoint.h"
 
-PlankAudioFileCuePointRef pl_AudioFileCuePoint_Create()
-{
-    return (PlankAudioFileCuePointRef)PLANK_NULL;
-}
 
-PlankResult pl_AudioFileCuePoint_Destroy (PlankAudioFileCuePointRef p)
+static PlankResult pl_AudioFileCuePoint_Init (PlankAudioFileCuePointRef p);
+static PlankResult pl_AudioFileCuePoint_DeInit (PlankAudioFileCuePointRef p);
+
+PLANKSHAREDPTR_CREATEANDINIT_DEFINE(AudioFileCuePoint)
+PLANKSHAREDPTR_INCREMENTREFCOUNTANDGET_DEFINE(AudioFileCuePoint)
+PLANKSHAREDPTR_DECREMENTREFCOUNT_DEFINE(AudioFileCuePoint)
+
+static PlankResult pl_AudioFileCuePoint_Init (PlankAudioFileCuePointRef p)
 {
-	(void)p;
+#if PLANKSHAREDPTR_DEBUG
+    printf("pl_AudioFileCuePoint_Init (%p)\n",p);
+#else
+    (void)p;
+#endif
     return PlankResult_OK;
 }
 
-PlankResult pl_AudioFileCuePoint_Init (PlankAudioFileCuePointRef p)
+static PlankResult pl_AudioFileCuePoint_DeInit (PlankAudioFileCuePointRef p)
 {
     PlankResult result = PlankResult_OK;
-    
+    PlankMemoryRef m;
+
     if (p == PLANK_NULL)
     {
         result = PlankResult_MemoryError;
         goto exit;
     }
     
-    pl_MemoryZero (p, sizeof (PlankAudioFileCuePoint));
+#if PLANKSHAREDPTR_DEBUG
+    printf("pl_AudioFileCuePoint_DeInit (%p)\n",p);
+#endif
     
+    if ((result = pl_DynamicArray_DeInit (&p->label)) != PlankResult_OK) goto exit;
+    if ((result = pl_DynamicArray_DeInit (&p->comment)) != PlankResult_OK) goto exit;
+    
+    if (p->extra != PLANK_NULL)
+    {
+        m = pl_MemoryGlobal();
+        
+        if ((result = pl_Memory_Free (m, p->extra)) != PlankResult_OK)
+            goto exit;
+    }
+        
 exit:
     return result;
 }
 
-PlankResult pl_AudioFileCuePoint_InitCopy (PlankAudioFileCuePointRef p, PlankAudioFileCuePointRef source)
+PlankResult pl_AudioFileCuePoint_SetCopy (PlankAudioFileCuePointRef p, PlankAudioFileCuePointRef source)
 {
     PlankResult result = PlankResult_OK;
-    
-    if ((result = pl_AudioFileCuePoint_Init (p)) != PlankResult_OK)
-        goto exit;
-    
+    PlankMemoryRef m;
+
     pl_AudioFileCuePoint_SetPosition (p, source->position);
     pl_AudioFileCuePoint_SetID (p, source->cueID);
     
@@ -93,35 +112,13 @@ PlankResult pl_AudioFileCuePoint_InitCopy (PlankAudioFileCuePointRef p, PlankAud
                                        source->extra->dialect,
                                        source->extra->codePage);
     }
-    
-exit:
-    return result;
-}
-
-PlankResult pl_AudioFileCuePoint_DeInit (PlankAudioFileCuePointRef p)
-{
-    PlankResult result = PlankResult_OK;
-    PlankMemoryRef m;
-
-    if (p == PLANK_NULL)
-    {
-        result = PlankResult_MemoryError;
-        goto exit;
-    }
-    
-    if ((result = pl_DynamicArray_DeInit (&p->label)) != PlankResult_OK) goto exit;
-    if ((result = pl_DynamicArray_DeInit (&p->comment)) != PlankResult_OK) goto exit;
-    
-    if (p->extra != PLANK_NULL)
+    else if (p->extra)
     {
         m = pl_MemoryGlobal();
-        
-        if ((result = pl_Memory_Free (m, p->extra)) != PlankResult_OK)
-            goto exit;
+        if ((result = pl_Memory_Free (m, p->extra)) != PlankResult_OK) goto exit;
+        p->extra = PLANK_NULL;
     }
     
-    pl_MemoryZero (p, sizeof (PlankAudioFileCuePoint));
-        
 exit:
     return result;
 }
@@ -227,16 +224,6 @@ int pl_AudioFileCuePoint_GetType (PlankAudioFileCuePointRef p)
 {
     return p->type;
 }
-//
-//PlankUI pl_AudioFileCuePoint_GetLabelLength (PlankAudioFileCuePointRef p)
-//{
-//    return (PlankUI)pl_DynamicArray_GetSize (&p->label) - 1;
-//}
-//
-//PlankUI pl_AudioFileCuePoint_GetCommentLength (PlankAudioFileCuePointRef p)
-//{
-//    return (PlankUI)pl_DynamicArray_GetSize (&p->comment) - 1;
-//}
 
 PlankUI pl_AudioFileCuePoint_GetLabelSize (PlankAudioFileCuePointRef p)
 {
@@ -247,7 +234,6 @@ PlankUI pl_AudioFileCuePoint_GetCommentSize (PlankAudioFileCuePointRef p)
 {
     return (PlankUI)pl_DynamicArray_GetSize (&p->comment);
 }
-
 
 PlankResult pl_AudioFileCuePoint_OffsetPosition (PlankAudioFileCuePointRef p, const PlankLL offset)
 {

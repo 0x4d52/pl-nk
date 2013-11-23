@@ -41,6 +41,21 @@
 
 #include "plank_DynamicArray.h"
 
+#define PLANKSHAREDPTR_CREATEANDINIT_DEFINE(NAME)\
+    Plank##NAME##Ref pl_##NAME##_CreateAndInit() {\
+        return (Plank##NAME##Ref)pl_SharedPtr_CreateAndInitWithSizeAndFunctions (sizeof (Plank##NAME),(PlankSharedPtrFunction)pl_##NAME##_Init,(PlankSharedPtrFunction)pl_##NAME##_DeInit);\
+    }
+
+#define PLANKSHAREDPTR_INCREMENTREFCOUNTANDGET_DEFINE(NAME)\
+    Plank##NAME##Ref pl_##NAME##_IncrementRefCountAndGet (Plank##NAME##Ref p) {\
+        return (Plank##NAME##Ref)pl_SharefPtr_IncrementRefCountAndGetPtr ((PlankSharedPtrRef)p);\
+    }
+
+#define PLANKSHAREDPTR_DECREMENTREFCOUNT_DEFINE(NAME)\
+    PlankResult pl_##NAME##_DecrementRefCount (Plank##NAME##Ref p) {\
+        return pl_SharedPtr_DecrementRefCount((PlankSharedPtrRef)p);\
+    }
+
 PLANK_BEGIN_C_LINKAGE
 
 /** A shared pointer.
@@ -81,10 +96,13 @@ PlankSharedPtrArrayRef pl_SharefPtrArray_IncrementRefCountAndGetPtr (PlankShared
 PlankResult pl_SharedPtrArray_DecrementRefCount (PlankSharedPtrArrayRef p);
 PlankResult pl_SharedPtrArray_Clear (PlankSharedPtrArrayRef p);
 PlankL pl_SharedPtrArray_GetLength (PlankSharedPtrArrayRef p);
-PlankResult pl_SharedPtrArray_AddSharePtr (PlankSharedPtrArrayRef p, PlankSharedPtrRef item);
-PlankResult pl_SharedPtrArray_PutSharePtr (PlankSharedPtrArrayRef p, const PlankL index, PlankSharedPtrRef item);
-PlankResult pl_SharedPtrArray_RemoveSharePtr (PlankSharedPtrArrayRef p, const PlankL index);
-PlankSharedPtrRef pl_SharedPtrArray_GetSharePtr (PlankSharedPtrArrayRef p, const PlankL index);
+PlankAtomicP* pl_SharedPtrArray_GetArray (PlankSharedPtrArrayRef p);
+PlankResult pl_SharedPtrArray_AddSharedPtr (PlankSharedPtrArrayRef p, PlankSharedPtrRef item);
+PlankResult pl_SharedPtrArray_PutSharedPtr (PlankSharedPtrArrayRef p, const PlankL index, PlankSharedPtrRef item);
+PlankResult pl_SharedPtrArray_RemoveSharedPtr (PlankSharedPtrArrayRef p, const PlankL index);
+PlankSharedPtrRef pl_SharedPtrArray_GetSharedPtr (PlankSharedPtrArrayRef p, const PlankL index);
+PlankResult pl_SharedPtrArray_Swap (PlankSharedPtrArrayRef p, const PlankL indexA, const PlankL indexB);
+
 
 /** @} */
 

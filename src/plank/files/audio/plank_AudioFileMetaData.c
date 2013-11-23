@@ -197,12 +197,16 @@ static PlankResult pl_AudioFileMetaDataFormatSpecificFree (PlankP ptr)
     return pl_DynamicArray_Destroy ((PlankDynamicArrayRef)ptr);
 }
 
-PlankAudioFileMetaDataRef pl_AudioFileMetaData_CreateAndInit()
-{
-    return (PlankAudioFileMetaDataRef)pl_SharedPtr_CreateAndInitWithSizeAndFunctions (sizeof (PlankAudioFileMetaData),
-                                                                                      (PlankSharedPtrFunction)pl_AudioFileMetaData_Init,
-                                                                                      (PlankSharedPtrFunction)pl_AudioFileMetaData_DeInit);
-}
+//PlankAudioFileMetaDataRef pl_AudioFileMetaData_CreateAndInit()
+//{
+//    return (PlankAudioFileMetaDataRef)pl_SharedPtr_CreateAndInitWithSizeAndFunctions (sizeof (PlankAudioFileMetaData),
+//                                                                                      (PlankSharedPtrFunction)pl_AudioFileMetaData_Init,
+//                                                                                      (PlankSharedPtrFunction)pl_AudioFileMetaData_DeInit);
+//}
+
+PLANKSHAREDPTR_CREATEANDINIT_DEFINE(AudioFileMetaData)
+PLANKSHAREDPTR_INCREMENTREFCOUNTANDGET_DEFINE(AudioFileMetaData)
+PLANKSHAREDPTR_DECREMENTREFCOUNT_DEFINE(AudioFileMetaData)
 
 PlankResult pl_AudioFileMetaData_Init (PlankAudioFileMetaDataRef p)
 {
@@ -213,7 +217,11 @@ PlankResult pl_AudioFileMetaData_Init (PlankAudioFileMetaDataRef p)
         result = PlankResult_NullPointerError;
         goto exit;
     }
-        
+    
+#if PLANKSHAREDPTR_DEBUG
+    printf("pl_AudioFileMetaData_Init (%p)\n", p);
+#endif 
+    
     // for some settings use -1 to indicate not set, others 0 is OK
     // but 0 should be checked for in some case to avoid errors (e.g., sample duration)
     p->baseNote         = -1;
@@ -225,54 +233,57 @@ PlankResult pl_AudioFileMetaData_Init (PlankAudioFileMetaDataRef p)
     p->trackNum         = -1;
     p->trackTotal       = -1;
     
+    p->cuePoints  = pl_SharedPtrArray_CreateAndInit();
+    p->loopPoints = pl_SharedPtrArray_CreateAndInit();
+    p->regions    = pl_SharedPtrArray_CreateAndInit();
+    
     // the formatSpecific linked list contains elements that are DynamicArrays
     pl_SimpleLinkedList_SetFreeElementDataFunction (&p->formatSpecific, pl_AudioFileMetaDataFormatSpecificFree);
     
-//    printf("pl_AudioFileMetaData_Init (%p)\n", p);
 
 exit:
     return result;
 }
 
-static PlankResult pl_AudioFileMetaDataDeInitCuePoints (PlankDynamicArrayRef p)
-{
-    PlankResult result = PlankResult_OK;
-    PlankL numCuePoints, i;
-    PlankAudioFileCuePoint* cuePoints;
-    
-    numCuePoints = pl_DynamicArray_GetSize (p);
-    cuePoints = (PlankAudioFileCuePoint*)pl_DynamicArray_GetArray (p);
-    
-    for (i = 0; i < numCuePoints; ++i)
-    {
-        if ((result = pl_AudioFileCuePoint_DeInit (&cuePoints[i])) != PlankResult_OK) goto exit;
-    }
-    
-    if ((result = pl_DynamicArray_DeInit (p)) != PlankResult_OK) goto exit;
-
-exit:
-    return result;
-}
-
-static PlankResult pl_AudioFileMetaDataDeInitRegions (PlankDynamicArrayRef p)
-{
-    PlankResult result = PlankResult_OK;
-    PlankL numRegions, i;
-    PlankAudioFileRegion* regions;
-    
-    numRegions = pl_DynamicArray_GetSize (p);
-    regions = (PlankAudioFileRegion*)pl_DynamicArray_GetArray (p);
-    
-    for (i = 0; i < numRegions; ++i)
-    {
-        if ((result = pl_AudioFileRegion_DeInit (&regions[i])) != PlankResult_OK) goto exit;
-    }
-    
-    if ((result = pl_DynamicArray_DeInit (p)) != PlankResult_OK) goto exit;
-
-exit:
-    return result;
-}
+//static PlankResult pl_AudioFileMetaDataDeInitCuePoints (PlankDynamicArrayRef p)
+//{
+//    PlankResult result = PlankResult_OK;
+//    PlankL numCuePoints, i;
+//    PlankAudioFileCuePoint* cuePoints;
+//    
+//    numCuePoints = pl_DynamicArray_GetSize (p);
+//    cuePoints = (PlankAudioFileCuePoint*)pl_DynamicArray_GetArray (p);
+//    
+//    for (i = 0; i < numCuePoints; ++i)
+//    {
+//        if ((result = pl_AudioFileCuePoint_DeInit (&cuePoints[i])) != PlankResult_OK) goto exit;
+//    }
+//    
+//    if ((result = pl_DynamicArray_DeInit (p)) != PlankResult_OK) goto exit;
+//
+//exit:
+//    return result;
+//}
+//
+//static PlankResult pl_AudioFileMetaDataDeInitRegions (PlankDynamicArrayRef p)
+//{
+//    PlankResult result = PlankResult_OK;
+//    PlankL numRegions, i;
+//    PlankAudioFileRegion* regions;
+//    
+//    numRegions = pl_DynamicArray_GetSize (p);
+//    regions = (PlankAudioFileRegion*)pl_DynamicArray_GetArray (p);
+//    
+//    for (i = 0; i < numRegions; ++i)
+//    {
+//        if ((result = pl_AudioFileRegion_DeInit (&regions[i])) != PlankResult_OK) goto exit;
+//    }
+//    
+//    if ((result = pl_DynamicArray_DeInit (p)) != PlankResult_OK) goto exit;
+//
+//exit:
+//    return result;
+//}
 
 
 PlankResult pl_AudioFileMetaData_DeInit (PlankAudioFileMetaDataRef p)
@@ -284,6 +295,10 @@ PlankResult pl_AudioFileMetaData_DeInit (PlankAudioFileMetaDataRef p)
         result = PlankResult_MemoryError;
         goto exit;
     }
+    
+#if PLANKSHAREDPTR_DEBUG
+    printf("pl_AudioFileMetaData_DeInit (%p)\n", p);
+#endif
     
     if ((result = pl_DynamicArray_DeInit (&p->descriptionComment)) != PlankResult_OK) goto exit;
     if ((result = pl_DynamicArray_DeInit (&p->originatorArtist)) != PlankResult_OK) goto exit;
@@ -304,28 +319,30 @@ PlankResult pl_AudioFileMetaData_DeInit (PlankAudioFileMetaDataRef p)
     
     if ((result = pl_DynamicArray_DeInit (&p->codingHistory)) != PlankResult_OK) goto exit;
 
-    if ((result = pl_AudioFileMetaDataDeInitCuePoints (&p->cuePoints)) != PlankResult_OK) goto exit;
-    if ((result = pl_AudioFileMetaDataDeInitRegions (&p->loopPoints)) != PlankResult_OK) goto exit;
-    if ((result = pl_AudioFileMetaDataDeInitRegions (&p->regions)) != PlankResult_OK) goto exit;
-    
+//    if ((result = pl_AudioFileMetaDataDeInitCuePoints (&p->cuePoints)) != PlankResult_OK) goto exit;
+//    if ((result = pl_AudioFileMetaDataDeInitRegions (&p->loopPoints)) != PlankResult_OK) goto exit;
+//    if ((result = pl_AudioFileMetaDataDeInitRegions (&p->regions)) != PlankResult_OK) goto exit;
+
+    if ((result = pl_SharedPtrArray_DecrementRefCount (p->cuePoints)) != PlankResult_OK) goto exit;
+    if ((result = pl_SharedPtrArray_DecrementRefCount (p->loopPoints)) != PlankResult_OK) goto exit;
+    if ((result = pl_SharedPtrArray_DecrementRefCount (p->regions)) != PlankResult_OK) goto exit;
+
     // this should free any extra data stored as dynamic arrays in the linked list
     if ((result = pl_SimpleLinkedList_Clear (&p->formatSpecific)) != PlankResult_OK) goto exit;
-    
-//    printf("pl_AudioFileMetaData_DeInit (%p)\n", p);
-    
+        
 exit:
     return result;
 }
 
-PlankAudioFileMetaDataRef pl_AudioFileMetaData_IncrementRefCountAndGet (PlankAudioFileMetaDataRef p)
-{
-    return (PlankAudioFileMetaDataRef)pl_SharefPtr_IncrementRefCountAndGetPtr ((PlankSharedPtrRef)p);
-}
-
-PlankResult pl_AudioFileMetaData_DecrementRefCount (PlankAudioFileMetaDataRef p)
-{
-    return pl_SharedPtr_DecrementRefCount((PlankSharedPtrRef)p);
-}
+//PlankAudioFileMetaDataRef pl_AudioFileMetaData_IncrementRefCountAndGet (PlankAudioFileMetaDataRef p)
+//{
+//    return (PlankAudioFileMetaDataRef)pl_SharefPtr_IncrementRefCountAndGetPtr ((PlankSharedPtrRef)p);
+//}
+//
+//PlankResult pl_AudioFileMetaData_DecrementRefCount (PlankAudioFileMetaDataRef p)
+//{
+//    return pl_SharedPtr_DecrementRefCount((PlankSharedPtrRef)p);
+//}
 
 PlankResult pl_AudioFileMetaData_SetEditCount (PlankAudioFileMetaDataRef p, const PlankUI count)
 {
@@ -666,18 +683,12 @@ const PlankUC* pl_AudioFileMetaData_GetUMID (PlankAudioFileMetaDataRef p)
 }
 
 PlankResult pl_AudioFileMetaData_AddCuePoint (PlankAudioFileMetaDataRef p, PlankAudioFileCuePointRef cuePoint)
-{
-    PlankResult result = PlankResult_OK;    
+{    
+    PlankResult result;
     
-    if (pl_DynamicArray_GetItemSize (&p->cuePoints) == 0)
-    {
-        if ((result = pl_DynamicArray_InitWithItemSize (&p->cuePoints, sizeof (PlankAudioFileCuePoint))) != PlankResult_OK) goto exit;
-    }
-    
-    if ((result = pl_DynamicArray_AddItem (&p->cuePoints, cuePoint)) != PlankResult_OK) goto exit;
-    
-    pl_MemoryZero (cuePoint, sizeof (PlankAudioFileCuePoint));
-    
+    if ((result = pl_SharedPtrArray_AddSharedPtr (p->cuePoints, (PlankSharedPtrRef)cuePoint)) != PlankResult_OK) goto exit;
+    if ((result = pl_AudioFileCuePoint_DecrementRefCount (cuePoint)) != PlankResult_OK) goto exit;
+
 exit:
     return result;
 }
@@ -686,16 +697,17 @@ PlankResult pl_AudioFileMetaData_FindCuePointWithID (PlankAudioFileMetaDataRef p
 {
     PlankResult result = PlankResult_OK;
     PlankL numCuePoints, i;
-    PlankAudioFileCuePoint* cuePoints;
+    PlankAudioFileCuePointRef temp;
     
-    numCuePoints = pl_DynamicArray_GetSize (&p->cuePoints);
-    cuePoints = (PlankAudioFileCuePoint*)pl_DynamicArray_GetArray (&p->cuePoints);
+    numCuePoints = pl_SharedPtrArray_GetLength (p->cuePoints);
     
     for (i = 0; i < numCuePoints; ++i)
     {
-        if (pl_AudioFileCuePoint_GetID (&cuePoints[i]) == cueID)
+        temp = (PlankAudioFileCuePointRef)pl_SharedPtrArray_GetSharedPtr (p->cuePoints, i);
+        
+        if (pl_AudioFileCuePoint_GetID (temp) == cueID)
         {
-            *cuePoint = &cuePoints[i];
+            *cuePoint = temp;
             goto exit;
         }
     }
@@ -713,22 +725,25 @@ exit:
     return result;
 }
 
-PlankResult pl_AudioFileMetaData_RemoveCuePointWithID (PlankAudioFileMetaDataRef p, const PlankUI cueID, PlankAudioFileCuePointRef cuePoint, PlankB* success)
+PlankResult pl_AudioFileMetaData_RemoveCuePointWithID (PlankAudioFileMetaDataRef p, const PlankUI cueID, PlankAudioFileCuePointRef* cuePoint, PlankB* success)
 {
     PlankResult result = PlankResult_OK;
     PlankL numCuePoints, i;
-    PlankAudioFileCuePoint* cuePoints;
     
-    numCuePoints = pl_DynamicArray_GetSize (&p->cuePoints);
-    cuePoints = (PlankAudioFileCuePoint*)pl_DynamicArray_GetArray (&p->cuePoints);
+    numCuePoints = pl_SharedPtrArray_GetLength (p->cuePoints);
     *success = PLANK_FALSE;
     
     for (i = 0; i < numCuePoints; ++i)
     {
-        if (pl_AudioFileCuePoint_GetID (&cuePoints[i]) == cueID)
+        if (pl_AudioFileCuePoint_GetID ((PlankAudioFileCuePointRef)pl_SharedPtrArray_GetSharedPtr (p->cuePoints, i)) == cueID)
         {
-            if ((result = pl_DynamicArray_GetItem (&p->cuePoints, i, cuePoint)) != PlankResult_OK) goto exit;
-            if ((result = pl_DynamicArray_RemoveItem (&p->cuePoints, i)) != PlankResult_OK) goto exit;
+            if (cuePoint)
+            {
+                *cuePoint = (PlankAudioFileCuePointRef)pl_SharedPtrArray_GetSharedPtr (p->cuePoints, i);
+                pl_AudioFileCuePoint_IncrementRefCountAndGet (*cuePoint);
+            }
+            
+            result = pl_SharedPtrArray_RemoveSharedPtr (p->cuePoints, i);
             *success = PLANK_TRUE;
             goto exit;
         }
@@ -742,15 +757,15 @@ PlankResult pl_AudioFileMetaData_GetNextCueID (PlankAudioFileMetaDataRef p, Plan
 {
     PlankResult result = PlankResult_OK;
     PlankUI nextCueID;
-    PlankAudioFileCuePoint* cueArray;
+    PlankAtomicP* cueArray;
     PlankL numCues, i;
 
     nextCueID = 1;
-    numCues = pl_DynamicArray_GetSize (&p->cuePoints);
-    cueArray = (PlankAudioFileCuePoint*)pl_DynamicArray_GetArray (&p->cuePoints);
+    numCues = pl_SharedPtrArray_GetLength (p->cuePoints);
+    cueArray = (PlankAtomicP*)pl_SharedPtrArray_GetArray (p->cuePoints);
     
     for (i = 0; i < numCues; ++i)
-        nextCueID = pl_MaxUI (nextCueID, pl_AudioFileCuePoint_GetID (&cueArray[i])) + 1;
+        nextCueID = pl_MaxUI (nextCueID, pl_AudioFileCuePoint_GetID (cueArray[i].ptr)) + 1;
     
     *cueID = nextCueID;
     
@@ -758,33 +773,27 @@ exit:
     return result;
 }
 
-PlankDynamicArrayRef pl_AudioFileMetaData_GetCuePoints (PlankAudioFileMetaDataRef p)
+PlankSharedPtrArrayRef pl_AudioFileMetaData_GetCuePoints (PlankAudioFileMetaDataRef p)
 {
-    return &p->cuePoints;
+    return p->cuePoints;
 }
 
-PlankDynamicArrayRef pl_AudioFileMetaData_GetRegions (PlankAudioFileMetaDataRef p)
+PlankSharedPtrArrayRef pl_AudioFileMetaData_GetRegions (PlankAudioFileMetaDataRef p)
 {
-    return &p->regions;
+    return p->regions;
 }
 
-PlankDynamicArrayRef pl_AudioFileMetaData_GetLoopPoints (PlankAudioFileMetaDataRef p)
+PlankSharedPtrArrayRef pl_AudioFileMetaData_GetLoopPoints (PlankAudioFileMetaDataRef p)
 {
-    return &p->loopPoints;
+    return p->loopPoints;
 }
 
 PlankResult pl_AudioFileMetaData_AddRegion (PlankAudioFileMetaDataRef p, PlankAudioFileRegionRef region)
-{
-    PlankResult result = PlankResult_OK;
+{    
+    PlankResult result;
     
-    if (pl_DynamicArray_GetItemSize (&p->regions) == 0)
-    {
-        if ((result = pl_DynamicArray_InitWithItemSize (&p->regions, sizeof (PlankAudioFileRegion))) != PlankResult_OK) goto exit;
-    }
-    
-    if ((result = pl_DynamicArray_AddItem (&p->regions, region)) != PlankResult_OK) goto exit;
-    
-    pl_MemoryZero (region, sizeof (PlankAudioFileRegion));
+    if ((result = pl_SharedPtrArray_AddSharedPtr (p->regions, (PlankSharedPtrRef)region)) != PlankResult_OK) goto exit;
+    if ((result = pl_AudioFileRegion_DecrementRefCount (region)) != PlankResult_OK) goto exit;
     
 exit:
     return result;
@@ -792,9 +801,9 @@ exit:
 
 PlankResult pl_AudioFileMetaData_ConvertCuePointsToRegions (PlankAudioFileMetaDataRef p, const PlankLL numFrames, const PlankB removeCuePoints)
 {
-    PlankAudioFileRegion region;
+    PlankAudioFileRegionRef region;
     PlankResult result = PlankResult_OK;
-    PlankAudioFileCuePoint* cueArray;
+    PlankAudioFileCuePointRef* cueArray;
     PlankAudioFileCuePointRef regionAnchorCue;
     PlankAudioFileCuePointRef regionStartCue;
     PlankAudioFileCuePointRef regionEndCue;
@@ -802,67 +811,84 @@ PlankResult pl_AudioFileMetaData_ConvertCuePointsToRegions (PlankAudioFileMetaDa
     PlankUI cueID;
     PlankLL start, end;
     
-    numCues = pl_DynamicArray_GetSize (&p->cuePoints);
+    numCues = pl_SharedPtrArray_GetLength (p->cuePoints);
     
     if (numCues <= 0)
         goto exit;
     
-    cueArray = (PlankAudioFileCuePoint*)pl_DynamicArray_GetArray (&p->cuePoints);
+    cueArray = (PlankAudioFileCuePointRef*)pl_SharedPtrArray_GetArray (p->cuePoints);
     pl_AudioFileMetaData_GetNextCueID (p, &cueID);
     
     start = 0;
-    end = pl_AudioFileCuePoint_GetPosition (&cueArray[0]);
-    
-    pl_AudioFileRegion_Init (&region);
-    regionAnchorCue = pl_AudioFileRegion_GetAnchorCuePoint (&region);
-    regionStartCue = pl_AudioFileRegion_GetStartCuePoint (&region);
-    regionEndCue = pl_AudioFileRegion_GetEndCuePoint (&region);
+    end = pl_AudioFileCuePoint_GetPosition (cueArray[0]);
+    region = PLANK_NULL;
     
     // if the first cue is not at frame zero, make a region from zero to the first cue
     if (end != 0)
     {
+        region = pl_AudioFileRegion_CreateAndInit();
+        regionAnchorCue = pl_AudioFileRegion_GetAnchorCuePoint (region);
+        regionStartCue  = pl_AudioFileRegion_GetStartCuePoint (region);
+        regionEndCue    = pl_AudioFileRegion_GetEndCuePoint (region);
+
         pl_AudioFileCuePoint_SetPosition (regionAnchorCue, 0);
         pl_AudioFileCuePoint_SetPosition (regionStartCue, 0);
         pl_AudioFileCuePoint_SetPosition (regionEndCue, end);
         pl_AudioFileCuePoint_SetID (regionAnchorCue, cueID++);
         pl_AudioFileCuePoint_SetID (regionStartCue, cueID++);
         pl_AudioFileCuePoint_SetID (regionEndCue, cueID++);
-        pl_AudioFileMetaData_AddRegion (p, &region);
+        
+        pl_AudioFileMetaData_AddRegion (p, region);
+        region = PLANK_NULL;
     }
     
     // then regions between all the other cues, keeping labels for the region starts
     for (i = 1; i < numCues; ++i)
     {
-        pl_AudioFileRegion_Init (&region);
-        pl_AudioFileCuePoint_InitCopy (regionAnchorCue, &cueArray[i - 1]);
+        region = pl_AudioFileRegion_CreateAndInit();
+        regionAnchorCue = pl_AudioFileRegion_GetAnchorCuePoint (region);
+        regionStartCue  = pl_AudioFileRegion_GetStartCuePoint (region);
+        regionEndCue    = pl_AudioFileRegion_GetEndCuePoint (region);
+
+        pl_AudioFileCuePoint_SetCopy (regionAnchorCue, cueArray[i - 1]);
         start = pl_AudioFileCuePoint_GetPosition (regionAnchorCue);
-        end   = pl_AudioFileCuePoint_GetPosition (&cueArray[i]);
+        end   = pl_AudioFileCuePoint_GetPosition (cueArray[i]);
         pl_AudioFileCuePoint_SetPosition (regionStartCue, start);
         pl_AudioFileCuePoint_SetPosition (regionEndCue, end);
+        
         pl_AudioFileCuePoint_SetID (regionAnchorCue, cueID++);
         pl_AudioFileCuePoint_SetID (regionStartCue, cueID++);
         pl_AudioFileCuePoint_SetID (regionEndCue, cueID++);
-        pl_AudioFileMetaData_AddRegion (p, &region);
+
+        pl_AudioFileMetaData_AddRegion (p, region);
+        region = PLANK_NULL;
     }
     
     // if the last cue is not at the end of the file, add a region from the last cue to the end
     if (end < numFrames)
     {
-        pl_AudioFileRegion_Init (&region);
-        pl_AudioFileCuePoint_InitCopy (regionAnchorCue, &cueArray[numCues - 1]);
+        region = pl_AudioFileRegion_CreateAndInit();
+        regionAnchorCue = pl_AudioFileRegion_GetAnchorCuePoint (region);
+        regionStartCue  = pl_AudioFileRegion_GetStartCuePoint (region);
+        regionEndCue    = pl_AudioFileRegion_GetEndCuePoint (region);
+
+        pl_AudioFileCuePoint_SetCopy (regionAnchorCue, cueArray[numCues - 1]);
         start = pl_AudioFileCuePoint_GetPosition (regionAnchorCue);
         end   = numFrames;
         pl_AudioFileCuePoint_SetPosition (regionStartCue, start);
         pl_AudioFileCuePoint_SetPosition (regionEndCue, numFrames);
+        
         pl_AudioFileCuePoint_SetID (regionAnchorCue, cueID++);
         pl_AudioFileCuePoint_SetID (regionStartCue, cueID++);
         pl_AudioFileCuePoint_SetID (regionEndCue, cueID++);
-        pl_AudioFileMetaData_AddRegion (p, &region);
+        
+        pl_AudioFileMetaData_AddRegion (p, region);
+        region = PLANK_NULL;
     }
     
     if (removeCuePoints)
     {
-        pl_AudioFileMetaDataDeInitCuePoints (&p->cuePoints);
+        pl_SharedPtrArray_Clear (p->cuePoints);
     }
     
 exit:
@@ -872,13 +898,12 @@ exit:
 PlankResult pl_AudioFileMetaData_SortCuePoints (PlankAudioFileMetaDataRef p)
 {
     PlankResult result = PlankResult_OK;
-    PlankAudioFileCuePoint* cueArray;
-    PlankAudioFileCuePoint temp;
+    PlankAudioFileCuePointRef* cueArray;
     PlankL numCues, i, j;
     PlankB swapped;
     
-    numCues = pl_DynamicArray_GetSize (&p->cuePoints);
-    cueArray = (PlankAudioFileCuePoint*)pl_DynamicArray_GetArray (&p->cuePoints);
+    numCues = pl_SharedPtrArray_GetLength (p->cuePoints);
+    cueArray = (PlankAudioFileCuePointRef*)pl_SharedPtrArray_GetArray (p->cuePoints);
     
     for (i = numCues; --i >= 0;)
     {
@@ -886,11 +911,9 @@ PlankResult pl_AudioFileMetaData_SortCuePoints (PlankAudioFileMetaDataRef p)
         
         for (j = 0; j < i; j++)
         {
-            if (cueArray[j].position > cueArray[j + 1].position)
+            if (cueArray[j]->position > cueArray[j + 1]->position)
             {
-                pl_MemoryCopy (&temp, &cueArray[j], sizeof (PlankAudioFileCuePoint));
-                pl_MemoryCopy (&cueArray[j], &cueArray[j + 1], sizeof (PlankAudioFileCuePoint));
-                pl_MemoryCopy (&cueArray[j + 1], &temp, sizeof (PlankAudioFileCuePoint));
+                pl_SharedPtrArray_Swap (p->cuePoints, j, j + 1);
                 swapped = PLANK_TRUE;
             }
         }
@@ -904,20 +927,15 @@ exit:
 }
 
 PlankResult pl_AudioFileMetaData_AddLoopPoint (PlankAudioFileMetaDataRef p, PlankAudioFileRegionRef region)
-{
-    PlankResult result = PlankResult_OK;
+{    
+    PlankResult result;
     
-    if (pl_DynamicArray_GetItemSize (&p->regions) == 0)
-    {
-        if ((result = pl_DynamicArray_InitWithItemSize (&p->loopPoints, sizeof (PlankAudioFileRegion))) != PlankResult_OK) goto exit;
-    }
-    
-    if ((result = pl_DynamicArray_AddItem (&p->loopPoints, region)) != PlankResult_OK) goto exit;
-    
-    pl_MemoryZero (region, sizeof (PlankAudioFileRegion));
+    if ((result = pl_SharedPtrArray_AddSharedPtr (p->loopPoints, (PlankSharedPtrRef)region)) != PlankResult_OK) goto exit;
+    if ((result = pl_AudioFileRegion_DecrementRefCount (region)) != PlankResult_OK) goto exit;
     
 exit:
-    return result;   
+    return result;
+
 }
 
 PlankResult pl_AudioFileMetaData_AddCodingHistory (PlankAudioFileMetaDataRef p, const char* text)
@@ -945,19 +963,19 @@ static PlankResult pl_AudioFileMetaData_CuePoints_InsertFrames (PlankAudioFileMe
 {
     PlankResult result = PlankResult_OK;
     PlankL numCuePoints, i;
-    PlankAudioFileCuePoint* cuePoints;
+    PlankAudioFileCuePointRef cuePoint;
     PlankLL position;
     
-    numCuePoints = pl_DynamicArray_GetSize (&p->cuePoints);
-    cuePoints = (PlankAudioFileCuePoint*)pl_DynamicArray_GetArray (&p->cuePoints);
+    numCuePoints = pl_SharedPtrArray_GetLength (p->cuePoints);
     
     for (i = numCuePoints; --i >= 0;)
     {
-        position = pl_AudioFileCuePoint_GetPosition (&cuePoints[i]);
+        cuePoint = (PlankAudioFileCuePointRef)pl_SharedPtrArray_GetSharedPtr (p->cuePoints, i);
+        position = pl_AudioFileCuePoint_GetPosition (cuePoint);
         
         if (start <= position)
         {
-            if ((result = pl_AudioFileCuePoint_SetPosition (&cuePoints[i], position + length) != PlankResult_OK)) goto exit;
+            if ((result = pl_AudioFileCuePoint_SetPosition (cuePoint, position + length) != PlankResult_OK)) goto exit;
         }
     }
     
@@ -965,29 +983,29 @@ exit:
     return result;
 }
 
-static PlankResult pl_AudioFileMetaData_RegionsArray_InsertFrames (PlankDynamicArrayRef regionArray, const PlankLL start, const PlankLL length)
+static PlankResult pl_AudioFileMetaData_RegionsArray_InsertFrames (PlankSharedPtrArrayRef regionArray, const PlankLL start, const PlankLL length)
 {
     PlankResult result = PlankResult_OK;
     PlankL numRegions, i;
-    PlankAudioFileRegion* regions;
+    PlankAudioFileRegionRef region;
     PlankLL regionStart, regionEnd, end;
     
-    numRegions = pl_DynamicArray_GetSize (regionArray);
-    regions = (PlankAudioFileRegion*)pl_DynamicArray_GetArray (regionArray);
+    numRegions = pl_SharedPtrArray_GetLength (regionArray);
     end = start + length;
     
     for (i = numRegions; --i >= 0;)
     {
-        regionStart = pl_AudioFileRegion_GetStartPosition (&regions[i]);
-        regionEnd = pl_AudioFileRegion_GetEndPosition (&regions[i]);
+        region      = (PlankAudioFileRegionRef)pl_SharedPtrArray_GetSharedPtr (regionArray, i);
+        regionStart = pl_AudioFileRegion_GetStartPosition (region);
+        regionEnd   = pl_AudioFileRegion_GetEndPosition (region);
         
         if (start < regionEnd)
         {
-            if ((result = pl_AudioFileRegion_SetEndPosition (&regions[i], regionEnd + length) != PlankResult_OK)) goto exit;
+            if ((result = pl_AudioFileRegion_SetEndPosition (region, regionEnd + length) != PlankResult_OK)) goto exit;
             
             if (start < regionStart)
             {
-                if ((result = pl_AudioFileRegion_SetStartPosition (&regions[i], regionStart + length) != PlankResult_OK)) goto exit;
+                if ((result = pl_AudioFileRegion_SetStartPosition (region, regionStart + length) != PlankResult_OK)) goto exit;
             }
         }
     }
@@ -998,12 +1016,12 @@ exit:
 
 static PlankResult pl_AudioFileMetaData_Regions_InsertFrames (PlankAudioFileMetaDataRef p, const PlankLL start, const PlankLL length)
 {
-    return pl_AudioFileMetaData_RegionsArray_InsertFrames (&p->regions, start, length);
+    return pl_AudioFileMetaData_RegionsArray_InsertFrames (p->regions, start, length);
 }
 
 static PlankResult pl_AudioFileMetaData_LoopPoints_InsertFrames (PlankAudioFileMetaDataRef p, const PlankLL start, const PlankLL length)
 {
-    return pl_AudioFileMetaData_RegionsArray_InsertFrames (&p->loopPoints, start, length);
+    return pl_AudioFileMetaData_RegionsArray_InsertFrames (p->loopPoints, start, length);
 }
 
 PlankResult pl_AudioFileMetaData_InsertFrames (PlankAudioFileMetaDataRef p, const PlankLL start, const PlankLL length)
@@ -1023,27 +1041,27 @@ static PlankResult pl_AudioFileMetaData_CuePoints_RemoveFrames (PlankAudioFileMe
 {
     PlankResult result = PlankResult_OK;
     PlankL numCuePoints, i;
-    PlankAudioFileCuePoint* cuePoints;
+    PlankAudioFileCuePointRef cuePoint;
     PlankLL end, position;
     
-    numCuePoints = pl_DynamicArray_GetSize (&p->cuePoints);
-    cuePoints = (PlankAudioFileCuePoint*)pl_DynamicArray_GetArray (&p->cuePoints);
+    numCuePoints = pl_SharedPtrArray_GetLength (p->cuePoints);
     end = start + length;
     
     // must go in reverse since we might remove items
     for (i = numCuePoints; --i >= 0;)
     {
-        position = pl_AudioFileCuePoint_GetPosition (&cuePoints[i]);
+        cuePoint = (PlankAudioFileCuePointRef)pl_SharedPtrArray_GetSharedPtr (p->cuePoints, i);
+        position = pl_AudioFileCuePoint_GetPosition (cuePoint);
         
         if (position >= start)
         {
             if (position < end)
             {
-                if ((result = pl_DynamicArray_RemoveItem (&p->cuePoints, i)) != PlankResult_OK) goto exit;
+                if ((result = pl_SharedPtrArray_RemoveSharedPtr (p->cuePoints, i)) != PlankResult_OK) goto exit;
             }
             else
             {
-                if ((result = pl_AudioFileCuePoint_SetPosition (&cuePoints[i], position - length) != PlankResult_OK)) goto exit;
+                if ((result = pl_AudioFileCuePoint_SetPosition (cuePoint, position - length) != PlankResult_OK)) goto exit;
             }
         }
     }
@@ -1052,33 +1070,33 @@ exit:
     return result;
 }
 
-static PlankResult pl_AudioFileMetaData_RegionsArray_RemoveFrames (PlankDynamicArrayRef regionArray, const PlankLL start, const PlankLL length)
+static PlankResult pl_AudioFileMetaData_RegionsArray_RemoveFrames (PlankSharedPtrArrayRef regionArray, const PlankLL start, const PlankLL length)
 {
     PlankResult result = PlankResult_OK;
     PlankL numRegions, i;
-    PlankAudioFileRegion* regions;
+    PlankAudioFileRegionRef region;
     PlankLL regionStart, regionEnd, end;
     
-    numRegions = pl_DynamicArray_GetSize (regionArray);
-    regions = (PlankAudioFileRegion*)pl_DynamicArray_GetArray (regionArray);
+    numRegions = pl_SharedPtrArray_GetLength (regionArray);
     end = start + length;
     
     // must go in reverse since we might remove items
     for (i = numRegions; --i >= 0;)
     {
-        regionStart = pl_AudioFileRegion_GetStartPosition (&regions[i]);
-        regionEnd = pl_AudioFileRegion_GetEndPosition (&regions[i]);
+        region      = (PlankAudioFileRegionRef)pl_SharedPtrArray_GetSharedPtr (regionArray, i);
+        regionStart = pl_AudioFileRegion_GetStartPosition (region);
+        regionEnd   = pl_AudioFileRegion_GetEndPosition (region);
         
         if (start < regionEnd)
         {
             if (end <= regionStart)
             {
-                if ((result = pl_AudioFileRegion_SetStartPosition (&regions[i], regionStart - length) != PlankResult_OK)) goto exit;
-                if ((result = pl_AudioFileRegion_SetEndPosition (&regions[i], regionEnd - length) != PlankResult_OK)) goto exit;
+                if ((result = pl_AudioFileRegion_SetStartPosition (region, regionStart - length) != PlankResult_OK)) goto exit;
+                if ((result = pl_AudioFileRegion_SetEndPosition (region, regionEnd - length) != PlankResult_OK)) goto exit;
             }
             else
             {
-                if ((result = pl_DynamicArray_RemoveItem (regionArray, i)) != PlankResult_OK) goto exit;
+                if ((result = pl_SharedPtrArray_RemoveSharedPtr (regionArray, i)) != PlankResult_OK) goto exit;
             }
         }
     }
@@ -1089,12 +1107,12 @@ exit:
 
 static PlankResult pl_AudioFileMetaData_Regions_RemoveFrames (PlankAudioFileMetaDataRef p, const PlankLL start, const PlankLL length)
 {
-    return pl_AudioFileMetaData_RegionsArray_RemoveFrames (&p->regions, start, length);
+    return pl_AudioFileMetaData_RegionsArray_RemoveFrames (p->regions, start, length);
 }
 
 static PlankResult pl_AudioFileMetaData_LoopPoints_RemoveFrames (PlankAudioFileMetaDataRef p, const PlankLL start, const PlankLL length)
 {
-    return pl_AudioFileMetaData_RegionsArray_RemoveFrames (&p->loopPoints, start, length);
+    return pl_AudioFileMetaData_RegionsArray_RemoveFrames (p->loopPoints, start, length);
 }
 
 PlankResult pl_AudioFileMetaData_RemoveFrames (PlankAudioFileMetaDataRef p, const PlankLL start, const PlankLL length)

@@ -54,14 +54,9 @@ PLANK_BEGIN_C_LINKAGE
 
 /** Create a <i>Plank AudioFileRegion</i> object and return an oqaque reference to it.
  @return A <i>Plank AudioFileRegion</i> object as an opaque reference or PLANK_NULL. */
-PlankAudioFileRegionRef pl_AudioFileRegion_Create();
-
-/** Destroy a <i>Plank AudioFileRegion</i> object. 
- @param p The <i>Plank AudioFileRegion</i> object. */
-PlankResult pl_AudioFileRegion_Destroy (PlankAudioFileRegionRef p);
-PlankResult pl_AudioFileRegion_Init (PlankAudioFileRegionRef p);
-PlankResult pl_AudioFileRegion_InitCopy (PlankAudioFileRegionRef p, PlankAudioFileRegionRef original);
-PlankResult pl_AudioFileRegion_DeInit (PlankAudioFileRegionRef p);
+PlankAudioFileRegionRef pl_AudioFileRegion_CreateAndInit();
+PlankAudioFileRegionRef pl_AudioFileRegion_IncrementRefCountAndGet (PlankAudioFileRegionRef p);
+PlankResult pl_AudioFileRegion_DecrementRefCount (PlankAudioFileRegionRef p);
 
 PlankAudioFileCuePointRef pl_AudioFileRegion_GetAnchorCuePoint (PlankAudioFileRegionRef p);
 PlankAudioFileCuePointRef pl_AudioFileRegion_GetStartCuePoint (PlankAudioFileRegionRef p);
@@ -106,9 +101,10 @@ PLANK_END_C_LINKAGE
 #if !DOXYGEN
 typedef struct PlankAudioFileRegion
 {
-	PlankAudioFileCuePoint anchor;
-	PlankAudioFileCuePoint start;
-    PlankAudioFileCuePoint end;
+    PlankSharedPtr sharedHeader;
+	PlankAudioFileCuePointRef anchor;
+	PlankAudioFileCuePointRef start;
+    PlankAudioFileCuePointRef end;
     int regionType;
     PlankUI regionOptions;
     PlankUI fraction;

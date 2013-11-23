@@ -3144,8 +3144,8 @@ static PlankResult pl_AudioFileWriter_WAV_WriteChunk_smpl (PlankAudioFileWriterR
     PlankUI smplChunkSize;
     PlankUI manufacturer, product, samplePeriod, smpteFormat, smpteOffset;
     PlankI baseNote, detune;
-    PlankDynamicArrayRef loopPoints;
-    PlankAudioFileRegion* loopArray;
+    PlankSharedPtrArrayRef loopPoints;
+    PlankAudioFileRegionRef loop;
     PlankDynamicArrayRef extraSamplerData;
     PlankUI numLoops, i, extraSamplerDataSize;
 
@@ -3155,7 +3155,7 @@ static PlankResult pl_AudioFileWriter_WAV_WriteChunk_smpl (PlankAudioFileWriterR
     iff  = (PlankIffFileWriterRef)p->peer;
 
     loopPoints = pl_AudioFileMetaData_GetLoopPoints (p->metaData);
-    numLoops   = (PlankUI)pl_DynamicArray_GetSize (loopPoints);
+    numLoops   = (PlankUI)pl_SharedPtrArray_GetLength (loopPoints);
     
     if ((result = pl_AudioFileMetaData_GetSamplerData (p->metaData, &manufacturer, &product, &samplePeriod, &smpteFormat, &smpteOffset)) != PlankResult_OK) goto exit;
     if ((result = pl_AudioFileMetaData_GetInstrumentData (p->metaData, &baseNote, &detune, 0, 0, 0, 0, 0)) != PlankResult_OK) goto exit;
@@ -3184,16 +3184,22 @@ static PlankResult pl_AudioFileWriter_WAV_WriteChunk_smpl (PlankAudioFileWriterR
         if ((result = pl_File_WriteUI ((PlankFileRef)iff, numLoops)) != PlankResult_OK) goto exit;
         if ((result = pl_File_WriteUI ((PlankFileRef)iff, extraSamplerDataSize)) != PlankResult_OK) goto exit; // sampler data
 
-        loopArray = (PlankAudioFileRegion*)pl_DynamicArray_GetArray (loopPoints);
-
         for (i = 0; i < numLoops; ++i)
         {
-            if ((result = pl_File_WriteUI ((PlankFileRef)iff, loopArray[i].anchor.cueID)) != PlankResult_OK) goto exit;
-            if ((result = pl_File_WriteUI ((PlankFileRef)iff, (PlankUI)loopArray[i].regionOptions)) != PlankResult_OK) goto exit;
-            if ((result = pl_File_WriteUI ((PlankFileRef)iff, (PlankUI)loopArray[i].start.position)) != PlankResult_OK) goto exit;
-            if ((result = pl_File_WriteUI ((PlankFileRef)iff, (PlankUI)loopArray[i].end.position)) != PlankResult_OK) goto exit;
-            if ((result = pl_File_WriteUI ((PlankFileRef)iff, (PlankUI)loopArray[i].fraction)) != PlankResult_OK) goto exit;
-            if ((result = pl_File_WriteUI ((PlankFileRef)iff, (PlankUI)loopArray[i].playCount)) != PlankResult_OK) goto exit;
+            loop = (PlankAudioFileRegionRef)pl_SharedPtrArray_GetSharedPtr (loopPoints, i);
+            
+            if (!loop)
+            {
+                result = PlankResult_UnknownError;
+                goto exit;
+            }
+
+            if ((result = pl_File_WriteUI ((PlankFileRef)iff, loop->anchor->cueID)) != PlankResult_OK) goto exit;
+            if ((result = pl_File_WriteUI ((PlankFileRef)iff, (PlankUI)loop->regionOptions)) != PlankResult_OK) goto exit;
+            if ((result = pl_File_WriteUI ((PlankFileRef)iff, (PlankUI)loop->start->position)) != PlankResult_OK) goto exit;
+            if ((result = pl_File_WriteUI ((PlankFileRef)iff, (PlankUI)loop->end->position)) != PlankResult_OK) goto exit;
+            if ((result = pl_File_WriteUI ((PlankFileRef)iff, (PlankUI)loop->fraction)) != PlankResult_OK) goto exit;
+            if ((result = pl_File_WriteUI ((PlankFileRef)iff, (PlankUI)loop->playCount)) != PlankResult_OK) goto exit;
         }
 
         if (extraSamplerDataSize > 0)
@@ -3263,15 +3269,14 @@ static PlankResult pl_AudioFileWriter_WAV_WriteChunk_cue (PlankAudioFileWriterRe
 {
     PlankResult result = PlankResult_OK;
     PlankIffFileWriterRef iff;
-    PlankDynamicArrayRef cuePoints;
-    PlankAudioFileCuePoint* cueArray;
-    PlankDynamicArrayRef regions;
-    PlankAudioFileRegion* regionArray;
-    PlankDynamicArrayRef loopPoints;
-    PlankAudioFileRegion* loopArray;
+    PlankSharedPtrArrayRef cuePoints;
+    PlankAudioFileCuePointRef cue;
+    PlankSharedPtrArrayRef regions;
+    PlankAudioFileRegionRef region;
+    PlankSharedPtrArrayRef loopPoints;
+    PlankAudioFileRegionRef loop;
     PlankUI cueChunkSize;
     int numCues, numRegions, numLoops, totalCues, i;
-    const char* cue;
     PlankFourCharCode dataID;
     
     if (!p->metaData)
@@ -3280,58 +3285,74 @@ static PlankResult pl_AudioFileWriter_WAV_WriteChunk_cue (PlankAudioFileWriterRe
     iff  = (PlankIffFileWriterRef)p->peer;
     
     cuePoints  = pl_AudioFileMetaData_GetCuePoints (p->metaData);
-    numCues    = (int)pl_DynamicArray_GetSize (cuePoints);
+    numCues    = (int)pl_SharedPtrArray_GetLength (cuePoints);
     regions    = pl_AudioFileMetaData_GetRegions (p->metaData);
-    numRegions = (int)pl_DynamicArray_GetSize (regions);
+    numRegions = (int)pl_SharedPtrArray_GetLength (regions);
     loopPoints = pl_AudioFileMetaData_GetLoopPoints (p->metaData);
-    numLoops   = (int)pl_DynamicArray_GetSize (loopPoints);
+    numLoops   = (int)pl_SharedPtrArray_GetLength (loopPoints);
     totalCues  = numCues + numRegions + numLoops;
         
     if (totalCues > 0)
     {
-        cue  = "cue ";
         cueChunkSize = totalCues * 24 + 4;
 
-        if ((result = pl_IffFileWriter_PrepareChunk (iff, p->metaDataChunkPosition, cue, 0, cueChunkSize)) != PlankResult_OK) goto exit;
-        
-        cueArray = (PlankAudioFileCuePoint*)pl_DynamicArray_GetArray (cuePoints);
-        
+        if ((result = pl_IffFileWriter_PrepareChunk (iff, p->metaDataChunkPosition, "cue ", 0, cueChunkSize)) != PlankResult_OK) goto exit;
         if ((result = pl_File_WriteUI ((PlankFileRef)iff, (PlankUI)totalCues)) != PlankResult_OK) goto exit;
         
         dataID = pl_FourCharCode ("data");
         
         for (i = 0; i < numCues; ++i)
         {
-            if ((result = pl_File_WriteUI ((PlankFileRef)iff, cueArray[i].cueID)) != PlankResult_OK) goto exit;
+            cue = (PlankAudioFileCuePointRef)pl_SharedPtrArray_GetSharedPtr (cuePoints, i);
+            
+            if (!cue)
+            {
+                result = PlankResult_UnknownError;
+                goto exit;
+            }
+            
+            if ((result = pl_File_WriteUI ((PlankFileRef)iff, cue->cueID)) != PlankResult_OK) goto exit;
             if ((result = pl_File_WriteUI ((PlankFileRef)iff, 0 /*order*/)) != PlankResult_OK) goto exit;
             if ((result = pl_File_WriteFourCharCode ((PlankFileRef)iff, dataID)) != PlankResult_OK) goto exit;
             if ((result = pl_File_WriteUI ((PlankFileRef)iff, 0 /*chunkStart*/)) != PlankResult_OK) goto exit;
             if ((result = pl_File_WriteUI ((PlankFileRef)iff, 0 /*blockStart*/)) != PlankResult_OK) goto exit;
-            if ((result = pl_File_WriteUI ((PlankFileRef)iff, (PlankUI)cueArray[i].position)) != PlankResult_OK) goto exit;
+            if ((result = pl_File_WriteUI ((PlankFileRef)iff, (PlankUI)cue->position)) != PlankResult_OK) goto exit;
         }
-        
-        regionArray = (PlankAudioFileRegion*)pl_DynamicArray_GetArray (regions);
-        
+                
         for (i = 0; i < numRegions; ++i)
         {
-            if ((result = pl_File_WriteUI ((PlankFileRef)iff, regionArray[i].start.cueID)) != PlankResult_OK) goto exit;
+            region = (PlankAudioFileRegionRef)pl_SharedPtrArray_GetSharedPtr (regions, i);
+            
+            if (!region)
+            {
+                result = PlankResult_UnknownError;
+                goto exit;
+            }
+            
+            if ((result = pl_File_WriteUI ((PlankFileRef)iff, region->start->cueID)) != PlankResult_OK) goto exit;
             if ((result = pl_File_WriteUI ((PlankFileRef)iff, 0 /*order*/)) != PlankResult_OK) goto exit;
             if ((result = pl_File_WriteFourCharCode ((PlankFileRef)iff, dataID)) != PlankResult_OK) goto exit;
             if ((result = pl_File_WriteUI ((PlankFileRef)iff, 0 /*chunkStart*/)) != PlankResult_OK) goto exit;
             if ((result = pl_File_WriteUI ((PlankFileRef)iff, 0 /*blockStart*/)) != PlankResult_OK) goto exit;
-            if ((result = pl_File_WriteUI ((PlankFileRef)iff, (PlankUI)regionArray[i].start.position)) != PlankResult_OK) goto exit;
+            if ((result = pl_File_WriteUI ((PlankFileRef)iff, (PlankUI)region->start->position)) != PlankResult_OK) goto exit;
         }
-        
-        loopArray = (PlankAudioFileRegion*)pl_DynamicArray_GetArray (loopPoints);
-        
+                
         for (i = 0; i < numLoops; ++i)
         {
-            if ((result = pl_File_WriteUI ((PlankFileRef)iff, loopArray[i].anchor.cueID)) != PlankResult_OK) goto exit;
+            loop = (PlankAudioFileRegionRef)pl_SharedPtrArray_GetSharedPtr (loopPoints, i);
+
+            if (!loop)
+            {
+                result = PlankResult_UnknownError;
+                goto exit;
+            }
+
+            if ((result = pl_File_WriteUI ((PlankFileRef)iff, loop->anchor->cueID)) != PlankResult_OK) goto exit;
             if ((result = pl_File_WriteUI ((PlankFileRef)iff, 0 /*order*/)) != PlankResult_OK) goto exit;
             if ((result = pl_File_WriteFourCharCode ((PlankFileRef)iff, dataID)) != PlankResult_OK) goto exit;
             if ((result = pl_File_WriteUI ((PlankFileRef)iff, 0 /*chunkStart*/)) != PlankResult_OK) goto exit;
             if ((result = pl_File_WriteUI ((PlankFileRef)iff, 0 /*blockStart*/)) != PlankResult_OK) goto exit;
-            if ((result = pl_File_WriteUI ((PlankFileRef)iff, (PlankUI)loopArray[i].anchor.position)) != PlankResult_OK) goto exit;
+            if ((result = pl_File_WriteUI ((PlankFileRef)iff, (PlankUI)loop->anchor->position)) != PlankResult_OK) goto exit;
         }
         
         p->dataPosition = pl_MaxLL (p->dataPosition,
@@ -3348,10 +3369,10 @@ static PlankResult pl_AudioFileWriter_WAV_WriteChunk_list (PlankAudioFileWriterR
 {
     PlankResult result = PlankResult_OK;
     PlankIffFileWriterRef iff;
-    PlankDynamicArrayRef cuePoints;
-    PlankAudioFileCuePoint* cueArray;
-    PlankDynamicArrayRef regions;
-    PlankAudioFileRegion* regionArray;
+    PlankSharedPtrArrayRef cuePoints;
+    PlankAudioFileCuePointRef cue;
+    PlankSharedPtrArrayRef regions;
+    PlankAudioFileRegionRef region;
     PlankDynamicArray chunkData;
     PlankFile chunkStream;
     PlankUI listChunkSize;
@@ -3374,9 +3395,9 @@ static PlankResult pl_AudioFileWriter_WAV_WriteChunk_list (PlankAudioFileWriterR
     iff  = (PlankIffFileWriterRef)p->peer;
     
     cuePoints  = pl_AudioFileMetaData_GetCuePoints (p->metaData);
-    numCues    = (int)pl_DynamicArray_GetSize (cuePoints);
+    numCues    = (int)pl_SharedPtrArray_GetLength (cuePoints);
     regions    = pl_AudioFileMetaData_GetRegions (p->metaData);
-    numRegions = (int)pl_DynamicArray_GetSize (regions);
+    numRegions = (int)pl_SharedPtrArray_GetLength (regions);
     
     if ((numCues + numRegions) > 0)
     {
@@ -3386,12 +3407,18 @@ static PlankResult pl_AudioFileWriter_WAV_WriteChunk_list (PlankAudioFileWriterR
         pl_File_OpenDynamicArray (&chunkStream, &chunkData, PLANKFILE_BINARY | PLANKFILE_READ | PLANKFILE_WRITE);
         
         if ((result = pl_File_WriteFourCharCode (&chunkStream, pl_FourCharCode (adtl))) != PlankResult_OK) goto exit;
-        
-        cueArray = (PlankAudioFileCuePoint*)pl_DynamicArray_GetArray (cuePoints);
-        
+            
         for (i = 0; i < numCues; ++i)
         {
-            string = pl_AudioFileCuePoint_GetLabel (&cueArray[i]);
+            cue = (PlankAudioFileCuePointRef)pl_SharedPtrArray_GetSharedPtr (cuePoints, i);
+
+            if (!cue)
+            {
+                result = PlankResult_UnknownError;
+                goto exit;
+            }
+            
+            string = pl_AudioFileCuePoint_GetLabel (cue);
             if (!string) continue;
             
             stringSize = (PlankUI)strlen (string) + 1;
@@ -3399,7 +3426,7 @@ static PlankResult pl_AudioFileWriter_WAV_WriteChunk_list (PlankAudioFileWriterR
             
             if ((result = pl_File_WriteFourCharCode (&chunkStream, pl_FourCharCode (labl))) != PlankResult_OK) goto exit;
             if ((result = pl_File_WriteUI (&chunkStream, 4 + stringSize + (stringSize & 1))) != PlankResult_OK) goto exit;
-            if ((result = pl_File_WriteUI (&chunkStream, pl_AudioFileCuePoint_GetID (&cueArray[i]))) != PlankResult_OK) goto exit;
+            if ((result = pl_File_WriteUI (&chunkStream, pl_AudioFileCuePoint_GetID (cue))) != PlankResult_OK) goto exit;
             if ((result = pl_File_Write (&chunkStream, string, stringSize)) != PlankResult_OK) goto exit;
             
             if (stringSize & 1)
@@ -3407,12 +3434,18 @@ static PlankResult pl_AudioFileWriter_WAV_WriteChunk_list (PlankAudioFileWriterR
                 if ((result = pl_File_WriteC (&chunkStream, 0)) != PlankResult_OK) goto exit;
             }
         }
-        
-        regionArray = (PlankAudioFileRegion*)pl_DynamicArray_GetArray (regions);
-        
+                
         for (i = 0; i < numRegions; ++i)
         {
-            string = pl_AudioFileRegion_GetLabel (&regionArray[i]);
+            region = (PlankAudioFileRegionRef)pl_SharedPtrArray_GetSharedPtr (regions, i);
+            
+            if (!region)
+            {
+                result = PlankResult_UnknownError;
+                goto exit;
+            }
+            
+            string = pl_AudioFileRegion_GetLabel (region);
             if (!string) continue;
             
             stringSize = (PlankUI)strlen (string) + 1;
@@ -3420,14 +3453,14 @@ static PlankResult pl_AudioFileWriter_WAV_WriteChunk_list (PlankAudioFileWriterR
             
             if ((result = pl_File_WriteFourCharCode (&chunkStream, pl_FourCharCode (ltxt))) != PlankResult_OK) goto exit;
             if ((result = pl_File_WriteUI (&chunkStream, 4 + 4 + 4 + 2 + 2 + 2 + 2 + stringSize + (stringSize & 1))) != PlankResult_OK) goto exit;
-            if ((result = pl_File_WriteUI (&chunkStream, regionArray[i].start.cueID)) != PlankResult_OK) goto exit;
-            if ((result = pl_File_WriteUI (&chunkStream, (PlankUI)(regionArray[i].end.position - regionArray[i].start.position))) != PlankResult_OK) goto exit;
+            if ((result = pl_File_WriteUI (&chunkStream, region->start->cueID)) != PlankResult_OK) goto exit;
+            if ((result = pl_File_WriteUI (&chunkStream, (PlankUI)(region->end->position - region->start->position))) != PlankResult_OK) goto exit;
             if ((result = pl_File_WriteUI (&chunkStream, pl_FourCharCode (labl))) != PlankResult_OK) goto exit; // purpose
-            if ((result = pl_File_WriteUS (&chunkStream, 0)) != PlankResult_OK) goto exit; // country
-            if ((result = pl_File_WriteUS (&chunkStream, 0)) != PlankResult_OK) goto exit; // language
-            if ((result = pl_File_WriteUS (&chunkStream, 0)) != PlankResult_OK) goto exit; // dialect
-            if ((result = pl_File_WriteUS (&chunkStream, 20127)) != PlankResult_OK) goto exit; // code page ASCII
-            if ((result = pl_File_Write (&chunkStream, string, stringSize)) != PlankResult_OK) goto exit;
+            if ((result = pl_File_WriteUS (&chunkStream, 0)) != PlankResult_OK) goto exit;                      // country
+            if ((result = pl_File_WriteUS (&chunkStream, 0)) != PlankResult_OK) goto exit;                      // language
+            if ((result = pl_File_WriteUS (&chunkStream, 0)) != PlankResult_OK) goto exit;                      // dialect
+            if ((result = pl_File_WriteUS (&chunkStream, 20127)) != PlankResult_OK) goto exit;                  // code page ASCII
+            if ((result = pl_File_Write   (&chunkStream, string, stringSize)) != PlankResult_OK) goto exit;
             
             if (stringSize & 1)
             {
@@ -3499,8 +3532,7 @@ static PlankResult pl_AudioFileWriter_AIFFAIFC_WriteChunk_MARK (PlankAudioFileWr
 {
     PlankResult result = PlankResult_OK;
     PlankIffFileWriterRef iff;
-    PlankDynamicArrayRef cuePoints;
-    PlankAudioFileCuePoint* cueArray;
+    PlankSharedPtrArrayRef cuePoints;
     PlankAudioFileCuePointRef cue;
     PlankUI markChunkSize;
     PlankDynamicArray chunkData;
@@ -3518,7 +3550,7 @@ static PlankResult pl_AudioFileWriter_AIFFAIFC_WriteChunk_MARK (PlankAudioFileWr
     chunkHeaderLength = iff->common.headerInfo.headerLength;
 
     cuePoints  = pl_AudioFileMetaData_GetCuePoints (p->metaData);
-    numCues    = (int)pl_DynamicArray_GetSize (cuePoints);
+    numCues    = (int)pl_SharedPtrArray_GetLength (cuePoints);
     
     if (numCues > 0)
     {
@@ -3531,11 +3563,15 @@ static PlankResult pl_AudioFileWriter_AIFFAIFC_WriteChunk_MARK (PlankAudioFileWr
             
         if ((result = pl_File_WriteUS (&chunkStream, (PlankUS)numCues)) != PlankResult_OK) goto exit;
         
-        cueArray = (PlankAudioFileCuePoint*)pl_DynamicArray_GetArray (cuePoints);
-
         for (i = 0; i < numCues; ++i)
         {
-            cue = &cueArray[i];
+            cue = (PlankAudioFileCuePointRef)pl_SharedPtrArray_GetSharedPtr (cuePoints, i);
+            
+            if (!cue)
+            {
+                result = PlankResult_UnknownError;
+                goto exit;
+            }
             
             if ((result = pl_File_WriteS (&chunkStream, cue->cueID + 1)) != PlankResult_OK) goto exit; // offset by 1 so ids are non-zero according to the spec
             if ((result = pl_File_WriteUI (&chunkStream, (PlankUI)cue->position)) != PlankResult_OK) goto exit;
@@ -3736,8 +3772,7 @@ static PlankResult pl_AudioFileWriter_CAF_WriteChunk_mark (PlankAudioFileWriterR
 {
     PlankResult result = PlankResult_OK;
     PlankIffFileWriterRef iff;
-    PlankDynamicArrayRef cuePoints;
-    PlankAudioFileCuePoint* cueArray;
+    PlankSharedPtrArrayRef cuePoints;
     PlankAudioFileCuePointRef cue;
     PlankUI markChunkSize;
     PlankDynamicArray chunkData;
@@ -3751,7 +3786,7 @@ static PlankResult pl_AudioFileWriter_CAF_WriteChunk_mark (PlankAudioFileWriterR
     iff  = (PlankIffFileWriterRef)p->peer;
     
     cuePoints  = pl_AudioFileMetaData_GetCuePoints (p->metaData);
-    numCues    = (PlankUI)pl_DynamicArray_GetSize (cuePoints);
+    numCues    = (PlankUI)pl_SharedPtrArray_GetLength (cuePoints);
     
     pl_File_Init (&chunkStream);
     pl_DynamicArray_Init (&chunkData);
@@ -3766,12 +3801,16 @@ static PlankResult pl_AudioFileWriter_CAF_WriteChunk_mark (PlankAudioFileWriterR
         
         if ((result = pl_File_WriteUI (&chunkStream, 0)) != PlankResult_OK) goto exit; // smpte time type
         if ((result = pl_File_WriteUI (&chunkStream, numCues)) != PlankResult_OK) goto exit;
-        
-        cueArray = (PlankAudioFileCuePoint*)pl_DynamicArray_GetArray (cuePoints);
-        
+                
         for (i = 0; i < numCues; ++i)
         {
-            cue = &cueArray[i];
+            cue = (PlankAudioFileCuePointRef)pl_SharedPtrArray_GetSharedPtr (cuePoints, i);
+            
+            if (!cue)
+            {
+                result = PlankResult_UnknownError;
+                goto exit;
+            }
             
             if ((result = pl_File_WriteUI (&chunkStream, PLANKAUDIOFILE_CAF_MARKERTYPE_GENERIC)) != PlankResult_OK) goto exit;
             if ((result = pl_File_WriteD  (&chunkStream, (PlankD)cue->position)) != PlankResult_OK) goto exit;
@@ -3859,12 +3898,12 @@ PlankResult pl_AudioFileWriter_CAF_WritePostDataMetaData (PlankAudioFileWriterRe
 {
     PlankResult result = PlankResult_OK;
     PlankIffFileWriterRef iff;
-    PlankDynamicArrayRef cuePoints;
-    PlankAudioFileCuePoint* cueArray;
-    PlankDynamicArrayRef regions;
-    PlankAudioFileRegion* regionArray;
-    PlankDynamicArrayRef loopPoints;
-    PlankAudioFileRegion* loopArray;
+    PlankSharedPtrArrayRef cuePoints;
+    PlankAudioFileCuePointRef cue;
+    PlankSharedPtrArrayRef regions;
+    PlankAudioFileRegionRef region;
+    PlankSharedPtrArrayRef loopPoints;
+    PlankAudioFileRegionRef loop;
     PlankDynamicArray stringIndices, strings;
     PlankCAFStringID stringEntry;
     PlankFile stringsDataStream;
@@ -3881,11 +3920,11 @@ PlankResult pl_AudioFileWriter_CAF_WritePostDataMetaData (PlankAudioFileWriterRe
     iff  = (PlankIffFileWriterRef)p->peer;
     
     cuePoints  = pl_AudioFileMetaData_GetCuePoints (p->metaData);
-    numCues    = (PlankUI)pl_DynamicArray_GetSize (cuePoints);
+    numCues    = (PlankUI)pl_SharedPtrArray_GetLength (cuePoints);
     regions    = pl_AudioFileMetaData_GetRegions (p->metaData);
-    numRegions = (PlankUI)pl_DynamicArray_GetSize (regions);
+    numRegions = (PlankUI)pl_SharedPtrArray_GetLength (regions);
     loopPoints = pl_AudioFileMetaData_GetLoopPoints (p->metaData);
-    numLoops   = (PlankUI)pl_DynamicArray_GetSize (loopPoints);
+    numLoops   = (PlankUI)pl_SharedPtrArray_GetLength (loopPoints);
     totalCues  = numCues + numRegions + numLoops;
     
     if (totalCues > 0)
@@ -3893,18 +3932,22 @@ PlankResult pl_AudioFileWriter_CAF_WritePostDataMetaData (PlankAudioFileWriterRe
         pl_DynamicArray_InitWithItemSizeAndCapacity (&stringIndices, sizeof (PlankCAFStringID), totalCues);
         pl_DynamicArray_InitWithItemSizeAndCapacity (&strings, 1, 512);
         pl_File_OpenDynamicArray (&stringsDataStream, &strings, PLANKFILE_BINARY | PLANKFILE_WRITE);
-        
-        cueArray    = (PlankAudioFileCuePoint*)pl_DynamicArray_GetArray (cuePoints);
-        regionArray = (PlankAudioFileRegion*)pl_DynamicArray_GetArray (regions);
-        loopArray   = (PlankAudioFileRegion*)pl_DynamicArray_GetArray (loopPoints);
-        
+                
         for (i = 0; i < numCues; ++i)
         {
-            if ((label = pl_AudioFileCuePoint_GetLabel (&cueArray[i])))
+            cue = (PlankAudioFileCuePointRef)pl_SharedPtrArray_GetSharedPtr (cuePoints, i);
+            
+            if (!cue)
+            {
+                result = PlankResult_UnknownError;
+                goto exit;
+            }
+
+            if ((label = pl_AudioFileCuePoint_GetLabel (cue)))
             {
                 if ((labelLength = (PlankUI)strlen (label)) > 0)
                 {
-                    stringEntry.stringID = cueArray[i].cueID + 1;
+                    stringEntry.stringID = cue->cueID + 1;
                     pl_File_GetPosition (&stringsDataStream, &stringEntry.offset);
                     pl_DynamicArray_AddItem (&stringIndices, &stringEntry);
                     pl_File_Write (&stringsDataStream, label, labelLength + 1);
@@ -3914,11 +3957,19 @@ PlankResult pl_AudioFileWriter_CAF_WritePostDataMetaData (PlankAudioFileWriterRe
         
         for (i = 0; i < numRegions; ++i)
         {
-            if ((label = pl_AudioFileRegion_GetLabel (&regionArray[i])))
+            region = (PlankAudioFileRegionRef)pl_SharedPtrArray_GetSharedPtr (regions, i);
+            
+            if (!region)
+            {
+                result = PlankResult_UnknownError;
+                goto exit;
+            }
+
+            if ((label = pl_AudioFileRegion_GetLabel (region)))
             {
                 if ((labelLength = (PlankUI)strlen (label)) > 0)
                 {
-                    stringEntry.stringID = regionArray[i].anchor.cueID + 1;
+                    stringEntry.stringID = region->anchor->cueID + 1;
                     pl_File_GetPosition (&stringsDataStream, &stringEntry.offset);
                     pl_DynamicArray_AddItem (&stringIndices, &stringEntry);
                     pl_File_Write (&stringsDataStream, label, labelLength + 1);
@@ -3928,11 +3979,19 @@ PlankResult pl_AudioFileWriter_CAF_WritePostDataMetaData (PlankAudioFileWriterRe
         
         for (i = 0; i < numLoops; ++i)
         {
-            if ((label = pl_AudioFileRegion_GetLabel (&loopArray[i])))
+            loop = (PlankAudioFileRegionRef)pl_SharedPtrArray_GetSharedPtr (loopPoints, i);
+            
+            if (!loop)
+            {
+                result = PlankResult_UnknownError;
+                goto exit;
+            }
+
+            if ((label = pl_AudioFileRegion_GetLabel (loop)))
             {
                 if ((labelLength = (PlankUI)strlen (label)) > 0)
                 {
-                    stringEntry.stringID = loopArray[i].anchor.cueID + 1;
+                    stringEntry.stringID = loop->anchor->cueID + 1;
                     pl_File_GetPosition (&stringsDataStream, &stringEntry.offset);
                     pl_DynamicArray_AddItem (&stringIndices, &stringEntry);
                     pl_File_Write (&stringsDataStream, label, labelLength + 1);
@@ -3961,8 +4020,8 @@ PlankResult pl_AudioFileWriter_W64_WriteMetaData (PlankAudioFileWriterRef p)
 static PlankResult pl_AudioFileWriter_Ogg_WriteMetaData (PlankAudioFileWriterRef p)
 {
     PlankResult result = PlankResult_OK;
-    PlankDynamicArrayRef cuePoints;
-    PlankAudioFileCuePoint* cueArray;
+    PlankSharedPtrArrayRef cuePoints;
+    PlankAudioFileCuePointRef cue;
     int numCues, i;
     PlankUI chapter;
     char tag[256];
@@ -3975,37 +4034,40 @@ static PlankResult pl_AudioFileWriter_Ogg_WriteMetaData (PlankAudioFileWriterRef
         goto exit;
     
     cuePoints  = pl_AudioFileMetaData_GetCuePoints (p->metaData);
-    numCues    = (int)pl_DynamicArray_GetSize (cuePoints);
-    
-    if (numCues > 0)
+    numCues    = (int)pl_SharedPtrArray_GetLength (cuePoints);
+           
+    for (i = 0; i < numCues; ++i)
     {
-        cueArray = (PlankAudioFileCuePoint*)pl_DynamicArray_GetArray (cuePoints);
+        cue = (PlankAudioFileCuePointRef)pl_SharedPtrArray_GetSharedPtr (cuePoints, i);
         
-        for (i = 0; i < numCues; ++i)
+        if (!cue)
         {
-            chapter = pl_AudioFileCuePoint_GetID (&cueArray[i]) + 1;
-            time = pl_AudioFileCuePoint_GetPosition (&cueArray[i]) / p->formatInfo.sampleRate;
-            
-            hours = (int)(time / 3600.0);
-            
-            if (hours > 99)
-                continue;
-            
-            time -= hours;
-            minutes = (int)(time / 60.0);
-            time -= minutes;
-            seconds = (int)time;
-            time -= seconds;
-            millis = (int)(time * 1000.0);
-            
-            snprintf (tag, 256, "CHAPTER%03u", chapter);
-            snprintf (timeText, 64, "%02d:%02d:%02d.%03d", hours, minutes, seconds, millis);
-            pl_AudioFileWriter_Ogg_CommentAddTag (p, tag, timeText);
-            
-            snprintf (tag, 256, "CHAPTER%03uNAME", chapter);
-            label =  pl_AudioFileCuePoint_GetLabel (&cueArray[i]);
-            pl_AudioFileWriter_Ogg_CommentAddTag (p, tag, label ? label : "");
+            result = PlankResult_UnknownError;
+            goto exit;
         }
+
+        chapter = pl_AudioFileCuePoint_GetID (cue) + 1;
+        time = pl_AudioFileCuePoint_GetPosition (cue) / p->formatInfo.sampleRate;
+        
+        hours = (int)(time / 3600.0);
+        
+        if (hours > 99)
+            continue;
+        
+        time -= hours;
+        minutes = (int)(time / 60.0);
+        time -= minutes;
+        seconds = (int)time;
+        time -= seconds;
+        millis = (int)(time * 1000.0);
+        
+        snprintf (tag, 256, "CHAPTER%03u", chapter);
+        snprintf (timeText, 64, "%02d:%02d:%02d.%03d", hours, minutes, seconds, millis);
+        pl_AudioFileWriter_Ogg_CommentAddTag (p, tag, timeText);
+        
+        snprintf (tag, 256, "CHAPTER%03uNAME", chapter);
+        label =  pl_AudioFileCuePoint_GetLabel (cue);
+        pl_AudioFileWriter_Ogg_CommentAddTag (p, tag, label ? label : "");
     }
     
 exit:

@@ -43,6 +43,23 @@
 #define PLANKSHAREDPTR_DEBUG 0
 #endif
 
+#if PLANKSHAREDPTR_DEBUG
+PlankAtomicL* pl_SharedPtrGlobalCount()
+{
+    static volatile PlankB firstTime = PLANK_TRUE;
+    static PLANK_ALIGN(PLANK_WIDESIZE) PlankAtomicL counter;
+    
+    if (firstTime)
+    {
+        firstTime = PLANK_FALSE;
+        pl_AtomicMemoryBarrier();
+        pl_AtomicL_Init (&counter);
+    }
+    
+    return &counter;
+}
+#endif
+
 //////////////////////////////// Helpers ///////////////////////////////////////
 
 typedef struct PlankSharedPtrCounts
@@ -71,7 +88,7 @@ typedef union PlankSharedPtrElement
 
 typedef struct PlankSharedPtrCounter
 {
-    PlankAtomicPX atom;
+    PLANK_ALIGN(PLANK_WIDESIZE) PlankAtomicPX atom;
 } PlankSharedPtrCounter;
 
 ///////////////////////////////// Weak /////////////////////////////////////////
@@ -112,7 +129,7 @@ static PlankSharedPtrCounterRef pl_SharedPtrCounter_CreateAndInitWithSharedPtr (
         p->atom.ptr = ptr;
         
 #if PLANKSHAREDPTR_DEBUG
-        printf("Create Counter  %p (ptr=%p)", p, ptr);
+        printf("Create Counter  %p (ptr=%p) TOTAL=%ld ", p, ptr, pl_AtomicL_Increment (pl_SharedPtrGlobalCount()));
 #endif
     }
     
@@ -134,7 +151,7 @@ static PlankResult pl_SharedPtrCounter_Destroy (PlankSharedPtrCounterRef p)
     }
     
 #if PLANKSHAREDPTR_DEBUG
-    printf("Destroy Counter %p\n", p);
+    printf("Destroy Counter %p          TOTAL=%ld\n", p, pl_AtomicL_Decrement (pl_SharedPtrGlobalCount()));
 #endif
     if ((result = pl_AtomicPX_DeInit (&p->atom)) != PlankResult_OK)
         goto exit;
@@ -190,6 +207,10 @@ static PlankResult pl_SharedPtrCounter_DecrementRefCount (PlankSharedPtrCounterR
                                               newElement.halves.ptr, newElement.halves.extra);
     } while (!success);
     
+#if PLANKSHAREDPTR_DEBUG
+    printf("Counter Ref  -- %p ptr=%p refCount=%d weakCount=%d\n", p, oldElement.halves.ptr, newElement.parts.counts.refCount, newElement.parts.counts.weakCount);
+#endif
+
     if (newElement.parts.counts.refCount == 0)
     {        
         if ((result = pl_SharedPtr_Destroy (oldElement.parts.ptr)) != PlankResult_OK) goto exit;
@@ -198,10 +219,6 @@ static PlankResult pl_SharedPtrCounter_DecrementRefCount (PlankSharedPtrCounterR
             result = pl_SharedPtrCounter_Destroy (p);
     }
     
-#if PLANKSHAREDPTR_DEBUG
-    printf("Counter Ref  -- %p ptr=%p refCount=%d weakCount=%d\n", p, oldElement.halves.ptr, newElement.parts.counts.refCount, newElement.parts.counts.weakCount);
-#endif
-
 exit:
     return result;
 }
@@ -248,12 +265,12 @@ static PlankResult pl_SharedPtrCounter_DecrementWeakCount (PlankSharedPtrCounter
                                               newElement.halves.ptr, newElement.halves.extra);
     } while (!success);
     
-    if ((newElement.parts.counts.refCount == 0) && (newElement.parts.counts.weakCount == 0))
-        result = pl_SharedPtrCounter_Destroy (p);
-    
 #if PLANKSHAREDPTR_DEBUG
     printf("Counter Weak -- %p ptr=%p refCount=%d weakCount=%d\n", p, oldElement.halves.ptr, newElement.parts.counts.refCount, newElement.parts.counts.weakCount);
 #endif
+
+    if ((newElement.parts.counts.refCount == 0) && (newElement.parts.counts.weakCount == 0))
+        result = pl_SharedPtrCounter_Destroy (p);    
     
 exit:
     return result;
@@ -434,11 +451,17 @@ static PlankResult pl_SharedPtrArray_DeInit (PlankSharedPtrArrayRef p);
 
 static PlankResult pl_SharedPtrArray_Init (PlankSharedPtrArrayRef p)
 {
+#if PLANKSHAREDPTR_DEBUG
+    printf("pl_SharedPtrArray_Init (%p)\n",p);
+#endif
     return pl_DynamicArray_InitWithItemSize (&p->array, sizeof (PlankAtomicP));
 }
 
 static PlankResult pl_SharedPtrArray_DeInit (PlankSharedPtrArrayRef p)
 {
+#if PLANKSHAREDPTR_DEBUG
+    printf("pl_SharedPtrArray_DeInit (%p)\n",p);
+#endif
     pl_SharedPtrArray_Clear (p);
     return pl_DynamicArray_DeInit (&p->array);
 }
@@ -495,21 +518,33 @@ PlankL pl_SharedPtrArray_GetLength (PlankSharedPtrArrayRef p)
     return pl_DynamicArray_GetSize (&p->array);
 }
 
-PlankResult pl_SharedPtrArray_AddSharePtr (PlankSharedPtrArrayRef p, PlankSharedPtrRef item)
+PlankAtomicP* pl_SharedPtrArray_GetArray (PlankSharedPtrArrayRef p)
+{
+    return (PlankAtomicP*)pl_DynamicArray_GetArray (&p->array);
+}
+
+PlankResult pl_SharedPtrArray_AddSharedPtr (PlankSharedPtrArrayRef p, PlankSharedPtrRef item)
 {
     PlankResult result;
+    PlankAtomicP atom;
+    
     result = PlankResult_OK;
     
+    pl_AtomicP_Init (&atom);
     if ((result = pl_SharedPtr_IncrementRefCount (item)) != PlankResult_OK) goto exit;
+    
+    atom.ptr = item;
     if ((result = pl_DynamicArray_AddItem (&p->array, &item)) != PlankResult_OK) goto exit;
     
 exit:
     return result;
 }
 
-PlankResult pl_SharedPtrArray_PutSharePtr (PlankSharedPtrArrayRef p, const PlankL index, PlankSharedPtrRef item)
+PlankResult pl_SharedPtrArray_PutSharedPtr (PlankSharedPtrArrayRef p, const PlankL index, PlankSharedPtrRef item)
 {
     PlankResult result;
+    PlankAtomicP atom;
+
     result = PlankResult_OK;
     
     if ((index < 0) || (index > p->array.usedItems))
@@ -518,15 +553,19 @@ PlankResult pl_SharedPtrArray_PutSharePtr (PlankSharedPtrArrayRef p, const Plank
         goto exit;
     }
     
+    pl_AtomicP_Init (&atom);
     if ((result = pl_SharedPtr_IncrementRefCount (item)) != PlankResult_OK) goto exit;
+    
+    atom.ptr = item;
     if ((result = pl_DynamicArray_PutItem (&p->array, index, &item)) != PlankResult_OK) goto exit;
+    
 exit:
     return result;
 }
 
-PlankResult pl_SharedPtrArray_RemoveSharePtr (PlankSharedPtrArrayRef p, const PlankL index)
+PlankResult pl_SharedPtrArray_RemoveSharedPtr (PlankSharedPtrArrayRef p, const PlankL index)
 {
-    PlankSharedPtrRef sharedPtr;
+    PlankAtomicP atom;
     PlankResult result;
     result = PlankResult_OK;
 
@@ -536,23 +575,41 @@ PlankResult pl_SharedPtrArray_RemoveSharePtr (PlankSharedPtrArrayRef p, const Pl
         goto exit;
     }
 
-    sharedPtr = pl_SharedPtrArray_GetSharePtr (p, index);
-    
-    if ((result = pl_SharedPtr_DecrementRefCount (sharedPtr)) != PlankResult_OK) goto exit;
+    if ((result = pl_DynamicArray_GetItem (&p->array, index, &atom)) != PlankResult_OK) goto exit;
+    if ((result = pl_SharedPtr_DecrementRefCount ((PlankSharedPtrRef)atom.ptr)) != PlankResult_OK) goto exit;
     if ((result = pl_DynamicArray_RemoveItem (&p->array, index)) != PlankResult_OK) goto exit;
 
+    pl_AtomicP_DeInit (&atom);
+    
 exit:
     return result;
 }
 
-PlankSharedPtrRef pl_SharedPtrArray_GetSharePtr (PlankSharedPtrArrayRef p, const PlankL index)
+PlankSharedPtrRef pl_SharedPtrArray_GetSharedPtr (PlankSharedPtrArrayRef p, const PlankL index)
 {
-    PlankSharedPtrRef sharedPtr;
+    PlankAtomicP atom;
     
-    sharedPtr = PLANK_NULL;
-    pl_DynamicArray_GetItem (&p->array, index, &sharedPtr);
+    pl_AtomicP_Init (&atom);
+    pl_DynamicArray_GetItem (&p->array, index, &atom);
     
-    return sharedPtr;
+    return (PlankSharedPtrRef)atom.ptr;
 }
 
+PlankResult pl_SharedPtrArray_Swap (PlankSharedPtrArrayRef p, const PlankL indexA, const PlankL indexB)
+{
+    PlankAtomicP* array;
+    
+    if ((indexA < 0) || (indexA >= p->array.usedItems) || (indexB < 0) || (indexB >= p->array.usedItems) )
+    {
+        return PlankResult_ArrayParameterError;
+    }
+    
+    if (indexA != indexB)
+    {
+        array = (PlankAtomicP*)pl_DynamicArray_GetArray (&p->array);
+        pl_AtomicP_SwapOther (&array[indexA], &array[indexB]);
+    }
+    
+    return PlankResult_OK;
+}
 

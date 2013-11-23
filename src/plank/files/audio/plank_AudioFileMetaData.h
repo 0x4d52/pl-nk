@@ -154,15 +154,15 @@ const PlankUC* pl_AudioFileMetaData_GetUMID (PlankAudioFileMetaDataRef p);
  Copies the data from another cue point. The source cue point is zeroed on return to help avoid memory allocation/deallocation issues. */
 PlankResult pl_AudioFileMetaData_AddCuePoint (PlankAudioFileMetaDataRef p, PlankAudioFileCuePointRef cuePoint);
 PlankResult pl_AudioFileMetaData_FindCuePointWithID (PlankAudioFileMetaDataRef p, const PlankUI cueID, PlankAudioFileCuePointRef* cuePoint, PlankL* index);
-PlankResult pl_AudioFileMetaData_RemoveCuePointWithID (PlankAudioFileMetaDataRef p, const PlankUI cueID, PlankAudioFileCuePointRef cuePoint, PlankB* success);
+PlankResult pl_AudioFileMetaData_RemoveCuePointWithID (PlankAudioFileMetaDataRef p, const PlankUI cueID, PlankAudioFileCuePointRef* cuePoint, PlankB* success);
 
 /** Searches the metadata for the highest numbered cue ID and returns this with 1 added. */
 PlankResult pl_AudioFileMetaData_GetNextCueID (PlankAudioFileMetaDataRef p, PlankUI* cueID);
 
 
-PlankDynamicArrayRef pl_AudioFileMetaData_GetCuePoints (PlankAudioFileMetaDataRef p);
-PlankDynamicArrayRef pl_AudioFileMetaData_GetRegions (PlankAudioFileMetaDataRef p);
-PlankDynamicArrayRef pl_AudioFileMetaData_GetLoopPoints (PlankAudioFileMetaDataRef p);
+PlankSharedPtrArrayRef pl_AudioFileMetaData_GetCuePoints (PlankAudioFileMetaDataRef p);
+PlankSharedPtrArrayRef pl_AudioFileMetaData_GetRegions (PlankAudioFileMetaDataRef p);
+PlankSharedPtrArrayRef pl_AudioFileMetaData_GetLoopPoints (PlankAudioFileMetaDataRef p);
 
 
 /** Adds a region.
@@ -257,10 +257,14 @@ typedef struct PlankAudioFileMetaData
     PlankUC umid[64];
     PlankDynamicArray codingHistory;
 
-	PlankDynamicArray cuePoints;
-    PlankDynamicArray loopPoints;
-    PlankDynamicArray regions;
-        
+//	PlankDynamicArray cuePoints;
+//    PlankDynamicArray loopPoints;
+//    PlankDynamicArray regions;
+
+    PlankSharedPtrArrayRef cuePoints;
+    PlankSharedPtrArrayRef loopPoints;
+    PlankSharedPtrArrayRef regions;
+
     // just a list of unparsed data - if we write the same format
     // wih no change this can be simply piped out
     PlankSimpleLinkedList formatSpecific;
