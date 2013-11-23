@@ -39,6 +39,8 @@
 #ifndef PLANK_SHAREDPTR_H
 #define PLANK_SHAREDPTR_H
 
+#include "plank_DynamicArray.h"
+
 PLANK_BEGIN_C_LINKAGE
 
 /** A shared pointer.
@@ -48,12 +50,10 @@ PLANK_BEGIN_C_LINKAGE
  @{
  */
 
-#if !PLANKSHAREDPTR_DEFINED
 typedef struct PlankSharedPtr* PlankSharedPtrRef;
 typedef struct PlankWeakPtr* PlankWeakPtrRef;
 typedef struct PlankSharedPtrCounter* PlankSharedPtrCounterRef;
 typedef PlankResult (*PlankSharedPtrFunction)(void*);
-#endif
 
 PlankSharedPtrRef pl_SharedPtr_CreateAndInitWithSizeAndFunctions (const PlankL size, void* initFunction, void* deInitFunction);
 PlankSharedPtrRef pl_SharefPtr_IncrementRefCountAndGetPtr (PlankSharedPtrRef p);
@@ -65,6 +65,26 @@ PlankSharedPtrRef pl_WeakPtr_GetSharedPtr (PlankWeakPtrRef p);
 PlankResult pl_WeakPtr_DecrementRefCount (PlankWeakPtrRef p);
 
 PlankResult pl_SharedPtrSwap (PlankSharedPtrRef* p1, PlankSharedPtrRef* p2);
+/** @} */
+
+/** An array of shared pointers.
+ 
+ @defgroup PlankSharedPtrClass Plank SharedPtr class
+ @ingroup PlankClasses
+ @{
+ */
+
+typedef struct PlankSharedPtrArray* PlankSharedPtrArrayRef;
+
+PlankSharedPtrArrayRef pl_SharedPtrArray_CreateAndInit();
+PlankSharedPtrArrayRef pl_SharefPtrArray_IncrementRefCountAndGetPtr (PlankSharedPtrArrayRef p);
+PlankResult pl_SharedPtrArray_DecrementRefCount (PlankSharedPtrArrayRef p);
+PlankResult pl_SharedPtrArray_Clear (PlankSharedPtrArrayRef p);
+PlankL pl_SharedPtrArray_GetLength (PlankSharedPtrArrayRef p);
+PlankResult pl_SharedPtrArray_AddSharePtr (PlankSharedPtrArrayRef p, PlankSharedPtrRef item);
+PlankResult pl_SharedPtrArray_PutSharePtr (PlankSharedPtrArrayRef p, const PlankL index, PlankSharedPtrRef item);
+PlankResult pl_SharedPtrArray_RemoveSharePtr (PlankSharedPtrArrayRef p, const PlankL index);
+PlankSharedPtrRef pl_SharedPtrArray_GetSharePtr (PlankSharedPtrArrayRef p, const PlankL index);
 
 /** @} */
 
@@ -80,5 +100,12 @@ typedef struct PlankSharedPtr
     PlankSharedPtrFunction deInitFunction;
     PlankWeakPtrRef weakPtr;
 } PlankSharedPtr;
+
+typedef struct PlankSharedPtrArray
+{
+    PlankSharedPtr sharedHeader;
+    PlankDynamicArray array;
+} PlankSharedPtrArray;
 #endif
+
 #endif // PLANK_SHAREDPTR_H

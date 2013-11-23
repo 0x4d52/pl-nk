@@ -455,6 +455,23 @@ exit:
     return result;    
 }
 
+PlankResult pl_DynamicArray_PutItem (PlankDynamicArrayRef p, const PlankL index, PlankP item)
+{
+    PlankResult result = PlankResult_OK;
+    
+    if ((index < 0) || (index >= p->usedItems))
+    {
+        result = PlankResult_ArrayParameterError;
+        goto exit;
+    }
+        
+    pl_MemoryCopy ((unsigned char*)p->data + index * p->itemSize, item, p->itemSize);
+        
+exit:
+    return result;
+
+}
+
 PlankResult pl_DynamicArray_RemoveItem (PlankDynamicArrayRef p, const PlankL index)
 {
     PlankResult result = PlankResult_OK;

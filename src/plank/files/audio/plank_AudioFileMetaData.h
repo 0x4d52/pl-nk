@@ -205,13 +205,6 @@ PLANK_END_C_LINKAGE
 
 
 #if !DOXYGEN
-//typedef struct PlankAudioFileMetaDataParseState
-//{
-//    PlankUI cueLabelIndex;
-//    PlankUI cueNoteIndex;
-//} PlankAudioFileMetaDataParseState;
-
-
 typedef struct PlankAudioFileMetaData
 {
     PlankSharedPtr sharedHeader;
@@ -271,9 +264,7 @@ typedef struct PlankAudioFileMetaData
     // just a list of unparsed data - if we write the same format
     // wih no change this can be simply piped out
     PlankSimpleLinkedList formatSpecific;
-    
-//    PlankAudioFileMetaDataParseState parseState;
-    
+        
 } PlankAudioFileMetaData;
 #endif 
 

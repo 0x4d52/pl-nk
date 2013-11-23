@@ -160,6 +160,8 @@ PlankResult pl_DynamicArray_InsertItem (PlankDynamicArrayRef p, const PlankL ind
  @return A result code which will be PlankResult_OK if the operation was completely successful. */
 PlankResult pl_DynamicArray_GetItem (PlankDynamicArrayRef p, const PlankL index, PlankP item);
 
+PlankResult pl_DynamicArray_PutItem (PlankDynamicArrayRef p, const PlankL index, PlankP item);
+
 /** Removes an item from the specified index.
  @param p The <i>Plank DynamicArray</i> object.
  @param index The desired index to remove. This must be between 0 and one less that the current size. 

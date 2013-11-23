@@ -420,9 +420,139 @@ PlankResult pl_WeakPtr_DecrementRefCount (PlankWeakPtrRef p)
 PlankResult pl_SharedPtrSwap (PlankSharedPtrRef* p1, PlankSharedPtrRef* p2)
 {
     PlankSharedPtrRef temp;
+    pl_AtomicMemoryBarrier();
     temp = *p2;
     *p2 = *p1;
     *p1 = temp;
     return PlankResult_OK;
 }
+
+/////----
+
+static PlankResult pl_SharedPtrArray_Init (PlankSharedPtrArrayRef p);
+static PlankResult pl_SharedPtrArray_DeInit (PlankSharedPtrArrayRef p);
+
+static PlankResult pl_SharedPtrArray_Init (PlankSharedPtrArrayRef p)
+{
+    return pl_DynamicArray_InitWithItemSize (&p->array, sizeof (PlankAtomicP));
+}
+
+static PlankResult pl_SharedPtrArray_DeInit (PlankSharedPtrArrayRef p)
+{
+    pl_SharedPtrArray_Clear (p);
+    return pl_DynamicArray_DeInit (&p->array);
+}
+
+PlankSharedPtrArrayRef pl_SharedPtrArray_CreateAndInit()
+{
+    return (PlankSharedPtrArrayRef)pl_SharedPtr_CreateAndInitWithSizeAndFunctions (sizeof (PlankSharedPtrArray),
+                                                                                   (PlankSharedPtrFunction)pl_SharedPtrArray_Init,
+                                                                                   (PlankSharedPtrFunction)pl_SharedPtrArray_DeInit);
+
+}
+
+PlankSharedPtrArrayRef pl_SharefPtrArray_IncrementRefCountAndGetPtr (PlankSharedPtrArrayRef p)
+{
+    return (PlankSharedPtrArrayRef)pl_SharefPtr_IncrementRefCountAndGetPtr ((PlankSharedPtrRef)p);
+}
+
+PlankResult pl_SharedPtrArray_DecrementRefCount (PlankSharedPtrArrayRef p)
+{
+    return pl_SharedPtr_DecrementRefCount((PlankSharedPtrRef)p);
+}
+
+PlankResult pl_SharedPtrArray_Clear (PlankSharedPtrArrayRef p)
+{
+    PlankResult result;
+    PlankL size, i;
+    PlankAtomicP* array;
+    PlankAtomicP temp;
+    
+    pl_AtomicP_Init (&temp);
+    
+    result = PlankResult_OK;
+    size = pl_DynamicArray_GetSize (&p->array);
+    array = (PlankAtomicP*)pl_DynamicArray_GetArray (&p->array);
+    
+    for (i = 0; i < size; ++i)
+    {
+        temp.ptr = PLANK_NULL;
+        pl_AtomicP_SwapOther (&array[i], &temp);
+        pl_SharedPtr_DecrementRefCount (temp.ptr);
+        pl_AtomicP_DeInit (&array[i]);
+    }
+    
+    pl_DynamicArray_SetSize (&p->array, 0);
+    
+exit:
+    pl_AtomicP_DeInit (&temp);
+    
+    return result;
+}
+
+PlankL pl_SharedPtrArray_GetLength (PlankSharedPtrArrayRef p)
+{
+    return pl_DynamicArray_GetSize (&p->array);
+}
+
+PlankResult pl_SharedPtrArray_AddSharePtr (PlankSharedPtrArrayRef p, PlankSharedPtrRef item)
+{
+    PlankResult result;
+    result = PlankResult_OK;
+    
+    if ((result = pl_SharedPtr_IncrementRefCount (item)) != PlankResult_OK) goto exit;
+    if ((result = pl_DynamicArray_AddItem (&p->array, &item)) != PlankResult_OK) goto exit;
+    
+exit:
+    return result;
+}
+
+PlankResult pl_SharedPtrArray_PutSharePtr (PlankSharedPtrArrayRef p, const PlankL index, PlankSharedPtrRef item)
+{
+    PlankResult result;
+    result = PlankResult_OK;
+    
+    if ((index < 0) || (index > p->array.usedItems))
+    {
+        result = PlankResult_ArrayParameterError;
+        goto exit;
+    }
+    
+    if ((result = pl_SharedPtr_IncrementRefCount (item)) != PlankResult_OK) goto exit;
+    if ((result = pl_DynamicArray_PutItem (&p->array, index, &item)) != PlankResult_OK) goto exit;
+exit:
+    return result;
+}
+
+PlankResult pl_SharedPtrArray_RemoveSharePtr (PlankSharedPtrArrayRef p, const PlankL index)
+{
+    PlankSharedPtrRef sharedPtr;
+    PlankResult result;
+    result = PlankResult_OK;
+
+    if ((index < 0) || (index > p->array.usedItems))
+    {
+        result = PlankResult_ArrayParameterError;
+        goto exit;
+    }
+
+    sharedPtr = pl_SharedPtrArray_GetSharePtr (p, index);
+    
+    if ((result = pl_SharedPtr_DecrementRefCount (sharedPtr)) != PlankResult_OK) goto exit;
+    if ((result = pl_DynamicArray_RemoveItem (&p->array, index)) != PlankResult_OK) goto exit;
+
+exit:
+    return result;
+}
+
+PlankSharedPtrRef pl_SharedPtrArray_GetSharePtr (PlankSharedPtrArrayRef p, const PlankL index)
+{
+    PlankSharedPtrRef sharedPtr;
+    
+    sharedPtr = PLANK_NULL;
+    pl_DynamicArray_GetItem (&p->array, index, &sharedPtr);
+    
+    return sharedPtr;
+}
+
 

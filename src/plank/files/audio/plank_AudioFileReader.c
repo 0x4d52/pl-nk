@@ -273,11 +273,9 @@ PlankResult pl_AudioFileReader_Init (PlankAudioFileReaderRef p)
     p->formatInfo.minimumBitRate   = 0;
     p->formatInfo.maximumBitRate   = 0;
     p->formatInfo.nominalBitRate   = 0;
-//    p->formatInfo.numChannels      = 0;
     p->formatInfo.sampleRate       = 0.0;
     p->formatInfo.frameDuration    = 0.f;
-    p->formatInfo.quality          = 0.f;
-    
+    p->formatInfo.quality          = 0.f;    
     
     p->numFrames                   = 0;
     p->dataPosition                = -1;
