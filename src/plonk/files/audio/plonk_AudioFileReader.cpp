@@ -292,18 +292,23 @@ AudioFileReaderInternal::AudioFileReaderInternal (AudioFileReaderQueue const& au
 class AudioFileReaderRegion : public PlonkBase
 {
 public:
-    AudioFileReaderRegion() throw()
+    AudioFileReaderRegion (AudioFileReader const& o) throw()
+    :   original (o),
+        region (pl_AudioFileRegion_CreateAndInit())
     {
-        pl_AudioFileRegion_Init (&region);
     }
     
     ~AudioFileReaderRegion()
     {
-        pl_AudioFileRegion_DeInit (&region);
+        pl_AudioFileRegion_DecrementRefCount (region);
     }
     
+    PlankAudioFileRegionRef getRegion() throw() { return region; }
+    AudioFileReader getOriginal() throw() { return original; }
+    
+private:
     AudioFileReader original;
-    PlankAudioFileRegion region;
+    PlankAudioFileRegionRef region;
 };
 
 static PlankResult AudioFileReaderInternal_Region_NextFunction (PlankP ref, PlankAudioFileReaderRef currentFile, PlankAudioFileReaderRef* audioFile) throw()
@@ -314,7 +319,7 @@ static PlankResult AudioFileReaderInternal_Region_NextFunction (PlankP ref, Plan
     if (!currentFile)
     {
         PlankAudioFileReaderRef file = pl_AudioFileReader_CreateAndInit();
-        result = pl_AudioFileReader_OpenWithRegion (file, readerRegion.original.getInternal()->getPeerRef(), &readerRegion.region);
+        result = pl_AudioFileReader_OpenWithRegion (file, readerRegion.getOriginal().getInternal()->getPeerRef(), readerRegion.getRegion());
         *audioFile = (result == PlankResult_OK) ? file : (PlankAudioFileReaderRef)PLANK_NULL;
     }
     else
@@ -354,10 +359,8 @@ AudioFileReaderInternal::AudioFileReaderInternal (AudioFileReader const& origina
 {
     pl_AudioFileReader_Init (getPeerRef());
     
-    AudioFileReaderRegion* readerRegion = new AudioFileReaderRegion();
-    
-    readerRegion->original = original;
-    pl_AudioFileRegion_SetRegion (&readerRegion->region, start, end);
+    AudioFileReaderRegion* readerRegion = new AudioFileReaderRegion (original);
+    pl_AudioFileRegion_SetRegion (readerRegion->getRegion(), start, end);
 
     if (pl_AudioFileReader_OpenWithCustomNextFunction (getPeerRef(),
                                                        AudioFileReaderInternal_Region_NextFunction,
@@ -661,7 +664,7 @@ int AudioFileReaderInternal::getNumCuePoints() const throw()
 {
     PlankAudioFileMetaDataRef metaData = pl_AudioFileReader_GetMetaData (getPeerRef());
     
-    return metaData ? (int)pl_DynamicArray_GetSize (pl_AudioFileMetaData_GetCuePoints (metaData)) : 0;
+    return metaData ? (int)pl_SharedPtrArray_GetLength (pl_AudioFileMetaData_GetCuePoints (metaData)) : 0;
 }
 
 bool AudioFileReaderInternal::getCuePointAtIndex (const int index, UnsignedInt& cueID, Text& label, LongLong& position) const throw()
@@ -674,8 +677,8 @@ bool AudioFileReaderInternal::getCuePointAtIndex (const int index, UnsignedInt& 
     if (!metaData)
         return false;
     
-    PlankDynamicArrayRef cuePoints = pl_AudioFileMetaData_GetCuePoints (metaData);
-    const int numCues = pl_DynamicArray_GetSize (cuePoints);
+    PlankSharedPtrArrayRef cuePoints = pl_AudioFileMetaData_GetCuePoints (metaData);
+    const int numCues = (int)pl_SharedPtrArray_GetLength (cuePoints);
     
     if (!numCues)
         return false;
@@ -683,11 +686,11 @@ bool AudioFileReaderInternal::getCuePointAtIndex (const int index, UnsignedInt& 
     if (index >= numCues)
         return false;
     
-    PlankAudioFileCuePoint* cueArray = static_cast<PlankAudioFileCuePoint*> (pl_DynamicArray_GetArray (cuePoints));
+    PlankAudioFileCuePointRef cue = reinterpret_cast<PlankAudioFileCuePointRef> (pl_SharedPtrArray_GetSharedPtr (cuePoints, index));
     
-    cueID    = pl_AudioFileCuePoint_GetID (&cueArray[index]);
-    label    = pl_AudioFileCuePoint_GetLabel (&cueArray[index]);
-    position = pl_AudioFileCuePoint_GetPosition (&cueArray[index]);
+    cueID    = pl_AudioFileCuePoint_GetID (cue);
+    label    = pl_AudioFileCuePoint_GetLabel (cue);
+    position = pl_AudioFileCuePoint_GetPosition (cue);
     
     return true;
 }
@@ -703,22 +706,22 @@ AudioFileReaderArray AudioFileReader::regionsFromMetaData (const int metaDataOpt
         if (metaDataOption & AudioFile::ConvertCuePointsToRegions)
             pl_AudioFileMetaData_ConvertCuePointsToRegions (metaData, getNumFrames(), metaDataOption & AudioFile::RemoveCuePoints);
      
-        PlankDynamicArrayRef regions = pl_AudioFileMetaData_GetRegions (metaData);
-        const int numRegions = (int)pl_DynamicArray_GetSize (regions);
+        PlankSharedPtrArrayRef regions = pl_AudioFileMetaData_GetRegions (metaData);
+        const int numRegions = (int)pl_SharedPtrArray_GetLength (regions);
         
         if (numRegions > 0)
         {
             regionReaderArray.setSize (numRegions, false);
             regionReaderArray.clear();
-            PlankAudioFileRegion* regionArray = static_cast<PlankAudioFileRegion*> (pl_DynamicArray_GetArray (regions));
             
             for (PlankL i = 0; i < numRegions; ++i)
             {
+                PlankAudioFileRegionRef region = reinterpret_cast<PlankAudioFileRegionRef> (pl_SharedPtrArray_GetSharedPtr (regions, i));
                 AudioFileReader reader = AudioFileReader (*this,
-                                                          pl_AudioFileRegion_GetStartPosition (&regionArray[i]),
-                                                          pl_AudioFileRegion_GetEndPosition (&regionArray[i]),
+                                                          pl_AudioFileRegion_GetStartPosition (region),
+                                                          pl_AudioFileRegion_GetEndPosition (region),
                                                           bufferSize);
-                Text name = getName() + "#" + pl_AudioFileRegion_GetLabel(&regionArray[i]);
+                Text name = getName() + "#" + pl_AudioFileRegion_GetLabel (region);
                 reader.setName (name);
                 regionReaderArray.add (reader);
             }

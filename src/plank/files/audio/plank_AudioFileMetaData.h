@@ -151,9 +151,15 @@ const PlankUC* pl_AudioFileMetaData_GetUMID (PlankAudioFileMetaDataRef p);
 
 
 /** Adds a cue point.
- Copies the data from another cue point. The source cue point is zeroed on return to help avoid memory allocation/deallocation issues. */
+ Cue points are reference counted. The meta data takes ownership - do not decrement the reference count after this returns. */
 PlankResult pl_AudioFileMetaData_AddCuePoint (PlankAudioFileMetaDataRef p, PlankAudioFileCuePointRef cuePoint);
+
+/** Remove a cue point.
+ Cue points are reference counted. This returns a cue point into cuePoint but does not change the reference count. */
 PlankResult pl_AudioFileMetaData_FindCuePointWithID (PlankAudioFileMetaDataRef p, const PlankUI cueID, PlankAudioFileCuePointRef* cuePoint, PlankL* index);
+
+/** Remove a cue point.
+ Cue points are reference counted. If the value returned in cuePoint is not null, the caller has taken ownship and must decrement the reference count once finished with it. */
 PlankResult pl_AudioFileMetaData_RemoveCuePointWithID (PlankAudioFileMetaDataRef p, const PlankUI cueID, PlankAudioFileCuePointRef* cuePoint, PlankB* success);
 
 /** Searches the metadata for the highest numbered cue ID and returns this with 1 added. */
@@ -166,7 +172,7 @@ PlankSharedPtrArrayRef pl_AudioFileMetaData_GetLoopPoints (PlankAudioFileMetaDat
 
 
 /** Adds a region.
- Copies the data from another region. The source region is zeroed on return to help avoid memory allocation/deallocation issues. */
+ Regions are reference counted. The meta data takes ownership - do not decrement the reference count after this returns. */
 PlankResult pl_AudioFileMetaData_AddRegion (PlankAudioFileMetaDataRef p, PlankAudioFileRegionRef region);
 
 /** Coverts cue points to regions.
@@ -182,7 +188,7 @@ PlankResult pl_AudioFileMetaData_SortCuePoints (PlankAudioFileMetaDataRef p);
 
 
 /** Adds a loop.
- Copies the data from another region. The source region is zeroed on return to help avoid memory allocation/deallocation issues. */
+ Loops are reference counted. The meta data takes ownership - do not decrement the reference count after this returns. */
 PlankResult pl_AudioFileMetaData_AddLoopPoint (PlankAudioFileMetaDataRef p, PlankAudioFileRegionRef region);
 
 PlankResult pl_AudioFileMetaData_AddCodingHistory (PlankAudioFileMetaDataRef p, const char* text);
