@@ -564,6 +564,7 @@ public:
     inline ElementType operator[] (const Long index) const throw()
     {
         Internal const internal = this->getInternal();
+        plonk_assert (internal != Base::getNullSharedPtr());
         return internal ? ElementType (reinterpret_cast<ElementInternalType> (pl_SharedPtrArray_GetSharedPtr (internal, index))) : ElementType::getNull();
     }
 
@@ -579,6 +580,7 @@ public:
 
         if (internal == Base::getNullSharedPtr())
             return ElementType::getNull();
+        else plonk_assertfalse;
         
         UnsignedLong length = (unsigned long)this->length();
         
@@ -601,6 +603,7 @@ public:
         
         if (internal != Base::getNullSharedPtr())
             pl_SharedPtrArray_AddSharedPtr (internal, reinterpret_cast<PlankSharedPtrRef> (item.getInternal()));
+        else plonk_assertfalse;
         
         return *this;
     }
@@ -611,6 +614,7 @@ public:
         
         if (internal != Base::getNullSharedPtr())
             pl_SharedPtrArray_RemoveSharedPtr (internal, index);
+        else plonk_assertfalse;
         
         return *this;
     }
@@ -621,6 +625,7 @@ public:
         
         if (internal != Base::getNullSharedPtr())
             pl_SharedPtrArray_PutSharedPtr (internal, index, static_cast<PlankSharedPtrRef> (item.getInternal()));
+        else plonk_assertfalse;
         
         return *this;
     }

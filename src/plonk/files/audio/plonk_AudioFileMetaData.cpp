@@ -85,7 +85,279 @@ AudioFileMetaData& AudioFileMetaData::operator= (AudioFileMetaData const &other)
     return *this;
 }
 
-PlankAudioFileMetaDataRef AudioFileMetaData::getPeerAndIncrementRefCount() throw()
+AudioFileCuePointArray AudioFileMetaData::getCuePoints() const throw()
+{
+    return AudioFileCuePointArray (pl_AudioFileMetaData_GetLoopPoints (getInternal()));
+}
+
+AudioFileRegionArray AudioFileMetaData::getRegions() const throw()
+{
+    return AudioFileRegionArray (pl_AudioFileMetaData_GetRegions (getInternal()));
+}
+
+AudioFileRegionArray AudioFileMetaData::getLoopPoints() const throw()
+{
+    return AudioFileRegionArray (pl_AudioFileMetaData_GetLoopPoints (getInternal()));
+}
+
+AudioFileMetaData& AudioFileMetaData::setEditCount (const UnsignedInt count) throw()
+{
+    Internal const internal = getInternal();
+    
+    if (internal != Base::getNullSharedPtr())
+        pl_AudioFileMetaData_SetEditCount (getInternal(), count);
+    else plonk_assertfalse;
+    
+    return *this;
+}
+
+UnsignedInt AudioFileMetaData::getEditCount() throw()
+{
+    
+}
+
+
+AudioFileMetaData& AudioFileMetaData::setInstrumentData (const int baseNote, const int detune, const int gain,
+                                                         const int lowNote, const int highNote,
+                                                         const int lowVelocity, const int highVelocity) throw()
+{
+    Internal const internal = getInternal();
+    
+    if (internal != Base::getNullSharedPtr())
+        pl_AudioFileMetaData_SetInstrumentData (getInternal(), baseNote, detune, gain, lowNote, highNote, lowVelocity, highVelocity);
+    else plonk_assertfalse;
+    
+    return *this;
+}
+
+void AudioFileMetaData::getInstrumentData (int& baseNote, int& detune, int& gain,
+                                           int& lowNote, int& highNote,
+                                           int& lowVelocity, int& highVelocity) throw()
+{
+    
+}
+
+AudioFileMetaData& AudioFileMetaData::setSamplerData (const UnsignedInt manufacturer, const UnsignedInt product, const UnsignedInt samplePeriod,
+                                                      const UnsignedInt smpteFormat, const UnsignedInt smpteOffset) throw()
+{
+    Internal const internal = getInternal();
+    
+    if (internal != Base::getNullSharedPtr())
+        pl_AudioFileMetaData_SetSamplerData (getInternal(), manufacturer, product, samplePeriod, smpteFormat, smpteOffset);
+    else plonk_assertfalse;
+    
+    return *this;
+}
+
+void AudioFileMetaData::getSamplerData (UnsignedInt& manufacturer, UnsignedInt& product, UnsignedInt& samplePeriod,
+                                        UnsignedInt& smpteFormat, UnsignedInt& smpteOffset) throw()
+{
+    
+}
+
+//    PlankDynamicArrayRef getExtraSamplerData () throw();
+
+AudioFileMetaData& AudioFileMetaData::setDescriptionComment (const char* text) throw()
+{
+    
+}
+
+AudioFileMetaData& AudioFileMetaData::setOriginatorArtist (const char* text) throw()
+{
+    
+}
+
+AudioFileMetaData& AudioFileMetaData::setOriginatorRef (const char* text) throw()
+{
+    
+}
+
+AudioFileMetaData& AudioFileMetaData::setOriginationDate (const char* text) throw()
+{
+    
+}
+
+AudioFileMetaData& AudioFileMetaData::setOriginationTime (const char* text) throw()
+{
+    
+}
+
+const char* AudioFileMetaData::getDescriptionComment() throw()
+{
+    
+}
+
+const char* AudioFileMetaData::getOriginatorArtist() throw()
+{
+    
+}
+
+const char* AudioFileMetaData::getOriginatorRef() throw()
+{
+    
+}
+
+const char* AudioFileMetaData::getOriginationDate() throw()
+{
+    
+}
+
+const char* AudioFileMetaData::getOriginationTime() throw()
+{
+    
+}
+
+AudioFileMetaData& AudioFileMetaData::setPerformer (const char* text) throw()
+{
+    
+}
+
+AudioFileMetaData& AudioFileMetaData::setTitle (const char* text) throw()
+{
+    
+}
+
+AudioFileMetaData& AudioFileMetaData::setAlbum (const char* text) throw()
+{
+    
+}
+
+AudioFileMetaData& AudioFileMetaData::setGenre (const char* text) throw()
+{
+    
+}
+
+AudioFileMetaData& AudioFileMetaData::setLyrics (const char* text) throw()
+{
+    
+}
+
+AudioFileMetaData& AudioFileMetaData::setVendor (const char* text) throw()
+{
+    
+}
+
+AudioFileMetaData& AudioFileMetaData::setISRC (const char* text) throw()
+{
+    
+}
+
+const char* AudioFileMetaData::getPerformer() throw()
+{
+    
+}
+
+const char* AudioFileMetaData::getTitle() throw()
+{
+    
+}
+
+const char* AudioFileMetaData::getAlbum() throw()
+{
+    
+}
+
+const char* AudioFileMetaData::getGenre() throw()
+{
+    
+}
+
+const char* AudioFileMetaData::getLyrics() throw()
+{
+    
+}
+
+const char* AudioFileMetaData::getVendor() throw()
+{
+    
+}
+
+const char* AudioFileMetaData::getISRC() throw()
+{
+    
+}
+
+AudioFileMetaData& AudioFileMetaData::addPerformer (const char* text) throw()
+{
+    
+}
+
+AudioFileMetaData& AudioFileMetaData::addDescriptionComment (const char* text) throw()
+{
+    
+}
+
+AudioFileMetaData& AudioFileMetaData::addOriginatorArtist (const char* text) throw()
+{
+    
+}
+
+AudioFileMetaData& AudioFileMetaData::addOriginatorRef (const char* text) throw()
+{
+    
+}
+
+AudioFileMetaData& AudioFileMetaData::addGenre (const char* text) throw()
+{
+    
+}
+
+
+//    AudioFileMetaData& setArt (PlankConstantP data, const PlankL size) throw();
+//    PlankResult getArt (PlankConstantP* data, PlankL* size) throw();
+
+AudioFileMetaData& AudioFileMetaData::setYear (const int year) throw()
+{
+    
+}
+
+int AudioFileMetaData::getYear() throw()
+{
+    
+}
+
+
+AudioFileMetaData& AudioFileMetaData::setTrackInfo (const int trackNum, const int trackTotal) throw()
+{
+    
+}
+
+void AudioFileMetaData::getTrackInfo (int& trackNum, int& trackTotal) throw()
+{
+    
+}
+
+AudioFileMetaData& AudioFileMetaData::setTimeRef (const LongLong timeRef) throw()
+{
+    
+}
+
+LongLong AudioFileMetaData::getTimeRef() throw()
+{
+    
+}
+
+AudioFileMetaData& AudioFileMetaData::setSource (const UnsignedInt source) throw()
+{
+    
+}
+
+UnsignedInt AudioFileMetaData::getSource() throw()
+{
+    
+}
+
+AudioFileMetaData& AudioFileMetaData::setUMID (const UnsignedChar* umid) throw()
+{
+    
+}
+
+const UnsignedChar* AudioFileMetaData::getUMID() throw()
+{
+    
+}
+
+PlankAudioFileMetaDataRef AudioFileMetaData::incrementRefCountAndGetPeer() throw()
 {
     return pl_AudioFileMetaData_IncrementRefCountAndGet (this->getInternal());
 }

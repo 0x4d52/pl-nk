@@ -545,7 +545,7 @@ public:
     void setMetaData (AudioFileMetaData const& metaData) throw()
     {
         AudioFileMetaData m (metaData);
-        pl_AudioFileWriter_SetMetaData (&peer, m.getPeerAndIncrementRefCount());
+        pl_AudioFileWriter_SetMetaData (&peer, m.incrementRefCountAndGetPeer());
     }
     
     friend class AudioFileWriter<SampleType>;

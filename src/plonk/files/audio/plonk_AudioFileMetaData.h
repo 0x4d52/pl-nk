@@ -39,6 +39,21 @@
 #ifndef PLONK_AUDIOFILEMETADATA_H
 #define PLONK_AUDIOFILEMETADATA_H
 
+class AudioFileCuePoint : public PlankSharedPtrContainer<PlankAudioFileCuePointRef>
+{
+public:
+private:
+};
+
+class AudioFileRegion : public PlankSharedPtrContainer<PlankAudioFileRegionRef>
+{
+public:
+private:
+};
+
+typedef PlankSharedPtrArrayContainer<AudioFileCuePoint> AudioFileCuePointArray;
+typedef PlankSharedPtrArrayContainer<AudioFileRegion>   AudioFileRegionArray;
+
 class AudioFileMetaData : public PlankSharedPtrContainer<PlankAudioFileMetaDataRef>
 {
 public:
@@ -54,11 +69,77 @@ public:
     AudioFileMetaData (Weak const& weak) throw();
     AudioFileMetaData& operator= (AudioFileMetaData const &other) throw();
 
+    AudioFileMetaData& setEditCount (const UnsignedInt count) throw();
+    UnsignedInt getEditCount() throw();
+    
+    AudioFileMetaData& setInstrumentData (const int baseNote, const int detune, const int gain, const int lowNote, const int highNote, const int lowVelocity, const int highVelocity) throw();
+    void getInstrumentData (int& baseNote, int& detune, int& gain, int& lowNote, int& highNote, int& lowVelocity, int& highVelocity) throw();
+    AudioFileMetaData& setSamplerData (const UnsignedInt manufacturer, const UnsignedInt product, const UnsignedInt samplePeriod, const UnsignedInt smpteFormat, const UnsignedInt smpteOffset) throw();
+    void getSamplerData (UnsignedInt& manufacturer, UnsignedInt& product, UnsignedInt& samplePeriod, UnsignedInt& smpteFormat, UnsignedInt& smpteOffset) throw();
+    
+//    PlankDynamicArrayRef getExtraSamplerData () throw();
+    
+    AudioFileMetaData& setDescriptionComment (const char* text) throw();
+    AudioFileMetaData& setOriginatorArtist (const char* text) throw();
+    AudioFileMetaData& setOriginatorRef (const char* text) throw();
+    AudioFileMetaData& setOriginationDate (const char* text) throw();
+    AudioFileMetaData& setOriginationTime (const char* text) throw();
+    
+    const char* getDescriptionComment() throw();
+    const char* getOriginatorArtist() throw();
+    const char* getOriginatorRef() throw();
+    const char* getOriginationDate() throw();
+    const char* getOriginationTime() throw();
+    
+    AudioFileMetaData& setPerformer (const char* text) throw();
+    AudioFileMetaData& setTitle (const char* text) throw();
+    AudioFileMetaData& setAlbum (const char* text) throw();
+    AudioFileMetaData& setGenre (const char* text) throw();
+    AudioFileMetaData& setLyrics (const char* text) throw();
+    AudioFileMetaData& setVendor (const char* text) throw();
+    AudioFileMetaData& setISRC (const char* text) throw();
+    
+    const char* getPerformer() throw();
+    const char* getTitle() throw();
+    const char* getAlbum() throw();
+    const char* getGenre() throw();
+    const char* getLyrics() throw();
+    const char* getVendor() throw();
+    const char* getISRC() throw();
+    
+    AudioFileMetaData& addPerformer (const char* text) throw();
+    AudioFileMetaData& addDescriptionComment (const char* text) throw();
+    AudioFileMetaData& addOriginatorArtist (const char* text) throw();
+    AudioFileMetaData& addOriginatorRef (const char* text) throw();
+    AudioFileMetaData& addGenre (const char* text) throw();
+    
+//    AudioFileMetaData& setArt (PlankConstantP data, const PlankL size) throw();
+//    PlankResult getArt (PlankConstantP* data, PlankL* size) throw();
+    
+    AudioFileMetaData& setYear (const int year) throw();
+    int getYear() throw();
+    
+    AudioFileMetaData& setTrackInfo (const int trackNum, const int trackTotal) throw();
+    void getTrackInfo (int& trackNum, int& trackTotal) throw();
+    
+    AudioFileMetaData& setTimeRef (const LongLong timeRef) throw();
+    LongLong getTimeRef() throw();
+    
+    AudioFileMetaData& setSource (const UnsignedInt source) throw();
+    UnsignedInt getSource() throw();
+    
+    AudioFileMetaData& setUMID (const UnsignedChar* umid) throw();
+    const UnsignedChar* getUMID() throw();
+    
+    AudioFileCuePointArray getCuePoints() const throw();
+    AudioFileRegionArray getRegions() const throw();
+    AudioFileRegionArray getLoopPoints() const throw();
+    
     friend class AudioFileReaderInternal;
     template<class SampleType> friend class AudioFileWriterInternal;
     
 private:
-    PlankAudioFileMetaDataRef getPeerAndIncrementRefCount() throw();
+    PlankAudioFileMetaDataRef incrementRefCountAndGetPeer() throw();
 };
 
 
