@@ -39,59 +39,23 @@
 #ifndef PLONK_AUDIOFILEMETADATA_H
 #define PLONK_AUDIOFILEMETADATA_H
 
-//class AudioFileCuePoint : public PlonkBase
-//{
-//private:
-//    AudioFileCuePoint (PlankAudioFileCuePoint* p = 0) throw();
-//    AudioFileCuePoint (AudioFileCuePoint const&); // = 0
-//    
-//public:    
-//    friend class AudioFileReaderInternal;
-//    template<class SampleType> friend class AudioFileWriterInternal;
-//    
-//    bool isValid() const throw();
-//    LongLong getPosition() const throw();
-//    Text getLabel() const throw();
-//    Text getComment() const throw();
-//    UnsignedInt getID() const throw();
-//    
-//private:
-//    PlankAudioFileCuePoint* peer;
-//};
-
-
-//class AudioFileMetaData : public PlonkBase
-//{
-//public:
-//    AudioFileMetaData() throw();
-//    ~AudioFileMetaData();
-//    AudioFileMetaData (AudioFileMetaData const& copy) throw();
-//    AudioFileMetaData& operator= (AudioFileMetaData const &other) throw();
-//    
-//    friend class AudioFileReaderInternal;
-//    template<class SampleType> friend class AudioFileWriterInternal;
-//   
-//private:
-//    AudioFileMetaData (PlankAudioFileMetaDataRef p) throw();
-//    PlankAudioFileMetaDataRef getPeerAndIncrementRefCount() throw();
-//
-//    PlankAudioFileMetaDataRef peer;
-//};
-
 class AudioFileMetaData : public PlankSharedPtrContainer<PlankAudioFileMetaDataRef>
 {
 public:
     typedef PlankSharedPtrContainer<PlankAudioFileMetaDataRef> Base;
+    typedef Base::Weak Weak;
     
     AudioFileMetaData() throw();
+    AudioFileMetaData (PlankAudioFileMetaDataRef p) throw();
     AudioFileMetaData (AudioFileMetaData const& copy) throw();
+    AudioFileMetaData (Base const& base) throw();
+    AudioFileMetaData (Weak const& weak) throw();
     AudioFileMetaData& operator= (AudioFileMetaData const &other) throw();
-    
+
     friend class AudioFileReaderInternal;
     template<class SampleType> friend class AudioFileWriterInternal;
     
 private:
-    AudioFileMetaData (PlankAudioFileMetaDataRef p) throw();
     PlankAudioFileMetaDataRef getPeerAndIncrementRefCount() throw();
 };
 

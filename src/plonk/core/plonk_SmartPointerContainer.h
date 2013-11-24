@@ -343,45 +343,61 @@ private:
     }
     
 //------------------------------------------------------------------------------
-
-template<class PlankSharePtrType>
+    
+    
+template<class PlankSharedPtrType> class PlankWeakPtrContainer;
+    
+template<class PlankSharedPtrType>
 class PlankSharedPtrContainer : public PlonkBase
 {
 public:
-    typedef AtomicValue<PlankSharePtrType> AtomicPointer;
+    typedef PlankSharedPtrType              Internal;
+    typedef AtomicValue<Internal>           AtomicPointer;
+    typedef PlankWeakPtrContainer<Internal> Weak;
 
-    inline static PlankSharePtrType getNullSharedPtr() throw()
+    inline static Internal getNullSharedPtr() throw()
     {
-        return static_cast<PlankSharePtrType> (0);
+        return static_cast<Internal> (0);
     }
     
-    PlankSharedPtrContainer (PlankSharePtrType p) throw()
-    :   internal (p ? reinterpret_cast<PlankSharePtrType> (pl_SharefPtr_IncrementRefCountAndGetPtr (reinterpret_cast<PlankSharedPtrRef> (p))) : getNullSharedPtr())
+    inline static PlankSharedPtrContainer getNull() throw()
+    {
+        static PlankSharedPtrContainer null (getNullSharedPtr());
+        return null;
+    }
+    
+    PlankSharedPtrContainer (Internal p) throw()
+    :   internal (p ? reinterpret_cast<Internal> (pl_SharefPtr_IncrementRefCountAndGetPtr (reinterpret_cast<PlankSharedPtrRef> (p))) : getNullSharedPtr())
     {
     }
+    
+    PlankSharedPtrContainer (Weak const& weak) throw()
+    :   internal ()
+    {
+    }
+    
+    inline PlankSharedPtrContainer (PlankSharedPtrContainer const& copy) throw()
+    :   internal (getNullSharedPtr())
+	{
+        Internal const copyPtr = copy.internal.getPtr();
+        
+        if (copyPtr != getNullSharedPtr())
+        {
+            AtomicPointer temp (reinterpret_cast<Internal> (pl_SharefPtr_IncrementRefCountAndGetPtr (reinterpret_cast<PlankSharedPtrRef> (copyPtr))));
+            internal.swapWith (temp);
+        }
+	}
     
     ~PlankSharedPtrContainer()
     {
         AtomicPointer temp (getNullSharedPtr());
         internal.swapWith (temp);
         
-        PlankSharePtrType const tempPtr = temp.getPtrUnchecked(); // unchecked version is fine here
+        Internal const tempPtr = temp.getPtrUnchecked(); // unchecked version is fine here
         
 		if (tempPtr != getNullSharedPtr())
 			pl_SharedPtr_DecrementRefCount (reinterpret_cast<PlankSharedPtrRef> (tempPtr));
     }
-    
-    inline PlankSharedPtrContainer (PlankSharedPtrContainer const& copy) throw()
-    :   internal (getNullSharedPtr())
-	{
-        PlankSharePtrType const copyPtr = copy.internal.getPtr();
-        
-        if (copyPtr != getNullSharedPtr())
-        {
-            AtomicPointer temp (reinterpret_cast<PlankSharePtrType> (pl_SharefPtr_IncrementRefCountAndGetPtr (reinterpret_cast<PlankSharedPtrRef> (copyPtr))));
-            internal.swapWith (temp);
-        }
-	}
 
     inline PlankSharedPtrContainer& operator= (PlankSharedPtrContainer const& other) throw()
     {
@@ -391,7 +407,7 @@ public:
         return *this;
     }
     
-    inline void setInternal (PlankSharePtrType newInternal) throw()
+    inline void setInternal (Internal newInternal) throw()
 	{
         PlankSharedPtrContainer temp (newInternal);
         internal.swapWith (temp.internal);
@@ -402,22 +418,22 @@ public:
         internal.swapWith (other.internal);
     }
 
-    inline PlankSharePtrType getInternal() throw()
+    inline Internal getInternal() throw()
     {
         return internal.getPtr();
     }
 
-    inline PlankSharePtrType getInternal() const throw()
+    inline Internal getInternal() const throw()
     {
         return internal.getPtr();
     }
 
-    inline PlankSharePtrType operator->() throw()
+    inline Internal operator->() throw()
 	{
 		return internal.getPtr();
 	}
     
-	inline const PlankSharePtrType operator->() const throw()
+	inline const Internal operator->() const throw()
 	{
 		return internal.getPtr();
 	}
@@ -432,8 +448,116 @@ public:
 		return internal.getPtr() != getNullSharedPtr();
 	}
     
+    Weak getWeak() throw()
+    {
+        return Weak (pl_SharedPtr_GetWeakPtr (reinterpret_cast<PlankSharedPtrRef> (internal.getPtr())));
+    }
+    
 private:
     AtomicPointer internal;
+};
+    
+//------------------------------------------------------------------------------
+
+template<class PlankSharedPtrType>
+class PlankWeakPtrContainer : public PlankSharedPtrContainer<PlankWeakPtrRef>
+{
+public:
+    typedef PlankSharedPtrContainer<PlankWeakPtrRef> Base;
+    typedef PlankSharedPtrContainer<PlankSharedPtrType> OriginalType;
+    
+    PlankWeakPtrContainer() throw()
+    :   Base (Base::getNullSharedPtr())
+    {
+    }
+    
+    PlankWeakPtrContainer (PlankWeakPtrRef p) throw()
+    :   Base (p)
+    {
+        if (p)
+        {
+            pl_WeakPtr_DecrementRefCount (p);
+        }
+    }
+    
+    PlankWeakPtrContainer (PlankWeakPtrContainer const& copy) throw()
+    :   Base (static_cast<Base const&> (copy))
+    {
+    }
+
+    PlankWeakPtrContainer& operator= (PlankWeakPtrContainer const& other) throw()
+    {
+        if (this != &other)
+            this->setInternal (other.getInternal());
+        
+        return *this;
+    }
+    
+    OriginalType fromWeak() const throw()
+    {
+        PlankSharedPtrType sharedPtr = reinterpret_cast<PlankSharedPtrType> (pl_WeakPtr_GetSharedPtr (this->getInternal()));
+        OriginalType result (sharedPtr);
+        pl_SharedPtr_DecrementRefCount (reinterpret_cast<PlankSharedPtrRef> (sharedPtr));
+        return result;
+    }
+    
+};
+
+//------------------------------------------------------------------------------
+
+template<class PlankSharePtrContainterType>
+class PlankSharedPtrArrayContainer : public PlankSharedPtrContainer<PlankSharedPtrArrayRef>
+{
+public:
+    typedef PlankSharedPtrContainer<PlankSharedPtrArrayRef> Base;
+    typedef PlankSharePtrContainterType                     ElementType;
+    typedef typename ElementType::Internal                  ElementInternalType;
+    typedef Base::Weak                                      Weak;
+
+    PlankSharedPtrArrayContainer() throw()
+    :   Base (Base::getNullSharedPtr())
+    {
+    }
+    
+    PlankSharedPtrArrayContainer (PlankSharedPtrArrayRef p) throw()
+    :   Base (p)
+    {
+    }
+    
+    PlankSharedPtrArrayContainer (PlankSharedPtrArrayContainer const& copy) throw()
+    :   Base (static_cast<Base const&> (copy))
+    {
+    }
+    
+    PlankSharedPtrArrayContainer (Base const& base) throw()
+    :   Base (base)
+    {
+    }
+    
+    PlankSharedPtrArrayContainer (Weak const& weak) throw()
+    :   Base (weak.fromWeak())
+    {
+    }
+    
+    PlankSharedPtrArrayContainer& operator= (PlankSharedPtrArrayContainer const& other) throw()
+    {
+        if (this != &other)
+            this->setInternal (other.getInternal());
+        
+        return *this;
+    }
+    
+    Long length() const throw()
+    {
+        Internal const internal = this->getInternal();
+        return internal ? pl_SharedPtrArray_GetLength (internal) : 0;
+    }
+
+    ElementType operator[] (const Long index) const throw()
+    {
+        Internal const internal = this->getInternal();
+        return internal ? ElementType (reinterpret_cast<ElementInternalType> (pl_SharedPtrArray_GetSharedPtr (internal, index))) : ElementType::getNull();
+    }
 };
 
 #endif // PLONK_SMARTPOINTERCONTAINER_H

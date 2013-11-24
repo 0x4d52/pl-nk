@@ -42,77 +42,6 @@ BEGIN_PLONK_NAMESPACE
 
 #include "../../core/plonk_Headers.h"
 
-//AudioFileCuePoint::AudioFileCuePoint (PlankAudioFileCuePoint* p) throw()
-//:   peer (p)
-//{
-//}
-//
-//bool AudioFileCuePoint::isValid() const throw()
-//{
-//    return peer != 0;
-//}
-//
-//LongLong AudioFileCuePoint::getPosition() const throw()
-//{
-//    return peer ? pl_AudioFileCuePoint_GetPosition (peer) : 0;
-//}
-//
-//Text AudioFileCuePoint::getLabel() const throw()
-//{
-//    return peer ? Text (pl_AudioFileCuePoint_GetLabel (peer)) : Text::getEmpty();
-//}
-//
-//Text AudioFileCuePoint::getComment() const throw()
-//{
-//    return peer ? Text (pl_AudioFileCuePoint_GetComment (peer)) : Text::getEmpty();
-//}
-//
-//UnsignedInt AudioFileCuePoint::getID() const throw()
-//{
-//    return peer ? pl_AudioFileCuePoint_GetID (peer) : 0;
-//}
-
-//AudioFileMetaData::AudioFileMetaData() throw()
-//:   peer (pl_AudioFileMetaData_CreateAndInit())
-//{
-//}
-//
-//AudioFileMetaData::AudioFileMetaData (PlankAudioFileMetaDataRef p) throw()
-//:   peer (p ? pl_AudioFileMetaData_IncrementRefCountAndGet (p) : static_cast<PlankAudioFileMetaDataRef> (0))
-//{
-//}
-//
-//AudioFileMetaData::~AudioFileMetaData()
-//{
-//    pl_AudioFileMetaData_DecrementRefCount (peer);
-//    peer = static_cast<PlankAudioFileMetaDataRef> (0);
-//}
-//
-//AudioFileMetaData::AudioFileMetaData (AudioFileMetaData const& copy) throw()
-//:   peer (copy.peer ? pl_AudioFileMetaData_IncrementRefCountAndGet (copy.peer) : static_cast<PlankAudioFileMetaDataRef> (0))
-//{
-//}
-//
-//AudioFileMetaData& AudioFileMetaData::operator= (AudioFileMetaData const& other) throw()
-//{
-//    if (this != &other)
-//    {
-//        PlankAudioFileMetaDataRef p = pl_AudioFileMetaData_IncrementRefCountAndGet (other.peer);
-//        
-//        if (peer)
-//            pl_AudioFileMetaData_DecrementRefCount (peer);
-//        
-//        peer = p;
-//    }
-//    
-//    return *this;
-//}
-//
-//PlankAudioFileMetaDataRef AudioFileMetaData::getPeerAndIncrementRefCount() throw()
-//{
-//    return pl_AudioFileMetaData_IncrementRefCountAndGet (peer);
-//}
-
 AudioFileMetaData::AudioFileMetaData() throw()
 :   Base (Base::getNullSharedPtr())
 {
@@ -125,6 +54,16 @@ AudioFileMetaData::AudioFileMetaData (PlankAudioFileMetaDataRef p) throw()
 
 AudioFileMetaData::AudioFileMetaData (AudioFileMetaData const& copy) throw()
 :   Base (static_cast<Base const&> (copy))
+{
+}
+
+AudioFileMetaData::AudioFileMetaData (Base const& base) throw()
+:   Base (base)
+{
+}
+
+AudioFileMetaData::AudioFileMetaData (Weak const& weak) throw()
+:   Base (weak.fromWeak())
 {
 }
 
