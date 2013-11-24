@@ -380,8 +380,8 @@ PlankResult pl_AudioFileReader_OpenInternalInternal (PlankAudioFileReaderRef p, 
         }
     }
     
-    if (readMetaData)
-        p->metaData = pl_AudioFileMetaData_CreateAndInit();
+    if (readMetaData && !p->metaData)
+        pl_AudioFileMetaData_CreateAndInit (&p->metaData);
     
     if ((iff = pl_IffAudioFileReader_CreateAndInit()) == PLANK_NULL)
     {
@@ -1034,7 +1034,7 @@ static PlankResult pl_AudioFileReader_WAV_ParseChunk_smpl_Loop (PlankAudioFileRe
     if ((result = pl_File_ReadUI ((PlankFileRef)iff, &fraction)) != PlankResult_OK) goto exit;
     if ((result = pl_File_ReadUI ((PlankFileRef)iff, &playCount)) != PlankResult_OK) goto exit;
     
-    loop = pl_AudioFileRegion_CreateAndInit();
+    pl_AudioFileRegion_CreateAndInit (&loop);
     
     if ((result = pl_AudioFileMetaData_RemoveCuePointWithID (p->metaData, cueID, &cuePointRef, &success)) != PlankResult_OK) goto exit;
     
@@ -1155,7 +1155,7 @@ static PlankResult pl_AudioFileReader_WAV_ParseChunk_cue (PlankAudioFileReaderRe
             (chunkStart == 0) &&
             (blockStart == 0))
         {            
-            cuePoint = pl_AudioFileCuePoint_CreateAndInit();
+            pl_AudioFileCuePoint_CreateAndInit (&cuePoint);
             
             if ((result = pl_AudioFileCuePoint_SetID (cuePoint, cueID)) != PlankResult_OK) goto exit;
             if ((result = pl_AudioFileCuePoint_SetPosition (cuePoint, offset)) != PlankResult_OK) goto exit;
@@ -1240,7 +1240,7 @@ static PlankResult pl_AudioFileReader_WAV_ParseChunk_list (PlankAudioFileReaderR
             
             if ((result = pl_File_ReadUI ((PlankFileRef)iff, &cueID)) != PlankResult_OK) goto exit;
             
-            region = pl_AudioFileRegion_CreateAndInit();
+            pl_AudioFileRegion_CreateAndInit (&region);
             
             if ((result = pl_AudioFileMetaData_RemoveCuePointWithID (p->metaData, cueID, &cuePointRef, &success)) != PlankResult_OK) goto exit;
             pl_AudioFileCuePoint_SetCopy (region->anchor, cuePointRef);
@@ -1417,7 +1417,7 @@ static PlankResult pl_AudioFileReader_AIFFAIFC_ParseChunk_MARK (PlankAudioFileRe
 
     for (i = 0; i < numCuePoints; ++i)
     {
-        cuePoint = pl_AudioFileCuePoint_CreateAndInit();
+        pl_AudioFileCuePoint_CreateAndInit (&cuePoint);
 
         if ((result = pl_File_ReadS ((PlankFileRef)iff, &cueID)) != PlankResult_OK) goto exit;
         if ((result = pl_File_ReadUI ((PlankFileRef)iff, &position)) != PlankResult_OK) goto exit;
@@ -1830,7 +1830,7 @@ static PlankResult pl_AudioFileReader_CAF_ParseChunk_mark (PlankAudioFileReaderR
         
         if (markerType == PLANKAUDIOFILE_CAF_MARKERTYPE_GENERIC)
         {
-            cuePoint = pl_AudioFileCuePoint_CreateAndInit();
+            pl_AudioFileCuePoint_CreateAndInit (&cuePoint);
 
             if ((result = pl_AudioFileCuePoint_SetID (cuePoint, markerID - 1)) != PlankResult_OK) goto exit; // spec recommends nonzero but not insists like AIFF spec, might underflow
             if ((result = pl_AudioFileCuePoint_SetPosition (cuePoint, (PlankLL)markerPosition)) != PlankResult_OK) goto exit;
@@ -2634,7 +2634,7 @@ static PlankResult pl_AudioFileReader_OggFile_ParseComment (PlankAudioFileReader
                 }
                 else
                 {
-                    newCuePoint = pl_AudioFileCuePoint_CreateAndInit();
+                    pl_AudioFileCuePoint_CreateAndInit (&newCuePoint);
                     pl_AudioFileCuePoint_SetID (newCuePoint, cueID);
                     pl_AudioFileCuePoint_SetPosition (newCuePoint, bigIntValue);
                     pl_AudioFileMetaData_AddCuePoint (p->metaData, newCuePoint);
@@ -2652,7 +2652,7 @@ static PlankResult pl_AudioFileReader_OggFile_ParseComment (PlankAudioFileReader
             }
             else
             {
-                newCuePoint = pl_AudioFileCuePoint_CreateAndInit();
+                pl_AudioFileCuePoint_CreateAndInit (&newCuePoint);
                 pl_AudioFileCuePoint_SetID (newCuePoint, cueID);
                 pl_AudioFileCuePoint_SetLabel (newCuePoint, value2);
                 pl_AudioFileMetaData_AddCuePoint (p->metaData, newCuePoint);

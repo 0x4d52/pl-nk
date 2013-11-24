@@ -54,7 +54,7 @@ PLANK_BEGIN_C_LINKAGE
 
 /** Create a <i>Plank AudioFileRegion</i> object and return an oqaque reference to it.
  @return A <i>Plank AudioFileRegion</i> object as an opaque reference or PLANK_NULL. */
-PlankAudioFileRegionRef pl_AudioFileRegion_CreateAndInit();
+PlankResult pl_AudioFileRegion_CreateAndInit (PlankAudioFileRegionRef* pp);
 PlankAudioFileRegionRef pl_AudioFileRegion_IncrementRefCountAndGet (PlankAudioFileRegionRef p);
 PlankResult pl_AudioFileRegion_DecrementRefCount (PlankAudioFileRegionRef p);
 

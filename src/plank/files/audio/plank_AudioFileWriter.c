@@ -297,7 +297,7 @@ const PlankAudioFileFormatInfo* pl_AudioFileWriter_GetFormatInfoReadOnly (PlankA
 PlankAudioFileMetaDataRef pl_AudioFileWriter_GetMetaData (PlankAudioFileWriterRef p)
 {    
     if (!p->metaData)
-        pl_AudioFileWriter_SetMetaData (p, pl_AudioFileMetaData_CreateAndInit());
+        pl_AudioFileMetaData_CreateAndInit (&p->metaData);
     
     return p->metaData;
 }

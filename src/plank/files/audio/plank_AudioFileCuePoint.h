@@ -54,7 +54,7 @@ PLANK_BEGIN_C_LINKAGE
 
 /** Create a <i>Plank AudioFileCuePoint</i> object and return an oqaque reference to it.
  @return A <i>Plank AudioFileCuePoint</i> object as an opaque reference or PLANK_NULL. */
-PlankAudioFileCuePointRef pl_AudioFileCuePoint_CreateAndInit();
+PlankResult pl_AudioFileCuePoint_CreateAndInit (PlankAudioFileCuePointRef* pp);
 PlankAudioFileCuePointRef pl_AudioFileCuePoint_IncrementRefCountAndGet (PlankAudioFileCuePointRef p);
 PlankResult pl_AudioFileCuePoint_DecrementRefCount (PlankAudioFileCuePointRef p);
 

@@ -42,8 +42,8 @@
 #include "plank_DynamicArray.h"
 
 #define PLANKSHAREDPTR_CREATEANDINIT_DEFINE(NAME)\
-    Plank##NAME##Ref pl_##NAME##_CreateAndInit() {\
-        return (Plank##NAME##Ref)pl_SharedPtr_CreateAndInitWithSizeAndFunctions (sizeof (Plank##NAME),(PlankSharedPtrFunction)pl_##NAME##_Init,(PlankSharedPtrFunction)pl_##NAME##_DeInit);\
+    PlankResult pl_##NAME##_CreateAndInit (Plank##NAME##Ref* pp) {\
+        return pl_SharedPtr_CreateAndInitWithSizeAndFunctions ((PlankSharedPtrRef*)pp, sizeof (Plank##NAME),(PlankSharedPtrFunction)pl_##NAME##_Init,(PlankSharedPtrFunction)pl_##NAME##_DeInit);\
     }
 
 #define PLANKSHAREDPTR_INCREMENTREFCOUNTANDGET_DEFINE(NAME)\
@@ -80,7 +80,7 @@ typedef struct PlankWeakPtr* PlankWeakPtrRef;
 typedef struct PlankSharedPtrCounter* PlankSharedPtrCounterRef;
 typedef PlankResult (*PlankSharedPtrFunction)(void*);
 
-PlankSharedPtrRef pl_SharedPtr_CreateAndInitWithSizeAndFunctions (const PlankL size, void* initFunction, void* deInitFunction);
+PlankResult pl_SharedPtr_CreateAndInitWithSizeAndFunctions (PlankSharedPtrRef* pp, const PlankL size, void* initFunction, void* deInitFunction);
 PlankSharedPtrRef pl_SharefPtr_IncrementRefCountAndGetPtr (PlankSharedPtrRef p);
 PlankResult pl_SharedPtr_DecrementRefCount (PlankSharedPtrRef p);
 PlankResult pl_SharedPtr_DecrementWeakCount (PlankSharedPtrRef p);
@@ -101,7 +101,7 @@ PlankResult pl_SharedPtrSwap (PlankSharedPtrRef* p1, PlankSharedPtrRef* p2);
 
 typedef struct PlankSharedPtrArray* PlankSharedPtrArrayRef;
 
-PlankSharedPtrArrayRef pl_SharedPtrArray_CreateAndInit();
+PlankResult pl_SharedPtrArray_CreateAndInit (PlankSharedPtrArrayRef* pp);
 PlankSharedPtrArrayRef pl_SharefPtrArray_IncrementRefCountAndGetPtr (PlankSharedPtrArrayRef p);
 PlankResult pl_SharedPtrArray_DecrementRefCount (PlankSharedPtrArrayRef p);
 PlankResult pl_SharedPtrArray_Clear (PlankSharedPtrArrayRef p);

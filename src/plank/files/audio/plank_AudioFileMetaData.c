@@ -228,9 +228,9 @@ PlankResult pl_AudioFileMetaData_Init (PlankAudioFileMetaDataRef p)
     p->trackNum         = -1;
     p->trackTotal       = -1;
     
-    p->cuePoints  = pl_SharedPtrArray_CreateAndInit();
-    p->loopPoints = pl_SharedPtrArray_CreateAndInit();
-    p->regions    = pl_SharedPtrArray_CreateAndInit();
+    pl_SharedPtrArray_CreateAndInit (&p->cuePoints);
+    pl_SharedPtrArray_CreateAndInit (&p->loopPoints);
+    pl_SharedPtrArray_CreateAndInit (&p->regions);
     
     // the formatSpecific linked list contains elements that are DynamicArrays
     pl_SimpleLinkedList_SetFreeElementDataFunction (&p->formatSpecific, pl_AudioFileMetaDataFormatSpecificFree);
@@ -627,7 +627,6 @@ PlankResult pl_AudioFileMetaData_AddCuePoint (PlankAudioFileMetaDataRef p, Plank
     PlankResult result;
     
     if ((result = pl_SharedPtrArray_AddSharedPtr (p->cuePoints, (PlankSharedPtrRef)cuePoint)) != PlankResult_OK) goto exit;
-    if ((result = pl_AudioFileCuePoint_DecrementRefCount (cuePoint)) != PlankResult_OK) goto exit;
 
 exit:
     return result;
@@ -733,7 +732,6 @@ PlankResult pl_AudioFileMetaData_AddRegion (PlankAudioFileMetaDataRef p, PlankAu
     PlankResult result;
     
     if ((result = pl_SharedPtrArray_AddSharedPtr (p->regions, (PlankSharedPtrRef)region)) != PlankResult_OK) goto exit;
-    if ((result = pl_AudioFileRegion_DecrementRefCount (region)) != PlankResult_OK) goto exit;
     
 exit:
     return result;
@@ -766,7 +764,7 @@ PlankResult pl_AudioFileMetaData_ConvertCuePointsToRegions (PlankAudioFileMetaDa
     // if the first cue is not at frame zero, make a region from zero to the first cue
     if (end != 0)
     {
-        region = pl_AudioFileRegion_CreateAndInit();
+        pl_AudioFileRegion_CreateAndInit (&region);
         regionAnchorCue = pl_AudioFileRegion_GetAnchorCuePoint (region);
         regionStartCue  = pl_AudioFileRegion_GetStartCuePoint (region);
         regionEndCue    = pl_AudioFileRegion_GetEndCuePoint (region);
@@ -779,13 +777,14 @@ PlankResult pl_AudioFileMetaData_ConvertCuePointsToRegions (PlankAudioFileMetaDa
         pl_AudioFileCuePoint_SetID (regionEndCue, cueID++);
         
         pl_AudioFileMetaData_AddRegion (p, region);
+        pl_AudioFileRegion_DecrementRefCount (region);
         region = PLANK_NULL;
     }
     
     // then regions between all the other cues, keeping labels for the region starts
     for (i = 1; i < numCues; ++i)
     {
-        region = pl_AudioFileRegion_CreateAndInit();
+        pl_AudioFileRegion_CreateAndInit (&region);
         regionAnchorCue = pl_AudioFileRegion_GetAnchorCuePoint (region);
         regionStartCue  = pl_AudioFileRegion_GetStartCuePoint (region);
         regionEndCue    = pl_AudioFileRegion_GetEndCuePoint (region);
@@ -801,13 +800,14 @@ PlankResult pl_AudioFileMetaData_ConvertCuePointsToRegions (PlankAudioFileMetaDa
         pl_AudioFileCuePoint_SetID (regionEndCue, cueID++);
 
         pl_AudioFileMetaData_AddRegion (p, region);
+        pl_AudioFileRegion_DecrementRefCount (region);
         region = PLANK_NULL;
     }
     
     // if the last cue is not at the end of the file, add a region from the last cue to the end
     if (end < numFrames)
     {
-        region = pl_AudioFileRegion_CreateAndInit();
+        pl_AudioFileRegion_CreateAndInit (&region);
         regionAnchorCue = pl_AudioFileRegion_GetAnchorCuePoint (region);
         regionStartCue  = pl_AudioFileRegion_GetStartCuePoint (region);
         regionEndCue    = pl_AudioFileRegion_GetEndCuePoint (region);
@@ -823,6 +823,7 @@ PlankResult pl_AudioFileMetaData_ConvertCuePointsToRegions (PlankAudioFileMetaDa
         pl_AudioFileCuePoint_SetID (regionEndCue, cueID++);
         
         pl_AudioFileMetaData_AddRegion (p, region);
+        pl_AudioFileRegion_DecrementRefCount (region);
         region = PLANK_NULL;
     }
     
@@ -871,7 +872,6 @@ PlankResult pl_AudioFileMetaData_AddLoopPoint (PlankAudioFileMetaDataRef p, Plan
     PlankResult result;
     
     if ((result = pl_SharedPtrArray_AddSharedPtr (p->loopPoints, (PlankSharedPtrRef)region)) != PlankResult_OK) goto exit;
-    if ((result = pl_AudioFileRegion_DecrementRefCount (region)) != PlankResult_OK) goto exit;
     
 exit:
     return result;

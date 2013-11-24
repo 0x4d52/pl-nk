@@ -279,7 +279,7 @@ exit:
 
 /////////////////////////////// SharedPtr //////////////////////////////////////
 
-PlankSharedPtrRef pl_SharedPtr_CreateAndInitWithSizeAndFunctions (const PlankL size, void* initFunction, void* deInitFunction)
+PlankResult pl_SharedPtr_CreateAndInitWithSizeAndFunctions (PlankSharedPtrRef* pp, const PlankL size, void* initFunction, void* deInitFunction)
 {
     PlankMemoryRef m;
     PlankSharedPtrRef p;
@@ -287,7 +287,10 @@ PlankSharedPtrRef pl_SharedPtr_CreateAndInitWithSizeAndFunctions (const PlankL s
     PlankSharedPtrCounterRef sharedCounter;
     PlankResult result;
     
+    if (!pp) return PlankResult_NullPointerError;
+
     p = PLANK_NULL;
+    result = PlankResult_OK;
     
     if (size > 0)
     {
@@ -318,7 +321,7 @@ PlankSharedPtrRef pl_SharedPtr_CreateAndInitWithSizeAndFunctions (const PlankL s
                 p->deInitFunction = deInitFunction;
                 
                 // allocate a WeakPtr
-                w = (PlankWeakPtrRef)pl_SharedPtr_CreateAndInitWithSizeAndFunctions (sizeof (PlankWeakPtr), PLANK_NULL, PLANK_NULL); // nulls say "I'm a WeakPtr"
+                pl_SharedPtr_CreateAndInitWithSizeAndFunctions ((PlankSharedPtrRef*)&w, sizeof (PlankWeakPtr), PLANK_NULL, PLANK_NULL); // nulls say "I'm a WeakPtr"
                 
                 if (w == PLANK_NULL)
                 {
@@ -349,7 +352,8 @@ PlankSharedPtrRef pl_SharedPtr_CreateAndInitWithSizeAndFunctions (const PlankL s
     }
     
 exit:
-    return p;
+    *pp = p;
+    return result;
 }
 
 PlankSharedPtrRef pl_SharefPtr_IncrementRefCountAndGetPtr (PlankSharedPtrRef p)
@@ -466,11 +470,12 @@ static PlankResult pl_SharedPtrArray_DeInit (PlankSharedPtrArrayRef p)
     return pl_DynamicArray_DeInit (&p->array);
 }
 
-PlankSharedPtrArrayRef pl_SharedPtrArray_CreateAndInit()
+PlankResult pl_SharedPtrArray_CreateAndInit (PlankSharedPtrArrayRef* pp)
 {
-    return (PlankSharedPtrArrayRef)pl_SharedPtr_CreateAndInitWithSizeAndFunctions (sizeof (PlankSharedPtrArray),
-                                                                                   (PlankSharedPtrFunction)pl_SharedPtrArray_Init,
-                                                                                   (PlankSharedPtrFunction)pl_SharedPtrArray_DeInit);
+    return pl_SharedPtr_CreateAndInitWithSizeAndFunctions ((PlankSharedPtrRef*)pp,
+                                                           sizeof (PlankSharedPtrArray),
+                                                           (PlankSharedPtrFunction)pl_SharedPtrArray_Init,
+                                                           (PlankSharedPtrFunction)pl_SharedPtrArray_DeInit);
 
 }
 
