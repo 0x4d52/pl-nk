@@ -294,8 +294,9 @@ class AudioFileReaderRegion : public PlonkBase
 public:
     AudioFileReaderRegion (AudioFileReader const& o) throw()
     :   original (o),
-        region (pl_AudioFileRegion_CreateAndInit())
+        region (static_cast<PlankAudioFileRegionRef> (PLANK_NULL))
     {
+        pl_AudioFileRegion_CreateAndInit (&region);
     }
     
     ~AudioFileReaderRegion()

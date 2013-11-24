@@ -42,9 +42,19 @@ BEGIN_PLONK_NAMESPACE
 
 #include "../../core/plonk_Headers.h"
 
+AudioFileMetaData AudioFileMetaData::getNull() throw()
+{
+    static AudioFileMetaData null (Base::getNullSharedPtr());
+    return null;
+}
+
 AudioFileMetaData::AudioFileMetaData() throw()
 :   Base (Base::getNullSharedPtr())
 {
+    PlankAudioFileMetaDataRef newMeta = Base::getNullSharedPtr();
+    pl_AudioFileMetaData_CreateAndInit (&newMeta);
+    setInternal (newMeta);
+    pl_AudioFileMetaData_DecrementRefCount (newMeta);
 }
 
 AudioFileMetaData::AudioFileMetaData (PlankAudioFileMetaDataRef p) throw()

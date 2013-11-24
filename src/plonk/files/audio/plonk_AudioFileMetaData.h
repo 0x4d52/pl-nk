@@ -45,6 +45,8 @@ public:
     typedef PlankSharedPtrContainer<PlankAudioFileMetaDataRef> Base;
     typedef Base::Weak Weak;
     
+    static AudioFileMetaData getNull() throw();
+    
     AudioFileMetaData() throw();
     AudioFileMetaData (PlankAudioFileMetaDataRef p) throw();
     AudioFileMetaData (AudioFileMetaData const& copy) throw();
