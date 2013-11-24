@@ -547,17 +547,84 @@ public:
         return *this;
     }
     
+    void clear() throw()
+    {
+        Internal const internal = this->getInternal();
+        
+        if (internal != ElementType::getNullSharedPtr())
+            pl_SharedPtrArray_Clear (internal);
+    }
+    
     Long length() const throw()
     {
         Internal const internal = this->getInternal();
         return internal ? pl_SharedPtrArray_GetLength (internal) : 0;
     }
 
-    ElementType operator[] (const Long index) const throw()
+    inline ElementType operator[] (const Long index) const throw()
     {
         Internal const internal = this->getInternal();
         return internal ? ElementType (reinterpret_cast<ElementInternalType> (pl_SharedPtrArray_GetSharedPtr (internal, index))) : ElementType::getNull();
     }
+
+    inline ElementType at (const Long index) const throw()
+    {
+        return at (index);
+    }
+    
+    
+    inline ElementType wrapAt (const Long index) const throw()
+    {
+        Internal const internal = this->getInternal();
+
+        if (internal == Base::getNullSharedPtr())
+            return ElementType::getNull();
+        
+        UnsignedLong length = (unsigned long)this->length();
+        
+        if (length == 0)
+            return ElementType::getNull();
+
+        int indexToUse = index;
+		while (indexToUse < 0)
+			indexToUse += length;
+		
+        return ElementType (reinterpret_cast<ElementInternalType> (pl_SharedPtrArray_GetSharedPtr (internal,
+                                                                                                   (unsigned long)indexToUse % length)));
+        
+		return this->getArray()[(unsigned long)indexToUse % (unsigned long)this->length()];
+    }
+
+    PlankSharedPtrArrayContainer& add (ElementType const& item) throw()
+    {
+        Internal const internal = this->getInternal();
+        
+        if (internal != Base::getNullSharedPtr())
+            pl_SharedPtrArray_AddSharedPtr (internal, reinterpret_cast<PlankSharedPtrRef> (item.getInternal()));
+        
+        return *this;
+    }
+    
+    PlankSharedPtrArrayContainer& remove (const Long index) throw()
+    {
+        Internal const internal = this->getInternal();
+        
+        if (internal != Base::getNullSharedPtr())
+            pl_SharedPtrArray_RemoveSharedPtr (internal, index);
+        
+        return *this;
+    }
+    
+    PlankSharedPtrArrayContainer& put (const Long index, ElementType const& item) throw()
+    {
+        Internal const internal = this->getInternal();
+        
+        if (internal != Base::getNullSharedPtr())
+            pl_SharedPtrArray_PutSharedPtr (internal, index, static_cast<PlankSharedPtrRef> (item.getInternal()));
+        
+        return *this;
+    }
+
 };
 
 #endif // PLONK_SMARTPOINTERCONTAINER_H
