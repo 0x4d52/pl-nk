@@ -101,9 +101,9 @@ static PlankResult pl_AudioFileRegion_Init (PlankAudioFileRegionRef p)
     printf("pl_AudioFileRegion_Init (%p)\n",p);
 #endif 
     
-    pl_AudioFileCuePoint_CreateAndInit (&p->anchor);
-    pl_AudioFileCuePoint_CreateAndInit (&p->start);
-    pl_AudioFileCuePoint_CreateAndInit (&p->end);
+    pl_AudioFileCuePoint_CreateSharedPtr (&p->anchor);
+    pl_AudioFileCuePoint_CreateSharedPtr (&p->start);
+    pl_AudioFileCuePoint_CreateSharedPtr (&p->end);
     
     return PlankResult_OK;
 }

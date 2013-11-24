@@ -296,7 +296,7 @@ public:
     :   original (o),
         region (static_cast<PlankAudioFileRegionRef> (PLANK_NULL))
     {
-        pl_AudioFileRegion_CreateAndInit (&region);
+        pl_AudioFileRegion_CreateSharedPtr (&region);
     }
     
     ~AudioFileReaderRegion()

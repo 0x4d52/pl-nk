@@ -42,7 +42,7 @@
 #include "plank_DynamicArray.h"
 
 #define PLANKSHAREDPTR_CREATEANDINIT_DEFINE(NAME)\
-    PlankResult pl_##NAME##_CreateAndInit (Plank##NAME##Ref* pp) {\
+    PlankResult pl_##NAME##_CreateSharedPtr (Plank##NAME##Ref* pp) {\
         return pl_SharedPtr_CreateAndInitWithSizeAndFunctions ((PlankSharedPtrRef*)pp, sizeof (Plank##NAME),(PlankSharedPtrFunction)pl_##NAME##_Init,(PlankSharedPtrFunction)pl_##NAME##_DeInit);\
     }
 
@@ -101,7 +101,7 @@ PlankResult pl_SharedPtrSwap (PlankSharedPtrRef* p1, PlankSharedPtrRef* p2);
 
 typedef struct PlankSharedPtrArray* PlankSharedPtrArrayRef;
 
-PlankResult pl_SharedPtrArray_CreateAndInit (PlankSharedPtrArrayRef* pp);
+PlankResult pl_SharedPtrArray_CreateSharedPtr (PlankSharedPtrArrayRef* pp);
 PlankSharedPtrArrayRef pl_SharefPtrArray_IncrementRefCountAndGetPtr (PlankSharedPtrArrayRef p);
 PlankResult pl_SharedPtrArray_DecrementRefCount (PlankSharedPtrArrayRef p);
 PlankResult pl_SharedPtrArray_Clear (PlankSharedPtrArrayRef p);

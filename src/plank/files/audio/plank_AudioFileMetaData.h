@@ -56,7 +56,7 @@ PLANK_BEGIN_C_LINKAGE
 
 /** Create a <i>Plank AudioFileMetaData</i> object and return an oqaque reference to it.
  @return A <i>Plank AudioFileMetaData</i> object as an opaque reference or PLANK_NULL. */
-PlankResult pl_AudioFileMetaData_CreateAndInit (PlankAudioFileMetaDataRef* pp);
+PlankResult pl_AudioFileMetaData_CreateSharedPtr (PlankAudioFileMetaDataRef* pp);
 PlankAudioFileMetaDataRef pl_AudioFileMetaData_IncrementRefCountAndGet (PlankAudioFileMetaDataRef p);
 PlankResult pl_AudioFileMetaData_DecrementRefCount (PlankAudioFileMetaDataRef p);
 PlankWeakPtrRef pl_AudioFileMetaData_GetWeakPtr (PlankAudioFileMetaDataRef p);

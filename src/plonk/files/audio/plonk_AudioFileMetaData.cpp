@@ -52,7 +52,7 @@ AudioFileMetaData::AudioFileMetaData() throw()
 :   Base (Base::getNullSharedPtr())
 {
     PlankAudioFileMetaDataRef newMeta = Base::getNullSharedPtr();
-    pl_AudioFileMetaData_CreateAndInit (&newMeta);
+    pl_AudioFileMetaData_CreateSharedPtr (&newMeta);
     setInternal (newMeta);
     pl_AudioFileMetaData_DecrementRefCount (newMeta);
 }

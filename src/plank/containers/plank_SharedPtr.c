@@ -470,7 +470,7 @@ static PlankResult pl_SharedPtrArray_DeInit (PlankSharedPtrArrayRef p)
     return pl_DynamicArray_DeInit (&p->array);
 }
 
-PlankResult pl_SharedPtrArray_CreateAndInit (PlankSharedPtrArrayRef* pp)
+PlankResult pl_SharedPtrArray_CreateSharedPtr (PlankSharedPtrArrayRef* pp)
 {
     return pl_SharedPtr_CreateAndInitWithSizeAndFunctions ((PlankSharedPtrRef*)pp,
                                                            sizeof (PlankSharedPtrArray),

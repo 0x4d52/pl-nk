@@ -228,9 +228,9 @@ PlankResult pl_AudioFileMetaData_Init (PlankAudioFileMetaDataRef p)
     p->trackNum         = -1;
     p->trackTotal       = -1;
     
-    pl_SharedPtrArray_CreateAndInit (&p->cuePoints);
-    pl_SharedPtrArray_CreateAndInit (&p->loopPoints);
-    pl_SharedPtrArray_CreateAndInit (&p->regions);
+    pl_SharedPtrArray_CreateSharedPtr (&p->cuePoints);
+    pl_SharedPtrArray_CreateSharedPtr (&p->loopPoints);
+    pl_SharedPtrArray_CreateSharedPtr (&p->regions);
     
     // the formatSpecific linked list contains elements that are DynamicArrays
     pl_SimpleLinkedList_SetFreeElementDataFunction (&p->formatSpecific, pl_AudioFileMetaDataFormatSpecificFree);
@@ -764,7 +764,7 @@ PlankResult pl_AudioFileMetaData_ConvertCuePointsToRegions (PlankAudioFileMetaDa
     // if the first cue is not at frame zero, make a region from zero to the first cue
     if (end != 0)
     {
-        pl_AudioFileRegion_CreateAndInit (&region);
+        pl_AudioFileRegion_CreateSharedPtr (&region);
         regionAnchorCue = pl_AudioFileRegion_GetAnchorCuePoint (region);
         regionStartCue  = pl_AudioFileRegion_GetStartCuePoint (region);
         regionEndCue    = pl_AudioFileRegion_GetEndCuePoint (region);
@@ -784,7 +784,7 @@ PlankResult pl_AudioFileMetaData_ConvertCuePointsToRegions (PlankAudioFileMetaDa
     // then regions between all the other cues, keeping labels for the region starts
     for (i = 1; i < numCues; ++i)
     {
-        pl_AudioFileRegion_CreateAndInit (&region);
+        pl_AudioFileRegion_CreateSharedPtr (&region);
         regionAnchorCue = pl_AudioFileRegion_GetAnchorCuePoint (region);
         regionStartCue  = pl_AudioFileRegion_GetStartCuePoint (region);
         regionEndCue    = pl_AudioFileRegion_GetEndCuePoint (region);
@@ -807,7 +807,7 @@ PlankResult pl_AudioFileMetaData_ConvertCuePointsToRegions (PlankAudioFileMetaDa
     // if the last cue is not at the end of the file, add a region from the last cue to the end
     if (end < numFrames)
     {
-        pl_AudioFileRegion_CreateAndInit (&region);
+        pl_AudioFileRegion_CreateSharedPtr (&region);
         regionAnchorCue = pl_AudioFileRegion_GetAnchorCuePoint (region);
         regionStartCue  = pl_AudioFileRegion_GetStartCuePoint (region);
         regionEndCue    = pl_AudioFileRegion_GetEndCuePoint (region);
