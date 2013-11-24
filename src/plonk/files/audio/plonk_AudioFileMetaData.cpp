@@ -72,45 +72,74 @@ BEGIN_PLONK_NAMESPACE
 //    return peer ? pl_AudioFileCuePoint_GetID (peer) : 0;
 //}
 
+//AudioFileMetaData::AudioFileMetaData() throw()
+//:   peer (pl_AudioFileMetaData_CreateAndInit())
+//{
+//}
+//
+//AudioFileMetaData::AudioFileMetaData (PlankAudioFileMetaDataRef p) throw()
+//:   peer (p ? pl_AudioFileMetaData_IncrementRefCountAndGet (p) : static_cast<PlankAudioFileMetaDataRef> (0))
+//{
+//}
+//
+//AudioFileMetaData::~AudioFileMetaData()
+//{
+//    pl_AudioFileMetaData_DecrementRefCount (peer);
+//    peer = static_cast<PlankAudioFileMetaDataRef> (0);
+//}
+//
+//AudioFileMetaData::AudioFileMetaData (AudioFileMetaData const& copy) throw()
+//:   peer (copy.peer ? pl_AudioFileMetaData_IncrementRefCountAndGet (copy.peer) : static_cast<PlankAudioFileMetaDataRef> (0))
+//{
+//}
+//
+//AudioFileMetaData& AudioFileMetaData::operator= (AudioFileMetaData const& other) throw()
+//{
+//    if (this != &other)
+//    {
+//        PlankAudioFileMetaDataRef p = pl_AudioFileMetaData_IncrementRefCountAndGet (other.peer);
+//        
+//        if (peer)
+//            pl_AudioFileMetaData_DecrementRefCount (peer);
+//        
+//        peer = p;
+//    }
+//    
+//    return *this;
+//}
+//
+//PlankAudioFileMetaDataRef AudioFileMetaData::getPeerAndIncrementRefCount() throw()
+//{
+//    return pl_AudioFileMetaData_IncrementRefCountAndGet (peer);
+//}
+
 AudioFileMetaData::AudioFileMetaData() throw()
-:   peer (pl_AudioFileMetaData_CreateAndInit())
+:   Base (Base::getNullSharedPtr())
 {
 }
 
 AudioFileMetaData::AudioFileMetaData (PlankAudioFileMetaDataRef p) throw()
-:   peer (p ? pl_AudioFileMetaData_IncrementRefCountAndGet (p) : static_cast<PlankAudioFileMetaDataRef> (0))
+:   Base (p)
 {
-}
-
-AudioFileMetaData::~AudioFileMetaData()
-{
-    pl_AudioFileMetaData_DecrementRefCount (peer);
-    peer = static_cast<PlankAudioFileMetaDataRef> (0);
 }
 
 AudioFileMetaData::AudioFileMetaData (AudioFileMetaData const& copy) throw()
-:   peer (copy.peer ? pl_AudioFileMetaData_IncrementRefCountAndGet (copy.peer) : static_cast<PlankAudioFileMetaDataRef> (0))
+:   Base (static_cast<Base const&> (copy))
 {
 }
 
-AudioFileMetaData& AudioFileMetaData::operator= (AudioFileMetaData const& other) throw()
+AudioFileMetaData& AudioFileMetaData::operator= (AudioFileMetaData const &other) throw()
 {
     if (this != &other)
-    {
-        PlankAudioFileMetaDataRef p = pl_AudioFileMetaData_IncrementRefCountAndGet (other.peer);
-        
-        if (peer)
-            pl_AudioFileMetaData_DecrementRefCount (peer);
-        
-        peer = p;
-    }
+        this->setInternal (other.getInternal());
     
     return *this;
 }
 
 PlankAudioFileMetaDataRef AudioFileMetaData::getPeerAndIncrementRefCount() throw()
 {
-    return pl_AudioFileMetaData_IncrementRefCountAndGet (peer);
+    return pl_AudioFileMetaData_IncrementRefCountAndGet (this->getInternal());
 }
+
 
 END_PLONK_NAMESPACE

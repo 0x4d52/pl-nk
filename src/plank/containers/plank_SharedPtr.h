@@ -56,6 +56,16 @@
         return pl_SharedPtr_DecrementRefCount((PlankSharedPtrRef)p);\
     }
 
+#define PLANKSHAREDPTR_GETWEAKPTR_DEFINE(NAME)\
+    PlankWeakPtrRef pl_##NAME##_GetWeakPtr (Plank##NAME##Ref p){\
+        return pl_SharedPtr_GetWeakPtr ((PlankSharedPtrRef)p);\
+    }
+
+#define PLANKSHAREDPTR_GETFROMWEAKPTR_DEFINE(NAME)\
+    Plank##NAME##Ref pl_##NAME##GetFromWeakPtr (PlankWeakPtrRef w){\
+        return (Plank##NAME##Ref)pl_WeakPtr_GetSharedPtr (w);\
+    }
+
 PLANK_BEGIN_C_LINKAGE
 
 /** A shared pointer.

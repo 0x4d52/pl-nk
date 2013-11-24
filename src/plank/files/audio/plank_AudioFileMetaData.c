@@ -197,16 +197,11 @@ static PlankResult pl_AudioFileMetaDataFormatSpecificFree (PlankP ptr)
     return pl_DynamicArray_Destroy ((PlankDynamicArrayRef)ptr);
 }
 
-//PlankAudioFileMetaDataRef pl_AudioFileMetaData_CreateAndInit()
-//{
-//    return (PlankAudioFileMetaDataRef)pl_SharedPtr_CreateAndInitWithSizeAndFunctions (sizeof (PlankAudioFileMetaData),
-//                                                                                      (PlankSharedPtrFunction)pl_AudioFileMetaData_Init,
-//                                                                                      (PlankSharedPtrFunction)pl_AudioFileMetaData_DeInit);
-//}
-
 PLANKSHAREDPTR_CREATEANDINIT_DEFINE(AudioFileMetaData)
 PLANKSHAREDPTR_INCREMENTREFCOUNTANDGET_DEFINE(AudioFileMetaData)
 PLANKSHAREDPTR_DECREMENTREFCOUNT_DEFINE(AudioFileMetaData)
+PLANKSHAREDPTR_GETWEAKPTR_DEFINE(AudioFileMetaData)
+PLANKSHAREDPTR_GETFROMWEAKPTR_DEFINE(AudioFileMetaData)
 
 PlankResult pl_AudioFileMetaData_Init (PlankAudioFileMetaDataRef p)
 {
@@ -245,47 +240,6 @@ exit:
     return result;
 }
 
-//static PlankResult pl_AudioFileMetaDataDeInitCuePoints (PlankDynamicArrayRef p)
-//{
-//    PlankResult result = PlankResult_OK;
-//    PlankL numCuePoints, i;
-//    PlankAudioFileCuePoint* cuePoints;
-//    
-//    numCuePoints = pl_DynamicArray_GetSize (p);
-//    cuePoints = (PlankAudioFileCuePoint*)pl_DynamicArray_GetArray (p);
-//    
-//    for (i = 0; i < numCuePoints; ++i)
-//    {
-//        if ((result = pl_AudioFileCuePoint_DeInit (&cuePoints[i])) != PlankResult_OK) goto exit;
-//    }
-//    
-//    if ((result = pl_DynamicArray_DeInit (p)) != PlankResult_OK) goto exit;
-//
-//exit:
-//    return result;
-//}
-//
-//static PlankResult pl_AudioFileMetaDataDeInitRegions (PlankDynamicArrayRef p)
-//{
-//    PlankResult result = PlankResult_OK;
-//    PlankL numRegions, i;
-//    PlankAudioFileRegion* regions;
-//    
-//    numRegions = pl_DynamicArray_GetSize (p);
-//    regions = (PlankAudioFileRegion*)pl_DynamicArray_GetArray (p);
-//    
-//    for (i = 0; i < numRegions; ++i)
-//    {
-//        if ((result = pl_AudioFileRegion_DeInit (&regions[i])) != PlankResult_OK) goto exit;
-//    }
-//    
-//    if ((result = pl_DynamicArray_DeInit (p)) != PlankResult_OK) goto exit;
-//
-//exit:
-//    return result;
-//}
-
-
 PlankResult pl_AudioFileMetaData_DeInit (PlankAudioFileMetaDataRef p)
 {
     PlankResult result = PlankResult_OK;
@@ -319,10 +273,6 @@ PlankResult pl_AudioFileMetaData_DeInit (PlankAudioFileMetaDataRef p)
     
     if ((result = pl_DynamicArray_DeInit (&p->codingHistory)) != PlankResult_OK) goto exit;
 
-//    if ((result = pl_AudioFileMetaDataDeInitCuePoints (&p->cuePoints)) != PlankResult_OK) goto exit;
-//    if ((result = pl_AudioFileMetaDataDeInitRegions (&p->loopPoints)) != PlankResult_OK) goto exit;
-//    if ((result = pl_AudioFileMetaDataDeInitRegions (&p->regions)) != PlankResult_OK) goto exit;
-
     if ((result = pl_SharedPtrArray_DecrementRefCount (p->cuePoints)) != PlankResult_OK) goto exit;
     if ((result = pl_SharedPtrArray_DecrementRefCount (p->loopPoints)) != PlankResult_OK) goto exit;
     if ((result = pl_SharedPtrArray_DecrementRefCount (p->regions)) != PlankResult_OK) goto exit;
@@ -333,16 +283,6 @@ PlankResult pl_AudioFileMetaData_DeInit (PlankAudioFileMetaDataRef p)
 exit:
     return result;
 }
-
-//PlankAudioFileMetaDataRef pl_AudioFileMetaData_IncrementRefCountAndGet (PlankAudioFileMetaDataRef p)
-//{
-//    return (PlankAudioFileMetaDataRef)pl_SharefPtr_IncrementRefCountAndGetPtr ((PlankSharedPtrRef)p);
-//}
-//
-//PlankResult pl_AudioFileMetaData_DecrementRefCount (PlankAudioFileMetaDataRef p)
-//{
-//    return pl_SharedPtr_DecrementRefCount((PlankSharedPtrRef)p);
-//}
 
 PlankResult pl_AudioFileMetaData_SetEditCount (PlankAudioFileMetaDataRef p, const PlankUI count)
 {

@@ -59,6 +59,8 @@ PLANK_BEGIN_C_LINKAGE
 PlankAudioFileMetaDataRef pl_AudioFileMetaData_CreateAndInit();
 PlankAudioFileMetaDataRef pl_AudioFileMetaData_IncrementRefCountAndGet (PlankAudioFileMetaDataRef p);
 PlankResult pl_AudioFileMetaData_DecrementRefCount (PlankAudioFileMetaDataRef p);
+PlankWeakPtrRef pl_AudioFileMetaData_GetWeakPtr (PlankAudioFileMetaDataRef p);
+PlankAudioFileMetaDataRef pl_AudioFileMetaDataGetFromWeakPtr (PlankWeakPtrRef w);
 
 PlankResult pl_AudioFileMetaData_SetEditCount (PlankAudioFileMetaDataRef p, const PlankUI count);
 PlankUI pl_AudioFileMetaData_GetEditCount (PlankAudioFileMetaDataRef p);

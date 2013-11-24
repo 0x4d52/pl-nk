@@ -60,22 +60,39 @@
 //};
 
 
-class AudioFileMetaData : public PlonkBase
+//class AudioFileMetaData : public PlonkBase
+//{
+//public:
+//    AudioFileMetaData() throw();
+//    ~AudioFileMetaData();
+//    AudioFileMetaData (AudioFileMetaData const& copy) throw();
+//    AudioFileMetaData& operator= (AudioFileMetaData const &other) throw();
+//    
+//    friend class AudioFileReaderInternal;
+//    template<class SampleType> friend class AudioFileWriterInternal;
+//   
+//private:
+//    AudioFileMetaData (PlankAudioFileMetaDataRef p) throw();
+//    PlankAudioFileMetaDataRef getPeerAndIncrementRefCount() throw();
+//
+//    PlankAudioFileMetaDataRef peer;
+//};
+
+class AudioFileMetaData : public PlankSharedPtrContainer<PlankAudioFileMetaDataRef>
 {
 public:
+    typedef PlankSharedPtrContainer<PlankAudioFileMetaDataRef> Base;
+    
     AudioFileMetaData() throw();
-    ~AudioFileMetaData();
     AudioFileMetaData (AudioFileMetaData const& copy) throw();
     AudioFileMetaData& operator= (AudioFileMetaData const &other) throw();
     
     friend class AudioFileReaderInternal;
     template<class SampleType> friend class AudioFileWriterInternal;
-   
+    
 private:
     AudioFileMetaData (PlankAudioFileMetaDataRef p) throw();
     PlankAudioFileMetaDataRef getPeerAndIncrementRefCount() throw();
-
-    PlankAudioFileMetaDataRef peer;
 };
 
 
