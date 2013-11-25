@@ -131,8 +131,8 @@ public:
     
     bool hasMetaData() const throw();
     AudioFileMetaData getMetaData() const throw();
-    int getNumCuePoints() const throw();
-    bool getCuePointAtIndex (const int index, UnsignedInt& cueID, Text& label, LongLong& position) const throw();
+//    int getNumCuePoints() const throw();
+//    bool getCuePointAtIndex (const int index, UnsignedInt& cueID, Text& label, LongLong& position) const throw();
     
     inline PlankAudioFileReaderRef getPeerRef() { return static_cast<PlankAudioFileReaderRef> (&peer); }
     inline const PlankAudioFileReaderRef getPeerRef() const { return const_cast<const PlankAudioFileReaderRef> (&peer); }
@@ -819,7 +819,7 @@ public:
         return getInternal()->didNumChannelsChange();
     }
     
-    AudioFileReaderArray regionsFromMetaData (const int  metaDataOption, const int bufferSize = 0) throw();
+    AudioFileReaderArray regionsFromMetaData (const int metaDataOption, const int bufferSize = 0) throw();
     
     void setName (Text const& name) throw()
     {
@@ -841,15 +841,15 @@ public:
         return this->getInternal()->getMetaData();
     }
     
-    int getNumCuePoints() const throw()
-    {
-        return this->getInternal()->getNumCuePoints();
-    }
-    
-    bool getCuePointAtIndex (const int index, UnsignedInt& cueID, Text& label, LongLong& position) const throw()
-    {
-        return this->getInternal()->getCuePointAtIndex (index, cueID, label, position);
-    }
+//    int getNumCuePoints() const throw()
+//    {
+//        return this->getInternal()->getNumCuePoints();
+//    }
+//    
+//    bool getCuePointAtIndex (const int index, UnsignedInt& cueID, Text& label, LongLong& position) const throw()
+//    {
+//        return this->getInternal()->getCuePointAtIndex (index, cueID, label, position);
+//    }
     
     inline ChannelLayout getChannelLayout() const throw()
     {

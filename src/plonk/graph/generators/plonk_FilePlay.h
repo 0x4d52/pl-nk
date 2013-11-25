@@ -128,7 +128,7 @@ public:
         int channel;
         int offset = 0;
         bool done = false;
-        
+                
         while (!done)
         {
             AudioFileReader& file = this->getInputAsAudioFileReader (IOKey::AudioFileReader);
@@ -153,22 +153,29 @@ public:
                 }
             }
             
-            if (file.hasMetaData())
+            const AudioFileMetaData metaData = file.getMetaData();
+            
+            if (metaData.isNotNull())
             {
-                UnsignedInt cueID;
-                Text cueLabel;
-                LongLong cuePosition;
+                const AudioFileCuePointArray cuePoints = metaData.getCuePoints();
+                AudioFileCuePoint cue = cuePoints[data.cueIndex];
+                
+//                UnsignedInt cueID;
+//                Text cueLabel;
+//                LongLong cuePosition;
+                
                 bool renderToNextCue = false;
                 
-                if (file.getCuePointAtIndex (data.cueIndex, cueID, cueLabel, cuePosition))
+                if (cue.isNotNull())
                 {
-                    if (cuePosition == filePosition)
+                    if (cue.getPosition() == filePosition)
                     {
-                        this->update (Text::getMessageCuePoint(), cueLabel);
+                        this->update (Text::getMessageCuePoint(), Text (cue.getLabel()));
                         
                         ++data.cueIndex;
+                        cue = cuePoints[data.cueIndex];
                         
-                        if (file.getCuePointAtIndex (data.cueIndex, cueID, cueLabel, cuePosition))
+                        if (cue.isNotNull())
                             renderToNextCue = true;                            
                     }
                     else
@@ -178,7 +185,7 @@ public:
                     
                     if (renderToNextCue)
                     {
-                        const LongLong framesToNextCue = cuePosition - filePosition;
+                        const LongLong framesToNextCue = cue.getPosition() - filePosition;
                         
                         if (framesToNextCue < (LongLong)blockSize)
                             bufferSize = plonk::min (bufferSize, (int)framesToNextCue * fileNumChannels);

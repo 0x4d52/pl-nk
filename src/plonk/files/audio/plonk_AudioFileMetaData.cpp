@@ -563,21 +563,21 @@ AudioFileCuePointArray AudioFileMetaData::getCuePoints() const throw()
 {
     Internal const internal = getInternal();
     plonk_assert (internal != Base::getNullSharedPtr());
-    return internal ? AudioFileCuePointArray (pl_AudioFileMetaData_GetLoopPoints (internal)) : AudioFileCuePointArray::getNull();
+    return internal ? AudioFileCuePointArray (pl_AudioFileMetaData_GetCuePoints (internal)) : AudioFileCuePointArray::getNull();
 }
 
 AudioFileRegionArray AudioFileMetaData::getRegions() const throw()
 {
     Internal const internal = getInternal();
     plonk_assert (internal != Base::getNullSharedPtr());
-    return internal ? AudioFileRegionArray (pl_AudioFileMetaData_GetRegions (internal)) : AudioFileCuePointArray::getNull();
+    return internal ? AudioFileRegionArray (pl_AudioFileMetaData_GetRegions (internal)) : AudioFileRegionArray::getNull();
 }
 
 AudioFileRegionArray AudioFileMetaData::getLoopPoints() const throw()
 {
     Internal const internal = getInternal();
     plonk_assert (internal != Base::getNullSharedPtr());
-    return internal ? AudioFileRegionArray (pl_AudioFileMetaData_GetLoopPoints (internal)) : AudioFileCuePointArray::getNull();
+    return internal ? AudioFileRegionArray (pl_AudioFileMetaData_GetLoopPoints (internal)) : AudioFileRegionArray::getNull();
 }
 
 AudioFileMetaData& AudioFileMetaData::setEditCount (const UnsignedInt count) throw()

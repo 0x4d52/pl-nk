@@ -658,43 +658,43 @@ bool AudioFileReaderInternal::hasMetaData() const throw()
 
 AudioFileMetaData AudioFileReaderInternal::getMetaData() const throw()
 {    
-    return AudioFileMetaData  (pl_AudioFileReader_GetMetaData (getPeerRef()));
+    return AudioFileMetaData (pl_AudioFileReader_GetMetaData (getPeerRef()));
 }
 
-int AudioFileReaderInternal::getNumCuePoints() const throw()
-{
-    PlankAudioFileMetaDataRef metaData = pl_AudioFileReader_GetMetaData (getPeerRef());
-    
-    return metaData ? (int)pl_SharedPtrArray_GetLength (pl_AudioFileMetaData_GetCuePoints (metaData)) : 0;
-}
-
-bool AudioFileReaderInternal::getCuePointAtIndex (const int index, UnsignedInt& cueID, Text& label, LongLong& position) const throw()
-{
-    if (index < 0)
-        return false;
-    
-    PlankAudioFileMetaDataRef metaData = pl_AudioFileReader_GetMetaData (getPeerRef());
-
-    if (!metaData)
-        return false;
-    
-    PlankSharedPtrArrayRef cuePoints = pl_AudioFileMetaData_GetCuePoints (metaData);
-    const int numCues = (int)pl_SharedPtrArray_GetLength (cuePoints);
-    
-    if (!numCues)
-        return false;
-    
-    if (index >= numCues)
-        return false;
-    
-    PlankAudioFileCuePointRef cue = reinterpret_cast<PlankAudioFileCuePointRef> (pl_SharedPtrArray_GetSharedPtr (cuePoints, index));
-    
-    cueID    = pl_AudioFileCuePoint_GetID (cue);
-    label    = pl_AudioFileCuePoint_GetLabel (cue);
-    position = pl_AudioFileCuePoint_GetPosition (cue);
-    
-    return true;
-}
+//int AudioFileReaderInternal::getNumCuePoints() const throw()
+//{
+//    PlankAudioFileMetaDataRef metaData = pl_AudioFileReader_GetMetaData (getPeerRef());
+//    
+//    return metaData ? (int)pl_SharedPtrArray_GetLength (pl_AudioFileMetaData_GetCuePoints (metaData)) : 0;
+//}
+//
+//bool AudioFileReaderInternal::getCuePointAtIndex (const int index, UnsignedInt& cueID, Text& label, LongLong& position) const throw()
+//{
+//    if (index < 0)
+//        return false;
+//    
+//    PlankAudioFileMetaDataRef metaData = pl_AudioFileReader_GetMetaData (getPeerRef());
+//
+//    if (!metaData)
+//        return false;
+//    
+//    PlankSharedPtrArrayRef cuePoints = pl_AudioFileMetaData_GetCuePoints (metaData);
+//    const int numCues = (int)pl_SharedPtrArray_GetLength (cuePoints);
+//    
+//    if (!numCues)
+//        return false;
+//    
+//    if (index >= numCues)
+//        return false;
+//    
+//    PlankAudioFileCuePointRef cue = reinterpret_cast<PlankAudioFileCuePointRef> (pl_SharedPtrArray_GetSharedPtr (cuePoints, index));
+//    
+//    cueID    = pl_AudioFileCuePoint_GetID (cue);
+//    label    = pl_AudioFileCuePoint_GetLabel (cue);
+//    position = pl_AudioFileCuePoint_GetPosition (cue);
+//    
+//    return true;
+//}
 
 AudioFileReaderArray AudioFileReader::regionsFromMetaData (const int metaDataOption, const int bufferSize) throw()
 {
