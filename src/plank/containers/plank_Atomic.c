@@ -67,7 +67,8 @@ PlankResult pl_AtomicI_Init (PlankAtomicIRef p)
     if (p == PLANK_NULL)
         return PlankResult_MemoryError;
     
-    pl_AtomicI_Set (p, (PlankI)0);
+//    pl_AtomicI_Set (p, (PlankI)0);
+    p->value = 0;
     
     return PlankResult_OK;
 }
@@ -125,7 +126,8 @@ PlankResult pl_AtomicL_Init (PlankAtomicLRef p)
     if (p == PLANK_NULL)
         return PlankResult_MemoryError;
     
-    pl_AtomicL_Set (p, (PlankL)0);
+//    pl_AtomicL_Set (p, (PlankL)0);
+    p->value = 0;
     
     return PlankResult_OK;
 }
@@ -192,7 +194,8 @@ PlankResult pl_AtomicLL_Init (PlankAtomicLLRef p)
     pl_ThreadSpinLock_Init (&p->lock);
 #endif    
     
-    pl_AtomicLL_Set (p, (PlankLL)0);
+//    pl_AtomicLL_Set (p, (PlankLL)0);
+    p->value = 0;
     
 exit:
     return result;
@@ -290,7 +293,8 @@ PlankResult pl_AtomicF_Init (PlankAtomicFRef p)
     if (p == PLANK_NULL)
         return PlankResult_MemoryError;
     
-    pl_AtomicF_Set (p, 0.f);
+//    pl_AtomicF_Set (p, 0.f);
+    p->value = 0.f;
     
     return PlankResult_OK;
 }
@@ -358,7 +362,8 @@ PlankResult pl_AtomicD_Init (PlankAtomicDRef p)
     pl_ThreadSpinLock_Init (&p->lock);
 #endif    
     
-    pl_AtomicD_Set (p, 0.0);
+//    pl_AtomicD_Set (p, 0.0);
+    p->value = 0.0;
     
 exit:
     return result;
@@ -438,7 +443,8 @@ PlankResult pl_AtomicP_Init (PlankAtomicPRef p)
     if (p == PLANK_NULL)
         return PlankResult_MemoryError;
     
-    pl_AtomicP_Set (p, PLANK_NULL);
+//    pl_AtomicP_Set (p, PLANK_NULL);
+    p->ptr = PLANK_NULL;
     
     return PlankResult_OK;
 }
@@ -506,7 +512,8 @@ PlankResult pl_AtomicPX_Init (PlankAtomicPXRef p)
     pl_ThreadSpinLock_Init (&p->lock);
 #endif        
     
-    pl_AtomicPX_SetAll (p, (PlankP)0, (PlankL)0);
+//    pl_AtomicPX_SetAll (p, (PlankP)0, (PlankL)0);
+    pl_MemoryZero (p, sizeof (PlankAtomicPX));
     
 exit:
     return result;
@@ -584,7 +591,8 @@ PlankResult pl_AtomicLX_Init (PlankAtomicLXRef p)
     pl_ThreadSpinLock_Init (&p->lock);
 #endif        
     
-    pl_AtomicLX_SetAll (p, (PlankL)0, (PlankL)0);
+//    pl_AtomicLX_SetAll (p, (PlankL)0, (PlankL)0);
+    pl_MemoryZero (p, sizeof (PlankAtomicLX));
     
 exit:
     return result;

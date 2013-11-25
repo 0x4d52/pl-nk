@@ -143,6 +143,33 @@ public:
         ConvertCuePointsToRegionsRemovingCuePoints = 3
     };
     
+    enum CuePointTypes
+    {
+        CuePointUnknown = PLANKAUDIOFILE_CUEPOINTTYPE_UNKNOWN,
+        CuePointCuePoint = PLANKAUDIOFILE_CUEPOINTTYPE_CUEPOINT,
+        CuePointInsertPoint = PLANKAUDIOFILE_CUEPOINTTYPE_INSERTPOINT,
+        CuePointPlayPosition = PLANKAUDIOFILE_CUEPOINTTYPE_PLAYPOSITION,
+        CuePointRegionStart = PLANKAUDIOFILE_CUEPOINTTYPE_REGIONSTART,
+        CuePointRegionEnd = PLANKAUDIOFILE_CUEPOINTTYPE_REGIONEND
+    };
+    
+    enum RegionTypes
+    {
+        RegionUnknown = PLANKAUDIOFILE_REGIONTYPE_UNKNOWN,
+        RegionRegion = PLANKAUDIOFILE_REGIONTYPE_REGION,
+        RegionSelection = PLANKAUDIOFILE_REGIONTYPE_SELECTION,
+        RegionLoop = PLANKAUDIOFILE_REGIONTYPE_LOOP,
+        RegionLyrics = PLANKAUDIOFILE_REGIONTYPE_LYRICS
+    };
+    
+    enum LoopTypes
+    {
+        LoopUnknown = PLANKAUDIOFILE_LOOPTYPE_UNKNOWN,
+        LoopForward = PLANKAUDIOFILE_LOOPTYPE_FORWARD,
+        LoopPingPong = PLANKAUDIOFILE_LOOPTYPE_PINGPONG,
+        LoopReverse = PLANKAUDIOFILE_LOOPTYPE_REVERESE
+    };
+    
     enum ChannelIdentifiers
     {
         ChannelNone = PLANKAUDIOFILE_CHANNEL_NONE,

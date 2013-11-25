@@ -453,6 +453,17 @@ public:
         return Weak (pl_SharedPtr_GetWeakPtr (reinterpret_cast<PlankSharedPtrRef> (internal.getPtr())));
     }
     
+protected:
+    /** To use this you must be sure that the container object cannot be contended e.g., in a derived class constructor. */
+    template<typename InitFunction>
+    inline void initInternalWithFunction (InitFunction initFunction) throw()
+	{
+        plonk_assert (internal.getPtrUnchecked() == PlankSharedPtrContainer::getNullSharedPtr());
+        Internal newInternal;
+        initFunction (&newInternal);
+        internal.getAtomicRef()->ptr = newInternal;
+	}
+    
 private:
     AtomicPointer internal;
 };
@@ -631,5 +642,17 @@ public:
     }
 
 };
+
+
+#define PLANKSHAREDPTRCONTAINER_DEFINE(NAME)\
+    NAME NAME::getNull() throw() { static NAME null (Base::getNullSharedPtr()); return null; }\
+    NAME::NAME() throw() : Base (Base::getNullSharedPtr()) { initInternalWithFunction (pl_##NAME##_CreateSharedPtr); }\
+    NAME::NAME (Plank##NAME##Ref p) throw() : Base (p) { }\
+    NAME::NAME (NAME const& copy) throw() : Base (static_cast<PlankSharedPtrContainer<Plank##NAME##Ref> const&> (copy)) { }\
+    NAME::NAME (Base const& base) throw() : Base (base) { }\
+    NAME::NAME (Weak const& weak) throw() : Base (weak.fromWeak()) { }\
+    NAME& NAME::operator= (NAME const &other) throw() { if (this != &other) this->setInternal (other.getInternal()); return *this; }\
+    Plank##NAME##Ref NAME::incrementRefCountAndGetPeer() throw() { return pl_##NAME##_IncrementRefCountAndGet (this->getInternal()); }
+
 
 #endif // PLONK_SMARTPOINTERCONTAINER_H

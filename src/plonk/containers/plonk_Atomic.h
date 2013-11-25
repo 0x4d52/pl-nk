@@ -103,7 +103,7 @@ class AtomicExtended : public AtomicBase<Type>
         \
         inline ATOMIC_CLASS (const Plank##TYPECODE initialValue) throw() {\
             pl_Atomic##FUNCCODE##_Init (getAtomicRef());\
-            pl_Atomic##FUNCCODE##_Set (getAtomicRef(), initialValue);\
+            getAtomicRef()->value = initialValue;\
         }\
         \
         inline ATOMIC_CLASS (ATOMIC_CLASS const& copy) throw() {\
@@ -222,21 +222,24 @@ public:
     inline AtomicValue (Type& initialValue) throw() 
     {
         pl_AtomicP_Init (getAtomicRef());
-        pl_AtomicP_Set (getAtomicRef(), static_cast<void*> (&initialValue));
+//        pl_AtomicP_Set (getAtomicRef(), static_cast<void*> (&initialValue));
+        getAtomicRef()->ptr = static_cast<void*> (&initialValue);
     }
     
 	template<class OtherType>
     inline AtomicValue (OtherType* initialPtr) throw() 
     {
         pl_AtomicP_Init (getAtomicRef());
-        pl_AtomicP_Set (getAtomicRef(), static_cast<Type*> (initialPtr));
+//        pl_AtomicP_Set (getAtomicRef(), static_cast<Type*> (initialPtr));
+        getAtomicRef()->ptr = static_cast<Type*> (initialPtr);
     }
     
     inline AtomicValue (Type* initialPtr) throw() 
     {
         pl_AtomicP_Init (getAtomicRef());
-        pl_AtomicP_Set (getAtomicRef(), initialPtr);
-    }    
+//        pl_AtomicP_Set (getAtomicRef(), initialPtr);
+        getAtomicRef()->ptr = initialPtr;
+    }
     
     inline AtomicValue (AtomicValue const& copy) throw() 
     {
@@ -306,7 +309,7 @@ public:
     inline operator Type* () const throw()                  { return static_cast<Type*> (pl_AtomicP_GetUnchecked (getAtomicRef())); }
 
     inline void deletePtr() throw()                         { delete this->getPtrUnchecked(); }
-    inline void deleteAndZeroPtr() throw()                  { delete this->getPtrUnchecked(); this->setPtr (0); }
+    inline void deleteAndZeroPtr() throw()                  { delete this->swap (0); }
 
     template<class OtherType> inline bool operator== (OtherType const& other) const throw() { return this->getValueUnchecked() == static_cast<Type*> (other); }
     template<class OtherType> inline bool operator!= (OtherType const& other) const throw() { return this->getValueUnchecked() != static_cast<Type*> (other); }
@@ -382,14 +385,16 @@ public:
     inline AtomicValue (OtherType* initialPtr) throw() 
     {
         pl_AtomicP_Init (getAtomicRef());
-        pl_AtomicP_Set (getAtomicRef(), static_cast<void*> (initialPtr));
+//        pl_AtomicP_Set (getAtomicRef(), static_cast<void*> (initialPtr));
+        getAtomicRef()->ptr = static_cast<void*> (initialPtr);
     }
     
     inline AtomicValue (void* initialPtr) throw() 
     {
         pl_AtomicP_Init (getAtomicRef());
-        pl_AtomicP_Set (getAtomicRef(), initialPtr);
-    }    
+//        pl_AtomicP_Set (getAtomicRef(), initialPtr);
+        getAtomicRef()->ptr = initialPtr;
+    }
     
     inline AtomicValue (AtomicValue const& copy) throw() 
     {

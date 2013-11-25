@@ -58,8 +58,7 @@ PlankResult pl_AudioFileCuePoint_CreateSharedPtr (PlankAudioFileCuePointRef* pp)
 PlankAudioFileCuePointRef pl_AudioFileCuePoint_IncrementRefCountAndGet (PlankAudioFileCuePointRef p);
 PlankResult pl_AudioFileCuePoint_DecrementRefCount (PlankAudioFileCuePointRef p);
 
-PlankResult pl_AudioFileCuePoint_SetCopy (PlankAudioFileCuePointRef p, PlankAudioFileCuePointRef source);
-
+PlankResult pl_AudioFileCuePoint_SetCopy                (PlankAudioFileCuePointRef p, PlankAudioFileCuePointRef source);
 PlankResult pl_AudioFileCuePoint_SetPosition            (PlankAudioFileCuePointRef p, const PlankLL position);
 PlankResult pl_AudioFileCuePoint_SetID                  (PlankAudioFileCuePointRef p, const PlankUI cueID);
 PlankResult pl_AudioFileCuePoint_SetLabel               (PlankAudioFileCuePointRef p, const char* label);
@@ -78,7 +77,7 @@ char* pl_AudioFileCuePoint_GetCommentWritable (PlankAudioFileCuePointRef p);
 int pl_AudioFileCuePoint_GetType (PlankAudioFileCuePointRef p);
 PlankUI pl_AudioFileCuePoint_GetLabelSize (PlankAudioFileCuePointRef p);
 PlankUI pl_AudioFileCuePoint_GetCommentSize (PlankAudioFileCuePointRef p);
-
+PlankAudioFileCuePointExtraRef pl_AudioFileCuePoint_GetExtra (PlankAudioFileCuePointRef p);
 PlankResult pl_AudioFileCuePoint_OffsetPosition (PlankAudioFileCuePointRef p, const PlankLL offset);
 
 /** @} */

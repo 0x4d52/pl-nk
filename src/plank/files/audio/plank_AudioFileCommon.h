@@ -444,13 +444,14 @@ typedef PlankUI PlankChannelLayout;
 
 //#define PLANKAUDIOFILEMETADATA_UNSET  INT_MIN
 
-
+#define PLANKAUDIOFILE_CUEPOINTTYPE_UNKNOWN        -1
 #define PLANKAUDIOFILE_CUEPOINTTYPE_CUEPOINT        0
 #define PLANKAUDIOFILE_CUEPOINTTYPE_INSERTPOINT     1
 #define PLANKAUDIOFILE_CUEPOINTTYPE_PLAYPOSITION    2
 #define PLANKAUDIOFILE_CUEPOINTTYPE_REGIONSTART     3
 #define PLANKAUDIOFILE_CUEPOINTTYPE_REGIONEND       4
 
+#define PLANKAUDIOFILE_REGIONTYPE_UNKNOWN          -1
 #define PLANKAUDIOFILE_REGIONTYPE_REGION            0
 #define PLANKAUDIOFILE_REGIONTYPE_SELECTION         1
 #define PLANKAUDIOFILE_REGIONTYPE_LOOP              2
@@ -460,9 +461,10 @@ typedef PlankUI PlankChannelLayout;
 #define PLANKAUDIOFILE_WAV_LOOPTYPE_PINGPONG        1
 #define PLANKAUDIOFILE_WAV_LOOPTYPE_REVERESE        2
 
+#define PLANKAUDIOFILE_LOOPTYPE_UNKNOWN            -1
 #define PLANKAUDIOFILE_LOOPTYPE_FORWARD             PLANKAUDIOFILE_WAV_LOOPTYPE_FORWARD
 #define PLANKAUDIOFILE_LOOPTYPE_PINGPONG            PLANKAUDIOFILE_WAV_LOOPTYPE_PINGPONG
-#define PLANKAUDIOFILE_LOOPTYPE_REVERESE            PLANKAUDIOFILE_LOOPTYPE_REVERESE
+#define PLANKAUDIOFILE_LOOPTYPE_REVERESE            PLANKAUDIOFILE_WAV_LOOPTYPE_REVERESE
 
 #define PLANKAUDIOFILE_AIFF_LOOPTYPE_NOLOOP         0 
 #define PLANKAUDIOFILE_AIFF_LOOPTYPE_FORWARD        1 
@@ -568,11 +570,15 @@ void pl_AudioFileFormatInfo_Opus_SetDefaultLayout (PlankAudioFileFormatInfoRef f
 /** An opaque reference to the <i>Plank AudioFileMetaData</i> object. */
 typedef struct PlankAudioFileMetaData* PlankAudioFileMetaDataRef;
 
+/** An opaque reference to the <i>Plank AudioFileCuePointExtra</i> object. */
+typedef struct PlankAudioFileCuePointExtra* PlankAudioFileCuePointExtraRef;
+
 /** An opaque reference to the <i>Plank AudioFileCuePoint</i> object. */
 typedef struct PlankAudioFileCuePoint* PlankAudioFileCuePointRef;
 
 /** An opaque reference to the <i>Plank AudioFileRegion</i> object. */
 typedef struct PlankAudioFileRegion* PlankAudioFileRegionRef;
+
 
 
 #endif // PLANK_AUDIOFILECOMMON_H

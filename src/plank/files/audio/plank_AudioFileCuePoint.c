@@ -235,6 +235,11 @@ PlankUI pl_AudioFileCuePoint_GetCommentSize (PlankAudioFileCuePointRef p)
     return (PlankUI)pl_DynamicArray_GetSize (&p->comment);
 }
 
+PlankAudioFileCuePointExtraRef pl_AudioFileCuePoint_GetExtra (PlankAudioFileCuePointRef p)
+{
+    return p->extra;
+}
+
 PlankResult pl_AudioFileCuePoint_OffsetPosition (PlankAudioFileCuePointRef p, const PlankLL offset)
 {
     p->position += offset;
