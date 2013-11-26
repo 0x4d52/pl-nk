@@ -580,6 +580,28 @@ AudioFileRegionArray AudioFileMetaData::getLoopPoints() const throw()
     return internal ? AudioFileRegionArray (pl_AudioFileMetaData_GetLoopPoints (internal)) : AudioFileRegionArray::getNull();
 }
 
+AudioFileMetaData& AudioFileMetaData::sortCuePointsByPosition() throw()
+{
+    Internal const internal = getInternal();
+    
+    if (internal != Base::getNullSharedPtr())
+        pl_AudioFileMetaData_SortCuePointsByPosition (internal);
+    else plonk_assertfalse;
+    
+    return *this;
+}
+
+AudioFileMetaData& AudioFileMetaData::sortCuePointsByID() throw()
+{
+    Internal const internal = getInternal();
+    
+    if (internal != Base::getNullSharedPtr())
+        pl_AudioFileMetaData_SortCuePointsByID (internal);
+    else plonk_assertfalse;
+    
+    return *this;
+}
+
 AudioFileMetaData& AudioFileMetaData::setEditCount (const UnsignedInt count) throw()
 {
     Internal const internal = getInternal();

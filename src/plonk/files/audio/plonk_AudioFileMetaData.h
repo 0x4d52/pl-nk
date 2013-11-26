@@ -215,6 +215,9 @@ public:
     AudioFileRegionArray getRegions() const throw();
     AudioFileRegionArray getLoopPoints() const throw();
     
+    AudioFileMetaData& sortCuePointsByPosition() throw();
+    AudioFileMetaData& sortCuePointsByID() throw();
+    
     friend class AudioFileReaderInternal;
     template<class SampleType> friend class AudioFileWriterInternal;
     

@@ -836,10 +836,14 @@ exit:
     return result;
 }
 
-PlankResult pl_AudioFileMetaData_SortCuePoints (PlankAudioFileMetaDataRef p)
+PlankResult pl_AudioFileMetaData_SortCuePointsByPosition (PlankAudioFileMetaDataRef p)
 {
-    // should do atomic swaps..
     return pl_SharedPtrArray_Sort (p->cuePoints, (PlankSharedPtrArrayCompareFunction)pl_AudioFileCuePoint_ComparePosition);
+}
+
+PlankResult pl_AudioFileMetaData_SortCuePointsByID (PlankAudioFileMetaDataRef p)
+{
+    return pl_SharedPtrArray_Sort (p->cuePoints, (PlankSharedPtrArrayCompareFunction)pl_AudioFileCuePoint_CompareID);
 }
 
 //PlankResult pl_AudioFileMetaData_SortCuePoints (PlankAudioFileMetaDataRef p)

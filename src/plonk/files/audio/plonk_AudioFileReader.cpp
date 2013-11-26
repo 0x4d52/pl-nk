@@ -73,13 +73,8 @@ ResultCode AudioFileReaderInternal::init (const char* path, const bool readMetaD
     if (result == PlankResult_OK)
         numFramesPerBuffer = readBuffer.length() / getBytesPerFrame();
         
-    if (readMetaData)
-    {
-        PlankAudioFileMetaDataRef metaData = pl_AudioFileReader_GetMetaData (getPeerRef());
-        
-        if (metaData)
-            result = pl_AudioFileMetaData_SortCuePoints (metaData);
-    }
+    if (this->hasMetaData())
+        this->getMetaData().sortCuePointsByPosition();
     
     return result;
 }
@@ -96,13 +91,8 @@ ResultCode AudioFileReaderInternal::init (ByteArray const& bytes, const bool rea
         {
             numFramesPerBuffer = readBuffer.length() / getBytesPerFrame();
             
-            if (readMetaData)
-            {
-                PlankAudioFileMetaDataRef metaData = pl_AudioFileReader_GetMetaData (getPeerRef());
-                
-                if (metaData)
-                    pl_AudioFileMetaData_SortCuePoints (metaData);
-            }
+            if (this->hasMetaData())
+                this->getMetaData().sortCuePointsByPosition();
 
             return PlankResult_OK;
         }

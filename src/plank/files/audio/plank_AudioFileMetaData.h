@@ -186,7 +186,8 @@ PlankResult pl_AudioFileMetaData_AddRegion (PlankAudioFileMetaDataRef p, PlankAu
  @return The result code for the operation. */
 PlankResult pl_AudioFileMetaData_ConvertCuePointsToRegions (PlankAudioFileMetaDataRef p, const PlankLL numFrames, const PlankB removeCuePoints);
 
-PlankResult pl_AudioFileMetaData_SortCuePoints (PlankAudioFileMetaDataRef p);
+PlankResult pl_AudioFileMetaData_SortCuePointsByPosition (PlankAudioFileMetaDataRef p);
+PlankResult pl_AudioFileMetaData_SortCuePointsByID (PlankAudioFileMetaDataRef p);
 
 
 /** Adds a loop.
