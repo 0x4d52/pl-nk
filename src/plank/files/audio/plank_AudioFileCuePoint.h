@@ -80,6 +80,9 @@ PlankUI pl_AudioFileCuePoint_GetCommentSize (PlankAudioFileCuePointRef p);
 PlankAudioFileCuePointExtraRef pl_AudioFileCuePoint_GetExtra (PlankAudioFileCuePointRef p);
 PlankResult pl_AudioFileCuePoint_OffsetPosition (PlankAudioFileCuePointRef p, const PlankLL offset);
 
+PlankB pl_AudioFileCuePoint_ComparePosition (PlankAudioFileCuePointRef low, PlankAudioFileCuePointRef hi);
+PlankB pl_AudioFileCuePoint_CompareID (PlankAudioFileCuePointRef low, PlankAudioFileCuePointRef hi);
+
 /** @} */
 
 PLANK_END_C_LINKAGE

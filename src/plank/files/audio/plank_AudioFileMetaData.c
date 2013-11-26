@@ -838,34 +838,40 @@ exit:
 
 PlankResult pl_AudioFileMetaData_SortCuePoints (PlankAudioFileMetaDataRef p)
 {
-    PlankResult result = PlankResult_OK;
-    PlankAudioFileCuePointRef* cueArray;
-    PlankL numCues, i, j;
-    PlankB swapped;
-    
-    numCues = pl_SharedPtrArray_GetLength (p->cuePoints);
-    cueArray = (PlankAudioFileCuePointRef*)pl_SharedPtrArray_GetArray (p->cuePoints);
-    
-    for (i = numCues; --i >= 0;)
-    {
-        swapped = PLANK_FALSE;
-        
-        for (j = 0; j < i; j++)
-        {
-            if (cueArray[j]->position > cueArray[j + 1]->position)
-            {
-                pl_SharedPtrArray_Swap (p->cuePoints, j, j + 1);
-                swapped = PLANK_TRUE;
-            }
-        }
-        
-        if (!swapped)
-            goto exit;
-    }
-    
-exit:
-    return result;
+    // should do atomic swaps..
+    return pl_SharedPtrArray_Sort (p->cuePoints, (PlankSharedPtrArrayCompareFunction)pl_AudioFileCuePoint_ComparePosition);
 }
+
+//PlankResult pl_AudioFileMetaData_SortCuePoints (PlankAudioFileMetaDataRef p)
+//{
+//    PlankResult result = PlankResult_OK;
+//    PlankAudioFileCuePointRef* cueArray;
+//    PlankL numCues, i, j;
+//    PlankB swapped;
+//    
+//    numCues = pl_SharedPtrArray_GetLength (p->cuePoints);
+//    cueArray = (PlankAudioFileCuePointRef*)pl_SharedPtrArray_GetArray (p->cuePoints);
+//    
+//    for (i = numCues; --i >= 0;)
+//    {
+//        swapped = PLANK_FALSE;
+//        
+//        for (j = 0; j < i; j++)
+//        {
+//            if (cueArray[j]->position > cueArray[j + 1]->position)
+//            {
+//                pl_SharedPtrArray_Swap (p->cuePoints, j, j + 1);
+//                swapped = PLANK_TRUE;
+//            }
+//        }
+//        
+//        if (!swapped)
+//            goto exit;
+//    }
+//    
+//exit:
+//    return result;
+//}
 
 PlankResult pl_AudioFileMetaData_AddLoopPoint (PlankAudioFileMetaDataRef p, PlankAudioFileRegionRef region)
 {    

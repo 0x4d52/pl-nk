@@ -54,6 +54,11 @@ PLANK_BEGIN_C_LINKAGE
 /** An opaque reference to the <i>Plank DynamicArray</i> object. */
 typedef struct PlankDynamicArray* PlankDynamicArrayRef; 
 
+/** Compare function. 
+ This should return PLANK_TRUE if the first argument should be placed after the second argument
+ in a sorted array. */
+typedef PlankB (*PlankDynamicArrayCompareFunction)(PlankP, PlankP);
+
 /** Creates and intialises a <i>Plank DynamicArray</i> object and return an oqaque reference to it.
  @return A <i>Plank DynamicArray</i> object as an opaque reference or PLANK_NULL. */
 PlankDynamicArrayRef pl_DynamicArray_CreateAndInit();
@@ -167,6 +172,8 @@ PlankResult pl_DynamicArray_PutItem (PlankDynamicArrayRef p, const PlankL index,
  @param index The desired index to remove. This must be between 0 and one less that the current size. 
  @return A result code which will be PlankResult_OK if the operation was completely successful. */
 PlankResult pl_DynamicArray_RemoveItem (PlankDynamicArrayRef p, const PlankL index);
+
+PlankResult pl_DynamicArray_Sort (PlankDynamicArrayRef p, PlankDynamicArrayCompareFunction comparator);
 
 /** Ensures that the array is sufficient to hold a certain number of items.
  This will resize the array if necessary to hold the specified capacity. This only

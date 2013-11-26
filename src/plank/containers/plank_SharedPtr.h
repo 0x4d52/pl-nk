@@ -100,6 +100,7 @@ PlankResult pl_SharedPtrSwap (PlankSharedPtrRef* p1, PlankSharedPtrRef* p2);
  */
 
 typedef struct PlankSharedPtrArray* PlankSharedPtrArrayRef;
+typedef PlankDynamicArrayCompareFunction PlankSharedPtrArrayCompareFunction;
 
 PlankResult pl_SharedPtrArray_CreateSharedPtr (PlankSharedPtrArrayRef* pp);
 PlankSharedPtrArrayRef pl_SharefPtrArray_IncrementRefCountAndGetPtr (PlankSharedPtrArrayRef p);
@@ -112,6 +113,7 @@ PlankResult pl_SharedPtrArray_PutSharedPtr (PlankSharedPtrArrayRef p, const Plan
 PlankResult pl_SharedPtrArray_RemoveSharedPtr (PlankSharedPtrArrayRef p, const PlankL index);
 PlankSharedPtrRef pl_SharedPtrArray_GetSharedPtr (PlankSharedPtrArrayRef p, const PlankL index);
 PlankResult pl_SharedPtrArray_Swap (PlankSharedPtrArrayRef p, const PlankL indexA, const PlankL indexB);
+PlankResult pl_SharedPtrArray_Sort (PlankSharedPtrArrayRef p, PlankSharedPtrArrayCompareFunction comparator);
 
 
 /** @} */

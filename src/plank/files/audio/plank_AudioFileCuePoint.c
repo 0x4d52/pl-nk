@@ -245,3 +245,15 @@ PlankResult pl_AudioFileCuePoint_OffsetPosition (PlankAudioFileCuePointRef p, co
     p->position += offset;
     return PlankResult_OK;
 }
+
+PlankB pl_AudioFileCuePoint_ComparePosition (PlankAudioFileCuePointRef low, PlankAudioFileCuePointRef hi)
+{
+    return low->position > hi->position;
+}
+
+PlankB pl_AudioFileCuePoint_CompareID (PlankAudioFileCuePointRef low, PlankAudioFileCuePointRef hi)
+{
+    return low->cueID > hi->cueID;
+}
+
+

@@ -240,13 +240,78 @@ PlankResult pl_DynamicArray_AddItem (PlankDynamicArrayRef p, const PlankP item)
     
     if (p->usedItems > p->allocatedItems)
     {        
-        result = pl_DynamicArray_Grow (p, PLANKDYNAMICARRAY_DEFAULTGRANULARITY);
-        
-        if (result != PlankResult_OK)
-            goto exit;
+        if ((result = pl_DynamicArray_Grow (p, PLANKDYNAMICARRAY_DEFAULTGRANULARITY)) != PlankResult_OK) goto exit;
     }
     
     pl_MemoryCopy ((unsigned char*)p->data + index * p->itemSize, item, p->itemSize);
+    
+exit:
+    return result;
+}
+
+static inline void pl_DynamicArraySwapItems (PlankP itemA, PlankP itemB, PlankP temp, const PlankL itemSize)
+{
+    pl_MemoryCopy (temp,  itemA, itemSize);
+    pl_MemoryCopy (itemA, itemB, itemSize);
+    pl_MemoryCopy (itemB, temp,  itemSize);
+}
+
+#ifndef PLANKDYNAMICARRAY_SORTTEMPSIZE
+#define PLANKDYNAMICARRAY_SORTTEMPSIZE 64
+#endif
+
+PlankResult pl_DynamicArray_Sort (PlankDynamicArrayRef p, PlankDynamicArrayCompareFunction comparator)
+{
+    // yikes - a bubble sort - must improve this...
+    PLANK_ALIGN(16) PlankUC tempData[PLANKDYNAMICARRAY_SORTTEMPSIZE];
+    PlankResult result = PlankResult_OK;
+    PlankL i, j, itemSize, end;
+    PlankB swapped;
+    PlankP itemA, itemB, temp;
+    PlankUC* data;
+    
+    if (comparator == PLANK_NULL)
+    {
+        result = PlankResult_FunctionsInvalid;
+        goto exit;
+    }
+    
+    itemSize = p->itemSize;
+
+    if (itemSize <= PLANKDYNAMICARRAY_SORTTEMPSIZE)
+    {
+        data = (PlankUC*)p->data;
+        temp = (PlankP)tempData;
+    }
+    else if (p->usedItems == p->allocatedItems)
+    {
+        // we need space for the temp location
+        if ((result = pl_DynamicArray_Grow (p, PLANKDYNAMICARRAY_DEFAULTGRANULARITY)) != PlankResult_OK) goto exit;
+        
+        data = (PlankUC*)p->data;
+        temp = data + p->usedItems * itemSize;
+    }
+        
+    for (i = p->usedItems; --i >= 0;)
+    {
+        swapped = PLANK_FALSE;
+        end = i * itemSize;
+        
+        for (j = 0; j < end; j += itemSize)
+        {
+            itemA = data + j;
+            itemB = itemA + itemSize;
+            
+            if (comparator (itemA, itemB))
+            {
+                pl_DynamicArraySwapItems (itemA, itemB, temp, itemSize);
+                swapped = PLANK_TRUE;
+            }
+        }
+        
+        if (!swapped)
+            goto exit;
+    }
     
 exit:
     return result;

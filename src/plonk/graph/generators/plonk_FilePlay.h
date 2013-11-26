@@ -159,11 +159,7 @@ public:
             {
                 const AudioFileCuePointArray cuePoints = metaData.getCuePoints();
                 AudioFileCuePoint cue = cuePoints[data.cueIndex];
-                
-//                UnsignedInt cueID;
-//                Text cueLabel;
-//                LongLong cuePosition;
-                
+                                
                 bool renderToNextCue = false;
                 
                 if (cue.isNotNull())
@@ -291,142 +287,6 @@ public:
     }
 
 
-//    void process (ProcessInfo& info, const int /*channel*/) throw()
-//    {
-//        Data& data = this->getState();        
-////        plonk_assert (file.getOwner() == this);
-//        
-//        IntVariable& loopCount (this->template getInputAs<IntVariable> (IOKey::LoopCount));
-//        int channel;
-//        int offset = 0;
-//        bool done = false;
-//        
-//        while (!done)
-//        {
-//            AudioFileReader& file = this->getInputAsAudioFileReader (IOKey::AudioFileReader);
-//
-//            const int numChannels = this->getNumChannels();
-//            const int fileNumChannels = file.getNumChannels();
-//            const int blockSize = this->getBlockSize().getValue();
-//            int bufferSize = blockSize * fileNumChannels;
-//            
-//            if (file.hasMetaData())
-//            {
-//                UnsignedInt cueID;
-//                Text cueLabel;
-//                LongLong cuePosition;
-//                bool renderToNextCue = false;
-//                
-//                if (file.getCuePointAtIndex (data.cueIndex, cueID, cueLabel, cuePosition))
-//                {
-//                    const LongLong filePosition = file.getFramePosition();
-//                    
-//                    if (cuePosition == filePosition)
-//                    {
-//                        this->update (Text::getMessageCuePoint(), cueLabel);
-//                        
-//                        ++data.cueIndex;
-//                                                
-//                        if (file.getCuePointAtIndex (data.cueIndex, cueID, cueLabel, cuePosition))
-//                            renderToNextCue = true;
-//                            
-//                        if (data.cueIndex >= file.getNumCuePoints())
-//                            data.cueIndex = 0;
-//                    }
-//                    else
-//                    {
-//                        renderToNextCue = true;
-//                    }
-//                    
-//                    if (renderToNextCue)
-//                    {
-//                        const LongLong framesToNextCue = cuePosition - filePosition;
-//                        
-//                        if (framesToNextCue < (LongLong)blockSize)
-//                            bufferSize = (int)framesToNextCue * fileNumChannels;
-//                    }
-//                }
-//            }
-//            
-//            buffer.setSize (bufferSize, false);
-//            file.readFrames (buffer, loopCount);
-//            const bool hitEOF = file.didHitEOF();
-//            const bool changedNumChannels = file.didNumChannelsChange();
-//            
-//            if (hitEOF)
-//            {
-//                const int bufferAvailable = buffer.length();
-//                const int bufferFramesAvailable = bufferAvailable / fileNumChannels;
-//                
-//                for (channel = 0; channel < numChannels; ++channel)
-//                {
-//                    Buffer& outputBuffer = this->getOutputBuffer (channel);
-//                    SampleType* const outputSamples = outputBuffer.getArray() + offset;
-//                    const int outputBufferLength = outputBuffer.length() - offset;
-//                    const int outputLengthToWrite = plonk::min (bufferFramesAvailable, outputBufferLength);
-//                    
-//                    const SampleType* bufferSamples = buffer.getArray() + ((unsigned int)channel % (unsigned int)fileNumChannels);
-//                    
-//                    for (int i = 0; i < outputLengthToWrite; ++i, bufferSamples += fileNumChannels)
-//                        outputSamples[i] = *bufferSamples;
-//                        
-//                    for (int i = outputLengthToWrite; i < outputBufferLength; ++i)
-//                        outputSamples[i] = SampleType (0);
-//                }
-//                
-//                if (!data.done)
-//                {
-//                    data.done = true;
-//                    this->update (Text::getMessageDone(), Dynamic::getNull());
-//                }
-//                
-//                done = true;
-//            }
-//            else if (changedNumChannels)
-//            {
-//                this->update (Text::getMessageNumChannelsChanged(), IntVariable (fileNumChannels));
-//
-//                const int bufferAvailable = buffer.length();
-//                const int bufferFramesAvailable = bufferAvailable / fileNumChannels;
-//                
-//                for (channel = 0; channel < numChannels; ++channel)
-//                {
-//                    Buffer& outputBuffer = this->getOutputBuffer (channel); 
-//                    SampleType* const outputSamples = outputBuffer.getArray() + offset;
-//                    const int outputBufferLength = outputBuffer.length() - offset;
-//                    const int outputLengthToWrite = plonk::min (bufferFramesAvailable, outputBufferLength);
-//                    
-//                    const SampleType* bufferSamples = buffer.getArray() + ((unsigned int)channel % (unsigned int)fileNumChannels);
-//                    
-//                    for (int i = 0; i < outputLengthToWrite; ++i, bufferSamples += fileNumChannels)
-//                        outputSamples[i] = *bufferSamples;                        
-//                }
-//                
-//                offset += bufferFramesAvailable;
-//                done = false;
-//            }
-//            else
-//            {
-//                for (channel = 0; channel < numChannels; ++channel)
-//                {
-//                    Buffer& outputBuffer = this->getOutputBuffer (channel);
-//                    SampleType* const outputSamples = outputBuffer.getArray() + offset;
-//                    const int outputBufferLength = outputBuffer.length() - offset;
-//                    
-//                    const SampleType* bufferSamples = buffer.getArray() + ((unsigned int)channel % (unsigned int)fileNumChannels);
-//                    
-//                    for (int i = 0; i < outputBufferLength; ++i, bufferSamples += fileNumChannels)
-//                        outputSamples[i] = *bufferSamples;
-//                }
-//                
-//                done = true;
-//            }            
-//        }
-//        
-//        if (data.done && data.deleteWhenDone)
-//            info.setShouldDelete();
-//    }
-
 private:
     Buffer buffer; // might need to use a signal...
     IntVariable zero;
@@ -457,12 +317,12 @@ private:
  be wrapped in a TaskUnit which buffers the audio on a separate thread.
  
  @par Factory functions:
- - ar (file, loop=1, mul=1, add=0, allowAutoDelete=true, preferredBlockSize=default, preferredSampleRate=noPref)
- - kr (file, loop=1, mul=1, add=0, allowAutoDelete=true) 
+ - ar (file, loopCount=0, mul=1, add=0, allowAutoDelete=true, preferredBlockSize=default, preferredSampleRate=noPref)
+ - kr (file, loopCount=0, mul=1, add=0, allowAutoDelete=true)
  
  @par Inputs:
  - file: (audiofilereader, multi) the audio file reader to use
- - loop: (unit) a flag to tell the file player to loop
+ - loopCount: (value) a control to tell the file player how many times to loop (0=infinite)
  - mul: (unit, multi) the multiplier applied to the output
  - add: (unit, multi) the offset aded to the output
  - allowAutoDelete: (bool) whether this unit can be caused to be deleted by the unit it contains

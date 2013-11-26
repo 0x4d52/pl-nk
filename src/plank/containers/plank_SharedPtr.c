@@ -590,15 +590,28 @@ exit:
     return result;
 }
 
+//PlankSharedPtrRef pl_SharedPtrArray_GetSharedPtr (PlankSharedPtrArrayRef p, const PlankL index)
+//{
+//    PlankAtomicP atom;
+//    
+//    pl_AtomicP_Init (&atom);
+//    pl_DynamicArray_GetItem (&p->array, index, &atom);
+//    
+//    return (PlankSharedPtrRef)atom.ptr;
+//}
+
 PlankSharedPtrRef pl_SharedPtrArray_GetSharedPtr (PlankSharedPtrArrayRef p, const PlankL index)
 {
-    PlankAtomicP atom;
+    PlankAtomicP* array;
     
-    pl_AtomicP_Init (&atom);
-    pl_DynamicArray_GetItem (&p->array, index, &atom);
+    if ((index < 0) || (index > p->array.usedItems))
+        return PLANK_NULL;
+
+    array = (PlankAtomicP*)pl_DynamicArray_GetArray (&p->array);
     
-    return (PlankSharedPtrRef)atom.ptr;
+    return (PlankSharedPtrRef)array[index].ptr;
 }
+
 
 PlankResult pl_SharedPtrArray_Swap (PlankSharedPtrArrayRef p, const PlankL indexA, const PlankL indexB)
 {
@@ -618,3 +631,44 @@ PlankResult pl_SharedPtrArray_Swap (PlankSharedPtrArrayRef p, const PlankL index
     return PlankResult_OK;
 }
 
+//PlankResult pl_SharedPtrArray_Sort (PlankSharedPtrArrayRef p, PlankSharedPtrArrayCompareFunction comparator)
+//{
+//    return pl_DynamicArray_Sort (&p->array, (PlankDynamicArrayCompareFunction)comparator);
+//}
+
+PlankResult pl_SharedPtrArray_Sort (PlankSharedPtrArrayRef p, PlankSharedPtrArrayCompareFunction comparator)
+{
+    // yikes - a bubble sort - must improve this...
+    PlankResult result = PlankResult_OK;
+    PlankL i, j;
+    PlankB swapped;
+    PlankAtomicP* array;
+
+    array = (PlankAtomicP*)pl_DynamicArray_GetArray (&p->array);
+    
+    if (comparator == PLANK_NULL)
+    {
+        result = PlankResult_FunctionsInvalid;
+        goto exit;
+    }
+    
+    for (i = p->array.usedItems; --i >= 0;)
+    {
+        swapped = PLANK_FALSE;
+        
+        for (j = 0; j < i; j++)
+        {            
+            if (((PlankDynamicArrayCompareFunction)comparator) (array[j].ptr, array[j + 1].ptr))
+            {
+                pl_AtomicP_SwapOther (&array[j], &array[j + 1]);
+                swapped = PLANK_TRUE;
+            }
+        }
+        
+        if (!swapped)
+            goto exit;
+    }
+    
+exit:
+    return result;
+}
