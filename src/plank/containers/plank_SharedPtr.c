@@ -279,7 +279,7 @@ exit:
 
 /////////////////////////////// SharedPtr //////////////////////////////////////
 
-PlankResult pl_SharedPtr_CreateAndInitWithSizeAndFunctions (PlankSharedPtrRef* pp, const PlankL size, void* initFunction, void* deInitFunction)
+PlankResult pl_SharedPtr_CreateAndInitWithSizeAndFunctions (PlankSharedPtrRef* pp, const PlankL size, const PlankFourCharCode type,  void* initFunction, void* deInitFunction)
 {
     PlankMemoryRef m;
     PlankSharedPtrRef p;
@@ -294,6 +294,12 @@ PlankResult pl_SharedPtr_CreateAndInitWithSizeAndFunctions (PlankSharedPtrRef* p
     
     if (size > 0)
     {
+        if (size > 0xFFFFFFFF)
+        {
+            result = PlankResult_MemoryError;
+            goto exit;
+        }
+        
         m = pl_MemoryGlobal();
         p = (PlankSharedPtrRef)pl_Memory_AllocateBytes (m, size);
         
@@ -390,6 +396,11 @@ PlankResult pl_SharedPtr_DecrementRefCount (PlankSharedPtrRef p)
 PlankResult pl_SharedPtr_DecrementWeakCount (PlankSharedPtrRef p)
 {
     return p ? (p->sharedCounter ? pl_SharedPtrCounter_DecrementWeakCount (p->sharedCounter) : PlankResult_NullPointerError) : PlankResult_NullPointerError;
+}
+
+PlankFourCharCode pl_SharedPtr_GetType (PlankSharedPtrRef p)
+{
+    return p->type;
 }
 
 static PlankResult pl_SharedPtr_IncrementRefCount (PlankSharedPtrRef p)

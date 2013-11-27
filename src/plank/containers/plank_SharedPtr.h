@@ -80,14 +80,16 @@ typedef struct PlankWeakPtr* PlankWeakPtrRef;
 typedef struct PlankSharedPtrCounter* PlankSharedPtrCounterRef;
 typedef PlankResult (*PlankSharedPtrFunction)(void*);
 
-PlankResult pl_SharedPtr_CreateAndInitWithSizeAndFunctions (PlankSharedPtrRef* pp, const PlankL size, void* initFunction, void* deInitFunction);
+PlankResult pl_SharedPtr_CreateAndInitWithSizeAndFunctions (PlankSharedPtrRef* pp, const PlankL size, const PlankFourCharCode type, void* initFunction, void* deInitFunction);
 PlankSharedPtrRef pl_SharefPtr_IncrementRefCountAndGetPtr (PlankSharedPtrRef p);
 PlankResult pl_SharedPtr_DecrementRefCount (PlankSharedPtrRef p);
 PlankResult pl_SharedPtr_DecrementWeakCount (PlankSharedPtrRef p);
+PlankFourCharCode pl_SharedPtr_GetType (PlankSharedPtrRef p);
 PlankWeakPtrRef pl_SharedPtr_GetWeakPtr (PlankSharedPtrRef p);
 
 PlankSharedPtrRef pl_WeakPtr_GetSharedPtr (PlankWeakPtrRef p);
 PlankResult pl_WeakPtr_DecrementRefCount (PlankWeakPtrRef p);
+
 
 PlankResult pl_SharedPtrSwap (PlankSharedPtrRef* p1, PlankSharedPtrRef* p2);
 /** @} */
@@ -125,7 +127,8 @@ PLANK_END_C_LINKAGE
 #if !DOXYGEN
 typedef struct PlankSharedPtr
 {
-    PlankL size;
+    PlankUI size;
+    PlankFourCharCode type;
     PlankSharedPtrCounterRef sharedCounter;
     PlankSharedPtrFunction deInitFunction;
     PlankWeakPtrRef weakPtr;

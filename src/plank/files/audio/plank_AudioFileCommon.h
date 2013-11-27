@@ -458,7 +458,7 @@ typedef PlankUI PlankChannelLayout;
 #define PLANKAUDIOFILEMETADATA_IOFLAGS_CUSTOM               0x80000000
 #define PLANKAUDIOFILEMETADATA_IOFLAGS_ALL                  0xFFFFFFFF
 
-typedef PlankUI PlankMetaDataIOFlags;
+typedef PlankUI PlankAudioFileMetaDataIOFlags;
 
 #define PLANKAUDIOFILE_CUEPOINTTYPE_UNKNOWN        -1
 #define PLANKAUDIOFILE_CUEPOINTTYPE_CUEPOINT        0

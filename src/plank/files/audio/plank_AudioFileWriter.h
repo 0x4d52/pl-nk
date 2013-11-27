@@ -88,6 +88,8 @@ PlankAudioFileFormatInfo* pl_AudioFileWriter_GetFormatInfo (PlankAudioFileWriter
 
 const PlankAudioFileFormatInfo* pl_AudioFileWriter_GetFormatInfoReadOnly (PlankAudioFileWriterRef p);
 
+PlankAudioFileMetaDataIOFlags pl_AudioFileWriter_GetMetaDataIOFlags (PlankAudioFileWriterRef p);
+PlankResult pl_AudioFileWriter_SetMetaDataIOFlags (PlankAudioFileWriterRef p, PlankAudioFileMetaDataIOFlags metaDataIOFlags);
 PlankAudioFileMetaDataRef pl_AudioFileWriter_GetMetaData (PlankAudioFileWriterRef p);
 PlankResult pl_AudioFileWriter_SetMetaData (PlankAudioFileWriterRef p, PlankAudioFileMetaDataRef metaData);
 
@@ -144,6 +146,7 @@ typedef struct PlankAudioFileWriter
     PlankUC reserved2;
     PlankUC reserved3;
     
+    PlankAudioFileMetaDataIOFlags metaDataIOFlags;
     PlankAudioFileMetaDataRef metaData;
     
     PlankP writeFramesFunction;

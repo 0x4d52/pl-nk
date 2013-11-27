@@ -60,7 +60,7 @@ typedef PlankResult (*PlankAudioFileReaderGetFramePositionFunction)(PlankAudioFi
 #pragma mark Private Function Declarations
 #endif
 
-PlankResult pl_AudioFileReader_OpenInternalInternal (PlankAudioFileReaderRef p, const char* filepath, PlankFileRef file, const PlankMetaDataIOFlags metaDataIOFlags);
+PlankResult pl_AudioFileReader_OpenInternalInternal (PlankAudioFileReaderRef p, const char* filepath, PlankFileRef file, const PlankAudioFileMetaDataIOFlags metaDataIOFlags);
 
 PlankResult pl_AudioFileReader_WAV_ParseFormat (PlankAudioFileReaderRef p, const PlankLL chunkLength, const PlankLL chunkDataPos);
 PlankResult pl_AudioFileReader_WAV_ParseMetaData (PlankAudioFileReaderRef p);
@@ -350,7 +350,7 @@ PlankResult pl_AudioFileReader_OpenWithMetaData (PlankAudioFileReaderRef p, cons
     return pl_AudioFileReader_OpenInternal (p, filepath, PLANK_TRUE);
 }
 
-PlankResult pl_AudioFileReader_OpenInternalInternal (PlankAudioFileReaderRef p, const char* filepath, PlankFileRef file, const PlankMetaDataIOFlags metaDataIOFlags)
+PlankResult pl_AudioFileReader_OpenInternalInternal (PlankAudioFileReaderRef p, const char* filepath, PlankFileRef file, const PlankAudioFileMetaDataIOFlags metaDataIOFlags)
 {
     PlankResult result;
     PlankIffID mainID;
@@ -487,12 +487,12 @@ exit:
     return result;
 }
 
-PlankResult pl_AudioFileReader_OpenInternal (PlankAudioFileReaderRef p, const char* filepath, const PlankMetaDataIOFlags metaDataIOFlags)
+PlankResult pl_AudioFileReader_OpenInternal (PlankAudioFileReaderRef p, const char* filepath, const PlankAudioFileMetaDataIOFlags metaDataIOFlags)
 {
     return pl_AudioFileReader_OpenInternalInternal (p, filepath, 0, metaDataIOFlags);
 }
 
-PlankResult pl_AudioFileReader_OpenWithFile (PlankAudioFileReaderRef p, PlankFileRef file, const PlankMetaDataIOFlags metaDataIOFlags)
+PlankResult pl_AudioFileReader_OpenWithFile (PlankAudioFileReaderRef p, PlankFileRef file, const PlankAudioFileMetaDataIOFlags metaDataIOFlags)
 {
     return pl_AudioFileReader_OpenInternalInternal (p, 0, file, metaDataIOFlags);
 }
