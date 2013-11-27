@@ -89,11 +89,11 @@ PlankResult pl_AudioFileReader_Open (PlankAudioFileReaderRef p, const char* file
 
 PlankResult pl_AudioFileReader_OpenWithMetaData (PlankAudioFileReaderRef p, const char* filepath);
 
-PlankResult pl_AudioFileReader_OpenInternal (PlankAudioFileReaderRef p, const char* filepath, const PlankB readMetaData);
+PlankResult pl_AudioFileReader_OpenInternal (PlankAudioFileReaderRef p, const char* filepath, const PlankMetaDataIOFlags metaDataIOFlags);
 
 /** Open from a file object.
  The AudioFileReader takes ownership of the file and zeros the incomming file object. */
-PlankResult pl_AudioFileReader_OpenWithFile (PlankAudioFileReaderRef p, PlankFileRef file, const PlankB readMetaData);
+PlankResult pl_AudioFileReader_OpenWithFile (PlankAudioFileReaderRef p, PlankFileRef file, const PlankMetaDataIOFlags metaDataIOFlags);
 
 PlankResult pl_AudioFileReader_OpenWithAudioFileArray (PlankAudioFileReaderRef p, PlankDynamicArrayRef array, PlankB ownArray, const int multiMode, int* indexRef);
 
@@ -209,6 +209,7 @@ typedef struct PlankAudioFileReader
     PlankLL numFrames;
     PlankLL dataPosition;
     
+    PlankMetaDataIOFlags metaDataIOFlags;
     PlankAudioFileMetaDataRef metaData;
     PlankDynamicArray name;
     

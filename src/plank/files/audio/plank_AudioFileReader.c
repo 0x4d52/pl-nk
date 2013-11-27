@@ -60,7 +60,7 @@ typedef PlankResult (*PlankAudioFileReaderGetFramePositionFunction)(PlankAudioFi
 #pragma mark Private Function Declarations
 #endif
 
-PlankResult pl_AudioFileReader_OpenInternalInternal (PlankAudioFileReaderRef p, const char* filepath, PlankFileRef file, const PlankB readMetaData);
+PlankResult pl_AudioFileReader_OpenInternalInternal (PlankAudioFileReaderRef p, const char* filepath, PlankFileRef file, const PlankMetaDataIOFlags metaDataIOFlags);
 
 PlankResult pl_AudioFileReader_WAV_ParseFormat (PlankAudioFileReaderRef p, const PlankLL chunkLength, const PlankLL chunkDataPos);
 PlankResult pl_AudioFileReader_WAV_ParseMetaData (PlankAudioFileReaderRef p);
@@ -306,6 +306,7 @@ PlankResult pl_AudioFileReader_DeInit (PlankAudioFileReaderRef p)
     if (p->metaData)
     {
         if ((result = pl_AudioFileMetaData_DecrementRefCount (p->metaData)) != PlankResult_OK) goto exit;
+        p->metaData = PLANK_NULL;
     }
     
     pl_MemoryZero (p, sizeof (PlankAudioFileReader));
@@ -349,7 +350,7 @@ PlankResult pl_AudioFileReader_OpenWithMetaData (PlankAudioFileReaderRef p, cons
     return pl_AudioFileReader_OpenInternal (p, filepath, PLANK_TRUE);
 }
 
-PlankResult pl_AudioFileReader_OpenInternalInternal (PlankAudioFileReaderRef p, const char* filepath, PlankFileRef file, const PlankB readMetaData)
+PlankResult pl_AudioFileReader_OpenInternalInternal (PlankAudioFileReaderRef p, const char* filepath, PlankFileRef file, const PlankMetaDataIOFlags metaDataIOFlags)
 {
     PlankResult result;
     PlankIffID mainID;
@@ -380,7 +381,9 @@ PlankResult pl_AudioFileReader_OpenInternalInternal (PlankAudioFileReaderRef p, 
         }
     }
     
-    if (readMetaData && !p->metaData)
+    p->metaDataIOFlags = metaDataIOFlags;
+    
+    if (metaDataIOFlags != PLANKAUDIOFILEMETADATA_IOFLAGS_NONE)
         pl_AudioFileMetaData_CreateSharedPtr (&p->metaData);
     
     if ((iff = pl_IffAudioFileReader_CreateAndInit()) == PLANK_NULL)
@@ -484,14 +487,14 @@ exit:
     return result;
 }
 
-PlankResult pl_AudioFileReader_OpenInternal (PlankAudioFileReaderRef p, const char* filepath, const PlankB readMetaData)
+PlankResult pl_AudioFileReader_OpenInternal (PlankAudioFileReaderRef p, const char* filepath, const PlankMetaDataIOFlags metaDataIOFlags)
 {
-    return pl_AudioFileReader_OpenInternalInternal (p, filepath, 0, readMetaData);
+    return pl_AudioFileReader_OpenInternalInternal (p, filepath, 0, metaDataIOFlags);
 }
 
-PlankResult pl_AudioFileReader_OpenWithFile (PlankAudioFileReaderRef p, PlankFileRef file, const PlankB readMetaData)
+PlankResult pl_AudioFileReader_OpenWithFile (PlankAudioFileReaderRef p, PlankFileRef file, const PlankMetaDataIOFlags metaDataIOFlags)
 {
-    return pl_AudioFileReader_OpenInternalInternal (p, 0, file, readMetaData);
+    return pl_AudioFileReader_OpenInternalInternal (p, 0, file, metaDataIOFlags);
 }
 
 PlankResult pl_AudioFileReader_OpenWithAudioFileArray (PlankAudioFileReaderRef p, PlankDynamicArrayRef array, PlankB ownArray, const int multiMode, int* indexRef)
@@ -1049,6 +1052,7 @@ static PlankResult pl_AudioFileReader_WAV_ParseChunk_smpl_Loop (PlankAudioFileRe
     if ((result = pl_AudioFileRegion_SetPlayCount (loop, playCount)) != PlankResult_OK) goto exit;
 
     if ((result = pl_AudioFileMetaData_AddLoopPoint (p->metaData, loop)) != PlankResult_OK) goto exit;
+    pl_AudioFileRegion_DecrementRefCount (loop);
     loop = PLANK_NULL;
     
 exit:
@@ -1088,7 +1092,7 @@ static PlankResult pl_AudioFileReader_WAV_ParseChunk_smpl (PlankAudioFileReaderR
         if ((result = pl_AudioFileReader_WAV_ParseChunk_smpl_Loop (p, i)) != PlankResult_OK) goto exit;
     }
     
-    if (samplerData > 0)
+    if ((samplerData > 0) && (p->metaDataIOFlags & PLANKAUDIOFILEMETADATA_IOFLAGS_EXTRASAMPLERDATA))
     {
         extraSamplerData = pl_AudioFileMetaData_GetExtraSamplerData (p->metaData);
         pl_DynamicArray_DeInit (extraSamplerData);
@@ -1162,6 +1166,7 @@ static PlankResult pl_AudioFileReader_WAV_ParseChunk_cue (PlankAudioFileReaderRe
             if ((result = pl_AudioFileCuePoint_SetType (cuePoint, PLANKAUDIOFILE_CUEPOINTTYPE_CUEPOINT)) != PlankResult_OK) goto exit;
 
             if ((result = pl_AudioFileMetaData_AddCuePoint (p->metaData, cuePoint)) != PlankResult_OK) goto exit;
+            pl_AudioFileCuePoint_DecrementRefCount (cuePoint);
             cuePoint = PLANK_NULL;
         }
         else
@@ -1318,35 +1323,35 @@ PlankResult pl_AudioFileReader_WAV_ParseMetaData (PlankAudioFileReaderRef p)
             // already done...
             goto next;
         }
-        else if (readChunkID.fcc == pl_FourCharCode ("bext"))
+        else if ((readChunkID.fcc == pl_FourCharCode ("bext")) && (p->metaDataIOFlags & PLANKAUDIOFILEMETADATA_IOFLAGS_INFO))
         {
             if ((result = pl_AudioFileReader_WAV_ParseChunk_bext (p, readChunkLength, readChunkEnd)) != PlankResult_OK) goto exit;
         }
-        else if (readChunkID.fcc == pl_FourCharCode ("levl"))
+        else if ((readChunkID.fcc == pl_FourCharCode ("levl")) && (p->metaDataIOFlags & PLANKAUDIOFILEMETADATA_IOFLAGS_OVERVIEW))
         {
             // might be large...
             goto next;
         }
-        else if (readChunkID.fcc == pl_FourCharCode ("smpl"))
+        else if ((readChunkID.fcc == pl_FourCharCode ("smpl")) && (p->metaDataIOFlags & PLANKAUDIOFILEMETADATA_IOFLAGS_SAMPLER))
         {
             if ((result = pl_AudioFileReader_WAV_ParseChunk_smpl (p, readChunkLength, readChunkEnd)) != PlankResult_OK) goto exit;
         }
-        else if ((readChunkID.fcc == pl_FourCharCode ("inst")) ||
-                 (readChunkID.fcc == pl_FourCharCode ("INST")))
+        else if (((readChunkID.fcc == pl_FourCharCode ("inst")) ||
+                 (readChunkID.fcc == pl_FourCharCode ("INST")))  && (p->metaDataIOFlags & PLANKAUDIOFILEMETADATA_IOFLAGS_SAMPLER))
         {
             if ((result = pl_AudioFileReader_WAV_ParseChunk_inst (p, readChunkLength, readChunkEnd)) != PlankResult_OK) goto exit;
         }
-        else if (readChunkID.fcc == pl_FourCharCode ("cue "))
+        else if ((readChunkID.fcc == pl_FourCharCode ("cue ")) && (p->metaDataIOFlags & PLANKAUDIOFILEMETADATA_IOFLAGS_CUEPOINTS))
         {
             if ((result = pl_AudioFileReader_WAV_ParseChunk_cue (p, readChunkLength, readChunkEnd)) != PlankResult_OK) goto exit;
         }
-        else if ((readChunkID.fcc == pl_FourCharCode ("list")) ||
-                 (readChunkID.fcc == pl_FourCharCode ("LIST")) )
+        else if (((readChunkID.fcc == pl_FourCharCode ("list")) ||
+                 (readChunkID.fcc == pl_FourCharCode ("LIST"))) && (p->metaDataIOFlags & PLANKAUDIOFILEMETADATA_IOFLAGS_TEXT) )
         {
             if ((result = pl_AudioFileReader_WAV_ParseChunk_list (p, readChunkLength, readChunkEnd)) != PlankResult_OK) goto exit;
         }
         
-        else if (readChunkID.fcc != iff->common.headerInfo.junkID.fcc)
+        else if ((readChunkID.fcc != iff->common.headerInfo.junkID.fcc) && (p->metaDataIOFlags & PLANKAUDIOFILEMETADATA_IOFLAGS_CUSTOM))
         {
             // cache others that aren't junk
             
@@ -1434,6 +1439,7 @@ static PlankResult pl_AudioFileReader_AIFFAIFC_ParseChunk_MARK (PlankAudioFileRe
         if ((result = pl_File_Read ((PlankFileRef)iff, pl_AudioFileCuePoint_GetLabelWritable (cuePoint), stringLength, PLANK_NULL)) != PlankResult_OK) goto exit;
 
         if ((result = pl_AudioFileMetaData_AddCuePoint (p->metaData, cuePoint)) != PlankResult_OK) goto exit;
+        pl_AudioFileCuePoint_DecrementRefCount (cuePoint);
         cuePoint = PLANK_NULL;
     }
     
@@ -1476,15 +1482,15 @@ static PlankResult pl_AudioFileReader_AIFFAIFC_ParseMetaData (PlankAudioFileRead
             // already done...
             goto next;
         }
-        else if (readChunkID.fcc == pl_FourCharCode ("MARK"))
+        else if ((readChunkID.fcc == pl_FourCharCode ("MARK")) && (p->metaDataIOFlags & PLANKAUDIOFILEMETADATA_IOFLAGS_CUEPOINTS))
         {
             if ((result = pl_AudioFileReader_AIFFAIFC_ParseChunk_MARK (p, readChunkLength, readChunkEnd)) != PlankResult_OK) goto exit;
         }
-        else if (readChunkID.fcc == pl_FourCharCode ("INST"))
+        else if ((readChunkID.fcc == pl_FourCharCode ("INST")) && (p->metaDataIOFlags & PLANKAUDIOFILEMETADATA_IOFLAGS_SAMPLER))
         {
             if ((result = pl_AudioFileReader_AIFFAIFC_ParseChunk_INST (p, readChunkLength, readChunkEnd)) != PlankResult_OK) goto exit;
         }
-        else if (readChunkID.fcc != iff->common.headerInfo.junkID.fcc)
+        else if ((readChunkID.fcc != iff->common.headerInfo.junkID.fcc) && (p->metaDataIOFlags & PLANKAUDIOFILEMETADATA_IOFLAGS_CUSTOM))
         {
             // cache others that aren't junk
             
@@ -1818,13 +1824,16 @@ static PlankResult pl_AudioFileReader_CAF_ParseChunk_mark (PlankAudioFileReaderR
         
         markerString = 0;
         
-        for (si = 0; si < numStrings; ++si)
+        if (p->metaDataIOFlags & PLANKAUDIOFILEMETADATA_IOFLAGS_TEXT)
         {
-            if (stringIndicesArray[si].stringID == markerID)
+            for (si = 0; si < numStrings; ++si)
             {
-                offset = stringIndicesArray[si].offset;
-                markerString = stringsData + offset;
-                break;
+                if (stringIndicesArray[si].stringID == markerID)
+                {
+                    offset = stringIndicesArray[si].offset;
+                    markerString = stringsData + offset;
+                    break;
+                }
             }
         }
         
@@ -1975,25 +1984,28 @@ PlankResult pl_AudioFileReader_CAF_ParseMetaData (PlankAudioFileReaderRef p)
 
     iff = (PlankIffFileReaderRef)p->peer;
     
-    if ((result = pl_IffFileReader_SeekChunk (iff, 0, "strg", &readChunkLength, &pos)) != PlankResult_OK) goto exit;
-    if ((result = pl_File_ReadUI ((PlankFileRef)iff, &numStrings)) != PlankResult_OK) goto exit;
-    
-    // find the strings and cache them
-    if (numStrings > 0)
+    if (p->metaDataIOFlags & PLANKAUDIOFILEMETADATA_IOFLAGS_TEXT)
     {
-        pl_DynamicArray_InitWithItemSizeAndSize (&stringIndices, sizeof (PlankCAFStringID), numStrings, PLANK_FALSE);
-        stringIndicesArray = pl_DynamicArray_GetArray (&stringIndices);
+        if ((result = pl_IffFileReader_SeekChunk (iff, 0, "strg", &readChunkLength, &pos)) != PlankResult_OK) goto exit;
+        if ((result = pl_File_ReadUI ((PlankFileRef)iff, &numStrings)) != PlankResult_OK) goto exit;
         
-        for (i = 0; i < numStrings; ++i)
+        // find the strings and cache them
+        if (numStrings > 0)
         {
-            if ((result = pl_File_ReadUI ((PlankFileRef)iff, &stringIndicesArray[i].stringID)) != PlankResult_OK) goto exit;
-            if ((result = pl_File_ReadLL ((PlankFileRef)iff, &stringIndicesArray[i].offset)) != PlankResult_OK) goto exit;
+            pl_DynamicArray_InitWithItemSizeAndSize (&stringIndices, sizeof (PlankCAFStringID), numStrings, PLANK_FALSE);
+            stringIndicesArray = pl_DynamicArray_GetArray (&stringIndices);
+            
+            for (i = 0; i < numStrings; ++i)
+            {
+                if ((result = pl_File_ReadUI ((PlankFileRef)iff, &stringIndicesArray[i].stringID)) != PlankResult_OK) goto exit;
+                if ((result = pl_File_ReadLL ((PlankFileRef)iff, &stringIndicesArray[i].offset)) != PlankResult_OK) goto exit;
+            }
+            
+            stringsDataSize = (PlankUI)(readChunkLength - 4 - (numStrings * (sizeof (PlankUI) + sizeof (PlankLL)))); // struct alignment issue, need to calculate raw sizes
+            pl_DynamicArray_InitWithItemSizeAndSize (&strings, 1, stringsDataSize, PLANK_FALSE);
+            stringsData = pl_DynamicArray_GetArray (&strings);
+            if ((result = pl_File_Read ((PlankFileRef)iff, stringsData, stringsDataSize, PLANK_NULL)) != PlankResult_OK) goto exit;
         }
-        
-        stringsDataSize = (PlankUI)(readChunkLength - 4 - (numStrings * (sizeof (PlankUI) + sizeof (PlankLL)))); // struct alignment issue, need to calculate raw sizes
-        pl_DynamicArray_InitWithItemSizeAndSize (&strings, 1, stringsDataSize, PLANK_FALSE);
-        stringsData = pl_DynamicArray_GetArray (&strings);
-        if ((result = pl_File_Read ((PlankFileRef)iff, stringsData, stringsDataSize, PLANK_NULL)) != PlankResult_OK) goto exit;
     }
     
     pos = iff->common.headerInfo.mainHeaderEnd;
@@ -2010,15 +2022,15 @@ PlankResult pl_AudioFileReader_CAF_ParseMetaData (PlankAudioFileReaderRef p)
             // already done...
             goto next;
         }
-        else if (readChunkID.fcc == pl_FourCharCode ("mark"))
+        else if ((readChunkID.fcc == pl_FourCharCode ("mark")) && (p->metaDataIOFlags & PLANKAUDIOFILEMETADATA_IOFLAGS_CUEPOINTS))
         {
             if ((result = pl_AudioFileReader_CAF_ParseChunk_mark (p, readChunkLength, readChunkEnd, &stringIndices, &strings)) != PlankResult_OK) goto exit;
         }
-        else if (readChunkID.fcc == pl_FourCharCode ("ovvw"))
+        else if ((readChunkID.fcc == pl_FourCharCode ("ovvw")) && (p->metaDataIOFlags & PLANKAUDIOFILEMETADATA_IOFLAGS_OVERVIEW))
         {
             goto next;
         }
-        else if (readChunkID.fcc != iff->common.headerInfo.junkID.fcc)
+        else if ((readChunkID.fcc != iff->common.headerInfo.junkID.fcc) && (p->metaDataIOFlags & PLANKAUDIOFILEMETADATA_IOFLAGS_CUSTOM))
         {
             // cache others that aren't junk
             
@@ -2557,53 +2569,56 @@ static PlankResult pl_AudioFileReader_OggFile_ParseComment (PlankAudioFileReader
     
     newCuePoint = PLANK_NULL;
     
-    if ((value1 = pl_OggTagCompare (comment, "TITLE=")) != 0)
+    if (p->metaDataIOFlags & PLANKAUDIOFILEMETADATA_IOFLAGS_INFO)
     {
-        pl_AudioFileMetaData_SetTitle (p->metaData, value1);
+        if ((value1 = pl_OggTagCompare (comment, "TITLE=")) != 0)
+        {
+            pl_AudioFileMetaData_SetTitle (p->metaData, value1);
+        }
+        else if ((value1 = pl_OggTagCompare (comment, "ALBUM=")) != 0)
+        {
+            pl_AudioFileMetaData_SetAlbum (p->metaData, value1);
+        }
+        else if ((value1 = pl_OggTagCompare (comment, "TRACKNUMBER=")) != 0)
+        {
+            sscanf (value1, "%d", &intValue);
+            pl_AudioFileMetaData_SetTrackInfo (p->metaData, intValue, 0);
+        }
+        else if ((value1 = pl_OggTagCompare (comment, "ARTIST=")) != 0)
+        {
+            pl_AudioFileMetaData_AddOriginatorArtist (p->metaData, value1);
+        }
+        else if ((value1 = pl_OggTagCompare (comment, "PERFORMER=")) != 0)
+        {
+            pl_AudioFileMetaData_AddPerformer (p->metaData, value1);
+        }
+        else if ((value1 = pl_OggTagCompare (comment, "TITLE=")) != 0)
+        {
+            pl_AudioFileMetaData_SetTitle (p->metaData, value1);
+        }
+        else if ((value1 = pl_OggTagCompare (comment, "DESCRIPTION=")) != 0)
+        {
+            pl_AudioFileMetaData_AddDescriptionComment (p->metaData, value1);
+        }
+        else if ((value1 = pl_OggTagCompare (comment, "GENRE=")) != 0)
+        {
+            pl_AudioFileMetaData_AddGenre (p->metaData, value1);
+        }
+        else if ((value1 = pl_OggTagCompare (comment, "DATE=")) != 0)
+        {
+            pl_AudioFileMetaData_SetOriginationDate (p->metaData, value1);
+        }
+        else if ((value1 = pl_OggTagCompare (comment, "ISRC=")) != 0)
+        {
+            pl_AudioFileMetaData_SetISRC (p->metaData, value1);
+        }
+        else if ((value1 = pl_OggTagCompare (comment, "ORGANIZATION=")) != 0)
+        {
+            pl_AudioFileMetaData_SetVendor (p->metaData, value1);
+        }
+        // etc // missing COPYRIGHT, VERSION, LICENSE, LOCATION, CONTACT
     }
-    else if ((value1 = pl_OggTagCompare (comment, "ALBUM=")) != 0)
-    {
-        pl_AudioFileMetaData_SetAlbum (p->metaData, value1);
-    }
-    else if ((value1 = pl_OggTagCompare (comment, "TRACKNUMBER=")) != 0)
-    {
-        sscanf (value1, "%d", &intValue);
-        pl_AudioFileMetaData_SetTrackInfo (p->metaData, intValue, 0);
-    }
-    else if ((value1 = pl_OggTagCompare (comment, "ARTIST=")) != 0)
-    {
-        pl_AudioFileMetaData_AddOriginatorArtist (p->metaData, value1);
-    }
-    else if ((value1 = pl_OggTagCompare (comment, "PERFORMER=")) != 0)
-    {
-        pl_AudioFileMetaData_AddPerformer (p->metaData, value1);
-    }
-    else if ((value1 = pl_OggTagCompare (comment, "TITLE=")) != 0)
-    {
-        pl_AudioFileMetaData_SetTitle (p->metaData, value1);
-    }
-    else if ((value1 = pl_OggTagCompare (comment, "DESCRIPTION=")) != 0)
-    {
-        pl_AudioFileMetaData_AddDescriptionComment (p->metaData, value1);
-    }
-    else if ((value1 = pl_OggTagCompare (comment, "GENRE=")) != 0)
-    {
-        pl_AudioFileMetaData_AddGenre (p->metaData, value1);
-    }
-    else if ((value1 = pl_OggTagCompare (comment, "DATE=")) != 0)
-    {
-        pl_AudioFileMetaData_SetOriginationDate (p->metaData, value1);
-    }
-    else if ((value1 = pl_OggTagCompare (comment, "ISRC=")) != 0)
-    {
-        pl_AudioFileMetaData_SetISRC (p->metaData, value1);
-    }
-    else if ((value1 = pl_OggTagCompare (comment, "ORGANIZATION=")) != 0)
-    {
-        pl_AudioFileMetaData_SetVendor (p->metaData, value1);
-    }
-    // etc // missing COPYRIGHT, VERSION, LICENSE, LOCATION, CONTACT
-    else if ((value1 = pl_OggTagCompare (comment, "CHAPTER")) != 0)
+    else if (((value1 = pl_OggTagCompare (comment, "CHAPTER")) != 0) && (p->metaDataIOFlags & PLANKAUDIOFILEMETADATA_IOFLAGS_CUEPOINTS))
     {
         if (isdigit (value1[0]) &&
             isdigit (value1[1]) &&
@@ -2642,7 +2657,7 @@ static PlankResult pl_AudioFileReader_OggFile_ParseComment (PlankAudioFileReader
                 }
             }
         }
-        else if ((value2 = pl_OggTagCompare (value1 + 3, "NAME=")) != 0)
+        else if (((value2 = pl_OggTagCompare (value1 + 3, "NAME=")) != 0) && (p->metaDataIOFlags & PLANKAUDIOFILEMETADATA_IOFLAGS_TEXT))
         {
             pl_AudioFileMetaData_FindCuePointWithID (p->metaData, cueID, &existingCuePoint, 0);
 
