@@ -43,9 +43,11 @@
 static PlankResult pl_AudioFileCuePoint_Init (PlankAudioFileCuePointRef p);
 static PlankResult pl_AudioFileCuePoint_DeInit (PlankAudioFileCuePointRef p);
 
-PLANKSHAREDPTR_CREATEANDINIT_DEFINE(AudioFileCuePoint)
+PLANKSHAREDPTR_CREATEANDINIT_DEFINE(AudioFileCuePoint, PLANKSHAREDPTR_TYPE_AUDIOFILECUEPOINT)
 PLANKSHAREDPTR_INCREMENTREFCOUNTANDGET_DEFINE(AudioFileCuePoint)
 PLANKSHAREDPTR_DECREMENTREFCOUNT_DEFINE(AudioFileCuePoint)
+PLANKSHAREDPTR_GETWEAKPTR_DEFINE(AudioFileCuePoint)
+PLANKSHAREDPTR_GETFROMWEAKPTR_DEFINE(AudioFileCuePoint)
 
 static PlankResult pl_AudioFileCuePoint_Init (PlankAudioFileCuePointRef p)
 {

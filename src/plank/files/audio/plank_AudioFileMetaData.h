@@ -44,6 +44,8 @@
 #include "../../containers/plank_DynamicArray.h"
 #include "../../containers/plank_SimpleLinkedList.h"
 
+#define PLANKSHAREDPTR_TYPE_AUDIOFILEMETADATA pl_FourCharCode("amtd")
+
 PLANK_BEGIN_C_LINKAGE
 
 /** An audio file meta data container.

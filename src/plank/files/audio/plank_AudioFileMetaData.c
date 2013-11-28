@@ -197,7 +197,7 @@ static PlankResult pl_AudioFileMetaDataFormatSpecificFree (PlankP ptr)
     return pl_DynamicArray_Destroy ((PlankDynamicArrayRef)ptr);
 }
 
-PLANKSHAREDPTR_CREATEANDINIT_DEFINE(AudioFileMetaData)
+PLANKSHAREDPTR_CREATEANDINIT_DEFINE(AudioFileMetaData, PLANKSHAREDPTR_TYPE_AUDIOFILEMETADATA);
 PLANKSHAREDPTR_INCREMENTREFCOUNTANDGET_DEFINE(AudioFileMetaData)
 PLANKSHAREDPTR_DECREMENTREFCOUNT_DEFINE(AudioFileMetaData)
 PLANKSHAREDPTR_GETWEAKPTR_DEFINE(AudioFileMetaData)
@@ -228,13 +228,12 @@ PlankResult pl_AudioFileMetaData_Init (PlankAudioFileMetaDataRef p)
     p->trackNum         = -1;
     p->trackTotal       = -1;
     
-    pl_SharedPtrArray_CreateSharedPtr (&p->cuePoints);
-    pl_SharedPtrArray_CreateSharedPtr (&p->loopPoints);
-    pl_SharedPtrArray_CreateSharedPtr (&p->regions);
+    pl_SharedPtrArray_CreateSharedPtr (&p->cuePoints, PLANKSHAREDPTR_TYPE_AUDIOFILECUEPOINT);
+    pl_SharedPtrArray_CreateSharedPtr (&p->loopPoints, PLANKSHAREDPTR_TYPE_AUDIOFILEREGION);
+    pl_SharedPtrArray_CreateSharedPtr (&p->regions, PLANKSHAREDPTR_TYPE_AUDIOFILEREGION);
     
     // the formatSpecific linked list contains elements that are DynamicArrays
     pl_SimpleLinkedList_SetFreeElementDataFunction (&p->formatSpecific, pl_AudioFileMetaDataFormatSpecificFree);
-    
 
 exit:
     return result;
@@ -644,7 +643,7 @@ PlankResult pl_AudioFileMetaData_FindCuePointWithID (PlankAudioFileMetaDataRef p
     {
         temp = (PlankAudioFileCuePointRef)pl_SharedPtrArray_GetSharedPtr (p->cuePoints, i);
         
-        if (pl_AudioFileCuePoint_GetID (temp) == cueID)
+        if ((temp != PLANK_NULL) && (pl_AudioFileCuePoint_GetID (temp) == cueID))
         {
             *cuePoint = temp;
             goto exit;

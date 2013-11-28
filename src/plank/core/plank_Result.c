@@ -96,7 +96,8 @@ const char* pl_ResultString (PlankResult result)
         "A generic JSON error occurred",                                                        //PlankResult_JSONError
         "A JSON error occurred with a file",                                                    //PlankResult_JSONFileError
         "A generic Zip error occurred",                                                         //PlankResult_ZipError
-        
+        "An error with mismatching types for share pointers occurred",                          //PlankResult_SharedPtrTypeError,
+
         ""
     };
     

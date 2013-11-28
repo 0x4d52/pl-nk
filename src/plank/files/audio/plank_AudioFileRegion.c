@@ -91,9 +91,11 @@
 static PlankResult pl_AudioFileRegion_Init (PlankAudioFileRegionRef p);
 static PlankResult pl_AudioFileRegion_DeInit (PlankAudioFileRegionRef p);
 
-PLANKSHAREDPTR_CREATEANDINIT_DEFINE(AudioFileRegion)
+PLANKSHAREDPTR_CREATEANDINIT_DEFINE(AudioFileRegion, PLANKSHAREDPTR_TYPE_AUDIOFILEREGION)
 PLANKSHAREDPTR_INCREMENTREFCOUNTANDGET_DEFINE(AudioFileRegion)
 PLANKSHAREDPTR_DECREMENTREFCOUNT_DEFINE(AudioFileRegion)
+PLANKSHAREDPTR_GETWEAKPTR_DEFINE(AudioFileRegion)
+PLANKSHAREDPTR_GETFROMWEAKPTR_DEFINE(AudioFileRegion)
 
 static PlankResult pl_AudioFileRegion_Init (PlankAudioFileRegionRef p)
 {

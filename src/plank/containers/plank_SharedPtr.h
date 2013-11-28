@@ -41,9 +41,9 @@
 
 #include "plank_DynamicArray.h"
 
-#define PLANKSHAREDPTR_CREATEANDINIT_DEFINE(NAME)\
+#define PLANKSHAREDPTR_CREATEANDINIT_DEFINE(NAME,TYPE)\
     PlankResult pl_##NAME##_CreateSharedPtr (Plank##NAME##Ref* pp) {\
-        return pl_SharedPtr_CreateAndInitWithSizeAndFunctions ((PlankSharedPtrRef*)pp, sizeof (Plank##NAME),(PlankSharedPtrFunction)pl_##NAME##_Init,(PlankSharedPtrFunction)pl_##NAME##_DeInit);\
+        return pl_SharedPtr_CreateAndInitWithSizeAndFunctions ((PlankSharedPtrRef*)pp, sizeof (Plank##NAME), TYPE, (PlankSharedPtrFunction)pl_##NAME##_Init,(PlankSharedPtrFunction)pl_##NAME##_DeInit);\
     }
 
 #define PLANKSHAREDPTR_INCREMENTREFCOUNTANDGET_DEFINE(NAME)\
@@ -65,6 +65,11 @@
     Plank##NAME##Ref pl_##NAME##GetFromWeakPtr (PlankWeakPtrRef w){\
         return (Plank##NAME##Ref)pl_WeakPtr_GetSharedPtr (w);\
     }
+
+
+#define PLANKSHAREDPTR_TYPE_WEAKPTR             pl_FourCharCode("weak")
+#define PLANKSHAREDPTR_TYPE_SHAREDPTRARRAY      pl_FourCharCode("arry")
+
 
 PLANK_BEGIN_C_LINKAGE
 
@@ -104,9 +109,11 @@ PlankResult pl_SharedPtrSwap (PlankSharedPtrRef* p1, PlankSharedPtrRef* p2);
 typedef struct PlankSharedPtrArray* PlankSharedPtrArrayRef;
 typedef PlankDynamicArrayCompareFunction PlankSharedPtrArrayCompareFunction;
 
-PlankResult pl_SharedPtrArray_CreateSharedPtr (PlankSharedPtrArrayRef* pp);
+PlankResult pl_SharedPtrArray_CreateSharedPtr (PlankSharedPtrArrayRef* pp, const PlankFourCharCode type);
 PlankSharedPtrArrayRef pl_SharefPtrArray_IncrementRefCountAndGetPtr (PlankSharedPtrArrayRef p);
 PlankResult pl_SharedPtrArray_DecrementRefCount (PlankSharedPtrArrayRef p);
+PlankResult pl_SharedPtrArray_SetElementType (PlankSharedPtrArrayRef p, const PlankFourCharCode type);
+PlankFourCharCode pl_SharedPtrArray_GetElementType (PlankSharedPtrArrayRef p);
 PlankResult pl_SharedPtrArray_Clear (PlankSharedPtrArrayRef p);
 PlankL pl_SharedPtrArray_GetLength (PlankSharedPtrArrayRef p);
 PlankAtomicP* pl_SharedPtrArray_GetArray (PlankSharedPtrArrayRef p);
@@ -137,6 +144,7 @@ typedef struct PlankSharedPtr
 typedef struct PlankSharedPtrArray
 {
     PlankSharedPtr sharedHeader;
+    PlankFourCharCode elementType;
     PlankDynamicArray array;
 } PlankSharedPtrArray;
 #endif

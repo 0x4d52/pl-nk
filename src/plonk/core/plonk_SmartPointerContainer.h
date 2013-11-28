@@ -464,6 +464,16 @@ protected:
         internal.getAtomicRef()->ptr = newInternal;
 	}
     
+    template<typename InitFunction, typename ArgType>
+    inline void initInternalWithFunction (InitFunction initFunction, ArgType arg) throw()
+	{
+        plonk_assert (internal.getPtrUnchecked() == PlankSharedPtrContainer::getNullSharedPtr());
+        Internal newInternal;
+        initFunction (&newInternal, arg);
+        internal.getAtomicRef()->ptr = newInternal;
+	}
+
+    
 private:
     AtomicPointer internal;
 };
@@ -528,6 +538,13 @@ public:
     PlankSharedPtrArrayContainer() throw()
     :   Base (Base::getNullSharedPtr())
     {
+        initInternalWithFunction (pl_SharedPtrArray_CreateSharedPtr, 0);
+    }
+    
+    PlankSharedPtrArrayContainer (FourCharCode const& elementType) throw()
+    :   Base (Base::getNullSharedPtr())
+    {
+        initInternalWithFunction (pl_SharedPtrArray_CreateSharedPtr, elementType);
     }
     
     PlankSharedPtrArrayContainer (PlankSharedPtrArrayRef p) throw()
@@ -583,7 +600,6 @@ public:
     {
         return at (index);
     }
-    
     
     inline ElementType wrapAt (const Long index) const throw()
     {

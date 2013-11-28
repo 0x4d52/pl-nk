@@ -42,6 +42,9 @@
 #include "plank_AudioFileCommon.h"
 #include "plank_AudioFileCuePoint.h"
 
+#define PLANKSHAREDPTR_TYPE_AUDIOFILEREGION pl_FourCharCode("regn")
+
+
 PLANK_BEGIN_C_LINKAGE
 
 /** An audio file region reference.

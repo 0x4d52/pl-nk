@@ -56,8 +56,8 @@ public:
     typedef AudioFileReader Container;
 
     AudioFileReaderInternal() throw();
-    AudioFileReaderInternal (const char* path, const int bufferSize, const bool readMetaData) throw();
-    AudioFileReaderInternal (ByteArray const& bytes, const int bufferSize, const bool readMetaData) throw();
+    AudioFileReaderInternal (const char* path, const int bufferSize, AudioFileMetaDataIOFlags const& metaDataIOFlags) throw();
+    AudioFileReaderInternal (ByteArray const& bytes, const int bufferSize, AudioFileMetaDataIOFlags const& metaDataIOFlags) throw();
     AudioFileReaderInternal (FilePathArray const& paths, const AudioFile::MultiFileTypes multiMode, const int bufferSize) throw();
     AudioFileReaderInternal (FilePathArray const& paths, IntVariable const& indexRef, const int bufferSize) throw();
     AudioFileReaderInternal (AudioFileReaderArray const& audioFiles, const AudioFile::MultiFileTypes multiMode, const int bufferSize, IntVariable* indexRef = 0) throw();
@@ -67,7 +67,7 @@ public:
 
     ~AudioFileReaderInternal();
     
-    ResultCode open (const char* path, const int bufferSize, const bool readMetaData) throw();
+    ResultCode open (const char* path, const int bufferSize, AudioFileMetaDataIOFlags const& metaDataIOFlags) throw();
     
     AudioFile::Format getFormat() const throw();
     AudioFile::Encoding getEncoding() const throw();
@@ -138,8 +138,8 @@ public:
     inline const PlankAudioFileReaderRef getPeerRef() const { return const_cast<const PlankAudioFileReaderRef> (&peer); }
 
 private:
-    ResultCode init (const char* path, const bool readMetaData) throw();
-    ResultCode init (ByteArray const& bytes, const bool readMetaData) throw();
+    ResultCode init (const char* path, AudioFileMetaDataIOFlags const& metaDataIOFlags) throw();
+    ResultCode init (ByteArray const& bytes, AudioFileMetaDataIOFlags const& metaDataIOFlags) throw();
 
     template<class Type>
     static inline void swapEndianIfNotNative (Type* data, const int numItems, const bool dataIsBigEndian) throw()
@@ -401,7 +401,7 @@ public:
      The default buffer size is used given by AudioFile::DefaultBufferSize (32768).
      @param path        The path of the file to read.  */
 	AudioFileReader (Text const& path) throw()
-	:	Base (new Internal (path.getArray(), 0, false))
+	:	Base (new Internal (path.getArray(), 0, AudioFile::MetaDatIOFlagsNone))
 	{
 	}
         
@@ -409,7 +409,7 @@ public:
      The default buffer size is used given by AudioFile::DefaultBufferSize (32768).
      @param path        The path of the file to read.  */
 	AudioFileReader (const char* path) throw()
-	:	Base (new Internal (path, 0, false))
+	:	Base (new Internal (path, 0, AudioFile::MetaDatIOFlagsNone))
 	{
 	}
     
@@ -417,20 +417,20 @@ public:
      The default buffer size is used given by AudioFile::DefaultBufferSize (32768).
      @param path        The path of the file to read.  */
 	AudioFileReader (FilePath const& path) throw()
-	:	Base (new Internal (path.fullpath().getArray(), 0, false))
+	:	Base (new Internal (path.fullpath().getArray(), 0, AudioFile::MetaDatIOFlagsNone))
 	{
 	}
     
-    AudioFileReader (FilePath const& path, const int bufferSize, const bool readMetaData) throw()
-	:	Base (new Internal (path.fullpath().getArray(), bufferSize, readMetaData))
+    AudioFileReader (FilePath const& path, const int bufferSize, AudioFileMetaDataIOFlags const& metaDataIOFlags) throw()
+	:	Base (new Internal (path.fullpath().getArray(), bufferSize, metaDataIOFlags))
 	{
 	}
     
     /** Creates an audio file reader from the given path.
      @param path        The path of the file to read.
      @param bufferSize  The buffer size to use when reading. */
-	AudioFileReader (const char* path, const int bufferSize, const bool readMetaData) throw()
-	:	Base (new Internal (path, bufferSize, readMetaData))
+	AudioFileReader (const char* path, const int bufferSize, AudioFileMetaDataIOFlags const& metaDataIOFlags) throw()
+	:	Base (new Internal (path, bufferSize, metaDataIOFlags))
 	{
 	}
 
@@ -509,8 +509,8 @@ public:
     {
     }
     
-    AudioFileReader (ByteArray const& bytes, const int bufferSize = 0, const bool readMetaData = false) throw()
-	:	Base (new Internal (bytes, bufferSize, readMetaData))
+    AudioFileReader (ByteArray const& bytes, const int bufferSize = 0, AudioFileMetaDataIOFlags const& metaDataIOFlags = AudioFile::MetaDatIOFlagsNone) throw()
+	:	Base (new Internal (bytes, bufferSize, metaDataIOFlags))
 	{
 	}
     
@@ -841,16 +841,6 @@ public:
         return this->getInternal()->getMetaData();
     }
     
-//    int getNumCuePoints() const throw()
-//    {
-//        return this->getInternal()->getNumCuePoints();
-//    }
-//    
-//    bool getCuePointAtIndex (const int index, UnsignedInt& cueID, Text& label, LongLong& position) const throw()
-//    {
-//        return this->getInternal()->getCuePointAtIndex (index, cueID, label, position);
-//    }
-    
     inline ChannelLayout getChannelLayout() const throw()
     {
         return this->getInternal()->getChannelLayout();
@@ -867,14 +857,14 @@ private:
     // these could be currently dangerous across threads, need to look at a safer way to open
     // a new file once one is already running...
     
-    ResultCode open (const char* path, const int bufferSize, const bool readMetaData) throw()
+    ResultCode open (const char* path, const int bufferSize, AudioFileMetaDataIOFlags const& metaDataIOFlags) throw()
     {
-        return getInternal()->open (path, bufferSize, readMetaData);
+        return getInternal()->open (path, bufferSize, metaDataIOFlags);
     }
     
     ResultCode open (Text const& path) throw()
     {
-        return getInternal()->open (path.getArray(), 0, false);
+        return getInternal()->open (path.getArray(), 0, AudioFile::MetaDatIOFlagsNone);
     }    
 };
 

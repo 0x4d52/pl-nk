@@ -52,7 +52,7 @@ AudioFileReaderInternal::AudioFileReaderInternal() throw()
     pl_AudioFileReader_Init (getPeerRef());
 }
 
-AudioFileReaderInternal::AudioFileReaderInternal (const char* path, const int bufferSize, const bool readMetaData) throw()
+AudioFileReaderInternal::AudioFileReaderInternal (const char* path, const int bufferSize, AudioFileMetaDataIOFlags const& metaDataIOFlags) throw()
 :   readBuffer (Chars::withSize ((bufferSize > 0) ? bufferSize : AudioFile::DefaultBufferSize)),
     numFramesPerBuffer (0),
     newPositionOnNextRead (-1),
@@ -60,15 +60,15 @@ AudioFileReaderInternal::AudioFileReaderInternal (const char* path, const int bu
     numChannelsChanged (false),
     defaultNumChannels (0)
 {
-    init (path, readMetaData);
+    init (path, metaDataIOFlags);
 }
 
-ResultCode AudioFileReaderInternal::init (const char* path, const bool readMetaData) throw()
+ResultCode AudioFileReaderInternal::init (const char* path, AudioFileMetaDataIOFlags const& metaDataIOFlags) throw()
 {
     plonk_assert (path != 0);
     
     pl_AudioFileReader_Init (getPeerRef());
-    ResultCode result = pl_AudioFileReader_OpenInternal (getPeerRef(), path, readMetaData);
+    ResultCode result = pl_AudioFileReader_OpenInternal (getPeerRef(), path, metaDataIOFlags.getValue());
     
     if (result == PlankResult_OK)
         numFramesPerBuffer = readBuffer.length() / getBytesPerFrame();
@@ -79,7 +79,7 @@ ResultCode AudioFileReaderInternal::init (const char* path, const bool readMetaD
     return result;
 }
 
-ResultCode AudioFileReaderInternal::init (ByteArray const& bytes, const bool readMetaData) throw()
+ResultCode AudioFileReaderInternal::init (ByteArray const& bytes, AudioFileMetaDataIOFlags const& metaDataIOFlags) throw()
 {
     pl_AudioFileReader_Init (getPeerRef());
     
@@ -87,7 +87,7 @@ ResultCode AudioFileReaderInternal::init (ByteArray const& bytes, const bool rea
     
     if (BinaryFileInternal::setupBytes (&file, bytes, false))
     {        
-        if (pl_AudioFileReader_OpenWithFile (getPeerRef(), &file, readMetaData) == PlankResult_OK)
+        if (pl_AudioFileReader_OpenWithFile (getPeerRef(), &file, metaDataIOFlags.getValue()) == PlankResult_OK)
         {
             numFramesPerBuffer = readBuffer.length() / getBytesPerFrame();
             
@@ -101,7 +101,7 @@ ResultCode AudioFileReaderInternal::init (ByteArray const& bytes, const bool rea
     return PlankResult_UnknownError;
 }
 
-AudioFileReaderInternal::AudioFileReaderInternal (ByteArray const& bytes, const int bufferSize, const bool readMetaData) throw()
+AudioFileReaderInternal::AudioFileReaderInternal (ByteArray const& bytes, const int bufferSize, AudioFileMetaDataIOFlags const& metaDataIOFlags) throw()
 :   readBuffer (Chars::withSize ((bufferSize > 0) ? bufferSize : AudioFile::DefaultBufferSize)),
     numFramesPerBuffer (0),
     newPositionOnNextRead (-1),
@@ -109,7 +109,7 @@ AudioFileReaderInternal::AudioFileReaderInternal (ByteArray const& bytes, const 
     numChannelsChanged (false),
     defaultNumChannels (0)
 {
-    init (bytes, readMetaData);
+    init (bytes, metaDataIOFlags);
 }
 
 
@@ -127,7 +127,7 @@ AudioFileReaderInternal::AudioFileReaderInternal (FilePathArray const& fileArray
     
     if (BinaryFileInternal::setupMulti (&file, fileArray, multiMode, PLANK_BIGENDIAN))
     {
-        if (pl_AudioFileReader_OpenWithFile (getPeerRef(), &file, false) == PlankResult_OK)
+        if (pl_AudioFileReader_OpenWithFile (getPeerRef(), &file, AudioFile::MetaDatIOFlagsNone) == PlankResult_OK)
         {
             if (getBytesPerFrame() > 0)
                 numFramesPerBuffer = readBuffer.length() / getBytesPerFrame();
@@ -150,7 +150,7 @@ AudioFileReaderInternal::AudioFileReaderInternal (FilePathArray const& fileArray
     
     if (BinaryFileInternal::setupMulti (&file, fileArray, AudioFile::MultiFileArrayIndexRef, PLANK_BIGENDIAN, &nextMultiIndexRef))
     {
-        if (pl_AudioFileReader_OpenWithFile (getPeerRef(), &file, false) == PlankResult_OK)
+        if (pl_AudioFileReader_OpenWithFile (getPeerRef(), &file, AudioFile::MetaDatIOFlagsNone) == PlankResult_OK)
         {
             if (getBytesPerFrame() > 0)
                 numFramesPerBuffer = readBuffer.length() / getBytesPerFrame();
@@ -204,7 +204,7 @@ AudioFileReaderInternal::AudioFileReaderInternal (FilePathQueue const& fileQueue
     
     if (BinaryFileInternal::setupMulti (&file, fileQueue, PLANK_BIGENDIAN))
     {
-        if (pl_AudioFileReader_OpenWithFile (getPeerRef(), &file, false) == PlankResult_OK)
+        if (pl_AudioFileReader_OpenWithFile (getPeerRef(), &file, AudioFile::MetaDatIOFlagsNone) == PlankResult_OK)
         {
             if (getBytesPerFrame() > 0)
                 numFramesPerBuffer = readBuffer.length() / getBytesPerFrame();
@@ -346,7 +346,7 @@ AudioFileReaderInternal::~AudioFileReaderInternal()
     pl_AudioFileReader_DeInit (getPeerRef());
 }
 
-ResultCode AudioFileReaderInternal::open (const char* path, const int bufferSize, const bool readMetaData) throw()
+ResultCode AudioFileReaderInternal::open (const char* path, const int bufferSize, AudioFileMetaDataIOFlags const& metaDataIOFlags) throw()
 {
     if ((readBuffer.length() == 0) || (bufferSize > 0))
         readBuffer.setSize ((bufferSize > 0) ? bufferSize : AudioFile::DefaultBufferSize, false);
@@ -354,7 +354,7 @@ ResultCode AudioFileReaderInternal::open (const char* path, const int bufferSize
     numFramesPerBuffer = 0;
     newPositionOnNextRead = -1;
     
-    return init (path, readMetaData);
+    return init (path, metaDataIOFlags);
 }
 
 AudioFile::Format AudioFileReaderInternal::getFormat() const throw()

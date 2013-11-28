@@ -95,6 +95,7 @@ enum PlankResultIdentifiers
     PlankResult_JSONError,                  ///< A generic JSON error occurred.
     PlankResult_JSONFileError,              ///< A JSON error occurred with a file.
     PlankResult_ZipError,                   ///< A generic Zip error occurred.
+    PlankResult_SharedPtrTypeError,         ///< An error with mismatching types for share pointers.
 
     PlankNumResults
 };

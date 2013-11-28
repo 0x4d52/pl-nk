@@ -143,6 +143,22 @@ public:
         ConvertCuePointsToRegionsRemovingCuePoints = 3
     };
     
+    enum MetaDataIOFlags
+    {
+        MetaDatIOFlagsNone = PLANKAUDIOFILEMETADATA_IOFLAGS_NONE,                           //0x00000000
+        MetaDatIOFlagsCuePoints = PLANKAUDIOFILEMETADATA_IOFLAGS_CUEPOINTS,                 //0x00000001
+        MetaDatIOFlagsRegions = PLANKAUDIOFILEMETADATA_IOFLAGS_REGIONS,                     //0x00000002
+        MetaDatIOFlagsLoops = PLANKAUDIOFILEMETADATA_IOFLAGS_LOOPS,                         //0x00000004
+        MetaDatIOFlagsText = PLANKAUDIOFILEMETADATA_IOFLAGS_TEXT,                           //0x00000008
+        MetaDatIOFlagssSampler = PLANKAUDIOFILEMETADATA_IOFLAGS_SAMPLER,                    //0x00000010
+        MetaDatIOFlagsExtraSamplerData = PLANKAUDIOFILEMETADATA_IOFLAGS_EXTRASAMPLERDATA,   //0x00000020
+        MetaDatIOFlagsInfo = PLANKAUDIOFILEMETADATA_IOFLAGS_INFO,                           //0x00000100
+        MetaDatIOFlagsNormal = PLANKAUDIOFILEMETADATA_IOFLAGS_NORMAL,                       //0x0000013F
+        MetaDatIOFlagsOverview = PLANKAUDIOFILEMETADATA_IOFLAGS_OVERVIEW,                   //0x00001000
+        MetaDatIOFlagsCustom = PLANKAUDIOFILEMETADATA_IOFLAGS_CUSTOM,                       //0x80000000
+        MetaDatIOFlagsAll = PLANKAUDIOFILEMETADATA_IOFLAGS_ALL                              //0xFFFFFFFF
+    };
+    
     enum CuePointTypes
     {
         CuePointUnknown = PLANKAUDIOFILE_CUEPOINTTYPE_UNKNOWN,
@@ -381,12 +397,12 @@ public:
     {
     }
     
-    operator const UnsignedInt& () const throw()
+    inline operator const UnsignedInt& () const throw()
     {
         return static_cast<const UnsignedInt&> (peer);
     }
     
-    const UnsignedInt& getValue() const throw()
+    inline const UnsignedInt& getValue() const throw()
     {
         return static_cast<const UnsignedInt&> (peer);
     }
@@ -415,12 +431,12 @@ public:
     {
     }
     
-    operator const UnsignedInt& () const throw()
+    inline operator const UnsignedInt& () const throw()
     {
         return static_cast<const UnsignedInt&> (peer);
     }
     
-    const UnsignedInt& getValue() const throw()
+    inline const UnsignedInt& getValue() const throw()
     {
         return static_cast<const UnsignedInt&> (peer);
     }
@@ -440,6 +456,54 @@ private:
     
     ChannelIdentifier (ChannelLayout const&);
 };
+
+class AudioFileMetaDataIOFlags : public PlonkBase
+{
+public:
+    AudioFileMetaDataIOFlags (UnsignedInt value) throw()
+    :   peer (static_cast<PlankAudioFileMetaDataIOFlags> (value))
+    {
+    }
+
+    AudioFileMetaDataIOFlags (AudioFile::MetaDataIOFlags value) throw()
+    :   peer (static_cast<PlankAudioFileMetaDataIOFlags> (value))
+    {
+    }
+
+    AudioFileMetaDataIOFlags (PlankAudioFileMetaDataIOFlags const& value) throw()
+    :   peer (value)
+    {
+    }
+    
+    inline operator const UnsignedInt& () const throw()
+    {
+        return static_cast<const UnsignedInt&> (peer);
+    }
+    
+    inline const UnsignedInt& getValue() const throw()
+    {
+        return static_cast<const UnsignedInt&> (peer);
+    }
+    
+    AudioFileMetaDataIOFlags& add (AudioFileMetaDataIOFlags const& other) throw()
+    {
+        peer = static_cast<PlankAudioFileMetaDataIOFlags> (getValue() | other.getValue());
+        return *this;
+    }
+    
+    AudioFileMetaDataIOFlags& remove (AudioFileMetaDataIOFlags const& other) throw()
+    {
+        peer = static_cast<PlankAudioFileMetaDataIOFlags> (getValue() & ~other.getValue());
+        return *this;
+    }
+
+    
+private:
+    PlankAudioFileMetaDataIOFlags peer;
+    
+    AudioFileMetaDataIOFlags (bool);
+};
+
 
 
 #endif // PLONK_AUDIOFILE_H

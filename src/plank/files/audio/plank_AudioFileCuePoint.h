@@ -43,6 +43,8 @@
 #include "../../containers/plank_SharedPtr.h"
 #include "../../containers/plank_DynamicArray.h"
 
+#define PLANKSHAREDPTR_TYPE_AUDIOFILECUEPOINT pl_FourCharCode("cuep")
+
 PLANK_BEGIN_C_LINKAGE
 
 /** An audio file cue point reference.
