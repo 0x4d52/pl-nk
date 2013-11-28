@@ -434,6 +434,19 @@ public:
 	{
 	}
 
+    AudioFileReader (FilePath const& path, const int bufferSize, UnsignedInt const& metaDataIOFlags) throw()
+	:	Base (new Internal (path.fullpath().getArray(), bufferSize, AudioFileMetaDataIOFlags (metaDataIOFlags)))
+	{
+	}
+    
+    /** Creates an audio file reader from the given path.
+     @param path        The path of the file to read.
+     @param bufferSize  The buffer size to use when reading. */
+	AudioFileReader (const char* path, const int bufferSize, UnsignedInt const& metaDataIOFlags) throw()
+	:	Base (new Internal (path, bufferSize, AudioFileMetaDataIOFlags (metaDataIOFlags)))
+	{
+	}
+
     /** Creates a multiple audio file reader from the given paths.
      @param paths       The paths of the files to read.
      @param bufferSize  The buffer size to use when reading. */
@@ -511,6 +524,11 @@ public:
     
     AudioFileReader (ByteArray const& bytes, const int bufferSize = 0, AudioFileMetaDataIOFlags const& metaDataIOFlags = AudioFile::MetaDatIOFlagsNone) throw()
 	:	Base (new Internal (bytes, bufferSize, metaDataIOFlags))
+	{
+	}
+    
+    AudioFileReader (ByteArray const& bytes, const int bufferSize = 0, UnsignedInt const& metaDataIOFlags = AudioFile::MetaDatIOFlagsNone) throw()
+	:	Base (new Internal (bytes, bufferSize, AudioFileMetaDataIOFlags (metaDataIOFlags)))
 	{
 	}
     

@@ -166,17 +166,9 @@ public:
             pl_DynamicArray_Init (&array);
             
             if (pl_JSON_IntArrayGet (json, &array) == PlankResult_OK)
-            {
-                IntArray values ((int)pl_DynamicArray_GetSize (&array),
-                                 static_cast<int*> (pl_DynamicArray_GetArray (&array)),
-                                 false, // not null terminated
-                                 true); // shouldTakeOwnership
-                return values;
-            }
+                return IntArray::withArray((int)pl_DynamicArray_GetSize (&array), static_cast<int*> (pl_DynamicArray_GetArray (&array)));
             else
-            {
                 pl_DynamicArray_DeInit (&array);
-            }
         }
         
         return IntArray::getNull();
@@ -190,17 +182,9 @@ public:
             pl_DynamicArray_Init (&array);
             
             if (pl_JSON_FloatArrayGet (json, &array) == PlankResult_OK)
-            {
-                FloatArray values ((int)pl_DynamicArray_GetSize (&array),
-                                   static_cast<float*> (pl_DynamicArray_GetArray (&array)),
-                                   false, // not null terminated
-                                   true); // shouldTakeOwnership
-                return values;
-            }
+                return FloatArray::withArray((int)pl_DynamicArray_GetSize (&array), static_cast<float*> (pl_DynamicArray_GetArray (&array)));
             else
-            {
                 pl_DynamicArray_DeInit (&array);
-            }
         }
         
         return FloatArray::getNull();
@@ -214,17 +198,9 @@ public:
             pl_DynamicArray_Init (&array);
             
             if (pl_JSON_DoubleArrayGet (json, &array) == PlankResult_OK)
-            {
-                DoubleArray values ((int)pl_DynamicArray_GetSize (&array),
-                                    static_cast<double*> (pl_DynamicArray_GetArray (&array)),
-                                    false, // not null terminated
-                                    true); // shouldTakeOwnership
-                return values;
-            }
+                return DoubleArray::withArray((int)pl_DynamicArray_GetSize (&array), static_cast<double*> (pl_DynamicArray_GetArray (&array)));
             else
-            {
                 pl_DynamicArray_DeInit (&array);
-            }
         }
         
         return DoubleArray::getNull();
@@ -248,9 +224,7 @@ public:
     inline JSON& put (const Long index, JSON const& item) throw()
     {
         if (isArray())
-        {
             pl_JSON_ArrayPut (json, index, pl_JSON_IncrementRefCount (item.json));
-        }
         
         return *this;
     }
@@ -258,9 +232,7 @@ public:
     inline JSON& add (JSON const& item) throw()
     {
         if (isArray())
-        {
             pl_JSON_ArrayAppend (json, pl_JSON_IncrementRefCount (item.json));
-        }
         
         return *this;
     }
@@ -268,9 +240,7 @@ public:
     inline JSON& add (const char* key, JSON const& item) throw()
     {
         if (isObject())
-        {
             pl_JSON_ObjectPutKey (json, key, pl_JSON_IncrementRefCount (item.json));
-        }
         
         return *this;
     }
@@ -278,25 +248,15 @@ public:
     inline Long length() const throw()
     {
         if (isArray())
-        {
             return pl_JSON_ArrayGetSize (json);
-        }
         else if (isObject())
-        {            
             return pl_JSON_ObjectGetSize (json);
-        }
         else if (isString())
-        {
             return strlen (pl_JSON_StringGet (json));
-        }
         else if (!json || isNull())
-        {
             return 0;
-        }
         else
-        {
             return 1;
-        }
     }
   
     static JSON versionString (const UnsignedChar ex, const UnsignedChar major, const UnsignedChar minor, const UnsignedChar micro) throw()

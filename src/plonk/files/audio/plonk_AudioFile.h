@@ -460,21 +460,11 @@ private:
 class AudioFileMetaDataIOFlags : public PlonkBase
 {
 public:
-    AudioFileMetaDataIOFlags (UnsignedInt value) throw()
-    :   peer (static_cast<PlankAudioFileMetaDataIOFlags> (value))
-    {
-    }
-
-    AudioFileMetaDataIOFlags (AudioFile::MetaDataIOFlags value) throw()
-    :   peer (static_cast<PlankAudioFileMetaDataIOFlags> (value))
-    {
-    }
-
     AudioFileMetaDataIOFlags (PlankAudioFileMetaDataIOFlags const& value) throw()
     :   peer (value)
     {
     }
-    
+
     inline operator const UnsignedInt& () const throw()
     {
         return static_cast<const UnsignedInt&> (peer);

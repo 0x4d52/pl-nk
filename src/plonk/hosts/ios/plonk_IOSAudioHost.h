@@ -39,10 +39,12 @@
 #ifndef PLONK_IOSAUDIOHOST_H
 #define PLONK_IOSAUDIOHOST_H
 
+namespace  {
 #include <AudioToolbox/AudioQueue.h>
 #include <AudioToolbox/AudioServices.h>
 #include <AudioToolbox/AudioToolbox.h>
 #include <AudioUnit/AudioUnit.h>
+}
 
 BEGIN_PLONK_NAMESPACE
 

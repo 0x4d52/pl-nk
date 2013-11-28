@@ -1007,18 +1007,18 @@ public:
             zero();
 	}
 	
-	/** Construct a NumericalArray that refers to some other data.
-	 It is very important to note that the data is not copies so must continue
-	 to exist for the lifetime of this object. 
-	 @param size The size of the source data to use.
-	 @param dataToUse A pointer to the data. 
-	 @param needsNullTermination Whether the data is null terminated ot not. 
-	 @see withArrayNoCopy */
-	NumericalArray (const int size, NumericalType* dataToUse, const bool needsNullTermination, const bool shouldTakeOwnership = false) throw()
-	:	Base (size, dataToUse, needsNullTermination, shouldTakeOwnership)
-	{
-		plonk_assert (size > 0);
-	}
+//	/** Construct a NumericalArray that refers to some other data.
+//	 It is very important to note that the data is not copies so must continue
+//	 to exist for the lifetime of this object. 
+//	 @param size The size of the source data to use.
+//	 @param dataToUse A pointer to the data. 
+//	 @param needsNullTermination Whether the data is null terminated ot not. 
+//	 @see withArrayNoCopy */
+//	NumericalArray (const int size, NumericalType* dataToUse, const bool needsNullTermination, const bool shouldTakeOwnership = false) throw()
+//	:	Base (size, dataToUse, needsNullTermination, shouldTakeOwnership)
+//	{
+//		plonk_assert (size > 0);
+//	}
 	
 	/** Creates a NumericalArray with a given size (length). */
 	static NumericalArray<NumericalType> withSize (const int size, const bool zeroData = false) throw()
@@ -1292,7 +1292,7 @@ public:
 														  const bool needsNullTermination = false) throw()
 	{
 		plonk_assert (sourceArray != 0);
-		return NumericalArray<NumericalType> (size, sourceArray, needsNullTermination);
+		return Base (size, sourceArray, needsNullTermination);
 	}
 	
 	/** Construct an array with a single value. */
