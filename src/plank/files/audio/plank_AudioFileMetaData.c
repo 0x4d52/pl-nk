@@ -317,7 +317,7 @@ PlankResult pl_AudioFileMetaData_SetInstrumentData (PlankAudioFileMetaDataRef p,
     p->lowVelocity  = lowVelocity;
     p->highVelocity = highVelocity;
     
-exit:
+//exit:
     return result;
 }
 
@@ -340,7 +340,7 @@ PlankResult pl_AudioFileMetaData_GetInstrumentData (PlankAudioFileMetaDataRef p,
     if (lowVelocity  != PLANK_NULL)  *lowVelocity = p->lowVelocity;
     if (highVelocity != PLANK_NULL) *highVelocity = p->highVelocity;
     
-exit:
+//exit:
     return result;    
 }
 
@@ -359,7 +359,7 @@ PlankResult pl_AudioFileMetaData_SetSamplerData (PlankAudioFileMetaDataRef p,
     p->smpteFormat  = smpteFormat;
     p->smpteOffset  = smpteOffset;
     
-exit:
+//exit:
     return result;
 }
 
@@ -378,7 +378,7 @@ PlankResult pl_AudioFileMetaData_GetSamplerData (PlankAudioFileMetaDataRef p,
     if (smpteFormat  != PLANK_NULL)  *smpteFormat = p->smpteFormat;
     if (smpteOffset  != PLANK_NULL)  *smpteOffset = p->smpteOffset;
 
-exit:
+//exit:
     return result;
 }
 
@@ -707,7 +707,7 @@ PlankResult pl_AudioFileMetaData_GetNextCueID (PlankAudioFileMetaDataRef p, Plan
     
     *cueID = nextCueID;
     
-exit:
+//exit:
     return result;
 }
 
@@ -924,7 +924,7 @@ static PlankResult pl_AudioFileMetaData_CuePoints_InsertFrames (PlankAudioFileMe
         
         if (start <= position)
         {
-            if ((result = pl_AudioFileCuePoint_SetPosition (cuePoint, position + length) != PlankResult_OK)) goto exit;
+            if ((result = pl_AudioFileCuePoint_SetPosition (cuePoint, position + length)) != PlankResult_OK) goto exit;
         }
     }
     
@@ -950,11 +950,11 @@ static PlankResult pl_AudioFileMetaData_RegionsArray_InsertFrames (PlankSharedPt
         
         if (start < regionEnd)
         {
-            if ((result = pl_AudioFileRegion_SetEndPosition (region, regionEnd + length) != PlankResult_OK)) goto exit;
+            if ((result = pl_AudioFileRegion_SetEndPosition (region, regionEnd + length)) != PlankResult_OK) goto exit;
             
             if (start < regionStart)
             {
-                if ((result = pl_AudioFileRegion_SetStartPosition (region, regionStart + length) != PlankResult_OK)) goto exit;
+                if ((result = pl_AudioFileRegion_SetStartPosition (region, regionStart + length)) != PlankResult_OK) goto exit;
             }
         }
     }
@@ -1010,7 +1010,7 @@ static PlankResult pl_AudioFileMetaData_CuePoints_RemoveFrames (PlankAudioFileMe
             }
             else
             {
-                if ((result = pl_AudioFileCuePoint_SetPosition (cuePoint, position - length) != PlankResult_OK)) goto exit;
+                if ((result = pl_AudioFileCuePoint_SetPosition (cuePoint, position - length)) != PlankResult_OK) goto exit;
             }
         }
     }
@@ -1040,8 +1040,8 @@ static PlankResult pl_AudioFileMetaData_RegionsArray_RemoveFrames (PlankSharedPt
         {
             if (end <= regionStart)
             {
-                if ((result = pl_AudioFileRegion_SetStartPosition (region, regionStart - length) != PlankResult_OK)) goto exit;
-                if ((result = pl_AudioFileRegion_SetEndPosition (region, regionEnd - length) != PlankResult_OK)) goto exit;
+                if ((result = pl_AudioFileRegion_SetStartPosition (region, regionStart - length)) != PlankResult_OK) goto exit;
+                if ((result = pl_AudioFileRegion_SetEndPosition (region, regionEnd - length)) != PlankResult_OK) goto exit;
             }
             else
             {

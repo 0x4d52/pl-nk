@@ -109,6 +109,8 @@ PlankResult pl_Base64_EncodeFile (PlankBase64Ref p, PlankFileRef outputTextFile,
     PlankUC data;
     PlankC char0, char1, char2, char3;
     
+	(void)p;
+
     result = PlankResult_OK;
     if ((result = pl_File_GetMode (outputTextFile, &outputMode)) != PlankResult_OK) goto exit;
     if ((result = pl_File_GetMode (inputBinaryFile, &inputMode)) != PlankResult_OK) goto exit;
@@ -188,6 +190,8 @@ PlankResult pl_Base64_DecodeFile (PlankBase64Ref p, PlankFileRef outputBinaryFil
     int outputMode, inputMode, bytesRead, binaryBytes;
     PlankC quad[4];
     
+	(void)p;
+
     result = PlankResult_OK;
     if ((result = pl_File_GetMode (inputTextFile, &inputMode)) != PlankResult_OK) goto exit;
     if ((result = pl_File_GetMode (outputBinaryFile, &outputMode)) != PlankResult_OK) goto exit;

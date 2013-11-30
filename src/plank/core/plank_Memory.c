@@ -138,7 +138,7 @@ PlankResult pl_Memory_SetFunctions (PlankMemoryRef p,
     if (freeFunction == PLANK_NULL)
         freeFunction = pl_MemoryDefaultFree;
     
-    temp.ptr = allocateBytesFunction;
+    temp.ptr = (PlankP)(PlankM)allocateBytesFunction;
     temp.extra = *(PlankL*)&freeFunction;
     
     pl_AtomicPX_SetAll (&p->funcs, temp.ptr, temp.extra);

@@ -160,7 +160,8 @@ void pl_ThreadSpinLock_Wait (PlankThreadSpinLockRef p)
 
 void pl_ThreadSpinLock_WaitTimeout (PlankThreadSpinLockRef p, double time)
 {
-    
+    (void)p;
+	(void)time;
 }
 
 void pl_ThreadSpinLock_Signal (PlankThreadSpinLockRef p)

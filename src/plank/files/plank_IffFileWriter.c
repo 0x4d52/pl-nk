@@ -86,7 +86,7 @@ PlankResult pl_IffFileWriter_Init (PlankIffFileWriterRef p)
     
     result = pl_DynamicArray_InitWithItemSizeAndCapacity (&p->chunkInfos, sizeof(PlankIffFileWriterChunkInfo), 16);
     
-exit:
+//exit:
     return result;
 }
 
@@ -898,7 +898,7 @@ PlankResult pl_IffFileWriter_FindLastChunk (PlankIffFileWriterRef p, PlankIffFil
     
     *lastChunkInfo = currentLastChunk;
     
-exit:
+//exit:
     return result;
 }
 
@@ -1071,7 +1071,7 @@ PlankResult pl_IffFileWriter_PurgeChunkInfos (PlankIffFileWriterRef p)
     }
     
     
-exit:
+//exit:
     return result;
 }
 

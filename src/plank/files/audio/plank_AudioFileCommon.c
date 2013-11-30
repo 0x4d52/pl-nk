@@ -117,7 +117,7 @@ PlankResult pl_AudioFileFormatInfo_SetChannelItentifier (PlankAudioFileFormatInf
     result = pl_DynamicArray_SetItem (&formatInfo->channelIdentifiers, channel, (void*)&channelIdentifier);
     formatInfo->channelLayout = pl_AudioFileFormatInfo_ChannelIdentifiersToLayout (formatInfo);
     
-exit:
+//exit:
     return result;
 }
 
@@ -496,9 +496,9 @@ const char* pl_AudioFileFormatInfoChannelLayoutToName (const PlankChannelLayout 
 PlankB pl_AudioFileFormatInfo_LayoutToFormatChannelIdentifiers (PlankAudioFileFormatInfoRef formatInfo, const PlankChannelLayout channelLayoutTag)
 {
     PlankChannelIdentifier* channelIdentifiers;
-    int numChannels;
+    PlankUI numChannels;
     
-    numChannels = pl_AudioFileFormatInfo_GetNumChannels (formatInfo);
+    numChannels = (PlankUI)pl_AudioFileFormatInfo_GetNumChannels (formatInfo);
     
     if ((numChannels > 0) && (numChannels == (channelLayoutTag & 0x0000FFFF)))
     {
@@ -1118,7 +1118,7 @@ PlankB pl_AudioFileFormatInfo_ChannelIdentifiersAreStereoPairs (PlankAudioFileFo
     
     for (i = 0; i < (numChannels & 0x0000FFFE); ++i)
     {
-        if (channelIdentifiers[i] != ((i & 1) ? PLANKAUDIOFILE_CHANNEL_STEREO_RIGHT : PLANKAUDIOFILE_CHANNEL_STEREO_LEFT))
+        if (channelIdentifiers[i] != (PlankUI)((i & 1) ? PLANKAUDIOFILE_CHANNEL_STEREO_RIGHT : PLANKAUDIOFILE_CHANNEL_STEREO_LEFT))
             return PLANK_FALSE;
     }
     
@@ -1420,8 +1420,8 @@ void pl_AudioFileFormatInfo_AIFF_SetDefaultLayout (PlankAudioFileFormatInfoRef f
             case 2:  pl_AudioFileFormatInfoLayoutToFormatChannelIdentifiers (channelIdentifiers, formatInfo->channelLayout = PLANKAUDIOFILE_LAYOUT_STEREO); break;
             case 3:  pl_AudioFileFormatInfoLayoutToFormatChannelIdentifiers (channelIdentifiers, formatInfo->channelLayout = PLANKAUDIOFILE_LAYOUT_MPEG_3_0_A); break;
             case 4:  pl_AudioFileFormatInfoLayoutToFormatChannelIdentifiers (channelIdentifiers, formatInfo->channelLayout = PLANKAUDIOFILE_LAYOUT_QUADRAPHONIC); break;
-            case 5:  pl_AudioFileFormatInfoLayoutToFormatChannelIdentifiers (channelIdentifiers, formatInfo->channelLayout = PLANKAUDIOFILE_LAYOUT_MPEG_5_0_A); break; //?? not specified!!
-            case 6:  pl_AudioFileFormatInfoLayoutToFormatChannelIdentifiers (channelIdentifiers, formatInfo->channelLayout = PLANKAUDIOFILE_LAYOUT_AIFF_6_0); break;
+            case 5:  pl_AudioFileFormatInfoLayoutToFormatChannelIdentifiers (channelIdentifiers, formatInfo->channelLayout = (PlankUI)PLANKAUDIOFILE_LAYOUT_MPEG_5_0_A); break; //?? not specified!!
+            case 6:  pl_AudioFileFormatInfoLayoutToFormatChannelIdentifiers (channelIdentifiers, formatInfo->channelLayout = (PlankUI)PLANKAUDIOFILE_LAYOUT_AIFF_6_0); break;
             default: pl_AudioFileFormatInfo_SetDiscreteLayout (formatInfo);
         }
     }
@@ -1446,8 +1446,8 @@ void pl_AudioFileFormatInfo_OggVorbis_SetDefaultLayout (PlankAudioFileFormatInfo
             case 4:  pl_AudioFileFormatInfoLayoutToFormatChannelIdentifiers (channelIdentifiers, formatInfo->channelLayout = PLANKAUDIOFILE_LAYOUT_QUADRAPHONIC); break;
             case 5:  pl_AudioFileFormatInfoLayoutToFormatChannelIdentifiers (channelIdentifiers, formatInfo->channelLayout = PLANKAUDIOFILE_LAYOUT_MPEG_5_0_C); break;
             case 6:  pl_AudioFileFormatInfoLayoutToFormatChannelIdentifiers (channelIdentifiers, formatInfo->channelLayout = PLANKAUDIOFILE_LAYOUT_MPEG_5_1_C); break;
-            case 7:  pl_AudioFileFormatInfoLayoutToFormatChannelIdentifiers (channelIdentifiers, formatInfo->channelLayout = PLANKAUDIOFILE_LAYOUT_OGGVORBIS_6_1); break;
-            case 8:  pl_AudioFileFormatInfoLayoutToFormatChannelIdentifiers (channelIdentifiers, formatInfo->channelLayout = PLANKAUDIOFILE_LAYOUT_OGGVORBIS_7_1); break;
+            case 7:  pl_AudioFileFormatInfoLayoutToFormatChannelIdentifiers (channelIdentifiers, formatInfo->channelLayout = (PlankUI)PLANKAUDIOFILE_LAYOUT_OGGVORBIS_6_1); break;
+            case 8:  pl_AudioFileFormatInfoLayoutToFormatChannelIdentifiers (channelIdentifiers, formatInfo->channelLayout = (PlankUI)PLANKAUDIOFILE_LAYOUT_OGGVORBIS_7_1); break;
             default: pl_AudioFileFormatInfo_SetDiscreteLayout (formatInfo);
         }
     }
@@ -1455,6 +1455,6 @@ void pl_AudioFileFormatInfo_OggVorbis_SetDefaultLayout (PlankAudioFileFormatInfo
 
 void pl_AudioFileFormatInfo_Opus_SetDefaultLayout (PlankAudioFileFormatInfoRef formatInfo)
 {
-    return pl_AudioFileFormatInfo_OggVorbis_SetDefaultLayout (formatInfo);
+    pl_AudioFileFormatInfo_OggVorbis_SetDefaultLayout (formatInfo);
 }
 

@@ -272,14 +272,14 @@ static PlankResult pl_SharedPtrCounter_DecrementWeakCount (PlankSharedPtrCounter
     if ((newElement.parts.counts.refCount == 0) && (newElement.parts.counts.weakCount == 0))
         result = pl_SharedPtrCounter_Destroy (p);    
     
-exit:
+//exit:
     return result;
 }
 
 
 /////////////////////////////// SharedPtr //////////////////////////////////////
 
-PlankResult pl_SharedPtr_CreateAndInitWithSizeAndFunctions (PlankSharedPtrRef* pp, const PlankL size, const PlankFourCharCode type,  void* initFunction, void* deInitFunction)
+PlankResult pl_SharedPtr_CreateAndInitWithSizeAndFunctions (PlankSharedPtrRef* pp, const PlankL size, const PlankFourCharCode type,  PlankM initFunction, PlankM deInitFunction)
 {
     PlankMemoryRef m;
     PlankSharedPtrRef p;
@@ -306,7 +306,7 @@ PlankResult pl_SharedPtr_CreateAndInitWithSizeAndFunctions (PlankSharedPtrRef* p
         if (p != PLANK_NULL)
         {
             pl_MemoryZero (p, size);
-            p->size = size;
+            p->size = (PlankUI)size;
             p->type = type;
             sharedCounter = pl_SharedPtrCounter_CreateAndInitWithSharedPtr (p);
             
@@ -325,7 +325,7 @@ PlankResult pl_SharedPtr_CreateAndInitWithSizeAndFunctions (PlankSharedPtrRef* p
                 printf("\n");
 #endif
                 // not a WeakPtr
-                p->deInitFunction = deInitFunction;
+                p->deInitFunction = (PlankSharedPtrFunction)deInitFunction;
                 
                 // allocate a WeakPtr
                 pl_SharedPtr_CreateAndInitWithSizeAndFunctions ((PlankSharedPtrRef*)&w, sizeof (PlankWeakPtr), PLANKSHAREDPTR_TYPE_WEAKPTR, PLANK_NULL, PLANK_NULL);
@@ -488,8 +488,8 @@ PlankResult pl_SharedPtrArray_CreateSharedPtr (PlankSharedPtrArrayRef* pp, const
     result = pl_SharedPtr_CreateAndInitWithSizeAndFunctions ((PlankSharedPtrRef*)pp,
                                                              sizeof (PlankSharedPtrArray),
                                                              PLANKSHAREDPTR_TYPE_SHAREDPTRARRAY,
-                                                             (PlankSharedPtrFunction)pl_SharedPtrArray_Init,
-                                                             (PlankSharedPtrFunction)pl_SharedPtrArray_DeInit);
+                                                             (PlankM)pl_SharedPtrArray_Init,
+                                                             (PlankM)pl_SharedPtrArray_DeInit);
     if (result == PlankResult_OK)
         (*pp)->elementType = elementType;
     
@@ -540,7 +540,7 @@ PlankResult pl_SharedPtrArray_Clear (PlankSharedPtrArrayRef p)
     
     pl_DynamicArray_SetSize (&p->array, 0);
     
-exit:
+//exit:
     pl_AtomicP_DeInit (&temp);
     
     return result;

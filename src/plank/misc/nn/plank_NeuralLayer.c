@@ -269,7 +269,7 @@ PlankResult pl_NeuralLayerF_Propogate (PlankNeuralLayerFRef p, const float* inpu
     for (i = 0; i < numNodes; ++i)
         outputVectorPtr[i] = pl_NeuralNodeF_Propogate (&nodeArray[i], inputVectorPtr);
         
-exit:
+//exit:
     return result;
 }
 

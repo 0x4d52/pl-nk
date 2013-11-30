@@ -90,6 +90,8 @@ PlankResult pl_Zip_DeflateStream (PlankZipRef p, const int amount,  PlankFileRef
     unsigned char in[PLANKZIP_CHUNK];
     unsigned char out[PLANKZIP_CHUNK];
 
+	(void)p;
+
     result = PlankResult_OK;
     if ((result = pl_File_GetMode (inputFile, &inputMode)) != PlankResult_OK) goto earlyExit;
     if ((result = pl_File_GetMode (outputZipFile, &outputMode)) != PlankResult_OK) goto earlyExit;
@@ -172,6 +174,8 @@ PlankResult pl_Zip_InflateStream (PlankZipRef p, PlankFileRef outputFile, PlankF
     z_stream strm;
     unsigned char in[PLANKZIP_CHUNK];
     unsigned char out[PLANKZIP_CHUNK];
+
+	(void)p;
 
     result = PlankResult_OK;
     if ((result = pl_File_GetMode (inputZipFile, &inputMode)) != PlankResult_OK) goto earlyExit;

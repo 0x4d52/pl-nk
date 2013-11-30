@@ -249,11 +249,7 @@ using namespace plonk;
  that implements the PLAudioGraph protocol in the init method of your derived
  class.
  
- When running in the simulator the preferred sample rate and block size
- properties may be ignored and default to the hardware settings of the Mac
- hosting the simulator.
- 
- @see PLAudioGraph */
+ @see PLAudioHostDelegate */
 @interface PLAudioHost : NSObject
 {
     void* peer;

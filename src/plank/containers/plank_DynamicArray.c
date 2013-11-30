@@ -269,7 +269,7 @@ PlankResult pl_DynamicArray_Sort (PlankDynamicArrayRef p, PlankDynamicArrayCompa
     PlankB swapped;
     PlankP itemA, itemB, temp;
     PlankUC* data;
-    
+
     if (comparator == PLANK_NULL)
     {
         result = PlankResult_FunctionsInvalid;
@@ -283,14 +283,18 @@ PlankResult pl_DynamicArray_Sort (PlankDynamicArrayRef p, PlankDynamicArrayCompa
         data = (PlankUC*)p->data;
         temp = (PlankP)tempData;
     }
-    else if (p->usedItems == p->allocatedItems)
+    else 
     {
-        // we need space for the temp location
-        if ((result = pl_DynamicArray_Grow (p, PLANKDYNAMICARRAY_DEFAULTGRANULARITY)) != PlankResult_OK) goto exit;
-        
+		if (p->usedItems == p->allocatedItems)
+		{
+			// we need space for the temp location
+			if ((result = pl_DynamicArray_Grow (p, PLANKDYNAMICARRAY_DEFAULTGRANULARITY)) != PlankResult_OK) goto exit;
+		}
+
         data = (PlankUC*)p->data;
         temp = data + p->usedItems * itemSize;
     }
+
         
     for (i = p->usedItems; --i >= 0;)
     {
@@ -300,7 +304,7 @@ PlankResult pl_DynamicArray_Sort (PlankDynamicArrayRef p, PlankDynamicArrayCompa
         for (j = 0; j < end; j += itemSize)
         {
             itemA = data + j;
-            itemB = itemA + itemSize;
+            itemB = (PlankUC*)itemA + itemSize;
             
             if (comparator (itemA, itemB))
             {

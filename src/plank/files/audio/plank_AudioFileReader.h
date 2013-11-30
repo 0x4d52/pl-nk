@@ -213,9 +213,9 @@ typedef struct PlankAudioFileReader
     PlankAudioFileMetaDataRef metaData;
     PlankDynamicArray name;
     
-    PlankP readFramesFunction;
-    PlankP setFramePositionFunction;
-    PlankP getFramePositionFunction;
+    PlankM readFramesFunction;
+    PlankM setFramePositionFunction;
+    PlankM getFramePositionFunction;
 } PlankAudioFileReader;
 
 typedef struct PlankAudioFileReaderCustom

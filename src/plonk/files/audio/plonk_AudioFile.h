@@ -145,18 +145,18 @@ public:
     
     enum MetaDataIOFlags
     {
-        MetaDatIOFlagsNone = PLANKAUDIOFILEMETADATA_IOFLAGS_NONE,                           //0x00000000
-        MetaDatIOFlagsCuePoints = PLANKAUDIOFILEMETADATA_IOFLAGS_CUEPOINTS,                 //0x00000001
-        MetaDatIOFlagsRegions = PLANKAUDIOFILEMETADATA_IOFLAGS_REGIONS,                     //0x00000002
-        MetaDatIOFlagsLoops = PLANKAUDIOFILEMETADATA_IOFLAGS_LOOPS,                         //0x00000004
-        MetaDatIOFlagsText = PLANKAUDIOFILEMETADATA_IOFLAGS_TEXT,                           //0x00000008
-        MetaDatIOFlagssSampler = PLANKAUDIOFILEMETADATA_IOFLAGS_SAMPLER,                    //0x00000010
-        MetaDatIOFlagsExtraSamplerData = PLANKAUDIOFILEMETADATA_IOFLAGS_EXTRASAMPLERDATA,   //0x00000020
-        MetaDatIOFlagsInfo = PLANKAUDIOFILEMETADATA_IOFLAGS_INFO,                           //0x00000100
-        MetaDatIOFlagsNormal = PLANKAUDIOFILEMETADATA_IOFLAGS_NORMAL,                       //0x0000013F
-        MetaDatIOFlagsOverview = PLANKAUDIOFILEMETADATA_IOFLAGS_OVERVIEW,                   //0x00001000
-        MetaDatIOFlagsCustom = PLANKAUDIOFILEMETADATA_IOFLAGS_CUSTOM,                       //0x80000000
-        MetaDatIOFlagsAll = PLANKAUDIOFILEMETADATA_IOFLAGS_ALL                              //0xFFFFFFFF
+        MetaDataIOFlagsNone = PLANKAUDIOFILEMETADATA_IOFLAGS_NONE,                           //0x00000000
+        MetaDataIOFlagsCuePoints = PLANKAUDIOFILEMETADATA_IOFLAGS_CUEPOINTS,                 //0x00000001
+        MetaDataIOFlagsRegions = PLANKAUDIOFILEMETADATA_IOFLAGS_REGIONS,                     //0x00000002
+        MetaDataIOFlagsLoops = PLANKAUDIOFILEMETADATA_IOFLAGS_LOOPS,                         //0x00000004
+        MetaDataIOFlagsText = PLANKAUDIOFILEMETADATA_IOFLAGS_TEXT,                           //0x00000008
+        MetaDataIOFlagssSampler = PLANKAUDIOFILEMETADATA_IOFLAGS_SAMPLER,                    //0x00000010
+        MetaDataIOFlagsExtraSamplerData = PLANKAUDIOFILEMETADATA_IOFLAGS_EXTRASAMPLERDATA,   //0x00000020
+        MetaDataIOFlagsInfo = PLANKAUDIOFILEMETADATA_IOFLAGS_INFO,                           //0x00000100
+        MetaDataIOFlagsNormal = PLANKAUDIOFILEMETADATA_IOFLAGS_NORMAL,                       //0x0000013F
+        MetaDataIOFlagsOverview = PLANKAUDIOFILEMETADATA_IOFLAGS_OVERVIEW,                   //0x00001000
+        MetaDataIOFlagsCustom = PLANKAUDIOFILEMETADATA_IOFLAGS_CUSTOM,                       //0x80000000
+        MetaDataIOFlagsAll = PLANKAUDIOFILEMETADATA_IOFLAGS_ALL                              //0xFFFFFFFF
     };
     
     enum CuePointTypes

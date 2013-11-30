@@ -530,7 +530,7 @@ PlankResult pl_JSON_IntArrayGet (PlankJSONRef p, PlankDynamicArrayRef array)
     }
     else result = PlankResult_JSONError;
     
-exit:
+//exit:
     return result;
 }
 
@@ -562,7 +562,7 @@ PlankResult pl_JSON_FloatArrayGet (PlankJSONRef p, PlankDynamicArrayRef array)
     }
     else result = PlankResult_JSONError;
     
-exit:
+//exit:
     return result;
 }
 
@@ -594,7 +594,7 @@ PlankResult pl_JSON_DoubleArrayGet (PlankJSONRef p, PlankDynamicArrayRef array)
     }
     else result = PlankResult_JSONError;
     
-exit:
+//exit:
     return result;
 }
 

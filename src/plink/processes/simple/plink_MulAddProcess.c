@@ -45,6 +45,8 @@ void plink_MulAddProcessF_NNNN (void* ppv, MulAddProcessState* state)
     int N;
     float *output, *input, *mul, *add;
     
+	(void)state;
+
     pp     = (PlinkProcessF*)ppv;
     N      = pp->buffers[0].bufferSize;
     output = pp->buffers[0].buffer;
@@ -62,6 +64,8 @@ void plink_MulAddProcessF_NN11 (void* ppv, MulAddProcessState* state)
     float *output, *input; 
     float mul, add;
     
+	(void)state;
+
     pp     = (PlinkProcessF*)ppv;
     N      = pp->buffers[0].bufferSize;
     output = pp->buffers[0].buffer;
@@ -79,6 +83,8 @@ void plink_MulAddProcessF_NNN1 (void* ppv, MulAddProcessState* state)
     float *output, *input, *mul;
     float add;
     
+	(void)state;
+
     pp     = (PlinkProcessF*)ppv;
     N      = pp->buffers[0].bufferSize;
     output = pp->buffers[0].buffer;
@@ -96,6 +102,8 @@ void plink_MulAddProcessF_NN1N (void* ppv, MulAddProcessState* state)
     float *output, *input, *add;
     float mul;
     
+	(void)state;
+
     pp     = (PlinkProcessF*)ppv;
     N      = pp->buffers[0].bufferSize;
     output = pp->buffers[0].buffer;
@@ -115,6 +123,8 @@ void plink_MulAddProcessF_Nnnn (void* ppv, MulAddProcessState* state)
     double mulPos, mulInc;
     double addPos, addInc;
     
+	(void)state;
+
     pp     = (PlinkProcessF*)ppv;
     N      = pp->buffers[0].bufferSize;
     output = pp->buffers[0].buffer;

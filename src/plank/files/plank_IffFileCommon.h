@@ -144,6 +144,8 @@ static inline PlankResult pl_IffFile_InitID (PlankIffFileRef p, const char* stri
 {
     int length;
     
+	(void)p;
+
     if (!string)
     {
         pl_MemoryZero (chunkID, sizeof (PlankIffID));

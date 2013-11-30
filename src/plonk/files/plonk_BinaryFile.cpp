@@ -149,7 +149,7 @@ PlankResult BinaryFileInternal::dynamicMemoryWriteCallback (PlankFileRef p, cons
     Memory::copy (dst, data, maximumBytes);
     p->position += maximumBytes;
     
-exit:
+//exit:
     return result;
 }
 
@@ -184,7 +184,7 @@ PlankResult BinaryFileInternal::dynamicMemorySetPositionCallback (PlankFileRef p
     
     p->position = newPosition;
     
-exit:
+//exit:
     return result;
 }
 
@@ -276,7 +276,7 @@ bool BinaryFileInternal::setupMulti (PlankFileRef p, FilePathArray const& fileAr
     
     const bool shouldTakeOwnership = true;
     
-    ResultCode result;
+    ResultCode result = PlankResult_OK;
     PlankDynamicArrayRef array = pl_DynamicArray_Create();
     pl_DynamicArray_InitWithItemSizeAndSize (array, sizeof (PlankFile), fileArray.length(), true);
     PlankFile* rawArray = static_cast<PlankFile*> (pl_DynamicArray_GetArray (array));

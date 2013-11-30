@@ -369,7 +369,7 @@ PlankResult pl_NeuralNodeF_ToJSON (PlankNeuralNodeFRef p, PlankJSONRef j, const 
     
     pl_JSON_ArrayAppend (j, jnode);
     
-exit:
+//exit:
     return result;
 }
 

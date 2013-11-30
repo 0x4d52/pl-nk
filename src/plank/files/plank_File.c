@@ -181,7 +181,7 @@ PlankResult pl_FileDefaultSetPositionCallback (PlankFileRef p, PlankLL offset, i
     int err;
     
     clearerr ((FILE*)p->stream);
-    err = _fseeki64 ((FILE*)p->stream, temp, code);
+    err = _fseeki64 ((FILE*)p->stream, offset, code);
     
     if (err != 0)
         return PlankResult_FileSeekFailed;
@@ -333,7 +333,7 @@ static PlankResult pl_FileMemorySetPositionCallback (PlankFileRef p, PlankLL off
     
     p->position = newPosition;
 
-exit:
+//exit:
     return result;
 }
 
@@ -376,7 +376,7 @@ static PlankResult pl_FileDynamicArrayCloseCallback (PlankFileRef p)
     if (result == PlankResult_OK)
         result = pl_File_Init (p);
 
-exit:
+//exit:
     return result;
 }
 
@@ -500,7 +500,7 @@ static PlankResult pl_FileDynamicArraySetPositionCallback (PlankFileRef p, Plank
     
     p->position = newPosition;
     
-exit:
+//exit:
     return result;
 }
 
@@ -571,7 +571,7 @@ static PlankResult pl_FileMultiReadCallback (PlankFileRef p, PlankP ptr, int max
     multi  = (PlankMulitFileReaderRef)p->stream;
     result = pl_MultiFileReader_Read (multi, ptr, maximumBytes, bytesRead);
     
-exit:
+//exit:
     return result;
 }
 
@@ -781,7 +781,7 @@ PlankResult pl_File_DeInit (PlankFileRef p)
 
     pl_MemoryZero (p, sizeof (PlankFile));
 
-exit:
+//exit:
     return result;
 }
 
@@ -1630,9 +1630,30 @@ PlankResult pl_File_Write (PlankFileRef p, const void* data, const int maximumBy
     return (p->writeFunction) (p, data, maximumBytes);
 }
 
+#define PLANKFILE_WRITEBYTES_SIZE 4096
+
 PlankResult pl_File_WriteDynamicArray (PlankFileRef p, PlankDynamicArrayRef array)
 {
-    return pl_File_Write (p, pl_DynamicArray_GetArray (array), pl_DynamicArray_GetItemSize (array) * pl_DynamicArray_GetSize (array));
+    PlankResult result;
+    PlankL remaining;
+    PlankUC* ptr;
+    int thisTime;
+    
+    result    = PlankResult_OK;
+    remaining = pl_DynamicArray_GetItemSize (array) * pl_DynamicArray_GetSize (array);
+    ptr       = (PlankUC*)pl_DynamicArray_GetArray (array);
+
+    while (remaining > 0)
+    {
+        thisTime = (int)pl_MinL (remaining, PLANKFILE_WRITEBYTES_SIZE);
+        
+        if ((result = pl_File_Write (p, ptr, thisTime)) != PlankResult_OK) goto exit;
+        
+        remaining -= thisTime;
+    }
+    
+exit:
+    return result;
 }
 
 PlankResult pl_File_WriteZeros (PlankFileRef p, const int numBytes)

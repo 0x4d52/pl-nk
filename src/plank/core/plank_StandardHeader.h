@@ -115,6 +115,11 @@
 	#pragma warning(disable : 4996) // security of snprintf etc
 	#pragma warning(disable : 4324) // structure padding / alignment
 	#pragma warning(disable : 4214) // bit field types other than int.. must revisit this
+	#pragma warning(disable : 4054) // type cast function pointer to data pointer
+	#pragma warning(disable : 4055) // type cast data pointer to function pointer
+	#pragma warning(disable : 4127) // conditional expression is constant (e.g., while(1){...} idiom)
+	#pragma warning(disable : 4706) // assignment within conditional expression
+	#pragma warning(disable : 4206) // empty compilation unit
 
     #define PLANK_WIN 1
     #define PLANK_X86 1
@@ -277,10 +282,11 @@ typedef PlankUL PlankB;
 #define PLANK_TRUE ((PlankB)(!0))
 
 typedef void* PlankP;
+typedef void (*PlankM) (void); // method
 typedef const void* PlankConstantP;
 #define PLANK_NULL ((PlankP)0)
 
-typedef PlankI PlankFourCharCode;
+typedef PlankUI PlankFourCharCode; // hope this didn't break
 
 typedef struct PlankFourCharCodeString
 {

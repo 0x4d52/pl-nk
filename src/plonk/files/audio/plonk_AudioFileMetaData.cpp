@@ -251,6 +251,8 @@ AudioFileRegion::AudioFileRegion (const UnsignedInt cueID, const LongLong start,
 {
     initInternalWithFunction (pl_AudioFileRegion_CreateSharedPtr);
     
+	(void)cueID; //fixme
+
     Internal const internal = getInternal();
     
     pl_AudioFileRegion_SetRegionWithAnchor (internal, start, end, anchor);

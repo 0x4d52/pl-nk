@@ -85,7 +85,7 @@ public:
         {                        
             NumericalType currentValue = start;
             
-            for (int i = 0; i < size; ++i)
+            for (UnsignedLong i = 0; i < size; ++i)
             {
                 dst[i] = currentValue;
                 currentValue += grow;
@@ -424,7 +424,7 @@ public:
             PLONK_SHADOW (src);
             PLONK_SHADOW (dst);
             
-            for (int i = 0; i < numSIMD; ++i, dstPtr += PLANK_SIMDF_LENGTH, srcPtr += PLANK_SIMDF_LENGTH)
+            for (UnsignedLong i = 0; i < numSIMD; ++i, dstPtr += PLANK_SIMDF_LENGTH, srcPtr += PLANK_SIMDF_LENGTH)
             {
                 pl_VectorMulF_NN1 (temp, srcPtr, factor, PLANK_SIMDF_LENGTH);
                 NumericalArrayConverterBase<DstType,float>::convertDirect (dstPtr, temp, PLANK_SIMDF_LENGTH);
@@ -460,7 +460,7 @@ public:
             PLONK_SHADOW (src);
             PLONK_SHADOW (dst);
             
-            for (int i = 0; i < numSIMD; ++i, dstPtr += PLANK_SIMDD_LENGTH, srcPtr += PLANK_SIMDD_LENGTH)
+            for (UnsignedLong i = 0; i < numSIMD; ++i, dstPtr += PLANK_SIMDD_LENGTH, srcPtr += PLANK_SIMDD_LENGTH)
             {
                 pl_VectorMulD_NN1 (temp, srcPtr, factor, PLANK_SIMDD_LENGTH);
                 NumericalArrayConverterBase<DstType,double>::convertDirect (dstPtr, temp, PLANK_SIMDD_LENGTH);

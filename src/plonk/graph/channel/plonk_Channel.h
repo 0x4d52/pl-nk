@@ -200,6 +200,8 @@ public:
     /** Returns @c true if this unit needs to process for the given timestamp. */
     inline bool needsToProcess (ProcessInfo& info, const int channel) throw()
     {
+		(void)channel;
+
         const TimeStamp& nextTimeStamp = this->getInternal()->getNextTimeStamp();
         const TimeStamp& infoTimeStamp = info.getTimeStamp();
 

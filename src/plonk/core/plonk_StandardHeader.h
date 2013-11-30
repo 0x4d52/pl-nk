@@ -190,6 +190,8 @@ typedef PlankULL UnsignedLongLong;
 
 typedef bool Bool;
 typedef PlankP Pointer;
+typedef PlankM Method;
+typedef PlankFourCharCode FourCharCode;
 
 struct VoidReturn { enum Type { Pass = 1 }; };
 

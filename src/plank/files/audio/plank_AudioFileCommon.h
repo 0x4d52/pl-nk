@@ -426,9 +426,9 @@ typedef PlankUI PlankChannelLayout;
 #define PLANKAUDIOFILE_LAYOUT_DISCRETE                  ((147<<16) | 0)                        // needs to be ORed with the actual number of channels
 #define PLANKAUDIOFILE_LAYOUT_UNKNOWN                   0xFFFF0000                             // needs to be ORed with the actual number of channels
 
-#define PLANKAUDIOFILE_LAYOUT_OGGVORBIS_6_1           ((32768<<16) | 7) // front left, center, front right, side left, side right, rear center, LFE
-#define PLANKAUDIOFILE_LAYOUT_OGGVORBIS_7_1           ((32769<<16) | 8) // front left, center, front right, side left, side right, rear left, rear right, LFE
-#define PLANKAUDIOFILE_LAYOUT_AIFF_6_0                ((32770<<16) | 6) // left, left centre, centre, right, right centre, surround
+#define PLANKAUDIOFILE_LAYOUT_OGGVORBIS_6_1           ((16384<<16) | 7) // front left, center, front right, side left, side right, rear center, LFE
+#define PLANKAUDIOFILE_LAYOUT_OGGVORBIS_7_1           ((16385<<16) | 8) // front left, center, front right, side left, side right, rear left, rear right, LFE
+#define PLANKAUDIOFILE_LAYOUT_AIFF_6_0                ((16386<<16) | 6) // left, left centre, centre, right, right centre, surround
 
 #define PLANKAUDIOFILE_LAYOUT_STEREOPAIRS               0xFFFE0000                             // needs to be ORed with the actual number of channels
 

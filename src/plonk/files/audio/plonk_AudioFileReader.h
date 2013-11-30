@@ -401,7 +401,7 @@ public:
      The default buffer size is used given by AudioFile::DefaultBufferSize (32768).
      @param path        The path of the file to read.  */
 	AudioFileReader (Text const& path) throw()
-	:	Base (new Internal (path.getArray(), 0, AudioFile::MetaDatIOFlagsNone))
+	:	Base (new Internal (path.getArray(), 0, AudioFileMetaDataIOFlags((UnsignedInt)AudioFile::MetaDataIOFlagsNone)))
 	{
 	}
         
@@ -409,7 +409,7 @@ public:
      The default buffer size is used given by AudioFile::DefaultBufferSize (32768).
      @param path        The path of the file to read.  */
 	AudioFileReader (const char* path) throw()
-	:	Base (new Internal (path, 0, AudioFile::MetaDatIOFlagsNone))
+	:	Base (new Internal (path, 0, AudioFileMetaDataIOFlags((UnsignedInt)AudioFile::MetaDataIOFlagsNone)))
 	{
 	}
     
@@ -417,7 +417,7 @@ public:
      The default buffer size is used given by AudioFile::DefaultBufferSize (32768).
      @param path        The path of the file to read.  */
 	AudioFileReader (FilePath const& path) throw()
-	:	Base (new Internal (path.fullpath().getArray(), 0, AudioFile::MetaDatIOFlagsNone))
+	:	Base (new Internal (path.fullpath().getArray(), 0, AudioFileMetaDataIOFlags((UnsignedInt)AudioFile::MetaDataIOFlagsNone)))
 	{
 	}
     
@@ -522,12 +522,12 @@ public:
     {
     }
     
-    AudioFileReader (ByteArray const& bytes, const int bufferSize = 0, AudioFileMetaDataIOFlags const& metaDataIOFlags = AudioFile::MetaDatIOFlagsNone) throw()
+    AudioFileReader (ByteArray const& bytes, const int bufferSize = 0, AudioFileMetaDataIOFlags const& metaDataIOFlags = AudioFileMetaDataIOFlags ((UnsignedInt)AudioFile::MetaDataIOFlagsNone)) throw()
 	:	Base (new Internal (bytes, bufferSize, metaDataIOFlags))
 	{
 	}
     
-    AudioFileReader (ByteArray const& bytes, const int bufferSize = 0, UnsignedInt const& metaDataIOFlags = AudioFile::MetaDatIOFlagsNone) throw()
+    AudioFileReader (ByteArray const& bytes, const int bufferSize = 0, UnsignedInt const& metaDataIOFlags = AudioFile::MetaDataIOFlagsNone) throw()
 	:	Base (new Internal (bytes, bufferSize, AudioFileMetaDataIOFlags (metaDataIOFlags)))
 	{
 	}
@@ -882,7 +882,7 @@ private:
     
     ResultCode open (Text const& path) throw()
     {
-        return getInternal()->open (path.getArray(), 0, AudioFile::MetaDatIOFlagsNone);
+        return getInternal()->open (path.getArray(), 0, AudioFileMetaDataIOFlags((UnsignedInt)AudioFile::MetaDataIOFlagsNone));
     }    
 };
 

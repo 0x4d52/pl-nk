@@ -153,7 +153,7 @@ bool ThreadSpinLockInternal::tryLock() throw()
 
 void ThreadSpinLockInternal::wait (const double time) throw()
 {
-    plonk_assert (Threading::getCurrentThreadID() != getPeerRef()->flag.value); // you're asking the thread that locked to wait! how is that going to work?
+    plonk_assert (Threading::getCurrentThreadID() != (Threading::ID)getPeerRef()->flag.value); // you're asking the thread that locked to wait! how is that going to work?
     
     if (time <= 0.0)
         pl_ThreadSpinLock_Wait (getPeerRef());

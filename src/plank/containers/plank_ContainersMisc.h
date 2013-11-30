@@ -796,7 +796,7 @@ static inline PlankResult pl_GUID_InitHexString (PlankGUIDRef p, const char* str
 {
     const char *map;
     PlankResult result;
-    int i, len;
+    PlankUL i, len;
     
     result = PlankResult_OK;
     map = pl_Char2HexDigitMap();
@@ -871,7 +871,7 @@ static inline PlankResult pl_GUID_InitChunkString (PlankGUIDRef p, const char* s
     const char *map;
     char chunkID[5];
     PlankResult result;
-    int i, len;
+    PlankUL i, len;
     
     result = PlankResult_OK;
     map = pl_Char2HexDigitMap();
@@ -942,7 +942,7 @@ exit:
 
 static inline PlankResult pl_GUID_InitString (PlankGUIDRef p, const char* string)
 {
-    int len;
+    PlankUL len;
     
     len = strlen (string);
 

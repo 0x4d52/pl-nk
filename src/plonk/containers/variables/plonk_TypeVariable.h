@@ -61,6 +61,7 @@ public:
     
     void changed (typename Variable<OtherType>::Sender const& sender, Text const& message, Dynamic const& payload) throw()
     {
+		(void)sender;
         this->update (message, payload); // transmit the change down the chain..
     }    
     

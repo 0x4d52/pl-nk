@@ -407,6 +407,7 @@ exit:
 PlankResult pl_Path_WinSystemCSIDL (const int csidl, char* path, int max)
 {
     HRESULT hr = SHGetFolderPath (0, csidl, 0, SHGFP_TYPE_CURRENT, path);
+	(void)max;
     return (hr == S_OK) ? PlankResult_OK : PlankResult_FilePathInvalid;
 }
 
@@ -493,7 +494,7 @@ PlankResult pl_Path_InitSystem (PlankPathRef p, const int systemPath, const char
     
     if (parent)
     {
-        pl_Path_WinReplaceBackslash (parent);
+        pl_Path_WinReplaceBackslash ((char*)parent); // fixme
         
         if ((result = pl_DynamicArray_InitWithItemSize (&p->buffer, 1)) != PlankResult_OK) goto exit;
         if ((result = pl_DynamicArray_SetAsText (&p->buffer, parent)) != PlankResult_OK) goto exit;

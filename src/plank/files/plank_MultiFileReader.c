@@ -72,7 +72,7 @@ PlankResult pl_MultiFileReaderArraySequenceOnceNextIndexFunction (PlankMulitFile
     if ((p->index < 0) || (p->index >= arraySize))
         p->index = arraySize;
         
-exit:
+//exit:
     return result;
 }
 
@@ -90,7 +90,7 @@ PlankResult pl_MultiFileReaderArraySequenceLoopNextIndexFunction (PlankMulitFile
     if ((p->index < 0) || (p->index >= arraySize))
         p->index = 0;
     
-exit:
+//exit:
     return result;
 }
 
@@ -105,7 +105,7 @@ PlankResult pl_MultiFileReaderArrayRandomNextIndexFunction (PlankMulitFileReader
     
     p->index = pl_RNG_NextInt (pl_RNGGlobal(), arraySize);
     
-exit:
+//exit:
     return result;
 }
 
@@ -132,7 +132,7 @@ PlankResult pl_MultiFileReaderArrayRandomNoRepeatNextIndexFunction (PlankMulitFi
     
     p->index = index;
     
-exit:
+//exit:
     return result;
 }
 
@@ -151,7 +151,7 @@ PlankResult pl_MultiFileReaderArrayRefNextIndexFunction (PlankMulitFileReaderRef
     if ((p->index < 0) || (p->index >= arraySize))
         p->index = arraySize;
 
-exit:
+//exit:
     return result;
 }
 
@@ -179,7 +179,7 @@ PlankResult pl_MultiFileReaderArrayNextFunction (PlankMulitFileReaderRef p)
     
     p->currentFile = file;
     
-exit:
+//exit:
     return result;
 }
 
@@ -292,7 +292,7 @@ PlankResult pl_MultiFileReader_InitArraySequence (PlankMulitFileReaderRef p, con
     
     p->ownSource = ownArray;
     
-exit:
+//exit:
     return result;
 }
 
@@ -319,7 +319,7 @@ PlankResult pl_MultiFileReader_InitArrayRandom (PlankMulitFileReaderRef p, const
 
     p->ownSource = ownArray;
 
-exit:
+//exit:
     return result;
 }
 
@@ -336,7 +336,7 @@ PlankResult pl_MultiFileReader_InitArrayIndexRef (PlankMulitFileReaderRef p, con
     p->otherRef = indexRef;
     p->ownSource = ownArray;
     p->fileMode = fileMode;
-exit:
+//exit:
     return result;
 }
 
@@ -351,7 +351,7 @@ PlankResult pl_MultiFileReader_InitQueue (PlankMulitFileReaderRef p, const int f
     p->nextFunction = pl_MultiFileReaderQueueNextFunction;
     p->ownSource = ownQueue;
     p->fileMode = fileMode;
-exit:
+//exit:
     return result;
 }
 
@@ -367,10 +367,10 @@ PlankResult pl_MultiFileReader_InitCustom (PlankMulitFileReaderRef p, const int 
     p->multiMode = PLANKMULITFILE_MODE_CUSTOM;
     p->nextFunction = nextFuntion;
     p->ownSource = ownCustom;
-    p->otherRef = destroyCustomFunction;
+    p->otherRef = (PlankP)(PlankM)destroyCustomFunction;
     p->fileMode = fileMode;
     
-exit:
+//exit:
     return result;
 }
 
@@ -593,13 +593,15 @@ exit:
     return result;
 }
 
-PlankResult pl_MultiFileReader_Read (PlankMulitFileReaderRef p, PlankP ptr, int maximumBytes, int* bytesRead)
+PlankResult pl_MultiFileReader_Read (PlankMulitFileReaderRef p, PlankP pv, int maximumBytes, int* bytesRead)
 {
     PlankResult result = PlankResult_OK;
     int bytesThisTime, bytesReadLocal;
+	PlankUC* ptr;
     
     bytesReadLocal = 0;
-    
+    ptr = (PlankUC*)pv;
+
     if ((result = pl_MultiFileReader_Open (p)) != PlankResult_OK)
         goto exit;    
     
