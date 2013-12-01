@@ -494,10 +494,13 @@ PlankResult pl_Path_InitSystem (PlankPathRef p, const int systemPath, const char
     
     if (parent)
     {
-        pl_Path_WinReplaceBackslash ((char*)parent); // fixme
+//        pl_Path_WinReplaceBackslash ((char*)parent); // fix below
         
         if ((result = pl_DynamicArray_InitWithItemSize (&p->buffer, 1)) != PlankResult_OK) goto exit;
         if ((result = pl_DynamicArray_SetAsText (&p->buffer, parent)) != PlankResult_OK) goto exit;
+        
+        pl_Path_WinReplaceBackslash ((char*)pl_DynamicArray_GetArray (&p->buffer));
+        
         if ((result = pl_DynamicArray_AppendText (&p->buffer, append)) != PlankResult_OK) goto exit;
         
         if (child)

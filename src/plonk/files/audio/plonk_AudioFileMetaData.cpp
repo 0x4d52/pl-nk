@@ -251,11 +251,11 @@ AudioFileRegion::AudioFileRegion (const UnsignedInt cueID, const LongLong start,
 {
     initInternalWithFunction (pl_AudioFileRegion_CreateSharedPtr);
     
-	(void)cueID; //fixme
-
     Internal const internal = getInternal();
     
     pl_AudioFileRegion_SetRegionWithAnchor (internal, start, end, anchor);
+    
+    pl_AudioFileCuePoint_SetID (pl_AudioFileRegion_GetAnchorCuePoint (internal), cueID);
     
     if (label.length() > 0)
         pl_AudioFileRegion_SetLabel (internal, label.getArray());
@@ -580,6 +580,17 @@ AudioFileRegionArray AudioFileMetaData::getLoopPoints() const throw()
     Internal const internal = getInternal();
     plonk_assert (internal != Base::getNullSharedPtr());
     return internal ? AudioFileRegionArray (pl_AudioFileMetaData_GetLoopPoints (internal)) : AudioFileRegionArray::getNull();
+}
+
+AudioFileMetaData& AudioFileMetaData::convertCuePointsToRegions (const LongLong numFrames, const bool removeCuePoints) throw()
+{
+    Internal const internal = getInternal();
+    
+    if (internal != Base::getNullSharedPtr())
+        pl_AudioFileMetaData_ConvertCuePointsToRegions (internal, numFrames, removeCuePoints);
+    else plonk_assertfalse;
+    
+    return *this;
 }
 
 AudioFileMetaData& AudioFileMetaData::sortCuePointsByPosition() throw()

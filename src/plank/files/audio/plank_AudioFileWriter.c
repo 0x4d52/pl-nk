@@ -2289,7 +2289,7 @@ PlankResult pl_AudioFileWriter_OggVorbis_OpenInternal (PlankAudioFileWriterRef p
             }
         } while (err != 0);
                 
-        p->writeFramesFunction = pl_AudioFileWriter_OggVorbis_WriteFrames;
+        p->writeFramesFunction = (PlankM)pl_AudioFileWriter_OggVorbis_WriteFrames;
         p->writeHeaderFunction = 0;
     }
 
@@ -2861,7 +2861,7 @@ static PlankResult pl_AudioFileWriter_Opus_OpenInternal (PlankAudioFileWriterRef
     pl_File_DeInit (&opus->commentWriter);
     pl_DynamicArray_DeInit (&opus->comments);
         
-    p->writeFramesFunction = pl_AudioFileWriter_Opus_WriteFrames;
+    p->writeFramesFunction = (PlankM)pl_AudioFileWriter_Opus_WriteFrames;
     p->writeHeaderFunction = 0; // no header that needs rewriting later
     
 exit:

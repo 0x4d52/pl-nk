@@ -63,7 +63,8 @@ public:
     AudioFileReaderInternal (AudioFileReaderArray const& audioFiles, const AudioFile::MultiFileTypes multiMode, const int bufferSize, IntVariable* indexRef = 0) throw();
     AudioFileReaderInternal (FilePathQueue const& paths, const int bufferSize) throw();
     AudioFileReaderInternal (AudioFileReaderQueue const& audioFiles, const int bufferSize) throw();
-    AudioFileReaderInternal (AudioFileReader const& original, const LongLong start, const LongLong end, const int bufferSize) throw();
+//    AudioFileReaderInternal (AudioFileReader const& original, const LongLong start, const LongLong end, const int bufferSize) throw();
+    AudioFileReaderInternal (AudioFileReader const& original, AudioFileRegion const& region, const int bufferSize) throw();
 
     ~AudioFileReaderInternal();
     
@@ -478,36 +479,41 @@ public:
     {
     }
     
-    AudioFileReader (AudioFileReader const& original, const LongLong start, const LongLong end, const int bufferSize = 0) throw()
-    :	Base (new Internal (original, start, end, bufferSize))
+    AudioFileReader (AudioFileReader const& original, AudioFileRegion const region, const int bufferSize = 0) throw()
+    :	Base (new Internal (original, region, bufferSize))
     {
     }
     
-    AudioFileReader (AudioFileReader const& original, const int start, const int end, const int bufferSize = 0) throw()
-    :	Base (new Internal (original, start, end, bufferSize))
-    {
-    }
-    
-    AudioFileReader (AudioFileReader const& original, const long start, const long end, const int bufferSize = 0) throw()
-    :	Base (new Internal (original, start, end, bufferSize))
-    {
-    }
-
-    AudioFileReader (AudioFileReader const& original, const double start, const double end, const int bufferSize = 0) throw()
-    :	Base (new Internal (original,
-                            LongLong (start * original.getSampleRate()),
-                            LongLong (end * original.getSampleRate()),
-                            bufferSize))
-    {
-    }
-    
-    AudioFileReader (AudioFileReader const& original, const float start, const float end, const int bufferSize = 0) throw()
-    :	Base (new Internal (original,
-                            LongLong (start * original.getSampleRate()),
-                            LongLong (end * original.getSampleRate()),
-                            bufferSize))
-    {
-    }
+//    AudioFileReader (AudioFileReader const& original, const LongLong start, const LongLong end, const int bufferSize = 0) throw()
+//    :	Base (new Internal (original, start, end, bufferSize))
+//    {
+//    }
+//    
+//    AudioFileReader (AudioFileReader const& original, const int start, const int end, const int bufferSize = 0) throw()
+//    :	Base (new Internal (original, start, end, bufferSize))
+//    {
+//    }
+//    
+//    AudioFileReader (AudioFileReader const& original, const long start, const long end, const int bufferSize = 0) throw()
+//    :	Base (new Internal (original, start, end, bufferSize))
+//    {
+//    }
+//
+//    AudioFileReader (AudioFileReader const& original, const double start, const double end, const int bufferSize = 0) throw()
+//    :	Base (new Internal (original,
+//                            LongLong (start * original.getSampleRate()),
+//                            LongLong (end * original.getSampleRate()),
+//                            bufferSize))
+//    {
+//    }
+//    
+//    AudioFileReader (AudioFileReader const& original, const float start, const float end, const int bufferSize = 0) throw()
+//    :	Base (new Internal (original,
+//                            LongLong (start * original.getSampleRate()),
+//                            LongLong (end * original.getSampleRate()),
+//                            bufferSize))
+//    {
+//    }
 
     /** @internal */
     explicit AudioFileReader (Internal* internalToUse) throw() 
@@ -869,7 +875,8 @@ public:
         return this->getInternal()->getChannelIdentifier (channel);
     }
 
-
+    
+    
 
 private:
     // these could be currently dangerous across threads, need to look at a safer way to open

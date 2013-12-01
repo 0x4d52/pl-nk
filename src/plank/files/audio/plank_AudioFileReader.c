@@ -2775,10 +2775,10 @@ PlankResult pl_AudioFileReader_OggVorbis_Open  (PlankAudioFileReaderRef p, const
     // open as binary, not writable, litte endian
     if ((result = pl_File_OpenBinaryRead (&ogg->file, filepath, PLANK_FALSE, PLANK_FALSE)) != PlankResult_OK) goto exit;
     
-    ogg->callbacks.read_func  = &pl_OggVorbisFileReader_ReadCallback;
-    ogg->callbacks.seek_func  = &pl_OggVorbisFileReader_SeekCallback;
-    ogg->callbacks.close_func = &pl_OggVorbisFileReader_CloseCallback;
-    ogg->callbacks.tell_func  = &pl_OggVorbisFileReader_TellCallback;
+    ogg->callbacks.read_func  = pl_OggVorbisFileReader_ReadCallback;
+    ogg->callbacks.seek_func  = pl_OggVorbisFileReader_SeekCallback;
+    ogg->callbacks.close_func = pl_OggVorbisFileReader_CloseCallback;
+    ogg->callbacks.tell_func  = pl_OggVorbisFileReader_TellCallback;
     
     err = ov_open_callbacks (p, &ogg->oggVorbisFile, 0, 0, ogg->callbacks); // docs suggest this should be on the other thread if threaded...
     
@@ -2814,9 +2814,9 @@ PlankResult pl_AudioFileReader_OggVorbis_Open  (PlankAudioFileReaderRef p, const
     }
         
     p->numFrames = numFrames;
-    p->readFramesFunction       = pl_AudioFileReader_OggVorbis_ReadFrames;
-    p->setFramePositionFunction = pl_AudioFileReader_OggVorbis_SetFramePosition;
-    p->getFramePositionFunction = pl_AudioFileReader_OggVorbis_GetFramePosition;
+    p->readFramesFunction       = (PlankM)pl_AudioFileReader_OggVorbis_ReadFrames;
+    p->setFramePositionFunction = (PlankM)pl_AudioFileReader_OggVorbis_SetFramePosition;
+    p->getFramePositionFunction = (PlankM)pl_AudioFileReader_OggVorbis_GetFramePosition;
     
     if (p->metaData)
     {
@@ -2886,10 +2886,10 @@ PlankResult pl_AudioFileReader_OggVorbis_OpenWithFile  (PlankAudioFileReaderRef 
     pl_MemoryCopy (&ogg->file, file, sizeof (PlankFile));
     pl_MemoryZero (file, sizeof (PlankFile));
     
-    ogg->callbacks.read_func  = &pl_OggVorbisFileReader_ReadCallback;
-    ogg->callbacks.seek_func  = &pl_OggVorbisFileReader_SeekCallback;
-    ogg->callbacks.close_func = &pl_OggVorbisFileReader_CloseCallback;
-    ogg->callbacks.tell_func  = &pl_OggVorbisFileReader_TellCallback;
+    ogg->callbacks.read_func  = pl_OggVorbisFileReader_ReadCallback;
+    ogg->callbacks.seek_func  = pl_OggVorbisFileReader_SeekCallback;
+    ogg->callbacks.close_func = pl_OggVorbisFileReader_CloseCallback;
+    ogg->callbacks.tell_func  = pl_OggVorbisFileReader_TellCallback;
     
     err = ov_open_callbacks (p, &ogg->oggVorbisFile, 0, 0, ogg->callbacks); // docs suggest this should be on the other thread if threaded...
     
@@ -2925,9 +2925,9 @@ PlankResult pl_AudioFileReader_OggVorbis_OpenWithFile  (PlankAudioFileReaderRef 
     }
     
     p->numFrames = numFrames;
-    p->readFramesFunction       = pl_AudioFileReader_OggVorbis_ReadFrames;
-    p->setFramePositionFunction = pl_AudioFileReader_OggVorbis_SetFramePosition;
-    p->getFramePositionFunction = pl_AudioFileReader_OggVorbis_GetFramePosition;
+    p->readFramesFunction       = (PlankM)pl_AudioFileReader_OggVorbis_ReadFrames;
+    p->setFramePositionFunction = (PlankM)pl_AudioFileReader_OggVorbis_SetFramePosition;
+    p->getFramePositionFunction = (PlankM)pl_AudioFileReader_OggVorbis_GetFramePosition;
     
     if (p->metaData)
     {
@@ -3289,10 +3289,10 @@ PlankResult pl_AudioFileReader_Opus_Open  (PlankAudioFileReaderRef p, const char
     // open as binary, not writable, litte endian
     if ((result = pl_File_OpenBinaryRead (&opus->file, filepath, PLANK_FALSE, PLANK_FALSE)) != PlankResult_OK) goto exit;
     
-    opus->callbacks.read  = &pl_OpusFileReader_ReadCallback;
-    opus->callbacks.seek  = &pl_OpusFileReader_SeekCallback;
-    opus->callbacks.close = &pl_OpusFileReader_CloseCallback;
-    opus->callbacks.tell  = &pl_OpusFileReader_TellCallback;
+    opus->callbacks.read  = pl_OpusFileReader_ReadCallback;
+    opus->callbacks.seek  = pl_OpusFileReader_SeekCallback;
+    opus->callbacks.close = pl_OpusFileReader_CloseCallback;
+    opus->callbacks.tell  = pl_OpusFileReader_TellCallback;
     
     opus->oggOpusFile = op_open_callbacks (p, &opus->callbacks, NULL, 0, &err);
     
@@ -3334,9 +3334,9 @@ PlankResult pl_AudioFileReader_Opus_Open  (PlankAudioFileReaderRef p, const char
     }
     
     p->numFrames = numFrames;
-    p->readFramesFunction       = pl_AudioFileReader_Opus_ReadFrames;
-    p->setFramePositionFunction = pl_AudioFileReader_Opus_SetFramePosition;
-    p->getFramePositionFunction = pl_AudioFileReader_Opus_GetFramePosition;
+    p->readFramesFunction       = (PlankM)pl_AudioFileReader_Opus_ReadFrames;
+    p->setFramePositionFunction = (PlankM)pl_AudioFileReader_Opus_SetFramePosition;
+    p->getFramePositionFunction = (PlankM)pl_AudioFileReader_Opus_GetFramePosition;
     
     if (p->metaData)
     {
@@ -3407,10 +3407,10 @@ PlankResult pl_AudioFileReader_Opus_OpenWithFile  (PlankAudioFileReaderRef p, Pl
     pl_MemoryCopy (&opus->file, file, sizeof (PlankFile));
     pl_MemoryZero (file, sizeof (PlankFile));
     
-    opus->callbacks.read  = &pl_OpusFileReader_ReadCallback;
-    opus->callbacks.seek  = &pl_OpusFileReader_SeekCallback;
-    opus->callbacks.close = &pl_OpusFileReader_CloseCallback;
-    opus->callbacks.tell  = &pl_OpusFileReader_TellCallback;
+    opus->callbacks.read  = pl_OpusFileReader_ReadCallback;
+    opus->callbacks.seek  = pl_OpusFileReader_SeekCallback;
+    opus->callbacks.close = pl_OpusFileReader_CloseCallback;
+    opus->callbacks.tell  = pl_OpusFileReader_TellCallback;
     
     opus->oggOpusFile = op_open_callbacks (p, &opus->callbacks, NULL, 0, &err);
     
@@ -3452,9 +3452,9 @@ PlankResult pl_AudioFileReader_Opus_OpenWithFile  (PlankAudioFileReaderRef p, Pl
     }
     
     p->numFrames = numFrames;
-    p->readFramesFunction       = pl_AudioFileReader_Opus_ReadFrames;
-    p->setFramePositionFunction = pl_AudioFileReader_Opus_SetFramePosition;
-    p->getFramePositionFunction = pl_AudioFileReader_Opus_GetFramePosition;
+    p->readFramesFunction       = (PlankM)pl_AudioFileReader_Opus_ReadFrames;
+    p->setFramePositionFunction = (PlankM)pl_AudioFileReader_Opus_SetFramePosition;
+    p->getFramePositionFunction = (PlankM)pl_AudioFileReader_Opus_GetFramePosition;
     
     if (p->metaData)
     {

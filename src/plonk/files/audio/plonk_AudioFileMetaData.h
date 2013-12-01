@@ -215,6 +215,7 @@ public:
     AudioFileRegionArray getRegions() const throw();
     AudioFileRegionArray getLoopPoints() const throw();
     
+    AudioFileMetaData& convertCuePointsToRegions (const LongLong numFrames, const bool removeCuePoints) throw();
     AudioFileMetaData& sortCuePointsByPosition() throw();
     AudioFileMetaData& sortCuePointsByID() throw();
     
