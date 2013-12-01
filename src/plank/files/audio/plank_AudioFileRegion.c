@@ -147,22 +147,22 @@ PlankAudioFileCuePointRef pl_AudioFileRegion_GetEndCuePoint (PlankAudioFileRegio
     return p->end;
 }
 
-PlankLL pl_AudioFileRegion_GetAnchorPosition (PlankAudioFileRegionRef p)
+double pl_AudioFileRegion_GetAnchorPosition (PlankAudioFileRegionRef p)
 {
     return p->anchor->position;
 }
 
-PlankLL pl_AudioFileRegion_GetStartPosition (PlankAudioFileRegionRef p)
+double pl_AudioFileRegion_GetStartPosition (PlankAudioFileRegionRef p)
 {
     return p->start->position;
 }
 
-PlankLL pl_AudioFileRegion_GetEndPosition (PlankAudioFileRegionRef p)
+double pl_AudioFileRegion_GetEndPosition (PlankAudioFileRegionRef p)
 {
     return p->end->position;
 }
 
-PlankLL pl_AudioFileRegion_GetLength (PlankAudioFileRegionRef p)
+double pl_AudioFileRegion_GetLength (PlankAudioFileRegionRef p)
 {
     return p->end->position - p->start->position;
 }
@@ -177,7 +177,7 @@ PlankUI pl_AudioFileRegion_GetOptions (PlankAudioFileRegionRef p)
     return p->regionOptions;
 }
 
-PlankUI pl_AudioFileRegion_GetFraction (PlankAudioFileRegionRef p)
+double pl_AudioFileRegion_GetFraction (PlankAudioFileRegionRef p)
 {
     return p->fraction;
 }
@@ -207,22 +207,22 @@ char* pl_AudioFileRegion_GetCommentWritable (PlankAudioFileRegionRef p)
     return pl_AudioFileCuePoint_GetCommentWritable (p->anchor);
 }
 
-PlankResult pl_AudioFileRegion_SetAnchorPosition (PlankAudioFileRegionRef p, const PlankLL position)
+PlankResult pl_AudioFileRegion_SetAnchorPosition (PlankAudioFileRegionRef p, const double position)
 {
     return pl_AudioFileCuePoint_SetPosition (p->anchor, position);
 }
 
-PlankResult pl_AudioFileRegion_SetStartPosition (PlankAudioFileRegionRef p, const PlankLL position)
+PlankResult pl_AudioFileRegion_SetStartPosition (PlankAudioFileRegionRef p, const double position)
 {
     return pl_AudioFileCuePoint_SetPosition (p->start, position);
 }
 
-PlankResult pl_AudioFileRegion_SetEndPosition (PlankAudioFileRegionRef p, const PlankLL position)
+PlankResult pl_AudioFileRegion_SetEndPosition (PlankAudioFileRegionRef p, const double position)
 {
     return pl_AudioFileCuePoint_SetPosition (p->end, position);
 }
 
-PlankResult pl_AudioFileRegion_SetLength (PlankAudioFileRegionRef p, const PlankLL length)
+PlankResult pl_AudioFileRegion_SetLength (PlankAudioFileRegionRef p, const double length)
 {
     return pl_AudioFileCuePoint_SetPosition (p->end, p->start->position + length);
 }
@@ -241,7 +241,7 @@ PlankResult pl_AudioFileRegion_SetOptions (PlankAudioFileRegionRef p, const Plan
     return PlankResult_OK;
 }
 
-PlankResult pl_AudioFileRegion_SetFraction (PlankAudioFileRegionRef p, const PlankUI fraction)
+PlankResult pl_AudioFileRegion_SetFraction (PlankAudioFileRegionRef p, const double fraction)
 {
     p->fraction = fraction;
     return PlankResult_OK;
@@ -263,7 +263,7 @@ PlankResult pl_AudioFileRegion_SetComment (PlankAudioFileRegionRef p, const char
     return pl_AudioFileCuePoint_SetComment (p->anchor, comment);
 }
 
-PlankResult pl_AudioFileRegion_GetRegion (PlankAudioFileRegionRef p, PlankLL* start, PlankLL* end, PlankLL* anchor)
+PlankResult pl_AudioFileRegion_GetRegion (PlankAudioFileRegionRef p, double* start, double* end, double* anchor)
 {
     if (start != PLANK_NULL)
         *start = p->start->position;
@@ -277,7 +277,7 @@ PlankResult pl_AudioFileRegion_GetRegion (PlankAudioFileRegionRef p, PlankLL* st
     return PlankResult_OK;
 }
 
-PlankResult pl_AudioFileRegion_SetRegion (PlankAudioFileRegionRef p, const PlankLL start, const PlankLL end)
+PlankResult pl_AudioFileRegion_SetRegion (PlankAudioFileRegionRef p, const double start, const double end)
 {
     if (start >= 0)
     {
@@ -291,7 +291,7 @@ PlankResult pl_AudioFileRegion_SetRegion (PlankAudioFileRegionRef p, const Plank
     return PlankResult_OK;
 }
 
-PlankResult pl_AudioFileRegion_SetRegionWithAnchor (PlankAudioFileRegionRef p, const PlankLL start, const PlankLL end, const PlankLL anchor)
+PlankResult pl_AudioFileRegion_SetRegionWithAnchor (PlankAudioFileRegionRef p, const double start, const double end, const double anchor)
 {
     if (start >= 0)
         p->start->position = start;
@@ -305,7 +305,7 @@ PlankResult pl_AudioFileRegion_SetRegionWithAnchor (PlankAudioFileRegionRef p, c
     return PlankResult_OK;
 }
 
-PlankResult pl_AudioFileRegion_OffsetPosition (PlankAudioFileRegionRef p, const PlankLL offset)
+PlankResult pl_AudioFileRegion_OffsetPosition (PlankAudioFileRegionRef p, const double offset)
 {
     p->start->position  += offset;
     p->end->position    += offset;

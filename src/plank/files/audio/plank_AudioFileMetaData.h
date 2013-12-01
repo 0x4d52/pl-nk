@@ -183,10 +183,10 @@ PlankResult pl_AudioFileMetaData_AddRegion (PlankAudioFileMetaDataRef p, PlankAu
  This creates regions starting at frame zero and creating a regions between each cue point and from 
  the last cue point to the end of the file. This requires the user to pass in the number of frames in the audio file.
  @param p The meta data object.
- @param numFrames The number of frames in the source audio file.
+ @param totalDuration The duration of the source audio file.
  @param removeCuePoints A boolean flag to indicate whether these cue points should be removed fromt he metadata.
  @return The result code for the operation. */
-PlankResult pl_AudioFileMetaData_ConvertCuePointsToRegions (PlankAudioFileMetaDataRef p, const PlankLL numFrames, const PlankB removeCuePoints);
+PlankResult pl_AudioFileMetaData_ConvertCuePointsToRegions (PlankAudioFileMetaDataRef p, const double totalDuration, const PlankB removeCuePoints);
 
 PlankResult pl_AudioFileMetaData_SortCuePointsByPosition (PlankAudioFileMetaDataRef p);
 PlankResult pl_AudioFileMetaData_SortCuePointsByID (PlankAudioFileMetaDataRef p);
@@ -205,8 +205,8 @@ const char* pl_AudioFileMetaData_GetCodingHistory (PlankAudioFileMetaDataRef p);
 PlankResult pl_AudioFileMetaData_AddFormatSpecificBlock (PlankAudioFileMetaDataRef p, PlankDynamicArrayRef block);
 
 
-PlankResult pl_AudioFileMetaData_InsertFrames (PlankAudioFileMetaDataRef p, const PlankLL start, const PlankLL length);
-PlankResult pl_AudioFileMetaData_RemoveFrames (PlankAudioFileMetaDataRef p, const PlankLL start, const PlankLL length);
+PlankResult pl_AudioFileMetaData_InsertTime (PlankAudioFileMetaDataRef p, const double start, const double length);
+PlankResult pl_AudioFileMetaData_RemoveTime (PlankAudioFileMetaDataRef p, const double start, const double length);
 
 
 

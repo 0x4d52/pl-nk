@@ -736,7 +736,7 @@ exit:
     return result;
 }
 
-PlankResult pl_AudioFileMetaData_ConvertCuePointsToRegions (PlankAudioFileMetaDataRef p, const PlankLL numFrames, const PlankB removeCuePoints)
+PlankResult pl_AudioFileMetaData_ConvertCuePointsToRegions (PlankAudioFileMetaDataRef p, const double totalDuration, const PlankB removeCuePoints)
 {
     PlankAudioFileRegionRef region;
     PlankResult result = PlankResult_OK;
@@ -746,7 +746,7 @@ PlankResult pl_AudioFileMetaData_ConvertCuePointsToRegions (PlankAudioFileMetaDa
     PlankAudioFileCuePointRef regionEndCue;
     PlankL numCues, i;
     PlankUI cueID;
-    PlankLL start, end;
+    double start, end;
     
     numCues = pl_SharedPtrArray_GetLength (p->cuePoints);
     
@@ -768,8 +768,8 @@ PlankResult pl_AudioFileMetaData_ConvertCuePointsToRegions (PlankAudioFileMetaDa
         regionStartCue  = pl_AudioFileRegion_GetStartCuePoint (region);
         regionEndCue    = pl_AudioFileRegion_GetEndCuePoint (region);
 
-        pl_AudioFileCuePoint_SetPosition (regionAnchorCue, 0);
-        pl_AudioFileCuePoint_SetPosition (regionStartCue, 0);
+        pl_AudioFileCuePoint_SetPosition (regionAnchorCue, 0.0);
+        pl_AudioFileCuePoint_SetPosition (regionStartCue, 0.0);
         pl_AudioFileCuePoint_SetPosition (regionEndCue, end);
         pl_AudioFileCuePoint_SetID (regionAnchorCue, cueID++);
         pl_AudioFileCuePoint_SetID (regionStartCue, cueID++);
@@ -804,7 +804,7 @@ PlankResult pl_AudioFileMetaData_ConvertCuePointsToRegions (PlankAudioFileMetaDa
     }
     
     // if the last cue is not at the end of the file, add a region from the last cue to the end
-    if (end < numFrames)
+    if (end < totalDuration)
     {
         pl_AudioFileRegion_CreateSharedPtr (&region);
         regionAnchorCue = pl_AudioFileRegion_GetAnchorCuePoint (region);
@@ -813,9 +813,9 @@ PlankResult pl_AudioFileMetaData_ConvertCuePointsToRegions (PlankAudioFileMetaDa
 
         pl_AudioFileCuePoint_SetCopy (regionAnchorCue, cueArray[numCues - 1]);
         start = pl_AudioFileCuePoint_GetPosition (regionAnchorCue);
-        end   = numFrames;
+        end   = totalDuration;
         pl_AudioFileCuePoint_SetPosition (regionStartCue, start);
-        pl_AudioFileCuePoint_SetPosition (regionEndCue, numFrames);
+        pl_AudioFileCuePoint_SetPosition (regionEndCue, end);
         
         pl_AudioFileCuePoint_SetID (regionAnchorCue, cueID++);
         pl_AudioFileCuePoint_SetID (regionStartCue, cueID++);
@@ -908,12 +908,12 @@ exit:
     return result;
 }
 
-static PlankResult pl_AudioFileMetaData_CuePoints_InsertFrames (PlankAudioFileMetaDataRef p, const PlankLL start, const PlankLL length)
+static PlankResult pl_AudioFileMetaData_CuePoints_InsertTime (PlankAudioFileMetaDataRef p, const double start, const double length)
 {
     PlankResult result = PlankResult_OK;
     PlankL numCuePoints, i;
     PlankAudioFileCuePointRef cuePoint;
-    PlankLL position;
+    double position;
     
     numCuePoints = pl_SharedPtrArray_GetLength (p->cuePoints);
     
@@ -932,12 +932,12 @@ exit:
     return result;
 }
 
-static PlankResult pl_AudioFileMetaData_RegionsArray_InsertFrames (PlankSharedPtrArrayRef regionArray, const PlankLL start, const PlankLL length)
+static PlankResult pl_AudioFileMetaData_RegionsArray_InsertTime (PlankSharedPtrArrayRef regionArray, const double start, const double length)
 {
     PlankResult result = PlankResult_OK;
     PlankL numRegions, i;
     PlankAudioFileRegionRef region;
-    PlankLL regionStart, regionEnd, end;
+    double regionStart, regionEnd, end;
     
     numRegions = pl_SharedPtrArray_GetLength (regionArray);
     end = start + length;
@@ -963,35 +963,35 @@ exit:
     return result;
 }
 
-static PlankResult pl_AudioFileMetaData_Regions_InsertFrames (PlankAudioFileMetaDataRef p, const PlankLL start, const PlankLL length)
+static PlankResult pl_AudioFileMetaData_Regions_InsertTime (PlankAudioFileMetaDataRef p, const double start, const double length)
 {
-    return pl_AudioFileMetaData_RegionsArray_InsertFrames (p->regions, start, length);
+    return pl_AudioFileMetaData_RegionsArray_InsertTime (p->regions, start, length);
 }
 
-static PlankResult pl_AudioFileMetaData_LoopPoints_InsertFrames (PlankAudioFileMetaDataRef p, const PlankLL start, const PlankLL length)
+static PlankResult pl_AudioFileMetaData_LoopPoints_InsertTime (PlankAudioFileMetaDataRef p, const double start, const double length)
 {
-    return pl_AudioFileMetaData_RegionsArray_InsertFrames (p->loopPoints, start, length);
+    return pl_AudioFileMetaData_RegionsArray_InsertTime (p->loopPoints, start, length);
 }
 
-PlankResult pl_AudioFileMetaData_InsertFrames (PlankAudioFileMetaDataRef p, const PlankLL start, const PlankLL length)
+PlankResult pl_AudioFileMetaData_InsertTime (PlankAudioFileMetaDataRef p, const double start, const double length)
 {
     PlankResult result;
     result = PlankResult_OK;
     
-    if ((result = pl_AudioFileMetaData_CuePoints_InsertFrames (p, start, length)) != PlankResult_OK) goto exit;
-    if ((result = pl_AudioFileMetaData_Regions_InsertFrames (p, start, length)) != PlankResult_OK) goto exit;
-    if ((result = pl_AudioFileMetaData_LoopPoints_InsertFrames (p, start, length)) != PlankResult_OK) goto exit;
+    if ((result = pl_AudioFileMetaData_CuePoints_InsertTime (p, start, length)) != PlankResult_OK) goto exit;
+    if ((result = pl_AudioFileMetaData_Regions_InsertTime (p, start, length)) != PlankResult_OK) goto exit;
+    if ((result = pl_AudioFileMetaData_LoopPoints_InsertTime (p, start, length)) != PlankResult_OK) goto exit;
     
 exit:
     return result;
 }
 
-static PlankResult pl_AudioFileMetaData_CuePoints_RemoveFrames (PlankAudioFileMetaDataRef p, const PlankLL start, const PlankLL length)
+static PlankResult pl_AudioFileMetaData_CuePoints_RemoveTime (PlankAudioFileMetaDataRef p, const double start, const double length)
 {
     PlankResult result = PlankResult_OK;
     PlankL numCuePoints, i;
     PlankAudioFileCuePointRef cuePoint;
-    PlankLL end, position;
+    double end, position;
     
     numCuePoints = pl_SharedPtrArray_GetLength (p->cuePoints);
     end = start + length;
@@ -1019,12 +1019,12 @@ exit:
     return result;
 }
 
-static PlankResult pl_AudioFileMetaData_RegionsArray_RemoveFrames (PlankSharedPtrArrayRef regionArray, const PlankLL start, const PlankLL length)
+static PlankResult pl_AudioFileMetaData_RegionsArray_RemoveTime (PlankSharedPtrArrayRef regionArray, const double start, const double length)
 {
     PlankResult result = PlankResult_OK;
     PlankL numRegions, i;
     PlankAudioFileRegionRef region;
-    PlankLL regionStart, regionEnd, end;
+    double regionStart, regionEnd, end;
     
     numRegions = pl_SharedPtrArray_GetLength (regionArray);
     end = start + length;
@@ -1054,24 +1054,24 @@ exit:
     return result;
 }
 
-static PlankResult pl_AudioFileMetaData_Regions_RemoveFrames (PlankAudioFileMetaDataRef p, const PlankLL start, const PlankLL length)
+static PlankResult pl_AudioFileMetaData_Regions_RemoveTime (PlankAudioFileMetaDataRef p, const double start, const double length)
 {
-    return pl_AudioFileMetaData_RegionsArray_RemoveFrames (p->regions, start, length);
+    return pl_AudioFileMetaData_RegionsArray_RemoveTime (p->regions, start, length);
 }
 
-static PlankResult pl_AudioFileMetaData_LoopPoints_RemoveFrames (PlankAudioFileMetaDataRef p, const PlankLL start, const PlankLL length)
+static PlankResult pl_AudioFileMetaData_LoopPoints_RemoveTime (PlankAudioFileMetaDataRef p, const double start, const double length)
 {
-    return pl_AudioFileMetaData_RegionsArray_RemoveFrames (p->loopPoints, start, length);
+    return pl_AudioFileMetaData_RegionsArray_RemoveTime (p->loopPoints, start, length);
 }
 
-PlankResult pl_AudioFileMetaData_RemoveFrames (PlankAudioFileMetaDataRef p, const PlankLL start, const PlankLL length)
+PlankResult pl_AudioFileMetaData_RemoveTime (PlankAudioFileMetaDataRef p, const double start, const double length)
 {
     PlankResult result;
     result = PlankResult_OK;
     
-    if ((result = pl_AudioFileMetaData_CuePoints_RemoveFrames (p, start, length)) != PlankResult_OK) goto exit;
-    if ((result = pl_AudioFileMetaData_Regions_RemoveFrames (p, start, length)) != PlankResult_OK) goto exit;
-    if ((result = pl_AudioFileMetaData_LoopPoints_RemoveFrames (p, start, length)) != PlankResult_OK) goto exit;
+    if ((result = pl_AudioFileMetaData_CuePoints_RemoveTime (p, start, length)) != PlankResult_OK) goto exit;
+    if ((result = pl_AudioFileMetaData_Regions_RemoveTime (p, start, length)) != PlankResult_OK) goto exit;
+    if ((result = pl_AudioFileMetaData_LoopPoints_RemoveTime (p, start, length)) != PlankResult_OK) goto exit;
     
 exit:
     return result;

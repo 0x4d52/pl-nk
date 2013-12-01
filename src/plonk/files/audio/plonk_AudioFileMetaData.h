@@ -56,20 +56,20 @@ public:
     AudioFileCuePoint (Weak const& weak) throw();
     AudioFileCuePoint& operator= (AudioFileCuePoint const &other) throw();
     
-    AudioFileCuePoint (const UnsignedInt cueID, const LongLong position,
+    AudioFileCuePoint (const UnsignedInt cueID, const double position,
                        Text const& label = Text::getEmpty(),
                        AudioFile::CuePointTypes type = AudioFile::CuePointCuePoint,
                        Text const& comment = Text::getEmpty()) throw();
     
     AudioFileCuePoint& setCopy (AudioFileCuePoint source) throw();
-    AudioFileCuePoint& setPosition (const LongLong position) throw();
+    AudioFileCuePoint& setPosition (const double position) throw();
     AudioFileCuePoint& setID (const UnsignedInt cueID) throw();
     AudioFileCuePoint& setLabel (const char* label) throw();
     AudioFileCuePoint& setComment (const char* comment) throw();
     AudioFileCuePoint& setType (const AudioFile::CuePointTypes type) throw();
     AudioFileCuePoint& setExtra (UnsignedInt purpose, UnsignedShort country, UnsignedShort language, UnsignedShort dialect, UnsignedShort codePage) throw();
     
-    LongLong getPosition() const throw();
+    double getPosition() const throw();
     UnsignedInt getID() const throw();
     const char* getLabel() const throw();
     const char* getComment() const throw();
@@ -77,7 +77,7 @@ public:
     AudioFileCuePoint::Extra* getExtra() throw();
     const AudioFileCuePoint::Extra* getExtra() const throw();
     
-    AudioFileCuePoint& offsetPosition (const LongLong offset) throw();
+    AudioFileCuePoint& offsetPosition (const double offset) throw();
 
 private:
     PlankAudioFileCuePointRef incrementRefCountAndGetPeer() throw();
@@ -96,7 +96,7 @@ public:
     AudioFileRegion (Weak const& weak) throw();
     AudioFileRegion& operator= (AudioFileRegion const &other) throw();
 
-    AudioFileRegion (const UnsignedInt cueID, const LongLong start, const LongLong end, const LongLong anchor,
+    AudioFileRegion (const UnsignedInt cueID, const double start, const double end, const double anchor,
                      Text const& label = Text::getEmpty(),
                      AudioFile::RegionTypes type = AudioFile::RegionRegion,
                      Text const& comment = Text::getEmpty()) throw();
@@ -104,30 +104,30 @@ public:
     AudioFileCuePoint getAnchorCuePoint() const throw();
     AudioFileCuePoint getStartCuePoint() const throw();
     AudioFileCuePoint getEndCuePoint() const throw();
-    LongLong getAnchorPosition() const throw();
-    LongLong getStartPosition() const throw();
-    LongLong getEndPosition() const throw();
-    LongLong getLength() const throw();
+    double getAnchorPosition() const throw();
+    double getStartPosition() const throw();
+    double getEndPosition() const throw();
+    double getLength() const throw();
     AudioFile::RegionTypes getType() const throw();
     UnsignedInt getOptions() const throw();
     UnsignedInt getFraction() const throw();
     UnsignedInt getPlayCount() const throw();
     const char* getLabel() const throw();
     const char* getComment() const throw();
-    AudioFileRegion& setAnchorPosition (const LongLong position) throw();
-    AudioFileRegion& setStartPosition (const LongLong position) throw();
-    AudioFileRegion& setEndPosition (const LongLong position) throw();
-    AudioFileRegion& setLength (const LongLong length) throw();
+    AudioFileRegion& setAnchorPosition (const double position) throw();
+    AudioFileRegion& setStartPosition (const double position) throw();
+    AudioFileRegion& setEndPosition (const double position) throw();
+    AudioFileRegion& setLength (const double length) throw();
     AudioFileRegion& setType (const AudioFile::RegionTypes type) throw();
     AudioFileRegion& setOptions (const UnsignedInt options) throw();
-    AudioFileRegion& setFraction (const UnsignedInt fraction) throw();
+    AudioFileRegion& setFraction (const double fraction) throw();
     AudioFileRegion& setPlayCount (const UnsignedInt playCount) throw();
     AudioFileRegion& setLabel (const char* label) throw();
     AudioFileRegion& setComment (const char* comment) throw();
-    void getRegion (LongLong& start, LongLong& end, LongLong& anchor) throw();
-    AudioFileRegion& setRegion (const LongLong start, const LongLong end) throw();
-    AudioFileRegion& setRegionWithAnchor (const LongLong start, const LongLong end, const LongLong anchor) throw();
-    AudioFileRegion& offsetPosition (const LongLong offset) throw();
+    void getRegion (double& start, double& end, double& anchor) throw();
+    AudioFileRegion& setRegion (const double start, const double end) throw();
+    AudioFileRegion& setRegionWithAnchor (const double start, const double end, const double anchor) throw();
+    AudioFileRegion& offsetPosition (const double offset) throw();
 
 private:
     PlankAudioFileRegionRef incrementRefCountAndGetPeer() throw();
@@ -215,7 +215,7 @@ public:
     AudioFileRegionArray getRegions() const throw();
     AudioFileRegionArray getLoopPoints() const throw();
     
-    AudioFileMetaData& convertCuePointsToRegions (const LongLong numFrames, const bool removeCuePoints) throw();
+    AudioFileMetaData& convertCuePointsToRegions (const double totalDuration, const bool removeCuePoints) throw();
     AudioFileMetaData& sortCuePointsByPosition() throw();
     AudioFileMetaData& sortCuePointsByID() throw();
     

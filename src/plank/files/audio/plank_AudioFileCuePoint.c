@@ -125,7 +125,7 @@ exit:
     return result;
 }
 
-PlankResult pl_AudioFileCuePoint_SetPosition (PlankAudioFileCuePointRef p, const PlankLL position)
+PlankResult pl_AudioFileCuePoint_SetPosition (PlankAudioFileCuePointRef p, const double position)
 {
     p->position = position;
     return PlankResult_OK;
@@ -192,7 +192,7 @@ exit:
     return result;
 }
 
-PlankLL pl_AudioFileCuePoint_GetPosition (PlankAudioFileCuePointRef p)
+double pl_AudioFileCuePoint_GetPosition (PlankAudioFileCuePointRef p)
 {
     return p->position;
 }
@@ -242,7 +242,7 @@ PlankAudioFileCuePointExtraRef pl_AudioFileCuePoint_GetExtra (PlankAudioFileCueP
     return p->extra;
 }
 
-PlankResult pl_AudioFileCuePoint_OffsetPosition (PlankAudioFileCuePointRef p, const PlankLL offset)
+PlankResult pl_AudioFileCuePoint_OffsetPosition (PlankAudioFileCuePointRef p, const double offset)
 {
     p->position += offset;
     return PlankResult_OK;

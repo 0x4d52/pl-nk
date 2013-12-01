@@ -744,7 +744,7 @@ AudioFileReaderArray AudioFileReader::regionsFromMetaData (const int metaDataOpt
             
             for (Long i = 0; i < numRegions; ++i)
             {
-                AudioFileReader reader = AudioFileReader (*this, regions[i], bufferSize);
+                const AudioFileReader reader = AudioFileReader (*this, regions[i], bufferSize);
                 regionReaderArray.add (reader);
             }
         }

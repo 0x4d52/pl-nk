@@ -44,7 +44,7 @@ BEGIN_PLONK_NAMESPACE
 
 PLANKSHAREDPTRCONTAINER_DEFINE(AudioFileCuePoint)
 
-AudioFileCuePoint::AudioFileCuePoint (const UnsignedInt cueID, const LongLong position,
+AudioFileCuePoint::AudioFileCuePoint (const UnsignedInt cueID, const double position,
                                       Text const& label, AudioFile::CuePointTypes type, Text const& comment) throw()
 :   Base (Base::getNullSharedPtr())
 {
@@ -79,7 +79,7 @@ AudioFileCuePoint& AudioFileCuePoint::setCopy (AudioFileCuePoint source) throw()
     return *this;
 }
 
-AudioFileCuePoint& AudioFileCuePoint::setPosition (const LongLong position) throw()
+AudioFileCuePoint& AudioFileCuePoint::setPosition (const double position) throw()
 {
     Internal const internal = getInternal();
     
@@ -145,7 +145,7 @@ AudioFileCuePoint& AudioFileCuePoint::setExtra (UnsignedInt purpose, UnsignedSho
     return *this;
 }
 
-LongLong AudioFileCuePoint::getPosition() const throw()
+double AudioFileCuePoint::getPosition() const throw()
 {
     Internal const internal = getInternal();
     
@@ -153,7 +153,7 @@ LongLong AudioFileCuePoint::getPosition() const throw()
         return pl_AudioFileCuePoint_GetPosition (internal);
     else plonk_assertfalse;
     
-    return -1;
+    return -1.0;
 }
 
 UnsignedInt AudioFileCuePoint::getID() const throw()
@@ -232,7 +232,7 @@ const AudioFileCuePoint::Extra* AudioFileCuePoint::getExtra() const throw()
     return static_cast<const AudioFileCuePoint::Extra*> (0);
 }
 
-AudioFileCuePoint& AudioFileCuePoint::offsetPosition (const LongLong offset) throw()
+AudioFileCuePoint& AudioFileCuePoint::offsetPosition (const double offset) throw()
 {
     Internal const internal = getInternal();
     
@@ -245,7 +245,7 @@ AudioFileCuePoint& AudioFileCuePoint::offsetPosition (const LongLong offset) thr
 
 PLANKSHAREDPTRCONTAINER_DEFINE(AudioFileRegion)
 
-AudioFileRegion::AudioFileRegion (const UnsignedInt cueID, const LongLong start, const LongLong end, const LongLong anchor,
+AudioFileRegion::AudioFileRegion (const UnsignedInt cueID, const double start, const double end, const double anchor,
                                   Text const& label, AudioFile::RegionTypes type, Text const& comment) throw()
 :   Base (Base::getNullSharedPtr())
 {
@@ -287,7 +287,7 @@ AudioFileCuePoint AudioFileRegion::getEndCuePoint() const throw()
     return internal ? AudioFileCuePoint (pl_AudioFileRegion_GetEndCuePoint (internal)) : AudioFileCuePoint::getNull();
 }
 
-LongLong AudioFileRegion::getAnchorPosition() const throw()
+double AudioFileRegion::getAnchorPosition() const throw()
 {
     Internal const internal = getInternal();
     
@@ -295,10 +295,10 @@ LongLong AudioFileRegion::getAnchorPosition() const throw()
         return pl_AudioFileRegion_GetAnchorPosition (internal);
     else plonk_assertfalse;
     
-    return 0;
+    return -1.0;
 }
 
-LongLong AudioFileRegion::getStartPosition() const throw()
+double AudioFileRegion::getStartPosition() const throw()
 {
     Internal const internal = getInternal();
     
@@ -306,10 +306,10 @@ LongLong AudioFileRegion::getStartPosition() const throw()
         return pl_AudioFileRegion_GetStartPosition (internal);
     else plonk_assertfalse;
     
-    return 0;
+    return -1.0;
 }
 
-LongLong AudioFileRegion::getEndPosition() const throw()
+double AudioFileRegion::getEndPosition() const throw()
 {
     Internal const internal = getInternal();
     
@@ -317,10 +317,10 @@ LongLong AudioFileRegion::getEndPosition() const throw()
         return pl_AudioFileRegion_GetEndPosition (internal);
     else plonk_assertfalse;
     
-    return 0;
+    return -1.0;
 }
 
-LongLong AudioFileRegion::getLength() const throw()
+double AudioFileRegion::getLength() const throw()
 {
     Internal const internal = getInternal();
     
@@ -328,7 +328,7 @@ LongLong AudioFileRegion::getLength() const throw()
         return pl_AudioFileRegion_GetLength (internal);
     else plonk_assertfalse;
     
-    return 0;
+    return -1.0;
 }
 
 AudioFile::RegionTypes AudioFileRegion::getType() const throw()
@@ -406,7 +406,7 @@ const char* AudioFileRegion::getComment() const throw()
     return 0;
 }
 
-AudioFileRegion& AudioFileRegion::setAnchorPosition (const LongLong position) throw()
+AudioFileRegion& AudioFileRegion::setAnchorPosition (const double position) throw()
 {
     Internal const internal = getInternal();
     
@@ -417,7 +417,7 @@ AudioFileRegion& AudioFileRegion::setAnchorPosition (const LongLong position) th
     return *this;
 }
 
-AudioFileRegion& AudioFileRegion::setStartPosition (const LongLong position) throw()
+AudioFileRegion& AudioFileRegion::setStartPosition (const double position) throw()
 {
     Internal const internal = getInternal();
     
@@ -428,7 +428,7 @@ AudioFileRegion& AudioFileRegion::setStartPosition (const LongLong position) thr
     return *this;
 }
 
-AudioFileRegion& AudioFileRegion::setEndPosition (const LongLong position) throw()
+AudioFileRegion& AudioFileRegion::setEndPosition (const double position) throw()
 {
     Internal const internal = getInternal();
     
@@ -439,7 +439,7 @@ AudioFileRegion& AudioFileRegion::setEndPosition (const LongLong position) throw
     return *this;
 }
 
-AudioFileRegion& AudioFileRegion::setLength (const LongLong length) throw()
+AudioFileRegion& AudioFileRegion::setLength (const double length) throw()
 {
     Internal const internal = getInternal();
     
@@ -472,7 +472,7 @@ AudioFileRegion& AudioFileRegion::setOptions (const UnsignedInt options) throw()
     return *this;
 }
 
-AudioFileRegion& AudioFileRegion::setFraction (const UnsignedInt fraction) throw()
+AudioFileRegion& AudioFileRegion::setFraction (const double fraction) throw()
 {
     Internal const internal = getInternal();
     
@@ -516,7 +516,7 @@ AudioFileRegion& AudioFileRegion::setComment (const char* comment) throw()
     return *this;
 }
 
-void AudioFileRegion::getRegion (LongLong& start, LongLong& end, LongLong& anchor) throw()
+void AudioFileRegion::getRegion (double& start, double& end, double& anchor) throw()
 {
     Internal const internal = getInternal();
     
@@ -525,7 +525,7 @@ void AudioFileRegion::getRegion (LongLong& start, LongLong& end, LongLong& ancho
     else plonk_assertfalse;    
 }
 
-AudioFileRegion& AudioFileRegion::setRegion (const LongLong start, const LongLong end) throw()
+AudioFileRegion& AudioFileRegion::setRegion (const double start, const double end) throw()
 {
     Internal const internal = getInternal();
     
@@ -536,7 +536,7 @@ AudioFileRegion& AudioFileRegion::setRegion (const LongLong start, const LongLon
     return *this;
 }
 
-AudioFileRegion& AudioFileRegion::setRegionWithAnchor (const LongLong start, const LongLong end, const LongLong anchor) throw()
+AudioFileRegion& AudioFileRegion::setRegionWithAnchor (const double start, const double end, const double anchor) throw()
 {
     Internal const internal = getInternal();
     
@@ -547,7 +547,7 @@ AudioFileRegion& AudioFileRegion::setRegionWithAnchor (const LongLong start, con
     return *this;
 }
 
-AudioFileRegion& AudioFileRegion::offsetPosition (const LongLong offset) throw()
+AudioFileRegion& AudioFileRegion::offsetPosition (const double offset) throw()
 {
     Internal const internal = getInternal();
     
@@ -582,12 +582,12 @@ AudioFileRegionArray AudioFileMetaData::getLoopPoints() const throw()
     return internal ? AudioFileRegionArray (pl_AudioFileMetaData_GetLoopPoints (internal)) : AudioFileRegionArray::getNull();
 }
 
-AudioFileMetaData& AudioFileMetaData::convertCuePointsToRegions (const LongLong numFrames, const bool removeCuePoints) throw()
+AudioFileMetaData& AudioFileMetaData::convertCuePointsToRegions (const double totalDuration, const bool removeCuePoints) throw()
 {
     Internal const internal = getInternal();
     
     if (internal != Base::getNullSharedPtr())
-        pl_AudioFileMetaData_ConvertCuePointsToRegions (internal, numFrames, removeCuePoints);
+        pl_AudioFileMetaData_ConvertCuePointsToRegions (internal, totalDuration, removeCuePoints);
     else plonk_assertfalse;
     
     return *this;

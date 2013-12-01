@@ -65,13 +65,13 @@ PlankAudioFileCuePointRef pl_AudioFileRegion_GetAnchorCuePoint (PlankAudioFileRe
 PlankAudioFileCuePointRef pl_AudioFileRegion_GetStartCuePoint (PlankAudioFileRegionRef p);
 PlankAudioFileCuePointRef pl_AudioFileRegion_GetEndCuePoint (PlankAudioFileRegionRef p);
 
-PlankLL pl_AudioFileRegion_GetAnchorPosition (PlankAudioFileRegionRef p);
-PlankLL pl_AudioFileRegion_GetStartPosition (PlankAudioFileRegionRef p);
-PlankLL pl_AudioFileRegion_GetEndPosition (PlankAudioFileRegionRef p);
-PlankLL pl_AudioFileRegion_GetLength (PlankAudioFileRegionRef p);
+double pl_AudioFileRegion_GetAnchorPosition (PlankAudioFileRegionRef p);
+double pl_AudioFileRegion_GetStartPosition (PlankAudioFileRegionRef p);
+double pl_AudioFileRegion_GetEndPosition (PlankAudioFileRegionRef p);
+double pl_AudioFileRegion_GetLength (PlankAudioFileRegionRef p);
 int pl_AudioFileRegion_GetType (PlankAudioFileRegionRef p);
 PlankUI pl_AudioFileRegion_GetOptions (PlankAudioFileRegionRef p);
-PlankUI pl_AudioFileRegion_GetFraction (PlankAudioFileRegionRef p);
+double pl_AudioFileRegion_GetFraction (PlankAudioFileRegionRef p);
 PlankUI pl_AudioFileRegion_GetPlayCount (PlankAudioFileRegionRef p);
 
 const char* pl_AudioFileRegion_GetLabel (PlankAudioFileRegionRef p);
@@ -79,22 +79,22 @@ char* pl_AudioFileRegion_GetLabelWritable (PlankAudioFileRegionRef p);
 const char* pl_AudioFileRegion_GetComment (PlankAudioFileRegionRef p);
 char* pl_AudioFileRegion_GetCommentWritable (PlankAudioFileRegionRef p);
 
-PlankResult pl_AudioFileRegion_SetAnchorPosition (PlankAudioFileRegionRef p, const PlankLL position);
-PlankResult pl_AudioFileRegion_SetStartPosition (PlankAudioFileRegionRef p, const PlankLL position);
-PlankResult pl_AudioFileRegion_SetEndPosition (PlankAudioFileRegionRef p, const PlankLL position);
-PlankResult pl_AudioFileRegion_SetLength (PlankAudioFileRegionRef p, const PlankLL length);
+PlankResult pl_AudioFileRegion_SetAnchorPosition (PlankAudioFileRegionRef p, const double position);
+PlankResult pl_AudioFileRegion_SetStartPosition (PlankAudioFileRegionRef p, const double position);
+PlankResult pl_AudioFileRegion_SetEndPosition (PlankAudioFileRegionRef p, const double position);
+PlankResult pl_AudioFileRegion_SetLength (PlankAudioFileRegionRef p, const double length);
 PlankResult pl_AudioFileRegion_SetType (PlankAudioFileRegionRef p, const int type);
 PlankResult pl_AudioFileRegion_SetOptions (PlankAudioFileRegionRef p, const PlankUI options);
-PlankResult pl_AudioFileRegion_SetFraction (PlankAudioFileRegionRef p, const PlankUI fraction);
+PlankResult pl_AudioFileRegion_SetFraction (PlankAudioFileRegionRef p, const double fraction);
 PlankResult pl_AudioFileRegion_SetPlayCount (PlankAudioFileRegionRef p, const PlankUI playCount);
 PlankResult pl_AudioFileRegion_SetLabel (PlankAudioFileRegionRef p, const char* label);
 PlankResult pl_AudioFileRegion_SetComment (PlankAudioFileRegionRef p, const char* comment);
 
-PlankResult pl_AudioFileRegion_GetRegion (PlankAudioFileRegionRef p, PlankLL* start, PlankLL* end, PlankLL* anchor);
-PlankResult pl_AudioFileRegion_SetRegion (PlankAudioFileRegionRef p, const PlankLL start, const PlankLL end);
-PlankResult pl_AudioFileRegion_SetRegionWithAnchor (PlankAudioFileRegionRef p, const PlankLL start, const PlankLL end, const PlankLL anchor);
+PlankResult pl_AudioFileRegion_GetRegion (PlankAudioFileRegionRef p, double* start, double* end, double* anchor);
+PlankResult pl_AudioFileRegion_SetRegion (PlankAudioFileRegionRef p, const double start, const double end);
+PlankResult pl_AudioFileRegion_SetRegionWithAnchor (PlankAudioFileRegionRef p, const double start, const double end, const double anchor);
 
-PlankResult pl_AudioFileRegion_OffsetPosition (PlankAudioFileRegionRef p, const PlankLL offset);
+PlankResult pl_AudioFileRegion_OffsetPosition (PlankAudioFileRegionRef p, const double offset);
 
 
 /** @} */
@@ -110,7 +110,7 @@ typedef struct PlankAudioFileRegion
     PlankAudioFileCuePointRef end;
     int regionType;
     PlankUI regionOptions;
-    PlankUI fraction;
+    double fraction;
     PlankUI playCount;
 } PlankAudioFileRegion;
 #endif
