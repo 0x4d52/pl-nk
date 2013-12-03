@@ -215,7 +215,7 @@ AudioFileReaderInternal::AudioFileReaderInternal (FilePathQueue const& fileQueue
 static PlankResult AudioFileReaderInternal_Queue_NextFunction (PlankP ref, PlankAudioFileReaderRef currentFile, PlankAudioFileReaderRef* audioFile) throw()
 {
     AudioFileReaderQueue& queue = *static_cast<AudioFileReaderQueue*> (ref);
-    AudioFileReader reader = queue.pop();
+    AudioFileReader reader (queue.pop());
     PlankAudioFileReaderRef file = pl_AudioFileReader_CreateAndInit();
     reader.disownPeer (file);
     *audioFile = file;    

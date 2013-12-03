@@ -3846,9 +3846,10 @@ PlankResult pl_AudioFileReader_Multi_Open (PlankAudioFileReaderRef p, PlankFileR
     if (pl_AudioFileReader_GetFile (amul->currentAudioFile) != PLANK_NULL)
     {
         pl_AudioFileReader_UpdateFormat (p, &amul->currentAudioFile->formatInfo, PLANK_NULL);
-        pl_AudioFileReader_GetNumFrames (amul->currentAudioFile, &p->numFrames); // maybe LL_MAX??
         pl_AudioFileReader_SetName (p, pl_AudioFileReader_GetName (amul->currentAudioFile));
     }
+    
+    p->numFrames = PLANK_LL_MAX;
     
     p->readFramesFunction       = (PlankM)pl_AudioFileReader_Multi_ReadFrames;
     p->setFramePositionFunction = (PlankM)pl_AudioFileReader_Multi_SetFramePosition;
@@ -3936,10 +3937,7 @@ PlankResult pl_AudioFileReader_Multi_ReadFrames (PlankAudioFileReaderRef p, cons
             goto exit;
         
         if (pl_AudioFileReader_GetFile (amul->currentAudioFile) != PLANK_NULL)
-        {
             pl_AudioFileReader_UpdateFormat (p, &amul->currentAudioFile->formatInfo, &frameFormatChanged);
-            pl_AudioFileReader_GetNumFrames (amul->currentAudioFile, &p->numFrames);
-        }
     }
     
     maximumFrames = numFrames;
@@ -3974,10 +3972,7 @@ PlankResult pl_AudioFileReader_Multi_ReadFrames (PlankAudioFileReaderRef p, cons
                     goto exit;
                 
                 if (pl_AudioFileReader_GetFile (amul->currentAudioFile) != PLANK_NULL)
-                {
                     pl_AudioFileReader_UpdateFormat (p, &amul->currentAudioFile->formatInfo, &frameFormatChanged);
-                    pl_AudioFileReader_GetNumFrames (amul->currentAudioFile, &p->numFrames);
-                }
             }
         }
         
@@ -4072,9 +4067,9 @@ PlankResult pl_MultiAudioFileReaderQueueNextFunction (PlankMultiAudioFileReaderR
     PlankLockFreeQueueRef q;
     PlankLockFreeQueueElementRef e;
     
-    file = (PlankFileRef)PLANK_NULL;
-    q = (PlankLockFreeQueueRef)p->source;
-    e = (PlankLockFreeQueueElementRef)PLANK_NULL;
+    file  = (PlankFileRef)PLANK_NULL;
+    q     = (PlankLockFreeQueueRef)p->source;
+    e     = (PlankLockFreeQueueElementRef)PLANK_NULL;
     multi = (PlankMulitFileReaderRef)p->originalMulti.stream;
     
     if ((result = pl_LockFreeQueue_Pop (q, &e)) != PlankResult_OK)
@@ -4145,15 +4140,12 @@ typedef struct PlankAudioFileReaderArray
     int* indexRef;
 } PlankAudioFileReaderArray;
 
-
 PlankResult pl_AudioFileReaderArraySequenceOnceNextIndexFunction (PlankAudioFileReaderArrayRef p);
 PlankResult pl_AudioFileReaderArraySequenceLoopNextIndexFunction (PlankAudioFileReaderArrayRef p);
 PlankResult pl_AudioFileReaderArrayRandomNextIndexFunction (PlankAudioFileReaderArrayRef p);
 PlankResult pl_AudioFileReaderArrayRandomNoRepeatNextIndexFunction (PlankAudioFileReaderArrayRef p);
 PlankResult pl_AudioFileReaderArrayIndexRefNextIndexFunction (PlankAudioFileReaderArrayRef p);
-
 PlankResult pl_AudioFileReaderArrayNextFunction (PlankAudioFileReaderArrayRef p);
-
 
 PlankResult pl_AudioFileReader_Array_Open (PlankAudioFileReaderRef p, PlankDynamicArrayRef array, PlankB ownArray, const int multiMode, int *indexRef)
 {
@@ -4220,10 +4212,11 @@ PlankResult pl_AudioFileReader_Array_Open (PlankAudioFileReaderRef p, PlankDynam
     if (pl_AudioFileReader_GetFile (audioFileArray->currentAudioFile) != PLANK_NULL)
     {
         pl_AudioFileReader_UpdateFormat (p, &audioFileArray->currentAudioFile->formatInfo, PLANK_NULL);
-        pl_AudioFileReader_GetNumFrames (audioFileArray->currentAudioFile, &p->numFrames); // maybe LL_MAX?
         pl_AudioFileReader_SetName (p, pl_AudioFileReader_GetName (audioFileArray->currentAudioFile));
     }
-    
+
+    p->numFrames = PLANK_LL_MAX;
+
     p->readFramesFunction       = (PlankM)pl_AudioFileReader_Array_ReadFrames;
     p->setFramePositionFunction = (PlankM)pl_AudioFileReader_Array_SetFramePosition;
     p->getFramePositionFunction = (PlankM)pl_AudioFileReader_Array_GetFramePosition;
@@ -4287,10 +4280,7 @@ PlankResult pl_AudioFileReader_Array_ReadFrames (PlankAudioFileReaderRef p, cons
             goto exit;
         
         if (pl_AudioFileReader_GetFile (audioFileArray->currentAudioFile) != PLANK_NULL)
-        {
             pl_AudioFileReader_UpdateFormat (p, &audioFileArray->currentAudioFile->formatInfo, &frameFormatChanged);
-            pl_AudioFileReader_GetNumFrames (audioFileArray->currentAudioFile, &p->numFrames);
-        }
     }
     
     maximumFrames = numFrames;
@@ -4325,10 +4315,7 @@ PlankResult pl_AudioFileReader_Array_ReadFrames (PlankAudioFileReaderRef p, cons
                     goto exit;
                 
                 if (pl_AudioFileReader_GetFile (audioFileArray->currentAudioFile) != PLANK_NULL)
-                {
                     pl_AudioFileReader_UpdateFormat (p, &audioFileArray->currentAudioFile->formatInfo, &frameFormatChanged);
-                    pl_AudioFileReader_GetNumFrames (audioFileArray->currentAudioFile, &p->numFrames);
-                }
             }
         }
         
@@ -4537,9 +4524,10 @@ PlankResult pl_AudioFileReader_Custom_Open (PlankAudioFileReaderRef p,
     if (pl_AudioFileReader_GetFile (custom->currentAudioFile) != PLANK_NULL)
     {
         pl_AudioFileReader_UpdateFormat (p, &custom->currentAudioFile->formatInfo, PLANK_NULL);
-        pl_AudioFileReader_GetNumFrames (custom->currentAudioFile, &p->numFrames);
         pl_AudioFileReader_SetName (p, pl_AudioFileReader_GetName (custom->currentAudioFile));
     }
+    
+    p->numFrames = PLANK_LL_MAX;
     
     p->readFramesFunction       = (PlankM)pl_AudioFileReader_Custom_ReadFrames;
     p->setFramePositionFunction = (PlankM)(setFrameFunction ? setFrameFunction : pl_AudioFileReader_Custom_SetFramePosition);
@@ -4601,10 +4589,7 @@ PlankResult pl_AudioFileReader_Custom_ReadFrames (PlankAudioFileReaderRef p, con
             goto exit;
         
         if (pl_AudioFileReader_GetFile (custom->currentAudioFile) != PLANK_NULL)
-        {
             pl_AudioFileReader_UpdateFormat (p, &custom->currentAudioFile->formatInfo, &frameFormatChanged);
-            pl_AudioFileReader_GetNumFrames (custom->currentAudioFile, &p->numFrames);
-        }
     }
     
     maximumFrames = numFrames;
@@ -4626,11 +4611,6 @@ PlankResult pl_AudioFileReader_Custom_ReadFrames (PlankAudioFileReaderRef p, con
         {
             result = pl_AudioFileReader_ReadFrames (custom->currentAudioFile, convertByteOrder, maximumFrames, ptr, &framesThisTime);
             
-//            if (result == PlankResult_UnknownError)
-//            {
-//                printf("");
-//            }
-
             if ((result != PlankResult_OK) && (result != PlankResult_FileEOF))
                 goto exit;
             
@@ -4643,25 +4623,17 @@ PlankResult pl_AudioFileReader_Custom_ReadFrames (PlankAudioFileReaderRef p, con
                 
                 result = pl_AudioFileReaderCustomNextFunction (custom);
                 
-//                if (result == PlankResult_UnknownError)
-//                {
-//                    printf("");
-//                }
-
                 if (result != PlankResult_OK)
                     goto exit;
                 
                 if (pl_AudioFileReader_GetFile (custom->currentAudioFile) != PLANK_NULL)
-                {
                     pl_AudioFileReader_UpdateFormat (p, &custom->currentAudioFile->formatInfo, &frameFormatChanged);
-                    pl_AudioFileReader_GetNumFrames (custom->currentAudioFile, &p->numFrames);
-                }
             }
         }
         
         framesReadLocal += framesThisTime;
         maximumFrames -= framesThisTime;
-        ptr += bytesThisTime;
+        ptr += bytesThisTime;        
     }
     
 exit:
@@ -4669,12 +4641,7 @@ exit:
         *framesRead = framesReadLocal;
     
     result = (numFails < 2) ? result : PlankResult_FileEOF;
-    
-//    if (result == PlankResult_UnknownError)
-//    {
-//        printf("");
-//    }
-    
+        
     return result;
 }
 
@@ -4710,11 +4677,6 @@ PlankResult pl_AudioFileReaderCustomNextFunction (PlankAudioFileReaderCustomRef 
     {
         p->currentAudioFile = newFile;
     }
-    
-//    if (result == PlankResult_UnknownError)
-//    {
-//        printf("");
-//    }
     
 //exit:
     return result;
