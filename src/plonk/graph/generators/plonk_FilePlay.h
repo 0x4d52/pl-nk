@@ -164,7 +164,7 @@ public:
                 
                 if (cue.isNotNull())
                 {
-                    if (cue.getPosition() == filePosition)
+                    if (cue.getFramePosition (file.getSampleRate()) == filePosition)
                     {
                         this->update (Text::getMessageCuePoint(), Text (cue.getLabel()));
                         
@@ -181,7 +181,7 @@ public:
                     
                     if (renderToNextCue)
                     {
-                        const LongLong framesToNextCue = cue.getPosition() - filePosition;
+                        const LongLong framesToNextCue = cue.getFramePosition (file.getSampleRate()) - filePosition;
                         
                         if (framesToNextCue < LongLong (bufferSize / fileNumChannels))
                         {
@@ -199,7 +199,7 @@ public:
             const bool hitEOF = file.didHitEOF();
             const int bufferAvailable = buffer.length();
             
-            if (bufferAvailable == 0)
+            if ((bufferAvailable == 0) || data.done)
             {
                 for (channel = 0; channel < numChannels; ++channel)
                 {

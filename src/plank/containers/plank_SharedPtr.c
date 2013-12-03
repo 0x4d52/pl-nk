@@ -580,7 +580,7 @@ PlankResult pl_SharedPtrArray_PutSharedPtr (PlankSharedPtrArrayRef p, const Plan
 
     result = PlankResult_OK;
     
-    if ((index < 0) || (index > p->array.usedItems))
+    if ((index < 0) || (index >= p->array.usedItems))
     {
         result = PlankResult_ArrayParameterError;
         goto exit;
@@ -608,7 +608,7 @@ PlankResult pl_SharedPtrArray_RemoveSharedPtr (PlankSharedPtrArrayRef p, const P
     PlankResult result;
     result = PlankResult_OK;
 
-    if ((index < 0) || (index > p->array.usedItems))
+    if ((index < 0) || (index >= p->array.usedItems))
     {
         result = PlankResult_ArrayParameterError;
         goto exit;
@@ -639,7 +639,7 @@ PlankSharedPtrRef pl_SharedPtrArray_GetSharedPtr (PlankSharedPtrArrayRef p, cons
     PlankAtomicP* array;
     PlankSharedPtr* sharedPtr;
     
-    if ((index < 0) || (index > p->array.usedItems))
+    if ((index < 0) || (index >= p->array.usedItems))
         return PLANK_NULL;
 
     array = (PlankAtomicP*)pl_DynamicArray_GetArray (&p->array);

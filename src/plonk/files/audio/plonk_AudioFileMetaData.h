@@ -70,6 +70,7 @@ public:
     AudioFileCuePoint& setExtra (UnsignedInt purpose, UnsignedShort country, UnsignedShort language, UnsignedShort dialect, UnsignedShort codePage) throw();
     
     double getPosition() const throw();
+    LongLong getFramePosition (const double sampleRate) const throw();
     UnsignedInt getID() const throw();
     const char* getLabel() const throw();
     const char* getComment() const throw();

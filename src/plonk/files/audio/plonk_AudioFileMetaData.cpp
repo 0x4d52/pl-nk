@@ -156,6 +156,17 @@ double AudioFileCuePoint::getPosition() const throw()
     return -1.0;
 }
 
+LongLong AudioFileCuePoint::getFramePosition (const double sampleRate) const throw()
+{
+    Internal const internal = getInternal();
+    
+    if (internal != Base::getNullSharedPtr())
+        return LongLong (pl_AudioFileCuePoint_GetPosition (internal) * sampleRate + 0.5);
+    else plonk_assertfalse;
+    
+    return -1.0;
+}
+
 UnsignedInt AudioFileCuePoint::getID() const throw()
 {
     Internal const internal = getInternal();
