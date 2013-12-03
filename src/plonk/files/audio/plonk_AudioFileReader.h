@@ -126,6 +126,7 @@ public:
     
     bool didHitEOF() const throw() { return hitEndOfFile; }
     bool didNumChannelsChange() const throw() { return numChannelsChanged; }
+    bool didAudioFileChange() const throw() { return audioFileChanged; }
     
     void setName (Text const& name) throw();
     Text getName() const throw();
@@ -160,6 +161,7 @@ private:
     AtomicValue<void*> owner;
     bool hitEndOfFile;
     bool numChannelsChanged;
+    bool audioFileChanged;
     IntVariable nextMultiIndexRef;
     int defaultNumChannels;
     double defaultSampleRate;
@@ -177,8 +179,9 @@ void AudioFileReaderInternal::readFrames (NumericalArray<SampleType>& data,
     
     this->hitEndOfFile = false;
     this->numChannelsChanged = false;
+    this->audioFileChanged = false;
     
-    ResultCode result;
+    ResultCode result = PlankResult_OK;
     
     const int dataLength = data.length();
     int dataRemaining = dataLength;
@@ -215,6 +218,7 @@ void AudioFileReaderInternal::readFrames (NumericalArray<SampleType>& data,
     while ((dataRemaining > 0) && 
            (result != PlankResult_FileEOF) &&
            (result != PlankResult_AudioFileFrameFormatChanged) &&
+           (result != PlankResult_AudioFileChanged) &&
            (numFails < numFailsAllowed))
     {
         AtomicLongLong newPosition (-1);
@@ -233,7 +237,10 @@ void AudioFileReaderInternal::readFrames (NumericalArray<SampleType>& data,
 
         int framesRead;
         result = pl_AudioFileReader_ReadFrames (getPeerRef(), PLANK_FALSE, framesToRead, readBufferArray, &framesRead);
-        plonk_assert ((result == PlankResult_OK) || (result == PlankResult_FileEOF) || (result == PlankResult_AudioFileFrameFormatChanged));
+        plonk_assert ((result == PlankResult_OK) ||
+                      (result == PlankResult_FileEOF) ||
+                      (result == PlankResult_AudioFileFrameFormatChanged) ||
+                      (result == PlankResult_AudioFileChanged));
         
         if (framesRead > 0)
         {
@@ -332,7 +339,7 @@ void AudioFileReaderInternal::readFrames (NumericalArray<SampleType>& data,
             
             if (newNumChannels == channels)
             {
-                result = PlankResult_OK; // no need to exit our loop unless the number of channels changed
+                result = PlankResult_AudioFileChanged;
             }
             else
             {
@@ -360,12 +367,11 @@ void AudioFileReaderInternal::readFrames (NumericalArray<SampleType>& data,
     
 exit:
     if (dataIndex < dataLength)
-    {
         data.setSize (dataIndex, true);
     
-        this->hitEndOfFile = (result == PlankResult_FileEOF);
-        this->numChannelsChanged = (result == PlankResult_AudioFileFrameFormatChanged);
-    }    
+    this->hitEndOfFile       = (result == PlankResult_FileEOF);
+    this->numChannelsChanged = (result == PlankResult_AudioFileFrameFormatChanged);
+    this->audioFileChanged   = (result == PlankResult_AudioFileChanged);
 }
 
 
@@ -840,6 +846,11 @@ public:
     bool didNumChannelsChange() const throw()
     {
         return getInternal()->didNumChannelsChange();
+    }
+    
+    bool didAudioFileChange() const throw()
+    {
+        return getInternal()->didAudioFileChange();
     }
     
     AudioFileReaderArray regionsFromMetaData (const int metaDataOption, const int bufferSize = 0) throw();

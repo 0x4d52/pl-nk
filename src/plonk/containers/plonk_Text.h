@@ -162,6 +162,7 @@ public:
     
     static const Text& getMessageDone() throw();
     static const Text& getMessageNumChannelsChanged() throw();
+    static const Text& getMessageAudioFileChanged() throw();
     static const Text& getMessageLooped() throw();
     static const Text& getMessagePatchStart() throw();
     static const Text& getMessagePatchEnd() throw();

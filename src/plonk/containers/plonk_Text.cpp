@@ -449,6 +449,12 @@ const Text& Text::getMessageNumChannelsChanged() throw()
 	return t;
 }
 
+const Text& Text::getMessageAudioFileChanged() throw()
+{
+    static const Text t = "audioFileChanged";
+	return t;
+}
+
 const Text& Text::getMessageLooped() throw()
 {
     static const Text t = "looped";

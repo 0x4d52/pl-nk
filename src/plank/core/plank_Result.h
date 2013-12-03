@@ -72,6 +72,7 @@ enum PlankResultIdentifiers
     PlankResult_AudioFileDataChunkInvalid,              ///< The data chunks appears to be invalid.
     PlankResult_AudioFileInvalidFilePosition,           ///< A file operation was attempted when the file was at an invalid position.
     PlankResult_AudioFileFrameFormatChanged,            ///< The audio file frame format changed mid-stream.
+    PlankResult_AudioFileChanged,                       ///< The source audio file changed but not the frame format.
     
     PlankResult_ThreadSetFunctionFailed,    ///< Setting the run function failed, probably because the thread is already running.
     PlankResult_ThreadSetUserDataFailed,    ///< Setting the user data failed, probably because the thread is already running.

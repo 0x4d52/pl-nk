@@ -3945,7 +3945,11 @@ PlankResult pl_AudioFileReader_Multi_ReadFrames (PlankAudioFileReaderRef p, cons
     
     while (maximumFrames > 0)
     {
-        if (frameFormatChanged)
+        if (result == PlankResult_AudioFileChanged)
+        {
+            goto exit;
+        }
+        else if (frameFormatChanged)
         {
             result = PlankResult_AudioFileFrameFormatChanged;
             goto exit;
@@ -3973,6 +3977,9 @@ PlankResult pl_AudioFileReader_Multi_ReadFrames (PlankAudioFileReaderRef p, cons
                 
                 if (pl_AudioFileReader_GetFile (amul->currentAudioFile) != PLANK_NULL)
                     pl_AudioFileReader_UpdateFormat (p, &amul->currentAudioFile->formatInfo, &frameFormatChanged);
+                
+                if (!frameFormatChanged)
+                    result = PlankResult_AudioFileChanged;
             }
         }
         
@@ -4288,7 +4295,11 @@ PlankResult pl_AudioFileReader_Array_ReadFrames (PlankAudioFileReaderRef p, cons
     
     while (maximumFrames > 0)
     {
-        if (frameFormatChanged)
+        if (result == PlankResult_AudioFileChanged)
+        {
+            goto exit;
+        }
+        else if (frameFormatChanged)
         {
             result = PlankResult_AudioFileFrameFormatChanged;
             goto exit;
@@ -4316,6 +4327,9 @@ PlankResult pl_AudioFileReader_Array_ReadFrames (PlankAudioFileReaderRef p, cons
                 
                 if (pl_AudioFileReader_GetFile (audioFileArray->currentAudioFile) != PLANK_NULL)
                     pl_AudioFileReader_UpdateFormat (p, &audioFileArray->currentAudioFile->formatInfo, &frameFormatChanged);
+                
+                if (!frameFormatChanged)
+                    result = PlankResult_AudioFileChanged;
             }
         }
         
@@ -4568,6 +4582,7 @@ PlankResult pl_AudioFileReader_Custom_ReadFrames (PlankAudioFileReaderRef p, con
 {
     PlankResult result = PlankResult_OK;
     PlankAudioFileReaderCustomRef custom;
+    PlankAudioFileReaderRef currentAudioFile;
     int framesThisTime, framesReadLocal, maximumFrames, bytesThisTime;
     PlankUC* ptr;
     PlankB frameFormatChanged;
@@ -4592,29 +4607,34 @@ PlankResult pl_AudioFileReader_Custom_ReadFrames (PlankAudioFileReaderRef p, con
             pl_AudioFileReader_UpdateFormat (p, &custom->currentAudioFile->formatInfo, &frameFormatChanged);
     }
     
+    currentAudioFile = custom->currentAudioFile;
     maximumFrames = numFrames;
     ptr = (PlankUC*)data;
     
     while ((maximumFrames > 0) && (numFails < 2))
     {
-        if (frameFormatChanged)
+        if (result == PlankResult_AudioFileChanged)
+        {
+            goto exit;
+        }
+        else if (frameFormatChanged)
         {
             result = PlankResult_AudioFileFrameFormatChanged;
             goto exit;
         }
-        else if (!pl_AudioFileReader_GetFile (custom->currentAudioFile))
+        else if (!pl_AudioFileReader_GetFile (currentAudioFile))
         {
             result = PlankResult_FileEOF;
             goto exit;
         }
         else
         {
-            result = pl_AudioFileReader_ReadFrames (custom->currentAudioFile, convertByteOrder, maximumFrames, ptr, &framesThisTime);
+            result = pl_AudioFileReader_ReadFrames (currentAudioFile, convertByteOrder, maximumFrames, ptr, &framesThisTime);
             
             if ((result != PlankResult_OK) && (result != PlankResult_FileEOF))
                 goto exit;
             
-            bytesThisTime = framesThisTime * custom->currentAudioFile->formatInfo.bytesPerFrame;
+            bytesThisTime = framesThisTime * currentAudioFile->formatInfo.bytesPerFrame;
             
             if (framesThisTime < maximumFrames)
             {
@@ -4628,6 +4648,11 @@ PlankResult pl_AudioFileReader_Custom_ReadFrames (PlankAudioFileReaderRef p, con
                 
                 if (pl_AudioFileReader_GetFile (custom->currentAudioFile) != PLANK_NULL)
                     pl_AudioFileReader_UpdateFormat (p, &custom->currentAudioFile->formatInfo, &frameFormatChanged);
+                
+                if (!frameFormatChanged && (currentAudioFile != custom->currentAudioFile))
+                    result = PlankResult_AudioFileChanged;
+                
+                currentAudioFile = custom->currentAudioFile;
             }
         }
         

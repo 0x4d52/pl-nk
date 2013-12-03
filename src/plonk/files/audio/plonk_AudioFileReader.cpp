@@ -47,6 +47,7 @@ AudioFileReaderInternal::AudioFileReaderInternal() throw()
     newPositionOnNextRead (-1),
     hitEndOfFile (false),
     numChannelsChanged (false),
+    audioFileChanged (false),
     defaultNumChannels (0)
 {
     pl_AudioFileReader_Init (getPeerRef());
@@ -58,6 +59,7 @@ AudioFileReaderInternal::AudioFileReaderInternal (const char* path, const int bu
     newPositionOnNextRead (-1),
     hitEndOfFile (false),
     numChannelsChanged (false),
+    audioFileChanged (false),
     defaultNumChannels (0)
 {
     init (path, metaDataIOFlags);
@@ -107,6 +109,7 @@ AudioFileReaderInternal::AudioFileReaderInternal (ByteArray const& bytes, const 
     newPositionOnNextRead (-1),
     hitEndOfFile (false),
     numChannelsChanged (false),
+    audioFileChanged (false),
     defaultNumChannels (0)
 {
     init (bytes, metaDataIOFlags);
@@ -119,6 +122,7 @@ AudioFileReaderInternal::AudioFileReaderInternal (FilePathArray const& fileArray
     newPositionOnNextRead (-1),
     hitEndOfFile (false),
     numChannelsChanged (false),
+    audioFileChanged (false),
     defaultNumChannels (0)
 {
     pl_AudioFileReader_Init (getPeerRef());
@@ -141,6 +145,7 @@ AudioFileReaderInternal::AudioFileReaderInternal (FilePathArray const& fileArray
     newPositionOnNextRead (-1),
     hitEndOfFile (false),
     numChannelsChanged (false),
+    audioFileChanged (false),
     nextMultiIndexRef (indexRef),
     defaultNumChannels (0)
 {
@@ -164,6 +169,7 @@ AudioFileReaderInternal::AudioFileReaderInternal (AudioFileReaderArray const& au
     newPositionOnNextRead (-1),
     hitEndOfFile (false),
     numChannelsChanged (false),
+    audioFileChanged (false),
     defaultNumChannels (0)
 {
     pl_AudioFileReader_Init (getPeerRef());
@@ -196,6 +202,7 @@ AudioFileReaderInternal::AudioFileReaderInternal (FilePathQueue const& fileQueue
     newPositionOnNextRead (-1),
     hitEndOfFile (false),
     numChannelsChanged (false),
+    audioFileChanged (false),
     defaultNumChannels (0)
 {
     pl_AudioFileReader_Init (getPeerRef());
@@ -262,6 +269,7 @@ AudioFileReaderInternal::AudioFileReaderInternal (AudioFileReaderQueue const& au
     newPositionOnNextRead (-1),
     hitEndOfFile (false),
     numChannelsChanged (false),
+    audioFileChanged (false),
     defaultNumChannels (0)
 {
     pl_AudioFileReader_Init (getPeerRef());
@@ -368,6 +376,7 @@ AudioFileReaderInternal::AudioFileReaderInternal (AudioFileReader const& origina
     newPositionOnNextRead (-1),
     hitEndOfFile (false),
     numChannelsChanged (false),
+    audioFileChanged (false),
     defaultNumChannels (0)
 {
     pl_AudioFileReader_Init (getPeerRef());
