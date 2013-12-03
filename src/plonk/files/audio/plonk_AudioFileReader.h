@@ -499,14 +499,13 @@ public:
 //    {
 //    }
 //
-//    AudioFileReader (AudioFileReader const& original, const double start, const double end, const int bufferSize = 0) throw()
-//    :	Base (new Internal (original,
-//                            LongLong (start * original.getSampleRate()),
-//                            LongLong (end * original.getSampleRate()),
-//                            bufferSize))
-//    {
-//    }
-//    
+    AudioFileReader (AudioFileReader const& original, const double start, const double end, const int bufferSize = 0) throw()
+    :	Base (new Internal (original,
+                            AudioFileRegion (0, start, end, -1.0),
+                            bufferSize))
+    {
+    }
+//
 //    AudioFileReader (AudioFileReader const& original, const float start, const float end, const int bufferSize = 0) throw()
 //    :	Base (new Internal (original,
 //                            LongLong (start * original.getSampleRate()),
@@ -875,8 +874,6 @@ public:
         return this->getInternal()->getChannelIdentifier (channel);
     }
 
-    
-    
 
 private:
     // these could be currently dangerous across threads, need to look at a safer way to open

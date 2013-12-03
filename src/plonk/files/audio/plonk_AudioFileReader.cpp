@@ -235,6 +235,27 @@ static PlankResult AudioFileReaderInternal_Queue_FreeFunction (PlankP ref) throw
     return PlankResult_OK;
 }
 
+static PlankResult AudioFileReaderInternal_Queue_SetFramePosition (PlankAudioFileReaderRef p, const PlankLL frameIndex)
+{
+    PlankAudioFileReaderCustomRef custom = static_cast<PlankAudioFileReaderCustomRef> (p->peer);
+    return custom->currentAudioFile ? pl_AudioFileReader_SetFramePosition (custom->currentAudioFile, frameIndex) : PlankResult_OK;
+}
+
+static PlankResult AudioFileReaderInternal_Queue_GetFramePosition (PlankAudioFileReaderRef p, PlankLL *frameIndex)
+{
+    PlankAudioFileReaderCustomRef custom = static_cast<PlankAudioFileReaderCustomRef> (p->peer);
+    
+    if (custom->currentAudioFile)
+    {
+        return pl_AudioFileReader_GetFramePosition (custom->currentAudioFile, frameIndex);
+    }
+    else
+    {
+        *frameIndex = 0;
+        return PlankResult_OK;
+    }
+}
+
 AudioFileReaderInternal::AudioFileReaderInternal (AudioFileReaderQueue const& audioFiles, const int bufferSize) throw()
 :   readBuffer (Chars::withSize ((bufferSize > 0) ? bufferSize : AudioFile::DefaultBufferSize)),
     numFramesPerBuffer (0),
@@ -248,8 +269,8 @@ AudioFileReaderInternal::AudioFileReaderInternal (AudioFileReaderQueue const& au
     if (pl_AudioFileReader_OpenWithCustomNextFunction (getPeerRef(),
                                                        AudioFileReaderInternal_Queue_NextFunction,
                                                        AudioFileReaderInternal_Queue_FreeFunction,
-                                                       0,
-                                                       0,
+                                                       AudioFileReaderInternal_Queue_SetFramePosition, //0,
+                                                       AudioFileReaderInternal_Queue_GetFramePosition, //0,
                                                        new AudioFileReaderQueue (audioFiles)) == PlankResult_OK)
     {
         if (getBytesPerFrame() > 0)
@@ -265,10 +286,10 @@ public:
     {
     }
     
-    AudioFileRegion& getRegion() throw() { return region; }
-    AudioFileReader& getOriginal() throw() { return original; }
-    const AudioFileRegion& getRegion() const throw() { return region; }
-    const AudioFileReader& getOriginal() const throw() { return original; }
+    inline AudioFileRegion& getRegion() throw() { return region; }
+    inline AudioFileReader& getOriginal() throw() { return original; }
+    inline const AudioFileRegion& getRegion() const throw() { return region; }
+    inline const AudioFileReader& getOriginal() const throw() { return original; }
 
 private:
     AudioFileReader original;
@@ -352,7 +373,7 @@ AudioFileReaderInternal::AudioFileReaderInternal (AudioFileReader const& origina
     pl_AudioFileReader_Init (getPeerRef());
     
     AudioFileReaderRegion* readerRegion = new AudioFileReaderRegion (original, region);
-    setName (original.getName() + "#" + region.getLabel());
+//    setName (original.getName() + "#" + region.getLabel());
     
     if (pl_AudioFileReader_OpenWithCustomNextFunction (getPeerRef(),
                                                        AudioFileReaderInternal_Region_NextFunction,

@@ -2116,7 +2116,7 @@ PlankResult pl_AudioFileReader_CAF_ParseData (PlankAudioFileReaderRef p, const P
     {
         if (audioDataLength == -1)
         {
-            p->numFrames = -1;
+            p->numFrames = -1; // LL_MAX?
         }
         else
         {
@@ -3844,7 +3844,11 @@ PlankResult pl_AudioFileReader_Multi_Open (PlankAudioFileReaderRef p, PlankFileR
     }
     
     if (pl_AudioFileReader_GetFile (amul->currentAudioFile) != PLANK_NULL)
+    {
         pl_AudioFileReader_UpdateFormat (p, &amul->currentAudioFile->formatInfo, PLANK_NULL);
+        pl_AudioFileReader_GetNumFrames (amul->currentAudioFile, &p->numFrames); // maybe LL_MAX??
+        pl_AudioFileReader_SetName (p, pl_AudioFileReader_GetName (amul->currentAudioFile));
+    }
     
     p->readFramesFunction       = (PlankM)pl_AudioFileReader_Multi_ReadFrames;
     p->setFramePositionFunction = (PlankM)pl_AudioFileReader_Multi_SetFramePosition;
@@ -3932,7 +3936,10 @@ PlankResult pl_AudioFileReader_Multi_ReadFrames (PlankAudioFileReaderRef p, cons
             goto exit;
         
         if (pl_AudioFileReader_GetFile (amul->currentAudioFile) != PLANK_NULL)
+        {
             pl_AudioFileReader_UpdateFormat (p, &amul->currentAudioFile->formatInfo, &frameFormatChanged);
+            pl_AudioFileReader_GetNumFrames (amul->currentAudioFile, &p->numFrames);
+        }
     }
     
     maximumFrames = numFrames;
@@ -3967,7 +3974,10 @@ PlankResult pl_AudioFileReader_Multi_ReadFrames (PlankAudioFileReaderRef p, cons
                     goto exit;
                 
                 if (pl_AudioFileReader_GetFile (amul->currentAudioFile) != PLANK_NULL)
+                {
                     pl_AudioFileReader_UpdateFormat (p, &amul->currentAudioFile->formatInfo, &frameFormatChanged);
+                    pl_AudioFileReader_GetNumFrames (amul->currentAudioFile, &p->numFrames);
+                }
             }
         }
         
@@ -4208,7 +4218,11 @@ PlankResult pl_AudioFileReader_Array_Open (PlankAudioFileReaderRef p, PlankDynam
     result = pl_AudioFileReaderArrayNextFunction (audioFileArray);
     
     if (pl_AudioFileReader_GetFile (audioFileArray->currentAudioFile) != PLANK_NULL)
+    {
         pl_AudioFileReader_UpdateFormat (p, &audioFileArray->currentAudioFile->formatInfo, PLANK_NULL);
+        pl_AudioFileReader_GetNumFrames (audioFileArray->currentAudioFile, &p->numFrames); // maybe LL_MAX?
+        pl_AudioFileReader_SetName (p, pl_AudioFileReader_GetName (audioFileArray->currentAudioFile));
+    }
     
     p->readFramesFunction       = (PlankM)pl_AudioFileReader_Array_ReadFrames;
     p->setFramePositionFunction = (PlankM)pl_AudioFileReader_Array_SetFramePosition;
@@ -4273,7 +4287,10 @@ PlankResult pl_AudioFileReader_Array_ReadFrames (PlankAudioFileReaderRef p, cons
             goto exit;
         
         if (pl_AudioFileReader_GetFile (audioFileArray->currentAudioFile) != PLANK_NULL)
+        {
             pl_AudioFileReader_UpdateFormat (p, &audioFileArray->currentAudioFile->formatInfo, &frameFormatChanged);
+            pl_AudioFileReader_GetNumFrames (audioFileArray->currentAudioFile, &p->numFrames);
+        }
     }
     
     maximumFrames = numFrames;
@@ -4308,7 +4325,10 @@ PlankResult pl_AudioFileReader_Array_ReadFrames (PlankAudioFileReaderRef p, cons
                     goto exit;
                 
                 if (pl_AudioFileReader_GetFile (audioFileArray->currentAudioFile) != PLANK_NULL)
+                {
                     pl_AudioFileReader_UpdateFormat (p, &audioFileArray->currentAudioFile->formatInfo, &frameFormatChanged);
+                    pl_AudioFileReader_GetNumFrames (audioFileArray->currentAudioFile, &p->numFrames);
+                }
             }
         }
         
@@ -4515,7 +4535,11 @@ PlankResult pl_AudioFileReader_Custom_Open (PlankAudioFileReaderRef p,
     result = pl_AudioFileReaderCustomNextFunction (custom);
     
     if (pl_AudioFileReader_GetFile (custom->currentAudioFile) != PLANK_NULL)
+    {
         pl_AudioFileReader_UpdateFormat (p, &custom->currentAudioFile->formatInfo, PLANK_NULL);
+        pl_AudioFileReader_GetNumFrames (custom->currentAudioFile, &p->numFrames);
+        pl_AudioFileReader_SetName (p, pl_AudioFileReader_GetName (custom->currentAudioFile));
+    }
     
     p->readFramesFunction       = (PlankM)pl_AudioFileReader_Custom_ReadFrames;
     p->setFramePositionFunction = (PlankM)(setFrameFunction ? setFrameFunction : pl_AudioFileReader_Custom_SetFramePosition);
@@ -4577,7 +4601,10 @@ PlankResult pl_AudioFileReader_Custom_ReadFrames (PlankAudioFileReaderRef p, con
             goto exit;
         
         if (pl_AudioFileReader_GetFile (custom->currentAudioFile) != PLANK_NULL)
+        {
             pl_AudioFileReader_UpdateFormat (p, &custom->currentAudioFile->formatInfo, &frameFormatChanged);
+            pl_AudioFileReader_GetNumFrames (custom->currentAudioFile, &p->numFrames);
+        }
     }
     
     maximumFrames = numFrames;
@@ -4625,7 +4652,10 @@ PlankResult pl_AudioFileReader_Custom_ReadFrames (PlankAudioFileReaderRef p, con
                     goto exit;
                 
                 if (pl_AudioFileReader_GetFile (custom->currentAudioFile) != PLANK_NULL)
+                {
                     pl_AudioFileReader_UpdateFormat (p, &custom->currentAudioFile->formatInfo, &frameFormatChanged);
+                    pl_AudioFileReader_GetNumFrames (custom->currentAudioFile, &p->numFrames);
+                }
             }
         }
         
@@ -4743,14 +4773,15 @@ PlankResult pl_AudioFileReader_Region_Open (PlankAudioFileReaderRef p, PlankAudi
     
     p->peer = audioFileRegion;
     p->format = PLANKAUDIOFILE_FORMAT_REGION;
+    pl_AudioFileReader_UpdateFormat (p, &original->formatInfo, PLANK_NULL);
     
     audioFileRegion->original = original;
-    audioFileRegion->anchor   = (pl_AudioFileRegion_GetAnchorPosition (region) * p->formatInfo.sampleRate + 0.5);
-    audioFileRegion->start    = (pl_AudioFileRegion_GetStartPosition (region) * p->formatInfo.sampleRate + 0.5);
-    audioFileRegion->end      = (pl_AudioFileRegion_GetEndPosition (region) * p->formatInfo.sampleRate + 0.5);
+    audioFileRegion->anchor   = (PlankLL)(pl_AudioFileRegion_GetAnchorPosition (region) * p->formatInfo.sampleRate + 0.5);
+    audioFileRegion->start    = (PlankLL)(pl_AudioFileRegion_GetStartPosition (region) * p->formatInfo.sampleRate + 0.5);
+    audioFileRegion->end      = (PlankLL)(pl_AudioFileRegion_GetEndPosition (region) * p->formatInfo.sampleRate + 0.5);
     audioFileRegion->pos      = 0; //audioFileRegion->start;
     
-    pl_AudioFileReader_UpdateFormat (p, &audioFileRegion->original->formatInfo, PLANK_NULL);
+    p->numFrames = audioFileRegion->end - audioFileRegion->start;
 
     p->readFramesFunction       = (PlankM)pl_AudioFileReader_Region_ReadFrames;
     p->setFramePositionFunction = (PlankM)pl_AudioFileReader_Region_SetFramePosition;
@@ -4966,7 +4997,7 @@ PlankResult pl_AudioFileReader_ApplyDefaultFormatIfInvalid (PlankAudioFileReader
     if (!numChannels)
     {
         numChannels = 1;
-        pl_AudioFileFormatInfo_SetNumChannels(&p->formatInfo, numChannels, PLANK_FALSE);
+        pl_AudioFileFormatInfo_SetNumChannels (&p->formatInfo, numChannels, PLANK_FALSE);
     }
     
     if (!p->formatInfo.bitsPerSample)
