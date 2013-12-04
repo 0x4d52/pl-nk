@@ -42,6 +42,8 @@
 #include "../../maths/plank_Maths.h"
 #include "../plank_IffFileCommon.h"
 
+#define PLANKAUDIOFILE_NAMENULL                       "(null)"
+
 #define PLANKAUDIOFILE_CHARBITS                       8
 
 #define PLANKAUDIOFILE_FORMAT_INVALID                -1

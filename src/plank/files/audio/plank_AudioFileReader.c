@@ -3843,6 +3843,8 @@ PlankResult pl_AudioFileReader_Multi_Open (PlankAudioFileReaderRef p, PlankFileR
             goto exit;
     }
     
+    pl_AudioFileReader_SetName (p, PLANKAUDIOFILE_NAMENULL);
+    
     if (pl_AudioFileReader_GetFile (amul->currentAudioFile) != PLANK_NULL)
     {
         pl_AudioFileReader_UpdateFormat (p, &amul->currentAudioFile->formatInfo, PLANK_NULL);
@@ -3918,6 +3920,7 @@ PlankResult pl_AudioFileReader_Multi_ReadFrames (PlankAudioFileReaderRef p, cons
 {
     PlankResult result = PlankResult_OK;
     PlankMultiAudioFileReaderRef amul;
+    PlankAudioFileReaderRef currentAudioFile;
     int framesThisTime, framesReadLocal, maximumFrames, bytesThisTime;
     PlankUC* ptr;
     PlankB frameFormatChanged;
@@ -3936,10 +3939,16 @@ PlankResult pl_AudioFileReader_Multi_ReadFrames (PlankAudioFileReaderRef p, cons
         if (result != PlankResult_OK)
             goto exit;
         
+        pl_AudioFileReader_SetName (p, PLANKAUDIOFILE_NAMENULL);
+        
         if (pl_AudioFileReader_GetFile (amul->currentAudioFile) != PLANK_NULL)
+        {
             pl_AudioFileReader_UpdateFormat (p, &amul->currentAudioFile->formatInfo, &frameFormatChanged);
+            pl_AudioFileReader_SetName (p, pl_AudioFileReader_GetName (amul->currentAudioFile));
+        }
     }
     
+    currentAudioFile = amul->currentAudioFile;
     maximumFrames = numFrames;
     ptr = (PlankUC*)data;
     
@@ -3954,19 +3963,19 @@ PlankResult pl_AudioFileReader_Multi_ReadFrames (PlankAudioFileReaderRef p, cons
             result = PlankResult_AudioFileFrameFormatChanged;
             goto exit;
         }
-        else if (!pl_AudioFileReader_GetFile (amul->currentAudioFile))
+        else if (!pl_AudioFileReader_GetFile (currentAudioFile))
         {
             result = PlankResult_FileEOF;
             goto exit;
         }
         else
         {
-            result = pl_AudioFileReader_ReadFrames (amul->currentAudioFile, convertByteOrder, maximumFrames, ptr, &framesThisTime);
+            result = pl_AudioFileReader_ReadFrames (currentAudioFile, convertByteOrder, maximumFrames, ptr, &framesThisTime);
             
             if ((result != PlankResult_OK) && (result != PlankResult_FileEOF))
                 goto exit;
             
-            bytesThisTime = framesThisTime * amul->currentAudioFile->formatInfo.bytesPerFrame;
+            bytesThisTime = framesThisTime * currentAudioFile->formatInfo.bytesPerFrame;
 
             if (framesThisTime < maximumFrames)
             {
@@ -3975,11 +3984,18 @@ PlankResult pl_AudioFileReader_Multi_ReadFrames (PlankAudioFileReaderRef p, cons
                 if (result != PlankResult_OK)
                     goto exit;
                 
-                if (pl_AudioFileReader_GetFile (amul->currentAudioFile) != PLANK_NULL)
-                    pl_AudioFileReader_UpdateFormat (p, &amul->currentAudioFile->formatInfo, &frameFormatChanged);
+                pl_AudioFileReader_SetName (p, PLANKAUDIOFILE_NAMENULL);
                 
-                if (!frameFormatChanged)
+                if (pl_AudioFileReader_GetFile (amul->currentAudioFile) != PLANK_NULL)
+                {
+                    pl_AudioFileReader_UpdateFormat (p, &amul->currentAudioFile->formatInfo, &frameFormatChanged);
+                    pl_AudioFileReader_SetName (p, pl_AudioFileReader_GetName (amul->currentAudioFile));
+                }
+                                
+                if (!frameFormatChanged && (currentAudioFile != amul->currentAudioFile))
                     result = PlankResult_AudioFileChanged;
+                
+                currentAudioFile = amul->currentAudioFile;
             }
         }
         
@@ -4216,6 +4232,8 @@ PlankResult pl_AudioFileReader_Array_Open (PlankAudioFileReaderRef p, PlankDynam
     
     result = pl_AudioFileReaderArrayNextFunction (audioFileArray);
     
+    pl_AudioFileReader_SetName (p, PLANKAUDIOFILE_NAMENULL);
+    
     if (pl_AudioFileReader_GetFile (audioFileArray->currentAudioFile) != PLANK_NULL)
     {
         pl_AudioFileReader_UpdateFormat (p, &audioFileArray->currentAudioFile->formatInfo, PLANK_NULL);
@@ -4268,6 +4286,7 @@ PlankResult pl_AudioFileReader_Array_ReadFrames (PlankAudioFileReaderRef p, cons
 {
     PlankResult result = PlankResult_OK;
     PlankAudioFileReaderArrayRef audioFileArray;
+    PlankAudioFileReaderRef currentAudioFile;
     int framesThisTime, framesReadLocal, maximumFrames, bytesThisTime;
     PlankUC* ptr;
     PlankB frameFormatChanged;
@@ -4286,10 +4305,16 @@ PlankResult pl_AudioFileReader_Array_ReadFrames (PlankAudioFileReaderRef p, cons
         if (result != PlankResult_OK)
             goto exit;
         
+        pl_AudioFileReader_SetName (p, PLANKAUDIOFILE_NAMENULL);
+        
         if (pl_AudioFileReader_GetFile (audioFileArray->currentAudioFile) != PLANK_NULL)
+        {
             pl_AudioFileReader_UpdateFormat (p, &audioFileArray->currentAudioFile->formatInfo, &frameFormatChanged);
+            pl_AudioFileReader_SetName (p, pl_AudioFileReader_GetName (audioFileArray->currentAudioFile));
+        }
     }
     
+    currentAudioFile = audioFileArray->currentAudioFile;
     maximumFrames = numFrames;
     ptr = (PlankUC*)data;
     
@@ -4304,19 +4329,19 @@ PlankResult pl_AudioFileReader_Array_ReadFrames (PlankAudioFileReaderRef p, cons
             result = PlankResult_AudioFileFrameFormatChanged;
             goto exit;
         }
-        else if (!pl_AudioFileReader_GetFile (audioFileArray->currentAudioFile))
+        else if (!pl_AudioFileReader_GetFile (currentAudioFile))
         {
             result = PlankResult_FileEOF;
             goto exit;
         }
         else
         {
-            result = pl_AudioFileReader_ReadFrames (audioFileArray->currentAudioFile, convertByteOrder, maximumFrames, ptr, &framesThisTime);
+            result = pl_AudioFileReader_ReadFrames (currentAudioFile, convertByteOrder, maximumFrames, ptr, &framesThisTime);
             
             if ((result != PlankResult_OK) && (result != PlankResult_FileEOF))
                 goto exit;
             
-            bytesThisTime = framesThisTime * audioFileArray->currentAudioFile->formatInfo.bytesPerFrame;
+            bytesThisTime = framesThisTime * currentAudioFile->formatInfo.bytesPerFrame;
             
             if (framesThisTime < maximumFrames)
             {
@@ -4325,11 +4350,18 @@ PlankResult pl_AudioFileReader_Array_ReadFrames (PlankAudioFileReaderRef p, cons
                 if (result != PlankResult_OK)
                     goto exit;
                 
-                if (pl_AudioFileReader_GetFile (audioFileArray->currentAudioFile) != PLANK_NULL)
-                    pl_AudioFileReader_UpdateFormat (p, &audioFileArray->currentAudioFile->formatInfo, &frameFormatChanged);
+                pl_AudioFileReader_SetName (p, PLANKAUDIOFILE_NAMENULL);
                 
-                if (!frameFormatChanged)
+                if (pl_AudioFileReader_GetFile (audioFileArray->currentAudioFile) != PLANK_NULL)
+                {
+                    pl_AudioFileReader_UpdateFormat (p, &audioFileArray->currentAudioFile->formatInfo, &frameFormatChanged);
+                    pl_AudioFileReader_SetName (p, pl_AudioFileReader_GetName (audioFileArray->currentAudioFile));
+                }
+                                
+                if (!frameFormatChanged && (currentAudioFile != audioFileArray->currentAudioFile))
                     result = PlankResult_AudioFileChanged;
+                
+                currentAudioFile = audioFileArray->currentAudioFile;
             }
         }
         
@@ -4535,6 +4567,8 @@ PlankResult pl_AudioFileReader_Custom_Open (PlankAudioFileReaderRef p,
     
     result = pl_AudioFileReaderCustomNextFunction (custom);
     
+    pl_AudioFileReader_SetName (p, PLANKAUDIOFILE_NAMENULL);
+
     if (pl_AudioFileReader_GetFile (custom->currentAudioFile) != PLANK_NULL)
     {
         pl_AudioFileReader_UpdateFormat (p, &custom->currentAudioFile->formatInfo, PLANK_NULL);
@@ -4603,8 +4637,13 @@ PlankResult pl_AudioFileReader_Custom_ReadFrames (PlankAudioFileReaderRef p, con
         if (result != PlankResult_OK)
             goto exit;
         
+        pl_AudioFileReader_SetName (p, PLANKAUDIOFILE_NAMENULL);
+        
         if (pl_AudioFileReader_GetFile (custom->currentAudioFile) != PLANK_NULL)
+        {
             pl_AudioFileReader_UpdateFormat (p, &custom->currentAudioFile->formatInfo, &frameFormatChanged);
+            pl_AudioFileReader_SetName (p, pl_AudioFileReader_GetName (custom->currentAudioFile));
+        }
     }
     
     currentAudioFile = custom->currentAudioFile;
@@ -4646,8 +4685,13 @@ PlankResult pl_AudioFileReader_Custom_ReadFrames (PlankAudioFileReaderRef p, con
                 if (result != PlankResult_OK)
                     goto exit;
                 
+                pl_AudioFileReader_SetName (p, PLANKAUDIOFILE_NAMENULL);
+
                 if (pl_AudioFileReader_GetFile (custom->currentAudioFile) != PLANK_NULL)
+                {
                     pl_AudioFileReader_UpdateFormat (p, &custom->currentAudioFile->formatInfo, &frameFormatChanged);
+                    pl_AudioFileReader_SetName (p, pl_AudioFileReader_GetName (custom->currentAudioFile));
+                }
                 
                 if (!frameFormatChanged && (currentAudioFile != custom->currentAudioFile))
                     result = PlankResult_AudioFileChanged;
