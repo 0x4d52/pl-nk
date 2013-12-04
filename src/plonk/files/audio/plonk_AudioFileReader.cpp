@@ -769,7 +769,7 @@ AudioFileReaderArray AudioFileReader::regionsFromMetaData (const int metaDataOpt
         
         if (numRegions > 0)
         {
-            regionReaderArray.setSize (numRegions, false);
+            regionReaderArray.setSize (int (numRegions), false);
             regionReaderArray.clear();
             
             for (Long i = 0; i < numRegions; ++i)

@@ -237,7 +237,7 @@ static PlankResult pl_FileMemoryCloseCallback (PlankFileRef p)
 
 static PlankResult pl_FileMemoryClearCallback (PlankFileRef p)
 {
-    return pl_MemoryZero (p->stream, p->size);
+    return pl_MemoryZero (p->stream, (PlankUL)p->size);
 }
 
 static PlankResult pl_FileMemoryGetStatusCallback (PlankFileRef p, int type, int* status)
@@ -456,7 +456,7 @@ static PlankResult pl_FileDynamicArrayWriteCallback (PlankFileRef p, const void*
     
     if (sizeNeeded > size)
     {
-        capacity = (sizeNeeded % itemSize) ? sizeNeeded / itemSize + 1 : sizeNeeded / itemSize;
+        capacity = (PlankL)((sizeNeeded % itemSize) ? sizeNeeded / itemSize + 1 : sizeNeeded / itemSize);
         if ((result = pl_DynamicArray_SetSize (array, capacity)) != PlankResult_OK) goto exit;
     }
     

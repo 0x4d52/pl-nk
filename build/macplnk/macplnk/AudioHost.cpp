@@ -52,7 +52,7 @@ Unit AudioHost::constructGraph()
 {    
     // src is a UnitVariable, the Patch is set up to received new sources
     // via this but crossfades between old and new sources
-    return Patch::ar (src, false, 2, 0.5);    
+    return Patch::ar (src, false, 2, 0.005);
 }
 
 void AudioHost::trigger() throw() 
@@ -61,6 +61,8 @@ void AudioHost::trigger() throw()
     // this is threadsafe so fine to call from the GUI thread for example
     src = Sine::ar (Floats::exprand (2, 880, 1760), 0.25);
 }
+
+
 
 
 

@@ -367,15 +367,18 @@ const char* pl_AudioFileFormatInfoChannelIdentifierToName (const PlankChannelIde
 
 char* pl_AudioFileFormatInfoAbbreviateIdentifierName (const char* name, char* abbrev, const int abbrevLength)
 {
-    int i, length;
+    int i, a, length;
     
     i = 0;
+    a = 0;
     length = (int)strlen (name);
     
     while ((i < length) && (i < (abbrevLength - 1)))
     {
         if (isupper (name[i]) || isdigit (name[i]))
-            abbrev[i++] = name[i];
+            abbrev[a++] = name[i];
+        
+        ++i;
     }
     
     abbrev[i] = '\0';

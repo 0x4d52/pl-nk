@@ -244,8 +244,7 @@ public:
         {
             CalcType temp;
             NumericalConverter::roundCopy (src[i], temp);
-            temp = NumericalType (temp * typePeak / otherTypePeak);
-            dst[i] = temp;
+            dst[i] = NumericalType (temp * typePeak / otherTypePeak);
         }
     }
 };

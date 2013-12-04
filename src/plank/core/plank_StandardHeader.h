@@ -177,7 +177,7 @@
             #define PLANK_GCC 1
         #endif
 
-// argg no __has_feature on xcode3.2
+        // no __has_feature on xcode3.2
         #if defined(__has_feature)
             #if __has_feature(objc_arc)
                 #define PLANK_OBJC_BRIDGE           __bridge
@@ -355,7 +355,7 @@ typedef struct PlankFourCharCodeString
 
 #define PLANK_MAJOR_VERSION      0
 #define PLANK_MINOR_VERSION      4
-#define PLANK_BUILDNUMBER        0
+#define PLANK_BUILDNUMBER        1
 #define PLANK_VERSION           "v" PLANK_PRESTRING(PLANK_MAJOR_VERSION) "." PLANK_PRESTRING(PLANK_MINOR_VERSION) "." PLANK_PRESTRING(PLANK_BUILDNUMBER)
 
 static inline double pl_TimeNow()

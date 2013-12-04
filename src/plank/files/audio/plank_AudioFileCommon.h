@@ -62,8 +62,6 @@
 #define PLANKAUDIOFILE_FORMAT_QUEUE                 102
 #define PLANKAUDIOFILE_FORMAT_CUSTOM                103
 
-static inline const char* pl_PlankAudioFileGetFormatName (int format);
-
 #define PLANKAUDIOFILE_ENCODING_BIGENDIAN_FLAG        1
 #define PLANKAUDIOFILE_ENCODING_PCM_FLAG              2
 #define PLANKAUDIOFILE_ENCODING_FLOAT_FLAG            4
@@ -557,6 +555,8 @@ typedef struct PlankAudioFileFormatInfo
 typedef struct PlankAudioFileFormatInfo* PlankAudioFileFormatInfoRef;
 
 //PlankB pl_AudioFileFormatInfo_IsChannelMapClear (const PlankAudioFileFormatInfo* info);
+
+const char* pl_PlankAudioFileGetFormatName (int format);
 
 PlankResult pl_AudioFileFormatInfo_Init (PlankAudioFileFormatInfoRef formatInfo);
 PlankResult pl_AudioFileFormatInfo_DeInit (PlankAudioFileFormatInfoRef formatInfo);

@@ -40,6 +40,17 @@
 
 BEGIN_PLONK_NAMESPACE
 
+////#ifdef __llvm__
+//// #ifdef __clang__
+//  #pragma clang diagnostic push
+//  #pragma clang diagnostic ignored "-Wno-deprecated"
+//
+  #pragma GCC diagnostic push
+  #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+//
+//// #endif
+////#endif
+
 template<class SampleType>
 static OSStatus Render (void                        *inRefCon,
                         AudioUnitRenderActionFlags 	*ioActionFlags,
@@ -555,6 +566,15 @@ void IOSAudioHostBase<SampleType>::setCustomRenderCallbacks (void* refCon,
     customPreRender = preRender;
     customPostRender = postRender;
 }
+
+//#ifdef __llvm__
+// #ifdef __clang__
+//  #pragma clang diagnostic pop
+// #endif
+//#endif
+
+#pragma GCC diagnostic pop
+
 
 END_PLONK_NAMESPACE
 

@@ -1065,16 +1065,13 @@ exit:
     return result;
 }
 
-static PlankResult pl_AudioFileReader_WAV_ParseChunk_smpl (PlankAudioFileReaderRef p, const PlankUI chunkLength, const PlankLL chunkEnd)
+static PlankResult pl_AudioFileReader_WAV_ParseChunk_smpl (PlankAudioFileReaderRef p, const PlankLL chunkLength, const PlankLL chunkEnd)
 {
     PlankResult result = PlankResult_OK;
     PlankUI manufacturer, product, samplePeriod, baseNote, detune, smpteFormat, smpteOffset, numSampleLoops, samplerData, i;
     PlankI gain, lowNote, highNote, lowVelocity, highVelocity;
     PlankIffFileReaderRef iff;
     PlankDynamicArrayRef extraSamplerData;
-
-	(void)chunkEnd;
-	(void)chunkLength;
     
     iff = (PlankIffFileReaderRef)p->peer;
 
@@ -1115,7 +1112,7 @@ exit:
 }
 
 
-static PlankResult pl_AudioFileReader_WAV_ParseChunk_inst (PlankAudioFileReaderRef p, const PlankUI chunkLength, const PlankLL chunkEnd)
+static PlankResult pl_AudioFileReader_WAV_ParseChunk_inst (PlankAudioFileReaderRef p, const PlankLL chunkLength, const PlankLL chunkEnd)
 {
     PlankResult result = PlankResult_OK;
     char baseNote, detune, gain, lowNote, highNote, lowVelocity, highVelocity;
@@ -1141,7 +1138,7 @@ exit:
     return result;
 }
 
-static PlankResult pl_AudioFileReader_WAV_ParseChunk_cue (PlankAudioFileReaderRef p, const PlankUI chunkLength, const PlankLL chunkEnd)
+static PlankResult pl_AudioFileReader_WAV_ParseChunk_cue (PlankAudioFileReaderRef p, const PlankLL chunkLength, const PlankLL chunkEnd)
 {
     PlankResult result = PlankResult_OK;
     PlankUI numCuePoints, i;
@@ -1197,7 +1194,7 @@ exit:
     return result;
 }
 
-static PlankResult pl_AudioFileReader_WAV_ParseChunk_list (PlankAudioFileReaderRef p, const PlankUI chunkLength, const PlankLL chunkEnd)
+static PlankResult pl_AudioFileReader_WAV_ParseChunk_list (PlankAudioFileReaderRef p, const PlankLL chunkLength, const PlankLL chunkEnd)
 {
     PlankResult result = PlankResult_OK;
     PlankIffFileReaderRef iff;
@@ -1239,7 +1236,7 @@ static PlankResult pl_AudioFileReader_WAV_ParseChunk_list (PlankAudioFileReaderR
 
             if (cuePointRef != PLANK_NULL)
             {
-                textLength = adtlChunkLength - 4;
+                textLength = (PlankUI)adtlChunkLength - 4;
                 
                 if ((result = pl_AudioFileCuePoint_SetLabelLengthClear (cuePointRef, textLength)) != PlankResult_OK) goto exit;
                 if ((result = pl_File_Read ((PlankFileRef)iff, pl_AudioFileCuePoint_GetLabelWritable (cuePointRef), textLength, PLANK_NULL)) != PlankResult_OK) goto exit;
@@ -1254,7 +1251,7 @@ static PlankResult pl_AudioFileReader_WAV_ParseChunk_list (PlankAudioFileReaderR
             
             if (cuePointRef != PLANK_NULL)
             {
-                textLength = adtlChunkLength - 4;
+                textLength = (PlankUI)adtlChunkLength - 4;
                 
                 if ((result = pl_AudioFileCuePoint_SetCommentLengthClear (cuePointRef, textLength)) != PlankResult_OK) goto exit;
                 if ((result = pl_File_Read ((PlankFileRef)iff, pl_AudioFileCuePoint_GetCommentWritable (cuePointRef), textLength, PLANK_NULL)) != PlankResult_OK) goto exit;
@@ -1282,7 +1279,7 @@ static PlankResult pl_AudioFileReader_WAV_ParseChunk_list (PlankAudioFileReaderR
                 if ((result = pl_File_ReadUS ((PlankFileRef)iff, &dialect)) != PlankResult_OK) goto exit;
                 if ((result = pl_File_ReadUS ((PlankFileRef)iff, &codePage)) != PlankResult_OK) goto exit;
                 
-                textLength = adtlChunkLength - 20;
+                textLength = (PlankUI)adtlChunkLength - 20;
 
                 if ((result = pl_AudioFileCuePoint_SetExtra (region->anchor, purpose, country, language, dialect, codePage)) != PlankResult_OK) goto exit;
                 if ((result = pl_AudioFileCuePoint_SetLabelLengthClear (region->anchor, textLength)) != PlankResult_OK) goto exit;
@@ -1346,7 +1343,7 @@ PlankResult pl_AudioFileReader_WAV_ParseMetaData (PlankAudioFileReaderRef p)
         }
         else if ((readChunkID.fcc == pl_FourCharCode ("bext")) && (p->metaDataIOFlags & PLANKAUDIOFILEMETADATA_IOFLAGS_INFO))
         {
-            if ((result = pl_AudioFileReader_WAV_ParseChunk_bext (p, readChunkLength, readChunkEnd)) != PlankResult_OK) goto exit;
+            if ((result = pl_AudioFileReader_WAV_ParseChunk_bext (p, (PlankUI)readChunkLength, readChunkEnd)) != PlankResult_OK) goto exit;
         }
         else if ((readChunkID.fcc == pl_FourCharCode ("levl")) && (p->metaDataIOFlags & PLANKAUDIOFILEMETADATA_IOFLAGS_OVERVIEW))
         {
@@ -1380,16 +1377,16 @@ PlankResult pl_AudioFileReader_WAV_ParseMetaData (PlankAudioFileReaderRef p)
             
             if (block != PLANK_NULL)
             {
-                if ((result = pl_DynamicArray_InitWithItemSizeAndSize (block, 1, readChunkLength + 8, PLANK_FALSE)) != PlankResult_OK) goto exit;
+                if ((result = pl_DynamicArray_InitWithItemSizeAndSize (block, 1, (PlankL)readChunkLength + 8, PLANK_FALSE)) != PlankResult_OK) goto exit;
                 
                 data = (PlankC*)pl_DynamicArray_GetArray (block);
                 
                 *(PlankFourCharCode*)data = readChunkID.fcc;
                 data += 4;
-                *(PlankUI*)data = readChunkLength;
+                *(PlankUI*)data = (PlankUI)readChunkLength;
                 data += 4;
                 
-                if ((result = pl_File_Read ((PlankFileRef)iff, data, readChunkLength, &bytesRead)) != PlankResult_OK) goto exit;
+                if ((result = pl_File_Read ((PlankFileRef)iff, data, (int)readChunkLength, &bytesRead)) != PlankResult_OK) goto exit;
                 if ((result = pl_AudioFileMetaData_AddFormatSpecificBlock (p->metaData, block)) != PlankResult_OK) goto exit;
             }
         }
@@ -1425,7 +1422,7 @@ PlankResult pl_AudioFileReader_WAV_ParseData (PlankAudioFileReaderRef p, const P
 #pragma mark AIFF/AIFC Functions
 #endif
 
-static PlankResult pl_AudioFileReader_AIFFAIFC_ParseChunk_MARK (PlankAudioFileReaderRef p, const PlankUI chunkLength, const PlankLL chunkEnd)
+static PlankResult pl_AudioFileReader_AIFFAIFC_ParseChunk_MARK (PlankAudioFileReaderRef p, const PlankLL chunkLength, const PlankLL chunkEnd)
 {
     PlankResult result = PlankResult_OK;
     PlankUS numCuePoints, i;
@@ -1473,7 +1470,7 @@ exit:
     return result;    
 }
 
-static PlankResult pl_AudioFileReader_AIFFAIFC_ParseChunk_INST (PlankAudioFileReaderRef p, const PlankUI chunkLength, const PlankLL chunkEnd)
+static PlankResult pl_AudioFileReader_AIFFAIFC_ParseChunk_INST (PlankAudioFileReaderRef p, const PlankLL chunkLength, const PlankLL chunkEnd)
 {
     PlankResult result = PlankResult_OK;
     
@@ -1528,16 +1525,16 @@ static PlankResult pl_AudioFileReader_AIFFAIFC_ParseMetaData (PlankAudioFileRead
             
             if (block != PLANK_NULL)
             {
-                if ((result = pl_DynamicArray_InitWithItemSizeAndSize (block, 1, readChunkLength + 8, PLANK_FALSE)) != PlankResult_OK) goto exit;
+                if ((result = pl_DynamicArray_InitWithItemSizeAndSize (block, 1, (PlankL)readChunkLength + 8, PLANK_FALSE)) != PlankResult_OK) goto exit;
                 
                 data = (PlankC*)pl_DynamicArray_GetArray (block);
                 
                 *(PlankFourCharCode*)data = readChunkID.fcc;
                 data += 4;
-                *(PlankUI*)data = readChunkLength;
+                *(PlankUI*)data = (PlankUI)readChunkLength;
                 data += 4;
                 
-                if ((result = pl_File_Read ((PlankFileRef)iff, data, readChunkLength, &bytesRead)) != PlankResult_OK) goto exit;
+                if ((result = pl_File_Read ((PlankFileRef)iff, data, (int)readChunkLength, &bytesRead)) != PlankResult_OK) goto exit;
                 if ((result = pl_AudioFileMetaData_AddFormatSpecificBlock (p->metaData, block)) != PlankResult_OK) goto exit;
             }
         }
@@ -1715,7 +1712,7 @@ PlankResult pl_AudioFileReader_AIFC_ParseData (PlankAudioFileReaderRef p, const 
 #pragma mark CAF Functions
 #endif
 
-PlankResult pl_AudioFileReader_CAF_ParseChunk_chan (PlankAudioFileReaderRef p, const PlankUI chunkLength, const PlankLL chunkEnd);
+PlankResult pl_AudioFileReader_CAF_ParseChunk_chan (PlankAudioFileReaderRef p, const PlankLL chunkLength, const PlankLL chunkEnd);
 
 PlankResult pl_AudioFileReader_CAF_ParseFormat (PlankAudioFileReaderRef p, const PlankLL chunkLength, const PlankLL chunkDataPos)
 {
@@ -1813,7 +1810,7 @@ exit:
     return result;
 }
 
-static PlankResult pl_AudioFileReader_CAF_ParseChunk_mark (PlankAudioFileReaderRef p, const PlankUI chunkLength, const PlankLL chunkEnd, PlankDynamicArrayRef stringIndices, PlankDynamicArrayRef strings)
+static PlankResult pl_AudioFileReader_CAF_ParseChunk_mark (PlankAudioFileReaderRef p, const PlankLL chunkLength, const PlankLL chunkEnd, PlankDynamicArrayRef stringIndices, PlankDynamicArrayRef strings)
 {
     PlankAudioFileCuePointRef cuePoint;
     PlankLL offset;
@@ -1831,10 +1828,10 @@ static PlankResult pl_AudioFileReader_CAF_ParseChunk_mark (PlankAudioFileReaderR
 
     iff = (PlankIffFileReaderRef)p->peer;
 
-    numStrings = pl_DynamicArray_GetSize (stringIndices);
+    numStrings = (PlankUI)pl_DynamicArray_GetSize (stringIndices);
     stringIndicesArray = (PlankCAFStringID*)pl_DynamicArray_GetArray (stringIndices);
     stringsData = (const char*)pl_DynamicArray_GetArray (strings);
-    stringsDataLength = pl_DynamicArray_GetSize (strings);
+    stringsDataLength = (PlankUI)pl_DynamicArray_GetSize (strings);
     
     if ((result = pl_File_ReadUI ((PlankFileRef)iff, &smpteTimeType)) != PlankResult_OK) goto exit;
     if ((result = pl_File_ReadUI ((PlankFileRef)iff, &numMarkers)) != PlankResult_OK) goto exit;
@@ -1897,7 +1894,7 @@ exit:
     return result;
 }
 
-PlankResult pl_AudioFileReader_CAF_ParseChunk_chan (PlankAudioFileReaderRef p, const PlankUI chunkLength, const PlankLL chunkEnd)
+PlankResult pl_AudioFileReader_CAF_ParseChunk_chan (PlankAudioFileReaderRef p, const PlankLL chunkLength, const PlankLL chunkEnd)
 {
     PlankResult result = PlankResult_OK;
     PlankIffFileReaderRef iff;
@@ -2070,16 +2067,16 @@ PlankResult pl_AudioFileReader_CAF_ParseMetaData (PlankAudioFileReaderRef p)
             
             if (block != PLANK_NULL)
             {
-                if ((result = pl_DynamicArray_InitWithItemSizeAndSize (block, 1, readChunkLength + 8, PLANK_FALSE)) != PlankResult_OK) goto exit;
+                if ((result = pl_DynamicArray_InitWithItemSizeAndSize (block, 1, (PlankL)readChunkLength + 8, PLANK_FALSE)) != PlankResult_OK) goto exit;
                 
                 data = (PlankC*)pl_DynamicArray_GetArray (block);
                 
                 *(PlankFourCharCode*)data = readChunkID.fcc;
                 data += 4;
-                *(PlankUI*)data = readChunkLength;
+                *(PlankUI*)data = (PlankUI)readChunkLength;
                 data += 4;
                 
-                if ((result = pl_File_Read ((PlankFileRef)iff, data, readChunkLength, &bytesRead)) != PlankResult_OK) goto exit;
+                if ((result = pl_File_Read ((PlankFileRef)iff, data, (int)readChunkLength, &bytesRead)) != PlankResult_OK) goto exit;
                 if ((result = pl_AudioFileMetaData_AddFormatSpecificBlock (p->metaData, block)) != PlankResult_OK) goto exit;
             }
         }
@@ -3791,7 +3788,7 @@ PlankResult pl_AudioFileReader_Multi_Open (PlankAudioFileReaderRef p, PlankFileR
             amul->nextFunction = pl_MultiAudioFileReaderArrayNextFunction;
             amul->currentAudioFile = (PlankAudioFileReaderRef)PLANK_NULL;
             pl_MultiFileReader_GetArray (multi, &fileArray);
-            arraySize = pl_DynamicArray_GetSize (fileArray);
+            arraySize = (int)pl_DynamicArray_GetSize (fileArray);
             audioFileArray = pl_DynamicArray_Create();
             
             if (!audioFileArray)
@@ -3885,7 +3882,7 @@ PlankResult pl_AudioFileReader_Multi_Close (PlankAudioFileReaderRef p)
             // here currentAudioFile just points to one of the files in the array
             amul->currentAudioFile = (PlankAudioFileReaderRef)PLANK_NULL;
             audioFileArray = (PlankDynamicArrayRef)amul->source;
-            arraySize = pl_DynamicArray_GetSize (audioFileArray);
+            arraySize = (int)pl_DynamicArray_GetSize (audioFileArray);
 
             for (i = 0; i < arraySize; ++i)
             {
@@ -4058,7 +4055,7 @@ PlankResult pl_MultiAudioFileReaderArrayNextFunction (PlankMultiAudioFileReaderR
     if (result == PlankResult_OK)
     {
         array     = (PlankDynamicArrayRef)p->source;
-        arraySize = pl_DynamicArray_GetSize (array);
+        arraySize = (int)pl_DynamicArray_GetSize (array);
         
         pl_MultiFileReader_GetIndex (multi, &index);
         
@@ -4189,7 +4186,7 @@ PlankResult pl_AudioFileReader_Array_Open (PlankAudioFileReaderRef p, PlankDynam
     
     pl_MemoryZero (audioFileArray, sizeof (PlankAudioFileReaderArray));
     
-    itemSize = pl_DynamicArray_GetItemSize (array);
+    itemSize = (int)pl_DynamicArray_GetItemSize (array);
     
     if (itemSize != sizeof (PlankAudioFileReader))
     {
@@ -4266,7 +4263,7 @@ PlankResult pl_AudioFileReader_Array_Close (PlankAudioFileReaderRef p)
     
     if (audioFileArray->ownArray)
     {
-        arraySize = pl_DynamicArray_GetSize (audioFileArray->array);
+        arraySize = (int)pl_DynamicArray_GetSize (audioFileArray->array);
         rawArray = (PlankAudioFileReader*)pl_DynamicArray_GetArray (audioFileArray->array);
         
         for (i = 0; i < arraySize; ++i)
@@ -4411,7 +4408,7 @@ PlankResult pl_AudioFileReaderArrayNextFunction (PlankAudioFileReaderArrayRef p)
     
     file = (PlankAudioFileReaderRef)PLANK_NULL;
     array = (PlankDynamicArrayRef)p->array;
-    arraySize = pl_DynamicArray_GetSize (array);
+    arraySize = (int)pl_DynamicArray_GetSize (array);
     
     if (p->nextIndexFunction)
         result = (p->nextIndexFunction) (p);
@@ -4435,7 +4432,7 @@ PlankResult pl_AudioFileReaderArraySequenceOnceNextIndexFunction (PlankAudioFile
     int arraySize;
     
     array = (PlankDynamicArrayRef)p->array;
-    arraySize = pl_DynamicArray_GetSize (array);
+    arraySize = (int)pl_DynamicArray_GetSize (array);
     
     p->index = p->index + 1;
     
@@ -4453,7 +4450,7 @@ PlankResult pl_AudioFileReaderArraySequenceLoopNextIndexFunction (PlankAudioFile
     int arraySize;
     
     array = (PlankDynamicArrayRef)p->array;
-    arraySize = pl_DynamicArray_GetSize (array);
+    arraySize = (int)pl_DynamicArray_GetSize (array);
     
     p->index = p->index + 1;
     
@@ -4471,7 +4468,7 @@ PlankResult pl_AudioFileReaderArrayRandomNextIndexFunction (PlankAudioFileReader
     int arraySize;
     
     array = (PlankDynamicArrayRef)p->array;
-    arraySize = pl_DynamicArray_GetSize (array);
+    arraySize = (int)pl_DynamicArray_GetSize (array);
     
     p->index = pl_RNG_NextInt (pl_RNGGlobal(), arraySize);
     
@@ -4486,7 +4483,7 @@ PlankResult pl_AudioFileReaderArrayRandomNoRepeatNextIndexFunction (PlankAudioFi
     int arraySize, index;
     
     array = (PlankDynamicArrayRef)p->array;
-    arraySize = pl_DynamicArray_GetSize (array);
+    arraySize = (int)pl_DynamicArray_GetSize (array);
     
     if (arraySize < 2)
     {
@@ -4513,7 +4510,7 @@ PlankResult pl_AudioFileReaderArrayIndexRefNextIndexFunction (PlankAudioFileRead
     int arraySize, *indexRef;
     
     array = (PlankDynamicArrayRef)p->array;
-    arraySize = pl_DynamicArray_GetSize (array);
+    arraySize = (int)pl_DynamicArray_GetSize (array);
     
     indexRef = p->indexRef;
     p->index = indexRef ? *indexRef : 0;
