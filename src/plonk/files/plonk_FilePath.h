@@ -208,6 +208,11 @@ public:
         
         return filename;
     }
+    
+    inline FilePath withExtension (Text const& ext) const throw()
+    {
+        return (ext.first() == '.') ? FilePath (fullpath() + ext) : FilePath (fullpath() + Text (".") + ext);
+    }
 
     inline bool isFile() const throw()
     {

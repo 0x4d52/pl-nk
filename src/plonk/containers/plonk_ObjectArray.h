@@ -1515,9 +1515,7 @@ public:
             Memory::copy (dst, src, srcSize * sizeof (ObjectType));
         }
         else
-        {
-            plonk_assert (srcSize % numGroups);
-            
+        {            
             const int dstSize = srcSize / numGroups;
             int i, j;
             
@@ -1533,9 +1531,7 @@ public:
     }
 
     static void deinterleave (ObjectType** dst, const ObjectType* src, const int srcSize, const int numGroups) throw()
-    {
-        plonk_assert (srcSize % numGroups);
-        
+    {        
         const int dstSize = srcSize / numGroups;
         int i, j;
         
@@ -1572,9 +1568,7 @@ public:
     }
     
     static void interleave (ObjectType* dst, const ObjectType** src, const int srcSize, const int numGroups) throw()
-    {
-        plonk_assert (srcSize % numGroups);
- 
+    { 
         const int dstSize = srcSize * numGroups;
         int i, j;
 

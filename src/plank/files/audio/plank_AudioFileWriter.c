@@ -2501,6 +2501,7 @@ static PlankResult pl_AudioFileWriter_Opus_OpenInternal (PlankAudioFileWriterRef
     OpusEncoder *oeStream;
 
     result = PlankResult_OK;
+    opus = PLANK_NULL;
     
     if (((filepath) && (file)) || ((filepath == 0) && (file == 0)))
     {
@@ -2541,7 +2542,7 @@ static PlankResult pl_AudioFileWriter_Opus_OpenInternal (PlankAudioFileWriterRef
         goto exit;
     }
     
-    pl_MemoryZero (opus, sizeof (PlankOggVorbisFileWriter));
+    pl_MemoryZero (opus, sizeof (PlankOpusFileWriter));
     
     if (filepath)
     {

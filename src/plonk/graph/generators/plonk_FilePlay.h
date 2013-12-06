@@ -139,14 +139,29 @@ public:
             int bufferSize = blockRemain * fileNumChannels;
             
             const LongLong numFrames = file.getNumFrames();
-            const LongLong filePosition = file.getFramePosition();
+            LongLong filePosition = file.getFramePosition();
             bool willHitEOF = false;
             
             if (numFrames > 0)
             {
-                const LongLong framesRemaining = numFrames - filePosition;
+                LongLong framesRemaining = numFrames - filePosition;
                 
-                if (framesRemaining < LongLong (blockRemain))
+                if (framesRemaining == 0)
+                {
+                    if ((loopCount.getValue() == 0) || (loopCount.getValue() > 1))
+                    {
+                        file.resetFramePosition();
+                        data.cueIndex = 0;
+                        
+                        if (loopCount.getValue() > 1)
+                            loopCount.setValue (loopCount.getValue() - 1);
+                    }
+                    
+                    filePosition = file.getFramePosition();
+                    framesRemaining = numFrames - filePosition;
+                }
+                
+                if (framesRemaining <= LongLong (blockRemain))
                 {
                     bufferSize = int (plonk::min (LongLong (bufferSize), framesRemaining * fileNumChannels));
                     willHitEOF = true;
@@ -264,16 +279,17 @@ public:
                     for (int i = 0; i < outputLengthToWrite; ++i, bufferSamples += fileNumChannels)
                         outputSamples[i] = *bufferSamples;
                 }
-                
-                if (audioFileChanged)
-                    this->update (Text::getMessageAudioFileChanged(), file);
-                    
-                if (changedNumChannels)
-                    this->update (Text::getMessageNumChannelsChanged(), IntVariable (fileNumChannels));
-                
+                                
                 offset += bufferFramesAvailable;
                 blockRemain -= bufferFramesAvailable;
             }
+            
+            if (audioFileChanged)
+                this->update (Text::getMessageAudioFileChanged(), file);
+                
+            if (changedNumChannels)
+                this->update (Text::getMessageNumChannelsChanged(), IntVariable (fileNumChannels));
+
         }
         
         if (data.done && data.deleteWhenDone)
