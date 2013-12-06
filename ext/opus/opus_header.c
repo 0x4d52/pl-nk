@@ -25,7 +25,7 @@
    SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#if 1 //def HAVE_CONFIG_H
+#if 1
 # include "config.h"
 #endif
 

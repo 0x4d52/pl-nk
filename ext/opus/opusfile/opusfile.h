@@ -31,12 +31,12 @@
     <tt><a href="https://mf4.xiph.org/jenkins/view/opus/job/opus/ws/doc/html/index.html">libopus</a></tt>
     libraries.
 
-   <tt>libopusfile</tt> provides serveral sets of built-in routines for
+   <tt>libopusfile</tt> provides several sets of built-in routines for
     file/stream access, and may also use custom stream I/O routines provided by
     the embedded environment.
    There are built-in I/O routines provided for ANSI-compliant
     <code>stdio</code> (<code>FILE *</code>), memory buffers, and URLs
-    (including "file:" URLs, plus optionally "http:" and "https:" URLs).
+    (including <file:> URLs, plus optionally <http:> and <https:> URLs).
 
    \section Organization
 
@@ -49,13 +49,61 @@
    Several additional sections are not tied to the main API.
    - \ref stream_callbacks
    - \ref header_info
-   - \ref error_codes*/
+   - \ref error_codes
 
+   \section Overview
+
+   The <tt>libopusfile</tt> API always decodes files to 48&nbsp;kHz.
+   The original sample rate is not preserved by the lossy compression, though
+    it is stored in the header to allow you to resample to it after decoding
+    (the <tt>libopusfile</tt> API does not currently provide a resampler,
+    but the
+    <a href="http://www.speex.org/docs/manual/speex-manual/node7.html#SECTION00760000000000000000">the
+    Speex resampler</a> is a good choice if you need one).
+   In general, if you are playing back the audio, you should leave it at
+    48&nbsp;kHz, provided your audio hardware supports it.
+   When decoding to a file, it may be worth resampling back to the original
+    sample rate, so as not to surprise users who might not expect the sample
+    rate to change after encoding to Opus and decoding.
+
+   Opus files can contain anywhere from 1 to 255 channels of audio.
+   The channel mappings for up to 8 channels are the same as the
+    <a href="http://www.xiph.org/vorbis/doc/Vorbis_I_spec.html#x1-800004.3.9">Vorbis
+    mappings</a>.
+   A special stereo API can convert everything to 2 channels, making it simple
+    to support multichannel files in a application which only has stereo
+    output.
+   Although the <tt>libopusfile</tt> ABI provides support for the theoretical
+    maximum number of channels, the current implementation does not support
+    files with more than 8 channels, as they do not have well-defined channel
+    mappings.
+
+   Like all Ogg files, Opus files may be "chained".
+   That is, multiple Opus files may be combined into a single, longer file just
+    by concatenating the original files.
+   This is commonly done in internet radio streaming, as it allows the title
+    and artist to be updated each time the song changes, since each link in the
+    chain includes its own set of metadata.
+
+   <tt>libopusfile</tt> fully supports chained files.
+   It will decode the first Opus stream found in each link of a chained file
+    (ignoring any other streams that might be concurrently multiplexed with it,
+    such as a video stream).
+
+   The channel count can also change between links, but if your application is
+    not prepared to deal with this, it can use the stereo API to ensure the
+    audio from all links will always get decoded into a common format.
+   Since <tt>libopusfile</tt> always decodes to 48&nbsp;kHz, you do not have to
+    worry about the sample rate changing between links (as was possible with
+    Vorbis).
+   This makes application support for chained files with <tt>libopusfile</tt>
+    very easy.*/
 
 # if defined(__cplusplus)
 extern "C" {
 # endif
 
+# include <stdarg.h>
 # include <stdio.h>
 # include "../../ogg/ogg.h"
 # include "../opus_multistream.h"
@@ -74,9 +122,10 @@ extern "C" {
 #  pragma GCC visibility push(default)
 # endif
 
-typedef struct OpusHead    OpusHead;
-typedef struct OpusTags    OpusTags;
-typedef struct OggOpusFile OggOpusFile;
+typedef struct OpusHead       OpusHead;
+typedef struct OpusTags       OpusTags;
+typedef struct OpusPictureTag OpusPictureTag;
+typedef struct OggOpusFile    OggOpusFile;
 
 /*Warning attributes for libopusfile functions.*/
 # if OP_GNUC_PREREQ(3,4)
@@ -181,8 +230,9 @@ struct OpusHead{
   opus_uint32   input_sample_rate;
   /**The gain to apply to the decoded output, in dB, as a Q8 value in the range
       -32768...32767.
-     The decoder will automatically scale the output by
-      pow(10,output_gain/(20.0*256)).*/
+     The <tt>libopusfile</tt> API will automatically apply this gain to the
+      decoded output before returning it, scaling it by
+      <code>pow(10,output_gain/(20.0*256))</code>.*/
   int           output_gain;
   /**The channel mapping family, in the range 0...255.
      Channel mapping family 0 covers mono or stereo in a single stream.
@@ -229,7 +279,7 @@ struct OpusHead{
    See <a href="http://www.xiph.org/vorbis/doc/v-comment.html">the Vorbis
     comment header specification</a> for details.
 
-   In filling in this structure, \a libopsfile will null-terminate the
+   In filling in this structure, <tt>libopusfile</tt> will null-terminate the
     #user_comments strings for safety.
    However, the bitstream format itself treats them as 8-bit clean vectors,
     possibly containing NUL characters, so the #comment_lengths array should be
@@ -250,6 +300,87 @@ struct OpusTags{
   /**The null-terminated vendor string.
      This identifies the software used to encode the stream.*/
   char  *vendor;
+};
+
+/**\name Picture tag image formats*/
+/*@{*/
+
+/**The MIME type was not recognized, or the image data did not match the
+    declared MIME type.*/
+#define OP_PIC_FORMAT_UNKNOWN (-1)
+/**The MIME type indicates the image data is really a URL.*/
+#define OP_PIC_FORMAT_URL     (0)
+/**The image is a JPEG.*/
+#define OP_PIC_FORMAT_JPEG    (1)
+/**The image is a PNG.*/
+#define OP_PIC_FORMAT_PNG     (2)
+/**The image is a GIF.*/
+#define OP_PIC_FORMAT_GIF     (3)
+
+/*@}*/
+
+/**The contents of a METADATA_BLOCK_PICTURE tag.*/
+struct OpusPictureTag{
+  /**The picture type according to the ID3v2 APIC frame:
+     <ol start="0">
+     <li>Other</li>
+     <li>32x32 pixels 'file icon' (PNG only)</li>
+     <li>Other file icon</li>
+     <li>Cover (front)</li>
+     <li>Cover (back)</li>
+     <li>Leaflet page</li>
+     <li>Media (e.g. label side of CD)</li>
+     <li>Lead artist/lead performer/soloist</li>
+     <li>Artist/performer</li>
+     <li>Conductor</li>
+     <li>Band/Orchestra</li>
+     <li>Composer</li>
+     <li>Lyricist/text writer</li>
+     <li>Recording Location</li>
+     <li>During recording</li>
+     <li>During performance</li>
+     <li>Movie/video screen capture</li>
+     <li>A bright colored fish</li>
+     <li>Illustration</li>
+     <li>Band/artist logotype</li>
+     <li>Publisher/Studio logotype</li>
+     </ol>
+     Others are reserved and should not be used.
+     There may only be one each of picture type 1 and 2 in a file.*/
+  opus_int32     type;
+  /**The MIME type of the picture, in printable ASCII characters 0x20-0x7E.
+     The MIME type may also be <code>"-->"</code> to signify that the data part
+      is a URL pointing to the picture instead of the picture data itself.
+     In this case, a terminating NUL is appended to the URL string in #data,
+      but #data_length is set to the length of the string excluding that
+      terminating NUL.*/
+  char          *mime_type;
+  /**The description of the picture, in UTF-8.*/
+  char          *description;
+  /**The width of the picture in pixels.*/
+  opus_uint32    width;
+  /**The height of the picture in pixels.*/
+  opus_uint32    height;
+  /**The color depth of the picture in bits-per-pixel (<em>not</em>
+      bits-per-channel).*/
+  opus_uint32    depth;
+  /**For indexed-color pictures (e.g., GIF), the number of colors used, or 0
+      for non-indexed pictures.*/
+  opus_uint32    colors;
+  /**The length of the picture data in bytes.*/
+  opus_uint32    data_length;
+  /**The binary picture data.*/
+  unsigned char *data;
+  /**The format of the picture data, if known.
+     One of
+     <ul>
+     <li>#OP_PIC_FORMAT_UNKNOWN,</li>
+     <li>#OP_PIC_FORMAT_URL,</li>
+     <li>#OP_PIC_FORMAT_JPEG,</li>
+     <li>#OP_PIC_FORMAT_PNG,</li>
+     <li>#OP_PIC_FORMAT_GIF, or</li>
+     </ul>.*/
+  int            format;
 };
 
 /**\name Functions for manipulating header data
@@ -384,6 +515,24 @@ const char *opus_tags_query(const OpusTags *_tags,const char *_tag,int _count)
 int opus_tags_query_count(const OpusTags *_tags,const char *_tag)
  OP_ARG_NONNULL(1) OP_ARG_NONNULL(2);
 
+/**Get the track gain from an R128_TRACK_GAIN tag, if one was specified.
+   This searches for the first R128_TRACK_GAIN tag with a valid signed,
+    16-bit decimal integer value and returns the value.
+   This routine is exposed merely for convenience for applications which wish
+    to do something special with the track gain (i.e., display it).
+   If you simply wish to apply the track gain instead of the header gain, you
+    can use op_set_gain_offset() with an #OP_TRACK_GAIN type and no offset.
+   \param      _tags    An initialized #OpusTags structure.
+   \param[out] _gain_q8 The track gain, in 1/256ths of a dB.
+                        This will lie in the range [-32768,32767], and should
+                         be applied in <em>addition</em> to the header gain.
+                        On error, no value is returned, and the previous
+                         contents remain unchanged.
+   \return 0 on success, or a negative value on error.
+   \retval OP_EFALSE There was no track gain available in the given tags.*/
+int opus_tags_get_track_gain(const OpusTags *_tags,int *_gain_q8)
+ OP_ARG_NONNULL(1) OP_ARG_NONNULL(2);
+
 /**Clears the #OpusTags structure.
    This should be called on an #OpusTags structure after it is no longer
     needed.
@@ -391,19 +540,140 @@ int opus_tags_query_count(const OpusTags *_tags,const char *_tag)
    \param _tags The #OpusTags structure to clear.*/
 void opus_tags_clear(OpusTags *_tags) OP_ARG_NONNULL(1);
 
-/*@}*/
+/**Parse a single METADATA_BLOCK_PICTURE tag.
+   This decodes the BASE64-encoded content of the tag and returns a structure
+    with the MIME type, description, image parameters (if known), and the
+    compressed image data.
+   If the MIME type indicates the presence of an image format we recognize
+    (JPEG, PNG, or GIF) and the actual image data contains the magic signature
+    associated with that format, then the OpusPictureTag::format field will be
+    set to the corresponding format.
+   This is provided as a convenience to avoid requiring applications to parse
+    the MIME type and/or do their own format detection for the commonly used
+    formats.
+   In this case, we also attempt to extract the image parameters directly from
+    the image data (overriding any that were present in the tag, which the
+    specification says applications are not meant to rely on).
+   The application must still provide its own support for actually decoding the
+    image data and, if applicable, retrieving that data from URLs.
+   \param[out] _pic Returns the parsed picture data.
+                    No sanitation is done on the type, MIME type, or
+                     description fields, so these might return invalid values.
+                    The contents of this structure are left unmodified on
+                     failure.
+   \param      _tag The METADATA_BLOCK_PICTURE tag contents.
+                    The leading "METADATA_BLOCK_PICTURE=" portion is optional,
+                     to allow the function to be used on either directly on the
+                     values in OpusTags::user_comments or on the return value
+                     of opus_tags_query().
+   \return 0 on success or a negative value on error.
+   \retval #OP_ENOTFORMAT The METADATA_BLOCK_PICTURE contents were not valid.
+   \retval #OP_EFAULT     A memory allocation failed.*/
+int opus_picture_tag_parse(OpusPictureTag *_pic,const char *_tag)
+ OP_ARG_NONNULL(1) OP_ARG_NONNULL(2);
+
+/**Initializes an #OpusPictureTag structure.
+   This should be called on a freshly allocated #OpusPictureTag structure
+    before attempting to use it.
+   \param _pic The #OpusPictureTag structure to initialize.*/
+void opus_picture_tag_init(OpusPictureTag *_pic) OP_ARG_NONNULL(1);
+
+/**Clears the #OpusPictureTag structure.
+   This should be called on an #OpusPictureTag structure after it is no longer
+    needed.
+   It will free all memory used by the structure members.
+   \param _pic The #OpusPictureTag structure to clear.*/
+void opus_picture_tag_clear(OpusPictureTag *_pic) OP_ARG_NONNULL(1);
 
 /*@}*/
 
-/**\defgroup url_flags URL Reading Flags*/
+/*@}*/
+
+/**\defgroup url_options URL Reading Options*/
 /*@{*/
-/**\name URL reading flags
-   Flags for op_url_create_with_proxy() and associated functions.
-   These may be expanded in the future.*/
+/**\name URL reading options
+   Options for op_url_stream_create() and associated functions.
+   These allow you to provide proxy configuration parameters, skip SSL
+    certificate checks, etc.
+   Options are processed in order, and if the same option is passed multiple
+    times, only the value specified by the last occurrence has an effect
+    (unless otherwise specified).
+   They may be expanded in the future.*/
 /*@{*/
 
-/**Skip the certificate check when connecting via TLS/SSL (https).*/
-#define OP_SSL_SKIP_CERTIFICATE_CHECK (1)
+/*These are the raw numbers used to define the request codes.
+  They should not be used directly.*/
+#define OP_SSL_SKIP_CERTIFICATE_CHECK_REQUEST (6464)
+#define OP_HTTP_PROXY_HOST_REQUEST            (6528)
+#define OP_HTTP_PROXY_PORT_REQUEST            (6592)
+#define OP_HTTP_PROXY_USER_REQUEST            (6656)
+#define OP_HTTP_PROXY_PASS_REQUEST            (6720)
+
+#define OP_URL_OPT(_request) ((_request)+(char *)0)
+
+/*These macros trigger compilation errors or warnings if the wrong types are
+   provided to one of the URL options.*/
+#define OP_CHECK_INT(_x) ((void)((_x)==(opus_int32)0),(opus_int32)(_x))
+#define OP_CHECK_CONST_CHAR_PTR(_x) ((_x)+((_x)-(const char *)(_x)))
+
+/**Skip the certificate check when connecting via TLS/SSL (https).
+   \param _b <code>opus_int32</code>: Whether or not to skip the certificate
+              check.
+             The check will be skipped if \a _b is non-zero, and will not be
+              skipped if \a _b is zero.
+   \hideinitializer*/
+#define OP_SSL_SKIP_CERTIFICATE_CHECK(_b) \
+ OP_URL_OPT(OP_SSL_SKIP_CERTIFICATE_CHECK_REQUEST),OP_CHECK_INT(_b)
+
+/**Proxy connections through the given host.
+   If no port is specified via #OP_HTTP_PROXY_PORT, the port number defaults
+    to 8080 (http-alt).
+   All proxy parameters are ignored for non-http and non-https URLs.
+   \param _host <code>const char *</code>: The proxy server hostname.
+                This may be <code>NULL</code> to disable the use of a proxy
+                 server.
+   \hideinitializer*/
+#define OP_HTTP_PROXY_HOST(_host) \
+ OP_URL_OPT(OP_HTTP_PROXY_HOST_REQUEST),OP_CHECK_CONST_CHAR_PTR(_host)
+
+/**Use the given port when proxying connections.
+   This option only has an effect if #OP_HTTP_PROXY_HOST is specified with a
+    non-<code>NULL</code> \a _host.
+   If this option is not provided, the proxy port number defaults to 8080
+    (http-alt).
+   All proxy parameters are ignored for non-http and non-https URLs.
+   \param _port <code>opus_int32</code>: The proxy server port.
+                This must be in the range 0...65535 (inclusive), or the
+                 URL function this is passed to will fail.
+   \hideinitializer*/
+#define OP_HTTP_PROXY_PORT(_port) \
+ OP_URL_OPT(OP_HTTP_PROXY_PORT_REQUEST),OP_CHECK_INT(_port)
+
+/**Use the given user name for authentication when proxying connections.
+   All proxy parameters are ignored for non-http and non-https URLs.
+   \param _user const char *: The proxy server user name.
+                              This may be <code>NULL</code> to disable proxy
+                               authentication.
+                              A non-<code>NULL</code> value only has an effect
+                               if #OP_HTTP_PROXY_HOST and #OP_HTTP_PROXY_PASS
+                               are also specified with non-<code>NULL</code>
+                               arguments.
+   \hideinitializer*/
+#define OP_HTTP_PROXY_USER(_user) \
+ OP_URL_OPT(OP_HTTP_PROXY_USER_REQUEST),OP_CHECK_CONST_CHAR_PTR(_host)
+
+/**Use the given password for authentication when proxying connections.
+   All proxy parameters are ignored for non-http and non-https URLs.
+   \param _pass const char *: The proxy server password.
+                              This may be <code>NULL</code> to disable proxy
+                               authentication.
+                              A non-<code>NULL</code> value only has an effect
+                               if #OP_HTTP_PROXY_HOST and #OP_HTTP_PROXY_USER
+                               are also specified with non-<code>NULL</code>
+                               arguments.
+   \hideinitializer*/
+#define OP_HTTP_PROXY_PASS(_pass) \
+ OP_URL_OPT(OP_HTTP_PROXY_PASS_REQUEST),OP_CHECK_CONST_CHAR_PTR(_host)
 
 /*@}*/
 /*@}*/
@@ -422,19 +692,15 @@ void opus_tags_clear(OpusTags *_tags) OP_ARG_NONNULL(1);
 
 typedef struct OpusFileCallbacks OpusFileCallbacks;
 
-/**Reads \a _nmemb elements of data, each \a _size bytes long, from
-    \a _stream.
-   \return The number of items successfully read (i.e., not the number of
-            characters).
-           Unlike normal <code>fread()</code>, this function is allowed to
-            return fewer items than requested (e.g., if reading more would
-            block), as long as <em>some</em> data is returned when no error
-            occurs and EOF has not been reached.
-           If an error occurs, or the end-of-file is reached, the return
-            value is zero.
-           <code>errno</code> need not be set.*/
-typedef size_t (*op_read_func)(void *_ptr,size_t _size,size_t _nmemb,
- void *_stream);
+/**Reads up to \a _nbytes bytes of data from \a _stream.
+   \param      _stream The stream to read from.
+   \param[out] _ptr    The buffer to store the data in.
+   \param      _nbytes The maximum number of bytes to read.
+                       This function may return fewer, though it will not
+                        return zero unless it reaches end-of-file.
+   \return The number of bytes successfully read, or a negative value on
+            error.*/
+typedef int (*op_read_func)(void *_stream,unsigned char *_ptr,int _nbytes);
 
 /**Sets the position indicator for \a _stream.
    The new position, measured in bytes, is obtained by adding \a _offset
@@ -491,6 +757,10 @@ struct OpusFileCallbacks{
                      If there is an error opening the file, nothing will be
                       filled in here.
    \param      _path The path to the file to open.
+                     On Windows, this string must be UTF-8 (to allow access to
+                      files whose names cannot be represented in the current
+                      MBCS code page).
+                     All other systems use the native character encoding.
    \param      _mode The mode to open the file in.
    \return A stream handle to use with the callbacks, or <code>NULL</code> on
             error.*/
@@ -524,6 +794,10 @@ OP_WARN_UNUSED_RESULT void *op_fdopen(OpusFileCallbacks *_cb,
                        If there is an error opening the file, nothing will be
                         filled in here.
    \param      _path   The path to the file to open.
+                       On Windows, this string must be UTF-8 (to allow access
+                        to files whose names cannot be represented in the
+                        current MBCS code page).
+                       All other systems use the native character encoding.
    \param      _mode   The mode to open the file in.
    \param      _stream A stream previously returned by op_fopen(), op_fdopen(),
                         or op_freopen().
@@ -547,57 +821,42 @@ OP_WARN_UNUSED_RESULT void *op_mem_stream_create(OpusFileCallbacks *_cb,
  const unsigned char *_data,size_t _size) OP_ARG_NONNULL(1);
 
 /**Creates a stream that reads from the given URL.
-   This is equivalent to calling op_url_stream_create_with_proxy() with
-    <code>NULL</code> for \a _proxy_host.
-   \param[out] _cb    The callbacks to use for this stream.
-                      If there is an error creating the stream, nothing will be
-                       filled in here.
-   \param      _url   The URL to read from.
-                      Currently only the "file:", "http:", and "https:" schemes
-                       are supported.
-                      Both "http:" and "https:" may be disabled at compile
-                       time, in which case opening such URLs will fail.
-   \param      _flags The \ref url_flags "optional flags" to use.
+   This function behaves identically to op_url_stream_create(), except that it
+    takes a va_list instead of a variable number of arguments.
+   It does not call the <code>va_end</code> macro, and because it invokes the
+    <code>va_arg</code> macro, the value of \a _ap is undefined after the call.
+   \param[out]    _cb  The callbacks to use for this stream.
+                       If there is an error creating the stream, nothing will
+                        be filled in here.
+   \param         _url The URL to read from.
+                       Currently only the <file:>, <http:>, and <https:>
+                        schemes are supported.
+                       Both <http:> and <https:> may be disabled at compile
+                        time, in which case opening such URLs will always fail.
+   \param[in,out] _ap  A list of the \ref url_options "optional flags" to use.
+                       This is a variable-length list of options terminated
+                        with <code>NULL</code>.
+   \return A stream handle to use with the callbacks, or <code>NULL</code> on
+            error.*/
+OP_WARN_UNUSED_RESULT void *op_url_stream_vcreate(OpusFileCallbacks *_cb,
+ const char *_url,va_list _ap) OP_ARG_NONNULL(1) OP_ARG_NONNULL(2);
+
+/**Creates a stream that reads from the given URL using the specified proxy.
+   \param[out] _cb  The callbacks to use for this stream.
+                    If there is an error creating the stream, nothing will be
+                     filled in here.
+   \param      _url The URL to read from.
+                    Currently only the <file:>, <http:>, and <https:> schemes
+                     are supported.
+                    Both <http:> and <https:> may be disabled at compile time,
+                     in which case opening such URLs will always fail.
+   \param      ...  The \ref url_options "optional flags" to use.
+                    This is a variable-length list of options terminated with
+                     <code>NULL</code>.
    \return A stream handle to use with the callbacks, or <code>NULL</code> on
             error.*/
 OP_WARN_UNUSED_RESULT void *op_url_stream_create(OpusFileCallbacks *_cb,
- const char *_url,int _flags) OP_ARG_NONNULL(1) OP_ARG_NONNULL(2);
-
-/**Creates a stream that reads from the given URL using the specified proxy.
-   \param[out] _cb         The callbacks to use for this stream.
-                           If there is an error creating the stream, nothing
-                            will be filled in here.
-   \param      _url        The URL to read from.
-                           Currently only the "file:", "http:", and "https:"
-                            schemes are supported.
-                           Both "http:" and "https:" may be disabled at compile
-                            time, in which case opening such URLs will fail.
-   \param      _flags      The \ref url_flags "optional flags" to use.
-   \param      _proxy_host The host of the proxy to connect to.
-                           This may be <code>NULL</code> if you do not wish to
-                            use a proxy.
-                           The proxy information is ignored if \a _url is a
-                            <file:> URL.
-   \param      _proxy_port The port of the proxy to connect to.
-                           This is ignored if \a _proxy_host is
-                            <code>NULL</code>.
-   \param      _proxy_user The username to use with the specified proxy.
-                           This may be <code>NULL</code> if no authorization is
-                            required.
-                           This is ignored if \a _proxy_host is
-                            <code>NULL</code>.
-   \param      _proxy_pass The password to use with the specified proxy.
-                           This may be <code>NULL</code> if no authorization is
-                            required.
-                           This is ignored if either \a _proxy_host or
-                            \a _proxy_user are <code>NULL</code>.
-   \return A stream handle to use with the callbacks, or <code>NULL</code> on
-            error.*/
-OP_WARN_UNUSED_RESULT void *op_url_stream_create_with_proxy(
- OpusFileCallbacks *_cb,const char *_url,int _flags,
-  const char *_proxy_host,unsigned _proxy_port,
-  const char *_proxy_user,const char *_proxy_pass) OP_ARG_NONNULL(1)
-  OP_ARG_NONNULL(2);
+ const char *_url,...) OP_ARG_NONNULL(1) OP_ARG_NONNULL(2);
 
 /*@}*/
 /*@}*/
@@ -615,16 +874,13 @@ OP_WARN_UNUSED_RESULT void *op_url_stream_create_with_proxy(
 /**Test to see if this is an Opus stream.
    For good results, you will need at least 57 bytes (for a pure Opus-only
     stream).
-   Something more like 512 bytes will give more reliable results for
-    multiplexed streams.
+   Something like 512 bytes will give more reliable results for multiplexed
+    streams.
    This function is meant to be a quick-rejection filter.
    Its purpose is not to guarantee that a stream is a valid Opus stream, but to
     ensure that it looks enough like Opus that it isn't going to be recognized
     as some other format (except possibly an Opus stream that is also
     multiplexed with other codecs, such as video).
-   If you need something that gives a much better guarantee that this stream
-    can be opened successfully, use op_test_callbacks() or one of the
-    associated convenience functions.
    \param[out] _head     The parsed ID header contents.
                          You may pass <code>NULL</code> if you do not need
                           this information.
@@ -643,9 +899,8 @@ OP_WARN_UNUSED_RESULT void *op_url_stream_create_with_proxy(
                            header for an Opus stream.
    \retval #OP_EVERSION   If the version field signaled a version this library
                            does not know how to parse.
-   \retval #OP_EBADHEADER A required header packet was not properly formatted,
-                           contained illegal values, or was missing
-                           altogether.*/
+   \retval #OP_EBADHEADER The ID header was not properly formatted or contained
+                           illegal values.*/
 int op_test(OpusHead *_head,
  const unsigned char *_initial_data,size_t _initial_bytes);
 
@@ -673,69 +928,47 @@ OP_WARN_UNUSED_RESULT OggOpusFile *op_open_memory(const unsigned char *_data,
  size_t _size,int *_error);
 
 /**Open a stream from a URL.
-   See the security warning in op_open_url_with_proxy() for information about
-    possible truncation attacks with HTTPS.
+   This function behaves identically to op_open_url(), except that it
+    takes a va_list instead of a variable number of arguments.
+   It does not call the <code>va_end</code> macro, and because it invokes the
+    <code>va_arg</code> macro, the value of \a _ap is undefined after the call.
+   \param         _url   The URL to open.
+                         Currently only the <file:>, <http:>, and <https:>
+                          schemes are supported.
+                         Both <http:> and <https:> may be disabled at compile
+                          time, in which case opening such URLs will always
+                          fail.
+   \param[out]    _error Returns 0 on success, or a failure code on error.
+                         You may pass in <code>NULL</code> if you don't want
+                          the failure code.
+                         See op_open_callbacks() for a full list of failure
+                          codes.
+   \param[in,out] _ap    A list of the \ref url_options "optional flags" to
+                          use.
+                         This is a variable-length list of options terminated
+                          with <code>NULL</code>.
+   \return A freshly opened \c OggOpusFile, or <code>NULL</code> on error.*/
+OP_WARN_UNUSED_RESULT OggOpusFile *op_vopen_url(const char *_url,
+ int *_error,va_list _ap) OP_ARG_NONNULL(1);
+
+/**Open a stream from a URL.
+   However, this approach will not work for live streams or HTTP/1.0 servers
+    (which do not support Range requets).
    \param      _url   The URL to open.
                       Currently only the <file:>, <http:>, and <https:> schemes
                        are supported.
-                      Both "http:" and "https:" may be disabled at compile
-                       time, in which case opening such URLs will fail.
-   \param      _flags The \ref url_flags "optional flags" to use.
+                      Both <http:> and <https:> may be disabled at compile
+                       time, in which case opening such URLs will always fail.
    \param[out] _error Returns 0 on success, or a failure code on error.
                       You may pass in <code>NULL</code> if you don't want the
                        failure code.
                       See op_open_callbacks() for a full list of failure codes.
+   \param      ...    The \ref url_options "optional flags" to use.
+                      This is a variable-length list of options terminated with
+                       <code>NULL</code>.
    \return A freshly opened \c OggOpusFile, or <code>NULL</code> on error.*/
 OP_WARN_UNUSED_RESULT OggOpusFile *op_open_url(const char *_url,
- int _flags,int *_error) OP_ARG_NONNULL(1);
-
-/**Open a stream from a URL using the specified proxy.
-   \warning HTTPS streams that are not served with a Content-Length header may
-    be vulnerable to truncation attacks.
-   The abstract stream interface is incapable of signaling whether a connection
-    was closed gracefully (with a TLS "close notify" message) or abruptly (and,
-    e.g., possibly by an attacker).
-   If you wish to guarantee that you are not vulnerable to such attacks, you
-    might consider only allowing seekable streams (which must have a valid
-    content length) and verifying the file position reported by op_raw_tell()
-    after decoding to the end is at least as large as that reported by
-    op_raw_total() (though possibly larger).
-   However, this approach will not work for live streams or HTTP/1.0 servers
-    (which do not support Range requets).
-   \param      _url        The URL to open.
-                           Currently only the <file:>, <http:>, and <https:>
-                            schemes are supported.
-                           Both "http:" and "https:" may be disabled at compile
-                            time, in which case opening such URLs will fail.
-   \param      _flags      The \ref url_flags "optional flags" to use.
-   \param      _proxy_host The host of the proxy to connect to.
-                           This may be <code>NULL</code> if you do not wish to
-                            use a proxy.
-                           The proxy information is ignored if \a _url is a
-                            <file:> URL.
-   \param      _proxy_port The port of the proxy to connect to.
-                           This is ignored if \a _proxy_host is
-                            <code>NULL</code>.
-   \param      _proxy_user The username to use with the specified proxy.
-                           This may be <code>NULL</code> if no authorization is
-                            required.
-                           This is ignored if \a _proxy_host is
-                            <code>NULL</code>.
-   \param      _proxy_pass The password to use with the specified proxy.
-                           This may be <code>NULL</code> if no authorization is
-                            required.
-                           This is ignored if either \a _proxy_host or
-                            \a _proxy_user are <code>NULL</code>.
-   \param[out] _error      Returns 0 on success, or a failure code on error.
-                           You may pass in <code>NULL</code> if you don't want
-                            the failure code.
-                           See op_open_callbacks() for a full list of failure
-                            codes.
-   \return A freshly opened \c OggOpusFile, or <code>NULL</code> on error.*/
-OP_WARN_UNUSED_RESULT OggOpusFile *op_open_url_with_proxy(const char *_url,
- int _flags,const char *_proxy_host,unsigned _proxy_port,
- const char *_proxy_user,const char *_proxy_pass,int *_error)
- OP_ARG_NONNULL(1);
+ int *_error,...) OP_ARG_NONNULL(1);
 
 /**Open a stream using the given set of callbacks to access it.
    \param _source        The stream to read from (e.g., a <code>FILE *</code>).
@@ -809,7 +1042,11 @@ OP_WARN_UNUSED_RESULT OggOpusFile *op_open_url_with_proxy(const char *_url,
                            <dd>The first or last timestamp in a link failed
                             basic validity checks.</dd>
                          </dl>
-   \return A freshly opened \c OggOpusFile, or <code>NULL</code> on error.*/
+   \return A freshly opened \c OggOpusFile, or <code>NULL</code> on error.
+           <tt>libopusfile</tt> does <em>not</em> take ownership of the source
+            if the call fails.
+           The calling application is responsible for closing the source if
+            this call returns an error.*/
 OP_WARN_UNUSED_RESULT OggOpusFile *op_open_callbacks(void *_source,
  const OpusFileCallbacks *_cb,const unsigned char *_initial_data,
  size_t _initial_bytes,int *_error) OP_ARG_NONNULL(2);
@@ -840,63 +1077,70 @@ OP_WARN_UNUSED_RESULT OggOpusFile *op_test_memory(const unsigned char *_data,
  size_t _size,int *_error);
 
 /**Partially open a stream from a URL.
+   This function behaves identically to op_test_url(), except that it
+    takes a va_list instead of a variable number of arguments.
+   It does not call the <code>va_end</code> macro, and because it invokes the
+    <code>va_arg</code> macro, the value of \a _ap is undefined after the call.
+   \see op_test_url
    \see op_test_callbacks
-   \param      _url   The URL to open.
-                      Currently only the <file:>, <http:>, and <https:> schemes
-                       are supported.
-                      Both "http:" and "https:" may be disabled at compile
-                       time, in which case opening such URLs will fail.
-   \param      _flags The <a href="#url_flags">optional flags</a> to use.
-   \param[out] _error Returns 0 on success, or a failure code on error.
-                      You may pass in <code>NULL</code> if you don't want the
-                       failure code.
-                      See op_open_callbacks() for a full list of failure codes.
+   \param         _url    The URL to open.
+                          Currently only the <file:>, <http:>, and <https:>
+                           schemes are supported.
+                          Both <http:> and <https:> may be disabled at compile
+                           time, in which case opening such URLs will always
+                           fail.
+   \param[out]    _error  Returns 0 on success, or a failure code on error.
+                          You may pass in <code>NULL</code> if you don't want
+                           the failure code.
+                          See op_open_callbacks() for a full list of failure
+                           codes.
+   \param[in,out] _ap     A list of the \ref url_options "optional flags" to
+                           use.
+                          This is a variable-length list of options terminated
+                           with <code>NULL</code>.
    \return A partially opened \c OggOpusFile, or <code>NULL</code> on error.*/
-OP_WARN_UNUSED_RESULT OggOpusFile *op_test_url(const char *_url,int _flags,
- int *_error) OP_ARG_NONNULL(1);
+OP_WARN_UNUSED_RESULT OggOpusFile *op_vtest_url(const char *_url,
+ int *_error,va_list _ap) OP_ARG_NONNULL(1);
 
-/**Partially open a stream from a URL using the specified proxy.
+/**Partially open a stream from a URL.
    \see op_test_callbacks
-   \param      _url        The URL to open.
-                           Currently only the <file:>, <http:>, and <https:>
-                            schemes are supported.
-                           Both "http:" and "https:" may be disabled at compile
-                            time, in which case opening such URLs will fail.
-   \param      _flags      The <a href="#url_flags">optional flags</a> to use.
-   \param      _proxy_host The host of the proxy to connect to.
-                           This may be <code>NULL</code> if you do not wish to
-                            use a proxy.
-                           The proxy information is ignored if \a _url is a
-                            <file:> URL.
-   \param      _proxy_port The port of the proxy to connect to.
-                           This is ignored if \a _proxy_host is
-                            <code>NULL</code>.
-   \param      _proxy_user The username to use with the specified proxy.
-                           This may be <code>NULL</code> if no authorization is
-                            required.
-                           This is ignored if \a _proxy_host is
-                            <code>NULL</code>.
-   \param      _proxy_pass The password to use with the specified proxy.
-                           This may be <code>NULL</code> if no authorization is
-                            required.
-                           This is ignored if either \a _proxy_host or
-                            \a _proxy_user are <code>NULL</code>.
-   \param[out] _error      Returns 0 on success, or a failure code on error.
-                           You may pass in <code>NULL</code> if you don't want
-                            the failure code.
-                           See op_open_callbacks() for a full list of failure
-                            codes.
+   \param      _url    The URL to open.
+                       Currently only the <file:>, <http:>, and <https:>
+                        schemes are supported.
+                       Both <http:> and <https:> may be disabled at compile
+                        time, in which case opening such URLs will always fail.
+   \param[out] _error  Returns 0 on success, or a failure code on error.
+                       You may pass in <code>NULL</code> if you don't want the
+                        failure code.
+                       See op_open_callbacks() for a full list of failure
+                        codes.
+   \param      ...     The \ref url_options "optional flags" to use.
+                       This is a variable-length list of options terminated
+                        with <code>NULL</code>.
    \return A partially opened \c OggOpusFile, or <code>NULL</code> on error.*/
-OP_WARN_UNUSED_RESULT OggOpusFile *op_test_url_with_proxy(const char *_url,
- int _flags,const char *_proxy_host,unsigned _proxy_port,
- const char *_proxy_user,const char *_proxy_pass,int *_error)
- OP_ARG_NONNULL(1);
+OP_WARN_UNUSED_RESULT OggOpusFile *op_test_url(const char *_url,
+ int *_error,...) OP_ARG_NONNULL(1);
 
 /**Partially open a stream using the given set of callbacks to access it.
    This tests for Opusness and loads the headers for the first link.
    It does not seek (although it tests for seekability).
-   Use op_test_open() to finish opening the stream, or op_free() to dispose of
-    it.
+   You can query a partially open stream for the few pieces of basic
+    information returned by op_serialno(), op_channel_count(), op_head(), and
+    op_tags() (but only for the first link).
+   You may also determine if it is seekable via a call to op_seekable().
+   You cannot read audio from the stream, seek, get the size or duration,
+    get information from links other than the first one, or even get the total
+    number of links until you finish opening the stream with op_test_open().
+   If you do not need to do any of these things, you can dispose of it with
+    op_free() instead.
+
+   This function is provided mostly to simplify porting existing code that used
+    <tt>libvorbisfile</tt>.
+   For new code, you are likely better off using op_test() instead, which
+    is less resource-intensive, requires less data to succeed, and imposes a
+    hard limit on the amount of data it examines (important for unseekable
+    sources, where all such data must be buffered until you are sure of the
+    stream type).
    \param _source        The stream to read from (e.g., a <code>FILE *</code>).
    \param _cb            The callbacks with which to access the stream.
                          <code><a href="#op_read_func">read()</a></code> must
@@ -935,7 +1179,11 @@ OP_WARN_UNUSED_RESULT OggOpusFile *op_test_url_with_proxy(const char *_url,
                           the failure code.
                          See op_open_callbacks() for a full list of failure
                           codes.
-   \return A partially opened \c OggOpusFile, or <code>NULL</code> on error.*/
+   \return A partially opened \c OggOpusFile, or <code>NULL</code> on error.
+           <tt>libopusfile</tt> does <em>not</em> take ownership of the source
+            if the call fails.
+           The calling application is responsible for closing the source if
+            this call returns an error.*/
 OP_WARN_UNUSED_RESULT OggOpusFile *op_test_callbacks(void *_source,
  const OpusFileCallbacks *_cb,const unsigned char *_initial_data,
  size_t _initial_bytes,int *_error) OP_ARG_NONNULL(2);
@@ -993,16 +1241,6 @@ void op_free(OggOpusFile *_of);
    Their documention will indicate so explicitly.*/
 /*@{*/
 
-/**Returns the number of links in this chained stream.
-   This function may be called on partially-opened streams, but it will always
-    return 1.
-   The actual number of links is not known until the stream is fully opened.
-   \param _of The \c OggOpusFile from which to retrieve the link count.
-   \return For seekable sources, this returns the total number of links in the
-            whole stream.
-           For unseekable sources, this always returns 1.*/
-int op_link_count(OggOpusFile *_of) OP_ARG_NONNULL(1);
-
 /**Returns whether or not the data source being read is seekable.
    This is true if
    <ol>
@@ -1018,6 +1256,16 @@ int op_link_count(OggOpusFile *_of) OP_ARG_NONNULL(1);
    \param _of The \c OggOpusFile whose seekable status is to be returned.
    \return A non-zero value if seekable, and 0 if unseekable.*/
 int op_seekable(OggOpusFile *_of) OP_ARG_NONNULL(1);
+
+/**Returns the number of links in this chained stream.
+   This function may be called on partially-opened streams, but it will always
+    return 1.
+   The actual number of links is not known until the stream is fully opened.
+   \param _of The \c OggOpusFile from which to retrieve the link count.
+   \return For fully-open seekable sources, this returns the total number of
+            links in the whole stream.
+           For partially-open or unseekable sources, this always returns 1.*/
+int op_link_count(OggOpusFile *_of) OP_ARG_NONNULL(1);
 
 /**Get the serial number of the given link in a (possibly-chained) Ogg Opus
     stream.
@@ -1039,7 +1287,7 @@ opus_uint32 op_serialno(OggOpusFile *_of,int _li) OP_ARG_NONNULL(1);
    This is equivalent to <code>op_head(_of,_li)->channel_count</code>, but
     is provided for convenience.
    This function may be called on partially-opened streams, but it will always
-    return the serial number of the Opus stream in the first link.
+    return the channel count of the Opus stream in the first link.
    \param _of The \c OggOpusFile from which to retrieve the channel count.
    \param _li The index of the link whose channel count should be retrieved.
               Use a negative number to get the channel count of the current
@@ -1105,6 +1353,8 @@ const OpusHead *op_head(OggOpusFile *_of,int _li) OP_ARG_NONNULL(1);
 
 /**Get the comment header information for the given link in a (possibly
     chained) Ogg Opus stream.
+   This function may be called on partially-opened streams, but it will always
+    return the tags from the Opus stream in the first link.
    \param _of The \c OggOpusFile from which to retrieve the comment header
                information.
    \param _li The index of the link whose comment header information should be
@@ -1115,8 +1365,8 @@ const OpusHead *op_head(OggOpusFile *_of,int _li) OP_ARG_NONNULL(1);
                header information for the current link is always returned, if
                available.
    \return The contents of the comment header for the given link, or
-            <code>NULL</code> if either the stream was only partially open or
-            this is an unseekable stream that encountered an invalid link.*/
+            <code>NULL</code> if this is an unseekable stream that encountered
+            an invalid link.*/
 const OpusTags *op_tags(OggOpusFile *_of,int _li) OP_ARG_NONNULL(1);
 
 /**Retrieve the index of the current link.
@@ -1127,13 +1377,13 @@ const OpusTags *op_tags(OggOpusFile *_of,int _li) OP_ARG_NONNULL(1);
     seek).
    \param _of The \c OggOpusFile from which to retrieve the current link index.
    \return The index of the current link on success, or a negative value on
-            failture.
+            failure.
            For seekable streams, this is a number between 0 and the value
             returned by op_link_count().
            For unseekable streams, this value starts at 0 and increments by one
             each time a new link is encountered (even though op_link_count()
             always returns 1).
-   \retval #OP_EINVAL The stream was not fully open.*/
+   \retval #OP_EINVAL The stream was only partially open.*/
 int op_current_link(OggOpusFile *_of) OP_ARG_NONNULL(1);
 
 /**Computes the bitrate for a given link in a (possibly chained) Ogg Opus
@@ -1144,7 +1394,7 @@ int op_current_link(OggOpusFile *_of) OP_ARG_NONNULL(1);
    \param _li The index of the link whose bitrate should be computed.
               USe a negative number to get the bitrate of the whole stream.
    \return The bitrate on success, or a negative value on error.
-   \retval #OP_EINVAL The stream was not fully open, the stream was not
+   \retval #OP_EINVAL The stream was only partially open, the stream was not
                        seekable, or \a _li was larger than the number of
                        links.*/
 opus_int32 op_bitrate(OggOpusFile *_of,int _li) OP_ARG_NONNULL(1);
@@ -1159,13 +1409,13 @@ opus_int32 op_bitrate(OggOpusFile *_of,int _li) OP_ARG_NONNULL(1);
    \return The bitrate, in bits per second, or a negative value on error.
    \retval #OP_FALSE  No data has been decoded since any of the events
                        described above.
-   \retval #OP_EINVAL The stream was not fully open.*/
+   \retval #OP_EINVAL The stream was only partially open.*/
 opus_int32 op_bitrate_instant(OggOpusFile *_of) OP_ARG_NONNULL(1);
 
 /**Obtain the current value of the position indicator for \a _of.
    \param _of The \c OggOpusFile from which to retrieve the position indicator.
    \return The byte position that is currently being read from.
-   \retval #OP_EINVAL The stream was not fully open.*/
+   \retval #OP_EINVAL The stream was only partially open.*/
 opus_int64 op_raw_tell(OggOpusFile *_of) OP_ARG_NONNULL(1);
 
 /**Obtain the PCM offset of the next sample to be read.
@@ -1174,7 +1424,7 @@ opus_int64 op_raw_tell(OggOpusFile *_of) OP_ARG_NONNULL(1);
     values.
    \param _of The \c OggOpusFile from which to retrieve the PCM offset.
    \return The PCM offset of the next sample to be read.
-   \retval #OP_EINVAL The stream was not fully open.*/
+   \retval #OP_EINVAL The stream was only partially open.*/
 ogg_int64_t op_pcm_tell(OggOpusFile *_of) OP_ARG_NONNULL(1);
 
 /*@}*/
@@ -1215,29 +1465,13 @@ ogg_int64_t op_pcm_tell(OggOpusFile *_of) OP_ARG_NONNULL(1);
    \param _of          The \c OggOpusFile in which to seek.
    \param _byte_offset The byte position to seek to.
    \return 0 on success, or a negative error code on failure.
-   \retval #OP_EREAD    The seek failed.
-   \retval #OP_EINVAL   The stream was not fully open, or the target was
+   \retval #OP_EREAD    The underlying seek operation failed.
+   \retval #OP_EINVAL   The stream was only partially open, or the target was
                          outside the valid range for the stream.
    \retval #OP_ENOSEEK  This stream is not seekable.
    \retval #OP_EBADLINK Failed to initialize a decoder for a stream for an
                          unknown reason.*/
 int op_raw_seek(OggOpusFile *_of,opus_int64 _byte_offset) OP_ARG_NONNULL(1);
-
-/**Seek to a page preceding the specified PCM offset, such that decoding will
-    quickly arrive at the requested position.
-   This is faster than sample-granularity seeking because it doesn't do the
-    last bit of decode to find a specific sample.
-   \param _of         The \c OggOpusFile in which to seek.
-   \param _pcm_offset The PCM offset to seek to.
-                      This is in samples at 48 kHz relative to the start of the
-                       stream.
-   \return 0 on success, or a negative value on error.
-   \retval #OP_EREAD   The seek failed.
-   \retval #OP_EINVAL  The stream was not fully open, or the target was outside
-                        the valid range for the stream.
-   \retval #OP_ENOSEEK This stream is not seekable.*/
-int op_pcm_seek_page(OggOpusFile *_of,ogg_int64_t _pcm_offset)
- OP_ARG_NONNULL(1);
 
 /**Seek to the specified PCM offset, such that decoding will begin at exactly
     the requested position.
@@ -1246,10 +1480,13 @@ int op_pcm_seek_page(OggOpusFile *_of,ogg_int64_t _pcm_offset)
                       This is in samples at 48 kHz relative to the start of the
                        stream.
    \return 0 on success, or a negative value on error.
-   \retval #OP_EREAD   The seek failed.
-   \retval #OP_EINVAL  The stream was not fully open, or the target was outside
-                        the valid range for the stream.
-   \retval #OP_ENOSEEK This stream is not seekable.*/
+   \retval #OP_EREAD    An underlying read or seek operation failed.
+   \retval #OP_EINVAL   The stream was only partially open, or the target was
+                         outside the valid range for the stream.
+   \retval #OP_ENOSEEK  This stream is not seekable.
+   \retval #OP_EBADLINK We failed to find data we had seen before, or the
+                         bitstream structure was sufficiently malformed that
+                         seeking to the target destination was impossible.*/
 int op_pcm_seek(OggOpusFile *_of,ogg_int64_t _pcm_offset) OP_ARG_NONNULL(1);
 
 /*@}*/
@@ -1275,15 +1512,59 @@ int op_pcm_seek(OggOpusFile *_of,ogg_int64_t _pcm_offset) OP_ARG_NONNULL(1);
     clipping and other issues which might be avoided entirely if, e.g., you
     scale down the volume at some other stage.
    However, if you intend to direct consume 16-bit samples, the conversion in
-    <tt>libopusfile</tt> provides noise-shaping dithering API.
+    <tt>libopusfile</tt> provides noise-shaping dithering and, if compiled
+    against <tt>libopus</tt>&nbsp;1.1 or later, soft-clipping prevention.
 
    <tt>libopusfile</tt> can also be configured at compile time to use the
     fixed-point <tt>libopus</tt> API.
-   If so, the floating-point API may also be disabled.
+   If so, <tt>libopusfile</tt>'s floating-point API may also be disabled.
    In that configuration, nothing in <tt>libopusfile</tt> will use any
     floating-point operations, to simplify support on devices without an
-    adequate FPU.*/
+    adequate FPU.
+
+   \warning HTTPS streams may be be vulnerable to truncation attacks if you do
+    not check the error return code from op_read_float() or its associated
+    functions.
+   If the remote peer does not close the connection gracefully (with a TLS
+    "close notify" message), these functions will return OP_EREAD instead of 0
+    when they reach the end of the file.
+   If you are reading from an <https:> URL (particularly if seeking is not
+    supported), you should make sure to check for this error and warn the user
+    appropriately.*/
 /*@{*/
+
+/**Gain offset type that indicates that the provided offset is relative to the
+    header gain.
+   This is the default.*/
+#define OP_HEADER_GAIN   (0)
+
+/**Gain offset type that indicates that the provided offset is relative to the
+    R128_TRACK_GAIN value (if any), in addition to the header gain.*/
+#define OP_TRACK_GAIN    (3008)
+
+/**Gain offset type that indicates that the provided offset should be used as
+    the gain directly, without applying any the header or track gains.*/
+#define OP_ABSOLUTE_GAIN (3009)
+
+/**Sets the gain to be used for decoded output.
+   By default, the gain in the header is applied with no additional offset.
+   The total gain (including header gain and/or track gain, if applicable, and
+    this offset), will be clamped to [-32768,32767]/256 dB.
+   This is more than enough to saturate or underflow 16-bit PCM.
+   \note The new gain will not be applied to any already buffered, decoded
+    output.
+   This means you cannot change it sample-by-sample, as at best it will be
+    updated packet-by-packet.
+   It is meant for setting a target volume level, rather than applying smooth
+    fades, etc.
+   \param _of             The \c OggOpusFile on which to set the gain offset.
+   \param _gain_type      One of #OP_HEADER_GAIN, #OP_TRACK_GAIN, or
+                           #OP_ABSOLUTE_GAIN.
+   \param _gain_offset_q8 The gain offset to apply, in 1/256ths of a dB.
+   \return 0 on success or a negative value on error.
+   \retval #OP_EINVAL The \a _gain_type was unrecognized.*/
+int op_set_gain_offset(OggOpusFile *_of,
+ int _gain_type,opus_int32 _gain_offset_q8);
 
 /**Reads more samples from the stream.
    \note Although \a _buf_size must indicate the total number of values that
@@ -1291,7 +1572,7 @@ int op_pcm_seek(OggOpusFile *_of,ogg_int64_t _pcm_offset) OP_ARG_NONNULL(1);
     <em>per channel</em>.
    This is done because
    <ol>
-   <li>The channel count cannot be known a prior (reading more samples might
+   <li>The channel count cannot be known a priori (reading more samples might
         advance us into the next link, with a different channel count), so
         \a _buf_size cannot also be in units of samples per channel,</li>
    <li>Returning the samples per channel matches the <code>libopus</code> API
@@ -1308,21 +1589,22 @@ int op_pcm_seek(OggOpusFile *_of,ogg_int64_t _pcm_offset) OP_ARG_NONNULL(1);
    </ol>
    \param      _of       The \c OggOpusFile from which to read.
    \param[out] _pcm      A buffer in which to store the output PCM samples, as
-                          signed native-endian 16-bit values with a nominal
-                          range of <code>[-32768,32767)</code>.
+                          signed native-endian 16-bit values at 48&nbsp;kHz
+                          with a nominal range of <code>[-32768,32767)</code>.
                          Multiple channels are interleaved using the
                           <a href="http://www.xiph.org/vorbis/doc/Vorbis_I_spec.html#x1-800004.3.9">Vorbis
                           channel ordering</a>.
                          This must have room for at least \a _buf_size values.
    \param      _buf_size The number of values that can be stored in \a _pcm.
-                         It is reccommended that this be large enough for at
+                         It is recommended that this be large enough for at
                           least 120 ms of data at 48 kHz per channel (5760
                           values per channel).
                          Smaller buffers will simply return less data, possibly
                           consuming more memory to buffer the data internally.
-                         If less than \a _buf_size values are returned,
-                          <tt>libopusfile</tt> makes no guarantee that the
-                          remaining data in \a _pcm will be unmodified.
+                         <tt>libopusfile</tt> may return less data than
+                          requested.
+                         If so, there is no guarantee that the remaining data
+                          in \a _pcm will be unmodified.
    \param[out] _li       The index of the link this data was decoded from.
                          You may pass <code>NULL</code> if you do not need this
                           information.
@@ -1338,11 +1620,18 @@ int op_pcm_seek(OggOpusFile *_of,ogg_int64_t _pcm_offset) OP_ARG_NONNULL(1);
            The list of possible failure codes follows.
            Most of them can only be returned by unseekable, chained streams
             that encounter a new link.
+   \retval #OP_HOLE          There was a hole in the data, and some samples
+                              may have been skipped.
+                             Call this function again to continue decoding
+                              past the hole.
+   \retval #OP_EREAD         An underlying read operation failed.
+                             This may signal a truncation attack from an
+                              <https:> source.
    \retval #OP_EFAULT        An internal memory allocation failed.
    \retval #OP_EIMPL         An unseekable stream encountered a new link that
                               used a feature that is not implemented, such as
                               an unsupported channel family.
-   \retval #OP_EINVAL        The stream was not fully open.
+   \retval #OP_EINVAL        The stream was only partially open.
    \retval #OP_ENOTFORMAT    An unseekable stream encountered a new link that
                               did not have any logical Opus streams in it.
    \retval #OP_EBADHEADER    An unseekable stream encountered a new link with a
@@ -1353,6 +1642,7 @@ int op_pcm_seek(OggOpusFile *_of,ogg_int64_t _pcm_offset) OP_ARG_NONNULL(1);
                               an ID header that contained an unrecognized
                               version number.
    \retval #OP_EBADPACKET    Failed to properly decode the next packet.
+   \retval #OP_EBADLINK      We failed to find data we had seen before.
    \retval #OP_EBADTIMESTAMP An unseekable stream encountered a new link with
                               a starting timestamp that failed basic validity
                               checks.*/
@@ -1364,7 +1654,7 @@ OP_WARN_UNUSED_RESULT int op_read(OggOpusFile *_of,
     can be stored in \a _pcm, the return value is the number of samples
     <em>per channel</em>.
    <ol>
-   <li>The channel count cannot be known a prior (reading more samples might
+   <li>The channel count cannot be known a priori (reading more samples might
         advance us into the next link, with a different channel count), so
         \a _buf_size cannot also be in units of samples per channel,</li>
    <li>Returning the samples per channel matches the <code>libopus</code> API
@@ -1381,14 +1671,14 @@ OP_WARN_UNUSED_RESULT int op_read(OggOpusFile *_of,
    </ol>
    \param      _of       The \c OggOpusFile from which to read.
    \param[out] _pcm      A buffer in which to store the output PCM samples as
-                          signed floats with a nominal range of
+                          signed floats at 48&nbsp;kHz with a nominal range of
                           <code>[-1.0,1.0]</code>.
                          Multiple channels are interleaved using the
                           <a href="http://www.xiph.org/vorbis/doc/Vorbis_I_spec.html#x1-800004.3.9">Vorbis
                           channel ordering</a>.
                          This must have room for at least \a _buf_size floats.
    \param      _buf_size The number of floats that can be stored in \a _pcm.
-                         It is reccommended that this be large enough for at
+                         It is recommended that this be large enough for at
                           least 120 ms of data at 48 kHz per channel (5760
                           samples per channel).
                          Smaller buffers will simply return less data, possibly
@@ -1411,11 +1701,18 @@ OP_WARN_UNUSED_RESULT int op_read(OggOpusFile *_of,
            The list of possible failure codes follows.
            Most of them can only be returned by unseekable, chained streams
             that encounter a new link.
+   \retval #OP_HOLE          There was a hole in the data, and some samples
+                              may have been skipped.
+                             Call this function again to continue decoding
+                              past the hole.
+   \retval #OP_EREAD         An underlying read operation failed.
+                             This may signal a truncation attack from an
+                              <https:> source.
    \retval #OP_EFAULT        An internal memory allocation failed.
    \retval #OP_EIMPL         An unseekable stream encountered a new link that
                               used a feature that is not implemented, such as
                               an unsupported channel family.
-   \retval #OP_EINVAL        The stream was not fully open.
+   \retval #OP_EINVAL        The stream was only partially open.
    \retval #OP_ENOTFORMAT    An unseekable stream encountered a new link that
                               did not have any logical Opus streams in it.
    \retval #OP_EBADHEADER    An unseekable stream encountered a new link with a
@@ -1426,6 +1723,7 @@ OP_WARN_UNUSED_RESULT int op_read(OggOpusFile *_of,
                               an ID header that contained an unrecognized
                               version number.
    \retval #OP_EBADPACKET    Failed to properly decode the next packet.
+   \retval #OP_EBADLINK      We failed to find data we had seen before.
    \retval #OP_EBADTIMESTAMP An unseekable stream encountered a new link with
                               a starting timestamp that failed basic validity
                               checks.*/
@@ -1442,13 +1740,13 @@ OP_WARN_UNUSED_RESULT int op_read_float(OggOpusFile *_of,
     op_read().
    \param      _of       The \c OggOpusFile from which to read.
    \param[out] _pcm      A buffer in which to store the output PCM samples, as
-                          signed native-endian 16-bit values with a nominal
-                          range of <code>[-32768,32767)</code>.
+                          signed native-endian 16-bit values at 48&nbsp;kHz
+                          with a nominal range of <code>[-32768,32767)</code>.
                          The left and right channels are interleaved in the
                           buffer.
                          This must have room for at least \a _buf_size values.
    \param      _buf_size The number of values that can be stored in \a _pcm.
-                         It is reccommended that this be large enough for at
+                         It is recommended that this be large enough for at
                           least 120 ms of data at 48 kHz per channel (11520
                           values total).
                          Smaller buffers will simply return less data, possibly
@@ -1464,11 +1762,18 @@ OP_WARN_UNUSED_RESULT int op_read_float(OggOpusFile *_of,
            The list of possible failure codes follows.
            Most of them can only be returned by unseekable, chained streams
             that encounter a new link.
+   \retval #OP_HOLE          There was a hole in the data, and some samples
+                              may have been skipped.
+                             Call this function again to continue decoding
+                              past the hole.
+   \retval #OP_EREAD         An underlying read operation failed.
+                             This may signal a truncation attack from an
+                              <https:> source.
    \retval #OP_EFAULT        An internal memory allocation failed.
    \retval #OP_EIMPL         An unseekable stream encountered a new link that
                               used a feature that is not implemented, such as
                               an unsupported channel family.
-   \retval #OP_EINVAL        The stream was not fully open.
+   \retval #OP_EINVAL        The stream was only partially open.
    \retval #OP_ENOTFORMAT    An unseekable stream encountered a new link that
                               did not have any logical Opus streams in it.
    \retval #OP_EBADHEADER    An unseekable stream encountered a new link with a
@@ -1479,6 +1784,7 @@ OP_WARN_UNUSED_RESULT int op_read_float(OggOpusFile *_of,
                               an ID header that contained an unrecognized
                               version number.
    \retval #OP_EBADPACKET    Failed to properly decode the next packet.
+   \retval #OP_EBADLINK      We failed to find data we had seen before.
    \retval #OP_EBADTIMESTAMP An unseekable stream encountered a new link with
                               a starting timestamp that failed basic validity
                               checks.*/
@@ -1495,13 +1801,13 @@ OP_WARN_UNUSED_RESULT int op_read_stereo(OggOpusFile *_of,
     op_read_float().
    \param      _of       The \c OggOpusFile from which to read.
    \param[out] _pcm      A buffer in which to store the output PCM samples, as
-                          signed floats with a nominal range of
+                          signed floats at 48&nbsp;kHz with a nominal range of
                           <code>[-1.0,1.0]</code>.
                          The left and right channels are interleaved in the
                           buffer.
                          This must have room for at least \a _buf_size values.
    \param      _buf_size The number of values that can be stored in \a _pcm.
-                         It is reccommended that this be large enough for at
+                         It is recommended that this be large enough for at
                           least 120 ms of data at 48 kHz per channel (11520
                           values total).
                          Smaller buffers will simply return less data, possibly
@@ -1517,11 +1823,18 @@ OP_WARN_UNUSED_RESULT int op_read_stereo(OggOpusFile *_of,
            The list of possible failure codes follows.
            Most of them can only be returned by unseekable, chained streams
             that encounter a new link.
+   \retval #OP_HOLE          There was a hole in the data, and some samples
+                              may have been skipped.
+                             Call this function again to continue decoding
+                              past the hole.
+   \retval #OP_EREAD         An underlying read operation failed.
+                             This may signal a truncation attack from an
+                              <https:> source.
    \retval #OP_EFAULT        An internal memory allocation failed.
    \retval #OP_EIMPL         An unseekable stream encountered a new link that
                               used a feature that is not implemented, such as
                               an unsupported channel family.
-   \retval #OP_EINVAL        The stream was not fully open.
+   \retval #OP_EINVAL        The stream was only partially open.
    \retval #OP_ENOTFORMAT    An unseekable stream encountered a new link that
                               that did not have any logical Opus streams in it.
    \retval #OP_EBADHEADER    An unseekable stream encountered a new link with a
@@ -1532,6 +1845,7 @@ OP_WARN_UNUSED_RESULT int op_read_stereo(OggOpusFile *_of,
                               an ID header that contained an unrecognized
                               version number.
    \retval #OP_EBADPACKET    Failed to properly decode the next packet.
+   \retval #OP_EBADLINK      We failed to find data we had seen before.
    \retval #OP_EBADTIMESTAMP An unseekable stream encountered a new link with
                               a starting timestamp that failed basic validity
                               checks.*/

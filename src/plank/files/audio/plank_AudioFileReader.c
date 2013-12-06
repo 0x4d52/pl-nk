@@ -3248,7 +3248,8 @@ typedef struct PlankOpusFileReader
 
 typedef PlankOpusFileReader* PlankOpusFileReaderRef;
 
-size_t pl_OpusFileReader_ReadCallback (PlankP ptr, size_t size, size_t size2, PlankP ref);
+//size_t pl_OpusFileReader_ReadCallback (PlankP ptr, size_t size, size_t size2, PlankP ref);
+int pl_OpusFileReader_ReadCallback (PlankP datasource, unsigned char *ptr, int numBytes);
 int pl_OpusFileReader_SeekCallback (PlankP ref, PlankLL offset, int code);
 int pl_OpusFileReader_CloseCallback (PlankP ref);
 PlankLL pl_OpusFileReader_TellCallback (PlankP ref);
@@ -3646,7 +3647,27 @@ exit:
 #pragma mark Opus Callbacks
 #endif
 
-size_t pl_OpusFileReader_ReadCallback (PlankP ptr, size_t size, size_t nmemb, PlankP datasource)
+//size_t pl_OpusFileReader_ReadCallback (PlankP ptr, size_t size, size_t nmemb, PlankP datasource)
+//{
+//    size_t ret;
+//    PlankResult result;
+//    PlankAudioFileReaderRef p;
+//    PlankOpusFileReaderRef opus;
+//    int bytesRead;
+//    
+//    p = (PlankAudioFileReaderRef)datasource;
+//    opus = (PlankOpusFileReaderRef)p->peer;
+//    
+//    result = pl_File_Read ((PlankFileRef)opus, ptr, (int)(size * nmemb) / size, &bytesRead);
+//    ret = bytesRead > 0 ? bytesRead : 0;
+//    
+//    if ((result != PlankResult_OK) && (result != PlankResult_FileEOF))
+//        errno = -1;
+//    
+//    return ret;
+//}
+
+int pl_OpusFileReader_ReadCallback (PlankP datasource, unsigned char *ptr, int numBytes)
 {
     size_t ret;
     PlankResult result;
@@ -3657,12 +3678,9 @@ size_t pl_OpusFileReader_ReadCallback (PlankP ptr, size_t size, size_t nmemb, Pl
     p = (PlankAudioFileReaderRef)datasource;
     opus = (PlankOpusFileReaderRef)p->peer;
     
-    result = pl_File_Read ((PlankFileRef)opus, ptr, (int)(size * nmemb) / size, &bytesRead);
-    ret = bytesRead > 0 ? bytesRead : 0;
-    
-    if ((result != PlankResult_OK) && (result != PlankResult_FileEOF))
-        errno = -1;
-    
+    result = pl_File_Read ((PlankFileRef)opus, ptr, numBytes, &bytesRead);
+    ret = bytesRead > 0 ? bytesRead : -1;
+        
     return ret;
 }
 
@@ -3695,7 +3713,7 @@ int pl_OpusFileReader_CloseCallback (PlankP datasource)
     
     result = pl_File_DeInit (file);
     
-    return result == PlankResult_OK ? 0 : OP_FALSE;
+    return result == PlankResult_OK ? 0 : OP_EOF; // docs say EOF ?? OP_FALSE;
 }
 
 PlankLL pl_OpusFileReader_TellCallback (PlankP datasource)
@@ -3714,6 +3732,7 @@ PlankLL pl_OpusFileReader_TellCallback (PlankP datasource)
     
     return result == PlankResult_OK ? position : (PlankLL)OP_FALSE;
 }
+
 #endif // PLANK_OPUS
 
 // -- MultiFile Functions -- //////////////////////////////////////////////////

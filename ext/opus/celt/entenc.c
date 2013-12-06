@@ -25,7 +25,7 @@
    SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#if defined(HAVE_CONFIG_H)
+#if 1
 # include "config.h"
 #endif
 #include "os_support.h"

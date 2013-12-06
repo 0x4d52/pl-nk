@@ -1,8 +1,5 @@
-/* Copyright (C) 2008 CSIRO */
-/**
-   @file fixed_c6x.h
-   @brief Fixed-point operations for the TI C6x DSP family
-*/
+/* Copyright (c) 2008-2011 Octasic Inc.
+   Written by Jean-Marc Valin */
 /*
    Redistribution and use in source and binary forms, with or without
    modification, are permitted provided that the following conditions
@@ -18,8 +15,8 @@
    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
    ``AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
    LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
-   A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER
-   OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+   A PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE FOUNDATION OR
+   CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
    EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
    PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
    PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
@@ -28,43 +25,17 @@
    SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef FIXED_C6X_H
-#define FIXED_C6X_H
+#ifndef _MLP_H_
+#define _MLP_H_
 
-#undef MULT16_16SU
-#define MULT16_16SU(a,b) _mpysu(a,b)
+#include "arch.h"
 
-#undef MULT_16_16
-#define MULT_16_16(a,b) _mpy(a,b)
+typedef struct {
+	int layers;
+	const int *topo;
+	const float *weights;
+} MLP;
 
-#define celt_ilog2(x) (30 - _norm(x))
-#define OVERRIDE_CELT_ILOG2
+void mlp_process(const MLP *m, const float *in, float *out);
 
-#undef MULT16_32_Q15
-#define MULT16_32_Q15(a,b) (_mpylill(a, b) >> 15)
-
-#if 0
-#include "dsplib.h"
-
-#undef MAX16
-#define MAX16(a,b) _max(a,b)
-
-#undef MIN16
-#define MIN16(a,b) _min(a,b)
-
-#undef MAX32
-#define MAX32(a,b) _lmax(a,b)
-
-#undef MIN32
-#define MIN32(a,b) _lmin(a,b)
-
-#undef VSHR32
-#define VSHR32(a, shift) _lshl(a,-(shift))
-
-#undef MULT16_16_Q15
-#define MULT16_16_Q15(a,b) (_smpy(a,b))
-
-#define celt_maxabs16(x, len) MAX16(maxval((DATA *)x, len),-minval((DATA *)x, len))
-#define OVERRIDE_CELT_MAXABS16
-
-#endif /* FIXED_C6X_H */
+#endif /* _MLP_H_ */

@@ -108,7 +108,7 @@ extern "C" {
   * elementary Opus stream, the encoder and decoder must negotiate the channel
   * configuration before the decoder can successfully interpret the data in the
   * packets produced by the encoder. Some basic information, such as packet
-  * duration, can be computed without any special negotation.
+  * duration, can be computed without any special negotiation.
   *
   * The format for multistream Opus packets is defined in the
   * <a href="http://tools.ietf.org/html/draft-terriberry-oggopus">Ogg
@@ -205,6 +205,12 @@ OPUS_EXPORT OPUS_WARN_UNUSED_RESULT opus_int32 opus_multistream_encoder_get_size
       int coupled_streams
 );
 
+OPUS_EXPORT OPUS_WARN_UNUSED_RESULT opus_int32 opus_multistream_surround_encoder_get_size(
+      int channels,
+      int mapping_family
+);
+
+
 /** Allocates and initializes a multistream encoder state.
   * Call opus_multistream_encoder_destroy() to release
   * this object when finished.
@@ -254,6 +260,17 @@ OPUS_EXPORT OPUS_WARN_UNUSED_RESULT OpusMSEncoder *opus_multistream_encoder_crea
       int streams,
       int coupled_streams,
       const unsigned char *mapping,
+      int application,
+      int *error
+) OPUS_ARG_NONNULL(5);
+
+OPUS_EXPORT OPUS_WARN_UNUSED_RESULT OpusMSEncoder *opus_multistream_surround_encoder_create(
+      opus_int32 Fs,
+      int channels,
+      int mapping_family,
+      int *streams,
+      int *coupled_streams,
+      unsigned char *mapping,
       int application,
       int *error
 ) OPUS_ARG_NONNULL(5);
@@ -316,6 +333,17 @@ OPUS_EXPORT int opus_multistream_encoder_init(
       int application
 ) OPUS_ARG_NONNULL(1) OPUS_ARG_NONNULL(6);
 
+OPUS_EXPORT int opus_multistream_surround_encoder_init(
+      OpusMSEncoder *st,
+      opus_int32 Fs,
+      int channels,
+      int mapping_family,
+      int *streams,
+      int *coupled_streams,
+      unsigned char *mapping,
+      int application
+) OPUS_ARG_NONNULL(1) OPUS_ARG_NONNULL(6);
+
 /** Encodes a multistream Opus frame.
   * @param st <tt>OpusMSEncoder*</tt>: Multistream encoder state.
   * @param[in] pcm <tt>const opus_int16*</tt>: The input signal as interleaved
@@ -335,12 +363,14 @@ OPUS_EXPORT int opus_multistream_encoder_init(
   * @param[out] data <tt>unsigned char*</tt>: Output payload.
   *                                           This must contain storage for at
   *                                           least \a max_data_bytes.
-  * @param max_data_bytes <tt>opus_int32</tt>: Size of the allocated memory for
-  *                                            the output payload. This may be
-  *                                            used to impose an upper limit on
-  *                                            the variable bitrate, but should
-  *                                            not be used as the only bitrate
-  *                                            control.
+  * @param [in] max_data_bytes <tt>opus_int32</tt>: Size of the allocated
+  *                                                 memory for the output
+  *                                                 payload. This may be
+  *                                                 used to impose an upper limit on
+  *                                                 the instant bitrate, but should
+  *                                                 not be used as the only bitrate
+  *                                                 control. Use #OPUS_SET_BITRATE to
+  *                                                 control the bitrate.
   * @returns The length of the encoded packet (in bytes) on success or a
   *          negative error code (see @ref opus_errorcodes) on failure.
   */
@@ -378,12 +408,14 @@ OPUS_EXPORT OPUS_WARN_UNUSED_RESULT int opus_multistream_encode(
   * @param[out] data <tt>unsigned char*</tt>: Output payload.
   *                                           This must contain storage for at
   *                                           least \a max_data_bytes.
-  * @param max_data_bytes <tt>opus_int32</tt>: Size of the allocated memory for
-  *                                            the output payload. This may be
-  *                                            used to impose an upper limit on
-  *                                            the variable bitrate, but should
-  *                                            not be used as the only bitrate
-  *                                            control.
+  * @param [in] max_data_bytes <tt>opus_int32</tt>: Size of the allocated
+  *                                                 memory for the output
+  *                                                 payload. This may be
+  *                                                 used to impose an upper limit on
+  *                                                 the instant bitrate, but should
+  *                                                 not be used as the only bitrate
+  *                                                 control. Use #OPUS_SET_BITRATE to
+  *                                                 control the bitrate.
   * @returns The length of the encoded packet (in bytes) on success or a
   *          negative error code (see @ref opus_errorcodes) on failure.
   */
@@ -535,9 +567,14 @@ OPUS_EXPORT int opus_multistream_decoder_init(
   *                                       samples.
   * @param frame_size <tt>int</tt>: The number of samples per channel of
   *                                 available space in \a pcm.
-  *                                 If this is less than the maximum frame size
-  *                                 (120 ms), this function will not be capable
-  *                                 of decoding some packets.
+  *                                 If this is less than the maximum packet duration
+  *                                 (120 ms; 5760 for 48kHz), this function will not be capable
+  *                                 of decoding some packets. In the case of PLC (data==NULL)
+  *                                 or FEC (decode_fec=1), then frame_size needs to be exactly
+  *                                 the duration of audio that is missing, otherwise the
+  *                                 decoder will not be in the optimal state to decode the
+  *                                 next incoming packet. For the PLC and FEC cases, frame_size
+  *                                 <b>must</b> be a multiple of 2.5 ms.
   * @param decode_fec <tt>int</tt>: Flag (0 or 1) to request that any in-band
   *                                 forward error correction data be decoded.
   *                                 If no such data is available, the frame is
@@ -568,9 +605,14 @@ OPUS_EXPORT OPUS_WARN_UNUSED_RESULT int opus_multistream_decode(
   *                                       samples.
   * @param frame_size <tt>int</tt>: The number of samples per channel of
   *                                 available space in \a pcm.
-  *                                 If this is less than the maximum frame size
-  *                                 (120 ms), this function will not be capable
-  *                                 of decoding some packets.
+  *                                 If this is less than the maximum packet duration
+  *                                 (120 ms; 5760 for 48kHz), this function will not be capable
+  *                                 of decoding some packets. In the case of PLC (data==NULL)
+  *                                 or FEC (decode_fec=1), then frame_size needs to be exactly
+  *                                 the duration of audio that is missing, otherwise the
+  *                                 decoder will not be in the optimal state to decode the
+  *                                 next incoming packet. For the PLC and FEC cases, frame_size
+  *                                 <b>must</b> be a multiple of 2.5 ms.
   * @param decode_fec <tt>int</tt>: Flag (0 or 1) to request that any in-band
   *                                 forward error correction data be decoded.
   *                                 If no such data is available, the frame is

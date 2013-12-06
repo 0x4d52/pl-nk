@@ -9,6 +9,10 @@
  * by the Xiph.Org Foundation and contributors http://www.xiph.org/ *
  *                                                                  *
  ********************************************************************/
+#if 1
+#include "config.h"
+#endif
+
 #include "internal.h"
 
 #if defined(OP_ENABLE_ASSERTIONS)
