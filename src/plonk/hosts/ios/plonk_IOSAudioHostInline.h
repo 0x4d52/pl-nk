@@ -505,7 +505,7 @@ void IOSAudioHostBase<SampleType>::resetIO() throw()
     
     if (this->getPreferredHostBlockSize() > 0)
     {
-        bufferDuration = this->getPreferredHostBlockSize() / hwSampleRate;
+        bufferDuration = (double (this->getPreferredHostBlockSize()) + 0.5) / hwSampleRate;
         AudioSessionSetProperty (kAudioSessionProperty_PreferredHardwareIOBufferDuration, sizeof (bufferDuration), &bufferDuration);
     }
 

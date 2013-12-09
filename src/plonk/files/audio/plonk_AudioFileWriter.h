@@ -456,7 +456,7 @@ public:
     
     bool writeFrames (Buffer const& frames) throw()
     {
-        const int numChannels = pl_DynamicArray_GetSize (&peer.formatInfo.channelIdentifiers);// peer.formatInfo.numChannels;
+        const int numChannels = pl_AudioFileFormatInfo_GetNumChannels (&peer.formatInfo);
         plonk_assert ((frames.length() % numChannels) == 0);
         return pl_AudioFileWriter_WriteFrames (&peer, true, frames.length() / numChannels, frames.getArray()) == PlankResult_OK;
     }
@@ -465,7 +465,7 @@ public:
     bool writeFrames (NumericalArray<OtherType> const& frames) throw()
     {
         bool success = true;
-        const int numChannels = pl_DynamicArray_GetSize (&peer.formatInfo.channelIdentifiers);//peer.formatInfo.numChannels;
+        const int numChannels = pl_AudioFileFormatInfo_GetNumChannels (&peer.formatInfo);
         
         plonk_assert ((frames.length() % numChannels) == 0);
         
@@ -492,8 +492,8 @@ public:
     
     bool writeFrames (AudioFileReader& reader, const int numFrames) throw()
     {
-        const int numChannels = pl_DynamicArray_GetSize (&peer.formatInfo.channelIdentifiers);//peer.formatInfo.numChannels;
-        plonk_assert (peer.formatInfo.sampleRate == reader.getSampleRate());
+        const int numChannels = pl_AudioFileFormatInfo_GetNumChannels (&peer.formatInfo);
+//        plonk_assert (peer.formatInfo.sampleRate == reader.getSampleRate());
         plonk_assert (numChannels == reader.getNumChannels());
         
         const int bufferLength = buffer.length();
@@ -536,7 +536,7 @@ public:
         
         return true;
     }
-
+    
     AudioFileMetaData getMetaData() const throw()
     {
         return AudioFileMetaData (pl_AudioFileWriter_GetMetaData (const_cast<PlankAudioFileWriter*> (&peer)));

@@ -46,17 +46,19 @@
 /** Resampler. */
 template<class SampleType, Interp::TypeCode InterpTypeCode>
 class ResampleChannelInternal
-:   public ChannelInternal<SampleType, ChannelInternalCore::Data>
+:   public ProxyOwnerChannelInternal<SampleType, ChannelInternalCore::Data>
 {
 public:
     typedef ChannelInternalCore::Data                               Data;
     typedef ChannelBase<SampleType>                                 ChannelType;
+    typedef ObjectArray<ChannelType>                                ChannelArrayType;
     typedef ResampleChannelInternal<SampleType,InterpTypeCode>      ResampleInternal;
-    typedef ChannelInternal<SampleType,Data>                        Internal;
+    typedef ProxyOwnerChannelInternal<SampleType,Data>              Internal;
     typedef ChannelInternalBase<SampleType>                         InternalBase;
     typedef UnitBase<SampleType>                                    UnitType;
     typedef InputDictionary                                         Inputs;
     typedef NumericalArray<SampleType>                              Buffer;
+    typedef ObjectArray<Buffer>                                     BufferArray;
     typedef typename TypeUtility<SampleType>::IndexType             IndexType;
     
     typedef typename TypeUtility<SampleType>::IndexType             RateType;
@@ -70,12 +72,16 @@ public:
     ResampleChannelInternal (Inputs const& inputs,
                              Data const& data,
                              BlockSize const& blockSize,
-                             SampleRate const& sampleRate) throw()
-    :   Internal (inputs, data, blockSize, sampleRate),
+                             SampleRate const& sampleRate,
+                             ChannelArrayType& channels) throw()
+    :   Internal (inputs.getMaxNumChannels(), inputs, data, blockSize, sampleRate, channels),
+        tempBuffers (BufferArray::withSize (inputs.getMaxNumChannels())),
         tempBufferPos (0),
         nextInputTimeStamp (TimeStamp::getZero())
     {
         plonk_assert (sampleRate.getValue() > 0.0);       // no need to resample a DC signal
+        
+        // should check the input is all the same sample rate too...
     }
     
     Text getName() const throw()
@@ -89,170 +95,248 @@ public:
         return keys;
     }
     
-    InternalBase* getChannel (const int index) throw()
+    /*
+    void initChannel (const int channel) throw()
     {
-        const Inputs channelInputs = this->getInputs().getChannel (index);
-        return new ResampleInternal (channelInputs,
-                                     this->getState(),
-                                     this->getBlockSize(),
-                                     this->getSampleRate());
+        if ((channel % this->getNumChannels()) == 0)
+        {
+            const AudioFileReader& file = this->getInputAsAudioFileReader (IOKey::AudioFileReader);
+            
+            double fileSampleRate = file.getSampleRate();
+            
+            if (fileSampleRate <= 0.0)
+                fileSampleRate = file.getDefaultSampleRate();
+                
+                this->setSampleRate (SampleRate::decide (fileSampleRate, this->getSampleRate()));
+                buffer.setSize (this->getBlockSize().getValue() * file.getNumChannels(), false);
+                }
+        
+        this->initProxyValue (channel, 0);
     }
-    
+*/
     void initChannel (const int channel) throw()
     {
         const UnitType& input = this->getInputAsUnit (IOKey::Generic);
-        
-#ifdef PLONK_DEBUG
+        const SampleType sourceValue = input.getValue (channel);
         const RateUnitType& rateUnit = ChannelInternalCore::getInputAs<RateUnitType> (IOKey::Rate);
         plonk_assert (input.getOverlap (channel) == Math<DoubleVariable>::get1());
         plonk_assert (rateUnit.getOverlap (channel) == Math<DoubleVariable>::get1());
-#endif
+
+        if (rateUnit.getBlockSize (channel).getValue() != this->getBlockSize().getValue())
+            this->ratePositions.setSize (this->getNumChannels(), false);
         
-        const SampleType sourceValue = input.getValue (channel);
-        this->initValue (sourceValue);
+        if ((channel % this->getNumChannels()) == 0)
+        {
+            // larger for interpolation
+            resizeTempBuffer (input.getBlockSize (0).getValue() + InterpType::getExtension());
+            tempBufferPos = tempBufferPosMax;
+        }
         
-        // larger for interpolation
-        resizeTempBuffer (input.getBlockSize (channel).getValue() + InterpType::getExtension());
-        tempBuffer.zero(); // was a bug on interpolation here..
-        tempBufferPos = tempBufferPosMax;
-        
-        tempBuffer.put (tempBufferPos, sourceValue);
+        tempBuffers.atUnchecked (channel).zero();
+        tempBuffers.atUnchecked (channel).put (tempBufferPos, sourceValue);
+
+        this->initProxyValue (channel, sourceValue);
     }
     
     inline void resizeTempBuffer (const int inputBufferLength) throw()
     {
-        if (inputBufferLength != tempBuffer.length())
+        if (inputBufferLength != tempBuffers.atUnchecked (0).length())
         {
-            tempBuffer.setSize (inputBufferLength, false);
+            for (int i = 0; i < tempBuffers.length(); ++i)
+            {
+                Buffer& tempBuffer = tempBuffers.atUnchecked (i);
+                tempBuffer.setSize (inputBufferLength, false);
+            }
+            
             tempBufferUsableLength = IndexType (inputBufferLength) - InterpType::getExtensionAsIndex();
             tempBufferPosMax = tempBufferUsableLength + InterpType::getOffsetAsIndex();
         }
     }
     
-    inline void getNextInputBuffer (ProcessInfo& info, const int channel, SampleType* &tempBufferSamples, int& tempBufferLength) throw()
+    inline void getNextInputBuffer (ProcessInfo& info) throw()
     {
         const int extension = InterpType::getExtension();
-
-        UnitType& inputUnit (this->getInputAsUnit (IOKey::Generic));
+        const int numChannels = this->getNumChannels();
 
         info.setTimeStamp (nextInputTimeStamp);
-        const Buffer& inputBuffer (inputUnit.process (info, channel));
-        nextInputTimeStamp = inputUnit.getNextTimeStamp (channel);
+
+        UnitType& inputUnit (this->getInputAsUnit (IOKey::Generic));        
         
-        const SampleType* const inputSamples = inputBuffer.getArray();
-        const int inputBufferLength = inputBuffer.length();
+        tempBufferPos -= tempBufferUsableLength;
+
+        for (int channel = 0; channel < numChannels; ++channel)
+        {        
+            const Buffer& inputBuffer (inputUnit.process (info, channel));
+            const SampleType* const inputSamples = inputBuffer.getArray();
+            const int inputBufferLength = inputBuffer.length();
+            
+            ExtensionBuffer interpolationValues;
+            Buffer::copyData (interpolationValues.buffer,
+                              tempBuffers.atUnchecked (channel).getArray() + tempBuffers.atUnchecked (channel).length() - extension,
+                              extension);
+            
+            resizeTempBuffer (inputBufferLength + extension);
+            
+            Buffer::copyData (tempBuffers.atUnchecked (channel).getArray(),
+                              interpolationValues.buffer,
+                              extension);
+            
+            Buffer::copyData (tempBuffers.atUnchecked (channel).getArray() + extension,
+                              inputSamples,
+                              inputBufferLength);
+        }
         
-        ExtensionBuffer interpolationValues;
-        Buffer::copyData (interpolationValues.buffer,
-                          tempBufferSamples + tempBufferLength - extension,
-                          extension);
-        
-        tempBufferPos -= tempBufferUsableLength;               // move this before resize
-        tempBufferLength = inputBufferLength + extension;      // larger for interpolation
-        resizeTempBuffer (tempBufferLength);
-        tempBufferSamples = this->tempBuffer.getArray();
-        
-        Buffer::copyData (tempBufferSamples,
-                          interpolationValues.buffer,
-                          extension);
-        
-        Buffer::copyData (tempBufferSamples + extension,
-                          inputSamples,
-                          inputBufferLength);
+        nextInputTimeStamp = inputUnit.getNextTimeStamp (0);
     }
     
-    void process (ProcessInfo& info, const int channel) throw()
+    void process (ProcessInfo& info, const int /*channel*/) throw()
     {
         const Data& data = this->getState();
         
         UnitType& inputUnit (this->getInputAsUnit (IOKey::Generic));
-        const IndexType inputSampleRate = IndexType (inputUnit.getSampleRate (channel));
+        const IndexType inputSampleRate = IndexType (inputUnit.getSampleRate (0)); // should be the same sample rate for each input channel
         
         RateUnitType& rateUnit = ChannelInternalCore::getInputAs<RateUnitType> (IOKey::Rate);
         
-        const int outputBufferLength = this->getOutputBuffer().length();
-        SampleType* outputSamples = this->getOutputSamples();
+        const int outputBufferLength = this->getOutputBuffer (0).length();
+        const int numChannels = this->getNumChannels();
         
         if (inputSampleRate <= 0.0)
         {
-            const SampleType inputValue = inputUnit.process (info, channel).atUnchecked (0);            
-            NumericalArrayFiller<SampleType>::fill (outputSamples, inputValue, outputBufferLength);
+            for (int channel = 0; channel < numChannels; ++channel)
+            {
+                const SampleType inputValue = inputUnit.process (info, channel).atUnchecked (0);
+                SampleType* const outputSamples = this->getOutputSamples (channel);
+                NumericalArrayFiller<SampleType>::fill (outputSamples, inputValue, outputBufferLength);
+            }
         }
         else
         {
             const TimeStamp infoTimeStamp = info.getTimeStamp();
-            SampleType* const outputSamplesEnd = outputSamples + outputBufferLength;
-            
-            const RateBufferType& rateBuffer (rateUnit.process (info, channel));
-            const RateType* rateSamples = rateBuffer.getArray();
-            const int rateBufferLength = rateBuffer.length();
                         
+            const RateBufferType& rateBuffer (rateUnit.process (info, 0));
+            const int rateBufferLength = rateBuffer.length();
+                                    
             if (rateBufferLength == 1)
             {
-                const IndexType tempBufferIncrement (inputSampleRate * IndexType (data.sampleDuration) * rateSamples[0]);
+                const IndexType tempBufferIncrement (inputSampleRate * IndexType (data.sampleDuration) * rateBuffer.getArray() [0]);
                 
                 if (tempBufferIncrement == Math<IndexType>::get0())
                 {
-                    SampleType* tempBufferSamples = this->tempBuffer.getArray();
-                    const SampleType dcOutput = InterpType::lookup (tempBufferSamples, tempBufferPos);
-                    NumericalArrayFiller<SampleType>::fill (outputSamples, dcOutput, outputBufferLength);
+                    for (int channel = 0; channel < numChannels; ++channel)
+                    {
+                        SampleType* tempBufferSamples = this->tempBuffers.atUnchecked (channel).getArray();
+                        const SampleType dcOutput = InterpType::lookup (tempBufferSamples, tempBufferPos);
+                        SampleType* const outputSamples = this->getOutputSamples (channel);
+                        NumericalArrayFiller<SampleType>::fill (outputSamples, dcOutput, outputBufferLength);
+                    }
                 }
                 else
                 {
-                    while (outputSamples < outputSamplesEnd)
-                    {
-                        int tempBufferLength = this->tempBuffer.length();
-                        SampleType* tempBufferSamples = this->tempBuffer.getArray();
-                        
+                    int outputSamplePosition = 0;
+
+                    while (outputSamplePosition < outputBufferLength)
+                    {                        
                         if (tempBufferPos >= tempBufferPosMax) // ran out of buffer
-                            getNextInputBuffer (info, channel, tempBufferSamples, tempBufferLength);
+                            getNextInputBuffer (info);
+                            
+                        int channelSamplePosition;
+                        IndexType channelBufferPos;
                         
-                        while ((outputSamples < outputSamplesEnd) && (tempBufferPos < tempBufferPosMax))
+                        for (int channel = 0; channel < numChannels; ++channel)
                         {
-                            *outputSamples++ = InterpType::lookup (tempBufferSamples, tempBufferPos);
-                            tempBufferPos += tempBufferIncrement;
+                            channelSamplePosition = outputSamplePosition;
+                            channelBufferPos = tempBufferPos;
+                            
+                            const SampleType* const tempBufferSamples = tempBuffers.atUnchecked (channel).getArray();
+                            SampleType* const outputSamples = this->getOutputSamples (channel);
+
+                            for (channelSamplePosition = outputSamplePosition;
+                                 (channelSamplePosition < outputBufferLength) && (channelBufferPos < tempBufferPosMax);
+                                 ++channelSamplePosition)
+                            {
+                                outputSamples[channelSamplePosition] = InterpType::lookup (tempBufferSamples, channelBufferPos);
+                                channelBufferPos += tempBufferIncrement;
+                            }
                         }
+                        
+                        outputSamplePosition = channelSamplePosition;
+                        tempBufferPos = channelBufferPos;
                     }
                 }
             }
             else if (rateBufferLength == outputBufferLength)
             {
-                while (outputSamples < outputSamplesEnd)
+                int outputSamplePosition = 0;
+                
+                while (outputSamplePosition < outputBufferLength)
                 {
-                    int tempBufferLength = this->tempBuffer.length();
-                    SampleType* tempBufferSamples = this->tempBuffer.getArray();
-                    
                     if (tempBufferPos >= tempBufferPosMax) // ran out of buffer
-                        getNextInputBuffer (info, channel, tempBufferSamples, tempBufferLength);
+                        getNextInputBuffer (info);
+                        
+                    int channelSamplePosition;
+                    IndexType channelBufferPos;
                     
-                    while ((outputSamples < outputSamplesEnd) && (tempBufferPos < tempBufferPosMax))
+                    for (int channel = 0; channel < numChannels; ++channel)
                     {
-                        *outputSamples++ = InterpType::lookup (tempBufferSamples, tempBufferPos);
-                        const IndexType tempBufferIncrement (inputSampleRate * IndexType (data.sampleDuration) * *rateSamples++);
-                        tempBufferPos += tempBufferIncrement;
+                        channelSamplePosition = outputSamplePosition;
+                        channelBufferPos = tempBufferPos;
+                        
+                        const SampleType* const tempBufferSamples = tempBuffers.atUnchecked (channel).getArray();
+                        SampleType* const outputSamples = this->getOutputSamples (channel);
+                        const SampleType* const rateSamples = rateBuffer.getArray();
+                        
+                        for (channelSamplePosition = outputSamplePosition;
+                             (channelSamplePosition < outputBufferLength) && (channelBufferPos < tempBufferPosMax);
+                             ++channelSamplePosition)
+                        {
+                            outputSamples[channelSamplePosition] = InterpType::lookup (tempBufferSamples, channelBufferPos);
+                            const IndexType tempBufferIncrement (inputSampleRate * IndexType (data.sampleDuration) * rateSamples[channelSamplePosition]);
+                            channelBufferPos += tempBufferIncrement;
+                        }
                     }
+                    
+                    outputSamplePosition = channelSamplePosition;
+                    tempBufferPos = channelBufferPos;
                 }
             }
             else
             {
-                while (outputSamples < outputSamplesEnd)
+                int outputSamplePosition = 0;
+                this->ratePositions.zero();
+                double* const ratePositionArray = this->ratePositions.getArray();
+                
+                while (outputSamplePosition < outputBufferLength)
                 {
-                    int tempBufferLength = this->tempBuffer.length();
-                    SampleType* tempBufferSamples = this->tempBuffer.getArray();
-                    
                     if (tempBufferPos >= tempBufferPosMax) // ran out of buffer
-                        getNextInputBuffer (info, channel, tempBufferSamples, tempBufferLength);
+                        getNextInputBuffer (info);
+                        
+                    int channelSamplePosition;
+                    IndexType channelBufferPos = tempBufferPos;
                     
-                    double ratePosition = 0.0;
-                    const double rateIncrement = double (rateBufferLength) / double (outputBufferLength);
-                    
-                    while ((outputSamples < outputSamplesEnd) && (tempBufferPos < tempBufferPosMax))
+                    for (int channel = 0; channel < numChannels; ++channel)
                     {
-                        *outputSamples++ = InterpType::lookup (tempBufferSamples, tempBufferPos);
-                        const IndexType tempBufferIncrement (inputSampleRate * IndexType (data.sampleDuration) * rateSamples[int (ratePosition)]);
-                        tempBufferPos += tempBufferIncrement;
-                        ratePosition += rateIncrement;
+                        channelSamplePosition = outputSamplePosition;
+                        
+                        const SampleType* const tempBufferSamples = tempBuffers.atUnchecked (channel).getArray();
+                        SampleType* const outputSamples = this->getOutputSamples (channel);
+                        const SampleType* const rateSamples = rateBuffer.getArray();
+                        
+                        const double rateIncrement = double (rateBufferLength) / double (outputBufferLength);
+                        
+                        for (channelSamplePosition = outputSamplePosition;
+                             (channelSamplePosition < outputBufferLength) && (channelBufferPos < tempBufferPosMax);
+                             ++channelSamplePosition)
+                        {
+                            outputSamples[channelSamplePosition] = InterpType::lookup (tempBufferSamples, channelBufferPos);
+                            const IndexType tempBufferIncrement (inputSampleRate * IndexType (data.sampleDuration) * rateSamples[int (ratePositionArray[channel])]);
+                            channelBufferPos += tempBufferIncrement;
+                            ratePositionArray[channel] += rateIncrement;
+                        }
                     }
+                    
+                    outputSamplePosition = channelSamplePosition;
+                    tempBufferPos = channelBufferPos;
                 }
             }
             
@@ -261,12 +345,243 @@ public:
     }
     
 private:
-    Buffer tempBuffer;
+    BufferArray tempBuffers;
     IndexType tempBufferPos;
     IndexType tempBufferPosMax;
     IndexType tempBufferUsableLength;
     TimeStamp nextInputTimeStamp;
+    DoubleArray ratePositions;
 };
+
+///** Resampler. */
+//template<class SampleType, Interp::TypeCode InterpTypeCode>
+//class ResampleChannelInternal
+//:   public ChannelInternal<SampleType, ChannelInternalCore::Data>
+//{
+//public:
+//    typedef ChannelInternalCore::Data                               Data;
+//    typedef ChannelBase<SampleType>                                 ChannelType;
+//    typedef ResampleChannelInternal<SampleType,InterpTypeCode>      ResampleInternal;
+//    typedef ChannelInternal<SampleType,Data>                        Internal;
+//    typedef ChannelInternalBase<SampleType>                         InternalBase;
+//    typedef UnitBase<SampleType>                                    UnitType;
+//    typedef InputDictionary                                         Inputs;
+//    typedef NumericalArray<SampleType>                              Buffer;
+//    typedef typename TypeUtility<SampleType>::IndexType             IndexType;
+//    
+//    typedef typename TypeUtility<SampleType>::IndexType             RateType;
+//    typedef UnitBase<RateType>                                      RateUnitType;
+//    typedef NumericalArray<RateType>                                RateBufferType;
+//    
+//    typedef InterpSelect<SampleType,IndexType,InterpTypeCode>       InterpSelect;
+//    typedef typename InterpSelect::InterpType                       InterpType;
+//    typedef typename InterpType::ExtensionBuffer                    ExtensionBuffer;
+//    
+//    ResampleChannelInternal (Inputs const& inputs,
+//                             Data const& data,
+//                             BlockSize const& blockSize,
+//                             SampleRate const& sampleRate) throw()
+//    :   Internal (inputs, data, blockSize, sampleRate),
+//    tempBufferPos (0),
+//    nextInputTimeStamp (TimeStamp::getZero())
+//    {
+//        plonk_assert (sampleRate.getValue() > 0.0);       // no need to resample a DC signal
+//    }
+//    
+//    Text getName() const throw()
+//    {
+//        return "Resample";
+//    }
+//    
+//    IntArray getInputKeys() const throw()
+//    {
+//        const IntArray keys (IOKey::Generic, IOKey::Rate);
+//        return keys;
+//    }
+//    
+//    InternalBase* getChannel (const int index) throw()
+//    {
+//        const Inputs channelInputs = this->getInputs().getChannel (index);
+//        return new ResampleInternal (channelInputs,
+//                                     this->getState(),
+//                                     this->getBlockSize(),
+//                                     this->getSampleRate());
+//    }
+//    
+//    void initChannel (const int channel) throw()
+//    {
+//        const UnitType& input = this->getInputAsUnit (IOKey::Generic);
+//        
+//#ifdef PLONK_DEBUG
+//        const RateUnitType& rateUnit = ChannelInternalCore::getInputAs<RateUnitType> (IOKey::Rate);
+//        plonk_assert (input.getOverlap (channel) == Math<DoubleVariable>::get1());
+//        plonk_assert (rateUnit.getOverlap (channel) == Math<DoubleVariable>::get1());
+//#endif
+//        
+//        const SampleType sourceValue = input.getValue (channel);
+//        this->initValue (sourceValue);
+//        
+//        // larger for interpolation
+//        resizeTempBuffer (input.getBlockSize (channel).getValue() + InterpType::getExtension());
+//        tempBuffer.zero(); // was a bug on interpolation here..
+//        tempBufferPos = tempBufferPosMax;
+//        
+//        tempBuffer.put (tempBufferPos, sourceValue);
+//    }
+//    
+//    inline void resizeTempBuffer (const int inputBufferLength) throw()
+//    {
+//        if (inputBufferLength != tempBuffer.length())
+//        {
+//            tempBuffer.setSize (inputBufferLength, false);
+//            tempBufferUsableLength = IndexType (inputBufferLength) - InterpType::getExtensionAsIndex();
+//            tempBufferPosMax = tempBufferUsableLength + InterpType::getOffsetAsIndex();
+//        }
+//    }
+//    
+//    inline void getNextInputBuffer (ProcessInfo& info, const int channel, SampleType* &tempBufferSamples, int& tempBufferLength) throw()
+//    {
+//        const int extension = InterpType::getExtension();
+//        
+//        UnitType& inputUnit (this->getInputAsUnit (IOKey::Generic));
+//        
+//        
+//        // bug here for multiple channels ??
+//        // as a result, might need to make the timestamp access virtual or shared between proxies and proxyowners?
+//        // won't help as the first channel getting the next buffer obliterates the remaining channels for the previous buffer
+//        
+//        info.setTimeStamp (nextInputTimeStamp);
+//        const Buffer& inputBuffer (inputUnit.process (info, channel));
+//        nextInputTimeStamp = inputUnit.getNextTimeStamp (channel);
+//        
+//        const SampleType* const inputSamples = inputBuffer.getArray();
+//        const int inputBufferLength = inputBuffer.length();
+//        
+//        ExtensionBuffer interpolationValues;
+//        Buffer::copyData (interpolationValues.buffer,
+//                          tempBufferSamples + tempBufferLength - extension,
+//                          extension);
+//        
+//        tempBufferPos -= tempBufferUsableLength;               // move this before resize
+//        tempBufferLength = inputBufferLength + extension;      // larger for interpolation
+//        resizeTempBuffer (tempBufferLength);
+//        tempBufferSamples = this->tempBuffer.getArray();
+//        
+//        Buffer::copyData (tempBufferSamples,
+//                          interpolationValues.buffer,
+//                          extension);
+//        
+//        Buffer::copyData (tempBufferSamples + extension,
+//                          inputSamples,
+//                          inputBufferLength);
+//    }
+//    
+//    void process (ProcessInfo& info, const int channel) throw()
+//    {
+//        const Data& data = this->getState();
+//        
+//        UnitType& inputUnit (this->getInputAsUnit (IOKey::Generic));
+//        const IndexType inputSampleRate = IndexType (inputUnit.getSampleRate (channel));
+//        
+//        RateUnitType& rateUnit = ChannelInternalCore::getInputAs<RateUnitType> (IOKey::Rate);
+//        
+//        const int outputBufferLength = this->getOutputBuffer().length();
+//        SampleType* outputSamples = this->getOutputSamples();
+//        
+//        if (inputSampleRate <= 0.0)
+//        {
+//            const SampleType inputValue = inputUnit.process (info, channel).atUnchecked (0);
+//            NumericalArrayFiller<SampleType>::fill (outputSamples, inputValue, outputBufferLength);
+//        }
+//        else
+//        {
+//            const TimeStamp infoTimeStamp = info.getTimeStamp();
+//            SampleType* const outputSamplesEnd = outputSamples + outputBufferLength;
+//            
+//            const RateBufferType& rateBuffer (rateUnit.process (info, channel));
+//            const RateType* rateSamples = rateBuffer.getArray();
+//            const int rateBufferLength = rateBuffer.length();
+//            
+//            if (rateBufferLength == 1)
+//            {
+//                const IndexType tempBufferIncrement (inputSampleRate * IndexType (data.sampleDuration) * rateSamples[0]);
+//                
+//                if (tempBufferIncrement == Math<IndexType>::get0())
+//                {
+//                    SampleType* tempBufferSamples = this->tempBuffer.getArray();
+//                    const SampleType dcOutput = InterpType::lookup (tempBufferSamples, tempBufferPos);
+//                    NumericalArrayFiller<SampleType>::fill (outputSamples, dcOutput, outputBufferLength);
+//                }
+//                else
+//                {
+//                    while (outputSamples < outputSamplesEnd)
+//                    {
+//                        int tempBufferLength = this->tempBuffer.length();
+//                        SampleType* tempBufferSamples = this->tempBuffer.getArray();
+//                        
+//                        if (tempBufferPos >= tempBufferPosMax) // ran out of buffer
+//                            getNextInputBuffer (info, channel, tempBufferSamples, tempBufferLength);
+//                            
+//                            while ((outputSamples < outputSamplesEnd) && (tempBufferPos < tempBufferPosMax))
+//                            {
+//                                *outputSamples++ = InterpType::lookup (tempBufferSamples, tempBufferPos);
+//                                tempBufferPos += tempBufferIncrement;
+//                            }
+//                    }
+//                }
+//            }
+//            else if (rateBufferLength == outputBufferLength)
+//            {
+//                while (outputSamples < outputSamplesEnd)
+//                {
+//                    int tempBufferLength = this->tempBuffer.length();
+//                    SampleType* tempBufferSamples = this->tempBuffer.getArray();
+//                    
+//                    if (tempBufferPos >= tempBufferPosMax) // ran out of buffer
+//                        getNextInputBuffer (info, channel, tempBufferSamples, tempBufferLength);
+//                        
+//                        while ((outputSamples < outputSamplesEnd) && (tempBufferPos < tempBufferPosMax))
+//                        {
+//                            *outputSamples++ = InterpType::lookup (tempBufferSamples, tempBufferPos);
+//                            const IndexType tempBufferIncrement (inputSampleRate * IndexType (data.sampleDuration) * *rateSamples++);
+//                            tempBufferPos += tempBufferIncrement;
+//                        }
+//                }
+//            }
+//            else
+//            {
+//                while (outputSamples < outputSamplesEnd)
+//                {
+//                    int tempBufferLength = this->tempBuffer.length();
+//                    SampleType* tempBufferSamples = this->tempBuffer.getArray();
+//                    
+//                    if (tempBufferPos >= tempBufferPosMax) // ran out of buffer
+//                        getNextInputBuffer (info, channel, tempBufferSamples, tempBufferLength);
+//                        
+//                        double ratePosition = 0.0;
+//                        const double rateIncrement = double (rateBufferLength) / double (outputBufferLength);
+//                        
+//                        while ((outputSamples < outputSamplesEnd) && (tempBufferPos < tempBufferPosMax))
+//                        {
+//                            *outputSamples++ = InterpType::lookup (tempBufferSamples, tempBufferPos);
+//                            const IndexType tempBufferIncrement (inputSampleRate * IndexType (data.sampleDuration) * rateSamples[int (ratePosition)]);
+//                            tempBufferPos += tempBufferIncrement;
+//                            ratePosition += rateIncrement;
+//                        }
+//                }
+//            }
+//            
+//            info.setTimeStamp (infoTimeStamp); // reset for the parent graph
+//        }
+//    }
+//    
+//private:
+//    Buffer tempBuffer;
+//    IndexType tempBufferPos;
+//    IndexType tempBufferPosMax;
+//    IndexType tempBufferUsableLength;
+//    TimeStamp nextInputTimeStamp;
+//};
 
 //------------------------------------------------------------------------------
 
@@ -278,7 +593,7 @@ private:
  
  @par Inputs:
  - input: (unit, multi) the unit to resample
- - rate: (unit, multi) a modulatable rate multiplier (e.g., for varispeed playback)
+ - rate: (unit) a modulatable rate multiplier (e.g., for varispeed playback)
  - preferredBlockSize: the preferred output block size 
  - preferredSampleRate: the preferred output sample rate
 
@@ -317,6 +632,26 @@ public:
                          IOKey::End);
     }    
     
+//    /** Create an audio rate sample rate converter. */
+//    static UnitType ar (UnitType const& input,
+//                        RateUnitType const& rate = Math<RateUnitType>::get1(),
+//                        BlockSize const& preferredBlockSize = BlockSize::getDefault(),
+//                        SampleRate const& preferredSampleRate = SampleRate::getDefault()) throw()
+//    {
+//        plonk_assert (preferredSampleRate.getValue() > 0.0); // no need to resample a DC signal
+//        
+//        Inputs inputs;
+//        inputs.put (IOKey::Generic, input);
+//        inputs.put (IOKey::Rate, rate);
+//        
+//        Data data = { -1.0, -1.0 };
+//        
+//        return UnitType::template createFromInputs<ResampleInternal> (inputs,
+//                                                                      data,
+//                                                                      preferredBlockSize,
+//                                                                      preferredSampleRate);
+//    }
+
     /** Create an audio rate sample rate converter. */
     static UnitType ar (UnitType const& input,
                         RateUnitType const& rate = Math<RateUnitType>::get1(),
@@ -324,6 +659,7 @@ public:
                         SampleRate const& preferredSampleRate = SampleRate::getDefault()) throw()
     {
         plonk_assert (preferredSampleRate.getValue() > 0.0); // no need to resample a DC signal
+        plonk_assert (rate.getNumChannels() == 1);
         
         Inputs inputs;
         inputs.put (IOKey::Generic, input);
@@ -331,18 +667,25 @@ public:
         
         Data data = { -1.0, -1.0 };
         
-        return UnitType::template createFromInputs<ResampleInternal> (inputs,
-                                                                      data,
-                                                                      preferredBlockSize,
-                                                                      preferredSampleRate);
+        return UnitType::template proxiesFromInputs<ResampleInternal> (inputs,
+                                                                       data,
+                                                                       preferredBlockSize,
+                                                                       preferredSampleRate);
     }
     
-    static inline UnitType kr (UnitType const& input,
-                               RateUnitType const& rate = Math<RateUnitType>::get1()) throw()
+    static inline UnitType kr (UnitType const& input, RateUnitType const& rate) throw()
     {
         return ar (input,
                    rate,
                    BlockSize::getControlRateBlockSize(), 
+                   SampleRate::getControlRate());
+    }
+    
+    static inline UnitType kr (UnitType const& input) throw()
+    {
+        return ar (input,
+                   Math<RateUnitType>::get1(),
+                   BlockSize::getControlRateBlockSize(),
                    SampleRate::getControlRate());
     }
     

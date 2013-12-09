@@ -556,6 +556,8 @@ typedef struct PlankAudioFileFormatInfo* PlankAudioFileFormatInfoRef;
 
 //PlankB pl_AudioFileFormatInfo_IsChannelMapClear (const PlankAudioFileFormatInfo* info);
 
+PLANK_BEGIN_C_LINKAGE
+
 const char* pl_PlankAudioFileGetFormatName (int format);
 
 PlankResult pl_AudioFileFormatInfo_Init (PlankAudioFileFormatInfoRef formatInfo);
@@ -584,6 +586,8 @@ void pl_AudioFileFormatInfo_WAV_SetDefaultLayout (PlankAudioFileFormatInfoRef fo
 void pl_AudioFileFormatInfo_AIFF_SetDefaultLayout (PlankAudioFileFormatInfoRef formatInfo);
 void pl_AudioFileFormatInfo_OggVorbis_SetDefaultLayout (PlankAudioFileFormatInfoRef formatInfo);
 void pl_AudioFileFormatInfo_Opus_SetDefaultLayout (PlankAudioFileFormatInfoRef formatInfo);
+
+PLANK_END_C_LINKAGE
 
 /** An opaque reference to the <i>Plank AudioFileMetaData</i> object. */
 typedef struct PlankAudioFileMetaData* PlankAudioFileMetaDataRef;

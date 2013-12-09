@@ -133,7 +133,7 @@ int pl_AudioFileFormatInfo_GetNumChannels (PlankAudioFileFormatInfoRef formatInf
 
 PlankResult pl_AudioFileFormatInfo_SetNumChannels (PlankAudioFileFormatInfoRef formatInfo, const int numChannels, const PlankB useCoords)
 {
-    if (numChannels == pl_AudioFileFormatInfo_GetNumChannels(formatInfo))
+    if (numChannels == pl_AudioFileFormatInfo_GetNumChannels (formatInfo))
         return PlankResult_OK;
     
     // resize identifiers

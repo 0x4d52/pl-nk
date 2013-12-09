@@ -136,7 +136,7 @@ public:
                 const SampleType* sourceData) throw()
     {
         const int currentBufferSize = bufferSize.getValue();
-        const double currentSampleRate = sampleRate.getValue(); // should it be double, was int??
+        const double currentSampleRate = sampleRate.getValue();
         
         SampleType* const bufferSamples = buffer.getArray();
         

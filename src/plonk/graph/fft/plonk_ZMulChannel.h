@@ -135,16 +135,7 @@ public:
                                                  outputBufferLengthHalved);
         
         realOutputSamples[0] = leftDC * rightDC;
-        imagOutputSamples[0] = leftNyquist * rightNyquist;
-
-//        realOutputSamples[0] = leftRealSamples[0] * rightRealSamples[0];
-//        imagOutputSamples[0] = leftImagSamples[0] * rightImagSamples[0];
-//
-//        for (int i = 1; i < outputBufferLengthHalved; ++i)
-//        {
-//            realOutputSamples[i] = leftRealSamples[i] * rightRealSamples[i] - leftImagSamples[i] * rightImagSamples[i];
-//            imagOutputSamples[i] = leftRealSamples[i] * rightImagSamples[i] + rightRealSamples[i] * leftImagSamples[i];
-//        }        
+        imagOutputSamples[0] = leftNyquist * rightNyquist;  
     }
 };
 

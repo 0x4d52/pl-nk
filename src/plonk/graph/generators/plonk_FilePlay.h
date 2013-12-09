@@ -289,7 +289,6 @@ public:
                 
             if (changedNumChannels)
                 this->update (Text::getMessageNumChannelsChanged(), IntVariable (fileNumChannels));
-
         }
         
         if (data.done && data.deleteWhenDone)

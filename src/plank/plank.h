@@ -94,6 +94,7 @@
 #include "files/plank_IffFileReader.h"
 #include "files/plank_IffFileWriter.h"
 
+#include "files/audio/plank_AudioFileCommon.h"
 #include "files/audio/plank_AudioFileReader.h"
 #include "files/audio/plank_AudioFileWriter.h"
 #include "files/audio/plank_AudioFileMetaData.h"
