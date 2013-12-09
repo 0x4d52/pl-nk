@@ -26,7 +26,7 @@ POSSIBILITY OF SUCH DAMAGE.
 ***********************************************************************/
 
 #if 1
-#include "config.h"
+#include "../config.h"
 #endif
 
 /* conversion between prediction filter coefficients and LSFs   */

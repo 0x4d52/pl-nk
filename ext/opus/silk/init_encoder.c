@@ -26,7 +26,7 @@ POSSIBILITY OF SUCH DAMAGE.
 ***********************************************************************/
 
 #if 1
-#include "config.h"
+#include "../config.h"
 #endif
 #ifdef FIXED_POINT
 #include "main_FIX.h"
@@ -34,7 +34,7 @@ POSSIBILITY OF SUCH DAMAGE.
 #include "main_FLP.h"
 #endif
 #include "tuning_parameters.h"
-#include "cpu_support.h"
+#include "../celt/cpu_support.h"
 
 /*********************************/
 /* Initialize Silk Encoder state */

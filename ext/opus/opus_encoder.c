@@ -40,7 +40,7 @@
 #include "arch.h"
 #include "opus_private.h"
 #include "os_support.h"
-#include "cpu_support.h"
+#include "celt/cpu_support.h"
 #include "analysis.h"
 #include "mathops.h"
 #include "tuning_parameters.h"

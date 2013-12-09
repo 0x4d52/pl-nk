@@ -29,7 +29,7 @@ POSSIBILITY OF SUCH DAMAGE.
 #define SILK_MACROS_H
 
 #if 1
-#include "config.h"
+#include "../config.h"
 #endif
 
 #include "opus_types.h"

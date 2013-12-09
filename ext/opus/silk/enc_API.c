@@ -26,7 +26,7 @@ POSSIBILITY OF SUCH DAMAGE.
 ***********************************************************************/
 
 #if 1
-#include "config.h"
+#include "../config.h"
 #endif
 #include "define.h"
 #include "API.h"

@@ -32,7 +32,7 @@
 */
 
 #if 1
-#include "config.h"
+#include "../config.h"
 #endif
 
 #include "pitch.h"

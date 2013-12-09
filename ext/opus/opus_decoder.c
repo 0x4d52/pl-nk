@@ -50,7 +50,7 @@
 #include "structs.h"
 #include "define.h"
 #include "mathops.h"
-#include "cpu_support.h"
+#include "celt/cpu_support.h"
 
 struct OpusDecoder {
    int          celt_dec_offset;

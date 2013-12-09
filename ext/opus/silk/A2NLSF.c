@@ -32,7 +32,7 @@ POSSIBILITY OF SUCH DAMAGE.
 /* functions are accurate inverses of each other                */
 
 #if 1
-#include "config.h"
+#include "../config.h"
 #endif
 
 #include "SigProc_FIX.h"

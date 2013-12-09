@@ -28,7 +28,7 @@
 */
 
 #if 1
-#include "config.h"
+#include "../config.h"
 #endif
 
 #include <math.h>

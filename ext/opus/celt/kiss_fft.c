@@ -31,7 +31,7 @@
 
 #ifndef SKIP_CONFIG_H
 #  if 1
-#    include "config.h"
+#    include "../config.h"
 #  endif
 #endif
 
