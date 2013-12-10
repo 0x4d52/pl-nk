@@ -46,24 +46,28 @@
 /** Output overlapped block. */
 template<class SampleType>
 class OverlapMixChannelInternal 
-:   public ChannelInternal<SampleType, ChannelInternalCore::Data>
+:   public ProxyOwnerChannelInternal<SampleType, ChannelInternalCore::Data>
 {
 public:
     typedef ChannelInternalCore::Data                               Data;
     typedef ChannelBase<SampleType>                                 ChannelType;
+    typedef ObjectArray<ChannelType>                                ChannelArrayType;
     typedef OverlapMixChannelInternal<SampleType>                   OverlapMixInternal;
-    typedef ChannelInternal<SampleType,Data>                        Internal;
+    typedef ProxyOwnerChannelInternal<SampleType,Data>              Internal;
     typedef ChannelInternalBase<SampleType>                         InternalBase;
     typedef UnitBase<SampleType>                                    UnitType;
     typedef InputDictionary                                         Inputs;
     typedef NumericalArray<SampleType>                              Buffer;
-    
-    OverlapMixChannelInternal (Inputs const& inputs, 
+    typedef ObjectArray<Buffer>                                     BufferArray;
+
+    OverlapMixChannelInternal (Inputs const& inputs,
                                Data const& data, 
                                BlockSize const& blockSize,
-                               SampleRate const& sampleRate) throw()
-    :   Internal (inputs, data, blockSize, sampleRate),
+                               SampleRate const& sampleRate,
+                               ChannelArrayType& channels) throw()
+    :   Internal (inputs.getMaxNumChannels(), inputs, data, blockSize, sampleRate, channels),
         overlapMix (ChannelInternalCore::getInputAs<DoubleVariable> (IOKey::OverlapMix)),
+        tempBuffers (BufferArray::withSize (inputs.getMaxNumChannels())),
         tempBufferPos (0),
         tempBufferStartOffset (0),
         nextInputTimeStamp (TimeStamp::getZero())
@@ -81,53 +85,59 @@ public:
         return keys;
     }
     
-    InternalBase* getChannel (const int index) throw()
-    {
-        const Inputs channelInputs = this->getInputs().getChannel (index);
-        return new OverlapMixChannelInternal (channelInputs, 
-                                              this->getState(), 
-                                              this->getBlockSize(), 
-                                              this->getSampleRate());
-    }    
-    
     void initChannel (const int channel) throw()
-    {                
+    {
         const UnitType& input = this->getInputAsUnit (IOKey::Generic);
-
-        this->setBlockSize (input.getBlockSize (channel));
-        this->setSampleRate (input.getSampleRate (channel));
+        const SampleType sourceValue = input.getValue (channel);
         
-        this->initValue (SampleType (0));        
-        
-        tempBuffer.setSize (this->getBlockSize().getValue() * 2, false);
-        tempBuffer.zero();
-        tempBufferPos = 0;
-        tempBufferStartOffset = 0;        
-    }    
+        if ((channel % this->getNumChannels()) == 0)
+        {
+            // all need to be the same input BS and SR
+            this->setBlockSize (input.getBlockSize (0));
+            this->setSampleRate (input.getSampleRate (0));
+            
+            for (int i = 0; i < this->getNumChannels(); ++i)
+            {
+                tempBuffers.atUnchecked (i).setSize (this->getBlockSize().getValue() * 2, false);
+                tempBuffers.atUnchecked (i).zero();
+                tempBufferPos = 0;
+                tempBufferStartOffset = 0;
+            }
+        }
+                
+        this->initProxyValue (channel, sourceValue);
+    }
     
-    void process (ProcessInfo& info, const int channel) throw()
+    void process (ProcessInfo& info, const int /*channel*/) throw()
     {                
         /* Be careful optimising this with the new NumericalArray vector stuff */
 
         UnitType& inputUnit (this->getInputAsUnit (IOKey::Generic));
         
-        const int outputBufferLength = this->getOutputBuffer().length();
-        SampleType* const outputSamples = this->getOutputSamples();        
-        SampleType* const tempBufferSamples = this->tempBuffer.getArray();        
-
+        const int numChannels = this->getNumChannels();
+        const int outputBufferLength = this->getOutputBuffer (0).length();
         const int overlapLength = int (this->overlapMix.getValue() * outputBufferLength + 0.5);
-        int i;
+        int i, channel, channelBufferPos;
 
         if (overlapLength < outputBufferLength)
         {
             const TimeStamp infoTimeStamp = info.getTimeStamp();
             
-            // copy remaining overlap from last time to the output
-            for (i = 0; i < outputBufferLength; ++i)
-                outputSamples[i] = tempBufferSamples[tempBufferPos++];
+            for (channel = 0; channel < numChannels; ++channel)
+            {
+                channelBufferPos = tempBufferPos;
+                
+                SampleType* const outputSamples = this->getOutputSamples (channel);
+                SampleType* const tempBufferSamples = this->tempBuffers.atUnchecked (channel).getArray();
+
+                // copy remaining overlap from last time to the output
+                for (i = 0; i < outputBufferLength; ++i)
+                    outputSamples[i] = tempBufferSamples[channelBufferPos++];
+                    
+                tempBuffers.atUnchecked (channel).zero();
+            }
                         
             // build the overlapping material in the temp buffer 
-            tempBuffer.zero();
             tempBufferPos = tempBufferStartOffset;
 
             while (tempBufferPos < outputBufferLength)
@@ -135,18 +145,27 @@ public:
                 const int tempBufferStartPos = tempBufferPos;
                 
                 info.setTimeStamp (nextInputTimeStamp);
-                const Buffer& inputBuffer (inputUnit.process (info, channel));            
-                nextInputTimeStamp = inputUnit.getNextTimeStamp (channel);
                 
-                const SampleType* const inputSamples = inputBuffer.getArray();
-                const int inputBufferLength = inputBuffer.length();
+                for (channel = 0; channel < numChannels; ++channel)
+                {
+                    channelBufferPos = tempBufferPos;
+                    
+                    SampleType* const tempBufferSamples = this->tempBuffers.atUnchecked (channel).getArray();
 
-                plonk_assert (inputBufferLength == outputBufferLength);
-                                
-                for (i = 0; i < inputBufferLength; ++i)
-                    tempBufferSamples[tempBufferPos++] += inputSamples[i];
+                    const Buffer& inputBuffer (inputUnit.process (info, channel));
+                    const SampleType* const inputSamples = inputBuffer.getArray();
+                    const int inputBufferLength = inputBuffer.length();
+
+                    plonk_assert (inputBufferLength == outputBufferLength);
+                                    
+                    for (i = 0; i < inputBufferLength; ++i)
+                        tempBufferSamples[channelBufferPos++] += inputSamples[i];
+                    
+                    channelBufferPos = tempBufferStartPos + overlapLength;
+                }
                 
-                tempBufferPos = tempBufferStartPos + overlapLength;
+                tempBufferPos = channelBufferPos;
+                nextInputTimeStamp = inputUnit.getNextTimeStamp (0);
             }
             
             // in case the overlap is not an integer divsion of the block size
@@ -155,25 +174,40 @@ public:
             // accumulate the first part of the temp buffer to the output
             // leaving the rest there for next time
             tempBufferPos = 0;
-            for (i = 0; i < outputBufferLength; ++i)
-                outputSamples[i] += tempBufferSamples[tempBufferPos++];
-                        
-            info.setTimeStamp (infoTimeStamp); // reset for the parent graph        
+            
+            for (channel = 0; channel < numChannels; ++channel)
+            {
+                channelBufferPos = tempBufferPos;
+
+                SampleType* const outputSamples = this->getOutputSamples (channel);
+                SampleType* const tempBufferSamples = this->tempBuffers.atUnchecked (channel).getArray();
+
+                for (i = 0; i < outputBufferLength; ++i)
+                    outputSamples[i] += tempBufferSamples[channelBufferPos++];
+            }
+            
+            tempBufferPos = channelBufferPos;
+            
+            info.setTimeStamp (infoTimeStamp); // reset for the parent graph
         }
         else
         {
-            const Buffer& inputBuffer (inputUnit.process (info, channel));            
-            const SampleType* const inputSamples = inputBuffer.getArray();
-            
-            plonk_assert (outputBufferLength == inputBuffer.length());
-            
-            Buffer::copyData (outputSamples, inputSamples, outputBufferLength);
+            for (channel = 0; channel < numChannels; ++channel)
+            {
+                SampleType* const outputSamples = this->getOutputSamples (channel);
+                const Buffer& inputBuffer (inputUnit.process (info, channel));
+                const SampleType* const inputSamples = inputBuffer.getArray();
+                
+                plonk_assert (outputBufferLength == inputBuffer.length());
+                
+                Buffer::copyData (outputSamples, inputSamples, outputBufferLength);
+            }
         }
     }
     
 private:
     DoubleVariable overlapMix;
-    Buffer tempBuffer;
+    BufferArray tempBuffers;
     int tempBufferPos;
     int tempBufferStartOffset;
     TimeStamp nextInputTimeStamp;
@@ -232,10 +266,10 @@ public:
         
         Data data = { -1.0, -1.0 };
         
-        return UnitType::template createFromInputs<OverlapMixInternal> (inputs, 
-                                                                        data, 
-                                                                        BlockSize::noPreference(), 
-                                                                        SampleRate::noPreference());
+        return UnitType::template proxiesFromInputs<OverlapMixInternal> (inputs,
+                                                                         data,
+                                                                         BlockSize::noPreference(),
+                                                                         SampleRate::noPreference());
     }
     
     

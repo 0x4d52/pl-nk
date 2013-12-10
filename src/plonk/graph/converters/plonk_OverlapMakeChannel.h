@@ -102,12 +102,15 @@ public:
             // all need to be the same input BS and SR
             this->setBlockSize (input.getBlockSize (0));
             this->setSampleRate (input.getSampleRate (0));
+            
+            for (int i = 0; i < this->getNumChannels(); ++i)
+            {
+                tempBuffers.atUnchecked (i).setSize (this->getBlockSize().getValue() * 2, false);
+                tempBuffers.atUnchecked (i).zero();
+                tempBufferPos = 0;
+                tempBufferFill = 0;
+            }
         }
-        
-        tempBuffers.atUnchecked (channel).setSize (this->getBlockSize().getValue() * 2, false);
-        tempBuffers.atUnchecked (channel).zero();
-        tempBufferPos = 0;
-        tempBufferFill = 0;
         
         this->initProxyValue (channel, sourceValue);        
     }    
@@ -135,10 +138,11 @@ public:
             while ((tempBufferPos + outputBufferLength) >= tempBufferFill)
             {
                 info.setTimeStamp (nextInputTimeStamp);
-                channelBufferFill = tempBufferFill;
                 
                 for (channel = 0; channel < numChannels; ++channel)
                 {
+                    channelBufferFill = tempBufferFill;
+
                     SampleType* const tempBufferSamples = this->tempBuffers.atUnchecked (channel).getArray();
 
                     const Buffer& inputBuffer (inputUnit.process (info, channel));
@@ -161,10 +165,11 @@ public:
             if (data.zeroPad == false)
             {
                 // filled with overlapping data
-                channelBufferPos = tempBufferPos;
                 
                 for (channel = 0; channel < numChannels; ++channel)
                 {
+                    channelBufferPos = tempBufferPos;
+
                     SampleType* const outputSamples = this->getOutputSamples (channel);
                     SampleType* const tempBufferSamples = this->tempBuffers.atUnchecked (channel).getArray();
 
@@ -184,10 +189,10 @@ public:
                 
                 const SampleType& zero = Math<SampleType>::get0();
                 
-                channelBufferPos = tempBufferPos;
-
                 for (channel = 0; channel < numChannels; ++channel)
                 {
+                    channelBufferPos = tempBufferPos;
+
                     SampleType* const outputSamples = this->getOutputSamples (channel);
                     SampleType* const tempBufferSamples = this->tempBuffers.atUnchecked (channel).getArray();
 
@@ -204,11 +209,11 @@ public:
             // if we're over 1/2 way move the 2nd half to the start 
             // (the 2nd half will be re-filled next time if needed)
             if (tempBufferPos >= outputBufferLength)
-            {
-                channelBufferFill = 0;
-                
+            {                
                 for (channel = 0; channel < numChannels; ++channel)
                 {
+                    channelBufferFill = 0;
+
                     SampleType* const tempBufferSamples = this->tempBuffers.atUnchecked (channel).getArray();
 
                     for (i = outputBufferLength; i < tempBufferLength; ++i)
