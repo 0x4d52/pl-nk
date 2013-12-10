@@ -963,6 +963,11 @@ public:
 		}
 	}
     
+    ObjectArray<ObjectType> rotate (const int amount) throw()
+    {
+        return this->range (amount, this->length()).add (this->range (0, amount));
+    }
+    
     /** Determine if each item in the array is equal to the others. 
      If the array is empty it will return true. */
     bool areAllEqual() const throw()
