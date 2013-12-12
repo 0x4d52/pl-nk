@@ -350,7 +350,7 @@ public:
     static inline const UnitType& getDummy() throw()
     {
         // dummy is a marker so we know we've done the whole queue up to the poiunt that we add this dummy marker
-        static UnitType dummy (0); // a new zero constant as a dummy unit marker
+        static UnitType dummy (0); 
         return dummy;
     }
     
@@ -365,16 +365,19 @@ public:
                                                      this->getSampleRate()));
         }
         
-        QueueType& queue = this->getInputAsUnitQueue (IOKey::UnitQueue);
-        UnitType inputUnit;
-        queue.push (getDummy());
-        
+        QueueType& queue = this->getInputAsUnitQueue (IOKey::UnitQueue);        
         SampleType value (0);
-        
-        while ((inputUnit = queue.pop()) != getDummy())
+
+        if (queue.length() > 0)
         {
-            value += inputUnit.getValue (channel);
-            queue.push (inputUnit);
+            UnitType inputUnit;
+            queue.push (getDummy());
+            
+            while ((inputUnit = queue.pop()) != getDummy())
+            {
+                value += inputUnit.getValue (channel);
+                queue.push (inputUnit);
+            }
         }
 
         this->initProxyValue (channel, value);
@@ -392,54 +395,57 @@ public:
         for (channel = 0; channel < numChannels; ++channel)
             this->getOutputBuffer (channel).zero();
         
-        UnitType inputUnit;
-        queue.push (getDummy());
+        if (queue.length() > 0)
+        {            
+            UnitType inputUnit;
+            queue.push (getDummy());
 
-        while ((inputUnit = queue.pop()) != getDummy())
-        {
-            if (inputUnit.isNotNull())
+            while ((inputUnit = queue.pop()) != getDummy())
             {
-                plonk_assert (inputUnit.getOverlap (channel) == Math<DoubleVariable>::get1());
-
-                for (channel = 0; channel < numChannels; ++channel)
+                if (inputUnit.isNotNull())
                 {
-                    const Buffer& inputBuffer (inputUnit.process (info, channel));
-                    const SampleType* const inputSamples = inputBuffer.getArray();
-                    const int inputBufferLength = inputBuffer.length();
-                    
-                    Buffer& outputBuffer = this->getOutputBuffer (channel);
-                    SampleType* const outputSamples = outputBuffer.getArray();
-                    const int outputBufferLength = outputBuffer.length();
+                    plonk_assert (inputUnit.getOverlap (channel) == Math<DoubleVariable>::get1());
 
-                    if (inputBufferLength == outputBufferLength)
+                    for (channel = 0; channel < numChannels; ++channel)
                     {
-                        NumericalArrayBinaryOp<SampleType,BinaryOpFunctionsType::addop>::calcNN (outputSamples, outputSamples, inputSamples, outputBufferLength);
-                    }
-                    else if (inputBufferLength == 1)
-                    {
-                        NumericalArrayBinaryOp<SampleType,BinaryOpFunctionsType::addop>::calcN1 (outputSamples, outputSamples, inputSamples[0], outputBufferLength);
-                    }
-                    else
-                    {
-                        double inputPosition = 0.0;
-                        const double inputIncrement = double (inputBufferLength) / double (outputBufferLength);
+                        const Buffer& inputBuffer (inputUnit.process (info, channel));
+                        const SampleType* const inputSamples = inputBuffer.getArray();
+                        const int inputBufferLength = inputBuffer.length();
                         
-                        for (i = 0; i < outputBufferLength; ++i)
+                        Buffer& outputBuffer = this->getOutputBuffer (channel);
+                        SampleType* const outputSamples = outputBuffer.getArray();
+                        const int outputBufferLength = outputBuffer.length();
+
+                        if (inputBufferLength == outputBufferLength)
                         {
-                            outputSamples[i] += inputSamples[int (inputPosition)];
-                            inputPosition += inputIncrement;
+                            NumericalArrayBinaryOp<SampleType,BinaryOpFunctionsType::addop>::calcNN (outputSamples, outputSamples, inputSamples, outputBufferLength);
                         }
+                        else if (inputBufferLength == 1)
+                        {
+                            NumericalArrayBinaryOp<SampleType,BinaryOpFunctionsType::addop>::calcN1 (outputSamples, outputSamples, inputSamples[0], outputBufferLength);
+                        }
+                        else
+                        {
+                            double inputPosition = 0.0;
+                            const double inputIncrement = double (inputBufferLength) / double (outputBufferLength);
+                            
+                            for (i = 0; i < outputBufferLength; ++i)
+                            {
+                                outputSamples[i] += inputSamples[int (inputPosition)];
+                                inputPosition += inputIncrement;
+                            }
+                        }
+                        
+                        if (data.allowAutoDelete == false)
+                            info.resetShouldDelete();
                     }
                     
-                    if (data.allowAutoDelete == false)
-                        info.resetShouldDelete();
+                    queue.push (inputUnit);
                 }
-                
-                queue.push (inputUnit);
-            }
-            else if (!data.purgeNullUnits)
-            {
-                queue.push (inputUnit);
+                else if (!data.purgeNullUnits)
+                {
+                    queue.push (inputUnit);
+                }
             }
         }
     }

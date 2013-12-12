@@ -355,7 +355,7 @@ typedef struct PlankFourCharCodeString
 
 #define PLANK_MAJOR_VERSION      0
 #define PLANK_MINOR_VERSION      4
-#define PLANK_BUILDNUMBER        2
+#define PLANK_BUILDNUMBER        3
 #define PLANK_VERSION           "v" PLANK_PRESTRING(PLANK_MAJOR_VERSION) "." PLANK_PRESTRING(PLANK_MINOR_VERSION) "." PLANK_PRESTRING(PLANK_BUILDNUMBER)
 
 static inline double pl_TimeNow()
