@@ -143,7 +143,7 @@ typedef UnitBase<Long>                  LongUnit;
 
 typedef BusBuffer<float>                FloatBus;
 typedef BusBuffer<double>               DoubleBus;
-typedef BusBuffer<char>                  CharBus;
+typedef BusBuffer<char>                 CharBus;
 typedef BusBuffer<int>                  IntBus;
 typedef BusBuffer<Int24>                Int24Bus;
 typedef BusBuffer<short>                ShortBus;
@@ -221,9 +221,14 @@ typedef Variable< Int24Units& >                             Int24UnitsVariable;
 typedef Variable< LongUnits& >                              LongUnitsVariable;
 typedef Variable< Units& >                                  UnitsVariable;
 
-
-//typedef AtomicDynamicPointerVariable                        PatchSource;
-
+typedef LockFreeQueue< UnitBase<float> >                    FloatUnitQueue;
+typedef LockFreeQueue< UnitBase<double> >                   DoubleUnitQueue;
+typedef LockFreeQueue< UnitBase<short> >                    ShortUnitQueue;
+typedef LockFreeQueue< UnitBase<char> >                     CharUnitQueue;
+typedef LockFreeQueue< UnitBase<int> >                      IntUnitQueue;
+typedef LockFreeQueue< UnitBase<Int24> >                    Int24UnitQueue;
+typedef LockFreeQueue< UnitBase<Long> >                     LongUnitQueue;
+typedef LockFreeQueue< UnitBase<PLONK_TYPE_DEFAULT> >       UnitQueue;
 
 
 #endif // PLONK_GRAPHFORWARDDECLARATIONS_H

@@ -211,7 +211,14 @@ int Dynamic::getNumChannels() const throw()
         case TypeCode::DoubleWavetable:
         case TypeCode::IntWavetable:
         case TypeCode::Int24Wavetable:
-        case TypeCode::LongWavetable:          return 1;
+        case TypeCode::LongWavetable:
+
+        case TypeCode::FloatUnitQueue:
+        case TypeCode::ShortUnitQueue:
+        case TypeCode::DoubleUnitQueue:
+        case TypeCode::IntUnitQueue:
+        case TypeCode::Int24UnitQueue:
+        case TypeCode::LongUnitQueue:       return 1;
             
         default:
             plonk_assertfalse;

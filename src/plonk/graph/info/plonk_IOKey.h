@@ -69,6 +69,7 @@ public:
         TypeSignalVariable,
         TypeBreakpointsVariable,
         TypeAudioFileReader,
+        TypeUnitQueue,
         TypeBlockSize,
         TypeSampleRate,
 //        TypeBlockSizes,
@@ -140,6 +141,7 @@ public:
         BreakpointsVariable,    ///< A variable Breakpoints object (i.e., an envelope specification)
         
         AudioFileReader,        ///< An AudioFileReader
+        UnitQueue,              ///< A unit queue
 
         AutoDeleteFlag, ///< To control the auto deletion
         PurgeNullUnitsFlag,

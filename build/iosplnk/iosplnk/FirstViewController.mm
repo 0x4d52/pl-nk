@@ -92,6 +92,11 @@
     host.freq = slider.value;
 }
 
+-(void)updateNotify
+{
+    [self performSelectorOnMainThread:@selector(updateParameters) withObject:nil waitUntilDone:NO];
+}
+
 -(void)updateParameters
 {
     // update the view from the audio settings

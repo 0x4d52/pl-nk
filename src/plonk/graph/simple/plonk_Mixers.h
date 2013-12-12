@@ -298,6 +298,155 @@ public:
 
 //------------------------------------------------------------------------------
 
+template<class SampleType> class QueueMixerChannelInternal;
+
+PLONK_CHANNELDATA_DECLARE(QueueMixerChannelInternal,SampleType)
+{
+    ChannelInternalCore::Data base;
+    int preferredNumChannels;
+    bool allowAutoDelete:1;
+    bool purgeNullUnits:1;
+};
+
+
+/** Mix a queue of units to a multichannel unit. */
+template<class SampleType>
+class QueueMixerChannelInternal
+:   public ProxyOwnerChannelInternal<SampleType, PLONK_CHANNELDATA_NAME(QueueMixerChannelInternal,SampleType)>
+{
+public:
+    typedef PLONK_CHANNELDATA_NAME(QueueMixerChannelInternal,SampleType)        Data;
+    typedef typename BinaryOpFunctionsHelper<SampleType>::BinaryOpFunctionsType BinaryOpFunctionsType;
+    typedef ChannelBase<SampleType>                                             ChannelType;
+    typedef ObjectArray<ChannelType>                                            ChannelArrayType;
+    typedef ProxyOwnerChannelInternal<SampleType,Data>                          Internal;
+    typedef UnitBase<SampleType>                                                UnitType;
+    typedef InputDictionary                                                     Inputs;
+    typedef NumericalArray<SampleType>                                          Buffer;
+    typedef NumericalArray2D<ChannelType,UnitType>                              UnitsType;
+    typedef LockFreeQueue<UnitType>                                             QueueType;
+    
+    QueueMixerChannelInternal (Inputs const& inputs,
+                               Data const& data,
+                               BlockSize const& blockSize,
+                               SampleRate const& sampleRate,
+                               ChannelArrayType& channels) throw()
+    :   Internal (data.preferredNumChannels > 0 ? data.preferredNumChannels : inputs.getMaxNumChannels(),
+                  inputs, data, blockSize, sampleRate, channels)
+    {
+    }
+    
+    Text getName() const throw()
+    {
+        return "Queue Mixer";
+    }
+    
+    IntArray getInputKeys() const throw()
+    {
+        const IntArray keys (IOKey::UnitQueue);
+        return keys;
+    }
+    
+    static inline const UnitType& getDummy() throw()
+    {
+        // dummy is a marker so we know we've done the whole queue up to the poiunt that we add this dummy marker
+        static UnitType dummy (0); // a new zero constant as a dummy unit marker
+        return dummy;
+    }
+    
+    void initChannel (const int channel) throw()
+    {
+        if ((channel % this->getNumChannels()) == 0)
+        {
+            // should look at the initial array in case no preference was given really...
+            this->setBlockSize (BlockSize::decide (BlockSize::getDefault(),
+                                                   this->getBlockSize()));
+            this->setSampleRate (SampleRate::decide (SampleRate::getDefault(),
+                                                     this->getSampleRate()));
+        }
+        
+        QueueType& queue = this->getInputAsUnitQueue (IOKey::UnitQueue);
+        UnitType inputUnit;
+        queue.push (getDummy());
+        
+        SampleType value (0);
+        
+        while ((inputUnit = queue.pop()) != getDummy())
+        {
+            value += inputUnit.getValue (channel);
+            queue.push (inputUnit);
+        }
+
+        this->initProxyValue (channel, value);
+    }
+        
+    void process (ProcessInfo& info, const int /*channel*/) throw()
+    {
+        const Data& data = this->getState();
+        
+        QueueType& queue = this->getInputAsUnitQueue (IOKey::UnitQueue);
+        
+        const int numChannels = this->getNumChannels();
+        int i, channel;
+        
+        for (channel = 0; channel < numChannels; ++channel)
+            this->getOutputBuffer (channel).zero();
+        
+        UnitType inputUnit;
+        queue.push (getDummy());
+
+        while ((inputUnit = queue.pop()) != getDummy())
+        {
+            if (inputUnit.isNotNull())
+            {
+                plonk_assert (inputUnit.getOverlap (channel) == Math<DoubleVariable>::get1());
+
+                for (channel = 0; channel < numChannels; ++channel)
+                {
+                    const Buffer& inputBuffer (inputUnit.process (info, channel));
+                    const SampleType* const inputSamples = inputBuffer.getArray();
+                    const int inputBufferLength = inputBuffer.length();
+                    
+                    Buffer& outputBuffer = this->getOutputBuffer (channel);
+                    SampleType* const outputSamples = outputBuffer.getArray();
+                    const int outputBufferLength = outputBuffer.length();
+
+                    if (inputBufferLength == outputBufferLength)
+                    {
+                        NumericalArrayBinaryOp<SampleType,BinaryOpFunctionsType::addop>::calcNN (outputSamples, outputSamples, inputSamples, outputBufferLength);
+                    }
+                    else if (inputBufferLength == 1)
+                    {
+                        NumericalArrayBinaryOp<SampleType,BinaryOpFunctionsType::addop>::calcN1 (outputSamples, outputSamples, inputSamples[0], outputBufferLength);
+                    }
+                    else
+                    {
+                        double inputPosition = 0.0;
+                        const double inputIncrement = double (inputBufferLength) / double (outputBufferLength);
+                        
+                        for (i = 0; i < outputBufferLength; ++i)
+                        {
+                            outputSamples[i] += inputSamples[int (inputPosition)];
+                            inputPosition += inputIncrement;
+                        }
+                    }
+                    
+                    if (data.allowAutoDelete == false)
+                        info.resetShouldDelete();
+                }
+                
+                queue.push (inputUnit);
+            }
+            else if (!data.purgeNullUnits)
+            {
+                queue.push (inputUnit);
+            }
+        }
+    }
+};
+
+//------------------------------------------------------------------------------
+
 #ifdef PLONK_USEPLINK
 #include "plonk_BinaryOpPlink.h"
 #include "plonk_UnaryOpPlink.h"
@@ -593,10 +742,12 @@ class MixerUnit
 public:    
     typedef ChannelMixerChannelInternal<SampleType>     ChannelMixerInternal;
     typedef UnitMixerChannelInternal<SampleType>        UnitMixerInternal;
+    typedef QueueMixerChannelInternal<SampleType>       QueueMixerInternal;
     typedef ChannelBase<SampleType>                     ChannelType;
     typedef UnitBase<SampleType>                        UnitType;
     typedef NumericalArray2D<ChannelType,UnitType>      UnitsType;
     typedef InputDictionary                             Inputs;
+    typedef LockFreeQueue<UnitType>                     QueueType;
 
     static inline UnitInfos getInfo() throw()
     {
@@ -685,6 +836,31 @@ public:
                                                                         preferredSampleRate);
     }
     
+    /** Create an audio rate unit queue mixer. */
+    static UnitType ar (QueueType const& queue,
+                        const bool allowAutoDelete = true,
+                        const bool purgeNullUnits = true,
+                        const int preferredNumChannels = 0,
+                        UnitType const& mul = SampleType (1),
+                        UnitType const& add = SampleType (0),
+                        BlockSize const& preferredBlockSize = BlockSize::getDefault(),
+                        SampleRate const& preferredSampleRate = SampleRate::getDefault()) throw()
+    {
+        typedef PLONK_CHANNELDATA_NAME(QueueMixerChannelInternal,SampleType) Data;
+        
+        Inputs inputs;
+        inputs.put (IOKey::UnitQueue, queue);
+        inputs.put (IOKey::Multiply, mul);
+        inputs.put (IOKey::Add, add);
+        
+        Data data = { { -1.0, -1.0 }, preferredNumChannels, allowAutoDelete, purgeNullUnits };
+        
+        return UnitType::template proxiesFromInputs<QueueMixerInternal> (inputs,
+                                                                         data,
+                                                                         preferredBlockSize,
+                                                                         preferredSampleRate);
+    }
+
 };
 
 typedef MixerUnit<PLONK_TYPE_DEFAULT> Mixer;
