@@ -144,7 +144,7 @@ public:
         UnitQueue,              ///< A unit queue
 
         AutoDeleteFlag, ///< To control the auto deletion
-        PurgeNullUnitsFlag,
+        PurgeExpiredUnitsFlag,
         HarmonicCount,
         BufferCount,
         Priority,

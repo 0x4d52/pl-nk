@@ -39,17 +39,17 @@
 #ifndef PLONK_H
 #define PLONK_H
 
-/* 05/04/2013
- http://cloc.sourceforge.net v 1.52  T=1.0 s (186.0 files/s, 60217.0 lines/s)
+/* 14/12/2013
+ http://cloc.sourceforge.net v 1.52  T=0.5 s (384.0 files/s, 133372.0 lines/s)
  -------------------------------------------------------------------------------
  Language                     files          blank        comment           code
  -------------------------------------------------------------------------------
- C/C++ Header                   155           9216           9750          33959
- C++                             31           1333           1153           4806
+ C/C++ Header                   159           9837          10882          36611
+ C++                             33           1791           1320           6245
  -------------------------------------------------------------------------------
- SUM:                           186          10549          10903          38765
+ SUM:                           192          11628          12202          42856
  -------------------------------------------------------------------------------
- */ 
+ */
 
 /* config macors
  PLONK_USEPLINK=1   -   Use Plink for float processes where implemented (also uses optimisations if enabled in Plank)

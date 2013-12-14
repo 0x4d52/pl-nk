@@ -1262,64 +1262,131 @@ public:
     }
     
     /** Returns @c true if this unit needs to process for the given timestamp. */
-    inline bool needsToProcess (ProcessInfo& info, const int channel) throw()
+    inline bool needsToProcess (ProcessInfo const& info, const int channel) const throw()
     {        
         return this->wrapAt (channel).needsToProcess (info, channel);
     }
+    
+    /** Returns @c true if this unit (i.e., all of its channels) needs to be deleted becasue they have expired. */
+    inline bool shouldBeDeletedNow (ProcessInfo const& info) const throw()
+    {
+        bool flag = true;
         
+        const int numChannels = this->getNumChannels();
+        const ChannelType* channels = this->getArray();
+        
+        for (int i = 0; i < numChannels; ++i)
+        {
+            if (!channels[i].shouldBeDeletedNow (info.getTimeStamp()))
+            {
+                flag = false;
+                break;
+            }
+        }
+        
+        return flag;
+    }
+    
+//    /** Process a specific channel in this unit.
+//     The host should prepare a ProcessInfo which is passed to this function
+//     for each required block of data. This is generally used by ChannelInternal
+//     subclasses when obtaining input data. 
+//     @return The buffer from the requested channel. */
+//    inline const Buffer& process (ProcessInfo& info, const int channel) throw()
+//    {
+//        ChannelType& theChannel (this->wrapAt (channel));
+//        
+//        if (theChannel.shouldBeDeletedNow (info.getTimeStamp()))
+//        {
+//            Buffer& buffer = theChannel.getOutputBuffer();
+//            buffer.zero();
+//            return buffer;
+//        }
+//        else
+//        {
+//            theChannel.process (info, channel);
+//            return this->getOutputBuffer (channel);
+//        }
+//        
+//    }
+    
     /** Process a specific channel in this unit.
      The host should prepare a ProcessInfo which is passed to this function
      for each required block of data. This is generally used by ChannelInternal
-     subclasses when obtaining input data. 
+     subclasses when obtaining input data.
      @return The buffer from the requested channel. */
     inline const Buffer& process (ProcessInfo& info, const int channel) throw()
     {
-        ChannelType& theChannel (this->wrapAt (channel));
-        
-        if (theChannel.shouldBeDeletedNow (info.getTimeStamp()))
-        {
-            this->setToNull();
-            this->wrapAt (channel).process (info, 0); // probably unnecessary?
-            return this->getOutputBuffer (0);
-        }
-        else
-        {
-            theChannel.process (info, channel);
-            return this->getOutputBuffer (channel);
-        }
-        
+        this->wrapAt (channel).process (info, channel);
+        return this->getOutputBuffer (channel);
     }
+
+    
+//    /** Process all channels in this unit.
+//     The host should prepare a ProcessInfo which is passed to this function
+//     for each required block of data. */    
+//    void process (ProcessInfo& info) throw()
+//    {        
+//        const int numChannels = this->getNumChannels();
+//        ChannelType* channels = this->getArray();
+//                        
+//        if (numChannels > 0)
+//        {
+//            int i;
+//            bool didDelete = false;
+//            
+//            for (i = 0; i < numChannels; ++i) 
+//            {
+//                if (channels[i].shouldBeDeletedNow (info.getTimeStamp()))
+//                {
+//                    didDelete = true;
+//                    break;
+//                }
+//            }
+//                        
+//            if (didDelete == false)
+//            {
+//                for (i = 0; i < numChannels; ++i)
+//                    channels[i].process (info, i);
+//            }
+//            else
+//            {
+//                this->setToNull();
+//                this->atUnchecked (0).process (info, 0); // probably unnecessary?
+//            }
+//        }
+//    }
+
+//    /** Process all channels in this unit.
+//     The host should prepare a ProcessInfo which is passed to this function
+//     for each required block of data. */
+//    void process (ProcessInfo& info) throw()
+//    {
+//        const int numChannels = this->getNumChannels();
+//        ChannelType* channels = this->getArray();
+//        
+//        for (int i = 0; i < numChannels; ++i)
+//        {
+//            if (channels[i].shouldBeDeletedNow (info.getTimeStamp()))
+//                channels[i].getOutputBuffer().zero();
+//            else
+//                channels[i].process (info, i);
+//        }
+//    }
     
     /** Process all channels in this unit.
      The host should prepare a ProcessInfo which is passed to this function
-     for each required block of data. */    
+     for each required block of data. */
     void process (ProcessInfo& info) throw()
-    {        
+    {
         const int numChannels = this->getNumChannels();
         ChannelType* channels = this->getArray();
-                        
-        if (numChannels > 0)
-        {
-            int i;
-            bool didDelete = false;
-            
-            for (i = 0; i < numChannels; ++i) 
-            {
-                if (channels[i].shouldBeDeletedNow (info.getTimeStamp()))
-                {
-                    didDelete = true;
-                    break;
-                }
-            }
-                        
-            if (didDelete == false)
-                for (i = 0; i < numChannels; ++i) 
-                    channels[i].process (info, i);
-            else
-                this->setToNull();
-        }
-    }
         
+        for (int i = 0; i < numChannels; ++i)
+            channels[i].process (info, i);
+    }
+
+    
     int getTypeCode() const throw()
     {
         return TypeUtility<UnitBase>::getTypeCode();

@@ -166,7 +166,7 @@ PLONK_CHANNELDATA_DECLARE(UnitMixerChannelInternal,SampleType)
     ChannelInternalCore::Data base;
     int preferredNumChannels;
     bool allowAutoDelete:1;
-    bool purgeNullUnits:1;
+    bool purgeExpiredUnits:1;
 };      
 
 
@@ -237,11 +237,11 @@ public:
         
         UnitsType& units = this->getInputAsUnits (IOKey::Units);
         
-        if (data.purgeNullUnits)
+        if (data.purgeExpiredUnits)
         {
             // remove nulls...
             for (unit = units.length(); --unit >= 0;)
-                if (units.atUnchecked (unit).isNull())
+                if (units.atUnchecked (unit).shouldBeDeletedNow (info))
                     units.remove (unit);
         }
         
@@ -260,7 +260,7 @@ public:
             {
                 UnitType& inputUnit (units.atUnchecked (unit));
                 
-                if (inputUnit.isNotNull (channel))
+                if (!inputUnit.wrapAt (channel).shouldBeDeletedNow (info))
                 {
                     plonk_assert (inputUnit.getOverlap (channel) == Math<DoubleVariable>::get1());
                     
@@ -305,7 +305,7 @@ PLONK_CHANNELDATA_DECLARE(QueueMixerChannelInternal,SampleType)
     ChannelInternalCore::Data base;
     int preferredNumChannels;
     bool allowAutoDelete:1;
-    bool purgeNullUnits:1;
+    bool purgeExpiredUnits:1;
 };
 
 
@@ -396,13 +396,13 @@ public:
             this->getOutputBuffer (channel).zero();
         
         if (queue.length() > 0)
-        {            
+        {
             UnitType inputUnit;
             queue.push (getDummy());
 
             while ((inputUnit = queue.pop()) != getDummy())
             {
-                if (inputUnit.isNotNull())
+                if (!inputUnit.shouldBeDeletedNow (info))
                 {
                     plonk_assert (inputUnit.getOverlap (channel) == Math<DoubleVariable>::get1());
 
@@ -442,13 +442,13 @@ public:
                     
                     queue.push (inputUnit);
                 }
-                else if (!data.purgeNullUnits)
+                else if (!data.purgeExpiredUnits)
                 {
                     queue.push (inputUnit);
                 }
             }
         }
-    }
+    }    
 };
 
 //------------------------------------------------------------------------------
@@ -663,7 +663,7 @@ public:
         {
             // remove nulls...
             for (unit = units.length(); --unit >= 0;)
-                if (units.atUnchecked (unit).isNull())
+                if (units.atUnchecked (unit).shouldBeDeletedNow (info))
                     units.remove (unit);
         }
         
@@ -687,7 +687,7 @@ public:
             {
                 UnitType& inputUnit (units.atUnchecked (unit));
                 
-                if (inputUnit.isNotNull (channel))
+                if (!inputUnit.wrapAt (channel).shouldBeDeletedNow (info))
                 {
                     plonk_assert (inputUnit.getOverlap (channel) == Math<DoubleVariable>::get1());
                     
@@ -784,7 +784,7 @@ public:
                                     // inputs
                                     IOKey::Units,                   Measure::None,
                                     IOKey::AutoDeleteFlag,          Measure::Bool,      IOInfo::True,       IOLimit::None,
-                                    IOKey::PurgeNullUnitsFlag,      Measure::Bool,      IOInfo::True,       IOLimit::None,
+                                    IOKey::PurgeExpiredUnitsFlag,   Measure::Bool,      IOInfo::True,       IOLimit::None,
                                     IOKey::PreferredNumChannels,    Measure::Count,     0.0,                IOLimit::None,
                                     IOKey::Multiply,                Measure::Factor,    1.0,                IOLimit::None,
                                     IOKey::Add,                     Measure::None,      0.0,                IOLimit::None,
@@ -820,7 +820,7 @@ public:
     /** Create an audio rate unit mixer. */
     static UnitType ar (UnitsType const& array, 
                         const bool allowAutoDelete = true,
-                        const bool purgeNullUnits = true,
+                        const bool purgeExpiredUnits = true,
                         const int preferredNumChannels = 0,
                         UnitType const& mul = SampleType (1),
                         UnitType const& add = SampleType (0),
@@ -834,7 +834,7 @@ public:
         inputs.put (IOKey::Multiply, mul);
         inputs.put (IOKey::Add, add);
         
-        Data data = { { -1.0, -1.0 }, preferredNumChannels, allowAutoDelete, purgeNullUnits };
+        Data data = { { -1.0, -1.0 }, preferredNumChannels, allowAutoDelete, purgeExpiredUnits };
         
         return UnitType::template proxiesFromInputs<UnitMixerInternal> (inputs, 
                                                                         data, 
@@ -845,7 +845,7 @@ public:
     /** Create an audio rate unit queue mixer. */
     static UnitType ar (QueueType const& queue,
                         const bool allowAutoDelete = true,
-                        const bool purgeNullUnits = true,
+                        const bool purgeExpiredUnits = true,
                         const int preferredNumChannels = 0,
                         UnitType const& mul = SampleType (1),
                         UnitType const& add = SampleType (0),
@@ -859,7 +859,7 @@ public:
         inputs.put (IOKey::Multiply, mul);
         inputs.put (IOKey::Add, add);
         
-        Data data = { { -1.0, -1.0 }, preferredNumChannels, allowAutoDelete, purgeNullUnits };
+        Data data = { { -1.0, -1.0 }, preferredNumChannels, allowAutoDelete, purgeExpiredUnits };
         
         return UnitType::template proxiesFromInputs<QueueMixerInternal> (inputs,
                                                                          data,

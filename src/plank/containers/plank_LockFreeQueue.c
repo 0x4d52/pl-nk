@@ -254,6 +254,48 @@ PlankResult pl_LockFreeQueue_Push (PlankLockFreeQueueRef p, const PlankLockFreeQ
     return result;
 }
 
+//PlankResult pl_LockFreeQueue_Push (PlankLockFreeQueueRef p, const PlankLockFreeQueueElementRef element)
+//{
+//    PlankResult result;
+//    PlankL tailExtra;
+//    PlankLockFreeQueueElementRef tailElement;
+//    PlankAtomicPXRef tailElementNextAtom;
+//    PlankB success;
+//    
+//    result = PlankResult_OK;
+//    success = PLANK_FALSE;
+//    
+//	tailExtra = 0;
+//	tailElement = 0;
+//    
+//    pl_LockFreeQueueElement_SetNext (element, (PlankLockFreeQueueElementRef)pl_AtomicPX_GetUnchecked ((PlankAtomicPXRef)&(p->head)));
+//    
+//    while (!success)
+//    {
+//        tailExtra = pl_AtomicPX_GetExtraUnchecked ((PlankAtomicPXRef)&(p->tail));                            // changed to unchecked
+//        tailElement = (PlankLockFreeQueueElementRef)pl_AtomicPX_GetUnchecked ((PlankAtomicPXRef)&(p->tail)); // changed to unchecked
+//        
+//        tailElementNextAtom = pl_LockFreeQueueElement_GetNextAtom (tailElement);
+//        success = pl_AtomicP_CompareAndSwap ((PlankAtomicPRef)tailElementNextAtom,
+//                                             pl_AtomicPX_GetUnchecked ((PlankAtomicPXRef)&(p->head)), element);
+//        
+//        if (!success)
+//        {
+//            pl_AtomicPX_CompareAndSwap ((PlankAtomicPXRef)&(p->tail),
+//                                        tailElement, tailExtra,
+//                                        pl_LockFreeQueueElement_GetNext (tailElement), tailExtra + 1);
+//        }
+//    }
+//    
+//    pl_AtomicPX_CompareAndSwap ((PlankAtomicPXRef)&(p->tail),
+//                                tailElement, tailExtra,
+//                                element, tailExtra + 1);
+//    
+//    pl_AtomicI_Increment (&p->count);
+//    
+//    return result;
+//}
+
 PlankResult pl_LockFreeQueue_Pop (PlankLockFreeQueueRef p, PlankLockFreeQueueElementRef* element)
 {
     PlankResult result;
@@ -311,6 +353,64 @@ PlankResult pl_LockFreeQueue_Pop (PlankLockFreeQueueRef p, PlankLockFreeQueueEle
 exit:
     return result;    
 }
+
+//PlankResult pl_LockFreeQueue_Pop (PlankLockFreeQueueRef p, PlankLockFreeQueueElementRef* element)
+//{
+//    PlankResult result;
+//    PlankL headExtra, tailExtra;
+//	PlankLockFreeQueueElementRef headElement, nextElement;
+//    PlankB success;
+//    
+//    result = PlankResult_OK;
+//	headElement = 0;
+//    success = PLANK_FALSE;
+//    
+//    while (!success)
+//    {
+//        headExtra = pl_AtomicPX_GetExtraUnchecked ((PlankAtomicPXRef)&(p->head));       // changed to unchecked
+//        tailExtra = pl_AtomicPX_GetExtraUnchecked ((PlankAtomicPXRef)&(p->tail));       // changed to unchecked
+//        headElement = pl_AtomicPX_GetUnchecked ((PlankAtomicPXRef)&(p->head));          // changed to unchecked
+//        nextElement = pl_LockFreeQueueElement_GetNext (headElement);
+//        
+//        if (headExtra == pl_AtomicPX_GetExtraUnchecked ((PlankAtomicPXRef)&(p->head)))  // changed to unchecked
+//        {
+//            if (headElement == pl_AtomicPX_GetUnchecked ((PlankAtomicPXRef)&(p->tail))) // changed to unchecked
+//            {
+//                if (nextElement == (PlankLockFreeQueueElementRef)pl_AtomicPX_GetUnchecked ((PlankAtomicPXRef)&(p->head)))
+//                {
+//                    *element = (PlankLockFreeQueueElementRef)PLANK_NULL;
+//                    goto exit;
+//                }
+//                
+//                pl_AtomicPX_CompareAndSwap ((PlankAtomicPXRef)&(p->tail),
+//                                            headElement, tailExtra,
+//                                            nextElement, tailExtra + 1);
+//            }
+//            else if (nextElement != (PlankLockFreeQueueElementRef)pl_AtomicPX_GetUnchecked ((PlankAtomicPXRef)&(p->head)))
+//            {
+//                success = pl_AtomicPX_CompareAndSwap ((PlankAtomicPXRef)&(p->head),
+//                                                      headElement, headExtra,
+//                                                      nextElement, headExtra + 1);
+//            }
+//        }
+//    }
+//    
+//    pl_AtomicI_Decrement (&p->count);
+//    
+//    if (headElement == &p->dummyElement)
+//    {
+//        if ((result = pl_LockFreeQueue_Push (p, headElement)) != PlankResult_OK)
+//            goto exit;
+//        
+//        if ((result = pl_LockFreeQueue_Pop (p, &headElement)) != PlankResult_OK)
+//            goto exit;
+//    }
+//    
+//    *element = headElement;
+//    
+//exit:
+//    return result;
+//}
 
 PlankI pl_LockFreeQueue_GetSize (PlankLockFreeQueueRef p)
 {

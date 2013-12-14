@@ -118,8 +118,8 @@ public:
     friend class LockFreeStack<ValueType>;
     
 private:
-    PlankLockFreeStack liveStack;
-    PlankLockFreeStack deadStack;
+    PLONK_ALIGN(16) PlankLockFreeStack liveStack;
+    PLONK_ALIGN(16) PlankLockFreeStack deadStack;
         
     static void initStack (PlankLockFreeStack& stack) throw()
     {
@@ -289,7 +289,7 @@ public:
     friend class LockFreeStack<ValueType*>;
     
 private:
-    PlankLockFreeStack stack;
+    PLONK_ALIGN(16) PlankLockFreeStack stack;
 };
 
 

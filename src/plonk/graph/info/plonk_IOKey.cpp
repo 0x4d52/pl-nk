@@ -101,7 +101,7 @@ IOKey::Name IOKey::fromInt (const int value) throw()
         IOKey::SignalVariable,
         IOKey::BreakpointsVariable,
         IOKey::AutoDeleteFlag,
-        IOKey::PurgeNullUnitsFlag,
+        IOKey::PurgeExpiredUnitsFlag,
         IOKey::HarmonicCount,
         IOKey::BufferCount,
         IOKey::Priority,
@@ -193,7 +193,7 @@ Text IOKey::getName (const int keyIndex) throw()
         "BreakpointsVariable",
         
         "Auto Delete Flag",
-        "Purge Null Units Flag",
+        "Purge Expired Units Flag",
         "Harmonic Count",
         "Buffer Count",
         "Priority",
@@ -270,7 +270,7 @@ IOKey::IOType IOKey::getType (const int keyIndex) throw()
         IOKey::TypeBreakpointsVariable,
         
         IOKey::TypeBool,            //"Auto Delete Flag"
-        IOKey::TypeBool,            //"Purge Null Units Flag"
+        IOKey::TypeBool,            //"Purge Expired Units Flag"
         IOKey::TypeNumerical,       //"Harmonic Count"
         IOKey::TypeNumerical,       //"Buffer Count"
         IOKey::TypeNumerical,
@@ -348,7 +348,7 @@ Text IOKey::getTypeName (const int keyIndex) throw()
         "UnitQueue",
         
         "Bool",             //"Auto Delete Flag"
-        "Bool",             //"Purge Null Units Flag"
+        "Bool",             //"Purge Expired Units Flag"
         "Numerical",        //"Harmonic Count"
         "Numerical",        //"Buffer Count"
         "Numerical",

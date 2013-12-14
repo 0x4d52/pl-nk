@@ -219,6 +219,27 @@ public:
     PLONK_BINARYOPS(Variable)
     PLONK_UNARYOPS(Variable)
     
+    Variable linlin (Variable const& inLow, Variable const& inHigh, Variable const& outLow, Variable const& outHigh) const throw()
+    {
+        return plonk::linlin (*this, inLow, inHigh, outLow, outHigh);
+    }
+    
+    Variable linexp (Variable const& inLow, Variable const& inHigh, Variable const& outLow, Variable const& outHigh) const throw()
+    {
+        return plonk::linexp (*this, inLow, inHigh, outLow, outHigh);
+    }
+    
+    Variable explin (Variable const& inLow, Variable const& inHigh, Variable const& outLow, Variable const& outHigh) const throw()
+    {
+        return plonk::explin (*this, inLow, inHigh, outLow, outHigh);
+    }
+    
+    Variable linwelch (Variable const& inLow, Variable const& inHigh, Variable const& outLow, Variable const& outHigh) const throw()
+    {
+        return plonk::linwelch (*this, inLow, inHigh, outLow, outHigh);
+    }
+
+    
     typedef ShapeVariableInternal<Type>     ShapeVariableInternalType;
     typedef IntVariable                     StepsVariable;
     typedef Variable<Shape::ShapeType>      ShapeTypeVariable;

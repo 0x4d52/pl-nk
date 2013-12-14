@@ -540,8 +540,50 @@ public:
     {
         return breakpoints; 
     }
+    
+    inline const Container levelScale (const SampleType amount) const throw()
+    {
+        BreakpointsInternal* internal = new BreakpointsInternal();
+        
+        internal->startLevel = startLevel * amount;
+        
+        for (int i = 0; i < breakpoints.length(); ++i)
+        {
+            const BreakpointType& point = breakpoints.atUnchecked (i);
+            internal->breakpoints.add (BreakpointType (point.getTargetLevel() * amount,
+                                                       point.getTargetTime(),
+                                                       point.getShape(),
+                                                       point.getNextGateOn(),
+                                                       point.getNextGateOff()));
+        }
+        
+        return Container (internal);
+    }
+    
+    inline const Container timeScale (const SampleType amount) const throw()
+    {
+        BreakpointsInternal* internal = new BreakpointsInternal();
+        
+        internal->startLevel = startLevel;
+        
+        for (int i = 0; i < breakpoints.length(); ++i)
+        {
+            const BreakpointType& point = breakpoints.atUnchecked (i);
+            internal->breakpoints.add (BreakpointType (point.getTargetLevel(),
+                                                       point.getTargetTime() * amount,
+                                                       point.getShape(),
+                                                       point.getNextGateOn(),
+                                                       point.getNextGateOff()));
+        }
+        
+        return Container (internal);
+    }
 	
 private:
+    BreakpointsInternal() throw()
+    {
+    }
+    
     SampleType startLevel;
     BreakpointArrayType breakpoints;
 };
@@ -667,6 +709,16 @@ public:
     inline const BreakpointType& atUnchecked (const int index) const throw()
     {
         return this->getInternal()->getBreakpoints().atUnchecked (index);
+    }
+    
+    inline const BreakpointsBase levelScale (const SampleType amount) const throw()
+    {
+        return this->getInternal()->levelScale (amount);
+    }
+    
+    inline const BreakpointsBase timeScale (const SampleType amount) const throw()
+    {
+        return this->getInternal()->timeScale (amount);
     }
     
     SampleType lookup (const double time) const throw()

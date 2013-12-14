@@ -132,8 +132,8 @@ public:
     friend class LockFreeQueue<ValueType>;
     
 private:
-    PlankLockFreeQueue liveQueue;
-    PlankLockFreeQueue deadQueue;
+    PLONK_ALIGN(16) PlankLockFreeQueue liveQueue;
+    PLONK_ALIGN(16) PlankLockFreeQueue deadQueue;
     
     static void initQueue (PlankLockFreeQueue& queue) throw()
     {
@@ -310,7 +310,7 @@ public:
     friend class LockFreeQueue<ValueType*>;
     
 private:
-    PlankLockFreeQueue queue;
+    PLONK_ALIGN(16) PlankLockFreeQueue queue;
 };
 
 

@@ -328,7 +328,6 @@ public:
                          // inputs
                          IOKey::UnitVariable,           Measure::None,      IOInfo::NoDefault,  IOLimit::None, 
                          IOKey::AutoDeleteFlag,         Measure::Bool,      IOInfo::True,       IOLimit::None,
-                         IOKey::PurgeNullUnitsFlag,     Measure::Bool,      IOInfo::True,       IOLimit::None,
                          IOKey::PreferredNumChannels,   Measure::Count,     0.0,                IOLimit::None,
                          IOKey::Duration,               Measure::Seconds,   0.1,                IOLimit::Minimum, Measure::Seconds,             0.0,
                          IOKey::BlockSize,              Measure::Samples,   blockSize,          IOLimit::Minimum, Measure::Samples,             1.0,
