@@ -85,9 +85,10 @@ inline int wrap (int value, int lower, int upper) throw()
 }
 
 template<class Type>
-inline Type wrap (Type const& value, Type const& lower, Type const& upper) throw()
+inline Type wrap (Type const& v, Type const& lower, Type const& upper) throw()
 {
 	Type range;
+    Type value = v;
     
 	if (value >= upper) 
 	{

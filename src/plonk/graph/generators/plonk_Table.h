@@ -445,7 +445,7 @@ public:
                          IOKey::End,
                          
                          // inputs
-                         IOKey::Frequency,  Measure::Hertz,     440.0,      IOLimit::Clipped,   Measure::SampleRateRatio,   0.0, 0.5,
+                         IOKey::Frequency,  Measure::Hertz,     440.0,      IOLimit::Clipped,   Measure::SampleRateRatio,  -0.5, 0.5,
                          IOKey::Multiply,   Measure::Factor,    1.0,        IOLimit::None,
                          IOKey::Add,        Measure::None,      0.0,        IOLimit::None,
                          IOKey::BlockSize,  Measure::Samples,   blockSize,  IOLimit::Minimum,   Measure::Samples,           1.0,
@@ -538,8 +538,8 @@ public:
                         BlockSize const& preferredBlockSize = BlockSize::getDefault(),
                         SampleRate const& preferredSampleRate = SampleRate::getDefault()) throw()
     {          
-        WeightsType weights = WeightsType::series (numHarmonics, 1, 1).reciprocal();
-        return TableType::ar (WavetableType::harmonic (8192, weights).normalise(), frequency, mul, add, preferredBlockSize, preferredSampleRate);
+        const WavetableType table = (numHarmonics == 21) ? WavetableType::harmonicSaw() : WavetableType::harmonicSaw (8192, numHarmonics);
+        return TableType::ar (table, frequency, mul, add, preferredBlockSize, preferredSampleRate);
     }
     
     /** Create a control rate harmonic sawtooth oscillator. */
@@ -548,8 +548,8 @@ public:
                         UnitType const& add = SampleType (0),
                         const int numHarmonics = 21) throw()
     {
-        WeightsType weights = WeightsType::series (numHarmonics, 1, 1).reciprocal();
-        return TableType::kr (WavetableType::harmonic (8192, weights).normalise(), frequency, mul, add);
+        const WavetableType table = (numHarmonics == 21) ? WavetableType::harmonicSaw() : WavetableType::harmonicSaw (8192, numHarmonics);
+        return TableType::kr (table, frequency, mul, add);
     }        
 };
 
@@ -620,8 +620,8 @@ public:
                         BlockSize const& preferredBlockSize = BlockSize::getDefault(),
                         SampleRate const& preferredSampleRate = SampleRate::getDefault()) throw()
     {            
-        const WeightsType weights = WeightsType::series (numHarmonics, 1, 1).reciprocal() * WeightsType (SampleType (1), SampleType (0));
-        return TableType::ar (WavetableType::harmonic (8192, weights).normalise(), frequency, mul, add, preferredBlockSize, preferredSampleRate);
+        const WavetableType table = (numHarmonics == 21) ? WavetableType::harmonicSquare() : WavetableType::harmonicSquare (8192, numHarmonics);
+        return TableType::ar (table, frequency, mul, add, preferredBlockSize, preferredSampleRate);
     }
     
     /** Create a control rate harmonic square wave oscillator. */
@@ -630,13 +630,93 @@ public:
                         UnitType const& add = SampleType (0),
                         const int numHarmonics = 21) throw()
     {
-        const WeightsType weights = WeightsType::series (numHarmonics, 1, 1).reciprocal() * WeightsType (SampleType (1), SampleType (0));
-        return TableType::kr (WavetableType::harmonic (8192, weights).normalise(), frequency, mul, add);
+        const WavetableType table = (numHarmonics == 21) ? WavetableType::harmonicSquare() : WavetableType::harmonicSquare (8192, numHarmonics);
+        return TableType::kr (table, frequency, mul, add);
     }        
 };
 
 typedef HarmonicSquareUnit<PLONK_TYPE_DEFAULT> HarmonicSquare;
 
+/** Harmonic triangle wave oscillator.
+ 
+ @par Factory functions:
+ - ar (frequency=440, mul=1, add=0, numHarmonics=21, preferredBlockSize=default, preferredSampleRate=default)
+ - kr (frequency=440, mul=1, add=0, numHarmonics=21)
+ 
+ @par Inputs:
+ - frequency: (unit, multi) the frequency of the oscillator in Hz
+ - mul: (unit, multi) the multiplier applied to the output
+ - add: (unit, multi) the offset aded to the output
+ - numHarmonics: (int) the number of harmonics to generate
+ - preferredBlockSize: the preferred output block size (for advanced usage, leave on default if unsure)
+ - preferredSampleRate: the preferred output sample rate (for advanced usage, leave on default if unsure)
+ 
+ @see TableUnit
+ @ingroup GeneratorUnits */
+template<class SampleType>
+class HarmonicTriUnit
+{
+public:
+    typedef TableChannelInternal<SampleType>        TableInternal;
+    typedef typename TableInternal::Data            Data;
+    typedef ChannelBase<SampleType>                 ChannelType;
+    typedef ChannelInternal<SampleType,Data>        Internal;
+    typedef UnitBase<SampleType>                    UnitType;
+    typedef InputDictionary                         Inputs;
+    typedef WavetableBase<SampleType>               WavetableType;
+    typedef TableUnit<SampleType>                   TableType;
+    typedef NumericalArray<SampleType>              WeightsType;
+    
+    typedef typename TableInternal::FrequencyType         FrequencyType;
+    typedef typename TableInternal::FrequencyUnitType     FrequencyUnitType;
+    typedef typename TableInternal::FrequencyBufferType   FrequencyBufferType;
+    
+    static inline UnitInfos getInfo() throw()
+    {
+        const double blockSize = (double)BlockSize::getDefault().getValue();
+        const double sampleRate = SampleRate::getDefault().getValue();
+        
+        return UnitInfo ("HarmonicTri", "A wavetable-based triangle wave oscillator.",
+                         
+                         // output
+                         ChannelCount::VariableChannelCount,
+                         IOKey::Generic,        Measure::None,      0.0,        IOLimit::None,
+                         IOKey::End,
+                         
+                         // inputs
+                         IOKey::Frequency,      Measure::Hertz,     440.0,      IOLimit::Clipped,   Measure::SampleRateRatio,   0.0, 0.5,
+                         IOKey::Multiply,       Measure::Factor,    1.0,        IOLimit::None,
+                         IOKey::Add,            Measure::None,      0.0,        IOLimit::None,
+                         IOKey::HarmonicCount,  Measure::Count,     21,         IOLimit::Minimum,   Measure::Count,             1,
+                         IOKey::BlockSize,      Measure::Samples,   blockSize,  IOLimit::Minimum,   Measure::Samples,           1.0,
+                         IOKey::SampleRate,     Measure::Hertz,     sampleRate, IOLimit::Minimum,   Measure::Hertz,             0.0,
+                         IOKey::End);
+    }
+    
+    /** Create an audio rate harmonic triangle wave oscillator. */
+    static UnitType ar (FrequencyUnitType const& frequency = FrequencyType (440),
+                        UnitType const& mul = SampleType (1),
+                        UnitType const& add = SampleType (0),
+                        const int numHarmonics = 21,
+                        BlockSize const& preferredBlockSize = BlockSize::getDefault(),
+                        SampleRate const& preferredSampleRate = SampleRate::getDefault()) throw()
+    {
+        const WavetableType table = (numHarmonics == 21) ? WavetableType::harmonicTri() : WavetableType::harmonicTri (8192, numHarmonics);
+        return TableType::ar (table, frequency, mul, add, preferredBlockSize, preferredSampleRate);
+    }
+    
+    /** Create a control rate harmonic triangle wave oscillator. */
+    static UnitType kr (FrequencyUnitType const& frequency,
+                        UnitType const& mul = SampleType (1),
+                        UnitType const& add = SampleType (0),
+                        const int numHarmonics = 21) throw()
+    {
+        const WavetableType table = (numHarmonics == 21) ? WavetableType::harmonicTri() : WavetableType::harmonicTri (8192, numHarmonics);
+        return TableType::kr (table, frequency, mul, add);
+    }        
+};
+
+typedef HarmonicTriUnit<PLONK_TYPE_DEFAULT> HarmonicTri;
 
 #endif // PLONK_TABLE_H
 

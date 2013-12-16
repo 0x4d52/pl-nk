@@ -36,72 +36,71 @@
  -------------------------------------------------------------------------------
  */
 
-#ifndef PLONK_SignalRead_H
-#define PLONK_SignalRead_H
+#ifndef PLONK_LOOKUP_H
+#define PLONK_LOOKUP_H
 
 #include "../channel/plonk_ChannelInternalCore.h"
 #include "../plonk_GraphForwardDeclarations.h"
 
-template<class SampleType> class SignalReadChannelInternal;
+template<class SampleType> class LookupChannelInternal;
 
-PLONK_CHANNELDATA_DECLARE(SignalReadChannelInternal,SampleType)
+PLONK_CHANNELDATA_DECLARE(LookupChannelInternal,SampleType)
 {    
     typedef typename TypeUtility<SampleType>::IndexType PositionType;
-
     ChannelInternalCore::Data base;
 };      
 
 //------------------------------------------------------------------------------
 
-/** Signal reader generator. */
+/** Wavetable lookup generator. */
 template<class SampleType>
-class SignalReadChannelInternal 
-:   public ChannelInternal<SampleType, PLONK_CHANNELDATA_NAME(SignalReadChannelInternal,SampleType)>
+class LookupChannelInternal
+:   public ChannelInternal<SampleType, PLONK_CHANNELDATA_NAME(LookupChannelInternal,SampleType)>
 {
 public:
 
-    typedef PLONK_CHANNELDATA_NAME(SignalReadChannelInternal,SampleType)  Data;
+    typedef PLONK_CHANNELDATA_NAME(LookupChannelInternal,SampleType)  Data;
     typedef ChannelBase<SampleType>                                 ChannelType;
-    typedef SignalReadChannelInternal<SampleType>                   SignalReadInternal;
+    typedef LookupChannelInternal<SampleType>                       LookupInternal;
     typedef ChannelInternal<SampleType,Data>                        Internal;
     typedef ChannelInternalBase<SampleType>                         InternalBase;
     typedef UnitBase<SampleType>                                    UnitType;
     typedef InputDictionary                                         Inputs;
     typedef NumericalArray<SampleType>                              Buffer;
-    typedef SignalBase<SampleType>                                  SignalType;
+    typedef WavetableBase<SampleType>                               WavetableType;
 
     typedef typename TypeUtility<SampleType>::IndexType             PositionType;
     typedef UnitBase<PositionType>                                  PositionUnitType;
     typedef NumericalArray<PositionType>                            PositionBufferType;
     typedef InterpLinear<SampleType,PositionType>                   InterpType;
 
-    SignalReadChannelInternal (Inputs const& inputs, 
-                               Data const& data,
-                               BlockSize const& blockSize,
-                               SampleRate const& sampleRate) throw()
+    LookupChannelInternal (Inputs const& inputs, 
+                           Data const& data,
+                           BlockSize const& blockSize,
+                           SampleRate const& sampleRate) throw()
     :   Internal (inputs, data, blockSize, sampleRate)
     {
     }
             
     Text getName() const throw()
     {
-        return "Signal Read";
+        return "Lookup";
     }       
     
     IntArray getInputKeys() const throw()
     {
-        const IntArray keys (IOKey::Signal, 
-                             IOKey::Time);
+        const IntArray keys (IOKey::Wavetable,
+                             IOKey::Position);
         return keys;
     }    
     
     InternalBase* getChannel (const int index) throw()
     {
         const Inputs channelInputs = this->getInputs().getChannel (index);
-        return new SignalReadInternal (channelInputs, 
-                                       this->getState(), 
-                                       this->getBlockSize(), 
-                                       this->getSampleRate());
+        return new LookupChannelInternal (channelInputs, 
+                                          this->getState(), 
+                                          this->getBlockSize(), 
+                                          this->getSampleRate());
     }
     
     void initChannel (const int channel) throw()
@@ -129,12 +128,10 @@ public:
         const PositionType* const positionSamples = positionBuffer.getArray();
         const int positionBufferLength = positionBuffer.length();
         
-        const SignalType& signal (this->getInputAsSignal (IOKey::Signal));
-        const SampleType* const signalSamples = signal.getSamples (channel);         
-        const unsigned int signalFrameStride = signal.getFrameStride();
-        const unsigned int numSignalFrames (signal.getNumFrames());
+        const WavetableType& table (this->getInputAsWavetable (IOKey::Wavetable));
+        const SampleType* const tableSamples = table.getArray();
         
-        const PositionType positionScale (signal.getSampleRate().getValue());
+        const PositionType positionScale (table.length());
         
         int i;
         
@@ -142,27 +139,14 @@ public:
         {
             for (i = 0; i < outputBufferLength; ++i) 
             {
-                const PositionType currentPosition = positionSamples[i] * positionScale;
-                
-                const unsigned int sampleA (plonk::max (PositionType (0), currentPosition));
-                const unsigned int sampleB (sampleA + 1);
-                const PositionType frac (plonk::frac (currentPosition));
-                
-                outputSamples[i] = InterpType::interp (signalSamples[(sampleA % numSignalFrames) * signalFrameStride], 
-                                                       signalSamples[(sampleB % numSignalFrames) * signalFrameStride], 
-                                                       frac);                
+                const PositionType currentPosition = plonk::wrap (positionSamples[i], PositionType (0), PositionType (1)) * positionScale;
+                outputSamples[i] = InterpType::lookup (tableSamples, currentPosition);
             }
         }
         else if (positionBufferLength == 1)
         {
-            const PositionType currentPosition = positionSamples[0] * positionScale;
-            const unsigned int sampleA (plonk::max (PositionType (0), currentPosition));
-            const unsigned int sampleB (sampleA + 1);
-            const PositionType frac (plonk::frac (currentPosition));
-            const SampleType value = InterpType::interp (signalSamples[(sampleA % numSignalFrames) * signalFrameStride],
-                                                         signalSamples[(sampleB % numSignalFrames) * signalFrameStride],
-                                                         frac);
-            
+            const PositionType currentPosition = plonk::wrap (positionSamples[0], PositionType (0), PositionType (1)) * positionScale;
+            const SampleType value = InterpType::lookup (tableSamples, currentPosition);
             NumericalArrayFiller<SampleType>::fill (outputSamples, value, outputBufferLength);
         }
         else
@@ -172,16 +156,8 @@ public:
             
             for (i = 0; i < outputBufferLength; ++i) 
             {
-                const PositionType currentPosition = positionSamples[int (positionPosition)] * positionScale;
-                
-                const unsigned int sampleA (plonk::max (PositionType (0), currentPosition));
-                const unsigned int sampleB (sampleA + 1);
-                const PositionType frac (plonk::frac (currentPosition));
-                
-                outputSamples[i] = InterpType::interp (signalSamples[(sampleA % numSignalFrames) * signalFrameStride], 
-                                                       signalSamples[(sampleB % numSignalFrames) * signalFrameStride], 
-                                                       frac);
-                
+                const PositionType currentPosition = plonk::wrap (positionSamples[int (positionPosition)], PositionType (0), PositionType (1)) * positionScale;
+                outputSamples[i] = InterpType::lookup (tableSamples, currentPosition);
                 positionPosition += positionIncrement;
             }                    
         }
@@ -193,15 +169,15 @@ private:
 
 //------------------------------------------------------------------------------
 
-/** Signal reader generator. 
+/** Wavetable lookup generator. 
  
  @par Factory functions:
- - ar (signal, position, mul=1, add=0, preferredBlockSize=default, preferredSampleRate=default)
- - kr (signal, position, mul=1, add=0) 
+ - ar (table, position, mul=1, add=0, preferredBlockSize=default, preferredSampleRate=default)
+ - kr (table, position, mul=1, add=0) 
  
  @par Inputs:
- - signal: (signal, multi) the signal to play
- - position: (unit, multi) the read position in seconds
+ - table: (wavetable) the wavetable to use
+ - position: (unit, multi) the read position between 0..1 (wrapped to this range)
  - mul: (unit, multi) the multiplier applied to the output
  - add: (unit, multi) the offset aded to the output
  - preferredBlockSize: the preferred output block size (for advanced usage, leave on default if unsure)
@@ -209,45 +185,45 @@ private:
 
   @ingroup GeneratorUnits */
 template<class SampleType>
-class SignalReadUnit
+class LookupUnit
 {
 public:    
-    typedef SignalReadChannelInternal<SampleType>       SignalReadInternal;
-    typedef typename SignalReadInternal::Data           Data;
+    typedef LookupChannelInternal<SampleType>           LookupInternal;
+    typedef typename LookupInternal::Data               Data;
     typedef ChannelBase<SampleType>                     ChannelType;
     typedef ChannelInternal<SampleType,Data>            Internal;
     typedef UnitBase<SampleType>                        UnitType;
     typedef InputDictionary                             Inputs;
-    typedef SignalBase<SampleType>                      SignalType;
+    typedef WavetableBase<SampleType>                   WavetableType;
     
-    typedef typename SignalReadInternal::PositionType         PositionType;
-    typedef typename SignalReadInternal::PositionUnitType     PositionUnitType;
-    typedef typename SignalReadInternal::PositionBufferType   PositionBufferType;
+    typedef typename LookupInternal::PositionType         PositionType;
+    typedef typename LookupInternal::PositionUnitType     PositionUnitType;
+    typedef typename LookupInternal::PositionBufferType   PositionBufferType;
     
     static inline UnitInfos getInfo() throw()
     {
         const double blockSize = (double)BlockSize::getDefault().getValue();
         const double sampleRate = SampleRate::getDefault().getValue();
         
-        return UnitInfo ("SignalRead", "A signal reader generator",
+        return UnitInfo ("Lookup", "A wavetable lookup generator",
                          
                          // output
                          ChannelCount::VariableChannelCount, 
-                         IOKey::Generic,    Measure::None,      0.0,                    IOLimit::None,
+                         IOKey::Generic,    Measure::None,                  0.0,                    IOLimit::None,
                          IOKey::End,
                          
                          // inputs
-                         IOKey::Signal,     Measure::None,
-                         IOKey::Time,       Measure::Seconds,   IOInfo::NoDefault,      IOLimit::Minimum,   Measure::Seconds,           0.0,
-                         IOKey::Multiply,   Measure::Factor,    1.0,                    IOLimit::None,
-                         IOKey::Add,        Measure::None,      0.0,                    IOLimit::None,
-                         IOKey::BlockSize,  Measure::Samples,   blockSize,              IOLimit::Minimum,   Measure::Samples,           1.0,
-                         IOKey::SampleRate, Measure::Hertz,     sampleRate,             IOLimit::Minimum,   Measure::Hertz,             0.0,
+                         IOKey::Wavetable,  Measure::None,
+                         IOKey::Position,   Measure::NormalisedUnipolar,    IOInfo::NoDefault,      IOLimit::None,
+                         IOKey::Multiply,   Measure::Factor,                1.0,                    IOLimit::None,
+                         IOKey::Add,        Measure::None,                  0.0,                    IOLimit::None,
+                         IOKey::BlockSize,  Measure::Samples,               blockSize,              IOLimit::Minimum,   Measure::Samples,               1.0,
+                         IOKey::SampleRate, Measure::Hertz,                 sampleRate,             IOLimit::Minimum,   Measure::Hertz,                 0.0,
                          IOKey::End);
     }
     
     /** Create an audio rate signal player. */
-    static UnitType ar (SignalType const& signal, 
+    static UnitType ar (WavetableType const& table,
                         PositionUnitType const& position,
                         UnitType const& mul = SampleType (1),
                         UnitType const& add = SampleType (0),
@@ -255,33 +231,33 @@ public:
                         SampleRate const& preferredSampleRate = SampleRate::getDefault()) throw()
     {             
         Inputs inputs;
-        inputs.put (IOKey::Signal, signal);
+        inputs.put (IOKey::Wavetable, table);
         inputs.put (IOKey::Time, position);
         inputs.put (IOKey::Multiply, mul);
         inputs.put (IOKey::Add, add);
                         
         Data data = { { -1.0, -1.0 } };
         
-        return UnitType::template createFromInputs<SignalReadInternal> (inputs, 
-                                                                        data, 
-                                                                        preferredBlockSize, 
-                                                                        preferredSampleRate);
+        return UnitType::template createFromInputs<LookupInternal> (inputs, 
+                                                                    data,
+                                                                    preferredBlockSize,
+                                                                    preferredSampleRate);
     }
     
     /** Create a control rate signal player.. */
-    static UnitType kr (SignalType const& signal,
+    static UnitType kr (WavetableType const& table,
                         PositionUnitType const& position,
                         UnitType const& mul = SampleType (1),
                         UnitType const& add = SampleType (0)) throw()
     {
-        return ar (signal, position, mul, add, 
+        return ar (table, position, mul, add,
                    BlockSize::getControlRateBlockSize(), 
                    SampleRate::getControlRate());
     }        
 };
 
-typedef SignalReadUnit<PLONK_TYPE_DEFAULT> SignalRead;
+typedef LookupUnit<PLONK_TYPE_DEFAULT> Lookup;
 
 
-#endif // PLONK_SignalRead_H
+#endif // PLONK_LOOKUP_H
 

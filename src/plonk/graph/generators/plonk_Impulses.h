@@ -36,80 +36,79 @@
  -------------------------------------------------------------------------------
  */
 
-#ifndef PLONK_SAW_H
-#define PLONK_SAW_H
+#ifndef PLONK_IMPULSES_H
+#define PLONK_IMPULSES_H
 
 #include "../channel/plonk_ChannelInternalCore.h"
 #include "../plonk_GraphForwardDeclarations.h"
+#include "plonk_Saw.h"
 
-template<class SampleType> class SawChannelInternal;
+template<class SampleType> class ImpulseChannelInternal;
 
-PLONK_CHANNELDATA_DECLARE(SawChannelInternal,SampleType)
-{    
+PLONK_CHANNELDATA_DECLARE(ImpulseChannelInternal,SampleType)
+{
     typedef typename TypeUtility<SampleType>::IndexType FrequencyType;
-
+    
     ChannelInternalCore::Data base;
     
     FrequencyType currentValue;
     LongLong peak;
     LongLong peak2peak;
-};      
+};
 
-PLONK_CHANNELDATA_SPECIAL(SawChannelInternal,float)
-{    
+PLONK_CHANNELDATA_SPECIAL(ImpulseChannelInternal,float)
+{
     ChannelInternalCore::Data base;
     
     float currentValue;
     float peak;
     float peak2peak;
-};        
+};
 
-PLONK_CHANNELDATA_SPECIAL(SawChannelInternal,double)
-{    
+PLONK_CHANNELDATA_SPECIAL(ImpulseChannelInternal,double)
+{
     ChannelInternalCore::Data base;
     
     double currentValue;
     double peak;
     double peak2peak;
-};        
+};
 
-PLONK_CHANNELDATA_SPECIAL(SawChannelInternal,short)
-{    
+PLONK_CHANNELDATA_SPECIAL(ImpulseChannelInternal,short)
+{
     typedef TypeUtility<short>::IndexType FrequencyType;
-
+    
     ChannelInternalCore::Data base;
     
     FrequencyType currentValue;
     short peak;
     int peak2peak;
-};      
+};
 
-PLONK_CHANNELDATA_SPECIAL(SawChannelInternal,int)
-{    
+PLONK_CHANNELDATA_SPECIAL(ImpulseChannelInternal,int)
+{
     typedef TypeUtility<int>::IndexType FrequencyType;
-
+    
     ChannelInternalCore::Data base;
     
     FrequencyType currentValue;
     int peak;
     LongLong peak2peak;
-};        
-
-
+};
 
 //------------------------------------------------------------------------------
 
-/** Sawtooth wave generator. */
+/** Impulse generator. */
 template<class SampleType>
-class SawChannelInternal 
-:   public ChannelInternal<SampleType, PLONK_CHANNELDATA_NAME(SawChannelInternal,SampleType)>
+class ImpulseChannelInternal
+:   public ChannelInternal<SampleType, PLONK_CHANNELDATA_NAME(ImpulseChannelInternal,SampleType)>
 {
 public:
-    typedef PLONK_CHANNELDATA_NAME(SawChannelInternal,SampleType)     Data;
-    typedef InputDictionary                                     Inputs;
-
+    typedef PLONK_CHANNELDATA_NAME(ImpulseChannelInternal,SampleType)   Data;
+    typedef InputDictionary                                             Inputs;
+    
     typedef ChannelBase<SampleType>                             ChannelType;
-    typedef SawChannelInternal<SampleType>                      SawInternal;
+    typedef ImpulseChannelInternal<SampleType>                  ImpulseInternal;
     typedef ChannelInternal<SampleType,Data>                    Internal;
     typedef ChannelInternalBase<SampleType>                     InternalBase;
     typedef UnitBase<SampleType>                                UnitType;
@@ -117,37 +116,37 @@ public:
     typedef typename TypeUtility<SampleType>::IndexType         FrequencyType;
     typedef UnitBase<FrequencyType>                             FrequencyUnitType;
     typedef NumericalArray<FrequencyType>                       FrequencyBufferType;
-
-    SawChannelInternal (Inputs const& inputs, 
-                        Data const& data, 
-                        BlockSize const& blockSize,
-                        SampleRate const& sampleRate) throw()
+    
+    ImpulseChannelInternal (Inputs const& inputs,
+                            Data const& data,
+                            BlockSize const& blockSize,
+                            SampleRate const& sampleRate) throw()
     :   Internal (inputs, data, blockSize, sampleRate)
     {
     }
-            
+    
     Text getName() const throw()
     {
-        return "Saw";
-    }       
+        return "Impulse";
+    }
     
     IntArray getInputKeys() const throw()
     {
         const IntArray keys (IOKey::Frequency);
         return keys;
-    }    
+    }
     
     InternalBase* getChannel (const int index) throw()
     {
         const Inputs channelInputs = this->getInputs().getChannel (index);
-        return new SawInternal (channelInputs, 
-                                this->getState(), 
-                                this->getBlockSize(), 
-                                this->getSampleRate());
+        return new ImpulseInternal (channelInputs,
+                                    this->getState(),
+                                    this->getBlockSize(),
+                                    this->getSampleRate());
     }
     
     void initChannel (const int channel) throw()
-    {                
+    {
         const FrequencyUnitType& frequencyUnit = ChannelInternalCore::getInputAs<FrequencyUnitType> (IOKey::Frequency);
         
         this->setBlockSize (BlockSize::decide (frequencyUnit.getBlockSize (channel),
@@ -157,168 +156,93 @@ public:
         
         this->setOverlap (frequencyUnit.getOverlap (channel));
         
-        this->initValue (this->getState().currentValue);
-    }    
+        this->initValue (SampleType (1));
+    }
     
     void process (ProcessInfo& info, const int channel) throw()
-    {        
+    {
         Data& data = this->getState();
         const double sampleDuration = data.base.sampleDuration;
         const double factor = data.peak2peak * sampleDuration;
-
+        
         FrequencyUnitType& frequencyUnit = ChannelInternalCore::getInputAs<FrequencyUnitType> (IOKey::Frequency);
-
+        
         const FrequencyBufferType& frequencyBuffer (frequencyUnit.process (info, channel));
         const FrequencyType* const frequencySamples = frequencyBuffer.getArray();
         const int frequencyBufferLength = frequencyBuffer.length();
         
         SampleType* const outputSamples = this->getOutputSamples();
         const int outputBufferLength = this->getOutputBuffer().length();
-
+        
         int i;
         
         if (frequencyBufferLength == outputBufferLength)
         {
-            for (i = 0; i < outputBufferLength; ++i) 
+            for (i = 0; i < outputBufferLength; ++i)
             {
-                outputSamples[i] = SampleType (data.currentValue);
-                data.currentValue += frequencySamples[i] * factor;
-                
                 if (data.currentValue >= data.peak)
+                {
                     data.currentValue -= data.peak2peak;
-                else if (data.currentValue < -data.peak)	
-                    data.currentValue += data.peak2peak;                
-            }                    
+                    outputSamples[i] = data.peak;
+                }
+                else
+                {
+                    outputSamples[i] = SampleType (0);
+                }
+
+                data.currentValue += frequencySamples[i] * factor;                
+            }
         }
         else if (frequencyBufferLength == 1)
         {
             const FrequencyType valueIncrement (frequencySamples[0] * factor);
             
-            for (i = 0; i < outputBufferLength; ++i) 
+            for (i = 0; i < outputBufferLength; ++i)
             {
-                outputSamples[i] = SampleType (data.currentValue);
-                data.currentValue += valueIncrement;
-                
                 if (data.currentValue >= data.peak)
+                {
                     data.currentValue -= data.peak2peak;
-                else if (data.currentValue < -data.peak)	
-                    data.currentValue += data.peak2peak;                
-            }                    
+                    outputSamples[i] = data.peak;
+                }
+                else
+                {
+                    outputSamples[i] = SampleType (0);
+                }
+
+                data.currentValue += valueIncrement;
+            }
         }
         else
         {
             double frequencyPosition = 0.0;
             const double frequencyIncrement = double (frequencyBufferLength) / double (outputBufferLength);
-                                
-            for (i = 0; i < outputBufferLength; ++i) 
+            
+            for (i = 0; i < outputBufferLength; ++i)
             {
-                outputSamples[i] = SampleType (data.currentValue);
-                data.currentValue += frequencySamples[int (frequencyPosition)] * factor;
-
                 if (data.currentValue >= data.peak)
+                {
                     data.currentValue -= data.peak2peak;
-                else if (data.currentValue < -data.peak)	
-                    data.currentValue += data.peak2peak;
-
+                    outputSamples[i] = data.peak;
+                }
+                else
+                {
+                    outputSamples[i] = SampleType (0);
+                }
+                
                 frequencyPosition += frequencyIncrement;
-            }        
+                data.currentValue += frequencySamples[int (frequencyPosition)] * factor;
+            }
         }
     }
     
 private:
 };
 
-//------------------------------------------------------------------------------
 
-#ifdef PLONK_USEPLINK
-
-template<>
-class SawChannelInternal<float> :   public ChannelInternal<float, SawProcessStateF>
-{
-public:
-    typedef SawProcessStateF                Data;
-    typedef InputDictionary                 Inputs;
-    typedef ChannelBase<float>              ChannelType;
-    typedef SawChannelInternal<float>       SawInternal;
-    typedef ChannelInternal<float,Data>     Internal;
-    typedef ChannelInternalBase<float>      InternalBase;
-    typedef UnitBase<float>                 UnitType;
-    
-    typedef float                           FrequencyType;
-    typedef UnitBase<float>                 FrequencyUnitType;
-    typedef NumericalArray<float>           FrequencyBufferType;
-    
-    enum Outputs { Output, NumOutputs };
-    enum InputIndices  { Frequency, NumInputs };
-    enum Buffers { OutputBuffer, FrequencyBuffer, NumBuffers };
-    
-    typedef PlinkProcess<NumBuffers>        Process;
-    
-    SawChannelInternal (Inputs const& inputs, 
-                        Data const& data, 
-                        BlockSize const& blockSize,
-                        SampleRate const& sampleRate) throw()
-    :   Internal (inputs, data, blockSize, sampleRate)
-    {
-        plonk_staticassert (NumBuffers == (NumInputs + NumOutputs));
-        
-        Process::init (&p, this, NumOutputs, NumInputs);
-    }
-        
-    Text getName() const throw()
-    {
-        return "Saw";
-    }       
-    
-    IntArray getInputKeys() const throw()
-    {
-        const IntArray keys (IOKey::Frequency);
-        return keys;
-    }    
-    
-    InternalBase* getChannel (const int index) throw()
-    {
-        const Inputs channelInputs = this->getInputs().getChannel (index);
-        return new SawInternal (channelInputs, 
-                                this->getState(), 
-                                this->getBlockSize(), 
-                                this->getSampleRate());
-    }    
-    
-    void initChannel (const int channel) throw()
-    {        
-        const FrequencyUnitType& frequencyUnit = ChannelInternalCore::getInputAs<FrequencyUnitType> (IOKey::Frequency);
-
-        this->setBlockSize (BlockSize::decide (frequencyUnit.getBlockSize (channel),
-                                               this->getBlockSize()));
-        this->setSampleRate (SampleRate::decide (frequencyUnit.getSampleRate (channel),
-                                                 this->getSampleRate()));
-        
-        this->initValue (this->getState().currentValue);
-    }        
-    
-    void process (ProcessInfo& info, const int channel) throw()
-    {                
-        FrequencyUnitType& frequencyUnit = ChannelInternalCore::getInputAs<FrequencyUnitType> (IOKey::Frequency);
-        const FrequencyBufferType& frequencyBuffer (frequencyUnit.process (info, channel));
-                        
-        p.buffers[0].bufferSize = this->getOutputBuffer().length();;
-        p.buffers[0].buffer     = this->getOutputSamples();
-        p.buffers[1].bufferSize = frequencyBuffer.length();
-        p.buffers[1].buffer     = frequencyBuffer.getArray();
-        
-        plink_SawProcessF (&p, &this->getState());
-    }
-  
-private:
-    Process p;
-};
-
-#endif
 
 //------------------------------------------------------------------------------
 
-/** A non-bandlimted sawtooth oscillator. 
+/** An impulse generator. 
  
  @par Factory functions:
  - ar (frequency=440, mul=1, add=0, preferredBlockSize=default, preferredSampleRate=default)
@@ -330,22 +254,22 @@ private:
  - add: (unit, multi) the offset aded to the output
  - preferredBlockSize: the preferred output block size (for advanced usage, leave on default if unsure)
  - preferredSampleRate: the preferred output sample rate (for advanced usage, leave on default if unsure)
- 
+
  @ingroup GeneratorUnits ControlUnits */
 template<class SampleType>
-class SawUnit
+class ImpulseUnit
 {
 public:    
-    typedef SawChannelInternal<SampleType>          SawInternal;
-    typedef typename SawInternal::Data              Data;
-    typedef InputDictionary                         Inputs;
-    typedef ChannelBase<SampleType>                 ChannelType;
-    typedef ChannelInternal<SampleType,Data>        Internal;
-    typedef UnitBase<SampleType>                    UnitType;
+    typedef ImpulseChannelInternal<SampleType>              ImpulseInternal;
+    typedef typename ImpulseInternal::Data                  Data;
+    typedef InputDictionary                                 Inputs;
+    typedef ChannelBase<SampleType>                         ChannelType;
+    typedef ChannelInternal<SampleType,Data>                Internal;
+    typedef UnitBase<SampleType>                            UnitType;
     
-    typedef typename SawInternal::FrequencyType         FrequencyType;
-    typedef typename SawInternal::FrequencyUnitType     FrequencyUnitType;
-    typedef typename SawInternal::FrequencyBufferType   FrequencyBufferType;
+    typedef typename ImpulseInternal::FrequencyType         FrequencyType;
+    typedef typename ImpulseInternal::FrequencyUnitType     FrequencyUnitType;
+    typedef typename ImpulseInternal::FrequencyBufferType   FrequencyBufferType;
 
     
     static inline UnitInfos getInfo() throw()
@@ -354,15 +278,15 @@ public:
         const double sampleRate = SampleRate::getDefault().getValue();
         const double peak = (double)TypeUtility<SampleType>::getTypePeak(); // will be innaccurate for LongLong
         
-        return UnitInfo ("Saw", "A non-band limited sawtooth wave oscillator.",
+        return UnitInfo ("Impulse", "An impulse generator.",
                          
                          // output
-                         ChannelCount::VariableChannelCount, 
+                         ChannelCount::VariableChannelCount,
                          IOKey::Generic,    Measure::None,      0.0,        IOLimit::Clipped,   Measure::NormalisedBipolar, -peak, peak,
                          IOKey::End,
                          
                          // inputs
-                         IOKey::Frequency,  Measure::Hertz,     440.0,      IOLimit::Clipped,   Measure::SampleRateRatio,  -0.5, 0.5,
+                         IOKey::Frequency,  Measure::Hertz,     440.0,      IOLimit::Clipped,   Measure::SampleRateRatio,   0.0, 0.5,
                          IOKey::Multiply,   Measure::Factor,    1.0,        IOLimit::None,
                          IOKey::Add,        Measure::None,      0.0,        IOLimit::None,
                          IOKey::BlockSize,  Measure::Samples,   blockSize,  IOLimit::Minimum,   Measure::Samples,           1.0,
@@ -370,43 +294,41 @@ public:
                          IOKey::End);
     }
     
-    /** Create an audio rate sawtooth oscillator. */
-    static UnitType ar (FrequencyUnitType const& frequency = FrequencyType (440), 
+    /** Create an audio rate impulse oscillator. */
+    static UnitType ar (FrequencyUnitType const& frequency = FrequencyType (440),
                         UnitType const& mul = SampleType (1),
                         UnitType const& add = SampleType (0),
                         BlockSize const& preferredBlockSize = BlockSize::getDefault(),
                         SampleRate const& preferredSampleRate = SampleRate::getDefault()) throw()
-    {                
+    {
         Inputs inputs;
         inputs.put (IOKey::Frequency, frequency);
         inputs.put (IOKey::Multiply, mul);
         inputs.put (IOKey::Add, add);
-                
+        
         const LongLong peak = SampleType (TypeUtility<SampleType>::getTypePeak());
         
         Data data = { { -1.0, -1.0 }, 0, peak, peak * 2 };
         
-        return UnitType::template createFromInputs<SawInternal> (inputs, 
-                                                                 data, 
-                                                                 preferredBlockSize, 
-                                                                 preferredSampleRate);
+        return UnitType::template createFromInputs<ImpulseInternal> (inputs,
+                                                                     data,
+                                                                     preferredBlockSize,
+                                                                     preferredSampleRate);
     }
     
-    /** Create a control rate sawtooth oscillator. */
-    static UnitType kr (FrequencyUnitType const& frequency, 
+    /** Create a control rate impulse oscillator. */
+    static UnitType kr (FrequencyUnitType const& frequency,
                         UnitType const& mul = SampleType (1),
                         UnitType const& add = SampleType (0)) throw()
     {
-        return ar (frequency, mul, add, 
-                   BlockSize::getControlRateBlockSize(), 
+        return ar (frequency, mul, add,
+                   BlockSize::getControlRateBlockSize(),
                    SampleRate::getControlRate());
-    }        
+    }
 };
 
-typedef SawUnit<PLONK_TYPE_DEFAULT> Saw;
+typedef ImpulseUnit<PLONK_TYPE_DEFAULT> Impulse;
 
 
-
-
-#endif // PLONK_SAW_H
+#endif // PLONK_IMPULSES_H
 

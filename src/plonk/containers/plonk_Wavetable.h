@@ -206,7 +206,19 @@ public:
     {
         static const WavetableBase table (Buffer::sineTable (8192, 1.0));        
         return table;        
-    }    
+    }
+    
+    static const WavetableBase& cosine512() throw()
+    {
+        static const WavetableBase table (Buffer::cosineTable (512, 1.0));
+        return table;
+    }
+    
+    static const WavetableBase& cosine8192() throw()
+    {
+        static const WavetableBase table (Buffer::cosineTable (8192, 1.0));
+        return table;
+    }
     
     static WavetableBase harmonic (const int size, Buffer const& weights) throw()
 	{
@@ -217,6 +229,51 @@ public:
 	{
 		return WavetableBase (Buffer::harmonicTable (8192, weights));
 	}
+    
+    static const WavetableBase& harmonicSaw() throw()
+	{
+		static const WavetableBase table (WavetableBase::harmonic8192 (Buffer::series (21, 1, 1)
+                                                                       .reciprocal()
+                                                                       .normalise()));
+        return table;
+	}
+
+    static WavetableBase harmonicSaw (const int size, const int numHarmonics = 21) throw()
+	{
+		return WavetableBase::harmonic (size, Buffer::series (numHarmonics, 1, 1)
+                                        .reciprocal().normalise());
+	}
+    
+    static const WavetableBase& harmonicSquare() throw()
+	{
+		static const WavetableBase table (WavetableBase::harmonic8192 ((Buffer::series (21, 1, 1).reciprocal() * Buffer (SampleType (1), SampleType (0)))
+                                                                       .normalise()));
+        return table;
+	}
+    
+    static WavetableBase harmonicSquare (const int size, const int numHarmonics = 21) throw()
+	{
+        plonk_assert (numHarmonics >= 2);
+		return WavetableBase::harmonic (size, (Buffer::series (numHarmonics, 1, 1).reciprocal()  * Buffer (SampleType (1), SampleType (0)))
+                                        .normalise());
+	}
+    
+    static const WavetableBase& harmonicTri() throw()
+	{
+		static const WavetableBase table (WavetableBase::harmonic8192 ((Buffer::series (21, 1, 1).reciprocal() * Buffer (SampleType (1), SampleType (0), SampleType (-1), SampleType (0)))
+                                                                       .squared()
+                                                                       .normalise()));
+        return table;
+	}
+    
+    static WavetableBase harmonicTri (const int size, const int numHarmonics = 21) throw()
+	{
+        plonk_assert (numHarmonics >= 4);
+		return WavetableBase::harmonic (size, (Buffer::series (numHarmonics, 1, 1).reciprocal()  * Buffer (SampleType (1), SampleType (0), SampleType (-1), SampleType (0)))
+                                        .squared()
+                                        .normalise());
+	}
+
     
     PLONK_OBJECTARROWOPERATOR(WavetableBase);
 

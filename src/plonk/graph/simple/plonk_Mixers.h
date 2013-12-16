@@ -260,7 +260,7 @@ public:
             {
                 UnitType& inputUnit (units.atUnchecked (unit));
                 
-                if (!inputUnit.wrapAt (channel).shouldBeDeletedNow (info))
+                if (!inputUnit.wrapAt (channel).shouldBeDeletedNow (info.getTimeStamp()))
                 {
                     plonk_assert (inputUnit.getOverlap (channel) == Math<DoubleVariable>::get1());
                     
@@ -659,7 +659,7 @@ public:
         const Data& data = this->getState();
         UnitsType& units = this->getInputAsUnits (IOKey::Units);
         
-        if (data.purgeNullUnits)
+        if (data.purgeExpiredUnits)
         {
             // remove nulls...
             for (unit = units.length(); --unit >= 0;)
@@ -687,7 +687,7 @@ public:
             {
                 UnitType& inputUnit (units.atUnchecked (unit));
                 
-                if (!inputUnit.wrapAt (channel).shouldBeDeletedNow (info))
+                if (!inputUnit.wrapAt (channel).shouldBeDeletedNow (info.getTimeStamp()))
                 {
                     plonk_assert (inputUnit.getOverlap (channel) == Math<DoubleVariable>::get1());
                     
@@ -729,10 +729,12 @@ private:
  @par Factory functions:
  - ar (input, allowAutoDelete=true, mul=1, add=0, preferredBlockSize=default, preferredSampleRate=default)
  - ar (array, allowAutoDelete=true, purgeNullUnits=true, preferredNumChannels=0, mul=1, add=0, preferredBlockSize=default, preferredSampleRate=default)
+ - ar (queue, allowAutoDelete=true, purgeNullUnits=true, preferredNumChannels=0, mul=1, add=0, preferredBlockSize=default, preferredSampleRate=default)
  
  @par Inputs:
  - input: (unit) the input unit to mix
  - array: (units, multi) the array of units to mix
+ - queue: (unit queue) the queue of units to mix 
  - allowAutoDelete: (bool) whether this unit can be casued to be deleted by the unit(s) it contains
  - purgeNullUnits: (bool) whether null units are removed from the array during processing
  - preferredNumChannels: (int) force this unit to have a certain number of channels (0= the maximum channel count in array)
@@ -760,7 +762,7 @@ public:
         const double blockSize = (double)BlockSize::getDefault().getValue();
         const double sampleRate = SampleRate::getDefault().getValue();
 
-        return UnitInfos (UnitInfo ("Mixer", "Mixes all channels in an input unit down to a single channel.",
+        return UnitInfos (UnitInfo ("Channel Mixer", "Mixes all channels in an input unit down to a single channel.",
                                     
                                     // output
                                     1, 
@@ -775,7 +777,22 @@ public:
                                     IOKey::SampleRate,       Measure::Hertz,     sampleRate,         IOLimit::Minimum,   Measure::Hertz,     0.0,
                                     IOKey::End),
                           
-                          UnitInfo ("Mixer", "Mixes multichannel units down to a multichannel unit.",
+                          UnitInfo ("Unit Mixer", "Mixes a queue of units down to a multichannel unit.",
+                                    
+                                    // output
+                                    ChannelCount::VariableChannelCount,
+                                    IOKey::Generic,          Measure::None,      IOInfo::NoDefault,  IOLimit::None,      IOKey::End,
+                                    
+                                    // inputs
+                                    IOKey::UnitQueue,        Measure::None,
+                                    IOKey::AutoDeleteFlag,   Measure::Bool,      IOInfo::True,       IOLimit::None,
+                                    IOKey::Multiply,         Measure::Factor,    1.0,                IOLimit::None,
+                                    IOKey::Add,              Measure::None,      0.0,                IOLimit::None,
+                                    IOKey::BlockSize,        Measure::Samples,   blockSize,          IOLimit::Minimum,   Measure::Samples,   1.0,
+                                    IOKey::SampleRate,       Measure::Hertz,     sampleRate,         IOLimit::Minimum,   Measure::Hertz,     0.0,
+                                    IOKey::End),
+                          
+                          UnitInfo ("Queue Mixer", "Mixes multichannel units down to a multichannel unit.",
                                     
                                     // output
                                     ChannelCount::VariableChannelCount,     

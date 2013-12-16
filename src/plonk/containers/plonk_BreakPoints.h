@@ -657,6 +657,14 @@ public:
 		return null;
 	}	               
     
+    static BreakpointsBase value (const double value,
+                                  const double sustainTime) throw()
+    {
+        return BreakpointsBase (LevelsArray (value, value),
+                                TimesArray (sustainTime),
+                                ShapeArray (Shape::Linear));
+    }
+    
     static BreakpointsBase linen (const double attackTime, 
                                   const double sustainTime,
                                   const double releaseTime,
@@ -691,6 +699,17 @@ public:
         const int lastPoint = 1;
         return BreakpointsBase (LevelsArray (SampleType (0), sustainLevel, SampleType (0)),
                                 TimesArray (attackTime, releaseTime),
+                                ShapeArray (shape),
+                                NextArray (BreakpointType::This, BreakpointType::End),
+                                NextArray (lastPoint, BreakpointType::End));
+    }
+    
+    static BreakpointsBase steal (const double releaseTime,
+                                  Shape const& shape = Shape::Linear) throw()
+    {
+        const int lastPoint = 1;
+        return BreakpointsBase (LevelsArray (SampleType (1), SampleType (1), SampleType (0)),
+                                TimesArray (0.0, releaseTime),
                                 ShapeArray (shape),
                                 NextArray (BreakpointType::This, BreakpointType::End),
                                 NextArray (lastPoint, BreakpointType::End));

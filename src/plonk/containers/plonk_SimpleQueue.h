@@ -113,6 +113,11 @@ public:
         return returnValue;
     }
     
+    inline LongLong length() throw()
+    {
+        return pl_SimpleQueue_GetSize (&queue);
+    }
+    
     friend class SimpleQueue<ValueType>;
     
 private:
@@ -176,6 +181,11 @@ public:
 #endif
         
         return returnValue;
+    }
+    
+    inline LongLong length() throw()
+    {
+        return pl_SimpleQueue_GetSize (&queue);
     }
     
     friend class SimpleQueue<ValueType*>;
@@ -244,6 +254,11 @@ public:
     ValueType pop() throw()
     {
         return this->getInternal()->pop();
+    }
+    
+    inline LongLong length() throw()
+    {
+        return this->getInternal()->length();
     }
     
     PLONK_OBJECTARROWOPERATOR(SimpleQueue);

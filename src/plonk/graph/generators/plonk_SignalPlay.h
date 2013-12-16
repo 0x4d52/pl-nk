@@ -258,6 +258,8 @@ private:
 
 /** Signal player generator. 
  
+ 
+ 
  @par Factory functions:
  - ar (signal, rate=1, loop=1, mul=1, add=0, allowAutoDelete=true, preferredBlockSize=default, preferredSampleRate=default)
  - kr (signal, rate=1, loop=1, mul=1, add=0, allowAutoDelete=true) 

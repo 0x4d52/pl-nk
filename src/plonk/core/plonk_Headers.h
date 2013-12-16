@@ -151,6 +151,7 @@
 #include "../graph/simple/plonk_VariableChannel.h"
 #include "../graph/simple/plonk_AtomicVariableChannel.h"
 #include "../graph/simple/plonk_PatchChannel.h"
+#include "../graph/simple/plonk_QueueChannel.h"
 
 #include "../graph/generators/plonk_Saw.h"
 #include "../graph/generators/plonk_WhiteNoise.h"
@@ -158,6 +159,8 @@
 #include "../graph/generators/plonk_SignalPlay.h"
 #include "../graph/generators/plonk_SignalRead.h"
 #include "../graph/generators/plonk_FilePlay.h"
+#include "../graph/generators/plonk_Impulses.h"
+#include "../graph/generators/plonk_Lookup.h"
 
 #include "../graph/filters/plonk_FilterForwardDeclarations.h"
 #include "../graph/filters/plonk_FilterTypes.h"

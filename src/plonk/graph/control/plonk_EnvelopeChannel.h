@@ -270,8 +270,11 @@ private:
 /** Envelope unit performs a series of breakpoints. 
  
  [args-todo]
- 
+ - breakpoints: (breakpoints) the series of breakpoints to perform.
+ - gate: (unit) controls the envelope
  - allowAutoDelete: (bool) whether this unit can be casued to be deleted by the unit it contains
+ - preferredBlockSize: the preferred output block size (for advanced usage, leave on default if unsure)
+ - preferredSampleRate: the preferred output sample rate (for advanced usage, leave on default if unsure)
 
  
  @ingroup EnvelopeUnits */
