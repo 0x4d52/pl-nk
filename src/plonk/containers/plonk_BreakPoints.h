@@ -665,6 +665,31 @@ public:
                                 ShapeArray (Shape::Linear));
     }
     
+    static BreakpointsBase line (const double startLevel,
+                                 const double endLevel,
+                                 const double duration,
+                                 Shape const& shape = Shape::Linear) throw()
+    {
+        return BreakpointsBase (LevelsArray (startLevel, endLevel),
+                                TimesArray (duration),
+                                ShapeArray (shape));
+    }
+    
+    static BreakpointsBase lineSustain (const double startLevel,
+                                        const double startTime,
+                                        const double sustainLevel,
+                                        const double endTime,
+                                        const double endLevel,
+                                        Shape const& shape = Shape::Linear) throw()
+    {
+        const int lastPoint = 1;
+        return BreakpointsBase (LevelsArray (startLevel, sustainLevel, endLevel),
+                                TimesArray (startTime, endTime),
+                                ShapeArray (shape),
+                                NextArray (BreakpointType::This, BreakpointType::End),
+                                NextArray (lastPoint, BreakpointType::End));
+    }
+    
     static BreakpointsBase linen (const double attackTime, 
                                   const double sustainTime,
                                   const double releaseTime,
@@ -674,6 +699,22 @@ public:
         return BreakpointsBase (LevelsArray (SampleType (0), peak, peak, SampleType (0)),
                                 TimesArray (attackTime, sustainTime, releaseTime),
                                 ShapeArray (shape));
+    }
+    
+    static BreakpointsBase ahdsr (const double attackTime,
+                                  const double holdTime,
+                                  const double decayTime,
+                                  const SampleType sustainLevel,
+                                  const double releaseTime,
+                                  Shape const& shape = Shape::Linear) throw()
+    {
+        const int lastPoint = 3;
+        const SampleType peak = SampleTypeUtility::getTypePeak();
+        return BreakpointsBase (LevelsArray (SampleType (0), peak, peak, sustainLevel, SampleType (0)),
+                                TimesArray (attackTime, holdTime, decayTime, releaseTime),
+                                ShapeArray (shape),
+                                NextArray (BreakpointType::Next, BreakpointType::Next, BreakpointType::This, BreakpointType::End),
+                                NextArray (lastPoint, lastPoint, lastPoint, BreakpointType::End));
     }
     
     static BreakpointsBase adsr (const double attackTime, 
@@ -691,19 +732,27 @@ public:
                                 NextArray (lastPoint, lastPoint, BreakpointType::End));
     }
     
-    static BreakpointsBase asr (const double attackTime, 
+//    static BreakpointsBase asr (const double attackTime, 
+//                                const SampleType sustainLevel,
+//                                const double releaseTime,
+//                                Shape const& shape = Shape::Linear) throw()
+//    {
+//        const int lastPoint = 1;
+//        return BreakpointsBase (LevelsArray (SampleType (0), sustainLevel, SampleType (0)),
+//                                TimesArray (attackTime, releaseTime),
+//                                ShapeArray (shape),
+//                                NextArray (BreakpointType::This, BreakpointType::End),
+//                                NextArray (lastPoint, BreakpointType::End));
+//    }
+
+    static BreakpointsBase asr (const double attackTime,
                                 const SampleType sustainLevel,
                                 const double releaseTime,
                                 Shape const& shape = Shape::Linear) throw()
     {
-        const int lastPoint = 1;
-        return BreakpointsBase (LevelsArray (SampleType (0), sustainLevel, SampleType (0)),
-                                TimesArray (attackTime, releaseTime),
-                                ShapeArray (shape),
-                                NextArray (BreakpointType::This, BreakpointType::End),
-                                NextArray (lastPoint, BreakpointType::End));
+        return BreakpointsBase::lineSustain (0.0, attackTime, sustainLevel, releaseTime, 0.0, shape);
     }
-    
+
     static BreakpointsBase steal (const double releaseTime,
                                   Shape const& shape = Shape::Linear) throw()
     {

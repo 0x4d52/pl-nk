@@ -197,6 +197,8 @@ public:
     inline const TimeStamp& getNextTimeStamp() const throw()                { return this->getInternal()->getNextTimeStamp(); }
     inline bool shouldBeDeletedNow (TimeStamp const& time) const throw()    { return this->getInternal()->shouldBeDeletedNow (time); }
     
+    inline void resetIfExpired() throw()                                    { this->getInternal()->setExpiryTimeStamp (TimeStamp::getMaximum()); }
+    
 //    /** Returns @c true if this unit needs to process for the given timestamp. */
 //    inline bool needsToProcess (ProcessInfo const& info, const int channel) const throw()
 //    {

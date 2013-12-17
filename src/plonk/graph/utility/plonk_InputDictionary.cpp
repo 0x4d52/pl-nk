@@ -145,5 +145,27 @@ int InputDictionary::getMaxNumChannels() const throw()
     return numChannels;        
 }
 
+void InputDictionary::resetExpiredUnits() throw()
+{
+    DynamicArray items = this->getValues();
+    const int numItems = items.length();
+    
+    for (int i = 0; i < numItems; ++i)
+    {
+        Dynamic& item = items.atUnchecked (i);
+        const int type = item.getTypeCode();
+
+        switch (type)
+        {
+            case TypeCode::FloatUnit:  item.asUnchecked<FloatUnit>().resetIfExpired();  break;
+            case TypeCode::DoubleUnit: item.asUnchecked<DoubleUnit>().resetIfExpired(); break;
+            case TypeCode::IntUnit:    item.asUnchecked<IntUnit>().resetIfExpired();    break;
+            case TypeCode::ShortUnit:  item.asUnchecked<ShortUnit>().resetIfExpired();  break;
+            case TypeCode::Int24Unit:  item.asUnchecked<Int24Unit>().resetIfExpired();  break;
+            case TypeCode::LongUnit:   item.asUnchecked<LongUnit>().resetIfExpired();   break;
+        }
+    }
+}
+
 
 END_PLONK_NAMESPACE

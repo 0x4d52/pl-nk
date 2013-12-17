@@ -82,7 +82,8 @@ public:
     void setLastTimeStamp (TimeStamp const& newTimeStamp) throw();
     void setExpiryTimeStamp (TimeStamp const& newTimeStamp) throw();
     bool shouldBeDeletedNow (TimeStamp const& time) const throw();
-        
+//    void resetIfExpired() throw();
+    
     inline const Inputs& getInputs() const throw()                                      { return this->inputs; }
     inline Inputs& getInputs() throw()                                                  { return this->inputs; }
     
@@ -173,6 +174,11 @@ inline bool ChannelInternalCore::shouldBeDeletedNow (TimeStamp const& time) cons
 {
     return time >= expiryTimeStamp;
 }
+
+//inline void ChannelInternalCore::resetIfExpired() throw()
+//{
+//    expiryTimeStamp = TimeStamp::getMaximum();
+//}
 
 inline double ChannelInternalCore::getBlockDurationInTicks() const throw()                          
 { 

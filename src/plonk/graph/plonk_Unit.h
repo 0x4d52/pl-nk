@@ -607,6 +607,8 @@ public:
                                              SampleRate const& preferredSampleRate) throw()
     {        
         Inputs mainInputs = inputs;
+        mainInputs.resetExpiredUnits();
+
         const Dynamic add = mainInputs.remove (IOKey::Add);
         const Dynamic mul = mainInputs.remove (IOKey::Multiply);
                         
@@ -639,6 +641,8 @@ public:
                                               SampleRate const& preferredSampleRate) throw()
     {        
         Inputs mainInputs = inputs;
+        mainInputs.resetExpiredUnits();
+        
         const Dynamic add = mainInputs.remove (IOKey::Add);
         const Dynamic mul = mainInputs.remove (IOKey::Multiply);
                 
@@ -1285,6 +1289,15 @@ public:
         }
         
         return flag;
+    }
+    
+    void resetIfExpired() throw()
+    {
+        const int numChannels = this->getNumChannels();
+        ChannelType* channels = this->getArray();
+        
+        for (int i = 0; i < numChannels; ++i)
+            channels[i].resetIfExpired();
     }
     
 //    /** Process a specific channel in this unit.

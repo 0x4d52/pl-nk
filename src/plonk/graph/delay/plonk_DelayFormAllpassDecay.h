@@ -189,7 +189,8 @@ public:
     typedef typename DelayInternal::Param2Type                  DecayType;
     typedef UnitBase<DecayType>                                 DecayUnitType;
     
-//    typedef AllpassDecayUnit<SampleType, Interp::Lagrange3>     HQ;
+    typedef AllpassDecayUnit<SampleType, Interp::Lagrange3>     HQ;
+    typedef AllpassDecayUnit<SampleType, Interp::None>          N;
     
     
     static inline UnitInfos getInfo() throw()

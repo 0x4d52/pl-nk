@@ -79,6 +79,8 @@ public:
      This is not recursive. */
     int getMaxNumChannels() const throw();
     
+    void resetExpiredUnits() throw();
+    
     PLONK_OBJECTARROWOPERATOR(InputDictionary);
 };
 

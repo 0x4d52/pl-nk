@@ -107,8 +107,10 @@ public:
             
             Data& data = this->getState();
             
+            const int bufferLength (data.maximumDuration * data.base.sampleRate + 0.5);
+            
             for (i = 0; i < FormType::getNumCircularBuffers(); ++i)
-                circularBuffers.put (i, Buffer::newClear (int (data.maximumDuration * data.base.sampleRate + 0.5) + 1));
+                circularBuffers.put (i, Buffer::newClear (bufferLength * 3));
             
             for (i = 0; i < this->getNumChannels(); ++i)
             {
@@ -121,8 +123,8 @@ public:
                 
                 DelayStateBase& delayStateBase (reinterpret_cast<DelayStateBase&>(delayState));
                 delayStateBase.bufferSamples = circularBuffer.getArray();
-                delayStateBase.bufferLength = circularBuffer.length() - 1,
-                delayStateBase.bufferLengthIndex = DurationType (circularBuffer.length()) - Math<DurationType>::get1(),
+                delayStateBase.bufferLength = bufferLength,
+                delayStateBase.bufferLengthIndex = DurationType (bufferLength),
                 delayStateBase.buffer0 = DurationType (0);
             }
         }

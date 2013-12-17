@@ -129,10 +129,8 @@ public:
     static inline void readIgnore (Data&, DelayState&) throw() { }
     static inline void readRead (Data&, DelayState& state) throw()
     {
-        DurationType readPosition = DurationType (state.writePosition) - state.paramsOut[DurationInSamplesOut];
-        if (readPosition < state.buffer0)
-            readPosition += state.bufferLengthIndex;
-        plonk_assert (readPosition >= 0 && readPosition <= state.bufferLengthIndex);
+        DurationType readPosition = DurationType (state.writePosition) - state.paramsOut[DurationInSamplesOut] + state.bufferLengthIndex;
+//        plonk_assert (readPosition >= 0 && readPosition <= state.bufferLengthIndex);
         state.readValue = InterpType::lookup (state.bufferSamples, readPosition);
     }
     
@@ -146,9 +144,8 @@ public:
                                                                     state.filterFormData);
         
         state.bufferSamples[state.writePosition] = state.writeValue;
-       
-        if (state.writePosition == 0)
-            state.bufferSamples[state.bufferLength] = state.writeValue; // for interpolation
+        state.bufferSamples[state.writePosition + state.bufferLength] = state.writeValue; // for interpolation
+        state.bufferSamples[state.writePosition + state.bufferLength + state.bufferLength] = state.writeValue; // for interpolation
     }
     
     static inline void outputIgnore (Data&, DelayState&) throw() { }
@@ -162,13 +159,10 @@ public:
     static inline void param1Ignore (Data&, DelayState&, DurationType const&) throw() { }
     static inline void param1Process (Data& data, DelayState& state, DurationType const& duration) throw()
     {
-        if (state.paramsIn[DurationIn] != duration)
-        {
-            state.paramsIn[DurationIn] = duration;
-            state.paramsOut[DurationInSamplesOut] = DurationType (duration * data.base.sampleRate);
-            plonk_assert (state.paramsOut[DurationInSamplesOut] >= 0 && 
-                          state.paramsOut[DurationInSamplesOut] <= state.bufferLengthIndex);
-        }
+        state.paramsIn[DurationIn] = duration;
+        state.paramsOut[DurationInSamplesOut] = DurationType (duration * data.base.sampleRate);
+        plonk_assert (state.paramsOut[DurationInSamplesOut] >= 0 && 
+                      state.paramsOut[DurationInSamplesOut] <= state.bufferLengthIndex);
     }
     
     static inline void param2Ignore (Data&, DelayState&, FeedbackType const&) throw() { }
@@ -284,7 +278,8 @@ public:
     typedef typename DelayInternal::Param3Type                      FrequencyType;
     typedef UnitBase<FrequencyType>                                 FrequencyUnitType;
 
-//    typedef CombFilter1ParamUnit<FilterShape, Interp::Lagrange3>    HQ;
+    typedef CombFilter1ParamUnit<FilterShape, Interp::Lagrange3>    HQ;
+    typedef CombFilter1ParamUnit<FilterShape, Interp::None>         N;
 
     static inline UnitInfos getInfo() throw()
     {
@@ -328,16 +323,16 @@ public:
 };
 
 /** A comb filter with a one-pole low-pass filter in the feedback loop. @ingroup DelayUnits */
-typedef CombFilter1ParamUnit<FilterShapeLPFP1Base<PLONK_TYPE_DEFAULT> >     CombLPFP1;
+typedef CombFilter1ParamUnit<FilterShapeLPFP1Base<PLONK_TYPE_DEFAULT> >                 CombLPFP1;
 
 /** A comb filter with a Butterworth low-pass filter in the feedback loop. @ingroup DelayUnits */
-typedef CombFilter1ParamUnit<FilterShapeLPFBase<PLONK_TYPE_DEFAULT> >       CombLPF;
+typedef CombFilter1ParamUnit<FilterShapeLPFBase<PLONK_TYPE_DEFAULT> >                   CombLPF;
 
 /** A comb filter with a one-pole high-pass filter in the feedback loop. @ingroup DelayUnits */
-typedef CombFilter1ParamUnit<FilterShapeHPFP1Base<PLONK_TYPE_DEFAULT> >     CombHPFP1;
+typedef CombFilter1ParamUnit<FilterShapeHPFP1Base<PLONK_TYPE_DEFAULT> >                 CombHPFP1;
 
 /** A comb filter with a Butterworth high-pass filter in the feedback loop. @ingroup DelayUnits */
-typedef CombFilter1ParamUnit<FilterShapeHPFBase<PLONK_TYPE_DEFAULT> >       CombHPF;
+typedef CombFilter1ParamUnit<FilterShapeHPFBase<PLONK_TYPE_DEFAULT> >                   CombHPF;
 
 
 #endif // PLONK_DELAYFORMCOMBFILTER1PARAM_H

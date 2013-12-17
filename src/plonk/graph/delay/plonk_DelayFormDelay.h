@@ -107,10 +107,8 @@ public:
     static inline void readIgnore (Data&, DelayState&) throw() { }
     static inline void readRead (Data&, DelayState& state) throw()
     {
-        DurationType readPosition = DurationType (state.writePosition) - state.paramsOut[DurationInSamples];
-        if (readPosition < state.buffer0)
-            readPosition += state.bufferLengthIndex;
-        plonk_assert (readPosition >= 0 && readPosition <= state.bufferLengthIndex);
+        DurationType readPosition = DurationType (state.writePosition) - state.paramsOut[DurationInSamples] + state.bufferLengthIndex;
+//        plonk_assert (readPosition >= 0 && readPosition <= state.bufferLengthIndex);
         state.readValue = InterpType::lookup (state.bufferSamples, readPosition);
     }
         
@@ -120,8 +118,8 @@ public:
         plonk_assert (state.writePosition >= 0 && state.writePosition < state.bufferLength);
         state.writeValue = state.inputValue;
         state.bufferSamples[state.writePosition] = state.writeValue;
-        if (state.writePosition == 0)
-            state.bufferSamples[state.bufferLength] = state.writeValue; // for interpolation
+        state.bufferSamples[state.writePosition + state.bufferLength] = state.writeValue; // for interpolation
+        state.bufferSamples[state.writePosition + state.bufferLength + state.bufferLength] = state.writeValue; // for interpolation
     }
     
     static inline void outputIgnore (Data&, DelayState&) throw() { }
@@ -135,13 +133,10 @@ public:
     static inline void param1Ignore (Data&, DelayState&, DurationType const&) throw() { }
     static inline void param1Process (Data& data, DelayState& state, DurationType const& duration) throw()
     {
-        if (state.paramsIn[Duration] != duration)
-        {
-            state.paramsIn[Duration] = duration;
-            state.paramsOut[DurationInSamples] = DurationType (duration * data.base.sampleRate);
-            plonk_assert (state.paramsOut[DurationInSamples] >= 0 && 
-                          state.paramsOut[DurationInSamples] <= state.bufferLengthIndex);
-        }
+        state.paramsIn[Duration] = duration;
+        state.paramsOut[DurationInSamples] = DurationType (duration * data.base.sampleRate);
+        plonk_assert (state.paramsOut[DurationInSamples] >= 0 && 
+                      state.paramsOut[DurationInSamples] <= state.bufferLengthIndex);
     }
     
     template<InputFunction inputFunction, 
@@ -239,7 +234,8 @@ public:
     typedef typename DelayInternal::Param1Type          DurationType;
     typedef UnitBase<DurationType>                      DurationUnitType;
 
-//    typedef DelayUnit<SampleType, Interp::Lagrange3>    HQ;
+    typedef DelayUnit<SampleType, Interp::Lagrange3>    HQ;
+    typedef DelayUnit<SampleType, Interp::None>         N;
     
     static inline UnitInfos getInfo() throw()
     {
@@ -277,7 +273,6 @@ public:
     
 };
 
-typedef DelayUnit<PLONK_TYPE_DEFAULT> Delay;
 typedef DelayUnit<PLONK_TYPE_DEFAULT> Delay;
 
 
