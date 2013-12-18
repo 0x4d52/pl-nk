@@ -682,7 +682,7 @@ public:
             hasAdd = false;
         
         if (hasMul && hasAdd)
-            result = MulAddUnit<SampleType>::ar (result, mul, add);
+            result = MulAddUnit<SampleType>::ar (result, mul, add, BlockSize::noPreference(), SampleRate::noPreference());
         else if (hasMul)
             result *= mul;
         else if (hasAdd)

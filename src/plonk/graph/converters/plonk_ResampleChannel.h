@@ -660,6 +660,28 @@ public:
     {
         plonk_assert (preferredSampleRate.getValue() > 0.0); // no need to resample a DC signal
         plonk_assert (rate.getNumChannels() == 1);
+
+        bool needsResample = false;
+        
+        if (rate != Math<RateUnitType>::get1())
+        {
+            needsResample = true;
+        }
+        else
+        {
+            for (int i = 0; i < input.getNumChannels(); ++i)
+            {
+                if (input.getSampleRate (i) != preferredSampleRate)
+                {
+                    needsResample = true;
+                    break;
+                }
+            }
+        }
+        
+        if (!needsResample)
+            return input;
+
         
         Inputs inputs;
         inputs.put (IOKey::Generic, input);

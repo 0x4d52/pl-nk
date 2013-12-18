@@ -286,7 +286,7 @@ public:
         const FrequencyBufferType& frequencyBuffer (frequencyUnit.process (info, channel));
         const WavetableType& table (this->getInputAsWavetable (IOKey::Wavetable));
 
-        p.buffers[0].bufferSize = this->getOutputBuffer().length();;
+        p.buffers[0].bufferSize = this->getOutputBuffer().length();
         p.buffers[0].buffer     = this->getOutputSamples();
         p.buffers[1].bufferSize = frequencyBuffer.length();
         p.buffers[1].buffer     = frequencyBuffer.getArray();

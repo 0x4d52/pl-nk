@@ -138,7 +138,7 @@
 	typedef unsigned __int64 PlankULL;
 	typedef PlankULL PlankBits;
 
-    #define PLANK_LL_MAX  _I64_MAX 
+    #define PLANK_LL_MAX   _I64_MAX 
     #define PLANK_ULL_MAX  _UI64_MAX 
 
     #define snprintf _snprintf
@@ -218,7 +218,6 @@
         #define PLANK_OBJC_AUTORELEASING
         #endif
 
-
         #if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
             #define PLANK_IOS 1
 
@@ -241,13 +240,24 @@
                 #define PLANK_X86 1
             #endif
         #endif
-
-        #if LONG_MAX == 0x7fffffff
-            #define PLANK_32BIT 1
-        #else
-            #define PLANK_64BIT 1
+    #elif defined(__ANDROID__)
+        #ifdef __i386__
+            #define PLANK_X86 1
+        #endif
+        #ifdef __arm__
+            #define PLANK_ARM 1
+        #endif
+        #ifdef _MIPS_ARCH
+            #define PLANK_MIPS 1
         #endif
     #endif
+
+    #if LONG_MAX == 0x7fffffff
+        #define PLANK_32BIT 1
+    #else
+        #define PLANK_64BIT 1
+    #endif
+
     #define PLANK_ALIGN(amount)   __attribute__ ((aligned (amount)))
 #endif
 
