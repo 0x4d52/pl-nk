@@ -152,20 +152,6 @@ PlankB pl_Lock_TryLock (PlankLockRef p)
     return pthread_mutex_trylock (&p->mutex) == 0;
 }
 
-//void pl_Lock_Wait (PlankLockRef p)
-//{
-//    int err;
-//    pthread_mutex_lock (&p->mutex);
-//    
-////    do 
-////    {
-//        err = pthread_cond_wait (&p->condition, &p->mutex);
-////    } while ((err == 0) && !p->flag);
-//    
-//    p->flag = PLANK_FALSE;
-//    pthread_mutex_unlock (&p->mutex);
-//}
-
 void pl_Lock_Wait (PlankLockRef p)
 {
     pthread_mutex_lock (&p->mutex);
@@ -206,6 +192,102 @@ void pl_Lock_Signal (PlankLockRef p)
 #endif // PLANK_APPLE
 
 //------------------------------------------------------------------------------
+
+#if PLANK_ANDROID
+
+PlankResult pl_Lock_Init (PlankLockRef p)
+{
+    PlankResult result = PlankResult_OK;
+    pthread_mutexattr_t attr;
+    
+    if (p == PLANK_NULL)
+    {
+        result = PlankResult_MemoryError;
+        goto exit;
+    }
+    
+    pthread_mutexattr_init (&attr);
+    pthread_mutexattr_settype (&attr, PTHREAD_MUTEX_RECURSIVE);
+    pthread_mutex_init (&p->mutex, &attr);
+    pthread_cond_init (&p->condition, NULL);
+    p->flag = PLANK_FALSE;
+    
+exit:
+    return result;
+}
+
+PlankResult pl_Lock_DeInit (PlankLockRef p)
+{
+    PlankResult result = PlankResult_OK;
+    
+    if (p == PLANK_NULL)
+    {
+        result = PlankResult_MemoryError;
+        goto exit;
+    }
+    
+    pthread_mutex_destroy (&p->mutex);
+    pthread_cond_destroy (&p->condition);
+    
+    pl_MemoryZero (p, sizeof (PlankLock));
+    
+exit:
+    return result;
+}
+
+void pl_Lock_Lock (PlankLockRef p)
+{
+    pthread_mutex_lock (&p->mutex);
+}
+
+void pl_Lock_Unlock (PlankLockRef p)
+{
+    pthread_mutex_unlock (&p->mutex);
+}
+
+PlankB pl_Lock_TryLock (PlankLockRef p)
+{
+    return pthread_mutex_trylock (&p->mutex) == 0;
+}
+
+void pl_Lock_Wait (PlankLockRef p)
+{
+    pthread_mutex_lock (&p->mutex);
+    
+    if (!p->flag)
+    {
+        do
+        {
+            pthread_cond_wait (&p->condition, &p->mutex);
+        } while (!p->flag);
+    }
+    
+    p->flag = PLANK_FALSE;
+    pthread_mutex_unlock (&p->mutex);
+}
+
+
+void pl_Lock_WaitTimeout (PlankLockRef p, double time)
+{
+    struct timespec timeout;
+    pthread_mutex_lock (&p->mutex);
+    
+    pl_TimeToTimeSpec (&timeout, pl_TimeNow() + time);
+    pthread_cond_timedwait (&p->condition, &p->mutex, &timeout);
+    p->flag = PLANK_FALSE;
+    
+    pthread_mutex_unlock (&p->mutex);
+}
+
+void pl_Lock_Signal (PlankLockRef p)
+{
+    pthread_mutex_lock (&p->mutex);
+    pthread_cond_signal (&p->condition);
+    p->flag = PLANK_TRUE;
+    pthread_mutex_unlock (&p->mutex);
+}
+
+#endif // PLANK_ANDROID
 
 //------------------------------------------------------------------------------
 

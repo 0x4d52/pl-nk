@@ -228,6 +228,12 @@ typedef void* PlankThreadNativeReturn;
 #define PLANK_THREADCALL
 #endif // PLANK_APPLE
 
+#if PLANK_ANDROID
+typedef pthread_t PlankThreadNativeHandle;
+typedef void* PlankThreadNativeReturn;
+#define PLANK_THREADCALL
+#endif // PLANK_ANDROID
+
 #if PLANK_WIN
 typedef uintptr_t PlankThreadNativeHandle;
 typedef unsigned PlankThreadNativeReturn;

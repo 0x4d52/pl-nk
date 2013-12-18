@@ -853,3 +853,41 @@ PlankB pl_AtomicLX_CompareAndSwap (PlankAtomicLXRef p, PlankL oldValue, PlankL o
 }
 #endif
 #endif
+
+#if PLANK_ANDROID
+#if PLANK_32BIT
+PlankB pl_AtomicLX_CompareAndSwap (PlankAtomicLXRef p, PlankL oldPtr, PlankL oldExtra, PlankL newPtr, PlankL newExtra)
+{
+    PlankAtomicLX oldAll = { oldPtr, oldExtra };
+    PlankAtomicLX newAll = { newPtr, newExtra };
+    
+    return __sync_bool_compare_and_swap ((volatile PlankLL*)p,
+                                         *(PlankLL*)&oldAll,
+                                         *(PlankLL*)&newAll);
+}
+#endif // PLANK_32BIT
+
+#if PLANK_64BIT
+
+#if PLANK_ARM
+#error pl_AtomicPX_CompareAndSwap need to implement 128-bit CAS for this platform
+#endif
+
+#if PLANK_X86
+PlankB pl_AtomicLX_CompareAndSwap (PlankAtomicLXRef p, PlankL oldPtr, PlankL oldExtra, PlankL newPtr, PlankL newExtra)
+{
+    char success;
+    __asm__ __volatile__("lock; cmpxchg16b %0; setz %1"
+                         : "=m"(*p), "=a"(success)
+                         : "m"(*p), "d" (oldExtra), "a" (oldPtr),
+                         "c" (newExtra), "b" (newPtr) : "memory");
+    return success;
+}
+#endif
+
+#endif // PLANK_64BIT
+#endif // PLANK_ANDROID
+
+
+
+

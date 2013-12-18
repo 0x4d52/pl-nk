@@ -149,6 +149,8 @@
 #else
     // assume unix and Apple 
 	#include <unistd.h>
+    #include <pthread.h>
+    #include <sys/time.h>
 
     typedef signed long PlankL;
     typedef unsigned long PlankUL;
@@ -163,8 +165,6 @@
         #define PLANK_APPLE 1
         #include <CoreFoundation/CoreFoundation.h> 
         #include <libkern/OSAtomic.h>
-        #include <pthread.h>
-        #include <sys/time.h>
 
         #ifdef __llvm__
             #ifdef __clang__
@@ -241,6 +241,8 @@
             #endif
         #endif
     #elif defined(__ANDROID__)
+        #define PLANK_ANDROID 1
+
         #ifdef __i386__
             #define PLANK_X86 1
         #endif
@@ -370,7 +372,7 @@ typedef struct PlankFourCharCodeString
 
 static inline double pl_TimeNow()
 {
-#if PLANK_APPLE
+#if PLANK_APPLE || PLANK_ANDROID
     struct timeval now;
     gettimeofday (&now, 0);
     return (double)now.tv_sec + now.tv_usec * 0.000001;
@@ -379,7 +381,7 @@ static inline double pl_TimeNow()
 #endif
 }
 
-#if PLANK_APPLE
+#if PLANK_APPLE || PLANK_ANDROID
 static inline void pl_TimeToTimeSpec (struct timespec* time, double seconds)
 {
     time->tv_sec = (long)seconds;

@@ -117,6 +117,15 @@ typedef struct PlankLock
 } PlankLock;
 #endif
 
+#if PLANK_ANDROID
+typedef struct PlankLock
+{
+    pthread_mutex_t mutex;
+    pthread_cond_t condition;
+    PlankB flag;
+} PlankLock;
+#endif
+
 #if PLANK_WIN
 typedef struct PlankLock
 {

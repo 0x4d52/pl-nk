@@ -35,7 +35,7 @@
 #define JSON_INTEGER_IS_LONG_LONG 1
 
 // MR   
-#if (!defined (_WIN32) && !defined (_WIN64))
+#if (!defined (_WIN32) && !defined (_WIN64) && !defined(__ANDROID__))
 /* If locale.h and localeconv() are available, define to 1,
    otherwise to 0. */
 # define JSON_HAVE_LOCALECONV 1

@@ -221,6 +221,20 @@ static inline PlankB  pl_AtomicI_CompareAndSwap (PlankAtomicIRef p, PlankI oldVa
 }
 #endif
 
+#if PLANK_ANDROID
+static inline PlankI pl_AtomicI_Add (PlankAtomicIRef p, PlankI operand)
+{
+    return __sync_add_and_fetch ((volatile PlankI*)p, operand);
+}
+
+static inline PlankB  pl_AtomicI_CompareAndSwap (PlankAtomicIRef p, PlankI oldValue, PlankI newValue)
+{
+    return __sync_bool_compare_and_swap ((volatile PlankI*)p,
+                                         oldValue,
+                                         newValue);
+}
+#endif
+
 static inline PlankI pl_AtomicI_Subtract (PlankAtomicIRef p, PlankI operand)
 {
     return pl_AtomicI_Add (p, -operand);
@@ -349,6 +363,20 @@ static inline PlankB  pl_AtomicL_CompareAndSwap (PlankAtomicLRef p, PlankL oldVa
 #endif //PLANK_64BIT
 #endif //PLANK_WIN
 
+#if PLANK_ANDROID
+static inline PlankL pl_AtomicL_Add (PlankAtomicLRef p, PlankL operand)
+{
+    return __sync_add_and_fetch ((volatile PlankL*)p, operand);
+}
+
+static inline PlankB pl_AtomicL_CompareAndSwap (PlankAtomicLRef p, PlankL oldValue, PlankL newValue)
+{
+    return __sync_bool_compare_and_swap ((volatile PlankL*)p,
+                                         oldValue,
+                                         newValue);
+}
+#endif
+
 static inline PlankL pl_AtomicL_Subtract (PlankAtomicLRef p, PlankL operand)
 {
     return pl_AtomicL_Add (p, -operand);
@@ -470,6 +498,20 @@ static inline PlankB pl_AtomicLL_CompareAndSwap (PlankAtomicLLRef p, PlankLL old
 }
 #endif
 
+#if PLANK_ANDROID
+static inline PlankLL pl_AtomicLL_Add (PlankAtomicLLRef p, PlankLL operand)
+{
+    return __sync_add_and_fetch ((volatile PlankLL*)p, operand);
+}
+
+static inline PlankB pl_AtomicLL_CompareAndSwap (PlankAtomicLLRef p, PlankLL oldValue, PlankLL newValue)
+{
+    return __sync_bool_compare_and_swap ((volatile PlankLL*)p,
+                                         oldValue,
+                                         newValue);
+}
+#endif
+
 static inline PlankLL pl_AtomicLL_Subtract (PlankAtomicLLRef p, PlankLL operand)
 {
     return pl_AtomicLL_Add (p, -operand);
@@ -563,6 +605,15 @@ static inline PlankB pl_AtomicF_CompareAndSwap (PlankAtomicFRef p, PlankF oldVal
     return oldLong == _InterlockedCompareExchange ((volatile long*)p,
                                                    *(long*)&newValue, 
                                                    oldLong);
+}
+#endif
+
+#if PLANK_ANDROID
+static inline PlankB pl_AtomicF_CompareAndSwap (PlankAtomicFRef p, PlankF oldValue, PlankF newValue)
+{
+    return __sync_bool_compare_and_swap ((volatile PlankI*)p,
+                                         *(PlankI*)&oldValue,
+                                         *(PlankI*)&newValue);
 }
 #endif
 
@@ -675,6 +726,15 @@ inline PlankB pl_AtomicD_CompareAndSwap (PlankAtomicDRef p, PlankD oldValue, Pla
     return oldBits == pl_InterlockedCompareExchange64 ((volatile PlankULL*)p,
                                                        *(PlankULL*)&newValue, 
                                                        oldBits);
+}
+#endif
+
+#if PLANK_ANDROID
+static inline PlankB pl_AtomicD_CompareAndSwap (PlankAtomicDRef p, PlankD oldValue, PlankD newValue)
+{
+    return __sync_bool_compare_and_swap ((volatile PlankLL*)p,
+                                         *(PlankLL*)&oldValue,
+                                         *(PlankLL*)&newValue);
 }
 #endif
 
@@ -807,6 +867,22 @@ static inline PlankB pl_AtomicP_CompareAndSwap (PlankAtomicPRef p, PlankP oldVal
 }
 #endif
 #endif
+
+
+#if PLANK_ANDROID
+static inline PlankP pl_AtomicP_Add (PlankAtomicPRef p, PlankL operand)
+{
+    return (PlankP)__sync_add_and_fetch ((volatile PlankL*)p, operand);
+}
+
+static inline PlankB pl_AtomicP_CompareAndSwap (PlankAtomicPRef p, PlankP oldValue, PlankP newValue)
+{
+    return __sync_bool_compare_and_swap ((volatile PlankL*)p,
+                                         *(PlankL*)&oldValue,
+                                         *(PlankL*)&newValue);
+}
+#endif
+
 
 static inline PlankP pl_AtomicP_Subtract (PlankAtomicPRef p, PlankL operand)
 {
@@ -1000,11 +1076,11 @@ static inline PlankB pl_AtomicPX_CompareAndSwap (PlankAtomicPXRef p, PlankP oldP
 #endif // PLANK_PPC and PLANK_APPLE
 
 #if PLANK_ARM // and PLANK_APPLE
+
 #if PLANK_64BIT // ARM
-
 #error pl_AtomicPX_CompareAndSwap need to implement 128-bit CAS for this platform
-
 #endif // PLANK_64BIT
+
 #if PLANK_32BIT // ARM
 static inline  PlankB pl_AtomicPX_CompareAndSwap (PlankAtomicPXRef p, PlankP oldPtr, PlankL oldExtra, PlankP newPtr, PlankL newExtra)
 {
@@ -1053,8 +1129,44 @@ static inline PlankB pl_AtomicPX_CompareAndSwap (PlankAtomicPXRef p, PlankP oldP
                                            (__int64*)&oldAll);    
 }
 #endif
+#endif // PLANK_WIN
+
+#if PLANK_ANDROID
+#if PLANK_32BIT
+static inline  PlankB pl_AtomicPX_CompareAndSwap (PlankAtomicPXRef p, PlankP oldPtr, PlankL oldExtra, PlankP newPtr, PlankL newExtra)
+{
+    PlankAtomicPX oldAll = { oldPtr, oldExtra };
+    PlankAtomicPX newAll = { newPtr, newExtra };
+    
+    return __sync_bool_compare_and_swap ((volatile PlankLL*)p,
+                                         *(PlankLL*)&oldAll,
+                                         *(PlankLL*)&newAll);
+}
+#endif // PLANK_32BIT
+
+#if PLANK_64BIT
+
+#if PLANK_ARM
+#error pl_AtomicPX_CompareAndSwap need to implement 128-bit CAS for this platform
 #endif
 
+#if PLANK_X86
+static inline  PlankB pl_AtomicPX_CompareAndSwap (PlankAtomicPXRef p, PlankP oldPtr, PlankL oldExtra, PlankP newPtr, PlankL newExtra)
+{
+    char success;
+    __asm__ __volatile__("lock; cmpxchg16b %0; setz %1"
+                         : "=m"(*p), "=a"(success)
+                         : "m"(*p), "d" (oldExtra), "a" (oldPtr),
+                         "c" (newExtra), "b" (newPtr) : "memory");
+    return success;
+}
+#endif
+
+#endif // PLANK_64BIT
+#endif // PLANK_ANDROID
 
 #endif //PLANK_INLINING_FUNCTIONS
+
+
+
 
