@@ -947,26 +947,26 @@ PlankResult pl_AtomicLX_Destroy (PlankAtomicLXRef p);
  used to make each write commit unique.
  @param p The <i>Plank %AtomicLX</i> object. 
  @return The value. */
-PlankL pl_AtomicLX_Get (PlankAtomicLXRef p);
+static PlankL pl_AtomicLX_Get (PlankAtomicLXRef p);
 
 /** Get the current value nonatomically. 
  @param p The <i>Plank %AtomicLX</i> object. 
  @return The value. */
-PlankL pl_AtomicLX_GetUnchecked (PlankAtomicLXRef p);
+static PlankL pl_AtomicLX_GetUnchecked (PlankAtomicLXRef p);
 
 /** Get the current value of the extra "tag". 
  Many algorithms the user doesn't need to know the value of the tag as it is 
  simply used to make each write commit unique.
  @param p The <i>Plank %AtomicLX</i> object. 
  @return The extra tag. */
-PlankL pl_AtomicLX_GetExtra (PlankAtomicLXRef p);
+static PlankL pl_AtomicLX_GetExtra (PlankAtomicLXRef p);
 
 /** Get the current value of the extra "tag" nonatomically. 
  Many algorithms the user doesn't need to know the value of the tag as it is 
  simply used to make each write commit unique.
  @param p The <i>Plank %AtomicLX</i> object. 
  @return The extra tag. */
-PlankL pl_AtomicLX_GetExtraUnchecked (PlankAtomicLXRef p);
+static PlankL pl_AtomicLX_GetExtraUnchecked (PlankAtomicLXRef p);
 
 /** Swap the current pointer with a new pointer and change the tag. 
  @param p The <i>Plank %AtomicLX</i> object. 
@@ -974,58 +974,58 @@ PlankL pl_AtomicLX_GetExtraUnchecked (PlankAtomicLXRef p);
  @param newExtra The new extra tag to store.
  @param oldExtra The old tage will be place here (you can pass PLANK_NULL if you don't need this).
  @return The previously stored value. */
-PlankL pl_AtomicLX_SwapAll (PlankAtomicLXRef p, PlankL newValue, PlankL newExtra, PlankL* oldExtra);
+static PlankL pl_AtomicLX_SwapAll (PlankAtomicLXRef p, PlankL newValue, PlankL newExtra, PlankL* oldExtra);
 
 /** Swap the current pointer with a new pointer. 
  This also increments the extra tag by 1.
  @param p The <i>Plank %AtomicLX</i> object. 
  @param newValue The new pointer to store.
  @return The previously stored value. */
-PlankL pl_AtomicLX_Swap (PlankAtomicLXRef p, PlankL newValue);
+static PlankL pl_AtomicLX_Swap (PlankAtomicLXRef p, PlankL newValue);
 
 /** Swap over two values.
  The contents of p1 is copied to p2 and p2 is copied to p1 in an atomic operation.
  @param p1 One <i>Plank %AtomicLX</i> object. 
  @param p2 The other <i>Plank %AtomicLX</i> object. */
-void pl_AtomicLX_SwapOther (PlankAtomicLXRef p1, PlankAtomicLXRef p2);
+static void pl_AtomicLX_SwapOther (PlankAtomicLXRef p1, PlankAtomicLXRef p2);
 
 /** Set the current value to a new value and change the tag. 
  @param p The <i>Plank %AtomicLX</i> object. 
  @param newValue The new value to store.
  @param newExtra The new extra tag to store. */
-void pl_AtomicLX_SetAll (PlankAtomicLXRef p, PlankL newValue, PlankL newExtra);
+static void pl_AtomicLX_SetAll (PlankAtomicLXRef p, PlankL newValue, PlankL newExtra);
 
 /** Set the current value to a new value. 
  This also increments the extra tag by 1.
  @param p The <i>Plank %AtomicLX</i> object. 
  @param newValue The new value to store. */
-void pl_AtomicLX_Set (PlankAtomicLXRef p, PlankL newValue);
+static void pl_AtomicLX_Set (PlankAtomicLXRef p, PlankL newValue);
 
 /** Offset current value. 
  This also increments the extra tag by 1.
  @param p The <i>Plank %AtomicLX</i> object. 
  @param operand The amount by which to offset. 
  @return The new value. */
-PlankL pl_AtomicLX_Add (PlankAtomicLXRef p, PlankL operand);
+static PlankL pl_AtomicLX_Add (PlankAtomicLXRef p, PlankL operand);
 
 /** Offset current value in a negative direction. 
  This also increments the extra tag by 1.
  @param p The <i>Plank %AtomicLX</i> object. 
  @param operand The amount to add to the value. 
  @return The new pointer. */
-PlankL pl_AtomicLX_Subtract (PlankAtomicLXRef p, PlankL operand);
+static PlankL pl_AtomicLX_Subtract (PlankAtomicLXRef p, PlankL operand);
 
 /** Increment the current value by 1. 
  This also increments the extra tag by 1.
  @param p The <i>Plank %AtomicLX</i> object. 
  @return The new value. */
-PlankL pl_AtomicLX_Increment (PlankAtomicLXRef p);
+static PlankL pl_AtomicLX_Increment (PlankAtomicLXRef p);
 
 /** Decrement the current value by 1 byte. 
  This also increments the extra tag by 1.
  @param p The <i>Plank %AtomicLX</i> object. 
  @return The new value. */
-PlankL pl_AtomicLX_Decrement (PlankAtomicLXRef p);
+static PlankL pl_AtomicLX_Decrement (PlankAtomicLXRef p);
 
 /** Swap the current values with new values if specified old values are still current.
  This is the most important atomic operation for each atomic class, many other operations are based on this.
@@ -1044,7 +1044,7 @@ PlankL pl_AtomicLX_Decrement (PlankAtomicLXRef p);
  @param newValue The new value to attempt to store.
  @param newExtra The new extra tag to attempt to store.
  @return @c true if the swap was successful, otherwise @c false. */
-PlankB pl_AtomicLX_CompareAndSwap (PlankAtomicLXRef p, PlankL oldValue, PlankL oldExtra, PlankL newValue, PlankL newExtra);
+static PlankB pl_AtomicLX_CompareAndSwap (PlankAtomicLXRef p, PlankL oldValue, PlankL oldExtra, PlankL newValue, PlankL newExtra);
 
 /** @} */
 
