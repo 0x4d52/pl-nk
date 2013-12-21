@@ -39,7 +39,7 @@
 #ifndef PLANK_THREAD_H
 #define PLANK_THREAD_H
 
-#include "../containers/plank_Atomic.h"
+#include "../containers/atomic/plank_Atomic.h"
 
 PLANK_BEGIN_C_LINKAGE
 

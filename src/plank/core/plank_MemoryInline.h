@@ -41,7 +41,7 @@
 // help prevent accidental inclusion other than via the intended header
 #if PLANK_INLINING_FUNCTIONS
 
-#include "../containers/plank_Atomic.h"
+#include "../containers/atomic/plank_Atomic.h"
 
 #if !DOXYGEN
 typedef struct PlankMemory

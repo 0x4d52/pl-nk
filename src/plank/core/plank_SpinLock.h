@@ -39,7 +39,7 @@
 #ifndef PLANK_SPINLOCK_H
 #define PLANK_SPINLOCK_H
 
-#include "../containers/plank_Atomic.h"
+#include "../containers/atomic/plank_Atomic.h"
 
 #define PLANK_SPINLOCK_UNLOCKED 0
 #define PLANK_SPINLOCK_LOCKED 1

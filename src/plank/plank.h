@@ -63,8 +63,8 @@
 #include "core/plank_Thread.h"
 #include "core/plank_LockFreeMemory.h"
 
+#include "containers/atomic/plank_Atomic.h"
 #include "containers/plank_ContainersMisc.h"
-#include "containers/plank_Atomic.h"
 #include "containers/plank_SharedPtr.h"
 #include "containers/plank_DynamicArray.h"
 #include "containers/plank_LockFreeDynamicArray.h"

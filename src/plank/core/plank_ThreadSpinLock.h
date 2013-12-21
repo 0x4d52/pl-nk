@@ -39,7 +39,7 @@
 #ifndef PLANK_THREADSPINLOCK_H
 #define PLANK_THREADSPINLOCK_H
 
-#include "../containers/plank_Atomic.h"
+#include "../containers/atomic/plank_Atomic.h"
 #include "plank_Thread.h"
 
 #define PLANK_THREADSPINLOCK_UNLOCKED 0 // assumes 0 is an invalid thread ID, should be OK on posix & windows

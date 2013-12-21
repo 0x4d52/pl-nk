@@ -38,7 +38,7 @@
 
 #include "../core/plank_StandardHeader.h"
 #include "plank_RNG.h"
-#include "../containers/plank_Atomic.h"
+#include "../containers/atomic/plank_Atomic.h"
 
 PlankRNGRef pl_RNGGlobal()
 {
