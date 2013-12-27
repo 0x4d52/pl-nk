@@ -67,8 +67,7 @@ PlankResult pl_AtomicI_Init (PlankAtomicIRef p)
     if (p == PLANK_NULL)
         return PlankResult_MemoryError;
     
-//    pl_AtomicI_Set (p, (PlankI)0);
-    p->value = 0;
+    pl_MemoryZero (p, sizeof (PlankAtomicI));
     
     return PlankResult_OK;
 }
@@ -126,8 +125,7 @@ PlankResult pl_AtomicL_Init (PlankAtomicLRef p)
     if (p == PLANK_NULL)
         return PlankResult_MemoryError;
     
-//    pl_AtomicL_Set (p, (PlankL)0);
-    p->value = 0;
+    pl_MemoryZero (p, sizeof (PlankAtomicL));
     
     return PlankResult_OK;
 }
@@ -180,45 +178,6 @@ PlankAtomicLLRef pl_AtomicLL_Create()
     return p;
 }
 
-PlankResult pl_AtomicLL_Init (PlankAtomicLLRef p)
-{
-    PlankResult result = PlankResult_OK;
-
-    if (p == PLANK_NULL)
-    {
-        result = PlankResult_MemoryError;
-        goto exit;
-    }
-    
-#if PLANK_NOATOMIC64BIT
-    pl_ThreadSpinLock_Init (&p->lock);
-#endif    
-    
-//    pl_AtomicLL_Set (p, (PlankLL)0);
-    p->value = 0;
-    
-exit:
-    return result;
-}
-
-PlankResult pl_AtomicLL_DeInit (PlankAtomicLLRef p)
-{
-    PlankResult result = PlankResult_OK;
-    
-    if (p == PLANK_NULL)
-    {
-        result = PlankResult_MemoryError;
-        goto exit;
-    }
-    
-#if PLANK_NOATOMIC64BIT
-    pl_ThreadSpinLock_DeInit (&p->lock);
-#endif
-    
-exit:
-    return result;
-}
-
 PlankResult pl_AtomicLL_Destroy (PlankAtomicLLRef p)
 {
     PlankResult result = PlankResult_OK;
@@ -243,27 +202,6 @@ PlankLL pl_AtomicLL_GetExtraUnchecked (PlankAtomicLLRef p)
     (void)p;
     return (PlankLL)0;
 }
-
-
-#if PLANK_APPLE && PLANK_PPC
-PlankB pl_AtomicLL_CompareAndSwap (PlankAtomicLLRef p, PlankLL oldValue, PlankLL newValue)
-{    
-    if (! pl_ThreadSpinLock_TryLock (&p->lock))
-        return PLANK_FALSE;
-    
-    if (p->value != oldValue)
-    {
-        pl_ThreadSpinLock_Unlock (&p->lock);
-        return PLANK_FALSE;
-    }
-    
-    p->value = newValue;
-    pl_ThreadSpinLock_Unlock (&p->lock);
-
-    return PLANK_TRUE;
-}
-#endif // PLANK_PPC && PLANK_APPLE
-
 
 //------------------------------------------------------------------------------
 
@@ -293,8 +231,7 @@ PlankResult pl_AtomicF_Init (PlankAtomicFRef p)
     if (p == PLANK_NULL)
         return PlankResult_MemoryError;
     
-//    pl_AtomicF_Set (p, 0.f);
-    p->value = 0.f;
+    pl_MemoryZero (p, sizeof (PlankAtomicF));
     
     return PlankResult_OK;
 }
@@ -348,45 +285,6 @@ PlankAtomicDRef pl_AtomicD_Create()
     return p;
 }
 
-PlankResult pl_AtomicD_Init (PlankAtomicDRef p)
-{
-    PlankResult result = PlankResult_OK;
-    
-    if (p == PLANK_NULL)
-    {
-        result = PlankResult_MemoryError;
-        goto exit;
-    }
-    
-#if PLANK_NOATOMIC64BIT
-    pl_ThreadSpinLock_Init (&p->lock);
-#endif    
-    
-//    pl_AtomicD_Set (p, 0.0);
-    p->value = 0.0;
-    
-exit:
-    return result;
-}
-
-PlankResult pl_AtomicD_DeInit (PlankAtomicDRef p)
-{
-    PlankResult result = PlankResult_OK;
-    
-    if (p == PLANK_NULL)
-    {
-        result = PlankResult_MemoryError;
-        goto exit;
-    }
-    
-#if PLANK_NOATOMIC64BIT
-    pl_ThreadSpinLock_DeInit (&p->lock);
-#endif
-    
-exit:
-    return result;
-}
-
 PlankResult pl_AtomicD_Destroy (PlankAtomicDRef p)
 {
     PlankResult result;
@@ -399,6 +297,7 @@ PlankResult pl_AtomicD_Destroy (PlankAtomicDRef p)
         goto exit;
     
     result = pl_Memory_Free (m, p);
+    
 exit:
     return result;
 }
@@ -443,8 +342,7 @@ PlankResult pl_AtomicP_Init (PlankAtomicPRef p)
     if (p == PLANK_NULL)
         return PlankResult_MemoryError;
     
-//    pl_AtomicP_Set (p, PLANK_NULL);
-    p->ptr = PLANK_NULL;
+    pl_MemoryZero (p, sizeof (PlankAtomicP));
     
     return PlankResult_OK;
 }
@@ -473,164 +371,6 @@ PlankL pl_AtomicP_GetExtraUnchecked (PlankAtomicPRef p)
 {
 	(void)p;
     return (PlankL)0;
-}
-
-//------------------------------------------------------------------------------
-
-PlankAtomicPXRef pl_AtomicPX_CreateAndInit()
-{
-    PlankAtomicPXRef p = pl_AtomicPX_Create();
-    if (p != PLANK_NULL) pl_AtomicPX_Init (p);
-    return p;
-}
-
-PlankAtomicPXRef pl_AtomicPX_Create()
-{
-    PlankMemoryRef m;
-    PlankAtomicPXRef p;
-    
-    m = pl_MemoryGlobal();
-    p = (PlankAtomicPXRef)pl_Memory_AllocateBytes (m, sizeof (PlankAtomicPX));
-    
-    if (p != PLANK_NULL)
-        pl_MemoryZero (p, sizeof (PlankAtomicPX));
-    
-    return p;
-}
-
-PlankResult pl_AtomicPX_Init (PlankAtomicPXRef p)
-{
-    PlankResult result = PlankResult_OK;
-
-    if (p == PLANK_NULL)
-    {
-        result = PlankResult_MemoryError;
-        goto exit;
-    }
-    
-#if PLANK_NOATOMIC64BIT
-    pl_ThreadSpinLock_Init (&p->lock);
-#endif        
-    
-//    pl_AtomicPX_SetAll (p, (PlankP)0, (PlankL)0);
-    pl_MemoryZero (p, sizeof (PlankAtomicPX));
-    
-exit:
-    return result;
-}
-
-PlankResult pl_AtomicPX_DeInit (PlankAtomicPXRef p)
-{
-    PlankResult result = PlankResult_OK;
-    
-    if (p == PLANK_NULL)
-    {
-        result = PlankResult_MemoryError;
-        goto exit;
-    }
-    
-#if PLANK_NOATOMIC64BIT
-    pl_ThreadSpinLock_DeInit (&p->lock);
-#endif
-    
-exit:
-    return result;
-}
-
-PlankResult pl_AtomicPX_Destroy (PlankAtomicPXRef p)
-{
-    PlankResult result;
-    PlankMemoryRef m;
-    
-    result = PlankResult_OK;
-    m = pl_MemoryGlobal();
-
-    if ((result = pl_AtomicPX_DeInit (p)) != PlankResult_OK)
-        goto exit;
-    
-    result = pl_Memory_Free (m, p);
-    
-exit:
-    return result;
-}
-
-//------------------------------------------------------------------------------
-
-PlankAtomicLXRef pl_AtomicLX_CreateAndInit()
-{
-    PlankAtomicLXRef p = pl_AtomicLX_Create();
-    if (p != PLANK_NULL) pl_AtomicLX_Init (p);
-    return p;
-}
-
-PlankAtomicLXRef pl_AtomicLX_Create()
-{
-    PlankMemoryRef m;
-    PlankAtomicLXRef p;
-    
-    m = pl_MemoryGlobal();
-    p = (PlankAtomicLXRef)pl_Memory_AllocateBytes (m, sizeof (PlankAtomicLX));
-    
-    if (p != PLANK_NULL)
-        pl_MemoryZero (p, sizeof (PlankAtomicLX));
-    
-    return p;
-}
-
-PlankResult pl_AtomicLX_Init (PlankAtomicLXRef p)
-{
-    PlankResult result = PlankResult_OK;
-    
-    if (p == PLANK_NULL)
-    {
-        result = PlankResult_MemoryError;
-        goto exit;
-    }
-    
-#if PLANK_NOATOMIC64BIT
-    pl_ThreadSpinLock_Init (&p->lock);
-#endif        
-    
-//    pl_AtomicLX_SetAll (p, (PlankL)0, (PlankL)0);
-    pl_MemoryZero (p, sizeof (PlankAtomicLX));
-    
-exit:
-    return result;
-}
-
-PlankResult pl_AtomicLX_DeInit (PlankAtomicLXRef p)
-{
-    PlankResult result = PlankResult_OK;
-    
-    if (p == PLANK_NULL)
-    {
-        result = PlankResult_MemoryError;
-        goto exit;
-    }
-    
-#if PLANK_NOATOMIC64BIT
-    pl_ThreadSpinLock_DeInit (&p->lock);
-#endif
-    
-exit:
-    return result;
-}
-
-PlankResult pl_AtomicLX_Destroy (PlankAtomicLXRef p)
-{
-    PlankResult result;
-    PlankMemoryRef m;
-    
-    result = PlankResult_OK;
-    m = pl_MemoryGlobal();
-    
-    if ((result = pl_AtomicLX_DeInit (p)) != PlankResult_OK)
-        goto exit;
-    
-    result = pl_Memory_Free (m, p);
-    
-exit:
-    return result;
 }
 
 

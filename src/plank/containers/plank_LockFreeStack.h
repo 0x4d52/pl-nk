@@ -72,8 +72,8 @@ PLANK_END_C_LINKAGE
 #if !DOXYGEN
 typedef struct PlankLockFreeStack
 {
-	PLANK_ALIGN(16) PlankAtomicPX	atom;
-    PLANK_ALIGN(16) PlankAtomicLL   count;
+	PLANK_ALIGN(PLANK_WIDESIZE) PlankAtomicPX	atom;
+    PLANK_ALIGN(PLANK_WIDESIZE) PlankAtomicLL   count;
     PlankLockFreeStackFreeElementDataFunction freeFunction;
 } PlankLockFreeStack;
 #endif

@@ -41,8 +41,8 @@
 #if !DOXYGEN
 typedef struct PlankLockFreeLinkedListElement
 {
-    PLANK_ALIGN(16) PlankAtomicPX next;
-	PLANK_ALIGN(16) PlankAtomicPX data;
+    PLANK_ALIGN(PLANK_WIDESIZE) PlankAtomicPX next;
+	PLANK_ALIGN(PLANK_WIDESIZE) PlankAtomicPX data;
 } PlankLockFreeLinkedListElement;
 
 typedef PlankLockFreeLinkedListElement PlankLockFreeQueueElement;

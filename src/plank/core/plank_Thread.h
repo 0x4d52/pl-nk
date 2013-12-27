@@ -248,7 +248,7 @@ typedef struct PlankThread
     PlankThreadNativeHandle thread;
     PlankThreadID threadID;
     PlankThreadFunction function;
-    PLANK_ALIGN(16) PlankAtomicPX userDataAtom;
+    PLANK_ALIGN(PLANK_WIDESIZE) PlankAtomicPX userDataAtom;
     PLANK_ALIGN(4) PlankAtomicI shouldExitAtom;
     PLANK_ALIGN(4) PlankAtomicI isRunningAtom;
     PLANK_ALIGN(4) PlankAtomicI paused;

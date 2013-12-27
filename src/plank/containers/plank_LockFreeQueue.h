@@ -75,8 +75,8 @@ PLANK_END_C_LINKAGE
 #if !DOXYGEN
 typedef struct PlankLockFreeQueue
 {
-	PLANK_ALIGN(16) PlankAtomicPX               head;
-    PLANK_ALIGN(16) PlankAtomicPX               tail;
+	PLANK_ALIGN(PLANK_WIDESIZE) PlankAtomicPX               head;
+    PLANK_ALIGN(PLANK_WIDESIZE) PlankAtomicPX               tail;
     PLANK_ALIGN(4) PlankAtomicI                 count;
     PlankLockFreeQueueFreeElementDataFunction   freeFunction;
     PlankLockFreeQueueElement                   dummyElement;

@@ -46,7 +46,7 @@
 #if !DOXYGEN
 typedef struct PlankMemory
 {
-    PLANK_ALIGN(16) PlankAtomicPX funcs;
+    PLANK_ALIGN(PLANK_WIDESIZE) PlankAtomicPX funcs;
     PlankP userData;
 } PlankMemory; 
 #endif

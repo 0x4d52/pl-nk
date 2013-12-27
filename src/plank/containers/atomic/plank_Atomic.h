@@ -304,12 +304,12 @@ PlankAtomicLLRef pl_AtomicLL_Create();
 /** Initialise a <i>Plank %AtomicLL</i> object. 
  @param p The <i>Plank %AtomicLL</i> object. 
  @return PlankResult_OK if successful, otherwise an error code. */
-PlankResult pl_AtomicLL_Init (PlankAtomicLLRef p);
+static PlankResult pl_AtomicLL_Init (PlankAtomicLLRef p);
 
 /** Deinitialise a <i>Plank %AtomicLL</i> object. 
  @param p The <i>Plank %AtomicLL</i> object. 
  @return PlankResult_OK if successful, otherwise an error code. */
-PlankResult pl_AtomicLL_DeInit (PlankAtomicLLRef p);
+static PlankResult pl_AtomicLL_DeInit (PlankAtomicLLRef p);
 
 /** Destroy a <i>Plank %AtomicLL</i> object. 
  @param p The <i>Plank %AtomicLL</i> object. 
@@ -385,10 +385,10 @@ static PlankLL pl_AtomicLL_Decrement (PlankAtomicLLRef p);
  @param oldValue The expected old value being currently stored.
  @param newValue The new value to attempt to store.
  @return @c true if the swap was successful, otherwise @c false. */
-#if !PLANK_NOATOMIC64BIT || DOXYGEN
-static
-#endif
-PlankB pl_AtomicLL_CompareAndSwap (PlankAtomicLLRef p, PlankLL oldValue, PlankLL newValue);
+//#if !PLANK_NOATOMIC64BIT || DOXYGEN
+//static
+//#endif
+static PlankB pl_AtomicLL_CompareAndSwap (PlankAtomicLLRef p, PlankLL oldValue, PlankLL newValue);
 
 /** @} */
 
@@ -536,12 +536,12 @@ PlankAtomicDRef pl_AtomicD_Create();
 /** Initialise a <i>Plank %AtomicD</i> object. 
  @param p The <i>Plank %AtomicD</i> object. 
  @return PlankResult_OK if successful, otherwise an error code. */
-PlankResult pl_AtomicD_Init (PlankAtomicDRef p);
+static PlankResult pl_AtomicD_Init (PlankAtomicDRef p);
 
 /** Deinitialise a <i>Plank %AtomicD</i> object. 
  @param p The <i>Plank %AtomicD</i> object. 
  @return PlankResult_OK if successful, otherwise an error code. */
-PlankResult pl_AtomicD_DeInit (PlankAtomicDRef p);
+static PlankResult pl_AtomicD_DeInit (PlankAtomicDRef p);
 
 /** Destroy a <i>Plank %AtomicD</i> object. 
  @param p The <i>Plank %AtomicD</i> object. 
@@ -766,27 +766,27 @@ typedef struct PlankAtomicPX* PlankAtomicPXRef;
 
 /** Creates and initialises a <i>Plank %AtomicPX</i> object and return an oqaque reference to it.
  @return A <i>Plank %AtomicPX</i> object as an opaque reference or PLANK_NULL. */
-PlankAtomicPXRef pl_AtomicPX_CreateAndInit();
+static PlankAtomicPXRef pl_AtomicPX_CreateAndInit();
 
 /** Create a <i>Plank %AtomicPX</i> object and return an oqaque reference to it.
  In this case both the pointer and the extra tag are set to 0.
  @return A <i>Plank %AtomicPX</i> object as an opaque reference or PLANK_NULL. */
-PlankAtomicPXRef pl_AtomicPX_Create();
+static PlankAtomicPXRef pl_AtomicPX_Create();
 
 /** Initialise a <i>Plank %AtomicPX</i> object. 
  @param p The <i>Plank %AtomicPX</i> object. 
  @return PlankResult_OK if successful, otherwise an error code. */
-PlankResult pl_AtomicPX_Init (PlankAtomicPXRef p);
+static PlankResult pl_AtomicPX_Init (PlankAtomicPXRef p);
 
 /** Deinitialise a <i>Plank %AtomicPX</i> object. 
  @param p The <i>Plank %AtomicPX</i> object. 
  @return PlankResult_OK if successful, otherwise an error code. */
-PlankResult pl_AtomicPX_DeInit (PlankAtomicPXRef p);
+static PlankResult pl_AtomicPX_DeInit (PlankAtomicPXRef p);
 
 /** Destroy a <i>Plank %AtomicPX</i> object. 
  @param p The <i>Plank %AtomicPX</i> object. 
  @return PlankResult_OK if successful, otherwise an error code. */
-PlankResult pl_AtomicPX_Destroy (PlankAtomicPXRef p);
+static PlankResult pl_AtomicPX_Destroy (PlankAtomicPXRef p);
 
 /** Get the current pointer. 
  The extra tag can be obtained using pl_AtomicPX_GetExtra() although for many
@@ -919,27 +919,27 @@ typedef struct PlankAtomicLX* PlankAtomicLXRef;
 
 /** Creates and initialises a <i>Plank %AtomicLX</i> object and return an oqaque reference to it.
  @return A <i>Plank %AtomicLX</i> object as an opaque reference or PLANK_NULL. */
-PlankAtomicLXRef pl_AtomicLX_CreateAndInit();
+static PlankAtomicLXRef pl_AtomicLX_CreateAndInit();
 
 /** Create a <i>Plank %AtomicLX</i> object and return an oqaque reference to it.
  In this case both the pointer and the extra tag are set to 0.
  @return A <i>Plank %AtomicLX</i> object as an opaque reference or PLANK_NULL. */
-PlankAtomicLXRef pl_AtomicLX_Create();
+static PlankAtomicLXRef pl_AtomicLX_Create();
 
 /** Initialise a <i>Plank %AtomicLX</i> object. 
  @param p The <i>Plank %AtomicLX</i> object. 
  @return PlankResult_OK if successful, otherwise an error code. */
-PlankResult pl_AtomicLX_Init (PlankAtomicLXRef p);
+static PlankResult pl_AtomicLX_Init (PlankAtomicLXRef p);
 
 /** Deinitialise a <i>Plank %AtomicLX</i> object. 
  @param p The <i>Plank %AtomicLX</i> object. 
  @return PlankResult_OK if successful, otherwise an error code. */
-PlankResult pl_AtomicLX_DeInit (PlankAtomicLXRef p);
+static PlankResult pl_AtomicLX_DeInit (PlankAtomicLXRef p);
 
 /** Destroy a <i>Plank %AtomicLX</i> object. 
  @param p The <i>Plank %AtomicLX</i> object. 
  @return PlankResult_OK if successful, otherwise an error code. */
-PlankResult pl_AtomicLX_Destroy (PlankAtomicLXRef p);
+static PlankResult pl_AtomicLX_Destroy (PlankAtomicLXRef p);
 
 /** Get the current VALUE. 
  The extra tag can be obtained using pl_AtomicLX_GetExtra() although for many

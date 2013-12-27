@@ -220,10 +220,13 @@ SmartPointerCounter::SmartPointerCounter (SmartPointer* smartPointer) throw()
     plonk_staticassert (sizeof (Halves) == (PLONK_WORDSIZE*2))
     plonk_staticassert (sizeof (Element) == (PLONK_WORDSIZE*2))
 
-    // no need to set atomically in the constructor
-    atom.getAtomicRef()->ptr = smartPointer;
-    atom.getAtomicRef()->extra = 0;
-        
+//    // no need to set atomically in the constructor
+//    atom.getAtomicRef()->ptr = smartPointer;
+//    atom.getAtomicRef()->extra = 0;
+    
+    // needs not to access members directly though if we're going to hack pointer bit masks
+    atom.setAll (smartPointer, 0);
+    
 #if PLONK_SMARTPOINTER_DEBUG
     ++getTotalSmartPointerCountersAtom();
 #if PLONK_SMARTPOINTER_DEBUGLOG
