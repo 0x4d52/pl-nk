@@ -190,7 +190,7 @@ PlankResult pl_LockFreeStack_Push (PlankLockFreeStackRef p, const PlankLockFreeS
 {
     PlankResult result;
     PlankP oldPtr, newPtr;
-    PlankL oldExtra, newExtra;
+    PlankUL oldExtra, newExtra;
     PlankB success;
         
     result = PlankResult_OK;

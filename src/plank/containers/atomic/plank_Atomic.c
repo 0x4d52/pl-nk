@@ -62,23 +62,6 @@ PlankAtomicIRef pl_AtomicI_Create()
     return p;
 }
 
-PlankResult pl_AtomicI_Init (PlankAtomicIRef p)
-{
-    if (p == PLANK_NULL)
-        return PlankResult_MemoryError;
-    
-    pl_MemoryZero (p, sizeof (PlankAtomicI));
-    
-    return PlankResult_OK;
-}
-
-PlankResult pl_AtomicI_DeInit (PlankAtomicIRef p)
-{
-    if (p == PLANK_NULL)
-        return PlankResult_MemoryError;
-    return PlankResult_OK;
-}
-
 PlankResult pl_AtomicI_Destroy (PlankAtomicIRef p)
 {
     PlankMemoryRef m = pl_MemoryGlobal();
@@ -95,6 +78,11 @@ PlankUI pl_AtomicI_GetExtraUnchecked (PlankAtomicIRef p)
 {
     (void)p;
     return 0;
+}
+
+void pl_AtomicI_SetUnchecked (PlankAtomicIRef p, PlankI newValue)
+{
+    p->value = newValue;
 }
 
 //------------------------------------------------------------------------------
@@ -120,23 +108,6 @@ PlankAtomicLRef pl_AtomicL_Create()
     return p;
 }
 
-PlankResult pl_AtomicL_Init (PlankAtomicLRef p)
-{
-    if (p == PLANK_NULL)
-        return PlankResult_MemoryError;
-    
-    pl_MemoryZero (p, sizeof (PlankAtomicL));
-    
-    return PlankResult_OK;
-}
-
-PlankResult pl_AtomicL_DeInit (PlankAtomicLRef p)
-{
-    if (p == PLANK_NULL)
-        return PlankResult_MemoryError;
-    return PlankResult_OK;
-}
-
 PlankResult pl_AtomicL_Destroy (PlankAtomicLRef p)
 {
     PlankMemoryRef m = pl_MemoryGlobal();
@@ -153,6 +124,11 @@ PlankUL pl_AtomicL_GetExtraUnchecked (PlankAtomicLRef p)
 {
     (void)p;
     return (PlankL)0;
+}
+
+void pl_AtomicL_SetUnchecked (PlankAtomicLRef p, PlankL newValue)
+{
+    p->value = newValue;
 }
 
 //------------------------------------------------------------------------------
@@ -203,6 +179,11 @@ PlankULL pl_AtomicLL_GetExtraUnchecked (PlankAtomicLLRef p)
     return (PlankLL)0;
 }
 
+void pl_AtomicLL_SetUnchecked (PlankAtomicLLRef p, PlankLL newValue)
+{
+    p->value = newValue;
+}
+
 //------------------------------------------------------------------------------
 
 PlankAtomicFRef pl_AtomicF_CreateAndInit()
@@ -226,23 +207,6 @@ PlankAtomicFRef pl_AtomicF_Create()
     return p;
 }
 
-PlankResult pl_AtomicF_Init (PlankAtomicFRef p)
-{
-    if (p == PLANK_NULL)
-        return PlankResult_MemoryError;
-    
-    pl_MemoryZero (p, sizeof (PlankAtomicF));
-    
-    return PlankResult_OK;
-}
-
-PlankResult pl_AtomicF_DeInit (PlankAtomicFRef p)
-{
-    if (p == PLANK_NULL)
-        return PlankResult_MemoryError;
-    return PlankResult_OK;
-}
-
 PlankResult pl_AtomicF_Destroy (PlankAtomicFRef p)
 {
     PlankMemoryRef m = pl_MemoryGlobal();
@@ -260,6 +224,11 @@ PlankUI pl_AtomicF_GetExtraUnchecked (PlankAtomicFRef p)
 {
     (void)p;
     return 0;
+}
+
+void pl_AtomicF_SetUnchecked (PlankAtomicFRef p, PlankF newValue)
+{
+    p->value = newValue;
 }
 
 //------------------------------------------------------------------------------
@@ -314,6 +283,11 @@ PlankULL pl_AtomicD_GetExtraUnchecked (PlankAtomicDRef p)
     return (PlankLL)0;
 }
 
+void pl_AtomicD_SetUnchecked (PlankAtomicDRef p, PlankD newValue)
+{
+    p->value = newValue;
+}
+
 //------------------------------------------------------------------------------
 
 PlankAtomicPRef pl_AtomicP_CreateAndInit()
@@ -337,23 +311,6 @@ PlankAtomicPRef pl_AtomicP_Create()
     return p;
 }
 
-PlankResult pl_AtomicP_Init (PlankAtomicPRef p)
-{
-    if (p == PLANK_NULL)
-        return PlankResult_MemoryError;
-    
-    pl_MemoryZero (p, sizeof (PlankAtomicP));
-    
-    return PlankResult_OK;
-}
-
-PlankResult pl_AtomicP_DeInit (PlankAtomicPRef p)
-{
-    if (p == PLANK_NULL)
-        return PlankResult_MemoryError;
-    return PlankResult_OK;
-}
-
 PlankResult pl_AtomicP_Destroy (PlankAtomicPRef p)
 {
     PlankMemoryRef m = pl_MemoryGlobal();
@@ -373,7 +330,18 @@ PlankUL pl_AtomicP_GetExtraUnchecked (PlankAtomicPRef p)
     return (PlankL)0;
 }
 
+void pl_AtomicP_SetUnchecked (PlankAtomicPRef p, PlankP newPtr)
+{
+    p->ptr = newPtr;
+}
 
+//------------------------------------------------------------------------------
+
+void pl_AtomicPX_SetAllUnchecked (PlankAtomicPXRef p, PlankP newPtr, PlankUL newExtra)
+{
+    p->ptr = newPtr;
+    p->extra = newExtra;
+}
 
 
 

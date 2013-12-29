@@ -103,12 +103,12 @@ class AtomicExtended : public AtomicBase<Type>
         \
         inline ATOMIC_CLASS (const Plank##TYPECODE initialValue) throw() {\
             pl_Atomic##FUNCCODE##_Init (getAtomicRef());\
-            getAtomicRef()->value = initialValue;\
+            pl_Atomic##FUNCCODE##_SetUnchecked (getAtomicRef(), initialValue);\
         }\
         \
         inline ATOMIC_CLASS (ATOMIC_CLASS const& copy) throw() {\
             pl_Atomic##FUNCCODE##_Init (getAtomicRef());\
-            pl_Atomic##FUNCCODE##_Set (getAtomicRef(), pl_Atomic##FUNCCODE##_Get (copy.getAtomicRef()));\
+            pl_Atomic##FUNCCODE##_SetUnchecked (getAtomicRef(), pl_Atomic##FUNCCODE##_Get (copy.getAtomicRef()));\
         }\
         \
         inline  ~ATOMIC_CLASS() {\
@@ -222,29 +222,26 @@ public:
     inline AtomicValue (Type& initialValue) throw() 
     {
         pl_AtomicP_Init (getAtomicRef());
-//        pl_AtomicP_Set (getAtomicRef(), static_cast<void*> (&initialValue));
-        getAtomicRef()->ptr = static_cast<void*> (&initialValue);
+        pl_AtomicP_SetUnchecked (getAtomicRef(), &initialValue);
     }
     
 	template<class OtherType>
     inline AtomicValue (OtherType* initialPtr) throw() 
     {
         pl_AtomicP_Init (getAtomicRef());
-//        pl_AtomicP_Set (getAtomicRef(), static_cast<Type*> (initialPtr));
-        getAtomicRef()->ptr = static_cast<Type*> (initialPtr);
+        pl_AtomicP_SetUnchecked (getAtomicRef(), static_cast<Type*> (initialPtr));
     }
     
     inline AtomicValue (Type* initialPtr) throw() 
     {
         pl_AtomicP_Init (getAtomicRef());
-//        pl_AtomicP_Set (getAtomicRef(), initialPtr);
-        getAtomicRef()->ptr = initialPtr;
+        pl_AtomicP_SetUnchecked (getAtomicRef(), initialPtr);
     }
     
     inline AtomicValue (AtomicValue const& copy) throw() 
     {
         pl_AtomicP_Init (getAtomicRef());
-        pl_AtomicP_Set (getAtomicRef(), pl_AtomicP_Get (copy.getAtomicRef()));
+        pl_AtomicP_SetUnchecked (getAtomicRef(), pl_AtomicP_Get (copy.getAtomicRef()));
     }
     
     inline ~AtomicValue() 
@@ -385,21 +382,19 @@ public:
     inline AtomicValue (OtherType* initialPtr) throw() 
     {
         pl_AtomicP_Init (getAtomicRef());
-//        pl_AtomicP_Set (getAtomicRef(), static_cast<void*> (initialPtr));
-        getAtomicRef()->ptr = static_cast<void*> (initialPtr);
+        pl_AtomicP_SetUnchecked (getAtomicRef(), static_cast<void*> (initialPtr));
     }
     
     inline AtomicValue (void* initialPtr) throw() 
     {
         pl_AtomicP_Init (getAtomicRef());
-//        pl_AtomicP_Set (getAtomicRef(), initialPtr);
-        getAtomicRef()->ptr = initialPtr;
+        pl_AtomicP_SetUnchecked (getAtomicRef(), initialPtr);
     }
     
     inline AtomicValue (AtomicValue const& copy) throw() 
     {
         pl_AtomicP_Init (getAtomicRef());
-        pl_AtomicP_Set (getAtomicRef(), pl_AtomicP_Get (copy.getAtomicRef()));
+        pl_AtomicP_SetUnchecked (getAtomicRef(), pl_AtomicP_Get (copy.getAtomicRef()));
     }
     
     inline ~AtomicValue() 
@@ -526,26 +521,26 @@ public:
     inline AtomicExtended (Type& initialValue) throw() 
     {
         pl_AtomicPX_Init (getAtomicRef());
-        pl_AtomicPX_Set (getAtomicRef(), static_cast<void*> (&initialValue));
+        pl_AtomicPX_SetAllUnchecked (getAtomicRef(), static_cast<void*> (&initialValue), 0);
     }
     
 	template<class OtherType>
     inline AtomicExtended (OtherType* const initialPtr) throw() 
     {
         pl_AtomicPX_Init (getAtomicRef());
-        pl_AtomicPX_Set (getAtomicRef(), static_cast<Type*> (initialPtr));
+        pl_AtomicPX_SetAllUnchecked (getAtomicRef(), static_cast<Type*> (initialPtr), 0);
     }
     
     inline AtomicExtended (Type* initialPtr) throw() 
     {
         pl_AtomicPX_Init (getAtomicRef());
-        pl_AtomicPX_Set (getAtomicRef(), initialPtr);
+        pl_AtomicPX_SetAllUnchecked (getAtomicRef(), initialPtr, 0);
     }    
     
     inline AtomicExtended (AtomicExtended const& copy) throw() 
     {
         pl_AtomicPX_Init (getAtomicRef());
-        pl_AtomicPX_Set (getAtomicRef(), pl_AtomicPX_Get (copy.getAtomicRef()));
+        pl_AtomicPX_SetAllUnchecked (getAtomicRef(), pl_AtomicPX_Get (copy.getAtomicRef()), 0);
     }
     
     inline ~AtomicExtended() 
@@ -707,145 +702,6 @@ private:
     };
 
     PLONK_ALIGN(PLONK_WIDESIZE) Union u;
-};
-
-
-template<>
-class AtomicExtended<Long> : public AtomicBase<Long>
-{
-public:
-    inline AtomicExtended() throw() 
-    {
-        pl_AtomicLX_Init (getAtomicRef());
-    }
-        
-    inline AtomicExtended (const Long initialValue) throw() 
-    {
-        pl_AtomicLX_Init (getAtomicRef());
-        pl_AtomicLX_Set (getAtomicRef(), initialValue);
-    }    
-    
-    inline AtomicExtended (const Long initialValue, const Long initialExtra) throw() 
-    {
-        pl_AtomicLX_Init (getAtomicRef());
-        pl_AtomicLX_SetAll (getAtomicRef(), initialValue, initialExtra);
-    }    
-    
-    inline AtomicExtended (AtomicExtended const& copy) throw() 
-    {
-        pl_AtomicLX_Init (getAtomicRef());
-        pl_AtomicLX_Set (getAtomicRef(), pl_AtomicLX_Get (copy.getAtomicRef()));
-    }
-    
-    inline ~AtomicExtended() 
-    {
-        pl_AtomicLX_DeInit (getAtomicRef());
-    }
-    
-    inline AtomicExtended& operator= (AtomicExtended const& other) throw() 
-    {
-        if (this != &other) 
-            pl_AtomicLX_Set (getAtomicRef(), pl_AtomicLX_Get (other.getAtomicRef()));
-        
-        return *this;
-    }
-        
-    inline AtomicExtended& operator= (const Long other) throw() 
-    {
-        pl_AtomicLX_Set (getAtomicRef(), other);
-        return *this;
-    }        
-    
-    inline void setAll (const Long other, const Long extra) throw() 
-    { 
-        pl_AtomicLX_SetAll (getAtomicRef(), other, extra); 
-    }
-    
-    inline bool compareAndSwap (const Long oldValue, const Long oldExtra, const Long newValue, const Long newExtra) throw() 
-    {
-        return pl_AtomicLX_CompareAndSwap (getAtomicRef(), oldValue, oldExtra, newValue, newExtra);
-    }
-    
-    inline bool compareAndSwap (const Long newValue, const Long newExtra) throw() 
-    {
-        return pl_AtomicLX_CompareAndSwap (getAtomicRef(), this->getValueUnchecked(), this->getExtraUnchecked(), newValue, newExtra);
-    }
-    
-    inline Long swap (const Long newValue) throw() 
-    {
-        return pl_AtomicLX_Swap (getAtomicRef(), newValue);
-    }
-    
-    Long swapAll (const Long newValue, const Long newExtra) throw() 
-    {
-        return pl_AtomicLX_SwapAll (getAtomicRef(), newValue, newExtra, 0);
-    }
-    
-    Long swapAll (const Long newValue, const Long newExtra, Long* oldExtraPtr) throw() 
-    {
-        return pl_AtomicLX_SwapAll (getAtomicRef(), newValue, newExtra, oldExtraPtr);
-    }
-    
-    inline void setValue (const Long other) throw() { pl_AtomicLX_Set (getAtomicRef(), other); }
-    inline Long getValue() const throw() { return pl_AtomicLX_Get (getAtomicRef()); }
-    inline Long getExtra() const throw() { return pl_AtomicLX_GetExtra (getAtomicRef()); }
-    inline Long getValueUnchecked() const throw() { return pl_AtomicLX_GetUnchecked (getAtomicRef()); }
-    inline Long getExtraUnchecked() const throw() { return pl_AtomicLX_GetExtraUnchecked (getAtomicRef()); }
-
-    template<class OtherType> bool operator== (OtherType const& other) const throw() { return this->getValueUnchecked() == static_cast<Long> (other); }
-    template<class OtherType> bool operator!= (OtherType const& other) const throw() { return this->getValueUnchecked() != static_cast<Long> (other); }
-    template<class OtherType> bool operator<  (OtherType const& other) const throw() { return this->getValueUnchecked() <  static_cast<Long> (other); }
-    template<class OtherType> bool operator<= (OtherType const& other) const throw() { return this->getValueUnchecked() <= static_cast<Long> (other); }
-    template<class OtherType> bool operator>  (OtherType const& other) const throw() { return this->getValueUnchecked() >  static_cast<Long> (other); }
-    template<class OtherType> bool operator>= (OtherType const& other) const throw() { return this->getValueUnchecked() >= static_cast<Long> (other); }
-    
-    bool operator== (const Long other) const throw() { return this->getValueUnchecked() == other; }
-    bool operator!= (const Long other) const throw() { return this->getValueUnchecked() != other; }
-    bool operator<  (const Long other) const throw() { return this->getValueUnchecked() <  other; }
-    bool operator<= (const Long other) const throw() { return this->getValueUnchecked() <= other; }
-    bool operator>  (const Long other) const throw() { return this->getValueUnchecked() >  other; }
-    bool operator>= (const Long other) const throw() { return this->getValueUnchecked() >= other; }
-
-    inline Long operator+= (const Long operand) throw() 
-    { 
-        return pl_AtomicLX_Add (getAtomicRef(), operand); 
-    }
-    
-    inline Long operator-= (const Long operand) throw() 
-    { 
-        return pl_AtomicLX_Add (getAtomicRef(), -operand); 
-    }
-    
-    inline Long operator++() throw() 
-    { 
-        return pl_AtomicLX_Add (getAtomicRef(), 1); 
-    }
-    
-    inline Long operator--() throw() 
-    { 
-        return pl_AtomicLX_Subtract (getAtomicRef(), 1); 
-    }
-    
-    inline Long operator++ (int) throw() 
-    { 
-        const Long oldValue = pl_AtomicLX_Get (getAtomicRef()); 
-        ++(*this); 
-        return oldValue; 
-    }
-    
-    inline Long operator-- (int) throw() 
-    { 
-        const Long oldValue = pl_AtomicLX_Get (getAtomicRef()); 
-        --(*this); 
-        return oldValue; 
-    }
-    
-    inline PlankAtomicLXRef getAtomicRef() { return static_cast<PlankAtomicLXRef> (&atomic); }
-    inline const PlankAtomicLXRef getAtomicRef() const { return const_cast<PlankAtomicLXRef> (&atomic); }
-    
-private:
-    PLONK_ALIGN(PLONK_WIDESIZE) 
-    PlankAtomicLX atomic;
 };
 
 template<>
@@ -1048,7 +904,9 @@ private:
     
     static inline LongLong fromParts (const Int value, const Int extra) throw()
     {
-        Element element = { { value, extra } };
+        Element element;
+        element.separate.value = value;
+        element.separate.extra = extra;
         return element.whole;
     }
     
@@ -1261,7 +1119,9 @@ private:
     
     static inline Int fromParts (const Short value, const Short extra) throw()
     {
-        Element element = { { value, extra } };
+        Element element;
+        element.separate.value = value;
+        element.separate.extra = extra;
         return element.whole;
     }
     

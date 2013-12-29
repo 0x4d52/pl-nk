@@ -87,20 +87,29 @@
 //    volatile PlankUL extra;
 //} PlankAtomicPX PLANK_ALIGN(8);
 //
-//typedef struct PlankAtomicLX
-//{
-//#warning AArch64 (ARM64) Need to implement as two 32-bit ints instead
-//    volatile PlankL value;
-//    volatile PlankUL extra;
-//} PlankAtomicLX PLANK_ALIGN(8);
-//#endif
-//
 //static inline void pl_AtomicMemoryBarrier()
 //{
 //    __sync_synchronize();
 //}
 //
 ////------------------------------------------------------------------------------
+//
+//static PlankResult pl_AtomicI_Init (PlankAtomicIRef p)
+//{
+//    if (p == PLANK_NULL)
+//        return PlankResult_MemoryError;
+//    
+//    pl_MemoryZero (p, sizeof (PlankAtomicI));
+//    
+//    return PlankResult_OK;
+//}
+//
+//static PlankResult pl_AtomicI_DeInit (PlankAtomicIRef p)
+//{
+//    if (p == PLANK_NULL)
+//        return PlankResult_MemoryError;
+//    return PlankResult_OK;
+//}
 //
 //static inline PlankI pl_AtomicI_Get (PlankAtomicIRef p)
 //{
@@ -172,6 +181,23 @@
 //}
 //
 ////------------------------------------------------------------------------------
+//
+//static PlankResult pl_AtomicL_Init (PlankAtomicLRef p)
+//{
+//    if (p == PLANK_NULL)
+//        return PlankResult_MemoryError;
+//    
+//    pl_MemoryZero (p, sizeof (PlankAtomicL));
+//    
+//    return PlankResult_OK;
+//}
+//
+//static PlankResult pl_AtomicL_DeInit (PlankAtomicLRef p)
+//{
+//    if (p == PLANK_NULL)
+//        return PlankResult_MemoryError;
+//    return PlankResult_OK;
+//}
 //
 //static inline PlankL pl_AtomicL_Get (PlankAtomicLRef p)
 //{
@@ -344,6 +370,23 @@
 //}
 //
 ////------------------------------------------------------------------------------
+//
+//static PlankResult pl_AtomicF_Init (PlankAtomicFRef p)
+//{
+//    if (p == PLANK_NULL)
+//        return PlankResult_MemoryError;
+//    
+//    pl_MemoryZero (p, sizeof (PlankAtomicF));
+//    
+//    return PlankResult_OK;
+//}
+//
+//static PlankResult pl_AtomicF_DeInit (PlankAtomicFRef p)
+//{
+//    if (p == PLANK_NULL)
+//        return PlankResult_MemoryError;
+//    return PlankResult_OK;
+//}
 //
 //static inline PlankF pl_AtomicF_Get (PlankAtomicFRef p)
 //{    
@@ -536,6 +579,23 @@
 //}
 //
 ////------------------------------------------------------------------------------
+//
+//static PlankResult pl_AtomicP_Init (PlankAtomicPRef p)
+//{
+//    if (p == PLANK_NULL)
+//        return PlankResult_MemoryError;
+//    
+//    pl_MemoryZero (p, sizeof (PlankAtomicP));
+//    
+//    return PlankResult_OK;
+//}
+//
+//static PlankResult pl_AtomicP_DeInit (PlankAtomicPRef p)
+//{
+//    if (p == PLANK_NULL)
+//        return PlankResult_MemoryError;
+//    return PlankResult_OK;
+//}
 //
 //static inline PlankP pl_AtomicP_Get (PlankAtomicPRef p)
 //{
@@ -785,10 +845,10 @@
 //    pl_AtomicPX_Set (p2, tmp1.ptr);
 //}
 //
-//static inline void pl_AtomicPX_SetAll (PlankAtomicPXRef p, PlankP newPtr, PlankL newExtra)
+//static inline void pl_AtomicPX_SetAll (PlankAtomicPXRef p, PlankP newPtr, PlankUL newExtra)
 //{
 //#warning AArch64 (ARM64) Need to implement and access a tagged pointer
-//    pl_AtomicPX_SwapAll (p, newPtr, newExtra, (PlankL*)PLANK_NULL);
+//    pl_AtomicPX_SwapAll (p, newPtr, newExtra, (PlankUL*)PLANK_NULL);
 //}
 //
 //static inline void pl_AtomicPX_Set (PlankAtomicPXRef p, PlankP newPtr)
@@ -809,7 +869,7 @@
 //{
 //#warning AArch64 (ARM64) Need to implement and access a tagged pointer
 //    PlankP newPtr, oldPtr;
-//    PlankL oldExtra;
+//    PlankUL oldExtra;
 //    PlankB success;
 //    
 //    do {
@@ -845,216 +905,6 @@
 //#warning AArch64 (ARM64) Need to implement and access a tagged pointer
 //    PlankAtomicPX oldAll = { oldPtr, oldExtra };
 //    PlankAtomicPX newAll = { newPtr, newExtra };
-//    
-//    return __sync_bool_compare_and_swap ((volatile PlankLL*)p,
-//                                         *(PlankLL*)&oldAll,
-//                                         *(PlankLL*)&newAll);
-//}
-//
-////------------------------------------------------------------------------------
-//
-//static inline PlankAtomicLXRef pl_AtomicLX_CreateAndInit()
-//{
-//    PlankAtomicLXRef p = pl_AtomicLX_Create();
-//    if (p != PLANK_NULL) pl_AtomicLX_Init (p);
-//    return p;
-//}
-//
-//static inline PlankAtomicLXRef pl_AtomicLX_Create()
-//{
-//    PlankMemoryRef m;
-//    PlankAtomicLXRef p;
-//    
-//    m = pl_MemoryGlobal();
-//    p = (PlankAtomicLXRef)pl_Memory_AllocateBytes (m, sizeof (PlankAtomicLX));
-//    
-//    if (p != PLANK_NULL)
-//        pl_MemoryZero (p, sizeof (PlankAtomicLX));
-//    
-//    return p;
-//}
-//
-//static inline PlankResult pl_AtomicLX_Init (PlankAtomicLXRef p)
-//{
-//    PlankResult result = PlankResult_OK;
-//    
-//    if (p == PLANK_NULL)
-//    {
-//        result = PlankResult_MemoryError;
-//        goto exit;
-//    }
-//    
-//    pl_MemoryZero (p, sizeof (PlankAtomicLX));
-//    
-//exit:
-//    return result;
-//}
-//
-//static inline PlankResult pl_AtomicLX_DeInit (PlankAtomicLXRef p)
-//{
-//    PlankResult result = PlankResult_OK;
-//    
-//    if (p == PLANK_NULL)
-//    {
-//        result = PlankResult_MemoryError;
-//        goto exit;
-//    }
-//        
-//exit:
-//    return result;
-//}
-//
-//static inline PlankResult pl_AtomicLX_Destroy (PlankAtomicLXRef p)
-//{
-//    PlankResult result;
-//    PlankMemoryRef m;
-//    
-//    result = PlankResult_OK;
-//    m = pl_MemoryGlobal();
-//    
-//    if ((result = pl_AtomicLX_DeInit (p)) != PlankResult_OK)
-//        goto exit;
-//    
-//    result = pl_Memory_Free (m, p);
-//    
-//exit:
-//    return result;
-//}
-//
-//static inline PlankL pl_AtomicLX_Get (PlankAtomicLXRef p)
-//{
-//#warning AArch64 (ARM64) Need to implement as two 32-bit ints instead
-//    return p->value; // should be aligned anyway and volatile so OK // pl_AtomicL_Get ((PlankAtomicLRef)p);
-//}
-//
-//static inline PlankL pl_AtomicLX_GetUnchecked (PlankAtomicLXRef p)
-//{
-//#warning AArch64 (ARM64) Need to implement as two 32-bit ints instead
-//    return p->value;
-//}
-//
-//static inline PlankUL pl_AtomicLX_GetExtra (PlankAtomicLXRef p)
-//{
-//#warning AArch64 (ARM64) Need to implement as two 32-bit ints instead
-//    return p->extra; // should be aligned anyway and volatile so OK // pl_AtomicL_Get ((PlankAtomicLRef)&(p->extra));
-//}
-//
-//static inline PlankUL pl_AtomicLX_GetExtraUnchecked (PlankAtomicLXRef p)
-//{
-//#warning AArch64 (ARM64) Need to implement as two 32-bit ints instead
-//    return p->extra;
-//}
-//
-//static inline PlankL pl_AtomicLX_SwapAll (PlankAtomicLXRef p, PlankL newValue, PlankUL newExtra, PlankUL* oldExtraPtr)
-//{
-//#warning AArch64 (ARM64) Need to implement as two 32-bit ints instead
-//    PlankL oldValue;
-//    PlankUL oldExtra;
-//    PlankB success;
-//    
-//    do {
-//        oldValue = p->value;
-//        oldExtra = p->extra;
-//        success = pl_AtomicLX_CompareAndSwap (p, oldValue, oldExtra, newValue, newExtra);
-//    } while (!success);
-//    
-//    if (oldExtraPtr != PLANK_NULL)
-//        *oldExtraPtr = oldExtra;
-//    
-//    return oldValue;
-//}
-//
-//static inline PlankL pl_AtomicLX_Swap (PlankAtomicLXRef p, PlankL newValue)
-//{
-//#warning AArch64 (ARM64) Need to implement as two 32-bit ints instead
-//    PlankL oldValue;
-//    PlankUL oldExtra;
-//    PlankB success;
-//    
-//    do {
-//        oldValue = p->value;
-//        oldExtra = p->extra;
-//        success = pl_AtomicLX_CompareAndSwap (p, oldValue, oldExtra, newValue, oldExtra + 1);
-//    } while (!success);
-//    
-//    return oldValue;
-//}
-//
-//static inline void pl_AtomicLX_SwapOther (PlankAtomicLXRef p1, PlankAtomicLXRef p2)
-//{
-//#warning AArch64 (ARM64) Need to implement as two 32-bit ints instead
-//    PlankAtomicLX tmp1, tmp2;
-//    PlankB success;
-//    
-//    do {
-//        tmp1 = *p1;
-//        tmp2 = *p2;
-//        success = pl_AtomicLX_CompareAndSwap (p1, tmp1.value, tmp1.extra, tmp2.value, tmp1.extra + 1);
-//    } while (!success);
-//    
-//    pl_AtomicLX_Set (p2, tmp1.value);
-//}
-//
-//static inline void pl_AtomicLX_SetAll (PlankAtomicLXRef p, PlankL newValue, PlankL newExtra)
-//{
-//#warning AArch64 (ARM64) Need to implement as two 32-bit ints instead
-//    pl_AtomicLX_SwapAll (p, newValue, newExtra, (PlankL*)PLANK_NULL);
-//}
-//
-//static inline void pl_AtomicLX_Set (PlankAtomicLXRef p, PlankL newValue)
-//{
-//#warning AArch64 (ARM64) Need to implement as two 32-bit ints instead
-//    PlankL oldValue;
-//    PlankUL oldExtra;
-//    PlankB success;
-//    
-//    do {
-//        oldValue = p->value;
-//        oldExtra = p->extra;
-//        success = pl_AtomicLX_CompareAndSwap (p, oldValue, oldExtra, newValue, oldExtra + 1);
-//    } while (!success);
-//}
-//
-//static inline PlankL pl_AtomicLX_Add (PlankAtomicLXRef p, PlankL operand)
-//{
-//#warning AArch64 (ARM64) Need to implement as two 32-bit ints instead
-//    PlankL newValue, oldValue;
-//    PlankUL oldExtra;
-//    PlankB success;
-//    
-//    do {
-//        oldValue = p->value;
-//        oldExtra = p->extra;
-//        newValue = oldValue + operand;
-//        success = pl_AtomicLX_CompareAndSwap (p, oldValue, oldExtra, newValue, oldExtra + 1);
-//    } while (!success);
-//    
-//    return newValue;
-//}
-//
-//static inline PlankL pl_AtomicLX_Subtract (PlankAtomicLXRef p, PlankL operand)
-//{
-//#warning AArch64 (ARM64) Need to implement as two 32-bit ints instead
-//    return pl_AtomicLX_Add (p, -operand);
-//}
-//
-//static inline PlankL pl_AtomicLX_Increment (PlankAtomicLXRef p)
-//{
-//#warning AArch64 (ARM64) Need to implement as two 32-bit ints instead
-//    return pl_AtomicLX_Add (p, (PlankL)1);
-//}
-//
-//static inline PlankL pl_AtomicLX_Decrement (PlankAtomicLXRef p)
-//{
-//#warning AArch64 (ARM64) Need to implement as two 32-bit ints instead
-//    return pl_AtomicLX_Add (p, (PlankL)(-1));
-//}
-//
-//static inline PlankB pl_AtomicLX_CompareAndSwap (PlankAtomicLXRef p, PlankL oldPtr, PlankL oldExtra, PlankL newPtr, PlankL newExtra)
-//{
-//#warning AArch64 (ARM64) Need to implement as two 32-bit ints instead
-//    PlankAtomicLX oldAll = { oldPtr, oldExtra };
-//    PlankAtomicLX newAll = { newPtr, newExtra };
 //    
 //    return __sync_bool_compare_and_swap ((volatile PlankLL*)p,
 //                                         *(PlankLL*)&oldAll,

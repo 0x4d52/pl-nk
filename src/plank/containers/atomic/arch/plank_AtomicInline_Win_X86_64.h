@@ -39,8 +39,6 @@
 // help prevent accidental inclusion other than via the intended header
 #if PLANK_INLINING_FUNCTIONS
 
-#include "../../../core/plank_ThreadSpinLock.h"
-
 #define PLANK_ATOMIC_XMAX 0xFFFFFFFFFFFFFFFF
 
 #if !DOXYGEN
@@ -73,6 +71,8 @@ typedef struct PlankAtomicP
 {
     volatile PlankP ptr;
 } PlankAtomicP PLANK_ALIGN(8);
+
+#include "../../../core/plank_ThreadSpinLock.h"
 
 typedef PlankB (*PlankAtomicPX_CompareAndSwapFunction) (PlankAtomicPXRef, PlankP, PlankL, PlankP, PlankL);
 
@@ -128,6 +128,22 @@ static inline PlankB pl_CPUSupports128BitCAS()
 }
 
 //------------------------------------------------------------------------------
+static PlankResult pl_AtomicI_Init (PlankAtomicIRef p)
+{
+    if (p == PLANK_NULL)
+        return PlankResult_MemoryError;
+    
+    pl_MemoryZero (p, sizeof (PlankAtomicI));
+    
+    return PlankResult_OK;
+}
+
+static PlankResult pl_AtomicI_DeInit (PlankAtomicIRef p)
+{
+    if (p == PLANK_NULL)
+        return PlankResult_MemoryError;
+    return PlankResult_OK;
+}
 
 static inline PlankI pl_AtomicI_Get (PlankAtomicIRef p)
 {
@@ -199,6 +215,22 @@ static inline PlankI pl_AtomicI_Decrement (PlankAtomicIRef p)
 }
 
 //------------------------------------------------------------------------------
+static PlankResult pl_AtomicL_Init (PlankAtomicLRef p)
+{
+    if (p == PLANK_NULL)
+        return PlankResult_MemoryError;
+    
+    pl_MemoryZero (p, sizeof (PlankAtomicL));
+    
+    return PlankResult_OK;
+}
+
+static PlankResult pl_AtomicL_DeInit (PlankAtomicLRef p)
+{
+    if (p == PLANK_NULL)
+        return PlankResult_MemoryError;
+    return PlankResult_OK;
+}
 
 static inline PlankL pl_AtomicL_Get (PlankAtomicLRef p)
 {
@@ -390,11 +422,25 @@ static inline PlankLL pl_AtomicLL_Decrement (PlankAtomicLLRef p)
 
 //------------------------------------------------------------------------------
 
+static PlankResult pl_AtomicF_Init (PlankAtomicFRef p)
+{
+    if (p == PLANK_NULL)
+        return PlankResult_MemoryError;
+    
+    pl_MemoryZero (p, sizeof (PlankAtomicF));
+    
+    return PlankResult_OK;
+}
+
+static PlankResult pl_AtomicF_DeInit (PlankAtomicFRef p)
+{
+    if (p == PLANK_NULL)
+        return PlankResult_MemoryError;
+    return PlankResult_OK;
+}
+
 static inline PlankF pl_AtomicF_Get (PlankAtomicFRef p)
 {
-//    PlankI bits = pl_AtomicI_Add ((PlankAtomicIRef)p, 0); // use the I version
-//    return *(PlankF*)&bits;
-    
     return p->value; // should be aligned anyway and volatile so OK
 }
 
@@ -586,6 +632,23 @@ static inline PlankD pl_AtomicD_Decrement (PlankAtomicDRef p)
 
 //------------------------------------------------------------------------------
 
+static PlankResult pl_AtomicP_Init (PlankAtomicPRef p)
+{
+    if (p == PLANK_NULL)
+        return PlankResult_MemoryError;
+    
+    pl_MemoryZero (p, sizeof (PlankAtomicP));
+    
+    return PlankResult_OK;
+}
+
+static PlankResult pl_AtomicP_DeInit (PlankAtomicPRef p)
+{
+    if (p == PLANK_NULL)
+        return PlankResult_MemoryError;
+    return PlankResult_OK;
+}
+
 static inline PlankP pl_AtomicP_Get (PlankAtomicPRef p)
 {
     return p->ptr; // should be aligned anyway and volatile so OK // pl_AtomicP_Add (p, (PlankL)0);
@@ -667,8 +730,8 @@ static inline PlankP pl_AtomicP_Decrement (PlankAtomicPRef p)
 
 //------------------------------------------------------------------------------
 
-PlankB pl_AtomicPX_CompareAndSwap_LockFree (PlankAtomicPXRef p, PlankP oldPtr, PlankL oldExtra, PlankP newPtr, PlankL newExtra);
-PlankB pl_AtomicPX_CompareAndSwap_SpinLock (PlankAtomicPXRef p, PlankP oldPtr, PlankL oldExtra, PlankP newPtr, PlankL newExtra);
+PlankB pl_AtomicPX_CompareAndSwap_LockFree (PlankAtomicPXRef p, PlankP oldPtr, PlankUL oldExtra, PlankP newPtr, PlankL newExtra);
+PlankB pl_AtomicPX_CompareAndSwap_SpinLock (PlankAtomicPXRef p, PlankP oldPtr, PlankUL oldExtra, PlankP newPtr, PlankL newExtra);
 
 
 static inline PlankAtomicPXRef pl_AtomicPX_CreateAndInit()
@@ -829,7 +892,7 @@ static inline void pl_AtomicPX_Set (PlankAtomicPXRef p, PlankP newPtr)
 static inline PlankP pl_AtomicPX_Add (PlankAtomicPXRef p, PlankL operand)
 {
     PlankP newPtr, oldPtr;
-    PlankL oldExtra;
+    PlankUL oldExtra;
     PlankB success;
     
     do {
@@ -857,7 +920,7 @@ static inline PlankP pl_AtomicPX_Decrement (PlankAtomicPXRef p)
     return pl_AtomicPX_Add (p, (PlankL)(-1));
 }
 
-PlankB pl_AtomicPX_CompareAndSwap_LockFree (PlankAtomicPXRef p, PlankP oldPtr, PlankL oldExtra, PlankP newPtr, PlankL newExtra)
+PlankB pl_AtomicPX_CompareAndSwap_LockFree (PlankAtomicPXRef p, PlankP oldPtr, PlankUL oldExtra, PlankP newPtr, PlankL newExtra)
 {
     PlankAtomicPX oldAll;
 	oldAll.ptr = oldPtr;
@@ -869,7 +932,7 @@ PlankB pl_AtomicPX_CompareAndSwap_LockFree (PlankAtomicPXRef p, PlankP oldPtr, P
                                            (__int64*)&oldAll);
 }
 
-PlankB pl_AtomicPX_CompareAndSwap_SpinLock (PlankAtomicPXRef p, PlankP oldPtr, PlankL oldExtra, PlankP newPtr, PlankL newExtra)
+PlankB pl_AtomicPX_CompareAndSwap_SpinLock (PlankAtomicPXRef p, PlankP oldPtr, PlankUL oldExtra, PlankP newPtr, PlankL newExtra)
 {
     if (! pl_ThreadSpinLock_TryLock (&p->lock))
         return PLANK_FALSE;
@@ -887,236 +950,11 @@ PlankB pl_AtomicPX_CompareAndSwap_SpinLock (PlankAtomicPXRef p, PlankP oldPtr, P
     return PLANK_TRUE;
 }
 
-static inline PlankB pl_AtomicPX_CompareAndSwap (PlankAtomicPXRef p, PlankP oldPtr, PlankL oldExtra, PlankP newPtr, PlankL newExtra)
+static inline PlankB pl_AtomicPX_CompareAndSwap (PlankAtomicPXRef p, PlankP oldPtr, PlankUL oldExtra, PlankP newPtr, PlankL newExtra)
 {
     return (p-cas) (p, oldPtr, oldExtra, newPtr, newExtra);
 }
 
-//------------------------------------------------------------------------------
-
-PlankB pl_AtomicLX_CompareAndSwap_LockFree (PlankAtomicLXRef p, PlankL oldValue, PlankL oldExtra, PlankL newValue, PlankL newExtra);
-PlankB pl_AtomicLX_CompareAndSwap_SpinLock (PlankAtomicLXRef p, PlankL oldValue, PlankL oldExtra, PlankL newValue, PlankL newExtra);
-
-static inline PlankAtomicLXRef pl_AtomicLX_CreateAndInit()
-{
-    PlankAtomicLXRef p = pl_AtomicLX_Create();
-    if (p != PLANK_NULL) pl_AtomicLX_Init (p);
-    return p;
-}
-
-static inline PlankAtomicLXRef pl_AtomicLX_Create()
-{
-    PlankMemoryRef m;
-    PlankAtomicLXRef p;
-    
-    m = pl_MemoryGlobal();
-    p = (PlankAtomicLXRef)pl_Memory_AllocateBytes (m, sizeof (PlankAtomicLX));
-    
-    if (p != PLANK_NULL)
-        pl_MemoryZero (p, sizeof (PlankAtomicLX));
-    
-    return p;
-}
-
-static inline PlankResult pl_AtomicLX_Init (PlankAtomicLXRef p)
-{
-    PlankResult result = PlankResult_OK;
-    
-    if (p == PLANK_NULL)
-    {
-        result = PlankResult_MemoryError;
-        goto exit;
-    }
-    
-    pl_MemoryZero (p, sizeof (PlankAtomicLX));
-    
-    p->cas = pl_CPUSupports128BitCAS() ? pl_AtomicLX_CompareAndSwap_LockFree : pl_AtomicLX_CompareAndSwap_SpinLock;
-    
-exit:
-    return result;
-}
-
-static inline PlankResult pl_AtomicLX_DeInit (PlankAtomicLXRef p)
-{
-    PlankResult result = PlankResult_OK;
-    
-    if (p == PLANK_NULL)
-    {
-        result = PlankResult_MemoryError;
-        goto exit;
-    }
-    
-exit:
-    return result;
-}
-
-static inline PlankResult pl_AtomicLX_Destroy (PlankAtomicLXRef p)
-{
-    PlankResult result;
-    PlankMemoryRef m;
-    
-    result = PlankResult_OK;
-    m = pl_MemoryGlobal();
-    
-    if ((result = pl_AtomicLX_DeInit (p)) != PlankResult_OK)
-        goto exit;
-    
-    result = pl_Memory_Free (m, p);
-    
-exit:
-    return result;
-}
-
-static inline PlankL pl_AtomicLX_Get (PlankAtomicLXRef p)
-{
-    return p->value; // should be aligned anyway and volatile so OK // pl_AtomicL_Get ((PlankAtomicLRef)p);
-}
-
-static inline PlankL pl_AtomicLX_GetUnchecked (PlankAtomicLXRef p)
-{
-    return p->value;
-}
-
-static inline PlankUL pl_AtomicLX_GetExtra (PlankAtomicLXRef p)
-{
-    return p->extra; // should be aligned anyway and volatile so OK // pl_AtomicL_Get ((PlankAtomicLRef)&(p->extra));
-}
-
-static inline PlankUL pl_AtomicLX_GetExtraUnchecked (PlankAtomicLXRef p)
-{
-    return p->extra;
-}
-
-static inline PlankL pl_AtomicLX_SwapAll (PlankAtomicLXRef p, PlankL newValue, PlankUL newExtra, PlankUL* oldExtraPtr)
-{
-    PlankL oldValue;
-    PlankUL oldExtra;
-    PlankB success;
-    
-    do {
-        oldValue = p->value;
-        oldExtra = p->extra;
-        success = pl_AtomicLX_CompareAndSwap (p, oldValue, oldExtra, newValue, newExtra);
-    } while (!success);
-    
-    if (oldExtraPtr != PLANK_NULL)
-        *oldExtraPtr = oldExtra;
-    
-    return oldValue;
-}
-
-static inline PlankL pl_AtomicLX_Swap (PlankAtomicLXRef p, PlankL newValue)
-{
-    PlankL oldValue;
-    PlankUL oldExtra;
-    PlankB success;
-    
-    do {
-        oldValue = p->value;
-        oldExtra = p->extra;
-        success = pl_AtomicLX_CompareAndSwap (p, oldValue, oldExtra, newValue, oldExtra + 1);
-    } while (!success);
-    
-    return oldValue;
-}
-
-static inline void pl_AtomicLX_SwapOther (PlankAtomicLXRef p1, PlankAtomicLXRef p2)
-{
-    PlankAtomicLX tmp1, tmp2;
-    PlankB success;
-    
-    do {
-        tmp1 = *p1;
-        tmp2 = *p2;
-        success = pl_AtomicLX_CompareAndSwap (p1, tmp1.value, tmp1.extra, tmp2.value, tmp1.extra + 1);
-    } while (!success);
-    
-    pl_AtomicLX_Set (p2, tmp1.value);
-}
-
-static inline void pl_AtomicLX_SetAll (PlankAtomicLXRef p, PlankL newValue, PlankUL newExtra)
-{
-    pl_AtomicLX_SwapAll (p, newValue, newExtra, (PlankUL*)PLANK_NULL);
-}
-
-static inline void pl_AtomicLX_Set (PlankAtomicLXRef p, PlankL newValue)
-{
-    PlankL oldValue;
-    PlankUL oldExtra;
-    PlankB success;
-    
-    do {
-        oldValue = p->value;
-        oldExtra = p->extra;
-        success = pl_AtomicLX_CompareAndSwap (p, oldValue, oldExtra, newValue, oldExtra + 1);
-    } while (!success);
-}
-
-static inline PlankL pl_AtomicLX_Add (PlankAtomicLXRef p, PlankL operand)
-{
-    PlankL newValue, oldValue;
-    PlankUL oldExtra;
-    PlankB success;
-    
-    do {
-        oldValue = p->value;
-        oldExtra = p->extra;
-        newValue = oldValue + operand;
-        success = pl_AtomicLX_CompareAndSwap (p, oldValue, oldExtra, newValue, oldExtra + 1);
-    } while (!success);
-    
-    return newValue;
-}
-
-static inline PlankL pl_AtomicLX_Subtract (PlankAtomicLXRef p, PlankL operand)
-{
-    return pl_AtomicLX_Add (p, -operand);
-}
-
-static inline PlankL pl_AtomicLX_Increment (PlankAtomicLXRef p)
-{
-    return pl_AtomicLX_Add (p, (PlankL)1);
-}
-
-static inline PlankL pl_AtomicLX_Decrement (PlankAtomicLXRef p)
-{
-    return pl_AtomicLX_Add (p, (PlankL)(-1));
-}
-
-PlankB pl_AtomicLX_CompareAndSwap_LockFree (PlankAtomicLXRef p, PlankL oldValue, PlankL oldExtra, PlankL newValue, PlankL newExtra)
-{
-    PlankAtomicLX oldAll;
-	oldAll.value = oldValue;
-	oldAll.extra = oldExtra;
-        
-    return _InterlockedCompareExchange128 ((volatile __int64*)p,
-                                           *(__int64*)&newExtra,
-                                           *(__int64*)&newValue,
-                                           (__int64*)&oldAll);
-}
-
-PlankB pl_AtomicLX_CompareAndSwap_SpinLock (PlankAtomicLXRef p, PlankL oldValue, PlankL oldExtra, PlankL newValue, PlankL newExtra)
-{
-    if (! pl_ThreadSpinLock_TryLock (&p->lock))
-        return PLANK_FALSE;
-    
-    if ((p->value != oldValue) || (p->extra != newExtra))
-    {
-        pl_ThreadSpinLock_Unlock (&p->lock);
-        return PLANK_FALSE;
-    }
-    
-    p->value = newValue;
-    p->extra = newExtra;
-    pl_ThreadSpinLock_Unlock (&p->lock);
-    
-    return PLANK_TRUE;
-}
-
-static inline PlankB pl_AtomicLX_CompareAndSwap (PlankAtomicLXRef p, PlankL oldValue, PlankL oldExtra, PlankL newValue, PlankL newExtra)
-{
-    return (p-cas) (p, oldValue, oldExtra, newValue, newExtra);
-}
 
 #define PLANK_ATOMICS_DEFINED 1
 
