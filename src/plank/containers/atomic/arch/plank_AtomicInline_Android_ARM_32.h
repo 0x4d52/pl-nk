@@ -39,6 +39,8 @@
 // help prevent accidental inclusion other than via the intended header
 #if PLANK_INLINING_FUNCTIONS
 
+#define PLANK_ATOMIC_XMAX 0xFFFFFFFF
+
 #if !DOXYGEN
 typedef struct PlankAtomicI
 {
@@ -73,13 +75,13 @@ typedef struct PlankAtomicP
 typedef struct PlankAtomicPX
 {
     volatile PlankP ptr;
-    volatile PlankL extra;
+    volatile PlankUL extra;
 } PlankAtomicPX PLANK_ALIGN(8);
 
 typedef struct PlankAtomicLX
 {
     volatile PlankL value;
-    volatile PlankL extra;
+    volatile PlankUL extra;
 } PlankAtomicLX PLANK_ALIGN(8);
 #endif
 
@@ -674,20 +676,20 @@ static inline PlankP pl_AtomicPX_GetUnchecked (PlankAtomicPXRef p)
     return p->ptr;
 }
 
-static inline PlankL pl_AtomicPX_GetExtra (PlankAtomicPXRef p)
+static inline PlankUL pl_AtomicPX_GetExtra (PlankAtomicPXRef p)
 {
     return p->extra; // should be aligned anyway and volatile so OK // pl_AtomicL_Get ((PlankAtomicLRef)&(p->extra));
 }
 
-static inline PlankL pl_AtomicPX_GetExtraUnchecked (PlankAtomicPXRef p)
+static inline PlankUL pl_AtomicPX_GetExtraUnchecked (PlankAtomicPXRef p)
 {
     return p->extra;
 }
 
-static inline PlankP pl_AtomicPX_SwapAll (PlankAtomicPXRef p, PlankP newPtr, PlankL newExtra, PlankL* oldExtraPtr)
+static inline PlankP pl_AtomicPX_SwapAll (PlankAtomicPXRef p, PlankP newPtr, PlankUL newExtra, PlankUL* oldExtraPtr)
 {
     PlankP oldPtr;
-    PlankL oldExtra;
+    PlankUL oldExtra;
     PlankB success;
     
     do {
@@ -705,7 +707,7 @@ static inline PlankP pl_AtomicPX_SwapAll (PlankAtomicPXRef p, PlankP newPtr, Pla
 static inline PlankP pl_AtomicPX_Swap (PlankAtomicPXRef p, PlankP newPtr)
 {
     PlankP oldPtr;
-    PlankL oldExtra;
+    PlankUL oldExtra;
     PlankB success;
     
     do {
@@ -731,15 +733,15 @@ static inline void pl_AtomicPX_SwapOther (PlankAtomicPXRef p1, PlankAtomicPXRef 
     pl_AtomicPX_Set (p2, tmp1.ptr);
 }
 
-static inline void pl_AtomicPX_SetAll (PlankAtomicPXRef p, PlankP newPtr, PlankL newExtra)
+static inline void pl_AtomicPX_SetAll (PlankAtomicPXRef p, PlankP newPtr, PlankUL newExtra)
 {
-    pl_AtomicPX_SwapAll (p, newPtr, newExtra, (PlankL*)PLANK_NULL);
+    pl_AtomicPX_SwapAll (p, newPtr, newExtra, (PlankUL*)PLANK_NULL);
 }
 
 static inline void pl_AtomicPX_Set (PlankAtomicPXRef p, PlankP newPtr)
 {
     PlankP oldPtr;
-    PlankL oldExtra;
+    PlankUL oldExtra;
     PlankB success;
     
     do {
@@ -780,7 +782,7 @@ static inline PlankP pl_AtomicPX_Decrement (PlankAtomicPXRef p)
     return pl_AtomicPX_Add (p, (PlankL)(-1));
 }
 
-static inline  PlankB pl_AtomicPX_CompareAndSwap (PlankAtomicPXRef p, PlankP oldPtr, PlankL oldExtra, PlankP newPtr, PlankL newExtra)
+static inline  PlankB pl_AtomicPX_CompareAndSwap (PlankAtomicPXRef p, PlankP oldPtr, PlankUL oldExtra, PlankP newPtr, PlankUL newExtra)
 {
     PlankAtomicPX oldAll = { oldPtr, oldExtra };
     PlankAtomicPX newAll = { newPtr, newExtra };
@@ -870,20 +872,20 @@ static inline PlankL pl_AtomicLX_GetUnchecked (PlankAtomicLXRef p)
     return p->value;
 }
 
-static inline PlankL pl_AtomicLX_GetExtra (PlankAtomicLXRef p)
+static inline PlankUL pl_AtomicLX_GetExtra (PlankAtomicLXRef p)
 {
     return p->extra; // should be aligned anyway and volatile so OK // pl_AtomicL_Get ((PlankAtomicLRef)&(p->extra));
 }
 
-static inline PlankL pl_AtomicLX_GetExtraUnchecked (PlankAtomicLXRef p)
+static inline PlankUL pl_AtomicLX_GetExtraUnchecked (PlankAtomicLXRef p)
 {
     return p->extra;
 }
 
-static inline PlankL pl_AtomicLX_SwapAll (PlankAtomicLXRef p, PlankL newValue, PlankL newExtra, PlankL* oldExtraPtr)
+static inline PlankL pl_AtomicLX_SwapAll (PlankAtomicLXRef p, PlankL newValue, PlankUL newExtra, PlankUL* oldExtraPtr)
 {
     PlankL oldValue;
-    PlankL oldExtra;
+    PlankUL oldExtra;
     PlankB success;
     
     do {
@@ -901,7 +903,7 @@ static inline PlankL pl_AtomicLX_SwapAll (PlankAtomicLXRef p, PlankL newValue, P
 static inline PlankL pl_AtomicLX_Swap (PlankAtomicLXRef p, PlankL newValue)
 {
     PlankL oldValue;
-    PlankL oldExtra;
+    PlankUL oldExtra;
     PlankB success;
     
     do {
@@ -927,15 +929,15 @@ static inline void pl_AtomicLX_SwapOther (PlankAtomicLXRef p1, PlankAtomicLXRef 
     pl_AtomicLX_Set (p2, tmp1.value);
 }
 
-static inline void pl_AtomicLX_SetAll (PlankAtomicLXRef p, PlankL newValue, PlankL newExtra)
+static inline void pl_AtomicLX_SetAll (PlankAtomicLXRef p, PlankL newValue, PlankUL newExtra)
 {
-    pl_AtomicLX_SwapAll (p, newValue, newExtra, (PlankL*)PLANK_NULL);
+    pl_AtomicLX_SwapAll (p, newValue, newExtra, (PlankUL*)PLANK_NULL);
 }
 
 static inline void pl_AtomicLX_Set (PlankAtomicLXRef p, PlankL newValue)
 {
     PlankL oldValue;
-    PlankL oldExtra;
+    PlankUL oldExtra;
     PlankB success;
     
     do {
@@ -948,7 +950,7 @@ static inline void pl_AtomicLX_Set (PlankAtomicLXRef p, PlankL newValue)
 static inline PlankL pl_AtomicLX_Add (PlankAtomicLXRef p, PlankL operand)
 {
     PlankL newValue, oldValue;
-    PlankL oldExtra;
+    PlankUL oldExtra;
     PlankB success;
     
     do {

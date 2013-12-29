@@ -84,14 +84,14 @@
 //typedef struct PlankAtomicPX
 //{
 //    volatile PlankP ptr;
-//    volatile PlankL extra;
+//    volatile PlankUL extra;
 //    PlankLock lock;
 //} PlankAtomicPX PLANK_ALIGN(8);
 //
 //typedef struct PlankAtomicLX
 //{
 //    volatile PlankL value;
-//    volatile PlankL extra;
+//    volatile PlankUL extra;
 //    PlankLock lock;
 //} PlankAtomicLX PLANK_ALIGN(8);
 //#endif
@@ -1032,17 +1032,17 @@
 //    return p->ptr;
 //}
 //
-//static inline PlankL pl_AtomicPX_GetExtra (PlankAtomicPXRef p)
+//static inline PlankUL pl_AtomicPX_GetExtra (PlankAtomicPXRef p)
 //{
 //    return p->extra; // should be aligned anyway and volatile so OK // pl_AtomicL_Get ((PlankAtomicLRef)&(p->extra));
 //}
 //
-//static inline PlankL pl_AtomicPX_GetExtraUnchecked (PlankAtomicPXRef p)
+//static inline PlankUL pl_AtomicPX_GetExtraUnchecked (PlankAtomicPXRef p)
 //{
 //    return p->extra;
 //}
 //
-//static inline PlankP pl_AtomicPX_SwapAll (PlankAtomicPXRef p, PlankP newPtr, PlankL newExtra, PlankL* oldExtraPtr)
+//static inline PlankP pl_AtomicPX_SwapAll (PlankAtomicPXRef p, PlankP newPtr, PlankUL newExtra, PlankUL* oldExtraPtr)
 //{
 //    PlankP oldPtr;
 //    PlankL oldExtra;
@@ -1142,7 +1142,7 @@
 //#if PLANK_APPLE
 //#if PLANK_X86
 //#if PLANK_32BIT
-//static inline  PlankB pl_AtomicPX_CompareAndSwap (PlankAtomicPXRef p, PlankP oldPtr, PlankL oldExtra, PlankP newPtr, PlankL newExtra)
+//static inline  PlankB pl_AtomicPX_CompareAndSwap (PlankAtomicPXRef p, PlankP oldPtr, PlankUL oldExtra, PlankP newPtr, PlankUL newExtra)
 //{
 //    char success;
 //#if __PIC__
@@ -1171,7 +1171,7 @@
 //#endif // PLANK_32BIT
 //
 //#if PLANK_64BIT
-//static inline  PlankB pl_AtomicPX_CompareAndSwap (PlankAtomicPXRef p, PlankP oldPtr, PlankL oldExtra, PlankP newPtr, PlankL newExtra)
+//static inline  PlankB pl_AtomicPX_CompareAndSwap (PlankAtomicPXRef p, PlankP oldPtr, PlankUL oldExtra, PlankP newPtr, PlankUL newExtra)
 //{
 //    char success;
 //    __asm__ __volatile__("lock; cmpxchg16b %0; setz %1"
@@ -1202,7 +1202,7 @@
 //#endif // PLANK_64BIT
 //
 //#if PLANK_32BIT // ARM
-//static inline  PlankB pl_AtomicPX_CompareAndSwap (PlankAtomicPXRef p, PlankP oldPtr, PlankL oldExtra, PlankP newPtr, PlankL newExtra)
+//static inline  PlankB pl_AtomicPX_CompareAndSwap (PlankAtomicPXRef p, PlankP oldPtr, PlankUL oldExtra, PlankP newPtr, PlankUL newExtra)
 //{
 //    PlankAtomicPX oldAll = { oldPtr, oldExtra };
 //    PlankAtomicPX newAll = { newPtr, newExtra };
@@ -1253,7 +1253,7 @@
 //
 //#if PLANK_ANDROID
 //#if PLANK_32BIT
-//static inline  PlankB pl_AtomicPX_CompareAndSwap (PlankAtomicPXRef p, PlankP oldPtr, PlankL oldExtra, PlankP newPtr, PlankL newExtra)
+//static inline  PlankB pl_AtomicPX_CompareAndSwap (PlankAtomicPXRef p, PlankP oldPtr, PlankUL oldExtra, PlankP newPtr, PlankUL newExtra)
 //{
 //    PlankAtomicPX oldAll = { oldPtr, oldExtra };
 //    PlankAtomicPX newAll = { newPtr, newExtra };
@@ -1271,7 +1271,7 @@
 //#endif
 //
 //#if PLANK_X86
-//static inline  PlankB pl_AtomicPX_CompareAndSwap (PlankAtomicPXRef p, PlankP oldPtr, PlankL oldExtra, PlankP newPtr, PlankL newExtra)
+//static inline  PlankB pl_AtomicPX_CompareAndSwap (PlankAtomicPXRef p, PlankP oldPtr, PlankUL oldExtra, PlankP newPtr, PlankUL newExtra)
 //{
 //    char success;
 //    __asm__ __volatile__("lock; cmpxchg16b %0; setz %1"
@@ -1374,17 +1374,17 @@
 //    return p->value;
 //}
 //
-//static inline PlankL pl_AtomicLX_GetExtra (PlankAtomicLXRef p)
+//static inline PlankUL pl_AtomicLX_GetExtra (PlankAtomicLXRef p)
 //{
 //    return p->extra; // should be aligned anyway and volatile so OK // pl_AtomicL_Get ((PlankAtomicLRef)&(p->extra));
 //}
 //
-//static inline PlankL pl_AtomicLX_GetExtraUnchecked (PlankAtomicLXRef p)
+//static inline PlankUL pl_AtomicLX_GetExtraUnchecked (PlankAtomicLXRef p)
 //{
 //    return p->extra;
 //}
 //
-//static inline PlankL pl_AtomicLX_SwapAll (PlankAtomicLXRef p, PlankL newValue, PlankL newExtra, PlankL* oldExtraPtr)
+//static inline PlankL pl_AtomicLX_SwapAll (PlankAtomicLXRef p, PlankL newValue, PlankUL newExtra, PlankUL* oldExtraPtr)
 //{
 //    PlankL oldValue;
 //    PlankL oldExtra;
@@ -1484,7 +1484,7 @@
 //#if PLANK_APPLE
 //#if PLANK_X86
 //#if PLANK_32BIT
-//static inline  PlankB pl_AtomicLX_CompareAndSwap (PlankAtomicLXRef p, PlankL oldValue, PlankL oldExtra, PlankL newValue, PlankL newExtra)
+//static inline  PlankB pl_AtomicLX_CompareAndSwap (PlankAtomicLXRef p, PlankL oldValue, PlankUL oldExtra, PlankL newValue, PlankUL newExtra)
 //{
 //    char success;
 //#if __PIC__
@@ -1513,7 +1513,7 @@
 //#endif // PLANK_32BIT
 //
 //#if PLANK_64BIT
-//static inline  PlankB pl_AtomicLX_CompareAndSwap (PlankAtomicLXRef p, PlankL oldValue, PlankL oldExtra, PlankL newValue, PlankL newExtra)
+//static inline  PlankB pl_AtomicLX_CompareAndSwap (PlankAtomicLXRef p, PlankL oldValue, PlankUL oldExtra, PlankL newValue, PlankUL newExtra)
 //{
 //    char success;
 //    __asm__ __volatile__("lock; cmpxchg16b %0; setz %1"
@@ -1538,7 +1538,7 @@
 //#endif // PLANK_PPC and PLANK_APPLE
 //
 //#if PLANK_ARM // and PLANK_APPLE
-//static inline  PlankB pl_AtomicLX_CompareAndSwap (PlankAtomicLXRef p, PlankL oldValue, PlankL oldExtra, PlankL newValue, PlankL newExtra)
+//static inline  PlankB pl_AtomicLX_CompareAndSwap (PlankAtomicLXRef p, PlankL oldValue, PlankUL oldExtra, PlankL newValue, PlankUL newExtra)
 //{
 //    PlankAtomicLX oldAll = { oldValue, oldExtra };
 //    PlankAtomicLX newAll = { newValue, newExtra };

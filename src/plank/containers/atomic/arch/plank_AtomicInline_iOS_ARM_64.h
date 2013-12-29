@@ -39,12 +39,7 @@
 // help prevent accidental inclusion other than via the intended header
 #if PLANK_INLINING_FUNCTIONS
 
-#if PLANK_NOATOMIC64BIT
-    #include "../core/plank_ThreadSpinLock.h"
-#endif
-
-//------------------------------------------------------------------------------
-
+#define PLANK_ATOMIC_XMAX 0xFFFFFFFFFFFFFFFF
 
 #if !DOXYGEN
 typedef struct PlankAtomicI
@@ -60,9 +55,6 @@ typedef struct PlankAtomicL
 typedef struct PlankAtomicLL
 {
     volatile PlankLL value;
-#if PLANK_NOATOMIC64BIT
-    PlankSpinLock lock;
-#endif
 } PlankAtomicLL PLANK_ALIGN(8);
 
 typedef struct PlankAtomicF
@@ -73,9 +65,6 @@ typedef struct PlankAtomicF
 typedef struct PlankAtomicD
 {
     volatile PlankD value;
-#if PLANK_NOATOMIC64BIT
-    PlankThreadSpinLock lock;
-#endif
 } PlankAtomicD PLANK_ALIGN(8);
 
 typedef struct PlankAtomicP
@@ -86,71 +75,20 @@ typedef struct PlankAtomicP
 typedef struct PlankAtomicPX
 {
     volatile PlankP ptr;
-    volatile PlankL extra;
-#if PLANK_NOATOMIC64BIT
-    PlankThreadSpinLock lock;
-#endif
+    volatile PlankUL extra;
 } PlankAtomicPX PLANK_ALIGN(16);
 
 typedef struct PlankAtomicLX
 {
     volatile PlankL value;
-    volatile PlankL extra;
-#if PLANK_NOATOMIC64BIT
-    PlankThreadSpinLock lock;
-#endif
+    volatile PlankUL extra;
 } PlankAtomicLX PLANK_ALIGN(16);
 #endif
 
 static inline void pl_AtomicMemoryBarrier()
 {
-#if PLANK_APPLE
     OSMemoryBarrier();
-#elif PLANK_WIN
-	_ReadWriteBarrier();
-#elif PLANK_ANDROID
-    __sync_synchronize();
-#else
-    #warning pl_AtomicMemoryBarrier() not fully implemented for this platform
-#endif
 }
-
-#if PLANK_WIN
-
-#if PLANK_32BIT
-#pragma warning(disable:4035)
-static inline PlankULL pl_InterlockedCompareExchange64 (volatile PlankULL *value, 
-                                                        PlankULL newValue, 
-                                                        PlankULL oldValue) 
-{
-    //value returned in eax::edx
-    __asm {
-        lea esi,oldValue;
-        lea edi,newValue;
-        
-        mov eax,[esi];
-        mov edx,4[esi];
-        mov ebx,[edi];
-        mov ecx,4[edi];
-        mov esi,value;
-        lock CMPXCHG8B [esi];			
-    }
-}
-#pragma warning(default:4035)
-#endif
-
-#if PLANK_64BIT
-static inline PlankULL pl_InterlockedCompareExchange64 (volatile PlankULL *value, 
-                                                        PlankULL newValue, 
-                                                        PlankULL oldValue) 
-{
-	return (PlankULL)_InterlockedCompareExchange64 ((volatile __int64*)value, 
-												    *(__int64*)&newValue, 
-												    *(__int64*)&oldValue);
-}
-#endif
-
-#endif
 
 //------------------------------------------------------------------------------
 
@@ -196,7 +134,6 @@ static inline void pl_AtomicI_Set (PlankAtomicIRef p, PlankI newValue)
     pl_AtomicI_Swap (p, newValue);
 }
 
-#if PLANK_APPLE
 static inline PlankI pl_AtomicI_Add (PlankAtomicIRef p, PlankI operand)
 {
     return OSAtomicAdd32Barrier (*(int32_t*)&operand, 
@@ -209,35 +146,6 @@ static inline PlankB  pl_AtomicI_CompareAndSwap (PlankAtomicIRef p, PlankI oldVa
                                             *(int32_t*)&newValue, 
                                             (volatile int32_t*)p);
 }
-#endif
-
-#if PLANK_WIN
-static inline PlankI pl_AtomicI_Add (PlankAtomicIRef p, PlankI operand)
-{
-    return operand + _InterlockedExchangeAdd ((volatile long*)p, operand);
-}
-
-static inline PlankB  pl_AtomicI_CompareAndSwap (PlankAtomicIRef p, PlankI oldValue, PlankI newValue)
-{    
-    return oldValue == _InterlockedCompareExchange ((volatile long*)p, 
-                                                    *(long*)&newValue, 
-                                                    *(long*)&oldValue);
-}
-#endif
-
-#if PLANK_ANDROID
-static inline PlankI pl_AtomicI_Add (PlankAtomicIRef p, PlankI operand)
-{
-    return __sync_add_and_fetch ((volatile PlankI*)p, operand);
-}
-
-static inline PlankB  pl_AtomicI_CompareAndSwap (PlankAtomicIRef p, PlankI oldValue, PlankI newValue)
-{
-    return __sync_bool_compare_and_swap ((volatile PlankI*)p,
-                                         oldValue,
-                                         newValue);
-}
-#endif
 
 static inline PlankI pl_AtomicI_Subtract (PlankAtomicIRef p, PlankI operand)
 {
@@ -298,23 +206,6 @@ static inline void pl_AtomicL_Set (PlankAtomicLRef p, PlankL newValue)
     pl_AtomicL_Swap (p, newValue);
 }
 
-#if PLANK_APPLE
-#if PLANK_32BIT
-static inline PlankL pl_AtomicL_Add (PlankAtomicLRef p, PlankL operand)
-{
-    return OSAtomicAdd32Barrier (*(int32_t*)&operand, 
-                                 (volatile int32_t*)p);
-}
-
-static inline PlankB pl_AtomicL_CompareAndSwap (PlankAtomicLRef p, PlankL oldValue, PlankL newValue)
-{    
-    return OSAtomicCompareAndSwap32Barrier (*(int32_t*)&oldValue, 
-                                            *(int32_t*)&newValue, 
-                                            (volatile int32_t*)p);
-}
-#endif //PLANK_32BIT
-
-#if PLANK_64BIT
 static inline PlankL pl_AtomicL_Add (PlankAtomicLRef p, PlankL operand)
 {
     return OSAtomicAdd64Barrier (*(int64_t*)&operand, 
@@ -327,59 +218,6 @@ static inline PlankB  pl_AtomicL_CompareAndSwap (PlankAtomicLRef p, PlankL oldVa
                                             *(int64_t*)&newValue, 
                                             (volatile int64_t*)p);
 }
-#endif //PLANK_64BIT
-#endif //PLANK_APPLE
-
-#if PLANK_WIN
-#if PLANK_32BIT
-static inline PlankL pl_AtomicL_Add (PlankAtomicLRef p, PlankL operand)
-{
-    return operand + _InterlockedExchangeAdd ((volatile long*)p, operand);
-}
-
-static inline PlankB  pl_AtomicL_CompareAndSwap (PlankAtomicLRef p, PlankL oldValue, PlankL newValue)
-{    
-    return oldValue == _InterlockedCompareExchange ((volatile long*)p, newValue, oldValue);
-}
-#endif //PLANK_32BIT
-
-#if PLANK_64BIT
-static inline PlankL pl_AtomicL_Add (PlankAtomicLRef p, PlankL operand)
-{
-    PlankL oldValue, newValue;
-    PlankB success;
-    
-    do {
-        oldValue = *(PlankL*)p;
-        newValue = oldValue + operand;
-        success = pl_AtomicL_CompareAndSwap (p, oldValue, newValue);
-    } while (!success);
-    
-    return newValue;    
-}
-
-static inline PlankB  pl_AtomicL_CompareAndSwap (PlankAtomicLRef p, PlankL oldValue, PlankL newValue)
-{    
-    return (*(PlankULL*)&oldValue) == pl_InterlockedCompareExchange64 ((volatile PlankULL*)p,
-									  					               *(PlankULL*)&newValue, 
-                                                                       *(PlankULL*)&oldValue);
-}
-#endif //PLANK_64BIT
-#endif //PLANK_WIN
-
-#if PLANK_ANDROID
-static inline PlankL pl_AtomicL_Add (PlankAtomicLRef p, PlankL operand)
-{
-    return __sync_add_and_fetch ((volatile PlankL*)p, operand);
-}
-
-static inline PlankB pl_AtomicL_CompareAndSwap (PlankAtomicLRef p, PlankL oldValue, PlankL newValue)
-{
-    return __sync_bool_compare_and_swap ((volatile PlankL*)p,
-                                         oldValue,
-                                         newValue);
-}
-#endif
 
 static inline PlankL pl_AtomicL_Subtract (PlankAtomicLRef p, PlankL operand)
 {
@@ -407,13 +245,8 @@ static inline PlankResult pl_AtomicLL_Init (PlankAtomicLLRef p)
         result = PlankResult_MemoryError;
         goto exit;
     }
-    
-#if PLANK_NOATOMIC64BIT
-    pl_ThreadSpinLock_Init (&p->lock);
-#endif
-    
-    //    pl_AtomicLL_Set (p, (PlankLL)0);
-    p->value = 0;
+
+    pl_MemoryZero (p, sizeof (PlankAtomicLL));
     
 exit:
     return result;
@@ -428,24 +261,14 @@ static inline PlankResult pl_AtomicLL_DeInit (PlankAtomicLLRef p)
         result = PlankResult_MemoryError;
         goto exit;
     }
-    
-#if PLANK_NOATOMIC64BIT
-    pl_ThreadSpinLock_DeInit (&p->lock);
-#endif
-    
+        
 exit:
     return result;
 }
 
 static inline PlankLL pl_AtomicLL_Get (PlankAtomicLLRef p)
 {
-#if PLANK_32BIT
-    return pl_AtomicLL_Add (p, (PlankLL)0);
-#endif
-    
-#if PLANK_64BIT
     return p->value; // should be aligned anyway and volatile so OK
-#endif
 }
 
 static inline PlankLL pl_AtomicLL_GetUnchecked (PlankAtomicLLRef p)
@@ -485,8 +308,6 @@ static inline void pl_AtomicLL_Set (PlankAtomicLLRef p, PlankLL newValue)
     pl_AtomicLL_Swap (p, newValue);
 }
 
-#if PLANK_APPLE
-#if PLANK_X86 || PLANK_ARM // and PLANK_APPLE
 static inline PlankLL pl_AtomicLL_Add (PlankAtomicLLRef p, PlankLL operand)
 {
     return OSAtomicAdd64Barrier (*(int64_t*)&operand, 
@@ -499,61 +320,6 @@ static inline PlankB pl_AtomicLL_CompareAndSwap (PlankAtomicLLRef p, PlankLL old
                                             *(int64_t*)&newValue, 
                                             (volatile int64_t*)p);
 }
-#endif // PLANK_X86 and PLANK_APPLE
-
-#if PLANK_PPC // and PLANK_APPLE
-static inline PlankLL pl_AtomicLL_Add (PlankAtomicLLRef p, PlankLL operand)
-{
-    PlankLL oldValue, newValue;
-    PlankB success;
-    
-    do {
-        oldValue = *(PlankLL*)p;
-        newValue = oldValue + operand;
-        success = pl_AtomicLL_CompareAndSwap (p, oldValue, newValue);
-    } while (!success);
-    
-    return newValue;    
-}
-#endif // PLANK_PPC and PLANK_APPLE
-#endif
-
-#if PLANK_WIN
-static inline PlankLL pl_AtomicLL_Add (PlankAtomicLLRef p, PlankLL operand)
-{
-    PlankLL oldValue, newValue;
-    PlankB success;
-    
-    do {
-        oldValue = *(PlankLL*)p;
-        newValue = oldValue + operand;
-        success = pl_AtomicLL_CompareAndSwap (p, oldValue, newValue);
-    } while (!success);
-    
-    return newValue;    
-}
-
-static inline PlankB pl_AtomicLL_CompareAndSwap (PlankAtomicLLRef p, PlankLL oldValue, PlankLL newValue)
-{    
-    return oldValue == (PlankLL)pl_InterlockedCompareExchange64 ((volatile PlankULL*)p,
-							   						             *(PlankULL*)&newValue, 
-																 *(PlankULL*)&oldValue);
-}
-#endif
-
-#if PLANK_ANDROID
-static inline PlankLL pl_AtomicLL_Add (PlankAtomicLLRef p, PlankLL operand)
-{
-    return __sync_add_and_fetch ((volatile PlankLL*)p, operand);
-}
-
-static inline PlankB pl_AtomicLL_CompareAndSwap (PlankAtomicLLRef p, PlankLL oldValue, PlankLL newValue)
-{
-    return __sync_bool_compare_and_swap ((volatile PlankLL*)p,
-                                         oldValue,
-                                         newValue);
-}
-#endif
 
 static inline PlankLL pl_AtomicLL_Subtract (PlankAtomicLLRef p, PlankLL operand)
 {
@@ -573,10 +339,7 @@ static inline PlankLL pl_AtomicLL_Decrement (PlankAtomicLLRef p)
 //------------------------------------------------------------------------------
 
 static inline PlankF pl_AtomicF_Get (PlankAtomicFRef p)
-{
-//    PlankI bits = pl_AtomicI_Add ((PlankAtomicIRef)p, 0); // use the I version
-//    return *(PlankF*)&bits;
-    
+{    
     return p->value; // should be aligned anyway and volatile so OK
 }
 
@@ -632,33 +395,12 @@ static inline PlankF pl_AtomicF_Add (PlankAtomicFRef p, PlankF operand)
     return newValue;
 }
 
-#if PLANK_APPLE
 static inline PlankB pl_AtomicF_CompareAndSwap (PlankAtomicFRef p, PlankF oldValue, PlankF newValue)
 {    
     return OSAtomicCompareAndSwap32Barrier (*(int32_t*)&oldValue, 
                                             *(int32_t*)&newValue, 
                                             (volatile int32_t*)p);
 }
-#endif
-
-#if PLANK_WIN
-static inline PlankB pl_AtomicF_CompareAndSwap (PlankAtomicFRef p, PlankF oldValue, PlankF newValue)
-{   
-	long oldLong = *(long*)&oldValue;
-    return oldLong == _InterlockedCompareExchange ((volatile long*)p,
-                                                   *(long*)&newValue, 
-                                                   oldLong);
-}
-#endif
-
-#if PLANK_ANDROID
-static inline PlankB pl_AtomicF_CompareAndSwap (PlankAtomicFRef p, PlankF oldValue, PlankF newValue)
-{
-    return __sync_bool_compare_and_swap ((volatile PlankI*)p,
-                                         *(PlankI*)&oldValue,
-                                         *(PlankI*)&newValue);
-}
-#endif
 
 static inline PlankF pl_AtomicF_Subtract (PlankAtomicFRef p, PlankF operand)
 {
@@ -687,12 +429,7 @@ static inline PlankResult pl_AtomicD_Init (PlankAtomicDRef p)
         goto exit;
     }
     
-#if PLANK_NOATOMIC64BIT
-    pl_ThreadSpinLock_Init (&p->lock);
-#endif
-    
-    //    pl_AtomicD_Set (p, 0.0);
-    p->value = 0.0;
+    pl_MemoryZero (p, sizeof (PlankAtomicD));
     
 exit:
     return result;
@@ -707,25 +444,14 @@ static inline PlankResult pl_AtomicD_DeInit (PlankAtomicDRef p)
         result = PlankResult_MemoryError;
         goto exit;
     }
-    
-#if PLANK_NOATOMIC64BIT
-    pl_ThreadSpinLock_DeInit (&p->lock);
-#endif
-    
+        
 exit:
     return result;
 }
 
 static inline PlankD pl_AtomicD_Get (PlankAtomicDRef p)
 {
-#if PLANK_32BIT
-    PlankLL bits = pl_AtomicLL_Add ((PlankAtomicLLRef)p, (PlankLL)0); // use the LL version
-    return *(PlankD*)&bits;
-#endif
-    
-#if PLANK_64BIT
     return p->value; // should be aligned anyway and volatile so OK
-#endif
 }
 
 static inline PlankD pl_AtomicD_GetUnchecked (PlankAtomicDRef p)
@@ -779,46 +505,12 @@ static inline PlankD pl_AtomicD_Add (PlankAtomicDRef p, PlankD operand)
     return newValue;
 }
 
-#if PLANK_APPLE
-#if PLANK_X86 || PLANK_ARM // and PLANK_APPLE
 static inline PlankB pl_AtomicD_CompareAndSwap (PlankAtomicDRef p, PlankD oldValue, PlankD newValue)
 {    
     return OSAtomicCompareAndSwap64Barrier (*(int64_t*)&oldValue, 
                                             *(int64_t*)&newValue, 
                                             (volatile int64_t*)p);
 }
-#endif // PLANK_X86 and PLANK_APPLE
-
-#if PLANK_PPC // and PLANK_APPLE
-static inline PlankB pl_AtomicD_CompareAndSwap (PlankAtomicDRef p, PlankD oldValue, PlankD newValue)
-{    
-    // must use an integer compare since comparing floating point 
-    // values doesn't do a bitwise comparison
-    return pl_AtomicLL_CompareAndSwap ((PlankAtomicLLRef)p, 
-                                       *(PlankLL*)&oldValue, 
-                                       *(PlankLL*)&newValue);
-}
-#endif // PLANK_PPC and PLANK_APPLE
-#endif // PLANK_APPLE
-
-#if PLANK_WIN
-inline PlankB pl_AtomicD_CompareAndSwap (PlankAtomicDRef p, PlankD oldValue, PlankD newValue)
-{   
-    PlankULL oldBits = *(PlankULL*)&oldValue;
-    return oldBits == pl_InterlockedCompareExchange64 ((volatile PlankULL*)p,
-                                                       *(PlankULL*)&newValue, 
-                                                       oldBits);
-}
-#endif
-
-#if PLANK_ANDROID
-static inline PlankB pl_AtomicD_CompareAndSwap (PlankAtomicDRef p, PlankD oldValue, PlankD newValue)
-{
-    return __sync_bool_compare_and_swap ((volatile PlankLL*)p,
-                                         *(PlankLL*)&oldValue,
-                                         *(PlankLL*)&newValue);
-}
-#endif
 
 static inline PlankD pl_AtomicD_Subtract (PlankAtomicDRef p, PlankD operand)
 {
@@ -879,22 +571,6 @@ static inline void pl_AtomicP_Set (PlankAtomicPRef p, PlankP newPtr)
     pl_AtomicP_Swap (p, newPtr);
 }
 
-#if PLANK_APPLE
-#if PLANK_32BIT // and PLANK_APPLE
-static inline PlankP pl_AtomicP_Add (PlankAtomicPRef p, PlankL operand)
-{
-    return (PlankP)OSAtomicAdd32Barrier (*(int32_t*)&operand, (volatile int32_t*)p);
-}
-
-static inline PlankB pl_AtomicP_CompareAndSwap (PlankAtomicPRef p, PlankP oldValue, PlankP newValue)
-{
-    return OSAtomicCompareAndSwap32Barrier (*(int32_t*)&oldValue, 
-                                            *(int32_t*)&newValue, 
-                                            (volatile int32_t*)p);
-}
-#endif // PLANK_32BIT and PLANK_APPLE
-
-#if PLANK_64BIT // and PLANK_APPLE
 static inline PlankP pl_AtomicP_Add (PlankAtomicPRef p, PlankL operand)
 {
     return (PlankP)OSAtomicAdd64Barrier (*(int64_t*)&operand, (volatile int64_t*)p);
@@ -906,65 +582,6 @@ static inline PlankB pl_AtomicP_CompareAndSwap (PlankAtomicPRef p, PlankP oldVal
                                             *(int64_t*)&newValue, 
                                             (volatile int64_t*)p);
 }
-#endif // PLANK_64BIT and PLANK_APPLE
-#endif // PLANK_APPLE
-
-#if PLANK_WIN
-#if PLANK_32BIT
-static inline PlankP pl_AtomicP_Add (PlankAtomicPRef p, PlankL operand)
-{
-    return (PlankP)(_InterlockedExchangeAdd ((volatile long*)&p, operand) + operand);
-}
-
-static inline PlankB pl_AtomicP_CompareAndSwap (PlankAtomicPRef p, PlankP oldValue, PlankP newValue)
-{    
-	long oldLong = *(long*)&oldValue;
-    return oldLong == _InterlockedCompareExchange ((volatile long*)p, 
-                                                   *(long*)&newValue, 
-                                                   oldLong);
-}
-#endif
-
-#if PLANK_64BIT
-static inline PlankP pl_AtomicP_Add (PlankAtomicPRef p, PlankL operand)
-{
-    PlankP oldValue, newValue;
-    PlankB success;
-    
-    do {
-        oldValue = *(PlankP*)p;
-        newValue = (PlankUC*)oldValue + operand;
-        success = pl_AtomicP_CompareAndSwap (p, oldValue, newValue);
-    } while (!success);
-    
-    return newValue;        
-}
-
-static inline PlankB pl_AtomicP_CompareAndSwap (PlankAtomicPRef p, PlankP oldValue, PlankP newValue)
-{    
-    PlankULL oldBits = *(PlankULL*)&oldValue;
-    return oldBits == pl_InterlockedCompareExchange64 ((volatile PlankULL*)p, 
-                                                       *(PlankULL*)&newValue, 
-                                                       *(PlankULL*)&oldValue);    
-}
-#endif
-#endif
-
-
-#if PLANK_ANDROID
-static inline PlankP pl_AtomicP_Add (PlankAtomicPRef p, PlankL operand)
-{
-    return (PlankP)__sync_add_and_fetch ((volatile PlankL*)p, operand);
-}
-
-static inline PlankB pl_AtomicP_CompareAndSwap (PlankAtomicPRef p, PlankP oldValue, PlankP newValue)
-{
-    return __sync_bool_compare_and_swap ((volatile PlankL*)p,
-                                         *(PlankL*)&oldValue,
-                                         *(PlankL*)&newValue);
-}
-#endif
-
 
 static inline PlankP pl_AtomicP_Subtract (PlankAtomicPRef p, PlankL operand)
 {
@@ -1014,11 +631,6 @@ static inline PlankResult pl_AtomicPX_Init (PlankAtomicPXRef p)
         goto exit;
     }
     
-#if PLANK_NOATOMIC64BIT
-    pl_ThreadSpinLock_Init (&p->lock);
-#endif
-    
-    //    pl_AtomicPX_SetAll (p, (PlankP)0, (PlankL)0);
     pl_MemoryZero (p, sizeof (PlankAtomicPX));
     
 exit:
@@ -1034,11 +646,7 @@ static inline PlankResult pl_AtomicPX_DeInit (PlankAtomicPXRef p)
         result = PlankResult_MemoryError;
         goto exit;
     }
-    
-#if PLANK_NOATOMIC64BIT
-    pl_ThreadSpinLock_DeInit (&p->lock);
-#endif
-    
+        
 exit:
     return result;
 }
@@ -1070,20 +678,20 @@ static inline PlankP pl_AtomicPX_GetUnchecked (PlankAtomicPXRef p)
     return p->ptr;
 }
 
-static inline PlankL pl_AtomicPX_GetExtra (PlankAtomicPXRef p)
+static inline PlankUL pl_AtomicPX_GetExtra (PlankAtomicPXRef p)
 {
     return p->extra; // should be aligned anyway and volatile so OK // pl_AtomicL_Get ((PlankAtomicLRef)&(p->extra));
 }
 
-static inline PlankL pl_AtomicPX_GetExtraUnchecked (PlankAtomicPXRef p)
+static inline PlankUL pl_AtomicPX_GetExtraUnchecked (PlankAtomicPXRef p)
 {
     return p->extra;
 }
 
-static inline PlankP pl_AtomicPX_SwapAll (PlankAtomicPXRef p, PlankP newPtr, PlankL newExtra, PlankL* oldExtraPtr)
+static inline PlankP pl_AtomicPX_SwapAll (PlankAtomicPXRef p, PlankP newPtr, PlankUL newExtra, PlankUL* oldExtraPtr)
 {
     PlankP oldPtr;
-    PlankL oldExtra;
+    PlankUL oldExtra;
     PlankB success;
     
     do {
@@ -1101,7 +709,7 @@ static inline PlankP pl_AtomicPX_SwapAll (PlankAtomicPXRef p, PlankP newPtr, Pla
 static inline PlankP pl_AtomicPX_Swap (PlankAtomicPXRef p, PlankP newPtr)
 {
     PlankP oldPtr;
-    PlankL oldExtra;
+    PlankUL oldExtra;
     PlankB success;
     
     do {
@@ -1127,15 +735,15 @@ static inline void pl_AtomicPX_SwapOther (PlankAtomicPXRef p1, PlankAtomicPXRef 
     pl_AtomicPX_Set (p2, tmp1.ptr);
 }
 
-static inline void pl_AtomicPX_SetAll (PlankAtomicPXRef p, PlankP newPtr, PlankL newExtra)
+static inline void pl_AtomicPX_SetAll (PlankAtomicPXRef p, PlankP newPtr, PlankUL newExtra)
 {
-    pl_AtomicPX_SwapAll (p, newPtr, newExtra, (PlankL*)PLANK_NULL);
+    pl_AtomicPX_SwapAll (p, newPtr, newExtra, (PlankUL*)PLANK_NULL);
 }
 
 static inline void pl_AtomicPX_Set (PlankAtomicPXRef p, PlankP newPtr)
 {
     PlankP oldPtr;
-    PlankL oldExtra;
+    PlankUL oldExtra;
     PlankB success;
     
     do {
@@ -1176,152 +784,15 @@ static inline PlankP pl_AtomicPX_Decrement (PlankAtomicPXRef p)
     return pl_AtomicPX_Add (p, (PlankL)(-1));
 }
 
-
-#if PLANK_APPLE
-#if PLANK_X86
-#if PLANK_32BIT
-static inline  PlankB pl_AtomicPX_CompareAndSwap (PlankAtomicPXRef p, PlankP oldPtr, PlankL oldExtra, PlankP newPtr, PlankL newExtra)
+static inline  PlankB pl_AtomicPX_CompareAndSwap (PlankAtomicPXRef p, PlankP oldPtr, PlankUL oldExtra, PlankP newPtr, PlankUL newExtra)
 {
-    char success;
-#if __PIC__
-    /* If PIC is turned on, we can't use %ebx as it is reserved for the
-     GOT pointer.  We can save and restore %ebx because GCC won't be
-     using it for anything else (such as any of the m operands) */
-    __asm__ __volatile__("pushl %%ebx;"   /* save ebx used for PIC GOT ptr */
-                         "movl %6,%%ebx;" /* move new_val2 to %ebx */
-                         "lock; cmpxchg8b %0; setz %1;"
-                         "pop %%ebx;"     /* restore %ebx */
-                         : "=m"(*p), "=a"(success)
-                         : "m"(*p), "d" (oldExtra), "a" (oldPtr),
-                         "c" (newExtra), "m" (newPtr) : "memory");
-#else // !__PIC__
-    /* We can't just do the same thing in non-PIC mode, because GCC
-     * might be using %ebx as the memory operand.  We could have ifdef'd
-     * in a clobber, but there's no point doing the push/pop if we don't
-     * have to. */
-    __asm__ __volatile__("lock; cmpxchg8b %0; setz %1;"
-                         : "=m"(*p), "=a"(success)
-                         : "m"(*p), "d" (oldExtra), "a" (oldPtr),
-                         "c" (newExtra), "b" (newPtr) : "memory");
-#endif // !__PIC__
-    return success;
+//    PlankAtomicPX oldAll = { oldPtr, oldExtra };
+//    PlankAtomicPX newAll = { newPtr, newExtra };
+//    
+//    return OSAtomicCompareAndSwap64Barrier (*(int64_t*)&oldAll,
+//                                            *(int64_t*)&newAll,
+//                                            (volatile int64_t*)p);
 }
-#endif // PLANK_32BIT
-
-#if PLANK_64BIT
-static inline  PlankB pl_AtomicPX_CompareAndSwap (PlankAtomicPXRef p, PlankP oldPtr, PlankL oldExtra, PlankP newPtr, PlankL newExtra)
-{
-    char success;
-    __asm__ __volatile__("lock; cmpxchg16b %0; setz %1"
-                         : "=m"(*p), "=a"(success)
-                         : "m"(*p), "d" (oldExtra), "a" (oldPtr),
-                         "c" (newExtra), "b" (newPtr) : "memory");
-    return success;
-}
-#endif //PLANK_64BIT
-#endif //PLANK_X86
-
-#if PLANK_PPC // and PLANK_APPLE
-static inline PlankB pl_AtomicPX_CompareAndSwap (PlankAtomicPXRef p, PlankP oldPtr, PlankL oldExtra, PlankP newPtr, PlankL newExtra)
-{
-    PlankAtomicPX oldAll = { oldPtr, oldExtra, p->lock };
-    PlankAtomicPX newAll = { newPtr, newExtra, p->lock };
-    
-    return pl_AtomicLL_CompareAndSwap ((PlankAtomicLLRef)p,
-                                       *(PlankLL*)&oldAll,
-                                       *(PlankLL*)&newAll);
-}
-#endif // PLANK_PPC and PLANK_APPLE
-
-#if PLANK_ARM // and PLANK_APPLE
-
-#if PLANK_64BIT // ARM
-#error pl_AtomicPX_CompareAndSwap need to implement 128-bit CAS for this platform
-#endif // PLANK_64BIT
-
-#if PLANK_32BIT // ARM
-static inline  PlankB pl_AtomicPX_CompareAndSwap (PlankAtomicPXRef p, PlankP oldPtr, PlankL oldExtra, PlankP newPtr, PlankL newExtra)
-{
-    PlankAtomicPX oldAll = { oldPtr, oldExtra };
-    PlankAtomicPX newAll = { newPtr, newExtra };
-    
-    return OSAtomicCompareAndSwap64Barrier (*(int64_t*)&oldAll,
-                                            *(int64_t*)&newAll,
-                                            (volatile int64_t*)p);
-}
-#endif // PLANK_32BIT ARM
-#endif // PLANK_ARM and PLANK_APPLE
-
-#endif // PLANK_APPLE
-
-#if PLANK_WIN
-#if PLANK_32BIT
-static inline PlankB pl_AtomicPX_CompareAndSwap (PlankAtomicPXRef p, PlankP oldPtr, PlankL oldExtra, PlankP newPtr, PlankL newExtra)
-{
-    // can't use static init as MSVC C is C89
-    PlankAtomicPX oldAll;
-    PlankAtomicPX newAll;
-    PlankULL oldAllValue;
-    PlankULL newAllValue;
-    
-	oldAll.ptr   = oldPtr;
-	oldAll.extra = oldExtra;
-	newAll.ptr   = newPtr;
-	newAll.extra = newExtra;
-    oldAllValue  = *(PlankULL*)&oldAll;
-	newAllValue  = *(PlankULL*)&newAll;
-    
-	return oldAllValue == pl_InterlockedCompareExchange64 ((volatile PlankULL*)p, newAllValue, oldAllValue);
-}
-#endif
-
-#if PLANK_64BIT
-static inline PlankB pl_AtomicPX_CompareAndSwap (PlankAtomicPXRef p, PlankP oldPtr, PlankL oldExtra, PlankP newPtr, PlankL newExtra)
-{
-    PlankAtomicPX oldAll;
-	oldAll.ptr = oldPtr;
-	oldAll.extra = oldExtra;
-    return _InterlockedCompareExchange128 ((volatile __int64*)p,
-                                           *(__int64*)&newExtra,
-                                           *(__int64*)&newPtr,
-                                           (__int64*)&oldAll);
-}
-#endif
-#endif // PLANK_WIN
-
-#if PLANK_ANDROID
-#if PLANK_32BIT
-static inline  PlankB pl_AtomicPX_CompareAndSwap (PlankAtomicPXRef p, PlankP oldPtr, PlankL oldExtra, PlankP newPtr, PlankL newExtra)
-{
-    PlankAtomicPX oldAll = { oldPtr, oldExtra };
-    PlankAtomicPX newAll = { newPtr, newExtra };
-    
-    return __sync_bool_compare_and_swap ((volatile PlankLL*)p,
-                                         *(PlankLL*)&oldAll,
-                                         *(PlankLL*)&newAll);
-}
-#endif // PLANK_32BIT
-
-#if PLANK_64BIT
-
-#if PLANK_ARM
-#error pl_AtomicPX_CompareAndSwap need to implement 128-bit CAS for this platform
-#endif
-
-#if PLANK_X86
-static inline  PlankB pl_AtomicPX_CompareAndSwap (PlankAtomicPXRef p, PlankP oldPtr, PlankL oldExtra, PlankP newPtr, PlankL newExtra)
-{
-    char success;
-    __asm__ __volatile__("lock; cmpxchg16b %0; setz %1"
-                         : "=m"(*p), "=a"(success)
-                         : "m"(*p), "d" (oldExtra), "a" (oldPtr),
-                         "c" (newExtra), "b" (newPtr) : "memory");
-    return success;
-}
-#endif
-
-#endif // PLANK_64BIT
-#endif // PLANK_ANDROID
 
 //------------------------------------------------------------------------------
 
@@ -1356,11 +827,6 @@ static inline PlankResult pl_AtomicLX_Init (PlankAtomicLXRef p)
         goto exit;
     }
     
-#if PLANK_NOATOMIC64BIT
-    pl_ThreadSpinLock_Init (&p->lock);
-#endif
-    
-    //    pl_AtomicLX_SetAll (p, (PlankL)0, (PlankL)0);
     pl_MemoryZero (p, sizeof (PlankAtomicLX));
     
 exit:
@@ -1376,10 +842,6 @@ static inline PlankResult pl_AtomicLX_DeInit (PlankAtomicLXRef p)
         result = PlankResult_MemoryError;
         goto exit;
     }
-    
-#if PLANK_NOATOMIC64BIT
-    pl_ThreadSpinLock_DeInit (&p->lock);
-#endif
     
 exit:
     return result;
@@ -1412,20 +874,20 @@ static inline PlankL pl_AtomicLX_GetUnchecked (PlankAtomicLXRef p)
     return p->value;
 }
 
-static inline PlankL pl_AtomicLX_GetExtra (PlankAtomicLXRef p)
+static inline PlankUL pl_AtomicLX_GetExtra (PlankAtomicLXRef p)
 {
     return p->extra; // should be aligned anyway and volatile so OK // pl_AtomicL_Get ((PlankAtomicLRef)&(p->extra));
 }
 
-static inline PlankL pl_AtomicLX_GetExtraUnchecked (PlankAtomicLXRef p)
+static inline PlankUL pl_AtomicLX_GetExtraUnchecked (PlankAtomicLXRef p)
 {
     return p->extra;
 }
 
-static inline PlankL pl_AtomicLX_SwapAll (PlankAtomicLXRef p, PlankL newValue, PlankL newExtra, PlankL* oldExtraPtr)
+static inline PlankL pl_AtomicLX_SwapAll (PlankAtomicLXRef p, PlankL newValue, PlankUL newExtra, PlankUL* oldExtraPtr)
 {
     PlankL oldValue;
-    PlankL oldExtra;
+    PlankUL oldExtra;
     PlankB success;
     
     do {
@@ -1443,7 +905,7 @@ static inline PlankL pl_AtomicLX_SwapAll (PlankAtomicLXRef p, PlankL newValue, P
 static inline PlankL pl_AtomicLX_Swap (PlankAtomicLXRef p, PlankL newValue)
 {
     PlankL oldValue;
-    PlankL oldExtra;
+    PlankUL oldExtra;
     PlankB success;
     
     do {
@@ -1469,15 +931,15 @@ static inline void pl_AtomicLX_SwapOther (PlankAtomicLXRef p1, PlankAtomicLXRef 
     pl_AtomicLX_Set (p2, tmp1.value);
 }
 
-static inline void pl_AtomicLX_SetAll (PlankAtomicLXRef p, PlankL newValue, PlankL newExtra)
+static inline void pl_AtomicLX_SetAll (PlankAtomicLXRef p, PlankL newValue, PlankUL newExtra)
 {
-    pl_AtomicLX_SwapAll (p, newValue, newExtra, (PlankL*)PLANK_NULL);
+    pl_AtomicLX_SwapAll (p, newValue, newExtra, (PlankUL*)PLANK_NULL);
 }
 
 static inline void pl_AtomicLX_Set (PlankAtomicLXRef p, PlankL newValue)
 {
     PlankL oldValue;
-    PlankL oldExtra;
+    PlankUL oldExtra;
     PlankB success;
     
     do {
@@ -1490,7 +952,7 @@ static inline void pl_AtomicLX_Set (PlankAtomicLXRef p, PlankL newValue)
 static inline PlankL pl_AtomicLX_Add (PlankAtomicLXRef p, PlankL operand)
 {
     PlankL newValue, oldValue;
-    PlankL oldExtra;
+    PlankUL oldExtra;
     PlankB success;
     
     do {
@@ -1518,144 +980,15 @@ static inline PlankL pl_AtomicLX_Decrement (PlankAtomicLXRef p)
     return pl_AtomicLX_Add (p, (PlankL)(-1));
 }
 
-
-#if PLANK_APPLE
-#if PLANK_X86
-#if PLANK_32BIT
-static inline  PlankB pl_AtomicLX_CompareAndSwap (PlankAtomicLXRef p, PlankL oldValue, PlankL oldExtra, PlankL newValue, PlankL newExtra)
+static inline  PlankB pl_AtomicLX_CompareAndSwap (PlankAtomicLXRef p, PlankL oldValue, PlankUL oldExtra, PlankL newValue, PlankUL newExtra)
 {
-    char success;
-#if __PIC__
-    /* If PIC is turned on, we can't use %ebx as it is reserved for the
-     GOT pointer.  We can save and restore %ebx because GCC won't be
-     using it for anything else (such as any of the m operands) */
-    __asm__ __volatile__("pushl %%ebx;"   /* save ebx used for PIC GOT ptr */
-                         "movl %6,%%ebx;" /* move new_val2 to %ebx */
-                         "lock; cmpxchg8b %0; setz %1;"
-                         "pop %%ebx;"     /* restore %ebx */
-                         : "=m"(*p), "=a"(success)
-                         : "m"(*p), "d" (oldExtra), "a" (oldValue),
-                         "c" (newExtra), "m" (newValue) : "memory");
-#else // !__PIC__
-    /* We can't just do the same thing in non-PIC mode, because GCC
-     * might be using %ebx as the memory operand.  We could have ifdef'd
-     * in a clobber, but there's no point doing the push/pop if we don't
-     * have to. */
-    __asm__ __volatile__("lock; cmpxchg8b %0; setz %1;"
-                         : "=m"(*p), "=a"(success)
-                         : "m"(*p), "d" (oldExtra), "a" (oldValue),
-                         "c" (newExtra), "b" (newValue) : "memory");
-#endif // !__PIC__
-    return success;
+//    PlankAtomicLX oldAll = { oldValue, oldExtra };
+//    PlankAtomicLX newAll = { newValue, newExtra };
+//    
+//    return OSAtomicCompareAndSwap64Barrier (*(int64_t*)&oldAll,
+//                                            *(int64_t*)&newAll,
+//                                            (volatile int64_t*)p);
 }
-#endif // PLANK_32BIT
-
-#if PLANK_64BIT
-static inline  PlankB pl_AtomicLX_CompareAndSwap (PlankAtomicLXRef p, PlankL oldValue, PlankL oldExtra, PlankL newValue, PlankL newExtra)
-{
-    char success;
-    __asm__ __volatile__("lock; cmpxchg16b %0; setz %1"
-                         : "=m"(*p), "=a"(success)
-                         : "m"(*p), "d" (oldExtra), "a" (oldValue),
-                         "c" (newExtra), "b" (newValue) : "memory");
-    return success;
-}
-#endif //PLANK_64BIT
-#endif //PLANK_X86
-
-#if PLANK_PPC // and PLANK_APPLE
-static inline  PlankB pl_AtomicLX_CompareAndSwap (PlankAtomicLXRef p, PlankL oldValue, PlankL oldExtra, PlankP newValue, PlankL newExtra)
-{
-    PlankAtomicLX oldAll = { oldValue, oldExtra, p->lock };
-    PlankAtomicLX newAll = { newValue, newExtra, p->lock };
-    
-    return pl_AtomicLL_CompareAndSwap ((PlankAtomicLLRef)p,
-                                       *(PlankLL*)&oldAll,
-                                       *(PlankLL*)&newAll);
-}
-#endif // PLANK_PPC and PLANK_APPLE
-
-#if PLANK_ARM // and PLANK_APPLE
-static inline  PlankB pl_AtomicLX_CompareAndSwap (PlankAtomicLXRef p, PlankL oldValue, PlankL oldExtra, PlankL newValue, PlankL newExtra)
-{
-    PlankAtomicLX oldAll = { oldValue, oldExtra };
-    PlankAtomicLX newAll = { newValue, newExtra };
-    
-    return OSAtomicCompareAndSwap64Barrier (*(int64_t*)&oldAll,
-                                            *(int64_t*)&newAll,
-                                            (volatile int64_t*)p);
-}
-#endif // PLANK_ARM and PLANK_APPLE
-
-#endif // PLANK_APPLE
-
-#if PLANK_WIN
-#if PLANK_32BIT
-static inline PlankB pl_AtomicLX_CompareAndSwap (PlankAtomicLXRef p, PlankL oldValue, PlankL oldExtra, PlankL newValue, PlankL newExtra)
-{
-    PlankAtomicLX oldAll;
-    PlankAtomicLX newAll;
-    PlankULL oldAllValue;
-    PlankULL newAllValue;
-    
-	oldAll.value = oldValue;
-	oldAll.extra = oldExtra;
-    newAll.value = newValue;
-	newAll.extra = newExtra;
-	oldAllValue  = *(PlankULL*)&oldAll;
-    newAllValue  = *(PlankULL*)&newAll;
-    
-	return oldAllValue == pl_InterlockedCompareExchange64 ((volatile PlankULL*)p, newAllValue, oldAllValue);
-}
-#endif
-
-#if PLANK_64BIT
-static inline PlankB pl_AtomicLX_CompareAndSwap (PlankAtomicLXRef p, PlankL oldValue, PlankL oldExtra, PlankL newValue, PlankL newExtra)
-{
-    PlankAtomicLX oldAll;
-	oldAll.value = oldValue;
-	oldAll.extra = oldExtra;
-    return _InterlockedCompareExchange128 ((volatile __int64*)p,
-                                           *(__int64*)&newExtra,
-                                           *(__int64*)&newValue,
-                                           (__int64*)&oldAll);
-}
-#endif
-#endif
-
-#if PLANK_ANDROID
-#if PLANK_32BIT
-static inline PlankB pl_AtomicLX_CompareAndSwap (PlankAtomicLXRef p, PlankL oldPtr, PlankL oldExtra, PlankL newPtr, PlankL newExtra)
-{
-    PlankAtomicLX oldAll = { oldPtr, oldExtra };
-    PlankAtomicLX newAll = { newPtr, newExtra };
-    
-    return __sync_bool_compare_and_swap ((volatile PlankLL*)p,
-                                         *(PlankLL*)&oldAll,
-                                         *(PlankLL*)&newAll);
-}
-#endif // PLANK_32BIT
-
-#if PLANK_64BIT
-
-#if PLANK_ARM
-#error pl_AtomicPX_CompareAndSwap need to implement 128-bit CAS for this platform
-#endif
-
-#if PLANK_X86
-static inline PlankB pl_AtomicLX_CompareAndSwap (PlankAtomicLXRef p, PlankL oldPtr, PlankL oldExtra, PlankL newPtr, PlankL newExtra)
-{
-    char success;
-    __asm__ __volatile__("lock; cmpxchg16b %0; setz %1"
-                         : "=m"(*p), "=a"(success)
-                         : "m"(*p), "d" (oldExtra), "a" (oldPtr),
-                         "c" (newExtra), "b" (newPtr) : "memory");
-    return success;
-}
-#endif
-
-#endif // PLANK_64BIT
-#endif // PLANK_ANDROID
 
 #define PLANK_ATOMICS_DEFINED 1
 

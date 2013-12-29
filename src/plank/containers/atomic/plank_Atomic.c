@@ -85,13 +85,13 @@ PlankResult pl_AtomicI_Destroy (PlankAtomicIRef p)
     return pl_Memory_Free (m, p);
 }
 
-PlankI pl_AtomicI_GetExtra (PlankAtomicIRef p)
+PlankUI pl_AtomicI_GetExtra (PlankAtomicIRef p)
 {
     (void)p;
     return 0;
 }
 
-PlankI pl_AtomicI_GetExtraUnchecked (PlankAtomicIRef p)
+PlankUI pl_AtomicI_GetExtraUnchecked (PlankAtomicIRef p)
 {
     (void)p;
     return 0;
@@ -143,13 +143,13 @@ PlankResult pl_AtomicL_Destroy (PlankAtomicLRef p)
     return pl_Memory_Free (m, p);
 }
 
-PlankL pl_AtomicL_GetExtra (PlankAtomicLRef p)
+PlankUL pl_AtomicL_GetExtra (PlankAtomicLRef p)
 {
     (void)p;
     return (PlankL)0;
 }
 
-PlankL pl_AtomicL_GetExtraUnchecked (PlankAtomicLRef p)
+PlankUL pl_AtomicL_GetExtraUnchecked (PlankAtomicLRef p)
 {
     (void)p;
     return (PlankL)0;
@@ -191,13 +191,13 @@ exit:
     return result;
 }
 
-PlankLL pl_AtomicLL_GetExtra (PlankAtomicLLRef p)
+PlankULL pl_AtomicLL_GetExtra (PlankAtomicLLRef p)
 {
     (void)p;
     return (PlankLL)0;
 }
 
-PlankLL pl_AtomicLL_GetExtraUnchecked (PlankAtomicLLRef p)
+PlankULL pl_AtomicLL_GetExtraUnchecked (PlankAtomicLLRef p)
 {
     (void)p;
     return (PlankLL)0;
@@ -250,13 +250,13 @@ PlankResult pl_AtomicF_Destroy (PlankAtomicFRef p)
     return PlankResult_OK;
 }
 
-PlankI pl_AtomicF_GetExtra (PlankAtomicFRef p)
+PlankUI pl_AtomicF_GetExtra (PlankAtomicFRef p)
 {
     (void)p;
     return 0;
 }
 
-PlankI pl_AtomicF_GetExtraUnchecked (PlankAtomicFRef p)
+PlankUI pl_AtomicF_GetExtraUnchecked (PlankAtomicFRef p)
 {
     (void)p;
     return 0;
@@ -302,13 +302,13 @@ exit:
     return result;
 }
 
-PlankLL pl_AtomicD_GetExtra (PlankAtomicDRef p)
+PlankULL pl_AtomicD_GetExtra (PlankAtomicDRef p)
 {
     (void)p;
     return (PlankLL)0;
 }
 
-PlankLL pl_AtomicD_GetExtraUnchecked (PlankAtomicDRef p)
+PlankULL pl_AtomicD_GetExtraUnchecked (PlankAtomicDRef p)
 {
     (void)p;
     return (PlankLL)0;
@@ -361,13 +361,13 @@ PlankResult pl_AtomicP_Destroy (PlankAtomicPRef p)
     return PlankResult_OK;
 }
 
-PlankL pl_AtomicP_GetExtra (PlankAtomicPRef p)
+PlankUL pl_AtomicP_GetExtra (PlankAtomicPRef p)
 {
 	(void)p;
     return (PlankL)0;
 }
 
-PlankL pl_AtomicP_GetExtraUnchecked (PlankAtomicPRef p)
+PlankUL pl_AtomicP_GetExtraUnchecked (PlankAtomicPRef p)
 {
 	(void)p;
     return (PlankL)0;

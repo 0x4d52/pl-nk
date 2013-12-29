@@ -104,12 +104,12 @@ static PlankI pl_AtomicI_GetUnchecked (PlankAtomicIRef p);
 /** Not used for this class. 
  @param p The <i>Plank %AtomicI</i> object. 
  @return Always returns 0. */
-PlankI pl_AtomicI_GetExtra (PlankAtomicIRef p);
+PlankUI pl_AtomicI_GetExtra (PlankAtomicIRef p);
 
 /** Not used for this class. 
  @param p The <i>Plank %AtomicI</i> object. 
  @return Always returns 0. */
-PlankI pl_AtomicI_GetExtraUnchecked (PlankAtomicIRef p);
+PlankUI pl_AtomicI_GetExtraUnchecked (PlankAtomicIRef p);
 
 /** Swap the current value with a new value. 
  @param p The <i>Plank %AtomicI</i> object. 
@@ -216,12 +216,12 @@ static PlankL pl_AtomicL_GetUnchecked (PlankAtomicLRef p);
 /** Not used for this class. 
  @param p The <i>Plank %AtomicL</i> object. 
  @return Always returns 0. */
-PlankL pl_AtomicL_GetExtra (PlankAtomicLRef p);
+PlankUL pl_AtomicL_GetExtra (PlankAtomicLRef p);
 
 /** Not used for this class. 
  @param p The <i>Plank %AtomicL</i> object. 
  @return Always returns 0. */
-PlankL pl_AtomicL_GetExtraUnchecked (PlankAtomicLRef p);
+PlankUL pl_AtomicL_GetExtraUnchecked (PlankAtomicLRef p);
 
 /** Swap the current value with a new value. 
  @param p The <i>Plank %AtomicL</i> object. 
@@ -329,12 +329,12 @@ static PlankLL pl_AtomicLL_GetUnchecked (PlankAtomicLLRef p);
 /** Not used for this class. 
  @param p The <i>Plank %AtomicLL</i> object. 
  @return Always returns 0. */
-PlankLL pl_AtomicLL_GetExtra (PlankAtomicLLRef p);
+PlankULL pl_AtomicLL_GetExtra (PlankAtomicLLRef p);
 
 /** Not used for this class. 
  @param p The <i>Plank %AtomicLL</i> object. 
  @return Always returns 0. */
-PlankLL pl_AtomicLL_GetExtraUnchecked (PlankAtomicLLRef p);
+PlankULL pl_AtomicLL_GetExtraUnchecked (PlankAtomicLLRef p);
 
 /** Swap the current value with a new value. 
  @param p The <i>Plank %AtomicLL</i> object. 
@@ -442,12 +442,12 @@ static PlankF pl_AtomicF_GetUnchecked (PlankAtomicFRef p);
 /** Not used for this class. 
  @param p The <i>Plank %AtomicF</i> object. 
  @return Always returns 0. */
-PlankI pl_AtomicF_GetExtra (PlankAtomicFRef p);
+PlankUI pl_AtomicF_GetExtra (PlankAtomicFRef p);
 
 /** Not used for this class. 
  @param p The <i>Plank %AtomicF</i> object. 
  @return Always returns 0. */
-PlankI pl_AtomicF_GetExtraUnchecked (PlankAtomicFRef p);
+PlankUI pl_AtomicF_GetExtraUnchecked (PlankAtomicFRef p);
 
 /** Swap the current value with a new value. 
  @param p The <i>Plank %AtomicF</i> object. 
@@ -561,12 +561,12 @@ static PlankD pl_AtomicD_GetUnchecked (PlankAtomicDRef p);
 /** Not used for this class. 
  @param p The <i>Plank %AtomicD</i> object. 
  @return Always returns 0. */
-PlankLL pl_AtomicD_GetExtra (PlankAtomicDRef p);
+PlankULL pl_AtomicD_GetExtra (PlankAtomicDRef p);
 
 /** Not used for this class. 
  @param p The <i>Plank %AtomicD</i> object. 
  @return Always returns 0. */
-PlankLL pl_AtomicD_GetExtraUnchecked (PlankAtomicDRef p);
+PlankULL pl_AtomicD_GetExtraUnchecked (PlankAtomicDRef p);
 
 /** Swap the current value with a new value. 
  @param p The <i>Plank %AtomicD</i> object. 
@@ -680,13 +680,13 @@ static PlankP pl_AtomicP_GetUnchecked (PlankAtomicPRef p);
  Use @link PlankAtomicPXClass AtomicPX @endlink for safer pointer storage.
  @param p The <i>Plank %AtomicI</i> object. 
  @return Always returns 0. */
-PlankL pl_AtomicP_GetExtra (PlankAtomicPRef p);
+PlankUL pl_AtomicP_GetExtra (PlankAtomicPRef p);
 
 /** Not used for this class. 
  Use @link PlankAtomicPXClass AtomicPX @endlink for safer pointer storage.
  @param p The <i>Plank %AtomicI</i> object. 
  @return Always returns 0. */
-PlankL pl_AtomicP_GetExtraUnchecked (PlankAtomicPRef p);
+PlankUL pl_AtomicP_GetExtraUnchecked (PlankAtomicPRef p);
 
 /** Swap the current pointer with a new pointer. 
  @param p The <i>Plank %AtomicP</i> object. 
@@ -752,9 +752,6 @@ static PlankB pl_AtomicP_CompareAndSwap (PlankAtomicPRef p, PlankP oldPtr, Plank
  The default is to use the extra tag as a counter such that the counter is incremented
  each time the stored pointer us set.
  
- On PPC on Mac OS these are not a truly lock-free operations, it
- uses a lock due to the absence of 64-bit atomic operations.
- 
  @defgroup PlankAtomicPXClass Plank AtomicPX class
  @ingroup PlankAtomicClasses
  @{
@@ -806,14 +803,14 @@ static PlankP pl_AtomicPX_GetUnchecked (PlankAtomicPXRef p);
  simply used to make each write commit unique.
  @param p The <i>Plank %AtomicPX</i> object. 
  @return The extra tag. */
-static PlankL pl_AtomicPX_GetExtra (PlankAtomicPXRef p);
+static PlankUL pl_AtomicPX_GetExtra (PlankAtomicPXRef p);
 
 /** Get the current value of the extra "tag" nonatomically. 
  Many algorithms the user doesn't need to know the value of the tag as it is 
  simply used to make each write commit unique.
  @param p The <i>Plank %AtomicPX</i> object. 
  @return The extra tag. */
-static PlankL pl_AtomicPX_GetExtraUnchecked (PlankAtomicPXRef p);
+static PlankUL pl_AtomicPX_GetExtraUnchecked (PlankAtomicPXRef p);
 
 /** Swap the current pointer with a new pointer and change the tag. 
  @param p The <i>Plank %AtomicPX</i> object. 
@@ -821,7 +818,7 @@ static PlankL pl_AtomicPX_GetExtraUnchecked (PlankAtomicPXRef p);
  @param newExtra The new extra tag to store.
  @param oldExtra The old tage will be place here (you can pass PLANK_NULL if you don't need this).
  @return The previously stored value. */
-static PlankP pl_AtomicPX_SwapAll (PlankAtomicPXRef p, PlankP newPtr, PlankL newExtra, PlankL* oldExtra);
+static PlankP pl_AtomicPX_SwapAll (PlankAtomicPXRef p, PlankP newPtr, PlankUL newExtra, PlankUL* oldExtra);
 
 /** Swap the current pointer with a new pointer. 
  This also increments the extra tag by 1.
@@ -840,7 +837,7 @@ static void pl_AtomicPX_SwapOther (PlankAtomicPXRef p1, PlankAtomicPXRef p2);
  @param p The <i>Plank %AtomicPX</i> object. 
  @param newPtr The new value to store.
  @param newExtra The new extra tag to store. */
-static void pl_AtomicPX_SetAll (PlankAtomicPXRef p, PlankP newPtr, PlankL newExtra);
+static void pl_AtomicPX_SetAll (PlankAtomicPXRef p, PlankP newPtr, PlankUL newExtra);
 
 /** Set the current pointer to a new pointer. 
  This also increments the extra tag by 1.
@@ -891,7 +888,7 @@ static PlankP pl_AtomicPX_Decrement (PlankAtomicPXRef p);
  @param newPtr The new pointer to attempt to store.
  @param newExtra The new extra tag to attempt to store.
  @return @c true if the swap was successful, otherwise @c false. */
-static PlankB pl_AtomicPX_CompareAndSwap (PlankAtomicPXRef p, PlankP oldPtr, PlankL oldExtra, PlankP newPtr, PlankL newExtra);
+static PlankB pl_AtomicPX_CompareAndSwap (PlankAtomicPXRef p, PlankP oldPtr, PlankUL oldExtra, PlankP newPtr, PlankUL newExtra);
 
 /** @} */
 
@@ -904,9 +901,6 @@ static PlankB pl_AtomicPX_CompareAndSwap (PlankAtomicPXRef p, PlankP oldPtr, Pla
  
  The default is to use the extra tag as a counter such that the counter is incremented
  each time the stored pointer us set.
- 
- On PPC on Mac OS these are not a truly lock-free operations, it
- uses a lock due to the absence of 64-bit atomic operations.
  
  @defgroup PlankAtomicLXClass Plank AtomicLX class
  @ingroup PlankAtomicClasses
@@ -959,14 +953,14 @@ static PlankL pl_AtomicLX_GetUnchecked (PlankAtomicLXRef p);
  simply used to make each write commit unique.
  @param p The <i>Plank %AtomicLX</i> object. 
  @return The extra tag. */
-static PlankL pl_AtomicLX_GetExtra (PlankAtomicLXRef p);
+static PlankUL pl_AtomicLX_GetExtra (PlankAtomicLXRef p);
 
 /** Get the current value of the extra "tag" nonatomically. 
  Many algorithms the user doesn't need to know the value of the tag as it is 
  simply used to make each write commit unique.
  @param p The <i>Plank %AtomicLX</i> object. 
  @return The extra tag. */
-static PlankL pl_AtomicLX_GetExtraUnchecked (PlankAtomicLXRef p);
+static PlankUL pl_AtomicLX_GetExtraUnchecked (PlankAtomicLXRef p);
 
 /** Swap the current pointer with a new pointer and change the tag. 
  @param p The <i>Plank %AtomicLX</i> object. 
@@ -974,7 +968,7 @@ static PlankL pl_AtomicLX_GetExtraUnchecked (PlankAtomicLXRef p);
  @param newExtra The new extra tag to store.
  @param oldExtra The old tage will be place here (you can pass PLANK_NULL if you don't need this).
  @return The previously stored value. */
-static PlankL pl_AtomicLX_SwapAll (PlankAtomicLXRef p, PlankL newValue, PlankL newExtra, PlankL* oldExtra);
+static PlankL pl_AtomicLX_SwapAll (PlankAtomicLXRef p, PlankL newValue, PlankUL newExtra, PlankUL* oldExtra);
 
 /** Swap the current pointer with a new pointer. 
  This also increments the extra tag by 1.
@@ -993,7 +987,7 @@ static void pl_AtomicLX_SwapOther (PlankAtomicLXRef p1, PlankAtomicLXRef p2);
  @param p The <i>Plank %AtomicLX</i> object. 
  @param newValue The new value to store.
  @param newExtra The new extra tag to store. */
-static void pl_AtomicLX_SetAll (PlankAtomicLXRef p, PlankL newValue, PlankL newExtra);
+static void pl_AtomicLX_SetAll (PlankAtomicLXRef p, PlankL newValue, PlankUL newExtra);
 
 /** Set the current value to a new value. 
  This also increments the extra tag by 1.
@@ -1044,7 +1038,7 @@ static PlankL pl_AtomicLX_Decrement (PlankAtomicLXRef p);
  @param newValue The new value to attempt to store.
  @param newExtra The new extra tag to attempt to store.
  @return @c true if the swap was successful, otherwise @c false. */
-static PlankB pl_AtomicLX_CompareAndSwap (PlankAtomicLXRef p, PlankL oldValue, PlankL oldExtra, PlankL newValue, PlankL newExtra);
+static PlankB pl_AtomicLX_CompareAndSwap (PlankAtomicLXRef p, PlankL oldValue, PlankUL oldExtra, PlankL newValue, PlankUL newExtra);
 
 /** @} */
 
