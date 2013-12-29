@@ -39,7 +39,18 @@
 // help prevent accidental inclusion other than via the intended header
 #if PLANK_INLINING_FUNCTIONS
 
-#define PLANK_ATOMIC_XMAX 0xFFFFFFFFFFFFFFFF
+#define PLANK_ATOMIC_XMAX        0x00000003FFFFFFFF // 31 + 3 bits
+
+#define PLANK_ATOMIC_X1BITSMASK  0xFFFFFFFE00000000 // upper 31 bits
+#define PLANK_ATOMIC_X2BITSMASK  0x0000000000000007 // lower 3 bits
+
+#define PLANK_ATOMIC_X1VALUEMASK 0x00000003FFFFFFF8 // upper 31 bits shifted left by 3
+#define PLANK_ATOMIC_X2VALUEMASK 0x0000000000000007 // lower 3 bits
+
+#define PLANK_ATOMIC_PMASK       0x00000001FFFFFFF8 // lower 33 bits except the lower 3 bits
+
+#define PLANK_ATOMIC_X1SHIFT     (33 - 3)
+
 
 #if !DOXYGEN
 typedef struct PlankAtomicI
@@ -74,10 +85,8 @@ typedef struct PlankAtomicP
 
 typedef struct PlankAtomicPX
 {
-    volatile PlankP ptr;
-    volatile PlankUL extra;
-} PlankAtomicPX PLANK_ALIGN(16);
-
+    volatile PlankULL bits;
+} PlankAtomicPX PLANK_ALIGN(8);
 #endif
 
 static inline void pl_AtomicMemoryBarrier()
@@ -731,22 +740,27 @@ exit:
 
 static inline PlankP pl_AtomicPX_Get (PlankAtomicPXRef p)
 {
-    return p->ptr; // should be aligned anyway and volatile so OK // pl_AtomicP_Get ((PlankAtomicPRef)p);
+    return (PlankP)(p->bits & PLANK_ATOMIC_PMASK);
 }
 
 static inline PlankP pl_AtomicPX_GetUnchecked (PlankAtomicPXRef p)
 {
-    return p->ptr;
+    return pl_AtomicPX_Get (p);
 }
 
 static inline PlankUL pl_AtomicPX_GetExtra (PlankAtomicPXRef p)
 {
-    return p->extra; // should be aligned anyway and volatile so OK // pl_AtomicL_Get ((PlankAtomicLRef)&(p->extra));
+    PlankULL x1, x2;
+    
+    x1 = p->bits & PLANK_ATOMIC_X1BITSMASK;
+    x2 = p->bits & PLANK_ATOMIC_X2BITSMASK;
+    
+    return (x1 >> PLANK_ATOMIC_X1SHIFT) | (x2);
 }
 
 static inline PlankUL pl_AtomicPX_GetExtraUnchecked (PlankAtomicPXRef p)
 {
-    return p->extra;
+    return pl_AtomicPX_GetExtra (p);
 }
 
 static inline PlankP pl_AtomicPX_SwapAll (PlankAtomicPXRef p, PlankP newPtr, PlankUL newExtra, PlankUL* oldExtraPtr)
@@ -756,9 +770,9 @@ static inline PlankP pl_AtomicPX_SwapAll (PlankAtomicPXRef p, PlankP newPtr, Pla
     PlankB success;
     
     do {
-        oldPtr = p->ptr;
-        oldExtra = p->extra;
-        success = pl_AtomicPX_CompareAndSwap (p, oldPtr, oldExtra, newPtr, newExtra);
+        oldPtr   = pl_AtomicPX_GetUnchecked (p);
+        oldExtra = pl_AtomicPX_GetExtraUnchecked (p);
+        success  = pl_AtomicPX_CompareAndSwap (p, oldPtr, oldExtra, newPtr, newExtra);
     } while (!success);
     
     if (oldExtraPtr != PLANK_NULL)
@@ -774,9 +788,9 @@ static inline PlankP pl_AtomicPX_Swap (PlankAtomicPXRef p, PlankP newPtr)
     PlankB success;
     
     do {
-        oldPtr = p->ptr;
-        oldExtra = p->extra;
-        success = pl_AtomicPX_CompareAndSwap (p, oldPtr, oldExtra, newPtr, oldExtra + 1);
+        oldPtr   = pl_AtomicPX_GetUnchecked (p);
+        oldExtra = pl_AtomicPX_GetExtraUnchecked (p);
+        success  = pl_AtomicPX_CompareAndSwap (p, oldPtr, oldExtra, newPtr, oldExtra + 1);
     } while (!success);
     
     return oldPtr;
@@ -786,11 +800,16 @@ static inline void pl_AtomicPX_SwapOther (PlankAtomicPXRef p1, PlankAtomicPXRef 
 {
     PlankAtomicPX tmp1, tmp2;
     PlankB success;
+    PlankUL extra;
     
     do {
         tmp1 = *p1;
         tmp2 = *p2;
-        success = pl_AtomicPX_CompareAndSwap (p1, tmp1.ptr, tmp1.extra, tmp2.ptr, tmp1.extra + 1);
+        extra = pl_AtomicPX_GetExtraUnchecked (tmp1);
+        
+        success = pl_AtomicPX_CompareAndSwap (p1,
+                                              pl_AtomicPX_GetUnchecked (tmp1), extra,
+                                              pl_AtomicPX_GetUnchecked (tmp2), extra + 1);
     } while (!success);
     
     pl_AtomicPX_Set (p2, tmp1.ptr);
@@ -808,9 +827,9 @@ static inline void pl_AtomicPX_Set (PlankAtomicPXRef p, PlankP newPtr)
     PlankB success;
     
     do {
-        oldPtr = p->ptr;
-        oldExtra = p->extra;
-        success = pl_AtomicPX_CompareAndSwap (p, oldPtr, oldExtra, newPtr, oldExtra + 1);
+        oldPtr   = pl_AtomicPX_GetUnchecked (p);
+        oldExtra = pl_AtomicPX_GetExtraUnchecked (p);
+        success  = pl_AtomicPX_CompareAndSwap (p, oldPtr, oldExtra, newPtr, oldExtra + 1);
     } while (!success);
 }
 
@@ -821,10 +840,10 @@ static inline PlankP pl_AtomicPX_Add (PlankAtomicPXRef p, PlankL operand)
     PlankB success;
     
     do {
-        oldPtr = p->ptr;
-        oldExtra = p->extra;
-        newPtr = (PlankUC*)oldPtr + operand;
-        success = pl_AtomicPX_CompareAndSwap (p, oldPtr, oldExtra, newPtr, oldExtra + 1);
+        oldPtr   = pl_AtomicPX_GetUnchecked (p);
+        oldExtra = pl_AtomicPX_GetExtraUnchecked (p);
+        newPtr   = (PlankUC*)oldPtr + operand;
+        success  = pl_AtomicPX_CompareAndSwap (p, oldPtr, oldExtra, newPtr, oldExtra + 1);
     } while (!success);
     
     return newPtr;
@@ -847,12 +866,23 @@ static inline PlankP pl_AtomicPX_Decrement (PlankAtomicPXRef p)
 
 static inline  PlankB pl_AtomicPX_CompareAndSwap (PlankAtomicPXRef p, PlankP oldPtr, PlankUL oldExtra, PlankP newPtr, PlankUL newExtra)
 {
-//    PlankAtomicPX oldAll = { oldPtr, oldExtra };
-//    PlankAtomicPX newAll = { newPtr, newExtra };
-//    
-//    return OSAtomicCompareAndSwap64Barrier (*(int64_t*)&oldAll,
-//                                            *(int64_t*)&newAll,
-//                                            (volatile int64_t*)p);
+    PlankULL oldAll, newAll;
+    PlankUL oldExtraMasked, newExtraMasked;
+    
+    oldExtraMasked = oldExtra & PLANK_ATOMIC_XMAX;
+    newExtraMasked = newExtra & PLANK_ATOMIC_XMAX;
+    
+    oldAll = ((oldExtraMasked & PLANK_ATOMIC_X1VALUEMASK) << PLANK_ATOMIC_X1SHIFT) |
+             ((PlankULL)oldPtr & PLANK_ATOMIC_PMASK) |
+             (oldExtraMasked & PLANK_ATOMIC_X2VALUEMASK);
+    
+    newAll = ((newExtraMasked & PLANK_ATOMIC_X1VALUEMASK) << PLANK_ATOMIC_X1SHIFT) |
+             ((PlankULL)newPtr & PLANK_ATOMIC_PMASK) |
+             (newExtraMasked & PLANK_ATOMIC_X2VALUEMASK);
+    
+    return OSAtomicCompareAndSwap64Barrier (*(int64_t*)&oldAll,
+                                            *(int64_t*)&newAll,
+                                            (volatile int64_t*)p);
 }
 
 #define PLANK_ATOMICS_DEFINED 1

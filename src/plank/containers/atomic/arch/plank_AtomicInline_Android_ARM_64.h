@@ -39,14 +39,6 @@
 //// help prevent accidental inclusion other than via the intended header
 //#if PLANK_INLINING_FUNCTIONS
 //
-///*
-//
-//low 33 bits
-//0x00000003FFFFFFFF
-// 
-//high 31 bits
-//0xFFFFFFFC00000000 
-// */
 //
 //#define PLANK_ATOMIC_XMAX 0xFFFFFFFFFFFFFFFF
 //
