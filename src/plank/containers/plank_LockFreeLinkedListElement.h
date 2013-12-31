@@ -39,7 +39,7 @@
 #ifndef PLANK_LOCKFREELINKEDLISTELEMENT_H
 #define PLANK_LOCKFREELINKEDLISTELEMENT_H
 
-#include "plank_Atomic.h"
+#include "atomic/plank_Atomic.h"
 
 PLANK_BEGIN_C_LINKAGE
 

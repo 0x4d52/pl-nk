@@ -446,8 +446,8 @@ public:
     
     inline void* getValueUnchecked() const throw()          { return pl_AtomicP_GetUnchecked (getAtomicRef()); }
     inline void* getPtrUnchecked() const throw()            { return pl_AtomicP_GetUnchecked (getAtomicRef()); }
-    inline Long getExtra() const throw()                    { return pl_AtomicP_GetExtra (getAtomicRef()); }
-    inline Long getExtraUnchecked() const throw()           { return pl_AtomicP_GetExtraUnchecked (getAtomicRef()); }
+    inline UnsignedLong getExtra() const throw()                    { return pl_AtomicP_GetExtra (getAtomicRef()); }
+    inline UnsignedLong getExtraUnchecked() const throw()           { return pl_AtomicP_GetExtraUnchecked (getAtomicRef()); }
     
     inline operator const void* () const throw()            { return static_cast<const void*> (pl_AtomicP_GetUnchecked (getAtomicRef())); }
     inline operator void* () const throw()                  { return pl_AtomicP_GetUnchecked (getAtomicRef()); }
@@ -513,6 +513,21 @@ template<class Type>
 class AtomicExtended<Type*> : public AtomicBase<Type*>
 {
 public:
+    
+    template<class OtherType>
+    static inline bool ptrUsesValidBits (OtherType* ptr) throw()
+    {
+        union Utility
+        {
+            OtherType* ptr;
+            UnsignedLong bits;
+        };
+
+        Utility u;
+        u.ptr = ptr;
+        return (u.bits & PLANK_ATOMIC_PMASK) == u.bits;
+    }
+    
     inline AtomicExtended() throw() 
     {
         pl_AtomicPX_Init (getAtomicRef());
@@ -520,6 +535,7 @@ public:
     
     inline AtomicExtended (Type& initialValue) throw() 
     {
+        plonk_assert (ptrUsesValidBits (&initialValue));
         pl_AtomicPX_Init (getAtomicRef());
         pl_AtomicPX_SetAllUnchecked (getAtomicRef(), static_cast<void*> (&initialValue), 0);
     }
@@ -527,12 +543,14 @@ public:
 	template<class OtherType>
     inline AtomicExtended (OtherType* const initialPtr) throw() 
     {
+        plonk_assert (ptrUsesValidBits (initialPtr));
         pl_AtomicPX_Init (getAtomicRef());
         pl_AtomicPX_SetAllUnchecked (getAtomicRef(), static_cast<Type*> (initialPtr), 0);
     }
     
     inline AtomicExtended (Type* initialPtr) throw() 
     {
+        plonk_assert (ptrUsesValidBits (initialPtr));
         pl_AtomicPX_Init (getAtomicRef());
         pl_AtomicPX_SetAllUnchecked (getAtomicRef(), initialPtr, 0);
     }    
@@ -567,6 +585,7 @@ public:
 	template<class OtherType>
     inline AtomicExtended& operator= (OtherType* const other) throw() 
     {
+        plonk_assert (ptrUsesValidBits (other));
         pl_AtomicPX_Set (getAtomicRef(), static_cast<Type*> (other));
         return *this;
     }    
@@ -579,37 +598,44 @@ public:
 
     inline AtomicExtended& operator= (Type* other) throw() 
     {
+        plonk_assert (ptrUsesValidBits (other));
         pl_AtomicPX_Set (getAtomicRef(), const_cast<Type*> (other));
         return *this;
     }        
     
-    inline void setAll (Type* const other, const Long extra) throw() 
-    { 
-        pl_AtomicPX_SetAll (getAtomicRef(), other, extra); 
+    inline void setAll (Type* const other, const UnsignedLong extra) throw()
+    {
+        plonk_assert (ptrUsesValidBits (other));
+        pl_AtomicPX_SetAll (getAtomicRef(), other, extra);
     }
     
-    inline bool compareAndSwap (Type* const oldValue, const Long oldExtra, Type* const newValue, const Long newExtra) throw() 
+    inline bool compareAndSwap (Type* const oldValue, const UnsignedLong oldExtra, Type* const newValue, const UnsignedLong newExtra) throw()
     {
+        plonk_assert (ptrUsesValidBits (newValue));
         return pl_AtomicPX_CompareAndSwap (getAtomicRef(), oldValue, oldExtra, newValue, newExtra);
     }
     
-    inline bool compareAndSwap (Type* const newValue, const Long newExtra) throw() 
+    inline bool compareAndSwap (Type* const newValue, const UnsignedLong newExtra) throw()
     {
+        plonk_assert (ptrUsesValidBits (newValue));
         return pl_AtomicPX_CompareAndSwap (getAtomicRef(), this->getValueUnchecked(), this->getExtraUnchecked(), newValue, newExtra);
     }
     
     inline Type* swap (Type* const newValue) throw() 
     {
+        plonk_assert (ptrUsesValidBits (newValue));
         return pl_AtomicPX_Swap (getAtomicRef(), newValue);
     }
     
-    inline Type* swapAll (Type* const newValue, const Long newExtra) throw() 
+    inline Type* swapAll (Type* const newValue, const UnsignedLong newExtra) throw()
     {
+        plonk_assert (ptrUsesValidBits (newValue));
         return pl_AtomicPX_SwapAll (getAtomicRef(), newValue, newExtra, 0);
     }
     
-    inline Type* swapAll (Type* const newValue, const Long newExtra, Long& oldExtra) throw() 
+    inline Type* swapAll (Type* const newValue, const UnsignedLong newExtra, UnsignedLong& oldExtra) throw()
     {
+        plonk_assert (ptrUsesValidBits (newValue));
         return pl_AtomicPX_SwapAll (getAtomicRef(), newValue, newExtra, &oldExtra);
     }
     
@@ -618,8 +644,8 @@ public:
         return pl_AtomicPX_SwapOther (getAtomicRef(), other.getAtomicRef());
     }
     
-    inline void setValue (Type* const other) throw()        { pl_AtomicPX_Set (getAtomicRef(), static_cast<void*> (other)); }
-    inline void setPtr (Type* const other) throw()          { pl_AtomicPX_Set (getAtomicRef(), static_cast<void*> (other)); }
+    inline void setValue (Type* const other) throw()        { plonk_assert (ptrUsesValidBits (other)); pl_AtomicPX_Set (getAtomicRef(), static_cast<void*> (other)); }
+    inline void setPtr (Type* const other) throw()          { plonk_assert (ptrUsesValidBits (other)); pl_AtomicPX_Set (getAtomicRef(), static_cast<void*> (other)); }
     
     inline Type* getValue() const throw()                   { return static_cast<Type*> (pl_AtomicPX_Get (getAtomicRef())); }
     inline Type* getPtr() const throw()                     { return static_cast<Type*> (pl_AtomicPX_Get (getAtomicRef())); }
@@ -628,11 +654,11 @@ public:
     inline Type* getValueUnchecked() const throw()          { return static_cast<Type*> (pl_AtomicPX_GetUnchecked (getAtomicRef())); }
     inline Type* getPtrUnchecked() const throw()            { return static_cast<Type*> (pl_AtomicPX_GetUnchecked (getAtomicRef())); }
 
-    inline operator const Type* () const throw()            { return static_cast<const Type*> (pl_AtomicPX_GetUncheckedUnchecked (getAtomicRef())); }
+    inline operator const Type* () const throw()            { return static_cast<const Type*> (pl_AtomicPX_GetUnchecked (getAtomicRef())); }
     inline operator Type* () throw()                        { return static_cast<Type*> (pl_AtomicPX_Get (getAtomicRef())); }
 
-    inline Long getExtra() const throw()                    { return pl_AtomicPX_GetExtra (getAtomicRef()); }
-    inline Long getExtraUnchecked() const throw()           { return pl_AtomicPX_GetExtraUnchecked (getAtomicRef()); }
+    inline UnsignedLong getExtra() const throw()            { return pl_AtomicPX_GetExtra (getAtomicRef()); }
+    inline UnsignedLong getExtraUnchecked() const throw()   { return pl_AtomicPX_GetExtraUnchecked (getAtomicRef()); }
     
     inline void deletePtr() throw()                         { delete this->getPtrUnchecked(); }
     inline void deleteAndZeroPtr() throw()                  { delete this->getPtrUnchecked(); this->setPtr (0); }
@@ -651,57 +677,46 @@ public:
     inline bool operator>  (Type* const other) const throw() { return this->getPtrUnchecked() >  other; }
     inline bool operator>= (Type* const other) const throw() { return this->getPtrUnchecked() >= other; }
 
-    inline Type* const operator+= (const Long operand) throw() 
-    { 
-        return pl_AtomicPX_Add (getAtomicRef(), operand * AtomicExtended::incrementSize()); 
-    }
+//    inline Type* const operator+= (const Long operand) throw() 
+//    { 
+//        return pl_AtomicPX_Add (getAtomicRef(), operand * AtomicExtended::incrementSize()); 
+//    }
+//    
+//    inline Type* const operator-= (const Long operand) throw() 
+//    { 
+//        return pl_AtomicPX_Add (getAtomicRef(), -operand * AtomicExtended::incrementSize()); 
+//    }
+//    
+//    inline Type* const operator++() throw() 
+//    { 
+//        return pl_AtomicPX_Add (getAtomicRef(), AtomicExtended::incrementSize()); 
+//    }
+//    
+//    inline Type* const operator--() throw() 
+//    { 
+//        return pl_AtomicPX_Subtract (getAtomicRef(), AtomicExtended::incrementSize()); 
+//    }
+//    
+//    inline Type* const operator++ (int) throw() 
+//    { 
+//        Type* const oldPtr = static_cast<Type*> (pl_AtomicPX_Get (getAtomicRef())); 
+//        ++(*this); 
+//        return oldPtr; 
+//    }
+//    
+//    inline Type* const operator-- (int) throw() 
+//    { 
+//        Type* const oldPtr = static_cast<Type*> (pl_AtomicPX_Get (getAtomicRef())); 
+//        --(*this); 
+//        return oldPtr; 
+//    }
     
-    inline Type* const operator-= (const Long operand) throw() 
-    { 
-        return pl_AtomicPX_Add (getAtomicRef(), -operand * AtomicExtended::incrementSize()); 
-    }
-    
-    inline Type* const operator++() throw() 
-    { 
-        return pl_AtomicPX_Add (getAtomicRef(), AtomicExtended::incrementSize()); 
-    }
-    
-    inline Type* const operator--() throw() 
-    { 
-        return pl_AtomicPX_Subtract (getAtomicRef(), AtomicExtended::incrementSize()); 
-    }
-    
-    inline Type* const operator++ (int) throw() 
-    { 
-        Type* const oldPtr = static_cast<Type*> (pl_AtomicPX_Get (getAtomicRef())); 
-        ++(*this); 
-        return oldPtr; 
-    }
-    
-    inline Type* const operator-- (int) throw() 
-    { 
-        Type* const oldPtr = static_cast<Type*> (pl_AtomicPX_Get (getAtomicRef())); 
-        --(*this); 
-        return oldPtr; 
-    }
-    
-    inline PlankAtomicPXRef getAtomicRef() { return static_cast<PlankAtomicPXRef> (&u.atomic); }
-    inline const PlankAtomicPXRef getAtomicRef() const { return const_cast<PlankAtomicPXRef> (&u.atomic); }
+    inline PlankAtomicPXRef getAtomicRef() { return static_cast<PlankAtomicPXRef> (&atomic); }
+    inline const PlankAtomicPXRef getAtomicRef() const { return const_cast<PlankAtomicPXRef> (&atomic); }
     
 private:
-    struct Debug
-    {
-        Type* ptr;
-        PlankL extra;
-    };
     
-    union Union
-    {
-        PlankAtomicPX atomic;
-        Debug debug;
-    };
-
-    PLONK_ALIGN(PLONK_WIDESIZE) Union u;
+    PLONK_ALIGN(PLONK_WIDESIZE) PlankAtomicPX atomic;
 };
 
 template<>

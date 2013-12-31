@@ -221,10 +221,10 @@
         #if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
             #define PLANK_IOS 1
 
-            #if defined(__arm__)
-                #define PLANK_ARM 1
-            #else
+            #if TARGET_IPHONE_SIMULATOR
                 #define PLANK_X86 1
+            #else
+                #define PLANK_ARM 1
             #endif
         #else
             #define PLANK_MAC 1
@@ -235,7 +235,6 @@
 
             #if defined (__ppc__) || defined (__ppc64__)
                 #define PLANK_PPC 1
-                #define PLANK_NOATOMIC64BIT 1
             #else
                 #define PLANK_X86 1
             #endif
@@ -317,11 +316,11 @@ typedef struct PlankFourCharCodeString
     #define PLANK_INFINITY (PLANK_INFINITY_HACK.Value)
 #endif
 
-#define PLANK_FLOAT_ONE         0x3f800000
-#define PLANK_FLOAT_ONEMASK     0x007fffff
-#define PLANK_DOUBLE_ONE        0x3ff0000000000000
-#define PLANK_DOUBLE_ONEMASK    0x000fffffffffffff
-#define PLANK_INT24_MAX         0x7fffff
+#define PLANK_FLOAT_ONE         0x3f800000UL
+#define PLANK_FLOAT_ONEMASK     0x007fffffUL
+#define PLANK_DOUBLE_ONE        0x3ff0000000000000ULL
+#define PLANK_DOUBLE_ONEMASK    0x000fffffffffffffULL
+#define PLANK_INT24_MAX         0x7fffffUL
 #define PLANK_CHARBITS          8
 
 

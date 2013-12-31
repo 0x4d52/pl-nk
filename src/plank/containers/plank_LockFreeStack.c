@@ -196,8 +196,8 @@ PlankResult pl_LockFreeStack_Push (PlankLockFreeStackRef p, const PlankLockFreeS
     result = PlankResult_OK;
     
 	do {
-		oldPtr = p->atom.ptr;
-        oldExtra = p->atom.extra;
+		oldPtr = pl_AtomicPX_GetUnchecked (&p->atom);
+        oldExtra = pl_AtomicPX_GetExtraUnchecked (&p->atom);
 		
         pl_LockFreeStackElement_SetNext (element, oldPtr);
 		
@@ -222,7 +222,7 @@ PlankResult pl_LockFreeStack_Pop (PlankLockFreeStackRef p, PlankLockFreeStackEle
     result = PlankResult_OK;
     
 	do {
-		headPtr = p->atom.ptr;
+        headPtr = pl_AtomicPX_GetUnchecked (&p->atom);
         
 		if (headPtr == PLANK_NULL)
         {
@@ -230,7 +230,8 @@ PlankResult pl_LockFreeStack_Pop (PlankLockFreeStackRef p, PlankLockFreeStackEle
             goto exit;
         }
         
-        headExtra = p->atom.extra;
+        headExtra = pl_AtomicPX_GetExtraUnchecked (&p->atom);
+
         nextPtr = pl_LockFreeStackElement_GetNext (headPtr);
         nextExtra = headExtra + 1;
         success = pl_AtomicPX_CompareAndSwap ((PlankAtomicPXRef)&(p->atom), 

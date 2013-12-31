@@ -852,7 +852,7 @@ static void pl_AtomicPX_SwapOther (PlankAtomicPXRef p1, PlankAtomicPXRef p2);
  @param newExtra The new extra tag to store. */
 static void pl_AtomicPX_SetAll (PlankAtomicPXRef p, PlankP newPtr, PlankUL newExtra);
 
-void pl_AtomicPX_SetAllUnchecked (PlankAtomicPXRef p, PlankP newPtr, PlankUL newExtra);
+static void pl_AtomicPX_SetAllUnchecked (PlankAtomicPXRef p, PlankP newPtr, PlankUL newExtra);
 
 /** Set the current pointer to a new pointer. 
  This also increments the extra tag by 1.

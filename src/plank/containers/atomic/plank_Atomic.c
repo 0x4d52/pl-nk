@@ -337,11 +337,6 @@ void pl_AtomicP_SetUnchecked (PlankAtomicPRef p, PlankP newPtr)
 
 //------------------------------------------------------------------------------
 
-void pl_AtomicPX_SetAllUnchecked (PlankAtomicPXRef p, PlankP newPtr, PlankUL newExtra)
-{
-    p->ptr = newPtr;
-    p->extra = newExtra;
-}
 
 
 

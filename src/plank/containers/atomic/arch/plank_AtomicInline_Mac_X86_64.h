@@ -39,7 +39,15 @@
 // help prevent accidental inclusion other than via the intended header
 #if PLANK_INLINING_FUNCTIONS
 
-#define PLANK_ATOMIC_XMAX 0xFFFFFFFFFFFFFFFF
+#define PLANK_ATOMIC_XBITS          64
+#define PLANK_ATOMIC_XREFCOUNTBITS  32
+#define PLANK_ATOMIC_XWEAKCOUNTBITS 32
+#define PLANK_ATOMIC_XREFCOUNTMAX   0x00000000FFFFFFFFUL
+#define PLANK_ATOMIC_XREFCOUNTMASK  PLANK_ATOMIC_XREFCOUNTMAX
+#define PLANK_ATOMIC_XWEAKCOUNTMAX  0x00000000FFFFFFFFUL
+#define PLANK_ATOMIC_XWEAKCOUNTMASK 0xFFFFFFFF00000000UL
+#define PLANK_ATOMIC_XMAX           0xFFFFFFFFFFFFFFFFUL
+#define PLANK_ATOMIC_PMASK          0xFFFFFFFFFFFFFFFFUL
 
 #if !DOXYGEN
 typedef struct PlankAtomicI
@@ -861,6 +869,12 @@ static inline  PlankB pl_AtomicPX_CompareAndSwap (PlankAtomicPXRef p, PlankP old
                          : "cc", "memory");
 #endif
     return success;
+}
+
+static void pl_AtomicPX_SetAllUnchecked (PlankAtomicPXRef p, PlankP newPtr, PlankUL newExtra)
+{
+    p->ptr = newPtr;
+    p->extra = newExtra;
 }
 
 #define PLANK_ATOMICS_DEFINED 1

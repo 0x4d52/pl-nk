@@ -38,7 +38,7 @@
 
 #include "../core/plank_StandardHeader.h"
 #include "plank_LockFreeDynamicArray.h"
-#include "plank_Atomic.h"
+#include "atomic/plank_Atomic.h"
 #include "../maths/plank_Maths.h"
 
 // unlikely to implement now... 

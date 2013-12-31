@@ -204,7 +204,6 @@ void SmartPointer::decrementRefCount()  throw()
 void* SmartPointer::getWeak() const throw()               
 { 
     return weakPointer.getPtrUnchecked(); 
-//    return counter->getSmartPointer();
 }
 
 int SmartPointer::getRefCount() const throw()            
@@ -216,15 +215,6 @@ int SmartPointer::getRefCount() const throw()
 
 SmartPointerCounter::SmartPointerCounter (SmartPointer* smartPointer) throw()
 {
-    plonk_staticassert (sizeof (Parts) == (PLONK_WORDSIZE*2))
-    plonk_staticassert (sizeof (Halves) == (PLONK_WORDSIZE*2))
-    plonk_staticassert (sizeof (Element) == (PLONK_WORDSIZE*2))
-
-//    // no need to set atomically in the constructor
-//    atom.getAtomicRef()->ptr = smartPointer;
-//    atom.getAtomicRef()->extra = 0;
-    
-    // needs not to access members directly though if we're going to hack pointer bit masks
     atom.setAll (smartPointer, 0);
     
 #if PLONK_SMARTPOINTER_DEBUG
@@ -247,150 +237,150 @@ SmartPointerCounter::~SmartPointerCounter()
 
 SmartPointer* SmartPointerCounter::getSmartPointer() const throw()
 {
-    Element e;
-    e.halves.ptr = atom.getPtr(); // could this be the unchecked version?
-    return e.parts.smartPointer;
+    return atom.getPtr(); // could this be the unchecked version?
 }
 
 void SmartPointerCounter::incrementRefCount() throw()
 {
-    Element oldElement, newElement;
+    SmartPointer *ptr;
+    UnsignedLong oldExtra, refCount;
     bool success;
     
     do
     {
-        oldElement.halves.ptr = newElement.halves.ptr = atom.getPtrUnchecked();
-        oldElement.halves.extra = newElement.halves.extra = atom.getExtraUnchecked();
-        ++newElement.parts.counts.refCount; // in multithreaded, we might be incrementing after the pointer was deleted and zereo'd
+        ptr      = atom.getPtrUnchecked();
+        oldExtra = atom.getExtraUnchecked();
+        refCount = PLANK_SHAREDPTR_XGETREFCOUNT(oldExtra) + 1;
         
-        plonk_assert (newElement.parts.counts.refCount != 0); // overflow occurred
+        plonk_assert ((refCount & PLANK_ATOMIC_XREFCOUNTMAX) != 0); // overflow occurred
         
-        success = atom.compareAndSwap (oldElement.halves.ptr, oldElement.halves.extra, 
-                                       newElement.halves.ptr, newElement.halves.extra);
+        success = atom.compareAndSwap (ptr, oldExtra,
+                                       ptr, PLANK_SHAREDPTR_XREFCOUNT(oldExtra, refCount));
     } while (!success);
 }
 
 void SmartPointerCounter::decrementRefCount() throw()
 {    
-    Element oldElement, newElement;
+    SmartPointer *oldPtr, *newPtr;
+    UnsignedLong oldExtra, refCount;
     bool success;
     
     do
     {
-        oldElement.halves.ptr = newElement.halves.ptr = atom.getPtrUnchecked();
-        oldElement.halves.extra = newElement.halves.extra = atom.getExtraUnchecked();
+        oldPtr   = atom.getPtrUnchecked();
+        oldExtra = atom.getExtraUnchecked();
+        refCount = PLANK_SHAREDPTR_XGETREFCOUNT(oldExtra) - 1;
+        newPtr   = refCount == 0 ? static_cast<SmartPointer*> (0) : oldPtr;
         
-        if (--newElement.parts.counts.refCount == 0)
-            newElement.parts.smartPointer = 0;
-        
-        success = atom.compareAndSwap (oldElement.halves.ptr, oldElement.halves.extra, 
-                                       newElement.halves.ptr, newElement.halves.extra);
+        success = atom.compareAndSwap (oldPtr, oldExtra,
+                                       newPtr, PLANK_SHAREDPTR_XREFCOUNT(oldExtra, refCount));
     } while (!success);
     
-    if (newElement.parts.counts.refCount == 0)
+    if (refCount == 0)
     {
-        delete oldElement.parts.smartPointer; // might be zero in multithreaded if we inc'd and dec'd again but that's OK
+        delete oldPtr; // might be zero in multithreaded if we inc'd and dec'd again but that's OK
         
-        if (newElement.parts.counts.weakCount == 0)
+        if (PLANK_SHAREDPTR_XGETWEAKCOUNT(oldExtra) == 0)
             delete this;
     }
 }
 
 int SmartPointerCounter::getRefCount() const throw()
 {
-    Element e;
-    e.halves.extra = atom.getExtra(); // could this be the unchecked version?
-    return e.parts.counts.refCount;
+    return PLANK_SHAREDPTR_XGETREFCOUNT(atom.getExtraUnchecked());
 }
 
 void SmartPointerCounter::incrementWeakCount() throw()
 {
-    Element oldElement, newElement;
+    SmartPointer *ptr;
+    UnsignedLong oldExtra, weakCount;
     bool success;
     
     do
     {
-        oldElement.halves.ptr = newElement.halves.ptr = atom.getPtrUnchecked();
-        oldElement.halves.extra = newElement.halves.extra = atom.getExtraUnchecked();
-        ++newElement.parts.counts.weakCount;
+        ptr       = atom.getPtrUnchecked();
+        oldExtra  = atom.getExtraUnchecked();
+        weakCount = PLANK_SHAREDPTR_XGETWEAKCOUNT(oldExtra) + 1;
         
-        plonk_assert (newElement.parts.counts.weakCount != 0); // overflow occurred
+        plonk_assert ((weakCount & PLANK_ATOMIC_XWEAKCOUNTMAX) != 0); // overflow occurred
         
-        success = atom.compareAndSwap (oldElement.halves.ptr, oldElement.halves.extra, 
-                                       newElement.halves.ptr, newElement.halves.extra);
+        success = atom.compareAndSwap (ptr, oldExtra,
+                                       ptr, PLANK_SHAREDPTR_XWEAKCOUNT(oldExtra, weakCount));
     } while (!success);
 }
 
 void SmartPointerCounter::decrementWeakCount() throw()
 {    
-    Element oldElement, newElement;
+    SmartPointer *ptr;
+    UnsignedLong oldExtra, weakCount;
     bool success;
     
     do
     {
-        oldElement.halves.ptr = newElement.halves.ptr = atom.getPtrUnchecked();
-        oldElement.halves.extra = newElement.halves.extra = atom.getExtraUnchecked();
-        --newElement.parts.counts.weakCount;
+        ptr       = atom.getPtrUnchecked();
+        oldExtra  = atom.getExtraUnchecked();
+        weakCount = PLANK_SHAREDPTR_XGETWEAKCOUNT(oldExtra) - 1;
         
-        success = atom.compareAndSwap (oldElement.halves.ptr, oldElement.halves.extra, 
-                                       newElement.halves.ptr, newElement.halves.extra);
+        success = atom.compareAndSwap (ptr, oldExtra,
+                                       ptr, PLANK_SHAREDPTR_XWEAKCOUNT(oldExtra, weakCount));
     } while (!success);
     
-    if ((newElement.parts.counts.refCount == 0) && (newElement.parts.counts.weakCount == 0))
+    if ((weakCount == 0) && (PLANK_SHAREDPTR_XGETREFCOUNT(oldExtra) == 0))
         delete this;
 }
 
 int SmartPointerCounter::getWeakCount() const throw()
 {
-    Element e;
-    e.halves.extra = atom.getExtra(); // could this be the unchecked version?
-    return e.parts.counts.weakCount;
+    return PLANK_SHAREDPTR_XGETWEAKCOUNT(atom.getExtraUnchecked());
 }
 
 void SmartPointerCounter::incrementCounts() throw()
 {
-    Element oldElement, newElement;
+    SmartPointer *ptr;
+    UnsignedLong oldExtra, refCount, weakCount;
     bool success;
     
     do
     {
-        oldElement.halves.ptr = newElement.halves.ptr = atom.getPtrUnchecked();
-        oldElement.halves.extra = newElement.halves.extra = atom.getExtraUnchecked();
-        ++newElement.parts.counts.refCount; // in multithreaded, we might be incrementing after the pointer was deleted and zereo'd
-        ++newElement.parts.counts.weakCount;
-        
-        plonk_assert (newElement.parts.counts.refCount != 0);  // overflow occurred
-        plonk_assert (newElement.parts.counts.weakCount != 0); // overflow occurred
+        ptr       = atom.getPtrUnchecked();
+        oldExtra  = atom.getExtraUnchecked();
 
-        success = atom.compareAndSwap (oldElement.halves.ptr, oldElement.halves.extra, 
-                                       newElement.halves.ptr, newElement.halves.extra);
+        refCount  = PLANK_SHAREDPTR_XGETREFCOUNT(oldExtra) + 1;
+        weakCount = PLANK_SHAREDPTR_XGETWEAKCOUNT(oldExtra) + 1;
+
+        plonk_assert ((refCount & PLANK_ATOMIC_XREFCOUNTMAX) != 0); // overflow occurred
+        plonk_assert ((weakCount & PLANK_ATOMIC_XWEAKCOUNTMAX) != 0); // overflow occurred
+
+        success = atom.compareAndSwap (ptr, oldExtra,
+                                       ptr, PLANK_SHAREDPTR_XCOUNTS(refCount, weakCount));
     } while (!success);
 }
 
 void SmartPointerCounter::decrementCounts() throw()
 {    
-    Element oldElement, newElement;
+    SmartPointer *oldPtr, *newPtr;
+    UnsignedLong oldExtra, refCount, weakCount;
     bool success;
     
     do
     {
-        oldElement.halves.ptr = newElement.halves.ptr = atom.getPtrUnchecked();
-        oldElement.halves.extra = newElement.halves.extra = atom.getExtraUnchecked();
+        oldPtr    = atom.getPtrUnchecked();
+        oldExtra  = atom.getExtraUnchecked();
+
+        refCount  = PLANK_SHAREDPTR_XGETREFCOUNT(oldExtra) - 1;
+        weakCount = PLANK_SHAREDPTR_XGETWEAKCOUNT(oldExtra) - 1;
         
-        if (--newElement.parts.counts.refCount == 0)
-            newElement.parts.smartPointer = 0;
+        newPtr    = refCount == 0 ? static_cast<SmartPointer*> (0) : oldPtr;
         
-        --newElement.parts.counts.weakCount;
-        
-        success = atom.compareAndSwap (oldElement.halves.ptr, oldElement.halves.extra, 
-                                       newElement.halves.ptr, newElement.halves.extra);
+        success = atom.compareAndSwap (oldPtr, oldExtra,
+                                       newPtr, PLANK_SHAREDPTR_XCOUNTS(refCount, weakCount));
     } while (!success);
     
-    if (newElement.parts.counts.refCount == 0)
+    if (refCount == 0)
     {
-        delete oldElement.parts.smartPointer; // might be zero in multithreaded if we inc'd and dec'd again but that's OK
+        delete oldPtr; // might be zero in multithreaded if we inc'd and dec'd again but that's OK
         
-        if (newElement.parts.counts.weakCount == 0)
+        if (weakCount == 0)
             delete this;
     }
 }

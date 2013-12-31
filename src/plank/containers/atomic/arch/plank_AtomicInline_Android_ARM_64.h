@@ -40,7 +40,7 @@
 //#if PLANK_INLINING_FUNCTIONS
 //
 //
-//#define PLANK_ATOMIC_XMAX 0xFFFFFFFFFFFFFFFF
+//#define PLANK_ATOMIC_XMAX 0xFFFFFFFFFFFFFFFFULL
 //
 //#if !DOXYGEN
 //typedef struct PlankAtomicI
@@ -901,6 +901,12 @@
 //    return __sync_bool_compare_and_swap ((volatile PlankLL*)p,
 //                                         *(PlankLL*)&oldAll,
 //                                         *(PlankLL*)&newAll);
+//}
+//
+//static void pl_AtomicPX_SetAllUnchecked (PlankAtomicPXRef p, PlankP newPtr, PlankUL newExtra)
+//{
+//    p->ptr = newPtr;
+//    p->extra = newExtra;
 //}
 //
 //#define PLANK_ATOMICS_DEFINED 1

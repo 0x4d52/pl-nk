@@ -41,59 +41,73 @@
 
 #include "../../../core/plank_Lock.h"
 
-//------------------------------------------------------------------------------
+#if PLANK_32BIT
+    #define PLANK_ATOMIC_XBITS          32
+    #define PLANK_ATOMIC_XREFCOUNTBITS  16
+    #define PLANK_ATOMIC_XWEAKCOUNTBITS 16
+    #define PLANK_ATOMIC_XREFCOUNTMAX   0x0000FFFFUL
+    #define PLANK_ATOMIC_XREFCOUNTMASK  PLANK_ATOMIC_XREFCOUNTMAX
+    #define PLANK_ATOMIC_XWEAKCOUNTMAX  0x0000FFFFUL
+    #define PLANK_ATOMIC_XWEAKCOUNTMASK 0xFFFF0000UL
+    #define PLANK_ATOMIC_XMAX           0xFFFFFFFFUL
+    #define PLANK_ATOMIC_PMASK          0xFFFFFFFFUL
+#endif
 
+#if PLANK_64BIT
+    #define PLANK_ATOMIC_XBITS          64
+    #define PLANK_ATOMIC_XREFCOUNTBITS  32
+    #define PLANK_ATOMIC_XWEAKCOUNTBITS 32
+    #define PLANK_ATOMIC_XREFCOUNTMAX   0x00000000FFFFFFFFUL
+    #define PLANK_ATOMIC_XREFCOUNTMASK  PLANK_ATOMIC_XREFCOUNTMAX
+    #define PLANK_ATOMIC_XWEAKCOUNTMAX  0x00000000FFFFFFFFUL
+    #define PLANK_ATOMIC_XWEAKCOUNTMASK 0xFFFFFFFF00000000UL
+    #define PLANK_ATOMIC_XMAX           0xFFFFFFFFFFFFFFFFUL
+    #define PLANK_ATOMIC_PMASK          0xFFFFFFFFFFFFFFFFUL
+#endif
 
 #if !DOXYGEN
 typedef struct PlankAtomicI
 {
-    volatile PlankI value;
+    PlankI value;
     PlankLock lock;
-} PlankAtomicI PLANK_ALIGN(4);
+} PlankAtomicI;
 
 typedef struct PlankAtomicL
 {
-    volatile PlankL value;
+    PlankL value;
     PlankLock lock;
-} PlankAtomicL PLANK_ALIGN(4);
+} PlankAtomicL;
 
 typedef struct PlankAtomicLL
 {
-    volatile PlankLL value;
+    PlankLL value;
     PlankLock lock;
-} PlankAtomicLL PLANK_ALIGN(8);
+} PlankAtomicLL;
 
 typedef struct PlankAtomicF
 {
-    volatile PlankF value;
+    PlankF value;
     PlankLock lock;
-} PlankAtomicF PLANK_ALIGN(4);
+} PlankAtomicF;
 
 typedef struct PlankAtomicD
 {
-    volatile PlankD value;
+    PlankD value;
     PlankLock lock;
-} PlankAtomicD PLANK_ALIGN(8);
+} PlankAtomicD;
 
 typedef struct PlankAtomicP
 {
-    volatile PlankP ptr;
+    PlankP ptr;
     PlankLock lock;
-} PlankAtomicP PLANK_ALIGN(4);
+} PlankAtomicP;
 
 typedef struct PlankAtomicPX
 {
-    volatile PlankP ptr;
-    volatile PlankUL extra;
+    PlankP ptr;
+    PlankUL extra;
     PlankLock lock;
-} PlankAtomicPX PLANK_ALIGN(8);
-
-typedef struct PlankAtomicLX
-{
-    volatile PlankL value;
-    volatile PlankUL extra;
-    PlankLock lock;
-} PlankAtomicLX PLANK_ALIGN(8);
+} PlankAtomicPX;
 #endif
 
 static PlankLock* getBarrierLock()
@@ -1042,6 +1056,12 @@ static inline  PlankB pl_AtomicPX_CompareAndSwap (PlankAtomicPXRef p, PlankP old
     pl_Lock_Unlock (&p->lock);
     
     return PLANK_TRUE;
+}
+
+static void pl_AtomicPX_SetAllUnchecked (PlankAtomicPXRef p, PlankP newPtr, PlankUL newExtra)
+{
+    p->ptr = newPtr;
+    p->extra = newExtra;
 }
 
 #define PLANK_ATOMICS_DEFINED 1

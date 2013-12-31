@@ -41,13 +41,15 @@
 // help prevent accidental inclusion other than via the intended header
 #if PLANK_INLINING_FUNCTIONS
 
-#include "../containers/atomic/plank_Atomic.h"
+#include "../core/plank_Lock.h"
 
 #if !DOXYGEN
 typedef struct PlankMemory
 {
-    PLANK_ALIGN(PLANK_WIDESIZE) PlankAtomicPX funcs;
+    PlankMemoryAllocateBytesFunction allocFunction;
+    PlankMemoryFreeFunction freeFunction;
     PlankP userData;
+    PlankLock lock;
 } PlankMemory; 
 #endif
 
@@ -96,28 +98,24 @@ static inline PlankResult pl_MemoryCopy (PlankP dst, PlankConstantP src, const P
 
 static inline PlankP pl_Memory_AllocateBytes (PlankMemoryRef p, PlankUL numBytes)
 {
-    PlankMemoryAllocateBytesFunction allocFunction;
     PlankP ptr;
     
-    allocFunction = (PlankMemoryAllocateBytesFunction)p->funcs.ptr;
-    ptr = (*allocFunction) (p->userData, numBytes);
+    ptr = (p->allocFunction) (p->userData, numBytes);
 
 #if defined(PLANK_DEBUG) && PLANK_MEMORY_DEBUG
     printf ("pl_Memory_AllocateBytes(%p, %ld) = %p\n", p, numBytes, ptr);
 #endif
+    
     return ptr;
 }
 
 static inline PlankResult pl_Memory_Free (PlankMemoryRef p, PlankP ptr)
 {
-    PlankMemoryFreeFunction freeFunction;
-    freeFunction = *(PlankMemoryFreeFunction*)&p->funcs.extra;
-
 #if defined(PLANK_DEBUG) && PLANK_MEMORY_DEBUG
     printf ("pl_Memory_Free(%p) = %p\n", p, ptr);
 #endif    
     
-    (*freeFunction) (p->userData, ptr);
+    (p->freeFunction) (p->userData, ptr);
 
     return PlankResult_OK;
 }

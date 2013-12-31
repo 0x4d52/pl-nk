@@ -77,9 +77,9 @@ typedef struct PlankLockFreeQueue
 {
 	PLANK_ALIGN(PLANK_WIDESIZE) PlankAtomicPX               head;
     PLANK_ALIGN(PLANK_WIDESIZE) PlankAtomicPX               tail;
-    PLANK_ALIGN(4) PlankAtomicI                 count;
-    PlankLockFreeQueueFreeElementDataFunction   freeFunction;
-    PlankLockFreeQueueElement                   dummyElement;
+    PLANK_ALIGN(4) PlankAtomicI                             count;
+    PlankLockFreeQueueFreeElementDataFunction               freeFunction;
+    PLANK_ALIGN(PLANK_WIDESIZE) PlankLockFreeQueueElement   dummyElement;
 
 } PlankLockFreeQueue;
 #endif

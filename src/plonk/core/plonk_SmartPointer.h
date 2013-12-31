@@ -150,29 +150,29 @@ public:
 private:
     AtomicExtended<SmartPointer*> atom;
     
-    struct Counts
-    {
-        unsigned int refCount:PLONK_HALFWORDBITS;
-        unsigned int weakCount:PLONK_HALFWORDBITS;
-    };
-    
-    struct Parts
-    {
-        SmartPointer* smartPointer;
-        Counts counts;    
-    };
-    
-    struct Halves
-    {
-        SmartPointer* ptr;
-        Long extra;
-    };
-    
-    union Element
-    {
-        Parts parts;
-        Halves halves;
-    };        
+//    struct Counts
+//    {
+//        unsigned int refCount:PLONK_HALFWORDBITS;
+//        unsigned int weakCount:PLONK_HALFWORDBITS;
+//    };
+//    
+//    struct Parts
+//    {
+//        SmartPointer* smartPointer;
+//        Counts counts;    
+//    };
+//    
+//    struct Halves
+//    {
+//        SmartPointer* ptr;
+//        Long extra;
+//    };
+//    
+//    union Element
+//    {
+//        Parts parts;
+//        Halves halves;
+//    };        
 };
 
 

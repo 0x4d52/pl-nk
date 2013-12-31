@@ -97,8 +97,9 @@ PlankResult pl_LockFreeQueue_Init (PlankLockFreeQueueRef p)
         
     pl_LockFreeQueueElement_Init (&p->dummyElement);
     
-    p->head.ptr = &p->dummyElement;
-    p->tail.ptr = &p->dummyElement;
+    pl_AtomicPX_SetAllUnchecked (&p->head, &p->dummyElement, 0);
+    pl_AtomicPX_SetAllUnchecked (&p->tail, &p->dummyElement, 0);
+    
     pl_LockFreeQueueElement_SetNext (&p->dummyElement, (PlankLockFreeQueueElementRef)p);
     
 exit:
