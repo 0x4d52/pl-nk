@@ -54,6 +54,22 @@
     #define PLONK_APPLE 1
 #endif
 
+#if PLANK_MAC
+    #define PLONK_MAC 1
+#endif
+
+#if PLANK_IOS
+    #define PLONK_IOS 1
+#endif
+
+#if PLANK_LINUX
+    #define PLONK_LINUX 1
+#endif
+
+#if PLANK_ANDROID
+    #define PLONK_ANDROID 1
+#endif
+
 #if PLANK_GCC
     #define PLONK_GCC 1
 #endif

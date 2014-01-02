@@ -143,8 +143,7 @@
 
     #define snprintf _snprintf
     //#define strncpy _strncpy
-    #define PLANK_LITTLEENDIAN  1
-    #define PLANK_BIGENDIAN     0
+
     #define PLANK_ALIGN(amount) __declspec(align(amount))
 #else
     // assume unix and Apple 
@@ -242,14 +241,32 @@
     #elif defined(__ANDROID__)
         #define PLANK_ANDROID 1
 
-        #ifdef __i386__
+        #define PLANK_GCC 1
+
+        #if defined(__i386__)
             #define PLANK_X86 1
-        #endif
-        #ifdef __arm__
+        #elif defined(__arm__)
             #define PLANK_ARM 1
+        #else
+            #error Target CPU not yet supported for PLANK_ANDROID
         #endif
-        #ifdef _MIPS_ARCH
-            #define PLANK_MIPS 1
+    #elif defined(__linux__)
+        #define PLANK_LINUX 1
+
+        #define PLANK_GCC 1
+
+        #ifdef __llvm__
+            #define PLANK_LLVM 1
+        #endif
+
+        #if defined(__i386__)
+            #define PLANK_X86 1
+        #elif defined(__arm__)
+            #define PLANK_ARM 1
+        #elif defined (__ppc__) || defined (__ppc64__)
+            #define PLANK_PPC 1
+        #else
+            #error Target CPU not yet supported for PLANK_LINUX
         #endif
     #endif
 
@@ -263,19 +280,18 @@
 #endif
 
 #if PLANK_32BIT
-#define PLANK_WORDBITS 32
-#define PLANK_HALFWORDBITS 16
-#define PLANK_WORDSIZE 4
-#define PLANK_WIDESIZE 8
+    #define PLANK_WORDBITS 32
+    #define PLANK_HALFWORDBITS 16
+    #define PLANK_WORDSIZE 4
+    #define PLANK_WIDESIZE 8
 #endif
 
 #if PLANK_64BIT
-#define PLANK_WORDBITS 64
-#define PLANK_HALFWORDBITS 32
-#define PLANK_WORDSIZE 8
-#define PLANK_WIDESIZE 16
+    #define PLANK_WORDBITS 64
+    #define PLANK_HALFWORDBITS 32
+    #define PLANK_WORDSIZE 8
+    #define PLANK_WIDESIZE 16
 #endif
-
 
 typedef float PlankF;
 typedef double PlankD;
@@ -316,11 +332,11 @@ typedef struct PlankFourCharCodeString
     #define PLANK_INFINITY (PLANK_INFINITY_HACK.Value)
 #endif
 
-#define PLANK_FLOAT_ONE         0x3f800000UL
-#define PLANK_FLOAT_ONEMASK     0x007fffffUL
+#define PLANK_FLOAT_ONE         0x3f800000
+#define PLANK_FLOAT_ONEMASK     0x007fffff
 #define PLANK_DOUBLE_ONE        0x3ff0000000000000ULL
 #define PLANK_DOUBLE_ONEMASK    0x000fffffffffffffULL
-#define PLANK_INT24_MAX         0x7fffffUL
+#define PLANK_INT24_MAX         0x7fffff
 #define PLANK_CHARBITS          8
 
 
@@ -335,16 +351,35 @@ typedef struct PlankFourCharCodeString
     #define PLANK_WORDSIZE 8
 #endif
 
-#ifndef PLANK_LITTLEENDIAN
-    #ifdef __LITTLE_ENDIAN__
-        #define PLANK_LITTLEENDIAN  1
-        #define PLANK_BIGENDIAN     0
-    #else
-        #define PLANK_LITTLEENDIAN  0
-        #define PLANK_BIGENDIAN     1
-    #endif
+#if defined(_BIG_ENDIAN) && !defined(_LITTLE_ENDIAN)
+    #define PLANK_LITTLEENDIAN  0
+    #define PLANK_BIGENDIAN     1
+#elif defined(_LITTLE_ENDIAN) && !defined(_BIG_ENDIAN)
+    #define PLANK_LITTLEENDIAN  1
+    #define PLANK_BIGENDIAN     0
+#elif defined(__BIG_ENDIAN__) && !defined(__LITTLE_ENDIAN__)
+    #define PLANK_LITTLEENDIAN  0
+    #define PLANK_BIGENDIAN     1
+#elif defined(__LITTLE_ENDIAN__) && !defined(__BIG_ENDIAN__)
+    #define PLANK_LITTLEENDIAN  1
+    #define PLANK_BIGENDIAN     0
+#elif defined(__sparc) || defined(__sparc__) \
+    || defined(_POWER) || defined(__powerpc__) \
+    || defined(__ppc__) || defined(__hpux) \
+    || defined(_MIPSEB) || defined(_POWER) \
+    || defined(__s390__)
+    #define PLANK_LITTLEENDIAN  0
+    #define PLANK_BIGENDIAN     1
+#elif defined(__i386__) || defined(__alpha__) \
+    || defined(__ia64) || defined(__ia64__) \
+    || defined(_M_IX86) || defined(_M_IA64) \
+    || defined(_M_ALPHA) || defined(__amd64) \
+    || defined(__amd64__) || defined(_M_AMD64) \
+    || defined(__x86_64) || defined(__x86_64__) \
+    || defined(_M_X64) || defined(__bfin__)
+    #define PLANK_LITTLEENDIAN  1
+    #define PLANK_BIGENDIAN     0
 #endif
-
 
 // 
 
@@ -371,7 +406,7 @@ typedef struct PlankFourCharCodeString
 
 static inline double pl_TimeNow()
 {
-#if PLANK_APPLE || PLANK_ANDROID
+#if PLANK_APPLE || PLANK_LINUX || PLANK_ANDROID
     struct timeval now;
     gettimeofday (&now, 0);
     return (double)now.tv_sec + now.tv_usec * 0.000001;
@@ -380,7 +415,7 @@ static inline double pl_TimeNow()
 #endif
 }
 
-#if PLANK_APPLE || PLANK_ANDROID
+#if PLANK_APPLE || PLANK_LINUX || PLANK_ANDROID
 static inline void pl_TimeToTimeSpec (struct timespec* time, double seconds)
 {
     time->tv_sec = (long)seconds;

@@ -222,7 +222,7 @@ PlankResult pl_Thread_SetAffinity (PlankThreadRef p, int affinity);
 PLANK_END_C_LINKAGE
 
 #if !DOXYGEN
-#if PLANK_APPLE
+#if PLANK_APPLE || PLANK_LINUX
 typedef pthread_t PlankThreadNativeHandle;
 typedef void* PlankThreadNativeReturn;
 #define PLANK_THREADCALL

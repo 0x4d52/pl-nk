@@ -108,7 +108,7 @@ void pl_Lock_Signal (PlankLockRef p);
 PLANK_END_C_LINKAGE
 
 #if !DOXYGEN
-#if PLANK_APPLE
+#if PLANK_APPLE || PLANK_LINUX
 typedef struct PlankLock
 {
     pthread_mutex_t mutex;

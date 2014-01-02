@@ -51,6 +51,10 @@
 #include "arch/plank_AtomicInline_Win_X86_32.h"
 #elif PLANK_WIN && PLANK_X86 && PLANK_64BIT
 #include "arch/plank_AtomicInline_Win_X86_64.h"
+#elif PLANK_LINUX && PLANK_32BIT
+#include "arch/plank_AtomicInline_Linux_X86_32.h"
+#elif PLANK_LINUX && PLANK_64BIT
+#include "arch/plank_AtomicInline_Linux_X86_64.h"
 #elif PLANK_ANDROID && PLANK_X86 && PLANK_32BIT
 #include "arch/plank_AtomicInline_Android_X86_32.h"
 #elif PLANK_ANDROID && PLANK_X86 && PLANK_64BIT

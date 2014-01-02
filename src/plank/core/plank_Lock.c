@@ -94,7 +94,7 @@ exit:
 
 //------------------------------------------------------------------------------
 
-#if PLANK_APPLE
+#if PLANK_APPLE || PLANK_LINUX
 
 PlankResult pl_Lock_Init (PlankLockRef p)
 {
@@ -189,7 +189,7 @@ void pl_Lock_Signal (PlankLockRef p)
     pthread_mutex_unlock (&p->mutex);
 }
 
-#endif // PLANK_APPLE
+#endif // PLANK_APPLE || PLANK_LINUX
 
 //------------------------------------------------------------------------------
 

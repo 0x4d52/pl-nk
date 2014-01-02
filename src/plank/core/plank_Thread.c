@@ -57,7 +57,7 @@ void pl_Thread_Reset (PlankThreadRef p)
 
 PlankResult pl_ThreadSleep (PlankD seconds)
 {
-#if PLANK_APPLE || PLANK_ANDROID
+#if PLANK_APPLE || PLANK_LINUX || PLANK_ANDROID
     useconds_t useconds;
     pl_AtomicMemoryBarrier();
     useconds = (useconds_t)pl_MaxD (seconds * 1000000.0, 0.0);
@@ -69,6 +69,8 @@ PlankResult pl_ThreadSleep (PlankD seconds)
 
 #elif PLANK_WIN    
     Sleep ((int)pl_MaxD (seconds * 1000.0, 0.0));
+#else
+    #error No platform defined to implement threads.
 #endif
     
     return PlankResult_OK;
@@ -76,21 +78,25 @@ PlankResult pl_ThreadSleep (PlankD seconds)
 
 PlankResult pl_ThreadYield()
 {
-#if PLANK_APPLE || PLANK_ANDROID
+#if PLANK_APPLE || PLANK_LINUX || PLANK_ANDROID
     sched_yield();
 #elif PLANK_WIN    
     Sleep (0);
+#else
+    #error No platform defined to implement threads.
 #endif
     return PlankResult_OK;
 }
 
 PlankThreadID pl_ThreadCurrentID()
 {
-#if PLANK_APPLE || PLANK_ANDROID
+#if PLANK_APPLE || PLANK_LINUX || PLANK_ANDROID
     pthread_t native = pthread_self();
     return (PlankThreadID)native;
 #elif PLANK_WIN
     return (PlankThreadID)GetCurrentThreadId();
+#else
+    #error No platform defined to implement threads.
 #endif
 }
 
@@ -106,7 +112,7 @@ struct THREADNAME_INFO
 
 static PlankResult pl_ThreadSetNameInternal (const char* name)
 {
-#if PLANK_APPLE || PLANK_ANDROID
+#if PLANK_APPLE || PLANK_LINUX || PLANK_ANDROID
     pthread_setname_np (name);
     return PlankResult_OK;
 #elif PLANK_WIN
@@ -130,6 +136,7 @@ static PlankResult pl_ThreadSetNameInternal (const char* name)
     return PlankResult_OK;
     
 #else
+    #error No platform defined to implement threads.
     (void)name;
     return PlankResult_OK;
 #endif
@@ -298,7 +305,7 @@ PlankResult pl_Thread_Start (PlankThreadRef p)
     if (p->function == PLANK_NULL)
         return PlankResult_ThreadFunctionInvalid;
     
-#if PLANK_APPLE || PLANK_ANDROID
+#if PLANK_APPLE || PLANK_LINUX || PLANK_ANDROID
     if (pthread_create (&p->thread, NULL, pl_ThreadNativeFunction, p) != 0)
         return PlankResult_ThreadStartFailed;
     
@@ -308,8 +315,9 @@ PlankResult pl_Thread_Start (PlankThreadRef p)
     if ((p->thread = _beginthreadex (NULL, 0, pl_ThreadNativeFunction, p, 0, (unsigned int*)&p->threadID)) == 0) 
         return PlankResult_ThreadStartFailed;
 
-#endif    
-//    pl_AtomicI_Set (&p->isRunningAtom, PLANK_TRUE);
+#else
+    #error No platform defined to implement threads.
+#endif
     
     if (p->priority != PLANK_THREAD_NOPRIORITY)
         pl_Thread_SetPriority (p, p->priority);
@@ -326,7 +334,7 @@ PlankResult pl_Thread_Cancel (PlankThreadRef p)
     if (! p->thread)
         return PlankResult_ThreadInvalid;
 
-#if PLANK_APPLE
+#if PLANK_APPLE || PLANK_LINUX || PLANK_ANDROID
     if (pthread_cancel (p->thread) == 0)
     {
         pl_Thread_Reset (p);
@@ -338,6 +346,8 @@ PlankResult pl_Thread_Cancel (PlankThreadRef p)
 #elif PLANK_WIN   
     TerminateThread ((HANDLE)p->thread, 0);
     return PlankResult_OK;
+#else
+    #error No platform defined to implement threads.
 #endif
 }
 
@@ -346,7 +356,7 @@ PlankResult pl_Thread_Wait (PlankThreadRef p)
     if (! p->thread)
         return PlankResult_ThreadInvalid;
     
-#if PLANK_APPLE
+#if PLANK_APPLE || PLANK_LINUX || PLANK_ANDROID
     if (pthread_join (p->thread, NULL) == 0) 
     {
         pl_Thread_Reset (p);
@@ -361,8 +371,11 @@ PlankResult pl_Thread_Wait (PlankThreadRef p)
         return PlankResult_OK;
     }
     
+#else
+    #error No platform defined to implement threads.
 #endif
-    return PlankResult_ThreadWaitFailed;    
+
+    return PlankResult_ThreadWaitFailed;
 }
 
 PlankResult pl_Thread_Pause (PlankThreadRef p)
@@ -422,7 +435,7 @@ PlankB pl_Thread_GetShouldExit (PlankThreadRef p)
 
 PlankResult pl_Thread_SetPriority (PlankThreadRef p, int priority)
 {
-#if PLANK_MAC
+#if PLANK_APPLE || PLANK_LINUX || PLANK_ANDROID
     struct sched_param param;
     int policy, minPriority, maxPriority;
 
