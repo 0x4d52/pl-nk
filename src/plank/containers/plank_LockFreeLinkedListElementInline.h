@@ -5,7 +5,7 @@
  
  http://code.google.com/p/pl-nk/
  
- Copyright University of the West of England, Bristol 2011-13
+ Copyright University of the West of England, Bristol 2011-14
  All rights reserved.
  
  Redistribution and use in source and binary forms, with or without
@@ -43,7 +43,7 @@ typedef struct PlankLockFreeLinkedListElement
 {
     PLANK_ALIGN(PLANK_WIDESIZE) PlankAtomicPX next;
 	PLANK_ALIGN(PLANK_WIDESIZE) PlankAtomicPX data;
-} PlankLockFreeLinkedListElement;
+} PlankLockFreeLinkedListElement PLANK_ALIGN(PLANK_WIDESIZE);
 
 typedef PlankLockFreeLinkedListElement PlankLockFreeQueueElement;
 typedef PlankLockFreeLinkedListElement PlankLockFreeStackElement;

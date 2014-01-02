@@ -5,7 +5,7 @@
  
  http://code.google.com/p/pl-nk/
  
- Copyright University of the West of England, Bristol 2011-13
+ Copyright University of the West of England, Bristol 2011-14
  All rights reserved.
  
  Redistribution and use in source and binary forms, with or without
@@ -732,26 +732,26 @@ public:
                                 NextArray (lastPoint, lastPoint, BreakpointType::End));
     }
     
-//    static BreakpointsBase asr (const double attackTime, 
-//                                const SampleType sustainLevel,
-//                                const double releaseTime,
-//                                Shape const& shape = Shape::Linear) throw()
-//    {
-//        const int lastPoint = 1;
-//        return BreakpointsBase (LevelsArray (SampleType (0), sustainLevel, SampleType (0)),
-//                                TimesArray (attackTime, releaseTime),
-//                                ShapeArray (shape),
-//                                NextArray (BreakpointType::This, BreakpointType::End),
-//                                NextArray (lastPoint, BreakpointType::End));
-//    }
-
-    static BreakpointsBase asr (const double attackTime,
+    static BreakpointsBase asr (const double attackTime, 
                                 const SampleType sustainLevel,
                                 const double releaseTime,
                                 Shape const& shape = Shape::Linear) throw()
     {
-        return BreakpointsBase::lineSustain (0.0, attackTime, sustainLevel, releaseTime, 0.0, shape);
+        const int lastPoint = 1;
+        return BreakpointsBase (LevelsArray (SampleType (0), sustainLevel, SampleType (0)),
+                                TimesArray (attackTime, releaseTime),
+                                ShapeArray (shape),
+                                NextArray (BreakpointType::This, BreakpointType::End),
+                                NextArray (lastPoint, BreakpointType::End));
     }
+
+//    static BreakpointsBase asr (const double attackTime,
+//                                const SampleType sustainLevel,
+//                                const double releaseTime,
+//                                Shape const& shape = Shape::Linear) throw()
+//    {
+//        return BreakpointsBase::lineSustain (0.0, attackTime, sustainLevel, releaseTime, 0.0, shape);
+//    }
 
     static BreakpointsBase steal (const double releaseTime,
                                   Shape const& shape = Shape::Linear) throw()

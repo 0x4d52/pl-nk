@@ -5,7 +5,7 @@
  
  http://code.google.com/p/pl-nk/
  
- Copyright University of the West of England, Bristol 2011-13
+ Copyright University of the West of England, Bristol 2011-14
  All rights reserved.
  
  Redistribution and use in source and binary forms, with or without
@@ -57,7 +57,7 @@ void pl_Thread_Reset (PlankThreadRef p)
 
 PlankResult pl_ThreadSleep (PlankD seconds)
 {
-#if PLANK_APPLE
+#if PLANK_APPLE || PLANK_ANDROID
     useconds_t useconds;
     pl_AtomicMemoryBarrier();
     useconds = (useconds_t)pl_MaxD (seconds * 1000000.0, 0.0);
@@ -76,7 +76,7 @@ PlankResult pl_ThreadSleep (PlankD seconds)
 
 PlankResult pl_ThreadYield()
 {
-#if PLANK_APPLE
+#if PLANK_APPLE || PLANK_ANDROID
     sched_yield();
 #elif PLANK_WIN    
     Sleep (0);
@@ -86,7 +86,7 @@ PlankResult pl_ThreadYield()
 
 PlankThreadID pl_ThreadCurrentID()
 {
-#if PLANK_APPLE
+#if PLANK_APPLE || PLANK_ANDROID
     pthread_t native = pthread_self();
     return (PlankThreadID)native;
 #elif PLANK_WIN
@@ -106,7 +106,7 @@ struct THREADNAME_INFO
 
 static PlankResult pl_ThreadSetNameInternal (const char* name)
 {
-#if PLANK_APPLE
+#if PLANK_APPLE || PLANK_ANDROID
     pthread_setname_np (name);
     return PlankResult_OK;
 #elif PLANK_WIN
@@ -151,9 +151,14 @@ PlankThreadNativeReturn PLANK_THREADCALL pl_ThreadNativeFunction (PlankP argumen
     }
     
     if (p->function == 0)
+    {
         result = PlankResult_ThreadFunctionInvalid;
+    }
     else
+    {
+        pl_AtomicI_Set (&p->isRunningAtom, PLANK_TRUE);
         result = (*p->function) (p);
+    }
   
 exit:
     pl_Thread_Reset (p);
@@ -293,7 +298,7 @@ PlankResult pl_Thread_Start (PlankThreadRef p)
     if (p->function == PLANK_NULL)
         return PlankResult_ThreadFunctionInvalid;
     
-#if PLANK_APPLE
+#if PLANK_APPLE || PLANK_ANDROID
     if (pthread_create (&p->thread, NULL, pl_ThreadNativeFunction, p) != 0)
         return PlankResult_ThreadStartFailed;
     
@@ -304,7 +309,7 @@ PlankResult pl_Thread_Start (PlankThreadRef p)
         return PlankResult_ThreadStartFailed;
 
 #endif    
-    pl_AtomicI_Set (&p->isRunningAtom, PLANK_TRUE);
+//    pl_AtomicI_Set (&p->isRunningAtom, PLANK_TRUE);
     
     if (p->priority != PLANK_THREAD_NOPRIORITY)
         pl_Thread_SetPriority (p, p->priority);

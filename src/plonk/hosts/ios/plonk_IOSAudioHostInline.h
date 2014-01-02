@@ -5,7 +5,7 @@
  
  http://code.google.com/p/pl-nk/
  
- Copyright University of the West of England, Bristol 2011-13
+ Copyright University of the West of England, Bristol 2011-14
  All rights reserved.
  
  Redistribution and use in source and binary forms, with or without
@@ -480,9 +480,9 @@ void IOSAudioHostBase<SampleType>::propertyCallback (AudioSessionPropertyID inID
             CFStringRef newAudioRoute;
             UInt32 propertySize = sizeof (CFStringRef);
             AudioSessionGetProperty (kAudioSessionProperty_AudioRoute, &propertySize, &newAudioRoute);
-            NSLog (@"route: %s reason = '%s' (%ld)\n",
+            NSLog (@"route: %s reason = '%s' (%d)\n",
                    CFStringGetCStringPtr (newAudioRoute,CFStringGetSystemEncoding()),
-                   reasons[routeChangeReason], routeChangeReason);
+                   reasons[routeChangeReason], (int)routeChangeReason);
             CFRelease(newAudioRoute);
             
             this->fixAudioRouteIfSetToReceiver();

@@ -5,7 +5,7 @@
  
  http://code.google.com/p/pl-nk/
  
- Copyright University of the West of England, Bristol 2011-13
+ Copyright University of the West of England, Bristol 2011-14
  All rights reserved.
  
  Redistribution and use in source and binary forms, with or without
@@ -77,7 +77,7 @@ typedef struct PlankJSON* PlankJSONRef;
 static PlankJSONRef pl_JSON_Object();
 static PlankJSONRef pl_JSON_Array();
 static PlankJSONRef pl_JSON_String (const char* string);
-static PlankJSONRef pl_JSON_Int (const int value);
+static PlankJSONRef pl_JSON_Int (const PlankLL value);
 static PlankJSONRef pl_JSON_Float (const float value);
 static PlankJSONRef pl_JSON_Double (const double value);
 static PlankJSONRef pl_JSON_Bool (const PlankB state);
@@ -109,21 +109,21 @@ static void pl_JSON_ArrayAppend (PlankJSONRef p, const PlankJSONRef value);
 
 static double pl_JSON_DoubleGet (PlankJSONRef p);
 static float pl_JSON_FloatGet (PlankJSONRef p);
-static int pl_JSON_IntGet (PlankJSONRef p);
+static PlankLL pl_JSON_IntGet (PlankJSONRef p);
 static const char* pl_JSON_StringGet (PlankJSONRef p);
 
 //
 
-PlankJSONRef pl_JSON_IntBinary (const int value);
+PlankJSONRef pl_JSON_IntBinary (const PlankLL value);
 PlankJSONRef pl_JSON_FloatBinary (const float value);
 PlankJSONRef pl_JSON_DoubleBinary (const double value);
-PlankJSONRef pl_JSON_IntArrayBinary (const int* values, const PlankL count);
+PlankJSONRef pl_JSON_IntArrayBinary (const PlankLL* values, const PlankL count);
 PlankJSONRef pl_JSON_FloatArrayBinary (const float* values, const PlankL count);
 PlankJSONRef pl_JSON_DoubleArrayBinary (const double* values, const PlankL count);
-PlankJSONRef pl_JSON_IntArrayCompressed (const int* values, const PlankL count);
+PlankJSONRef pl_JSON_IntArrayCompressed (const PlankLL* values, const PlankL count);
 PlankJSONRef pl_JSON_FloatArrayCompressed (const float* values, const PlankL count);
 PlankJSONRef pl_JSON_DoubleArrayCompressed (const double* values, const PlankL count);
-PlankJSONRef pl_JSON_IntArray (const int* values, const PlankL count);
+PlankJSONRef pl_JSON_IntArray (const PlankLL* values, const PlankL count);
 PlankJSONRef pl_JSON_FloatArray (const float* values, const PlankL count);
 PlankJSONRef pl_JSON_DoubleArray (const double* values, const PlankL count);
 
@@ -137,7 +137,7 @@ PlankB pl_JSON_IsDoubleArrayEncoded (PlankJSONRef p);
 PlankB pl_JSON_IsError (PlankJSONRef p);
 
 
-int pl_JSON_IntEncodedGet (PlankJSONRef p);
+PlankLL pl_JSON_IntEncodedGet (PlankJSONRef p);
 float pl_JSON_FloatEncodedGet (PlankJSONRef p);
 double pl_JSON_DoubleEncodedGet (PlankJSONRef p);
 PlankResult pl_JSON_IntArrayGet (PlankJSONRef p, PlankDynamicArrayRef array);

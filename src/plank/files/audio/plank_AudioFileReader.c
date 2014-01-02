@@ -5,7 +5,7 @@
  
  http://code.google.com/p/pl-nk/
  
- Copyright University of the West of England, Bristol 2011-13
+ Copyright University of the West of England, Bristol 2011-14
  All rights reserved.
  
  Redistribution and use in source and binary forms, with or without
@@ -2800,9 +2800,9 @@ PlankResult pl_AudioFileReader_OggVorbis_Open  (PlankAudioFileReaderRef p, const
 
     p->formatInfo.sampleRate        = info->rate;
     p->formatInfo.bytesPerFrame     = info->channels * bytesPerSample;
-    p->formatInfo.nominalBitRate    = info->bitrate_nominal;
-    p->formatInfo.minimumBitRate    = info->bitrate_lower;
-    p->formatInfo.maximumBitRate    = info->bitrate_upper;
+    p->formatInfo.nominalBitRate    = (int)info->bitrate_nominal;
+    p->formatInfo.minimumBitRate    = (int)info->bitrate_lower;
+    p->formatInfo.maximumBitRate    = (int)info->bitrate_upper;
     p->formatInfo.frameDuration     = 0.0;
     p->formatInfo.quality           = 0.f;
     
@@ -2911,9 +2911,9 @@ PlankResult pl_AudioFileReader_OggVorbis_OpenWithFile  (PlankAudioFileReaderRef 
 
     p->formatInfo.sampleRate        = info->rate;
     p->formatInfo.bytesPerFrame     = info->channels * bytesPerSample;
-    p->formatInfo.nominalBitRate    = info->bitrate_nominal;
-    p->formatInfo.minimumBitRate    = info->bitrate_lower;
-    p->formatInfo.maximumBitRate    = info->bitrate_upper;
+    p->formatInfo.nominalBitRate    = (int)info->bitrate_nominal;
+    p->formatInfo.minimumBitRate    = (int)info->bitrate_lower;
+    p->formatInfo.maximumBitRate    = (int)info->bitrate_upper;
     p->formatInfo.frameDuration     = 0.0;
     p->formatInfo.quality           = 0.f;
 
@@ -2981,7 +2981,7 @@ PlankResult pl_AudioFileReader_OggVorbis_ReadFrames (PlankAudioFileReaderRef p, 
     PlankOggVorbisFileReaderRef ogg;
     int numFramesRemaining, bufferFramesRemaining, bufferFramePosition;
     int bufferSizeInBytes, bytesPerFrame, bufferFrameEnd, bitStream;
-    int framesThisTime, numChannels, framesRead, streamFrameEnd, i, j;
+    int framesThisTime, numChannels, framesRead, /*streamFrameEnd,*/ i, j;
     float* buffer;
     float* dst;
     float** pcm;
@@ -2997,13 +2997,13 @@ PlankResult pl_AudioFileReader_OggVorbis_ReadFrames (PlankAudioFileReaderRef p, 
     numFramesRemaining      = numFrames;
     bufferFramesRemaining   = ogg->bufferFrames;         // starts at 0
     bufferFramePosition     = ogg->bufferPosition;       // starts at 0
-    bufferSizeInBytes       = pl_DynamicArray_GetSize (&ogg->buffer);
+    bufferSizeInBytes       = (int)pl_DynamicArray_GetSize (&ogg->buffer);
     bytesPerFrame           = p->formatInfo.bytesPerFrame;
     numChannels             = (int)pl_AudioFileFormatInfo_GetNumChannels (&p->formatInfo);
     bufferFrameEnd          = bufferSizeInBytes / bytesPerFrame;
     buffer                  = (float*)pl_DynamicArray_GetArray (&ogg->buffer);
     dst                     = (float*)data;
-    streamFrameEnd          = p->numFrames;
+//    streamFrameEnd          = p->numFrames;
     bitStream               = ogg->bitStream;
     
     framesRead = 0;

@@ -5,7 +5,7 @@
  
  http://code.google.com/p/pl-nk/
  
- Copyright University of the West of England, Bristol 2011-13
+ Copyright University of the West of England, Bristol 2011-14
  All rights reserved.
  
  Redistribution and use in source and binary forms, with or without
@@ -220,40 +220,126 @@ PlankResult pl_LockFreeQueue_Push (PlankLockFreeQueueRef p, const PlankLockFreeQ
     PlankLockFreeQueueElementRef tailElement;
     PlankAtomicPXRef tailElementNextAtom;
     PlankB success;
-    
+
     result = PlankResult_OK;
     success = PLANK_FALSE;
-    
+
 	tailExtra = 0;
 	tailElement = 0;
 
     pl_LockFreeQueueElement_SetNext (element, (PlankLockFreeQueueElementRef)p);
-    
+
     while (!success)
     {
         tailExtra = pl_AtomicPX_GetExtraUnchecked ((PlankAtomicPXRef)&(p->tail));                            // changed to unchecked
         tailElement = (PlankLockFreeQueueElementRef)pl_AtomicPX_GetUnchecked ((PlankAtomicPXRef)&(p->tail)); // changed to unchecked
-        
+
         tailElementNextAtom = pl_LockFreeQueueElement_GetNextAtom (tailElement);
-        success = pl_AtomicP_CompareAndSwap ((PlankAtomicPRef)tailElementNextAtom, 
-                                             (PlankLockFreeQueueElementRef)p, element);
-        
+        success = pl_AtomicPX_CompareAndSwapP (tailElementNextAtom,
+                                               (PlankLockFreeQueueElementRef)p, element);
+
         if (!success)
         {
-            pl_AtomicPX_CompareAndSwap ((PlankAtomicPXRef)&(p->tail), 
-                                        tailElement, tailExtra, 
+            pl_AtomicPX_CompareAndSwap ((PlankAtomicPXRef)&(p->tail),
+                                        tailElement, tailExtra,
                                         pl_LockFreeQueueElement_GetNext (tailElement), tailExtra + 1);
         }
     }
-    
-    pl_AtomicPX_CompareAndSwap ((PlankAtomicPXRef)&(p->tail), 
-                                tailElement, tailExtra, 
-                                element, tailExtra + 1);    
-    
+
+    pl_AtomicPX_CompareAndSwap ((PlankAtomicPXRef)&(p->tail),
+                                tailElement, tailExtra,
+                                element, tailExtra + 1);
+
     pl_AtomicI_Increment (&p->count);
-    
+
     return result;
 }
+
+//PlankResult pl_LockFreeQueue_Push (PlankLockFreeQueueRef p, const PlankLockFreeQueueElementRef element)
+//{
+//    PlankResult result;
+//    PlankL tailExtra, nextAtomExtra;
+//    PlankLockFreeQueueElementRef tailElement;
+//    PlankAtomicPXRef tailElementNextAtom;
+//    PlankB success;
+//    
+//    result = PlankResult_OK;
+//    success = PLANK_FALSE;
+//    
+//	tailExtra = 0;
+//	tailElement = 0;
+//    
+//    pl_LockFreeQueueElement_SetNext (element, (PlankLockFreeQueueElementRef)p);
+//    
+//    while (!success)
+//    {
+//        tailExtra = pl_AtomicPX_GetExtraUnchecked ((PlankAtomicPXRef)&(p->tail));                            // changed to unchecked
+//        tailElement = (PlankLockFreeQueueElementRef)pl_AtomicPX_GetUnchecked ((PlankAtomicPXRef)&(p->tail)); // changed to unchecked
+//        
+//        tailElementNextAtom = pl_LockFreeQueueElement_GetNextAtom (tailElement);
+//        nextAtomExtra       = pl_AtomicPX_GetExtraUnchecked (tailElementNextAtom);
+//        success             = pl_AtomicPX_CompareAndSwap (tailElementNextAtom,
+//                                                          (PlankLockFreeQueueElementRef)p, nextAtomExtra,
+//                                                          element, nextAtomExtra);
+//        
+//        if (!success)
+//        {
+//            pl_AtomicPX_CompareAndSwap ((PlankAtomicPXRef)&(p->tail),
+//                                        tailElement, tailExtra,
+//                                        pl_LockFreeQueueElement_GetNext (tailElement), tailExtra + 1);
+//        }
+//    }
+//    
+//    pl_AtomicPX_CompareAndSwap ((PlankAtomicPXRef)&(p->tail),
+//                                tailElement, tailExtra,
+//                                element, tailExtra + 1);
+//    
+//    pl_AtomicI_Increment (&p->count);
+//    
+//    return result;
+//}
+
+//PlankResult pl_LockFreeQueue_Push (PlankLockFreeQueueRef p, const PlankLockFreeQueueElementRef element)
+//{
+//    PlankResult result;
+//    PlankL tailExtra;
+//    PlankLockFreeQueueElementRef tailElement;
+//    PlankAtomicPXRef tailElementNextAtom;
+//    PlankB success;
+//    
+//    result = PlankResult_OK;
+//    success = PLANK_FALSE;
+//    
+//	tailExtra = 0;
+//	tailElement = 0;
+//
+//    pl_LockFreeQueueElement_SetNext (element, (PlankLockFreeQueueElementRef)p);
+//    
+//    while (!success)
+//    {
+//        tailExtra = pl_AtomicPX_GetExtraUnchecked ((PlankAtomicPXRef)&(p->tail));                            // changed to unchecked
+//        tailElement = (PlankLockFreeQueueElementRef)pl_AtomicPX_GetUnchecked ((PlankAtomicPXRef)&(p->tail)); // changed to unchecked
+//        
+//        tailElementNextAtom = pl_LockFreeQueueElement_GetNextAtom (tailElement);
+//        success = pl_AtomicP_CompareAndSwap ((PlankAtomicPRef)tailElementNextAtom, 
+//                                             (PlankLockFreeQueueElementRef)p, element);
+//        
+//        if (!success)
+//        {
+//            pl_AtomicPX_CompareAndSwap ((PlankAtomicPXRef)&(p->tail), 
+//                                        tailElement, tailExtra, 
+//                                        pl_LockFreeQueueElement_GetNext (tailElement), tailExtra + 1);
+//        }
+//    }
+//    
+//    pl_AtomicPX_CompareAndSwap ((PlankAtomicPXRef)&(p->tail), 
+//                                tailElement, tailExtra, 
+//                                element, tailExtra + 1);    
+//    
+//    pl_AtomicI_Increment (&p->count);
+//    
+//    return result;
+//}
 
 //PlankResult pl_LockFreeQueue_Push (PlankLockFreeQueueRef p, const PlankLockFreeQueueElementRef element)
 //{

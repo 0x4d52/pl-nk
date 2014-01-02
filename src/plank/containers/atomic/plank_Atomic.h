@@ -5,7 +5,7 @@
  
  http://code.google.com/p/pl-nk/
  
- Copyright University of the West of England, Bristol 2011-13
+ Copyright University of the West of England, Bristol 2011-14
  All rights reserved.
  
  Redistribution and use in source and binary forms, with or without
@@ -904,6 +904,9 @@ static PlankP pl_AtomicPX_Decrement (PlankAtomicPXRef p);
  @param newExtra The new extra tag to attempt to store.
  @return @c true if the swap was successful, otherwise @c false. */
 static PlankB pl_AtomicPX_CompareAndSwap (PlankAtomicPXRef p, PlankP oldPtr, PlankUL oldExtra, PlankP newPtr, PlankUL newExtra);
+
+static PlankB pl_AtomicPX_CompareAndSwapP (PlankAtomicPXRef p, PlankP oldPtr, PlankP newPtr);
+
 
 /** @} */
 

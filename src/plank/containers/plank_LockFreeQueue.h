@@ -5,7 +5,7 @@
  
  http://code.google.com/p/pl-nk/
  
- Copyright University of the West of England, Bristol 2011-13
+ Copyright University of the West of England, Bristol 2011-14
  All rights reserved.
  
  Redistribution and use in source and binary forms, with or without
@@ -81,7 +81,7 @@ typedef struct PlankLockFreeQueue
     PlankLockFreeQueueFreeElementDataFunction               freeFunction;
     PLANK_ALIGN(PLANK_WIDESIZE) PlankLockFreeQueueElement   dummyElement;
 
-} PlankLockFreeQueue;
+} PlankLockFreeQueue PLANK_ALIGN(PLANK_WIDESIZE);
 #endif
 
 #endif // PLANK_LOCKFREEQUEUE_H

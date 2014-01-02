@@ -5,7 +5,7 @@
  
  http://code.google.com/p/pl-nk/
  
- Copyright University of the West of England, Bristol 2011-13
+ Copyright University of the West of England, Bristol 2011-14
  All rights reserved.
  
  Redistribution and use in source and binary forms, with or without
@@ -124,6 +124,7 @@ typedef NumericalArray<Short>			ShortArray;
 typedef NumericalArray<Int>				IntArray;
 typedef NumericalArray<Int24>			Int24Array;
 typedef NumericalArray<Long>			LongArray;
+typedef NumericalArray<LongLong>        LongLongArray;
 typedef NumericalArray<UnsignedChar>	UnsignedCharArray;
 typedef UnsignedCharArray				ByteArray;
 typedef NumericalArray<UnsignedShort>	UnsignedShortArray;
@@ -138,6 +139,7 @@ typedef NumericalArray<Short>			Shorts;
 typedef NumericalArray<Int>				Ints;
 typedef NumericalArray<Int24>			Int24s;
 typedef NumericalArray<Long>			Longs;
+typedef NumericalArray<LongLong>        LongLongs;
 typedef NumericalArray<UnsignedChar>	UnsignedChars;
 typedef UnsignedCharArray				Bytes;
 typedef NumericalArray<UnsignedShort>	UnsignedShorts;
@@ -165,6 +167,7 @@ typedef NumericalArray2D<Short>				ShortArray2D;
 typedef NumericalArray2D<Int>				IntArray2D;
 typedef NumericalArray2D<Int24>				Int24Array2D;
 typedef NumericalArray2D<Long>				LongArray2D;
+typedef NumericalArray2D<LongLong>          LongLongArray2D;
 typedef NumericalArray2D<UnsignedChar>		UnsignedCharArray2D;
 typedef NumericalArray2D<UnsignedChar>		ByteArray2D;
 typedef NumericalArray2D<UnsignedShort>     UnsignedShortArray2D;
@@ -178,6 +181,7 @@ typedef NumericalArray2D<Short>				Short2D;
 typedef NumericalArray2D<Int>				Int2D;
 typedef NumericalArray2D<Int24>				Int242D;
 typedef NumericalArray2D<Long>				Long2D;
+typedef NumericalArray2D<LongLong>          LongLong2D;
 typedef NumericalArray2D<UnsignedChar>		UnsignedChar2D;
 typedef NumericalArray2D<UnsignedChar>		Byte2D;
 typedef NumericalArray2D<UnsignedShort>     UnsignedShort2D;

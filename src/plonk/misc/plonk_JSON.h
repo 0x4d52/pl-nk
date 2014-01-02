@@ -5,7 +5,7 @@
  
  http://code.google.com/p/pl-nk/
  
- Copyright University of the West of England, Bristol 2011-13
+ Copyright University of the West of England, Bristol 2011-14
  All rights reserved.
  
  Redistribution and use in source and binary forms, with or without
@@ -44,16 +44,21 @@ class JSON
 {
 public:
     inline JSON() throw() : json (0) { }
-    inline JSON (const int value) throw() : json (pl_JSON_Int (value)) { }
+    inline JSON (const Long value) throw() : json (pl_JSON_Int (LongLong (value))) { }
+    inline JSON (const LongLong value) throw() : json (pl_JSON_Int (value)) { }
     inline JSON (const float value) throw() : json (pl_JSON_Float (value)) { }
     inline JSON (const double value) throw() : json (pl_JSON_Double (value)) { }
-    inline JSON (IntArray const& values) throw() : json (pl_JSON_IntArray (values.getArray(), values.length())) { }
+    inline JSON (LongLongArray const& values) throw() : json (pl_JSON_IntArray (values.getArray(), values.length())) { }
     inline JSON (FloatArray const& values) throw() : json (pl_JSON_FloatArray (values.getArray(), values.length())) { }
     inline JSON (DoubleArray const& values) throw() : json (pl_JSON_DoubleArray (values.getArray(), values.length())) { }
     inline JSON (Text const& text) throw() : json (pl_JSON_String (text.getArray())) { }
     inline JSON (const char* text) throw() : json (pl_JSON_String (text)) { }
-    
-    inline JSON (const int value, const bool useBinary) throw()
+
+    inline JSON (const Long value, const bool useBinary) throw()
+    : json (useBinary ? pl_JSON_IntBinary (LongLong (value)) : pl_JSON_Int (LongLong (value)))
+    { }
+
+    inline JSON (const LongLong value, const bool useBinary) throw()
     : json (useBinary ? pl_JSON_IntBinary (value) : pl_JSON_Int (value))
     { }
     
@@ -65,7 +70,7 @@ public:
     : json (useBinary ? pl_JSON_DoubleBinary (value) : pl_JSON_Double (value))
     { }
     
-    inline JSON (IntArray const& values, const bool useBinary) throw()
+    inline JSON (LongLongArray const& values, const bool useBinary) throw()
     : json (useBinary ? pl_JSON_IntArrayBinary (values.getArray(), values.length()) : pl_JSON_IntArray (values.getArray(), values.length()))
     { }
     
@@ -139,26 +144,27 @@ public:
 
     inline bool operator== (JSON const& other) const throw() { return json == other.json; }
     inline bool operator!= (JSON const& other) const throw() { return json != other.json; }
-        
-    operator int () const throw() { return pl_JSON_IntGet (json); }
-    operator PlankUI () const throw() { return PlankUI (pl_JSON_IntGet (json)); }
+
+    operator int () const throw() { return int (pl_JSON_IntGet (json)); }
+    operator LongLong () const throw() { return pl_JSON_IntGet (json); }
+    operator UnsignedLongLong () const throw() { return UnsignedLongLong (pl_JSON_IntGet (json)); }
     operator float () const throw() { return pl_JSON_FloatGet (json); }
     operator double () const throw() { return pl_JSON_DoubleGet (json); }
     operator Text () const throw() { return getText(); }
     operator const char* () const throw() { return pl_JSON_StringGet (json); }
        
-    int getInt() const throw() { return pl_JSON_IntGet (json); }
-    UnsignedInt getUnsignedInt() const throw() { return PlankUI (pl_JSON_IntGet (json)); }
+    LongLong getInt() const throw() { return pl_JSON_IntGet (json); }
+    UnsignedLongLong getUnsignedInt() const throw() { return PlankUI (pl_JSON_IntGet (json)); }
     float getFloat() const throw() { return pl_JSON_FloatGet (json); }
     double getDouble() const throw() { return pl_JSON_DoubleGet (json); }
     Text getText() const throw() { const char* string = pl_JSON_StringGet (json); return string ? string : ""; }
     const char* getCString() const throw() { return pl_JSON_StringGet (json); }
                 
-    operator IntArray () const throw() { return getIntArray();  }
+    operator LongLongArray () const throw() { return getIntArray();  }
     operator FloatArray () const throw() { return getFloatArray(); }
     operator DoubleArray () const throw() { return getDoubleArray(); }
 
-    IntArray getIntArray() const throw()
+    LongLongArray getIntArray() const throw()
     {
         if (isIntArrayEncoded() || isArray())
         {
@@ -166,7 +172,7 @@ public:
             pl_DynamicArray_Init (&array);
             
             if (pl_JSON_IntArrayGet (json, &array) == PlankResult_OK)
-                return IntArray::withArray((int)pl_DynamicArray_GetSize (&array), static_cast<int*> (pl_DynamicArray_GetArray (&array)));
+                return LongLongArray::withArray((int)pl_DynamicArray_GetSize (&array), static_cast<LongLong*> (pl_DynamicArray_GetArray (&array)));
             else
                 pl_DynamicArray_DeInit (&array);
         }

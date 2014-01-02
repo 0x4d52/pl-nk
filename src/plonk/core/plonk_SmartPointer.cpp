@@ -5,7 +5,7 @@
  
  http://code.google.com/p/pl-nk/
  
- Copyright University of the West of England, Bristol 2011-13
+ Copyright University of the West of England, Bristol 2011-14
  All rights reserved.
  
  Redistribution and use in source and binary forms, with or without
@@ -214,8 +214,8 @@ int SmartPointer::getRefCount() const throw()
 ///-----------------------------------------------------------------------------
 
 SmartPointerCounter::SmartPointerCounter (SmartPointer* smartPointer) throw()
+:   atom (smartPointer, 0)
 {
-    atom.setAll (smartPointer, 0);
     
 #if PLONK_SMARTPOINTER_DEBUG
     ++getTotalSmartPointerCountersAtom();
@@ -237,7 +237,7 @@ SmartPointerCounter::~SmartPointerCounter()
 
 SmartPointer* SmartPointerCounter::getSmartPointer() const throw()
 {
-    return atom.getPtr(); // could this be the unchecked version?
+    return atom.getPtr();
 }
 
 void SmartPointerCounter::incrementRefCount() throw()

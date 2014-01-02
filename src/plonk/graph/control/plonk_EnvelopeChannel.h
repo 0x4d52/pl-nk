@@ -5,7 +5,7 @@
  
  http://code.google.com/p/pl-nk/
  
- Copyright University of the West of England, Bristol 2011-13
+ Copyright University of the West of England, Bristol 2011-14
  All rights reserved.
  
  Redistribution and use in source and binary forms, with or without
@@ -184,80 +184,87 @@ public:
         SampleType* outputSamples = this->getOutputSamples();
         const int outputBufferLength = this->getOutputBuffer().length();
 
-        UnitType& gate (this->getInputAsUnit (IOKey::Gate));
-        const Buffer& gateBuffer (gate.process (info, 0));
-        const SampleType* const gateSamples = gateBuffer.getArray();
-        const int gateBufferLength = gateBuffer.length();        
-        
-        bool currGate;
-        
-        if (gateBufferLength == 1) // most efficient
+        if (data.done)
         {
-            int samplesRemaining = outputBufferLength;
-            currGate = gateSamples[0] >= SampleType (0.5);
-            
-            if (currGate != data.prevGate)
-                this->nextTargetPoint (currGate, samplesRemaining);
-            
-            while (samplesRemaining > 0)
-            {
-                const int samplesThisTime = int (plonk::min (LongLong (samplesRemaining), data.shapeState.stepsToTarget));
-                
-                if (samplesThisTime > 0)
-                {
-                    Shape::processShape (data.shapeState, outputSamples, samplesThisTime);
-                                        
-                    outputSamples += samplesThisTime;
-                    samplesRemaining -= samplesThisTime;
-                }
-                
-                if (data.shapeState.stepsToTarget == 0)
-                    this->nextTargetPoint (currGate, samplesRemaining);
-            }
-            
-            data.prevGate = currGate;
-        }
-        else if (gateBufferLength == outputBufferLength)
-        {
-            for (int i = 0; i < outputBufferLength; ++i)
-            {
-                currGate = gateSamples[i] >= SampleType (0.5);
-                
-                if (currGate != data.prevGate)
-                    this->nextTargetPoint (currGate, 1);
-                    
-                Shape::processShape (data.shapeState, outputSamples++, 1);
-                
-                if (data.shapeState.stepsToTarget == 0)
-                    this->nextTargetPoint (currGate, 1);
-                
-                data.prevGate = currGate;
-            }
+            NumericalArrayFiller<SampleType>::fill (outputSamples, data.shapeState.currentLevel, outputBufferLength);
         }
         else
-        {            
-            double gatePosition = 0.0;
-            const double gateIncrement = double (gateBufferLength) / double (outputBufferLength);
+        {
+            UnitType& gate (this->getInputAsUnit (IOKey::Gate));
+            const Buffer& gateBuffer (gate.process (info, 0));
+            const SampleType* const gateSamples = gateBuffer.getArray();
+            const int gateBufferLength = gateBuffer.length();
             
-            for (int i = 0; i < outputBufferLength; ++i)
+            bool currGate;
+
+            if (gateBufferLength == 1) // most efficient
             {
-                currGate = gateSamples[int (gatePosition)] >= SampleType (0.5);
+                int samplesRemaining = outputBufferLength;
+                currGate = gateSamples[0] >= SampleType (0.5);
                 
                 if (currGate != data.prevGate)
-                    this->nextTargetPoint (currGate, 1);
+                    this->nextTargetPoint (currGate, samplesRemaining);
                 
-                Shape::processShape (data.shapeState, outputSamples++, 1);
+                while (samplesRemaining > 0)
+                {
+                    const int samplesThisTime = int (plonk::min (LongLong (samplesRemaining), data.shapeState.stepsToTarget));
                     
-                if (data.shapeState.stepsToTarget == 0)
-                    this->nextTargetPoint (currGate, 1);
+                    if (samplesThisTime > 0)
+                    {
+                        Shape::processShape (data.shapeState, outputSamples, samplesThisTime);
+                                            
+                        outputSamples += samplesThisTime;
+                        samplesRemaining -= samplesThisTime;
+                    }
+                    
+                    if (data.shapeState.stepsToTarget == 0)
+                        this->nextTargetPoint (currGate, samplesRemaining);
+                }
                 
                 data.prevGate = currGate;
-                gatePosition += gateIncrement;
             }
+            else if (gateBufferLength == outputBufferLength)
+            {
+                for (int i = 0; i < outputBufferLength; ++i)
+                {
+                    currGate = gateSamples[i] >= SampleType (0.5);
+                    
+                    if (currGate != data.prevGate)
+                        this->nextTargetPoint (currGate, 1);
+                        
+                    Shape::processShape (data.shapeState, outputSamples++, 1);
+                    
+                    if (data.shapeState.stepsToTarget == 0)
+                        this->nextTargetPoint (currGate, 1);
+                    
+                    data.prevGate = currGate;
+                }
+            }
+            else
+            {            
+                double gatePosition = 0.0;
+                const double gateIncrement = double (gateBufferLength) / double (outputBufferLength);
+                
+                for (int i = 0; i < outputBufferLength; ++i)
+                {
+                    currGate = gateSamples[int (gatePosition)] >= SampleType (0.5);
+                    
+                    if (currGate != data.prevGate)
+                        this->nextTargetPoint (currGate, 1);
+                    
+                    Shape::processShape (data.shapeState, outputSamples++, 1);
+                        
+                    if (data.shapeState.stepsToTarget == 0)
+                        this->nextTargetPoint (currGate, 1);
+                    
+                    data.prevGate = currGate;
+                    gatePosition += gateIncrement;
+                }
+            }
+            
+            if (data.done && data.deleteWhenDone)
+                info.setShouldDelete();
         }
-        
-        if (data.done && data.deleteWhenDone)
-            info.setShouldDelete();
     }
 
 private:

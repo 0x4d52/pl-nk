@@ -5,7 +5,7 @@
  
  http://code.google.com/p/pl-nk/
  
- Copyright University of the West of England, Bristol 2011-13
+ Copyright University of the West of England, Bristol 2011-14
  All rights reserved.
  
  Redistribution and use in source and binary forms, with or without
@@ -61,9 +61,9 @@ static inline PlankJSONRef pl_JSON_String (const char* string)
     return (PlankJSONRef)json_string (string);
 }
 
-static inline PlankJSONRef pl_JSON_Int(const int value)
+static inline PlankJSONRef pl_JSON_Int (const PlankLL value)
 {
-    return (PlankJSONRef)json_integer (value);
+    return (PlankJSONRef)json_integer ((PlankL)value);
 }
 
 static inline PlankJSONRef pl_JSON_Float (const float value)
@@ -101,9 +101,9 @@ static inline PlankB pl_JSON_IsString (PlankJSONRef p)
     return json_is_string ((json_t*)p);
 }
 
-static inline PlankB pl_JSON_IsInt(PlankJSONRef p)
+static inline PlankB pl_JSON_IsInt (PlankJSONRef p)
 {
-    return json_is_integer ((json_t*)p) ? PLANK_TRUE : pl_JSON_IsIntEncoded(p);
+    return json_is_integer ((json_t*)p) ? PLANK_TRUE : pl_JSON_IsIntEncoded (p);
 }
 
 static inline PlankB pl_JSON_IsFloat (PlankJSONRef p)
@@ -203,13 +203,13 @@ static inline float pl_JSON_FloatGet (PlankJSONRef p)
     return value;
 }
 
-static inline int pl_JSON_IntGet (PlankJSONRef p)
+static inline PlankLL pl_JSON_IntGet (PlankJSONRef p)
 {
-    int value = 0;
+    PlankLL value = 0;
     
     if (json_is_integer ((json_t*)p))
     {
-        value = (int)json_integer_value ((json_t*)p);
+        value = (PlankLL)json_integer_value ((json_t*)p);
     }
     else if (pl_JSON_ObjectGetSize (p) == 1)
     {

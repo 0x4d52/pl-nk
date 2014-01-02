@@ -5,7 +5,7 @@
  
  http://code.google.com/p/pl-nk/
  
- Copyright University of the West of England, Bristol 2011-13
+ Copyright University of the West of England, Bristol 2011-14
  All rights reserved.
  
  Redistribution and use in source and binary forms, with or without
@@ -553,7 +553,14 @@ public:
         plonk_assert (ptrUsesValidBits (initialPtr));
         pl_AtomicPX_Init (getAtomicRef());
         pl_AtomicPX_SetAllUnchecked (getAtomicRef(), initialPtr, 0);
-    }    
+    }
+    
+    inline AtomicExtended (Type* initialPtr, const UnsignedLong extra) throw()
+    {
+        plonk_assert (ptrUsesValidBits (initialPtr));
+        pl_AtomicPX_Init (getAtomicRef());
+        pl_AtomicPX_SetAllUnchecked (getAtomicRef(), initialPtr, extra);
+    }
     
     inline AtomicExtended (AtomicExtended const& copy) throw() 
     {
@@ -715,7 +722,6 @@ public:
     inline const PlankAtomicPXRef getAtomicRef() const { return const_cast<PlankAtomicPXRef> (&atomic); }
     
 private:
-    
     PLONK_ALIGN(PLONK_WIDESIZE) PlankAtomicPX atomic;
 };
 

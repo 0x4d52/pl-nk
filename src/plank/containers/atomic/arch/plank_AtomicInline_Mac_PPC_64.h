@@ -5,7 +5,7 @@
  
  http://code.google.com/p/pl-nk/
  
- Copyright University of the West of England, Bristol 2011-13
+ Copyright University of the West of England, Bristol 2011-14
  All rights reserved.
  
  Redistribution and use in source and binary forms, with or without
@@ -869,6 +869,11 @@ static inline  PlankB pl_AtomicPX_CompareAndSwap (PlankAtomicPXRef p, PlankP old
     pl_ThreadSpinLock_Unlock (&p->lock);
     
     return PLANK_TRUE;
+}
+
+static inline PlankB pl_AtomicPX_CompareAndSwapP (PlankAtomicPXRef p, PlankP oldPtr, PlankP newPtr)
+{
+    return pl_AtomicP_CompareAndSwap ((PlankAtomicPRef)p, oldPtr, newPtr);
 }
 
 static void pl_AtomicPX_SetAllUnchecked (PlankAtomicPXRef p, PlankP newPtr, PlankUL newExtra)

@@ -5,7 +5,7 @@
  
  http://code.google.com/p/pl-nk/
  
- Copyright University of the West of England, Bristol 2011-13
+ Copyright University of the West of England, Bristol 2011-14
  All rights reserved.
  
  Redistribution and use in source and binary forms, with or without
@@ -75,7 +75,7 @@ typedef struct PlankLockFreeStack
 	PLANK_ALIGN(PLANK_WIDESIZE) PlankAtomicPX	atom;
     PLANK_ALIGN(PLANK_WIDESIZE) PlankAtomicLL   count;
     PlankLockFreeStackFreeElementDataFunction freeFunction;
-} PlankLockFreeStack;
+} PlankLockFreeStack PLANK_ALIGN(PLANK_WIDESIZE);
 #endif
 
 #endif // PLANK_LOCKFREESTACK_H

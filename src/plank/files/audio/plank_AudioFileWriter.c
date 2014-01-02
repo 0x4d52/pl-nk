@@ -5,7 +5,7 @@
  
  http://code.google.com/p/pl-nk/
  
- Copyright University of the West of England, Bristol 2011-13
+ Copyright University of the West of England, Bristol 2011-14
  All rights reserved.
  
  Redistribution and use in source and binary forms, with or without
@@ -2095,8 +2095,8 @@ static PlankResult pl_AudioFileWriter_Ogg_WritePage (PlankFileRef file, const og
 {
     PlankResult result = PlankResult_OK;
     
-    if ((result = pl_File_Write (file, og->header, og->header_len)) != PlankResult_OK) goto exit;
-    if ((result = pl_File_Write (file, og->body,   og->body_len))   != PlankResult_OK) goto exit;
+    if ((result = pl_File_Write (file, og->header, (int)og->header_len)) != PlankResult_OK) goto exit;
+    if ((result = pl_File_Write (file, og->body,   (int)og->body_len))   != PlankResult_OK) goto exit;
     
 exit:
     return result;

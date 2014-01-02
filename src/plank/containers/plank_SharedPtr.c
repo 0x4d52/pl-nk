@@ -5,7 +5,7 @@
  
  http://code.google.com/p/pl-nk/
  
- Copyright University of the West of England, Bristol 2011-13
+ Copyright University of the West of England, Bristol 2011-14
  All rights reserved.
  
  Redistribution and use in source and binary forms, with or without
@@ -89,7 +89,7 @@ PlankAtomicL* pl_SharedPtrGlobalCount()
 typedef struct PlankSharedPtrCounter
 {
     PLANK_ALIGN(PLANK_WIDESIZE) PlankAtomicPX atom;
-} PlankSharedPtrCounter;
+} PlankSharedPtrCounter PLANK_ALIGN(PLANK_WIDESIZE);
 
 ///////////////////////////////// Weak /////////////////////////////////////////
 
@@ -97,7 +97,7 @@ typedef struct PlankWeakPtr
 {
     PlankSharedPtr sharedPtr;
     PlankSharedPtrCounterRef sharedCounter;
-} PlankWeakPtr;
+} PlankWeakPtr PLANK_ALIGN(PLANK_WIDESIZE);
 
 /////////////////////////////// Functions //////////////////////////////////////
 

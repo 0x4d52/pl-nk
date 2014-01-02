@@ -5,7 +5,7 @@
  
  http://code.google.com/p/pl-nk/
  
- Copyright University of the West of England, Bristol 2011-13
+ Copyright University of the West of England, Bristol 2011-14
  All rights reserved.
  
  Redistribution and use in source and binary forms, with or without
@@ -186,7 +186,7 @@ static inline PlankJSONRef pl_JSON_Binary (const char* key, const void* data, co
     return j;
 }
 
-PlankJSONRef pl_JSON_IntBinary (const int value)
+PlankJSONRef pl_JSON_IntBinary (const PlankLL value)
 {
     return pl_JSON_Binary (PLANK_JSON_INTBINARY, &value, sizeof (value));
 }
@@ -201,7 +201,7 @@ PlankJSONRef pl_JSON_DoubleBinary (const double value)
     return pl_JSON_Binary (PLANK_JSON_DOUBLEBINARY, &value, sizeof (value));
 }
 
-PlankJSONRef pl_JSON_IntArrayBinary (const int* values, const PlankL count)
+PlankJSONRef pl_JSON_IntArrayBinary (const PlankLL* values, const PlankL count)
 {
     return pl_JSON_Binary (PLANK_JSON_INTARRAYBINARY, values, sizeof (values[0]) * count);
 }
@@ -238,7 +238,7 @@ static inline PlankJSONRef pl_JSON_Compressed (const char* key, const void* data
     return j;
 }
 
-PlankJSONRef pl_JSON_IntArrayCompressed (const int* values, const PlankL count)
+PlankJSONRef pl_JSON_IntArrayCompressed (const PlankLL* values, const PlankL count)
 {
     return pl_JSON_Compressed (PLANK_JSON_INTARRAYCOMPRESSED, values, sizeof (values[0]) * count);
 }
@@ -253,7 +253,7 @@ PlankJSONRef pl_JSON_DoubleArrayCompressed (const double* values, const PlankL c
     return pl_JSON_Compressed (PLANK_JSON_DOUBLEARRAYCOMPRESSED, values, sizeof (values[0]) * count);
 }
 
-PlankJSONRef pl_JSON_IntArray (const int* values, const PlankL count)
+PlankJSONRef pl_JSON_IntArray (const PlankLL* values, const PlankL count)
 {
     PlankJSONRef j;
     PlankL i;
@@ -322,10 +322,10 @@ static inline const void* pl_JSON_EncodedGet (PlankJSONRef p, const char* keyTyp
 
 }
 
-int pl_JSON_IntEncodedGet (PlankJSONRef p)
+PlankLL pl_JSON_IntEncodedGet (PlankJSONRef p)
 {
-    const int* data;
-    data = (const int*)pl_JSON_EncodedGet (p, PLANK_JSON_INTBINARY, sizeof (data[0]));
+    const PlankLL* data;
+    data = (const PlankLL*)pl_JSON_EncodedGet (p, PLANK_JSON_INTBINARY, sizeof (data[0]));
     return data ? *data : 0;
 }
 
@@ -359,7 +359,7 @@ static PlankResult pl_JSON_EncodedArrayGet (PlankJSONRef p, PlankDynamicArrayRef
     const void* data;
     const void* zdata;
     PlankUL itemSize;
-    int numStrings, i;
+    PlankL numStrings, i;
     
     result = PlankResult_OK;
     key = json_object_iter_key (json_object_iter ((json_t*)p));
@@ -398,7 +398,7 @@ static PlankResult pl_JSON_EncodedArrayGet (PlankJSONRef p, PlankDynamicArrayRef
             }
             else if (pl_JSON_IsArray (p))
             {
-                numStrings = (int)pl_JSON_ArrayGetSize (p);
+                numStrings = pl_JSON_ArrayGetSize (p);
                 
                 pl_DynamicArray_InitWithItemSize (&zArray, 1);
                 pl_File_Init (&zStream);
@@ -446,7 +446,7 @@ static PlankResult pl_JSON_EncodedArrayGet (PlankJSONRef p, PlankDynamicArrayRef
             }
             else if (pl_JSON_IsArray (p))
             {
-                numStrings = (int)pl_JSON_ArrayGetSize (p);
+                numStrings = pl_JSON_ArrayGetSize (p);
                 
                 for (i = 0; i < numStrings; ++i)
                 {
@@ -506,7 +506,7 @@ PlankResult pl_JSON_IntArrayGet (PlankJSONRef p, PlankDynamicArrayRef array)
 {
     PlankResult result;
     PlankL size, i, sz;
-    int* values;
+    PlankL* values;
     
     result = PlankResult_OK;
     sz = sizeof (values[0]);
@@ -521,7 +521,7 @@ PlankResult pl_JSON_IntArrayGet (PlankJSONRef p, PlankDynamicArrayRef array)
         
         if (size)
         {
-            values = (int*)pl_DynamicArray_GetArray (array);
+            values = (PlankL*)pl_DynamicArray_GetArray (array);
             
             for (i = 0; i < size; ++i)
                 values[i] = pl_JSON_IntGet (pl_JSON_ArrayAt (p, i));
@@ -732,7 +732,7 @@ PlankUI pl_JSON_VersionGet (PlankJSONRef p)
     if (pl_JSON_IsString (p))
         return pl_JSON_VersionCodeFromString (p);
     else
-        return pl_JSON_IntGet (p);
+        return (PlankUI)pl_JSON_IntGet (p);
 }
 
 PlankB pl_JSON_IsObjectType (PlankJSONRef p, const char* type)
