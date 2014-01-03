@@ -259,6 +259,7 @@
             #define PLANK_LLVM 1
         #endif
 
+        // probably avoid needing to know the CPU for linux...
         #if defined(__i386__)
             #define PLANK_X86 1
         #elif defined(__arm__)
@@ -266,7 +267,7 @@
         #elif defined (__ppc__) || defined (__ppc64__)
             #define PLANK_PPC 1
         #else
-            #error Target CPU not yet supported for PLANK_LINUX
+            #define PLANK_UNKNOWNCPU 1
         #endif
     #endif
 
@@ -339,17 +340,7 @@ typedef struct PlankFourCharCodeString
 #define PLANK_INT24_MAX         0x7fffff
 #define PLANK_CHARBITS          8
 
-
 #include "plank_Result.h"
-
-
-#ifdef PLANK_32BIT
-    #define PLANK_WORDSIZE 4
-#endif
-
-#ifdef PLANK_64BIT
-    #define PLANK_WORDSIZE 8
-#endif
 
 #if defined(_BIG_ENDIAN) && !defined(_LITTLE_ENDIAN)
     #define PLANK_LITTLEENDIAN  0
@@ -401,7 +392,7 @@ typedef struct PlankFourCharCodeString
 
 #define PLANK_MAJOR_VERSION      0
 #define PLANK_MINOR_VERSION      4
-#define PLANK_BUILDNUMBER        3
+#define PLANK_BUILDNUMBER        4
 #define PLANK_VERSION           "v" PLANK_PRESTRING(PLANK_MAJOR_VERSION) "." PLANK_PRESTRING(PLANK_MINOR_VERSION) "." PLANK_PRESTRING(PLANK_BUILDNUMBER)
 
 static inline double pl_TimeNow()

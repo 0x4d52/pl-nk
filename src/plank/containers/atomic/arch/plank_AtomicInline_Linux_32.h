@@ -39,6 +39,8 @@
 // help prevent accidental inclusion other than via the intended header
 #if PLANK_INLINING_FUNCTIONS
 
+#ifdef __GCC_HAVE_SYNC_COMPARE_AND_SWAP_4
+
 #define PLANK_ATOMIC_XBITS          32
 #define PLANK_ATOMIC_XREFCOUNTBITS  16
 #define PLANK_ATOMIC_XWEAKCOUNTBITS 16
@@ -48,14 +50,6 @@
 #define PLANK_ATOMIC_XWEAKCOUNTMASK 0xFFFF0000UL
 #define PLANK_ATOMIC_XMAX           0xFFFFFFFFUL
 #define PLANK_ATOMIC_PMASK          0xFFFFFFFFUL
-
-/*
- __GCC_HAVE_SYNC_COMPARE_AND_SWAP_1
- __GCC_HAVE_SYNC_COMPARE_AND_SWAP_2
- __GCC_HAVE_SYNC_COMPARE_AND_SWAP_4
- __GCC_HAVE_SYNC_COMPARE_AND_SWAP_8
- __GCC_HAVE_SYNC_COMPARE_AND_SWAP_16
- */
 
 #if !DOXYGEN
 typedef struct PlankAtomicI
@@ -68,30 +62,51 @@ typedef struct PlankAtomicL
     volatile PlankL value;
 } PlankAtomicL PLANK_ALIGN(4);
 
-typedef struct PlankAtomicLL
-{
-    volatile PlankLL value;
-} PlankAtomicLL PLANK_ALIGN(8);
-
 typedef struct PlankAtomicF
 {
     volatile PlankF value;
 } PlankAtomicF PLANK_ALIGN(4);
-
-typedef struct PlankAtomicD
-{
-    volatile PlankD value;
-} PlankAtomicD PLANK_ALIGN(8);
 
 typedef struct PlankAtomicP
 {
     volatile PlankP ptr;
 } PlankAtomicP PLANK_ALIGN(4);
 
+#ifdef  __GCC_HAVE_SYNC_COMPARE_AND_SWAP_8
+typedef struct PlankAtomicD
+{
+    volatile PlankD value;
+} PlankAtomicD PLANK_ALIGN(8);
+
+typedef struct PlankAtomicLL
+{
+    volatile PlankLL value;
+} PlankAtomicLL PLANK_ALIGN(8);
+
 typedef struct PlankAtomicPX
 {
     volatile PlankP ptr;
     volatile PlankUL extra;
+} PlankAtomicPX PLANK_ALIGN(8);
+#else //!__GCC_HAVE_SYNC_COMPARE_AND_SWAP_8
+#include "../../../core/plank_ThreadSpinLock.h"
+typedef struct PlankAtomicD
+{
+    volatile PlankD value;
+    ThreadSpinLock lock;
+} PlankAtomicD PLANK_ALIGN(8);
+
+typedef struct PlankAtomicLL
+{
+    volatile PlankLL value;
+    ThreadSpinLock lock;
+} PlankAtomicLL PLANK_ALIGN(8);
+
+typedef struct PlankAtomicPX
+{
+    volatile PlankP ptr;
+    volatile PlankUL extra;
+    ThreadSpinLock lock;
 } PlankAtomicPX PLANK_ALIGN(8);
 #endif
 
@@ -350,6 +365,7 @@ static inline void pl_AtomicLL_Set (PlankAtomicLLRef p, PlankLL newValue)
     pl_AtomicLL_Swap (p, newValue);
 }
 
+#ifdef  __GCC_HAVE_SYNC_COMPARE_AND_SWAP_8
 static inline PlankLL pl_AtomicLL_Add (PlankAtomicLLRef p, PlankLL operand)
 {
     return __sync_add_and_fetch ((volatile PlankLL*)p, operand);
@@ -361,6 +377,38 @@ static inline PlankB pl_AtomicLL_CompareAndSwap (PlankAtomicLLRef p, PlankLL old
                                          oldValue,
                                          newValue);
 }
+#else
+static inline PlankLL pl_AtomicLL_Add (PlankAtomicLLRef p, PlankLL operand)
+{
+    PlankLL oldValue, newValue;
+    PlankB success;
+    
+    do {
+        oldValue = *(PlankLL*)p;
+        newValue = oldValue + operand;
+        success = pl_AtomicLL_CompareAndSwap (p, oldValue, newValue);
+    } while (!success);
+    
+    return newValue;
+}
+
+static inline PlankB pl_AtomicLL_CompareAndSwap (PlankAtomicLLRef p, PlankLL oldValue, PlankLL newValue)
+{
+    if (! pl_ThreadSpinLock_TryLock (&p->lock))
+        return PLANK_FALSE;
+    
+    if (p->value != oldValue)
+    {
+        pl_ThreadSpinLock_Unlock (&p->lock);
+        return PLANK_FALSE;
+    }
+    
+    p->value = newValue;
+    pl_ThreadSpinLock_Unlock (&p->lock);
+    
+    return PLANK_TRUE;
+}
+#endif
 
 static inline PlankLL pl_AtomicLL_Subtract (PlankAtomicLLRef p, PlankLL operand)
 {
@@ -564,12 +612,23 @@ static inline PlankD pl_AtomicD_Add (PlankAtomicDRef p, PlankD operand)
     return newValue;
 }
 
+#ifdef  __GCC_HAVE_SYNC_COMPARE_AND_SWAP_8
 static inline PlankB pl_AtomicD_CompareAndSwap (PlankAtomicDRef p, PlankD oldValue, PlankD newValue)
 {
     return __sync_bool_compare_and_swap ((volatile PlankLL*)p,
                                          *(PlankLL*)&oldValue,
                                          *(PlankLL*)&newValue);
 }
+#else
+static inline PlankB pl_AtomicD_CompareAndSwap (PlankAtomicDRef p, PlankD oldValue, PlankD newValue)
+{
+    // must use an integer compare since comparing floating point
+    // values doesn't do a bitwise comparison
+    return pl_AtomicLL_CompareAndSwap ((PlankAtomicLLRef)p,
+                                       *(PlankLL*)&oldValue,
+                                       *(PlankLL*)&newValue);
+}
+#endif
 
 static inline PlankD pl_AtomicD_Subtract (PlankAtomicDRef p, PlankD operand)
 {
@@ -860,6 +919,7 @@ static inline PlankP pl_AtomicPX_Decrement (PlankAtomicPXRef p)
     return pl_AtomicPX_Add (p, (PlankL)(-1));
 }
 
+#ifdef  __GCC_HAVE_SYNC_COMPARE_AND_SWAP_8
 static inline  PlankB pl_AtomicPX_CompareAndSwap (PlankAtomicPXRef p, PlankP oldPtr, PlankUL oldExtra, PlankP newPtr, PlankUL newExtra)
 {
     PlankAtomicPX oldAll = { oldPtr, oldExtra };
@@ -869,6 +929,17 @@ static inline  PlankB pl_AtomicPX_CompareAndSwap (PlankAtomicPXRef p, PlankP old
                                          *(PlankLL*)&oldAll,
                                          *(PlankLL*)&newAll);
 }
+#else
+static inline PlankB pl_AtomicPX_CompareAndSwap (PlankAtomicPXRef p, PlankP oldPtr, PlankUL oldExtra, PlankP newPtr, PlankL newExtra)
+{
+    PlankAtomicPX oldAll = { oldPtr, oldExtra, { { 0 } } };
+    PlankAtomicPX newAll = { newPtr, newExtra, { { 0 } } };
+    
+    return pl_AtomicLL_CompareAndSwap ((PlankAtomicLLRef)p,
+                                       *(PlankLL*)&oldAll,
+                                       *(PlankLL*)&newAll);
+}
+#endif
 
 static inline PlankB pl_AtomicPX_CompareAndSwapP (PlankAtomicPXRef p, PlankP oldPtr, PlankP newPtr)
 {
@@ -883,5 +954,6 @@ static void pl_AtomicPX_SetAllUnchecked (PlankAtomicPXRef p, PlankP newPtr, Plan
 
 #define PLANK_ATOMICS_DEFINED 1
 
+#endif // __GCC_HAVE_SYNC_COMPARE_AND_SWAP_4
 #endif // PLANK_INLINING_FUNCTIONS
 

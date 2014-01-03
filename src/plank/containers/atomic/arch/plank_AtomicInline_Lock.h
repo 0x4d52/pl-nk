@@ -39,6 +39,8 @@
 // help prevent accidental inclusion other than via the intended header
 #if PLANK_INLINING_FUNCTIONS
 
+#warning Using full mutex locks for atomic operations on this platform
+
 #include "../../../core/plank_Lock.h"
 
 #if PLANK_32BIT

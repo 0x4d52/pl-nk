@@ -158,7 +158,7 @@
 
 #define PLONK_MAJOR_VERSION      0
 #define PLONK_MINOR_VERSION      4
-#define PLONK_BUILDNUMBER        3
+#define PLONK_BUILDNUMBER        4
 #define PLONK_VERSION           "v" PLANK_PRESTRING(PLONK_MAJOR_VERSION) "." PLANK_PRESTRING(PLONK_MINOR_VERSION) "." PLANK_PRESTRING(PLONK_BUILDNUMBER)
 
 
@@ -166,7 +166,6 @@
     #include <cassert>
     #define plonk_assert        assert
 	#define plonk_assertfalse	(assert (false))
-//    int main(void); // to let use main as a friend for some tests
 #else
 	#define plonk_assert(x)     { }
 	#define plonk_assertfalse	{ }
