@@ -1197,6 +1197,7 @@ public:
     
     inline const Base& getRaw() const throw() { return internal; }
     
+#if !PLONK_ANDROID
     friend std::istream& operator>> (std::istream &inputStream, Fix& value)
     {
         float floatValue;
@@ -1210,7 +1211,7 @@ public:
         outputStream << float (value);
         return outputStream;
     }
-
+#endif
     
 private:
     Base internal;

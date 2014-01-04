@@ -325,6 +325,7 @@ inline UnitBase<Type> kr (Variable<Type> v) throw()
     return UnitBase<Type> (v).kr();
 }
 
+#if !PLONK_ANDROID
 template<class Type>
 std::istream& operator>> (std::istream &inputStream, Variable<Type>& variable)
 {
@@ -342,7 +343,8 @@ std::ostream& operator<< (std::ostream &outputStream, Variable<Type> const& vari
     outputStream << variable.getValue();
     return outputStream;
 }
-
+#endif
+    
 //BINARYOPGLOBALS(Variable) // declares global functions with the same name as the binary operators
 //UNARYOPGLOBALS(Variable)  // declares global functions with the same name as the unary operators
 

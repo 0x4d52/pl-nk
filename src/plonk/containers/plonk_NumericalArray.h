@@ -1889,6 +1889,7 @@ public:
 	
 	void print (const char *prefix = 0, const bool oneLine = false) const throw()
 	{
+#if !PLONK_ANDROID
         int i;
         
 		if (oneLine)
@@ -1911,6 +1912,7 @@ public:
 				std::cout << "[" << i << "] = " << this->at (i) << std::endl;
 			}
 		}
+#endif
 	}
     
     int getTypeCode() const throw()

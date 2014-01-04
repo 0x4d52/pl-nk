@@ -47,7 +47,7 @@
 #elif PLONK_GCC || PLONK_LLVM || PLANK_APPLE_LLVM
     #define PLONK_PACKED __attribute__((packed))
 #else
-    #warning Data packing macros haven't been handled for this build system
+    #warning Data packing macros have not been handled for this build system
 #endif
 
 /** An emulated 24-bit integer type.
@@ -198,8 +198,10 @@ public:
     Int24& operator<<= (const int shift) throw();
     Int24& operator>>= (const int shift) throw();
     
+#if !PLONK_ANDROID
     friend std::istream& operator>> (std::istream &inputStream, Int24& value);
     friend std::ostream& operator<< (std::ostream &outputStream, Int24 const& value);
+#endif
     
 private:
     Internal data;
@@ -250,9 +252,10 @@ public:
 
 };
 
+#if !PLONK_ANDROID
 std::istream& operator>> (std::istream &inputStream, Int24& value);
 std::ostream& operator<< (std::ostream &outputStream, Int24 const& value);
-
+#endif
 
 float operator+ (const float leftOperand, Int24 const& rightOperand) throw();
 float operator- (const float leftOperand, Int24 const& rightOperand) throw();

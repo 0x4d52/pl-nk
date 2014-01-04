@@ -65,9 +65,9 @@ public:
     typedef UnitBase<RateType>                                      RateUnitType;
     typedef NumericalArray<RateType>                                RateBufferType;
     
-    typedef InterpSelect<SampleType,IndexType,InterpTypeCode>       InterpSelect;
-    typedef typename InterpSelect::InterpType                       InterpType;
-    typedef typename InterpType::ExtensionBuffer                    ExtensionBuffer;
+    typedef InterpSelect<SampleType,IndexType,InterpTypeCode>       InterpSelectType;
+    typedef typename InterpSelectType::InterpType                   InterpType;
+    typedef typename InterpSelectType::ExtensionBuffer              ExtensionBuffer;
     
     ResampleChannelInternal (Inputs const& inputs,
                              Data const& data,

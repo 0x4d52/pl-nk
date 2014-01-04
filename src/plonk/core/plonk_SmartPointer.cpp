@@ -121,10 +121,12 @@ void* PlonkBase::operator new (size_t size)
 {
     void *ptr = Memory::global().allocateBytes (size);
     
+#if !PLONK_ANDROID
     if (ptr == 0)
         throw std::bad_alloc();
-            
-    return ptr;    
+#endif
+    
+    return ptr;
 }
 
 void PlonkBase::operator delete (void* ptr)
@@ -136,10 +138,12 @@ void* PlonkBase::operator new[] (size_t size)
 {
     void *ptr = Memory::global().allocateBytes (size);
     
+#if !PLONK_ANDROID
     if (ptr == 0)
         throw std::bad_alloc();
+#endif
     
-    return ptr;    
+    return ptr;
 }
 
 void PlonkBase::operator delete[] (void* ptr)

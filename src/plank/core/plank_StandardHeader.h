@@ -243,6 +243,10 @@
 
         #define PLANK_GCC 1
 
+        #ifdef __llvm__
+            #define PLANK_LLVM 1
+        #endif
+
         #if defined(__i386__)
             #define PLANK_X86 1
         #elif defined(__arm__)
@@ -368,6 +372,12 @@ typedef struct PlankFourCharCodeString
     || defined(__amd64__) || defined(_M_AMD64) \
     || defined(__x86_64) || defined(__x86_64__) \
     || defined(_M_X64) || defined(__bfin__)
+    #define PLANK_LITTLEENDIAN  1
+    #define PLANK_BIGENDIAN     0
+#elif __BYTE_ORDER == _BIG_ENDIAN
+    #define PLANK_LITTLEENDIAN  0
+    #define PLANK_BIGENDIAN     1
+#elif __BYTE_ORDER == _LITTLE_ENDIAN
     #define PLANK_LITTLEENDIAN  1
     #define PLANK_BIGENDIAN     0
 #endif

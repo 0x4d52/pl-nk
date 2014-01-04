@@ -82,8 +82,8 @@ public:
     typedef NumericalArray2D<DurationChannelType,DurationUnitType>  DurationUnitArrayType;
     
     typedef NumericalArray2D<ChannelType,UnitType>                  UnitArrayType;
-    typedef InterpSelect<SampleType,DurationType,InterpTypeCode>    InterpSelect;
-    typedef typename InterpSelect::InterpType                       InterpType;
+    typedef InterpSelect<SampleType,DurationType,InterpTypeCode>    InterpSelectType;
+    typedef typename InterpSelectType::InterpType                   InterpType;
     typedef typename InterpType::ExtensionBuffer                    ExtensionBuffer;
 
     typedef void (*InputFunction)  (Data&, DelayState&);

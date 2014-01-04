@@ -83,8 +83,8 @@ public:
     typedef Param2Type                                              FeedbackType;    
     typedef UnitBase<FeedbackType>                                  FeedbackUnitType;
     
-    typedef InterpSelect<SampleType,DurationType,InterpTypeCode>    InterpSelect;
-    typedef typename InterpSelect::InterpType                       InterpType;
+    typedef InterpSelect<SampleType,DurationType,InterpTypeCode>    InterpSelectType;
+    typedef typename InterpSelectType::InterpType                   InterpType;
     typedef typename InterpType::ExtensionBuffer                    ExtensionBuffer;
     
     typedef void (*InputFunction)  (Data&, DelayState&);

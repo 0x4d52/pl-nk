@@ -77,7 +77,12 @@ int ChannelCount::numOutputInfos (const int index) throw()
 
 //------------------------------------------------------------------------------    
 
+#if PLONK_ANDROID
+static UnsignedLongLong nanbits = 0xFFFFFFFFFFFFFFFF;
+double IOInfo::NoDefault = *(double*)&nanbits;
+#else
 double IOInfo::NoDefault = std::numeric_limits<double>::quiet_NaN();
+#endif
 double IOInfo::True = 1.0;
 double IOInfo::False = 0.0;
 

@@ -112,8 +112,11 @@ struct THREADNAME_INFO
 
 static PlankResult pl_ThreadSetNameInternal (const char* name)
 {
-#if PLANK_APPLE || PLANK_LINUX || PLANK_ANDROID
+#if PLANK_APPLE
     pthread_setname_np (name);
+    return PlankResult_OK;
+#elif PLANK_LINUX || PLANK_ANDROID
+    pthread_setname_np (pthread_self(), name);
     return PlankResult_OK;
 #elif PLANK_WIN
     
@@ -334,7 +337,7 @@ PlankResult pl_Thread_Cancel (PlankThreadRef p)
     if (! p->thread)
         return PlankResult_ThreadInvalid;
 
-#if PLANK_APPLE || PLANK_LINUX || PLANK_ANDROID
+#if PLANK_APPLE || PLANK_LINUX
     if (pthread_cancel (p->thread) == 0)
     {
         pl_Thread_Reset (p);
@@ -342,7 +345,9 @@ PlankResult pl_Thread_Cancel (PlankThreadRef p)
     }
     
 	return PlankResult_ThreadCancelFailed;
-
+#elif PLANK_ANDROID
+    (void)p;
+    return PlankResult_ThreadCancelFailed;
 #elif PLANK_WIN   
     TerminateThread ((HANDLE)p->thread, 0);
     return PlankResult_OK;

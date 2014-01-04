@@ -74,7 +74,7 @@
     #define PLONK_GCC 1
 #endif
 
-#if PLANK_LLVN
+#if PLANK_LLVM
     #define PLONK_LLVM 1
 #endif
 
@@ -144,17 +144,29 @@
  compiler. If you're using Objective C then use Objective C++ by using .mm files
  instead of .m as an extension. */
 #include <cstdlib>
-#include <cstdarg>
+
+//#if PLONK_ANDROID
+#include <stdarg.h>
+//#else
+//    #include <cstdarg>
+//#endif
+
 #include <climits>
 #include <cfloat>
 #include <cmath>
 #include <cwchar>
-#include <stdexcept>
+
+//#if !PLONK_ANDROID
+//#include <stdexcept>
+//#endif
+
 #include <typeinfo>
 #include <cstring>
 #include <cstdio>
-#include <iostream>
 
+#if !PLONK_ANDROID
+#include <iostream>
+#endif
 
 #define PLONK_MAJOR_VERSION      0
 #define PLONK_MINOR_VERSION      4

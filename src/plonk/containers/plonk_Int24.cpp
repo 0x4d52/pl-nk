@@ -609,6 +609,7 @@ Int24& Int24::operator>>= (const int shift) throw()
 
 // global functions
 
+#if !PLONK_ANDROID
 std::istream& operator>> (std::istream &inputStream, Int24& value)
 {
     int intValue;
@@ -622,6 +623,7 @@ std::ostream& operator<< (std::ostream &outputStream, Int24 const& value)
     outputStream << int (value);
     return outputStream;
 }
+#endif 
 
 float operator+ (const float leftOperand, Int24 const& rightOperand) throw()
 {

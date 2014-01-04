@@ -76,8 +76,8 @@ public:
     typedef Param2Type                                              DecayType;    
     typedef UnitBase<DecayType>                                     DecayUnitType;
     
-    typedef InterpSelect<SampleType,DurationType,InterpTypeCode>    InterpSelect;
-    typedef typename InterpSelect::InterpType                       InterpType;
+    typedef InterpSelect<SampleType,DurationType,InterpTypeCode>    InterpSelectType;
+    typedef typename InterpSelectType::InterpType                   InterpType;
     typedef typename InterpType::ExtensionBuffer                    ExtensionBuffer;
 
     

@@ -39,7 +39,7 @@
 #ifndef PLONK_FILTERSHAPESSIMPLE_H
 #define PLONK_FILTERSHAPESSIMPLE_H
 
-#include "plonk_FilterForwardDeclarations.h"
+#include "../plonk_FilterForwardDeclarations.h"
 
 
 //------------------------------------------------------------------------------

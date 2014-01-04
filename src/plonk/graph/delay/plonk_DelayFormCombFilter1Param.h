@@ -102,8 +102,8 @@ public:
     typedef Param3Type                                              FrequencyType;    
     typedef UnitBase<FrequencyType>                                 FrequencyUnitType;
 
-    typedef InterpSelect<SampleType,DurationType,InterpTypeCode>    InterpSelect;
-    typedef typename InterpSelect::InterpType                       InterpType;
+    typedef InterpSelect<SampleType,DurationType,InterpTypeCode>    InterpSelectType;
+    typedef typename InterpSelectType::InterpType                   InterpType;
     typedef typename InterpType::ExtensionBuffer                    ExtensionBuffer;
     
     typedef void (*InputFunction)  (Data&, DelayState&);

@@ -199,6 +199,7 @@ public:
 
 	void print (const char *prefix = 0, const bool rowsOnOneLine = false) const throw()
 	{
+#if !PLONK_ANDROID
 		if (rowsOnOneLine)
 		{
 			for (int row = 0; row < this->size(); ++row)
@@ -224,6 +225,7 @@ public:
 				}		
 			}
 		}
+#endif
 	}
 	
     PLONK_OBJECTARROWOPERATOR(NumericalArray2D);

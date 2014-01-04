@@ -44,7 +44,7 @@
 
 #include "../core/plonk_SmartPointer.h"
 #include "../core/plonk_WeakPointer.h"
-#include "plonk_SmartPointerContainer.h"
+#include "../core/plonk_SmartPointerContainer.h"
 #include "plonk_ObjectArrayInternal.h"
 
 
