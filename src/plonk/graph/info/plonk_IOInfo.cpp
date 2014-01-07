@@ -87,9 +87,9 @@ double IOInfo::True = 1.0;
 double IOInfo::False = 0.0;
 
 IOInfo::IOInfo (const IOKey::Name nameToUse, 
-                      const Measure::Name measureToUse, 
-                      const double defaultValueToUse,
-                      const IOLimit limitToUse) throw()
+                const Measure::Name measureToUse,
+                const double defaultValueToUse,
+                const IOLimit limitToUse) throw()
 :   name (nameToUse),
     measure (measureToUse),
     defaultValue (defaultValueToUse),
