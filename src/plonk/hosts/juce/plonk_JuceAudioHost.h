@@ -52,7 +52,7 @@ class JuceAudioHost :   public AudioHostBase<float>,
                         public AudioIODeviceCallback
 {
 public:
-    JuceAudioHost (ObjectMemoryBase* omb = ObjectMemory<ObjectMemoryDefault>::create()) throw();
+    JuceAudioHost() throw();
     ~JuceAudioHost();
     
     Text getHostName() const throw();

@@ -166,9 +166,8 @@ private:
 
 /** Manage a custom memory allocation system.
  An ObjectMemoryBase subclass manages a Memory instance. Care should be take for this
- to be created before any other objects EXCEPT for Memory instances and AudioHostBase subclasses. 
- In fact the AudioHostBase provides a means for using an ObjectMemoryBase subclass
- and controls its creation and running. */
+ to be created before any other objects EXCEPT for Memory instances. 
+ */
 class ObjectMemoryBase
 {
 public:
@@ -187,15 +186,15 @@ private:
     ObjectMemoryBase& operator= (const ObjectMemoryBase&);
 };
 
-template<class ObjectMemoryType>
-class ObjectMemory
-{
-public:
-    static ObjectMemoryBase* create (Memory& memory = Memory::global()) throw()
-    {
-        return new ObjectMemoryType (memory);
-    }
-};
+//template<class ObjectMemoryType>
+//class ObjectMemory
+//{
+//public:
+//    static ObjectMemoryBase* create (Memory& memory = Memory::global()) throw()
+//    {
+//        return new ObjectMemoryType (memory);
+//    }
+//};
 
 class ObjectMemoryDefault : public ObjectMemoryBase
 {

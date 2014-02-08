@@ -122,9 +122,8 @@ static inline void audioShortToTypeChannels (AudioBufferList* src, DstType* cons
 //------------------------------------------------------------------------------
 
 template<class SampleType>
-IOSAudioHostBase<SampleType>::IOSAudioHostBase (ObjectMemoryBase* omb) throw()
-:   AudioHostBase<SampleType> (omb),
-    hwSampleRate (0.0),         // let the hardware choose
+IOSAudioHostBase<SampleType>::IOSAudioHostBase() throw()
+:   hwSampleRate (0.0),         // let the hardware choose
     rioUnit (NULL),
     cpuUsage (0.0),
     interrupted (NO),

@@ -75,9 +75,8 @@ static inline bool paCheckError (PaError err)
 //------------------------------------------------------------------------------
 
 template<class SampleType>
-PortAudioAudioHostBase<SampleType>::PortAudioAudioHostBase (ObjectMemoryBase* omb) throw() 
-:   AudioHostBase<SampleType> (omb),
-    stream (0)
+PortAudioAudioHostBase<SampleType>::PortAudioAudioHostBase() throw() 
+:   stream (0)
 {
     PaError err;
 	err = Pa_Initialize();

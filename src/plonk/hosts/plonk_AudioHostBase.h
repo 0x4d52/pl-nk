@@ -46,7 +46,7 @@ class AudioHostBase;
 /** An abstract class to interface with audio devices.
  @see PortAudioAudioHost, IOSAudioHost, JuceAudioHost */
 template<class SampleType>
-class AudioHostBase // don't inherit from PlonkBase...!
+class AudioHostBase : public PlonkBase
 {
 public:    
     typedef NumericalArray<SampleType*>            BufferArray;
@@ -59,15 +59,13 @@ public:
     typedef NumericalArray<SampleType>          BufferType;
     
     /** Constructor */
-    AudioHostBase (ObjectMemoryBase* omb = ObjectMemory<ObjectMemoryDefault>::create()) throw()
-    :   om (omb),
-        preferredHostSampleRate (0.0),
+    AudioHostBase() throw()
+    :   preferredHostSampleRate (0.0),
         preferredHostBlockSize (0),
         preferredGraphBlockSize (0),
         isRunning (false),
         isPaused (false)
     { 
-        om->init();
     }
         
     /** Destructor */
@@ -247,8 +245,6 @@ protected:
     inline void setIsPaused (const bool state) throw() { isPaused = state; }
     
 private:
-    ScopedPointerContainer<ObjectMemoryBase> om;
-
     double preferredHostSampleRate;
     int preferredHostBlockSize;
     int preferredGraphBlockSize;

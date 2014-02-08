@@ -68,7 +68,7 @@ static inline void* staticDoAlloc (void* userData, UnsignedLong requestedSize) t
     const UnsignedLong size = Bits::nextPowerOf2 (requestedSize + align);
     UnsignedChar* raw = static_cast<UnsignedChar*> (pl_MemoryDefaultAllocateBytes (userData, size));
     *reinterpret_cast<UnsignedLong*> (raw) = size;
-    
+        
     return raw + align;
 }
 

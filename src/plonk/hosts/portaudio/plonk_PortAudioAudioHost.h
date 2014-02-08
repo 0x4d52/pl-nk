@@ -51,7 +51,7 @@ public:
     typedef NumericalArray<const SampleType*>      ConstBufferArray;
 
     /** Default constructor. */
-    PortAudioAudioHostBase (ObjectMemoryBase* omb = ObjectMemory<ObjectMemoryDefault>::create()) throw();
+    PortAudioAudioHostBase() throw();
     ~PortAudioAudioHostBase();
     
     Text getHostName() const throw();
@@ -75,7 +75,7 @@ private:
 class PortAudioAudioHost : public PortAudioAudioHostBase<float>
 {
 public:
-    PortAudioAudioHost (ObjectMemoryBase* omb = ObjectMemory<ObjectMemoryDefault>::create()) throw();
+    PortAudioAudioHost() throw();
     ~PortAudioAudioHost();
 };
 

@@ -50,8 +50,7 @@ END_PLONK_NAMESPACE
 #include "plonk_PortAudioAudioHost.h"
 BEGIN_PLONK_NAMESPACE
 
-PortAudioAudioHost::PortAudioAudioHost (ObjectMemoryBase* omb) throw()
-:   PortAudioAudioHostBase<float> (omb)
+PortAudioAudioHost::PortAudioAudioHost() throw()
 {
 }
 

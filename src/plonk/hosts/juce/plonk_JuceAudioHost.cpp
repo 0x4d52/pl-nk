@@ -55,8 +55,7 @@ BEGIN_PLONK_NAMESPACE
 
 
 
-JuceAudioHost::JuceAudioHost (ObjectMemoryBase* omb) throw()
-:   AudioHostBase<float> (omb)
+JuceAudioHost::JuceAudioHost() throw()
 {    
     setNumInputs (2);
     setNumOutputs (2);

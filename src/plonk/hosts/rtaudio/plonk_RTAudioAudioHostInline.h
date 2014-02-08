@@ -60,8 +60,7 @@ static void rtAudioErrorCallback (RtError::Type type, const std::string &errorTe
 //------------------------------------------------------------------------------
 
 template<class SampleType>
-RTAudioAudioHostBase<SampleType>::RTAudioAudioHostBase (ObjectMemoryBase* omb) throw() 
-:   AudioHostBase<SampleType> (omb)
+RTAudioAudioHostBase<SampleType>::RTAudioAudioHostBase() throw() 
 {
     inputParams.deviceId = dac.getDefaultInputDevice();
     outputParams.deviceId = dac.getDefaultOutputDevice();

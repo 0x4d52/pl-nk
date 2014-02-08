@@ -81,7 +81,7 @@ public:
     typedef typename AudioHostBase<SampleType>::UnitType         UnitType;
     typedef NumericalArray<SampleType>                           Buffer;
     
-    IOSAudioHostBase (ObjectMemoryBase* omb = ObjectMemory<ObjectMemoryDefault>::create()) throw();
+    IOSAudioHostBase() throw();
     ~IOSAudioHostBase();
     
     Text getHostName() const throw();
@@ -146,8 +146,7 @@ private:
 class IOSAudioHost : public IOSAudioHostBase<float>
 {
 public:
-    IOSAudioHost (ObjectMemoryBase* omb = ObjectMemory<ObjectMemoryDefault>::create()) throw()
-    :   IOSAudioHostBase<float> (omb)
+    IOSAudioHost() throw()
     {
     }
 };
