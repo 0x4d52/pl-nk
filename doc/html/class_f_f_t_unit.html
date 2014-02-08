@@ -20,7 +20,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="pl-nk-logo-small.png"/></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">pl-nk</div>
+   <div id="projectname">pl-nk&#160;<span id="projectnumber">v0.4.5</span></div>
+   <div id="projectbrief">Plonk|Plink|Plank are a set of cross-platform C/C++ frameworks for audio software development</div>
   </td>
  </tr>
  </tbody>
@@ -29,8 +30,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -62,7 +63,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="header">
   <div class="summary">
-<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a>  </div>
   <div class="headertitle">
 <div class="title">FFTUnit&lt; SampleType &gt; Class Template Reference<div class="ingroups"><a class="el" href="group___converter_units.html">Converter unit classes.</a> &#124; <a class="el" href="group___f_f_t_units.html">FFT-based unit classes.</a></div></div>  </div>
@@ -74,16 +74,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <p><a href="class_f_f_t_unit-members.html">List of all members.</a></p>
 <table class="memberdecls">
-<tr><td colspan="2"><h2><a name="pub-types"></a>
-Public Types</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_f_f_t_channel_internal.html">FFTChannelInternal</a><br class="typebreak"/>
-&lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_f_f_t_unit.html#a9ad85d7f7eeab31521a602f6717641e7">FFTInternal</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="struct_channel_data_3_01_channel_internal_core_01_4.html">FFTInternal::Data</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_f_f_t_unit.html#a70f9fd6cfc94ae3e765a7f12cd0af9f7">Data</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_f_f_t_unit.html#a2e8dffe070d4024e942e96be6e1e4f29">UnitType</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_input_dictionary.html">InputDictionary</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_f_f_t_unit.html#a096c61a380ecf29c578ec65c05f812e4">Inputs</a></td></tr>
 <tr><td colspan="2"><h2><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_object_array.html">UnitInfos</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_f_f_t_unit.html#ad9c44667f2c2eadd0c1f5732b2c667d4">getInfo</a> ()  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_unit_base.html">UnitType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_f_f_t_unit.html#ab7707d07e6434ab87d3503089a3f6b82">ar</a> (<a class="el" href="class_unit_base.html">UnitType</a> const &amp;input)  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">FFTs a signal.  <a href="#ab7707d07e6434ab87d3503089a3f6b82"></a><br/></td></tr>
 </table>
@@ -94,94 +86,15 @@ class FFTUnit&lt; SampleType &gt;</h3>
 <p>FFT Unit. </p>
 <p>Takes a time domain real signal as its input and outputs frequency domain data in real/imaginary format.</p>
 <p>Each input channel generates two output channels. The even number channel is the real data and the odd numbered channel contains the imaginary data. (The <a class="el" href="class_i_f_f_t_unit.html" title="IFFT Unit.">IFFTUnit</a> expects the data in this format.)</p>
-<p>Factory functions:</p>
-<ul>
+<dl class="user"><dt><b>Factory functions:</b></dt><dd><ul>
 <li>ar (input)</li>
 </ul>
-<p>Inputs:</p>
-<ul>
+</dd></dl>
+<dl class="user"><dt><b>Inputs:</b></dt><dd><ul>
 <li>input: (unit, multi) the input unit </li>
 </ul>
-</div><hr/><h2>Member Typedef Documentation</h2>
-<a class="anchor" id="a9ad85d7f7eeab31521a602f6717641e7"></a><!-- doxytag: member="FFTUnit::FFTInternal" ref="a9ad85d7f7eeab31521a602f6717641e7" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_f_f_t_channel_internal.html">FFTChannelInternal</a>&lt;SampleType&gt; <a class="el" href="class_f_f_t_unit.html">FFTUnit</a>&lt; SampleType &gt;::<a class="el" href="class_f_f_t_channel_internal.html">FFTInternal</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a70f9fd6cfc94ae3e765a7f12cd0af9f7"></a><!-- doxytag: member="FFTUnit::Data" ref="a70f9fd6cfc94ae3e765a7f12cd0af9f7" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="struct_channel_data_3_01_channel_internal_core_01_4.html">FFTInternal::Data</a> <a class="el" href="class_f_f_t_unit.html">FFTUnit</a>&lt; SampleType &gt;::<a class="el" href="struct_channel_data_3_01_channel_internal_core_01_4.html">Data</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a2e8dffe070d4024e942e96be6e1e4f29"></a><!-- doxytag: member="FFTUnit::UnitType" ref="a2e8dffe070d4024e942e96be6e1e4f29" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_unit_base.html">UnitBase</a>&lt;SampleType&gt; <a class="el" href="class_f_f_t_unit.html">FFTUnit</a>&lt; SampleType &gt;::<a class="el" href="class_unit_base.html">UnitType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a096c61a380ecf29c578ec65c05f812e4"></a><!-- doxytag: member="FFTUnit::Inputs" ref="a096c61a380ecf29c578ec65c05f812e4" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_input_dictionary.html">InputDictionary</a> <a class="el" href="class_f_f_t_unit.html">FFTUnit</a>&lt; SampleType &gt;::<a class="el" href="class_input_dictionary.html">Inputs</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="ad9c44667f2c2eadd0c1f5732b2c667d4"></a><!-- doxytag: member="FFTUnit::getInfo" ref="ad9c44667f2c2eadd0c1f5732b2c667d4" args="()" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">static <a class="el" href="class_object_array.html">UnitInfos</a> <a class="el" href="class_f_f_t_unit.html">FFTUnit</a>&lt; SampleType &gt;::getInfo </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
+</dd></dl>
+</div><hr/><h2>Member Function Documentation</h2>
 <a class="anchor" id="ab7707d07e6434ab87d3503089a3f6b82"></a><!-- doxytag: member="FFTUnit::ar" ref="ab7707d07e6434ab87d3503089a3f6b82" args="(UnitType const &amp;input)" -->
 <div class="memitem">
 <div class="memproto">
@@ -212,7 +125,7 @@ template&lt;class SampleType &gt; </div>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Properties</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -221,7 +134,7 @@ template&lt;class SampleType &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 5 2012 17:05:02 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 8 2014 12:26:52 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

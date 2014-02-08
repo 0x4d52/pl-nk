@@ -1,0 +1,3101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DocSetNodes version="1.0">
+  <TOC>
+    <Node>
+      <Name>Root</Name>
+      <Path>index.html</Path>
+      <Subnodes>
+       <Node>
+        <Name>Plonk|Plink|Plank Documentation</Name>
+        <Path>index.html</Path>
+       </Node>
+       <Node>
+        <Name>Related Pages</Name>
+        <Path>pages.html</Path>
+        <Subnodes>
+         <Node>
+          <Name>Deprecated List</Name>
+          <Path>deprecated.html</Path>
+          <Subnodes>
+          </Subnodes>
+         </Node>
+        </Subnodes>
+       </Node>
+       <Node>
+        <Name>Modules</Name>
+        <Path>modules.html</Path>
+        <Subnodes>
+         <Node>
+          <Name>Plank</Name>
+          <Path>group___plank_modules.html</Path>
+          <Subnodes>
+           <Node>
+            <Name>Fundamentals</Name>
+            <Path>group___plank_fundamentals.html</Path>
+            <Subnodes>
+             <Node>
+              <Name>Core Plank concepts.</Name>
+              <Path>group___plank_core_concepts.html</Path>
+              <Subnodes>
+              </Subnodes>
+             </Node>
+            </Subnodes>
+           </Node>
+           <Node>
+            <Name>Plank classes</Name>
+            <Path>group___plank_classes.html</Path>
+            <Subnodes>
+             <Node>
+              <Name>Plank Atomic operation classes</Name>
+              <Path>group___plank_atomic_classes.html</Path>
+              <Subnodes>
+               <Node>
+                <Name>Plank AtomicD class</Name>
+                <Path>group___plank_atomic_d_class.html</Path>
+                <Subnodes>
+                </Subnodes>
+               </Node>
+               <Node>
+                <Name>Plank AtomicF class</Name>
+                <Path>group___plank_atomic_f_class.html</Path>
+                <Subnodes>
+                </Subnodes>
+               </Node>
+               <Node>
+                <Name>Plank AtomicI class</Name>
+                <Path>group___plank_atomic_i_class.html</Path>
+                <Subnodes>
+                </Subnodes>
+               </Node>
+               <Node>
+                <Name>Plank AtomicL class</Name>
+                <Path>group___plank_atomic_l_class.html</Path>
+                <Subnodes>
+                </Subnodes>
+               </Node>
+               <Node>
+                <Name>Plank AtomicLL class</Name>
+                <Path>group___plank_atomic_l_l_class.html</Path>
+                <Subnodes>
+                </Subnodes>
+               </Node>
+               <Node>
+                <Name>Plank AtomicP class</Name>
+                <Path>group___plank_atomic_p_class.html</Path>
+                <Subnodes>
+                </Subnodes>
+               </Node>
+               <Node>
+                <Name>Plank AtomicPX class</Name>
+                <Path>group___plank_atomic_p_x_class.html</Path>
+                <Subnodes>
+                </Subnodes>
+               </Node>
+              </Subnodes>
+             </Node>
+             <Node>
+              <Name>Plank AudioFileCuePoint class</Name>
+              <Path>group___plank_audio_file_cue_point_class.html</Path>
+              <Subnodes>
+              </Subnodes>
+             </Node>
+             <Node>
+              <Name>Plank AudioFileMetaData class</Name>
+              <Path>group___plank_audio_file_meta_data_class.html</Path>
+              <Subnodes>
+              </Subnodes>
+             </Node>
+             <Node>
+              <Name>Plank AudioFileReader class</Name>
+              <Path>group___plank_audio_file_reader_class.html</Path>
+              <Subnodes>
+              </Subnodes>
+             </Node>
+             <Node>
+              <Name>Plank AudioFileRegion class</Name>
+              <Path>group___plank_audio_file_region_class.html</Path>
+              <Subnodes>
+              </Subnodes>
+             </Node>
+             <Node>
+              <Name>Plank AudioFileWriter class</Name>
+              <Path>group___plank_audio_file_writer_class.html</Path>
+              <Subnodes>
+              </Subnodes>
+             </Node>
+             <Node>
+              <Name>Plank DynamicArray class</Name>
+              <Path>group___plank_dynamic_array_class.html</Path>
+              <Subnodes>
+              </Subnodes>
+             </Node>
+             <Node>
+              <Name>Plank FFTF class</Name>
+              <Path>group___plank_f_f_t_f_class.html</Path>
+              <Subnodes>
+              </Subnodes>
+             </Node>
+             <Node>
+              <Name>Plank File class</Name>
+              <Path>group___plank_file_class.html</Path>
+              <Subnodes>
+              </Subnodes>
+             </Node>
+             <Node>
+              <Name>Plank GUID class</Name>
+              <Path>group___plank_g_u_i_d.html</Path>
+              <Subnodes>
+              </Subnodes>
+             </Node>
+             <Node>
+              <Name>Plank IffFileReader class</Name>
+              <Path>group___plank_iff_file_reader_class.html</Path>
+              <Subnodes>
+              </Subnodes>
+             </Node>
+             <Node>
+              <Name>Plank IffFileWriter class</Name>
+              <Path>group___plank_iff_file_writer_class.html</Path>
+              <Subnodes>
+              </Subnodes>
+             </Node>
+             <Node>
+              <Name>Plank Lock class</Name>
+              <Path>group___plank_lock_class.html</Path>
+              <Subnodes>
+              </Subnodes>
+             </Node>
+             <Node>
+              <Name>Plank LockFreeDynamicArray class</Name>
+              <Path>group___plank_lock_free_dynamic_array_class.html</Path>
+              <Subnodes>
+              </Subnodes>
+             </Node>
+             <Node>
+              <Name>Plank LockFreeLinkedListElement class</Name>
+              <Path>group___plank_lock_free_linked_list_element_class.html</Path>
+              <Subnodes>
+              </Subnodes>
+             </Node>
+             <Node>
+              <Name>Plank LockFreeQueue class</Name>
+              <Path>group___plank_lock_free_queue_class.html</Path>
+              <Subnodes>
+              </Subnodes>
+             </Node>
+             <Node>
+              <Name>Plank LockFreeStack class</Name>
+              <Path>group___plank_lock_free_stack_class.html</Path>
+              <Subnodes>
+              </Subnodes>
+             </Node>
+             <Node>
+              <Name>Plank MultiFile class</Name>
+              <Path>group___plank_multi_file_class.html</Path>
+              <Subnodes>
+              </Subnodes>
+             </Node>
+             <Node>
+              <Name>Plank NeuralNetwork class</Name>
+              <Path>group___plank_neural_layer_f_class.html</Path>
+              <Subnodes>
+              </Subnodes>
+             </Node>
+             <Node>
+              <Name>Plank NeuralNode class</Name>
+              <Path>group___plank_neural_node_f_class.html</Path>
+              <Subnodes>
+              </Subnodes>
+             </Node>
+             <Node>
+              <Name>Plank RNG class</Name>
+              <Path>group___plank_r_n_g_class.html</Path>
+              <Subnodes>
+              </Subnodes>
+             </Node>
+             <Node>
+              <Name>Plank SharedPtr class</Name>
+              <Path>group___plank_shared_ptr_class.html</Path>
+              <Subnodes>
+              </Subnodes>
+             </Node>
+             <Node>
+              <Name>Plank SimpleLinkedList class</Name>
+              <Path>group___plank_simple_linked_list_class.html</Path>
+              <Subnodes>
+              </Subnodes>
+             </Node>
+             <Node>
+              <Name>Plank SimpleLinkedListElement class</Name>
+              <Path>group___plank_simple_linked_list_element_class.html</Path>
+              <Subnodes>
+              </Subnodes>
+             </Node>
+             <Node>
+              <Name>Plank SimpleMap class</Name>
+              <Path>group___plank_simple_map_class.html</Path>
+              <Subnodes>
+              </Subnodes>
+             </Node>
+             <Node>
+              <Name>Plank SimpleStack class</Name>
+              <Path>group___plank_simple_stack_class.html</Path>
+              <Subnodes>
+              </Subnodes>
+             </Node>
+             <Node>
+              <Name>Plank SpinLock class</Name>
+              <Path>group___plank_spin_lock_class.html</Path>
+              <Subnodes>
+              </Subnodes>
+             </Node>
+             <Node>
+              <Name>Plank Thread class</Name>
+              <Path>group___plank_thread_class.html</Path>
+              <Subnodes>
+              </Subnodes>
+             </Node>
+             <Node>
+              <Name>Plank ThreadLocalStorage class</Name>
+              <Path>group___plank_thread_local_storage_class.html</Path>
+              <Subnodes>
+              </Subnodes>
+             </Node>
+             <Node>
+              <Name>Plank ThreadSpinLock class</Name>
+              <Path>group___plank_thread_spin_lock_class.html</Path>
+              <Subnodes>
+              </Subnodes>
+             </Node>
+            </Subnodes>
+           </Node>
+           <Node>
+            <Name>Plank functions</Name>
+            <Path>group___plank_functions.html</Path>
+            <Subnodes>
+             <Node>
+              <Name>Plank bitwise functions</Name>
+              <Path>group___plank_bitwise_functions.html</Path>
+              <Subnodes>
+              </Subnodes>
+             </Node>
+             <Node>
+              <Name>Plank endian functions</Name>
+              <Path>group___plank_endian_functions.html</Path>
+              <Subnodes>
+              </Subnodes>
+             </Node>
+             <Node>
+              <Name>Plank maths functions</Name>
+              <Path>group___plank_maths_functions.html</Path>
+              <Subnodes>
+              </Subnodes>
+             </Node>
+             <Node>
+              <Name>Plank misc functions</Name>
+              <Path>group___plank_misc_functions.html</Path>
+              <Subnodes>
+              </Subnodes>
+             </Node>
+             <Node>
+              <Name>Plank vector functions</Name>
+              <Path>group___plank_vector_functions.html</Path>
+              <Subnodes>
+              </Subnodes>
+             </Node>
+            </Subnodes>
+           </Node>
+           <Node>
+            <Name>Plank internal macros</Name>
+            <Path>group___plank_internal_macros.html</Path>
+            <Subnodes>
+             <Node>
+              <Name>Plank vector function creation macros</Name>
+              <Path>group___plank_vector_macros.html</Path>
+              <Subnodes>
+              </Subnodes>
+             </Node>
+            </Subnodes>
+           </Node>
+          </Subnodes>
+         </Node>
+         <Node>
+          <Name>Plank NeuralNetwork class</Name>
+          <Path>group___plank_neural_network_f_class.html</Path>
+          <Subnodes>
+          </Subnodes>
+         </Node>
+         <Node>
+          <Name>Plink</Name>
+          <Path>group___plink_modules.html</Path>
+          <Subnodes>
+           <Node>
+            <Name>Classes</Name>
+            <Path>group___plink_classes.html</Path>
+            <Subnodes>
+             <Node>
+              <Name>Plink BinaryOpProcessF classes</Name>
+              <Path>group___plink_binary_op_process_f_class.html</Path>
+              <Subnodes>
+              </Subnodes>
+             </Node>
+             <Node>
+              <Name>Plink MulAddProcessF class</Name>
+              <Path>group___plink_mul_add_process_f_class.html</Path>
+              <Subnodes>
+              </Subnodes>
+             </Node>
+             <Node>
+              <Name>Plink SawProcessF class</Name>
+              <Path>group___plink_saw_process_f_class.html</Path>
+              <Subnodes>
+              </Subnodes>
+             </Node>
+             <Node>
+              <Name>Plink TableProcessF class</Name>
+              <Path>group___plink_table_process_f_class.html</Path>
+              <Subnodes>
+              </Subnodes>
+             </Node>
+             <Node>
+              <Name>Plink UnaryOpProcessF classes</Name>
+              <Path>group___plink_unary_op_process_f_class.html</Path>
+              <Subnodes>
+              </Subnodes>
+             </Node>
+             <Node>
+              <Name>Plink WhiteNoiseProcessStateF class</Name>
+              <Path>group___plink_white_noise_process_f_class.html</Path>
+              <Subnodes>
+              </Subnodes>
+             </Node>
+            </Subnodes>
+           </Node>
+           <Node>
+            <Name>Fundamentals</Name>
+            <Path>group___plink_fundamentals.html</Path>
+            <Subnodes>
+             <Node>
+              <Name>Core Plink concepts.</Name>
+              <Path>group___plink_core_concepts.html</Path>
+              <Subnodes>
+              </Subnodes>
+             </Node>
+            </Subnodes>
+           </Node>
+           <Node>
+            <Name>Plink internal macros</Name>
+            <Path>group___plink_internal_macros.html</Path>
+            <Subnodes>
+             <Node>
+              <Name>Plink binary operator class creation macros</Name>
+              <Path>group___plink_binary_op_macros.html</Path>
+              <Subnodes>
+              </Subnodes>
+             </Node>
+             <Node>
+              <Name>Plink unary operator class creation macros</Name>
+              <Path>group___plink_unary_op_macros.html</Path>
+              <Subnodes>
+              </Subnodes>
+             </Node>
+            </Subnodes>
+           </Node>
+          </Subnodes>
+         </Node>
+         <Node>
+          <Name>Plonk</Name>
+          <Path>group___plonk_modules.html</Path>
+          <Subnodes>
+           <Node>
+            <Name>Extras</Name>
+            <Path>group___plonk_extras.html</Path>
+            <Subnodes>
+            </Subnodes>
+           </Node>
+           <Node>
+            <Name>Fundamentals</Name>
+            <Path>group___plonk_fundamentals.html</Path>
+            <Subnodes>
+             <Node>
+              <Name>Core Plonk concepts.</Name>
+              <Path>group___plonk_core_concepts.html</Path>
+              <Subnodes>
+               <Node>
+                <Name></Name>
+                <Path>group___plonk_core_concepts.html</Path>
+               </Node>
+              </Subnodes>
+             </Node>
+            </Subnodes>
+           </Node>
+           <Node>
+            <Name>Other Plonk user classes</Name>
+            <Path>group___plonk_other_user_classes.html</Path>
+            <Subnodes>
+            </Subnodes>
+           </Node>
+           <Node>
+            <Name>Other Plonk user functions</Name>
+            <Path>group___plonk_other_user_functions.html</Path>
+            <Subnodes>
+             <Node>
+              <Name>Binary arithmetic operator functions</Name>
+              <Path>group___plonk_binary_op_functions.html</Path>
+              <Subnodes>
+              </Subnodes>
+             </Node>
+             <Node>
+              <Name>Miscellaneous arithmetic functions</Name>
+              <Path>group___plonk_misc_arithmetic_functions.html</Path>
+              <Subnodes>
+              </Subnodes>
+             </Node>
+             <Node>
+              <Name>Unary arithmetic operator functions</Name>
+              <Path>group___plonk_unary_op_functions.html</Path>
+              <Subnodes>
+              </Subnodes>
+             </Node>
+            </Subnodes>
+           </Node>
+           <Node>
+            <Name>Plonk container classes</Name>
+            <Path>group___plonk_container_classes.html</Path>
+            <Subnodes>
+            </Subnodes>
+           </Node>
+           <Node>
+            <Name>Unit categories</Name>
+            <Path>group___plonk_unit_categogies.html</Path>
+            <Subnodes>
+             <Node>
+              <Name>Control unit classes.</Name>
+              <Path>group___control_units.html</Path>
+              <Subnodes>
+              </Subnodes>
+             </Node>
+             <Node>
+              <Name>Converter unit classes.</Name>
+              <Path>group___converter_units.html</Path>
+              <Subnodes>
+              </Subnodes>
+             </Node>
+             <Node>
+              <Name>Delay units classes.</Name>
+              <Path>group___delay_units.html</Path>
+              <Subnodes>
+              </Subnodes>
+             </Node>
+             <Node>
+              <Name>Envelope unit classes.</Name>
+              <Path>group___envelope_units.html</Path>
+              <Subnodes>
+              </Subnodes>
+             </Node>
+             <Node>
+              <Name>FFT-based unit classes.</Name>
+              <Path>group___f_f_t_units.html</Path>
+              <Subnodes>
+              </Subnodes>
+             </Node>
+             <Node>
+              <Name>Filter unit classes.</Name>
+              <Path>group___filter_units.html</Path>
+              <Subnodes>
+              </Subnodes>
+             </Node>
+             <Node>
+              <Name>Mathemetical unit classes.</Name>
+              <Path>group___maths_units.html</Path>
+              <Subnodes>
+              </Subnodes>
+             </Node>
+             <Node>
+              <Name>Miscellaneous unit class.</Name>
+              <Path>group___misc_units.html</Path>
+              <Subnodes>
+              </Subnodes>
+             </Node>
+             <Node>
+              <Name>Noise unit classes.</Name>
+              <Path>group___noise_units.html</Path>
+              <Subnodes>
+              </Subnodes>
+             </Node>
+             <Node>
+              <Name>Oscillator unit classes.</Name>
+              <Path>group___generator_units.html</Path>
+              <Subnodes>
+              </Subnodes>
+             </Node>
+             <Node>
+              <Name>Sound file unit classes.</Name>
+              <Path>group___sound_file_units.html</Path>
+              <Subnodes>
+              </Subnodes>
+             </Node>
+            </Subnodes>
+           </Node>
+          </Subnodes>
+         </Node>
+        </Subnodes>
+       </Node>
+       <Node>
+        <Name>Class List</Name>
+        <Path>annotated.html</Path>
+        <Subnodes>
+         <Node>
+          <Name>AllpassDecayUnit&lt; SampleType, InterpTypeCode &gt;</Name>
+          <Path>class_allpass_decay_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>AllpassFFFBUnit&lt; SampleType, InterpTypeCode &gt;</Name>
+          <Path>class_allpass_f_f_f_b_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>ArrayAllocator&lt; Type &gt;</Name>
+          <Path>class_array_allocator.html</Path>
+         </Node>
+         <Node>
+          <Name>ArrayAllocator&lt; Type * &gt;</Name>
+          <Path>class_array_allocator_3_01_type_01_5_01_4.html</Path>
+         </Node>
+         <Node>
+          <Name>ArrayAllocatorBuiltIn&lt; Type &gt;</Name>
+          <Path>class_array_allocator_built_in.html</Path>
+         </Node>
+         <Node>
+          <Name>AtomicExtended&lt; Type &gt;</Name>
+          <Path>class_atomic_extended.html</Path>
+         </Node>
+         <Node>
+          <Name>AtomicOps</Name>
+          <Path>class_atomic_ops.html</Path>
+         </Node>
+         <Node>
+          <Name>AtomicValue&lt; Type &gt;</Name>
+          <Path>class_atomic_value.html</Path>
+         </Node>
+         <Node>
+          <Name>AtomicVariableChannelInternal&lt; SampleType &gt;</Name>
+          <Path>class_atomic_variable_channel_internal.html</Path>
+         </Node>
+         <Node>
+          <Name>AtomicVariableUnit&lt; SampleType &gt;</Name>
+          <Path>class_atomic_variable_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>AudioFile</Name>
+          <Path>class_audio_file.html</Path>
+         </Node>
+         <Node>
+          <Name>AudioFileReader</Name>
+          <Path>class_audio_file_reader.html</Path>
+         </Node>
+         <Node>
+          <Name>AudioFileWriter&lt; SampleType &gt;</Name>
+          <Path>class_audio_file_writer.html</Path>
+         </Node>
+         <Node>
+          <Name>AudioHostBase&lt; SampleType &gt;</Name>
+          <Path>class_audio_host_base.html</Path>
+         </Node>
+         <Node>
+          <Name>Base64</Name>
+          <Path>class_base64.html</Path>
+         </Node>
+         <Node>
+          <Name>BinaryFile</Name>
+          <Path>class_binary_file.html</Path>
+         </Node>
+         <Node>
+          <Name>BinaryOpChannelInternal&lt; SampleType, op &gt;</Name>
+          <Path>class_binary_op_channel_internal.html</Path>
+         </Node>
+         <Node>
+          <Name>Bits</Name>
+          <Path>class_bits.html</Path>
+         </Node>
+         <Node>
+          <Name>BlockChannelInternal&lt; SampleType &gt;</Name>
+          <Path>class_block_channel_internal.html</Path>
+         </Node>
+         <Node>
+          <Name>BlockSize</Name>
+          <Path>class_block_size.html</Path>
+         </Node>
+         <Node>
+          <Name>BlockUnit&lt; SampleType &gt;</Name>
+          <Path>class_block_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>BPFUnit&lt; SampleType, InterpTypeCode &gt;</Name>
+          <Path>class_b_p_f_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>BRFUnit&lt; SampleType, InterpTypeCode &gt;</Name>
+          <Path>class_b_r_f_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>BusBuffer&lt; SampleType &gt;</Name>
+          <Path>class_bus_buffer.html</Path>
+         </Node>
+         <Node>
+          <Name>BusReadChannelInternal&lt; SampleType &gt;</Name>
+          <Path>class_bus_read_channel_internal.html</Path>
+         </Node>
+         <Node>
+          <Name>BusReadUnit&lt; SampleType &gt;</Name>
+          <Path>class_bus_read_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>BusWriteChannelInternal&lt; SampleType &gt;</Name>
+          <Path>class_bus_write_channel_internal.html</Path>
+         </Node>
+         <Node>
+          <Name>BusWriteUnit&lt; SampleType &gt;</Name>
+          <Path>class_bus_write_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>ChannelBase&lt; SampleType &gt;</Name>
+          <Path>class_channel_base.html</Path>
+         </Node>
+         <Node>
+          <Name>ChannelData&lt; OwnerType &gt;</Name>
+          <Path>struct_channel_data.html</Path>
+         </Node>
+         <Node>
+          <Name>ChannelInternal&lt; SampleType, DataType &gt;</Name>
+          <Path>class_channel_internal.html</Path>
+         </Node>
+         <Node>
+          <Name>ChannelInternalBase&lt; SampleType &gt;</Name>
+          <Path>class_channel_internal_base.html</Path>
+         </Node>
+         <Node>
+          <Name>ChannelInternalCore</Name>
+          <Path>class_channel_internal_core.html</Path>
+         </Node>
+         <Node>
+          <Name>ChannelMixerChannelInternal&lt; SampleType &gt;</Name>
+          <Path>class_channel_mixer_channel_internal.html</Path>
+         </Node>
+         <Node>
+          <Name>CombDecayUnit&lt; SampleType, InterpTypeCode &gt;</Name>
+          <Path>class_comb_decay_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>CombFBUnit&lt; SampleType, InterpTypeCode &gt;</Name>
+          <Path>class_comb_f_b_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>CombFilter1ParamUnit&lt; FilterShape, InterpTypeCode &gt;</Name>
+          <Path>class_comb_filter1_param_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>ConstantChannelInternal&lt; SampleType &gt;</Name>
+          <Path>class_constant_channel_internal.html</Path>
+         </Node>
+         <Node>
+          <Name>DCUnit&lt; SampleType, InterpTypeCode &gt;</Name>
+          <Path>class_d_c_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>DecayUnit&lt; SampleType, InterpTypeCode &gt;</Name>
+          <Path>class_decay_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>Delay1ParamChannelInternal&lt; FormType &gt;</Name>
+          <Path>class_delay1_param_channel_internal.html</Path>
+         </Node>
+         <Node>
+          <Name>Delay2ParamChannelInternal&lt; FormType &gt;</Name>
+          <Path>class_delay2_param_channel_internal.html</Path>
+         </Node>
+         <Node>
+          <Name>Delay3ParamChannelInternal&lt; FormType &gt;</Name>
+          <Path>class_delay3_param_channel_internal.html</Path>
+         </Node>
+         <Node>
+          <Name>Delay4ParamChannelInternal&lt; FormType &gt;</Name>
+          <Path>class_delay4_param_channel_internal.html</Path>
+         </Node>
+         <Node>
+          <Name>DelayUnit&lt; SampleType, InterpTypeCode &gt;</Name>
+          <Path>class_delay_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>Dictionary&lt; ValueType, KeyType &gt;</Name>
+          <Path>class_dictionary.html</Path>
+         </Node>
+         <Node>
+          <Name>Endian</Name>
+          <Path>class_endian.html</Path>
+         </Node>
+         <Node>
+          <Name>EndianIfBig</Name>
+          <Path>class_endian_if_big.html</Path>
+         </Node>
+         <Node>
+          <Name>EndianIfLittle</Name>
+          <Path>class_endian_if_little.html</Path>
+         </Node>
+         <Node>
+          <Name>EnvelopeChannelInternal&lt; SampleType &gt;</Name>
+          <Path>class_envelope_channel_internal.html</Path>
+         </Node>
+         <Node>
+          <Name>EnvelopeUnit&lt; SampleType &gt;</Name>
+          <Path>class_envelope_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>FFTChannelInternal&lt; SampleType &gt;</Name>
+          <Path>class_f_f_t_channel_internal.html</Path>
+         </Node>
+         <Node>
+          <Name>FFTEngineBase&lt; float &gt;</Name>
+          <Path>class_f_f_t_engine_base_3_01float_01_4.html</Path>
+         </Node>
+         <Node>
+          <Name>FFTUnit&lt; SampleType &gt;</Name>
+          <Path>class_f_f_t_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>FilePath</Name>
+          <Path>class_file_path.html</Path>
+         </Node>
+         <Node>
+          <Name>FilePlayChannelInternal&lt; SampleType &gt;</Name>
+          <Path>class_file_play_channel_internal.html</Path>
+         </Node>
+         <Node>
+          <Name>FilePlayUnit&lt; SampleType &gt;</Name>
+          <Path>class_file_play_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>FilterChannelInternal&lt; FormType &gt;</Name>
+          <Path>class_filter_channel_internal.html</Path>
+         </Node>
+         <Node>
+          <Name>FilterCoeffs1ParamChannelInternal&lt; ShapeType &gt;</Name>
+          <Path>class_filter_coeffs1_param_channel_internal.html</Path>
+         </Node>
+         <Node>
+          <Name>FilterCoeffs1ParamUnit&lt; ShapeType &gt;</Name>
+          <Path>class_filter_coeffs1_param_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>FilterCoeffs2ParamChannelInternal&lt; ShapeType &gt;</Name>
+          <Path>class_filter_coeffs2_param_channel_internal.html</Path>
+         </Node>
+         <Node>
+          <Name>FilterCoeffs2ParamUnit&lt; ShapeType &gt;</Name>
+          <Path>class_filter_coeffs2_param_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>FilterCoeffs3ParamChannelInternal&lt; ShapeType &gt;</Name>
+          <Path>class_filter_coeffs3_param_channel_internal.html</Path>
+         </Node>
+         <Node>
+          <Name>FilterCoeffs3ParamUnit&lt; ShapeType &gt;</Name>
+          <Path>class_filter_coeffs3_param_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>FilterForm&lt; SampleType, FilterFormType::B2 &gt;</Name>
+          <Path>class_filter_form_3_01_sample_type_00_01_filter_form_type_1_1_b2_01_4.html</Path>
+         </Node>
+         <Node>
+          <Name>FilterForm&lt; SampleType, FilterFormType::P1 &gt;</Name>
+          <Path>class_filter_form_3_01_sample_type_00_01_filter_form_type_1_1_p1_01_4.html</Path>
+         </Node>
+         <Node>
+          <Name>FilterForm&lt; SampleType, FilterFormType::P1a &gt;</Name>
+          <Path>class_filter_form_3_01_sample_type_00_01_filter_form_type_1_1_p1a_01_4.html</Path>
+         </Node>
+         <Node>
+          <Name>FilterForm&lt; SampleType, FilterFormType::P1b &gt;</Name>
+          <Path>class_filter_form_3_01_sample_type_00_01_filter_form_type_1_1_p1b_01_4.html</Path>
+         </Node>
+         <Node>
+          <Name>FilterForm&lt; SampleType, FilterFormType::P2Z2 &gt;</Name>
+          <Path>class_filter_form_3_01_sample_type_00_01_filter_form_type_1_1_p2_z2_01_4.html</Path>
+         </Node>
+         <Node>
+          <Name>FilterShapeBPFBase&lt; SampleType &gt;</Name>
+          <Path>class_filter_shape_b_p_f_base.html</Path>
+         </Node>
+         <Node>
+          <Name>FilterShapeBRFBase&lt; SampleType &gt;</Name>
+          <Path>class_filter_shape_b_r_f_base.html</Path>
+         </Node>
+         <Node>
+          <Name>FilterShapeDecayBase&lt; SampleType &gt;</Name>
+          <Path>class_filter_shape_decay_base.html</Path>
+         </Node>
+         <Node>
+          <Name>FilterShapeHighShelfBase&lt; SampleType &gt;</Name>
+          <Path>class_filter_shape_high_shelf_base.html</Path>
+         </Node>
+         <Node>
+          <Name>FilterShapeHPFBase&lt; SampleType &gt;</Name>
+          <Path>class_filter_shape_h_p_f_base.html</Path>
+         </Node>
+         <Node>
+          <Name>FilterShapeHPFP1Base&lt; SampleType &gt;</Name>
+          <Path>class_filter_shape_h_p_f_p1_base.html</Path>
+         </Node>
+         <Node>
+          <Name>FilterShapeLagBase&lt; SampleType &gt;</Name>
+          <Path>class_filter_shape_lag_base.html</Path>
+         </Node>
+         <Node>
+          <Name>FilterShapeLowShelfBase&lt; SampleType &gt;</Name>
+          <Path>class_filter_shape_low_shelf_base.html</Path>
+         </Node>
+         <Node>
+          <Name>FilterShapeLPFBase&lt; SampleType &gt;</Name>
+          <Path>class_filter_shape_l_p_f_base.html</Path>
+         </Node>
+         <Node>
+          <Name>FilterShapeLPFP1Base&lt; SampleType &gt;</Name>
+          <Path>class_filter_shape_l_p_f_p1_base.html</Path>
+         </Node>
+         <Node>
+          <Name>FilterShapeNotchBase&lt; SampleType &gt;</Name>
+          <Path>class_filter_shape_notch_base.html</Path>
+         </Node>
+         <Node>
+          <Name>FilterShapeRHPFBase&lt; SampleType &gt;</Name>
+          <Path>class_filter_shape_r_h_p_f_base.html</Path>
+         </Node>
+         <Node>
+          <Name>FilterShapeRLPFBase&lt; SampleType &gt;</Name>
+          <Path>class_filter_shape_r_l_p_f_base.html</Path>
+         </Node>
+         <Node>
+          <Name>FilterUnit&lt; FormType &gt;</Name>
+          <Path>class_filter_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>Fix&lt; Base, IBits, FBits &gt;</Name>
+          <Path>class_fix.html</Path>
+         </Node>
+         <Node>
+          <Name>PLONK_NAMESPACE::ForceErrorStruct</Name>
+          <Path>struct_p_l_o_n_k___n_a_m_e_s_p_a_c_e_1_1_force_error_struct.html</Path>
+         </Node>
+         <Node>
+          <Name>HarmonicSawUnit&lt; SampleType &gt;</Name>
+          <Path>class_harmonic_saw_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>HarmonicSquareUnit&lt; SampleType &gt;</Name>
+          <Path>class_harmonic_square_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>HarmonicTriUnit&lt; SampleType &gt;</Name>
+          <Path>class_harmonic_tri_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>HighShelfUnit&lt; SampleType, InterpTypeCode &gt;</Name>
+          <Path>class_high_shelf_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>HPFP1Unit&lt; SampleType, InterpTypeCode &gt;</Name>
+          <Path>class_h_p_f_p1_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>HPFUnit&lt; SampleType, InterpTypeCode &gt;</Name>
+          <Path>class_h_p_f_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>IFFTChannelInternal&lt; SampleType &gt;</Name>
+          <Path>class_i_f_f_t_channel_internal.html</Path>
+         </Node>
+         <Node>
+          <Name>IFFTUnit&lt; SampleType &gt;</Name>
+          <Path>class_i_f_f_t_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>ImpulseChannelInternal&lt; SampleType &gt;</Name>
+          <Path>class_impulse_channel_internal.html</Path>
+         </Node>
+         <Node>
+          <Name>ImpulseUnit&lt; SampleType &gt;</Name>
+          <Path>class_impulse_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>InputDictionary</Name>
+          <Path>class_input_dictionary.html</Path>
+         </Node>
+         <Node>
+          <Name>InputTaskChannelInternal&lt; SampleType, InterpTypeCode &gt;</Name>
+          <Path>class_input_task_channel_internal.html</Path>
+         </Node>
+         <Node>
+          <Name>InputTaskUnit&lt; SampleType, InterpTypeCode &gt;</Name>
+          <Path>class_input_task_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>Int24</Name>
+          <Path>class_int24.html</Path>
+         </Node>
+         <Node>
+          <Name>PLONK_NAMESPACE::IOSAudioHostBase&lt; SampleType &gt;</Name>
+          <Path>class_p_l_o_n_k___n_a_m_e_s_p_a_c_e_1_1_i_o_s_audio_host_base.html</Path>
+         </Node>
+         <Node>
+          <Name>PLONK_NAMESPACE::IOSUtilities</Name>
+          <Path>class_p_l_o_n_k___n_a_m_e_s_p_a_c_e_1_1_i_o_s_utilities.html</Path>
+         </Node>
+         <Node>
+          <Name>LagUnit&lt; SampleType, InterpTypeCode &gt;</Name>
+          <Path>class_lag_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>LinearPanChannelInternal&lt; SampleType &gt;</Name>
+          <Path>class_linear_pan_channel_internal.html</Path>
+         </Node>
+         <Node>
+          <Name>LinearPanUnit&lt; SampleType &gt;</Name>
+          <Path>class_linear_pan_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>LockedValue&lt; Type &gt;</Name>
+          <Path>class_locked_value.html</Path>
+         </Node>
+         <Node>
+          <Name>LookupChannelInternal&lt; SampleType &gt;</Name>
+          <Path>class_lookup_channel_internal.html</Path>
+         </Node>
+         <Node>
+          <Name>LookupUnit&lt; SampleType &gt;</Name>
+          <Path>class_lookup_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>LowShelfUnit&lt; SampleType, InterpTypeCode &gt;</Name>
+          <Path>class_low_shelf_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>LPFP1Unit&lt; SampleType, InterpTypeCode &gt;</Name>
+          <Path>class_l_p_f_p1_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>LPFUnit&lt; SampleType, InterpTypeCode &gt;</Name>
+          <Path>class_l_p_f_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>Math&lt; Type &gt;</Name>
+          <Path>class_math.html</Path>
+         </Node>
+         <Node>
+          <Name>MixerUnit&lt; SampleType &gt;</Name>
+          <Path>class_mixer_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>MulAddChannelInternal&lt; SampleType &gt;</Name>
+          <Path>class_mul_add_channel_internal.html</Path>
+         </Node>
+         <Node>
+          <Name>NotchUnit&lt; SampleType, InterpTypeCode &gt;</Name>
+          <Path>class_notch_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>NullChannelInternal&lt; SampleType &gt;</Name>
+          <Path>class_null_channel_internal.html</Path>
+         </Node>
+         <Node>
+          <Name>NumericalArray&lt; NumericalType &gt;</Name>
+          <Path>class_numerical_array.html</Path>
+         </Node>
+         <Node>
+          <Name>NumericalArraySpec</Name>
+          <Path>class_numerical_array_spec.html</Path>
+         </Node>
+         <Node>
+          <Name>NumericalConverter</Name>
+          <Path>class_numerical_converter.html</Path>
+         </Node>
+         <Node>
+          <Name>ObjectArray&lt; ObjectType &gt;</Name>
+          <Path>class_object_array.html</Path>
+         </Node>
+         <Node>
+          <Name>ObjectMemoryBase</Name>
+          <Path>class_object_memory_base.html</Path>
+         </Node>
+         <Node>
+          <Name>OverlapMakeChannelInternal&lt; SampleType &gt;</Name>
+          <Path>class_overlap_make_channel_internal.html</Path>
+         </Node>
+         <Node>
+          <Name>OverlapMakeUnit&lt; SampleType &gt;</Name>
+          <Path>class_overlap_make_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>OverlapMixChannelInternal&lt; SampleType &gt;</Name>
+          <Path>class_overlap_mix_channel_internal.html</Path>
+         </Node>
+         <Node>
+          <Name>OverlapMixUnit&lt; SampleType &gt;</Name>
+          <Path>class_overlap_mix_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>ParamChannelInternal&lt; SampleType &gt;</Name>
+          <Path>class_param_channel_internal.html</Path>
+         </Node>
+         <Node>
+          <Name>ParamUnit&lt; SampleType &gt;</Name>
+          <Path>class_param_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>PatchChannelInternal&lt; SampleType &gt;</Name>
+          <Path>class_patch_channel_internal.html</Path>
+         </Node>
+         <Node>
+          <Name>PatchUnit&lt; SampleType &gt;</Name>
+          <Path>class_patch_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>PlankF80</Name>
+          <Path>struct_plank_f80.html</Path>
+         </Node>
+         <Node>
+          <Name>PlankI24</Name>
+          <Path>struct_plank_i24.html</Path>
+         </Node>
+         <Node>
+          <Name>PlankPascalString255</Name>
+          <Path>struct_plank_pascal_string255.html</Path>
+         </Node>
+         <Node>
+          <Name>PlankUI24</Name>
+          <Path>struct_plank_u_i24.html</Path>
+         </Node>
+         <Node>
+          <Name>PLAudioHost</Name>
+          <Path>interface_p_l_audio_host.html</Path>
+         </Node>
+         <Node>
+          <Name>&lt;PLAudioHostDelegate&gt;</Name>
+          <Path>protocol_p_l_audio_host_delegate-p.html</Path>
+         </Node>
+         <Node>
+          <Name>PlinkBufferF</Name>
+          <Path>struct_plink_buffer_f.html</Path>
+         </Node>
+         <Node>
+          <Name>ProcessInfo</Name>
+          <Path>class_process_info.html</Path>
+         </Node>
+         <Node>
+          <Name>ProxyOwnerChannelInternal&lt; SampleType, DataType &gt;</Name>
+          <Path>class_proxy_owner_channel_internal.html</Path>
+         </Node>
+         <Node>
+          <Name>QueueChannelInternal&lt; SampleType &gt;</Name>
+          <Path>class_queue_channel_internal.html</Path>
+         </Node>
+         <Node>
+          <Name>QueueMixerChannelInternal&lt; SampleType &gt;</Name>
+          <Path>class_queue_mixer_channel_internal.html</Path>
+         </Node>
+         <Node>
+          <Name>QueueUnit&lt; SampleType &gt;</Name>
+          <Path>class_queue_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>ReblockChannelInternal&lt; SampleType &gt;</Name>
+          <Path>class_reblock_channel_internal.html</Path>
+         </Node>
+         <Node>
+          <Name>ReblockUnit&lt; SampleType &gt;</Name>
+          <Path>class_reblock_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>ResampleChannelInternal&lt; SampleType, InterpTypeCode &gt;</Name>
+          <Path>class_resample_channel_internal.html</Path>
+         </Node>
+         <Node>
+          <Name>ResampleUnit&lt; SampleType, InterpTypeCode &gt;</Name>
+          <Path>class_resample_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>RHPFUnit&lt; SampleType, InterpTypeCode &gt;</Name>
+          <Path>class_r_h_p_f_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>RLPFUnit&lt; SampleType, InterpTypeCode &gt;</Name>
+          <Path>class_r_l_p_f_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>RNG</Name>
+          <Path>class_r_n_g.html</Path>
+         </Node>
+         <Node>
+          <Name>SampleRate</Name>
+          <Path>class_sample_rate.html</Path>
+         </Node>
+         <Node>
+          <Name>SawChannelInternal&lt; SampleType &gt;</Name>
+          <Path>class_saw_channel_internal.html</Path>
+         </Node>
+         <Node>
+          <Name>SawUnit&lt; SampleType &gt;</Name>
+          <Path>class_saw_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>SchmidtChannelInternal&lt; SampleType &gt;</Name>
+          <Path>class_schmidt_channel_internal.html</Path>
+         </Node>
+         <Node>
+          <Name>SchmidtUnit&lt; SampleType &gt;</Name>
+          <Path>class_schmidt_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>SignalPlayChannelInternal&lt; SampleType &gt;</Name>
+          <Path>class_signal_play_channel_internal.html</Path>
+         </Node>
+         <Node>
+          <Name>SignalPlayUnit&lt; SampleType &gt;</Name>
+          <Path>class_signal_play_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>SignalReadChannelInternal&lt; SampleType &gt;</Name>
+          <Path>class_signal_read_channel_internal.html</Path>
+         </Node>
+         <Node>
+          <Name>SignalReadUnit&lt; SampleType &gt;</Name>
+          <Path>class_signal_read_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>FilePlayUnit&lt; SampleType &gt;::Simple</Name>
+          <Path>class_file_play_unit_1_1_simple.html</Path>
+         </Node>
+         <Node>
+          <Name>SineUnit&lt; SampleType &gt;</Name>
+          <Path>class_sine_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>SmartPointer</Name>
+          <Path>class_smart_pointer.html</Path>
+         </Node>
+         <Node>
+          <Name>SmartPointerContainerBase&lt; SmartPointerType &gt;</Name>
+          <Path>class_smart_pointer_container_base.html</Path>
+         </Node>
+         <Node>
+          <Name>TableChannelInternal&lt; SampleType &gt;</Name>
+          <Path>class_table_channel_internal.html</Path>
+         </Node>
+         <Node>
+          <Name>TableUnit&lt; SampleType &gt;</Name>
+          <Path>class_table_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>Text</Name>
+          <Path>class_text.html</Path>
+         </Node>
+         <Node>
+          <Name>TextFile</Name>
+          <Path>class_text_file.html</Path>
+         </Node>
+         <Node>
+          <Name>Threading::Thread</Name>
+          <Path>class_threading_1_1_thread.html</Path>
+         </Node>
+         <Node>
+          <Name>Threading</Name>
+          <Path>class_threading.html</Path>
+         </Node>
+         <Node>
+          <Name>TimeStamp</Name>
+          <Path>class_time_stamp.html</Path>
+         </Node>
+         <Node>
+          <Name>TriggerChannelInternal&lt; SampleType &gt;</Name>
+          <Path>class_trigger_channel_internal.html</Path>
+         </Node>
+         <Node>
+          <Name>TriggerUnit&lt; SampleType &gt;</Name>
+          <Path>class_trigger_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>TypeChannelInternal&lt; OutputSampleType, InputSampleType &gt;</Name>
+          <Path>class_type_channel_internal.html</Path>
+         </Node>
+         <Node>
+          <Name>TypeCode</Name>
+          <Path>class_type_code.html</Path>
+         </Node>
+         <Node>
+          <Name>TypeUnitBase&lt; OutputSampleType, InputSampleType &gt;</Name>
+          <Path>class_type_unit_base.html</Path>
+         </Node>
+         <Node>
+          <Name>TypeUtility&lt; Type &gt;</Name>
+          <Path>class_type_utility.html</Path>
+         </Node>
+         <Node>
+          <Name>UnaryOpChannelInternal&lt; SampleType, op &gt;</Name>
+          <Path>class_unary_op_channel_internal.html</Path>
+         </Node>
+         <Node>
+          <Name>UnitBase&lt; SampleType &gt;</Name>
+          <Path>class_unit_base.html</Path>
+         </Node>
+         <Node>
+          <Name>UnitMixerChannelInternal&lt; SampleType &gt;</Name>
+          <Path>class_unit_mixer_channel_internal.html</Path>
+         </Node>
+         <Node>
+          <Name>Variable&lt; Type &gt;</Name>
+          <Path>class_variable.html</Path>
+         </Node>
+         <Node>
+          <Name>Variable&lt; Type &amp; &gt;</Name>
+          <Path>class_variable_3_01_type_01_6_01_4.html</Path>
+         </Node>
+         <Node>
+          <Name>WeakPointer</Name>
+          <Path>class_weak_pointer.html</Path>
+         </Node>
+         <Node>
+          <Name>WeakPointerContainer&lt; OriginalType &gt;</Name>
+          <Path>class_weak_pointer_container.html</Path>
+         </Node>
+         <Node>
+          <Name>WhiteNoiseChannelInternal&lt; SampleType &gt;</Name>
+          <Path>class_white_noise_channel_internal.html</Path>
+         </Node>
+         <Node>
+          <Name>WhiteNoiseUnit&lt; SampleType &gt;</Name>
+          <Path>class_white_noise_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>ZMulChannelInternal&lt; SampleType &gt;</Name>
+          <Path>class_z_mul_channel_internal.html</Path>
+         </Node>
+         <Node>
+          <Name>ZMulUnit&lt; SampleType &gt;</Name>
+          <Path>class_z_mul_unit.html</Path>
+         </Node>
+        </Subnodes>
+       </Node>
+       <Node>
+        <Name>Class Index</Name>
+        <Path>classes.html</Path>
+       </Node>
+       <Node>
+        <Name>Class Hierarchy</Name>
+        <Path>hierarchy.html</Path>
+        <Subnodes>
+         <Node>
+          <Name>AllpassDecayUnit&lt; SampleType, InterpTypeCode &gt;</Name>
+          <Path>class_allpass_decay_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>AllpassFFFBUnit&lt; SampleType, InterpTypeCode &gt;</Name>
+          <Path>class_allpass_f_f_f_b_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>ArrayAllocator&lt; Type &gt;</Name>
+          <Path>class_array_allocator.html</Path>
+         </Node>
+         <Node>
+          <Name>ArrayAllocator&lt; Type * &gt;</Name>
+          <Path>class_array_allocator_3_01_type_01_5_01_4.html</Path>
+         </Node>
+         <Node>
+          <Name>ArrayAllocatorBuiltIn&lt; Type &gt;</Name>
+          <Path>class_array_allocator_built_in.html</Path>
+         </Node>
+         <Node>
+          <Name>ArrayAllocatorBuiltIn&lt; Bool &gt;</Name>
+          <Path>class_array_allocator_built_in.html</Path>
+         </Node>
+         <Node>
+          <Name>ArrayAllocatorBuiltIn&lt; Char &gt;</Name>
+          <Path>class_array_allocator_built_in.html</Path>
+         </Node>
+         <Node>
+          <Name>ArrayAllocatorBuiltIn&lt; Double &gt;</Name>
+          <Path>class_array_allocator_built_in.html</Path>
+         </Node>
+         <Node>
+          <Name>ArrayAllocatorBuiltIn&lt; Float &gt;</Name>
+          <Path>class_array_allocator_built_in.html</Path>
+         </Node>
+         <Node>
+          <Name>ArrayAllocatorBuiltIn&lt; Int &gt;</Name>
+          <Path>class_array_allocator_built_in.html</Path>
+         </Node>
+         <Node>
+          <Name>ArrayAllocatorBuiltIn&lt; Int24 &gt;</Name>
+          <Path>class_array_allocator_built_in.html</Path>
+         </Node>
+         <Node>
+          <Name>ArrayAllocatorBuiltIn&lt; Long &gt;</Name>
+          <Path>class_array_allocator_built_in.html</Path>
+         </Node>
+         <Node>
+          <Name>ArrayAllocatorBuiltIn&lt; LongLong &gt;</Name>
+          <Path>class_array_allocator_built_in.html</Path>
+         </Node>
+         <Node>
+          <Name>ArrayAllocatorBuiltIn&lt; Short &gt;</Name>
+          <Path>class_array_allocator_built_in.html</Path>
+         </Node>
+         <Node>
+          <Name>ArrayAllocatorBuiltIn&lt; UnsignedChar &gt;</Name>
+          <Path>class_array_allocator_built_in.html</Path>
+         </Node>
+         <Node>
+          <Name>ArrayAllocatorBuiltIn&lt; UnsignedInt &gt;</Name>
+          <Path>class_array_allocator_built_in.html</Path>
+         </Node>
+         <Node>
+          <Name>ArrayAllocatorBuiltIn&lt; UnsignedLong &gt;</Name>
+          <Path>class_array_allocator_built_in.html</Path>
+         </Node>
+         <Node>
+          <Name>ArrayAllocatorBuiltIn&lt; UnsignedLongLong &gt;</Name>
+          <Path>class_array_allocator_built_in.html</Path>
+         </Node>
+         <Node>
+          <Name>ArrayAllocatorBuiltIn&lt; UnsignedShort &gt;</Name>
+          <Path>class_array_allocator_built_in.html</Path>
+         </Node>
+         <Node>
+          <Name>AtomicExtended&lt; Type &gt;</Name>
+          <Path>class_atomic_extended.html</Path>
+         </Node>
+         <Node>
+          <Name>AtomicOps</Name>
+          <Path>class_atomic_ops.html</Path>
+         </Node>
+         <Node>
+          <Name>AtomicValue&lt; Type &gt;</Name>
+          <Path>class_atomic_value.html</Path>
+         </Node>
+         <Node>
+          <Name>AtomicValue&lt; AudioFileReaderInternal * &gt;</Name>
+          <Path>class_atomic_value.html</Path>
+         </Node>
+         <Node>
+          <Name>AtomicValue&lt; AudioFileWriterInternal&lt; SampleType &gt; * &gt;</Name>
+          <Path>class_atomic_value.html</Path>
+         </Node>
+         <Node>
+          <Name>AtomicValue&lt; Base64Internal * &gt;</Name>
+          <Path>class_atomic_value.html</Path>
+         </Node>
+         <Node>
+          <Name>AtomicValue&lt; BinaryFileInternal * &gt;</Name>
+          <Path>class_atomic_value.html</Path>
+         </Node>
+         <Node>
+          <Name>AtomicValue&lt; BreakpointInternal&lt; SampleType &gt; * &gt;</Name>
+          <Path>class_atomic_value.html</Path>
+         </Node>
+         <Node>
+          <Name>AtomicValue&lt; BreakpointsInternal&lt; SampleType &gt; * &gt;</Name>
+          <Path>class_atomic_value.html</Path>
+         </Node>
+         <Node>
+          <Name>AtomicValue&lt; BusBufferInternal&lt; SampleType &gt; * &gt;</Name>
+          <Path>class_atomic_value.html</Path>
+         </Node>
+         <Node>
+          <Name>AtomicValue&lt; ChannelInternalBase&lt; SampleType &gt; * &gt;</Name>
+          <Path>class_atomic_value.html</Path>
+         </Node>
+         <Node>
+          <Name>AtomicValue&lt; DictionaryInternal&lt; Dynamic, int &gt; * &gt;</Name>
+          <Path>class_atomic_value.html</Path>
+         </Node>
+         <Node>
+          <Name>AtomicValue&lt; DictionaryInternal&lt; Dynamic, KeyType &gt; * &gt;</Name>
+          <Path>class_atomic_value.html</Path>
+         </Node>
+         <Node>
+          <Name>AtomicValue&lt; DictionaryInternal&lt; ValueType, KeyType &gt; * &gt;</Name>
+          <Path>class_atomic_value.html</Path>
+         </Node>
+         <Node>
+          <Name>AtomicValue&lt; DynamicInternal * &gt;</Name>
+          <Path>class_atomic_value.html</Path>
+         </Node>
+         <Node>
+          <Name>AtomicValue&lt; FFTEngineInternal&lt; float &gt; * &gt;</Name>
+          <Path>class_atomic_value.html</Path>
+         </Node>
+         <Node>
+          <Name>AtomicValue&lt; FilePathInternal * &gt;</Name>
+          <Path>class_atomic_value.html</Path>
+         </Node>
+         <Node>
+          <Name>AtomicValue&lt; FunctionCallerInternal&lt; FunctionType, FunctionType::Return, ArgType1, ArgType2, ArgType3 &gt; * &gt;</Name>
+          <Path>class_atomic_value.html</Path>
+         </Node>
+         <Node>
+          <Name>AtomicValue&lt; FunctionCallerInternal&lt; FunctionType, FunctionType::Return, FunctionType::Arg1, ArgType2, ArgType3 &gt; * &gt;</Name>
+          <Path>class_atomic_value.html</Path>
+         </Node>
+         <Node>
+          <Name>AtomicValue&lt; FunctionCallerInternal&lt; FunctionType, FunctionType::Return, FunctionType::Arg1, FunctionType::Arg2, ArgType3 &gt; * &gt;</Name>
+          <Path>class_atomic_value.html</Path>
+         </Node>
+         <Node>
+          <Name>AtomicValue&lt; FunctionCallerInternal&lt; FunctionType, FunctionType::Return, FunctionType::Arg1, FunctionType::Arg2, FunctionType::Arg3 &gt; * &gt;</Name>
+          <Path>class_atomic_value.html</Path>
+         </Node>
+         <Node>
+          <Name>AtomicValue&lt; FunctionCallerInternal&lt; FunctionType, ReturnType &gt; * &gt;</Name>
+          <Path>class_atomic_value.html</Path>
+         </Node>
+         <Node>
+          <Name>AtomicValue&lt; FunctionCallerInternal&lt; FunctionType, ReturnType, ArgType1 &gt; * &gt;</Name>
+          <Path>class_atomic_value.html</Path>
+         </Node>
+         <Node>
+          <Name>AtomicValue&lt; FunctionCallerInternal&lt; FunctionType, ReturnType, ArgType1, ArgType2 &gt; * &gt;</Name>
+          <Path>class_atomic_value.html</Path>
+         </Node>
+         <Node>
+          <Name>AtomicValue&lt; FunctionCallerInternal&lt; FunctionType, ReturnType, ArgType1, ArgType2, ArgType3 &gt; * &gt;</Name>
+          <Path>class_atomic_value.html</Path>
+         </Node>
+         <Node>
+          <Name>AtomicValue&lt; FunctionProxyCallerInternal&lt; FunctionType, FunctionType::Return, ArgType1, ArgType2, ArgType3 &gt; * &gt;</Name>
+          <Path>class_atomic_value.html</Path>
+         </Node>
+         <Node>
+          <Name>AtomicValue&lt; FunctionProxyCallerInternal&lt; FunctionType, FunctionType::Return, FunctionType::Arg1, ArgType2, ArgType3 &gt; * &gt;</Name>
+          <Path>class_atomic_value.html</Path>
+         </Node>
+         <Node>
+          <Name>AtomicValue&lt; FunctionProxyCallerInternal&lt; FunctionType, FunctionType::Return, FunctionType::Arg1, FunctionType::Arg2, ArgType3 &gt; * &gt;</Name>
+          <Path>class_atomic_value.html</Path>
+         </Node>
+         <Node>
+          <Name>AtomicValue&lt; FunctionProxyCallerInternal&lt; FunctionType, FunctionType::Return, FunctionType::Arg1, FunctionType::Arg2, FunctionType::Arg3 &gt; * &gt;</Name>
+          <Path>class_atomic_value.html</Path>
+         </Node>
+         <Node>
+          <Name>AtomicValue&lt; FunctionProxyCallerInternal&lt; FunctionType, ReturnType &gt; * &gt;</Name>
+          <Path>class_atomic_value.html</Path>
+         </Node>
+         <Node>
+          <Name>AtomicValue&lt; FunctionProxyCallerInternal&lt; FunctionType, ReturnType, ArgType1 &gt; * &gt;</Name>
+          <Path>class_atomic_value.html</Path>
+         </Node>
+         <Node>
+          <Name>AtomicValue&lt; FunctionProxyCallerInternal&lt; FunctionType, ReturnType, ArgType1, ArgType2 &gt; * &gt;</Name>
+          <Path>class_atomic_value.html</Path>
+         </Node>
+         <Node>
+          <Name>AtomicValue&lt; FunctionProxyCallerInternal&lt; FunctionType, ReturnType, ArgType1, ArgType2, ArgType3 &gt; * &gt;</Name>
+          <Path>class_atomic_value.html</Path>
+         </Node>
+         <Node>
+          <Name>AtomicValue&lt; Int &gt;</Name>
+          <Path>class_atomic_value.html</Path>
+         </Node>
+         <Node>
+          <Name>AtomicValue&lt; Internal &gt;</Name>
+          <Path>class_atomic_value.html</Path>
+         </Node>
+         <Node>
+          <Name>AtomicValue&lt; LockedValueInternal&lt; Type &gt; * &gt;</Name>
+          <Path>class_atomic_value.html</Path>
+         </Node>
+         <Node>
+          <Name>AtomicValue&lt; LockFreeQueueInternal&lt; ValueType &gt; * &gt;</Name>
+          <Path>class_atomic_value.html</Path>
+         </Node>
+         <Node>
+          <Name>AtomicValue&lt; LockFreeStackInternal&lt; ValueType &gt; * &gt;</Name>
+          <Path>class_atomic_value.html</Path>
+         </Node>
+         <Node>
+          <Name>AtomicValue&lt; LockInternalBase * &gt;</Name>
+          <Path>class_atomic_value.html</Path>
+         </Node>
+         <Node>
+          <Name>AtomicValue&lt; NeuralNetworkInternal&lt; ValueType &gt; * &gt;</Name>
+          <Path>class_atomic_value.html</Path>
+         </Node>
+         <Node>
+          <Name>AtomicValue&lt; ObjectArrayInternal&lt; Buffer &gt; * &gt;</Name>
+          <Path>class_atomic_value.html</Path>
+         </Node>
+         <Node>
+          <Name>AtomicValue&lt; ObjectArrayInternal&lt; BusType &gt; * &gt;</Name>
+          <Path>class_atomic_value.html</Path>
+         </Node>
+         <Node>
+          <Name>AtomicValue&lt; ObjectArrayInternal&lt; ChannelBase&lt; float &gt; &gt; * &gt;</Name>
+          <Path>class_atomic_value.html</Path>
+         </Node>
+         <Node>
+          <Name>AtomicValue&lt; ObjectArrayInternal&lt; ChannelBase&lt; SampleType &gt; &gt; * &gt;</Name>
+          <Path>class_atomic_value.html</Path>
+         </Node>
+         <Node>
+          <Name>AtomicValue&lt; ObjectArrayInternal&lt; const float * &gt; * &gt;</Name>
+          <Path>class_atomic_value.html</Path>
+         </Node>
+         <Node>
+          <Name>AtomicValue&lt; ObjectArrayInternal&lt; float * &gt; * &gt;</Name>
+          <Path>class_atomic_value.html</Path>
+         </Node>
+         <Node>
+          <Name>AtomicValue&lt; ObjectArrayInternal&lt; float &gt; * &gt;</Name>
+          <Path>class_atomic_value.html</Path>
+         </Node>
+         <Node>
+          <Name>AtomicValue&lt; ObjectArrayInternal&lt; FormType::SampleDataType &gt; * &gt;</Name>
+          <Path>class_atomic_value.html</Path>
+         </Node>
+         <Node>
+          <Name>AtomicValue&lt; ObjectArrayInternal&lt; NumericalType &gt; * &gt;</Name>
+          <Path>class_atomic_value.html</Path>
+         </Node>
+         <Node>
+          <Name>AtomicValue&lt; ObjectArrayInternal&lt; ObjectType &gt; * &gt;</Name>
+          <Path>class_atomic_value.html</Path>
+         </Node>
+         <Node>
+          <Name>AtomicValue&lt; ObjectArrayInternal&lt; ObjectType, SmartPointer &gt; * &gt;</Name>
+          <Path>class_atomic_value.html</Path>
+         </Node>
+         <Node>
+          <Name>AtomicValue&lt; ObjectArrayInternal&lt; OutputSampleType &gt; * &gt;</Name>
+          <Path>class_atomic_value.html</Path>
+         </Node>
+         <Node>
+          <Name>AtomicValue&lt; ObjectArrayInternal&lt; Receiver *, SmartPointer &gt; * &gt;</Name>
+          <Path>class_atomic_value.html</Path>
+         </Node>
+         <Node>
+          <Name>AtomicValue&lt; ObjectArrayInternal&lt; RowType &gt; * &gt;</Name>
+          <Path>class_atomic_value.html</Path>
+         </Node>
+         <Node>
+          <Name>AtomicValue&lt; ObjectArrayInternal&lt; SampleType &gt; * &gt;</Name>
+          <Path>class_atomic_value.html</Path>
+         </Node>
+         <Node>
+          <Name>AtomicValue&lt; ObjectArrayInternal&lt; ShapeType::SampleDataType &gt; * &gt;</Name>
+          <Path>class_atomic_value.html</Path>
+         </Node>
+         <Node>
+          <Name>AtomicValue&lt; ObjectArrayInternal&lt; Text &gt; * &gt;</Name>
+          <Path>class_atomic_value.html</Path>
+         </Node>
+         <Node>
+          <Name>AtomicValue&lt; ObjectArrayInternal&lt; WeakChannelType, SmartPointer &gt; * &gt;</Name>
+          <Path>class_atomic_value.html</Path>
+         </Node>
+         <Node>
+          <Name>AtomicValue&lt; ObjectArrayInternal&lt; WeakPointer *, SmartPointer &gt; * &gt;</Name>
+          <Path>class_atomic_value.html</Path>
+         </Node>
+         <Node>
+          <Name>AtomicValue&lt; ProcessInfoInternal * &gt;</Name>
+          <Path>class_atomic_value.html</Path>
+         </Node>
+         <Node>
+          <Name>AtomicValue&lt; ReceiverInternalType * &gt;</Name>
+          <Path>class_atomic_value.html</Path>
+         </Node>
+         <Node>
+          <Name>AtomicValue&lt; RNGInternal * &gt;</Name>
+          <Path>class_atomic_value.html</Path>
+         </Node>
+         <Node>
+          <Name>AtomicValue&lt; SenderInternalType * &gt;</Name>
+          <Path>class_atomic_value.html</Path>
+         </Node>
+         <Node>
+          <Name>AtomicValue&lt; SignalInternal&lt; SampleType &gt; * &gt;</Name>
+          <Path>class_atomic_value.html</Path>
+         </Node>
+         <Node>
+          <Name>AtomicValue&lt; SimpleLinkedListInternal&lt; ValueType &gt; * &gt;</Name>
+          <Path>class_atomic_value.html</Path>
+         </Node>
+         <Node>
+          <Name>AtomicValue&lt; SimpleQueueInternal&lt; ValueType &gt; * &gt;</Name>
+          <Path>class_atomic_value.html</Path>
+         </Node>
+         <Node>
+          <Name>AtomicValue&lt; SimpleStackInternal&lt; ValueType &gt; * &gt;</Name>
+          <Path>class_atomic_value.html</Path>
+         </Node>
+         <Node>
+          <Name>AtomicValue&lt; TaskBufferInternal&lt; SampleType &gt; * &gt;</Name>
+          <Path>class_atomic_value.html</Path>
+         </Node>
+         <Node>
+          <Name>AtomicValue&lt; TaskMessageInternal * &gt;</Name>
+          <Path>class_atomic_value.html</Path>
+         </Node>
+         <Node>
+          <Name>AtomicValue&lt; TextFileInternal * &gt;</Name>
+          <Path>class_atomic_value.html</Path>
+         </Node>
+         <Node>
+          <Name>AtomicValue&lt; VariableInternal&lt; Type &amp; &gt; * &gt;</Name>
+          <Path>class_atomic_value.html</Path>
+         </Node>
+         <Node>
+          <Name>AtomicValue&lt; VariableInternalBase&lt; Type &gt; * &gt;</Name>
+          <Path>class_atomic_value.html</Path>
+         </Node>
+         <Node>
+          <Name>AtomicValue&lt; WeakPointer * &gt;</Name>
+          <Path>class_atomic_value.html</Path>
+         </Node>
+         <Node>
+          <Name>AtomicValue&lt; ZipInternal * &gt;</Name>
+          <Path>class_atomic_value.html</Path>
+         </Node>
+         <Node>
+          <Name>AtomicVariableUnit&lt; SampleType &gt;</Name>
+          <Path>class_atomic_variable_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>AudioFile</Name>
+          <Path>class_audio_file.html</Path>
+         </Node>
+         <Node>
+          <Name>AudioFileReader</Name>
+          <Path>class_audio_file_reader.html</Path>
+         </Node>
+         <Node>
+          <Name>AudioFileWriter&lt; SampleType &gt;</Name>
+          <Path>class_audio_file_writer.html</Path>
+         </Node>
+         <Node>
+          <Name>AudioHostBase&lt; SampleType &gt;</Name>
+          <Path>class_audio_host_base.html</Path>
+          <Subnodes>
+           <Node>
+            <Name>PLONK_NAMESPACE::IOSAudioHostBase&lt; SampleType &gt;</Name>
+            <Path>class_p_l_o_n_k___n_a_m_e_s_p_a_c_e_1_1_i_o_s_audio_host_base.html</Path>
+           </Node>
+          </Subnodes>
+         </Node>
+         <Node>
+          <Name>AudioHostBase&lt; float &gt;</Name>
+          <Path>class_audio_host_base.html</Path>
+          <Subnodes>
+           <Node>
+            <Name>PLONK_NAMESPACE::IOSAudioHostBase&lt; float &gt;</Name>
+            <Path>class_p_l_o_n_k___n_a_m_e_s_p_a_c_e_1_1_i_o_s_audio_host_base.html</Path>
+           </Node>
+          </Subnodes>
+         </Node>
+         <Node>
+          <Name>Base64</Name>
+          <Path>class_base64.html</Path>
+         </Node>
+         <Node>
+          <Name>BinaryFile</Name>
+          <Path>class_binary_file.html</Path>
+         </Node>
+         <Node>
+          <Name>Bits</Name>
+          <Path>class_bits.html</Path>
+         </Node>
+         <Node>
+          <Name>BlockSize</Name>
+          <Path>class_block_size.html</Path>
+         </Node>
+         <Node>
+          <Name>BlockUnit&lt; SampleType &gt;</Name>
+          <Path>class_block_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>BPFUnit&lt; SampleType, InterpTypeCode &gt;</Name>
+          <Path>class_b_p_f_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>BRFUnit&lt; SampleType, InterpTypeCode &gt;</Name>
+          <Path>class_b_r_f_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>BusBuffer&lt; SampleType &gt;</Name>
+          <Path>class_bus_buffer.html</Path>
+         </Node>
+         <Node>
+          <Name>BusReadUnit&lt; SampleType &gt;</Name>
+          <Path>class_bus_read_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>BusWriteUnit&lt; SampleType &gt;</Name>
+          <Path>class_bus_write_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>ChannelBase&lt; SampleType &gt;</Name>
+          <Path>class_channel_base.html</Path>
+         </Node>
+         <Node>
+          <Name>ChannelData&lt; OwnerType &gt;</Name>
+          <Path>struct_channel_data.html</Path>
+         </Node>
+         <Node>
+          <Name>ChannelData&lt; ChannelMixerChannelInternal&lt; SampleType &gt; &gt;</Name>
+          <Path>struct_channel_data.html</Path>
+         </Node>
+         <Node>
+          <Name>ChannelData&lt; EnvelopeChannelInternal&lt; SampleType &gt; &gt;</Name>
+          <Path>struct_channel_data.html</Path>
+         </Node>
+         <Node>
+          <Name>ChannelData&lt; FilePlayChannelInternal&lt; SampleType &gt; &gt;</Name>
+          <Path>struct_channel_data.html</Path>
+         </Node>
+         <Node>
+          <Name>ChannelData&lt; ImpulseChannelInternal&lt; SampleType &gt; &gt;</Name>
+          <Path>struct_channel_data.html</Path>
+         </Node>
+         <Node>
+          <Name>ChannelData&lt; InputTaskChannelInternal&lt; SampleType, InterpTypeCode &gt; &gt;</Name>
+          <Path>struct_channel_data.html</Path>
+         </Node>
+         <Node>
+          <Name>ChannelData&lt; LookupChannelInternal&lt; SampleType &gt; &gt;</Name>
+          <Path>struct_channel_data.html</Path>
+         </Node>
+         <Node>
+          <Name>ChannelData&lt; OverlapMakeChannelInternal&lt; SampleType &gt; &gt;</Name>
+          <Path>struct_channel_data.html</Path>
+         </Node>
+         <Node>
+          <Name>ChannelData&lt; PatchChannelInternal&lt; SampleType &gt; &gt;</Name>
+          <Path>struct_channel_data.html</Path>
+         </Node>
+         <Node>
+          <Name>ChannelData&lt; QueueChannelInternal&lt; SampleType &gt; &gt;</Name>
+          <Path>struct_channel_data.html</Path>
+         </Node>
+         <Node>
+          <Name>ChannelData&lt; QueueMixerChannelInternal&lt; SampleType &gt; &gt;</Name>
+          <Path>struct_channel_data.html</Path>
+         </Node>
+         <Node>
+          <Name>ChannelData&lt; SawChannelInternal&lt; SampleType &gt; &gt;</Name>
+          <Path>struct_channel_data.html</Path>
+         </Node>
+         <Node>
+          <Name>ChannelData&lt; SchmidtChannelInternal&lt; SampleType &gt; &gt;</Name>
+          <Path>struct_channel_data.html</Path>
+         </Node>
+         <Node>
+          <Name>ChannelData&lt; SignalPlayChannelInternal&lt; SampleType &gt; &gt;</Name>
+          <Path>struct_channel_data.html</Path>
+         </Node>
+         <Node>
+          <Name>ChannelData&lt; SignalReadChannelInternal&lt; SampleType &gt; &gt;</Name>
+          <Path>struct_channel_data.html</Path>
+         </Node>
+         <Node>
+          <Name>ChannelData&lt; TableChannelInternal&lt; SampleType &gt; &gt;</Name>
+          <Path>struct_channel_data.html</Path>
+         </Node>
+         <Node>
+          <Name>ChannelData&lt; TriggerChannelInternal&lt; SampleType &gt; &gt;</Name>
+          <Path>struct_channel_data.html</Path>
+         </Node>
+         <Node>
+          <Name>ChannelData&lt; UnitMixerChannelInternal&lt; SampleType &gt; &gt;</Name>
+          <Path>struct_channel_data.html</Path>
+         </Node>
+         <Node>
+          <Name>ChannelData&lt; WhiteNoiseChannelInternal&lt; SampleType &gt; &gt;</Name>
+          <Path>struct_channel_data.html</Path>
+         </Node>
+         <Node>
+          <Name>ChannelInternalCore</Name>
+          <Path>class_channel_internal_core.html</Path>
+          <Subnodes>
+           <Node>
+            <Name>ChannelInternalBase&lt; SampleType &gt;</Name>
+            <Path>class_channel_internal_base.html</Path>
+            <Subnodes>
+             <Node>
+              <Name>ChannelInternal&lt; SampleType, DataType &gt;</Name>
+              <Path>class_channel_internal.html</Path>
+              <Subnodes>
+               <Node>
+                <Name>ProxyOwnerChannelInternal&lt; SampleType, DataType &gt;</Name>
+                <Path>class_proxy_owner_channel_internal.html</Path>
+               </Node>
+              </Subnodes>
+             </Node>
+             <Node>
+              <Name>ChannelInternal&lt; SampleType, ChannelData&lt; ChannelMixerChannelInternal&lt; SampleType &gt; &gt; &gt;</Name>
+              <Path>class_channel_internal.html</Path>
+              <Subnodes>
+               <Node>
+                <Name>ChannelMixerChannelInternal&lt; SampleType &gt;</Name>
+                <Path>class_channel_mixer_channel_internal.html</Path>
+               </Node>
+              </Subnodes>
+             </Node>
+             <Node>
+              <Name>ChannelInternal&lt; SampleType, ChannelData&lt; EnvelopeChannelInternal&lt; SampleType &gt; &gt; &gt;</Name>
+              <Path>class_channel_internal.html</Path>
+              <Subnodes>
+               <Node>
+                <Name>EnvelopeChannelInternal&lt; SampleType &gt;</Name>
+                <Path>class_envelope_channel_internal.html</Path>
+               </Node>
+              </Subnodes>
+             </Node>
+             <Node>
+              <Name>ChannelInternal&lt; SampleType, ChannelData&lt; FilePlayChannelInternal&lt; SampleType &gt; &gt; &gt;</Name>
+              <Path>class_channel_internal.html</Path>
+              <Subnodes>
+               <Node>
+                <Name>ProxyOwnerChannelInternal&lt; SampleType, ChannelData&lt; FilePlayChannelInternal&lt; SampleType &gt; &gt; &gt;</Name>
+                <Path>class_proxy_owner_channel_internal.html</Path>
+                <Subnodes>
+                 <Node>
+                  <Name>FilePlayChannelInternal&lt; SampleType &gt;</Name>
+                  <Path>class_file_play_channel_internal.html</Path>
+                 </Node>
+                </Subnodes>
+               </Node>
+              </Subnodes>
+             </Node>
+             <Node>
+              <Name>ChannelInternal&lt; SampleType, ChannelData&lt; ImpulseChannelInternal&lt; SampleType &gt; &gt; &gt;</Name>
+              <Path>class_channel_internal.html</Path>
+              <Subnodes>
+               <Node>
+                <Name>ImpulseChannelInternal&lt; SampleType &gt;</Name>
+                <Path>class_impulse_channel_internal.html</Path>
+               </Node>
+              </Subnodes>
+             </Node>
+             <Node>
+              <Name>ChannelInternal&lt; SampleType, ChannelData&lt; InputTaskChannelInternal&lt; SampleType, InterpTypeCode &gt; &gt; &gt;</Name>
+              <Path>class_channel_internal.html</Path>
+              <Subnodes>
+               <Node>
+                <Name>ProxyOwnerChannelInternal&lt; SampleType, ChannelData&lt; InputTaskChannelInternal&lt; SampleType, InterpTypeCode &gt; &gt; &gt;</Name>
+                <Path>class_proxy_owner_channel_internal.html</Path>
+                <Subnodes>
+                 <Node>
+                  <Name>InputTaskChannelInternal&lt; SampleType, InterpTypeCode &gt;</Name>
+                  <Path>class_input_task_channel_internal.html</Path>
+                 </Node>
+                </Subnodes>
+               </Node>
+              </Subnodes>
+             </Node>
+             <Node>
+              <Name>ChannelInternal&lt; SampleType, ChannelData&lt; LookupChannelInternal&lt; SampleType &gt; &gt; &gt;</Name>
+              <Path>class_channel_internal.html</Path>
+              <Subnodes>
+               <Node>
+                <Name>LookupChannelInternal&lt; SampleType &gt;</Name>
+                <Path>class_lookup_channel_internal.html</Path>
+               </Node>
+              </Subnodes>
+             </Node>
+             <Node>
+              <Name>ChannelInternal&lt; SampleType, ChannelData&lt; OverlapMakeChannelInternal&lt; SampleType &gt; &gt; &gt;</Name>
+              <Path>class_channel_internal.html</Path>
+              <Subnodes>
+               <Node>
+                <Name>ProxyOwnerChannelInternal&lt; SampleType, ChannelData&lt; OverlapMakeChannelInternal&lt; SampleType &gt; &gt; &gt;</Name>
+                <Path>class_proxy_owner_channel_internal.html</Path>
+                <Subnodes>
+                 <Node>
+                  <Name>OverlapMakeChannelInternal&lt; SampleType &gt;</Name>
+                  <Path>class_overlap_make_channel_internal.html</Path>
+                 </Node>
+                </Subnodes>
+               </Node>
+              </Subnodes>
+             </Node>
+             <Node>
+              <Name>ChannelInternal&lt; SampleType, ChannelData&lt; PatchChannelInternal&lt; SampleType &gt; &gt; &gt;</Name>
+              <Path>class_channel_internal.html</Path>
+              <Subnodes>
+               <Node>
+                <Name>ProxyOwnerChannelInternal&lt; SampleType, ChannelData&lt; PatchChannelInternal&lt; SampleType &gt; &gt; &gt;</Name>
+                <Path>class_proxy_owner_channel_internal.html</Path>
+                <Subnodes>
+                 <Node>
+                  <Name>PatchChannelInternal&lt; SampleType &gt;</Name>
+                  <Path>class_patch_channel_internal.html</Path>
+                 </Node>
+                </Subnodes>
+               </Node>
+              </Subnodes>
+             </Node>
+             <Node>
+              <Name>ChannelInternal&lt; SampleType, ChannelData&lt; QueueChannelInternal&lt; SampleType &gt; &gt; &gt;</Name>
+              <Path>class_channel_internal.html</Path>
+              <Subnodes>
+               <Node>
+                <Name>ProxyOwnerChannelInternal&lt; SampleType, ChannelData&lt; QueueChannelInternal&lt; SampleType &gt; &gt; &gt;</Name>
+                <Path>class_proxy_owner_channel_internal.html</Path>
+                <Subnodes>
+                 <Node>
+                  <Name>QueueChannelInternal&lt; SampleType &gt;</Name>
+                  <Path>class_queue_channel_internal.html</Path>
+                 </Node>
+                </Subnodes>
+               </Node>
+              </Subnodes>
+             </Node>
+             <Node>
+              <Name>ChannelInternal&lt; SampleType, ChannelData&lt; QueueMixerChannelInternal&lt; SampleType &gt; &gt; &gt;</Name>
+              <Path>class_channel_internal.html</Path>
+              <Subnodes>
+               <Node>
+                <Name>ProxyOwnerChannelInternal&lt; SampleType, ChannelData&lt; QueueMixerChannelInternal&lt; SampleType &gt; &gt; &gt;</Name>
+                <Path>class_proxy_owner_channel_internal.html</Path>
+                <Subnodes>
+                 <Node>
+                  <Name>QueueMixerChannelInternal&lt; SampleType &gt;</Name>
+                  <Path>class_queue_mixer_channel_internal.html</Path>
+                 </Node>
+                </Subnodes>
+               </Node>
+              </Subnodes>
+             </Node>
+             <Node>
+              <Name>ChannelInternal&lt; SampleType, ChannelData&lt; SawChannelInternal&lt; SampleType &gt; &gt; &gt;</Name>
+              <Path>class_channel_internal.html</Path>
+              <Subnodes>
+               <Node>
+                <Name>SawChannelInternal&lt; SampleType &gt;</Name>
+                <Path>class_saw_channel_internal.html</Path>
+               </Node>
+              </Subnodes>
+             </Node>
+             <Node>
+              <Name>ChannelInternal&lt; SampleType, ChannelData&lt; SchmidtChannelInternal&lt; SampleType &gt; &gt; &gt;</Name>
+              <Path>class_channel_internal.html</Path>
+              <Subnodes>
+               <Node>
+                <Name>SchmidtChannelInternal&lt; SampleType &gt;</Name>
+                <Path>class_schmidt_channel_internal.html</Path>
+               </Node>
+              </Subnodes>
+             </Node>
+             <Node>
+              <Name>ChannelInternal&lt; SampleType, ChannelData&lt; SignalPlayChannelInternal&lt; SampleType &gt; &gt; &gt;</Name>
+              <Path>class_channel_internal.html</Path>
+              <Subnodes>
+               <Node>
+                <Name>SignalPlayChannelInternal&lt; SampleType &gt;</Name>
+                <Path>class_signal_play_channel_internal.html</Path>
+               </Node>
+              </Subnodes>
+             </Node>
+             <Node>
+              <Name>ChannelInternal&lt; SampleType, ChannelData&lt; SignalReadChannelInternal&lt; SampleType &gt; &gt; &gt;</Name>
+              <Path>class_channel_internal.html</Path>
+              <Subnodes>
+               <Node>
+                <Name>SignalReadChannelInternal&lt; SampleType &gt;</Name>
+                <Path>class_signal_read_channel_internal.html</Path>
+               </Node>
+              </Subnodes>
+             </Node>
+             <Node>
+              <Name>ChannelInternal&lt; SampleType, ChannelData&lt; TableChannelInternal&lt; SampleType &gt; &gt; &gt;</Name>
+              <Path>class_channel_internal.html</Path>
+              <Subnodes>
+               <Node>
+                <Name>TableChannelInternal&lt; SampleType &gt;</Name>
+                <Path>class_table_channel_internal.html</Path>
+               </Node>
+              </Subnodes>
+             </Node>
+             <Node>
+              <Name>ChannelInternal&lt; SampleType, ChannelData&lt; TriggerChannelInternal&lt; SampleType &gt; &gt; &gt;</Name>
+              <Path>class_channel_internal.html</Path>
+              <Subnodes>
+               <Node>
+                <Name>TriggerChannelInternal&lt; SampleType &gt;</Name>
+                <Path>class_trigger_channel_internal.html</Path>
+               </Node>
+              </Subnodes>
+             </Node>
+             <Node>
+              <Name>ChannelInternal&lt; SampleType, ChannelData&lt; UnitMixerChannelInternal&lt; SampleType &gt; &gt; &gt;</Name>
+              <Path>class_channel_internal.html</Path>
+              <Subnodes>
+               <Node>
+                <Name>ProxyOwnerChannelInternal&lt; SampleType, ChannelData&lt; UnitMixerChannelInternal&lt; SampleType &gt; &gt; &gt;</Name>
+                <Path>class_proxy_owner_channel_internal.html</Path>
+                <Subnodes>
+                 <Node>
+                  <Name>UnitMixerChannelInternal&lt; SampleType &gt;</Name>
+                  <Path>class_unit_mixer_channel_internal.html</Path>
+                 </Node>
+                </Subnodes>
+               </Node>
+              </Subnodes>
+             </Node>
+             <Node>
+              <Name>ChannelInternal&lt; SampleType, ChannelData&lt; WhiteNoiseChannelInternal&lt; SampleType &gt; &gt; &gt;</Name>
+              <Path>class_channel_internal.html</Path>
+              <Subnodes>
+               <Node>
+                <Name>WhiteNoiseChannelInternal&lt; SampleType &gt;</Name>
+                <Path>class_white_noise_channel_internal.html</Path>
+               </Node>
+              </Subnodes>
+             </Node>
+             <Node>
+              <Name>ChannelInternal&lt; SampleType, ChannelInternalCore::Data &gt;</Name>
+              <Path>class_channel_internal.html</Path>
+              <Subnodes>
+               <Node>
+                <Name>AtomicVariableChannelInternal&lt; SampleType &gt;</Name>
+                <Path>class_atomic_variable_channel_internal.html</Path>
+               </Node>
+               <Node>
+                <Name>BinaryOpChannelInternal&lt; SampleType, op &gt;</Name>
+                <Path>class_binary_op_channel_internal.html</Path>
+               </Node>
+               <Node>
+                <Name>BlockChannelInternal&lt; SampleType &gt;</Name>
+                <Path>class_block_channel_internal.html</Path>
+               </Node>
+               <Node>
+                <Name>BusReadChannelInternal&lt; SampleType &gt;</Name>
+                <Path>class_bus_read_channel_internal.html</Path>
+               </Node>
+               <Node>
+                <Name>BusWriteChannelInternal&lt; SampleType &gt;</Name>
+                <Path>class_bus_write_channel_internal.html</Path>
+               </Node>
+               <Node>
+                <Name>ConstantChannelInternal&lt; SampleType &gt;</Name>
+                <Path>class_constant_channel_internal.html</Path>
+                <Subnodes>
+                 <Node>
+                  <Name>NullChannelInternal&lt; SampleType &gt;</Name>
+                  <Path>class_null_channel_internal.html</Path>
+                 </Node>
+                </Subnodes>
+               </Node>
+               <Node>
+                <Name>FFTChannelInternal&lt; SampleType &gt;</Name>
+                <Path>class_f_f_t_channel_internal.html</Path>
+               </Node>
+               <Node>
+                <Name>IFFTChannelInternal&lt; SampleType &gt;</Name>
+                <Path>class_i_f_f_t_channel_internal.html</Path>
+               </Node>
+               <Node>
+                <Name>MulAddChannelInternal&lt; SampleType &gt;</Name>
+                <Path>class_mul_add_channel_internal.html</Path>
+               </Node>
+               <Node>
+                <Name>ParamChannelInternal&lt; SampleType &gt;</Name>
+                <Path>class_param_channel_internal.html</Path>
+               </Node>
+               <Node>
+                <Name>ProxyOwnerChannelInternal&lt; SampleType, ChannelInternalCore::Data &gt;</Name>
+                <Path>class_proxy_owner_channel_internal.html</Path>
+                <Subnodes>
+                 <Node>
+                  <Name>LinearPanChannelInternal&lt; SampleType &gt;</Name>
+                  <Path>class_linear_pan_channel_internal.html</Path>
+                 </Node>
+                 <Node>
+                  <Name>OverlapMixChannelInternal&lt; SampleType &gt;</Name>
+                  <Path>class_overlap_mix_channel_internal.html</Path>
+                 </Node>
+                 <Node>
+                  <Name>ResampleChannelInternal&lt; SampleType, InterpTypeCode &gt;</Name>
+                  <Path>class_resample_channel_internal.html</Path>
+                 </Node>
+                </Subnodes>
+               </Node>
+               <Node>
+                <Name>ReblockChannelInternal&lt; SampleType &gt;</Name>
+                <Path>class_reblock_channel_internal.html</Path>
+               </Node>
+               <Node>
+                <Name>UnaryOpChannelInternal&lt; SampleType, op &gt;</Name>
+                <Path>class_unary_op_channel_internal.html</Path>
+               </Node>
+               <Node>
+                <Name>ZMulChannelInternal&lt; SampleType &gt;</Name>
+                <Path>class_z_mul_channel_internal.html</Path>
+               </Node>
+              </Subnodes>
+             </Node>
+            </Subnodes>
+           </Node>
+           <Node>
+            <Name>ChannelInternalBase&lt; FormType::SampleDataType &gt;</Name>
+            <Path>class_channel_internal_base.html</Path>
+            <Subnodes>
+             <Node>
+              <Name>ChannelInternal&lt; FormType::SampleDataType, FormType::Data &gt;</Name>
+              <Path>class_channel_internal.html</Path>
+              <Subnodes>
+               <Node>
+                <Name>FilterChannelInternal&lt; FormType &gt;</Name>
+                <Path>class_filter_channel_internal.html</Path>
+               </Node>
+               <Node>
+                <Name>ProxyOwnerChannelInternal&lt; FormType::SampleDataType, FormType::Data &gt;</Name>
+                <Path>class_proxy_owner_channel_internal.html</Path>
+               </Node>
+              </Subnodes>
+             </Node>
+            </Subnodes>
+           </Node>
+           <Node>
+            <Name>ChannelInternalBase&lt; OutputSampleType &gt;</Name>
+            <Path>class_channel_internal_base.html</Path>
+            <Subnodes>
+             <Node>
+              <Name>ChannelInternal&lt; OutputSampleType, ChannelInternalCore::Data &gt;</Name>
+              <Path>class_channel_internal.html</Path>
+              <Subnodes>
+               <Node>
+                <Name>TypeChannelInternal&lt; OutputSampleType, InputSampleType &gt;</Name>
+                <Path>class_type_channel_internal.html</Path>
+               </Node>
+              </Subnodes>
+             </Node>
+            </Subnodes>
+           </Node>
+           <Node>
+            <Name>ChannelInternalBase&lt; ShapeType::SampleDataType &gt;</Name>
+            <Path>class_channel_internal_base.html</Path>
+            <Subnodes>
+             <Node>
+              <Name>ChannelInternal&lt; ShapeType::SampleDataType, ShapeType::Data &gt;</Name>
+              <Path>class_channel_internal.html</Path>
+              <Subnodes>
+               <Node>
+                <Name>ProxyOwnerChannelInternal&lt; ShapeType::SampleDataType, ShapeType::Data &gt;</Name>
+                <Path>class_proxy_owner_channel_internal.html</Path>
+                <Subnodes>
+                 <Node>
+                  <Name>FilterCoeffs1ParamChannelInternal&lt; ShapeType &gt;</Name>
+                  <Path>class_filter_coeffs1_param_channel_internal.html</Path>
+                 </Node>
+                 <Node>
+                  <Name>FilterCoeffs2ParamChannelInternal&lt; ShapeType &gt;</Name>
+                  <Path>class_filter_coeffs2_param_channel_internal.html</Path>
+                 </Node>
+                 <Node>
+                  <Name>FilterCoeffs3ParamChannelInternal&lt; ShapeType &gt;</Name>
+                  <Path>class_filter_coeffs3_param_channel_internal.html</Path>
+                 </Node>
+                </Subnodes>
+               </Node>
+              </Subnodes>
+             </Node>
+            </Subnodes>
+           </Node>
+          </Subnodes>
+         </Node>
+         <Node>
+          <Name>CombDecayUnit&lt; SampleType, InterpTypeCode &gt;</Name>
+          <Path>class_comb_decay_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>CombFBUnit&lt; SampleType, InterpTypeCode &gt;</Name>
+          <Path>class_comb_f_b_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>CombFilter1ParamUnit&lt; FilterShape, InterpTypeCode &gt;</Name>
+          <Path>class_comb_filter1_param_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>DCUnit&lt; SampleType, InterpTypeCode &gt;</Name>
+          <Path>class_d_c_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>DecayUnit&lt; SampleType, InterpTypeCode &gt;</Name>
+          <Path>class_decay_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>Delay1ParamChannelInternal&lt; FormType &gt;</Name>
+          <Path>class_delay1_param_channel_internal.html</Path>
+         </Node>
+         <Node>
+          <Name>Delay2ParamChannelInternal&lt; FormType &gt;</Name>
+          <Path>class_delay2_param_channel_internal.html</Path>
+         </Node>
+         <Node>
+          <Name>Delay3ParamChannelInternal&lt; FormType &gt;</Name>
+          <Path>class_delay3_param_channel_internal.html</Path>
+         </Node>
+         <Node>
+          <Name>Delay4ParamChannelInternal&lt; FormType &gt;</Name>
+          <Path>class_delay4_param_channel_internal.html</Path>
+         </Node>
+         <Node>
+          <Name>DelayUnit&lt; SampleType, InterpTypeCode &gt;</Name>
+          <Path>class_delay_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>Dictionary&lt; ValueType, KeyType &gt;</Name>
+          <Path>class_dictionary.html</Path>
+         </Node>
+         <Node>
+          <Name>Dictionary&lt; Dynamic &gt;</Name>
+          <Path>class_dictionary.html</Path>
+         </Node>
+         <Node>
+          <Name>Dictionary&lt; Dynamic, int &gt;</Name>
+          <Path>class_dictionary.html</Path>
+          <Subnodes>
+           <Node>
+            <Name>InputDictionary</Name>
+            <Path>class_input_dictionary.html</Path>
+           </Node>
+          </Subnodes>
+         </Node>
+         <Node>
+          <Name>Endian</Name>
+          <Path>class_endian.html</Path>
+          <Subnodes>
+           <Node>
+            <Name>EndianIfBig</Name>
+            <Path>class_endian_if_big.html</Path>
+           </Node>
+           <Node>
+            <Name>EndianIfLittle</Name>
+            <Path>class_endian_if_little.html</Path>
+           </Node>
+          </Subnodes>
+         </Node>
+         <Node>
+          <Name>EnvelopeUnit&lt; SampleType &gt;</Name>
+          <Path>class_envelope_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>FFTEngineBase&lt; float &gt;</Name>
+          <Path>class_f_f_t_engine_base_3_01float_01_4.html</Path>
+         </Node>
+         <Node>
+          <Name>FFTUnit&lt; SampleType &gt;</Name>
+          <Path>class_f_f_t_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>FilePath</Name>
+          <Path>class_file_path.html</Path>
+         </Node>
+         <Node>
+          <Name>FilePlayUnit&lt; SampleType &gt;</Name>
+          <Path>class_file_play_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>FilterCoeffs1ParamUnit&lt; ShapeType &gt;</Name>
+          <Path>class_filter_coeffs1_param_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>FilterCoeffs2ParamUnit&lt; ShapeType &gt;</Name>
+          <Path>class_filter_coeffs2_param_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>FilterCoeffs3ParamUnit&lt; ShapeType &gt;</Name>
+          <Path>class_filter_coeffs3_param_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>FilterForm&lt; SampleType, FilterFormType::B2 &gt;</Name>
+          <Path>class_filter_form_3_01_sample_type_00_01_filter_form_type_1_1_b2_01_4.html</Path>
+         </Node>
+         <Node>
+          <Name>FilterForm&lt; SampleType, FilterFormType::P1 &gt;</Name>
+          <Path>class_filter_form_3_01_sample_type_00_01_filter_form_type_1_1_p1_01_4.html</Path>
+         </Node>
+         <Node>
+          <Name>FilterForm&lt; SampleType, FilterFormType::P1a &gt;</Name>
+          <Path>class_filter_form_3_01_sample_type_00_01_filter_form_type_1_1_p1a_01_4.html</Path>
+         </Node>
+         <Node>
+          <Name>FilterForm&lt; SampleType, FilterFormType::P1b &gt;</Name>
+          <Path>class_filter_form_3_01_sample_type_00_01_filter_form_type_1_1_p1b_01_4.html</Path>
+         </Node>
+         <Node>
+          <Name>FilterForm&lt; SampleType, FilterFormType::P2Z2 &gt;</Name>
+          <Path>class_filter_form_3_01_sample_type_00_01_filter_form_type_1_1_p2_z2_01_4.html</Path>
+         </Node>
+         <Node>
+          <Name>FilterShapeBPFBase&lt; SampleType &gt;</Name>
+          <Path>class_filter_shape_b_p_f_base.html</Path>
+         </Node>
+         <Node>
+          <Name>FilterShapeBRFBase&lt; SampleType &gt;</Name>
+          <Path>class_filter_shape_b_r_f_base.html</Path>
+         </Node>
+         <Node>
+          <Name>FilterShapeDecayBase&lt; SampleType &gt;</Name>
+          <Path>class_filter_shape_decay_base.html</Path>
+         </Node>
+         <Node>
+          <Name>FilterShapeHighShelfBase&lt; SampleType &gt;</Name>
+          <Path>class_filter_shape_high_shelf_base.html</Path>
+         </Node>
+         <Node>
+          <Name>FilterShapeHPFBase&lt; SampleType &gt;</Name>
+          <Path>class_filter_shape_h_p_f_base.html</Path>
+         </Node>
+         <Node>
+          <Name>FilterShapeHPFP1Base&lt; SampleType &gt;</Name>
+          <Path>class_filter_shape_h_p_f_p1_base.html</Path>
+         </Node>
+         <Node>
+          <Name>FilterShapeLagBase&lt; SampleType &gt;</Name>
+          <Path>class_filter_shape_lag_base.html</Path>
+         </Node>
+         <Node>
+          <Name>FilterShapeLowShelfBase&lt; SampleType &gt;</Name>
+          <Path>class_filter_shape_low_shelf_base.html</Path>
+         </Node>
+         <Node>
+          <Name>FilterShapeLPFBase&lt; SampleType &gt;</Name>
+          <Path>class_filter_shape_l_p_f_base.html</Path>
+         </Node>
+         <Node>
+          <Name>FilterShapeLPFP1Base&lt; SampleType &gt;</Name>
+          <Path>class_filter_shape_l_p_f_p1_base.html</Path>
+         </Node>
+         <Node>
+          <Name>FilterShapeNotchBase&lt; SampleType &gt;</Name>
+          <Path>class_filter_shape_notch_base.html</Path>
+         </Node>
+         <Node>
+          <Name>FilterShapeRHPFBase&lt; SampleType &gt;</Name>
+          <Path>class_filter_shape_r_h_p_f_base.html</Path>
+         </Node>
+         <Node>
+          <Name>FilterShapeRLPFBase&lt; SampleType &gt;</Name>
+          <Path>class_filter_shape_r_l_p_f_base.html</Path>
+         </Node>
+         <Node>
+          <Name>FilterUnit&lt; FormType &gt;</Name>
+          <Path>class_filter_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>Fix&lt; Base, IBits, FBits &gt;</Name>
+          <Path>class_fix.html</Path>
+         </Node>
+         <Node>
+          <Name>PLONK_NAMESPACE::ForceErrorStruct</Name>
+          <Path>struct_p_l_o_n_k___n_a_m_e_s_p_a_c_e_1_1_force_error_struct.html</Path>
+         </Node>
+         <Node>
+          <Name>HarmonicSawUnit&lt; SampleType &gt;</Name>
+          <Path>class_harmonic_saw_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>HarmonicSquareUnit&lt; SampleType &gt;</Name>
+          <Path>class_harmonic_square_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>HarmonicTriUnit&lt; SampleType &gt;</Name>
+          <Path>class_harmonic_tri_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>HighShelfUnit&lt; SampleType, InterpTypeCode &gt;</Name>
+          <Path>class_high_shelf_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>HPFP1Unit&lt; SampleType, InterpTypeCode &gt;</Name>
+          <Path>class_h_p_f_p1_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>HPFUnit&lt; SampleType, InterpTypeCode &gt;</Name>
+          <Path>class_h_p_f_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>IFFTUnit&lt; SampleType &gt;</Name>
+          <Path>class_i_f_f_t_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>ImpulseUnit&lt; SampleType &gt;</Name>
+          <Path>class_impulse_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>InputTaskUnit&lt; SampleType, InterpTypeCode &gt;</Name>
+          <Path>class_input_task_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>Int24</Name>
+          <Path>class_int24.html</Path>
+         </Node>
+         <Node>
+          <Name>PLONK_NAMESPACE::IOSUtilities</Name>
+          <Path>class_p_l_o_n_k___n_a_m_e_s_p_a_c_e_1_1_i_o_s_utilities.html</Path>
+         </Node>
+         <Node>
+          <Name>LagUnit&lt; SampleType, InterpTypeCode &gt;</Name>
+          <Path>class_lag_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>LinearPanUnit&lt; SampleType &gt;</Name>
+          <Path>class_linear_pan_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>LockedValue&lt; Type &gt;</Name>
+          <Path>class_locked_value.html</Path>
+         </Node>
+         <Node>
+          <Name>LookupUnit&lt; SampleType &gt;</Name>
+          <Path>class_lookup_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>LowShelfUnit&lt; SampleType, InterpTypeCode &gt;</Name>
+          <Path>class_low_shelf_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>LPFP1Unit&lt; SampleType, InterpTypeCode &gt;</Name>
+          <Path>class_l_p_f_p1_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>LPFUnit&lt; SampleType, InterpTypeCode &gt;</Name>
+          <Path>class_l_p_f_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>Math&lt; Type &gt;</Name>
+          <Path>class_math.html</Path>
+         </Node>
+         <Node>
+          <Name>MixerUnit&lt; SampleType &gt;</Name>
+          <Path>class_mixer_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>NotchUnit&lt; SampleType, InterpTypeCode &gt;</Name>
+          <Path>class_notch_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>NumericalArraySpec</Name>
+          <Path>class_numerical_array_spec.html</Path>
+         </Node>
+         <Node>
+          <Name>NumericalConverter</Name>
+          <Path>class_numerical_converter.html</Path>
+         </Node>
+         <Node>
+          <Name>ObjectArray&lt; ObjectType &gt;</Name>
+          <Path>class_object_array.html</Path>
+         </Node>
+         <Node>
+          <Name>ObjectArray&lt; Buffer &gt;</Name>
+          <Path>class_object_array.html</Path>
+         </Node>
+         <Node>
+          <Name>ObjectArray&lt; BusType &gt;</Name>
+          <Path>class_object_array.html</Path>
+          <Subnodes>
+           <Node>
+            <Name>NumericalArray&lt; BusType &gt;</Name>
+            <Path>class_numerical_array.html</Path>
+           </Node>
+          </Subnodes>
+         </Node>
+         <Node>
+          <Name>ObjectArray&lt; ChannelBase&lt; float &gt; &gt;</Name>
+          <Path>class_object_array.html</Path>
+          <Subnodes>
+           <Node>
+            <Name>NumericalArray&lt; ChannelBase&lt; float &gt; &gt;</Name>
+            <Path>class_numerical_array.html</Path>
+            <Subnodes>
+             <Node>
+              <Name>UnitBase&lt; float &gt;</Name>
+              <Path>class_unit_base.html</Path>
+             </Node>
+            </Subnodes>
+           </Node>
+          </Subnodes>
+         </Node>
+         <Node>
+          <Name>ObjectArray&lt; ChannelBase&lt; SampleType &gt; &gt;</Name>
+          <Path>class_object_array.html</Path>
+          <Subnodes>
+           <Node>
+            <Name>NumericalArray&lt; ChannelBase&lt; SampleType &gt; &gt;</Name>
+            <Path>class_numerical_array.html</Path>
+            <Subnodes>
+             <Node>
+              <Name>UnitBase&lt; SampleType &gt;</Name>
+              <Path>class_unit_base.html</Path>
+             </Node>
+            </Subnodes>
+           </Node>
+          </Subnodes>
+         </Node>
+         <Node>
+          <Name>ObjectArray&lt; const float * &gt;</Name>
+          <Path>class_object_array.html</Path>
+          <Subnodes>
+           <Node>
+            <Name>NumericalArray&lt; const float * &gt;</Name>
+            <Path>class_numerical_array.html</Path>
+           </Node>
+          </Subnodes>
+         </Node>
+         <Node>
+          <Name>ObjectArray&lt; float * &gt;</Name>
+          <Path>class_object_array.html</Path>
+          <Subnodes>
+           <Node>
+            <Name>NumericalArray&lt; float * &gt;</Name>
+            <Path>class_numerical_array.html</Path>
+           </Node>
+          </Subnodes>
+         </Node>
+         <Node>
+          <Name>ObjectArray&lt; float &gt;</Name>
+          <Path>class_object_array.html</Path>
+          <Subnodes>
+           <Node>
+            <Name>NumericalArray&lt; float &gt;</Name>
+            <Path>class_numerical_array.html</Path>
+           </Node>
+          </Subnodes>
+         </Node>
+         <Node>
+          <Name>ObjectArray&lt; FormType::SampleDataType &gt;</Name>
+          <Path>class_object_array.html</Path>
+          <Subnodes>
+           <Node>
+            <Name>NumericalArray&lt; FormType::SampleDataType &gt;</Name>
+            <Path>class_numerical_array.html</Path>
+           </Node>
+          </Subnodes>
+         </Node>
+         <Node>
+          <Name>ObjectArray&lt; NumericalType &gt;</Name>
+          <Path>class_object_array.html</Path>
+          <Subnodes>
+           <Node>
+            <Name>NumericalArray&lt; NumericalType &gt;</Name>
+            <Path>class_numerical_array.html</Path>
+           </Node>
+          </Subnodes>
+         </Node>
+         <Node>
+          <Name>ObjectArray&lt; OutputSampleType &gt;</Name>
+          <Path>class_object_array.html</Path>
+          <Subnodes>
+           <Node>
+            <Name>NumericalArray&lt; OutputSampleType &gt;</Name>
+            <Path>class_numerical_array.html</Path>
+           </Node>
+          </Subnodes>
+         </Node>
+         <Node>
+          <Name>ObjectArray&lt; RowType &gt;</Name>
+          <Path>class_object_array.html</Path>
+         </Node>
+         <Node>
+          <Name>ObjectArray&lt; SampleType &gt;</Name>
+          <Path>class_object_array.html</Path>
+          <Subnodes>
+           <Node>
+            <Name>NumericalArray&lt; SampleType &gt;</Name>
+            <Path>class_numerical_array.html</Path>
+           </Node>
+          </Subnodes>
+         </Node>
+         <Node>
+          <Name>ObjectArray&lt; ShapeType::SampleDataType &gt;</Name>
+          <Path>class_object_array.html</Path>
+          <Subnodes>
+           <Node>
+            <Name>NumericalArray&lt; ShapeType::SampleDataType &gt;</Name>
+            <Path>class_numerical_array.html</Path>
+           </Node>
+          </Subnodes>
+         </Node>
+         <Node>
+          <Name>ObjectArray&lt; Text &gt;</Name>
+          <Path>class_object_array.html</Path>
+         </Node>
+         <Node>
+          <Name>ObjectMemoryBase</Name>
+          <Path>class_object_memory_base.html</Path>
+         </Node>
+         <Node>
+          <Name>OverlapMakeUnit&lt; SampleType &gt;</Name>
+          <Path>class_overlap_make_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>OverlapMixUnit&lt; SampleType &gt;</Name>
+          <Path>class_overlap_mix_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>ParamUnit&lt; SampleType &gt;</Name>
+          <Path>class_param_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>PatchUnit&lt; SampleType &gt;</Name>
+          <Path>class_patch_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>PlankF80</Name>
+          <Path>struct_plank_f80.html</Path>
+         </Node>
+         <Node>
+          <Name>PlankI24</Name>
+          <Path>struct_plank_i24.html</Path>
+         </Node>
+         <Node>
+          <Name>PlankPascalString255</Name>
+          <Path>struct_plank_pascal_string255.html</Path>
+         </Node>
+         <Node>
+          <Name>PlankUI24</Name>
+          <Path>struct_plank_u_i24.html</Path>
+         </Node>
+         <Node>
+          <Name>PLAudioHost</Name>
+          <Path>interface_p_l_audio_host.html</Path>
+         </Node>
+         <Node>
+          <Name>&lt;PLAudioHostDelegate&gt;</Name>
+          <Path>protocol_p_l_audio_host_delegate-p.html</Path>
+         </Node>
+         <Node>
+          <Name>PlinkBufferF</Name>
+          <Path>struct_plink_buffer_f.html</Path>
+         </Node>
+         <Node>
+          <Name>ProcessInfo</Name>
+          <Path>class_process_info.html</Path>
+         </Node>
+         <Node>
+          <Name>QueueUnit&lt; SampleType &gt;</Name>
+          <Path>class_queue_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>ReblockUnit&lt; SampleType &gt;</Name>
+          <Path>class_reblock_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>ResampleUnit&lt; SampleType, InterpTypeCode &gt;</Name>
+          <Path>class_resample_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>RHPFUnit&lt; SampleType, InterpTypeCode &gt;</Name>
+          <Path>class_r_h_p_f_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>RLPFUnit&lt; SampleType, InterpTypeCode &gt;</Name>
+          <Path>class_r_l_p_f_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>RNG</Name>
+          <Path>class_r_n_g.html</Path>
+         </Node>
+         <Node>
+          <Name>SampleRate</Name>
+          <Path>class_sample_rate.html</Path>
+         </Node>
+         <Node>
+          <Name>SawUnit&lt; SampleType &gt;</Name>
+          <Path>class_saw_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>SchmidtUnit&lt; SampleType &gt;</Name>
+          <Path>class_schmidt_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>SignalPlayUnit&lt; SampleType &gt;</Name>
+          <Path>class_signal_play_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>SignalReadUnit&lt; SampleType &gt;</Name>
+          <Path>class_signal_read_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>FilePlayUnit&lt; SampleType &gt;::Simple</Name>
+          <Path>class_file_play_unit_1_1_simple.html</Path>
+         </Node>
+         <Node>
+          <Name>SineUnit&lt; SampleType &gt;</Name>
+          <Path>class_sine_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>SmartPointer</Name>
+          <Path>class_smart_pointer.html</Path>
+          <Subnodes>
+           <Node>
+            <Name>WeakPointer</Name>
+            <Path>class_weak_pointer.html</Path>
+           </Node>
+          </Subnodes>
+         </Node>
+         <Node>
+          <Name>SmartPointerContainerBase&lt; SmartPointerType &gt;</Name>
+          <Path>class_smart_pointer_container_base.html</Path>
+         </Node>
+         <Node>
+          <Name>SmartPointerContainerBase&lt; AudioFileReaderInternal &gt;</Name>
+          <Path>class_smart_pointer_container_base.html</Path>
+         </Node>
+         <Node>
+          <Name>SmartPointerContainerBase&lt; AudioFileWriterInternal&lt; SampleType &gt; &gt;</Name>
+          <Path>class_smart_pointer_container_base.html</Path>
+         </Node>
+         <Node>
+          <Name>SmartPointerContainerBase&lt; Base64Internal &gt;</Name>
+          <Path>class_smart_pointer_container_base.html</Path>
+         </Node>
+         <Node>
+          <Name>SmartPointerContainerBase&lt; BinaryFileInternal &gt;</Name>
+          <Path>class_smart_pointer_container_base.html</Path>
+         </Node>
+         <Node>
+          <Name>SmartPointerContainerBase&lt; BreakpointInternal&lt; SampleType &gt; &gt;</Name>
+          <Path>class_smart_pointer_container_base.html</Path>
+         </Node>
+         <Node>
+          <Name>SmartPointerContainerBase&lt; BreakpointsInternal&lt; SampleType &gt; &gt;</Name>
+          <Path>class_smart_pointer_container_base.html</Path>
+         </Node>
+         <Node>
+          <Name>SmartPointerContainerBase&lt; BusBufferInternal&lt; SampleType &gt; &gt;</Name>
+          <Path>class_smart_pointer_container_base.html</Path>
+         </Node>
+         <Node>
+          <Name>SmartPointerContainerBase&lt; ChannelInternalBase&lt; SampleType &gt; &gt;</Name>
+          <Path>class_smart_pointer_container_base.html</Path>
+         </Node>
+         <Node>
+          <Name>SmartPointerContainerBase&lt; DictionaryInternal&lt; Dynamic, int &gt; &gt;</Name>
+          <Path>class_smart_pointer_container_base.html</Path>
+         </Node>
+         <Node>
+          <Name>SmartPointerContainerBase&lt; DictionaryInternal&lt; Dynamic, KeyType &gt; &gt;</Name>
+          <Path>class_smart_pointer_container_base.html</Path>
+         </Node>
+         <Node>
+          <Name>SmartPointerContainerBase&lt; DictionaryInternal&lt; ValueType, KeyType &gt; &gt;</Name>
+          <Path>class_smart_pointer_container_base.html</Path>
+         </Node>
+         <Node>
+          <Name>SmartPointerContainerBase&lt; DynamicInternal &gt;</Name>
+          <Path>class_smart_pointer_container_base.html</Path>
+         </Node>
+         <Node>
+          <Name>SmartPointerContainerBase&lt; FFTEngineInternal&lt; float &gt; &gt;</Name>
+          <Path>class_smart_pointer_container_base.html</Path>
+         </Node>
+         <Node>
+          <Name>SmartPointerContainerBase&lt; FilePathInternal &gt;</Name>
+          <Path>class_smart_pointer_container_base.html</Path>
+         </Node>
+         <Node>
+          <Name>SmartPointerContainerBase&lt; FunctionCallerInternal&lt; FunctionType, FunctionType::Return, ArgType1, ArgType2, ArgType3 &gt; &gt;</Name>
+          <Path>class_smart_pointer_container_base.html</Path>
+         </Node>
+         <Node>
+          <Name>SmartPointerContainerBase&lt; FunctionCallerInternal&lt; FunctionType, FunctionType::Return, FunctionType::Arg1, ArgType2, ArgType3 &gt; &gt;</Name>
+          <Path>class_smart_pointer_container_base.html</Path>
+         </Node>
+         <Node>
+          <Name>SmartPointerContainerBase&lt; FunctionCallerInternal&lt; FunctionType, FunctionType::Return, FunctionType::Arg1, FunctionType::Arg2, ArgType3 &gt; &gt;</Name>
+          <Path>class_smart_pointer_container_base.html</Path>
+         </Node>
+         <Node>
+          <Name>SmartPointerContainerBase&lt; FunctionCallerInternal&lt; FunctionType, FunctionType::Return, FunctionType::Arg1, FunctionType::Arg2, FunctionType::Arg3 &gt; &gt;</Name>
+          <Path>class_smart_pointer_container_base.html</Path>
+         </Node>
+         <Node>
+          <Name>SmartPointerContainerBase&lt; FunctionCallerInternal&lt; FunctionType, ReturnType &gt; &gt;</Name>
+          <Path>class_smart_pointer_container_base.html</Path>
+         </Node>
+         <Node>
+          <Name>SmartPointerContainerBase&lt; FunctionCallerInternal&lt; FunctionType, ReturnType, ArgType1 &gt; &gt;</Name>
+          <Path>class_smart_pointer_container_base.html</Path>
+         </Node>
+         <Node>
+          <Name>SmartPointerContainerBase&lt; FunctionCallerInternal&lt; FunctionType, ReturnType, ArgType1, ArgType2 &gt; &gt;</Name>
+          <Path>class_smart_pointer_container_base.html</Path>
+         </Node>
+         <Node>
+          <Name>SmartPointerContainerBase&lt; FunctionCallerInternal&lt; FunctionType, ReturnType, ArgType1, ArgType2, ArgType3 &gt; &gt;</Name>
+          <Path>class_smart_pointer_container_base.html</Path>
+         </Node>
+         <Node>
+          <Name>SmartPointerContainerBase&lt; FunctionProxyCallerInternal&lt; FunctionType, FunctionType::Return, ArgType1, ArgType2, ArgType3 &gt; &gt;</Name>
+          <Path>class_smart_pointer_container_base.html</Path>
+         </Node>
+         <Node>
+          <Name>SmartPointerContainerBase&lt; FunctionProxyCallerInternal&lt; FunctionType, FunctionType::Return, FunctionType::Arg1, ArgType2, ArgType3 &gt; &gt;</Name>
+          <Path>class_smart_pointer_container_base.html</Path>
+         </Node>
+         <Node>
+          <Name>SmartPointerContainerBase&lt; FunctionProxyCallerInternal&lt; FunctionType, FunctionType::Return, FunctionType::Arg1, FunctionType::Arg2, ArgType3 &gt; &gt;</Name>
+          <Path>class_smart_pointer_container_base.html</Path>
+         </Node>
+         <Node>
+          <Name>SmartPointerContainerBase&lt; FunctionProxyCallerInternal&lt; FunctionType, FunctionType::Return, FunctionType::Arg1, FunctionType::Arg2, FunctionType::Arg3 &gt; &gt;</Name>
+          <Path>class_smart_pointer_container_base.html</Path>
+         </Node>
+         <Node>
+          <Name>SmartPointerContainerBase&lt; FunctionProxyCallerInternal&lt; FunctionType, ReturnType &gt; &gt;</Name>
+          <Path>class_smart_pointer_container_base.html</Path>
+         </Node>
+         <Node>
+          <Name>SmartPointerContainerBase&lt; FunctionProxyCallerInternal&lt; FunctionType, ReturnType, ArgType1 &gt; &gt;</Name>
+          <Path>class_smart_pointer_container_base.html</Path>
+         </Node>
+         <Node>
+          <Name>SmartPointerContainerBase&lt; FunctionProxyCallerInternal&lt; FunctionType, ReturnType, ArgType1, ArgType2 &gt; &gt;</Name>
+          <Path>class_smart_pointer_container_base.html</Path>
+         </Node>
+         <Node>
+          <Name>SmartPointerContainerBase&lt; FunctionProxyCallerInternal&lt; FunctionType, ReturnType, ArgType1, ArgType2, ArgType3 &gt; &gt;</Name>
+          <Path>class_smart_pointer_container_base.html</Path>
+         </Node>
+         <Node>
+          <Name>SmartPointerContainerBase&lt; LockedValueInternal&lt; Type &gt; &gt;</Name>
+          <Path>class_smart_pointer_container_base.html</Path>
+         </Node>
+         <Node>
+          <Name>SmartPointerContainerBase&lt; LockFreeQueueInternal&lt; ValueType &gt; &gt;</Name>
+          <Path>class_smart_pointer_container_base.html</Path>
+         </Node>
+         <Node>
+          <Name>SmartPointerContainerBase&lt; LockFreeStackInternal&lt; ValueType &gt; &gt;</Name>
+          <Path>class_smart_pointer_container_base.html</Path>
+         </Node>
+         <Node>
+          <Name>SmartPointerContainerBase&lt; LockInternalBase &gt;</Name>
+          <Path>class_smart_pointer_container_base.html</Path>
+         </Node>
+         <Node>
+          <Name>SmartPointerContainerBase&lt; NeuralNetworkInternal&lt; ValueType &gt; &gt;</Name>
+          <Path>class_smart_pointer_container_base.html</Path>
+         </Node>
+         <Node>
+          <Name>SmartPointerContainerBase&lt; ObjectArrayInternal&lt; Buffer &gt; &gt;</Name>
+          <Path>class_smart_pointer_container_base.html</Path>
+         </Node>
+         <Node>
+          <Name>SmartPointerContainerBase&lt; ObjectArrayInternal&lt; BusType &gt; &gt;</Name>
+          <Path>class_smart_pointer_container_base.html</Path>
+         </Node>
+         <Node>
+          <Name>SmartPointerContainerBase&lt; ObjectArrayInternal&lt; ChannelBase&lt; float &gt; &gt; &gt;</Name>
+          <Path>class_smart_pointer_container_base.html</Path>
+         </Node>
+         <Node>
+          <Name>SmartPointerContainerBase&lt; ObjectArrayInternal&lt; ChannelBase&lt; SampleType &gt; &gt; &gt;</Name>
+          <Path>class_smart_pointer_container_base.html</Path>
+         </Node>
+         <Node>
+          <Name>SmartPointerContainerBase&lt; ObjectArrayInternal&lt; const float * &gt; &gt;</Name>
+          <Path>class_smart_pointer_container_base.html</Path>
+         </Node>
+         <Node>
+          <Name>SmartPointerContainerBase&lt; ObjectArrayInternal&lt; float * &gt; &gt;</Name>
+          <Path>class_smart_pointer_container_base.html</Path>
+         </Node>
+         <Node>
+          <Name>SmartPointerContainerBase&lt; ObjectArrayInternal&lt; float &gt; &gt;</Name>
+          <Path>class_smart_pointer_container_base.html</Path>
+         </Node>
+         <Node>
+          <Name>SmartPointerContainerBase&lt; ObjectArrayInternal&lt; FormType::SampleDataType &gt; &gt;</Name>
+          <Path>class_smart_pointer_container_base.html</Path>
+         </Node>
+         <Node>
+          <Name>SmartPointerContainerBase&lt; ObjectArrayInternal&lt; NumericalType &gt; &gt;</Name>
+          <Path>class_smart_pointer_container_base.html</Path>
+         </Node>
+         <Node>
+          <Name>SmartPointerContainerBase&lt; ObjectArrayInternal&lt; ObjectType &gt; &gt;</Name>
+          <Path>class_smart_pointer_container_base.html</Path>
+         </Node>
+         <Node>
+          <Name>SmartPointerContainerBase&lt; ObjectArrayInternal&lt; ObjectType, SmartPointer &gt; &gt;</Name>
+          <Path>class_smart_pointer_container_base.html</Path>
+         </Node>
+         <Node>
+          <Name>SmartPointerContainerBase&lt; ObjectArrayInternal&lt; OutputSampleType &gt; &gt;</Name>
+          <Path>class_smart_pointer_container_base.html</Path>
+         </Node>
+         <Node>
+          <Name>SmartPointerContainerBase&lt; ObjectArrayInternal&lt; Receiver *, SmartPointer &gt; &gt;</Name>
+          <Path>class_smart_pointer_container_base.html</Path>
+         </Node>
+         <Node>
+          <Name>SmartPointerContainerBase&lt; ObjectArrayInternal&lt; RowType &gt; &gt;</Name>
+          <Path>class_smart_pointer_container_base.html</Path>
+         </Node>
+         <Node>
+          <Name>SmartPointerContainerBase&lt; ObjectArrayInternal&lt; SampleType &gt; &gt;</Name>
+          <Path>class_smart_pointer_container_base.html</Path>
+         </Node>
+         <Node>
+          <Name>SmartPointerContainerBase&lt; ObjectArrayInternal&lt; ShapeType::SampleDataType &gt; &gt;</Name>
+          <Path>class_smart_pointer_container_base.html</Path>
+         </Node>
+         <Node>
+          <Name>SmartPointerContainerBase&lt; ObjectArrayInternal&lt; Text &gt; &gt;</Name>
+          <Path>class_smart_pointer_container_base.html</Path>
+         </Node>
+         <Node>
+          <Name>SmartPointerContainerBase&lt; ObjectArrayInternal&lt; WeakChannelType, SmartPointer &gt; &gt;</Name>
+          <Path>class_smart_pointer_container_base.html</Path>
+         </Node>
+         <Node>
+          <Name>SmartPointerContainerBase&lt; ObjectArrayInternal&lt; WeakPointer *, SmartPointer &gt; &gt;</Name>
+          <Path>class_smart_pointer_container_base.html</Path>
+         </Node>
+         <Node>
+          <Name>SmartPointerContainerBase&lt; ProcessInfoInternal &gt;</Name>
+          <Path>class_smart_pointer_container_base.html</Path>
+         </Node>
+         <Node>
+          <Name>SmartPointerContainerBase&lt; ReceiverInternalType &gt;</Name>
+          <Path>class_smart_pointer_container_base.html</Path>
+         </Node>
+         <Node>
+          <Name>SmartPointerContainerBase&lt; RNGInternal &gt;</Name>
+          <Path>class_smart_pointer_container_base.html</Path>
+         </Node>
+         <Node>
+          <Name>SmartPointerContainerBase&lt; SenderInternalType &gt;</Name>
+          <Path>class_smart_pointer_container_base.html</Path>
+         </Node>
+         <Node>
+          <Name>SmartPointerContainerBase&lt; SignalInternal&lt; SampleType &gt; &gt;</Name>
+          <Path>class_smart_pointer_container_base.html</Path>
+         </Node>
+         <Node>
+          <Name>SmartPointerContainerBase&lt; SimpleLinkedListInternal&lt; ValueType &gt; &gt;</Name>
+          <Path>class_smart_pointer_container_base.html</Path>
+         </Node>
+         <Node>
+          <Name>SmartPointerContainerBase&lt; SimpleQueueInternal&lt; ValueType &gt; &gt;</Name>
+          <Path>class_smart_pointer_container_base.html</Path>
+         </Node>
+         <Node>
+          <Name>SmartPointerContainerBase&lt; SimpleStackInternal&lt; ValueType &gt; &gt;</Name>
+          <Path>class_smart_pointer_container_base.html</Path>
+         </Node>
+         <Node>
+          <Name>SmartPointerContainerBase&lt; TaskBufferInternal&lt; SampleType &gt; &gt;</Name>
+          <Path>class_smart_pointer_container_base.html</Path>
+         </Node>
+         <Node>
+          <Name>SmartPointerContainerBase&lt; TaskMessageInternal &gt;</Name>
+          <Path>class_smart_pointer_container_base.html</Path>
+         </Node>
+         <Node>
+          <Name>SmartPointerContainerBase&lt; TextFileInternal &gt;</Name>
+          <Path>class_smart_pointer_container_base.html</Path>
+         </Node>
+         <Node>
+          <Name>SmartPointerContainerBase&lt; VariableInternal&lt; Type &amp; &gt; &gt;</Name>
+          <Path>class_smart_pointer_container_base.html</Path>
+         </Node>
+         <Node>
+          <Name>SmartPointerContainerBase&lt; VariableInternalBase&lt; Type &gt; &gt;</Name>
+          <Path>class_smart_pointer_container_base.html</Path>
+         </Node>
+         <Node>
+          <Name>SmartPointerContainerBase&lt; WeakPointer &gt;</Name>
+          <Path>class_smart_pointer_container_base.html</Path>
+         </Node>
+         <Node>
+          <Name>SmartPointerContainerBase&lt; ZipInternal &gt;</Name>
+          <Path>class_smart_pointer_container_base.html</Path>
+         </Node>
+         <Node>
+          <Name>TableUnit&lt; SampleType &gt;</Name>
+          <Path>class_table_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>Text</Name>
+          <Path>class_text.html</Path>
+         </Node>
+         <Node>
+          <Name>TextFile</Name>
+          <Path>class_text_file.html</Path>
+         </Node>
+         <Node>
+          <Name>Threading::Thread</Name>
+          <Path>class_threading_1_1_thread.html</Path>
+         </Node>
+         <Node>
+          <Name>Threading</Name>
+          <Path>class_threading.html</Path>
+         </Node>
+         <Node>
+          <Name>TimeStamp</Name>
+          <Path>class_time_stamp.html</Path>
+         </Node>
+         <Node>
+          <Name>TriggerUnit&lt; SampleType &gt;</Name>
+          <Path>class_trigger_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>TypeCode</Name>
+          <Path>class_type_code.html</Path>
+         </Node>
+         <Node>
+          <Name>TypeUnitBase&lt; OutputSampleType, InputSampleType &gt;</Name>
+          <Path>class_type_unit_base.html</Path>
+         </Node>
+         <Node>
+          <Name>TypeUtility&lt; Type &gt;</Name>
+          <Path>class_type_utility.html</Path>
+         </Node>
+         <Node>
+          <Name>Variable&lt; Type &gt;</Name>
+          <Path>class_variable.html</Path>
+         </Node>
+         <Node>
+          <Name>Variable&lt; Type &amp; &gt;</Name>
+          <Path>class_variable_3_01_type_01_6_01_4.html</Path>
+         </Node>
+         <Node>
+          <Name>WeakPointerContainer&lt; OriginalType &gt;</Name>
+          <Path>class_weak_pointer_container.html</Path>
+         </Node>
+         <Node>
+          <Name>WhiteNoiseUnit&lt; SampleType &gt;</Name>
+          <Path>class_white_noise_unit.html</Path>
+         </Node>
+         <Node>
+          <Name>ZMulUnit&lt; SampleType &gt;</Name>
+          <Path>class_z_mul_unit.html</Path>
+         </Node>
+        </Subnodes>
+       </Node>
+       <Node>
+        <Name>Class Members</Name>
+        <Path>functions.html</Path>
+       </Node>
+       <Node>
+        <Name>File List</Name>
+        <Path>files.html</Path>
+        <Subnodes>
+        </Subnodes>
+       </Node>
+      </Subnodes>
+    </Node>
+  </TOC>
+</DocSetNodes>

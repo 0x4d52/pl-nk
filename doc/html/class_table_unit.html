@@ -20,7 +20,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="pl-nk-logo-small.png"/></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">pl-nk</div>
+   <div id="projectname">pl-nk&#160;<span id="projectnumber">v0.4.5</span></div>
+   <div id="projectbrief">Plonk|Plink|Plank are a set of cross-platform C/C++ frameworks for audio software development</div>
   </td>
  </tr>
  </tbody>
@@ -29,8 +30,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -62,7 +63,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="header">
   <div class="summary">
-<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a>  </div>
   <div class="headertitle">
 <div class="title">TableUnit&lt; SampleType &gt; Class Template Reference<div class="ingroups"><a class="el" href="group___generator_units.html">Oscillator unit classes.</a> &#124; <a class="el" href="group___control_units.html">Control unit classes.</a></div></div>  </div>
@@ -74,29 +74,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <p><a href="class_table_unit-members.html">List of all members.</a></p>
 <table class="memberdecls">
-<tr><td colspan="2"><h2><a name="pub-types"></a>
-Public Types</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_table_channel_internal.html">TableChannelInternal</a><br class="typebreak"/>
-&lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_table_unit.html#a5c25b28b288832c5ad18f50200db9af5">TableInternal</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="struct_channel_data_3_01_table_channel_internal_3_01_sample_type_01_4_01_4.html">TableInternal::Data</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_table_unit.html#a383c57087116223fa1060002f3ad0a76">Data</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_channel_base.html">ChannelBase</a>&lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_table_unit.html#a4e0a9c2083aaa00c8f3ed15c0968a987">ChannelType</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_channel_internal.html">ChannelInternal</a><br class="typebreak"/>
-&lt; SampleType, <a class="el" href="struct_channel_data_3_01_table_channel_internal_3_01_sample_type_01_4_01_4.html">Data</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_table_unit.html#afdd7856c705fd7babcb79a6ecf92c363">Internal</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_table_unit.html#af580566790ccab1e60bfbc8409433d73">UnitType</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_input_dictionary.html">InputDictionary</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_table_unit.html#a428cd317cfe65433e7a726362f62645b">Inputs</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_wavetable_base.html">WavetableBase</a>&lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_table_unit.html#a7911225870951ec46081200e35042078">WavetableType</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <br class="typebreak"/>
-<a class="el" href="class_table_channel_internal.html#a7f53c1b05bd5faa13e3de103ffbda551">TableInternal::FrequencyType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_table_unit.html#ad0f0db784cef58deb35a9eb1f43d9f27">FrequencyType</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <br class="typebreak"/>
-<a class="el" href="class_unit_base.html">TableInternal::FrequencyUnitType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_table_unit.html#aa326c901e1ed1b1d8fd08977b0b28a92">FrequencyUnitType</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <br class="typebreak"/>
-<a class="el" href="class_numerical_array.html">TableInternal::FrequencyBufferType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_table_unit.html#a90161f535709836b403d748284c39a2b">FrequencyBufferType</a></td></tr>
 <tr><td colspan="2"><h2><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_object_array.html">UnitInfos</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_table_unit.html#a89f4d068825189edc87d81199fd86e16">getInfo</a> ()  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_unit_base.html">UnitType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_table_unit.html#aef71a79ad5a9e86547deef6477508e5f">ar</a> (<a class="el" href="class_wavetable_base.html">WavetableType</a> const &amp;table, <a class="el" href="class_unit_base.html">FrequencyUnitType</a> const &amp;frequency=<a class="el" href="class_table_unit.html#ad0f0db784cef58deb35a9eb1f43d9f27">FrequencyType</a>(440), <a class="el" href="class_unit_base.html">UnitType</a> const &amp;mul=SampleType(1), <a class="el" href="class_unit_base.html">UnitType</a> const &amp;add=SampleType(0), <a class="el" href="class_block_size.html">BlockSize</a> const &amp;preferredBlockSize=BlockSize::getDefault(), <a class="el" href="class_sample_rate.html">SampleRate</a> const &amp;preferredSampleRate=SampleRate::getDefault())  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_unit_base.html">UnitType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_table_unit.html#aef71a79ad5a9e86547deef6477508e5f">ar</a> (WavetableType const &amp;table, <a class="el" href="class_unit_base.html">FrequencyUnitType</a> const &amp;frequency=FrequencyType(440), <a class="el" href="class_unit_base.html">UnitType</a> const &amp;mul=SampleType(1), <a class="el" href="class_unit_base.html">UnitType</a> const &amp;add=SampleType(0), <a class="el" href="class_block_size.html">BlockSize</a> const &amp;preferredBlockSize=BlockSize::getDefault(), <a class="el" href="class_sample_rate.html">SampleRate</a> const &amp;preferredSampleRate=SampleRate::getDefault())  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create an audio rate wavetable oscillator.  <a href="#aef71a79ad5a9e86547deef6477508e5f"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_unit_base.html">UnitType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_table_unit.html#a9eddb6c7b178640c71cb56c95752fe48">kr</a> (<a class="el" href="class_wavetable_base.html">WavetableType</a> const &amp;table, <a class="el" href="class_unit_base.html">FrequencyUnitType</a> const &amp;frequency, <a class="el" href="class_unit_base.html">UnitType</a> const &amp;mul=SampleType(1), <a class="el" href="class_unit_base.html">UnitType</a> const &amp;add=SampleType(0))  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_unit_base.html">UnitType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_table_unit.html#a9eddb6c7b178640c71cb56c95752fe48">kr</a> (WavetableType const &amp;table, <a class="el" href="class_unit_base.html">FrequencyUnitType</a> const &amp;frequency, <a class="el" href="class_unit_base.html">UnitType</a> const &amp;mul=SampleType(1), <a class="el" href="class_unit_base.html">UnitType</a> const &amp;add=SampleType(0))  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a control rate wavetable oscillator.  <a href="#a9eddb6c7b178640c71cb56c95752fe48"></a><br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
@@ -104,13 +86,12 @@ Static Public Member Functions</h2></td></tr>
 class TableUnit&lt; SampleType &gt;</h3>
 
 <p>Wavetable oscillator. </p>
-<p>Factory functions:</p>
-<ul>
+<dl class="user"><dt><b>Factory functions:</b></dt><dd><ul>
 <li>ar (table, frequency=440, mul=1, add=0, preferredBlockSize=default, preferredSampleRate=default)</li>
 <li>kr (table, frequency=440, mul=1, add=0)</li>
 </ul>
-<p>Inputs:</p>
-<ul>
+</dd></dl>
+<dl class="user"><dt><b>Inputs:</b></dt><dd><ul>
 <li>table: (wavetable) the wavetable to use for the oscillator</li>
 <li>frequency: (unit, multi) the frequency of the oscillator in Hz</li>
 <li>mul: (unit, multi) the multiplier applied to the output</li>
@@ -118,176 +99,8 @@ class TableUnit&lt; SampleType &gt;</h3>
 <li>preferredBlockSize: the preferred output block size (for advanced usage, leave on default if unsure)</li>
 <li>preferredSampleRate: the preferred output sample rate (for advanced usage, leave on default if unsure) </li>
 </ul>
-</div><hr/><h2>Member Typedef Documentation</h2>
-<a class="anchor" id="a5c25b28b288832c5ad18f50200db9af5"></a><!-- doxytag: member="TableUnit::TableInternal" ref="a5c25b28b288832c5ad18f50200db9af5" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_table_channel_internal.html">TableChannelInternal</a>&lt;SampleType&gt; <a class="el" href="class_table_unit.html">TableUnit</a>&lt; SampleType &gt;::<a class="el" href="class_table_channel_internal.html">TableInternal</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a383c57087116223fa1060002f3ad0a76"></a><!-- doxytag: member="TableUnit::Data" ref="a383c57087116223fa1060002f3ad0a76" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="struct_channel_data_3_01_table_channel_internal_3_01_sample_type_01_4_01_4.html">TableInternal::Data</a> <a class="el" href="class_table_unit.html">TableUnit</a>&lt; SampleType &gt;::<a class="el" href="struct_channel_data_3_01_table_channel_internal_3_01_sample_type_01_4_01_4.html">Data</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a4e0a9c2083aaa00c8f3ed15c0968a987"></a><!-- doxytag: member="TableUnit::ChannelType" ref="a4e0a9c2083aaa00c8f3ed15c0968a987" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_channel_base.html">ChannelBase</a>&lt;SampleType&gt; <a class="el" href="class_table_unit.html">TableUnit</a>&lt; SampleType &gt;::<a class="el" href="class_channel_base.html">ChannelType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="afdd7856c705fd7babcb79a6ecf92c363"></a><!-- doxytag: member="TableUnit::Internal" ref="afdd7856c705fd7babcb79a6ecf92c363" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_channel_internal.html">ChannelInternal</a>&lt;SampleType,<a class="el" href="struct_channel_data_3_01_table_channel_internal_3_01_sample_type_01_4_01_4.html">Data</a>&gt; <a class="el" href="class_table_unit.html">TableUnit</a>&lt; SampleType &gt;::<a class="el" href="class_channel_internal.html">Internal</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="af580566790ccab1e60bfbc8409433d73"></a><!-- doxytag: member="TableUnit::UnitType" ref="af580566790ccab1e60bfbc8409433d73" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_unit_base.html">UnitBase</a>&lt;SampleType&gt; <a class="el" href="class_table_unit.html">TableUnit</a>&lt; SampleType &gt;::<a class="el" href="class_unit_base.html">UnitType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a428cd317cfe65433e7a726362f62645b"></a><!-- doxytag: member="TableUnit::Inputs" ref="a428cd317cfe65433e7a726362f62645b" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_input_dictionary.html">InputDictionary</a> <a class="el" href="class_table_unit.html">TableUnit</a>&lt; SampleType &gt;::<a class="el" href="class_input_dictionary.html">Inputs</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a7911225870951ec46081200e35042078"></a><!-- doxytag: member="TableUnit::WavetableType" ref="a7911225870951ec46081200e35042078" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_wavetable_base.html">WavetableBase</a>&lt;SampleType&gt; <a class="el" href="class_table_unit.html">TableUnit</a>&lt; SampleType &gt;::<a class="el" href="class_wavetable_base.html">WavetableType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ad0f0db784cef58deb35a9eb1f43d9f27"></a><!-- doxytag: member="TableUnit::FrequencyType" ref="ad0f0db784cef58deb35a9eb1f43d9f27" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_table_channel_internal.html#a7f53c1b05bd5faa13e3de103ffbda551">TableInternal::FrequencyType</a> <a class="el" href="class_table_unit.html">TableUnit</a>&lt; SampleType &gt;::<a class="el" href="class_table_unit.html#ad0f0db784cef58deb35a9eb1f43d9f27">FrequencyType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="aa326c901e1ed1b1d8fd08977b0b28a92"></a><!-- doxytag: member="TableUnit::FrequencyUnitType" ref="aa326c901e1ed1b1d8fd08977b0b28a92" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_unit_base.html">TableInternal::FrequencyUnitType</a> <a class="el" href="class_table_unit.html">TableUnit</a>&lt; SampleType &gt;::<a class="el" href="class_unit_base.html">FrequencyUnitType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a90161f535709836b403d748284c39a2b"></a><!-- doxytag: member="TableUnit::FrequencyBufferType" ref="a90161f535709836b403d748284c39a2b" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_numerical_array.html">TableInternal::FrequencyBufferType</a> <a class="el" href="class_table_unit.html">TableUnit</a>&lt; SampleType &gt;::<a class="el" href="class_numerical_array.html">FrequencyBufferType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a89f4d068825189edc87d81199fd86e16"></a><!-- doxytag: member="TableUnit::getInfo" ref="a89f4d068825189edc87d81199fd86e16" args="()" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">static <a class="el" href="class_object_array.html">UnitInfos</a> <a class="el" href="class_table_unit.html">TableUnit</a>&lt; SampleType &gt;::getInfo </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
+</dd></dl>
+</div><hr/><h2>Member Function Documentation</h2>
 <a class="anchor" id="aef71a79ad5a9e86547deef6477508e5f"></a><!-- doxytag: member="TableUnit::ar" ref="aef71a79ad5a9e86547deef6477508e5f" args="(WavetableType const &amp;table, FrequencyUnitType const &amp;frequency=FrequencyType(440), UnitType const &amp;mul=SampleType(1), UnitType const &amp;add=SampleType(0), BlockSize const &amp;preferredBlockSize=BlockSize::getDefault(), SampleRate const &amp;preferredSampleRate=SampleRate::getDefault())" -->
 <div class="memitem">
 <div class="memproto">
@@ -297,14 +110,14 @@ template&lt;class SampleType &gt; </div>
         <tr>
           <td class="memname">static <a class="el" href="class_unit_base.html">UnitType</a> <a class="el" href="class_table_unit.html">TableUnit</a>&lt; SampleType &gt;::ar </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_wavetable_base.html">WavetableType</a> const &amp;&#160;</td>
+          <td class="paramtype">WavetableType const &amp;&#160;</td>
           <td class="paramname"><em>table</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="class_unit_base.html">FrequencyUnitType</a> const &amp;&#160;</td>
-          <td class="paramname"><em>frequency</em> = <code><a class="el" href="class_table_unit.html#ad0f0db784cef58deb35a9eb1f43d9f27">FrequencyType</a>&#160;(440)</code>, </td>
+          <td class="paramname"><em>frequency</em> = <code>FrequencyType&#160;(440)</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -352,7 +165,7 @@ template&lt;class SampleType &gt; </div>
         <tr>
           <td class="memname">static <a class="el" href="class_unit_base.html">UnitType</a> <a class="el" href="class_table_unit.html">TableUnit</a>&lt; SampleType &gt;::kr </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_wavetable_base.html">WavetableType</a> const &amp;&#160;</td>
+          <td class="paramtype">WavetableType const &amp;&#160;</td>
           <td class="paramname"><em>table</em>, </td>
         </tr>
         <tr>
@@ -395,7 +208,7 @@ template&lt;class SampleType &gt; </div>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Properties</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -404,7 +217,7 @@ template&lt;class SampleType &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 5 2012 17:05:11 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 8 2014 12:26:52 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

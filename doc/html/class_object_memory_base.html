@@ -20,7 +20,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="pl-nk-logo-small.png"/></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">pl-nk</div>
+   <div id="projectname">pl-nk&#160;<span id="projectnumber">v0.4.5</span></div>
+   <div id="projectbrief">Plonk|Plink|Plank are a set of cross-platform C/C++ frameworks for audio software development</div>
   </td>
  </tr>
  </tbody>
@@ -29,8 +30,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -70,66 +71,20 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <!-- doxytag: class="ObjectMemoryBase" -->
 <p>Manage a custom memory allocation system.  
  <a href="class_object_memory_base.html#details">More...</a></p>
-<div class="dynheader">
-Inheritance diagram for ObjectMemoryBase:</div>
-<div class="dyncontent">
- <div class="center">
-  <img src="class_object_memory_base.png" usemap="#ObjectMemoryBase_map" alt=""/>
-  <map id="ObjectMemoryBase_map" name="ObjectMemoryBase_map">
-<area href="class_object_memory_default.html" alt="ObjectMemoryDefault" shape="rect" coords="0,56,154,80"/>
-<area href="class_object_memory_defer_free.html" alt="ObjectMemoryDeferFree" shape="rect" coords="164,56,318,80"/>
-<area href="class_object_memory_pools.html" alt="ObjectMemoryPools" shape="rect" coords="328,56,482,80"/>
-</map>
- </div></div>
+
+<p>Inherited by ObjectMemoryDefault, ObjectMemoryDeferFree, and ObjectMemoryPools.</p>
 
 <p><a href="class_object_memory_base-members.html">List of all members.</a></p>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_object_memory_base.html#a3f39ad0b45c475177a63d18860fb37fc">ObjectMemoryBase</a> (<a class="el" href="class_memory.html">Memory</a> &amp;m)  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_object_memory_base.html#a38c8a1601c95a65beb9ff91847860e1a">~ObjectMemoryBase</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_object_memory_base.html#ae64795a840be11636927a027e0270f0d">init</a> ()=0</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Must implement, normally this starts a background thread.  <a href="#ae64795a840be11636927a027e0270f0d"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_memory.html">Memory</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_object_memory_base.html#a9dfbded251d24e41093eb93d216c4d94">getMemory</a> ()  throw ()</td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Manage a custom memory allocation system. </p>
-<p>An <a class="el" href="class_object_memory_base.html" title="Manage a custom memory allocation system.">ObjectMemoryBase</a> subclass manages a <a class="el" href="class_memory.html">Memory</a> instance. Care should be take for this to be created before any other objects EXCEPT for <a class="el" href="class_memory.html">Memory</a> instances and <a class="el" href="class_audio_host_base.html" title="An abstract class to interface with audio devices.">AudioHostBase</a> subclasses. In fact the <a class="el" href="class_audio_host_base.html" title="An abstract class to interface with audio devices.">AudioHostBase</a> provides a means for using an <a class="el" href="class_object_memory_base.html" title="Manage a custom memory allocation system.">ObjectMemoryBase</a> subclass and controls its creation and running. </p>
-</div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a3f39ad0b45c475177a63d18860fb37fc"></a><!-- doxytag: member="ObjectMemoryBase::ObjectMemoryBase" ref="a3f39ad0b45c475177a63d18860fb37fc" args="(Memory &amp;m)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">ObjectMemoryBase::ObjectMemoryBase </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_memory.html">Memory</a> &amp;&#160;</td>
-          <td class="paramname"><em>m</em></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a38c8a1601c95a65beb9ff91847860e1a"></a><!-- doxytag: member="ObjectMemoryBase::~ObjectMemoryBase" ref="a38c8a1601c95a65beb9ff91847860e1a" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual ObjectMemoryBase::~ObjectMemoryBase </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td><code> [inline, virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<hr/><h2>Member Function Documentation</h2>
+<p>An <a class="el" href="class_object_memory_base.html" title="Manage a custom memory allocation system.">ObjectMemoryBase</a> subclass manages a Memory instance. Care should be take for this to be created before any other objects EXCEPT for Memory instances. </p>
+</div><hr/><h2>Member Function Documentation</h2>
 <a class="anchor" id="ae64795a840be11636927a027e0270f0d"></a><!-- doxytag: member="ObjectMemoryBase::init" ref="ae64795a840be11636927a027e0270f0d" args="()=0" -->
 <div class="memitem">
 <div class="memproto">
@@ -146,24 +101,6 @@ Public Member Functions</h2></td></tr>
 
 <p>Must implement, normally this starts a background thread. </p>
 
-<p>Implemented in <a class="el" href="class_object_memory_defer_free.html#abb08cdaef3857a2f6bb32dc1a35d37d1">ObjectMemoryDeferFree</a>, <a class="el" href="class_object_memory_pools.html#a75bf1d76a8caf0890e073a81b6072942">ObjectMemoryPools</a>, and <a class="el" href="class_object_memory_default.html#a1932528c6340bc19161d2cd04f2b9b94">ObjectMemoryDefault</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a9dfbded251d24e41093eb93d216c4d94"></a><!-- doxytag: member="ObjectMemoryBase::getMemory" ref="a9dfbded251d24e41093eb93d216c4d94" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_memory.html">Memory</a>&amp; ObjectMemoryBase::getMemory </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
@@ -175,7 +112,7 @@ Public Member Functions</h2></td></tr>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Properties</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -184,7 +121,7 @@ Public Member Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 5 2012 17:05:07 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 8 2014 12:26:52 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

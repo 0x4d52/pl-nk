@@ -20,7 +20,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="pl-nk-logo-small.png"/></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">pl-nk</div>
+   <div id="projectname">pl-nk&#160;<span id="projectnumber">v0.4.5</span></div>
+   <div id="projectbrief">Plonk|Plink|Plank are a set of cross-platform C/C++ frameworks for audio software development</div>
   </td>
  </tr>
  </tbody>
@@ -29,8 +30,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -62,43 +63,24 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="header">
   <div class="summary">
-<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a>  </div>
   <div class="headertitle">
 <div class="title">BlockSize Class Reference</div>  </div>
 </div>
 <div class="contents">
-<!-- doxytag: class="BlockSize" --><!-- doxytag: inherits="Variable" -->
-<p>A specialised Variable&lt;int&gt; for handling block sizes.  
+<!-- doxytag: class="BlockSize" --><!-- doxytag: inherits="Variable&lt; int &gt;" -->
+<p>A specialised <a class="el" href="class_variable.html">Variable&lt;int&gt;</a> for handling block sizes.  
  <a href="class_block_size.html#details">More...</a></p>
-<div class="dynheader">
-Inheritance diagram for BlockSize:</div>
-<div class="dyncontent">
- <div class="center">
-  <img src="class_block_size.png" usemap="#BlockSize_map" alt=""/>
-  <map id="BlockSize_map" name="BlockSize_map">
-<area href="class_variable.html" title="A template class for storing any variable type." alt="Variable&lt; Type &gt;" shape="rect" coords="185,224,546,248"/>
-<area href="class_sender_container.html" alt="SenderContainer&lt; VariableInternalBase&lt; Type &gt; &gt;" shape="rect" coords="185,168,546,192"/>
-<area href="class_smart_pointer_container.html" alt="SmartPointerContainer&lt; VariableInternalBase&lt; Type &gt; &gt;" shape="rect" coords="185,112,546,136"/>
-<area href="class_smart_pointer_container_base.html" alt="SmartPointerContainerBase&lt; VariableInternalBase&lt; Type &gt; &gt;" shape="rect" coords="185,56,546,80"/>
-<area href="class_plonk_base.html" alt="PlonkBase" shape="rect" coords="185,0,546,24"/>
-<area href="class_block_size_default.html" alt="BlockSizeDefault" shape="rect" coords="0,336,361,360"/>
-<area href="class_block_size_no_preference.html" alt="BlockSizeNoPreference" shape="rect" coords="371,336,732,360"/>
-</map>
- </div></div>
+
+<p>Inherits <a class="el" href="class_variable.html">Variable&lt; int &gt;</a>.</p>
+
+<p>Inherited by BlockSizeDefault, and BlockSizeNoPreference.</p>
 
 <p><a href="class_block_size-members.html">List of all members.</a></p>
 <table class="memberdecls">
-<tr><td colspan="2"><h2><a name="pub-types"></a>
-Public Types</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_variable_internal.html">VariableInternal</a>&lt; int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_block_size.html#a4040584c77fe568474f4d8cfd0486dd8">Internal</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_variable.html">IntVariable</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_block_size.html#a9a8590ac83812328fbd25ab0a0b0a6a0">Base</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_weak_pointer_container.html">WeakPointerContainer</a><br class="typebreak"/>
-&lt; <a class="el" href="class_block_size.html">BlockSize</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_block_size.html#abc106659fc8fa174e2d80df9caa1d6ae">Weak</a></td></tr>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_block_size.html#a9382fb3b82ae5150202f22c196720651">BlockSize</a> ()  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_block_size.html#a3267344c93ac784230c999d152425200">BlockSize</a> (<a class="el" href="class_sample_rate.html">SampleRate</a> const &amp;sampleRate)  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">To catch a potential programming error.  <a href="#a3267344c93ac784230c999d152425200"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_block_size.html#a2c7c7a4a9f8585b2cc414a392126dbf8">BlockSize</a> (const int initValue)  throw ()</td></tr>
@@ -107,13 +89,9 @@ Public Member Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create <a class="el" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a> from an IntVariable.  <a href="#aeadcdd13e4f698280b8578823abcda5a"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_block_size.html#a422cfa94141bf1c527ab73e48dad8a08">BlockSize</a> (<a class="el" href="class_block_size.html">BlockSize</a> const &amp;copy)  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy constructor.  <a href="#a422cfa94141bf1c527ab73e48dad8a08"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_block_size.html#a595309bd6aed699c9cff17a59f32e795">BlockSize</a> (<a class="el" href="class_block_size_default.html">BlockSizeDefault</a> const &amp;copy)  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_block_size.html#ab3f321a633030e2d5c8f9b9ae0ddb54a">BlockSize</a> (<a class="el" href="class_block_size_no_preference.html">BlockSizeNoPreference</a> const &amp;copy)  throw ()</td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class OtherType &gt; </td></tr>
 <tr><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_block_size.html#a38a8b440dbc0e857af8b3ec993ccc7e6">BlockSize</a> (OtherType const &amp;initValue)  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a block size converting from another type.  <a href="#a38a8b440dbc0e857af8b3ec993ccc7e6"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_block_size.html">BlockSize</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_block_size.html#a587b509c45d6de7a40881c30f1f7d434">operator-&gt;</a> ()  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">const <a class="el" href="class_block_size.html">BlockSize</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_block_size.html#a1df8868d2a850ee865b206a72175f0eb">operator-&gt;</a> () const   throw ()</td></tr>
 <tr><td colspan="2"><h2><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_block_size.html">BlockSize</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_block_size.html#ac022f97ed4f42a64936fdc0f3479c1cb">getDefault</a> ()  throw ()</td></tr>
@@ -124,9 +102,6 @@ Static Public Member Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a block size that is a fraction of the default block size.  <a href="#a692b89b56a9004c70c1aeaf8f6cb1d09"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static const <a class="el" href="class_block_size.html">BlockSize</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_block_size.html#a5130faee8cc5b8862d39ecfecca4c16c">getMultipleOfDefault</a> (<a class="el" href="class_variable.html">IntVariable</a> const &amp;factor)  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a block size that is a multiple of the default block size.  <a href="#a5130faee8cc5b8862d39ecfecca4c16c"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static const <a class="el" href="class_block_size.html">BlockSize</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_block_size.html#a78aaaf5a6aacd02ecaaf51af8c25f2fe">getMultipleOfDefault</a> (const int factor)  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static const <a class="el" href="class_block_size.html">BlockSize</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_block_size.html#add0eddaba59d8d76c135727a64c6b842">getMultipleOfDefault</a> (<a class="el" href="class_variable.html">DoubleVariable</a> const &amp;factor)  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static const <a class="el" href="class_block_size.html">BlockSize</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_block_size.html#a4677711209117060b10dfb120c18d410">getMultipleOfDefault</a> (const double factor)  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static const <a class="el" href="class_block_size.html">BlockSize</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_block_size.html#aa6ada18e533ad70d58aae4e0549fab84">noPreference</a> ()  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">A dummy block size used to indicate no preference.  <a href="#aa6ada18e533ad70d58aae4e0549fab84"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static const <a class="el" href="class_block_size.html">BlockSize</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_block_size.html#a908f1f70af4835dfe259c9f914c563b9">getBlockSize1</a> ()  throw ()</td></tr>
@@ -135,72 +110,10 @@ Static Public Member Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Select a block size based on a unit's preference and its inputs.  <a href="#afcc989dcc540a3d62f67d939f16c6457"></a><br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
-<div class="textblock"><p>A specialised Variable&lt;int&gt; for handling block sizes. </p>
-<p>One or more <a class="el" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a> objects store the block size for different parts of the graph. For most applications there can be just one, default block size which is used by the enitre graph (plus a global block size of 1 being available for things like constants and other "control rate" channels). All channels register themsleves as a <a class="el" href="class_variable.html#aa2d9bec5af21535eb910c562a135b229">BlockSize::Receiver</a> so they can be notified of block size changes and resize their output buffers accordingly. There are accessors to get the default block size, and a "no preference" block size (which is equal to 0). Generators (e.g., oscillators) should have a preference (e.g., the default block size) but processors should commonly specify no preference (thus, their block size will be decided according to the block size of their inputs). </p>
+<div class="textblock"><p>A specialised <a class="el" href="class_variable.html">Variable&lt;int&gt;</a> for handling block sizes. </p>
+<p>One or more <a class="el" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a> objects store the block size for different parts of the graph. For most applications there can be just one, default block size which is used by the enitre graph (plus a global block size of 1 being available for things like constants and other "control rate" channels). All channels register themsleves as a BlockSize::Receiver so they can be notified of block size changes and resize their output buffers accordingly. There are accessors to get the default block size, and a "no preference" block size (which is equal to 0). Generators (e.g., oscillators) should have a preference (e.g., the default block size) but processors should commonly specify no preference (thus, their block size will be decided according to the block size of their inputs). </p>
 <dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="class_sample_rate.html" title="A specialised Variable&lt;double&gt; for handling sample rates.">SampleRate</a> </dd></dl>
-</div><hr/><h2>Member Typedef Documentation</h2>
-<a class="anchor" id="a4040584c77fe568474f4d8cfd0486dd8"></a><!-- doxytag: member="BlockSize::Internal" ref="a4040584c77fe568474f4d8cfd0486dd8" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_variable_internal.html">VariableInternal</a>&lt;int&gt; <a class="el" href="class_variable_internal.html">BlockSize::Internal</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="class_variable.html#aa48b89eeec4c57a9648acdaab46d9e49">Variable&lt; Type &gt;</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a9a8590ac83812328fbd25ab0a0b0a6a0"></a><!-- doxytag: member="BlockSize::Base" ref="a9a8590ac83812328fbd25ab0a0b0a6a0" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_variable.html">IntVariable</a> <a class="el" href="class_variable.html">BlockSize::Base</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="class_variable.html#a7d33a8832aa7de89feb902833102589a">Variable&lt; Type &gt;</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="abc106659fc8fa174e2d80df9caa1d6ae"></a><!-- doxytag: member="BlockSize::Weak" ref="abc106659fc8fa174e2d80df9caa1d6ae" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_weak_pointer_container.html">WeakPointerContainer</a>&lt;<a class="el" href="class_block_size.html">BlockSize</a>&gt; <a class="el" href="class_weak_pointer_container.html">BlockSize::Weak</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="class_variable.html#a36b782ed60391366e7bc3ac12ed61860">Variable&lt; Type &gt;</a>.</p>
-
-</div>
-</div>
-<hr/><h2>Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a9382fb3b82ae5150202f22c196720651"></a><!-- doxytag: member="BlockSize::BlockSize" ref="a9382fb3b82ae5150202f22c196720651" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">BEGIN_PLONK_NAMESPACE BlockSize::BlockSize </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
+</div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a3267344c93ac784230c999d152425200"></a><!-- doxytag: member="BlockSize::BlockSize" ref="a3267344c93ac784230c999d152425200" args="(SampleRate const &amp;sampleRate)" -->
 <div class="memitem">
 <div class="memproto">
@@ -277,40 +190,6 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a595309bd6aed699c9cff17a59f32e795"></a><!-- doxytag: member="BlockSize::BlockSize" ref="a595309bd6aed699c9cff17a59f32e795" args="(BlockSizeDefault const &amp;copy)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">BlockSize::BlockSize </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_block_size_default.html">BlockSizeDefault</a> const &amp;&#160;</td>
-          <td class="paramname"><em>copy</em></td><td>)</td>
-          <td>  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ab3f321a633030e2d5c8f9b9ae0ddb54a"></a><!-- doxytag: member="BlockSize::BlockSize" ref="ab3f321a633030e2d5c8f9b9ae0ddb54a" args="(BlockSizeNoPreference const &amp;copy)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">BlockSize::BlockSize </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_block_size_no_preference.html">BlockSizeNoPreference</a> const &amp;&#160;</td>
-          <td class="paramname"><em>copy</em></td><td>)</td>
-          <td>  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 <a class="anchor" id="a38a8b440dbc0e857af8b3ec993ccc7e6"></a><!-- doxytag: member="BlockSize::BlockSize" ref="a38a8b440dbc0e857af8b3ec993ccc7e6" args="(OtherType const &amp;initValue)" -->
 <div class="memitem">
 <div class="memproto">
@@ -334,12 +213,43 @@ template&lt;class OtherType &gt; </div>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="ac022f97ed4f42a64936fdc0f3479c1cb"></a><!-- doxytag: member="BlockSize::getDefault" ref="ac022f97ed4f42a64936fdc0f3479c1cb" args="()" -->
+<a class="anchor" id="afcc989dcc540a3d62f67d939f16c6457"></a><!-- doxytag: member="BlockSize::decide" ref="afcc989dcc540a3d62f67d939f16c6457" args="(BlockSize const &amp;inputBlockSize, BlockSize const &amp;preferredBlockSize)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_block_size.html">BlockSize</a> &amp; BlockSize::getDefault </td>
+          <td class="memname"><a class="el" href="class_block_size.html">BlockSize</a> BlockSize::decide </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_block_size.html">BlockSize</a> const &amp;&#160;</td>
+          <td class="paramname"><em>inputBlockSize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_block_size.html">BlockSize</a> const &amp;&#160;</td>
+          <td class="paramname"><em>preferredBlockSize</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>  throw ()<code> [static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Select a block size based on a unit's preference and its inputs. </p>
+<p>Here the <code>preferredBlockSize</code> will be return UNLESS it indicates "no
+     preference". If the inputs have "no preference" then the default block size is returned. </p>
+
+</div>
+</div>
+<a class="anchor" id="a908f1f70af4835dfe259c9f914c563b9"></a><!-- doxytag: member="BlockSize::getBlockSize1" ref="a908f1f70af4835dfe259c9f914c563b9" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="class_block_size.html">BlockSize</a> &amp; BlockSize::getBlockSize1 </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td>  throw ()<code> [static]</code></td>
@@ -348,10 +258,9 @@ template&lt;class OtherType &gt; </div>
 </div>
 <div class="memdoc">
 
-<p>Gets the default block size. </p>
-<p>In most situations this will be the hardware block size. This defaults to 512, to update it you should do this early in your initialisation code (before creating any units). </p>
-<div class="fragment"><pre class="fragment">        <a class="code" href="class_block_size.html#ac022f97ed4f42a64936fdc0f3479c1cb" title="Gets the default block size.">BlockSize::getDefault</a>().<a class="code" href="class_variable.html#ab412784e254b3fb3914d7118b03777c9" title="Sets the current value.">setValue</a>(newBlockSize)
-</pre></div> 
+<p>Get a block size of 1. </p>
+<p>NB This is currently the same size as the default control rate block size but are two separate copies. </p>
+
 </div>
 </div>
 <a class="anchor" id="a0b63924e21af360f0e44fdaccb56c14d"></a><!-- doxytag: member="BlockSize::getControlRateBlockSize" ref="a0b63924e21af360f0e44fdaccb56c14d" args="()" -->
@@ -371,6 +280,26 @@ template&lt;class OtherType &gt; </div>
 <p>Gets the default control rate block size. </p>
 <p>This is currently 1. </p>
 
+</div>
+</div>
+<a class="anchor" id="ac022f97ed4f42a64936fdc0f3479c1cb"></a><!-- doxytag: member="BlockSize::getDefault" ref="ac022f97ed4f42a64936fdc0f3479c1cb" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_block_size.html">BlockSize</a> &amp; BlockSize::getDefault </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()<code> [static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Gets the default block size. </p>
+<p>In most situations this will be the hardware block size. This defaults to 512, to update it you should do this early in your initialisation code (before creating any units). </p>
+<div class="fragment"><pre class="fragment">        <a class="code" href="class_block_size.html#ac022f97ed4f42a64936fdc0f3479c1cb" title="Gets the default block size.">BlockSize::getDefault</a>().<a class="code" href="class_variable.html#ab412784e254b3fb3914d7118b03777c9" title="Sets the current value.">setValue</a>(newBlockSize)
+</pre></div> 
 </div>
 </div>
 <a class="anchor" id="a692b89b56a9004c70c1aeaf8f6cb1d09"></a><!-- doxytag: member="BlockSize::getFractionOfDefault" ref="a692b89b56a9004c70c1aeaf8f6cb1d09" args="(IntVariable const &amp;divisor)" -->
@@ -413,57 +342,6 @@ template&lt;class OtherType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a78aaaf5a6aacd02ecaaf51af8c25f2fe"></a><!-- doxytag: member="BlockSize::getMultipleOfDefault" ref="a78aaaf5a6aacd02ecaaf51af8c25f2fe" args="(const int factor)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">static const <a class="el" href="class_block_size.html">BlockSize</a> BlockSize::getMultipleOfDefault </td>
-          <td>(</td>
-          <td class="paramtype">const int&#160;</td>
-          <td class="paramname"><em>factor</em></td><td>)</td>
-          <td>  throw ()<code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="add0eddaba59d8d76c135727a64c6b842"></a><!-- doxytag: member="BlockSize::getMultipleOfDefault" ref="add0eddaba59d8d76c135727a64c6b842" args="(DoubleVariable const &amp;factor)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">static const <a class="el" href="class_block_size.html">BlockSize</a> BlockSize::getMultipleOfDefault </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_variable.html">DoubleVariable</a> const &amp;&#160;</td>
-          <td class="paramname"><em>factor</em></td><td>)</td>
-          <td>  throw ()<code> [static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a4677711209117060b10dfb120c18d410"></a><!-- doxytag: member="BlockSize::getMultipleOfDefault" ref="a4677711209117060b10dfb120c18d410" args="(const double factor)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">static const <a class="el" href="class_block_size.html">BlockSize</a> BlockSize::getMultipleOfDefault </td>
-          <td>(</td>
-          <td class="paramtype">const double&#160;</td>
-          <td class="paramname"><em>factor</em></td><td>)</td>
-          <td>  throw ()<code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 <a class="anchor" id="aa6ada18e533ad70d58aae4e0549fab84"></a><!-- doxytag: member="BlockSize::noPreference" ref="aa6ada18e533ad70d58aae4e0549fab84" args="()" -->
 <div class="memitem">
 <div class="memproto">
@@ -483,95 +361,9 @@ template&lt;class OtherType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a908f1f70af4835dfe259c9f914c563b9"></a><!-- doxytag: member="BlockSize::getBlockSize1" ref="a908f1f70af4835dfe259c9f914c563b9" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const <a class="el" href="class_block_size.html">BlockSize</a> &amp; BlockSize::getBlockSize1 </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Get a block size of 1. </p>
-<p>NB This is currently the same size as the default control rate block size but are two separate copies. </p>
-
-</div>
-</div>
-<a class="anchor" id="afcc989dcc540a3d62f67d939f16c6457"></a><!-- doxytag: member="BlockSize::decide" ref="afcc989dcc540a3d62f67d939f16c6457" args="(BlockSize const &amp;inputBlockSize, BlockSize const &amp;preferredBlockSize)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_block_size.html">BlockSize</a> BlockSize::decide </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_block_size.html">BlockSize</a> const &amp;&#160;</td>
-          <td class="paramname"><em>inputBlockSize</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="class_block_size.html">BlockSize</a> const &amp;&#160;</td>
-          <td class="paramname"><em>preferredBlockSize</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td>  throw ()<code> [static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Select a block size based on a unit's preference and its inputs. </p>
-<p>Here the <code>preferredBlockSize</code> will be return UNLESS it indicates "no
-     preference". If the inputs have "no preference" then the default block size is returned. </p>
-
-</div>
-</div>
-<a class="anchor" id="a587b509c45d6de7a40881c30f1f7d434"></a><!-- doxytag: member="BlockSize::operator&#45;&gt;" ref="a587b509c45d6de7a40881c30f1f7d434" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_block_size.html">BlockSize</a>* BlockSize::operator-&gt; </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="class_smart_pointer_container_base.html#ab65284d17f2082ce89f6b1017011e418">SmartPointerContainerBase&lt; VariableInternalBase&lt; Type &gt; &gt;</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a1df8868d2a850ee865b206a72175f0eb"></a><!-- doxytag: member="BlockSize::operator&#45;&gt;" ref="a1df8868d2a850ee865b206a72175f0eb" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const <a class="el" href="class_block_size.html">BlockSize</a>* BlockSize::operator-&gt; </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="class_smart_pointer_container_base.html#a2ba4f8902c0316ee3b8dbe10c3332002">SmartPointerContainerBase&lt; VariableInternalBase&lt; Type &gt; &gt;</a>.</p>
-
-</div>
-</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li><a class="el" href="plonk___block_size_8h_source.html">plonk_BlockSize.h</a></li>
-<li><a class="el" href="plonk___block_size_8cpp.html">plonk_BlockSize.cpp</a></li>
+<li>plonk_BlockSize.cpp</li>
 </ul>
 </div>
 <!-- window showing the filter options -->
@@ -579,7 +371,7 @@ template&lt;class OtherType &gt; </div>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Properties</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -588,7 +380,7 @@ template&lt;class OtherType &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 5 2012 17:05:00 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 8 2014 12:26:52 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

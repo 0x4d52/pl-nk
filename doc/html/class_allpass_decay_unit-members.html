@@ -20,7 +20,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="pl-nk-logo-small.png"/></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">pl-nk</div>
+   <div id="projectname">pl-nk&#160;<span id="projectnumber">v0.4.5</span></div>
+   <div id="projectbrief">Plonk|Plink|Plank are a set of cross-platform C/C++ frameworks for audio software development</div>
   </td>
  </tr>
  </tbody>
@@ -29,8 +30,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -62,28 +63,18 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="header">
   <div class="headertitle">
-<div class="title">AllpassDecayUnit&lt; SampleType &gt; Member List</div>  </div>
+<div class="title">AllpassDecayUnit&lt; SampleType, InterpTypeCode &gt; Member List</div>  </div>
 </div>
 <div class="contents">
-This is the complete list of members for <a class="el" href="class_allpass_decay_unit.html">AllpassDecayUnit&lt; SampleType &gt;</a>, including all inherited members.<table>
-  <tr class="memlist"><td><a class="el" href="class_allpass_decay_unit.html#a802d7c4afc9a9565ff5ef678865ea486">AltFormType</a> typedef</td><td><a class="el" href="class_allpass_decay_unit.html">AllpassDecayUnit&lt; SampleType &gt;</a></td><td></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_allpass_decay_unit.html#a2605ea3a91b16128a264ffa219453e44">ar</a>(UnitType const &amp;input, DurationUnitType const &amp;duration=DurationType(0.5), DecayUnitType const &amp;decay=DecayType(1.0), const DurationType maximumDuration=DurationType(1.0), UnitType const &amp;mul=SampleType(1), UnitType const &amp;add=SampleType(0), BlockSize const &amp;preferredBlockSize=BlockSize::getDefault(), SampleRate const &amp;preferredSampleRate=SampleRate::getDefault())</td><td><a class="el" href="class_allpass_decay_unit.html">AllpassDecayUnit&lt; SampleType &gt;</a></td><td><code> [inline, static]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_allpass_decay_unit.html#a84b403586e25e4064fe745edc5d970a7">DecayType</a> typedef</td><td><a class="el" href="class_allpass_decay_unit.html">AllpassDecayUnit&lt; SampleType &gt;</a></td><td></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_allpass_decay_unit.html#aaaaa5143d5c32bb18cb813e82609a47f">DecayUnitType</a> typedef</td><td><a class="el" href="class_allpass_decay_unit.html">AllpassDecayUnit&lt; SampleType &gt;</a></td><td></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_allpass_decay_unit.html#acc60d3f5bf6c8e31da8cc00a711e1a6e">DelayInternal</a> typedef</td><td><a class="el" href="class_allpass_decay_unit.html">AllpassDecayUnit&lt; SampleType &gt;</a></td><td></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_allpass_decay_unit.html#a2b08f651e2678821327c762746cccd69">DurationType</a> typedef</td><td><a class="el" href="class_allpass_decay_unit.html">AllpassDecayUnit&lt; SampleType &gt;</a></td><td></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_allpass_decay_unit.html#a8b73c5bbc455a983a48b5c36fb01a32a">DurationUnitType</a> typedef</td><td><a class="el" href="class_allpass_decay_unit.html">AllpassDecayUnit&lt; SampleType &gt;</a></td><td></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_allpass_decay_unit.html#a8e7d818800155ff6897204eaf6fa91d5">FormType</a> typedef</td><td><a class="el" href="class_allpass_decay_unit.html">AllpassDecayUnit&lt; SampleType &gt;</a></td><td></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_allpass_decay_unit.html#adf9165985d345cae807dbc4d74b31f72">getInfo</a>()</td><td><a class="el" href="class_allpass_decay_unit.html">AllpassDecayUnit&lt; SampleType &gt;</a></td><td><code> [inline, static]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_allpass_decay_unit.html#a3a6818f7511855be6bc81c78345c37e4">Inputs</a> typedef</td><td><a class="el" href="class_allpass_decay_unit.html">AllpassDecayUnit&lt; SampleType &gt;</a></td><td></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_allpass_decay_unit.html#a4e838bca97a90495ffa97711306a2c96">UnitType</a> typedef</td><td><a class="el" href="class_allpass_decay_unit.html">AllpassDecayUnit&lt; SampleType &gt;</a></td><td></td></tr>
+This is the complete list of members for <a class="el" href="class_allpass_decay_unit.html">AllpassDecayUnit&lt; SampleType, InterpTypeCode &gt;</a>, including all inherited members.<table>
+  <tr class="memlist"><td><a class="el" href="class_allpass_decay_unit.html#a65f97adc2d1d7e235f036337bdec7902">ar</a>(UnitType const &amp;input, DurationUnitType const &amp;duration=DurationType(0.5), DecayUnitType const &amp;decay=DecayType(1.0), const DurationType maximumDuration=DurationType(1.0), UnitType const &amp;mul=SampleType(1), UnitType const &amp;add=SampleType(0), BlockSize const &amp;preferredBlockSize=BlockSize::getDefault(), SampleRate const &amp;preferredSampleRate=SampleRate::getDefault())</td><td><a class="el" href="class_allpass_decay_unit.html">AllpassDecayUnit&lt; SampleType, InterpTypeCode &gt;</a></td><td><code> [inline, static]</code></td></tr>
 </table></div>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Properties</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -92,7 +83,7 @@ This is the complete list of members for <a class="el" href="class_allpass_decay
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 5 2012 17:04:58 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 8 2014 12:26:52 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

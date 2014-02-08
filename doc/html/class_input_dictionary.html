@@ -20,7 +20,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="pl-nk-logo-small.png"/></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">pl-nk</div>
+   <div id="projectname">pl-nk&#160;<span id="projectnumber">v0.4.5</span></div>
+   <div id="projectbrief">Plonk|Plink|Plank are a set of cross-platform C/C++ frameworks for audio software development</div>
   </td>
  </tr>
  </tbody>
@@ -29,8 +30,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -62,104 +63,36 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="header">
   <div class="summary">
-<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a>  </div>
   <div class="headertitle">
 <div class="title">InputDictionary Class Reference</div>  </div>
 </div>
 <div class="contents">
 <!-- doxytag: class="InputDictionary" --><!-- doxytag: inherits="Dictionary&lt; Dynamic, int &gt;" -->
-<p>For storing named <a class="el" href="class_dynamic.html">Dynamic</a> objects.  
+<p>For storing named Dynamic objects.  
  <a href="class_input_dictionary.html#details">More...</a></p>
-<div class="dynheader">
-Inheritance diagram for InputDictionary:</div>
-<div class="dyncontent">
- <div class="center">
-  <img src="class_input_dictionary.png" usemap="#InputDictionary_map" alt=""/>
-  <map id="InputDictionary_map" name="InputDictionary_map">
-<area href="class_dictionary.html" alt="Dictionary&lt; Dynamic, int &gt;" shape="rect" coords="0,168,353,192"/>
-<area href="class_smart_pointer_container.html" alt="SmartPointerContainer&lt; SmartPointerType, enableWeak &gt;" shape="rect" coords="0,112,353,136"/>
-<area href="class_smart_pointer_container_base.html" title="This manages a SmartPointer pointer." alt="SmartPointerContainerBase&lt; SmartPointerType &gt;" shape="rect" coords="0,56,353,80"/>
-<area href="class_plonk_base.html" alt="PlonkBase" shape="rect" coords="0,0,353,24"/>
-</map>
- </div></div>
+
+<p>Inherits <a class="el" href="class_dictionary.html">Dictionary&lt; Dynamic, int &gt;</a>.</p>
 
 <p><a href="class_input_dictionary-members.html">List of all members.</a></p>
 <table class="memberdecls">
-<tr><td colspan="2"><h2><a name="pub-types"></a>
-Public Types</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_weak_pointer_container.html">WeakPointerContainer</a><br class="typebreak"/>
-&lt; <a class="el" href="class_input_dictionary.html">InputDictionary</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_input_dictionary.html#aa435ae2697ed8dc9e7da1d908364d657">Weak</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_dictionary.html">Dictionary</a>&lt; <a class="el" href="class_dynamic.html">Dynamic</a>, int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_input_dictionary.html#aa416b65cfc080b9a54bf51e0d27c5dd0">Base</a></td></tr>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_input_dictionary.html#a785fac6fa362988a9237a9c76f9c1eed">InputDictionary</a> ()  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_input_dictionary.html#aa9195863f264f8f6862e80477c03ea83">InputDictionary</a> (<a class="el" href="class_input_dictionary.html">InputDictionary</a> const &amp;copy)  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy constructor.  <a href="#aa9195863f264f8f6862e80477c03ea83"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">const <a class="el" href="class_block_size.html">BlockSize</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_input_dictionary.html#acbb83df5e4fa32283a471aaf591ae550">getMinBlockSize</a> () const   throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Find the minimum Unit block size in this dictionary.  <a href="#acbb83df5e4fa32283a471aaf591ae550"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">const <a class="el" href="class_block_size.html">BlockSize</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_input_dictionary.html#a1c246911ba287f20fb7128eedadb0566">getMaxBlockSize</a> () const   throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Find the maximum Unit block size in this dictionary.  <a href="#a1c246911ba287f20fb7128eedadb0566"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">const <a class="el" href="class_sample_rate.html">SampleRate</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_input_dictionary.html#a0ada4022649b9844321244a1f56a6b35">getMinSampleRate</a> () const   throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">const <a class="el" href="class_sample_rate.html">SampleRate</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_input_dictionary.html#a4be8e52456db84b80e8f2db38bd977fb">getMaxSampleRate</a> () const   throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_input_dictionary.html">InputDictionary</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_input_dictionary.html#a2f1736b42993b530ae0000070506f520">getChannel</a> (const int index)  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns this dictionary with all the units containing only a single channel.  <a href="#a2f1736b42993b530ae0000070506f520"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_input_dictionary.html#aa21b83d48d840409efb41c7c6c551bb4">getMaxNumChannels</a> () const   throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Find the maximum number of channels in this dictionary (i.e., in unit, units and busses).  <a href="#aa21b83d48d840409efb41c7c6c551bb4"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_input_dictionary.html">InputDictionary</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_input_dictionary.html#a9deee976aa50b7a376b619731311e67f">operator-&gt;</a> ()  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">const <a class="el" href="class_input_dictionary.html">InputDictionary</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_input_dictionary.html#ab8a1a75c1c4034efdb3f3f4f815d4b64">operator-&gt;</a> () const   throw ()</td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
-<div class="textblock"><p>For storing named <a class="el" href="class_dynamic.html">Dynamic</a> objects. </p>
+<div class="textblock"><p>For storing named Dynamic objects. </p>
 <p>This is used by Channel classes to receive inputs as a dictionary of named items. </p>
-</div><hr/><h2>Member Typedef Documentation</h2>
-<a class="anchor" id="aa435ae2697ed8dc9e7da1d908364d657"></a><!-- doxytag: member="InputDictionary::Weak" ref="aa435ae2697ed8dc9e7da1d908364d657" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_weak_pointer_container.html">WeakPointerContainer</a>&lt;<a class="el" href="class_input_dictionary.html">InputDictionary</a>&gt; <a class="el" href="class_weak_pointer_container.html">InputDictionary::Weak</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="class_dictionary.html#a93150b94ceaf76c1dad10f5894fe7d34">Dictionary&lt; Dynamic, int &gt;</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="aa416b65cfc080b9a54bf51e0d27c5dd0"></a><!-- doxytag: member="InputDictionary::Base" ref="aa416b65cfc080b9a54bf51e0d27c5dd0" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_dictionary.html">Dictionary</a>&lt;<a class="el" href="class_dynamic.html">Dynamic</a>,int&gt; <a class="el" href="class_dictionary.html">InputDictionary::Base</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="class_dictionary.html#a63fa6492d520e66be961871b7533f385">Dictionary&lt; Dynamic, int &gt;</a>.</p>
-
-</div>
-</div>
-<hr/><h2>Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a785fac6fa362988a9237a9c76f9c1eed"></a><!-- doxytag: member="InputDictionary::InputDictionary" ref="a785fac6fa362988a9237a9c76f9c1eed" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">BEGIN_PLONK_NAMESPACE InputDictionary::InputDictionary </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
+</div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="aa9195863f264f8f6862e80477c03ea83"></a><!-- doxytag: member="InputDictionary::InputDictionary" ref="aa9195863f264f8f6862e80477c03ea83" args="(InputDictionary const &amp;copy)" -->
 <div class="memitem">
 <div class="memproto">
@@ -180,76 +113,6 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="acbb83df5e4fa32283a471aaf591ae550"></a><!-- doxytag: member="InputDictionary::getMinBlockSize" ref="acbb83df5e4fa32283a471aaf591ae550" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const <a class="el" href="class_block_size.html">BlockSize</a> InputDictionary::getMinBlockSize </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Find the minimum Unit block size in this dictionary. </p>
-<p>This is not recursive but does search each channel of the units. </p>
-
-</div>
-</div>
-<a class="anchor" id="a1c246911ba287f20fb7128eedadb0566"></a><!-- doxytag: member="InputDictionary::getMaxBlockSize" ref="a1c246911ba287f20fb7128eedadb0566" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const <a class="el" href="class_block_size.html">BlockSize</a> InputDictionary::getMaxBlockSize </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Find the maximum Unit block size in this dictionary. </p>
-<p>This is not recursive but does search each channel of the units. </p>
-
-</div>
-</div>
-<a class="anchor" id="a0ada4022649b9844321244a1f56a6b35"></a><!-- doxytag: member="InputDictionary::getMinSampleRate" ref="a0ada4022649b9844321244a1f56a6b35" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const <a class="el" href="class_sample_rate.html">SampleRate</a> InputDictionary::getMinSampleRate </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a4be8e52456db84b80e8f2db38bd977fb"></a><!-- doxytag: member="InputDictionary::getMaxSampleRate" ref="a4be8e52456db84b80e8f2db38bd977fb" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const <a class="el" href="class_sample_rate.html">SampleRate</a> InputDictionary::getMaxSampleRate </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 <a class="anchor" id="a2f1736b42993b530ae0000070506f520"></a><!-- doxytag: member="InputDictionary::getChannel" ref="a2f1736b42993b530ae0000070506f520" args="(const int index)" -->
 <div class="memitem">
 <div class="memproto">
@@ -275,6 +138,25 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a1c246911ba287f20fb7128eedadb0566"></a><!-- doxytag: member="InputDictionary::getMaxBlockSize" ref="a1c246911ba287f20fb7128eedadb0566" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="class_block_size.html">BlockSize</a> InputDictionary::getMaxBlockSize </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Find the maximum Unit block size in this dictionary. </p>
+<p>This is not recursive but does search each channel of the units. </p>
+
+</div>
+</div>
 <a class="anchor" id="aa21b83d48d840409efb41c7c6c551bb4"></a><!-- doxytag: member="InputDictionary::getMaxNumChannels" ref="aa21b83d48d840409efb41c7c6c551bb4" args="() const " -->
 <div class="memitem">
 <div class="memproto">
@@ -294,45 +176,28 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a9deee976aa50b7a376b619731311e67f"></a><!-- doxytag: member="InputDictionary::operator&#45;&gt;" ref="a9deee976aa50b7a376b619731311e67f" args="()" -->
+<a class="anchor" id="acbb83df5e4fa32283a471aaf591ae550"></a><!-- doxytag: member="InputDictionary::getMinBlockSize" ref="acbb83df5e4fa32283a471aaf591ae550" args="() const " -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_input_dictionary.html">InputDictionary</a>* InputDictionary::operator-&gt; </td>
+          <td class="memname">const <a class="el" href="class_block_size.html">BlockSize</a> InputDictionary::getMinBlockSize </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
+          <td> const  throw ()</td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="class_dictionary.html#a7a7216ec346e85989ff8246aef1e806f">Dictionary&lt; Dynamic, int &gt;</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ab8a1a75c1c4034efdb3f3f4f815d4b64"></a><!-- doxytag: member="InputDictionary::operator&#45;&gt;" ref="ab8a1a75c1c4034efdb3f3f4f815d4b64" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const <a class="el" href="class_input_dictionary.html">InputDictionary</a>* InputDictionary::operator-&gt; </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="class_dictionary.html#a96a4c8347ab8a0373033e49e49ded93b">Dictionary&lt; Dynamic, int &gt;</a>.</p>
+<p>Find the minimum Unit block size in this dictionary. </p>
+<p>This is not recursive but does search each channel of the units. </p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li><a class="el" href="plonk___input_dictionary_8h_source.html">plonk_InputDictionary.h</a></li>
-<li><a class="el" href="plonk___input_dictionary_8cpp.html">plonk_InputDictionary.cpp</a></li>
+<li>plonk_InputDictionary.cpp</li>
 </ul>
 </div>
 <!-- window showing the filter options -->
@@ -340,7 +205,7 @@ Public Member Functions</h2></td></tr>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Properties</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -349,7 +214,7 @@ Public Member Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 5 2012 17:05:05 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 8 2014 12:26:52 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

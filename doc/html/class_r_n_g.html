@@ -20,7 +20,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="pl-nk-logo-small.png"/></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">pl-nk</div>
+   <div id="projectname">pl-nk&#160;<span id="projectnumber">v0.4.5</span></div>
+   <div id="projectbrief">Plonk|Plink|Plank are a set of cross-platform C/C++ frameworks for audio software development</div>
   </td>
  </tr>
  </tbody>
@@ -29,8 +30,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -62,38 +63,22 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="header">
   <div class="summary">
-<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a>  </div>
   <div class="headertitle">
 <div class="title">RNG Class Reference<div class="ingroups"><a class="el" href="group___plonk_other_user_classes.html">Other Plonk user classes</a></div></div>  </div>
 </div>
 <div class="contents">
-<!-- doxytag: class="RNG" --><!-- doxytag: inherits="SmartPointerContainer&lt; RNGInternal &gt;" -->
+<!-- doxytag: class="RNG" --><!-- doxytag: inherits="SmartPointerContainer" -->
 <p>Random number generator.  
  <a href="class_r_n_g.html#details">More...</a></p>
-<div class="dynheader">
-Inheritance diagram for RNG:</div>
-<div class="dyncontent">
- <div class="center">
-  <img src="class_r_n_g.png" usemap="#RNG_map" alt=""/>
-  <map id="RNG_map" name="RNG_map">
-<area href="class_smart_pointer_container.html" alt="SmartPointerContainer&lt; RNGInternal &gt;" shape="rect" coords="0,0,231,24"/>
-</map>
- </div></div>
+
+<p>Inherits SmartPointerContainer&lt; SmartPointerType, enableWeak &gt;.</p>
 
 <p><a href="class_r_n_g-members.html">List of all members.</a></p>
 <table class="memberdecls">
-<tr><td colspan="2"><h2><a name="pub-types"></a>
-Public Types</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_r_n_g_internal.html">RNGInternal</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_n_g.html#acaa45d0b4815a166def98155a9dc80ba">Internal</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_smart_pointer_container.html">SmartPointerContainer</a><br class="typebreak"/>
-&lt; <a class="el" href="class_r_n_g_internal.html">RNGInternal</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_n_g.html#a31fc3af92db0f42c258cf1c9cf964ffd">Base</a></td></tr>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_n_g.html#a0028b717ff3d402a5829fc09ab1c5ed4">RNG</a> ()  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_n_g.html#ae153671570e8007b6fa10e6bd2a56636">RNG</a> (<a class="el" href="class_r_n_g.html">RNG</a> const &amp;copy)  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_r_n_g.html">RNG</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_n_g.html#ad232137c7fcb68def173d3cbbee91aea">operator=</a> (<a class="el" href="class_r_n_g.html">RNG</a> const &amp;other)  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_n_g.html#aa131d14f6a74afc136ca32103adca4d7">seed</a> (const unsigned int value)  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Seed this random number generator.  <a href="#aa131d14f6a74afc136ca32103adca4d7"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_n_g.html#aeecbdccb6e1cf814fcfb61f2ea789a67">uniformInt</a> ()  throw ()</td></tr>
@@ -122,8 +107,6 @@ Public Member Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate a exponentially distributed random float between min and max.  <a href="#a7c587706ed3daa38b0a0c27146da1c67"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_n_g.html#a05bf1021e9ff83eea90b7acefa143b2a">exponential</a> (const double min, const double max)  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate a exponentially distributed random double between min and max.  <a href="#a05bf1021e9ff83eea90b7acefa143b2a"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_r_n_g.html">RNG</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_n_g.html#a80ae0c62a18121e55840f4e3f8c886d0">operator-&gt;</a> ()  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">const <a class="el" href="class_r_n_g.html">RNG</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_n_g.html#a21111ad2877f2b0bfaf36fd09fce256b">operator-&gt;</a> () const   throw ()</td></tr>
 <tr><td colspan="2"><h2><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_r_n_g.html">RNG</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_n_g.html#aa44a6fbe95ea8b66e3f7280389cf3a75">global</a> ()  throw ()</td></tr>
@@ -133,103 +116,7 @@ Static Public Member Functions</h2></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Random number generator. </p>
-</div><hr/><h2>Member Typedef Documentation</h2>
-<a class="anchor" id="acaa45d0b4815a166def98155a9dc80ba"></a><!-- doxytag: member="RNG::Internal" ref="acaa45d0b4815a166def98155a9dc80ba" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_r_n_g_internal.html">RNGInternal</a> <a class="el" href="class_r_n_g_internal.html">RNG::Internal</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a31fc3af92db0f42c258cf1c9cf964ffd"></a><!-- doxytag: member="RNG::Base" ref="a31fc3af92db0f42c258cf1c9cf964ffd" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_smart_pointer_container.html">SmartPointerContainer</a>&lt;<a class="el" href="class_r_n_g_internal.html">RNGInternal</a>&gt; <a class="el" href="class_smart_pointer_container.html">RNG::Base</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<hr/><h2>Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a0028b717ff3d402a5829fc09ab1c5ed4"></a><!-- doxytag: member="RNG::RNG" ref="a0028b717ff3d402a5829fc09ab1c5ed4" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">RNG::RNG </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ae153671570e8007b6fa10e6bd2a56636"></a><!-- doxytag: member="RNG::RNG" ref="ae153671570e8007b6fa10e6bd2a56636" args="(RNG const &amp;copy)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">RNG::RNG </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_r_n_g.html">RNG</a> const &amp;&#160;</td>
-          <td class="paramname"><em>copy</em></td><td>)</td>
-          <td>  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="ad232137c7fcb68def173d3cbbee91aea"></a><!-- doxytag: member="RNG::operator=" ref="ad232137c7fcb68def173d3cbbee91aea" args="(RNG const &amp;other)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_r_n_g.html">RNG</a> &amp; RNG::operator= </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_r_n_g.html">RNG</a> const &amp;&#160;</td>
-          <td class="paramname"><em>other</em></td><td>)</td>
-          <td>  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="aa44a6fbe95ea8b66e3f7280389cf3a75"></a><!-- doxytag: member="RNG::global" ref="aa44a6fbe95ea8b66e3f7280389cf3a75" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_r_n_g.html">RNG</a> &amp; RNG::global </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Get the global random number generator. </p>
-
-</div>
-</div>
+</div><hr/><h2>Member Function Documentation</h2>
 <a class="anchor" id="ac15818ab04c2f5c3299e92d4e85e6b78"></a><!-- doxytag: member="RNG::audio" ref="ac15818ab04c2f5c3299e92d4e85e6b78" args="()" -->
 <div class="memitem">
 <div class="memproto">
@@ -246,271 +133,6 @@ Static Public Member Functions</h2></td></tr>
 
 <p>Get the audio thread random number generator. </p>
 <p>NB This will be no longer sufficient when multicore. </p>
-
-</div>
-</div>
-<a class="anchor" id="aa131d14f6a74afc136ca32103adca4d7"></a><!-- doxytag: member="RNG::seed" ref="aa131d14f6a74afc136ca32103adca4d7" args="(const unsigned int value)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void RNG::seed </td>
-          <td>(</td>
-          <td class="paramtype">const unsigned int&#160;</td>
-          <td class="paramname"><em>value</em></td><td>)</td>
-          <td>  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Seed this random number generator. </p>
-
-</div>
-</div>
-<a class="anchor" id="aeecbdccb6e1cf814fcfb61f2ea789a67"></a><!-- doxytag: member="RNG::uniformInt" ref="aeecbdccb6e1cf814fcfb61f2ea789a67" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">unsigned int RNG::uniformInt </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Generate a random integer. </p>
-
-</div>
-</div>
-<a class="anchor" id="a6e56870f2b86b5f2c65c89bb182e452a"></a><!-- doxytag: member="RNG::uniform" ref="a6e56870f2b86b5f2c65c89bb182e452a" args="(const unsigned int max)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">unsigned int RNG::uniform </td>
-          <td>(</td>
-          <td class="paramtype">const unsigned int&#160;</td>
-          <td class="paramname"><em>max</em></td><td>)</td>
-          <td>  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Generate a uniformly distributed random integer between 0 and max-1. </p>
-
-</div>
-</div>
-<a class="anchor" id="a8ec9105d96c21cff1cf9c98df9e383b6"></a><!-- doxytag: member="RNG::uniform" ref="a8ec9105d96c21cff1cf9c98df9e383b6" args="(const unsigned int min, const unsigned int max)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">unsigned int RNG::uniform </td>
-          <td>(</td>
-          <td class="paramtype">const unsigned int&#160;</td>
-          <td class="paramname"><em>min</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const unsigned int&#160;</td>
-          <td class="paramname"><em>max</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td>  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Generate a uniformly distributed random integer between min and max-1. </p>
-
-</div>
-</div>
-<a class="anchor" id="a271c0ff3841d39e898561bb1ffd51450"></a><!-- doxytag: member="RNG::uniform" ref="a271c0ff3841d39e898561bb1ffd51450" args="(const int max)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int RNG::uniform </td>
-          <td>(</td>
-          <td class="paramtype">const int&#160;</td>
-          <td class="paramname"><em>max</em></td><td>)</td>
-          <td>  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Generate a uniformly distributed random integer between 0 and max-1. </p>
-
-</div>
-</div>
-<a class="anchor" id="aedd795e97f744c788e357388ec57c64c"></a><!-- doxytag: member="RNG::uniform" ref="aedd795e97f744c788e357388ec57c64c" args="(const int min, const int max)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int RNG::uniform </td>
-          <td>(</td>
-          <td class="paramtype">const int&#160;</td>
-          <td class="paramname"><em>min</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const int&#160;</td>
-          <td class="paramname"><em>max</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td>  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Generate a uniformly distributed random integer between min and max-1. </p>
-
-</div>
-</div>
-<a class="anchor" id="a2dc3b8cc59dbdff953b7cf09434a360c"></a><!-- doxytag: member="RNG::uniformFloat" ref="a2dc3b8cc59dbdff953b7cf09434a360c" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">float RNG::uniformFloat </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Generate a uniformly distributed random float between 0 and 1. </p>
-
-</div>
-</div>
-<a class="anchor" id="a4f798468273cd1b1bcbb6ae56b17cd79"></a><!-- doxytag: member="RNG::uniform" ref="a4f798468273cd1b1bcbb6ae56b17cd79" args="(const float max)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">float RNG::uniform </td>
-          <td>(</td>
-          <td class="paramtype">const float&#160;</td>
-          <td class="paramname"><em>max</em></td><td>)</td>
-          <td>  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Generate a uniformly distributed random float between 0 and max. </p>
-
-</div>
-</div>
-<a class="anchor" id="a3ad52daf4592a6a361897920f71a2ef7"></a><!-- doxytag: member="RNG::uniform" ref="a3ad52daf4592a6a361897920f71a2ef7" args="(const float min, const float max)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">float RNG::uniform </td>
-          <td>(</td>
-          <td class="paramtype">const float&#160;</td>
-          <td class="paramname"><em>min</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const float&#160;</td>
-          <td class="paramname"><em>max</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td>  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Generate a uniformly distributed random float between min and max. </p>
-
-</div>
-</div>
-<a class="anchor" id="a9b84bf032396bd8ca213db2786d4d41c"></a><!-- doxytag: member="RNG::uniformDouble" ref="a9b84bf032396bd8ca213db2786d4d41c" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">double RNG::uniformDouble </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Generate a uniformly distributed random double between 0 and 1. </p>
-
-</div>
-</div>
-<a class="anchor" id="a04952e6c6cc1a9b0261fff0fa85e7313"></a><!-- doxytag: member="RNG::uniform" ref="a04952e6c6cc1a9b0261fff0fa85e7313" args="(const double max)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">double RNG::uniform </td>
-          <td>(</td>
-          <td class="paramtype">const double&#160;</td>
-          <td class="paramname"><em>max</em></td><td>)</td>
-          <td>  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Generate a uniformly distributed random double between 0 and max. </p>
-
-</div>
-</div>
-<a class="anchor" id="a35f7bcb937a43e0c3bae77437875d6f1"></a><!-- doxytag: member="RNG::uniform" ref="a35f7bcb937a43e0c3bae77437875d6f1" args="(const double min, const double max)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">double RNG::uniform </td>
-          <td>(</td>
-          <td class="paramtype">const double&#160;</td>
-          <td class="paramname"><em>min</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const double&#160;</td>
-          <td class="paramname"><em>max</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td>  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Generate a uniformly distributed random double between min and max. </p>
 
 </div>
 </div>
@@ -572,45 +194,292 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a80ae0c62a18121e55840f4e3f8c886d0"></a><!-- doxytag: member="RNG::operator&#45;&gt;" ref="a80ae0c62a18121e55840f4e3f8c886d0" args="()" -->
+<a class="anchor" id="aa44a6fbe95ea8b66e3f7280389cf3a75"></a><!-- doxytag: member="RNG::global" ref="aa44a6fbe95ea8b66e3f7280389cf3a75" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_r_n_g.html">RNG</a>* RNG::operator-&gt; </td>
+          <td class="memname"><a class="el" href="class_r_n_g.html">RNG</a> &amp; RNG::global </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
+          <td>  throw ()<code> [static]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="class_smart_pointer_container_base.html#ab65284d17f2082ce89f6b1017011e418">SmartPointerContainerBase&lt; RNGInternal &gt;</a>.</p>
+<p>Get the global random number generator. </p>
 
 </div>
 </div>
-<a class="anchor" id="a21111ad2877f2b0bfaf36fd09fce256b"></a><!-- doxytag: member="RNG::operator&#45;&gt;" ref="a21111ad2877f2b0bfaf36fd09fce256b" args="() const " -->
+<a class="anchor" id="aa131d14f6a74afc136ca32103adca4d7"></a><!-- doxytag: member="RNG::seed" ref="aa131d14f6a74afc136ca32103adca4d7" args="(const unsigned int value)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const <a class="el" href="class_r_n_g.html">RNG</a>* RNG::operator-&gt; </td>
+          <td class="memname">void RNG::seed </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
+          <td class="paramtype">const unsigned int&#160;</td>
+          <td class="paramname"><em>value</em></td><td>)</td>
+          <td>  throw ()</td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="class_smart_pointer_container_base.html#a2ba4f8902c0316ee3b8dbe10c3332002">SmartPointerContainerBase&lt; RNGInternal &gt;</a>.</p>
+<p>Seed this random number generator. </p>
+
+</div>
+</div>
+<a class="anchor" id="a04952e6c6cc1a9b0261fff0fa85e7313"></a><!-- doxytag: member="RNG::uniform" ref="a04952e6c6cc1a9b0261fff0fa85e7313" args="(const double max)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double RNG::uniform </td>
+          <td>(</td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname"><em>max</em></td><td>)</td>
+          <td>  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Generate a uniformly distributed random double between 0 and max. </p>
+
+</div>
+</div>
+<a class="anchor" id="a35f7bcb937a43e0c3bae77437875d6f1"></a><!-- doxytag: member="RNG::uniform" ref="a35f7bcb937a43e0c3bae77437875d6f1" args="(const double min, const double max)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double RNG::uniform </td>
+          <td>(</td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname"><em>min</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname"><em>max</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Generate a uniformly distributed random double between min and max. </p>
+
+</div>
+</div>
+<a class="anchor" id="a271c0ff3841d39e898561bb1ffd51450"></a><!-- doxytag: member="RNG::uniform" ref="a271c0ff3841d39e898561bb1ffd51450" args="(const int max)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int RNG::uniform </td>
+          <td>(</td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>max</em></td><td>)</td>
+          <td>  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Generate a uniformly distributed random integer between 0 and max-1. </p>
+
+</div>
+</div>
+<a class="anchor" id="aedd795e97f744c788e357388ec57c64c"></a><!-- doxytag: member="RNG::uniform" ref="aedd795e97f744c788e357388ec57c64c" args="(const int min, const int max)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int RNG::uniform </td>
+          <td>(</td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>min</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>max</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Generate a uniformly distributed random integer between min and max-1. </p>
+
+</div>
+</div>
+<a class="anchor" id="a4f798468273cd1b1bcbb6ae56b17cd79"></a><!-- doxytag: member="RNG::uniform" ref="a4f798468273cd1b1bcbb6ae56b17cd79" args="(const float max)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float RNG::uniform </td>
+          <td>(</td>
+          <td class="paramtype">const float&#160;</td>
+          <td class="paramname"><em>max</em></td><td>)</td>
+          <td>  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Generate a uniformly distributed random float between 0 and max. </p>
+
+</div>
+</div>
+<a class="anchor" id="a8ec9105d96c21cff1cf9c98df9e383b6"></a><!-- doxytag: member="RNG::uniform" ref="a8ec9105d96c21cff1cf9c98df9e383b6" args="(const unsigned int min, const unsigned int max)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned int RNG::uniform </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned int&#160;</td>
+          <td class="paramname"><em>min</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned int&#160;</td>
+          <td class="paramname"><em>max</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Generate a uniformly distributed random integer between min and max-1. </p>
+
+</div>
+</div>
+<a class="anchor" id="a3ad52daf4592a6a361897920f71a2ef7"></a><!-- doxytag: member="RNG::uniform" ref="a3ad52daf4592a6a361897920f71a2ef7" args="(const float min, const float max)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float RNG::uniform </td>
+          <td>(</td>
+          <td class="paramtype">const float&#160;</td>
+          <td class="paramname"><em>min</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const float&#160;</td>
+          <td class="paramname"><em>max</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Generate a uniformly distributed random float between min and max. </p>
+
+</div>
+</div>
+<a class="anchor" id="a6e56870f2b86b5f2c65c89bb182e452a"></a><!-- doxytag: member="RNG::uniform" ref="a6e56870f2b86b5f2c65c89bb182e452a" args="(const unsigned int max)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned int RNG::uniform </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned int&#160;</td>
+          <td class="paramname"><em>max</em></td><td>)</td>
+          <td>  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Generate a uniformly distributed random integer between 0 and max-1. </p>
+
+</div>
+</div>
+<a class="anchor" id="a9b84bf032396bd8ca213db2786d4d41c"></a><!-- doxytag: member="RNG::uniformDouble" ref="a9b84bf032396bd8ca213db2786d4d41c" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double RNG::uniformDouble </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Generate a uniformly distributed random double between 0 and 1. </p>
+
+</div>
+</div>
+<a class="anchor" id="a2dc3b8cc59dbdff953b7cf09434a360c"></a><!-- doxytag: member="RNG::uniformFloat" ref="a2dc3b8cc59dbdff953b7cf09434a360c" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float RNG::uniformFloat </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Generate a uniformly distributed random float between 0 and 1. </p>
+
+</div>
+</div>
+<a class="anchor" id="aeecbdccb6e1cf814fcfb61f2ea789a67"></a><!-- doxytag: member="RNG::uniformInt" ref="aeecbdccb6e1cf814fcfb61f2ea789a67" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned int RNG::uniformInt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Generate a random integer. </p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li><a class="el" href="plonk___r_n_g_8h_source.html">plonk_RNG.h</a></li>
-<li><a class="el" href="plonk___r_n_g_8cpp.html">plonk_RNG.cpp</a></li>
+<li>plonk_RNG.cpp</li>
 </ul>
 </div>
 <!-- window showing the filter options -->
@@ -618,7 +487,7 @@ Static Public Member Functions</h2></td></tr>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Properties</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -627,7 +496,7 @@ Static Public Member Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 5 2012 17:05:09 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 8 2014 12:26:52 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

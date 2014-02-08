@@ -20,7 +20,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="pl-nk-logo-small.png"/></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">pl-nk</div>
+   <div id="projectname">pl-nk&#160;<span id="projectnumber">v0.4.5</span></div>
+   <div id="projectbrief">Plonk|Plink|Plank are a set of cross-platform C/C++ frameworks for audio software development</div>
   </td>
  </tr>
  </tbody>
@@ -29,8 +30,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -54,7 +55,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
       <li><a href="files.html"><span>File&#160;List</span></a></li>
-      <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
 <div class="header">
@@ -62,14 +62,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">plonk_UnaryOpChannel.h</div>  </div>
 </div>
 <div class="contents">
-<a href="plonk___unary_op_channel_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*</span>
+<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*</span>
 <a name="l00002"></a>00002 <span class="comment"> -------------------------------------------------------------------------------</span>
 <a name="l00003"></a>00003 <span class="comment"> This file is part of the Plink, Plonk, Plank libraries</span>
 <a name="l00004"></a>00004 <span class="comment">  by Martin Robinson</span>
 <a name="l00005"></a>00005 <span class="comment"> </span>
 <a name="l00006"></a>00006 <span class="comment"> http://code.google.com/p/pl-nk/</span>
 <a name="l00007"></a>00007 <span class="comment"> </span>
-<a name="l00008"></a>00008 <span class="comment"> Copyright University of the West of England, Bristol 2011-12</span>
+<a name="l00008"></a>00008 <span class="comment"> Copyright University of the West of England, Bristol 2011-14</span>
 <a name="l00009"></a>00009 <span class="comment"> All rights reserved.</span>
 <a name="l00010"></a>00010 <span class="comment"> </span>
 <a name="l00011"></a>00011 <span class="comment"> Redistribution and use in source and binary forms, with or without</span>
@@ -108,175 +108,178 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00044"></a>00044 <span class="preprocessor">#include &quot;../plonk_GraphForwardDeclarations.h&quot;</span>
 <a name="l00045"></a>00045 
 <a name="l00046"></a>00046 <span class="keyword">template</span>&lt;<span class="keyword">class</span> SampleType&gt;
-<a name="l00047"></a><a class="code" href="class_unary_op_utility.html">00047</a> <span class="keyword">class </span><a class="code" href="class_unary_op_utility.html">UnaryOpUtility</a>
+<a name="l00047"></a>00047 <span class="keyword">class </span>UnaryOpUtility
 <a name="l00048"></a>00048 {
 <a name="l00049"></a>00049 <span class="keyword">private</span>:
-<a name="l00050"></a>00050     <span class="keyword">typedef</span> SampleType (*<a class="code" href="class_function.html">Function</a>)(SampleType <span class="keyword">const</span>&amp;);
-<a name="l00051"></a>00051     
-<a name="l00052"></a>00052     <a class="code" href="class_unary_op_utility.html">UnaryOpUtility</a>() <span class="keywordflow">throw</span>()
-<a name="l00053"></a>00053     {
-<a name="l00054"></a>00054         names.<a class="code" href="class_dictionary.html#a6ee81b793caf6c652e9d6545ce848a13" title="Put an item into the dicionary associated with the specified key.">put</a> (&amp;plonk::move&lt;SampleType&gt;,        <span class="stringliteral">&quot;move&quot;</span>);
-<a name="l00055"></a>00055         names.<a class="code" href="class_dictionary.html#a6ee81b793caf6c652e9d6545ce848a13" title="Put an item into the dicionary associated with the specified key.">put</a> (&amp;plonk::inc&lt;SampleType&gt;,         <span class="stringliteral">&quot;inc&quot;</span>);
-<a name="l00056"></a>00056         names.<a class="code" href="class_dictionary.html#a6ee81b793caf6c652e9d6545ce848a13" title="Put an item into the dicionary associated with the specified key.">put</a> (&amp;plonk::dec&lt;SampleType&gt;,         <span class="stringliteral">&quot;dec&quot;</span>);
-<a name="l00057"></a>00057         names.<a class="code" href="class_dictionary.html#a6ee81b793caf6c652e9d6545ce848a13" title="Put an item into the dicionary associated with the specified key.">put</a> (&amp;plonk::abs&lt;SampleType&gt;,         <span class="stringliteral">&quot;abs&quot;</span>);
-<a name="l00058"></a>00058         names.<a class="code" href="class_dictionary.html#a6ee81b793caf6c652e9d6545ce848a13" title="Put an item into the dicionary associated with the specified key.">put</a> (&amp;plonk::log2&lt;SampleType&gt;,        <span class="stringliteral">&quot;log2&quot;</span>);
-<a name="l00059"></a>00059         names.<a class="code" href="class_dictionary.html#a6ee81b793caf6c652e9d6545ce848a13" title="Put an item into the dicionary associated with the specified key.">put</a> (&amp;plonk::neg&lt;SampleType&gt;,         <span class="stringliteral">&quot;neg&quot;</span>);
-<a name="l00060"></a>00060         names.<a class="code" href="class_dictionary.html#a6ee81b793caf6c652e9d6545ce848a13" title="Put an item into the dicionary associated with the specified key.">put</a> (&amp;plonk::reciprocal&lt;SampleType&gt;,  <span class="stringliteral">&quot;reciprocal&quot;</span>);
-<a name="l00061"></a>00061         names.<a class="code" href="class_dictionary.html#a6ee81b793caf6c652e9d6545ce848a13" title="Put an item into the dicionary associated with the specified key.">put</a> (&amp;plonk::sin&lt;SampleType&gt;,         <span class="stringliteral">&quot;sin&quot;</span>);
-<a name="l00062"></a>00062         names.<a class="code" href="class_dictionary.html#a6ee81b793caf6c652e9d6545ce848a13" title="Put an item into the dicionary associated with the specified key.">put</a> (&amp;plonk::cos&lt;SampleType&gt;,         <span class="stringliteral">&quot;cos&quot;</span>);
-<a name="l00063"></a>00063         names.<a class="code" href="class_dictionary.html#a6ee81b793caf6c652e9d6545ce848a13" title="Put an item into the dicionary associated with the specified key.">put</a> (&amp;plonk::tan&lt;SampleType&gt;,         <span class="stringliteral">&quot;tan&quot;</span>);
-<a name="l00064"></a>00064         names.<a class="code" href="class_dictionary.html#a6ee81b793caf6c652e9d6545ce848a13" title="Put an item into the dicionary associated with the specified key.">put</a> (&amp;plonk::asin&lt;SampleType&gt;,        <span class="stringliteral">&quot;asin&quot;</span>);
-<a name="l00065"></a>00065         names.<a class="code" href="class_dictionary.html#a6ee81b793caf6c652e9d6545ce848a13" title="Put an item into the dicionary associated with the specified key.">put</a> (&amp;plonk::acos&lt;SampleType&gt;,        <span class="stringliteral">&quot;acos&quot;</span>);
-<a name="l00066"></a>00066         names.<a class="code" href="class_dictionary.html#a6ee81b793caf6c652e9d6545ce848a13" title="Put an item into the dicionary associated with the specified key.">put</a> (&amp;plonk::atan&lt;SampleType&gt;,        <span class="stringliteral">&quot;atan&quot;</span>);
-<a name="l00067"></a>00067         names.<a class="code" href="class_dictionary.html#a6ee81b793caf6c652e9d6545ce848a13" title="Put an item into the dicionary associated with the specified key.">put</a> (&amp;plonk::sinh&lt;SampleType&gt;,        <span class="stringliteral">&quot;sinh&quot;</span>);
-<a name="l00068"></a>00068         names.<a class="code" href="class_dictionary.html#a6ee81b793caf6c652e9d6545ce848a13" title="Put an item into the dicionary associated with the specified key.">put</a> (&amp;plonk::cosh&lt;SampleType&gt;,        <span class="stringliteral">&quot;cosh&quot;</span>);
-<a name="l00069"></a>00069         names.<a class="code" href="class_dictionary.html#a6ee81b793caf6c652e9d6545ce848a13" title="Put an item into the dicionary associated with the specified key.">put</a> (&amp;plonk::tanh&lt;SampleType&gt;,        <span class="stringliteral">&quot;tanh&quot;</span>);
-<a name="l00070"></a>00070         names.<a class="code" href="class_dictionary.html#a6ee81b793caf6c652e9d6545ce848a13" title="Put an item into the dicionary associated with the specified key.">put</a> (&amp;plonk::sqrt&lt;SampleType&gt;,        <span class="stringliteral">&quot;sqrt&quot;</span>);
-<a name="l00071"></a>00071         names.<a class="code" href="class_dictionary.html#a6ee81b793caf6c652e9d6545ce848a13" title="Put an item into the dicionary associated with the specified key.">put</a> (&amp;plonk::log&lt;SampleType&gt;,         <span class="stringliteral">&quot;log&quot;</span>);
-<a name="l00072"></a>00072         names.<a class="code" href="class_dictionary.html#a6ee81b793caf6c652e9d6545ce848a13" title="Put an item into the dicionary associated with the specified key.">put</a> (&amp;plonk::log10&lt;SampleType&gt;,       <span class="stringliteral">&quot;log10&quot;</span>);
-<a name="l00073"></a>00073         names.<a class="code" href="class_dictionary.html#a6ee81b793caf6c652e9d6545ce848a13" title="Put an item into the dicionary associated with the specified key.">put</a> (&amp;plonk::exp&lt;SampleType&gt;,         <span class="stringliteral">&quot;exp&quot;</span>);
-<a name="l00074"></a>00074         names.<a class="code" href="class_dictionary.html#a6ee81b793caf6c652e9d6545ce848a13" title="Put an item into the dicionary associated with the specified key.">put</a> (&amp;plonk::squared&lt;SampleType&gt;,     <span class="stringliteral">&quot;squared&quot;</span>);
-<a name="l00075"></a>00075         names.<a class="code" href="class_dictionary.html#a6ee81b793caf6c652e9d6545ce848a13" title="Put an item into the dicionary associated with the specified key.">put</a> (&amp;plonk::cubed&lt;SampleType&gt;,       <span class="stringliteral">&quot;cubed&quot;</span>);
-<a name="l00076"></a>00076         names.<a class="code" href="class_dictionary.html#a6ee81b793caf6c652e9d6545ce848a13" title="Put an item into the dicionary associated with the specified key.">put</a> (&amp;plonk::ceil&lt;SampleType&gt;,        <span class="stringliteral">&quot;ceil&quot;</span>);
-<a name="l00077"></a>00077         names.<a class="code" href="class_dictionary.html#a6ee81b793caf6c652e9d6545ce848a13" title="Put an item into the dicionary associated with the specified key.">put</a> (&amp;plonk::floor&lt;SampleType&gt;,       <span class="stringliteral">&quot;floor&quot;</span>);
-<a name="l00078"></a>00078         names.<a class="code" href="class_dictionary.html#a6ee81b793caf6c652e9d6545ce848a13" title="Put an item into the dicionary associated with the specified key.">put</a> (&amp;plonk::frac&lt;SampleType&gt;,        <span class="stringliteral">&quot;frac&quot;</span>);
-<a name="l00079"></a>00079         names.<a class="code" href="class_dictionary.html#a6ee81b793caf6c652e9d6545ce848a13" title="Put an item into the dicionary associated with the specified key.">put</a> (&amp;plonk::sign&lt;SampleType&gt;,        <span class="stringliteral">&quot;sign&quot;</span>);
-<a name="l00080"></a>00080         names.<a class="code" href="class_dictionary.html#a6ee81b793caf6c652e9d6545ce848a13" title="Put an item into the dicionary associated with the specified key.">put</a> (&amp;plonk::m2f&lt;SampleType&gt;,         <span class="stringliteral">&quot;MIDI to frequency&quot;</span>);
-<a name="l00081"></a>00081         names.<a class="code" href="class_dictionary.html#a6ee81b793caf6c652e9d6545ce848a13" title="Put an item into the dicionary associated with the specified key.">put</a> (&amp;plonk::f2m&lt;SampleType&gt;,         <span class="stringliteral">&quot;Frequency to MIDI&quot;</span>);
-<a name="l00082"></a>00082         names.<a class="code" href="class_dictionary.html#a6ee81b793caf6c652e9d6545ce848a13" title="Put an item into the dicionary associated with the specified key.">put</a> (&amp;plonk::a2dB&lt;SampleType&gt;,        <span class="stringliteral">&quot;Amplitude to dB&quot;</span>);
-<a name="l00083"></a>00083         names.<a class="code" href="class_dictionary.html#a6ee81b793caf6c652e9d6545ce848a13" title="Put an item into the dicionary associated with the specified key.">put</a> (&amp;plonk::dB2a&lt;SampleType&gt;,        <span class="stringliteral">&quot;dB to Amplitude&quot;</span>);
-<a name="l00084"></a>00084         names.<a class="code" href="class_dictionary.html#a6ee81b793caf6c652e9d6545ce848a13" title="Put an item into the dicionary associated with the specified key.">put</a> (&amp;plonk::d2r&lt;SampleType&gt;,         <span class="stringliteral">&quot;Degrees to Radians&quot;</span>);
-<a name="l00085"></a>00085         names.<a class="code" href="class_dictionary.html#a6ee81b793caf6c652e9d6545ce848a13" title="Put an item into the dicionary associated with the specified key.">put</a> (&amp;plonk::r2d&lt;SampleType&gt;,         <span class="stringliteral">&quot;Radians to Degrees&quot;</span>);
-<a name="l00086"></a>00086         names.<a class="code" href="class_dictionary.html#a6ee81b793caf6c652e9d6545ce848a13" title="Put an item into the dicionary associated with the specified key.">put</a> (&amp;plonk::distort&lt;SampleType&gt;,     <span class="stringliteral">&quot;distort&quot;</span>);
-<a name="l00087"></a>00087         names.<a class="code" href="class_dictionary.html#a6ee81b793caf6c652e9d6545ce848a13" title="Put an item into the dicionary associated with the specified key.">put</a> (&amp;plonk::zap&lt;SampleType&gt;,         <span class="stringliteral">&quot;zap&quot;</span>);
-<a name="l00088"></a>00088     }
-<a name="l00089"></a>00089     
-<a name="l00090"></a>00090 <span class="keyword">public</span>:
-<a name="l00091"></a><a class="code" href="class_unary_op_utility.html#a0ffdf30687bf03f2d92f351dc129a804">00091</a>     <span class="keyword">inline</span> <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> <a class="code" href="class_unary_op_utility.html#a0ffdf30687bf03f2d92f351dc129a804">getName</a> (<a class="code" href="class_function.html">Function</a> function) <span class="keyword">const</span> <span class="keywordflow">throw</span>()
-<a name="l00092"></a>00092     {
-<a name="l00093"></a>00093         <span class="keywordflow">return</span> names[function];
-<a name="l00094"></a>00094     }
-<a name="l00095"></a>00095     
-<a name="l00096"></a><a class="code" href="class_unary_op_utility.html#a1a6e099e72f8e3cb5c0ff62cdc84158d">00096</a>     <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="class_unary_op_utility.html#a1a6e099e72f8e3cb5c0ff62cdc84158d">add</a> (<a class="code" href="class_function.html">Function</a> function, <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> <span class="keyword">const</span>&amp; name) <span class="keywordflow">throw</span>()
-<a name="l00097"></a>00097     {
-<a name="l00098"></a>00098         names.<a class="code" href="class_dictionary.html#a6ee81b793caf6c652e9d6545ce848a13" title="Put an item into the dicionary associated with the specified key.">put</a> (function, name);
-<a name="l00099"></a>00099     }
-<a name="l00100"></a>00100         
-<a name="l00101"></a><a class="code" href="class_unary_op_utility.html#a9d403431722cb2776f6f60d98d593844">00101</a>     <span class="keyword">static</span> <a class="code" href="class_unary_op_utility.html">UnaryOpUtility</a>&amp; <a class="code" href="class_unary_op_utility.html#a9d403431722cb2776f6f60d98d593844">global</a>() throw()
-<a name="l00102"></a>00102     {
-<a name="l00103"></a>00103         <span class="keyword">static</span> <a class="code" href="class_unary_op_utility.html">UnaryOpUtility</a> util;
-<a name="l00104"></a>00104         <span class="keywordflow">return</span> util;
-<a name="l00105"></a>00105     }
-<a name="l00106"></a>00106     
-<a name="l00107"></a>00107 <span class="keyword">private</span>:
-<a name="l00108"></a>00108     <a class="code" href="class_dictionary.html">Dictionary&lt;Text, Function&gt;</a> names;
-<a name="l00109"></a>00109 };
-<a name="l00110"></a>00110 
+<a name="l00050"></a>00050     <span class="keyword">typedef</span> SampleType (*Function)(SampleType <span class="keyword">const</span>&amp;);
+<a name="l00051"></a>00051     <span class="keyword">typedef</span> <span class="keyword">typename</span> UnaryOpFunctionsHelper&lt;SampleType&gt;::UnaryOpFunctionsType UnaryOpFunctionsType;
+<a name="l00052"></a>00052 
+<a name="l00053"></a>00053     UnaryOpUtility() throw()
+<a name="l00054"></a>00054     {
+<a name="l00055"></a>00055         names.put (&amp;<a class="code" href="group___plonk_unary_op_functions.html#gad5313447396d37207a9d8531fda5bc34" title="Just returns the input argument.">UnaryOpFunctionsType::move</a>,        <span class="stringliteral">&quot;move&quot;</span>);
+<a name="l00056"></a>00056         names.put (&amp;<a class="code" href="group___plonk_unary_op_functions.html#gade67f9737af203712eb3750f6be0a033" title="Increment by 1.">UnaryOpFunctionsType::inc</a>,         <span class="stringliteral">&quot;inc&quot;</span>);
+<a name="l00057"></a>00057         names.put (&amp;<a class="code" href="group___plonk_unary_op_functions.html#gabffd643a6de922fc4b6fca4da69ae666" title="Decrement by 1.">UnaryOpFunctionsType::dec</a>,         <span class="stringliteral">&quot;dec&quot;</span>);
+<a name="l00058"></a>00058         names.put (&amp;<a class="code" href="group___plonk_unary_op_functions.html#ga06d0709c8d848fd8a378b06a3483ff11" title="Returns the absolute of the input argument.">UnaryOpFunctionsType::abs</a>,         <span class="stringliteral">&quot;abs&quot;</span>);
+<a name="l00059"></a>00059         names.put (&amp;<a class="code" href="group___plonk_unary_op_functions.html#ga6ada25a93b42c22935c7045ea5b2c7a5" title="Returns the logarithm base 2 of the input argument.">UnaryOpFunctionsType::log2</a>,        <span class="stringliteral">&quot;log2&quot;</span>);
+<a name="l00060"></a>00060         names.put (&amp;<a class="code" href="group___plonk_unary_op_functions.html#ga599553e9c1629dba5ed1cf8f189bc2c4" title="Returns the negative of the input argument.">UnaryOpFunctionsType::neg</a>,         <span class="stringliteral">&quot;neg&quot;</span>);
+<a name="l00061"></a>00061         names.put (&amp;<a class="code" href="group___plonk_unary_op_functions.html#ga3409b1ec9b0184b70f506b20d904e08a" title="Returns the reciprocal of the input argument (i.e, ).">UnaryOpFunctionsType::reciprocal</a>,  <span class="stringliteral">&quot;reciprocal&quot;</span>);
+<a name="l00062"></a>00062         names.put (&amp;<a class="code" href="group___plonk_unary_op_functions.html#ga731baf3de4ee31dbd113dc6dd30e03b9" title="Returns the sine of the input argument.">UnaryOpFunctionsType::sin</a>,         <span class="stringliteral">&quot;sin&quot;</span>);
+<a name="l00063"></a>00063         names.put (&amp;<a class="code" href="group___plonk_unary_op_functions.html#gaab9a616ae79e3254e55525c49ca0dfc2" title="Returns the cosine of the input argument.">UnaryOpFunctionsType::cos</a>,         <span class="stringliteral">&quot;cos&quot;</span>);
+<a name="l00064"></a>00064         names.put (&amp;<a class="code" href="group___plonk_unary_op_functions.html#ga115f75881b696f375ed1503c9d9df9ec" title="Returns the tangent of the input argument.">UnaryOpFunctionsType::tan</a>,         <span class="stringliteral">&quot;tan&quot;</span>);
+<a name="l00065"></a>00065         names.put (&amp;<a class="code" href="group___plonk_unary_op_functions.html#ga6cc0d4479a73f33ae482260da3d289c2" title="Returns the arcsine of the input argument.">UnaryOpFunctionsType::asin</a>,        <span class="stringliteral">&quot;asin&quot;</span>);
+<a name="l00066"></a>00066         names.put (&amp;<a class="code" href="group___plonk_unary_op_functions.html#ga018fb854e657a002746727f991b69e85" title="Returns the arcosine of the input argument.">UnaryOpFunctionsType::acos</a>,        <span class="stringliteral">&quot;acos&quot;</span>);
+<a name="l00067"></a>00067         names.put (&amp;<a class="code" href="group___plonk_unary_op_functions.html#gaac91c8110b3619165da582eaed03d760" title="Returns the arctangent of the input argument.">UnaryOpFunctionsType::atan</a>,        <span class="stringliteral">&quot;atan&quot;</span>);
+<a name="l00068"></a>00068         names.put (&amp;<a class="code" href="group___plonk_unary_op_functions.html#gaa8a751a153620f9ed886270064f8e8e3" title="Returns the hyperbolic sine of the input argument.">UnaryOpFunctionsType::sinh</a>,        <span class="stringliteral">&quot;sinh&quot;</span>);
+<a name="l00069"></a>00069         names.put (&amp;<a class="code" href="group___plonk_unary_op_functions.html#ga5c5e2f5e148871472711b32aee8875e2" title="Returns the hyperbolic cosine of the input argument.">UnaryOpFunctionsType::cosh</a>,        <span class="stringliteral">&quot;cosh&quot;</span>);
+<a name="l00070"></a>00070         names.put (&amp;<a class="code" href="group___plonk_unary_op_functions.html#ga5d74e407f13c2b5df5b3909e6c61b3f2" title="Returns the hyperbolic tangent of the input argument.">UnaryOpFunctionsType::tanh</a>,        <span class="stringliteral">&quot;tanh&quot;</span>);
+<a name="l00071"></a>00071         names.put (&amp;<a class="code" href="group___plonk_unary_op_functions.html#gae19ace5e774d8e4be6541f7da421b07d" title="Returns the square root of the input argument.">UnaryOpFunctionsType::sqrt</a>,        <span class="stringliteral">&quot;sqrt&quot;</span>);
+<a name="l00072"></a>00072         names.put (&amp;<a class="code" href="group___plonk_unary_op_functions.html#gae53dc6c1396bbeb7af2d1e428ecf533b" title="Returns the natural logarithm of the input argument.">UnaryOpFunctionsType::log</a>,         <span class="stringliteral">&quot;log&quot;</span>);
+<a name="l00073"></a>00073         names.put (&amp;<a class="code" href="group___plonk_unary_op_functions.html#ga1deca0817cf680d015c518b306541d85" title="Returns the logarithm base 10 of the input argument.">UnaryOpFunctionsType::log10</a>,       <span class="stringliteral">&quot;log10&quot;</span>);
+<a name="l00074"></a>00074         names.put (&amp;<a class="code" href="group___plonk_unary_op_functions.html#gab29841e04677e978e08b70b8ca71d26d" title="Returns the exponent of the input argument.">UnaryOpFunctionsType::exp</a>,         <span class="stringliteral">&quot;exp&quot;</span>);
+<a name="l00075"></a>00075         names.put (&amp;<a class="code" href="group___plonk_binary_op_functions.html#ga3edabf0b05f53c9399cd27330d6bbb04" title="Returns the input argument squared.">UnaryOpFunctionsType::squared</a>,     <span class="stringliteral">&quot;squared&quot;</span>);
+<a name="l00076"></a>00076         names.put (&amp;<a class="code" href="group___plonk_binary_op_functions.html#gadd1d6f37c63b4d84d7ccec97ce802376" title="Returns the input argument cubed.">UnaryOpFunctionsType::cubed</a>,       <span class="stringliteral">&quot;cubed&quot;</span>);
+<a name="l00077"></a>00077         names.put (&amp;<a class="code" href="group___plonk_unary_op_functions.html#gafa342560d0e1548479d7c925b1cd5471" title="Returns the input argument rounded up to the next highest integer.">UnaryOpFunctionsType::ceil</a>,        <span class="stringliteral">&quot;ceil&quot;</span>);
+<a name="l00078"></a>00078         names.put (&amp;<a class="code" href="group___plonk_unary_op_functions.html#gabca294f6c49287f58c83d1762f63a634" title="Returns the input argument rounded down to the next lowest integer.">UnaryOpFunctionsType::floor</a>,       <span class="stringliteral">&quot;floor&quot;</span>);
+<a name="l00079"></a>00079         names.put (&amp;<a class="code" href="group___plonk_unary_op_functions.html#ga8574f6b212e32701381d2e070c8707b6" title="Returns the fractional part of the input argument.">UnaryOpFunctionsType::frac</a>,        <span class="stringliteral">&quot;frac&quot;</span>);
+<a name="l00080"></a>00080         names.put (&amp;<a class="code" href="group___plonk_unary_op_functions.html#ga44d7723c080a9bc8577e4e264db52549" title="Returns 0 if the input is 0, -1 if the input is negative or 1 if the input argument is positive...">UnaryOpFunctionsType::sign</a>,        <span class="stringliteral">&quot;sign&quot;</span>);
+<a name="l00081"></a>00081         names.put (&amp;<a class="code" href="group___plonk_unary_op_functions.html#ga181f59f1188049529a16a2cf5f508501" title="Returns the input argument converted from MIDI note numbers to frequency (in Hz).">UnaryOpFunctionsType::m2f</a>,         <span class="stringliteral">&quot;MIDI to frequency&quot;</span>);
+<a name="l00082"></a>00082         names.put (&amp;<a class="code" href="group___plonk_unary_op_functions.html#ga3bbc54f534126badd26fbd42d57a1c82" title="Returns the input argument converted from frequency (in Hz) to MIDI note numbers.">UnaryOpFunctionsType::f2m</a>,         <span class="stringliteral">&quot;Frequency to MIDI&quot;</span>);
+<a name="l00083"></a>00083         names.put (&amp;<a class="code" href="group___plonk_unary_op_functions.html#gaecb823fdaad20c335c43527670afd1d7" title="Returns the input argument converted from linear amplitude to decibels where 0dB is an amplitude of 1...">UnaryOpFunctionsType::a2dB</a>,        <span class="stringliteral">&quot;Amplitude to dB&quot;</span>);
+<a name="l00084"></a>00084         names.put (&amp;<a class="code" href="group___plonk_unary_op_functions.html#ga0a730e2e046bf1e584745ce86d4e834b" title="Returns the input argument converted from decibels to linear amplitude where 0dB is an amplitude of 1...">UnaryOpFunctionsType::dB2a</a>,        <span class="stringliteral">&quot;dB to Amplitude&quot;</span>);
+<a name="l00085"></a>00085         names.put (&amp;<a class="code" href="group___plonk_unary_op_functions.html#ga549ae4182588d64654a5f948c20017b6" title="Returns the input argument converted from degrees to radians.">UnaryOpFunctionsType::d2r</a>,         <span class="stringliteral">&quot;Degrees to Radians&quot;</span>);
+<a name="l00086"></a>00086         names.put (&amp;<a class="code" href="group___plonk_unary_op_functions.html#ga7a02abc6cfbf80e5dd88f306ac5f2efc" title="Returns the input argument converted from radians to degrees.">UnaryOpFunctionsType::r2d</a>,         <span class="stringliteral">&quot;Radians to Degrees&quot;</span>);
+<a name="l00087"></a>00087         names.put (&amp;<a class="code" href="group___plonk_unary_op_functions.html#ga988f86caa5764c14dd3d8612bd87d4f8" title="Returns the input argument distorted.">UnaryOpFunctionsType::distort</a>,     <span class="stringliteral">&quot;distort&quot;</span>);
+<a name="l00088"></a>00088         names.put (&amp;<a class="code" href="group___plonk_unary_op_functions.html#gae8df018eed382aa92946ec1320864aa5" title="Returns the input argument with infinities, NaNs and denormallised numbers removed.">UnaryOpFunctionsType::zap</a>,         <span class="stringliteral">&quot;zap&quot;</span>);
+<a name="l00089"></a>00089     }
+<a name="l00090"></a>00090     
+<a name="l00091"></a>00091 <span class="keyword">public</span>:
+<a name="l00092"></a>00092     <span class="keyword">inline</span> <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> getName (Function function) <span class="keyword">const</span> <span class="keywordflow">throw</span>()
+<a name="l00093"></a>00093     {
+<a name="l00094"></a>00094         <span class="keywordflow">return</span> names[function];
+<a name="l00095"></a>00095     }
+<a name="l00096"></a>00096     
+<a name="l00097"></a>00097     <span class="keyword">inline</span> <span class="keywordtype">void</span> add (Function function, <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> <span class="keyword">const</span>&amp; name) <span class="keywordflow">throw</span>()
+<a name="l00098"></a>00098     {
+<a name="l00099"></a>00099         names.<a class="code" href="class_object_array.html#ad675f23eada53adcadda78f096b3642d" title="Places an item at the given index.">put</a> (function, name);
+<a name="l00100"></a>00100     }
+<a name="l00101"></a>00101         
+<a name="l00102"></a>00102     <span class="keyword">static</span> UnaryOpUtility&amp; global() throw()
+<a name="l00103"></a>00103     {
+<a name="l00104"></a>00104         <span class="keyword">static</span> UnaryOpUtility util;
+<a name="l00105"></a>00105         <span class="keywordflow">return</span> util;
+<a name="l00106"></a>00106     }
+<a name="l00107"></a>00107     
+<a name="l00108"></a>00108 <span class="keyword">private</span>:
+<a name="l00109"></a>00109     <a class="code" href="class_dictionary.html">Dictionary&lt;Text, Function&gt;</a> names;
+<a name="l00110"></a>00110 };
 <a name="l00111"></a>00111 
-<a name="l00112"></a>00112 <span class="comment">//------------------------------------------------------------------------------</span>
-<a name="l00113"></a>00113 
+<a name="l00112"></a>00112 
+<a name="l00113"></a>00113 <span class="comment">//------------------------------------------------------------------------------</span>
 <a name="l00114"></a>00114 
-<a name="l00116"></a>00116 <span class="keyword">template</span>&lt;<span class="keyword">class</span> SampleType, PLONK_UNARYOPFUNCTION(SampleType, op)&gt;
-<a name="l00117"></a><a class="code" href="class_unary_op_channel_internal.html">00117</a> <span class="keyword">class </span><a class="code" href="class_unary_op_channel_internal.html" title="For applying unary operators.">UnaryOpChannelInternal</a>
-<a name="l00118"></a>00118 :   <span class="keyword">public</span> <a class="code" href="class_channel_internal.html" title="The base class from which most ChannelInternals should be derived.">ChannelInternal</a>&lt;SampleType, ChannelInternalCore::Data&gt;
-<a name="l00119"></a>00119 {
-<a name="l00120"></a>00120 <span class="keyword">public</span>:
-<a name="l00121"></a><a class="code" href="class_unary_op_channel_internal.html#a68ca5b80cbe1031fe7d2fa9357731c14">00121</a>     <span class="keyword">typedef</span> <span class="keyword">typename</span> <a class="code" href="struct_channel_data_3_01_channel_internal_core_01_4.html">ChannelInternalCore::Data</a>  <a class="code" href="class_unary_op_channel_internal.html#a68ca5b80cbe1031fe7d2fa9357731c14" title="To store channel state data.">Data</a>;
-<a name="l00122"></a>00122 
-<a name="l00123"></a><a class="code" href="class_unary_op_channel_internal.html#a353a2adf0af4d24d39771a6af6f73ca9">00123</a>     <span class="keyword">typedef</span> <a class="code" href="class_channel_base.html" title="A single output signal.">ChannelBase&lt;SampleType&gt;</a>                 <a class="code" href="class_unary_op_channel_internal.html#a353a2adf0af4d24d39771a6af6f73ca9">ChannelType</a>;
-<a name="l00124"></a><a class="code" href="class_unary_op_channel_internal.html#a400b5d66bd4887c604da3e80421ba613">00124</a>     <span class="keyword">typedef</span> <a class="code" href="class_unary_op_channel_internal.html" title="For applying unary operators.">UnaryOpChannelInternal&lt;SampleType,op&gt;</a>   <a class="code" href="class_unary_op_channel_internal.html#a400b5d66bd4887c604da3e80421ba613">UnaryOpInternal</a>;
-<a name="l00125"></a><a class="code" href="class_unary_op_channel_internal.html#ad3868022bd78f0a6a4c9ed7cd74f0445">00125</a>     <span class="keyword">typedef</span> <a class="code" href="class_channel_internal.html" title="The base class from which most ChannelInternals should be derived.">ChannelInternal&lt;SampleType,Data&gt;</a>        <a class="code" href="class_unary_op_channel_internal.html#ad3868022bd78f0a6a4c9ed7cd74f0445">Internal</a>;
-<a name="l00126"></a><a class="code" href="class_unary_op_channel_internal.html#a8968e81c8328ebf3d67833bc37e94baa">00126</a>     <span class="keyword">typedef</span> <a class="code" href="class_channel_internal_base.html" title="The templated base class for all internal channel processes.">ChannelInternalBase&lt;SampleType&gt;</a>         <a class="code" href="class_unary_op_channel_internal.html#a8968e81c8328ebf3d67833bc37e94baa">InternalBase</a>;
-<a name="l00127"></a><a class="code" href="class_unary_op_channel_internal.html#a2725ad82d83a2eb6c4971128a5d72eed">00127</a>     <span class="keyword">typedef</span> <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase&lt;SampleType&gt;</a>                    <a class="code" href="class_unary_op_channel_internal.html#a2725ad82d83a2eb6c4971128a5d72eed">UnitType</a>;
-<a name="l00128"></a><a class="code" href="class_unary_op_channel_internal.html#aa347bfe58e600de97d1202476510b68f">00128</a>     <span class="keyword">typedef</span> <a class="code" href="class_input_dictionary.html" title="For storing named Dynamic objects.">InputDictionary</a>                         <a class="code" href="class_unary_op_channel_internal.html#aa347bfe58e600de97d1202476510b68f">Inputs</a>;
-<a name="l00129"></a><a class="code" href="class_unary_op_channel_internal.html#af1c7eff229b11df13ccfa7bafa7789cb">00129</a>     <span class="keyword">typedef</span> <a class="code" href="class_numerical_array.html">NumericalArray&lt;SampleType&gt;</a>              <a class="code" href="class_unary_op_channel_internal.html#af1c7eff229b11df13ccfa7bafa7789cb">Buffer</a>;
-<a name="l00130"></a><a class="code" href="class_unary_op_channel_internal.html#a6d9f079d356e3c7e0472b050d6cde807">00130</a>     <span class="keyword">typedef</span> <a class="code" href="class_unary_op_utility.html">UnaryOpUtility&lt;SampleType&gt;</a>              <a class="code" href="class_unary_op_channel_internal.html#a6d9f079d356e3c7e0472b050d6cde807">UtilityType</a>;
-<a name="l00131"></a>00131     
-<a name="l00132"></a><a class="code" href="class_unary_op_channel_internal.html#ad6b6794a6b6cc1853272f470dbc0cb06">00132</a>     <a class="code" href="class_unary_op_channel_internal.html#ad6b6794a6b6cc1853272f470dbc0cb06">UnaryOpChannelInternal</a> (<a class="code" href="class_input_dictionary.html" title="For storing named Dynamic objects.">Inputs</a> <span class="keyword">const</span>&amp; inputs, 
-<a name="l00133"></a>00133                             <a class="code" href="struct_channel_data_3_01_channel_internal_core_01_4.html">Data</a> <span class="keyword">const</span>&amp; data, 
-<a name="l00134"></a>00134                             <a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a> <span class="keyword">const</span>&amp; blockSize,
-<a name="l00135"></a>00135                             <a class="code" href="class_sample_rate.html" title="A specialised Variable&lt;double&gt; for handling sample rates.">SampleRate</a> <span class="keyword">const</span>&amp; sampleRate) <span class="keywordflow">throw</span>()
-<a name="l00136"></a>00136     :   <a class="code" href="class_unary_op_channel_internal.html#ad3868022bd78f0a6a4c9ed7cd74f0445">Internal</a> (inputs, data, blockSize, sampleRate)
-<a name="l00137"></a>00137     {
-<a name="l00138"></a>00138     }
-<a name="l00139"></a>00139         
-<a name="l00140"></a><a class="code" href="class_unary_op_channel_internal.html#af21c782eb2e61489273ab471546d2415">00140</a>     <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> <a class="code" href="class_unary_op_channel_internal.html#af21c782eb2e61489273ab471546d2415">getName</a>() <span class="keyword">const</span> throw()
-<a name="l00141"></a>00141     {
-<a name="l00142"></a>00142         <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> variant = <a class="code" href="class_unary_op_utility.html#a9d403431722cb2776f6f60d98d593844">UtilityType::global</a>().<a class="code" href="class_unary_op_utility.html#a0ffdf30687bf03f2d92f351dc129a804">getName</a> (op);
-<a name="l00143"></a>00143         
-<a name="l00144"></a>00144         <span class="keywordflow">if</span> (variant.<a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a>() &lt; 1)
-<a name="l00145"></a>00145             variant = <span class="stringliteral">&quot;unknown type&quot;</span>;
+<a name="l00115"></a>00115 
+<a name="l00117"></a>00117 <span class="keyword">template</span>&lt;<span class="keyword">class</span> SampleType, PLONK_UNARYOPFUNCTION(SampleType, op)&gt;
+<a name="l00118"></a><a class="code" href="class_unary_op_channel_internal.html">00118</a> <span class="keyword">class </span><a class="code" href="class_unary_op_channel_internal.html" title="For applying unary operators.">UnaryOpChannelInternal</a>
+<a name="l00119"></a>00119 :   <span class="keyword">public</span> <a class="code" href="class_channel_internal.html" title="The base class from which most ChannelInternals should be derived.">ChannelInternal</a>&lt;SampleType, ChannelInternalCore::Data&gt;
+<a name="l00120"></a>00120 {
+<a name="l00121"></a>00121 <span class="keyword">public</span>:
+<a name="l00122"></a><a class="code" href="class_unary_op_channel_internal.html#a68ca5b80cbe1031fe7d2fa9357731c14">00122</a>     <span class="keyword">typedef</span> <span class="keyword">typename</span> <a class="code" href="class_channel_internal_core.html#a09763233582f6f0985461449aa262ae5" title="To store channel state data.">ChannelInternalCore::Data</a>  <a class="code" href="class_unary_op_channel_internal.html#a68ca5b80cbe1031fe7d2fa9357731c14" title="To store channel state data.">Data</a>;
+<a name="l00123"></a>00123     <span class="keyword">typedef</span> <span class="keyword">typename</span> UnaryOpFunctionsHelper&lt;SampleType&gt;::UnaryOpFunctionsType UnaryOpFunctionsType;
+<a name="l00124"></a>00124 
+<a name="l00125"></a>00125     <span class="keyword">typedef</span> <a class="code" href="class_channel_base.html" title="A single output signal.">ChannelBase&lt;SampleType&gt;</a>                 <a class="code" href="class_channel_base.html" title="A single output signal.">ChannelType</a>;
+<a name="l00126"></a>00126     <span class="keyword">typedef</span> <a class="code" href="class_unary_op_channel_internal.html" title="For applying unary operators.">UnaryOpChannelInternal&lt;SampleType,op&gt;</a>   <a class="code" href="class_unary_op_channel_internal.html" title="For applying unary operators.">UnaryOpInternal</a>;
+<a name="l00127"></a>00127     <span class="keyword">typedef</span> <a class="code" href="class_channel_internal.html" title="The base class from which most ChannelInternals should be derived.">ChannelInternal&lt;SampleType,Data&gt;</a>        Internal;
+<a name="l00128"></a>00128     <span class="keyword">typedef</span> <a class="code" href="class_channel_internal_base.html" title="The templated base class for all internal channel processes.">ChannelInternalBase&lt;SampleType&gt;</a>         <a class="code" href="class_channel_internal_base.html" title="The templated base class for all internal channel processes.">InternalBase</a>;
+<a name="l00129"></a>00129     <span class="keyword">typedef</span> <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase&lt;SampleType&gt;</a>                    <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitType</a>;
+<a name="l00130"></a>00130     <span class="keyword">typedef</span> <a class="code" href="class_input_dictionary.html" title="For storing named Dynamic objects.">InputDictionary</a>                         <a class="code" href="class_input_dictionary.html" title="For storing named Dynamic objects.">Inputs</a>;
+<a name="l00131"></a>00131     <span class="keyword">typedef</span> <a class="code" href="class_numerical_array.html">NumericalArray&lt;SampleType&gt;</a>              <a class="code" href="class_numerical_array.html">Buffer</a>;
+<a name="l00132"></a>00132     <span class="keyword">typedef</span> UnaryOpUtility&lt;SampleType&gt;              UtilityType;
+<a name="l00133"></a>00133     
+<a name="l00134"></a>00134 
+<a name="l00135"></a>00135     <a class="code" href="class_unary_op_channel_internal.html" title="For applying unary operators.">UnaryOpChannelInternal</a> (<a class="code" href="class_input_dictionary.html" title="For storing named Dynamic objects.">Inputs</a> <span class="keyword">const</span>&amp; inputs, 
+<a name="l00136"></a>00136                             <a class="code" href="class_channel_internal_core.html#a09763233582f6f0985461449aa262ae5" title="To store channel state data.">Data</a> <span class="keyword">const</span>&amp; data, 
+<a name="l00137"></a>00137                             <a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a> <span class="keyword">const</span>&amp; blockSize,
+<a name="l00138"></a>00138                             <a class="code" href="class_sample_rate.html" title="A specialised Variable&lt;double&gt; for handling sample rates.">SampleRate</a> <span class="keyword">const</span>&amp; sampleRate) <span class="keywordflow">throw</span>()
+<a name="l00139"></a>00139     :   Internal (inputs, data, blockSize, sampleRate)
+<a name="l00140"></a>00140     {
+<a name="l00141"></a>00141     }
+<a name="l00142"></a>00142         
+<a name="l00143"></a>00143     <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> getName() <span class="keyword">const</span> throw()
+<a name="l00144"></a>00144     {
+<a name="l00145"></a>00145         <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> variant = UtilityType::global().getName (op);
 <a name="l00146"></a>00146         
-<a name="l00147"></a>00147         <span class="keywordflow">return</span> <span class="stringliteral">&quot;Unary Operator (&quot;</span> + variant + <span class="stringliteral">&quot;)&quot;</span>;
-<a name="l00148"></a>00148     }    
-<a name="l00149"></a>00149     
-<a name="l00150"></a><a class="code" href="class_unary_op_channel_internal.html#a7e05e6ee482af61e0eaa354b1585d73f">00150</a>     <a class="code" href="class_numerical_array.html">IntArray</a> <a class="code" href="class_unary_op_channel_internal.html#a7e05e6ee482af61e0eaa354b1585d73f">getInputKeys</a>() <span class="keyword">const</span> throw()
-<a name="l00151"></a>00151     {
-<a name="l00152"></a>00152         <span class="keyword">const</span> <a class="code" href="class_numerical_array.html">IntArray</a> keys (<a class="code" href="class_i_o_key.html#a31bc497f7606db39aa57aa0366b87e37aa60b1c99f5ef2914e94ca6115fba0983" title="A generic audio (commonly used where there is only one input or output).">IOKey::Generic</a>);
-<a name="l00153"></a>00153         <span class="keywordflow">return</span> keys;
-<a name="l00154"></a>00154     }    
-<a name="l00155"></a>00155     
-<a name="l00156"></a><a class="code" href="class_unary_op_channel_internal.html#a230a1244f40c64ac5c6c53dec5b77cca">00156</a>     <a class="code" href="class_channel_internal_base.html" title="The templated base class for all internal channel processes.">InternalBase</a>* <a class="code" href="class_unary_op_channel_internal.html#a230a1244f40c64ac5c6c53dec5b77cca">getChannel</a> (<span class="keyword">const</span> <span class="keywordtype">int</span> index) <span class="keywordflow">throw</span>()
-<a name="l00157"></a>00157     {
-<a name="l00158"></a>00158         <span class="keyword">const</span> <a class="code" href="class_input_dictionary.html" title="For storing named Dynamic objects.">Inputs</a> channelInputs = this-&gt;<a class="code" href="class_channel_internal_core.html#a874d7d0ef62aecabcc28b5ff2bd8bfa1">getInputs</a>().<a class="code" href="class_input_dictionary.html#a2f1736b42993b530ae0000070506f520" title="Returns this dictionary with all the units containing only a single channel.">getChannel</a> (index);
-<a name="l00159"></a>00159         <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="class_unary_op_channel_internal.html#a400b5d66bd4887c604da3e80421ba613">UnaryOpInternal</a> (channelInputs, 
-<a name="l00160"></a>00160                                     this-&gt;<a class="code" href="class_channel_internal.html#aa0fba1693bbfe6dae4dfedaa0cc0f079">getState</a>(), 
-<a name="l00161"></a>00161                                     this-&gt;<a class="code" href="class_channel_internal_core.html#a39653f4cdda1c47d2827fad92bfe0fd6">getBlockSize</a>(), 
-<a name="l00162"></a>00162                                     this-&gt;<a class="code" href="class_channel_internal_core.html#a56c8b6a5cbe0f7678eaf2af4d8d45d4c">getSampleRate</a>());
-<a name="l00163"></a>00163     }    
-<a name="l00164"></a>00164     
-<a name="l00165"></a><a class="code" href="class_unary_op_channel_internal.html#a5487af6714fddfac007aa54aff97a9c0">00165</a>     <span class="keywordtype">void</span> <a class="code" href="class_unary_op_channel_internal.html#a5487af6714fddfac007aa54aff97a9c0" title="Called to initialise the channel&#39;s initial value.">initChannel</a> (<span class="keyword">const</span> <span class="keywordtype">int</span> channel) <span class="keywordflow">throw</span>()
-<a name="l00166"></a>00166     {
-<a name="l00167"></a>00167         <span class="keyword">const</span> <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitType</a>&amp; input = this-&gt;<a class="code" href="class_channel_internal_base.html#a0eefaad39c06f04bbb89979fdcbfa153">getInputAsUnit</a> (<a class="code" href="class_i_o_key.html#a31bc497f7606db39aa57aa0366b87e37aa60b1c99f5ef2914e94ca6115fba0983" title="A generic audio (commonly used where there is only one input or output).">IOKey::Generic</a>);
-<a name="l00168"></a>00168         <span class="keyword">const</span> SampleType sourceValue = input.<a class="code" href="class_unit_base.html#a0abca48d077f3f49b5c9639ac64eec5a" title="Get the current value of a specific channel in this unit.">getValue</a> (channel);
-<a name="l00169"></a>00169         
-<a name="l00170"></a>00170         this-&gt;<a class="code" href="class_channel_internal_base.html#aa64de82fe8ad87d4ad2446ca0d1b2511">setBlockSize</a> (<a class="code" href="class_block_size.html#afcc989dcc540a3d62f67d939f16c6457" title="Select a block size based on a unit&#39;s preference and its inputs.">BlockSize::decide</a> (input.<a class="code" href="class_unit_base.html#a9e6663d2783b9de78f1f06442c395532" title="Get the block size of a specific channel in this unit.">getBlockSize</a> (channel),
-<a name="l00171"></a>00171                                                this-&gt;<a class="code" href="class_channel_internal_core.html#a39653f4cdda1c47d2827fad92bfe0fd6">getBlockSize</a>()));
-<a name="l00172"></a>00172         this-&gt;<a class="code" href="class_channel_internal.html#aa03065dc474226453a0334dc82bae624">setSampleRate</a> (<a class="code" href="class_sample_rate.html#a17ecb104d9a67ca7dbd0a076f0aa6bbf">SampleRate::decide</a> (input.<a class="code" href="class_unit_base.html#ae75214256d2240c537462510737bdd61" title="Get the sample rate of a specific channel in this unit.">getSampleRate</a> (channel),
-<a name="l00173"></a>00173                                                  this-&gt;<a class="code" href="class_channel_internal_core.html#a56c8b6a5cbe0f7678eaf2af4d8d45d4c">getSampleRate</a>()));    
-<a name="l00174"></a>00174         
-<a name="l00175"></a>00175         this-&gt;<a class="code" href="class_channel_internal.html#a69a895f1fb4feef65421a5059e98ebc3">setOverlap</a> (input.<a class="code" href="class_unit_base.html#a3e8cc9f7b3ffc03fd4224207ae03a34c">getOverlap</a> (channel));
-<a name="l00176"></a>00176         
-<a name="l00177"></a>00177         this-&gt;<a class="code" href="class_channel_internal_base.html#aed88288e0eb608e998b3f7ccf6bf2aaf">initValue</a> (op (sourceValue));
-<a name="l00178"></a>00178     }
-<a name="l00179"></a>00179     
-<a name="l00180"></a><a class="code" href="class_unary_op_channel_internal.html#aebe42ff392bcaa20966fe5f3a0edd86a">00180</a>     <span class="keywordtype">void</span> <a class="code" href="class_unary_op_channel_internal.html#aebe42ff392bcaa20966fe5f3a0edd86a" title="The DSP function.">process</a> (<a class="code" href="class_process_info.html" title="Holds information about the Unit graph.">ProcessInfo</a>&amp; info, <span class="keyword">const</span> <span class="keywordtype">int</span> channel) <span class="keywordflow">throw</span>()
-<a name="l00181"></a>00181     {
-<a name="l00182"></a>00182         <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitType</a>&amp; operandUnit (this-&gt;<a class="code" href="class_channel_internal_base.html#a0eefaad39c06f04bbb89979fdcbfa153">getInputAsUnit</a> (<a class="code" href="class_i_o_key.html#a31bc497f7606db39aa57aa0366b87e37aa60b1c99f5ef2914e94ca6115fba0983" title="A generic audio (commonly used where there is only one input or output).">IOKey::Generic</a>));
-<a name="l00183"></a>00183         <span class="keyword">const</span> <a class="code" href="class_numerical_array.html">Buffer</a>&amp; operandBuffer (operandUnit.<a class="code" href="class_unit_base.html#a78e56679819dde06c3beb022cbdb13a4" title="Process a specific channel in this unit.">process</a> (info, channel));
-<a name="l00184"></a>00184         
-<a name="l00185"></a>00185         SampleType* <span class="keyword">const</span> outputSamples = this-&gt;<a class="code" href="class_channel_internal_base.html#a87680feef8745429802ff10ca3887012">getOutputSamples</a>();
-<a name="l00186"></a>00186         <span class="keyword">const</span> <span class="keywordtype">int</span> outputBufferLength = this-&gt;<a class="code" href="class_channel_internal_base.html#a48f5cfad8e3c1977412e357a2e41b41f">getOutputBuffer</a>().<a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a>();
+<a name="l00147"></a>00147         <span class="keywordflow">if</span> (variant.<a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a>() &lt; 1)
+<a name="l00148"></a>00148             variant = <span class="stringliteral">&quot;unknown type&quot;</span>;
+<a name="l00149"></a>00149         
+<a name="l00150"></a>00150         <span class="keywordflow">return</span> <span class="stringliteral">&quot;Unary Operator (&quot;</span> + variant + <span class="stringliteral">&quot;)&quot;</span>;
+<a name="l00151"></a>00151     }    
+<a name="l00152"></a>00152     
+<a name="l00153"></a>00153     <a class="code" href="class_numerical_array.html">IntArray</a> getInputKeys() <span class="keyword">const</span> throw()
+<a name="l00154"></a>00154     {
+<a name="l00155"></a>00155         <span class="keyword">const</span> <a class="code" href="class_numerical_array.html">IntArray</a> keys (IOKey::Generic);
+<a name="l00156"></a>00156         <span class="keywordflow">return</span> keys;
+<a name="l00157"></a>00157     }    
+<a name="l00158"></a>00158     
+<a name="l00159"></a>00159     InternalBase* getChannel (<span class="keyword">const</span> <span class="keywordtype">int</span> index) <span class="keywordflow">throw</span>()
+<a name="l00160"></a>00160     {
+<a name="l00161"></a>00161         <span class="keyword">const</span> Inputs channelInputs = this-&gt;getInputs().<a class="code" href="class_input_dictionary.html#a2f1736b42993b530ae0000070506f520" title="Returns this dictionary with all the units containing only a single channel.">getChannel</a> (index);
+<a name="l00162"></a>00162         <span class="keywordflow">return</span> <span class="keyword">new</span> UnaryOpInternal (channelInputs, 
+<a name="l00163"></a>00163                                     this-&gt;getState(), 
+<a name="l00164"></a>00164                                     this-&gt;getBlockSize(), 
+<a name="l00165"></a>00165                                     this-&gt;getSampleRate());
+<a name="l00166"></a>00166     }    
+<a name="l00167"></a>00167     
+<a name="l00168"></a><a class="code" href="class_unary_op_channel_internal.html#a5487af6714fddfac007aa54aff97a9c0">00168</a>     <span class="keywordtype">void</span> <a class="code" href="class_unary_op_channel_internal.html#a5487af6714fddfac007aa54aff97a9c0" title="Called to initialise the channel&#39;s initial value.">initChannel</a> (<span class="keyword">const</span> <span class="keywordtype">int</span> channel) <span class="keywordflow">throw</span>()
+<a name="l00169"></a>00169     {
+<a name="l00170"></a>00170         <span class="keyword">const</span> <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitType</a>&amp; input = this-&gt;getInputAsUnit (IOKey::Generic);
+<a name="l00171"></a>00171         <span class="keyword">const</span> SampleType sourceValue = input.<a class="code" href="class_unit_base.html#a0abca48d077f3f49b5c9639ac64eec5a" title="Get the current value of a specific channel in this unit.">getValue</a> (channel);
+<a name="l00172"></a>00172         
+<a name="l00173"></a>00173         this-&gt;setBlockSize (<a class="code" href="class_block_size.html#afcc989dcc540a3d62f67d939f16c6457" title="Select a block size based on a unit&#39;s preference and its inputs.">BlockSize::decide</a> (input.<a class="code" href="class_unit_base.html#a9e6663d2783b9de78f1f06442c395532" title="Get the block size of a specific channel in this unit.">getBlockSize</a> (channel),
+<a name="l00174"></a>00174                                                this-&gt;getBlockSize()));
+<a name="l00175"></a>00175         this-&gt;setSampleRate (SampleRate::decide (input.<a class="code" href="class_unit_base.html#ae75214256d2240c537462510737bdd61" title="Get the sample rate of a specific channel in this unit.">getSampleRate</a> (channel),
+<a name="l00176"></a>00176                                                  this-&gt;getSampleRate()));    
+<a name="l00177"></a>00177         
+<a name="l00178"></a>00178         this-&gt;setOverlap (input.getOverlap (channel));
+<a name="l00179"></a>00179         
+<a name="l00180"></a>00180         this-&gt;initValue (op (sourceValue));
+<a name="l00181"></a>00181     }
+<a name="l00182"></a>00182     
+<a name="l00183"></a><a class="code" href="class_unary_op_channel_internal.html#aebe42ff392bcaa20966fe5f3a0edd86a">00183</a>     <span class="keywordtype">void</span> <a class="code" href="class_unary_op_channel_internal.html#aebe42ff392bcaa20966fe5f3a0edd86a" title="The DSP function.">process</a> (<a class="code" href="class_process_info.html" title="Holds information about the Unit graph.">ProcessInfo</a>&amp; info, <span class="keyword">const</span> <span class="keywordtype">int</span> channel) <span class="keywordflow">throw</span>()
+<a name="l00184"></a>00184     {
+<a name="l00185"></a>00185         <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitType</a>&amp; operandUnit (this-&gt;getInputAsUnit (IOKey::Generic));
+<a name="l00186"></a>00186         <span class="keyword">const</span> <a class="code" href="class_numerical_array.html">Buffer</a>&amp; operandBuffer (operandUnit.<a class="code" href="class_unit_base.html#a78e56679819dde06c3beb022cbdb13a4" title="Process a specific channel in this unit.">process</a> (info, channel));
 <a name="l00187"></a>00187         
-<a name="l00188"></a>00188         <span class="keyword">const</span> SampleType* <span class="keyword">const</span> operandSamples = operandBuffer.getArray();
-<a name="l00189"></a>00189         <span class="keyword">const</span> <span class="keywordtype">int</span> operandBufferLength = operandBuffer.length();
+<a name="l00188"></a>00188         SampleType* <span class="keyword">const</span> outputSamples = this-&gt;getOutputSamples();
+<a name="l00189"></a>00189         <span class="keyword">const</span> <span class="keywordtype">int</span> outputBufferLength = this-&gt;getOutputBuffer().<a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a>();
 <a name="l00190"></a>00190         
-<a name="l00191"></a>00191         <span class="keywordtype">int</span> i;
-<a name="l00192"></a>00192         
-<a name="l00193"></a>00193         <span class="keywordflow">if</span> (operandBufferLength == outputBufferLength)
-<a name="l00194"></a>00194         {
-<a name="l00195"></a>00195             <a class="code" href="class_numerical_array_unary_op.html">NumericalArrayUnaryOp&lt;SampleType,op&gt;::calc</a> (outputSamples, operandSamples, outputBufferLength);
-<a name="l00196"></a>00196         }
-<a name="l00197"></a>00197         <span class="keywordflow">else</span> <span class="keywordflow">if</span> (operandBufferLength == 1)
-<a name="l00198"></a>00198         {
-<a name="l00199"></a>00199             <a class="code" href="class_numerical_array_filler.html">NumericalArrayFiller&lt;SampleType&gt;::fill</a> (outputSamples, operandSamples[0], outputBufferLength);
-<a name="l00200"></a>00200         }
-<a name="l00201"></a>00201         <span class="keywordflow">else</span>
-<a name="l00202"></a>00202         {
-<a name="l00203"></a>00203             <span class="keywordtype">double</span> operandPosition = 0.0;
-<a name="l00204"></a>00204             <span class="keyword">const</span> <span class="keywordtype">double</span> operandIncrement = double (operandBufferLength) / double (outputBufferLength);
-<a name="l00205"></a>00205             
-<a name="l00206"></a>00206             <span class="keywordflow">for</span> (i = 0; i &lt; outputBufferLength; ++i) 
-<a name="l00207"></a>00207             {
-<a name="l00208"></a>00208                 outputSamples[i] = op (operandSamples[<span class="keywordtype">int</span> (operandPosition)]);
-<a name="l00209"></a>00209                 operandPosition += operandIncrement;
-<a name="l00210"></a>00210             }        
-<a name="l00211"></a>00211         }
-<a name="l00212"></a>00212     }
-<a name="l00213"></a>00213 };
-<a name="l00214"></a>00214 
-<a name="l00215"></a>00215 
-<a name="l00216"></a>00216 <span class="preprocessor">#endif // PLONK_UNARYOPCHANNEL_H</span>
+<a name="l00191"></a>00191         <span class="keyword">const</span> SampleType* <span class="keyword">const</span> operandSamples = operandBuffer.getArray();
+<a name="l00192"></a>00192         <span class="keyword">const</span> <span class="keywordtype">int</span> operandBufferLength = operandBuffer.length();
+<a name="l00193"></a>00193         
+<a name="l00194"></a>00194         <span class="keywordtype">int</span> i;
+<a name="l00195"></a>00195         
+<a name="l00196"></a>00196         <span class="keywordflow">if</span> (operandBufferLength == outputBufferLength)
+<a name="l00197"></a>00197         {
+<a name="l00198"></a>00198             NumericalArrayUnaryOp&lt;SampleType,op&gt;::calc (outputSamples, operandSamples, outputBufferLength);
+<a name="l00199"></a>00199         }
+<a name="l00200"></a>00200         <span class="keywordflow">else</span> <span class="keywordflow">if</span> (operandBufferLength == 1)
+<a name="l00201"></a>00201         {
+<a name="l00202"></a>00202             NumericalArrayFiller&lt;SampleType&gt;::fill (outputSamples, operandSamples[0], outputBufferLength);
+<a name="l00203"></a>00203         }
+<a name="l00204"></a>00204         <span class="keywordflow">else</span>
+<a name="l00205"></a>00205         {
+<a name="l00206"></a>00206             <span class="keywordtype">double</span> operandPosition = 0.0;
+<a name="l00207"></a>00207             <span class="keyword">const</span> <span class="keywordtype">double</span> operandIncrement = double (operandBufferLength) / double (outputBufferLength);
+<a name="l00208"></a>00208             
+<a name="l00209"></a>00209             <span class="keywordflow">for</span> (i = 0; i &lt; outputBufferLength; ++i) 
+<a name="l00210"></a>00210             {
+<a name="l00211"></a>00211                 outputSamples[i] = op (operandSamples[<span class="keywordtype">int</span> (operandPosition)]);
+<a name="l00212"></a>00212                 operandPosition += operandIncrement;
+<a name="l00213"></a>00213             }        
+<a name="l00214"></a>00214         }
+<a name="l00215"></a>00215     }
+<a name="l00216"></a>00216 };
+<a name="l00217"></a>00217 
+<a name="l00218"></a>00218 
+<a name="l00219"></a>00219 <span class="preprocessor">#endif // PLONK_UNARYOPCHANNEL_H</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -284,7 +287,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Properties</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -293,7 +296,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 5 2012 17:04:56 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 8 2014 12:26:50 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<title>pl-nk: CombFilter1ParamUnit&lt; FilterShape &gt; Class Template Reference</title>
+<title>pl-nk: CombFilter1ParamUnit&lt; FilterShape, InterpTypeCode &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/search.js"></script>
@@ -20,7 +20,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="pl-nk-logo-small.png"/></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">pl-nk</div>
+   <div id="projectname">pl-nk&#160;<span id="projectnumber">v0.4.5</span></div>
+   <div id="projectbrief">Plonk|Plink|Plank are a set of cross-platform C/C++ frameworks for audio software development</div>
   </td>
  </tr>
  </tbody>
@@ -29,8 +30,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -62,10 +63,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="header">
   <div class="summary">
-<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a>  </div>
   <div class="headertitle">
-<div class="title">CombFilter1ParamUnit&lt; FilterShape &gt; Class Template Reference<div class="ingroups"><a class="el" href="group___delay_units.html">Delay units classes.</a></div></div>  </div>
+<div class="title">CombFilter1ParamUnit&lt; FilterShape, InterpTypeCode &gt; Class Template Reference<div class="ingroups"><a class="el" href="group___delay_units.html">Delay units classes.</a></div></div>  </div>
 </div>
 <div class="contents">
 <!-- doxytag: class="CombFilter1ParamUnit" -->
@@ -74,40 +74,21 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <p><a href="class_comb_filter1_param_unit-members.html">List of all members.</a></p>
 <table class="memberdecls">
-<tr><td colspan="2"><h2><a name="pub-types"></a>
-Public Types</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_filter_shape.html#a1b22416c1b650d9279c2175c227812b8">FilterShape::SampleDataType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_comb_filter1_param_unit.html#a179784d647f1f35d25c2265f0e3c06de">SampleType</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <br class="typebreak"/>
-<a class="el" href="class_delay_form_comb_filter1_param.html">DelayFormCombFilter1Param</a><br class="typebreak"/>
-&lt; <a class="el" href="class_filter_shape.html">FilterShape</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_comb_filter1_param_unit.html#a776242231699bb5c756f8e7d675c4fda">FormType</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <br class="typebreak"/>
-<a class="el" href="class_delay3_param_channel_internal.html">Delay3ParamChannelInternal</a><br class="typebreak"/>
-&lt; <a class="el" href="class_delay_form_comb_filter1_param.html">FormType</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_comb_filter1_param_unit.html#a4d20ac19b28d7f0e3e359eeecb84ebd8">DelayInternal</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_unit_base.html">UnitBase</a>&lt; <a class="el" href="class_comb_filter1_param_unit.html#a179784d647f1f35d25c2265f0e3c06de">SampleType</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_comb_filter1_param_unit.html#a39eac2e6deb84391f18a8abe75d7c7a1">UnitType</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_input_dictionary.html">InputDictionary</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_comb_filter1_param_unit.html#ae6d21cce7a29b7c54babbe0aa68718b0">Inputs</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_delay3_param_channel_internal.html#ab584e31c8bbaf490e381fc221732476c">DelayInternal::Param1Type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_comb_filter1_param_unit.html#a272934a75018f20051c96a5735d3a959">DurationType</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_unit_base.html">UnitBase</a>&lt; <a class="el" href="class_comb_filter1_param_unit.html#a272934a75018f20051c96a5735d3a959">DurationType</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_comb_filter1_param_unit.html#a3673301f30e7cd205656c1e9eda108b9">DurationUnitType</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_delay3_param_channel_internal.html#a39e12788bcde77927ac494c12af6cf33">DelayInternal::Param2Type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_comb_filter1_param_unit.html#ad9dfa35769b5ad33476c603260d975d8">FeedbackType</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_unit_base.html">UnitBase</a>&lt; <a class="el" href="class_comb_filter1_param_unit.html#ad9dfa35769b5ad33476c603260d975d8">FeedbackType</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_comb_filter1_param_unit.html#aa6f6f36396a1cec67d28e76b8debd8a8">FeedbackUnitType</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_delay3_param_channel_internal.html#a35ee8c990fff2354913e740d6d7d495a">DelayInternal::Param3Type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_comb_filter1_param_unit.html#af116f9af8c9c2ff0b2890ba5a1b5710b">FrequencyType</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_unit_base.html">UnitBase</a>&lt; <a class="el" href="class_comb_filter1_param_unit.html#af116f9af8c9c2ff0b2890ba5a1b5710b">FrequencyType</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_comb_filter1_param_unit.html#a2bd646169360bbd1e82a2545bc1137d3">FrequencyUnitType</a></td></tr>
 <tr><td colspan="2"><h2><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_object_array.html">UnitInfos</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_comb_filter1_param_unit.html#a2bb3dea6156ee33428f8bbeaa93b7c95">getInfo</a> ()  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_unit_base.html">UnitType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_comb_filter1_param_unit.html#a412a073f361885f380872ae28790733b">ar</a> (<a class="el" href="class_unit_base.html">UnitType</a> const &amp;input, <a class="el" href="class_unit_base.html">DurationUnitType</a> const &amp;duration=<a class="el" href="class_comb_filter1_param_unit.html#a272934a75018f20051c96a5735d3a959">DurationType</a>(0.5), <a class="el" href="class_unit_base.html">FeedbackUnitType</a> const &amp;feedback=<a class="el" href="class_comb_filter1_param_unit.html#ad9dfa35769b5ad33476c603260d975d8">FeedbackType</a>(0.5), <a class="el" href="class_unit_base.html">FrequencyUnitType</a> const &amp;frequency=<a class="el" href="class_comb_filter1_param_unit.html#af116f9af8c9c2ff0b2890ba5a1b5710b">FrequencyType</a>(1200.0), const <a class="el" href="class_comb_filter1_param_unit.html#a272934a75018f20051c96a5735d3a959">DurationType</a> maximumDuration=<a class="el" href="class_comb_filter1_param_unit.html#a272934a75018f20051c96a5735d3a959">DurationType</a>(1.0), <a class="el" href="class_unit_base.html">UnitType</a> const &amp;mul=<a class="el" href="class_comb_filter1_param_unit.html#a179784d647f1f35d25c2265f0e3c06de">SampleType</a>(1), <a class="el" href="class_unit_base.html">UnitType</a> const &amp;add=<a class="el" href="class_comb_filter1_param_unit.html#a179784d647f1f35d25c2265f0e3c06de">SampleType</a>(0), <a class="el" href="class_block_size.html">BlockSize</a> const &amp;preferredBlockSize=BlockSize::getDefault(), <a class="el" href="class_sample_rate.html">SampleRate</a> const &amp;preferredSampleRate=SampleRate::getDefault())  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create an audio rate comb filter.  <a href="#a412a073f361885f380872ae28790733b"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_unit_base.html">UnitType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_comb_filter1_param_unit.html#a13ca4487e2afd20310e6f054a0182040">ar</a> (<a class="el" href="class_unit_base.html">UnitType</a> const &amp;input, <a class="el" href="class_unit_base.html">DurationUnitType</a> const &amp;duration=DurationType(0.5), <a class="el" href="class_unit_base.html">FeedbackUnitType</a> const &amp;feedback=FeedbackType(0.5), <a class="el" href="class_unit_base.html">FrequencyUnitType</a> const &amp;frequency=FrequencyType(1200.0), const DurationType maximumDuration=DurationType(1.0), <a class="el" href="class_unit_base.html">UnitType</a> const &amp;mul=SampleType(1), <a class="el" href="class_unit_base.html">UnitType</a> const &amp;add=SampleType(0), <a class="el" href="class_block_size.html">BlockSize</a> const &amp;preferredBlockSize=BlockSize::getDefault(), <a class="el" href="class_sample_rate.html">SampleRate</a> const &amp;preferredSampleRate=SampleRate::getDefault())  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create an audio rate comb filter.  <a href="#a13ca4487e2afd20310e6f054a0182040"></a><br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
-<div class="textblock"><h3>template&lt;class FilterShape&gt;<br/>
-class CombFilter1ParamUnit&lt; FilterShape &gt;</h3>
+<div class="textblock"><h3>template&lt;class FilterShape, Interp::TypeCode InterpTypeCode&gt;<br/>
+class CombFilter1ParamUnit&lt; FilterShape, InterpTypeCode &gt;</h3>
 
 <p>A comb filter with a filter in the feedback loop (where the filter takes one parameter). </p>
-<p>Factory functions:</p>
-<ul>
+<dl class="user"><dt><b>Factory functions:</b></dt><dd><ul>
 <li>ar (input, duration=0.5, feedback=0.5, maximumDuration=1, mul=1, add=0, preferredBlockSize=default, preferredSampleRate=default)</li>
 </ul>
-<p>Inputs:</p>
-<ul>
+</dd></dl>
+<dl class="user"><dt><b>Inputs:</b></dt><dd><ul>
 <li>input: (unit, multi) the unit to which delay is applied</li>
 <li>duration: (unit, multi) the delay duration in seconds</li>
 <li>feedback: (unit, multi) the feedback amount multiplier</li>
@@ -118,199 +99,16 @@ class CombFilter1ParamUnit&lt; FilterShape &gt;</h3>
 <li>preferredBlockSize: the preferred output block size (for advanced usage, leave on default if unsure)</li>
 <li>preferredSampleRate: the preferred output sample rate (for advanced usage, leave on default if unsure) </li>
 </ul>
-</div><hr/><h2>Member Typedef Documentation</h2>
-<a class="anchor" id="a179784d647f1f35d25c2265f0e3c06de"></a><!-- doxytag: member="CombFilter1ParamUnit::SampleType" ref="a179784d647f1f35d25c2265f0e3c06de" args="" -->
+</dd></dl>
+</div><hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="a13ca4487e2afd20310e6f054a0182040"></a><!-- doxytag: member="CombFilter1ParamUnit::ar" ref="a13ca4487e2afd20310e6f054a0182040" args="(UnitType const &amp;input, DurationUnitType const &amp;duration=DurationType(0.5), FeedbackUnitType const &amp;feedback=FeedbackType(0.5), FrequencyUnitType const &amp;frequency=FrequencyType(1200.0), const DurationType maximumDuration=DurationType(1.0), UnitType const &amp;mul=SampleType(1), UnitType const &amp;add=SampleType(0), BlockSize const &amp;preferredBlockSize=BlockSize::getDefault(), SampleRate const &amp;preferredSampleRate=SampleRate::getDefault())" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class FilterShape &gt; </div>
+template&lt;class FilterShape , Interp::TypeCode InterpTypeCode&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_filter_shape.html#a1b22416c1b650d9279c2175c227812b8">FilterShape::SampleDataType</a> <a class="el" href="class_comb_filter1_param_unit.html">CombFilter1ParamUnit</a>&lt; <a class="el" href="class_filter_shape.html">FilterShape</a> &gt;::<a class="el" href="class_comb_filter1_param_unit.html#a179784d647f1f35d25c2265f0e3c06de">SampleType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a776242231699bb5c756f8e7d675c4fda"></a><!-- doxytag: member="CombFilter1ParamUnit::FormType" ref="a776242231699bb5c756f8e7d675c4fda" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class FilterShape &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_delay_form_comb_filter1_param.html">DelayFormCombFilter1Param</a>&lt;<a class="el" href="class_filter_shape.html">FilterShape</a>&gt; <a class="el" href="class_comb_filter1_param_unit.html">CombFilter1ParamUnit</a>&lt; <a class="el" href="class_filter_shape.html">FilterShape</a> &gt;::<a class="el" href="class_delay_form_comb_filter1_param.html">FormType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a4d20ac19b28d7f0e3e359eeecb84ebd8"></a><!-- doxytag: member="CombFilter1ParamUnit::DelayInternal" ref="a4d20ac19b28d7f0e3e359eeecb84ebd8" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class FilterShape &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_delay3_param_channel_internal.html">Delay3ParamChannelInternal</a>&lt;<a class="el" href="class_delay_form_comb_filter1_param.html">FormType</a>&gt; <a class="el" href="class_comb_filter1_param_unit.html">CombFilter1ParamUnit</a>&lt; <a class="el" href="class_filter_shape.html">FilterShape</a> &gt;::<a class="el" href="class_delay3_param_channel_internal.html">DelayInternal</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a39eac2e6deb84391f18a8abe75d7c7a1"></a><!-- doxytag: member="CombFilter1ParamUnit::UnitType" ref="a39eac2e6deb84391f18a8abe75d7c7a1" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class FilterShape &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_unit_base.html">UnitBase</a>&lt;<a class="el" href="class_comb_filter1_param_unit.html#a179784d647f1f35d25c2265f0e3c06de">SampleType</a>&gt; <a class="el" href="class_comb_filter1_param_unit.html">CombFilter1ParamUnit</a>&lt; <a class="el" href="class_filter_shape.html">FilterShape</a> &gt;::<a class="el" href="class_unit_base.html">UnitType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ae6d21cce7a29b7c54babbe0aa68718b0"></a><!-- doxytag: member="CombFilter1ParamUnit::Inputs" ref="ae6d21cce7a29b7c54babbe0aa68718b0" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class FilterShape &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_input_dictionary.html">InputDictionary</a> <a class="el" href="class_comb_filter1_param_unit.html">CombFilter1ParamUnit</a>&lt; <a class="el" href="class_filter_shape.html">FilterShape</a> &gt;::<a class="el" href="class_input_dictionary.html">Inputs</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a272934a75018f20051c96a5735d3a959"></a><!-- doxytag: member="CombFilter1ParamUnit::DurationType" ref="a272934a75018f20051c96a5735d3a959" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class FilterShape &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_delay3_param_channel_internal.html#ab584e31c8bbaf490e381fc221732476c">DelayInternal::Param1Type</a> <a class="el" href="class_comb_filter1_param_unit.html">CombFilter1ParamUnit</a>&lt; <a class="el" href="class_filter_shape.html">FilterShape</a> &gt;::<a class="el" href="class_comb_filter1_param_unit.html#a272934a75018f20051c96a5735d3a959">DurationType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a3673301f30e7cd205656c1e9eda108b9"></a><!-- doxytag: member="CombFilter1ParamUnit::DurationUnitType" ref="a3673301f30e7cd205656c1e9eda108b9" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class FilterShape &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_unit_base.html">UnitBase</a>&lt;<a class="el" href="class_comb_filter1_param_unit.html#a272934a75018f20051c96a5735d3a959">DurationType</a>&gt; <a class="el" href="class_comb_filter1_param_unit.html">CombFilter1ParamUnit</a>&lt; <a class="el" href="class_filter_shape.html">FilterShape</a> &gt;::<a class="el" href="class_unit_base.html">DurationUnitType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ad9dfa35769b5ad33476c603260d975d8"></a><!-- doxytag: member="CombFilter1ParamUnit::FeedbackType" ref="ad9dfa35769b5ad33476c603260d975d8" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class FilterShape &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_delay3_param_channel_internal.html#a39e12788bcde77927ac494c12af6cf33">DelayInternal::Param2Type</a> <a class="el" href="class_comb_filter1_param_unit.html">CombFilter1ParamUnit</a>&lt; <a class="el" href="class_filter_shape.html">FilterShape</a> &gt;::<a class="el" href="class_comb_filter1_param_unit.html#ad9dfa35769b5ad33476c603260d975d8">FeedbackType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="aa6f6f36396a1cec67d28e76b8debd8a8"></a><!-- doxytag: member="CombFilter1ParamUnit::FeedbackUnitType" ref="aa6f6f36396a1cec67d28e76b8debd8a8" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class FilterShape &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_unit_base.html">UnitBase</a>&lt;<a class="el" href="class_comb_filter1_param_unit.html#ad9dfa35769b5ad33476c603260d975d8">FeedbackType</a>&gt; <a class="el" href="class_comb_filter1_param_unit.html">CombFilter1ParamUnit</a>&lt; <a class="el" href="class_filter_shape.html">FilterShape</a> &gt;::<a class="el" href="class_unit_base.html">FeedbackUnitType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="af116f9af8c9c2ff0b2890ba5a1b5710b"></a><!-- doxytag: member="CombFilter1ParamUnit::FrequencyType" ref="af116f9af8c9c2ff0b2890ba5a1b5710b" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class FilterShape &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_delay3_param_channel_internal.html#a35ee8c990fff2354913e740d6d7d495a">DelayInternal::Param3Type</a> <a class="el" href="class_comb_filter1_param_unit.html">CombFilter1ParamUnit</a>&lt; <a class="el" href="class_filter_shape.html">FilterShape</a> &gt;::<a class="el" href="class_comb_filter1_param_unit.html#af116f9af8c9c2ff0b2890ba5a1b5710b">FrequencyType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a2bd646169360bbd1e82a2545bc1137d3"></a><!-- doxytag: member="CombFilter1ParamUnit::FrequencyUnitType" ref="a2bd646169360bbd1e82a2545bc1137d3" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class FilterShape &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_unit_base.html">UnitBase</a>&lt;<a class="el" href="class_comb_filter1_param_unit.html#af116f9af8c9c2ff0b2890ba5a1b5710b">FrequencyType</a>&gt; <a class="el" href="class_comb_filter1_param_unit.html">CombFilter1ParamUnit</a>&lt; <a class="el" href="class_filter_shape.html">FilterShape</a> &gt;::<a class="el" href="class_unit_base.html">FrequencyUnitType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a2bb3dea6156ee33428f8bbeaa93b7c95"></a><!-- doxytag: member="CombFilter1ParamUnit::getInfo" ref="a2bb3dea6156ee33428f8bbeaa93b7c95" args="()" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class FilterShape &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">static <a class="el" href="class_object_array.html">UnitInfos</a> <a class="el" href="class_comb_filter1_param_unit.html">CombFilter1ParamUnit</a>&lt; <a class="el" href="class_filter_shape.html">FilterShape</a> &gt;::getInfo </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a412a073f361885f380872ae28790733b"></a><!-- doxytag: member="CombFilter1ParamUnit::ar" ref="a412a073f361885f380872ae28790733b" args="(UnitType const &amp;input, DurationUnitType const &amp;duration=DurationType(0.5), FeedbackUnitType const &amp;feedback=FeedbackType(0.5), FrequencyUnitType const &amp;frequency=FrequencyType(1200.0), const DurationType maximumDuration=DurationType(1.0), UnitType const &amp;mul=SampleType(1), UnitType const &amp;add=SampleType(0), BlockSize const &amp;preferredBlockSize=BlockSize::getDefault(), SampleRate const &amp;preferredSampleRate=SampleRate::getDefault())" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class FilterShape &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">static <a class="el" href="class_unit_base.html">UnitType</a> <a class="el" href="class_comb_filter1_param_unit.html">CombFilter1ParamUnit</a>&lt; <a class="el" href="class_filter_shape.html">FilterShape</a> &gt;::ar </td>
+          <td class="memname">static <a class="el" href="class_unit_base.html">UnitType</a> <a class="el" href="class_comb_filter1_param_unit.html">CombFilter1ParamUnit</a>&lt; FilterShape, InterpTypeCode &gt;::ar </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="class_unit_base.html">UnitType</a> const &amp;&#160;</td>
           <td class="paramname"><em>input</em>, </td>
@@ -319,37 +117,37 @@ template&lt;class FilterShape &gt; </div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="class_unit_base.html">DurationUnitType</a> const &amp;&#160;</td>
-          <td class="paramname"><em>duration</em> = <code><a class="el" href="class_comb_filter1_param_unit.html#a272934a75018f20051c96a5735d3a959">DurationType</a>&#160;(0.5)</code>, </td>
+          <td class="paramname"><em>duration</em> = <code>DurationType&#160;(0.5)</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="class_unit_base.html">FeedbackUnitType</a> const &amp;&#160;</td>
-          <td class="paramname"><em>feedback</em> = <code><a class="el" href="class_comb_filter1_param_unit.html#ad9dfa35769b5ad33476c603260d975d8">FeedbackType</a>&#160;(0.5)</code>, </td>
+          <td class="paramname"><em>feedback</em> = <code>FeedbackType&#160;(0.5)</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="class_unit_base.html">FrequencyUnitType</a> const &amp;&#160;</td>
-          <td class="paramname"><em>frequency</em> = <code><a class="el" href="class_comb_filter1_param_unit.html#af116f9af8c9c2ff0b2890ba5a1b5710b">FrequencyType</a>&#160;(1200.0)</code>, </td>
+          <td class="paramname"><em>frequency</em> = <code>FrequencyType&#160;(1200.0)</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="class_comb_filter1_param_unit.html#a272934a75018f20051c96a5735d3a959">DurationType</a>&#160;</td>
-          <td class="paramname"><em>maximumDuration</em> = <code><a class="el" href="class_comb_filter1_param_unit.html#a272934a75018f20051c96a5735d3a959">DurationType</a>&#160;(1.0)</code>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="class_unit_base.html">UnitType</a> const &amp;&#160;</td>
-          <td class="paramname"><em>mul</em> = <code><a class="el" href="class_comb_filter1_param_unit.html#a179784d647f1f35d25c2265f0e3c06de">SampleType</a>&#160;(1)</code>, </td>
+          <td class="paramtype">const DurationType&#160;</td>
+          <td class="paramname"><em>maximumDuration</em> = <code>DurationType&#160;(1.0)</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="class_unit_base.html">UnitType</a> const &amp;&#160;</td>
-          <td class="paramname"><em>add</em> = <code><a class="el" href="class_comb_filter1_param_unit.html#a179784d647f1f35d25c2265f0e3c06de">SampleType</a>&#160;(0)</code>, </td>
+          <td class="paramname"><em>mul</em> = <code>SampleType&#160;(1)</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_unit_base.html">UnitType</a> const &amp;&#160;</td>
+          <td class="paramname"><em>add</em> = <code>SampleType&#160;(0)</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -385,7 +183,7 @@ template&lt;class FilterShape &gt; </div>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Properties</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -394,7 +192,7 @@ template&lt;class FilterShape &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 5 2012 17:05:01 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 8 2014 12:26:52 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

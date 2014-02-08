@@ -20,7 +20,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="pl-nk-logo-small.png"/></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">pl-nk</div>
+   <div id="projectname">pl-nk&#160;<span id="projectnumber">v0.4.5</span></div>
+   <div id="projectbrief">Plonk|Plink|Plank are a set of cross-platform C/C++ frameworks for audio software development</div>
   </td>
  </tr>
  </tbody>
@@ -29,8 +30,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -61,9 +62,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   </div>
 </div>
 <div class="header">
-  <div class="summary">
-<a href="#pub-types">Public Types</a> &#124;
-<a href="#pub-static-methods">Static Public Member Functions</a>  </div>
   <div class="headertitle">
 <div class="title">OverlapMixUnit&lt; SampleType &gt; Class Template Reference<div class="ingroups"><a class="el" href="group___converter_units.html">Converter unit classes.</a></div></div>  </div>
 </div>
@@ -74,176 +72,22 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <p><a href="class_overlap_mix_unit-members.html">List of all members.</a></p>
 <table class="memberdecls">
-<tr><td colspan="2"><h2><a name="pub-types"></a>
-Public Types</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <br class="typebreak"/>
-<a class="el" href="class_overlap_mix_channel_internal.html">OverlapMixChannelInternal</a><br class="typebreak"/>
-&lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_overlap_mix_unit.html#ac18a8d5faac7d3bd5c485dee74c9ff79">OverlapMixInternal</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="struct_channel_data_3_01_channel_internal_core_01_4.html">OverlapMixInternal::Data</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_overlap_mix_unit.html#a5aedb74de8f274df0b8fa010bdd77217">Data</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_channel_base.html">ChannelBase</a>&lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_overlap_mix_unit.html#a3be8ee84162323accf43afeb67947157">ChannelType</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_channel_internal.html">ChannelInternal</a><br class="typebreak"/>
-&lt; SampleType, <a class="el" href="struct_channel_data_3_01_channel_internal_core_01_4.html">Data</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_overlap_mix_unit.html#aa831e0f3f5fdd317dae6c92754b0e195">Internal</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_overlap_mix_unit.html#ae0eccaf85718e8013c9d018e54322111">UnitType</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_input_dictionary.html">InputDictionary</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_overlap_mix_unit.html#aecfd24a2a48dab3ede9bc979a6f23a61">Inputs</a></td></tr>
-<tr><td colspan="2"><h2><a name="pub-static-methods"></a>
-Static Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_object_array.html">UnitInfos</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_overlap_mix_unit.html#aa2f578bf77ce0342453348384b1ce21d">getInfo</a> ()  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_unit_base.html">UnitType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_overlap_mix_unit.html#a8c798ef040f4e9742de8aef0f1f25116">ar</a> (<a class="el" href="class_unit_base.html">UnitType</a> const &amp;input, <a class="el" href="class_variable.html">DoubleVariable</a> const &amp;overlap=<a class="el" href="class_math.html">Math</a>&lt; <a class="el" href="class_variable.html">DoubleVariable</a> &gt;::get0_5())  throw ()</td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><h3>template&lt;class SampleType&gt;<br/>
 class OverlapMixUnit&lt; SampleType &gt;</h3>
 
 <p>Mix down an overlapped processing stream to a continuous one. </p>
-<p>Factory functions:</p>
-<ul>
+<dl class="user"><dt><b>Factory functions:</b></dt><dd><ul>
 <li>ar (input, overlap=0.5)</li>
 </ul>
-<p>Inputs:</p>
-<ul>
+</dd></dl>
+<dl class="user"><dt><b>Inputs:</b></dt><dd><ul>
 <li>input: (unit, multi) the unit to de-overlap</li>
 <li>overlap: (doublevariable) the source overlap (1= is no overlap, 0.5= blocks overlap by half their length) </li>
 </ul>
-</div><hr/><h2>Member Typedef Documentation</h2>
-<a class="anchor" id="ac18a8d5faac7d3bd5c485dee74c9ff79"></a><!-- doxytag: member="OverlapMixUnit::OverlapMixInternal" ref="ac18a8d5faac7d3bd5c485dee74c9ff79" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_overlap_mix_channel_internal.html">OverlapMixChannelInternal</a>&lt;SampleType&gt; <a class="el" href="class_overlap_mix_unit.html">OverlapMixUnit</a>&lt; SampleType &gt;::<a class="el" href="class_overlap_mix_channel_internal.html">OverlapMixInternal</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a5aedb74de8f274df0b8fa010bdd77217"></a><!-- doxytag: member="OverlapMixUnit::Data" ref="a5aedb74de8f274df0b8fa010bdd77217" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="struct_channel_data_3_01_channel_internal_core_01_4.html">OverlapMixInternal::Data</a> <a class="el" href="class_overlap_mix_unit.html">OverlapMixUnit</a>&lt; SampleType &gt;::<a class="el" href="struct_channel_data_3_01_channel_internal_core_01_4.html">Data</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a3be8ee84162323accf43afeb67947157"></a><!-- doxytag: member="OverlapMixUnit::ChannelType" ref="a3be8ee84162323accf43afeb67947157" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_channel_base.html">ChannelBase</a>&lt;SampleType&gt; <a class="el" href="class_overlap_mix_unit.html">OverlapMixUnit</a>&lt; SampleType &gt;::<a class="el" href="class_channel_base.html">ChannelType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="aa831e0f3f5fdd317dae6c92754b0e195"></a><!-- doxytag: member="OverlapMixUnit::Internal" ref="aa831e0f3f5fdd317dae6c92754b0e195" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_channel_internal.html">ChannelInternal</a>&lt;SampleType,<a class="el" href="struct_channel_data_3_01_channel_internal_core_01_4.html">Data</a>&gt; <a class="el" href="class_overlap_mix_unit.html">OverlapMixUnit</a>&lt; SampleType &gt;::<a class="el" href="class_channel_internal.html">Internal</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ae0eccaf85718e8013c9d018e54322111"></a><!-- doxytag: member="OverlapMixUnit::UnitType" ref="ae0eccaf85718e8013c9d018e54322111" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_unit_base.html">UnitBase</a>&lt;SampleType&gt; <a class="el" href="class_overlap_mix_unit.html">OverlapMixUnit</a>&lt; SampleType &gt;::<a class="el" href="class_unit_base.html">UnitType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="aecfd24a2a48dab3ede9bc979a6f23a61"></a><!-- doxytag: member="OverlapMixUnit::Inputs" ref="aecfd24a2a48dab3ede9bc979a6f23a61" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_input_dictionary.html">InputDictionary</a> <a class="el" href="class_overlap_mix_unit.html">OverlapMixUnit</a>&lt; SampleType &gt;::<a class="el" href="class_input_dictionary.html">Inputs</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="aa2f578bf77ce0342453348384b1ce21d"></a><!-- doxytag: member="OverlapMixUnit::getInfo" ref="aa2f578bf77ce0342453348384b1ce21d" args="()" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">static <a class="el" href="class_object_array.html">UnitInfos</a> <a class="el" href="class_overlap_mix_unit.html">OverlapMixUnit</a>&lt; SampleType &gt;::getInfo </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a8c798ef040f4e9742de8aef0f1f25116"></a><!-- doxytag: member="OverlapMixUnit::ar" ref="a8c798ef040f4e9742de8aef0f1f25116" args="(UnitType const &amp;input, DoubleVariable const &amp;overlap=Math&lt; DoubleVariable &gt;::get0_5())" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">static <a class="el" href="class_unit_base.html">UnitType</a> <a class="el" href="class_overlap_mix_unit.html">OverlapMixUnit</a>&lt; SampleType &gt;::ar </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_unit_base.html">UnitType</a> const &amp;&#160;</td>
-          <td class="paramname"><em>input</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="class_variable.html">DoubleVariable</a> const &amp;&#160;</td>
-          <td class="paramname"><em>overlap</em> = <code><a class="el" href="class_math.html">Math</a>&lt;<a class="el" href="class_variable.html">DoubleVariable</a>&gt;::get0_5()</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td>  throw ()<code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<hr/>The documentation for this class was generated from the following file:<ul>
+</dd></dl>
+</div><hr/>The documentation for this class was generated from the following file:<ul>
 <li><a class="el" href="plonk___overlap_mix_channel_8h_source.html">plonk_OverlapMixChannel.h</a></li>
 </ul>
 </div>
@@ -252,7 +96,7 @@ template&lt;class SampleType &gt; </div>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Properties</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -261,7 +105,7 @@ template&lt;class SampleType &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 5 2012 17:05:07 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 8 2014 12:26:52 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

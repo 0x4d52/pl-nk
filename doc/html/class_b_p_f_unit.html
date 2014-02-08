@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<title>pl-nk: BPFUnit&lt; SampleType &gt; Class Template Reference</title>
+<title>pl-nk: BPFUnit&lt; SampleType, InterpTypeCode &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/search.js"></script>
@@ -20,7 +20,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="pl-nk-logo-small.png"/></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">pl-nk</div>
+   <div id="projectname">pl-nk&#160;<span id="projectnumber">v0.4.5</span></div>
+   <div id="projectbrief">Plonk|Plink|Plank are a set of cross-platform C/C++ frameworks for audio software development</div>
   </td>
  </tr>
  </tbody>
@@ -29,8 +30,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -62,10 +63,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="header">
   <div class="summary">
-<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a>  </div>
   <div class="headertitle">
-<div class="title">BPFUnit&lt; SampleType &gt; Class Template Reference<div class="ingroups"><a class="el" href="group___filter_units.html">Filter unit classes.</a></div></div>  </div>
+<div class="title">BPFUnit&lt; SampleType, InterpTypeCode &gt; Class Template Reference<div class="ingroups"><a class="el" href="group___filter_units.html">Filter unit classes.</a></div></div>  </div>
 </div>
 <div class="contents">
 <!-- doxytag: class="BPFUnit" -->
@@ -74,36 +74,24 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <p><a href="class_b_p_f_unit-members.html">List of all members.</a></p>
 <table class="memberdecls">
-<tr><td colspan="2"><h2><a name="pub-types"></a>
-Public Types</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_b_p_f_unit.html#a4b9addc78ec4cdb198db9736e1479dd8">UnitType</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_filter_shape_b_p_f_base.html">FilterShapeBPFBase</a><br class="typebreak"/>
-&lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_b_p_f_unit.html#a134bfba66c667c60ee515714c41733bc">FilterShape</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_filter_coeffs2_param_unit.html">FilterCoeffs2ParamUnit</a><br class="typebreak"/>
-&lt; <a class="el" href="class_filter_shape_b_p_f_base.html">FilterShape</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_b_p_f_unit.html#a49556ac30ce4ccea94ebc11d6cf83f72">FilterCoeffsType</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_filter_coeffs2_param_unit.html#adfd61f5163669e9821abd72bcfc9ccf1">FilterCoeffsType::FormType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_b_p_f_unit.html#a41225132c5f1b971fc683dd864e2994f">FormType</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_filter_unit.html">FilterUnit</a>&lt; <a class="el" href="class_b_p_f_unit.html#a41225132c5f1b971fc683dd864e2994f">FormType</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_b_p_f_unit.html#a33e97f55eb0edb80187444305650978f">FilterType</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_resample_unit.html">ResampleUnit</a>&lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_b_p_f_unit.html#abdfa9c385c4102f95a8ee7e798bb0ef2">ResampleType</a></td></tr>
 <tr><td colspan="2"><h2><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_object_array.html">UnitInfos</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_b_p_f_unit.html#a5df5f17a9f133bb95a39ef0d06864d9b">getInfo</a> ()  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_unit_base.html">UnitType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_b_p_f_unit.html#aeee58f840b0e7573abac3b824d83ceb2">ar</a> (<a class="el" href="class_unit_base.html">UnitType</a> const &amp;input, <a class="el" href="class_unit_base.html">UnitType</a> const &amp;frequency=SampleType(1200), <a class="el" href="class_unit_base.html">UnitType</a> const &amp;bandwidth=SampleType(1), <a class="el" href="class_unit_base.html">UnitType</a> const &amp;mul=SampleType(1), <a class="el" href="class_unit_base.html">UnitType</a> const &amp;add=SampleType(0), <a class="el" href="class_block_size.html">BlockSize</a> const &amp;preferredBlockSize=BlockSize::noPreference(), <a class="el" href="class_sample_rate.html">SampleRate</a> const &amp;preferredSampleRate=SampleRate::noPreference())  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a bandpass filter.  <a href="#aeee58f840b0e7573abac3b824d83ceb2"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_unit_base.html">UnitType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_b_p_f_unit.html#a3f00e8a3e7f0e330d0b3dc81a7ecfd76">kr</a> (<a class="el" href="class_unit_base.html">UnitType</a> const &amp;input, <a class="el" href="class_unit_base.html">UnitType</a> const &amp;frequency=SampleType(1200), <a class="el" href="class_unit_base.html">UnitType</a> const &amp;bandwidth=SampleType(1), <a class="el" href="class_unit_base.html">UnitType</a> const &amp;mul=SampleType(1), <a class="el" href="class_unit_base.html">UnitType</a> const &amp;add=SampleType(0))  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a control rate bandpass filter.  <a href="#a3f00e8a3e7f0e330d0b3dc81a7ecfd76"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_unit_base.html">UnitType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_b_p_f_unit.html#aa9881bc69068cfe59bc0aec661421b30">ar</a> (<a class="el" href="class_unit_base.html">UnitType</a> const &amp;input, <a class="el" href="class_unit_base.html">UnitType</a> const &amp;frequency=SampleType(1200), <a class="el" href="class_unit_base.html">UnitType</a> const &amp;bandwidth=SampleType(1), <a class="el" href="class_unit_base.html">UnitType</a> const &amp;mul=SampleType(1), <a class="el" href="class_unit_base.html">UnitType</a> const &amp;add=SampleType(0), <a class="el" href="class_block_size.html">BlockSize</a> const &amp;preferredBlockSize=BlockSize::noPreference(), <a class="el" href="class_sample_rate.html">SampleRate</a> const &amp;preferredSampleRate=SampleRate::noPreference())  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a bandpass filter.  <a href="#aa9881bc69068cfe59bc0aec661421b30"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_unit_base.html">UnitType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_b_p_f_unit.html#a49fedf3fbbc053c0919ab236fd0b8595">kr</a> (<a class="el" href="class_unit_base.html">UnitType</a> const &amp;input, <a class="el" href="class_unit_base.html">UnitType</a> const &amp;frequency=SampleType(1200), <a class="el" href="class_unit_base.html">UnitType</a> const &amp;bandwidth=SampleType(1), <a class="el" href="class_unit_base.html">UnitType</a> const &amp;mul=SampleType(1), <a class="el" href="class_unit_base.html">UnitType</a> const &amp;add=SampleType(0))  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a control rate bandpass filter.  <a href="#a49fedf3fbbc053c0919ab236fd0b8595"></a><br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
-<div class="textblock"><h3>template&lt;class SampleType&gt;<br/>
-class BPFUnit&lt; SampleType &gt;</h3>
+<div class="textblock"><h3>template&lt;class SampleType, Interp::TypeCode InterpTypeCode = Interp::Linear&gt;<br/>
+class BPFUnit&lt; SampleType, InterpTypeCode &gt;</h3>
 
 <p>Bandpass filter. </p>
-<p>Factory functions:</p>
-<ul>
+<dl class="user"><dt><b>Factory functions:</b></dt><dd><ul>
 <li>ar (input, frequency=1200, bandwidth=1, mul=1, add=0, preferredBlockSize=default, preferredSampleRate=default)</li>
 <li>kr (input frequency=1200, bandwidth=1, mul=1, add=0)</li>
 </ul>
-<p>Inputs:</p>
-<ul>
+</dd></dl>
+<dl class="user"><dt><b>Inputs:</b></dt><dd><ul>
 <li>input: (unit, multi) the unit to filter</li>
 <li>frequency: (unit, multi) the -3dB point cut-off frequency in Hz</li>
 <li>bandwidth: (unit, multi) The bandwidth of the passband in octaves</li>
@@ -112,124 +100,16 @@ class BPFUnit&lt; SampleType &gt;</h3>
 <li>preferredBlockSize: the preferred output block size (for advanced usage, leave on default if unsure)</li>
 <li>preferredSampleRate: the preferred output sample rate (for advanced usage, leave on default if unsure) </li>
 </ul>
-</div><hr/><h2>Member Typedef Documentation</h2>
-<a class="anchor" id="a4b9addc78ec4cdb198db9736e1479dd8"></a><!-- doxytag: member="BPFUnit::UnitType" ref="a4b9addc78ec4cdb198db9736e1479dd8" args="" -->
+</dd></dl>
+</div><hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="aa9881bc69068cfe59bc0aec661421b30"></a><!-- doxytag: member="BPFUnit::ar" ref="aa9881bc69068cfe59bc0aec661421b30" args="(UnitType const &amp;input, UnitType const &amp;frequency=SampleType(1200), UnitType const &amp;bandwidth=SampleType(1), UnitType const &amp;mul=SampleType(1), UnitType const &amp;add=SampleType(0), BlockSize const &amp;preferredBlockSize=BlockSize::noPreference(), SampleRate const &amp;preferredSampleRate=SampleRate::noPreference())" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class SampleType &gt; </div>
+template&lt;class SampleType , Interp::TypeCode InterpTypeCode = Interp::Linear&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_unit_base.html">UnitBase</a>&lt;SampleType&gt; <a class="el" href="class_b_p_f_unit.html">BPFUnit</a>&lt; SampleType &gt;::<a class="el" href="class_unit_base.html">UnitType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a134bfba66c667c60ee515714c41733bc"></a><!-- doxytag: member="BPFUnit::FilterShape" ref="a134bfba66c667c60ee515714c41733bc" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_filter_shape_b_p_f_base.html">FilterShapeBPFBase</a>&lt;SampleType&gt; <a class="el" href="class_b_p_f_unit.html">BPFUnit</a>&lt; SampleType &gt;::<a class="el" href="class_filter_shape_b_p_f_base.html">FilterShape</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a49556ac30ce4ccea94ebc11d6cf83f72"></a><!-- doxytag: member="BPFUnit::FilterCoeffsType" ref="a49556ac30ce4ccea94ebc11d6cf83f72" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_filter_coeffs2_param_unit.html">FilterCoeffs2ParamUnit</a>&lt;<a class="el" href="class_filter_shape_b_p_f_base.html">FilterShape</a>&gt; <a class="el" href="class_b_p_f_unit.html">BPFUnit</a>&lt; SampleType &gt;::<a class="el" href="class_filter_coeffs2_param_unit.html">FilterCoeffsType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a41225132c5f1b971fc683dd864e2994f"></a><!-- doxytag: member="BPFUnit::FormType" ref="a41225132c5f1b971fc683dd864e2994f" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_filter_coeffs2_param_unit.html#adfd61f5163669e9821abd72bcfc9ccf1">FilterCoeffsType::FormType</a> <a class="el" href="class_b_p_f_unit.html">BPFUnit</a>&lt; SampleType &gt;::<a class="el" href="class_b_p_f_unit.html#a41225132c5f1b971fc683dd864e2994f">FormType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a33e97f55eb0edb80187444305650978f"></a><!-- doxytag: member="BPFUnit::FilterType" ref="a33e97f55eb0edb80187444305650978f" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_filter_unit.html">FilterUnit</a>&lt;<a class="el" href="class_b_p_f_unit.html#a41225132c5f1b971fc683dd864e2994f">FormType</a>&gt; <a class="el" href="class_b_p_f_unit.html">BPFUnit</a>&lt; SampleType &gt;::<a class="el" href="class_filter_unit.html">FilterType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="abdfa9c385c4102f95a8ee7e798bb0ef2"></a><!-- doxytag: member="BPFUnit::ResampleType" ref="abdfa9c385c4102f95a8ee7e798bb0ef2" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_resample_unit.html">ResampleUnit</a>&lt;SampleType&gt; <a class="el" href="class_b_p_f_unit.html">BPFUnit</a>&lt; SampleType &gt;::<a class="el" href="class_resample_unit.html">ResampleType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a5df5f17a9f133bb95a39ef0d06864d9b"></a><!-- doxytag: member="BPFUnit::getInfo" ref="a5df5f17a9f133bb95a39ef0d06864d9b" args="()" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">static <a class="el" href="class_object_array.html">UnitInfos</a> <a class="el" href="class_b_p_f_unit.html">BPFUnit</a>&lt; SampleType &gt;::getInfo </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="aeee58f840b0e7573abac3b824d83ceb2"></a><!-- doxytag: member="BPFUnit::ar" ref="aeee58f840b0e7573abac3b824d83ceb2" args="(UnitType const &amp;input, UnitType const &amp;frequency=SampleType(1200), UnitType const &amp;bandwidth=SampleType(1), UnitType const &amp;mul=SampleType(1), UnitType const &amp;add=SampleType(0), BlockSize const &amp;preferredBlockSize=BlockSize::noPreference(), SampleRate const &amp;preferredSampleRate=SampleRate::noPreference())" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">static <a class="el" href="class_unit_base.html">UnitType</a> <a class="el" href="class_b_p_f_unit.html">BPFUnit</a>&lt; SampleType &gt;::ar </td>
+          <td class="memname">static <a class="el" href="class_unit_base.html">UnitType</a> <a class="el" href="class_b_p_f_unit.html">BPFUnit</a>&lt; SampleType, InterpTypeCode &gt;::ar </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="class_unit_base.html">UnitType</a> const &amp;&#160;</td>
           <td class="paramname"><em>input</em>, </td>
@@ -295,14 +175,14 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a3f00e8a3e7f0e330d0b3dc81a7ecfd76"></a><!-- doxytag: member="BPFUnit::kr" ref="a3f00e8a3e7f0e330d0b3dc81a7ecfd76" args="(UnitType const &amp;input, UnitType const &amp;frequency=SampleType(1200), UnitType const &amp;bandwidth=SampleType(1), UnitType const &amp;mul=SampleType(1), UnitType const &amp;add=SampleType(0))" -->
+<a class="anchor" id="a49fedf3fbbc053c0919ab236fd0b8595"></a><!-- doxytag: member="BPFUnit::kr" ref="a49fedf3fbbc053c0919ab236fd0b8595" args="(UnitType const &amp;input, UnitType const &amp;frequency=SampleType(1200), UnitType const &amp;bandwidth=SampleType(1), UnitType const &amp;mul=SampleType(1), UnitType const &amp;add=SampleType(0))" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class SampleType &gt; </div>
+template&lt;class SampleType , Interp::TypeCode InterpTypeCode = Interp::Linear&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">static <a class="el" href="class_unit_base.html">UnitType</a> <a class="el" href="class_b_p_f_unit.html">BPFUnit</a>&lt; SampleType &gt;::kr </td>
+          <td class="memname">static <a class="el" href="class_unit_base.html">UnitType</a> <a class="el" href="class_b_p_f_unit.html">BPFUnit</a>&lt; SampleType, InterpTypeCode &gt;::kr </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="class_unit_base.html">UnitType</a> const &amp;&#160;</td>
           <td class="paramname"><em>input</em>, </td>
@@ -363,7 +243,7 @@ template&lt;class SampleType &gt; </div>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Properties</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -372,7 +252,7 @@ template&lt;class SampleType &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 5 2012 17:05:00 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 8 2014 12:26:52 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

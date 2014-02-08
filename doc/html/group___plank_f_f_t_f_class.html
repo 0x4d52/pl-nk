@@ -20,7 +20,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="pl-nk-logo-small.png"/></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">pl-nk</div>
+   <div id="projectname">pl-nk&#160;<span id="projectnumber">v0.4.5</span></div>
+   <div id="projectbrief">Plonk|Plink|Plank are a set of cross-platform C/C++ frameworks for audio software development</div>
   </td>
  </tr>
  </tbody>
@@ -29,8 +30,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -74,21 +75,21 @@ Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create and initialise a <em>Plank FFTF</em> object and return an oqaque reference to it.  <a href="#ga64f618d491734a3bdde35081ad76b638"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="group___plank_f_f_t_f_class.html#ga89d883ebc7fce22b9ab8345bfa66d9a7">PlankFFTFRef</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_f_f_t_f_class.html#ga4d5a51ebb526b6da9e003faad7e2745e">pl_FFTF_Create</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a <em>Plank FFTF</em> object and return an oqaque reference to it.  <a href="#ga4d5a51ebb526b6da9e003faad7e2745e"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_f_f_t_f_class.html#ga3a6acb5eeebbb43e50a34b4970c0334c">pl_FFTF_Init</a> (<a class="el" href="group___plank_f_f_t_f_class.html#ga89d883ebc7fce22b9ab8345bfa66d9a7">PlankFFTFRef</a> p)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">PlankResult&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_f_f_t_f_class.html#ga3a6acb5eeebbb43e50a34b4970c0334c">pl_FFTF_Init</a> (<a class="el" href="group___plank_f_f_t_f_class.html#ga89d883ebc7fce22b9ab8345bfa66d9a7">PlankFFTFRef</a> p)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialise a <em>Plank FFTF</em> object with a default length (PLANKFFTF_DEFAULTLENGTH).  <a href="#ga3a6acb5eeebbb43e50a34b4970c0334c"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_f_f_t_f_class.html#ga08189e7ca2694321a80f4bb3d7b29dfd">pl_FFTF_InitWithLength</a> (<a class="el" href="group___plank_f_f_t_f_class.html#ga89d883ebc7fce22b9ab8345bfa66d9a7">PlankFFTFRef</a> p, const <a class="el" href="plank___standard_header_8h.html#a56a3a82c06ac0807a6e4c7afbece3c3f">PlankL</a> length)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">PlankResult&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_f_f_t_f_class.html#ga08189e7ca2694321a80f4bb3d7b29dfd">pl_FFTF_InitWithLength</a> (<a class="el" href="group___plank_f_f_t_f_class.html#ga89d883ebc7fce22b9ab8345bfa66d9a7">PlankFFTFRef</a> p, const PlankL length)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialise a <em>Plank FFTF</em> object.  <a href="#ga08189e7ca2694321a80f4bb3d7b29dfd"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_f_f_t_f_class.html#ga97269b462bd67784918a0daef74a5e9e">pl_FFTF_DeInit</a> (<a class="el" href="group___plank_f_f_t_f_class.html#ga89d883ebc7fce22b9ab8345bfa66d9a7">PlankFFTFRef</a> p)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">PlankResult&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_f_f_t_f_class.html#ga97269b462bd67784918a0daef74a5e9e">pl_FFTF_DeInit</a> (<a class="el" href="group___plank_f_f_t_f_class.html#ga89d883ebc7fce22b9ab8345bfa66d9a7">PlankFFTFRef</a> p)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Deinitialise a <em>Plank FFTF</em> object.  <a href="#ga97269b462bd67784918a0daef74a5e9e"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_f_f_t_f_class.html#ga9a785765c0551f8c0add01eb4a8fe04b">pl_FFTF_Destroy</a> (<a class="el" href="group___plank_f_f_t_f_class.html#ga89d883ebc7fce22b9ab8345bfa66d9a7">PlankFFTFRef</a> p)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">PlankResult&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_f_f_t_f_class.html#ga9a785765c0551f8c0add01eb4a8fe04b">pl_FFTF_Destroy</a> (<a class="el" href="group___plank_f_f_t_f_class.html#ga89d883ebc7fce22b9ab8345bfa66d9a7">PlankFFTFRef</a> p)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy a <em>Plank FFTF</em> object.  <a href="#ga9a785765c0551f8c0add01eb4a8fe04b"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_f_f_t_f_class.html#gae8de8981be43638abe68f206f4e596ad">pl_FFTF_Forward</a> (<a class="el" href="group___plank_f_f_t_f_class.html#ga89d883ebc7fce22b9ab8345bfa66d9a7">PlankFFTFRef</a> p, float *output, const float *input)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Apply the FFT to the input and place the result in output.  <a href="#gae8de8981be43638abe68f206f4e596ad"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_f_f_t_f_class.html#ga58f9deb1c96c5dc9313b302fc03f6289">pl_FFTF_Inverse</a> (<a class="el" href="group___plank_f_f_t_f_class.html#ga89d883ebc7fce22b9ab8345bfa66d9a7">PlankFFTFRef</a> p, float *output, const float *input)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Apply the inverse-FFT to the input and place the result in output.  <a href="#ga58f9deb1c96c5dc9313b302fc03f6289"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="plank___standard_header_8h.html#a56a3a82c06ac0807a6e4c7afbece3c3f">PlankL</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_f_f_t_f_class.html#gacba55adc5154dd0186cfc2d86e279de7">pl_FFTF_Length</a> (<a class="el" href="group___plank_f_f_t_f_class.html#ga89d883ebc7fce22b9ab8345bfa66d9a7">PlankFFTFRef</a> p)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">PlankL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_f_f_t_f_class.html#gacba55adc5154dd0186cfc2d86e279de7">pl_FFTF_Length</a> (<a class="el" href="group___plank_f_f_t_f_class.html#ga89d883ebc7fce22b9ab8345bfa66d9a7">PlankFFTFRef</a> p)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the FFT size.  <a href="#gacba55adc5154dd0186cfc2d86e279de7"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="plank___standard_header_8h.html#a56a3a82c06ac0807a6e4c7afbece3c3f">PlankL</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_f_f_t_f_class.html#gab72a69072a99acdbaa71c599bd0aabe0">pl_FFTF_HalfLength</a> (<a class="el" href="group___plank_f_f_t_f_class.html#ga89d883ebc7fce22b9ab8345bfa66d9a7">PlankFFTFRef</a> p)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">PlankL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_f_f_t_f_class.html#gab72a69072a99acdbaa71c599bd0aabe0">pl_FFTF_HalfLength</a> (<a class="el" href="group___plank_f_f_t_f_class.html#ga89d883ebc7fce22b9ab8345bfa66d9a7">PlankFFTFRef</a> p)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get half FFT size.  <a href="#gab72a69072a99acdbaa71c599bd0aabe0"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_f_f_t_f_class.html#ga283a3d98eb47fb4a25d5fc71739a7307">pl_FFTF_Temp</a> (<a class="el" href="group___plank_f_f_t_f_class.html#ga89d883ebc7fce22b9ab8345bfa66d9a7">PlankFFTFRef</a> p)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a pointer to the internal temporary buffer.  <a href="#ga283a3d98eb47fb4a25d5fc71739a7307"></a><br/></td></tr>
@@ -146,25 +147,6 @@ Functions</h2></td></tr>
 </div>
 </div>
 <hr/><h2>Function Documentation</h2>
-<a class="anchor" id="ga64f618d491734a3bdde35081ad76b638"></a><!-- doxytag: member="plank_FFT.h::pl_FFTF_CreateAndInit" ref="ga64f618d491734a3bdde35081ad76b638" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="group___plank_f_f_t_f_class.html#ga89d883ebc7fce22b9ab8345bfa66d9a7">PlankFFTFRef</a> pl_FFTF_CreateAndInit </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Create and initialise a <em>Plank FFTF</em> object and return an oqaque reference to it. </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>A <em>Plank FFTF</em> object as an opaque reference. </dd></dl>
-
-</div>
-</div>
 <a class="anchor" id="ga4d5a51ebb526b6da9e003faad7e2745e"></a><!-- doxytag: member="plank_FFT.h::pl_FFTF_Create" ref="ga4d5a51ebb526b6da9e003faad7e2745e" args="()" -->
 <div class="memitem">
 <div class="memproto">
@@ -184,66 +166,22 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ga3a6acb5eeebbb43e50a34b4970c0334c"></a><!-- doxytag: member="plank_FFT.h::pl_FFTF_Init" ref="ga3a6acb5eeebbb43e50a34b4970c0334c" args="(PlankFFTFRef p)" -->
+<a class="anchor" id="ga64f618d491734a3bdde35081ad76b638"></a><!-- doxytag: member="plank_FFT.h::pl_FFTF_CreateAndInit" ref="ga64f618d491734a3bdde35081ad76b638" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_FFTF_Init </td>
+          <td class="memname"><a class="el" href="group___plank_f_f_t_f_class.html#ga89d883ebc7fce22b9ab8345bfa66d9a7">PlankFFTFRef</a> pl_FFTF_CreateAndInit </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group___plank_f_f_t_f_class.html#ga89d883ebc7fce22b9ab8345bfa66d9a7">PlankFFTFRef</a>&#160;</td>
-          <td class="paramname"><em>p</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Initialise a <em>Plank FFTF</em> object with a default length (PLANKFFTF_DEFAULTLENGTH). </p>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">p</td><td>The <em>Plank FFTF</em> object. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>A result code which will be PlankResult_OK if the operation was completely successful. </dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="ga08189e7ca2694321a80f4bb3d7b29dfd"></a><!-- doxytag: member="plank_FFT.h::pl_FFTF_InitWithLength" ref="ga08189e7ca2694321a80f4bb3d7b29dfd" args="(PlankFFTFRef p, const PlankL length)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_FFTF_InitWithLength </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="group___plank_f_f_t_f_class.html#ga89d883ebc7fce22b9ab8345bfa66d9a7">PlankFFTFRef</a>&#160;</td>
-          <td class="paramname"><em>p</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="plank___standard_header_8h.html#a56a3a82c06ac0807a6e4c7afbece3c3f">PlankL</a>&#160;</td>
-          <td class="paramname"><em>length</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Initialise a <em>Plank FFTF</em> object. </p>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">p</td><td>The <em>Plank FFTF</em> object. </td></tr>
-    <tr><td class="paramname">length</td><td>The FFT size - this must be a power of 2 or less than 16 (where it will specify the log2 FFT size e.g., length 8 = pow(2,8) = 256 </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>A result code which will be PlankResult_OK if the operation was completely successful. </dd></dl>
+<p>Create and initialise a <em>Plank FFTF</em> object and return an oqaque reference to it. </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>A <em>Plank FFTF</em> object as an opaque reference. </dd></dl>
 
 </div>
 </div>
@@ -252,7 +190,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_FFTF_DeInit </td>
+          <td class="memname">PlankResult pl_FFTF_DeInit </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="group___plank_f_f_t_f_class.html#ga89d883ebc7fce22b9ab8345bfa66d9a7">PlankFFTFRef</a>&#160;</td>
           <td class="paramname"><em>p</em></td><td>)</td>
@@ -278,7 +216,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_FFTF_Destroy </td>
+          <td class="memname">PlankResult pl_FFTF_Destroy </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="group___plank_f_f_t_f_class.html#ga89d883ebc7fce22b9ab8345bfa66d9a7">PlankFFTFRef</a>&#160;</td>
           <td class="paramname"><em>p</em></td><td>)</td>
@@ -343,6 +281,96 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="gab72a69072a99acdbaa71c599bd0aabe0"></a><!-- doxytag: member="plank_FFT.h::pl_FFTF_HalfLength" ref="gab72a69072a99acdbaa71c599bd0aabe0" args="(PlankFFTFRef p)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">PlankL pl_FFTF_HalfLength </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___plank_f_f_t_f_class.html#ga89d883ebc7fce22b9ab8345bfa66d9a7">PlankFFTFRef</a>&#160;</td>
+          <td class="paramname"><em>p</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Get half FFT size. </p>
+<p>This is just as a convenience as it is already cached for efficiency. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>The <em>Plank FFTF</em> object. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The half FFT size. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ga3a6acb5eeebbb43e50a34b4970c0334c"></a><!-- doxytag: member="plank_FFT.h::pl_FFTF_Init" ref="ga3a6acb5eeebbb43e50a34b4970c0334c" args="(PlankFFTFRef p)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">PlankResult pl_FFTF_Init </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___plank_f_f_t_f_class.html#ga89d883ebc7fce22b9ab8345bfa66d9a7">PlankFFTFRef</a>&#160;</td>
+          <td class="paramname"><em>p</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Initialise a <em>Plank FFTF</em> object with a default length (PLANKFFTF_DEFAULTLENGTH). </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>The <em>Plank FFTF</em> object. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>A result code which will be PlankResult_OK if the operation was completely successful. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ga08189e7ca2694321a80f4bb3d7b29dfd"></a><!-- doxytag: member="plank_FFT.h::pl_FFTF_InitWithLength" ref="ga08189e7ca2694321a80f4bb3d7b29dfd" args="(PlankFFTFRef p, const PlankL length)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">PlankResult pl_FFTF_InitWithLength </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___plank_f_f_t_f_class.html#ga89d883ebc7fce22b9ab8345bfa66d9a7">PlankFFTFRef</a>&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const PlankL&#160;</td>
+          <td class="paramname"><em>length</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Initialise a <em>Plank FFTF</em> object. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>The <em>Plank FFTF</em> object. </td></tr>
+    <tr><td class="paramname">length</td><td>The FFT size - this must be a power of 2 or less than 16 (where it will specify the log2 FFT size e.g., length 8 = pow(2,8) = 256 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>A result code which will be PlankResult_OK if the operation was completely successful. </dd></dl>
+
+</div>
+</div>
 <a class="anchor" id="ga58f9deb1c96c5dc9313b302fc03f6289"></a><!-- doxytag: member="plank_FFT.h::pl_FFTF_Inverse" ref="ga58f9deb1c96c5dc9313b302fc03f6289" args="(PlankFFTFRef p, float *output, const float *input)" -->
 <div class="memitem">
 <div class="memproto">
@@ -392,7 +420,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="plank___standard_header_8h.html#a56a3a82c06ac0807a6e4c7afbece3c3f">PlankL</a> pl_FFTF_Length </td>
+          <td class="memname">PlankL pl_FFTF_Length </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="group___plank_f_f_t_f_class.html#ga89d883ebc7fce22b9ab8345bfa66d9a7">PlankFFTFRef</a>&#160;</td>
           <td class="paramname"><em>p</em></td><td>)</td>
@@ -410,33 +438,6 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>The FFT size. </dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="gab72a69072a99acdbaa71c599bd0aabe0"></a><!-- doxytag: member="plank_FFT.h::pl_FFTF_HalfLength" ref="gab72a69072a99acdbaa71c599bd0aabe0" args="(PlankFFTFRef p)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="plank___standard_header_8h.html#a56a3a82c06ac0807a6e4c7afbece3c3f">PlankL</a> pl_FFTF_HalfLength </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="group___plank_f_f_t_f_class.html#ga89d883ebc7fce22b9ab8345bfa66d9a7">PlankFFTFRef</a>&#160;</td>
-          <td class="paramname"><em>p</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Get half FFT size. </p>
-<p>This is just as a convenience as it is already cached for efficiency. </p>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">p</td><td>The <em>Plank FFTF</em> object. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>The half FFT size. </dd></dl>
 
 </div>
 </div>
@@ -473,7 +474,7 @@ Functions</h2></td></tr>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Properties</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -482,7 +483,7 @@ Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 5 2012 17:04:57 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 8 2014 12:26:52 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

@@ -20,7 +20,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="pl-nk-logo-small.png"/></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">pl-nk</div>
+   <div id="projectname">pl-nk&#160;<span id="projectnumber">v0.4.5</span></div>
+   <div id="projectbrief">Plonk|Plink|Plank are a set of cross-platform C/C++ frameworks for audio software development</div>
   </td>
  </tr>
  </tbody>
@@ -29,8 +30,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -63,12 +64,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="functions.html"><span>All</span></a></li>
       <li class="current"><a href="functions_func.html"><span>Functions</span></a></li>
-      <li><a href="functions_vars.html"><span>Variables</span></a></li>
       <li><a href="functions_type.html"><span>Typedefs</span></a></li>
       <li><a href="functions_enum.html"><span>Enumerations</span></a></li>
       <li><a href="functions_eval.html"><span>Enumerator</span></a></li>
       <li><a href="functions_prop.html"><span>Properties</span></a></li>
-      <li><a href="functions_rela.html"><span>Related&#160;Functions</span></a></li>
     </ul>
   </div>
   <div id="navrow4" class="tabs3">
@@ -82,7 +81,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="functions_func_0x67.html#index_g"><span>g</span></a></li>
       <li><a href="functions_func_0x68.html#index_h"><span>h</span></a></li>
       <li><a href="functions_func_0x69.html#index_i"><span>i</span></a></li>
-      <li><a href="functions_func_0x6a.html#index_j"><span>j</span></a></li>
       <li><a href="functions_func_0x6b.html#index_k"><span>k</span></a></li>
       <li><a href="functions_func_0x6c.html#index_l"><span>l</span></a></li>
       <li><a href="functions_func_0x6d.html#index_m"><span>m</span></a></li>
@@ -105,71 +103,27 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 &#160;
 
 <h3><a class="anchor" id="index_n"></a>- n -</h3><ul>
+<li>needsToProcess()
+: <a class="el" href="class_channel_base.html#a9b2815328e92bb1947ca2e6c5da88bca">ChannelBase&lt; SampleType &gt;</a>
+, <a class="el" href="class_unit_base.html#a73a6b7e224d34b5c8aece708480c8cfc">UnitBase&lt; SampleType &gt;</a>
+</li>
 <li>neg()
-: <a class="el" href="class_numerical_array.html#a55de58ebf08c5847b883fc490d08b9d4">NumericalArray&lt; NumericalType &gt;</a>
-, <a class="el" href="class_variable.html#a6fdd06820e46c7995b40d634a7ed674e">Variable&lt; Type &gt;</a>
+: <a class="el" href="class_variable.html#a6fdd06820e46c7995b40d634a7ed674e">Variable&lt; Type &gt;</a>
 , <a class="el" href="class_unit_base.html#a0314952ec0909fb5cce927b12efc9a7f">UnitBase&lt; SampleType &gt;</a>
+, <a class="el" href="class_numerical_array.html#a55de58ebf08c5847b883fc490d08b9d4">NumericalArray&lt; NumericalType &gt;</a>
 </li>
 <li>newClear()
 : <a class="el" href="class_numerical_array.html#a35333c3e01ef69f3a2915165c2d3ab83">NumericalArray&lt; NumericalType &gt;</a>
 , <a class="el" href="class_text.html#afa3c84f9ac6aaa4c88a5fa2736849e53">Text</a>
 </li>
-<li>nextPowerOf2()
-: <a class="el" href="class_bits_base_3_01_type_00_014_01_4.html#a7fc073a93ae2ff4738f4d1c487b781be">BitsBase&lt; Type, 4 &gt;</a>
-, <a class="el" href="class_bits_base_3_01_type_00_018_01_4.html#a25300406c5c63ef0dca8d4e711bc4414">BitsBase&lt; Type, 8 &gt;</a>
-, <a class="el" href="class_bits.html#a8b23fd3a8c0e8c51389108108bc836c7">Bits</a>
-, <a class="el" href="class_bits_base_3_01_type_00_011_01_4.html#a1345037daa70bf2ada14df08c4911300">BitsBase&lt; Type, 1 &gt;</a>
-, <a class="el" href="class_bits_base_3_01_type_00_012_01_4.html#af5a1fb763796a397b8522536d31ae5af">BitsBase&lt; Type, 2 &gt;</a>
-</li>
-<li>nextTargetPoint()
-: <a class="el" href="class_envelope_channel_internal.html#a3d484bd5449da88f26ffa58f64bc5e8e">EnvelopeChannelInternal&lt; SampleType &gt;</a>
-</li>
 <li>nextValue()
-: <a class="el" href="class_variable_internal_base.html#a0eb64b89f21a4e0cf66344198da0e452">VariableInternalBase&lt; Type &gt;</a>
-, <a class="el" href="class_variable_internal.html#a0a5a6bc6d34115aa1d2acff179769d36">VariableInternal&lt; Type &gt;</a>
-, <a class="el" href="class_binary_op_variable_internal.html#aae76e7aed770d9a19e2dfec03cb65e33">BinaryOpVariableInternal&lt; Type, op &gt;</a>
-, <a class="el" href="class_type_variable_internal.html#a966567ed75bba47f85b78ece15382247">TypeVariableInternal&lt; Type, OtherType &gt;</a>
-, <a class="el" href="class_unary_op_variable_internal.html#a4d1e3fc0ccc3e9b89981b3af1a9b112c">UnaryOpVariableInternal&lt; Type, op &gt;</a>
-, <a class="el" href="class_variable.html#a547e48952c1ffe3c0833fc6f5830162a">Variable&lt; Type &gt;</a>
-</li>
-<li>NoLockInternal()
-: <a class="el" href="class_no_lock_internal.html#a8516745496deef6e88b7535bed333e93">NoLockInternal</a>
+: <a class="el" href="class_variable.html#a547e48952c1ffe3c0833fc6f5830162a">Variable&lt; Type &gt;</a>
 </li>
 <li>noPreference()
 : <a class="el" href="class_block_size.html#aa6ada18e533ad70d58aae4e0549fab84">BlockSize</a>
-, <a class="el" href="class_sample_rate.html#a2c73817f04514911a2a8993ea10b3a31">SampleRate</a>
-</li>
-<li>normalise()
-: <a class="el" href="class_numerical_array.html#a4196939f3d55c0140578d24d5646b39a">NumericalArray&lt; NumericalType &gt;</a>
-, <a class="el" href="class_wavetable_base.html#a5d6eaf55f3567f0de28a5509fd463b2e">WavetableBase&lt; SampleType &gt;</a>
-</li>
-<li>NullChannelInternal()
-: <a class="el" href="class_null_channel_internal.html#a4562f209a41be1cc436dab1fb8f05d2d">NullChannelInternal&lt; SampleType &gt;</a>
-</li>
-<li>numBitsRequired()
-: <a class="el" href="class_bits_base_3_01_type_00_011_01_4.html#a3e14c71197d2d75e0e35ec1f9024397f">BitsBase&lt; Type, 1 &gt;</a>
-, <a class="el" href="class_bits_base_3_01_type_00_012_01_4.html#afb9f6a72da25e5e5f335338d95f7d78b">BitsBase&lt; Type, 2 &gt;</a>
-, <a class="el" href="class_bits_base_3_01_type_00_014_01_4.html#ae3a561bd988a1b937e9b9ff363f9a951">BitsBase&lt; Type, 4 &gt;</a>
-, <a class="el" href="class_bits_base_3_01_type_00_018_01_4.html#a24ebfcb0982a8702721c17fa9db7f10d">BitsBase&lt; Type, 8 &gt;</a>
-, <a class="el" href="class_bits.html#a985afe1ef40d74d28da75bbf7e0d16c7">Bits</a>
-</li>
-<li>numColumns()
-: <a class="el" href="class_object_array2_d_base.html#a7f18891a5476fbfc4c71ed05cc7a4946">ObjectArray2DBase&lt; ArrayType, RowType &gt;</a>
 </li>
 <li>NumericalArray()
-: <a class="el" href="class_numerical_array.html#ab365d3169b875f9d1956521ba42ea7f3">NumericalArray&lt; NumericalType &gt;</a>
-</li>
-<li>NumericalArray2D()
-: <a class="el" href="class_numerical_array2_d.html#a697727ec201b94ef12d8069f4b328f07">NumericalArray2D&lt; NumericalType, RowType &gt;</a>
-</li>
-<li>NumericalArraySpec()
-: <a class="el" href="class_numerical_array_spec.html#a9132b054fb8d3e3088e23f656fa7439d">NumericalArraySpec</a>
-</li>
-<li>numOutputInfos()
-: <a class="el" href="class_channel_count.html#af36292b7693855f2ff655a9e6de31a98">ChannelCount</a>
-</li>
-<li>numRows()
-: <a class="el" href="class_object_array2_d_base.html#abab907a4c2f115abd51b2b74b92bcd11">ObjectArray2DBase&lt; ArrayType, RowType &gt;</a>
+: <a class="el" href="class_numerical_array.html#a8252e40234e6de0cb678bcb0f751dc57">NumericalArray&lt; NumericalType &gt;</a>
 </li>
 </ul>
 </div>
@@ -178,7 +132,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Properties</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -187,7 +141,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 5 2012 17:04:58 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 8 2014 12:26:52 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

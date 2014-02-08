@@ -20,7 +20,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="pl-nk-logo-small.png"/></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">pl-nk</div>
+   <div id="projectname">pl-nk&#160;<span id="projectnumber">v0.4.5</span></div>
+   <div id="projectbrief">Plonk|Plink|Plank are a set of cross-platform C/C++ frameworks for audio software development</div>
   </td>
  </tr>
  </tbody>
@@ -29,8 +30,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -54,7 +55,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
       <li><a href="files.html"><span>File&#160;List</span></a></li>
-      <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
 <div class="header">
@@ -62,14 +62,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">plank_Result.h</div>  </div>
 </div>
 <div class="contents">
-<a href="plank___result_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*</span>
+<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*</span>
 <a name="l00002"></a>00002 <span class="comment"> -------------------------------------------------------------------------------</span>
 <a name="l00003"></a>00003 <span class="comment"> This file is part of the Plink, Plonk, Plank libraries</span>
 <a name="l00004"></a>00004 <span class="comment">  by Martin Robinson</span>
 <a name="l00005"></a>00005 <span class="comment"> </span>
 <a name="l00006"></a>00006 <span class="comment"> http://code.google.com/p/pl-nk/</span>
 <a name="l00007"></a>00007 <span class="comment"> </span>
-<a name="l00008"></a>00008 <span class="comment"> Copyright University of the West of England, Bristol 2011-12</span>
+<a name="l00008"></a>00008 <span class="comment"> Copyright University of the West of England, Bristol 2011-14</span>
 <a name="l00009"></a>00009 <span class="comment"> All rights reserved.</span>
 <a name="l00010"></a>00010 <span class="comment"> </span>
 <a name="l00011"></a>00011 <span class="comment"> Redistribution and use in source and binary forms, with or without</span>
@@ -103,68 +103,77 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00039"></a>00039 <span class="preprocessor">#ifndef PLANK_RESULT_H</span>
 <a name="l00040"></a>00040 <span class="preprocessor"></span><span class="preprocessor">#define PLANK_RESULT_H</span>
 <a name="l00041"></a>00041 <span class="preprocessor"></span>
-<a name="l00042"></a><a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">00042</a> <span class="keyword">typedef</span> <a class="code" href="plank___standard_header_8h.html#adc55cc3e1effd5d94c88cc90d1117ce5">PlankI</a> <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a>;
+<a name="l00042"></a>00042 <span class="keyword">typedef</span> PlankI PlankResult;
 <a name="l00043"></a>00043 
-<a name="l00044"></a><a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50">00044</a> <span class="keyword">enum</span> <a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50">PlankResultIdentifiers</a>
+<a name="l00044"></a>00044 <span class="keyword">enum</span> PlankResultIdentifiers
 <a name="l00045"></a>00045 {
-<a name="l00046"></a><a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50af336ea275ee6514611cfe075d69dcdac">00046</a>     <a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50af336ea275ee6514611cfe075d69dcdac" title="No error occurred during the operation.">PlankResult_OK</a> = 0,             
-<a name="l00047"></a><a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50a9f0c8ab0fca7d01caff9d5cdc4d147d0">00047</a>     <a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50a9f0c8ab0fca7d01caff9d5cdc4d147d0" title="An error of an unknown type occurred.">PlankResult_UnknownError</a>,       
-<a name="l00048"></a><a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50a8c9fa4706ba77598bab0319f737d0a9b">00048</a>     <a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50a8c9fa4706ba77598bab0319f737d0a9b" title="The error code is itself invalid !">PlankResult_ResultInvalid</a>,      
+<a name="l00046"></a>00046     PlankResult_OK = 0,             
+<a name="l00047"></a>00047     PlankResult_UnknownError,       
+<a name="l00048"></a>00048     PlankResult_ResultInvalid,      
 <a name="l00049"></a>00049     
-<a name="l00050"></a><a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50a8bbe9bca94a814dc4e089ca6d3e447c1">00050</a>     <a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50a8bbe9bca94a814dc4e089ca6d3e447c1" title="A memory error occured e.g., out of memory.">PlankResult_MemoryError</a>,        
-<a name="l00051"></a><a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50a184be160f9b09b65cf9875d01f9c53d1">00051</a>     <a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50a184be160f9b09b65cf9875d01f9c53d1" title="A null pointer was passed to a function where this is invalid.">PlankResult_NullPointerError</a>,   
-<a name="l00052"></a><a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50a89c06dd1833948a11fb00ca7cedbda63">00052</a>     <a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50a89c06dd1833948a11fb00ca7cedbda63" title="There was an error in a parameter to an array function.">PlankResult_ArrayParameterError</a>, 
+<a name="l00050"></a>00050     PlankResult_MemoryError,        
+<a name="l00051"></a>00051     PlankResult_NullPointerError,   
+<a name="l00052"></a>00052     PlankResult_ArrayParameterError, 
 <a name="l00053"></a>00053     
-<a name="l00054"></a><a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50a85aa3825bbb72ba5dab6c99883fb13c8">00054</a>     <a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50a85aa3825bbb72ba5dab6c99883fb13c8" title="The requested file mode is invalid.">PlankResult_FileModeInvalid</a>,    
-<a name="l00055"></a><a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50af226d339f4b15b1d29ff411c438c2e47">00055</a>     <a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50af226d339f4b15b1d29ff411c438c2e47" title="A request to open a file failed for some reason.">PlankResult_FileOpenFailed</a>,     
-<a name="l00056"></a><a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50ab714f6743522896bdd860bfa77194b87">00056</a>     <a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50ab714f6743522896bdd860bfa77194b87" title="A request to close a file failed for some reason.">PlankResult_FileCloseFailed</a>,    
-<a name="l00057"></a><a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50afa5f5a8eff02e47193871c5714f14cdd">00057</a>     <a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50afa5f5a8eff02e47193871c5714f14cdd" title="A request to open a file failed because a file is already open.">PlankResult_FileAlreadyOpen</a>,    
-<a name="l00058"></a><a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50acd766f15b3604c864af270074c98dfe6">00058</a>     <a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50acd766f15b3604c864af270074c98dfe6" title="A file handle is invalid, probably null.">PlankResult_FileInvalid</a>,        
-<a name="l00059"></a><a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50a9212bbc47ee929738db07967fbc72a26">00059</a>     <a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50a9212bbc47ee929738db07967fbc72a26" title="The file path passed to the function is invalid.">PlankResult_FilePathInvalid</a>,    
-<a name="l00060"></a><a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50a7fd62353f83e1f6ff4c90f44ea09df5e">00060</a>     <a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50a7fd62353f83e1f6ff4c90f44ea09df5e" title="A file read operation failed with an error.">PlankResult_FileReadError</a>,      
-<a name="l00061"></a><a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50a5efae7c79ab9ee651aa7bc74967ee647">00061</a>     <a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50a5efae7c79ab9ee651aa7bc74967ee647" title="A file write operation failed with an error.">PlankResult_FileWriteError</a>,     
-<a name="l00062"></a><a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50afe910f4a80bc5604a95905ead7794b2e">00062</a>     <a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50afe910f4a80bc5604a95905ead7794b2e" title="A file position pointer hit the end of the file.">PlankResult_FileEOF</a>,            
-<a name="l00063"></a><a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50acd87177129110a12b399fbdd504c742b">00063</a>     <a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50acd87177129110a12b399fbdd504c742b" title="The file failed to seek.">PlankResult_FileSeekFailed</a>,     
-<a name="l00064"></a><a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50acce1d6d58e506fb49da84757d25f8e57">00064</a>     <a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50acce1d6d58e506fb49da84757d25f8e57" title="A request to remove a file from the filesystem failed.">PlankResult_FileRemoveFailed</a>,   
-<a name="l00065"></a>00065     
-<a name="l00066"></a><a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50a4a911814b1843dae6ea3b5757ba3d81e">00066</a>     <a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50a4a911814b1843dae6ea3b5757ba3d81e" title="The specified chunk ID was not found.">PlankResult_IffFileReaderChunkNotFound</a>,                   
-<a name="l00067"></a>00067     
-<a name="l00068"></a><a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50aa8808a857e7fdcefcfa1456336d6e2a4">00068</a>     <a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50aa8808a857e7fdcefcfa1456336d6e2a4" title="Invalid data while reading an audio file.">PlankResult_AudioFileReaderInavlidType</a>,                   
-<a name="l00069"></a><a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50ac924bfae0a2c896f7b4603191f516460">00069</a>     <a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50ac924bfae0a2c896f7b4603191f516460" title="The file is not ready for this operation.">PlankResult_AudioFileReaderNotReady</a>,                      
-<a name="l00070"></a><a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50acb7f0032fceb78e222d9c9ac3703023f">00070</a>     <a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50acb7f0032fceb78e222d9c9ac3703023f" title="The data chunks appears to be invalid.">PlankResult_AudioFileReaderDataChunkInvalid</a>,              
-<a name="l00071"></a><a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50ae5d2cc4e6ce4d6f5701815d0c0e5d782">00071</a>     <a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50ae5d2cc4e6ce4d6f5701815d0c0e5d782" title="A read operation was attempted when the file was at an invalid read position.">PlankResult_AudioFileReaderInvalidFilePosition</a>,           
-<a name="l00072"></a>00072     
-<a name="l00073"></a><a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50aa1598eb53d374f670b3e960f5f3f7f22">00073</a>     <a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50aa1598eb53d374f670b3e960f5f3f7f22" title="Setting the run function failed, probably because the thread is already running.">PlankResult_ThreadSetFunctionFailed</a>,    
-<a name="l00074"></a><a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50a3c5cf71d2723eb596ff689670fcf5cb0">00074</a>     <a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50a3c5cf71d2723eb596ff689670fcf5cb0" title="Setting the user data failed, probably because the thread is already running.">PlankResult_ThreadSetUserDataFailed</a>,    
-<a name="l00075"></a><a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50af81ad8f3e77093e243f55b7be1c72585">00075</a>     <a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50af81ad8f3e77093e243f55b7be1c72585" title="An attempt to run a Thread that is already running was made.">PlankResult_ThreadAlreadyRunning</a>,       
-<a name="l00076"></a><a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50aebc8f3393fae0cccf4387a435bc73626">00076</a>     <a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50aebc8f3393fae0cccf4387a435bc73626" title="Starting a Thread failed for some reason.">PlankResult_ThreadStartFailed</a>,          
-<a name="l00077"></a><a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50abd4094315b69ad0f529b4c571d3ec770">00077</a>     <a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50abd4094315b69ad0f529b4c571d3ec770" title="An operation on an invalid (possibly null) thread was attempted.">PlankResult_ThreadInvalid</a>,              
-<a name="l00078"></a><a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50ae524b964e8f51bc9d6af03ca2eb9065b">00078</a>     <a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50ae524b964e8f51bc9d6af03ca2eb9065b" title="Cancelling a Thread failed.">PlankResult_ThreadCancelFailed</a>,         
-<a name="l00079"></a><a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50a7c11d0a19cfdb36c8b6525846b6f4d7f">00079</a>     <a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50a7c11d0a19cfdb36c8b6525846b6f4d7f" title="Waiting a Thread failed.">PlankResult_ThreadWaitFailed</a>,           
-<a name="l00080"></a><a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50a3e0ce37a45ba46f73721f9f80b4b19ad">00080</a>     <a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50a3e0ce37a45ba46f73721f9f80b4b19ad" title="The Thread function is invalid.">PlankResult_ThreadFunctionInvalid</a>,      
-<a name="l00081"></a><a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50adc5af881e05088cf726da81cc92307c0">00081</a>     <a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50adc5af881e05088cf726da81cc92307c0" title="Signaling a thread to exit that has already set set to exit.">PlankResult_ThreadShouldExitAlreadySet</a>, 
-<a name="l00082"></a><a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50a89352d01a9577232ad50355da1486a8e">00082</a>     <a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50a89352d01a9577232ad50355da1486a8e" title="Setting the thread&#39;s priority failed.">PlankResult_ThreadSetPriorityFailed</a>,    
-<a name="l00083"></a><a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50a5281e421c8221f9f9256fe538f74b95d">00083</a>     <a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50a5281e421c8221f9f9256fe538f74b95d" title="Setting the thread&#39;s affinity failed.">PlankResult_ThreadSetAffinityFailed</a>,    
-<a name="l00084"></a>00084 
-<a name="l00085"></a><a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50ac659fff7913cdc327ce076acdc6d0c44">00085</a>     <a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50ac659fff7913cdc327ce076acdc6d0c44">PlankResult_FunctionsInvalid</a>, 
-<a name="l00086"></a>00086     
-<a name="l00087"></a><a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50ac90720aabcd2e3318132bc65a36803c6">00087</a>     <a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50ac90720aabcd2e3318132bc65a36803c6" title="An index for a list, array etc was out of range.">PlankResult_IndexOutOfRange</a>,            
-<a name="l00088"></a><a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50a98fc6f9a7fd359be832cb944f8a372ae">00088</a>     <a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50a98fc6f9a7fd359be832cb944f8a372ae" title="A container (list, queue, stack) is being de-initialised but is non-empty.">PlankResult_ContainerNotEmptyOnDeInit</a>,  
-<a name="l00089"></a>00089     
-<a name="l00090"></a><a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50a1439df4894f173505d02c34dffba1de3">00090</a>     <a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50a1439df4894f173505d02c34dffba1de3" title="The maximum number of identifiers for thread-local storage has been reached.">PlankResult_ThreadLocalStorageMaximumIdentifiersReached</a>, 
-<a name="l00091"></a>00091     
-<a name="l00092"></a><a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50ab6875c54eef96a178c33daede2fb2bc8">00092</a>     <a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50ab6875c54eef96a178c33daede2fb2bc8">PlankNumResults</a>
-<a name="l00093"></a>00093 };
-<a name="l00094"></a>00094 
-<a name="l00095"></a>00095 <a class="code" href="plank___standard_header_8h.html#a04d6b0df91a3ec64f89589fab47dff92">PLANK_BEGIN_C_LINKAGE</a>
-<a name="l00096"></a>00096 
-<a name="l00097"></a>00097 <span class="keyword">const</span> <span class="keywordtype">char</span>* <a class="code" href="plank___result_8c.html#aa148cdc60032487aa6231578e3bdd312">pl_ResultString</a> (<a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> result);
-<a name="l00098"></a>00098 
-<a name="l00099"></a>00099 <a class="code" href="plank___standard_header_8h.html#a5f78f73f0b53faac6c264036f55232e4">PLANK_END_C_LINKAGE</a>
+<a name="l00054"></a>00054     PlankResult_FileModeInvalid,            
+<a name="l00055"></a>00055     PlankResult_FileOpenFailed,             
+<a name="l00056"></a>00056     PlankResult_FileCloseFailed,            
+<a name="l00057"></a>00057     PlankResult_FileAlreadyOpen,            
+<a name="l00058"></a>00058     PlankResult_FileInvalid,                
+<a name="l00059"></a>00059     PlankResult_FilePathInvalid,            
+<a name="l00060"></a>00060     PlankResult_FileReadError,              
+<a name="l00061"></a>00061     PlankResult_FileWriteError,             
+<a name="l00062"></a>00062     PlankResult_FileEOF,                    
+<a name="l00063"></a>00063     PlankResult_FileSeekFailed,             
+<a name="l00064"></a>00064     PlankResult_FileRemoveFailed,           
+<a name="l00065"></a>00065     PlankResult_FileMakeDirectoryFailed,    
+<a name="l00066"></a>00066     
+<a name="l00067"></a>00067     PlankResult_IffFileReaderChunkNotFound,                   
+<a name="l00068"></a>00068     
+<a name="l00069"></a>00069     PlankResult_AudioFileInavlidType,                   
+<a name="l00070"></a>00070     PlankResult_AudioFileUnsupportedType,               
+<a name="l00071"></a>00071     PlankResult_AudioFileNotReady,                      
+<a name="l00072"></a>00072     PlankResult_AudioFileDataChunkInvalid,              
+<a name="l00073"></a>00073     PlankResult_AudioFileInvalidFilePosition,           
+<a name="l00074"></a>00074     PlankResult_AudioFileFrameFormatChanged,            
+<a name="l00075"></a>00075     PlankResult_AudioFileChanged,                       
+<a name="l00076"></a>00076     
+<a name="l00077"></a>00077     PlankResult_ThreadSetFunctionFailed,    
+<a name="l00078"></a>00078     PlankResult_ThreadSetUserDataFailed,    
+<a name="l00079"></a>00079     PlankResult_ThreadAlreadyRunning,       
+<a name="l00080"></a>00080     PlankResult_ThreadStartFailed,          
+<a name="l00081"></a>00081     PlankResult_ThreadInvalid,              
+<a name="l00082"></a>00082     PlankResult_ThreadCancelFailed,         
+<a name="l00083"></a>00083     PlankResult_ThreadWaitFailed,           
+<a name="l00084"></a>00084     PlankResult_ThreadFunctionInvalid,      
+<a name="l00085"></a>00085     PlankResult_ThreadShouldExitAlreadySet, 
+<a name="l00086"></a>00086     PlankResult_ThreadSetPriorityFailed,    
+<a name="l00087"></a>00087     PlankResult_ThreadSetAffinityFailed,    
+<a name="l00088"></a>00088 
+<a name="l00089"></a>00089     PlankResult_FunctionsInvalid,           
+<a name="l00090"></a>00090     
+<a name="l00091"></a>00091     PlankResult_IndexOutOfRange,            
+<a name="l00092"></a>00092     PlankResult_ItemCountInvalid,           
+<a name="l00093"></a>00093     PlankResult_ContainerNotEmptyOnDeInit,  
+<a name="l00094"></a>00094     
+<a name="l00095"></a>00095     PlankResult_ThreadLocalStorageMaximumIdentifiersReached, 
+<a name="l00096"></a>00096     PlankResult_JSONError,                  
+<a name="l00097"></a>00097     PlankResult_JSONFileError,              
+<a name="l00098"></a>00098     PlankResult_ZipError,                   
+<a name="l00099"></a>00099     PlankResult_SharedPtrTypeError,         
 <a name="l00100"></a>00100 
-<a name="l00101"></a>00101 
-<a name="l00102"></a>00102 
-<a name="l00103"></a>00103 <span class="preprocessor">#endif // PLANK_RESULT_H</span>
+<a name="l00101"></a>00101     PlankNumResults
+<a name="l00102"></a>00102 };
+<a name="l00103"></a>00103 
+<a name="l00104"></a>00104 PLANK_BEGIN_C_LINKAGE
+<a name="l00105"></a>00105 
+<a name="l00106"></a>00106 <span class="keyword">const</span> <span class="keywordtype">char</span>* pl_ResultString (PlankResult result);
+<a name="l00107"></a>00107 
+<a name="l00108"></a>00108 PLANK_END_C_LINKAGE
+<a name="l00109"></a>00109 
+<a name="l00110"></a>00110 
+<a name="l00111"></a>00111 
+<a name="l00112"></a>00112 <span class="preprocessor">#endif // PLANK_RESULT_H</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -172,7 +181,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Properties</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -181,7 +190,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 5 2012 17:04:52 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 8 2014 12:26:46 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

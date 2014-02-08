@@ -20,7 +20,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="pl-nk-logo-small.png"/></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">pl-nk</div>
+   <div id="projectname">pl-nk&#160;<span id="projectnumber">v0.4.5</span></div>
+   <div id="projectbrief">Plonk|Plink|Plank are a set of cross-platform C/C++ frameworks for audio software development</div>
   </td>
  </tr>
  </tbody>
@@ -29,8 +30,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -54,7 +55,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
       <li><a href="files.html"><span>File&#160;List</span></a></li>
-      <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
 <div class="header">
@@ -62,14 +62,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">plink_WhiteNoise.h</div>  </div>
 </div>
 <div class="contents">
-<a href="plink___white_noise_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*</span>
+<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*</span>
 <a name="l00002"></a>00002 <span class="comment"> -------------------------------------------------------------------------------</span>
 <a name="l00003"></a>00003 <span class="comment"> This file is part of the Plink, Plonk, Plank libraries</span>
 <a name="l00004"></a>00004 <span class="comment">  by Martin Robinson</span>
 <a name="l00005"></a>00005 <span class="comment"> </span>
 <a name="l00006"></a>00006 <span class="comment"> http://code.google.com/p/pl-nk/</span>
 <a name="l00007"></a>00007 <span class="comment"> </span>
-<a name="l00008"></a>00008 <span class="comment"> Copyright University of the West of England, Bristol 2011-12</span>
+<a name="l00008"></a>00008 <span class="comment"> Copyright University of the West of England, Bristol 2011-14</span>
 <a name="l00009"></a>00009 <span class="comment"> All rights reserved.</span>
 <a name="l00010"></a>00010 <span class="comment"> </span>
 <a name="l00011"></a>00011 <span class="comment"> Redistribution and use in source and binary forms, with or without</span>
@@ -105,20 +105,20 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00041"></a>00041 <span class="preprocessor"></span>
 <a name="l00042"></a>00042 <span class="preprocessor">#include &quot;../plink_Process.h&quot;</span>
 <a name="l00043"></a>00043 
-<a name="l00051"></a><a class="code" href="struct_white_noise_process_state_f.html">00051</a> <span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="struct_white_noise_process_state_f.html">WhiteNoiseProcessStateF</a>
+<a name="l00051"></a>00051 <span class="keyword">typedef</span> <span class="keyword">struct </span>WhiteNoiseProcessStateF
 <a name="l00052"></a>00052 {
-<a name="l00053"></a><a class="code" href="struct_white_noise_process_state_f.html#a75ec2d83b494c8d6d1c835f4bced7ffd">00053</a>     <a class="code" href="struct_plink_state.html">PlinkState</a> <a class="code" href="struct_white_noise_process_state_f.html#a75ec2d83b494c8d6d1c835f4bced7ffd">base</a>;
-<a name="l00054"></a><a class="code" href="struct_white_noise_process_state_f.html#a4d0d0bca8985081177ac1e1bddd27ab8">00054</a>     <span class="keywordtype">float</span> <a class="code" href="struct_white_noise_process_state_f.html#a4d0d0bca8985081177ac1e1bddd27ab8">minValue</a>;
-<a name="l00055"></a><a class="code" href="struct_white_noise_process_state_f.html#a3e8b579c59c94426387821d4c1a55687">00055</a>     <span class="keywordtype">float</span> <a class="code" href="struct_white_noise_process_state_f.html#a3e8b579c59c94426387821d4c1a55687">maxValue</a>;
-<a name="l00056"></a><a class="code" href="struct_white_noise_process_state_f.html#a9e5a6f73caad1dfa5a35ffcf435b4ec8">00056</a>     PlankRNG <a class="code" href="struct_white_noise_process_state_f.html#a9e5a6f73caad1dfa5a35ffcf435b4ec8">rng</a>;
-<a name="l00057"></a>00057 } <a class="code" href="group___plink_white_noise_process_f_class.html#ga67c4cefdeefa096e866523c32411cb7f">WhiteNoiseProcessStateF</a>;
+<a name="l00053"></a>00053     PlinkState base;
+<a name="l00054"></a>00054     <span class="keywordtype">float</span> minValue;
+<a name="l00055"></a>00055     <span class="keywordtype">float</span> maxValue;
+<a name="l00056"></a>00056     PlankRNG rng;
+<a name="l00057"></a>00057 } WhiteNoiseProcessStateF;
 <a name="l00058"></a>00058 
-<a name="l00059"></a>00059 <a class="code" href="plink___standard_header_8h.html#a655701e76491767a3c7eae3f5ad8bc75">PLINK_BEGIN_C_LINKAGE</a>
+<a name="l00059"></a>00059 PLINK_BEGIN_C_LINKAGE
 <a name="l00060"></a>00060 
-<a name="l00061"></a>00061 <span class="keywordtype">void</span> <a class="code" href="plink_8h.html#ae1a8a9671664454367b9f21d4f533b0c">PLINK_API</a> <a class="code" href="group___plink_white_noise_process_f_class.html#ga5362b388559f2142a9631d7add17a38e">plink_WhiteNoiseProcessF_N</a> (<span class="keywordtype">void</span>* pp, <a class="code" href="struct_white_noise_process_state_f.html">WhiteNoiseProcessStateF</a>* state);
-<a name="l00062"></a>00062 <span class="keywordtype">void</span> <a class="code" href="plink_8h.html#ae1a8a9671664454367b9f21d4f533b0c">PLINK_API</a> <a class="code" href="group___plink_white_noise_process_f_class.html#ga6608c03aa18dcc1a15df08deaaa0480b">plink_WhiteNoiseProcessF</a>   (<span class="keywordtype">void</span>* pp, <a class="code" href="struct_white_noise_process_state_f.html">WhiteNoiseProcessStateF</a>* state);
+<a name="l00061"></a>00061 <span class="keywordtype">void</span> PLINK_API plink_WhiteNoiseProcessF_N (<span class="keywordtype">void</span>* pp, WhiteNoiseProcessStateF* state);
+<a name="l00062"></a>00062 <span class="keywordtype">void</span> PLINK_API plink_WhiteNoiseProcessF   (<span class="keywordtype">void</span>* pp, WhiteNoiseProcessStateF* state);
 <a name="l00063"></a>00063 
-<a name="l00064"></a>00064 <a class="code" href="plink___standard_header_8h.html#a6ad1826e88571e104dbae167ddcdbe3e">PLINK_END_C_LINKAGE</a>
+<a name="l00064"></a>00064 PLINK_END_C_LINKAGE
 <a name="l00065"></a>00065 
 <a name="l00067"></a>00067 
 <a name="l00068"></a>00068 <span class="preprocessor">#endif // PLINK_WHITENOISE_H</span>
@@ -129,7 +129,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Properties</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -138,7 +138,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 5 2012 17:04:52 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 8 2014 12:26:46 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

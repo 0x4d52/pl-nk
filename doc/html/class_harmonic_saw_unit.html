@@ -20,7 +20,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="pl-nk-logo-small.png"/></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">pl-nk</div>
+   <div id="projectname">pl-nk&#160;<span id="projectnumber">v0.4.5</span></div>
+   <div id="projectbrief">Plonk|Plink|Plank are a set of cross-platform C/C++ frameworks for audio software development</div>
   </td>
  </tr>
  </tbody>
@@ -29,8 +30,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -62,7 +63,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="header">
   <div class="summary">
-<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a>  </div>
   <div class="headertitle">
 <div class="title">HarmonicSawUnit&lt; SampleType &gt; Class Template Reference<div class="ingroups"><a class="el" href="group___generator_units.html">Oscillator unit classes.</a></div></div>  </div>
@@ -74,30 +74,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <p><a href="class_harmonic_saw_unit-members.html">List of all members.</a></p>
 <table class="memberdecls">
-<tr><td colspan="2"><h2><a name="pub-types"></a>
-Public Types</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_table_channel_internal.html">TableChannelInternal</a><br class="typebreak"/>
-&lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_harmonic_saw_unit.html#abf3128e5f476a102b22ea2aee29fe68b">TableInternal</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="struct_channel_data_3_01_table_channel_internal_3_01_sample_type_01_4_01_4.html">TableInternal::Data</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_harmonic_saw_unit.html#a9491fd6305d4743747ea36ade3a159d7">Data</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_channel_base.html">ChannelBase</a>&lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_harmonic_saw_unit.html#a15c00a60fd2bbdad2b28de9156046487">ChannelType</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_channel_internal.html">ChannelInternal</a><br class="typebreak"/>
-&lt; SampleType, <a class="el" href="struct_channel_data_3_01_table_channel_internal_3_01_sample_type_01_4_01_4.html">Data</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_harmonic_saw_unit.html#a3beedf3305712033ef252c714535dbbc">Internal</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_harmonic_saw_unit.html#afd0704432a1206c417186e29a9a0fcb6">UnitType</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_input_dictionary.html">InputDictionary</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_harmonic_saw_unit.html#a90de506e7df9bbe47c970214f7dce91e">Inputs</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_wavetable_base.html">WavetableBase</a>&lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_harmonic_saw_unit.html#affef80b7779f5b19f273b6713a26df35">WavetableType</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_table_unit.html">TableUnit</a>&lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_harmonic_saw_unit.html#ab9cd2e7e69a5c751a252215810a94ca1">TableType</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a><br class="typebreak"/>
-&lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_harmonic_saw_unit.html#ad095e469f15b58a74cf636f0f4c2a128">WeightsType</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <br class="typebreak"/>
-<a class="el" href="class_table_channel_internal.html#a7f53c1b05bd5faa13e3de103ffbda551">TableInternal::FrequencyType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_harmonic_saw_unit.html#a41edc2dcc10419d028d80716e7903e7c">FrequencyType</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <br class="typebreak"/>
-<a class="el" href="class_unit_base.html">TableInternal::FrequencyUnitType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_harmonic_saw_unit.html#ac021a415a616bbe6df1ee32188a510b6">FrequencyUnitType</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <br class="typebreak"/>
-<a class="el" href="class_numerical_array.html">TableInternal::FrequencyBufferType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_harmonic_saw_unit.html#aa6359e8f2d23deed207f0642092b7b10">FrequencyBufferType</a></td></tr>
 <tr><td colspan="2"><h2><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_object_array.html">UnitInfos</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_harmonic_saw_unit.html#af3b66b8c2274a2c152e28da409b04308">getInfo</a> ()  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_unit_base.html">UnitType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_harmonic_saw_unit.html#a219fc58728192ee0c91275a6cb9e9707">ar</a> (<a class="el" href="class_unit_base.html">FrequencyUnitType</a> const &amp;frequency=<a class="el" href="class_harmonic_saw_unit.html#a41edc2dcc10419d028d80716e7903e7c">FrequencyType</a>(440), <a class="el" href="class_unit_base.html">UnitType</a> const &amp;mul=SampleType(1), <a class="el" href="class_unit_base.html">UnitType</a> const &amp;add=SampleType(0), const int numHarmonics=21, <a class="el" href="class_block_size.html">BlockSize</a> const &amp;preferredBlockSize=BlockSize::getDefault(), <a class="el" href="class_sample_rate.html">SampleRate</a> const &amp;preferredSampleRate=SampleRate::getDefault())  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_unit_base.html">UnitType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_harmonic_saw_unit.html#a219fc58728192ee0c91275a6cb9e9707">ar</a> (<a class="el" href="class_unit_base.html">FrequencyUnitType</a> const &amp;frequency=FrequencyType(440), <a class="el" href="class_unit_base.html">UnitType</a> const &amp;mul=SampleType(1), <a class="el" href="class_unit_base.html">UnitType</a> const &amp;add=SampleType(0), const int numHarmonics=21, <a class="el" href="class_block_size.html">BlockSize</a> const &amp;preferredBlockSize=BlockSize::getDefault(), <a class="el" href="class_sample_rate.html">SampleRate</a> const &amp;preferredSampleRate=SampleRate::getDefault())  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create an audio rate harmonic sawtooth oscillator.  <a href="#a219fc58728192ee0c91275a6cb9e9707"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_unit_base.html">UnitType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_harmonic_saw_unit.html#ad7d4bdd281699619b76bdadfcb5d6582">kr</a> (<a class="el" href="class_unit_base.html">FrequencyUnitType</a> const &amp;frequency, <a class="el" href="class_unit_base.html">UnitType</a> const &amp;mul=SampleType(1), <a class="el" href="class_unit_base.html">UnitType</a> const &amp;add=SampleType(0), const int numHarmonics=21)  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a control rate harmonic sawtooth oscillator.  <a href="#ad7d4bdd281699619b76bdadfcb5d6582"></a><br/></td></tr>
@@ -107,13 +86,12 @@ Static Public Member Functions</h2></td></tr>
 class HarmonicSawUnit&lt; SampleType &gt;</h3>
 
 <p>Harmonic sawtooth wave oscillator. </p>
-<p>Factory functions:</p>
-<ul>
+<dl class="user"><dt><b>Factory functions:</b></dt><dd><ul>
 <li>ar (frequency=440, mul=1, add=0, numHarmonics=21, preferredBlockSize=default, preferredSampleRate=default)</li>
 <li>kr (frequency=440, mul=1, add=0, numHarmonics=21)</li>
 </ul>
-<p>Inputs:</p>
-<ul>
+</dd></dl>
+<dl class="user"><dt><b>Inputs:</b></dt><dd><ul>
 <li>frequency: (unit, multi) the frequency of the oscillator in Hz</li>
 <li>mul: (unit, multi) the multiplier applied to the output</li>
 <li>add: (unit, multi) the offset aded to the output</li>
@@ -121,207 +99,9 @@ class HarmonicSawUnit&lt; SampleType &gt;</h3>
 <li>preferredBlockSize: the preferred output block size (for advanced usage, leave on default if unsure)</li>
 <li>preferredSampleRate: the preferred output sample rate (for advanced usage, leave on default if unsure)</li>
 </ul>
+</dd></dl>
 <dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="class_table_unit.html" title="Wavetable oscillator.">TableUnit</a> </dd></dl>
-</div><hr/><h2>Member Typedef Documentation</h2>
-<a class="anchor" id="abf3128e5f476a102b22ea2aee29fe68b"></a><!-- doxytag: member="HarmonicSawUnit::TableInternal" ref="abf3128e5f476a102b22ea2aee29fe68b" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_table_channel_internal.html">TableChannelInternal</a>&lt;SampleType&gt; <a class="el" href="class_harmonic_saw_unit.html">HarmonicSawUnit</a>&lt; SampleType &gt;::<a class="el" href="class_table_channel_internal.html">TableInternal</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a9491fd6305d4743747ea36ade3a159d7"></a><!-- doxytag: member="HarmonicSawUnit::Data" ref="a9491fd6305d4743747ea36ade3a159d7" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="struct_channel_data_3_01_table_channel_internal_3_01_sample_type_01_4_01_4.html">TableInternal::Data</a> <a class="el" href="class_harmonic_saw_unit.html">HarmonicSawUnit</a>&lt; SampleType &gt;::<a class="el" href="struct_channel_data_3_01_table_channel_internal_3_01_sample_type_01_4_01_4.html">Data</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a15c00a60fd2bbdad2b28de9156046487"></a><!-- doxytag: member="HarmonicSawUnit::ChannelType" ref="a15c00a60fd2bbdad2b28de9156046487" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_channel_base.html">ChannelBase</a>&lt;SampleType&gt; <a class="el" href="class_harmonic_saw_unit.html">HarmonicSawUnit</a>&lt; SampleType &gt;::<a class="el" href="class_channel_base.html">ChannelType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a3beedf3305712033ef252c714535dbbc"></a><!-- doxytag: member="HarmonicSawUnit::Internal" ref="a3beedf3305712033ef252c714535dbbc" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_channel_internal.html">ChannelInternal</a>&lt;SampleType,<a class="el" href="struct_channel_data_3_01_table_channel_internal_3_01_sample_type_01_4_01_4.html">Data</a>&gt; <a class="el" href="class_harmonic_saw_unit.html">HarmonicSawUnit</a>&lt; SampleType &gt;::<a class="el" href="class_channel_internal.html">Internal</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="afd0704432a1206c417186e29a9a0fcb6"></a><!-- doxytag: member="HarmonicSawUnit::UnitType" ref="afd0704432a1206c417186e29a9a0fcb6" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_unit_base.html">UnitBase</a>&lt;SampleType&gt; <a class="el" href="class_harmonic_saw_unit.html">HarmonicSawUnit</a>&lt; SampleType &gt;::<a class="el" href="class_unit_base.html">UnitType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a90de506e7df9bbe47c970214f7dce91e"></a><!-- doxytag: member="HarmonicSawUnit::Inputs" ref="a90de506e7df9bbe47c970214f7dce91e" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_input_dictionary.html">InputDictionary</a> <a class="el" href="class_harmonic_saw_unit.html">HarmonicSawUnit</a>&lt; SampleType &gt;::<a class="el" href="class_input_dictionary.html">Inputs</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="affef80b7779f5b19f273b6713a26df35"></a><!-- doxytag: member="HarmonicSawUnit::WavetableType" ref="affef80b7779f5b19f273b6713a26df35" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_wavetable_base.html">WavetableBase</a>&lt;SampleType&gt; <a class="el" href="class_harmonic_saw_unit.html">HarmonicSawUnit</a>&lt; SampleType &gt;::<a class="el" href="class_wavetable_base.html">WavetableType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ab9cd2e7e69a5c751a252215810a94ca1"></a><!-- doxytag: member="HarmonicSawUnit::TableType" ref="ab9cd2e7e69a5c751a252215810a94ca1" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_table_unit.html">TableUnit</a>&lt;SampleType&gt; <a class="el" href="class_harmonic_saw_unit.html">HarmonicSawUnit</a>&lt; SampleType &gt;::<a class="el" href="class_table_unit.html">TableType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ad095e469f15b58a74cf636f0f4c2a128"></a><!-- doxytag: member="HarmonicSawUnit::WeightsType" ref="ad095e469f15b58a74cf636f0f4c2a128" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt;SampleType&gt; <a class="el" href="class_harmonic_saw_unit.html">HarmonicSawUnit</a>&lt; SampleType &gt;::<a class="el" href="class_numerical_array.html">WeightsType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a41edc2dcc10419d028d80716e7903e7c"></a><!-- doxytag: member="HarmonicSawUnit::FrequencyType" ref="a41edc2dcc10419d028d80716e7903e7c" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_table_channel_internal.html#a7f53c1b05bd5faa13e3de103ffbda551">TableInternal::FrequencyType</a> <a class="el" href="class_harmonic_saw_unit.html">HarmonicSawUnit</a>&lt; SampleType &gt;::<a class="el" href="class_harmonic_saw_unit.html#a41edc2dcc10419d028d80716e7903e7c">FrequencyType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ac021a415a616bbe6df1ee32188a510b6"></a><!-- doxytag: member="HarmonicSawUnit::FrequencyUnitType" ref="ac021a415a616bbe6df1ee32188a510b6" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_unit_base.html">TableInternal::FrequencyUnitType</a> <a class="el" href="class_harmonic_saw_unit.html">HarmonicSawUnit</a>&lt; SampleType &gt;::<a class="el" href="class_unit_base.html">FrequencyUnitType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="aa6359e8f2d23deed207f0642092b7b10"></a><!-- doxytag: member="HarmonicSawUnit::FrequencyBufferType" ref="aa6359e8f2d23deed207f0642092b7b10" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_numerical_array.html">TableInternal::FrequencyBufferType</a> <a class="el" href="class_harmonic_saw_unit.html">HarmonicSawUnit</a>&lt; SampleType &gt;::<a class="el" href="class_numerical_array.html">FrequencyBufferType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="af3b66b8c2274a2c152e28da409b04308"></a><!-- doxytag: member="HarmonicSawUnit::getInfo" ref="af3b66b8c2274a2c152e28da409b04308" args="()" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">static <a class="el" href="class_object_array.html">UnitInfos</a> <a class="el" href="class_harmonic_saw_unit.html">HarmonicSawUnit</a>&lt; SampleType &gt;::getInfo </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
+</div><hr/><h2>Member Function Documentation</h2>
 <a class="anchor" id="a219fc58728192ee0c91275a6cb9e9707"></a><!-- doxytag: member="HarmonicSawUnit::ar" ref="a219fc58728192ee0c91275a6cb9e9707" args="(FrequencyUnitType const &amp;frequency=FrequencyType(440), UnitType const &amp;mul=SampleType(1), UnitType const &amp;add=SampleType(0), const int numHarmonics=21, BlockSize const &amp;preferredBlockSize=BlockSize::getDefault(), SampleRate const &amp;preferredSampleRate=SampleRate::getDefault())" -->
 <div class="memitem">
 <div class="memproto">
@@ -332,7 +112,7 @@ template&lt;class SampleType &gt; </div>
           <td class="memname">static <a class="el" href="class_unit_base.html">UnitType</a> <a class="el" href="class_harmonic_saw_unit.html">HarmonicSawUnit</a>&lt; SampleType &gt;::ar </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="class_unit_base.html">FrequencyUnitType</a> const &amp;&#160;</td>
-          <td class="paramname"><em>frequency</em> = <code><a class="el" href="class_harmonic_saw_unit.html#a41edc2dcc10419d028d80716e7903e7c">FrequencyType</a>&#160;(440)</code>, </td>
+          <td class="paramname"><em>frequency</em> = <code>FrequencyType&#160;(440)</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -429,7 +209,7 @@ template&lt;class SampleType &gt; </div>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Properties</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -438,7 +218,7 @@ template&lt;class SampleType &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 5 2012 17:05:05 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 8 2014 12:26:52 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

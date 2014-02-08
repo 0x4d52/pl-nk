@@ -20,7 +20,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="pl-nk-logo-small.png"/></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">pl-nk</div>
+   <div id="projectname">pl-nk&#160;<span id="projectnumber">v0.4.5</span></div>
+   <div id="projectbrief">Plonk|Plink|Plank are a set of cross-platform C/C++ frameworks for audio software development</div>
   </td>
  </tr>
  </tbody>
@@ -29,8 +30,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -63,7 +64,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="#properties">Properties</a>  </div>
   <div class="headertitle">
 <div class="title">PLAudioHost Class Reference</div>  </div>
@@ -81,47 +81,100 @@ Public Member Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Start the host running.  <a href="#a4632229b1b2bf8910f552147b4b125ce"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">(void)&#160;</td><td class="memItemRight" valign="bottom">- <a class="el" href="interface_p_l_audio_host.html#a0340697ab1516d826ca775e70fe2cf77">stopHost</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Stop the host running.  <a href="#a0340697ab1516d826ca775e70fe2cf77"></a><br/></td></tr>
-<tr><td colspan="2"><h2><a name="pro-attribs"></a>
-Protected Attributes</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_p_l_audio_host.html#a13b0c7fe05cb6ab73e9e895f24cd02cc">peer</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">id&lt; <a class="el" href="protocol_p_l_audio_host_delegate-p.html">PLAudioHostDelegate</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_p_l_audio_host.html#a9573c9e1072aacdc982d3c2e4c64de06">delegate</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">(void)&#160;</td><td class="memItemRight" valign="bottom">- <a class="el" href="interface_p_l_audio_host.html#ae9cdfdda5e395619dacd125d57f9f6ce">pauseHost</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Pause the host.  <a href="#ae9cdfdda5e395619dacd125d57f9f6ce"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">(void)&#160;</td><td class="memItemRight" valign="bottom">- <a class="el" href="interface_p_l_audio_host.html#a0ba3696e30efda50e25e1388a8bfb8cc">resumeHost</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Resume the host.  <a href="#a0ba3696e30efda50e25e1388a8bfb8cc"></a><br/></td></tr>
 <tr><td colspan="2"><h2><a name="properties"></a>
 Properties</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">id&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_p_l_audio_host.html#a1f05ecdc163b39e2737c6a3b9c3c6d21">delegate</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">The delegat that contains the constructGraph method.  <a href="#a1f05ecdc163b39e2737c6a3b9c3c6d21"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">NSString *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_p_l_audio_host.html#af3a6a192ba27ba46a9a2a42020ef039b">hostName</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">The host name - always "iOS".  <a href="#af3a6a192ba27ba46a9a2a42020ef039b"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">NSString *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_p_l_audio_host.html#ae1f9428528fa57ef31ad54ec4ead601e">nativeHostName</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">The native host name - currently always "RemoteIO".  <a href="#ae1f9428528fa57ef31ad54ec4ead601e"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">NSString *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_p_l_audio_host.html#a49667880f969d2d7a4d225f213e61d5f">inputName</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">The name of the input device. May be "Default Input" on the simulator.  <a href="#a49667880f969d2d7a4d225f213e61d5f"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">NSString *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_p_l_audio_host.html#a801abb70ea4f0e485f3d6dab29e00133">outputName</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">The name of the output device. May be "Default Output" on the simulator.  <a href="#a801abb70ea4f0e485f3d6dab29e00133"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_p_l_audio_host.html#ac52aba0de2bc5fe5e917a27d3e146bdd">cpuUsage</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">The current CPU usage of the DSP loop.  <a href="#ac52aba0de2bc5fe5e917a27d3e146bdd"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_p_l_audio_host.html#a2e2383bea16877af6d26e8e9be8b371b">isRunning</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Is the host running?  <a href="#a2e2383bea16877af6d26e8e9be8b371b"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">PLUNIT&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_p_l_audio_host.html#aca2f44cee58c26663034a25f869ec552">outputUnit</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">The output unit of the host.  <a href="#aca2f44cee58c26663034a25f869ec552"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_p_l_audio_host.html#a2d99079f809dd7669d0a818cd0fe9292">numInputs</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">The number of audio inputs, only set this BEFORE sending the startHost message.  <a href="#a2d99079f809dd7669d0a818cd0fe9292"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_p_l_audio_host.html#ae95c772181f43c44e71a5f064f732e5e">numOutputs</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">The number of audio outputs, only set this BEFORE sending the startHost message.  <a href="#ae95c772181f43c44e71a5f064f732e5e"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_p_l_audio_host.html#a597a74efc968d07e81fe7a0a933cadc1">preferredHostBlockSize</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">The preferred block size, only set this BEFORE sending the startHost message.  <a href="#a597a74efc968d07e81fe7a0a933cadc1"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_p_l_audio_host.html#a797691d1aee1e61a85f942ab16a38976">preferredHostSampleRate</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">The preferred sample rate, only set this BEFORE sending the startHost message.  <a href="#a797691d1aee1e61a85f942ab16a38976"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">UInt32&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_p_l_audio_host.html#a0d6e194b401bb33f632da21c37a0fa64">category</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">The audio session category (kAudioSessionProperty_AudioCategory), only set this BEFORE sending the startHost message.  <a href="#a0d6e194b401bb33f632da21c37a0fa64"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">UInt32&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_p_l_audio_host.html#ad1f823296fe6ab0b28d983f75556a24c">mode</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">The audio session mode (kAudioSessionProperty_Mode), only set this BEFORE sending the startHost message.  <a href="#ad1f823296fe6ab0b28d983f75556a24c"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1f05ecdc163b39e2737c6a3b9c3c6d21"></a><!-- doxytag: member="PLAudioHost::delegate" ref="a1f05ecdc163b39e2737c6a3b9c3c6d21" args="" -->
+id&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_p_l_audio_host.html#a1f05ecdc163b39e2737c6a3b9c3c6d21">delegate</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">The delegate that contains the constructGraph method. <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af3a6a192ba27ba46a9a2a42020ef039b"></a><!-- doxytag: member="PLAudioHost::hostName" ref="af3a6a192ba27ba46a9a2a42020ef039b" args="" -->
+NSString *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_p_l_audio_host.html#af3a6a192ba27ba46a9a2a42020ef039b">hostName</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">The host name - always "iOS". <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae1f9428528fa57ef31ad54ec4ead601e"></a><!-- doxytag: member="PLAudioHost::nativeHostName" ref="ae1f9428528fa57ef31ad54ec4ead601e" args="" -->
+NSString *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_p_l_audio_host.html#ae1f9428528fa57ef31ad54ec4ead601e">nativeHostName</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">The native host name - currently always "RemoteIO". <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a49667880f969d2d7a4d225f213e61d5f"></a><!-- doxytag: member="PLAudioHost::inputName" ref="a49667880f969d2d7a4d225f213e61d5f" args="" -->
+NSString *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_p_l_audio_host.html#a49667880f969d2d7a4d225f213e61d5f">inputName</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">The name of the input device. May be "Default Input" on the simulator. <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a801abb70ea4f0e485f3d6dab29e00133"></a><!-- doxytag: member="PLAudioHost::outputName" ref="a801abb70ea4f0e485f3d6dab29e00133" args="" -->
+NSString *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_p_l_audio_host.html#a801abb70ea4f0e485f3d6dab29e00133">outputName</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">The name of the output device. May be "Default Output" on the simulator. <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac52aba0de2bc5fe5e917a27d3e146bdd"></a><!-- doxytag: member="PLAudioHost::cpuUsage" ref="ac52aba0de2bc5fe5e917a27d3e146bdd" args="" -->
+double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_p_l_audio_host.html#ac52aba0de2bc5fe5e917a27d3e146bdd">cpuUsage</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">The current CPU usage of the DSP loop. <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2e2383bea16877af6d26e8e9be8b371b"></a><!-- doxytag: member="PLAudioHost::isRunning" ref="a2e2383bea16877af6d26e8e9be8b371b" args="" -->
+BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_p_l_audio_host.html#a2e2383bea16877af6d26e8e9be8b371b">isRunning</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Is the host running? <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae15f5c4b8b6209324f1c399c935d10fe"></a><!-- doxytag: member="PLAudioHost::isPaused" ref="ae15f5c4b8b6209324f1c399c935d10fe" args="" -->
+BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_p_l_audio_host.html#ae15f5c4b8b6209324f1c399c935d10fe">isPaused</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Is the host paused? <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2d3a8c487d55b19d3ef04de2f8b1cdea"></a><!-- doxytag: member="PLAudioHost::wasInterrupted" ref="a2d3a8c487d55b19d3ef04de2f8b1cdea" args="" -->
+BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_p_l_audio_host.html#a2d3a8c487d55b19d3ef04de2f8b1cdea">wasInterrupted</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Was the host interrupted? <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6eb8fe1b9aea5fdc9743c2a50397d0e4"></a><!-- doxytag: member="PLAudioHost::outputUnit" ref="a6eb8fe1b9aea5fdc9743c2a50397d0e4" args="" -->
+Dynamic&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_p_l_audio_host.html#a6eb8fe1b9aea5fdc9743c2a50397d0e4">outputUnit</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">The output unit of the host. <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2d99079f809dd7669d0a818cd0fe9292"></a><!-- doxytag: member="PLAudioHost::numInputs" ref="a2d99079f809dd7669d0a818cd0fe9292" args="" -->
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_p_l_audio_host.html#a2d99079f809dd7669d0a818cd0fe9292">numInputs</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">The number of audio inputs, only set this BEFORE sending the startHost message. <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae95c772181f43c44e71a5f064f732e5e"></a><!-- doxytag: member="PLAudioHost::numOutputs" ref="ae95c772181f43c44e71a5f064f732e5e" args="" -->
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_p_l_audio_host.html#ae95c772181f43c44e71a5f064f732e5e">numOutputs</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">The number of audio outputs, only set this BEFORE sending the startHost message. <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a597a74efc968d07e81fe7a0a933cadc1"></a><!-- doxytag: member="PLAudioHost::preferredHostBlockSize" ref="a597a74efc968d07e81fe7a0a933cadc1" args="" -->
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_p_l_audio_host.html#a597a74efc968d07e81fe7a0a933cadc1">preferredHostBlockSize</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">The preferred host block size, only set this BEFORE sending the startHost message. <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="adff565711c798f69e0ef7a9d6e25215c"></a><!-- doxytag: member="PLAudioHost::preferredGraphBlockSize" ref="adff565711c798f69e0ef7a9d6e25215c" args="" -->
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_p_l_audio_host.html#adff565711c798f69e0ef7a9d6e25215c">preferredGraphBlockSize</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">The preferred graph block size, only set this BEFORE sending the startHost message. <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a797691d1aee1e61a85f942ab16a38976"></a><!-- doxytag: member="PLAudioHost::preferredHostSampleRate" ref="a797691d1aee1e61a85f942ab16a38976" args="" -->
+double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_p_l_audio_host.html#a797691d1aee1e61a85f942ab16a38976">preferredHostSampleRate</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">The preferred sample rate, only set this BEFORE sending the startHost message. <br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>An Objective-C audio host for the iOS platform. </p>
-<p>This is simply an adapter for the C++ <a class="el" href="class_i_o_s_audio_host.html" title="An audio host for the iOS platform.">IOSAudioHost</a>. You need to set an object that implements the PLAudioGraph protocol in the init method of your derived class.</p>
+<p>This is simply an adapter for the C++ IOSAudioHost. You need to set an object that implements the PLAudioGraph protocol in the init method of your derived class.</p>
 <p>When running in the simulator the preferred sample rate and block size properties may be ignored and default to the hardware settings of the Mac hosting the simulator.</p>
 <dl class="see"><dt><b>See also:</b></dt><dd>PLAudioGraph </dd></dl>
 </div><hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="ae9cdfdda5e395619dacd125d57f9f6ce"></a><!-- doxytag: member="PLAudioHost::pauseHost" ref="ae9cdfdda5e395619dacd125d57f9f6ce" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">- (void) pauseHost </td>
+          <td></td>
+          <td class="paramname"></td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Pause the host. </p>
+
+</div>
+</div>
+<a class="anchor" id="a0ba3696e30efda50e25e1388a8bfb8cc"></a><!-- doxytag: member="PLAudioHost::resumeHost" ref="a0ba3696e30efda50e25e1388a8bfb8cc" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">- (void) resumeHost </td>
+          <td></td>
+          <td class="paramname"></td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Resume the host. </p>
+
+</div>
+</div>
 <a class="anchor" id="a4632229b1b2bf8910f552147b4b125ce"></a><!-- doxytag: member="PLAudioHost::startHost" ref="a4632229b1b2bf8910f552147b4b125ce" args="()" -->
 <div class="memitem">
 <div class="memproto">
@@ -158,244 +211,6 @@ Properties</h2></td></tr>
 
 </div>
 </div>
-<hr/><h2>Member Data Documentation</h2>
-<a class="anchor" id="a13b0c7fe05cb6ab73e9e895f24cd02cc"></a><!-- doxytag: member="PLAudioHost::peer" ref="a13b0c7fe05cb6ab73e9e895f24cd02cc" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">- (void*) <a class="el" href="interface_p_l_audio_host.html#a13b0c7fe05cb6ab73e9e895f24cd02cc">peer</a><code> [protected]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a9573c9e1072aacdc982d3c2e4c64de06"></a><!-- doxytag: member="PLAudioHost::delegate" ref="a9573c9e1072aacdc982d3c2e4c64de06" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">- (id&lt;<a class="el" href="protocol_p_l_audio_host_delegate-p.html">PLAudioHostDelegate</a>&gt;) <a class="el" href="interface_p_l_audio_host.html#a9573c9e1072aacdc982d3c2e4c64de06">delegate</a><code> [protected]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<hr/><h2>Property Documentation</h2>
-<a class="anchor" id="a1f05ecdc163b39e2737c6a3b9c3c6d21"></a><!-- doxytag: member="PLAudioHost::delegate" ref="a1f05ecdc163b39e2737c6a3b9c3c6d21" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">- (id) <a class="el" href="interface_p_l_audio_host.html#a9573c9e1072aacdc982d3c2e4c64de06">delegate</a><code> [read, write, retain]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>The delegat that contains the constructGraph method. </p>
-
-</div>
-</div>
-<a class="anchor" id="af3a6a192ba27ba46a9a2a42020ef039b"></a><!-- doxytag: member="PLAudioHost::hostName" ref="af3a6a192ba27ba46a9a2a42020ef039b" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">- (NSString*) hostName<code> [read, assign]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>The host name - always "iOS". </p>
-
-</div>
-</div>
-<a class="anchor" id="ae1f9428528fa57ef31ad54ec4ead601e"></a><!-- doxytag: member="PLAudioHost::nativeHostName" ref="ae1f9428528fa57ef31ad54ec4ead601e" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">- (NSString*) nativeHostName<code> [read, assign]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>The native host name - currently always "RemoteIO". </p>
-
-</div>
-</div>
-<a class="anchor" id="a49667880f969d2d7a4d225f213e61d5f"></a><!-- doxytag: member="PLAudioHost::inputName" ref="a49667880f969d2d7a4d225f213e61d5f" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">- (NSString*) inputName<code> [read, assign]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>The name of the input device. May be "Default Input" on the simulator. </p>
-
-</div>
-</div>
-<a class="anchor" id="a801abb70ea4f0e485f3d6dab29e00133"></a><!-- doxytag: member="PLAudioHost::outputName" ref="a801abb70ea4f0e485f3d6dab29e00133" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">- (NSString*) outputName<code> [read, assign]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>The name of the output device. May be "Default Output" on the simulator. </p>
-
-</div>
-</div>
-<a class="anchor" id="ac52aba0de2bc5fe5e917a27d3e146bdd"></a><!-- doxytag: member="PLAudioHost::cpuUsage" ref="ac52aba0de2bc5fe5e917a27d3e146bdd" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">- (double) cpuUsage<code> [read, assign]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>The current CPU usage of the DSP loop. </p>
-
-</div>
-</div>
-<a class="anchor" id="a2e2383bea16877af6d26e8e9be8b371b"></a><!-- doxytag: member="PLAudioHost::isRunning" ref="a2e2383bea16877af6d26e8e9be8b371b" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">- (BOOL) isRunning<code> [read, assign]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Is the host running? </p>
-
-</div>
-</div>
-<a class="anchor" id="aca2f44cee58c26663034a25f869ec552"></a><!-- doxytag: member="PLAudioHost::outputUnit" ref="aca2f44cee58c26663034a25f869ec552" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">- (PLUNIT) outputUnit<code> [read, assign]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>The output unit of the host. </p>
-
-</div>
-</div>
-<a class="anchor" id="a2d99079f809dd7669d0a818cd0fe9292"></a><!-- doxytag: member="PLAudioHost::numInputs" ref="a2d99079f809dd7669d0a818cd0fe9292" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">- (int) numInputs<code> [read, write, assign]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>The number of audio inputs, only set this BEFORE sending the startHost message. </p>
-
-</div>
-</div>
-<a class="anchor" id="ae95c772181f43c44e71a5f064f732e5e"></a><!-- doxytag: member="PLAudioHost::numOutputs" ref="ae95c772181f43c44e71a5f064f732e5e" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">- (int) numOutputs<code> [read, write, assign]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>The number of audio outputs, only set this BEFORE sending the startHost message. </p>
-
-</div>
-</div>
-<a class="anchor" id="a597a74efc968d07e81fe7a0a933cadc1"></a><!-- doxytag: member="PLAudioHost::preferredHostBlockSize" ref="a597a74efc968d07e81fe7a0a933cadc1" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">- (int) preferredHostBlockSize<code> [read, write, assign]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>The preferred block size, only set this BEFORE sending the startHost message. </p>
-
-</div>
-</div>
-<a class="anchor" id="a797691d1aee1e61a85f942ab16a38976"></a><!-- doxytag: member="PLAudioHost::preferredHostSampleRate" ref="a797691d1aee1e61a85f942ab16a38976" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">- (double) preferredHostSampleRate<code> [read, write, assign]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>The preferred sample rate, only set this BEFORE sending the startHost message. </p>
-
-</div>
-</div>
-<a class="anchor" id="a0d6e194b401bb33f632da21c37a0fa64"></a><!-- doxytag: member="PLAudioHost::category" ref="a0d6e194b401bb33f632da21c37a0fa64" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">- (UInt32) category<code> [read, write, assign]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>The audio session category (kAudioSessionProperty_AudioCategory), only set this BEFORE sending the startHost message. </p>
-
-</div>
-</div>
-<a class="anchor" id="ad1f823296fe6ab0b28d983f75556a24c"></a><!-- doxytag: member="PLAudioHost::mode" ref="ad1f823296fe6ab0b28d983f75556a24c" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">- (UInt32) mode<code> [read, write, assign]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>The audio session mode (kAudioSessionProperty_Mode), only set this BEFORE sending the startHost message. </p>
-
-</div>
-</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li><a class="el" href="plonk___i_o_s_audio_host_8h_source.html">plonk_IOSAudioHost.h</a></li>
 </ul>
@@ -405,7 +220,7 @@ Properties</h2></td></tr>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Properties</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -414,7 +229,7 @@ Properties</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 5 2012 17:05:07 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 8 2014 12:26:52 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

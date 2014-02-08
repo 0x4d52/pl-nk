@@ -20,7 +20,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="pl-nk-logo-small.png"/></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">pl-nk</div>
+   <div id="projectname">pl-nk&#160;<span id="projectnumber">v0.4.5</span></div>
+   <div id="projectbrief">Plonk|Plink|Plank are a set of cross-platform C/C++ frameworks for audio software development</div>
   </td>
  </tr>
  </tbody>
@@ -29,8 +30,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -54,7 +55,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
       <li><a href="files.html"><span>File&#160;List</span></a></li>
-      <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
 <div class="header">
@@ -62,14 +62,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">plonk_SignalPlay.h</div>  </div>
 </div>
 <div class="contents">
-<a href="plonk___signal_play_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*</span>
+<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*</span>
 <a name="l00002"></a>00002 <span class="comment"> -------------------------------------------------------------------------------</span>
 <a name="l00003"></a>00003 <span class="comment"> This file is part of the Plink, Plonk, Plank libraries</span>
 <a name="l00004"></a>00004 <span class="comment">  by Martin Robinson</span>
 <a name="l00005"></a>00005 <span class="comment"> </span>
 <a name="l00006"></a>00006 <span class="comment"> http://code.google.com/p/pl-nk/</span>
 <a name="l00007"></a>00007 <span class="comment"> </span>
-<a name="l00008"></a>00008 <span class="comment"> Copyright University of the West of England, Bristol 2011-12</span>
+<a name="l00008"></a>00008 <span class="comment"> Copyright University of the West of England, Bristol 2011-14</span>
 <a name="l00009"></a>00009 <span class="comment"> All rights reserved.</span>
 <a name="l00010"></a>00010 <span class="comment"> </span>
 <a name="l00011"></a>00011 <span class="comment"> Redistribution and use in source and binary forms, with or without</span>
@@ -108,250 +108,299 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00044"></a>00044 
 <a name="l00045"></a>00045 <span class="keyword">template</span>&lt;<span class="keyword">class</span> SampleType&gt; <span class="keyword">class </span><a class="code" href="class_signal_play_channel_internal.html" title="Signal player generator.">SignalPlayChannelInternal</a>;
 <a name="l00046"></a>00046 
-<a name="l00047"></a><a class="code" href="struct_channel_data_3_01_signal_play_channel_internal_3_01_sample_type_01_4_01_4.html">00047</a> <a class="code" href="plonk___channel_data_8h.html#a5079435c39572d6e2b30614a371bbc17" title="Macro to make typing this hideous construction more bearable.">PLONK_CHANNELDATA_DECLARE</a>(<a class="code" href="class_signal_play_channel_internal.html" title="Signal player generator.">SignalPlayChannelInternal</a>,SampleType)
+<a name="l00047"></a>00047 PLONK_CHANNELDATA_DECLARE(<a class="code" href="class_signal_play_channel_internal.html" title="Signal player generator.">SignalPlayChannelInternal</a>,SampleType)
 <a name="l00048"></a>00048 {    
-<a name="l00049"></a><a class="code" href="struct_channel_data_3_01_signal_play_channel_internal_3_01_sample_type_01_4_01_4.html#ad8fc82f07bfa1f6566f979dc0e5d1c94">00049</a>     <span class="keyword">typedef</span> <span class="keyword">typename</span> <a class="code" href="class_type_utility.html" title="A utility for finding out information about certain other classes and types.">TypeUtility&lt;SampleType&gt;::IndexType</a> <a class="code" href="struct_channel_data_3_01_signal_play_channel_internal_3_01_sample_type_01_4_01_4.html#ad8fc82f07bfa1f6566f979dc0e5d1c94">RateType</a>;
+<a name="l00049"></a>00049     <span class="keyword">typedef</span> <span class="keyword">typename</span> <a class="code" href="class_type_utility.html" title="A utility for finding out information about certain other classes and types.">TypeUtility&lt;SampleType&gt;::IndexType</a> RateType;
 <a name="l00050"></a>00050 
-<a name="l00051"></a><a class="code" href="struct_channel_data_3_01_signal_play_channel_internal_3_01_sample_type_01_4_01_4.html#a6cd7c97b75417f117d6d69ed97b5e87e">00051</a>     <a class="code" href="struct_channel_data_3_01_channel_internal_core_01_4.html">ChannelInternalCore::Data</a> <a class="code" href="struct_channel_data_3_01_signal_play_channel_internal_3_01_sample_type_01_4_01_4.html#a6cd7c97b75417f117d6d69ed97b5e87e">base</a>;
-<a name="l00052"></a><a class="code" href="struct_channel_data_3_01_signal_play_channel_internal_3_01_sample_type_01_4_01_4.html#a20ada04f87a9ae70d98d51ee15056ec8">00052</a>     RateType <a class="code" href="struct_channel_data_3_01_signal_play_channel_internal_3_01_sample_type_01_4_01_4.html#a20ada04f87a9ae70d98d51ee15056ec8">currentPosition</a>;
-<a name="l00053"></a>00053 };      
-<a name="l00054"></a>00054 
-<a name="l00055"></a>00055 <span class="comment">//------------------------------------------------------------------------------</span>
-<a name="l00056"></a>00056 
-<a name="l00058"></a>00058 <span class="keyword">template</span>&lt;<span class="keyword">class</span> SampleType&gt;
-<a name="l00059"></a><a class="code" href="class_signal_play_channel_internal.html">00059</a> <span class="keyword">class </span><a class="code" href="class_signal_play_channel_internal.html" title="Signal player generator.">SignalPlayChannelInternal</a> 
-<a name="l00060"></a>00060 :   <span class="keyword">public</span> <a class="code" href="class_channel_internal.html" title="The base class from which most ChannelInternals should be derived.">ChannelInternal</a>&lt;SampleType, PLONK_CHANNELDATA_NAME(SignalPlayChannelInternal,SampleType)&gt;
-<a name="l00061"></a>00061 {
-<a name="l00062"></a>00062 <span class="keyword">public</span>:
-<a name="l00063"></a>00063 
-<a name="l00064"></a><a class="code" href="class_signal_play_channel_internal.html#aeb855dc8b892bd37ac7096e29e143931">00064</a>     <span class="keyword">typedef</span> <a class="code" href="plonk___channel_data_8h.html#ae3a9e6ec0790799a4a7a234602f2af4b" title="Macro to make typing this hideous construction more bearable.">PLONK_CHANNELDATA_NAME</a>(<a class="code" href="class_signal_play_channel_internal.html" title="Signal player generator.">SignalPlayChannelInternal</a>,SampleType)  <a class="code" href="struct_channel_data_3_01_channel_internal_core_01_4.html">Data</a>;
-<a name="l00065"></a><a class="code" href="class_signal_play_channel_internal.html#a9e908e3509f86f2367f3a5cf296d9ed5">00065</a>     typedef <a class="code" href="class_channel_base.html" title="A single output signal.">ChannelBase</a>&lt;SampleType&gt;                                 <a class="code" href="class_channel_base.html" title="A single output signal.">ChannelType</a>;
-<a name="l00066"></a><a class="code" href="class_signal_play_channel_internal.html#a037fedc9e16529a4155d40c0ac4fa233">00066</a>     typedef <a class="code" href="class_signal_play_channel_internal.html" title="Signal player generator.">SignalPlayChannelInternal</a>&lt;SampleType&gt;                   <a class="code" href="class_signal_play_channel_internal.html" title="Signal player generator.">SignalPlayInternal</a>;
-<a name="l00067"></a><a class="code" href="class_signal_play_channel_internal.html#a334c7391591d990e561022cf12ef2bba">00067</a>     typedef <a class="code" href="class_channel_internal.html" title="The base class from which most ChannelInternals should be derived.">ChannelInternal</a>&lt;SampleType,Data&gt;                        <a class="code" href="class_receiver_internal.html#ac1910adc042a53336c1316a1303eafcc">Internal</a>;
-<a name="l00068"></a><a class="code" href="class_signal_play_channel_internal.html#a3496878d800f99915d6340900e07a565">00068</a>     typedef <a class="code" href="class_channel_internal_base.html" title="The templated base class for all internal channel processes.">ChannelInternalBase</a>&lt;SampleType&gt;                         <a class="code" href="class_channel_internal_base.html" title="The templated base class for all internal channel processes.">InternalBase</a>;
-<a name="l00069"></a><a class="code" href="class_signal_play_channel_internal.html#ac16e2558545dfa434447612cadb0ee9c">00069</a>     typedef <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a>&lt;SampleType&gt;                                    <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitType</a>;
-<a name="l00070"></a><a class="code" href="class_signal_play_channel_internal.html#a663c2e2f995f3fbac387bd073828c73a">00070</a>     typedef <a class="code" href="class_input_dictionary.html" title="For storing named Dynamic objects.">InputDictionary</a>                                         <a class="code" href="class_input_dictionary.html" title="For storing named Dynamic objects.">Inputs</a>;
-<a name="l00071"></a><a class="code" href="class_signal_play_channel_internal.html#aebcf56d16abeaa37325bfd7f2b937965">00071</a>     typedef <a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">NumericalArray</a>&lt;SampleType&gt;                              <a class="code" href="class_numerical_array.html">Buffer</a>;
-<a name="l00072"></a><a class="code" href="class_signal_play_channel_internal.html#a35d05b76e1f6feebb6a62356217d74ec">00072</a>     typedef <a class="code" href="class_signal_base.html">SignalBase</a>&lt;SampleType&gt;                                  <a class="code" href="class_signal_base.html">SignalType</a>;
-<a name="l00073"></a>00073 
-<a name="l00074"></a><a class="code" href="class_signal_play_channel_internal.html#a8d9b0d6c3822dc277244c7f0a7f5aa1c">00074</a>     typedef typename <a class="code" href="class_type_utility.html" title="A utility for finding out information about certain other classes and types.">TypeUtility</a>&lt;SampleType&gt;::IndexType             <a class="code" href="class_signal_play_channel_internal.html#a8d9b0d6c3822dc277244c7f0a7f5aa1c">RateType</a>;
-<a name="l00075"></a><a class="code" href="class_signal_play_channel_internal.html#a5d901af9bea9361d15c7e0c5e1f90ce5">00075</a>     typedef <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a>&lt;RateType&gt;                                      <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">RateUnitType</a>;
-<a name="l00076"></a><a class="code" href="class_signal_play_channel_internal.html#a77cbe72655df433605071e92f761e6cb">00076</a>     typedef <a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">NumericalArray</a>&lt;RateType&gt;                                <a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">RateBufferType</a>;
-<a name="l00077"></a><a class="code" href="class_signal_play_channel_internal.html#a445701d97d1ee44bcd148555a9f2489f">00077</a>     typedef <a class="code" href="class_interp_linear.html">InterpLinear</a>&lt;SampleType,RateType&gt;                       <a class="code" href="class_interp_linear.html">InterpType</a>;
-<a name="l00078"></a>00078 
-<a name="l00079"></a><a class="code" href="class_signal_play_channel_internal.html#a36c6c832fad9666183cf56c01b938a5b">00079</a>     <a class="code" href="class_signal_play_channel_internal.html" title="Signal player generator.">SignalPlayChannelInternal</a> (Inputs const&amp; inputs, 
-<a name="l00080"></a>00080                                Data const&amp; data, 
-<a name="l00081"></a>00081                                <a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a> const&amp; blockSize,
-<a name="l00082"></a>00082                                <a class="code" href="class_sample_rate.html" title="A specialised Variable&lt;double&gt; for handling sample rates.">SampleRate</a> const&amp; sampleRate) throw()
-<a name="l00083"></a>00083     :   Internal (inputs, data, blockSize, sampleRate)
-<a name="l00084"></a>00084     {
-<a name="l00085"></a>00085     }
-<a name="l00086"></a>00086             
-<a name="l00087"></a><a class="code" href="class_signal_play_channel_internal.html#a6aaa4e1ffdb93bce3d886b80cfa25877">00087</a>     <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> <a class="code" href="class_signal_play_channel_internal.html#a6aaa4e1ffdb93bce3d886b80cfa25877">getName</a>() <span class="keyword">const</span> throw()
-<a name="l00088"></a>00088     {
-<a name="l00089"></a>00089         <span class="keywordflow">return</span> <span class="stringliteral">&quot;Signal Play&quot;</span>;
-<a name="l00090"></a>00090     }       
-<a name="l00091"></a>00091     
-<a name="l00092"></a><a class="code" href="class_signal_play_channel_internal.html#ad8c410dc3b31fe21fdac4fa72663a10c">00092</a>     <a class="code" href="class_numerical_array.html">IntArray</a> <a class="code" href="class_signal_play_channel_internal.html#ad8c410dc3b31fe21fdac4fa72663a10c">getInputKeys</a>() <span class="keyword">const</span> throw()
-<a name="l00093"></a>00093     {
-<a name="l00094"></a>00094         <span class="keyword">const</span> <a class="code" href="class_numerical_array.html">IntArray</a> keys (<a class="code" href="class_i_o_key.html#a31bc497f7606db39aa57aa0366b87e37a5698ab43cec4e3a53e3ba0fff75fa8bb" title="A stored signal buffer.">IOKey::Signal</a>, 
-<a name="l00095"></a>00095                              <a class="code" href="class_i_o_key.html#a31bc497f7606db39aa57aa0366b87e37a48b406f30d3119576aad3fb241dbe799" title="Relative speed where 1 = normal.">IOKey::Rate</a>);
-<a name="l00096"></a>00096         <span class="keywordflow">return</span> keys;
-<a name="l00097"></a>00097     }    
-<a name="l00098"></a>00098     
-<a name="l00099"></a><a class="code" href="class_signal_play_channel_internal.html#a0a12b7ea88a7dc3c03c215af6c7c4a7d">00099</a>     <a class="code" href="class_channel_internal_base.html" title="The templated base class for all internal channel processes.">InternalBase</a>* <a class="code" href="class_signal_play_channel_internal.html#a0a12b7ea88a7dc3c03c215af6c7c4a7d">getChannel</a> (<span class="keyword">const</span> <span class="keywordtype">int</span> index) <span class="keywordflow">throw</span>()
-<a name="l00100"></a>00100     {
-<a name="l00101"></a>00101         <span class="keyword">const</span> <a class="code" href="class_input_dictionary.html" title="For storing named Dynamic objects.">Inputs</a> channelInputs = this-&gt;<a class="code" href="class_channel_internal_core.html#a874d7d0ef62aecabcc28b5ff2bd8bfa1">getInputs</a>().<a class="code" href="class_input_dictionary.html#a2f1736b42993b530ae0000070506f520" title="Returns this dictionary with all the units containing only a single channel.">getChannel</a> (index);
-<a name="l00102"></a>00102         <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="class_signal_play_channel_internal.html#a037fedc9e16529a4155d40c0ac4fa233">SignalPlayInternal</a> (channelInputs, 
-<a name="l00103"></a>00103                                        this-&gt;<a class="code" href="class_channel_internal.html#aa0fba1693bbfe6dae4dfedaa0cc0f079">getState</a>(), 
-<a name="l00104"></a>00104                                        this-&gt;<a class="code" href="class_channel_internal_core.html#a39653f4cdda1c47d2827fad92bfe0fd6">getBlockSize</a>(), 
-<a name="l00105"></a>00105                                        this-&gt;<a class="code" href="class_channel_internal_core.html#a56c8b6a5cbe0f7678eaf2af4d8d45d4c">getSampleRate</a>());
-<a name="l00106"></a>00106     }
-<a name="l00107"></a>00107     
-<a name="l00108"></a><a class="code" href="class_signal_play_channel_internal.html#ac82529da94ea92bcbf2f2f3586f7247a">00108</a>     <span class="keywordtype">void</span> <a class="code" href="class_signal_play_channel_internal.html#ac82529da94ea92bcbf2f2f3586f7247a" title="Called to initialise the channel&#39;s initial value.">initChannel</a> (<span class="keyword">const</span> <span class="keywordtype">int</span> channel) <span class="keywordflow">throw</span>()
-<a name="l00109"></a>00109     {        
-<a name="l00110"></a>00110         <span class="keyword">const</span> <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">RateUnitType</a>&amp; rateUnit = ChannelInternalCore::getInputAs&lt;RateUnitType&gt; (<a class="code" href="class_i_o_key.html#a31bc497f7606db39aa57aa0366b87e37a48b406f30d3119576aad3fb241dbe799" title="Relative speed where 1 = normal.">IOKey::Rate</a>);
-<a name="l00111"></a>00111         
-<a name="l00112"></a>00112         this-&gt;<a class="code" href="class_channel_internal_base.html#aa64de82fe8ad87d4ad2446ca0d1b2511">setBlockSize</a> (<a class="code" href="class_block_size.html#afcc989dcc540a3d62f67d939f16c6457" title="Select a block size based on a unit&#39;s preference and its inputs.">BlockSize::decide</a> (rateUnit.<a class="code" href="class_unit_base.html#a9e6663d2783b9de78f1f06442c395532" title="Get the block size of a specific channel in this unit.">getBlockSize</a> (channel),
-<a name="l00113"></a>00113                                                this-&gt;<a class="code" href="class_channel_internal_core.html#a39653f4cdda1c47d2827fad92bfe0fd6">getBlockSize</a>()));
-<a name="l00114"></a>00114         this-&gt;<a class="code" href="class_channel_internal.html#aa03065dc474226453a0334dc82bae624">setSampleRate</a> (<a class="code" href="class_sample_rate.html#a17ecb104d9a67ca7dbd0a076f0aa6bbf">SampleRate::decide</a> (rateUnit.<a class="code" href="class_unit_base.html#ae75214256d2240c537462510737bdd61" title="Get the sample rate of a specific channel in this unit.">getSampleRate</a> (channel),
-<a name="l00115"></a>00115                                                  this-&gt;<a class="code" href="class_channel_internal_core.html#a56c8b6a5cbe0f7678eaf2af4d8d45d4c">getSampleRate</a>()));
-<a name="l00116"></a>00116         
-<a name="l00117"></a>00117         this-&gt;<a class="code" href="class_channel_internal.html#a69a895f1fb4feef65421a5059e98ebc3">setOverlap</a> (rateUnit.<a class="code" href="class_unit_base.html#a3e8cc9f7b3ffc03fd4224207ae03a34c">getOverlap</a> (channel));
-<a name="l00118"></a>00118         
-<a name="l00119"></a>00119         this-&gt;<a class="code" href="class_channel_internal_base.html#aed88288e0eb608e998b3f7ccf6bf2aaf">initValue</a> (0);<span class="comment">//this-&gt;getState().currentPosition);</span>
-<a name="l00120"></a>00120     }    
-<a name="l00121"></a>00121     
-<a name="l00122"></a><a class="code" href="class_signal_play_channel_internal.html#a31f7ddf13402b8e25051e364c27094e9">00122</a>     <span class="keywordtype">void</span> <a class="code" href="class_signal_play_channel_internal.html#a31f7ddf13402b8e25051e364c27094e9" title="The DSP function.">process</a> (<a class="code" href="class_process_info.html" title="Holds information about the Unit graph.">ProcessInfo</a>&amp; info, <span class="keyword">const</span> <span class="keywordtype">int</span> channel) <span class="keywordflow">throw</span>()
-<a name="l00123"></a>00123     {        
-<a name="l00124"></a>00124         <a class="code" href="struct_channel_data_3_01_channel_internal_core_01_4.html">Data</a>&amp; data = this-&gt;<a class="code" href="class_channel_internal.html#aa0fba1693bbfe6dae4dfedaa0cc0f079">getState</a>();
-<a name="l00125"></a>00125         
-<a name="l00126"></a>00126         <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">RateUnitType</a>&amp; rateUnit = ChannelInternalCore::getInputAs&lt;RateUnitType&gt; (<a class="code" href="class_i_o_key.html#a31bc497f7606db39aa57aa0366b87e37a48b406f30d3119576aad3fb241dbe799" title="Relative speed where 1 = normal.">IOKey::Rate</a>);
-<a name="l00127"></a>00127         <span class="keyword">const</span> <a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">RateBufferType</a>&amp; rateBuffer (rateUnit.<a class="code" href="class_unit_base.html#a78e56679819dde06c3beb022cbdb13a4" title="Process a specific channel in this unit.">process</a> (info, channel));
-<a name="l00128"></a>00128         
-<a name="l00129"></a>00129         SampleType* <span class="keyword">const</span> outputSamples = this-&gt;<a class="code" href="class_channel_internal_base.html#a87680feef8745429802ff10ca3887012">getOutputSamples</a>();
-<a name="l00130"></a>00130         <span class="keyword">const</span> <span class="keywordtype">int</span> outputBufferLength = this-&gt;<a class="code" href="class_channel_internal_base.html#a48f5cfad8e3c1977412e357a2e41b41f">getOutputBuffer</a>().<a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a>();
-<a name="l00131"></a>00131         
-<a name="l00132"></a>00132         <span class="keyword">const</span> <a class="code" href="class_signal_play_channel_internal.html#a8d9b0d6c3822dc277244c7f0a7f5aa1c">RateType</a>* <span class="keyword">const</span> rateSamples = rateBuffer.getArray();
-<a name="l00133"></a>00133         <span class="keyword">const</span> <span class="keywordtype">int</span> rateBufferLength = rateBuffer.length();
-<a name="l00134"></a>00134         
-<a name="l00135"></a>00135         <span class="keyword">const</span> <a class="code" href="class_signal_base.html">SignalType</a>&amp; signal (this-&gt;<a class="code" href="class_channel_internal_base.html#a9acf9118182b5c88afb9d45f0235daad">getInputAsSignal</a> (<a class="code" href="class_i_o_key.html#a31bc497f7606db39aa57aa0366b87e37a5698ab43cec4e3a53e3ba0fff75fa8bb" title="A stored signal buffer.">IOKey::Signal</a>));
-<a name="l00136"></a>00136         <span class="keyword">const</span> SampleType* <span class="keyword">const</span> signalSamples = signal.<a class="code" href="class_signal_base.html#a390d52b58e445f9768c80216f7459e58">getSamples</a> (channel);         
-<a name="l00137"></a>00137         <span class="keyword">const</span> <span class="keywordtype">int</span> signalFrameStride = signal.<a class="code" href="class_signal_base.html#a54e5d4fe8787f1198a5086215a6dce98">getFrameStride</a>();
-<a name="l00138"></a>00138         <span class="keyword">const</span> <a class="code" href="class_signal_play_channel_internal.html#a8d9b0d6c3822dc277244c7f0a7f5aa1c">RateType</a> numSignalFrames (signal.<a class="code" href="class_signal_base.html#ac8fbaa071d5860ec54c29e357d235187">getNumFrames</a>());
-<a name="l00139"></a>00139         <span class="keyword">const</span> <a class="code" href="class_signal_play_channel_internal.html#a8d9b0d6c3822dc277244c7f0a7f5aa1c">RateType</a> rateScale (signal.<a class="code" href="class_signal_base.html#a60aff6d5eeb77cb50b41c5037dcde125">getSampleRate</a>().<a class="code" href="class_variable.html#a3f05fc2768b1de80706b39ee14f3c360" title="Returns the current value.">getValue</a>() * data.base.<a class="code" href="struct_channel_data_3_01_channel_internal_core_01_4.html#aeeeea2e40ee71f629e09f6e4fc990f1f">sampleDuration</a>);
-<a name="l00140"></a>00140         
-<a name="l00141"></a>00141         <span class="keywordtype">int</span> i;
-<a name="l00142"></a>00142         
-<a name="l00143"></a>00143         <span class="keywordflow">if</span> (rateBufferLength == outputBufferLength)
-<a name="l00144"></a>00144         {
-<a name="l00145"></a>00145             <span class="keywordflow">for</span> (i = 0; i &lt; outputBufferLength; ++i) 
-<a name="l00146"></a>00146             {
-<a name="l00147"></a>00147                 <span class="keyword">const</span> <span class="keywordtype">int</span> sampleA (data.currentPosition);
-<a name="l00148"></a>00148                 <span class="keyword">const</span> <span class="keywordtype">int</span> sampleB (sampleA + 1);
-<a name="l00149"></a>00149                 <span class="keyword">const</span> <a class="code" href="class_signal_play_channel_internal.html#a8d9b0d6c3822dc277244c7f0a7f5aa1c">RateType</a> <a class="code" href="group___plonk_unary_op_functions.html#ga8574f6b212e32701381d2e070c8707b6" title="Returns the fractional part of the input argument.">frac</a> (data.currentPosition - <a class="code" href="class_signal_play_channel_internal.html#a8d9b0d6c3822dc277244c7f0a7f5aa1c">RateType</a> (sampleA));
-<a name="l00150"></a>00150                 
-<a name="l00151"></a>00151                 outputSamples[i] = <a class="code" href="class_interp_linear.html#a5a631471cf60b634500e4f608ec88c6a">InterpType::interp</a> (signalSamples[sampleA * signalFrameStride], 
-<a name="l00152"></a>00152                                                        signalSamples[sampleB * signalFrameStride], 
-<a name="l00153"></a>00153                                                        frac);
-<a name="l00154"></a>00154                 
-<a name="l00155"></a>00155                 data.currentPosition += rateSamples[i] * rateScale;
-<a name="l00156"></a>00156                 
-<a name="l00157"></a>00157                 <span class="keywordflow">if</span> (data.currentPosition &gt;= numSignalFrames)
-<a name="l00158"></a>00158                     data.currentPosition -= numSignalFrames;
-<a name="l00159"></a>00159                 <span class="keywordflow">else</span> <span class="keywordflow">if</span> (data.currentPosition &lt; <a class="code" href="class_signal_play_channel_internal.html#a8d9b0d6c3822dc277244c7f0a7f5aa1c">RateType</a> (0))   
-<a name="l00160"></a>00160                     data.currentPosition += numSignalFrames;
-<a name="l00161"></a>00161             }                    
-<a name="l00162"></a>00162         }
-<a name="l00163"></a>00163         <span class="keywordflow">else</span> <span class="keywordflow">if</span> (rateBufferLength == 1)
-<a name="l00164"></a>00164         {
-<a name="l00165"></a>00165             <span class="keyword">const</span> <a class="code" href="class_signal_play_channel_internal.html#a8d9b0d6c3822dc277244c7f0a7f5aa1c">RateType</a> increment = rateSamples[0] * rateScale;
-<a name="l00166"></a>00166             
-<a name="l00167"></a>00167             <span class="keywordflow">for</span> (i = 0; i &lt; outputBufferLength; ++i) 
-<a name="l00168"></a>00168             {
-<a name="l00169"></a>00169                 <span class="keyword">const</span> <span class="keywordtype">int</span> sampleA (data.currentPosition);
-<a name="l00170"></a>00170                 <span class="keyword">const</span> <span class="keywordtype">int</span> sampleB (sampleA + 1);
-<a name="l00171"></a>00171                 <span class="keyword">const</span> <a class="code" href="class_signal_play_channel_internal.html#a8d9b0d6c3822dc277244c7f0a7f5aa1c">RateType</a> <a class="code" href="group___plonk_unary_op_functions.html#ga8574f6b212e32701381d2e070c8707b6" title="Returns the fractional part of the input argument.">frac</a> (data.currentPosition - <a class="code" href="class_signal_play_channel_internal.html#a8d9b0d6c3822dc277244c7f0a7f5aa1c">RateType</a> (sampleA));
-<a name="l00172"></a>00172                 
-<a name="l00173"></a>00173                 outputSamples[i] = <a class="code" href="class_interp_linear.html#a5a631471cf60b634500e4f608ec88c6a">InterpType::interp</a> (signalSamples[sampleA * signalFrameStride], 
-<a name="l00174"></a>00174                                                        signalSamples[sampleB * signalFrameStride], 
-<a name="l00175"></a>00175                                                        frac);
-<a name="l00176"></a>00176                 data.currentPosition += increment;
-<a name="l00177"></a>00177                 
-<a name="l00178"></a>00178                 <span class="keywordflow">if</span> (data.currentPosition &gt;= numSignalFrames)
-<a name="l00179"></a>00179                     data.currentPosition -= numSignalFrames;
-<a name="l00180"></a>00180                 <span class="keywordflow">else</span> <span class="keywordflow">if</span> (data.currentPosition &lt; <a class="code" href="class_signal_play_channel_internal.html#a8d9b0d6c3822dc277244c7f0a7f5aa1c">RateType</a> (0))   
-<a name="l00181"></a>00181                     data.currentPosition += numSignalFrames;                
-<a name="l00182"></a>00182             }                    
-<a name="l00183"></a>00183         }
-<a name="l00184"></a>00184         <span class="keywordflow">else</span>
-<a name="l00185"></a>00185         {
-<a name="l00186"></a>00186             <span class="keywordtype">double</span> ratePosition = 0.0;
-<a name="l00187"></a>00187             <span class="keyword">const</span> <span class="keywordtype">double</span> rateIncrement = double (rateBufferLength) / double (outputBufferLength);
-<a name="l00188"></a>00188             
-<a name="l00189"></a>00189             <span class="keywordflow">for</span> (i = 0; i &lt; outputBufferLength; ++i) 
-<a name="l00190"></a>00190             {
-<a name="l00191"></a>00191                 <span class="keyword">const</span> <span class="keywordtype">int</span> sampleA (data.currentPosition);
-<a name="l00192"></a>00192                 <span class="keyword">const</span> <span class="keywordtype">int</span> sampleB (sampleA + 1);
-<a name="l00193"></a>00193                 <span class="keyword">const</span> <a class="code" href="class_signal_play_channel_internal.html#a8d9b0d6c3822dc277244c7f0a7f5aa1c">RateType</a> <a class="code" href="group___plonk_unary_op_functions.html#ga8574f6b212e32701381d2e070c8707b6" title="Returns the fractional part of the input argument.">frac</a> (data.currentPosition - <a class="code" href="class_signal_play_channel_internal.html#a8d9b0d6c3822dc277244c7f0a7f5aa1c">RateType</a> (sampleA));
+<a name="l00051"></a>00051     <a class="code" href="class_channel_internal_core.html#a09763233582f6f0985461449aa262ae5" title="To store channel state data.">ChannelInternalCore::Data</a> base;
+<a name="l00052"></a>00052     RateType currentPosition;
+<a name="l00053"></a>00053     
+<a name="l00054"></a>00054     <span class="keywordtype">bool</span> done:1;
+<a name="l00055"></a>00055     <span class="keywordtype">bool</span> deleteWhenDone:1;
+<a name="l00056"></a>00056 };
+<a name="l00057"></a>00057 
+<a name="l00058"></a>00058 <span class="comment">//------------------------------------------------------------------------------</span>
+<a name="l00059"></a>00059 
+<a name="l00061"></a>00061 <span class="keyword">template</span>&lt;<span class="keyword">class</span> SampleType&gt;
+<a name="l00062"></a><a class="code" href="class_signal_play_channel_internal.html">00062</a> <span class="keyword">class </span><a class="code" href="class_signal_play_channel_internal.html" title="Signal player generator.">SignalPlayChannelInternal</a> 
+<a name="l00063"></a>00063 :   <span class="keyword">public</span> <a class="code" href="class_channel_internal.html" title="The base class from which most ChannelInternals should be derived.">ChannelInternal</a>&lt;SampleType, PLONK_CHANNELDATA_NAME(SignalPlayChannelInternal,SampleType)&gt;
+<a name="l00064"></a>00064 {
+<a name="l00065"></a>00065 <span class="keyword">public</span>:
+<a name="l00066"></a>00066 
+<a name="l00067"></a><a class="code" href="class_signal_play_channel_internal.html#aeb855dc8b892bd37ac7096e29e143931">00067</a>     <span class="keyword">typedef</span> PLONK_CHANNELDATA_NAME(<a class="code" href="class_signal_play_channel_internal.html" title="Signal player generator.">SignalPlayChannelInternal</a>,SampleType)  <a class="code" href="class_channel_internal_core.html#a09763233582f6f0985461449aa262ae5" title="To store channel state data.">Data</a>;
+<a name="l00068"></a>00068     typedef <a class="code" href="class_channel_base.html" title="A single output signal.">ChannelBase</a>&lt;SampleType&gt;                                 <a class="code" href="class_channel_base.html" title="A single output signal.">ChannelType</a>;
+<a name="l00069"></a>00069     typedef <a class="code" href="class_signal_play_channel_internal.html" title="Signal player generator.">SignalPlayChannelInternal</a>&lt;SampleType&gt;                   <a class="code" href="class_signal_play_channel_internal.html" title="Signal player generator.">SignalPlayInternal</a>;
+<a name="l00070"></a>00070     typedef <a class="code" href="class_channel_internal.html" title="The base class from which most ChannelInternals should be derived.">ChannelInternal</a>&lt;SampleType,Data&gt;                        Internal;
+<a name="l00071"></a>00071     typedef <a class="code" href="class_channel_internal_base.html" title="The templated base class for all internal channel processes.">ChannelInternalBase</a>&lt;SampleType&gt;                         <a class="code" href="class_channel_internal_base.html" title="The templated base class for all internal channel processes.">InternalBase</a>;
+<a name="l00072"></a>00072     typedef <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a>&lt;SampleType&gt;                                    <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitType</a>;
+<a name="l00073"></a>00073     typedef <a class="code" href="class_input_dictionary.html" title="For storing named Dynamic objects.">InputDictionary</a>                                         <a class="code" href="class_input_dictionary.html" title="For storing named Dynamic objects.">Inputs</a>;
+<a name="l00074"></a>00074     typedef <a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">NumericalArray</a>&lt;SampleType&gt;                              <a class="code" href="class_numerical_array.html">Buffer</a>;
+<a name="l00075"></a>00075     typedef SignalBase&lt;SampleType&gt;                                  SignalType;
+<a name="l00076"></a>00076 
+<a name="l00077"></a>00077     typedef typename <a class="code" href="class_type_utility.html" title="A utility for finding out information about certain other classes and types.">TypeUtility</a>&lt;SampleType&gt;::IndexType             RateType;
+<a name="l00078"></a>00078     typedef <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a>&lt;RateType&gt;                                      <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">RateUnitType</a>;
+<a name="l00079"></a>00079     typedef <a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">NumericalArray</a>&lt;RateType&gt;                                <a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">RateBufferType</a>;
+<a name="l00080"></a>00080     typedef InterpLinear&lt;SampleType,RateType&gt;                       InterpType;
+<a name="l00081"></a>00081 
+<a name="l00082"></a>00082     <a class="code" href="class_signal_play_channel_internal.html" title="Signal player generator.">SignalPlayChannelInternal</a> (Inputs const&amp; inputs, 
+<a name="l00083"></a>00083                                Data const&amp; data, 
+<a name="l00084"></a>00084                                <a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a> const&amp; blockSize,
+<a name="l00085"></a>00085                                <a class="code" href="class_sample_rate.html" title="A specialised Variable&lt;double&gt; for handling sample rates.">SampleRate</a> const&amp; sampleRate) throw()
+<a name="l00086"></a>00086     :   Internal (inputs, data, blockSize, sampleRate)
+<a name="l00087"></a>00087     {
+<a name="l00088"></a>00088     }
+<a name="l00089"></a>00089             
+<a name="l00090"></a>00090     <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> getName() <span class="keyword">const</span> throw()
+<a name="l00091"></a>00091     {
+<a name="l00092"></a>00092         <span class="keywordflow">return</span> <span class="stringliteral">&quot;Signal Play&quot;</span>;
+<a name="l00093"></a>00093     }       
+<a name="l00094"></a>00094     
+<a name="l00095"></a>00095     <a class="code" href="class_numerical_array.html">IntArray</a> getInputKeys() <span class="keyword">const</span> throw()
+<a name="l00096"></a>00096     {
+<a name="l00097"></a>00097         <span class="keyword">const</span> <a class="code" href="class_numerical_array.html">IntArray</a> keys (IOKey::Signal, 
+<a name="l00098"></a>00098                              IOKey::Rate);
+<a name="l00099"></a>00099         <span class="keywordflow">return</span> keys;
+<a name="l00100"></a>00100     }    
+<a name="l00101"></a>00101     
+<a name="l00102"></a>00102     InternalBase* getChannel (<span class="keyword">const</span> <span class="keywordtype">int</span> index) <span class="keywordflow">throw</span>()
+<a name="l00103"></a>00103     {
+<a name="l00104"></a>00104         <span class="keyword">const</span> Inputs channelInputs = this-&gt;getInputs().<a class="code" href="class_input_dictionary.html#a2f1736b42993b530ae0000070506f520" title="Returns this dictionary with all the units containing only a single channel.">getChannel</a> (index);
+<a name="l00105"></a>00105         <span class="keywordflow">return</span> <span class="keyword">new</span> SignalPlayInternal (channelInputs, 
+<a name="l00106"></a>00106                                        this-&gt;getState(), 
+<a name="l00107"></a>00107                                        this-&gt;getBlockSize(), 
+<a name="l00108"></a>00108                                        this-&gt;getSampleRate());
+<a name="l00109"></a>00109     }
+<a name="l00110"></a>00110     
+<a name="l00111"></a><a class="code" href="class_signal_play_channel_internal.html#ac82529da94ea92bcbf2f2f3586f7247a">00111</a>     <span class="keywordtype">void</span> <a class="code" href="class_signal_play_channel_internal.html#ac82529da94ea92bcbf2f2f3586f7247a" title="Called to initialise the channel&#39;s initial value.">initChannel</a> (<span class="keyword">const</span> <span class="keywordtype">int</span> channel) <span class="keywordflow">throw</span>()
+<a name="l00112"></a>00112     {        
+<a name="l00113"></a>00113         <span class="keyword">const</span> <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">RateUnitType</a>&amp; rateUnit = ChannelInternalCore::getInputAs&lt;RateUnitType&gt; (IOKey::Rate);
+<a name="l00114"></a>00114         
+<a name="l00115"></a>00115         this-&gt;setBlockSize (<a class="code" href="class_block_size.html#afcc989dcc540a3d62f67d939f16c6457" title="Select a block size based on a unit&#39;s preference and its inputs.">BlockSize::decide</a> (rateUnit.<a class="code" href="class_unit_base.html#a9e6663d2783b9de78f1f06442c395532" title="Get the block size of a specific channel in this unit.">getBlockSize</a> (channel),
+<a name="l00116"></a>00116                                                this-&gt;getBlockSize()));
+<a name="l00117"></a>00117         this-&gt;setSampleRate (SampleRate::decide (rateUnit.<a class="code" href="class_unit_base.html#ae75214256d2240c537462510737bdd61" title="Get the sample rate of a specific channel in this unit.">getSampleRate</a> (channel),
+<a name="l00118"></a>00118                                                  this-&gt;getSampleRate()));
+<a name="l00119"></a>00119         
+<a name="l00120"></a>00120         this-&gt;setOverlap (rateUnit.getOverlap (channel));
+<a name="l00121"></a>00121         
+<a name="l00122"></a>00122         this-&gt;initValue (0);<span class="comment">//this-&gt;getState().currentPosition);</span>
+<a name="l00123"></a>00123     }
+<a name="l00124"></a>00124     
+<a name="l00125"></a>00125     <span class="keyword">inline</span> <span class="keywordtype">bool</span> checkPosition (<a class="code" href="class_process_info.html" title="Holds information about the Unit graph.">ProcessInfo</a>&amp; info, <a class="code" href="class_signal_play_channel_internal.html#aeb855dc8b892bd37ac7096e29e143931" title="To store channel state data.">Data</a>&amp; data, <span class="keyword">const</span> <span class="keywordtype">int</span> numSignalFrames, <span class="keyword">const</span> <span class="keywordtype">bool</span> loop) <span class="keywordflow">throw</span>()
+<a name="l00126"></a>00126     {        
+<a name="l00127"></a>00127         <span class="keywordflow">if</span> (data.currentPosition &gt;= numSignalFrames)
+<a name="l00128"></a>00128         {
+<a name="l00129"></a>00129             <span class="keywordflow">if</span> (loop)
+<a name="l00130"></a>00130             {
+<a name="l00131"></a>00131                 data.currentPosition -= numSignalFrames;
+<a name="l00132"></a>00132                 this-&gt;update (Text::getMessageLooped(), Dynamic::getNull());
+<a name="l00133"></a>00133             }
+<a name="l00134"></a>00134             <span class="keywordflow">else</span>
+<a name="l00135"></a>00135             {
+<a name="l00136"></a>00136                 data.done = <span class="keyword">true</span>;
+<a name="l00137"></a>00137                 this-&gt;update (Text::getMessageDone(), Dynamic::getNull());
+<a name="l00138"></a>00138             }
+<a name="l00139"></a>00139         }
+<a name="l00140"></a>00140         <span class="keywordflow">else</span> <span class="keywordflow">if</span> (data.currentPosition &lt; RateType (0))
+<a name="l00141"></a>00141         {
+<a name="l00142"></a>00142             <span class="keywordflow">if</span> (loop)
+<a name="l00143"></a>00143             {
+<a name="l00144"></a>00144                 data.currentPosition += numSignalFrames;
+<a name="l00145"></a>00145                 this-&gt;update (Text::getMessageLooped(), Dynamic::getNull());
+<a name="l00146"></a>00146             }
+<a name="l00147"></a>00147             <span class="keywordflow">else</span>
+<a name="l00148"></a>00148             {
+<a name="l00149"></a>00149                 data.done = <span class="keyword">true</span>;
+<a name="l00150"></a>00150                 this-&gt;update (Text::getMessageDone(), Dynamic::getNull());
+<a name="l00151"></a>00151             }
+<a name="l00152"></a>00152         }
+<a name="l00153"></a>00153         
+<a name="l00154"></a>00154         <span class="keywordflow">return</span> data.done;
+<a name="l00155"></a>00155     }
+<a name="l00156"></a>00156     
+<a name="l00157"></a><a class="code" href="class_signal_play_channel_internal.html#a31f7ddf13402b8e25051e364c27094e9">00157</a>     <span class="keywordtype">void</span> <a class="code" href="class_signal_play_channel_internal.html#a31f7ddf13402b8e25051e364c27094e9" title="The DSP function.">process</a> (<a class="code" href="class_process_info.html" title="Holds information about the Unit graph.">ProcessInfo</a>&amp; info, <span class="keyword">const</span> <span class="keywordtype">int</span> channel) <span class="keywordflow">throw</span>()
+<a name="l00158"></a>00158     {        
+<a name="l00159"></a>00159         <a class="code" href="class_channel_internal_core.html#a09763233582f6f0985461449aa262ae5" title="To store channel state data.">Data</a>&amp; data = this-&gt;getState();
+<a name="l00160"></a>00160         
+<a name="l00161"></a>00161         <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">RateUnitType</a>&amp; rateUnit = ChannelInternalCore::getInputAs&lt;RateUnitType&gt; (IOKey::Rate);
+<a name="l00162"></a>00162         <span class="keyword">const</span> <a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">RateBufferType</a>&amp; rateBuffer (rateUnit.<a class="code" href="class_unit_base.html#a78e56679819dde06c3beb022cbdb13a4" title="Process a specific channel in this unit.">process</a> (info, channel));
+<a name="l00163"></a>00163         
+<a name="l00164"></a>00164         SampleType* outputSamples = this-&gt;getOutputSamples();
+<a name="l00165"></a>00165         <span class="keyword">const</span> <span class="keywordtype">int</span> outputBufferLength = this-&gt;getOutputBuffer().<a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a>();
+<a name="l00166"></a>00166         
+<a name="l00167"></a>00167         <span class="keyword">const</span> RateType* rateSamples = rateBuffer.getArray();
+<a name="l00168"></a>00168         <span class="keyword">const</span> <span class="keywordtype">int</span> rateBufferLength = rateBuffer.length();
+<a name="l00169"></a>00169         
+<a name="l00170"></a>00170         <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitType</a>&amp; loop (this-&gt;getInputAsUnit (IOKey::Loop));
+<a name="l00171"></a>00171         <span class="keyword">const</span> <a class="code" href="class_numerical_array.html">Buffer</a>&amp; loopBuffer (loop.<a class="code" href="class_unit_base.html#a78e56679819dde06c3beb022cbdb13a4" title="Process a specific channel in this unit.">process</a> (info, channel));
+<a name="l00172"></a>00172         <span class="keyword">const</span> SampleType* <span class="keyword">const</span> loopSamples = loopBuffer.<a class="code" href="class_object_array.html#a49f3b9719cdeefc07c0ac52f1735d93d" title="Returns a pointer to the raw array.">getArray</a>();
+<a name="l00173"></a>00173         <span class="keyword">const</span> <span class="keywordtype">bool</span> loopFlag = loopSamples[0] &gt;= SampleType (0.5);
+<a name="l00174"></a>00174         
+<a name="l00175"></a>00175         <span class="keyword">const</span> SignalType&amp; signal (this-&gt;getInputAsSignal (IOKey::Signal));
+<a name="l00176"></a>00176         <span class="keyword">const</span> SampleType* <span class="keyword">const</span> signalSamples = signal.getSamples (channel);         
+<a name="l00177"></a>00177         <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> signalFrameStride = signal.getFrameStride();
+<a name="l00178"></a>00178         <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> numSignalFrames (signal.getNumFrames());
+<a name="l00179"></a>00179         <span class="keyword">const</span> RateType rateScale (signal.getSampleRate().getValue() * data.base.sampleDuration);
+<a name="l00180"></a>00180         
+<a name="l00181"></a>00181         <span class="keywordtype">int</span> numSamplesRemaining = outputBufferLength;
+<a name="l00182"></a>00182         
+<a name="l00183"></a>00183         <span class="keywordflow">if</span> (rateBufferLength == outputBufferLength)
+<a name="l00184"></a>00184         {
+<a name="l00185"></a>00185             <span class="keywordflow">while</span> (numSamplesRemaining--)
+<a name="l00186"></a>00186             {
+<a name="l00187"></a>00187                 <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> sampleA (data.currentPosition);
+<a name="l00188"></a>00188                 <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> sampleB (sampleA + 1);
+<a name="l00189"></a>00189                 <span class="keyword">const</span> RateType <a class="code" href="group___plonk_unary_op_functions.html#ga8574f6b212e32701381d2e070c8707b6" title="Returns the fractional part of the input argument.">frac</a> (<a class="code" href="group___plonk_unary_op_functions.html#ga8574f6b212e32701381d2e070c8707b6" title="Returns the fractional part of the input argument.">plonk::frac</a> (data.currentPosition));
+<a name="l00190"></a>00190                 
+<a name="l00191"></a>00191                 *outputSamples++ = InterpType::interp (signalSamples[(sampleA % numSignalFrames) * signalFrameStride],
+<a name="l00192"></a>00192                                                        signalSamples[(sampleB % numSignalFrames) * signalFrameStride], 
+<a name="l00193"></a>00193                                                        frac);
 <a name="l00194"></a>00194                 
-<a name="l00195"></a>00195                 outputSamples[i] = <a class="code" href="class_interp_linear.html#a5a631471cf60b634500e4f608ec88c6a">InterpType::interp</a> (signalSamples[sampleA * signalFrameStride], 
-<a name="l00196"></a>00196                                                        signalSamples[sampleB * signalFrameStride], 
-<a name="l00197"></a>00197                                                        frac);
-<a name="l00198"></a>00198                 
-<a name="l00199"></a>00199                 data.currentPosition += rateSamples[int (ratePosition)] * rateScale;
-<a name="l00200"></a>00200                 
-<a name="l00201"></a>00201                 <span class="keywordflow">if</span> (data.currentPosition &gt;= numSignalFrames)
-<a name="l00202"></a>00202                     data.currentPosition -= numSignalFrames;
-<a name="l00203"></a>00203                 <span class="keywordflow">else</span> <span class="keywordflow">if</span> (data.currentPosition &lt; <a class="code" href="class_signal_play_channel_internal.html#a8d9b0d6c3822dc277244c7f0a7f5aa1c">RateType</a> (0))   
-<a name="l00204"></a>00204                     data.currentPosition += numSignalFrames;
-<a name="l00205"></a>00205                 
-<a name="l00206"></a>00206                 ratePosition += rateIncrement;
-<a name="l00207"></a>00207             }                    
-<a name="l00208"></a>00208         }
-<a name="l00209"></a>00209         
-<a name="l00210"></a>00210     }
-<a name="l00211"></a>00211     
-<a name="l00212"></a>00212 <span class="keyword">private</span>:
-<a name="l00213"></a>00213 };
-<a name="l00214"></a>00214 
-<a name="l00215"></a>00215 <span class="comment">//------------------------------------------------------------------------------</span>
-<a name="l00216"></a>00216 
-<a name="l00232"></a>00232 <span class="keyword">template</span>&lt;<span class="keyword">class</span> SampleType&gt;
-<a name="l00233"></a><a class="code" href="class_signal_play_unit.html">00233</a> <span class="keyword">class </span><a class="code" href="class_signal_play_unit.html" title="Signal player generator.">SignalPlayUnit</a>
-<a name="l00234"></a>00234 {
-<a name="l00235"></a>00235 <span class="keyword">public</span>:    
-<a name="l00236"></a><a class="code" href="class_signal_play_unit.html#a79123e1b1ce3b2026ac3ad1f882932e9">00236</a>     <span class="keyword">typedef</span> <a class="code" href="class_signal_play_channel_internal.html" title="Signal player generator.">SignalPlayChannelInternal&lt;SampleType&gt;</a>       <a class="code" href="class_signal_play_unit.html#a79123e1b1ce3b2026ac3ad1f882932e9">SignalPlayInternal</a>;
-<a name="l00237"></a><a class="code" href="class_signal_play_unit.html#a0b38c31e95e401a92725df8f8802ede9">00237</a>     <span class="keyword">typedef</span> <span class="keyword">typename</span> <a class="code" href="struct_channel_data_3_01_signal_play_channel_internal_3_01_sample_type_01_4_01_4.html">SignalPlayInternal::Data</a>           <a class="code" href="class_signal_play_unit.html#a0b38c31e95e401a92725df8f8802ede9">Data</a>;
-<a name="l00238"></a><a class="code" href="class_signal_play_unit.html#ab7a0759ced863e48c770486e47c0038f">00238</a>     <span class="keyword">typedef</span> <a class="code" href="class_channel_base.html" title="A single output signal.">ChannelBase&lt;SampleType&gt;</a>                     <a class="code" href="class_signal_play_unit.html#ab7a0759ced863e48c770486e47c0038f">ChannelType</a>;
-<a name="l00239"></a><a class="code" href="class_signal_play_unit.html#a460cf7f57069d983c6f0ebb067017754">00239</a>     <span class="keyword">typedef</span> <a class="code" href="class_channel_internal.html" title="The base class from which most ChannelInternals should be derived.">ChannelInternal&lt;SampleType,Data&gt;</a>            <a class="code" href="class_signal_play_unit.html#a460cf7f57069d983c6f0ebb067017754">Internal</a>;
-<a name="l00240"></a><a class="code" href="class_signal_play_unit.html#a9025e0896aee24077085bce4500e5b63">00240</a>     <span class="keyword">typedef</span> <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase&lt;SampleType&gt;</a>                        <a class="code" href="class_signal_play_unit.html#a9025e0896aee24077085bce4500e5b63">UnitType</a>;
-<a name="l00241"></a><a class="code" href="class_signal_play_unit.html#a764b092d55322256773c030fb2a9567e">00241</a>     <span class="keyword">typedef</span> <a class="code" href="class_input_dictionary.html" title="For storing named Dynamic objects.">InputDictionary</a>                             <a class="code" href="class_signal_play_unit.html#a764b092d55322256773c030fb2a9567e">Inputs</a>;
-<a name="l00242"></a><a class="code" href="class_signal_play_unit.html#ac8d1757b39333b6a74e931409eebd7ca">00242</a>     <span class="keyword">typedef</span> <a class="code" href="class_signal_base.html">SignalBase&lt;SampleType&gt;</a>                      <a class="code" href="class_signal_play_unit.html#ac8d1757b39333b6a74e931409eebd7ca">SignalType</a>;
-<a name="l00243"></a>00243     
-<a name="l00244"></a><a class="code" href="class_signal_play_unit.html#a80092d2b541518e59b9e11ce595d5e26">00244</a>     <span class="keyword">typedef</span> <span class="keyword">typename</span> <a class="code" href="class_signal_play_channel_internal.html#a8d9b0d6c3822dc277244c7f0a7f5aa1c">SignalPlayInternal::RateType</a>         <a class="code" href="class_signal_play_unit.html#a80092d2b541518e59b9e11ce595d5e26">RateType</a>;
-<a name="l00245"></a><a class="code" href="class_signal_play_unit.html#a7964f5388d1e59af56f8ec1d684f9891">00245</a>     <span class="keyword">typedef</span> <span class="keyword">typename</span> <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">SignalPlayInternal::RateUnitType</a>     <a class="code" href="class_signal_play_unit.html#a7964f5388d1e59af56f8ec1d684f9891">RateUnitType</a>;
-<a name="l00246"></a><a class="code" href="class_signal_play_unit.html#a2fbac57d1c46097be037cb88771f1c22">00246</a>     <span class="keyword">typedef</span> <span class="keyword">typename</span> <a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">SignalPlayInternal::RateBufferType</a>   <a class="code" href="class_signal_play_unit.html#a2fbac57d1c46097be037cb88771f1c22">RateBufferType</a>;
-<a name="l00247"></a>00247     
-<a name="l00248"></a><a class="code" href="class_signal_play_unit.html#a2d12c192ced4f8ce323a9bb54869db18">00248</a>     <span class="keyword">static</span> <span class="keyword">inline</span> <a class="code" href="class_object_array.html" title="This is the base class for arrays.">UnitInfos</a> <a class="code" href="class_signal_play_unit.html#a2d12c192ced4f8ce323a9bb54869db18">getInfo</a>() throw()
-<a name="l00249"></a>00249     {
-<a name="l00250"></a>00250         <span class="keyword">const</span> <span class="keywordtype">double</span> blockSize = (double)<a class="code" href="class_block_size.html#ac022f97ed4f42a64936fdc0f3479c1cb" title="Gets the default block size.">BlockSize::getDefault</a>().<a class="code" href="class_variable.html#a3f05fc2768b1de80706b39ee14f3c360" title="Returns the current value.">getValue</a>();
-<a name="l00251"></a>00251         <span class="keyword">const</span> <span class="keywordtype">double</span> sampleRate = <a class="code" href="class_sample_rate.html#a892e4d1aae2bee986ee38fd371011f04">SampleRate::getDefault</a>().<a class="code" href="class_variable.html#a3f05fc2768b1de80706b39ee14f3c360" title="Returns the current value.">getValue</a>();
-<a name="l00252"></a>00252         
-<a name="l00253"></a>00253         <span class="keywordflow">return</span> <a class="code" href="class_unit_info.html">UnitInfo</a> (<span class="stringliteral">&quot;SignalPlay&quot;</span>, <span class="stringliteral">&quot;A signal player generator.&quot;</span>,
-<a name="l00254"></a>00254                          
-<a name="l00255"></a>00255                          <span class="comment">// output</span>
-<a name="l00256"></a>00256                          <a class="code" href="class_channel_count.html#aaf2e88ceee410f2250d45b63234ef4cea1beea3f5924a755479c13087b9d4547c">ChannelCount::VariableChannelCount</a>, 
-<a name="l00257"></a>00257                          <a class="code" href="class_i_o_key.html#a31bc497f7606db39aa57aa0366b87e37aa60b1c99f5ef2914e94ca6115fba0983" title="A generic audio (commonly used where there is only one input or output).">IOKey::Generic</a>,    <a class="code" href="class_measure.html#af74c37cd245b1262c0602548b4027e86a07021d5ac257538d56b6eb30c5c2000e" title="None i.e., not applicable.">Measure::None</a>,      0.0,        <a class="code" href="class_i_o_limit.html#a221d406cacbba8286e3fde4220ffe263a59a0af582036349f1b8d209f197154ee">IOLimit::None</a>,
-<a name="l00258"></a>00258                          <a class="code" href="class_i_o_key.html#a31bc497f7606db39aa57aa0366b87e37ab4c7f3ea28d6e5e763b97934501d650c" title="Used to terminate a list of IOKeys.">IOKey::End</a>,
-<a name="l00259"></a>00259                          
-<a name="l00260"></a>00260                          <span class="comment">// inputs</span>
-<a name="l00261"></a>00261                          <a class="code" href="class_i_o_key.html#a31bc497f7606db39aa57aa0366b87e37a5698ab43cec4e3a53e3ba0fff75fa8bb" title="A stored signal buffer.">IOKey::Signal</a>,     <a class="code" href="class_measure.html#af74c37cd245b1262c0602548b4027e86a07021d5ac257538d56b6eb30c5c2000e" title="None i.e., not applicable.">Measure::None</a>,
-<a name="l00262"></a>00262                          <a class="code" href="class_i_o_key.html#a31bc497f7606db39aa57aa0366b87e37a48b406f30d3119576aad3fb241dbe799" title="Relative speed where 1 = normal.">IOKey::Rate</a>,       <a class="code" href="class_measure.html#af74c37cd245b1262c0602548b4027e86a6a51c229b06b5d03ce894c7cc9441595" title="A multiplication factor.">Measure::Factor</a>,    1.0,        <a class="code" href="class_i_o_limit.html#a221d406cacbba8286e3fde4220ffe263a59a0af582036349f1b8d209f197154ee">IOLimit::None</a>,
-<a name="l00263"></a>00263                          <a class="code" href="class_i_o_key.html#a31bc497f7606db39aa57aa0366b87e37a9b5cc51cb000b4b5d4348326b240639b" title="A multiplier.">IOKey::Multiply</a>,   <a class="code" href="class_measure.html#af74c37cd245b1262c0602548b4027e86a6a51c229b06b5d03ce894c7cc9441595" title="A multiplication factor.">Measure::Factor</a>,    1.0,        <a class="code" href="class_i_o_limit.html#a221d406cacbba8286e3fde4220ffe263a59a0af582036349f1b8d209f197154ee">IOLimit::None</a>,
-<a name="l00264"></a>00264                          <a class="code" href="class_i_o_key.html#a31bc497f7606db39aa57aa0366b87e37a1e4e9f4f8bfee0060113b7068bf5c3c1" title="An offset.">IOKey::Add</a>,        <a class="code" href="class_measure.html#af74c37cd245b1262c0602548b4027e86a07021d5ac257538d56b6eb30c5c2000e" title="None i.e., not applicable.">Measure::None</a>,      0.0,        <a class="code" href="class_i_o_limit.html#a221d406cacbba8286e3fde4220ffe263a59a0af582036349f1b8d209f197154ee">IOLimit::None</a>,
-<a name="l00265"></a>00265                          <a class="code" href="class_i_o_key.html#a31bc497f7606db39aa57aa0366b87e37ab9487086113a53cfe13ff5785e8dad24" title="Audio processing block size.">IOKey::BlockSize</a>,  <a class="code" href="class_measure.html#af74c37cd245b1262c0602548b4027e86ad61a89d635b70cb1d07df5a4f73cbfaa" title="A number of audio samples.">Measure::Samples</a>,   blockSize,  <a class="code" href="class_i_o_limit.html#a221d406cacbba8286e3fde4220ffe263a54bbbe9142ad0dafcbeba7afd0311fc1">IOLimit::Minimum</a>,   <a class="code" href="class_measure.html#af74c37cd245b1262c0602548b4027e86ad61a89d635b70cb1d07df5a4f73cbfaa" title="A number of audio samples.">Measure::Samples</a>,           1.0,
-<a name="l00266"></a>00266                          <a class="code" href="class_i_o_key.html#a31bc497f7606db39aa57aa0366b87e37a7a965484c296e56d16eee78fd2397ca7" title="Audio processing sample rate.">IOKey::SampleRate</a>, <a class="code" href="class_measure.html#af74c37cd245b1262c0602548b4027e86a4194b7eabb65cf6a0de419798724ea23" title="Frequency in Hertz.">Measure::Hertz</a>,     sampleRate, <a class="code" href="class_i_o_limit.html#a221d406cacbba8286e3fde4220ffe263a54bbbe9142ad0dafcbeba7afd0311fc1">IOLimit::Minimum</a>,   <a class="code" href="class_measure.html#af74c37cd245b1262c0602548b4027e86a4194b7eabb65cf6a0de419798724ea23" title="Frequency in Hertz.">Measure::Hertz</a>,             0.0,
-<a name="l00267"></a>00267                          <a class="code" href="class_i_o_key.html#a31bc497f7606db39aa57aa0366b87e37ab4c7f3ea28d6e5e763b97934501d650c" title="Used to terminate a list of IOKeys.">IOKey::End</a>);
-<a name="l00268"></a>00268     }
-<a name="l00269"></a>00269     
-<a name="l00271"></a><a class="code" href="class_signal_play_unit.html#aa3dff9d3c4f781c0c58c45dae1a0ee64">00271</a>     <span class="keyword">static</span> <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitType</a> <a class="code" href="class_signal_play_unit.html#aa3dff9d3c4f781c0c58c45dae1a0ee64" title="Create an audio rate signal player.">ar</a> (<a class="code" href="class_signal_base.html">SignalType</a> <span class="keyword">const</span>&amp; signal, 
-<a name="l00272"></a>00272                         <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">RateUnitType</a> <span class="keyword">const</span>&amp; rate = <a class="code" href="class_signal_play_unit.html#a80092d2b541518e59b9e11ce595d5e26">RateType</a> (1), 
-<a name="l00273"></a>00273                         <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitType</a> <span class="keyword">const</span>&amp; mul = SampleType (1),
-<a name="l00274"></a>00274                         <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitType</a> <span class="keyword">const</span>&amp; add = SampleType (0),
-<a name="l00275"></a>00275                         <a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a> <span class="keyword">const</span>&amp; preferredBlockSize = <a class="code" href="class_block_size.html#ac022f97ed4f42a64936fdc0f3479c1cb" title="Gets the default block size.">BlockSize::getDefault</a>(),
-<a name="l00276"></a>00276                         <a class="code" href="class_sample_rate.html" title="A specialised Variable&lt;double&gt; for handling sample rates.">SampleRate</a> <span class="keyword">const</span>&amp; preferredSampleRate = <a class="code" href="class_sample_rate.html#a892e4d1aae2bee986ee38fd371011f04">SampleRate::getDefault</a>()) throw()
-<a name="l00277"></a>00277     {             
-<a name="l00278"></a>00278         <a class="code" href="class_input_dictionary.html" title="For storing named Dynamic objects.">Inputs</a> inputs;
-<a name="l00279"></a>00279         inputs.<a class="code" href="class_dictionary.html#a6ee81b793caf6c652e9d6545ce848a13" title="Put an item into the dicionary associated with the specified key.">put</a> (<a class="code" href="class_i_o_key.html#a31bc497f7606db39aa57aa0366b87e37a5698ab43cec4e3a53e3ba0fff75fa8bb" title="A stored signal buffer.">IOKey::Signal</a>, signal);
-<a name="l00280"></a>00280         inputs.<a class="code" href="class_dictionary.html#a6ee81b793caf6c652e9d6545ce848a13" title="Put an item into the dicionary associated with the specified key.">put</a> (<a class="code" href="class_i_o_key.html#a31bc497f7606db39aa57aa0366b87e37a48b406f30d3119576aad3fb241dbe799" title="Relative speed where 1 = normal.">IOKey::Rate</a>, rate);
-<a name="l00281"></a>00281         inputs.<a class="code" href="class_dictionary.html#a6ee81b793caf6c652e9d6545ce848a13" title="Put an item into the dicionary associated with the specified key.">put</a> (<a class="code" href="class_i_o_key.html#a31bc497f7606db39aa57aa0366b87e37a9b5cc51cb000b4b5d4348326b240639b" title="A multiplier.">IOKey::Multiply</a>, mul);
-<a name="l00282"></a>00282         inputs.<a class="code" href="class_dictionary.html#a6ee81b793caf6c652e9d6545ce848a13" title="Put an item into the dicionary associated with the specified key.">put</a> (<a class="code" href="class_i_o_key.html#a31bc497f7606db39aa57aa0366b87e37a1e4e9f4f8bfee0060113b7068bf5c3c1" title="An offset.">IOKey::Add</a>, add);
-<a name="l00283"></a>00283                         
-<a name="l00284"></a>00284         <a class="code" href="struct_channel_data_3_01_signal_play_channel_internal_3_01_sample_type_01_4_01_4.html">Data</a> data = { { -1.0, -1.0 }, <a class="code" href="class_signal_play_unit.html#a80092d2b541518e59b9e11ce595d5e26">RateType</a> (0) };
-<a name="l00285"></a>00285         
-<a name="l00286"></a>00286         <span class="keywordflow">return</span> UnitType::template createFromInputs&lt;SignalPlayInternal&gt; (inputs, 
-<a name="l00287"></a>00287                                                                         data, 
-<a name="l00288"></a>00288                                                                         preferredBlockSize, 
-<a name="l00289"></a>00289                                                                         preferredSampleRate);
-<a name="l00290"></a>00290     }
-<a name="l00291"></a>00291     
-<a name="l00293"></a><a class="code" href="class_signal_play_unit.html#a69acf0edb40c6ac07522627cb2f36e45">00293</a>     <span class="keyword">static</span> <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitType</a> <a class="code" href="class_signal_play_unit.html#a69acf0edb40c6ac07522627cb2f36e45" title="Create a control rate signal player.">kr</a> (<a class="code" href="class_signal_base.html">SignalType</a> <span class="keyword">const</span>&amp; signal,
-<a name="l00294"></a>00294                         <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">RateUnitType</a> <span class="keyword">const</span>&amp; rate, 
-<a name="l00295"></a>00295                         <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitType</a> <span class="keyword">const</span>&amp; mul = SampleType (1),
-<a name="l00296"></a>00296                         <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitType</a> <span class="keyword">const</span>&amp; add = SampleType (0)) throw()
-<a name="l00297"></a>00297     {
-<a name="l00298"></a>00298         <span class="keywordflow">return</span> <a class="code" href="class_signal_play_unit.html#aa3dff9d3c4f781c0c58c45dae1a0ee64" title="Create an audio rate signal player.">ar</a> (signal, rate, mul, add, 
-<a name="l00299"></a>00299                    <a class="code" href="class_block_size.html#a0b63924e21af360f0e44fdaccb56c14d" title="Gets the default control rate block size.">BlockSize::getControlRateBlockSize</a>(), 
-<a name="l00300"></a>00300                    <a class="code" href="class_sample_rate.html#a4622d6e02aafefc7426d760160df7bbb">SampleRate::getControlRate</a>());
-<a name="l00301"></a>00301     }        
-<a name="l00302"></a>00302 };
-<a name="l00303"></a>00303 
-<a name="l00304"></a><a class="code" href="plonk___signal_play_8h.html#a88fd258615e6410a387236e98f127559">00304</a> <span class="keyword">typedef</span> <a class="code" href="class_signal_play_unit.html" title="Signal player generator.">SignalPlayUnit&lt;PLONK_TYPE_DEFAULT&gt;</a> <a class="code" href="plonk___signal_play_8h.html#a88fd258615e6410a387236e98f127559">SignalPlay</a>;
-<a name="l00305"></a>00305 
-<a name="l00306"></a>00306 
-<a name="l00307"></a>00307 <span class="preprocessor">#endif // PLONK_SIGNALPLAY_H</span>
-<a name="l00308"></a>00308 <span class="preprocessor"></span>
+<a name="l00195"></a>00195                 data.currentPosition += *rateSamples++ * rateScale;
+<a name="l00196"></a>00196                 
+<a name="l00197"></a>00197                 <span class="keywordflow">if</span> (checkPosition (info, data, numSignalFrames, loopFlag))
+<a name="l00198"></a>00198                     <span class="keywordflow">break</span>;
+<a name="l00199"></a>00199             }
+<a name="l00200"></a>00200         }
+<a name="l00201"></a>00201         <span class="keywordflow">else</span> <span class="keywordflow">if</span> (rateBufferLength == 1)
+<a name="l00202"></a>00202         {
+<a name="l00203"></a>00203             <span class="keyword">const</span> RateType increment = rateSamples[0] * rateScale;
+<a name="l00204"></a>00204             
+<a name="l00205"></a>00205             <span class="keywordflow">while</span> (numSamplesRemaining--)
+<a name="l00206"></a>00206             {
+<a name="l00207"></a>00207                 <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> sampleA (data.currentPosition);
+<a name="l00208"></a>00208                 <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> sampleB (sampleA + 1);
+<a name="l00209"></a>00209                 <span class="keyword">const</span> RateType <a class="code" href="group___plonk_unary_op_functions.html#ga8574f6b212e32701381d2e070c8707b6" title="Returns the fractional part of the input argument.">frac</a> (<a class="code" href="group___plonk_unary_op_functions.html#ga8574f6b212e32701381d2e070c8707b6" title="Returns the fractional part of the input argument.">plonk::frac</a> (data.currentPosition));
+<a name="l00210"></a>00210                 
+<a name="l00211"></a>00211                 *outputSamples++ = InterpType::interp (signalSamples[(sampleA % numSignalFrames) * signalFrameStride],
+<a name="l00212"></a>00212                                                        signalSamples[(sampleB % numSignalFrames) * signalFrameStride], 
+<a name="l00213"></a>00213                                                        frac);
+<a name="l00214"></a>00214                 data.currentPosition += increment;
+<a name="l00215"></a>00215                 
+<a name="l00216"></a>00216                 <span class="keywordflow">if</span> (checkPosition (info, data, numSignalFrames, loopFlag))
+<a name="l00217"></a>00217                     <span class="keywordflow">break</span>;
+<a name="l00218"></a>00218             }
+<a name="l00219"></a>00219         }
+<a name="l00220"></a>00220         <span class="keywordflow">else</span>
+<a name="l00221"></a>00221         {
+<a name="l00222"></a>00222             <span class="keywordtype">double</span> ratePosition = 0.0;
+<a name="l00223"></a>00223             <span class="keyword">const</span> <span class="keywordtype">double</span> rateIncrement = double (rateBufferLength) / double (outputBufferLength);
+<a name="l00224"></a>00224             
+<a name="l00225"></a>00225             <span class="keywordflow">while</span> (numSamplesRemaining--)
+<a name="l00226"></a>00226             {
+<a name="l00227"></a>00227                 <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> sampleA (data.currentPosition);
+<a name="l00228"></a>00228                 <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> sampleB (sampleA + 1);
+<a name="l00229"></a>00229                 <span class="keyword">const</span> RateType <a class="code" href="group___plonk_unary_op_functions.html#ga8574f6b212e32701381d2e070c8707b6" title="Returns the fractional part of the input argument.">frac</a> (<a class="code" href="group___plonk_unary_op_functions.html#ga8574f6b212e32701381d2e070c8707b6" title="Returns the fractional part of the input argument.">plonk::frac</a> (data.currentPosition));
+<a name="l00230"></a>00230                 
+<a name="l00231"></a>00231                 *outputSamples++ = InterpType::interp (signalSamples[(sampleA % numSignalFrames) * signalFrameStride],
+<a name="l00232"></a>00232                                                        signalSamples[(sampleB % numSignalFrames) * signalFrameStride], 
+<a name="l00233"></a>00233                                                        frac);
+<a name="l00234"></a>00234                 
+<a name="l00235"></a>00235                 data.currentPosition += rateSamples[int (ratePosition)] * rateScale;
+<a name="l00236"></a>00236                 
+<a name="l00237"></a>00237                 <span class="keywordflow">if</span> (checkPosition (info, data, numSignalFrames, loopFlag))
+<a name="l00238"></a>00238                     <span class="keywordflow">break</span>;
+<a name="l00239"></a>00239                 
+<a name="l00240"></a>00240                 ratePosition += rateIncrement;
+<a name="l00241"></a>00241             }                    
+<a name="l00242"></a>00242         }
+<a name="l00243"></a>00243         
+<a name="l00244"></a>00244         <span class="keywordflow">if</span> (numSamplesRemaining &gt; 0)
+<a name="l00245"></a>00245         {
+<a name="l00246"></a>00246             <span class="keywordflow">while</span> (numSamplesRemaining--)
+<a name="l00247"></a>00247                 *outputSamples++ = SampleType (0);
+<a name="l00248"></a>00248         }
+<a name="l00249"></a>00249         
+<a name="l00250"></a>00250         <span class="keywordflow">if</span> (data.done &amp;&amp; data.deleteWhenDone)
+<a name="l00251"></a>00251             info.setShouldDelete();
+<a name="l00252"></a>00252     }
+<a name="l00253"></a>00253     
+<a name="l00254"></a>00254 <span class="keyword">private</span>:
+<a name="l00255"></a>00255 };
+<a name="l00256"></a>00256 
+<a name="l00257"></a>00257 <span class="comment">//------------------------------------------------------------------------------</span>
+<a name="l00258"></a>00258 
+<a name="l00278"></a>00278 <span class="keyword">template</span>&lt;<span class="keyword">class</span> SampleType&gt;
+<a name="l00279"></a><a class="code" href="class_signal_play_unit.html">00279</a> <span class="keyword">class </span><a class="code" href="class_signal_play_unit.html" title="Signal player generator.">SignalPlayUnit</a>
+<a name="l00280"></a>00280 {
+<a name="l00281"></a>00281 <span class="keyword">public</span>:    
+<a name="l00282"></a>00282     <span class="keyword">typedef</span> <a class="code" href="class_signal_play_channel_internal.html" title="Signal player generator.">SignalPlayChannelInternal&lt;SampleType&gt;</a>       <a class="code" href="class_signal_play_channel_internal.html" title="Signal player generator.">SignalPlayInternal</a>;
+<a name="l00283"></a>00283     <span class="keyword">typedef</span> <span class="keyword">typename</span> <a class="code" href="class_signal_play_channel_internal.html#aeb855dc8b892bd37ac7096e29e143931" title="To store channel state data.">SignalPlayInternal::Data</a>           Data;
+<a name="l00284"></a>00284     <span class="keyword">typedef</span> <a class="code" href="class_channel_base.html" title="A single output signal.">ChannelBase&lt;SampleType&gt;</a>                     <a class="code" href="class_channel_base.html" title="A single output signal.">ChannelType</a>;
+<a name="l00285"></a>00285     <span class="keyword">typedef</span> <a class="code" href="class_channel_internal.html" title="The base class from which most ChannelInternals should be derived.">ChannelInternal&lt;SampleType,Data&gt;</a>            <a class="code" href="class_channel_internal.html" title="The base class from which most ChannelInternals should be derived.">Internal</a>;
+<a name="l00286"></a>00286     <span class="keyword">typedef</span> <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase&lt;SampleType&gt;</a>                        <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitType</a>;
+<a name="l00287"></a>00287     <span class="keyword">typedef</span> <a class="code" href="class_input_dictionary.html" title="For storing named Dynamic objects.">InputDictionary</a>                             <a class="code" href="class_input_dictionary.html" title="For storing named Dynamic objects.">Inputs</a>;
+<a name="l00288"></a>00288     <span class="keyword">typedef</span> SignalBase&lt;SampleType&gt;                      SignalType;
+<a name="l00289"></a>00289     
+<a name="l00290"></a>00290     <span class="keyword">typedef</span> <span class="keyword">typename</span> SignalPlayInternal::RateType         RateType;
+<a name="l00291"></a>00291     <span class="keyword">typedef</span> <span class="keyword">typename</span> <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">SignalPlayInternal::RateUnitType</a>     <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">RateUnitType</a>;
+<a name="l00292"></a>00292     <span class="keyword">typedef</span> <span class="keyword">typename</span> <a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">SignalPlayInternal::RateBufferType</a>   <a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">RateBufferType</a>;
+<a name="l00293"></a>00293     
+<a name="l00294"></a>00294     <span class="keyword">static</span> <span class="keyword">inline</span> <a class="code" href="class_object_array.html" title="This is the base class for arrays.">UnitInfos</a> getInfo() <span class="keywordflow">throw</span>()
+<a name="l00295"></a>00295     {
+<a name="l00296"></a>00296         <span class="keyword">const</span> <span class="keywordtype">double</span> blockSize = (double)<a class="code" href="class_block_size.html#ac022f97ed4f42a64936fdc0f3479c1cb" title="Gets the default block size.">BlockSize::getDefault</a>().<a class="code" href="class_variable.html#a3f05fc2768b1de80706b39ee14f3c360" title="Returns the current value.">getValue</a>();
+<a name="l00297"></a>00297         <span class="keyword">const</span> <span class="keywordtype">double</span> sampleRate = SampleRate::getDefault().<a class="code" href="class_variable.html#a3f05fc2768b1de80706b39ee14f3c360" title="Returns the current value.">getValue</a>();
+<a name="l00298"></a>00298         
+<a name="l00299"></a>00299         <span class="keywordflow">return</span> UnitInfo (<span class="stringliteral">&quot;SignalPlay&quot;</span>, <span class="stringliteral">&quot;A signal player generator.&quot;</span>,
+<a name="l00300"></a>00300                          
+<a name="l00301"></a>00301                          <span class="comment">// output</span>
+<a name="l00302"></a>00302                          ChannelCount::VariableChannelCount, 
+<a name="l00303"></a>00303                          IOKey::Generic,        Measure::None,      0.0,            IOLimit::None,
+<a name="l00304"></a>00304                          IOKey::End,
+<a name="l00305"></a>00305                          
+<a name="l00306"></a>00306                          <span class="comment">// inputs</span>
+<a name="l00307"></a>00307                          IOKey::Signal,         Measure::None,
+<a name="l00308"></a>00308                          IOKey::Rate,           Measure::Factor,    1.0,            IOLimit::None,
+<a name="l00309"></a>00309                          IOKey::Loop,           Measure::Bool,      1.0,            IOLimit::Clipped,   Measure::NormalisedUnipolar,    0.0, 1.0,
+<a name="l00310"></a>00310                          IOKey::Multiply,       Measure::Factor,    1.0,            IOLimit::None,
+<a name="l00311"></a>00311                          IOKey::Add,            Measure::None,      0.0,            IOLimit::None,
+<a name="l00312"></a>00312                          IOKey::AutoDeleteFlag, Measure::Bool,      IOInfo::True,   IOLimit::None,
+<a name="l00313"></a>00313                          IOKey::BlockSize,      Measure::Samples,   blockSize,      IOLimit::Minimum,   Measure::Samples,           1.0,
+<a name="l00314"></a>00314                          IOKey::SampleRate,     Measure::Hertz,     sampleRate,     IOLimit::Minimum,   Measure::Hertz,             0.0,
+<a name="l00315"></a>00315                          IOKey::End);
+<a name="l00316"></a>00316     }
+<a name="l00317"></a>00317     
+<a name="l00319"></a><a class="code" href="class_signal_play_unit.html#a57e8b75bed5b361f7038ab2369903aa2">00319</a>     <span class="keyword">static</span> <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitType</a> <a class="code" href="class_signal_play_unit.html#a57e8b75bed5b361f7038ab2369903aa2" title="Create an audio rate signal player.">ar</a> (SignalType <span class="keyword">const</span>&amp; signal, 
+<a name="l00320"></a>00320                         <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">RateUnitType</a> <span class="keyword">const</span>&amp; rate = RateType (1), 
+<a name="l00321"></a>00321                         <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitType</a> <span class="keyword">const</span>&amp; loop = SampleType (1),
+<a name="l00322"></a>00322                         <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitType</a> <span class="keyword">const</span>&amp; mul = SampleType (1),
+<a name="l00323"></a>00323                         <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitType</a> <span class="keyword">const</span>&amp; add = SampleType (0),
+<a name="l00324"></a>00324                         <span class="keyword">const</span> <span class="keywordtype">bool</span> deleteWhenDone = <span class="keyword">true</span>,
+<a name="l00325"></a>00325                         <a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a> <span class="keyword">const</span>&amp; preferredBlockSize = <a class="code" href="class_block_size.html#ac022f97ed4f42a64936fdc0f3479c1cb" title="Gets the default block size.">BlockSize::getDefault</a>(),
+<a name="l00326"></a>00326                         <a class="code" href="class_sample_rate.html" title="A specialised Variable&lt;double&gt; for handling sample rates.">SampleRate</a> <span class="keyword">const</span>&amp; preferredSampleRate = SampleRate::getDefault()) throw()
+<a name="l00327"></a>00327     {        
+<a name="l00328"></a>00328         <a class="code" href="class_input_dictionary.html" title="For storing named Dynamic objects.">Inputs</a> inputs;
+<a name="l00329"></a>00329         inputs.<a class="code" href="class_dictionary.html#a6ee81b793caf6c652e9d6545ce848a13" title="Put an item into the dicionary associated with the specified key.">put</a> (IOKey::Signal, signal);
+<a name="l00330"></a>00330         inputs.<a class="code" href="class_dictionary.html#a6ee81b793caf6c652e9d6545ce848a13" title="Put an item into the dicionary associated with the specified key.">put</a> (IOKey::Rate, rate);
+<a name="l00331"></a>00331         inputs.<a class="code" href="class_dictionary.html#a6ee81b793caf6c652e9d6545ce848a13" title="Put an item into the dicionary associated with the specified key.">put</a> (IOKey::Loop, loop);
+<a name="l00332"></a>00332         inputs.<a class="code" href="class_dictionary.html#a6ee81b793caf6c652e9d6545ce848a13" title="Put an item into the dicionary associated with the specified key.">put</a> (IOKey::Multiply, mul);
+<a name="l00333"></a>00333         inputs.<a class="code" href="class_dictionary.html#a6ee81b793caf6c652e9d6545ce848a13" title="Put an item into the dicionary associated with the specified key.">put</a> (IOKey::Add, add);
+<a name="l00334"></a>00334                         
+<a name="l00335"></a>00335         Data data = { { -1.0, -1.0 }, RateType (0), <span class="keyword">false</span>, deleteWhenDone };
+<a name="l00336"></a>00336         
+<a name="l00337"></a>00337         <span class="keywordflow">return</span> UnitType::template createFromInputs&lt;SignalPlayInternal&gt; (inputs, 
+<a name="l00338"></a>00338                                                                         data, 
+<a name="l00339"></a>00339                                                                         preferredBlockSize, 
+<a name="l00340"></a>00340                                                                         preferredSampleRate);
+<a name="l00341"></a>00341     }
+<a name="l00342"></a>00342     
+<a name="l00344"></a><a class="code" href="class_signal_play_unit.html#a44b523a0bde794fa71f9a3c4de48251b">00344</a>     <span class="keyword">static</span> <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitType</a> <a class="code" href="class_signal_play_unit.html#a44b523a0bde794fa71f9a3c4de48251b" title="Create a control rate signal player.">kr</a> (SignalType <span class="keyword">const</span>&amp; signal,
+<a name="l00345"></a>00345                         <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">RateUnitType</a> <span class="keyword">const</span>&amp; rate, 
+<a name="l00346"></a>00346                         <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitType</a> <span class="keyword">const</span>&amp; loop = SampleType (1),
+<a name="l00347"></a>00347                         <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitType</a> <span class="keyword">const</span>&amp; mul = SampleType (1),
+<a name="l00348"></a>00348                         <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitType</a> <span class="keyword">const</span>&amp; add = SampleType (0),
+<a name="l00349"></a>00349                         <span class="keyword">const</span> <span class="keywordtype">bool</span> deleteWhenDone = <span class="keyword">true</span>) throw()
+<a name="l00350"></a>00350     {
+<a name="l00351"></a>00351         <span class="keywordflow">return</span> <a class="code" href="class_signal_play_unit.html#a57e8b75bed5b361f7038ab2369903aa2" title="Create an audio rate signal player.">ar</a> (signal, rate, loop, mul, add, deleteWhenDone,
+<a name="l00352"></a>00352                    <a class="code" href="class_block_size.html#a0b63924e21af360f0e44fdaccb56c14d" title="Gets the default control rate block size.">BlockSize::getControlRateBlockSize</a>(), 
+<a name="l00353"></a>00353                    SampleRate::getControlRate());
+<a name="l00354"></a>00354     }        
+<a name="l00355"></a>00355 };
+<a name="l00356"></a>00356 
+<a name="l00357"></a>00357 <span class="keyword">typedef</span> <a class="code" href="class_signal_play_unit.html" title="Signal player generator.">SignalPlayUnit&lt;PLONK_TYPE_DEFAULT&gt;</a> <a class="code" href="class_signal_play_unit.html" title="Signal player generator.">SignalPlay</a>;
+<a name="l00358"></a>00358 
+<a name="l00359"></a>00359 
+<a name="l00360"></a>00360 <span class="preprocessor">#endif // PLONK_SIGNALPLAY_H</span>
+<a name="l00361"></a>00361 <span class="preprocessor"></span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -359,7 +408,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Properties</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -368,7 +417,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 5 2012 17:04:55 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 8 2014 12:26:50 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

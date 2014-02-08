@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<title>pl-nk: LPFUnit&lt; SampleType &gt; Class Template Reference</title>
+<title>pl-nk: LPFUnit&lt; SampleType, InterpTypeCode &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/search.js"></script>
@@ -20,7 +20,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="pl-nk-logo-small.png"/></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">pl-nk</div>
+   <div id="projectname">pl-nk&#160;<span id="projectnumber">v0.4.5</span></div>
+   <div id="projectbrief">Plonk|Plink|Plank are a set of cross-platform C/C++ frameworks for audio software development</div>
   </td>
  </tr>
  </tbody>
@@ -29,8 +30,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -62,10 +63,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="header">
   <div class="summary">
-<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a>  </div>
   <div class="headertitle">
-<div class="title">LPFUnit&lt; SampleType &gt; Class Template Reference<div class="ingroups"><a class="el" href="group___filter_units.html">Filter unit classes.</a></div></div>  </div>
+<div class="title">LPFUnit&lt; SampleType, InterpTypeCode &gt; Class Template Reference<div class="ingroups"><a class="el" href="group___filter_units.html">Filter unit classes.</a></div></div>  </div>
 </div>
 <div class="contents">
 <!-- doxytag: class="LPFUnit" -->
@@ -74,39 +74,25 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <p><a href="class_l_p_f_unit-members.html">List of all members.</a></p>
 <table class="memberdecls">
-<tr><td colspan="2"><h2><a name="pub-types"></a>
-Public Types</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_l_p_f_unit.html#a54ceaa867bfda23e5d76bad10aa719f4">UnitType</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_filter_shape_l_p_f_base.html">FilterShapeLPFBase</a><br class="typebreak"/>
-&lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_l_p_f_unit.html#a84a442518446d40218daaa8f1eb38268">FilterShape</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_filter_coeffs1_param_unit.html">FilterCoeffs1ParamUnit</a><br class="typebreak"/>
-&lt; <a class="el" href="class_filter_shape_l_p_f_base.html">FilterShape</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_l_p_f_unit.html#a3da55da89982540ac3cce904724096d6">FilterCoeffsType</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_filter_coeffs1_param_unit.html#ad87cd8f7a11f0100fd3e33a420336dd5">FilterCoeffsType::FormType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_l_p_f_unit.html#a971a67b2842e54c643a435920313ea2b">FormType</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_filter_unit.html">FilterUnit</a>&lt; <a class="el" href="class_l_p_f_unit.html#a971a67b2842e54c643a435920313ea2b">FormType</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_l_p_f_unit.html#a52e39b292a1bd4f4abcab79c80db27e9">FilterType</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_resample_unit.html">ResampleUnit</a>&lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_l_p_f_unit.html#a6bc2112a473fc5715f8e961d9438b87a">ResampleType</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef FormType::Data&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_l_p_f_unit.html#a473ec931e4f10d3458f0934d23557e7d">FormData</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="struct_filter_shape_data.html">FilterShape::Data</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_l_p_f_unit.html#a7c16fac84aadbe092f012bc4764ff6f4">FilterShapeData</a></td></tr>
 <tr><td colspan="2"><h2><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_object_array.html">UnitInfos</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_l_p_f_unit.html#ae8042412117c7d6f571efa64a45e856c">getInfo</a> ()  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_unit_base.html">UnitType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_l_p_f_unit.html#a394fb174ebbbd2f6b9f6d0993794a2e1">ar</a> (<a class="el" href="class_unit_base.html">UnitType</a> const &amp;input, <a class="el" href="class_unit_base.html">UnitType</a> const &amp;frequency=SampleType(1200), <a class="el" href="class_unit_base.html">UnitType</a> const &amp;mul=SampleType(1), <a class="el" href="class_unit_base.html">UnitType</a> const &amp;add=SampleType(0), <a class="el" href="class_block_size.html">BlockSize</a> const &amp;preferredBlockSize=BlockSize::noPreference(), <a class="el" href="class_sample_rate.html">SampleRate</a> const &amp;preferredSampleRate=SampleRate::noPreference())  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a simple Butterworth 2nd-order low-pass filter.  <a href="#a394fb174ebbbd2f6b9f6d0993794a2e1"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_unit_base.html">UnitType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_l_p_f_unit.html#a875160e638b9f5ae49903ad441eef3b6">kr</a> (<a class="el" href="class_unit_base.html">UnitType</a> const &amp;input, <a class="el" href="class_unit_base.html">UnitType</a> const &amp;frequency=SampleType(1200), <a class="el" href="class_unit_base.html">UnitType</a> const &amp;mul=SampleType(1), <a class="el" href="class_unit_base.html">UnitType</a> const &amp;add=SampleType(0)())  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a simple control rate Butterworth 2nd-order low-pass filter.  <a href="#a875160e638b9f5ae49903ad441eef3b6"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_unit_base.html">UnitType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_l_p_f_unit.html#ab68f9c65805da1f60b4491c1e7c9443c">ar</a> (<a class="el" href="class_unit_base.html">UnitType</a> const &amp;input, <a class="el" href="class_unit_base.html">UnitType</a> const &amp;frequency=SampleType(1200), <a class="el" href="class_unit_base.html">UnitType</a> const &amp;mul=SampleType(1), <a class="el" href="class_unit_base.html">UnitType</a> const &amp;add=SampleType(0), <a class="el" href="class_block_size.html">BlockSize</a> const &amp;preferredBlockSize=BlockSize::noPreference(), <a class="el" href="class_sample_rate.html">SampleRate</a> const &amp;preferredSampleRate=SampleRate::noPreference())  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a simple Butterworth 2nd-order low-pass filter.  <a href="#ab68f9c65805da1f60b4491c1e7c9443c"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_unit_base.html">UnitType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_l_p_f_unit.html#a4567ee2529e67739617c2f0a76290f1e">kr</a> (<a class="el" href="class_unit_base.html">UnitType</a> const &amp;input, <a class="el" href="class_unit_base.html">UnitType</a> const &amp;frequency=SampleType(1200), <a class="el" href="class_unit_base.html">UnitType</a> const &amp;mul=SampleType(1), <a class="el" href="class_unit_base.html">UnitType</a> const &amp;add=SampleType(0)())  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a simple control rate Butterworth 2nd-order low-pass filter.  <a href="#a4567ee2529e67739617c2f0a76290f1e"></a><br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
-<div class="textblock"><h3>template&lt;class SampleType&gt;<br/>
-class LPFUnit&lt; SampleType &gt;</h3>
+<div class="textblock"><h3>template&lt;class SampleType, Interp::TypeCode InterpTypeCode = Interp::Linear&gt;<br/>
+class LPFUnit&lt; SampleType, InterpTypeCode &gt;</h3>
 
 <p>Butterworth 2nd-order low-pass filter. </p>
 <p>This has good linearity in the passband.</p>
-<p>Factory functions:</p>
-<ul>
+<dl class="user"><dt><b>Factory functions:</b></dt><dd><ul>
 <li>ar (input, frequency=1200, mul=1, add=0, preferredBlockSize=default, preferredSampleRate=default)</li>
 <li>kr (input frequency=1200, mul=1, add=0)</li>
 </ul>
-<p>Inputs:</p>
-<ul>
+</dd></dl>
+<dl class="user"><dt><b>Inputs:</b></dt><dd><ul>
 <li>input: (unit, multi) the unit to filter</li>
 <li>frequency: (unit, multi) the -3dB point cut-off frequency in Hz</li>
 <li>mul: (unit, multi) the multiplier applied to the output</li>
@@ -114,154 +100,16 @@ class LPFUnit&lt; SampleType &gt;</h3>
 <li>preferredBlockSize: the preferred output block size (for advanced usage, leave on default if unsure)</li>
 <li>preferredSampleRate: the preferred output sample rate (for advanced usage, leave on default if unsure) </li>
 </ul>
-</div><hr/><h2>Member Typedef Documentation</h2>
-<a class="anchor" id="a54ceaa867bfda23e5d76bad10aa719f4"></a><!-- doxytag: member="LPFUnit::UnitType" ref="a54ceaa867bfda23e5d76bad10aa719f4" args="" -->
+</dd></dl>
+</div><hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="ab68f9c65805da1f60b4491c1e7c9443c"></a><!-- doxytag: member="LPFUnit::ar" ref="ab68f9c65805da1f60b4491c1e7c9443c" args="(UnitType const &amp;input, UnitType const &amp;frequency=SampleType(1200), UnitType const &amp;mul=SampleType(1), UnitType const &amp;add=SampleType(0), BlockSize const &amp;preferredBlockSize=BlockSize::noPreference(), SampleRate const &amp;preferredSampleRate=SampleRate::noPreference())" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class SampleType &gt; </div>
+template&lt;class SampleType , Interp::TypeCode InterpTypeCode = Interp::Linear&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_unit_base.html">UnitBase</a>&lt;SampleType&gt; <a class="el" href="class_l_p_f_unit.html">LPFUnit</a>&lt; SampleType &gt;::<a class="el" href="class_unit_base.html">UnitType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a84a442518446d40218daaa8f1eb38268"></a><!-- doxytag: member="LPFUnit::FilterShape" ref="a84a442518446d40218daaa8f1eb38268" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_filter_shape_l_p_f_base.html">FilterShapeLPFBase</a>&lt;SampleType&gt; <a class="el" href="class_l_p_f_unit.html">LPFUnit</a>&lt; SampleType &gt;::<a class="el" href="class_filter_shape_l_p_f_base.html">FilterShape</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a3da55da89982540ac3cce904724096d6"></a><!-- doxytag: member="LPFUnit::FilterCoeffsType" ref="a3da55da89982540ac3cce904724096d6" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_filter_coeffs1_param_unit.html">FilterCoeffs1ParamUnit</a>&lt;<a class="el" href="class_filter_shape_l_p_f_base.html">FilterShape</a>&gt; <a class="el" href="class_l_p_f_unit.html">LPFUnit</a>&lt; SampleType &gt;::<a class="el" href="class_filter_coeffs1_param_unit.html">FilterCoeffsType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a971a67b2842e54c643a435920313ea2b"></a><!-- doxytag: member="LPFUnit::FormType" ref="a971a67b2842e54c643a435920313ea2b" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_filter_coeffs1_param_unit.html#ad87cd8f7a11f0100fd3e33a420336dd5">FilterCoeffsType::FormType</a> <a class="el" href="class_l_p_f_unit.html">LPFUnit</a>&lt; SampleType &gt;::<a class="el" href="class_l_p_f_unit.html#a971a67b2842e54c643a435920313ea2b">FormType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a52e39b292a1bd4f4abcab79c80db27e9"></a><!-- doxytag: member="LPFUnit::FilterType" ref="a52e39b292a1bd4f4abcab79c80db27e9" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_filter_unit.html">FilterUnit</a>&lt;<a class="el" href="class_l_p_f_unit.html#a971a67b2842e54c643a435920313ea2b">FormType</a>&gt; <a class="el" href="class_l_p_f_unit.html">LPFUnit</a>&lt; SampleType &gt;::<a class="el" href="class_filter_unit.html">FilterType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a6bc2112a473fc5715f8e961d9438b87a"></a><!-- doxytag: member="LPFUnit::ResampleType" ref="a6bc2112a473fc5715f8e961d9438b87a" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_resample_unit.html">ResampleUnit</a>&lt;SampleType&gt; <a class="el" href="class_l_p_f_unit.html">LPFUnit</a>&lt; SampleType &gt;::<a class="el" href="class_resample_unit.html">ResampleType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a473ec931e4f10d3458f0934d23557e7d"></a><!-- doxytag: member="LPFUnit::FormData" ref="a473ec931e4f10d3458f0934d23557e7d" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef FormType::Data <a class="el" href="class_l_p_f_unit.html">LPFUnit</a>&lt; SampleType &gt;::<a class="el" href="class_l_p_f_unit.html#a473ec931e4f10d3458f0934d23557e7d">FormData</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a7c16fac84aadbe092f012bc4764ff6f4"></a><!-- doxytag: member="LPFUnit::FilterShapeData" ref="a7c16fac84aadbe092f012bc4764ff6f4" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="struct_filter_shape_data.html">FilterShape::Data</a> <a class="el" href="class_l_p_f_unit.html">LPFUnit</a>&lt; SampleType &gt;::<a class="el" href="struct_filter_shape_data.html">FilterShapeData</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="ae8042412117c7d6f571efa64a45e856c"></a><!-- doxytag: member="LPFUnit::getInfo" ref="ae8042412117c7d6f571efa64a45e856c" args="()" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">static <a class="el" href="class_object_array.html">UnitInfos</a> <a class="el" href="class_l_p_f_unit.html">LPFUnit</a>&lt; SampleType &gt;::getInfo </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a394fb174ebbbd2f6b9f6d0993794a2e1"></a><!-- doxytag: member="LPFUnit::ar" ref="a394fb174ebbbd2f6b9f6d0993794a2e1" args="(UnitType const &amp;input, UnitType const &amp;frequency=SampleType(1200), UnitType const &amp;mul=SampleType(1), UnitType const &amp;add=SampleType(0), BlockSize const &amp;preferredBlockSize=BlockSize::noPreference(), SampleRate const &amp;preferredSampleRate=SampleRate::noPreference())" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">static <a class="el" href="class_unit_base.html">UnitType</a> <a class="el" href="class_l_p_f_unit.html">LPFUnit</a>&lt; SampleType &gt;::ar </td>
+          <td class="memname">static <a class="el" href="class_unit_base.html">UnitType</a> <a class="el" href="class_l_p_f_unit.html">LPFUnit</a>&lt; SampleType, InterpTypeCode &gt;::ar </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="class_unit_base.html">UnitType</a> const &amp;&#160;</td>
           <td class="paramname"><em>input</em>, </td>
@@ -320,14 +168,14 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a875160e638b9f5ae49903ad441eef3b6"></a><!-- doxytag: member="LPFUnit::kr" ref="a875160e638b9f5ae49903ad441eef3b6" args="(UnitType const &amp;input, UnitType const &amp;frequency=SampleType(1200), UnitType const &amp;mul=SampleType(1), UnitType const &amp;add=SampleType(0)())" -->
+<a class="anchor" id="a4567ee2529e67739617c2f0a76290f1e"></a><!-- doxytag: member="LPFUnit::kr" ref="a4567ee2529e67739617c2f0a76290f1e" args="(UnitType const &amp;input, UnitType const &amp;frequency=SampleType(1200), UnitType const &amp;mul=SampleType(1), UnitType const &amp;add=SampleType(0)())" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class SampleType &gt; </div>
+template&lt;class SampleType , Interp::TypeCode InterpTypeCode = Interp::Linear&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">static <a class="el" href="class_unit_base.html">UnitType</a> <a class="el" href="class_l_p_f_unit.html">LPFUnit</a>&lt; SampleType &gt;::kr </td>
+          <td class="memname">static <a class="el" href="class_unit_base.html">UnitType</a> <a class="el" href="class_l_p_f_unit.html">LPFUnit</a>&lt; SampleType, InterpTypeCode &gt;::kr </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="class_unit_base.html">UnitType</a> const &amp;&#160;</td>
           <td class="paramname"><em>input</em>, </td>
@@ -381,7 +229,7 @@ template&lt;class SampleType &gt; </div>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Properties</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -390,7 +238,7 @@ template&lt;class SampleType &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 5 2012 17:05:06 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 8 2014 12:26:52 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

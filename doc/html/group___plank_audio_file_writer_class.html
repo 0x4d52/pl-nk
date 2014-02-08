@@ -20,7 +20,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="pl-nk-logo-small.png"/></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">pl-nk</div>
+   <div id="projectname">pl-nk&#160;<span id="projectnumber">v0.4.5</span></div>
+   <div id="projectbrief">Plonk|Plink|Plank are a set of cross-platform C/C++ frameworks for audio software development</div>
   </td>
  </tr>
  </tbody>
@@ -29,8 +30,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -68,23 +69,23 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 Typedefs</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef struct <br class="typebreak"/>
 PlankAudioFileWriter *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_audio_file_writer_class.html#ga0443905cb8b979bb5e7cf68edfabf7d3">PlankAudioFileWriterRef</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">An opaque reference to the <em>Plank AudioFileWriter</em> object.  <a href="#ga0443905cb8b979bb5e7cf68edfabf7d3"></a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">An opaque reference to the <em>Plank <a class="el" href="class_audio_file_writer.html" title="Audio file writing class.">AudioFileWriter</a></em> object.  <a href="#ga0443905cb8b979bb5e7cf68edfabf7d3"></a><br/></td></tr>
 <tr><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="group___plank_audio_file_writer_class.html#ga0443905cb8b979bb5e7cf68edfabf7d3">PlankAudioFileWriterRef</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_audio_file_writer_class.html#ga977ec0922644294aea3ed6be0536754a">pl_AudioFileWriter_CreateAndInit</a> ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create and intitialise a <em>Plank AudioFileWriter</em> object and return an oqaque reference to it.  <a href="#ga977ec0922644294aea3ed6be0536754a"></a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create and intitialise a <em>Plank <a class="el" href="class_audio_file_writer.html" title="Audio file writing class.">AudioFileWriter</a></em> object and return an oqaque reference to it.  <a href="#ga977ec0922644294aea3ed6be0536754a"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="group___plank_audio_file_writer_class.html#ga0443905cb8b979bb5e7cf68edfabf7d3">PlankAudioFileWriterRef</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_audio_file_writer_class.html#gae81c11ca2793bae61c247159438db94a">pl_AudioFileWriter_Create</a> ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a <em>Plank AudioFileWriter</em> object and return an oqaque reference to it.  <a href="#gae81c11ca2793bae61c247159438db94a"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_audio_file_writer_class.html#ga75b1e9d0eb60730587c8eda08a884f2c">pl_AudioFileWriter_Init</a> (<a class="el" href="group___plank_audio_file_writer_class.html#ga0443905cb8b979bb5e7cf68edfabf7d3">PlankAudioFileWriterRef</a> p)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Inititalise a <em>Plank AudioFileWriter</em> object.  <a href="#ga75b1e9d0eb60730587c8eda08a884f2c"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_audio_file_writer_class.html#ga451ab87a5455da84f80a3b754de4c8d7">pl_AudioFileWriter_DeInit</a> (<a class="el" href="group___plank_audio_file_writer_class.html#ga0443905cb8b979bb5e7cf68edfabf7d3">PlankAudioFileWriterRef</a> p)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Deinitialise a <em>Plank AudioFileWriter</em> object.  <a href="#ga451ab87a5455da84f80a3b754de4c8d7"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_audio_file_writer_class.html#gac31cf7fba4e88acde197ff642f02e9b5">pl_AudioFileWriter_Destroy</a> (<a class="el" href="group___plank_audio_file_writer_class.html#ga0443905cb8b979bb5e7cf68edfabf7d3">PlankAudioFileWriterRef</a> p)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy a <em>Plank AudioFileWriter</em> object.  <a href="#gac31cf7fba4e88acde197ff642f02e9b5"></a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a <em>Plank <a class="el" href="class_audio_file_writer.html" title="Audio file writing class.">AudioFileWriter</a></em> object and return an oqaque reference to it.  <a href="#gae81c11ca2793bae61c247159438db94a"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">PlankResult&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_audio_file_writer_class.html#ga75b1e9d0eb60730587c8eda08a884f2c">pl_AudioFileWriter_Init</a> (<a class="el" href="group___plank_audio_file_writer_class.html#ga0443905cb8b979bb5e7cf68edfabf7d3">PlankAudioFileWriterRef</a> p)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Inititalise a <em>Plank <a class="el" href="class_audio_file_writer.html" title="Audio file writing class.">AudioFileWriter</a></em> object.  <a href="#ga75b1e9d0eb60730587c8eda08a884f2c"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">PlankResult&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_audio_file_writer_class.html#ga451ab87a5455da84f80a3b754de4c8d7">pl_AudioFileWriter_DeInit</a> (<a class="el" href="group___plank_audio_file_writer_class.html#ga0443905cb8b979bb5e7cf68edfabf7d3">PlankAudioFileWriterRef</a> p)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Deinitialise a <em>Plank <a class="el" href="class_audio_file_writer.html" title="Audio file writing class.">AudioFileWriter</a></em> object.  <a href="#ga451ab87a5455da84f80a3b754de4c8d7"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">PlankResult&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_audio_file_writer_class.html#gac31cf7fba4e88acde197ff642f02e9b5">pl_AudioFileWriter_Destroy</a> (<a class="el" href="group___plank_audio_file_writer_class.html#ga0443905cb8b979bb5e7cf68edfabf7d3">PlankAudioFileWriterRef</a> p)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy a <em>Plank <a class="el" href="class_audio_file_writer.html" title="Audio file writing class.">AudioFileWriter</a></em> object.  <a href="#gac31cf7fba4e88acde197ff642f02e9b5"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="group___plank_file_class.html#ga7a3834c3811eceffb81213155fd14e59">PlankFileRef</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_audio_file_writer_class.html#gae27c3ac6a31d563bede50e9d22674629">pl_AudioFileWriter_GetFile</a> (<a class="el" href="group___plank_audio_file_writer_class.html#ga0443905cb8b979bb5e7cf68edfabf7d3">PlankAudioFileWriterRef</a> p)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the underlying <em>Plank File</em> object.  <a href="#gae27c3ac6a31d563bede50e9d22674629"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_audio_file_writer_class.html#ga561b59dbe51b1f87ba87108269ba31e7">pl_AudioFileWriter_Open</a> (<a class="el" href="group___plank_audio_file_writer_class.html#ga0443905cb8b979bb5e7cf68edfabf7d3">PlankAudioFileWriterRef</a> p, const char *filepath)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_audio_file_writer_class.html#gabda47171a44d03c520aab7b86a23c685">pl_AudioFileWriter_Close</a> (<a class="el" href="group___plank_audio_file_writer_class.html#ga0443905cb8b979bb5e7cf68edfabf7d3">PlankAudioFileWriterRef</a> p)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">PlankAudioFileFormatInfo *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_audio_file_writer_class.html#ga009020d9179124eea96a710b06edbc5b">pl_AudioFileWriter_GetFormatInfo</a> (<a class="el" href="group___plank_audio_file_writer_class.html#ga0443905cb8b979bb5e7cf68edfabf7d3">PlankAudioFileWriterRef</a> p)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get format before open.  <a href="#ga009020d9179124eea96a710b06edbc5b"></a><br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <p>An audio file writer. </p>
@@ -100,30 +101,11 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>An opaque reference to the <em>Plank AudioFileWriter</em> object. </p>
+<p>An opaque reference to the <em>Plank <a class="el" href="class_audio_file_writer.html" title="Audio file writing class.">AudioFileWriter</a></em> object. </p>
 
 </div>
 </div>
 <hr/><h2>Function Documentation</h2>
-<a class="anchor" id="ga977ec0922644294aea3ed6be0536754a"></a><!-- doxytag: member="plank_AudioFileWriter.h::pl_AudioFileWriter_CreateAndInit" ref="ga977ec0922644294aea3ed6be0536754a" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="group___plank_audio_file_writer_class.html#ga0443905cb8b979bb5e7cf68edfabf7d3">PlankAudioFileWriterRef</a> pl_AudioFileWriter_CreateAndInit </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Create and intitialise a <em>Plank AudioFileWriter</em> object and return an oqaque reference to it. </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>A <em>Plank AudioFileWriter</em> object as an opaque reference or PLANK_NULL. </dd></dl>
-
-</div>
-</div>
 <a class="anchor" id="gae81c11ca2793bae61c247159438db94a"></a><!-- doxytag: member="plank_AudioFileWriter.h::pl_AudioFileWriter_Create" ref="gae81c11ca2793bae61c247159438db94a" args="()" -->
 <div class="memitem">
 <div class="memproto">
@@ -138,34 +120,28 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Create a <em>Plank AudioFileWriter</em> object and return an oqaque reference to it. </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>A <em>Plank AudioFileWriter</em> object as an opaque reference or PLANK_NULL. </dd></dl>
+<p>Create a <em>Plank <a class="el" href="class_audio_file_writer.html" title="Audio file writing class.">AudioFileWriter</a></em> object and return an oqaque reference to it. </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>A <em>Plank <a class="el" href="class_audio_file_writer.html" title="Audio file writing class.">AudioFileWriter</a></em> object as an opaque reference or PLANK_NULL. </dd></dl>
 
 </div>
 </div>
-<a class="anchor" id="ga75b1e9d0eb60730587c8eda08a884f2c"></a><!-- doxytag: member="plank_AudioFileWriter.h::pl_AudioFileWriter_Init" ref="ga75b1e9d0eb60730587c8eda08a884f2c" args="(PlankAudioFileWriterRef p)" -->
+<a class="anchor" id="ga977ec0922644294aea3ed6be0536754a"></a><!-- doxytag: member="plank_AudioFileWriter.h::pl_AudioFileWriter_CreateAndInit" ref="ga977ec0922644294aea3ed6be0536754a" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_AudioFileWriter_Init </td>
+          <td class="memname"><a class="el" href="group___plank_audio_file_writer_class.html#ga0443905cb8b979bb5e7cf68edfabf7d3">PlankAudioFileWriterRef</a> pl_AudioFileWriter_CreateAndInit </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group___plank_audio_file_writer_class.html#ga0443905cb8b979bb5e7cf68edfabf7d3">PlankAudioFileWriterRef</a>&#160;</td>
-          <td class="paramname"><em>p</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Inititalise a <em>Plank AudioFileWriter</em> object. </p>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">p</td><td>The <em>Plank AudioFileWriter</em> object. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>A result code which will be PlankResult_OK if the operation was completely successful. </dd></dl>
+<p>Create and intitialise a <em>Plank <a class="el" href="class_audio_file_writer.html" title="Audio file writing class.">AudioFileWriter</a></em> object and return an oqaque reference to it. </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>A <em>Plank <a class="el" href="class_audio_file_writer.html" title="Audio file writing class.">AudioFileWriter</a></em> object as an opaque reference or PLANK_NULL.</dd></dl>
+<p>--- </p>
 
 </div>
 </div>
@@ -174,7 +150,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_AudioFileWriter_DeInit </td>
+          <td class="memname">PlankResult pl_AudioFileWriter_DeInit </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="group___plank_audio_file_writer_class.html#ga0443905cb8b979bb5e7cf68edfabf7d3">PlankAudioFileWriterRef</a>&#160;</td>
           <td class="paramname"><em>p</em></td><td>)</td>
@@ -184,10 +160,10 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Deinitialise a <em>Plank AudioFileWriter</em> object. </p>
+<p>Deinitialise a <em>Plank <a class="el" href="class_audio_file_writer.html" title="Audio file writing class.">AudioFileWriter</a></em> object. </p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">p</td><td>The <em>Plank AudioFileWriter</em> object. </td></tr>
+    <tr><td class="paramname">p</td><td>The <em>Plank <a class="el" href="class_audio_file_writer.html" title="Audio file writing class.">AudioFileWriter</a></em> object. </td></tr>
   </table>
   </dd>
 </dl>
@@ -200,7 +176,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_AudioFileWriter_Destroy </td>
+          <td class="memname">PlankResult pl_AudioFileWriter_Destroy </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="group___plank_audio_file_writer_class.html#ga0443905cb8b979bb5e7cf68edfabf7d3">PlankAudioFileWriterRef</a>&#160;</td>
           <td class="paramname"><em>p</em></td><td>)</td>
@@ -210,10 +186,10 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Destroy a <em>Plank AudioFileWriter</em> object. </p>
+<p>Destroy a <em>Plank <a class="el" href="class_audio_file_writer.html" title="Audio file writing class.">AudioFileWriter</a></em> object. </p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">p</td><td>The <em>Plank AudioFileWriter</em> object. </td></tr>
+    <tr><td class="paramname">p</td><td>The <em>Plank <a class="el" href="class_audio_file_writer.html" title="Audio file writing class.">AudioFileWriter</a></em> object. </td></tr>
   </table>
   </dd>
 </dl>
@@ -240,7 +216,7 @@ Functions</h2></td></tr>
 <p>This is the raw file object the is performing the fundamental file access operations. </p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">p</td><td>The <em>Plank AudioFileWriter</em> object. </td></tr>
+    <tr><td class="paramname">p</td><td>The <em>Plank <a class="el" href="class_audio_file_writer.html" title="Audio file writing class.">AudioFileWriter</a></em> object. </td></tr>
   </table>
   </dd>
 </dl>
@@ -248,39 +224,12 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ga561b59dbe51b1f87ba87108269ba31e7"></a><!-- doxytag: member="plank_AudioFileWriter.h::pl_AudioFileWriter_Open" ref="ga561b59dbe51b1f87ba87108269ba31e7" args="(PlankAudioFileWriterRef p, const char *filepath)" -->
+<a class="anchor" id="ga009020d9179124eea96a710b06edbc5b"></a><!-- doxytag: member="plank_AudioFileWriter.h::pl_AudioFileWriter_GetFormatInfo" ref="ga009020d9179124eea96a710b06edbc5b" args="(PlankAudioFileWriterRef p)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_AudioFileWriter_Open </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="group___plank_audio_file_writer_class.html#ga0443905cb8b979bb5e7cf68edfabf7d3">PlankAudioFileWriterRef</a>&#160;</td>
-          <td class="paramname"><em>p</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>filepath</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="gabda47171a44d03c520aab7b86a23c685"></a><!-- doxytag: member="plank_AudioFileWriter.h::pl_AudioFileWriter_Close" ref="gabda47171a44d03c520aab7b86a23c685" args="(PlankAudioFileWriterRef p)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_AudioFileWriter_Close </td>
+          <td class="memname">PlankAudioFileFormatInfo* pl_AudioFileWriter_GetFormatInfo </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="group___plank_audio_file_writer_class.html#ga0443905cb8b979bb5e7cf68edfabf7d3">PlankAudioFileWriterRef</a>&#160;</td>
           <td class="paramname"><em>p</em></td><td>)</td>
@@ -290,6 +239,35 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
+<p>Get format before open. </p>
+<p>Returns null if the file is already open. </p>
+
+</div>
+</div>
+<a class="anchor" id="ga75b1e9d0eb60730587c8eda08a884f2c"></a><!-- doxytag: member="plank_AudioFileWriter.h::pl_AudioFileWriter_Init" ref="ga75b1e9d0eb60730587c8eda08a884f2c" args="(PlankAudioFileWriterRef p)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">PlankResult pl_AudioFileWriter_Init </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___plank_audio_file_writer_class.html#ga0443905cb8b979bb5e7cf68edfabf7d3">PlankAudioFileWriterRef</a>&#160;</td>
+          <td class="paramname"><em>p</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Inititalise a <em>Plank <a class="el" href="class_audio_file_writer.html" title="Audio file writing class.">AudioFileWriter</a></em> object. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>The <em>Plank <a class="el" href="class_audio_file_writer.html" title="Audio file writing class.">AudioFileWriter</a></em> object. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>A result code which will be PlankResult_OK if the operation was completely successful. </dd></dl>
+
 </div>
 </div>
 </div>
@@ -298,7 +276,7 @@ Functions</h2></td></tr>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Properties</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -307,7 +285,7 @@ Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 5 2012 17:04:57 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 8 2014 12:26:52 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

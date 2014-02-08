@@ -20,7 +20,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="pl-nk-logo-small.png"/></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">pl-nk</div>
+   <div id="projectname">pl-nk&#160;<span id="projectnumber">v0.4.5</span></div>
+   <div id="projectbrief">Plonk|Plink|Plank are a set of cross-platform C/C++ frameworks for audio software development</div>
   </td>
  </tr>
  </tbody>
@@ -29,8 +30,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -73,31 +74,33 @@ Classes</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Filter coefficients generator for an IIR filter using two control parameters.  <a href="class_filter_coeffs2_param_unit.html#details">More...</a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_filter_coeffs3_param_unit.html">FilterCoeffs3ParamUnit&lt; ShapeType &gt;</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Filter coefficients generator for an IIR filter using three control parameters.  <a href="class_filter_coeffs3_param_unit.html#details">More...</a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_l_p_f_p1_unit.html">LPFP1Unit&lt; SampleType &gt;</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_l_p_f_p1_unit.html">LPFP1Unit&lt; SampleType, InterpTypeCode &gt;</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">One-pole low-pass filter.  <a href="class_l_p_f_p1_unit.html#details">More...</a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_lag_unit.html">LagUnit&lt; SampleType &gt;</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_lag_unit.html">LagUnit&lt; SampleType, InterpTypeCode &gt;</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Exponential lag filter.  <a href="class_lag_unit.html#details">More...</a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_h_p_f_p1_unit.html">HPFP1Unit&lt; SampleType &gt;</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_h_p_f_p1_unit.html">HPFP1Unit&lt; SampleType, InterpTypeCode &gt;</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">One-pole high-pass filter.  <a href="class_h_p_f_p1_unit.html#details">More...</a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_decay_unit.html">DecayUnit&lt; SampleType &gt;</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_decay_unit.html">DecayUnit&lt; SampleType, InterpTypeCode &gt;</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Exponential decay filter.  <a href="class_decay_unit.html#details">More...</a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_l_p_f_unit.html">RLPFUnit&lt; SampleType &gt;</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_d_c_unit.html">DCUnit&lt; SampleType, InterpTypeCode &gt;</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">DC removal filter.  <a href="class_d_c_unit.html#details">More...</a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_l_p_f_unit.html">RLPFUnit&lt; SampleType, InterpTypeCode &gt;</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Resonant low-pass filter.  <a href="class_r_l_p_f_unit.html#details">More...</a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_h_p_f_unit.html">RHPFUnit&lt; SampleType &gt;</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_h_p_f_unit.html">RHPFUnit&lt; SampleType, InterpTypeCode &gt;</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Resonant high-pass filter.  <a href="class_r_h_p_f_unit.html#details">More...</a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_low_shelf_unit.html">LowShelfUnit&lt; SampleType &gt;</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_low_shelf_unit.html">LowShelfUnit&lt; SampleType, InterpTypeCode &gt;</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Low-shelving (bass) filter.  <a href="class_low_shelf_unit.html#details">More...</a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_high_shelf_unit.html">HighShelfUnit&lt; SampleType &gt;</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_high_shelf_unit.html">HighShelfUnit&lt; SampleType, InterpTypeCode &gt;</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">High-shelving (treble) filter.  <a href="class_high_shelf_unit.html#details">More...</a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_notch_unit.html">NotchUnit&lt; SampleType &gt;</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_notch_unit.html">NotchUnit&lt; SampleType, InterpTypeCode &gt;</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Notch filter (i.e, parametric mid-EQ).  <a href="class_notch_unit.html#details">More...</a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_b_p_f_unit.html">BPFUnit&lt; SampleType &gt;</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_b_p_f_unit.html">BPFUnit&lt; SampleType, InterpTypeCode &gt;</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Bandpass filter.  <a href="class_b_p_f_unit.html#details">More...</a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_b_r_f_unit.html">BRFUnit&lt; SampleType &gt;</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_b_r_f_unit.html">BRFUnit&lt; SampleType, InterpTypeCode &gt;</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Bandreject (band-elimination) filter.  <a href="class_b_r_f_unit.html#details">More...</a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_l_p_f_unit.html">LPFUnit&lt; SampleType &gt;</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_l_p_f_unit.html">LPFUnit&lt; SampleType, InterpTypeCode &gt;</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Butterworth 2nd-order low-pass filter.  <a href="class_l_p_f_unit.html#details">More...</a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_h_p_f_unit.html">HPFUnit&lt; SampleType &gt;</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_h_p_f_unit.html">HPFUnit&lt; SampleType, InterpTypeCode &gt;</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Butterworth 2nd-order high-pass filter.  <a href="class_h_p_f_unit.html#details">More...</a><br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
@@ -109,7 +112,7 @@ Classes</h2></td></tr>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Properties</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -118,7 +121,7 @@ Classes</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 5 2012 17:04:58 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 8 2014 12:26:52 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

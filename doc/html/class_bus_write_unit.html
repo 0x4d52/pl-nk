@@ -20,7 +20,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="pl-nk-logo-small.png"/></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">pl-nk</div>
+   <div id="projectname">pl-nk&#160;<span id="projectnumber">v0.4.5</span></div>
+   <div id="projectbrief">Plonk|Plink|Plank are a set of cross-platform C/C++ frameworks for audio software development</div>
   </td>
  </tr>
  </tbody>
@@ -29,8 +30,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -62,7 +63,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="header">
   <div class="summary">
-<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a>  </div>
   <div class="headertitle">
 <div class="title">BusWriteUnit&lt; SampleType &gt; Class Template Reference<div class="ingroups"><a class="el" href="group___misc_units.html">Miscellaneous unit class.</a></div></div>  </div>
@@ -74,205 +74,17 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <p><a href="class_bus_write_unit-members.html">List of all members.</a></p>
 <table class="memberdecls">
-<tr><td colspan="2"><h2><a name="pub-types"></a>
-Public Types</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <br class="typebreak"/>
-<a class="el" href="class_bus_write_channel_internal.html">BusWriteChannelInternal</a><br class="typebreak"/>
-&lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bus_write_unit.html#a97a945260802abef84817f84e01d45da">BusWriteInternal</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="struct_channel_data_3_01_channel_internal_core_01_4.html">BusWriteInternal::Data</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bus_write_unit.html#af0810a9f42b187bb2ca4f620ff27f464">Data</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_channel_base.html">ChannelBase</a>&lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bus_write_unit.html#a4cda7d613ccb122fbafc0a7e5faef637">ChannelType</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_channel_internal.html">ChannelInternal</a><br class="typebreak"/>
-&lt; SampleType, <a class="el" href="struct_channel_data_3_01_channel_internal_core_01_4.html">Data</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bus_write_unit.html#ab507a951e7f6e1a1fc5e5788d6990fca">Internal</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_channel_internal_base.html">ChannelInternalBase</a><br class="typebreak"/>
-&lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bus_write_unit.html#a01bc694bb20967ad08af874fd0528d00">InternaBase</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bus_write_unit.html#a8569454a00be9559f488ec4b2a60e2d6">UnitType</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_input_dictionary.html">InputDictionary</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bus_write_unit.html#a7d0f5387e4ec3d3ac7d9af5e480b5754">Inputs</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a><br class="typebreak"/>
-&lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bus_write_unit.html#a97518ea37c6867d31ab96fcfb8f1d752">Buffer</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_bus_buffer.html">BusBuffer</a>&lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bus_write_unit.html#a4451d903edd97542468337c4554e081a">Bus</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt; <a class="el" href="class_bus_buffer.html">Bus</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bus_write_unit.html#a64e92ac6f97e03c46183465eb15f6ccf">Busses</a></td></tr>
 <tr><td colspan="2"><h2><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_object_array.html">UnitInfos</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bus_write_unit.html#a4f4298e98c98f33be271dbdfe4ca4740">getInfo</a> ()  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_unit_base.html">UnitType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bus_write_unit.html#ac827ead7040479156130903742389edf">ar</a> (<a class="el" href="class_numerical_array.html">Busses</a> const &amp;busses, <a class="el" href="class_unit_base.html">UnitType</a> const &amp;input, <a class="el" href="class_block_size.html">BlockSize</a> const &amp;preferredBlockSize=BlockSize::noPreference())  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create an audio rate bus writer.  <a href="#ac827ead7040479156130903742389edf"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_unit_base.html">UnitType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bus_write_unit.html#abe26fbff51099cf9e639567eb816e19d">kr</a> (<a class="el" href="class_numerical_array.html">Busses</a> const &amp;busses, <a class="el" href="class_unit_base.html">UnitType</a> const &amp;input)  throw ()</td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><h3>template&lt;class SampleType&gt;<br/>
 class BusWriteUnit&lt; SampleType &gt;</h3>
 
 <p>Write data to a Bus. </p>
-</div><hr/><h2>Member Typedef Documentation</h2>
-<a class="anchor" id="a97a945260802abef84817f84e01d45da"></a><!-- doxytag: member="BusWriteUnit::BusWriteInternal" ref="a97a945260802abef84817f84e01d45da" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_bus_write_channel_internal.html">BusWriteChannelInternal</a>&lt;SampleType&gt; <a class="el" href="class_bus_write_unit.html">BusWriteUnit</a>&lt; SampleType &gt;::<a class="el" href="class_bus_write_channel_internal.html">BusWriteInternal</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="af0810a9f42b187bb2ca4f620ff27f464"></a><!-- doxytag: member="BusWriteUnit::Data" ref="af0810a9f42b187bb2ca4f620ff27f464" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="struct_channel_data_3_01_channel_internal_core_01_4.html">BusWriteInternal::Data</a> <a class="el" href="class_bus_write_unit.html">BusWriteUnit</a>&lt; SampleType &gt;::<a class="el" href="struct_channel_data_3_01_channel_internal_core_01_4.html">Data</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a4cda7d613ccb122fbafc0a7e5faef637"></a><!-- doxytag: member="BusWriteUnit::ChannelType" ref="a4cda7d613ccb122fbafc0a7e5faef637" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_channel_base.html">ChannelBase</a>&lt;SampleType&gt; <a class="el" href="class_bus_write_unit.html">BusWriteUnit</a>&lt; SampleType &gt;::<a class="el" href="class_channel_base.html">ChannelType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ab507a951e7f6e1a1fc5e5788d6990fca"></a><!-- doxytag: member="BusWriteUnit::Internal" ref="ab507a951e7f6e1a1fc5e5788d6990fca" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_channel_internal.html">ChannelInternal</a>&lt;SampleType,<a class="el" href="struct_channel_data_3_01_channel_internal_core_01_4.html">Data</a>&gt; <a class="el" href="class_bus_write_unit.html">BusWriteUnit</a>&lt; SampleType &gt;::<a class="el" href="class_channel_internal.html">Internal</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a01bc694bb20967ad08af874fd0528d00"></a><!-- doxytag: member="BusWriteUnit::InternaBase" ref="a01bc694bb20967ad08af874fd0528d00" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_channel_internal_base.html">ChannelInternalBase</a>&lt;SampleType&gt; <a class="el" href="class_bus_write_unit.html">BusWriteUnit</a>&lt; SampleType &gt;::<a class="el" href="class_channel_internal_base.html">InternaBase</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a8569454a00be9559f488ec4b2a60e2d6"></a><!-- doxytag: member="BusWriteUnit::UnitType" ref="a8569454a00be9559f488ec4b2a60e2d6" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_unit_base.html">UnitBase</a>&lt;SampleType&gt; <a class="el" href="class_bus_write_unit.html">BusWriteUnit</a>&lt; SampleType &gt;::<a class="el" href="class_unit_base.html">UnitType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a7d0f5387e4ec3d3ac7d9af5e480b5754"></a><!-- doxytag: member="BusWriteUnit::Inputs" ref="a7d0f5387e4ec3d3ac7d9af5e480b5754" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_input_dictionary.html">InputDictionary</a> <a class="el" href="class_bus_write_unit.html">BusWriteUnit</a>&lt; SampleType &gt;::<a class="el" href="class_input_dictionary.html">Inputs</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a97518ea37c6867d31ab96fcfb8f1d752"></a><!-- doxytag: member="BusWriteUnit::Buffer" ref="a97518ea37c6867d31ab96fcfb8f1d752" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt;SampleType&gt; <a class="el" href="class_bus_write_unit.html">BusWriteUnit</a>&lt; SampleType &gt;::<a class="el" href="class_numerical_array.html">Buffer</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a4451d903edd97542468337c4554e081a"></a><!-- doxytag: member="BusWriteUnit::Bus" ref="a4451d903edd97542468337c4554e081a" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_bus_buffer.html">BusBuffer</a>&lt;SampleType&gt; <a class="el" href="class_bus_write_unit.html">BusWriteUnit</a>&lt; SampleType &gt;::<a class="el" href="class_bus_buffer.html">Bus</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a64e92ac6f97e03c46183465eb15f6ccf"></a><!-- doxytag: member="BusWriteUnit::Busses" ref="a64e92ac6f97e03c46183465eb15f6ccf" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt;<a class="el" href="class_bus_buffer.html">Bus</a>&gt; <a class="el" href="class_bus_write_unit.html">BusWriteUnit</a>&lt; SampleType &gt;::<a class="el" href="class_numerical_array.html">Busses</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a4f4298e98c98f33be271dbdfe4ca4740"></a><!-- doxytag: member="BusWriteUnit::getInfo" ref="a4f4298e98c98f33be271dbdfe4ca4740" args="()" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">static <a class="el" href="class_object_array.html">UnitInfos</a> <a class="el" href="class_bus_write_unit.html">BusWriteUnit</a>&lt; SampleType &gt;::getInfo </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
+</div><hr/><h2>Member Function Documentation</h2>
 <a class="anchor" id="ac827ead7040479156130903742389edf"></a><!-- doxytag: member="BusWriteUnit::ar" ref="ac827ead7040479156130903742389edf" args="(Busses const &amp;busses, UnitType const &amp;input, BlockSize const &amp;preferredBlockSize=BlockSize::noPreference())" -->
 <div class="memitem">
 <div class="memproto">
@@ -310,35 +122,6 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="abe26fbff51099cf9e639567eb816e19d"></a><!-- doxytag: member="BusWriteUnit::kr" ref="abe26fbff51099cf9e639567eb816e19d" args="(Busses const &amp;busses, UnitType const &amp;input)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">static <a class="el" href="class_unit_base.html">UnitType</a> <a class="el" href="class_bus_write_unit.html">BusWriteUnit</a>&lt; SampleType &gt;::kr </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_numerical_array.html">Busses</a> const &amp;&#160;</td>
-          <td class="paramname"><em>busses</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="class_unit_base.html">UnitType</a> const &amp;&#160;</td>
-          <td class="paramname"><em>input</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td>  throw ()<code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li><a class="el" href="plonk___bus_write_channel_8h_source.html">plonk_BusWriteChannel.h</a></li>
 </ul>
@@ -348,7 +131,7 @@ template&lt;class SampleType &gt; </div>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Properties</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -357,7 +140,7 @@ template&lt;class SampleType &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 5 2012 17:05:00 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 8 2014 12:26:52 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

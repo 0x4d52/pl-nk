@@ -20,7 +20,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="pl-nk-logo-small.png"/></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">pl-nk</div>
+   <div id="projectname">pl-nk&#160;<span id="projectnumber">v0.4.5</span></div>
+   <div id="projectbrief">Plonk|Plink|Plank are a set of cross-platform C/C++ frameworks for audio software development</div>
   </td>
  </tr>
  </tbody>
@@ -29,8 +30,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -54,7 +55,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
       <li><a href="files.html"><span>File&#160;List</span></a></li>
-      <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
 <div class="header">
@@ -62,14 +62,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">plonk_Thread.h</div>  </div>
 </div>
 <div class="contents">
-<a href="plonk___thread_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*</span>
+<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*</span>
 <a name="l00002"></a>00002 <span class="comment"> -------------------------------------------------------------------------------</span>
 <a name="l00003"></a>00003 <span class="comment"> This file is part of the Plink, Plonk, Plank libraries</span>
 <a name="l00004"></a>00004 <span class="comment">  by Martin Robinson</span>
 <a name="l00005"></a>00005 <span class="comment"> </span>
 <a name="l00006"></a>00006 <span class="comment"> http://code.google.com/p/pl-nk/</span>
 <a name="l00007"></a>00007 <span class="comment"> </span>
-<a name="l00008"></a>00008 <span class="comment"> Copyright University of the West of England, Bristol 2011-12</span>
+<a name="l00008"></a>00008 <span class="comment"> Copyright University of the West of England, Bristol 2011-14</span>
 <a name="l00009"></a>00009 <span class="comment"> All rights reserved.</span>
 <a name="l00010"></a>00010 <span class="comment"> </span>
 <a name="l00011"></a>00011 <span class="comment"> Redistribution and use in source and binary forms, with or without</span>
@@ -106,66 +106,66 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00043"></a><a class="code" href="class_threading.html">00043</a> <span class="keyword">class </span><a class="code" href="class_threading.html" title="Crossplatform threading support.">Threading</a>
 <a name="l00044"></a>00044 {
 <a name="l00045"></a>00045 <span class="keyword">public</span>:
-<a name="l00046"></a><a class="code" href="class_threading.html#ac072dacd374bc2543081179faa801e27">00046</a>     <span class="keyword">typedef</span> <a class="code" href="group___plank_thread_class.html#ga8e4ce91496e1d22a26bac03aba31d9f3" title="Thread ID.">PlankThreadID</a> <a class="code" href="class_threading.html#ac072dacd374bc2543081179faa801e27">ID</a>;
+<a name="l00046"></a>00046     <span class="keyword">typedef</span> <a class="code" href="group___plank_thread_class.html#ga8e4ce91496e1d22a26bac03aba31d9f3" title="Thread ID.">PlankThreadID</a> ID;
 <a name="l00047"></a>00047 
-<a name="l00050"></a>00050     <span class="keyword">static</span> <a class="code" href="plonk___standard_header_8h.html#a677077d87aa175d7a3ee2e5c9e51c2e7">ResultCode</a> <a class="code" href="class_threading.html#af06e4d7a02ac3054e17b01ae78e39684" title="Sleeps the current thread.">sleep</a> (<span class="keyword">const</span> <span class="keywordtype">double</span> seconds) <span class="keywordflow">throw</span>();
+<a name="l00050"></a>00050     <span class="keyword">static</span> ResultCode <a class="code" href="class_threading.html#af06e4d7a02ac3054e17b01ae78e39684" title="Sleeps the current thread.">sleep</a> (<span class="keyword">const</span> <span class="keywordtype">double</span> seconds) <span class="keywordflow">throw</span>();
 <a name="l00051"></a>00051     
-<a name="l00054"></a>00054     <span class="keyword">static</span> <a class="code" href="plonk___standard_header_8h.html#a677077d87aa175d7a3ee2e5c9e51c2e7">ResultCode</a> <a class="code" href="class_threading.html#a064c003b9a820cabb3768f7466d4d05a" title="Yield the current thread.">yield</a>() throw();
+<a name="l00054"></a>00054     <span class="keyword">static</span> ResultCode <a class="code" href="class_threading.html#a064c003b9a820cabb3768f7466d4d05a" title="Yield the current thread.">yield</a>() <span class="keywordflow">throw</span>();
 <a name="l00055"></a>00055     
-<a name="l00057"></a>00057     static <a class="code" href="class_threading.html" title="Crossplatform threading support.">Threading</a>::<a class="code" href="class_threading.html#ac072dacd374bc2543081179faa801e27">ID</a> <a class="code" href="class_threading.html#a9453710636ee4e1b579bd1153b00c25c" title="Get the calling thread ID.">getCurrentThreadID</a>() throw();
+<a name="l00057"></a>00057     <span class="keyword">static</span> Threading::ID <a class="code" href="class_threading.html#a9453710636ee4e1b579bd1153b00c25c" title="Get the calling thread ID.">getCurrentThreadID</a>() <span class="keywordflow">throw</span>();
 <a name="l00058"></a>00058     
-<a name="l00059"></a>00059     static <a class="code" href="class_threading.html" title="Crossplatform threading support.">Threading</a>::<a class="code" href="class_threading.html#ac072dacd374bc2543081179faa801e27">ID</a> <a class="code" href="class_threading.html#acb3e4038e1bca654e09cd3d270e9d259">getAudioThreadID</a>() throw(); <span class="comment">// there will be more that one audio thread when going multicore</span>
-<a name="l00060"></a>00060     static <span class="keywordtype">bool</span> <a class="code" href="class_threading.html#a80cbc490a9390a7a6faadff865ea3ca2">setAudioThreadID</a> (const <a class="code" href="class_threading.html" title="Crossplatform threading support.">Threading</a>::<a class="code" href="class_threading.html#ac072dacd374bc2543081179faa801e27">ID</a> theID) throw();
-<a name="l00061"></a>00061     static <span class="keywordtype">bool</span> <a class="code" href="class_threading.html#a68419efc1cc64978766b5fcc3a15c60a">currentThreadIsAudioThread</a>() throw();
+<a name="l00059"></a>00059     <span class="keyword">static</span> Threading::ID getAudioThreadID() <span class="keywordflow">throw</span>(); <span class="comment">// there will be more that one audio thread when going multicore, not really only one actual &quot;audio thread&quot;</span>
+<a name="l00060"></a>00060     <span class="keyword">static</span> <span class="keywordtype">bool</span> setAudioThreadID (<span class="keyword">const</span> Threading::ID theID) <span class="keywordflow">throw</span>();
+<a name="l00061"></a>00061     <span class="keyword">static</span> <span class="keywordtype">bool</span> currentThreadIsAudioThread() <span class="keywordflow">throw</span>();
 <a name="l00062"></a>00062     
-<a name="l00093"></a><a class="code" href="class_threading_1_1_thread.html">00093</a>     class <a class="code" href="class_threading_1_1_thread.html" title="The Thread class itself.">Thread</a> <span class="comment">// do not inherit from PlonkBase - threads need to managed carefully</span>
+<a name="l00093"></a><a class="code" href="class_threading_1_1_thread.html">00093</a>     <span class="keyword">class </span><a class="code" href="class_threading_1_1_thread.html" title="The Thread class itself.">Thread</a> <span class="comment">// do not inherit from PlonkBase - threads need to managed carefully</span>
 <a name="l00094"></a>00094     {
 <a name="l00095"></a>00095     <span class="keyword">public</span>:
-<a name="l00096"></a>00096         <a class="code" href="class_threading.html#adbc148eaddd341d7ae4d07c9e9e33bfd">Thread</a> (<span class="keyword">const</span> <span class="keywordtype">char</span>* name = 0) <span class="keywordflow">throw</span>();
-<a name="l00097"></a>00097         <span class="keyword">virtual</span> ~Thread();
+<a name="l00096"></a>00096         <a class="code" href="class_threading_1_1_thread.html" title="The Thread class itself.">Thread</a> (<span class="keyword">const</span> <span class="keywordtype">char</span>* name = 0) <span class="keywordflow">throw</span>();
+<a name="l00097"></a>00097         <span class="keyword">virtual</span> ~<a class="code" href="class_threading_1_1_thread.html" title="The Thread class itself.">Thread</a>();
 <a name="l00098"></a>00098         
-<a name="l00099"></a>00099         <a class="code" href="plonk___standard_header_8h.html#a677077d87aa175d7a3ee2e5c9e51c2e7">ResultCode</a> start() <span class="keywordflow">throw</span>();
-<a name="l00100"></a>00100         <a class="code" href="plonk___standard_header_8h.html#a677077d87aa175d7a3ee2e5c9e51c2e7">ResultCode</a> cancel() <span class="keywordflow">throw</span>();
+<a name="l00099"></a>00099         ResultCode start() <span class="keywordflow">throw</span>();
+<a name="l00100"></a>00100         ResultCode cancel() <span class="keywordflow">throw</span>();
 <a name="l00101"></a>00101         
-<a name="l00106"></a>00106         <a class="code" href="plonk___standard_header_8h.html#a677077d87aa175d7a3ee2e5c9e51c2e7">ResultCode</a> wait() <span class="keywordflow">throw</span>();
+<a name="l00106"></a>00106         ResultCode <a class="code" href="class_threading_1_1_thread.html#a69a1d2b26ec63699833c4b3c86719fb4" title="Waits for the thread to exit.">wait</a>() <span class="keywordflow">throw</span>();
 <a name="l00107"></a>00107         
-<a name="l00108"></a>00108         <a class="code" href="plonk___standard_header_8h.html#a677077d87aa175d7a3ee2e5c9e51c2e7">ResultCode</a> pause (<span class="keyword">const</span> <span class="keywordtype">double</span> duration = <a class="code" href="plonk___standard_header_8h.html#a36a5bf30b8b9f7cbde34b8a729a6c084">PLONK_INFINITY</a>) <span class="keywordflow">throw</span>();
-<a name="l00109"></a>00109         <a class="code" href="plonk___standard_header_8h.html#a677077d87aa175d7a3ee2e5c9e51c2e7">ResultCode</a> resume() <span class="keywordflow">throw</span>();
+<a name="l00108"></a>00108         ResultCode pause (<span class="keyword">const</span> <span class="keywordtype">double</span> duration = PLONK_INFINITY) <span class="keywordflow">throw</span>();
+<a name="l00109"></a>00109         ResultCode resume() <span class="keywordflow">throw</span>();
 <a name="l00110"></a>00110         
-<a name="l00113"></a>00113         <span class="keywordtype">bool</span> isRunning() <span class="keywordflow">throw</span>();
+<a name="l00113"></a>00113         <span class="keywordtype">bool</span> <a class="code" href="class_threading_1_1_thread.html#aa09e7addc297931a3dab8740e88b624f" title="Returns true if the thread is running, otherwise false.">isRunning</a>() <span class="keywordflow">throw</span>();
 <a name="l00114"></a>00114         
-<a name="l00118"></a>00118         <a class="code" href="plonk___standard_header_8h.html#a677077d87aa175d7a3ee2e5c9e51c2e7">ResultCode</a> setShouldExit() <span class="keywordflow">throw</span>();
+<a name="l00118"></a>00118         ResultCode <a class="code" href="class_threading_1_1_thread.html#af7b4f2a7a1cd0fac3734f3873dfa96c9" title="Signals that the thread should exit.">setShouldExit</a>() <span class="keywordflow">throw</span>();
 <a name="l00119"></a>00119         
-<a name="l00124"></a>00124         <a class="code" href="plonk___standard_header_8h.html#a677077d87aa175d7a3ee2e5c9e51c2e7">ResultCode</a> setShouldExitAndWait (<span class="keyword">const</span> <span class="keywordtype">double</span> interval = 0.000001) <span class="keywordflow">throw</span>();
+<a name="l00124"></a>00124         ResultCode <a class="code" href="class_threading_1_1_thread.html#afac6cb66c5ab59a6a3f371dbea00e898" title="Signals that the thread should exit then waits for it to exit.">setShouldExitAndWait</a> (<span class="keyword">const</span> <span class="keywordtype">double</span> interval = 0.000001) <span class="keywordflow">throw</span>();
 <a name="l00125"></a>00125         
-<a name="l00128"></a>00128         <span class="keywordtype">bool</span> getShouldExit() <span class="keywordflow">throw</span>();
+<a name="l00128"></a>00128         <span class="keywordtype">bool</span> <a class="code" href="class_threading_1_1_thread.html#a8f420000728f97481fda9c4be5388c3e" title="Returns true if the thread has been signalled to exit, otherwise false.">getShouldExit</a>() <span class="keywordflow">throw</span>();
 <a name="l00129"></a>00129         
 <a name="l00130"></a>00130         <span class="keywordtype">bool</span> setPriority (<span class="keyword">const</span> <span class="keywordtype">int</span> priority) <span class="keywordflow">throw</span>();
 <a name="l00131"></a>00131         <span class="keywordtype">bool</span> setPriorityAudio (<span class="keyword">const</span> <span class="keywordtype">int</span> blockSize, <span class="keyword">const</span> <span class="keywordtype">double</span> sampleRate) <span class="keywordflow">throw</span>();
 <a name="l00132"></a>00132         
-<a name="l00134"></a>00134         <a class="code" href="class_threading.html#ac072dacd374bc2543081179faa801e27">Threading::ID</a> getID() <span class="keywordflow">throw</span>();
+<a name="l00134"></a>00134         Threading::ID <a class="code" href="class_threading_1_1_thread.html#ae8f792258076e7a3d886cf3eca777b8c" title="Get this thread&#39;s ID.">getID</a>() <span class="keywordflow">throw</span>();
 <a name="l00135"></a>00135         
-<a name="l00137"></a>00137         <span class="keyword">virtual</span> <a class="code" href="plonk___standard_header_8h.html#a677077d87aa175d7a3ee2e5c9e51c2e7">ResultCode</a> run() = 0;
+<a name="l00137"></a>00137         <span class="keyword">virtual</span> ResultCode <a class="code" href="class_threading_1_1_thread.html#a30d723c645d98a76e58f692d5ac26b32" title="The run() function: you must implement this in your sublcass.">run</a>() = 0;
 <a name="l00138"></a>00138         
 <a name="l00139"></a>00139     <span class="keyword">protected</span>:
-<a name="l00141"></a>00141         <span class="keyword">static</span> <a class="code" href="plonk___standard_header_8h.html#a677077d87aa175d7a3ee2e5c9e51c2e7">ResultCode</a> <a class="code" href="class_threading.html#af06e4d7a02ac3054e17b01ae78e39684" title="Sleeps the current thread.">sleep</a> (<span class="keyword">const</span> <span class="keywordtype">double</span> seconds) <span class="keywordflow">throw</span>();
+<a name="l00141"></a>00141         <span class="keyword">static</span> ResultCode <a class="code" href="class_threading_1_1_thread.html#a6e52ef55ffcba982eb270909564f607e" title="A shortcut for Threading::sleep()">sleep</a> (<span class="keyword">const</span> <span class="keywordtype">double</span> seconds) <span class="keywordflow">throw</span>();
 <a name="l00142"></a>00142         
-<a name="l00144"></a>00144         <span class="keyword">static</span> <a class="code" href="plonk___standard_header_8h.html#a677077d87aa175d7a3ee2e5c9e51c2e7">ResultCode</a> <a class="code" href="class_threading.html#a064c003b9a820cabb3768f7466d4d05a" title="Yield the current thread.">yield</a>() <span class="keywordflow">throw</span>();
+<a name="l00144"></a>00144         <span class="keyword">static</span> ResultCode <a class="code" href="class_threading_1_1_thread.html#afd1de33dbda00617731d7b5498af1b88" title="A shortcut for Threading::yield()">yield</a>() <span class="keywordflow">throw</span>();
 <a name="l00145"></a>00145         
 <a name="l00146"></a>00146     <span class="keyword">private</span>:
 <a name="l00147"></a>00147         <span class="keyword">inline</span> <a class="code" href="group___plank_thread_class.html#gae37e4606c7f40ef7b6f2363fc3def081" title="An opaque reference to the Plank Thread object.">PlankThreadRef</a> getPeerRef() { <span class="keywordflow">return</span> &amp;thread; }
 <a name="l00148"></a>00148         
-<a name="l00149"></a>00149         <a class="code" href="plonk___standard_header_8h.html#ac7071a7ab77e97d1a3958560fe726096">PLONK_ALIGN</a>(16) 
+<a name="l00149"></a>00149         PLONK_ALIGN(16) 
 <a name="l00150"></a>00150         PlankThread thread;
 <a name="l00151"></a>00151         
-<a name="l00152"></a>00152         <a class="code" href="class_threading.html#adbc148eaddd341d7ae4d07c9e9e33bfd">Thread</a> (Thread <span class="keyword">const</span>&amp;);
-<a name="l00153"></a>00153         Thread&amp; operator= (Thread <span class="keyword">const</span>&amp;);
+<a name="l00152"></a>00152         <a class="code" href="class_threading_1_1_thread.html" title="The Thread class itself.">Thread</a> (<a class="code" href="class_threading_1_1_thread.html" title="The Thread class itself.">Thread</a> <span class="keyword">const</span>&amp;);
+<a name="l00153"></a>00153         <a class="code" href="class_threading_1_1_thread.html" title="The Thread class itself.">Thread</a>&amp; operator= (<a class="code" href="class_threading_1_1_thread.html" title="The Thread class itself.">Thread</a> <span class="keyword">const</span>&amp;);
 <a name="l00154"></a>00154     };
 <a name="l00155"></a>00155     
-<a name="l00156"></a><a class="code" href="class_threading.html#adbc148eaddd341d7ae4d07c9e9e33bfd">00156</a>     <span class="keyword">friend</span> <span class="keyword">class </span><a class="code" href="class_threading_1_1_thread.html" title="The Thread class itself.">Thread</a>;
+<a name="l00156"></a>00156     <span class="keyword">friend</span> <span class="keyword">class </span><a class="code" href="class_threading_1_1_thread.html" title="The Thread class itself.">Thread</a>;
 <a name="l00157"></a>00157     
 <a name="l00158"></a>00158 <span class="keyword">private</span>:
-<a name="l00159"></a>00159     <span class="keyword">static</span> <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> run (<a class="code" href="group___plank_thread_class.html#gae37e4606c7f40ef7b6f2363fc3def081" title="An opaque reference to the Plank Thread object.">PlankThreadRef</a> plankThread) <span class="keywordflow">throw</span>();
+<a name="l00159"></a>00159     <span class="keyword">static</span> PlankResult run (<a class="code" href="group___plank_thread_class.html#gae37e4606c7f40ef7b6f2363fc3def081" title="An opaque reference to the Plank Thread object.">PlankThreadRef</a> plankThread) <span class="keywordflow">throw</span>();
 <a name="l00160"></a>00160 };
 <a name="l00161"></a>00161 
 <a name="l00162"></a>00162 
@@ -180,7 +180,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Properties</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -189,7 +189,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 5 2012 17:04:56 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 8 2014 12:26:50 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

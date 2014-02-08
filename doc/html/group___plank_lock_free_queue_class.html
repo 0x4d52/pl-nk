@@ -20,7 +20,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="pl-nk-logo-small.png"/></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">pl-nk</div>
+   <div id="projectname">pl-nk&#160;<span id="projectnumber">v0.4.5</span></div>
+   <div id="projectbrief">Plonk|Plink|Plank are a set of cross-platform C/C++ frameworks for audio software development</div>
   </td>
  </tr>
  </tbody>
@@ -29,8 +30,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -54,7 +55,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="header">
   <div class="summary">
-<a href="#typedef-members">Typedefs</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">Plank LockFreeQueue class</div>  </div>
@@ -64,243 +64,22 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <p>A lock-free queue (FIFO).  
 <a href="#details">More...</a></p>
 <table class="memberdecls">
-<tr><td colspan="2"><h2><a name="typedef-members"></a>
-Typedefs</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef struct PlankLockFreeQueue *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_lock_free_queue_class.html#ga7c068cf6b20efd5a00f15d89d2be5167">PlankLockFreeQueueRef</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_lock_free_queue_class.html#ga7504ef4a6c3859003f938f7b989ac323">PlankLockFreeQueueFreeElementDataFunction</a> )(<a class="el" href="plank___standard_header_8h.html#a6461616175af5df334c3067edbe0b6c3">PlankP</a>)</td></tr>
 <tr><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="group___plank_lock_free_queue_class.html#ga7c068cf6b20efd5a00f15d89d2be5167">PlankLockFreeQueueRef</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_lock_free_queue_class.html#ga34203c72ddf1e100b4e7bda6e64838b4">pl_LockFreeQueue_CreateAndInit</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="group___plank_lock_free_queue_class.html#ga7c068cf6b20efd5a00f15d89d2be5167">PlankLockFreeQueueRef</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_lock_free_queue_class.html#ga86b810409108ffdb914cde24780ba04e">pl_LockFreeQueue_Create</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_lock_free_queue_class.html#ga0ec98226a4b16c9520c83eda9dbb60f9">pl_LockFreeQueue_Init</a> (<a class="el" href="group___plank_lock_free_queue_class.html#ga7c068cf6b20efd5a00f15d89d2be5167">PlankLockFreeQueueRef</a> p)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_lock_free_queue_class.html#gae420f1660c934e90e682a9913769d495">pl_LockFreeQueue_DeInit</a> (<a class="el" href="group___plank_lock_free_queue_class.html#ga7c068cf6b20efd5a00f15d89d2be5167">PlankLockFreeQueueRef</a> p)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_lock_free_queue_class.html#ga22fddc6eab9392565837be81186a7358">pl_LockFreeQueue_Destroy</a> (<a class="el" href="group___plank_lock_free_queue_class.html#ga7c068cf6b20efd5a00f15d89d2be5167">PlankLockFreeQueueRef</a> p)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_lock_free_queue_class.html#ga9651b88d77524c82642c0cbadcbbf58e">pl_LockFreeQueue_Clear</a> (<a class="el" href="group___plank_lock_free_queue_class.html#ga7c068cf6b20efd5a00f15d89d2be5167">PlankLockFreeQueueRef</a> p)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_lock_free_queue_class.html#gaf310470590c1e97e259cebf0b9c352d1">pl_LockFreeQueue_SetFreeElementDataFunction</a> (<a class="el" href="group___plank_lock_free_queue_class.html#ga7c068cf6b20efd5a00f15d89d2be5167">PlankLockFreeQueueRef</a> p, <a class="el" href="group___plank_lock_free_queue_class.html#ga7504ef4a6c3859003f938f7b989ac323">PlankLockFreeQueueFreeElementDataFunction</a> freeFunction)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_lock_free_queue_class.html#gab2a410db5a9c7f3e147660850adbb1f7">pl_LockFreeQueue_Push</a> (<a class="el" href="group___plank_lock_free_queue_class.html#ga7c068cf6b20efd5a00f15d89d2be5167">PlankLockFreeQueueRef</a> p, const <a class="el" href="group___plank_lock_free_linked_list_element_class.html#ga7e049c7edba8f155690ca68a97bd2180">PlankLockFreeQueueElementRef</a> element)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_lock_free_queue_class.html#gab64a9e7f8817ed5e220b8f51e2993837">pl_LockFreeQueue_Pop</a> (<a class="el" href="group___plank_lock_free_queue_class.html#ga7c068cf6b20efd5a00f15d89d2be5167">PlankLockFreeQueueRef</a> p, <a class="el" href="group___plank_lock_free_linked_list_element_class.html#ga7e049c7edba8f155690ca68a97bd2180">PlankLockFreeQueueElementRef</a> *element)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="plank___standard_header_8h.html#adc55cc3e1effd5d94c88cc90d1117ce5">PlankI</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_lock_free_queue_class.html#gafb22446a30c9dee41214207fe01130a8">pl_LockFreeQueue_GetSize</a> (<a class="el" href="group___plank_lock_free_queue_class.html#ga7c068cf6b20efd5a00f15d89d2be5167">PlankLockFreeQueueRef</a> p)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">PlankI&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_lock_free_queue_class.html#gafb22446a30c9dee41214207fe01130a8">pl_LockFreeQueue_GetSize</a> (PlankLockFreeQueueRef p)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">NB the result of this could be invalid by the time it is returned in a multithreaded context.  <a href="#gafb22446a30c9dee41214207fe01130a8"></a><br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <p>A lock-free queue (FIFO). </p>
-<hr/><h2>Typedef Documentation</h2>
-<a class="anchor" id="ga7c068cf6b20efd5a00f15d89d2be5167"></a><!-- doxytag: member="plank_LockFreeQueue.h::PlankLockFreeQueueRef" ref="ga7c068cf6b20efd5a00f15d89d2be5167" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef struct PlankLockFreeQueue* <a class="el" href="group___plank_lock_free_queue_class.html#ga7c068cf6b20efd5a00f15d89d2be5167">PlankLockFreeQueueRef</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ga7504ef4a6c3859003f938f7b989ac323"></a><!-- doxytag: member="plank_LockFreeQueue.h::PlankLockFreeQueueFreeElementDataFunction" ref="ga7504ef4a6c3859003f938f7b989ac323" args=")(PlankP)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a>(* <a class="el" href="group___plank_lock_free_queue_class.html#ga7504ef4a6c3859003f938f7b989ac323">PlankLockFreeQueueFreeElementDataFunction</a>)(<a class="el" href="plank___standard_header_8h.html#a6461616175af5df334c3067edbe0b6c3">PlankP</a>)</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 <hr/><h2>Function Documentation</h2>
-<a class="anchor" id="ga34203c72ddf1e100b4e7bda6e64838b4"></a><!-- doxytag: member="plank_LockFreeQueue.h::pl_LockFreeQueue_CreateAndInit" ref="ga34203c72ddf1e100b4e7bda6e64838b4" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="group___plank_lock_free_queue_class.html#ga7c068cf6b20efd5a00f15d89d2be5167">PlankLockFreeQueueRef</a> pl_LockFreeQueue_CreateAndInit </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ga86b810409108ffdb914cde24780ba04e"></a><!-- doxytag: member="plank_LockFreeQueue.h::pl_LockFreeQueue_Create" ref="ga86b810409108ffdb914cde24780ba04e" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="group___plank_lock_free_queue_class.html#ga7c068cf6b20efd5a00f15d89d2be5167">PlankLockFreeQueueRef</a> pl_LockFreeQueue_Create </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ga0ec98226a4b16c9520c83eda9dbb60f9"></a><!-- doxytag: member="plank_LockFreeQueue.h::pl_LockFreeQueue_Init" ref="ga0ec98226a4b16c9520c83eda9dbb60f9" args="(PlankLockFreeQueueRef p)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_LockFreeQueue_Init </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="group___plank_lock_free_queue_class.html#ga7c068cf6b20efd5a00f15d89d2be5167">PlankLockFreeQueueRef</a>&#160;</td>
-          <td class="paramname"><em>p</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="gae420f1660c934e90e682a9913769d495"></a><!-- doxytag: member="plank_LockFreeQueue.h::pl_LockFreeQueue_DeInit" ref="gae420f1660c934e90e682a9913769d495" args="(PlankLockFreeQueueRef p)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_LockFreeQueue_DeInit </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="group___plank_lock_free_queue_class.html#ga7c068cf6b20efd5a00f15d89d2be5167">PlankLockFreeQueueRef</a>&#160;</td>
-          <td class="paramname"><em>p</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ga22fddc6eab9392565837be81186a7358"></a><!-- doxytag: member="plank_LockFreeQueue.h::pl_LockFreeQueue_Destroy" ref="ga22fddc6eab9392565837be81186a7358" args="(PlankLockFreeQueueRef p)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_LockFreeQueue_Destroy </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="group___plank_lock_free_queue_class.html#ga7c068cf6b20efd5a00f15d89d2be5167">PlankLockFreeQueueRef</a>&#160;</td>
-          <td class="paramname"><em>p</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ga9651b88d77524c82642c0cbadcbbf58e"></a><!-- doxytag: member="plank_LockFreeQueue.h::pl_LockFreeQueue_Clear" ref="ga9651b88d77524c82642c0cbadcbbf58e" args="(PlankLockFreeQueueRef p)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_LockFreeQueue_Clear </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="group___plank_lock_free_queue_class.html#ga7c068cf6b20efd5a00f15d89d2be5167">PlankLockFreeQueueRef</a>&#160;</td>
-          <td class="paramname"><em>p</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="gaf310470590c1e97e259cebf0b9c352d1"></a><!-- doxytag: member="plank_LockFreeQueue.h::pl_LockFreeQueue_SetFreeElementDataFunction" ref="gaf310470590c1e97e259cebf0b9c352d1" args="(PlankLockFreeQueueRef p, PlankLockFreeQueueFreeElementDataFunction freeFunction)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_LockFreeQueue_SetFreeElementDataFunction </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="group___plank_lock_free_queue_class.html#ga7c068cf6b20efd5a00f15d89d2be5167">PlankLockFreeQueueRef</a>&#160;</td>
-          <td class="paramname"><em>p</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="group___plank_lock_free_queue_class.html#ga7504ef4a6c3859003f938f7b989ac323">PlankLockFreeQueueFreeElementDataFunction</a>&#160;</td>
-          <td class="paramname"><em>freeFunction</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="gab2a410db5a9c7f3e147660850adbb1f7"></a><!-- doxytag: member="plank_LockFreeQueue.h::pl_LockFreeQueue_Push" ref="gab2a410db5a9c7f3e147660850adbb1f7" args="(PlankLockFreeQueueRef p, const PlankLockFreeQueueElementRef element)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_LockFreeQueue_Push </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="group___plank_lock_free_queue_class.html#ga7c068cf6b20efd5a00f15d89d2be5167">PlankLockFreeQueueRef</a>&#160;</td>
-          <td class="paramname"><em>p</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="group___plank_lock_free_linked_list_element_class.html#ga7e049c7edba8f155690ca68a97bd2180">PlankLockFreeQueueElementRef</a>&#160;</td>
-          <td class="paramname"><em>element</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="gab64a9e7f8817ed5e220b8f51e2993837"></a><!-- doxytag: member="plank_LockFreeQueue.h::pl_LockFreeQueue_Pop" ref="gab64a9e7f8817ed5e220b8f51e2993837" args="(PlankLockFreeQueueRef p, PlankLockFreeQueueElementRef *element)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_LockFreeQueue_Pop </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="group___plank_lock_free_queue_class.html#ga7c068cf6b20efd5a00f15d89d2be5167">PlankLockFreeQueueRef</a>&#160;</td>
-          <td class="paramname"><em>p</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="group___plank_lock_free_linked_list_element_class.html#ga7e049c7edba8f155690ca68a97bd2180">PlankLockFreeQueueElementRef</a> *&#160;</td>
-          <td class="paramname"><em>element</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 <a class="anchor" id="gafb22446a30c9dee41214207fe01130a8"></a><!-- doxytag: member="plank_LockFreeQueue.h::pl_LockFreeQueue_GetSize" ref="gafb22446a30c9dee41214207fe01130a8" args="(PlankLockFreeQueueRef p)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="plank___standard_header_8h.html#adc55cc3e1effd5d94c88cc90d1117ce5">PlankI</a> pl_LockFreeQueue_GetSize </td>
+          <td class="memname">PlankI pl_LockFreeQueue_GetSize </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group___plank_lock_free_queue_class.html#ga7c068cf6b20efd5a00f15d89d2be5167">PlankLockFreeQueueRef</a>&#160;</td>
+          <td class="paramtype">PlankLockFreeQueueRef&#160;</td>
           <td class="paramname"><em>p</em></td><td>)</td>
           <td></td>
         </tr>
@@ -318,7 +97,7 @@ Functions</h2></td></tr>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Properties</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -327,7 +106,7 @@ Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 5 2012 17:04:57 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 8 2014 12:26:51 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

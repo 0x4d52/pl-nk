@@ -20,7 +20,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="pl-nk-logo-small.png"/></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">pl-nk</div>
+   <div id="projectname">pl-nk&#160;<span id="projectnumber">v0.4.5</span></div>
+   <div id="projectbrief">Plonk|Plink|Plank are a set of cross-platform C/C++ frameworks for audio software development</div>
   </td>
  </tr>
  </tbody>
@@ -29,8 +30,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -54,7 +55,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
       <li><a href="files.html"><span>File&#160;List</span></a></li>
-      <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
 <div class="header">
@@ -62,14 +62,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">plonk_DelayFormDelay.h</div>  </div>
 </div>
 <div class="contents">
-<a href="plonk___delay_form_delay_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*</span>
+<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*</span>
 <a name="l00002"></a>00002 <span class="comment"> -------------------------------------------------------------------------------</span>
 <a name="l00003"></a>00003 <span class="comment"> This file is part of the Plink, Plonk, Plank libraries</span>
 <a name="l00004"></a>00004 <span class="comment">  by Martin Robinson</span>
 <a name="l00005"></a>00005 <span class="comment"> </span>
 <a name="l00006"></a>00006 <span class="comment"> http://code.google.com/p/pl-nk/</span>
 <a name="l00007"></a>00007 <span class="comment"> </span>
-<a name="l00008"></a>00008 <span class="comment"> Copyright University of the West of England, Bristol 2011-12</span>
+<a name="l00008"></a>00008 <span class="comment"> Copyright University of the West of England, Bristol 2011-14</span>
 <a name="l00009"></a>00009 <span class="comment"> All rights reserved.</span>
 <a name="l00010"></a>00010 <span class="comment"> </span>
 <a name="l00011"></a>00011 <span class="comment"> Redistribution and use in source and binary forms, with or without</span>
@@ -104,231 +104,230 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00040"></a>00040 <span class="preprocessor"></span><span class="preprocessor">#define PLONK_DELAYFORMDELAY_H</span>
 <a name="l00041"></a>00041 <span class="preprocessor"></span>
 <a name="l00042"></a>00042 <span class="preprocessor">#include &quot;../channel/plonk_ChannelInternalCore.h&quot;</span>
-<a name="l00043"></a>00043 <span class="preprocessor">#include &quot;<a class="code" href="plonk___delay_forward_declarations_8h.html">plonk_DelayForwardDeclarations.h</a>&quot;</span>
+<a name="l00043"></a>00043 <span class="preprocessor">#include &quot;plonk_DelayForwardDeclarations.h&quot;</span>
 <a name="l00044"></a>00044 
 <a name="l00045"></a>00045 
-<a name="l00046"></a>00046 <span class="keyword">template</span>&lt;<span class="keyword">class</span> SampleType&gt;
-<a name="l00047"></a><a class="code" href="class_delay_form_delay.html">00047</a> <span class="keyword">class </span><a class="code" href="class_delay_form_delay.html">DelayFormDelay</a>
-<a name="l00048"></a>00048 :   <span class="keyword">public</span> <a class="code" href="class_delay_form.html">DelayForm</a>&lt;SampleType, DelayFormType::Delay, 1, 1&gt;
+<a name="l00046"></a>00046 <span class="keyword">template</span>&lt;<span class="keyword">class</span> SampleType, Interp::TypeCode InterpTypeCode&gt;
+<a name="l00047"></a>00047 <span class="keyword">class </span>DelayFormDelay
+<a name="l00048"></a>00048 :   <span class="keyword">public</span> DelayForm&lt;SampleType, DelayFormType::Delay, 1, 1&gt;
 <a name="l00049"></a>00049 {
 <a name="l00050"></a>00050 <span class="keyword">public</span>:
-<a name="l00051"></a><a class="code" href="class_delay_form_delay.html#ae5312bfb44da928e096d1e69e09f7dfc">00051</a>     <span class="keyword">typedef</span> <a class="code" href="class_delay_form.html">DelayForm&lt;SampleType, DelayFormType::Delay, 1, 1&gt;</a>       <a class="code" href="class_delay_form_delay.html#ae5312bfb44da928e096d1e69e09f7dfc">Base</a>;
+<a name="l00051"></a>00051     <span class="keyword">typedef</span> DelayForm&lt;SampleType, DelayFormType::Delay, 1, 1&gt;       Base;
 <a name="l00052"></a>00052     
-<a name="l00053"></a><a class="code" href="class_delay_form_delay.html#a8c2605d862ee1584fd3f48ebb4bc7e85">00053</a>     <span class="keyword">enum</span> <a class="code" href="class_delay_form_delay.html#a8c2605d862ee1584fd3f48ebb4bc7e85">InParams</a>
+<a name="l00053"></a>00053     <span class="keyword">enum</span> InParams
 <a name="l00054"></a>00054     {
-<a name="l00055"></a><a class="code" href="class_delay_form_delay.html#a8c2605d862ee1584fd3f48ebb4bc7e85aa520259593d37b506e171b01e9afb949">00055</a>         <a class="code" href="class_delay_form_delay.html#a8c2605d862ee1584fd3f48ebb4bc7e85aa520259593d37b506e171b01e9afb949">Duration</a>,
-<a name="l00056"></a><a class="code" href="class_delay_form_delay.html#a8c2605d862ee1584fd3f48ebb4bc7e85a9ee8e0ef5306a1d27a013e7bda4be854">00056</a>         <a class="code" href="class_delay_form_delay.html#a8c2605d862ee1584fd3f48ebb4bc7e85a9ee8e0ef5306a1d27a013e7bda4be854">NumInParams</a>
+<a name="l00055"></a>00055         Duration,
+<a name="l00056"></a>00056         NumInParams
 <a name="l00057"></a>00057     };
 <a name="l00058"></a>00058     
-<a name="l00059"></a><a class="code" href="class_delay_form_delay.html#a32507ddcfc092962beb7f6affa14d793">00059</a>     <span class="keyword">enum</span> <a class="code" href="class_delay_form_delay.html#a32507ddcfc092962beb7f6affa14d793">OutParams</a>
+<a name="l00059"></a>00059     <span class="keyword">enum</span> OutParams
 <a name="l00060"></a>00060     {
-<a name="l00061"></a><a class="code" href="class_delay_form_delay.html#a32507ddcfc092962beb7f6affa14d793a4859e5d8a3ed6ebfff0e4b553ccaa06b">00061</a>         <a class="code" href="class_delay_form_delay.html#a32507ddcfc092962beb7f6affa14d793a4859e5d8a3ed6ebfff0e4b553ccaa06b">DurationInSamples</a>,
-<a name="l00062"></a><a class="code" href="class_delay_form_delay.html#a32507ddcfc092962beb7f6affa14d793ac10c99c4b3bd68219ecc9e871c34b698">00062</a>         <a class="code" href="class_delay_form_delay.html#a32507ddcfc092962beb7f6affa14d793ac10c99c4b3bd68219ecc9e871c34b698">NumOutParams</a>
+<a name="l00061"></a>00061         DurationInSamples,
+<a name="l00062"></a>00062         NumOutParams
 <a name="l00063"></a>00063     };
 <a name="l00064"></a>00064 
-<a name="l00065"></a><a class="code" href="class_delay_form_delay.html#ac929e13dd28ec8827cbe97a5fab6882b">00065</a>     <span class="keyword">typedef</span> <span class="keyword">typename</span> <a class="code" href="struct_delay_form_data.html">Base::Data</a>                                     <a class="code" href="class_delay_form_delay.html#ac929e13dd28ec8827cbe97a5fab6882b">Data</a>;
-<a name="l00066"></a><a class="code" href="class_delay_form_delay.html#a5af8d1211597d0dd7348e11af5ccb16d">00066</a>     <span class="keyword">typedef</span> <span class="keyword">typename</span> <a class="code" href="struct_delay_form_data_1_1_delay_state.html">Data::DelayState</a>                               <a class="code" href="class_delay_form_delay.html#a5af8d1211597d0dd7348e11af5ccb16d">DelayState</a>;
-<a name="l00067"></a><a class="code" href="class_delay_form_delay.html#adfabf55287a301902faf5df62c0d3299">00067</a>     <span class="keyword">typedef</span> <a class="code" href="class_delay_form_delay.html">DelayFormDelay</a>                                          <a class="code" href="class_delay_form_delay.html#adfabf55287a301902faf5df62c0d3299">FormType</a>;
+<a name="l00065"></a>00065     <span class="keyword">typedef</span> <span class="keyword">typename</span> Base::Data                                     Data;
+<a name="l00066"></a>00066     <span class="keyword">typedef</span> <span class="keyword">typename</span> Data::DelayState                               DelayState;
+<a name="l00067"></a>00067     <span class="keyword">typedef</span> DelayFormDelay                                          FormType;
 <a name="l00068"></a>00068  
-<a name="l00069"></a><a class="code" href="class_delay_form_delay.html#a315dd2878ddd410956798a54a4f39cb0">00069</a>     <span class="keyword">typedef</span> SampleType                                              <a class="code" href="class_delay_form_delay.html#a315dd2878ddd410956798a54a4f39cb0">SampleDataType</a>;
-<a name="l00070"></a><a class="code" href="class_delay_form_delay.html#a56376139183a3e68b35b53837b0ce480">00070</a>     <span class="keyword">typedef</span> <a class="code" href="class_delay1_param_channel_internal.html" title="Delay processor.">Delay1ParamChannelInternal&lt;FormType&gt;</a>                    <a class="code" href="class_delay_form_delay.html#a56376139183a3e68b35b53837b0ce480">DelayInternal</a>;
-<a name="l00071"></a><a class="code" href="class_delay_form_delay.html#a6be3b5b23a25d21dea872a04f8056dd0">00071</a>     <span class="keyword">typedef</span> <a class="code" href="class_channel_base.html" title="A single output signal.">ChannelBase&lt;SampleType&gt;</a>                                 <a class="code" href="class_delay_form_delay.html#a6be3b5b23a25d21dea872a04f8056dd0">ChannelType</a>;
-<a name="l00072"></a><a class="code" href="class_delay_form_delay.html#a0b78321cf24ea03bb4874bed3b514d84">00072</a>     <span class="keyword">typedef</span> <a class="code" href="class_channel_internal.html" title="The base class from which most ChannelInternals should be derived.">ChannelInternal&lt;SampleType,Data&gt;</a>                        <a class="code" href="class_delay_form_delay.html#a0b78321cf24ea03bb4874bed3b514d84">Internal</a>;
-<a name="l00073"></a><a class="code" href="class_delay_form_delay.html#aded2ed7f5665e8f9e2de1e2c1b066b61">00073</a>     <span class="keyword">typedef</span> <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase&lt;SampleType&gt;</a>                                    <a class="code" href="class_delay_form_delay.html#aded2ed7f5665e8f9e2de1e2c1b066b61">UnitType</a>;
-<a name="l00074"></a><a class="code" href="class_delay_form_delay.html#a925fcb17aa96ad712f35a0e3ec52ceb6">00074</a>     <span class="keyword">typedef</span> <a class="code" href="class_input_dictionary.html" title="For storing named Dynamic objects.">InputDictionary</a>                                         <a class="code" href="class_delay_form_delay.html#a925fcb17aa96ad712f35a0e3ec52ceb6">Inputs</a>;
-<a name="l00075"></a><a class="code" href="class_delay_form_delay.html#a17cd2af4b43ed5e385bd78cbd02a205a">00075</a>     <span class="keyword">typedef</span> <a class="code" href="class_numerical_array.html">NumericalArray&lt;SampleType&gt;</a>                              <a class="code" href="class_delay_form_delay.html#a17cd2af4b43ed5e385bd78cbd02a205a">Buffer</a>;
+<a name="l00069"></a>00069     <span class="keyword">typedef</span> SampleType                                              SampleDataType;
+<a name="l00070"></a>00070     <span class="keyword">typedef</span> <a class="code" href="class_delay1_param_channel_internal.html" title="Delay processor.">Delay1ParamChannelInternal&lt;FormType&gt;</a>                    DelayInternal;
+<a name="l00071"></a>00071     <span class="keyword">typedef</span> <a class="code" href="class_channel_base.html" title="A single output signal.">ChannelBase&lt;SampleType&gt;</a>                                 ChannelType;
+<a name="l00072"></a>00072     <span class="keyword">typedef</span> <a class="code" href="class_channel_internal.html" title="The base class from which most ChannelInternals should be derived.">ChannelInternal&lt;SampleType,Data&gt;</a>                        Internal;
+<a name="l00073"></a>00073     <span class="keyword">typedef</span> <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase&lt;SampleType&gt;</a>                                    UnitType;
+<a name="l00074"></a>00074     <span class="keyword">typedef</span> <a class="code" href="class_input_dictionary.html" title="For storing named Dynamic objects.">InputDictionary</a>                                         Inputs;
+<a name="l00075"></a>00075     <span class="keyword">typedef</span> <a class="code" href="class_numerical_array.html">NumericalArray&lt;SampleType&gt;</a>                              <a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">Buffer</a>;
 <a name="l00076"></a>00076     
-<a name="l00077"></a><a class="code" href="class_delay_form_delay.html#a28f850a5725a1578f1f85662a9d22abe">00077</a>     <span class="keyword">typedef</span> <span class="keyword">typename</span> <a class="code" href="class_type_utility.html" title="A utility for finding out information about certain other classes and types.">TypeUtility&lt;SampleType&gt;::IndexType</a>             <a class="code" href="class_delay_form_delay.html#a28f850a5725a1578f1f85662a9d22abe">Param1Type</a>;  
-<a name="l00078"></a><a class="code" href="class_delay_form_delay.html#a431e12180e54d4803e7353e8d1c2dbb9">00078</a>     <span class="keyword">typedef</span> <a class="code" href="class_delay_form_delay.html#a28f850a5725a1578f1f85662a9d22abe">Param1Type</a>                                              <a class="code" href="class_delay_form_delay.html#a431e12180e54d4803e7353e8d1c2dbb9">DurationType</a>;    
-<a name="l00079"></a><a class="code" href="class_delay_form_delay.html#aab2dbae204a5dd964acd7575875a568a">00079</a>     <span class="keyword">typedef</span> <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase&lt;DurationType&gt;</a>                                  <a class="code" href="class_delay_form_delay.html#aab2dbae204a5dd964acd7575875a568a">DurationUnitType</a>;
-<a name="l00080"></a><a class="code" href="class_delay_form_delay.html#a54a0ff8526f0fef52390d4948d68387f">00080</a>     <span class="keyword">typedef</span> <a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">NumericalArray&lt;DurationType&gt;</a>                            <a class="code" href="class_delay_form_delay.html#a54a0ff8526f0fef52390d4948d68387f">DurationBufferType</a>;
-<a name="l00081"></a><a class="code" href="class_delay_form_delay.html#a12ceebdd5d9302bea323e99839844b8a">00081</a>     <span class="keyword">typedef</span> <a class="code" href="class_channel_base.html" title="A single output signal.">ChannelBase&lt;DurationType&gt;</a>                               <a class="code" href="class_delay_form_delay.html#a12ceebdd5d9302bea323e99839844b8a">DurationChannelType</a>;
-<a name="l00082"></a><a class="code" href="class_delay_form_delay.html#a8790db0ded214a921c0fcb35d8b7fd3e">00082</a>     <span class="keyword">typedef</span> <a class="code" href="class_numerical_array2_d.html">NumericalArray2D&lt;DurationChannelType,DurationUnitType&gt;</a>  <a class="code" href="class_delay_form_delay.html#a8790db0ded214a921c0fcb35d8b7fd3e">DurationUnitArrayType</a>;
+<a name="l00077"></a>00077     <span class="keyword">typedef</span> <span class="keyword">typename</span> <a class="code" href="class_type_utility.html" title="A utility for finding out information about certain other classes and types.">TypeUtility&lt;SampleType&gt;::IndexType</a>             Param1Type;  
+<a name="l00078"></a>00078     <span class="keyword">typedef</span> Param1Type                                              DurationType;    
+<a name="l00079"></a>00079     <span class="keyword">typedef</span> <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase&lt;DurationType&gt;</a>                                  DurationUnitType;
+<a name="l00080"></a>00080     <span class="keyword">typedef</span> <a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">NumericalArray&lt;DurationType&gt;</a>                            DurationBufferType;
+<a name="l00081"></a>00081     <span class="keyword">typedef</span> <a class="code" href="class_channel_base.html" title="A single output signal.">ChannelBase&lt;DurationType&gt;</a>                               DurationChannelType;
+<a name="l00082"></a>00082     <span class="keyword">typedef</span> NumericalArray2D&lt;DurationChannelType,DurationUnitType&gt;  DurationUnitArrayType;
 <a name="l00083"></a>00083     
-<a name="l00084"></a><a class="code" href="class_delay_form_delay.html#a4f0fdfa92d8de4632ba38b398809c478">00084</a>     <span class="keyword">typedef</span> <a class="code" href="class_numerical_array2_d.html">NumericalArray2D&lt;ChannelType,UnitType&gt;</a>                  <a class="code" href="class_delay_form_delay.html#a4f0fdfa92d8de4632ba38b398809c478">UnitArrayType</a>;
-<a name="l00085"></a><a class="code" href="class_delay_form_delay.html#ab93414503d7ee51f8bbbc0360f237da9">00085</a>     <span class="keyword">typedef</span> <a class="code" href="class_interp_linear.html">InterpLinear&lt;SampleType,DurationType&gt;</a>                   <a class="code" href="class_delay_form_delay.html#ab93414503d7ee51f8bbbc0360f237da9">InterpType</a>;
-<a name="l00086"></a>00086 
-<a name="l00087"></a><a class="code" href="class_delay_form_delay.html#ad99636c470be1a715eb55a516a8c6e74">00087</a>     <span class="keyword">typedef</span> void (*<a class="code" href="class_delay_form_delay.html#ad99636c470be1a715eb55a516a8c6e74">InputFunction</a>)  (<a class="code" href="struct_delay_form_data.html">Data</a>&amp;, <a class="code" href="struct_delay_form_data_1_1_delay_state.html">DelayState</a>&amp;);
-<a name="l00088"></a><a class="code" href="class_delay_form_delay.html#a0f443cb28bee9d5482a1de3ae0beaa0f">00088</a>     <span class="keyword">typedef</span> void (*<a class="code" href="class_delay_form_delay.html#a0f443cb28bee9d5482a1de3ae0beaa0f">ReadFunction</a>)   (<a class="code" href="struct_delay_form_data.html">Data</a>&amp;, <a class="code" href="struct_delay_form_data_1_1_delay_state.html">DelayState</a>&amp;);
-<a name="l00089"></a><a class="code" href="class_delay_form_delay.html#a399825022fbd2af618246bf2129fbe1b">00089</a>     <span class="keyword">typedef</span> void (*<a class="code" href="class_delay_form_delay.html#a399825022fbd2af618246bf2129fbe1b">WriteFunction</a>)  (<a class="code" href="struct_delay_form_data.html">Data</a>&amp;, <a class="code" href="struct_delay_form_data_1_1_delay_state.html">DelayState</a>&amp;);
-<a name="l00090"></a><a class="code" href="class_delay_form_delay.html#a3470c39725a99cfa0177e93257a54c31">00090</a>     <span class="keyword">typedef</span> void (*<a class="code" href="class_delay_form_delay.html#a3470c39725a99cfa0177e93257a54c31">OutputFunction</a>) (<a class="code" href="struct_delay_form_data.html">Data</a>&amp;, <a class="code" href="struct_delay_form_data_1_1_delay_state.html">DelayState</a>&amp;);
-<a name="l00091"></a><a class="code" href="class_delay_form_delay.html#a30bfaffecf114e11f18ae70abfffc1e4">00091</a>     <span class="keyword">typedef</span> void (*<a class="code" href="class_delay_form_delay.html#a30bfaffecf114e11f18ae70abfffc1e4">Param1Function</a>) (<a class="code" href="struct_delay_form_data.html">Data</a>&amp;, <a class="code" href="struct_delay_form_data_1_1_delay_state.html">DelayState</a>&amp;, <a class="code" href="class_delay_form_delay.html#a28f850a5725a1578f1f85662a9d22abe">Param1Type</a> <span class="keyword">const</span>&amp;);
-<a name="l00092"></a>00092 
-<a name="l00093"></a><a class="code" href="class_delay_form_delay.html#ad2dca578c79730c6854d562b55f30915">00093</a>     <span class="keyword">static</span> <span class="keyword">inline</span> <a class="code" href="class_numerical_array.html">IntArray</a> <a class="code" href="class_delay_form_delay.html#ad2dca578c79730c6854d562b55f30915">getInputKeys</a>() throw()
-<a name="l00094"></a>00094     {
-<a name="l00095"></a>00095         <span class="keyword">const</span> <a class="code" href="class_numerical_array.html">IntArray</a> keys (<a class="code" href="class_i_o_key.html#a31bc497f7606db39aa57aa0366b87e37aa60b1c99f5ef2914e94ca6115fba0983" title="A generic audio (commonly used where there is only one input or output).">IOKey::Generic</a>, <a class="code" href="class_i_o_key.html#a31bc497f7606db39aa57aa0366b87e37ac8b16ba9e77c41579c01af8a94dd63a0" title="Duration in seconds.">IOKey::Duration</a>);
-<a name="l00096"></a>00096         <span class="keywordflow">return</span> keys;
-<a name="l00097"></a>00097     }    
-<a name="l00098"></a>00098     
-<a name="l00099"></a><a class="code" href="class_delay_form_delay.html#af4b452c1a0ff2ceb46e91fb8b717229f">00099</a>     <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="class_delay_form_delay.html#af4b452c1a0ff2ceb46e91fb8b717229f">inputIgnore</a> (<a class="code" href="struct_delay_form_data.html">Data</a>&amp;, <a class="code" href="struct_delay_form_data_1_1_delay_state.html">DelayState</a>&amp;) throw() { }
-<a name="l00100"></a><a class="code" href="class_delay_form_delay.html#acc916f3a5d3072620141ffba9f5fdc8a">00100</a>     <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="class_delay_form_delay.html#acc916f3a5d3072620141ffba9f5fdc8a">inputRead</a> (<a class="code" href="struct_delay_form_data.html">Data</a>&amp;, <a class="code" href="struct_delay_form_data_1_1_delay_state.html">DelayState</a>&amp; state) <span class="keywordflow">throw</span>()
-<a name="l00101"></a>00101     {
-<a name="l00102"></a>00102         state.inputValue = *state.inputSamples++;
-<a name="l00103"></a>00103     }
-<a name="l00104"></a>00104     
-<a name="l00105"></a><a class="code" href="class_delay_form_delay.html#a09afd81a1142c98f09c1190164f28068">00105</a>     <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="class_delay_form_delay.html#a09afd81a1142c98f09c1190164f28068">readIgnore</a> (<a class="code" href="struct_delay_form_data.html">Data</a>&amp;, <a class="code" href="struct_delay_form_data_1_1_delay_state.html">DelayState</a>&amp;) throw() { }
-<a name="l00106"></a><a class="code" href="class_delay_form_delay.html#ae6a6bf11ac97470eb7d4e586880019c4">00106</a>     <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="class_delay_form_delay.html#ae6a6bf11ac97470eb7d4e586880019c4">readRead</a> (<a class="code" href="struct_delay_form_data.html">Data</a>&amp;, <a class="code" href="struct_delay_form_data_1_1_delay_state.html">DelayState</a>&amp; state) <span class="keywordflow">throw</span>()
-<a name="l00107"></a>00107     {
-<a name="l00108"></a>00108         <a class="code" href="class_delay_form_delay.html#a431e12180e54d4803e7353e8d1c2dbb9">DurationType</a> readPosition = <a class="code" href="class_delay_form_delay.html#a431e12180e54d4803e7353e8d1c2dbb9">DurationType</a> (state.writePosition) - state.paramsOut[<a class="code" href="class_delay_form_delay.html#a32507ddcfc092962beb7f6affa14d793a4859e5d8a3ed6ebfff0e4b553ccaa06b">DurationInSamples</a>];
-<a name="l00109"></a>00109         <span class="keywordflow">if</span> (readPosition &lt; state.buffer0)
-<a name="l00110"></a>00110             readPosition += state.bufferLengthIndex;
-<a name="l00111"></a>00111         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (readPosition &gt;= 0 &amp;&amp; readPosition &lt;= state.bufferLengthIndex);
-<a name="l00112"></a>00112         state.readValue = <a class="code" href="class_interp_linear.html#a933631cb5d0c494325f6b8e2ba5da197">InterpType::lookup</a> (state.bufferSamples, readPosition);
+<a name="l00084"></a>00084     <span class="keyword">typedef</span> NumericalArray2D&lt;ChannelType,UnitType&gt;                  UnitArrayType;
+<a name="l00085"></a>00085     <span class="keyword">typedef</span> InterpSelect&lt;SampleType,DurationType,InterpTypeCode&gt;    InterpSelectType;
+<a name="l00086"></a>00086     <span class="keyword">typedef</span> <span class="keyword">typename</span> InterpSelectType::InterpType                   InterpType;
+<a name="l00087"></a>00087     <span class="keyword">typedef</span> <span class="keyword">typename</span> InterpType::ExtensionBuffer                    ExtensionBuffer;
+<a name="l00088"></a>00088 
+<a name="l00089"></a>00089     <span class="keyword">typedef</span> void (*InputFunction)  (Data&amp;, DelayState&amp;);
+<a name="l00090"></a>00090     <span class="keyword">typedef</span> void (*ReadFunction)   (Data&amp;, DelayState&amp;);
+<a name="l00091"></a>00091     <span class="keyword">typedef</span> void (*WriteFunction)  (Data&amp;, DelayState&amp;);
+<a name="l00092"></a>00092     <span class="keyword">typedef</span> void (*OutputFunction) (Data&amp;, DelayState&amp;);
+<a name="l00093"></a>00093     <span class="keyword">typedef</span> void (*Param1Function) (Data&amp;, DelayState&amp;, Param1Type <span class="keyword">const</span>&amp;);
+<a name="l00094"></a>00094 
+<a name="l00095"></a>00095     <span class="keyword">static</span> <span class="keyword">inline</span> <a class="code" href="class_numerical_array.html">IntArray</a> getInputKeys() throw()
+<a name="l00096"></a>00096     {
+<a name="l00097"></a>00097         <span class="keyword">const</span> <a class="code" href="class_numerical_array.html">IntArray</a> keys (IOKey::Generic, IOKey::Duration);
+<a name="l00098"></a>00098         <span class="keywordflow">return</span> keys;
+<a name="l00099"></a>00099     }    
+<a name="l00100"></a>00100     
+<a name="l00101"></a>00101     <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> inputIgnore (Data&amp;, DelayState&amp;) throw() { }
+<a name="l00102"></a>00102     <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> inputRead (Data&amp;, DelayState&amp; state) <span class="keywordflow">throw</span>()
+<a name="l00103"></a>00103     {
+<a name="l00104"></a>00104         state.inputValue = *state.inputSamples++;
+<a name="l00105"></a>00105     }
+<a name="l00106"></a>00106     
+<a name="l00107"></a>00107     <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> readIgnore (Data&amp;, DelayState&amp;) throw() { }
+<a name="l00108"></a>00108     <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> readRead (Data&amp;, DelayState&amp; state) <span class="keywordflow">throw</span>()
+<a name="l00109"></a>00109     {
+<a name="l00110"></a>00110         DurationType readPosition = DurationType (state.writePosition) - state.paramsOut[DurationInSamples] + state.bufferLengthIndex;
+<a name="l00111"></a>00111 <span class="comment">//        plonk_assert (readPosition &gt;= 0 &amp;&amp; readPosition &lt;= state.bufferLengthIndex);</span>
+<a name="l00112"></a>00112         state.readValue = InterpType::lookup (state.bufferSamples, readPosition);
 <a name="l00113"></a>00113     }
 <a name="l00114"></a>00114         
-<a name="l00115"></a><a class="code" href="class_delay_form_delay.html#af3b13e4a5384ceeeeff999d80de4900a">00115</a>     <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="class_delay_form_delay.html#af3b13e4a5384ceeeeff999d80de4900a">writeIgnore</a> (<a class="code" href="struct_delay_form_data.html">Data</a>&amp;, <a class="code" href="struct_delay_form_data_1_1_delay_state.html">DelayState</a>&amp;) throw() { }
-<a name="l00116"></a><a class="code" href="class_delay_form_delay.html#a5fd4e8a8783698b7620649b3f02a8fb6">00116</a>     <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="class_delay_form_delay.html#a5fd4e8a8783698b7620649b3f02a8fb6">writeWrite</a> (<a class="code" href="struct_delay_form_data.html">Data</a>&amp;, <a class="code" href="struct_delay_form_data_1_1_delay_state.html">DelayState</a>&amp; state) <span class="keywordflow">throw</span>()
+<a name="l00115"></a>00115     <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> writeIgnore (Data&amp;, DelayState&amp;) throw() { }
+<a name="l00116"></a>00116     <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> writeWrite (Data&amp;, DelayState&amp; state) <span class="keywordflow">throw</span>()
 <a name="l00117"></a>00117     {
-<a name="l00118"></a>00118         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (state.writePosition &gt;= 0 &amp;&amp; state.writePosition &lt; state.bufferLength);
+<a name="l00118"></a>00118         plonk_assert (state.writePosition &gt;= 0 &amp;&amp; state.writePosition &lt; state.bufferLength);
 <a name="l00119"></a>00119         state.writeValue = state.inputValue;
 <a name="l00120"></a>00120         state.bufferSamples[state.writePosition] = state.writeValue;
-<a name="l00121"></a>00121         <span class="keywordflow">if</span> (state.writePosition == 0)
-<a name="l00122"></a>00122             state.bufferSamples[state.bufferLength] = state.writeValue; <span class="comment">// for interpolation</span>
+<a name="l00121"></a>00121         state.bufferSamples[state.writePosition + state.bufferLength] = state.writeValue; <span class="comment">// for interpolation</span>
+<a name="l00122"></a>00122         state.bufferSamples[state.writePosition + state.bufferLength + state.bufferLength] = state.writeValue; <span class="comment">// for interpolation</span>
 <a name="l00123"></a>00123     }
 <a name="l00124"></a>00124     
-<a name="l00125"></a><a class="code" href="class_delay_form_delay.html#a744cc4b957ca06bb786e8677babe3f10">00125</a>     <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="class_delay_form_delay.html#a744cc4b957ca06bb786e8677babe3f10">outputIgnore</a> (<a class="code" href="struct_delay_form_data.html">Data</a>&amp;, <a class="code" href="struct_delay_form_data_1_1_delay_state.html">DelayState</a>&amp;) throw() { }
-<a name="l00126"></a><a class="code" href="class_delay_form_delay.html#a131c9083c21ceec19bd9136c39f1d7d3">00126</a>     <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="class_delay_form_delay.html#a131c9083c21ceec19bd9136c39f1d7d3">outputWrite</a> (<a class="code" href="struct_delay_form_data.html">Data</a>&amp;, <a class="code" href="struct_delay_form_data_1_1_delay_state.html">DelayState</a>&amp; state) <span class="keywordflow">throw</span>()
+<a name="l00125"></a>00125     <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> outputIgnore (Data&amp;, DelayState&amp;) throw() { }
+<a name="l00126"></a>00126     <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> outputWrite (Data&amp;, DelayState&amp; state) <span class="keywordflow">throw</span>()
 <a name="l00127"></a>00127     {
 <a name="l00128"></a>00128         state.outputValue = state.readValue;
 <a name="l00129"></a>00129         *state.outputSamples++ = state.outputValue;
 <a name="l00130"></a>00130         state.writePosition++;
 <a name="l00131"></a>00131     }
 <a name="l00132"></a>00132     
-<a name="l00133"></a><a class="code" href="class_delay_form_delay.html#af0878448084ef1c3cafe8f8d2061b4a6">00133</a>     <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="class_delay_form_delay.html#af0878448084ef1c3cafe8f8d2061b4a6">param1Ignore</a> (<a class="code" href="struct_delay_form_data.html">Data</a>&amp;, <a class="code" href="struct_delay_form_data_1_1_delay_state.html">DelayState</a>&amp;, <a class="code" href="class_delay_form_delay.html#a431e12180e54d4803e7353e8d1c2dbb9">DurationType</a> <span class="keyword">const</span>&amp;) throw() { }
-<a name="l00134"></a><a class="code" href="class_delay_form_delay.html#af1723f5f994b198f2ad307d438f32941">00134</a>     <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="class_delay_form_delay.html#af1723f5f994b198f2ad307d438f32941">param1Process</a> (<a class="code" href="struct_delay_form_data.html">Data</a>&amp; data, <a class="code" href="struct_delay_form_data_1_1_delay_state.html">DelayState</a>&amp; state, <a class="code" href="class_delay_form_delay.html#a431e12180e54d4803e7353e8d1c2dbb9">DurationType</a> <span class="keyword">const</span>&amp; duration) <span class="keywordflow">throw</span>()
+<a name="l00133"></a>00133     <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> param1Ignore (Data&amp;, DelayState&amp;, DurationType <span class="keyword">const</span>&amp;) throw() { }
+<a name="l00134"></a>00134     <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> param1Process (Data&amp; data, DelayState&amp; state, DurationType <span class="keyword">const</span>&amp; duration) <span class="keywordflow">throw</span>()
 <a name="l00135"></a>00135     {
-<a name="l00136"></a>00136         <span class="keywordflow">if</span> (state.paramsIn[<a class="code" href="class_delay_form_delay.html#a8c2605d862ee1584fd3f48ebb4bc7e85aa520259593d37b506e171b01e9afb949">Duration</a>] != duration)
-<a name="l00137"></a>00137         {
-<a name="l00138"></a>00138             state.paramsIn[<a class="code" href="class_delay_form_delay.html#a8c2605d862ee1584fd3f48ebb4bc7e85aa520259593d37b506e171b01e9afb949">Duration</a>] = duration;
-<a name="l00139"></a>00139             state.paramsOut[<a class="code" href="class_delay_form_delay.html#a32507ddcfc092962beb7f6affa14d793a4859e5d8a3ed6ebfff0e4b553ccaa06b">DurationInSamples</a>] = <a class="code" href="class_delay_form_delay.html#a431e12180e54d4803e7353e8d1c2dbb9">DurationType</a> (duration * data.base.sampleRate);
-<a name="l00140"></a>00140             <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (state.paramsOut[<a class="code" href="class_delay_form_delay.html#a32507ddcfc092962beb7f6affa14d793a4859e5d8a3ed6ebfff0e4b553ccaa06b">DurationInSamples</a>] &gt;= 0 &amp;&amp; 
-<a name="l00141"></a>00141                           state.paramsOut[<a class="code" href="class_delay_form_delay.html#a32507ddcfc092962beb7f6affa14d793a4859e5d8a3ed6ebfff0e4b553ccaa06b">DurationInSamples</a>] &lt;= state.bufferLengthIndex);
-<a name="l00142"></a>00142         }
-<a name="l00143"></a>00143     }
-<a name="l00144"></a>00144     
-<a name="l00145"></a>00145     <span class="keyword">template</span>&lt;<a class="code" href="class_delay_form_delay.html#ad99636c470be1a715eb55a516a8c6e74">InputFunction</a> inputFunction, 
-<a name="l00146"></a>00146              <a class="code" href="class_delay_form_delay.html#a0f443cb28bee9d5482a1de3ae0beaa0f">ReadFunction</a> readFunction,
-<a name="l00147"></a>00147              <a class="code" href="class_delay_form_delay.html#a399825022fbd2af618246bf2129fbe1b">WriteFunction</a> writeFunction,
-<a name="l00148"></a>00148              <a class="code" href="class_delay_form_delay.html#a3470c39725a99cfa0177e93257a54c31">OutputFunction</a> outputFunction&gt;
-<a name="l00149"></a><a class="code" href="class_delay_form_delay.html#a38119fbc60585b02e4d5e0b76d163533">00149</a>     <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="class_delay_form_delay.html#a38119fbc60585b02e4d5e0b76d163533">tick</a> (<a class="code" href="struct_delay_form_data.html">Data</a>&amp; data, <a class="code" href="struct_delay_form_data_1_1_delay_state.html">DelayState</a>&amp; state) <span class="keywordflow">throw</span>()
-<a name="l00150"></a>00150     {
-<a name="l00151"></a>00151         inputFunction (data, state);
-<a name="l00152"></a>00152         writeFunction (data, state);
-<a name="l00153"></a>00153         readFunction (data, state);  
-<a name="l00154"></a>00154         outputFunction (data, state);
-<a name="l00155"></a>00155     }
-<a name="l00156"></a>00156     
-<a name="l00157"></a><a class="code" href="class_delay_form_delay.html#ace0b45269dba57d1ccc571bd8946779c">00157</a>     <span class="keyword">static</span> <span class="keyword">inline</span> <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitType</a> <a class="code" href="class_delay_form_delay.html#ace0b45269dba57d1ccc571bd8946779c">ar</a> (<a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitType</a> <span class="keyword">const</span>&amp; input,
-<a name="l00158"></a>00158                                <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">DurationUnitType</a> <span class="keyword">const</span>&amp; duration,
-<a name="l00159"></a>00159                                <span class="keyword">const</span> <a class="code" href="class_delay_form_delay.html#a431e12180e54d4803e7353e8d1c2dbb9">DurationType</a> maximumDuration,
-<a name="l00160"></a>00160                                <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitType</a> <span class="keyword">const</span>&amp; mul,
-<a name="l00161"></a>00161                                <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitType</a> <span class="keyword">const</span>&amp; add,
-<a name="l00162"></a>00162                                <a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a> <span class="keyword">const</span>&amp; preferredBlockSize,
-<a name="l00163"></a>00163                                <a class="code" href="class_sample_rate.html" title="A specialised Variable&lt;double&gt; for handling sample rates.">SampleRate</a> <span class="keyword">const</span>&amp; preferredSampleRate) <span class="keywordflow">throw</span>()
-<a name="l00164"></a>00164     {             
-<a name="l00165"></a>00165         <span class="keyword">const</span> <a class="code" href="struct_delay_form_data.html">Data</a> data = { { -1.0, -1.0 }, maximumDuration, 0, };
-<a name="l00166"></a>00166         
-<a name="l00167"></a>00167         <span class="keyword">const</span> <span class="keywordtype">int</span> numInputChannels = input.getNumChannels();
-<a name="l00168"></a>00168         <span class="keyword">const</span> <span class="keywordtype">int</span> numDurationChannels = duration.getNumChannels();
-<a name="l00169"></a>00169         <span class="keyword">const</span> <span class="keywordtype">int</span> numChannels = <a class="code" href="group___plonk_binary_op_functions.html#gae9767f40737087f6253040a0aaee4146" title="Returns maximum of a and b.">plonk::max</a> (numInputChannels, numDurationChannels);
-<a name="l00170"></a>00170         
-<a name="l00171"></a>00171         <span class="keywordflow">if</span> (numChannels == 1)
-<a name="l00172"></a>00172         {
-<a name="l00173"></a>00173             <a class="code" href="class_input_dictionary.html" title="For storing named Dynamic objects.">Inputs</a> inputs;
-<a name="l00174"></a>00174             inputs.<a class="code" href="class_dictionary.html#a6ee81b793caf6c652e9d6545ce848a13" title="Put an item into the dicionary associated with the specified key.">put</a> (<a class="code" href="class_i_o_key.html#a31bc497f7606db39aa57aa0366b87e37aa60b1c99f5ef2914e94ca6115fba0983" title="A generic audio (commonly used where there is only one input or output).">IOKey::Generic</a>, input);
-<a name="l00175"></a>00175             inputs.<a class="code" href="class_dictionary.html#a6ee81b793caf6c652e9d6545ce848a13" title="Put an item into the dicionary associated with the specified key.">put</a> (<a class="code" href="class_i_o_key.html#a31bc497f7606db39aa57aa0366b87e37ac8b16ba9e77c41579c01af8a94dd63a0" title="Duration in seconds.">IOKey::Duration</a>, duration);
-<a name="l00176"></a>00176             inputs.<a class="code" href="class_dictionary.html#a6ee81b793caf6c652e9d6545ce848a13" title="Put an item into the dicionary associated with the specified key.">put</a> (<a class="code" href="class_i_o_key.html#a31bc497f7606db39aa57aa0366b87e37a9b5cc51cb000b4b5d4348326b240639b" title="A multiplier.">IOKey::Multiply</a>, mul);
-<a name="l00177"></a>00177             inputs.<a class="code" href="class_dictionary.html#a6ee81b793caf6c652e9d6545ce848a13" title="Put an item into the dicionary associated with the specified key.">put</a> (<a class="code" href="class_i_o_key.html#a31bc497f7606db39aa57aa0366b87e37a1e4e9f4f8bfee0060113b7068bf5c3c1" title="An offset.">IOKey::Add</a>, add);
-<a name="l00178"></a>00178             
-<a name="l00179"></a>00179             <span class="keywordflow">return</span> UnitType::template proxiesFromInputs&lt;DelayInternal&gt; (inputs,
-<a name="l00180"></a>00180                                                                         data, 
-<a name="l00181"></a>00181                                                                         preferredBlockSize, 
-<a name="l00182"></a>00182                                                                         preferredSampleRate);
-<a name="l00183"></a>00183         }
-<a name="l00184"></a>00184         <span class="keywordflow">else</span>
-<a name="l00185"></a>00185         {
-<a name="l00186"></a>00186             <a class="code" href="class_numerical_array2_d.html">DurationUnitArrayType</a> durationsGrouped = duration.<a class="code" href="class_object_array.html#ae4f769c721e3b332257513b88e8ed748" title="De-interleave an array into a 2D array.">deinterleave</a> (numInputChannels);
-<a name="l00187"></a>00187             <a class="code" href="class_numerical_array2_d.html">UnitArrayType</a> resultGrouped;
-<a name="l00188"></a>00188             
-<a name="l00189"></a>00189             <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; numInputChannels; ++i)
-<a name="l00190"></a>00190             {
-<a name="l00191"></a>00191                 <a class="code" href="class_input_dictionary.html" title="For storing named Dynamic objects.">Inputs</a> inputs;
-<a name="l00192"></a>00192                 inputs.<a class="code" href="class_dictionary.html#a6ee81b793caf6c652e9d6545ce848a13" title="Put an item into the dicionary associated with the specified key.">put</a> (<a class="code" href="class_i_o_key.html#a31bc497f7606db39aa57aa0366b87e37aa60b1c99f5ef2914e94ca6115fba0983" title="A generic audio (commonly used where there is only one input or output).">IOKey::Generic</a>, input[i]);
-<a name="l00193"></a>00193                 inputs.<a class="code" href="class_dictionary.html#a6ee81b793caf6c652e9d6545ce848a13" title="Put an item into the dicionary associated with the specified key.">put</a> (<a class="code" href="class_i_o_key.html#a31bc497f7606db39aa57aa0366b87e37ac8b16ba9e77c41579c01af8a94dd63a0" title="Duration in seconds.">IOKey::Duration</a>, durationsGrouped.<a class="code" href="class_object_array.html#a7f8923e3ea4e9737e04a0b35100db841" title="Returns a reference to an item at the specified index.">wrapAt</a> (i));
-<a name="l00194"></a>00194                 
-<a name="l00195"></a>00195                 <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitType</a> unit = UnitType::template proxiesFromInputs&lt;DelayInternal&gt; (inputs, 
-<a name="l00196"></a>00196                                                                                      data, 
-<a name="l00197"></a>00197                                                                                      preferredBlockSize, 
-<a name="l00198"></a>00198                                                                                      preferredSampleRate);
-<a name="l00199"></a>00199                 resultGrouped.<a class="code" href="class_object_array.html#aa15b17d07062a81fa7fbc0fb275d18af" title="Adds an item in-place.">add</a> (unit);
-<a name="l00200"></a>00200             }
-<a name="l00201"></a>00201             
-<a name="l00202"></a>00202             <span class="keyword">const</span> <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitType</a> mainUnit (resultGrouped.<a class="code" href="class_object_array2_d_base.html#a48a1a46956adc5c15b0cfec6d297f3dd" title="Interleave the 2D array into one dimension.">interleave</a>());
-<a name="l00203"></a>00203             <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (mainUnit.getNumChannels() == numChannels);
-<a name="l00204"></a>00204             <span class="keywordflow">return</span> <a class="code" href="class_unit_base.html#a3d6a3fbf0d6a2f1dcec1a7503e74b9d4" title="Apply multiply and addition operators to another unit.">UnitType::applyMulAdd</a> (mainUnit, mul, add);
-<a name="l00205"></a>00205         }
-<a name="l00206"></a>00206     }
-<a name="l00207"></a>00207 
-<a name="l00208"></a>00208 };
-<a name="l00209"></a>00209 
-<a name="l00210"></a>00210 <span class="comment">//------------------------------------------------------------------------------</span>
-<a name="l00211"></a>00211 
-<a name="l00227"></a>00227 <span class="keyword">template</span>&lt;<span class="keyword">class</span> SampleType&gt;
-<a name="l00228"></a><a class="code" href="class_delay_unit.html">00228</a> <span class="keyword">class </span><a class="code" href="class_delay_unit.html" title="Simple delay processor.">DelayUnit</a>
-<a name="l00229"></a>00229 {
-<a name="l00230"></a>00230 <span class="keyword">public</span>:    
-<a name="l00231"></a><a class="code" href="class_delay_unit.html#a76ab469ef9cca9aab6fe1a40d0b0b42e">00231</a>     <span class="keyword">typedef</span> <a class="code" href="class_delay_form_delay.html">DelayFormDelay&lt;SampleType&gt;</a>              <a class="code" href="class_delay_unit.html#a76ab469ef9cca9aab6fe1a40d0b0b42e">FormType</a>;
-<a name="l00232"></a>00232     
-<a name="l00233"></a><a class="code" href="class_delay_unit.html#a0312e60123b52cb2530b569c5e66d8c2">00233</a>     <span class="keyword">typedef</span> <a class="code" href="class_delay1_param_channel_internal.html" title="Delay processor.">Delay1ParamChannelInternal&lt;FormType&gt;</a>    <a class="code" href="class_delay_unit.html#a0312e60123b52cb2530b569c5e66d8c2">DelayInternal</a>;
-<a name="l00234"></a><a class="code" href="class_delay_unit.html#a854ef5968580aaf33ce191b3be3575b9">00234</a>     <span class="keyword">typedef</span> <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase&lt;SampleType&gt;</a>                    <a class="code" href="class_delay_unit.html#a854ef5968580aaf33ce191b3be3575b9">UnitType</a>;
-<a name="l00235"></a><a class="code" href="class_delay_unit.html#a560d473787f4898c32fe70be3f4aa2bb">00235</a>     <span class="keyword">typedef</span> <a class="code" href="class_input_dictionary.html" title="For storing named Dynamic objects.">InputDictionary</a>                         <a class="code" href="class_delay_unit.html#a560d473787f4898c32fe70be3f4aa2bb">Inputs</a>;
-<a name="l00236"></a>00236     
-<a name="l00237"></a><a class="code" href="class_delay_unit.html#aab6d7783dbc763560735783edb4848a7">00237</a>     <span class="keyword">typedef</span> <span class="keyword">typename</span> <a class="code" href="class_delay1_param_channel_internal.html#ad7b2e0960b16a2448016dc0ea411e044">DelayInternal::Param1Type</a>      <a class="code" href="class_delay_unit.html#aab6d7783dbc763560735783edb4848a7">DurationType</a>;
-<a name="l00238"></a><a class="code" href="class_delay_unit.html#a9508b31d1c927bb2342ca26737f48a09">00238</a>     <span class="keyword">typedef</span> <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase&lt;DurationType&gt;</a>                  <a class="code" href="class_delay_unit.html#a9508b31d1c927bb2342ca26737f48a09">DurationUnitType</a>;
+<a name="l00136"></a>00136         state.paramsIn[Duration] = duration;
+<a name="l00137"></a>00137         state.paramsOut[DurationInSamples] = DurationType (duration * data.base.sampleRate);
+<a name="l00138"></a>00138         plonk_assert (state.paramsOut[DurationInSamples] &gt;= 0 &amp;&amp; 
+<a name="l00139"></a>00139                       state.paramsOut[DurationInSamples] &lt;= state.bufferLengthIndex);
+<a name="l00140"></a>00140     }
+<a name="l00141"></a>00141     
+<a name="l00142"></a>00142     <span class="keyword">template</span>&lt;InputFunction inputFunction, 
+<a name="l00143"></a>00143              ReadFunction readFunction,
+<a name="l00144"></a>00144              WriteFunction writeFunction,
+<a name="l00145"></a>00145              OutputFunction outputFunction&gt;
+<a name="l00146"></a>00146     <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> tick (Data&amp; data, DelayState&amp; state) <span class="keywordflow">throw</span>()
+<a name="l00147"></a>00147     {
+<a name="l00148"></a>00148         inputFunction (data, state);
+<a name="l00149"></a>00149         writeFunction (data, state);
+<a name="l00150"></a>00150         readFunction (data, state);  
+<a name="l00151"></a>00151         outputFunction (data, state);
+<a name="l00152"></a>00152     }
+<a name="l00153"></a>00153     
+<a name="l00154"></a>00154     <span class="keyword">static</span> <span class="keyword">inline</span> UnitType ar (UnitType <span class="keyword">const</span>&amp; input,
+<a name="l00155"></a>00155                                DurationUnitType <span class="keyword">const</span>&amp; duration,
+<a name="l00156"></a>00156                                <span class="keyword">const</span> DurationType maximumDuration,
+<a name="l00157"></a>00157                                UnitType <span class="keyword">const</span>&amp; mul,
+<a name="l00158"></a>00158                                UnitType <span class="keyword">const</span>&amp; add,
+<a name="l00159"></a>00159                                <a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a> <span class="keyword">const</span>&amp; preferredBlockSize,
+<a name="l00160"></a>00160                                <a class="code" href="class_sample_rate.html" title="A specialised Variable&lt;double&gt; for handling sample rates.">SampleRate</a> <span class="keyword">const</span>&amp; preferredSampleRate) <span class="keywordflow">throw</span>()
+<a name="l00161"></a>00161     {             
+<a name="l00162"></a>00162         <span class="keyword">const</span> Data data = { { -1.0, -1.0 }, maximumDuration, 0, };
+<a name="l00163"></a>00163         
+<a name="l00164"></a>00164         <span class="keyword">const</span> <span class="keywordtype">int</span> numInputChannels = input.getNumChannels();
+<a name="l00165"></a>00165         <span class="keyword">const</span> <span class="keywordtype">int</span> numDurationChannels = duration.getNumChannels();
+<a name="l00166"></a>00166         <span class="keyword">const</span> <span class="keywordtype">int</span> numChannels = <a class="code" href="group___plonk_binary_op_functions.html#gae9767f40737087f6253040a0aaee4146" title="Returns maximum of a and b.">plonk::max</a> (numInputChannels, numDurationChannels);
+<a name="l00167"></a>00167         
+<a name="l00168"></a>00168         <span class="keywordflow">if</span> (numChannels == 1)
+<a name="l00169"></a>00169         {
+<a name="l00170"></a>00170             Inputs inputs;
+<a name="l00171"></a>00171             inputs.put (IOKey::Generic, input);
+<a name="l00172"></a>00172             inputs.put (IOKey::Duration, duration);
+<a name="l00173"></a>00173             inputs.put (IOKey::Multiply, mul);
+<a name="l00174"></a>00174             inputs.put (IOKey::Add, add);
+<a name="l00175"></a>00175             
+<a name="l00176"></a>00176             <span class="keywordflow">return</span> UnitType::template proxiesFromInputs&lt;DelayInternal&gt; (inputs,
+<a name="l00177"></a>00177                                                                         data, 
+<a name="l00178"></a>00178                                                                         preferredBlockSize, 
+<a name="l00179"></a>00179                                                                         preferredSampleRate);
+<a name="l00180"></a>00180         }
+<a name="l00181"></a>00181         <span class="keywordflow">else</span>
+<a name="l00182"></a>00182         {
+<a name="l00183"></a>00183             DurationUnitArrayType durationsGrouped = duration.deinterleave (numInputChannels);
+<a name="l00184"></a>00184             UnitArrayType resultGrouped;
+<a name="l00185"></a>00185             
+<a name="l00186"></a>00186             <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; numInputChannels; ++i)
+<a name="l00187"></a>00187             {
+<a name="l00188"></a>00188                 Inputs inputs;
+<a name="l00189"></a>00189                 inputs.put (IOKey::Generic, input[i]);
+<a name="l00190"></a>00190                 inputs.put (IOKey::Duration, durationsGrouped.wrapAt (i));
+<a name="l00191"></a>00191                 
+<a name="l00192"></a>00192                 UnitType unit = UnitType::template proxiesFromInputs&lt;DelayInternal&gt; (inputs,
+<a name="l00193"></a>00193                                                                                      data,
+<a name="l00194"></a>00194                                                                                      preferredBlockSize,
+<a name="l00195"></a>00195                                                                                      preferredSampleRate);
+<a name="l00196"></a>00196                 resultGrouped.add (unit);
+<a name="l00197"></a>00197             }
+<a name="l00198"></a>00198             
+<a name="l00199"></a>00199             <span class="keyword">const</span> UnitType mainUnit (resultGrouped.interleave());
+<a name="l00200"></a>00200             plonk_assert (mainUnit.getNumChannels() == numChannels);
+<a name="l00201"></a>00201             <span class="keywordflow">return</span> <a class="code" href="class_unit_base.html#a3d6a3fbf0d6a2f1dcec1a7503e74b9d4" title="Apply multiply and addition operators to another unit.">UnitType::applyMulAdd</a> (mainUnit, mul, add);
+<a name="l00202"></a>00202         }
+<a name="l00203"></a>00203     }
+<a name="l00204"></a>00204 
+<a name="l00205"></a>00205 };
+<a name="l00206"></a>00206 
+<a name="l00207"></a>00207 <span class="comment">//------------------------------------------------------------------------------</span>
+<a name="l00208"></a>00208 
+<a name="l00224"></a>00224 <span class="keyword">template</span>&lt;<span class="keyword">class</span> SampleType, Interp::TypeCode InterpTypeCode&gt;
+<a name="l00225"></a><a class="code" href="class_delay_unit.html">00225</a> <span class="keyword">class </span><a class="code" href="class_delay_unit.html" title="Simple delay processor.">DelayUnit</a>
+<a name="l00226"></a>00226 {
+<a name="l00227"></a>00227 <span class="keyword">public</span>:    
+<a name="l00228"></a>00228     <span class="keyword">typedef</span> DelayFormDelay&lt;SampleType,InterpTypeCode&gt;   FormType;
+<a name="l00229"></a>00229     
+<a name="l00230"></a>00230     <span class="keyword">typedef</span> <a class="code" href="class_delay1_param_channel_internal.html" title="Delay processor.">Delay1ParamChannelInternal&lt;FormType&gt;</a>        <a class="code" href="class_delay1_param_channel_internal.html" title="Delay processor.">DelayInternal</a>;
+<a name="l00231"></a>00231     <span class="keyword">typedef</span> <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase&lt;SampleType&gt;</a>                        <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitType</a>;
+<a name="l00232"></a>00232     <span class="keyword">typedef</span> <a class="code" href="class_input_dictionary.html" title="For storing named Dynamic objects.">InputDictionary</a>                             <a class="code" href="class_input_dictionary.html" title="For storing named Dynamic objects.">Inputs</a>;
+<a name="l00233"></a>00233     
+<a name="l00234"></a>00234     <span class="keyword">typedef</span> <span class="keyword">typename</span> DelayInternal::Param1Type          DurationType;
+<a name="l00235"></a>00235     <span class="keyword">typedef</span> <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase&lt;DurationType&gt;</a>                      <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">DurationUnitType</a>;
+<a name="l00236"></a>00236 
+<a name="l00237"></a>00237     <span class="keyword">typedef</span> <a class="code" href="class_delay_unit.html" title="Simple delay processor.">DelayUnit&lt;SampleType, Interp::Lagrange3&gt;</a>    <a class="code" href="class_delay_unit.html" title="Simple delay processor.">HQ</a>;
+<a name="l00238"></a>00238     <span class="keyword">typedef</span> <a class="code" href="class_delay_unit.html" title="Simple delay processor.">DelayUnit&lt;SampleType, Interp::None&gt;</a>         <a class="code" href="class_delay_unit.html" title="Simple delay processor.">N</a>;
 <a name="l00239"></a>00239     
-<a name="l00240"></a>00240     
-<a name="l00241"></a><a class="code" href="class_delay_unit.html#abb19261c8f1324b227438080081a7090">00241</a>     <span class="keyword">static</span> <span class="keyword">inline</span> <a class="code" href="class_object_array.html" title="This is the base class for arrays.">UnitInfos</a> <a class="code" href="class_delay_unit.html#abb19261c8f1324b227438080081a7090">getInfo</a>() throw()
-<a name="l00242"></a>00242     {
-<a name="l00243"></a>00243         <span class="keyword">const</span> <span class="keywordtype">double</span> blockSize = (double)<a class="code" href="class_block_size.html#ac022f97ed4f42a64936fdc0f3479c1cb" title="Gets the default block size.">BlockSize::getDefault</a>().<a class="code" href="class_variable.html#a3f05fc2768b1de80706b39ee14f3c360" title="Returns the current value.">getValue</a>();
-<a name="l00244"></a>00244         <span class="keyword">const</span> <span class="keywordtype">double</span> sampleRate = <a class="code" href="class_sample_rate.html#a892e4d1aae2bee986ee38fd371011f04">SampleRate::getDefault</a>().<a class="code" href="class_variable.html#a3f05fc2768b1de80706b39ee14f3c360" title="Returns the current value.">getValue</a>();
-<a name="l00245"></a>00245         
-<a name="l00246"></a>00246         <span class="keywordflow">return</span> <a class="code" href="class_unit_info.html">UnitInfo</a> (<span class="stringliteral">&quot;Delay&quot;</span>, <span class="stringliteral">&quot;A simple delay processor.&quot;</span>,
-<a name="l00247"></a>00247                          
-<a name="l00248"></a>00248                          <span class="comment">// output</span>
-<a name="l00249"></a>00249                          <a class="code" href="class_channel_count.html#aaf2e88ceee410f2250d45b63234ef4cea1beea3f5924a755479c13087b9d4547c">ChannelCount::VariableChannelCount</a>, 
-<a name="l00250"></a>00250                          <a class="code" href="class_i_o_key.html#a31bc497f7606db39aa57aa0366b87e37aa60b1c99f5ef2914e94ca6115fba0983" title="A generic audio (commonly used where there is only one input or output).">IOKey::Generic</a>,            <a class="code" href="class_measure.html#af74c37cd245b1262c0602548b4027e86a07021d5ac257538d56b6eb30c5c2000e" title="None i.e., not applicable.">Measure::None</a>,      0.0,                <a class="code" href="class_i_o_limit.html#a221d406cacbba8286e3fde4220ffe263a59a0af582036349f1b8d209f197154ee">IOLimit::None</a>,                         
-<a name="l00251"></a>00251                          <a class="code" href="class_i_o_key.html#a31bc497f7606db39aa57aa0366b87e37ab4c7f3ea28d6e5e763b97934501d650c" title="Used to terminate a list of IOKeys.">IOKey::End</a>,
-<a name="l00252"></a>00252                          
-<a name="l00253"></a>00253                          <span class="comment">// inputs</span>
-<a name="l00254"></a>00254                          <a class="code" href="class_i_o_key.html#a31bc497f7606db39aa57aa0366b87e37aa60b1c99f5ef2914e94ca6115fba0983" title="A generic audio (commonly used where there is only one input or output).">IOKey::Generic</a>,            <a class="code" href="class_measure.html#af74c37cd245b1262c0602548b4027e86a07021d5ac257538d56b6eb30c5c2000e" title="None i.e., not applicable.">Measure::None</a>,      <a class="code" href="class_i_o_info.html#a9023a2547ca686e6c0def6032c02145c">IOInfo::NoDefault</a>,  <a class="code" href="class_i_o_limit.html#a221d406cacbba8286e3fde4220ffe263a59a0af582036349f1b8d209f197154ee">IOLimit::None</a>,
-<a name="l00255"></a>00255                          <a class="code" href="class_i_o_key.html#a31bc497f7606db39aa57aa0366b87e37ac8b16ba9e77c41579c01af8a94dd63a0" title="Duration in seconds.">IOKey::Duration</a>,           <a class="code" href="class_measure.html#af74c37cd245b1262c0602548b4027e86afb8239f9b7614807276cb09e9f635522" title="Time in seconds.">Measure::Seconds</a>,   0.5,                <a class="code" href="class_i_o_limit.html#a221d406cacbba8286e3fde4220ffe263a54bbbe9142ad0dafcbeba7afd0311fc1">IOLimit::Minimum</a>,   <a class="code" href="class_measure.html#af74c37cd245b1262c0602548b4027e86afb8239f9b7614807276cb09e9f635522" title="Time in seconds.">Measure::Seconds</a>,   0.0,
-<a name="l00256"></a>00256                          <a class="code" href="class_i_o_key.html#a31bc497f7606db39aa57aa0366b87e37a5bb84518050c33df0a176c0836eb8e3d">IOKey::MaximumDuration</a>,    <a class="code" href="class_measure.html#af74c37cd245b1262c0602548b4027e86afb8239f9b7614807276cb09e9f635522" title="Time in seconds.">Measure::Seconds</a>,   1.0,                <a class="code" href="class_i_o_limit.html#a221d406cacbba8286e3fde4220ffe263a54bbbe9142ad0dafcbeba7afd0311fc1">IOLimit::Minimum</a>,   <a class="code" href="class_measure.html#af74c37cd245b1262c0602548b4027e86ad61a89d635b70cb1d07df5a4f73cbfaa" title="A number of audio samples.">Measure::Samples</a>,   1.0,
-<a name="l00257"></a>00257                          <a class="code" href="class_i_o_key.html#a31bc497f7606db39aa57aa0366b87e37a9b5cc51cb000b4b5d4348326b240639b" title="A multiplier.">IOKey::Multiply</a>,           <a class="code" href="class_measure.html#af74c37cd245b1262c0602548b4027e86a6a51c229b06b5d03ce894c7cc9441595" title="A multiplication factor.">Measure::Factor</a>,    1.0,                <a class="code" href="class_i_o_limit.html#a221d406cacbba8286e3fde4220ffe263a59a0af582036349f1b8d209f197154ee">IOLimit::None</a>,
-<a name="l00258"></a>00258                          <a class="code" href="class_i_o_key.html#a31bc497f7606db39aa57aa0366b87e37a1e4e9f4f8bfee0060113b7068bf5c3c1" title="An offset.">IOKey::Add</a>,                <a class="code" href="class_measure.html#af74c37cd245b1262c0602548b4027e86a07021d5ac257538d56b6eb30c5c2000e" title="None i.e., not applicable.">Measure::None</a>,      0.0,                <a class="code" href="class_i_o_limit.html#a221d406cacbba8286e3fde4220ffe263a59a0af582036349f1b8d209f197154ee">IOLimit::None</a>,
-<a name="l00259"></a>00259                          <a class="code" href="class_i_o_key.html#a31bc497f7606db39aa57aa0366b87e37ab9487086113a53cfe13ff5785e8dad24" title="Audio processing block size.">IOKey::BlockSize</a>,          <a class="code" href="class_measure.html#af74c37cd245b1262c0602548b4027e86ad61a89d635b70cb1d07df5a4f73cbfaa" title="A number of audio samples.">Measure::Samples</a>,   blockSize,          <a class="code" href="class_i_o_limit.html#a221d406cacbba8286e3fde4220ffe263a54bbbe9142ad0dafcbeba7afd0311fc1">IOLimit::Minimum</a>,   <a class="code" href="class_measure.html#af74c37cd245b1262c0602548b4027e86ad61a89d635b70cb1d07df5a4f73cbfaa" title="A number of audio samples.">Measure::Samples</a>,   1.0,
-<a name="l00260"></a>00260                          <a class="code" href="class_i_o_key.html#a31bc497f7606db39aa57aa0366b87e37a7a965484c296e56d16eee78fd2397ca7" title="Audio processing sample rate.">IOKey::SampleRate</a>,         <a class="code" href="class_measure.html#af74c37cd245b1262c0602548b4027e86a4194b7eabb65cf6a0de419798724ea23" title="Frequency in Hertz.">Measure::Hertz</a>,     sampleRate,         <a class="code" href="class_i_o_limit.html#a221d406cacbba8286e3fde4220ffe263a54bbbe9142ad0dafcbeba7afd0311fc1">IOLimit::Minimum</a>,   <a class="code" href="class_measure.html#af74c37cd245b1262c0602548b4027e86a4194b7eabb65cf6a0de419798724ea23" title="Frequency in Hertz.">Measure::Hertz</a>,     0.0,
-<a name="l00261"></a>00261                          <a class="code" href="class_i_o_key.html#a31bc497f7606db39aa57aa0366b87e37ab4c7f3ea28d6e5e763b97934501d650c" title="Used to terminate a list of IOKeys.">IOKey::End</a>);
-<a name="l00262"></a>00262     }
-<a name="l00263"></a>00263     
-<a name="l00264"></a><a class="code" href="class_delay_unit.html#a836a9668205981c9406ca717664fefef">00264</a>     <span class="keyword">static</span> <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitType</a> <a class="code" href="class_delay_unit.html#a836a9668205981c9406ca717664fefef">ar</a> (<a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitType</a> <span class="keyword">const</span>&amp; input,
-<a name="l00265"></a>00265                         <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">DurationUnitType</a> <span class="keyword">const</span>&amp; duration = <a class="code" href="class_delay_unit.html#aab6d7783dbc763560735783edb4848a7">DurationType</a> (0.5),
-<a name="l00266"></a>00266                         <span class="keyword">const</span> <a class="code" href="class_delay_unit.html#aab6d7783dbc763560735783edb4848a7">DurationType</a> maximumDuration = <a class="code" href="class_delay_unit.html#aab6d7783dbc763560735783edb4848a7">DurationType</a> (1.0),
-<a name="l00267"></a>00267                         <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitType</a> <span class="keyword">const</span>&amp; mul = SampleType (1),
-<a name="l00268"></a>00268                         <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitType</a> <span class="keyword">const</span>&amp; add = SampleType (0),
-<a name="l00269"></a>00269                         <a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a> <span class="keyword">const</span>&amp; preferredBlockSize = <a class="code" href="class_block_size.html#ac022f97ed4f42a64936fdc0f3479c1cb" title="Gets the default block size.">BlockSize::getDefault</a>(),
-<a name="l00270"></a>00270                         <a class="code" href="class_sample_rate.html" title="A specialised Variable&lt;double&gt; for handling sample rates.">SampleRate</a> <span class="keyword">const</span>&amp; preferredSampleRate = <a class="code" href="class_sample_rate.html#a892e4d1aae2bee986ee38fd371011f04">SampleRate::getDefault</a>()) throw()
-<a name="l00271"></a>00271     {             
-<a name="l00272"></a>00272         <span class="keywordflow">return</span> <a class="code" href="class_delay_form_delay.html#ace0b45269dba57d1ccc571bd8946779c">FormType::ar</a> (input, duration, maximumDuration, mul, add, preferredBlockSize, preferredSampleRate);
-<a name="l00273"></a>00273     }
-<a name="l00274"></a>00274     
-<a name="l00275"></a>00275 };
-<a name="l00276"></a>00276 
-<a name="l00277"></a><a class="code" href="plonk___delay_form_delay_8h.html#a2012fe4b4753f14702682fac18e02790">00277</a> <span class="keyword">typedef</span> <a class="code" href="class_delay_unit.html" title="Simple delay processor.">DelayUnit&lt;PLONK_TYPE_DEFAULT&gt;</a> <a class="code" href="plonk___delay_form_delay_8h.html#a2012fe4b4753f14702682fac18e02790">Delay</a>;
+<a name="l00240"></a>00240     <span class="keyword">static</span> <span class="keyword">inline</span> <a class="code" href="class_object_array.html" title="This is the base class for arrays.">UnitInfos</a> getInfo() <span class="keywordflow">throw</span>()
+<a name="l00241"></a>00241     {
+<a name="l00242"></a>00242         <span class="keyword">const</span> <span class="keywordtype">double</span> blockSize = (double)<a class="code" href="class_block_size.html#ac022f97ed4f42a64936fdc0f3479c1cb" title="Gets the default block size.">BlockSize::getDefault</a>().<a class="code" href="class_variable.html#a3f05fc2768b1de80706b39ee14f3c360" title="Returns the current value.">getValue</a>();
+<a name="l00243"></a>00243         <span class="keyword">const</span> <span class="keywordtype">double</span> sampleRate = SampleRate::getDefault().<a class="code" href="class_variable.html#a3f05fc2768b1de80706b39ee14f3c360" title="Returns the current value.">getValue</a>();
+<a name="l00244"></a>00244         
+<a name="l00245"></a>00245         <span class="keywordflow">return</span> UnitInfo (<span class="stringliteral">&quot;Delay&quot;</span>, <span class="stringliteral">&quot;A simple delay processor.&quot;</span>,
+<a name="l00246"></a>00246                          
+<a name="l00247"></a>00247                          <span class="comment">// output</span>
+<a name="l00248"></a>00248                          ChannelCount::VariableChannelCount, 
+<a name="l00249"></a>00249                          IOKey::Generic,            Measure::None,      0.0,                IOLimit::None,                         
+<a name="l00250"></a>00250                          IOKey::End,
+<a name="l00251"></a>00251                          
+<a name="l00252"></a>00252                          <span class="comment">// inputs</span>
+<a name="l00253"></a>00253                          IOKey::Generic,            Measure::None,      IOInfo::NoDefault,  IOLimit::None,
+<a name="l00254"></a>00254                          IOKey::Duration,           Measure::Seconds,   0.5,                IOLimit::Minimum,   Measure::Seconds,   0.0,
+<a name="l00255"></a>00255                          IOKey::MaximumDuration,    Measure::Seconds,   1.0,                IOLimit::Minimum,   Measure::Samples,   1.0,
+<a name="l00256"></a>00256                          IOKey::Multiply,           Measure::Factor,    1.0,                IOLimit::None,
+<a name="l00257"></a>00257                          IOKey::Add,                Measure::None,      0.0,                IOLimit::None,
+<a name="l00258"></a>00258                          IOKey::BlockSize,          Measure::Samples,   blockSize,          IOLimit::Minimum,   Measure::Samples,   1.0,
+<a name="l00259"></a>00259                          IOKey::SampleRate,         Measure::Hertz,     sampleRate,         IOLimit::Minimum,   Measure::Hertz,     0.0,
+<a name="l00260"></a>00260                          IOKey::End);
+<a name="l00261"></a>00261     }
+<a name="l00262"></a>00262     
+<a name="l00263"></a>00263     <span class="keyword">static</span> <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitType</a> ar (<a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitType</a> <span class="keyword">const</span>&amp; input,
+<a name="l00264"></a>00264                         <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">DurationUnitType</a> <span class="keyword">const</span>&amp; duration = DurationType (0.5),
+<a name="l00265"></a>00265                         <span class="keyword">const</span> DurationType maximumDuration = DurationType (1.0),
+<a name="l00266"></a>00266                         <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitType</a> <span class="keyword">const</span>&amp; mul = SampleType (1),
+<a name="l00267"></a>00267                         <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitType</a> <span class="keyword">const</span>&amp; add = SampleType (0),
+<a name="l00268"></a>00268                         <a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a> <span class="keyword">const</span>&amp; preferredBlockSize = <a class="code" href="class_block_size.html#ac022f97ed4f42a64936fdc0f3479c1cb" title="Gets the default block size.">BlockSize::getDefault</a>(),
+<a name="l00269"></a>00269                         <a class="code" href="class_sample_rate.html" title="A specialised Variable&lt;double&gt; for handling sample rates.">SampleRate</a> <span class="keyword">const</span>&amp; preferredSampleRate = SampleRate::getDefault()) <span class="keywordflow">throw</span>()
+<a name="l00270"></a>00270     {             
+<a name="l00271"></a>00271         <span class="keywordflow">return</span> FormType::ar (input, duration, maximumDuration, mul, add, preferredBlockSize, preferredSampleRate);
+<a name="l00272"></a>00272     }
+<a name="l00273"></a>00273     
+<a name="l00274"></a>00274 };
+<a name="l00275"></a>00275 
+<a name="l00276"></a>00276 <span class="keyword">typedef</span> <a class="code" href="class_delay_unit.html" title="Simple delay processor.">DelayUnit&lt;PLONK_TYPE_DEFAULT&gt;</a> <a class="code" href="class_delay_unit.html" title="Simple delay processor.">Delay</a>;
+<a name="l00277"></a>00277 
 <a name="l00278"></a>00278 
 <a name="l00279"></a>00279 
-<a name="l00280"></a>00280 
-<a name="l00281"></a>00281 <span class="preprocessor">#endif // PLONK_DELAYFORMDELAY_H</span>
-<a name="l00282"></a>00282 <span class="preprocessor"></span>
+<a name="l00280"></a>00280 <span class="preprocessor">#endif // PLONK_DELAYFORMDELAY_H</span>
+<a name="l00281"></a>00281 <span class="preprocessor"></span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -336,7 +335,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Properties</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -345,7 +344,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 5 2012 17:04:54 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 8 2014 12:26:48 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

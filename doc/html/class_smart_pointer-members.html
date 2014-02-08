@@ -20,7 +20,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="pl-nk-logo-small.png"/></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">pl-nk</div>
+   <div id="projectname">pl-nk&#160;<span id="projectnumber">v0.4.5</span></div>
+   <div id="projectbrief">Plonk|Plink|Plank are a set of cross-platform C/C++ frameworks for audio software development</div>
   </td>
  </tr>
  </tbody>
@@ -29,8 +30,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -66,29 +67,13 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="contents">
 This is the complete list of members for <a class="el" href="class_smart_pointer.html">SmartPointer</a>, including all inherited members.<table>
-  <tr class="memlist"><td><a class="el" href="class_smart_pointer.html#a7ba301343cc7433dab04868a57419aba">counter</a></td><td><a class="el" href="class_smart_pointer.html">SmartPointer</a></td><td><code> [protected]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_smart_pointer.html#acea9f749c0ab920d2833d4bb81f6eb9f">decrementRefCount</a>()</td><td><a class="el" href="class_smart_pointer.html">SmartPointer</a></td><td></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_smart_pointer.html#a02d93e0dab37f421808dc02dc348d7fd">getRefCount</a>() const </td><td><a class="el" href="class_smart_pointer.html">SmartPointer</a></td><td></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_smart_pointer.html#afce7e04754b78ffcb484c8b5108d799a">getWeak</a>() const </td><td><a class="el" href="class_smart_pointer.html">SmartPointer</a></td><td></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_smart_pointer.html#ad9196fe14d4e4d9b1c28982738436544">incrementRefCount</a>()</td><td><a class="el" href="class_smart_pointer.html">SmartPointer</a></td><td></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_plonk_base.html#a2a6cd5929fffe586119920e4e8ec272d">operator delete</a>(void *ptr)</td><td><a class="el" href="class_plonk_base.html">PlonkBase</a></td><td><code> [static]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_plonk_base.html#a675fca1c9385594a8f85c5be86cbbf8a">operator delete[]</a>(void *ptr)</td><td><a class="el" href="class_plonk_base.html">PlonkBase</a></td><td><code> [static]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_plonk_base.html#a26fcb87fd8b6743b76bdffb74bdef2fd">operator new</a>(size_t size)</td><td><a class="el" href="class_plonk_base.html">PlonkBase</a></td><td><code> [static]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_plonk_base.html#a272539263843cc0178dcfe406730ab67">operator new[]</a>(size_t size)</td><td><a class="el" href="class_plonk_base.html">PlonkBase</a></td><td><code> [static]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_plonk_base.html#a52a540ab018929c9224336d44be9e31e">PlonkBase</a>()</td><td><a class="el" href="class_plonk_base.html">PlonkBase</a></td><td><code> [inline]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_smart_pointer.html#a279a99170aded5dad1d4cf939bbc8fbe">SmartPointer</a>(const bool allocateWeakPointer=true)</td><td><a class="el" href="class_smart_pointer.html">SmartPointer</a></td><td></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_smart_pointer.html#a91e9d2ec0e1ed1d0d34344f4c8b63994">update</a>()</td><td><a class="el" href="class_smart_pointer.html">SmartPointer</a></td><td><code> [inline]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_smart_pointer.html#ae9317dca421926e7b6140f0675ee70d9">WeakPointer</a> class</td><td><a class="el" href="class_smart_pointer.html">SmartPointer</a></td><td><code> [friend]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_smart_pointer.html#a9d43530959d2bb8831e77832fe9a7271">weakPointer</a></td><td><a class="el" href="class_smart_pointer.html">SmartPointer</a></td><td><code> [protected]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_plonk_base.html#abec18f8588d85a52bbda28c350a9afaf">~PlonkBase</a>()</td><td><a class="el" href="class_plonk_base.html">PlonkBase</a></td><td><code> [inline]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_smart_pointer.html#a961ec2a7684ba32d0aaff86969c28099">~SmartPointer</a>()</td><td><a class="el" href="class_smart_pointer.html">SmartPointer</a></td><td><code> [virtual]</code></td></tr>
 </table></div>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Properties</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -97,7 +82,7 @@ This is the complete list of members for <a class="el" href="class_smart_pointer
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 5 2012 17:05:10 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 8 2014 12:26:52 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

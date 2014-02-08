@@ -20,7 +20,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="pl-nk-logo-small.png"/></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">pl-nk</div>
+   <div id="projectname">pl-nk&#160;<span id="projectnumber">v0.4.5</span></div>
+   <div id="projectbrief">Plonk|Plink|Plank are a set of cross-platform C/C++ frameworks for audio software development</div>
   </td>
  </tr>
  </tbody>
@@ -29,8 +30,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -66,55 +67,16 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="contents">
 This is the complete list of members for <a class="el" href="class_channel_internal_core.html">ChannelInternalCore</a>, including all inherited members.<table>
-  <tr class="memlist"><td><a class="el" href="class_channel_internal_core.html#a30c2976be76027e42d6e018a9fa5240b">canUseExternalBuffer</a>() const </td><td><a class="el" href="class_channel_internal_core.html">ChannelInternalCore</a></td><td><code> [inline, virtual]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_channel_internal_core.html#ab079725d1b0cdafbf9c46c805509ce52">ChannelInternalCore</a>(Inputs const &amp;inputs, BlockSize const &amp;blockSize, SampleRate const &amp;sampleRate)</td><td><a class="el" href="class_channel_internal_core.html">ChannelInternalCore</a></td><td></td></tr>
   <tr class="memlist"><td><a class="el" href="class_channel_internal_core.html#a09763233582f6f0985461449aa262ae5">Data</a> typedef</td><td><a class="el" href="class_channel_internal_core.html">ChannelInternalCore</a></td><td></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_channel_internal_core.html#aabf2f40df2608c4beec6491393bd3b33">getBlockDurationInTicks</a>() const </td><td><a class="el" href="class_channel_internal_core.html">ChannelInternalCore</a></td><td><code> [inline]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_channel_internal_core.html#a39653f4cdda1c47d2827fad92bfe0fd6">getBlockSize</a>() const </td><td><a class="el" href="class_channel_internal_core.html">ChannelInternalCore</a></td><td><code> [inline]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_channel_internal_core.html#a1dd0a007846baffb36471ef4039a84cd">getBlockSize</a>()</td><td><a class="el" href="class_channel_internal_core.html">ChannelInternalCore</a></td><td><code> [inline]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_channel_internal_core.html#a48eb36f3ce586084e339dd45d3cfaef2">getInputAs</a>(const int key) const </td><td><a class="el" href="class_channel_internal_core.html">ChannelInternalCore</a></td><td><code> [inline]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_channel_internal_core.html#a54de87f25575380c89023d3e7bda3179">getInputAs</a>(const int key)</td><td><a class="el" href="class_channel_internal_core.html">ChannelInternalCore</a></td><td><code> [inline]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_channel_internal_core.html#a5f731843efea658e869a27e0529b5c6c">getInputKeys</a>() const =0</td><td><a class="el" href="class_channel_internal_core.html">ChannelInternalCore</a></td><td><code> [pure virtual]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_channel_internal_core.html#aba48225249f5367de51053f44274bfa0">getInputNames</a>() const </td><td><a class="el" href="class_channel_internal_core.html">ChannelInternalCore</a></td><td></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_channel_internal_core.html#a874d7d0ef62aecabcc28b5ff2bd8bfa1">getInputs</a>() const </td><td><a class="el" href="class_channel_internal_core.html">ChannelInternalCore</a></td><td><code> [inline]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_channel_internal_core.html#aa2a1fe086bb3b0112ad5354fe0e06627">getInputs</a>()</td><td><a class="el" href="class_channel_internal_core.html">ChannelInternalCore</a></td><td><code> [inline]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_channel_internal_core.html#a969420a1eedeeb703734c130aac59098">getInputTypeNames</a>() const </td><td><a class="el" href="class_channel_internal_core.html">ChannelInternalCore</a></td><td></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_channel_internal_core.html#a481effc0687a2f6126ac1444d24ea29e">getInputTypes</a>() const </td><td><a class="el" href="class_channel_internal_core.html">ChannelInternalCore</a></td><td></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_channel_internal_core.html#a27bda1a4eba75b6e5266af3939564929">getLabel</a>() const </td><td><a class="el" href="class_channel_internal_core.html">ChannelInternalCore</a></td><td><code> [inline, virtual]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_channel_internal_core.html#abc028c726259caa42cdeef07bbc67de9">getLatency</a>() const </td><td><a class="el" href="class_channel_internal_core.html">ChannelInternalCore</a></td><td><code> [inline, virtual]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_channel_internal_core.html#afab91268bb677531d7a921554681ffae">getName</a>() const =0</td><td><a class="el" href="class_channel_internal_core.html">ChannelInternalCore</a></td><td><code> [pure virtual]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_channel_internal_core.html#a8e8274bbd1ae0cd5175aafb0421b3003">getNextTimeStamp</a>() const </td><td><a class="el" href="class_channel_internal_core.html">ChannelInternalCore</a></td><td><code> [inline]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_channel_internal_core.html#a43277b3178b32a3945b1275ab50c6122">getNumChannels</a>() const </td><td><a class="el" href="class_channel_internal_core.html">ChannelInternalCore</a></td><td><code> [inline, virtual]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_channel_internal_core.html#a1c27c0269a43e031542da6770f0ca857">getOverlap</a>() const </td><td><a class="el" href="class_channel_internal_core.html">ChannelInternalCore</a></td><td><code> [inline]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_channel_internal_core.html#a3fe9ebb152cafe32dba8a4fa5fb40075">getOverlap</a>()</td><td><a class="el" href="class_channel_internal_core.html">ChannelInternalCore</a></td><td><code> [inline]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_channel_internal_core.html#adec0ae5607da4ca0b915b10918cb84a2">getSampleDurationInTicks</a>() const </td><td><a class="el" href="class_channel_internal_core.html">ChannelInternalCore</a></td><td><code> [inline]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_channel_internal_core.html#a56c8b6a5cbe0f7678eaf2af4d8d45d4c">getSampleRate</a>() const </td><td><a class="el" href="class_channel_internal_core.html">ChannelInternalCore</a></td><td><code> [inline]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_channel_internal_core.html#a9c6482dcfeac96eee96fe652a9bc04a3">getSampleRate</a>()</td><td><a class="el" href="class_channel_internal_core.html">ChannelInternalCore</a></td><td><code> [inline]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="class_channel_internal_core.html#a0d5725cc71173dcff25b08f992acf1ea">initChannel</a>(const int channel)=0</td><td><a class="el" href="class_channel_internal_core.html">ChannelInternalCore</a></td><td><code> [pure virtual]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_channel_internal_core.html#a1462c3dd7060daabe130145d982143d9">Inputs</a> typedef</td><td><a class="el" href="class_channel_internal_core.html">ChannelInternalCore</a></td><td></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_channel_internal_core.html#a3b57daa99a47d608ebeb15308d18fac8">isConstant</a>() const </td><td><a class="el" href="class_channel_internal_core.html">ChannelInternalCore</a></td><td><code> [inline, virtual]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_channel_internal_core.html#a9c4f7554ccc6fe389a9fa5f14a766994">isNull</a>() const </td><td><a class="el" href="class_channel_internal_core.html">ChannelInternalCore</a></td><td><code> [inline, virtual]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_channel_internal_core.html#af679e95482b03a76e5f6c78200ba1d24">isProxy</a>() const </td><td><a class="el" href="class_channel_internal_core.html">ChannelInternalCore</a></td><td><code> [inline, virtual]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_channel_internal_core.html#a27ef737a9cd0b9fd436ff138320ef2d5">isProxyOwner</a>() const </td><td><a class="el" href="class_channel_internal_core.html">ChannelInternalCore</a></td><td><code> [inline, virtual]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_channel_internal_core.html#a253102c48ff406ee9f23b579ed435d11">isTypeConverter</a>() const </td><td><a class="el" href="class_channel_internal_core.html">ChannelInternalCore</a></td><td><code> [inline, virtual]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="class_channel_internal_core.html#aa4e59e6ac19208c22de024fe2bda39bc">process</a>(ProcessInfo &amp;info, const int channel)=0</td><td><a class="el" href="class_channel_internal_core.html">ChannelInternalCore</a></td><td><code> [pure virtual]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_channel_internal_core.html#a805137d0a10f0aa09b091c4910ba8a21">setBlockSizeInternal</a>(BlockSize const &amp;newBlockSize)</td><td><a class="el" href="class_channel_internal_core.html">ChannelInternalCore</a></td><td><code> [protected]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_channel_internal_core.html#a46908f1a726dc424030936a18b168fe3">setExpiryTimeStamp</a>(TimeStamp const &amp;newTimeStamp)</td><td><a class="el" href="class_channel_internal_core.html">ChannelInternalCore</a></td><td><code> [inline]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_channel_internal_core.html#ab2074527635ab833ba3cd9b98e759731">setLabel</a>(Text const &amp;newId)</td><td><a class="el" href="class_channel_internal_core.html">ChannelInternalCore</a></td><td><code> [virtual]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_channel_internal_core.html#a20142d7f34874e4adf1f451f2cb187a1">setLastTimeStamp</a>(TimeStamp const &amp;newTimeStamp)</td><td><a class="el" href="class_channel_internal_core.html">ChannelInternalCore</a></td><td><code> [inline]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_channel_internal_core.html#a550d87456bdf498f1c71995c2525a722">setNextTimeStamp</a>(TimeStamp const &amp;newTimeStamp)</td><td><a class="el" href="class_channel_internal_core.html">ChannelInternalCore</a></td><td><code> [inline]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_channel_internal_core.html#aaf11db5b5db746648b79aa01d8185698">setOverlapInternal</a>(DoubleVariable const &amp;newOverlap)</td><td><a class="el" href="class_channel_internal_core.html">ChannelInternalCore</a></td><td><code> [protected]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_channel_internal_core.html#a1b392656cac98b2d13f9e4906f4d9437">setSampleRateInternal</a>(SampleRate const &amp;newSampleRate)</td><td><a class="el" href="class_channel_internal_core.html">ChannelInternalCore</a></td><td><code> [protected]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_channel_internal_core.html#af2185f2ceb6d22ba4d3ac2a8a20ddbac">shouldBeDeletedNow</a>(TimeStamp const &amp;time) const </td><td><a class="el" href="class_channel_internal_core.html">ChannelInternalCore</a></td><td><code> [inline]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_channel_internal_core.html#aa894a313c4586b69279da1b27a66b703">updateTimeStamp</a>()</td><td><a class="el" href="class_channel_internal_core.html">ChannelInternalCore</a></td><td></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_channel_internal_core.html#ac88aad5e3536c4cb5aeb051460ee877f">~ChannelInternalCore</a>()</td><td><a class="el" href="class_channel_internal_core.html">ChannelInternalCore</a></td><td><code> [inline, virtual]</code></td></tr>
 </table></div>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Properties</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -123,7 +85,7 @@ This is the complete list of members for <a class="el" href="class_channel_inter
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 5 2012 17:05:01 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 8 2014 12:26:52 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

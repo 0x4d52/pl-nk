@@ -20,7 +20,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="pl-nk-logo-small.png"/></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">pl-nk</div>
+   <div id="projectname">pl-nk&#160;<span id="projectnumber">v0.4.5</span></div>
+   <div id="projectbrief">Plonk|Plink|Plank are a set of cross-platform C/C++ frameworks for audio software development</div>
   </td>
  </tr>
  </tbody>
@@ -29,8 +30,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -68,10 +69,9 @@ Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Swap the byte order of the 24-bit int pointed to by <em>bits</em>.  <a href="#gac75ceea748c47b6dfda8c357364e5da0"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_endian_functions.html#ga1d4306e552673586bbaaa76e97dfc9cd">pl_SwapEndianUI</a> (unsigned int *bits)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Swap the byte order of the unisgned int pointed to by <em>bits</em>.  <a href="#ga1d4306e552673586bbaaa76e97dfc9cd"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_endian_functions.html#ga37d0f99842d745175394f7f4a378e82d">pl_SwapEndianULL</a> (<a class="el" href="plank___standard_header_8h.html#a173f1d590f482a0eefff64a9f90a9d26">PlankULL</a> *bits)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_endian_functions.html#ga37d0f99842d745175394f7f4a378e82d">pl_SwapEndianULL</a> (PlankULL *bits)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Swap the byte order of the unisgned long long pointed to by <em>bits</em>.  <a href="#ga37d0f99842d745175394f7f4a378e82d"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_endian_functions.html#gacc9809c1baebce7729a069c1636927e1">pl_SwapEndianF80</a> (<a class="el" href="struct_plank_f80.html">PlankF80</a> *bits)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_endian_functions.html#ga11766e40fbdf1bf99aab1b10805eccba">pl_SwapEndianUL</a> (<a class="el" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> *data)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_endian_functions.html#ga11766e40fbdf1bf99aab1b10805eccba">pl_SwapEndianUL</a> (PlankUL *data)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Swap the byte order of the unisgned long pointed to by <em>data</em>.  <a href="#ga11766e40fbdf1bf99aab1b10805eccba"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_endian_functions.html#gacbd1eb291c50b32d9798bb2ec3588063">pl_SwapEndianS</a> (short *data)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Swap the byte order of the short pointed to by <em>data</em>.  <a href="#gacbd1eb291c50b32d9798bb2ec3588063"></a><br/></td></tr>
@@ -81,115 +81,52 @@ Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Swap the byte order of the 24-bit int pointed to by <em>data</em>.  <a href="#gac92e5c02813dd30dc9377f3f9ead4376"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_endian_functions.html#ga064fa00018ad8477203f12e4babf39eb">pl_SwapEndianL</a> (long *data)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Swap the byte order of the long pointed to by <em>data</em>.  <a href="#ga064fa00018ad8477203f12e4babf39eb"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_endian_functions.html#gae1c304d7d3a6a976febed64933563ccd">pl_SwapEndianLL</a> (<a class="el" href="plank___standard_header_8h.html#a854e96ed6d678b7cbcbedffce1c0844d">PlankLL</a> *data)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_endian_functions.html#gae1c304d7d3a6a976febed64933563ccd">pl_SwapEndianLL</a> (PlankLL *data)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Swap the byte order of the long long pointed to by <em>data</em>.  <a href="#gae1c304d7d3a6a976febed64933563ccd"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_endian_functions.html#gac654560c74f2e97495eeee74e84502e1">pl_SwapEndianF</a> (float *data)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Swap the byte order of the float pointed to by <em>data</em>.  <a href="#gac654560c74f2e97495eeee74e84502e1"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_endian_functions.html#ga7c9224f7d4c4e4f65adfe844a90345e5">pl_SwapEndianD</a> (double *data)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Swap the byte order of the double pointed to by <em>data</em>.  <a href="#ga7c9224f7d4c4e4f65adfe844a90345e5"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gaad47ed6ec1112e62fbcf37d52bf3e8ba"></a><!-- doxytag: member="PlankEndianFunctions::pl_VectorSwapEndianUS" ref="gaad47ed6ec1112e62fbcf37d52bf3e8ba" args="(PlankUS *data, PlankUL N)" -->
+static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_endian_functions.html#gaad47ed6ec1112e62fbcf37d52bf3e8ba">pl_VectorSwapEndianUS</a> (PlankUS *data, PlankUL N)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Swap the endianness of a vector of unsigned short elements. <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gac2a9bbe8bd68d2e4f0ad845302a35e41"></a><!-- doxytag: member="PlankEndianFunctions::pl_VectorSwapEndianS" ref="gac2a9bbe8bd68d2e4f0ad845302a35e41" args="(PlankS *data, PlankUL N)" -->
+static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_endian_functions.html#gac2a9bbe8bd68d2e4f0ad845302a35e41">pl_VectorSwapEndianS</a> (PlankS *data, PlankUL N)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Swap the endianness of a vector of short elements. <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga95ac1433588bc708224d63b722b8f5f8"></a><!-- doxytag: member="PlankEndianFunctions::pl_VectorSwapEndianUI24" ref="ga95ac1433588bc708224d63b722b8f5f8" args="(PlankUI24 *data, PlankUL N)" -->
+static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_endian_functions.html#ga95ac1433588bc708224d63b722b8f5f8">pl_VectorSwapEndianUI24</a> (<a class="el" href="struct_plank_u_i24.html">PlankUI24</a> *data, PlankUL N)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Swap the endianness of a vector of unsigned 24-bit int elements. <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga7604245ac9f66736a91b5021f3de2b37"></a><!-- doxytag: member="PlankEndianFunctions::pl_VectorSwapEndianI24" ref="ga7604245ac9f66736a91b5021f3de2b37" args="(PlankI24 *data, PlankUL N)" -->
+static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_endian_functions.html#ga7604245ac9f66736a91b5021f3de2b37">pl_VectorSwapEndianI24</a> (<a class="el" href="struct_plank_i24.html">PlankI24</a> *data, PlankUL N)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Swap the endianness of a vector of 24-bit int elements. <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga6375760408bb72569315fd789584f54d"></a><!-- doxytag: member="PlankEndianFunctions::pl_VectorSwapEndianUI" ref="ga6375760408bb72569315fd789584f54d" args="(PlankUI *data, PlankUL N)" -->
+static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_endian_functions.html#ga6375760408bb72569315fd789584f54d">pl_VectorSwapEndianUI</a> (PlankUI *data, PlankUL N)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Swap the endianness of a vector of unsigned int elements. <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga50132656767457518fb71a5fa1a16f8a"></a><!-- doxytag: member="PlankEndianFunctions::pl_VectorSwapEndianI" ref="ga50132656767457518fb71a5fa1a16f8a" args="(PlankI *data, PlankUL N)" -->
+static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_endian_functions.html#ga50132656767457518fb71a5fa1a16f8a">pl_VectorSwapEndianI</a> (PlankI *data, PlankUL N)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Swap the endianness of a vector of int elements. <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga13e357d6631b9249b071eed95bab3427"></a><!-- doxytag: member="PlankEndianFunctions::pl_VectorSwapEndianUL" ref="ga13e357d6631b9249b071eed95bab3427" args="(PlankUL *data, PlankUL N)" -->
+static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_endian_functions.html#ga13e357d6631b9249b071eed95bab3427">pl_VectorSwapEndianUL</a> (PlankUL *data, PlankUL N)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Swap the endianness of a vector of unsigned long elements. <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga4a934295b74de6f927562b60ca42082c"></a><!-- doxytag: member="PlankEndianFunctions::pl_VectorSwapEndianL" ref="ga4a934295b74de6f927562b60ca42082c" args="(PlankL *data, PlankUL N)" -->
+static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_endian_functions.html#ga4a934295b74de6f927562b60ca42082c">pl_VectorSwapEndianL</a> (PlankL *data, PlankUL N)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Swap the endianness of a vector of long elements. <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga7c453b13e7b777fbff26687a54638069"></a><!-- doxytag: member="PlankEndianFunctions::pl_VectorSwapEndianULL" ref="ga7c453b13e7b777fbff26687a54638069" args="(PlankULL *data, PlankUL N)" -->
+static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_endian_functions.html#ga7c453b13e7b777fbff26687a54638069">pl_VectorSwapEndianULL</a> (PlankULL *data, PlankUL N)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Swap the endianness of a vector of unsigned long long (64-bit) elements. <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gafe44c27a16eb8deaa2ef6b98515715be"></a><!-- doxytag: member="PlankEndianFunctions::pl_VectorSwapEndianLL" ref="gafe44c27a16eb8deaa2ef6b98515715be" args="(PlankLL *data, PlankUL N)" -->
+static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_endian_functions.html#gafe44c27a16eb8deaa2ef6b98515715be">pl_VectorSwapEndianLL</a> (PlankLL *data, PlankUL N)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Swap the endianness of a vector of long long (64-bit) elements. <br/></td></tr>
 </table>
 <hr/><h2>Function Documentation</h2>
-<a class="anchor" id="gae23643694e2e245ca44347c6192a8c52"></a><!-- doxytag: member="plank_ContainersMisc.h::pl_SwapEndianUS" ref="gae23643694e2e245ca44347c6192a8c52" args="(unsigned short *bits)" -->
+<a class="anchor" id="ga7c9224f7d4c4e4f65adfe844a90345e5"></a><!-- doxytag: member="plank_ContainersMisc.h::pl_SwapEndianD" ref="ga7c9224f7d4c4e4f65adfe844a90345e5" args="(double *data)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">static void pl_SwapEndianUS </td>
+          <td class="memname">static void pl_SwapEndianD </td>
           <td>(</td>
-          <td class="paramtype">unsigned short *&#160;</td>
-          <td class="paramname"><em>bits</em></td><td>)</td>
-          <td><code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Swap the byte order of the unisgned short pointed to by <em>bits</em>. </p>
-
-</div>
-</div>
-<a class="anchor" id="gac75ceea748c47b6dfda8c357364e5da0"></a><!-- doxytag: member="plank_ContainersMisc.h::pl_SwapEndianUI24" ref="gac75ceea748c47b6dfda8c357364e5da0" args="(PlankUI24 *bits)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">static void pl_SwapEndianUI24 </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_plank_u_i24.html">PlankUI24</a> *&#160;</td>
-          <td class="paramname"><em>bits</em></td><td>)</td>
-          <td><code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Swap the byte order of the 24-bit int pointed to by <em>bits</em>. </p>
-
-</div>
-</div>
-<a class="anchor" id="ga1d4306e552673586bbaaa76e97dfc9cd"></a><!-- doxytag: member="plank_ContainersMisc.h::pl_SwapEndianUI" ref="ga1d4306e552673586bbaaa76e97dfc9cd" args="(unsigned int *bits)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">static void pl_SwapEndianUI </td>
-          <td>(</td>
-          <td class="paramtype">unsigned int *&#160;</td>
-          <td class="paramname"><em>bits</em></td><td>)</td>
-          <td><code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Swap the byte order of the unisgned int pointed to by <em>bits</em>. </p>
-
-</div>
-</div>
-<a class="anchor" id="ga37d0f99842d745175394f7f4a378e82d"></a><!-- doxytag: member="plank_ContainersMisc.h::pl_SwapEndianULL" ref="ga37d0f99842d745175394f7f4a378e82d" args="(PlankULL *bits)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">static void pl_SwapEndianULL </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="plank___standard_header_8h.html#a173f1d590f482a0eefff64a9f90a9d26">PlankULL</a> *&#160;</td>
-          <td class="paramname"><em>bits</em></td><td>)</td>
-          <td><code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Swap the byte order of the unisgned long long pointed to by <em>bits</em>. </p>
-
-</div>
-</div>
-<a class="anchor" id="gacc9809c1baebce7729a069c1636927e1"></a><!-- doxytag: member="plank_ContainersMisc.h::pl_SwapEndianF80" ref="gacc9809c1baebce7729a069c1636927e1" args="(PlankF80 *bits)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">static void pl_SwapEndianF80 </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_plank_f80.html">PlankF80</a> *&#160;</td>
-          <td class="paramname"><em>bits</em></td><td>)</td>
-          <td><code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ga11766e40fbdf1bf99aab1b10805eccba"></a><!-- doxytag: member="plank_ContainersMisc.h::pl_SwapEndianUL" ref="ga11766e40fbdf1bf99aab1b10805eccba" args="(PlankUL *data)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">static void pl_SwapEndianUL </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> *&#160;</td>
+          <td class="paramtype">double *&#160;</td>
           <td class="paramname"><em>data</em></td><td>)</td>
           <td><code> [inline, static]</code></td>
         </tr>
@@ -197,18 +134,18 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Swap the byte order of the unisgned long pointed to by <em>data</em>. </p>
+<p>Swap the byte order of the double pointed to by <em>data</em>. </p>
 
 </div>
 </div>
-<a class="anchor" id="gacbd1eb291c50b32d9798bb2ec3588063"></a><!-- doxytag: member="plank_ContainersMisc.h::pl_SwapEndianS" ref="gacbd1eb291c50b32d9798bb2ec3588063" args="(short *data)" -->
+<a class="anchor" id="gac654560c74f2e97495eeee74e84502e1"></a><!-- doxytag: member="plank_ContainersMisc.h::pl_SwapEndianF" ref="gac654560c74f2e97495eeee74e84502e1" args="(float *data)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">static void pl_SwapEndianS </td>
+          <td class="memname">static void pl_SwapEndianF </td>
           <td>(</td>
-          <td class="paramtype">short *&#160;</td>
+          <td class="paramtype">float *&#160;</td>
           <td class="paramname"><em>data</em></td><td>)</td>
           <td><code> [inline, static]</code></td>
         </tr>
@@ -216,7 +153,7 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Swap the byte order of the short pointed to by <em>data</em>. </p>
+<p>Swap the byte order of the float pointed to by <em>data</em>. </p>
 
 </div>
 </div>
@@ -284,7 +221,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">static void pl_SwapEndianLL </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="plank___standard_header_8h.html#a854e96ed6d678b7cbcbedffce1c0844d">PlankLL</a> *&#160;</td>
+          <td class="paramtype">PlankLL *&#160;</td>
           <td class="paramname"><em>data</em></td><td>)</td>
           <td><code> [inline, static]</code></td>
         </tr>
@@ -296,14 +233,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="gac654560c74f2e97495eeee74e84502e1"></a><!-- doxytag: member="plank_ContainersMisc.h::pl_SwapEndianF" ref="gac654560c74f2e97495eeee74e84502e1" args="(float *data)" -->
+<a class="anchor" id="gacbd1eb291c50b32d9798bb2ec3588063"></a><!-- doxytag: member="plank_ContainersMisc.h::pl_SwapEndianS" ref="gacbd1eb291c50b32d9798bb2ec3588063" args="(short *data)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">static void pl_SwapEndianF </td>
+          <td class="memname">static void pl_SwapEndianS </td>
           <td>(</td>
-          <td class="paramtype">float *&#160;</td>
+          <td class="paramtype">short *&#160;</td>
           <td class="paramname"><em>data</em></td><td>)</td>
           <td><code> [inline, static]</code></td>
         </tr>
@@ -311,18 +248,56 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Swap the byte order of the float pointed to by <em>data</em>. </p>
+<p>Swap the byte order of the short pointed to by <em>data</em>. </p>
 
 </div>
 </div>
-<a class="anchor" id="ga7c9224f7d4c4e4f65adfe844a90345e5"></a><!-- doxytag: member="plank_ContainersMisc.h::pl_SwapEndianD" ref="ga7c9224f7d4c4e4f65adfe844a90345e5" args="(double *data)" -->
+<a class="anchor" id="ga1d4306e552673586bbaaa76e97dfc9cd"></a><!-- doxytag: member="plank_ContainersMisc.h::pl_SwapEndianUI" ref="ga1d4306e552673586bbaaa76e97dfc9cd" args="(unsigned int *bits)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">static void pl_SwapEndianD </td>
+          <td class="memname">static void pl_SwapEndianUI </td>
           <td>(</td>
-          <td class="paramtype">double *&#160;</td>
+          <td class="paramtype">unsigned int *&#160;</td>
+          <td class="paramname"><em>bits</em></td><td>)</td>
+          <td><code> [inline, static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Swap the byte order of the unisgned int pointed to by <em>bits</em>. </p>
+
+</div>
+</div>
+<a class="anchor" id="gac75ceea748c47b6dfda8c357364e5da0"></a><!-- doxytag: member="plank_ContainersMisc.h::pl_SwapEndianUI24" ref="gac75ceea748c47b6dfda8c357364e5da0" args="(PlankUI24 *bits)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void pl_SwapEndianUI24 </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_plank_u_i24.html">PlankUI24</a> *&#160;</td>
+          <td class="paramname"><em>bits</em></td><td>)</td>
+          <td><code> [inline, static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Swap the byte order of the 24-bit int pointed to by <em>bits</em>. </p>
+
+</div>
+</div>
+<a class="anchor" id="ga11766e40fbdf1bf99aab1b10805eccba"></a><!-- doxytag: member="plank_ContainersMisc.h::pl_SwapEndianUL" ref="ga11766e40fbdf1bf99aab1b10805eccba" args="(PlankUL *data)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void pl_SwapEndianUL </td>
+          <td>(</td>
+          <td class="paramtype">PlankUL *&#160;</td>
           <td class="paramname"><em>data</em></td><td>)</td>
           <td><code> [inline, static]</code></td>
         </tr>
@@ -330,7 +305,45 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Swap the byte order of the double pointed to by <em>data</em>. </p>
+<p>Swap the byte order of the unisgned long pointed to by <em>data</em>. </p>
+
+</div>
+</div>
+<a class="anchor" id="ga37d0f99842d745175394f7f4a378e82d"></a><!-- doxytag: member="plank_ContainersMisc.h::pl_SwapEndianULL" ref="ga37d0f99842d745175394f7f4a378e82d" args="(PlankULL *bits)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void pl_SwapEndianULL </td>
+          <td>(</td>
+          <td class="paramtype">PlankULL *&#160;</td>
+          <td class="paramname"><em>bits</em></td><td>)</td>
+          <td><code> [inline, static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Swap the byte order of the unisgned long long pointed to by <em>bits</em>. </p>
+
+</div>
+</div>
+<a class="anchor" id="gae23643694e2e245ca44347c6192a8c52"></a><!-- doxytag: member="plank_ContainersMisc.h::pl_SwapEndianUS" ref="gae23643694e2e245ca44347c6192a8c52" args="(unsigned short *bits)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void pl_SwapEndianUS </td>
+          <td>(</td>
+          <td class="paramtype">unsigned short *&#160;</td>
+          <td class="paramname"><em>bits</em></td><td>)</td>
+          <td><code> [inline, static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Swap the byte order of the unisgned short pointed to by <em>bits</em>. </p>
 
 </div>
 </div>
@@ -340,7 +353,7 @@ Functions</h2></td></tr>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Properties</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -349,7 +362,7 @@ Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 5 2012 17:04:57 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 8 2014 12:26:51 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

@@ -20,7 +20,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="pl-nk-logo-small.png"/></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">pl-nk</div>
+   <div id="projectname">pl-nk&#160;<span id="projectnumber">v0.4.5</span></div>
+   <div id="projectbrief">Plonk|Plink|Plank are a set of cross-platform C/C++ frameworks for audio software development</div>
   </td>
  </tr>
  </tbody>
@@ -29,8 +30,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -54,7 +55,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
       <li><a href="files.html"><span>File&#160;List</span></a></li>
-      <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
 <div class="header">
@@ -62,14 +62,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">plonk_VariableInternal.h</div>  </div>
 </div>
 <div class="contents">
-<a href="plonk___variable_internal_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*</span>
+<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*</span>
 <a name="l00002"></a>00002 <span class="comment"> -------------------------------------------------------------------------------</span>
 <a name="l00003"></a>00003 <span class="comment"> This file is part of the Plink, Plonk, Plank libraries</span>
 <a name="l00004"></a>00004 <span class="comment">  by Martin Robinson</span>
 <a name="l00005"></a>00005 <span class="comment"> </span>
 <a name="l00006"></a>00006 <span class="comment"> http://code.google.com/p/pl-nk/</span>
 <a name="l00007"></a>00007 <span class="comment"> </span>
-<a name="l00008"></a>00008 <span class="comment"> Copyright University of the West of England, Bristol 2011-12</span>
+<a name="l00008"></a>00008 <span class="comment"> Copyright University of the West of England, Bristol 2011-14</span>
 <a name="l00009"></a>00009 <span class="comment"> All rights reserved.</span>
 <a name="l00010"></a>00010 <span class="comment"> </span>
 <a name="l00011"></a>00011 <span class="comment"> Redistribution and use in source and binary forms, with or without</span>
@@ -103,130 +103,126 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00039"></a>00039 <span class="preprocessor">#ifndef PLONK_VARIABLEINTERNAL_H</span>
 <a name="l00040"></a>00040 <span class="preprocessor"></span><span class="preprocessor">#define PLONK_VARIABLEINTERNAL_H</span>
 <a name="l00041"></a>00041 <span class="preprocessor"></span>
-<a name="l00042"></a>00042 <span class="preprocessor">#include &quot;<a class="code" href="plonk___variable_forward_declarations_8h.html">plonk_VariableForwardDeclarations.h</a>&quot;</span>
+<a name="l00042"></a>00042 <span class="preprocessor">#include &quot;plonk_VariableForwardDeclarations.h&quot;</span>
 <a name="l00043"></a>00043 <span class="preprocessor">#include &quot;../../core/plonk_Sender.h&quot;</span>
 <a name="l00044"></a>00044 
 <a name="l00045"></a>00045 
 <a name="l00046"></a>00046 <span class="keyword">template</span>&lt;<span class="keyword">class</span> Type&gt;
-<a name="l00047"></a><a class="code" href="class_variable_internal_base.html">00047</a> <span class="keyword">class </span><a class="code" href="class_variable_internal_base.html">VariableInternalBase</a> : <span class="keyword">public</span> <a class="code" href="class_sender_internal.html">SenderInternal</a>&lt; Variable&lt;Type&gt; &gt;
+<a name="l00047"></a>00047 <span class="keyword">class </span>VariableInternalBase : <span class="keyword">public</span> SenderInternal&lt; Variable&lt;Type&gt; &gt;
 <a name="l00048"></a>00048 {
 <a name="l00049"></a>00049 <span class="keyword">public</span>:
-<a name="l00050"></a><a class="code" href="class_variable_internal_base.html#a72be33518bf57eb93c312e9b68b66516">00050</a>     <a class="code" href="class_variable_internal_base.html#a72be33518bf57eb93c312e9b68b66516">~VariableInternalBase</a>() { }
-<a name="l00051"></a>00051     <span class="keyword">virtual</span> <span class="keyword">const</span> Type <a class="code" href="class_variable_internal_base.html#a369ba8fea5e5a5af1956de3fce161102">getValue</a>() <span class="keyword">const</span> = 0;
-<a name="l00052"></a>00052     <span class="keyword">virtual</span> <span class="keyword">const</span> Type <a class="code" href="class_variable_internal_base.html#a0eb64b89f21a4e0cf66344198da0e452">nextValue</a>() = 0;
-<a name="l00053"></a>00053     <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_variable_internal_base.html#aeb59d98cf979fdec63175f6884ee8bd3">setValue</a> (Type <span class="keyword">const</span>&amp; newValue) = 0;
-<a name="l00054"></a>00054 };
-<a name="l00055"></a>00055 
-<a name="l00056"></a>00056 <span class="comment">//template&lt;class Type&gt;</span>
-<a name="l00057"></a>00057 <span class="comment">//class VariableInternalBase&lt;Type&amp;&gt; : public SmartPointer</span>
-<a name="l00058"></a>00058 <span class="comment">//{</span>
-<a name="l00059"></a>00059 <span class="comment">//public:</span>
-<a name="l00060"></a>00060 <span class="comment">//    ~VariableInternalBase() { }</span>
-<a name="l00061"></a>00061 <span class="comment">//    virtual Type&amp; getValue() = 0;</span>
-<a name="l00062"></a>00062 <span class="comment">//    virtual void setValue (Type&amp; newValue) = 0;</span>
-<a name="l00063"></a>00063 <span class="comment">//};</span>
-<a name="l00064"></a>00064 
-<a name="l00065"></a>00065 
-<a name="l00066"></a>00066 
-<a name="l00067"></a>00067 <span class="comment">//------------------------------------------------------------------------------</span>
-<a name="l00068"></a>00068 
-<a name="l00069"></a>00069 
-<a name="l00070"></a>00070 <span class="keyword">template</span>&lt;<span class="keyword">class</span> Type&gt;
-<a name="l00071"></a><a class="code" href="class_variable_internal.html">00071</a> <span class="keyword">class </span><a class="code" href="class_variable_internal.html">VariableInternal</a> : <span class="keyword">public</span> <a class="code" href="class_variable_internal_base.html">VariableInternalBase</a>&lt;Type&gt;
-<a name="l00072"></a>00072 {
-<a name="l00073"></a>00073 <span class="keyword">public</span>:    
-<a name="l00074"></a><a class="code" href="class_variable_internal.html#a8fc420510254ef105a515e2166828cfa">00074</a>     <span class="keyword">typedef</span> <a class="code" href="class_variable.html" title="A template class for storing any variable type.">Variable&lt;Type&gt;</a> <a class="code" href="class_variable_internal.html#a8fc420510254ef105a515e2166828cfa">Container</a>; 
+<a name="l00050"></a>00050     ~VariableInternalBase() { }
+<a name="l00051"></a>00051     <span class="keyword">virtual</span> <span class="keyword">const</span> Type getValue() <span class="keyword">const</span> = 0;
+<a name="l00052"></a>00052     <span class="keyword">virtual</span> Type* getValuePtr() { <span class="keywordflow">return</span> 0; }
+<a name="l00053"></a>00053     <span class="keyword">virtual</span> <span class="keyword">const</span> Type nextValue() = 0;
+<a name="l00054"></a>00054     <span class="keyword">virtual</span> <span class="keywordtype">void</span> setValue (Type <span class="keyword">const</span>&amp; newValue) = 0;
+<a name="l00055"></a>00055 };
+<a name="l00056"></a>00056 
+<a name="l00057"></a>00057 
+<a name="l00058"></a>00058 <span class="comment">//------------------------------------------------------------------------------</span>
+<a name="l00059"></a>00059 
+<a name="l00060"></a>00060 
+<a name="l00061"></a>00061 <span class="keyword">template</span>&lt;<span class="keyword">class</span> Type&gt;
+<a name="l00062"></a>00062 <span class="keyword">class </span>VariableInternal : <span class="keyword">public</span> VariableInternalBase&lt;Type&gt;
+<a name="l00063"></a>00063 {
+<a name="l00064"></a>00064 <span class="keyword">public</span>:    
+<a name="l00065"></a>00065     <span class="keyword">typedef</span> <a class="code" href="class_variable.html" title="A template class for storing any variable type.">Variable&lt;Type&gt;</a> Container; 
+<a name="l00066"></a>00066     
+<a name="l00067"></a>00067     <span class="keyword">inline</span> VariableInternal() throw()
+<a name="l00068"></a>00068     :   value (0)
+<a name="l00069"></a>00069     {
+<a name="l00070"></a>00070     }
+<a name="l00071"></a>00071     
+<a name="l00072"></a>00072     <span class="keyword">inline</span> ~VariableInternal()
+<a name="l00073"></a>00073     {
+<a name="l00074"></a>00074     }
 <a name="l00075"></a>00075     
-<a name="l00076"></a><a class="code" href="class_variable_internal.html#aa37d4b78d4b4c1d39e774ea6167b050d">00076</a>     <span class="keyword">inline</span> <a class="code" href="class_variable_internal.html#aa37d4b78d4b4c1d39e774ea6167b050d">VariableInternal</a>() throw()
-<a name="l00077"></a>00077     :   value (0)
-<a name="l00078"></a>00078     {
-<a name="l00079"></a>00079     }
-<a name="l00080"></a>00080     
-<a name="l00081"></a><a class="code" href="class_variable_internal.html#ac11d6c73d3b0c7dcf980979e446a0e06">00081</a>     <span class="keyword">inline</span> <a class="code" href="class_variable_internal.html#ac11d6c73d3b0c7dcf980979e446a0e06">~VariableInternal</a>()
-<a name="l00082"></a>00082     {
-<a name="l00083"></a>00083     }
-<a name="l00084"></a>00084     
-<a name="l00085"></a>00085 <span class="comment">//    template&lt;class OtherType&gt;</span>
-<a name="l00086"></a>00086 <span class="comment">//    VariableInternal (OtherType const&amp; initValue) throw()</span>
-<a name="l00087"></a>00087 <span class="comment">//    :   value (initValue)</span>
-<a name="l00088"></a>00088 <span class="comment">//    {</span>
-<a name="l00089"></a>00089 <span class="comment">//    }</span>
-<a name="l00090"></a>00090 
-<a name="l00091"></a><a class="code" href="class_variable_internal.html#abaaafbf4e887059059bc657a1cb77da1">00091</a>     <span class="keyword">inline</span> <a class="code" href="class_variable_internal.html#aa37d4b78d4b4c1d39e774ea6167b050d">VariableInternal</a> (Type <span class="keyword">const</span>&amp; initValue) <span class="keywordflow">throw</span>()
-<a name="l00092"></a>00092     :   value (initValue)
+<a name="l00076"></a>00076 <span class="comment">//    template&lt;class OtherType&gt;</span>
+<a name="l00077"></a>00077 <span class="comment">//    VariableInternal (OtherType const&amp; initValue) throw()</span>
+<a name="l00078"></a>00078 <span class="comment">//    :   value (initValue)</span>
+<a name="l00079"></a>00079 <span class="comment">//    {</span>
+<a name="l00080"></a>00080 <span class="comment">//    }</span>
+<a name="l00081"></a>00081 
+<a name="l00082"></a>00082     <span class="keyword">inline</span> VariableInternal (Type <span class="keyword">const</span>&amp; initValue) <span class="keywordflow">throw</span>()
+<a name="l00083"></a>00083     :   value (initValue)
+<a name="l00084"></a>00084     {
+<a name="l00085"></a>00085     }
+<a name="l00086"></a>00086 
+<a name="l00087"></a>00087     <span class="keyword">const</span> Type getValue() <span class="keyword">const</span> throw()
+<a name="l00088"></a>00088     {
+<a name="l00089"></a>00089         <span class="keywordflow">return</span> value;
+<a name="l00090"></a>00090     }
+<a name="l00091"></a>00091     
+<a name="l00092"></a>00092     Type* getValuePtr() throw()
 <a name="l00093"></a>00093     {
-<a name="l00094"></a>00094     }
-<a name="l00095"></a>00095 
-<a name="l00096"></a><a class="code" href="class_variable_internal.html#a77f3d3bb8eb343a65e60670bce2a5338">00096</a>     <span class="keyword">inline</span> <span class="keyword">const</span> Type <a class="code" href="class_variable_internal.html#a77f3d3bb8eb343a65e60670bce2a5338">getValue</a>() <span class="keyword">const</span> throw()
-<a name="l00097"></a>00097     {
-<a name="l00098"></a>00098         <span class="keywordflow">return</span> value;
-<a name="l00099"></a>00099     }
-<a name="l00100"></a>00100     
-<a name="l00101"></a><a class="code" href="class_variable_internal.html#a0a5a6bc6d34115aa1d2acff179769d36">00101</a>     <span class="keyword">inline</span> <span class="keyword">const</span> Type <a class="code" href="class_variable_internal.html#a0a5a6bc6d34115aa1d2acff179769d36">nextValue</a>() throw()
-<a name="l00102"></a>00102     {        
-<a name="l00103"></a>00103         <span class="keywordflow">return</span> value;
-<a name="l00104"></a>00104     }
-<a name="l00105"></a>00105     
-<a name="l00106"></a><a class="code" href="class_variable_internal.html#aaa7337d8b439aed0563734469f90ef1b">00106</a>     <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="class_variable_internal.html#aaa7337d8b439aed0563734469f90ef1b">setValue</a> (Type <span class="keyword">const</span>&amp; newValue) <span class="keywordflow">throw</span>()
-<a name="l00107"></a>00107     {
-<a name="l00108"></a>00108         <span class="keywordflow">if</span> (value != newValue)
-<a name="l00109"></a>00109         {
-<a name="l00110"></a>00110             value = newValue;
-<a name="l00111"></a>00111             this-&gt;<a class="code" href="class_sender_internal.html#a3c1c3d0839c682179b82ef1b93dd6ec1">update</a>();
-<a name="l00112"></a>00112         }
-<a name="l00113"></a>00113     }
-<a name="l00114"></a>00114     
-<a name="l00115"></a><a class="code" href="class_variable_internal.html#a0b1d7d01dc52a0537d53ae124084a9c8">00115</a>     <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="class_variable_internal.html#a0b1d7d01dc52a0537d53ae124084a9c8">swapValues</a> (Type&amp; other) <span class="keywordflow">throw</span>()
-<a name="l00116"></a>00116     {
-<a name="l00117"></a>00117         Type temp = other;
-<a name="l00118"></a>00118         other = value;
-<a name="l00119"></a>00119         value = temp;
-<a name="l00120"></a>00120     }
-<a name="l00121"></a>00121     
-<a name="l00122"></a>00122 <span class="keyword">private</span>:
-<a name="l00123"></a>00123     Type value;
-<a name="l00124"></a>00124 };
-<a name="l00125"></a>00125 
-<a name="l00126"></a>00126 
-<a name="l00127"></a>00127 <span class="keyword">template</span>&lt;<span class="keyword">class</span> Type&gt;
-<a name="l00128"></a><a class="code" href="class_variable_internal_3_01_type_01_6_01_4.html">00128</a> <span class="keyword">class </span><a class="code" href="class_variable_internal.html">VariableInternal</a>&lt;Type&amp;&gt; : <span class="keyword">public</span> <a class="code" href="class_smart_pointer.html" title="Reference counted pointer base class.">SmartPointer</a> <span class="comment">// VariableInternalBase&lt;Type&amp;&gt;</span>
-<a name="l00129"></a>00129 {
-<a name="l00130"></a>00130 <span class="keyword">public</span>:    
-<a name="l00131"></a><a class="code" href="class_variable_internal_3_01_type_01_6_01_4.html#a0f8d4ae4f94882d19892038f825b03c3">00131</a>     <span class="keyword">typedef</span> <a class="code" href="class_variable_3_01_type_01_6_01_4.html" title="A variable container for objects.">Variable&lt;Type&amp;&gt;</a> <a class="code" href="class_variable_internal_3_01_type_01_6_01_4.html#a0f8d4ae4f94882d19892038f825b03c3">Container</a>; 
-<a name="l00132"></a>00132         
-<a name="l00133"></a>00133 <span class="comment">//    VariableInternal (Type const&amp; initValue) throw()</span>
-<a name="l00134"></a>00134 <span class="comment">//    {</span>
-<a name="l00135"></a>00135 <span class="comment">//        value.setValue (initValue.getValue());</span>
-<a name="l00136"></a>00136 <span class="comment">//    }</span>
-<a name="l00137"></a>00137     
-<a name="l00138"></a>00138     <span class="keyword">template</span>&lt;<span class="keyword">class</span> ValueType&gt;
-<a name="l00139"></a><a class="code" href="class_variable_internal_3_01_type_01_6_01_4.html#ac9de9672069adae20b789af9e96ad855">00139</a>     <a class="code" href="class_variable_internal.html#aa37d4b78d4b4c1d39e774ea6167b050d">VariableInternal</a> (ValueType <span class="keyword">const</span>&amp; initValue) <span class="keywordflow">throw</span>()
-<a name="l00140"></a>00140     {
-<a name="l00141"></a>00141         <a class="code" href="class_variable_internal.html#aaa7337d8b439aed0563734469f90ef1b">setValue</a> (initValue);
-<a name="l00142"></a>00142     }
-<a name="l00143"></a>00143     
-<a name="l00144"></a><a class="code" href="class_variable_internal_3_01_type_01_6_01_4.html#ae6f49fcc159bf32302462836a89f63d7">00144</a>     <span class="keyword">inline</span> Type&amp; <a class="code" href="class_variable_internal.html#a77f3d3bb8eb343a65e60670bce2a5338">getValue</a>() throw()
-<a name="l00145"></a>00145     {
-<a name="l00146"></a>00146         <span class="keywordflow">return</span> value;
-<a name="l00147"></a>00147     }
-<a name="l00148"></a>00148         
-<a name="l00149"></a>00149     <span class="keyword">template</span>&lt;<span class="keyword">class</span> ValueType&gt;
-<a name="l00150"></a><a class="code" href="class_variable_internal_3_01_type_01_6_01_4.html#abf63deaa45abf057d8f60d9cd447b895">00150</a>     <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="class_variable_internal.html#aaa7337d8b439aed0563734469f90ef1b">setValue</a> (ValueType <span class="keyword">const</span>&amp; newValue) <span class="keywordflow">throw</span>()
-<a name="l00151"></a>00151     {
-<a name="l00152"></a>00152         value = newValue;
-<a name="l00153"></a>00153     }
-<a name="l00154"></a>00154     
-<a name="l00155"></a><a class="code" href="class_variable_internal_3_01_type_01_6_01_4.html#a1b3a40a0c9892507566a48523f7958c0">00155</a>     <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="class_variable_internal.html#a0b1d7d01dc52a0537d53ae124084a9c8">swapValues</a> (Type&amp; other) <span class="keywordflow">throw</span>()
-<a name="l00156"></a>00156     {
-<a name="l00157"></a>00157         value.swapWith (other);
-<a name="l00158"></a>00158     }
-<a name="l00159"></a>00159     
-<a name="l00160"></a>00160 <span class="keyword">private</span>:
-<a name="l00161"></a>00161     Type value;
-<a name="l00162"></a>00162 };
-<a name="l00163"></a>00163 
-<a name="l00164"></a>00164 
-<a name="l00165"></a>00165 <span class="preprocessor">#endif // PLONK_VARIABLEINTERNAL_H</span>
+<a name="l00094"></a>00094         <span class="keywordflow">return</span> &amp;value;
+<a name="l00095"></a>00095     }
+<a name="l00096"></a>00096     
+<a name="l00097"></a>00097     <span class="keyword">const</span> Type nextValue() throw()
+<a name="l00098"></a>00098     {        
+<a name="l00099"></a>00099         <span class="keywordflow">return</span> value;
+<a name="l00100"></a>00100     }
+<a name="l00101"></a>00101     
+<a name="l00102"></a>00102     <span class="keywordtype">void</span> setValue (Type <span class="keyword">const</span>&amp; newValue) <span class="keywordflow">throw</span>()
+<a name="l00103"></a>00103     {
+<a name="l00104"></a>00104         <span class="keywordflow">if</span> (value != newValue)
+<a name="l00105"></a>00105         {
+<a name="l00106"></a>00106             value = newValue;
+<a name="l00107"></a>00107             this-&gt;update (Text::getEmpty(), Dynamic::getNull());
+<a name="l00108"></a>00108         }
+<a name="l00109"></a>00109     }
+<a name="l00110"></a>00110     
+<a name="l00111"></a>00111     <span class="keyword">inline</span> <span class="keywordtype">void</span> swapValues (Type&amp; other) <span class="keywordflow">throw</span>()
+<a name="l00112"></a>00112     {
+<a name="l00113"></a>00113         Type temp = other;
+<a name="l00114"></a>00114         other = value;
+<a name="l00115"></a>00115         value = temp;
+<a name="l00116"></a>00116     }
+<a name="l00117"></a>00117     
+<a name="l00118"></a>00118 <span class="keyword">private</span>:
+<a name="l00119"></a>00119     PLONK_ALIGN(PLONK_WORDSIZE) Type value;
+<a name="l00120"></a>00120 };
+<a name="l00121"></a>00121 
+<a name="l00122"></a>00122 
+<a name="l00123"></a>00123 template&lt;class Type&gt;
+<a name="l00124"></a>00124 class VariableInternal&lt;Type&amp;&gt; : public <a class="code" href="class_smart_pointer.html" title="Reference counted pointer base class.">SmartPointer</a> <span class="comment">// VariableInternalBase&lt;Type&amp;&gt;</span>
+<a name="l00125"></a>00125 {
+<a name="l00126"></a>00126 <span class="keyword">public</span>:    
+<a name="l00127"></a>00127     <span class="keyword">typedef</span> <a class="code" href="class_variable_3_01_type_01_6_01_4.html" title="A variable container for objects.">Variable&lt;Type&amp;&gt;</a> Container; 
+<a name="l00128"></a>00128         
+<a name="l00129"></a>00129 <span class="comment">//    VariableInternal (Type const&amp; initValue) throw()</span>
+<a name="l00130"></a>00130 <span class="comment">//    {</span>
+<a name="l00131"></a>00131 <span class="comment">//        value.setValue (initValue.getValue());</span>
+<a name="l00132"></a>00132 <span class="comment">//    }</span>
+<a name="l00133"></a>00133     
+<a name="l00134"></a>00134     <span class="keyword">template</span>&lt;<span class="keyword">class</span> ValueType&gt;
+<a name="l00135"></a>00135     VariableInternal (ValueType <span class="keyword">const</span>&amp; initValue) <span class="keywordflow">throw</span>()
+<a name="l00136"></a>00136     {
+<a name="l00137"></a>00137         setValue (initValue);
+<a name="l00138"></a>00138     }
+<a name="l00139"></a>00139     
+<a name="l00140"></a>00140     Type&amp; getValue() throw()
+<a name="l00141"></a>00141     {
+<a name="l00142"></a>00142         <span class="keywordflow">return</span> value;
+<a name="l00143"></a>00143     }
+<a name="l00144"></a>00144         
+<a name="l00145"></a>00145     <span class="keyword">template</span>&lt;<span class="keyword">class</span> ValueType&gt;
+<a name="l00146"></a>00146     <span class="keywordtype">void</span> setValue (ValueType <span class="keyword">const</span>&amp; newValue) <span class="keywordflow">throw</span>()
+<a name="l00147"></a>00147     {
+<a name="l00148"></a>00148         value = newValue;
+<a name="l00149"></a>00149     }
+<a name="l00150"></a>00150     
+<a name="l00151"></a>00151     <span class="keywordtype">void</span> swapValues (Type&amp; other) <span class="keywordflow">throw</span>()
+<a name="l00152"></a>00152     {
+<a name="l00153"></a>00153         value.swapWith (other);
+<a name="l00154"></a>00154     }
+<a name="l00155"></a>00155     
+<a name="l00156"></a>00156 <span class="keyword">private</span>:
+<a name="l00157"></a>00157     Type value;
+<a name="l00158"></a>00158 };
+<a name="l00159"></a>00159 
+<a name="l00160"></a>00160 
+<a name="l00161"></a>00161 <span class="preprocessor">#endif // PLONK_VARIABLEINTERNAL_H</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -234,7 +230,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Properties</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -243,7 +239,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 5 2012 17:04:57 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 8 2014 12:26:51 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

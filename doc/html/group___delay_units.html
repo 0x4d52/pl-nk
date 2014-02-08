@@ -20,7 +20,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="pl-nk-logo-small.png"/></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">pl-nk</div>
+   <div id="projectname">pl-nk&#160;<span id="projectnumber">v0.4.5</span></div>
+   <div id="projectbrief">Plonk|Plink|Plank are a set of cross-platform C/C++ frameworks for audio software development</div>
   </td>
  </tr>
  </tbody>
@@ -29,8 +30,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -66,17 +67,17 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_allpass_decay_unit.html">AllpassDecayUnit&lt; SampleType &gt;</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_allpass_decay_unit.html">AllpassDecayUnit&lt; SampleType, InterpTypeCode &gt;</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">An allpass delay setting the decay as a time to decay by 60dB.  <a href="class_allpass_decay_unit.html#details">More...</a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_allpass_f_f_f_b_unit.html">AllpassFFFBUnit&lt; SampleType &gt;</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_allpass_f_f_f_b_unit.html">AllpassFFFBUnit&lt; SampleType, InterpTypeCode &gt;</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">An allpass delay setting the feedforward and feeback coefficient directly.  <a href="class_allpass_f_f_f_b_unit.html#details">More...</a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_comb_decay_unit.html">CombDecayUnit&lt; SampleType &gt;</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_comb_decay_unit.html">CombDecayUnit&lt; SampleType, InterpTypeCode &gt;</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">A comb filter setting the decay as a time to decay by 60dB.  <a href="class_comb_decay_unit.html#details">More...</a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_comb_f_b_unit.html">CombFBUnit&lt; SampleType &gt;</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_comb_f_b_unit.html">CombFBUnit&lt; SampleType, InterpTypeCode &gt;</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">A comb filter setting the feedback amount directly.  <a href="class_comb_f_b_unit.html#details">More...</a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_comb_filter1_param_unit.html">CombFilter1ParamUnit&lt; FilterShape &gt;</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_comb_filter1_param_unit.html">CombFilter1ParamUnit&lt; FilterShape, InterpTypeCode &gt;</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">A comb filter with a filter in the feedback loop (where the filter takes one parameter).  <a href="class_comb_filter1_param_unit.html#details">More...</a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_delay_unit.html">DelayUnit&lt; SampleType &gt;</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_delay_unit.html">DelayUnit&lt; SampleType, InterpTypeCode &gt;</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Simple delay processor.  <a href="class_delay_unit.html#details">More...</a><br/></td></tr>
 <tr><td colspan="2"><h2><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
@@ -100,33 +101,18 @@ Typedefs</h2></td></tr>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <p>A list of all delay-based unit classes and their brief descriptions. </p>
 <hr/><h2>Typedef Documentation</h2>
-<a class="anchor" id="ga3c05fa3e91b5971010a9bc5ec049312c"></a><!-- doxytag: member="plonk_DelayFormCombFilter1Param.h::CombLPFP1" ref="ga3c05fa3e91b5971010a9bc5ec049312c" args="" -->
+<a class="anchor" id="ga9c454891d960c13bcea3a8f94c3cb00c"></a><!-- doxytag: member="plonk_DelayFormCombFilter1Param.h::CombHPF" ref="ga9c454891d960c13bcea3a8f94c3cb00c" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_comb_filter1_param_unit.html">CombFilter1ParamUnit</a>&lt;<a class="el" href="class_filter_shape_l_p_f_p1_base.html">FilterShapeLPFP1Base</a>&lt;PLONK_TYPE_DEFAULT&gt; &gt; <a class="el" href="class_comb_filter1_param_unit.html">CombLPFP1</a></td>
+          <td class="memname">typedef <a class="el" href="class_comb_filter1_param_unit.html">CombFilter1ParamUnit</a>&lt;<a class="el" href="class_filter_shape_h_p_f_base.html">FilterShapeHPFBase</a>&lt;PLONK_TYPE_DEFAULT&gt; &gt; <a class="el" href="class_comb_filter1_param_unit.html">CombHPF</a></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>A comb filter with a one-pole low-pass filter in the feedback loop. </p>
-
-</div>
-</div>
-<a class="anchor" id="ga08d4f111a94ff880f375bef56b6e7b91"></a><!-- doxytag: member="plonk_DelayFormCombFilter1Param.h::CombLPF" ref="ga08d4f111a94ff880f375bef56b6e7b91" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_comb_filter1_param_unit.html">CombFilter1ParamUnit</a>&lt;<a class="el" href="class_filter_shape_l_p_f_base.html">FilterShapeLPFBase</a>&lt;PLONK_TYPE_DEFAULT&gt; &gt; <a class="el" href="class_comb_filter1_param_unit.html">CombLPF</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>A comb filter with a Butterworth low-pass filter in the feedback loop. </p>
+<p>A comb filter with a Butterworth high-pass filter in the feedback loop. </p>
 
 </div>
 </div>
@@ -145,18 +131,33 @@ Typedefs</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ga9c454891d960c13bcea3a8f94c3cb00c"></a><!-- doxytag: member="plonk_DelayFormCombFilter1Param.h::CombHPF" ref="ga9c454891d960c13bcea3a8f94c3cb00c" args="" -->
+<a class="anchor" id="ga08d4f111a94ff880f375bef56b6e7b91"></a><!-- doxytag: member="plonk_DelayFormCombFilter1Param.h::CombLPF" ref="ga08d4f111a94ff880f375bef56b6e7b91" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_comb_filter1_param_unit.html">CombFilter1ParamUnit</a>&lt;<a class="el" href="class_filter_shape_h_p_f_base.html">FilterShapeHPFBase</a>&lt;PLONK_TYPE_DEFAULT&gt; &gt; <a class="el" href="class_comb_filter1_param_unit.html">CombHPF</a></td>
+          <td class="memname">typedef <a class="el" href="class_comb_filter1_param_unit.html">CombFilter1ParamUnit</a>&lt;<a class="el" href="class_filter_shape_l_p_f_base.html">FilterShapeLPFBase</a>&lt;PLONK_TYPE_DEFAULT&gt; &gt; <a class="el" href="class_comb_filter1_param_unit.html">CombLPF</a></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>A comb filter with a Butterworth high-pass filter in the feedback loop. </p>
+<p>A comb filter with a Butterworth low-pass filter in the feedback loop. </p>
+
+</div>
+</div>
+<a class="anchor" id="ga3c05fa3e91b5971010a9bc5ec049312c"></a><!-- doxytag: member="plonk_DelayFormCombFilter1Param.h::CombLPFP1" ref="ga3c05fa3e91b5971010a9bc5ec049312c" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_comb_filter1_param_unit.html">CombFilter1ParamUnit</a>&lt;<a class="el" href="class_filter_shape_l_p_f_p1_base.html">FilterShapeLPFP1Base</a>&lt;PLONK_TYPE_DEFAULT&gt; &gt; <a class="el" href="class_comb_filter1_param_unit.html">CombLPFP1</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>A comb filter with a one-pole low-pass filter in the feedback loop. </p>
 
 </div>
 </div>
@@ -166,7 +167,7 @@ Typedefs</h2></td></tr>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Properties</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -175,7 +176,7 @@ Typedefs</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 5 2012 17:04:58 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 8 2014 12:26:52 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

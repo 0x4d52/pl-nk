@@ -20,7 +20,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="pl-nk-logo-small.png"/></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">pl-nk</div>
+   <div id="projectname">pl-nk&#160;<span id="projectnumber">v0.4.5</span></div>
+   <div id="projectbrief">Plonk|Plink|Plank are a set of cross-platform C/C++ frameworks for audio software development</div>
   </td>
  </tr>
  </tbody>
@@ -29,8 +30,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -61,9 +62,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   </div>
 </div>
 <div class="header">
-  <div class="summary">
-<a href="#pub-types">Public Types</a> &#124;
-<a href="#pub-methods">Public Member Functions</a>  </div>
   <div class="headertitle">
 <div class="title">ChannelInternal&lt; SampleType, DataType &gt; Class Template Reference</div>  </div>
 </div>
@@ -71,46 +69,13 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <!-- doxytag: class="ChannelInternal" --><!-- doxytag: inherits="ChannelInternalBase,ReceiverInternal" -->
 <p>The base class from which most ChannelInternals should be derived.  
  <a href="class_channel_internal.html#details">More...</a></p>
-<div class="dynheader">
-Inheritance diagram for ChannelInternal&lt; SampleType, DataType &gt;:</div>
-<div class="dyncontent">
- <div class="center">
-  <img src="class_channel_internal.png" usemap="#ChannelInternal&lt; SampleType, DataType &gt;_map" alt=""/>
-  <map id="ChannelInternal&lt; SampleType, DataType &gt;_map" name="ChannelInternal&lt; SampleType, DataType &gt;_map">
-<area href="class_channel_internal_base.html" title="The templated base class for all internal channel processes." alt="ChannelInternalBase&lt; SampleType &gt;" shape="rect" coords="338,168,666,192"/>
-<area href="class_receiver_internal.html" alt="ReceiverInternal&lt; SenderContainerBaseType &gt;" shape="rect" coords="676,168,1004,192"/>
-<area href="class_sender_internal.html" alt="SenderInternal&lt; ChannelBase&lt; SampleType &gt; &gt;" shape="rect" coords="0,112,328,136"/>
-<area href="class_channel_internal_core.html" title="The base, core class for all internal channel processes." alt="ChannelInternalCore" shape="rect" coords="338,112,666,136"/>
-<area href="class_receiver_internal.html" alt="ReceiverInternal&lt; SenderContainerBaseType &gt;" shape="rect" coords="676,112,1004,136"/>
-<area href="class_smart_pointer.html" title="Reference counted pointer base class." alt="SmartPointer" shape="rect" coords="0,56,328,80"/>
-<area href="class_plonk_base.html" alt="PlonkBase" shape="rect" coords="0,0,328,24"/>
-<area href="class_proxy_owner_channel_internal.html" title="Where true multiple-input-multiple-output units are needed This is where all outputs depend on all in..." alt="ProxyOwnerChannelInternal&lt; SampleType, DataType &gt;" shape="rect" coords="507,280,835,304"/>
-</map>
- </div></div>
+
+<p>Inherits <a class="el" href="class_channel_internal_base.html">ChannelInternalBase&lt; SampleType &gt;</a>, and ReceiverInternal&lt; SenderContainerBaseType &gt;.</p>
+
+<p>Inherited by <a class="el" href="class_proxy_owner_channel_internal.html">ProxyOwnerChannelInternal&lt; SampleType, DataType &gt;</a>.</p>
 
 <p><a href="class_channel_internal-members.html">List of all members.</a></p>
 <table class="memberdecls">
-<tr><td colspan="2"><h2><a name="pub-types"></a>
-Public Types</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_channel_base.html">ChannelBase</a>&lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_channel_internal.html#a3ff51af2f5629cdb9f81c7af3a3ec672">ChannelType</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_channel_internal_base.html">ChannelInternalBase</a><br class="typebreak"/>
-&lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_channel_internal.html#a9edab70c3d38bb8adb2e816dfb578cf1">Internal</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_channel_internal.html#a3b121d7cdac860b370de05f3540c81ae">UnitType</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a><br class="typebreak"/>
-&lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_channel_internal.html#a16c6a9a8471f62660653e9c5921aac70">Buffer</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_input_dictionary.html">InputDictionary</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_channel_internal.html#aaad27a4ef43a757a678695a406757706">Inputs</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_channel_base.html">ChannelBase</a>&lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_channel_internal.html#a5ebd3022e26f5eb6eb05de9eb842989c">Container</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="struct_channel_data_3_01_channel_internal_core_01_4.html">ChannelInternalCore::Data</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_channel_internal.html#a2494fe6f33d165fd94c08600755fc4a2">BaseData</a></td></tr>
-<tr><td colspan="2"><h2><a name="pub-methods"></a>
-Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_channel_internal.html#a3ba837b76e7bc19364c701b49acc613a">ChannelInternal</a> (<a class="el" href="class_input_dictionary.html">Inputs</a> const &amp;inputDictionary, DataType const &amp;initState, <a class="el" href="class_block_size.html">BlockSize</a> const &amp;blockSize, <a class="el" href="class_sample_rate.html">SampleRate</a> const &amp;sampleRate)  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_channel_internal.html#a86bdb17b03a3f896ce8d9e6510aab466">~ChannelInternal</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">const DataType &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_channel_internal.html#aa0fba1693bbfe6dae4dfedaa0cc0f079">getState</a> () const   throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">DataType &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_channel_internal.html#a8708ae6b7f2c2cf43fbc465549d49c94">getState</a> ()  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_channel_internal.html#aa03065dc474226453a0334dc82bae624">setSampleRate</a> (<a class="el" href="class_sample_rate.html">SampleRate</a> const &amp;newSampleRate)  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_channel_internal.html#a69a895f1fb4feef65421a5059e98ebc3">setOverlap</a> (<a class="el" href="class_variable.html">DoubleVariable</a> const &amp;newOverlap)  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_channel_internal.html#a9243aead95b3f12bab5f8afdd482f4fe">changed</a> (<a class="el" href="class_variable.html">DoubleVariable::Sender</a> const &amp;source)  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_channel_internal.html#a0ee4bd3249bc1c00df03672302779a33">updateSampleRateInData</a> ()  throw ()</td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><h3>template&lt;class SampleType, class DataType&gt;<br/>
@@ -119,319 +84,7 @@ class ChannelInternal&lt; SampleType, DataType &gt;</h3>
 <p>The base class from which most ChannelInternals should be derived. </p>
 <p>DataType should be a class which stores a ChannelInternal's current state (e.g., current phase, filter coefficients etc). It should be a POD (plain old data) type so it can be usefully used to pass to C code if neccesary.</p>
 <p>Normally a <a class="el" href="class_channel_internal.html" title="The base class from which most ChannelInternals should be derived.">ChannelInternal</a> will process only one channel of output buffer samples. Multichannel operation is achieved by arrays of these or in some cases the proxy system is used (see below). </p>
-</div><hr/><h2>Member Typedef Documentation</h2>
-<a class="anchor" id="a3ff51af2f5629cdb9f81c7af3a3ec672"></a><!-- doxytag: member="ChannelInternal::ChannelType" ref="a3ff51af2f5629cdb9f81c7af3a3ec672" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType, class DataType&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_channel_base.html">ChannelBase</a>&lt;SampleType&gt; <a class="el" href="class_channel_internal.html">ChannelInternal</a>&lt; SampleType, DataType &gt;::<a class="el" href="class_channel_base.html">ChannelType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="class_channel_internal_base.html#a9aaf4cc94cc8b4e4444f2fce7d9ab6e9">ChannelInternalBase&lt; SampleType &gt;</a>.</p>
-
-<p>Reimplemented in <a class="el" href="class_proxy_channel_internal.html#a1c0b256463e67c38a632711e920d5483">ProxyChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_proxy_owner_channel_internal.html#a66b854dcf0db11c050c69dff2f3e374f">ProxyOwnerChannelInternal&lt; SampleType, DataType &gt;</a>, <a class="el" href="class_envelope_channel_internal.html#a8b6256b23ed6049c141c05d094dba755">EnvelopeChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_overlap_make_channel_internal.html#ad316efdcf8c331bde372fedff54e028b">OverlapMakeChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_overlap_mix_channel_internal.html#a28efd2b1945f3ae50ffd91eff835b080">OverlapMixChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_resample_channel_internal.html#aa57a0a9e346391385667c76181ba85ea">ResampleChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_threaded_channel_internal.html#a0bc5a54445edcb4e03a6d91430676e78">ThreadedChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_delay1_param_channel_internal.html#a8db93d5facc65672c047216a41caabbf">Delay1ParamChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_delay2_param_channel_internal.html#a8bbd1b9bd53b76017232bc8e9ef72421">Delay2ParamChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_delay3_param_channel_internal.html#a73ad6b538760b8769a6ef71e5a3d38f7">Delay3ParamChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_delay4_param_channel_internal.html#a222d65725954cdedd2a2351b76495046">Delay4ParamChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_delay_channel_internal_base.html#abf4df64b97b005d47185b141d18c43c6">DelayChannelInternalBase&lt; FormType &gt;</a>, <a class="el" href="class_f_f_t_channel_internal.html#ab8d7b9e973668ccc24a401ef3f0abcfc">FFTChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_i_f_f_t_channel_internal.html#a14304f5ba4934a2ccf1085a82f2c4c98">IFFTChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_filter_channel_internal.html#aab0c6a7905efb19b2d532981e493f871">FilterChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_filter_coeffs1_param_channel_internal.html#a7d7372b8175b5d2b2f07e2f1a595a116">FilterCoeffs1ParamChannelInternal&lt; ShapeType &gt;</a>, <a class="el" href="class_filter_coeffs2_param_channel_internal.html#a5410ca29623aec5bd24d4273790d9e53">FilterCoeffs2ParamChannelInternal&lt; ShapeType &gt;</a>, <a class="el" href="class_filter_coeffs3_param_channel_internal.html#a9b417ef1a79072ad7458e37666a569af">FilterCoeffs3ParamChannelInternal&lt; ShapeType &gt;</a>, <a class="el" href="class_file_play_channel_internal.html#a0585b6cfbfeb58a15bf6417b624d9adf">FilePlayChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_saw_channel_internal.html#a58eb974d86ccda7a3044efe354a7f552">SawChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_signal_play_channel_internal.html#a9e908e3509f86f2367f3a5cf296d9ed5">SignalPlayChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_table_channel_internal.html#aa1caa9d4762e9197b5a9f4b30217759d">TableChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_white_noise_channel_internal.html#a1de39b16727c1986cebfd76d5f3d8d60">WhiteNoiseChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_atomic_variable_channel_internal.html#afc0421758139da3739045d3404a8b61f">AtomicVariableChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_binary_op_channel_internal.html#a21a6edb5b81e598eefb00a5aaa69ae65">BinaryOpChannelInternal&lt; SampleType, op &gt;</a>, <a class="el" href="class_block_channel_internal.html#a72aade4e2f7e48253c3a2169cf5c8dfa">BlockChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_bus_read_channel_internal.html#a3e794056dd7b9b1815bf125b701345de">BusReadChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_bus_write_channel_internal.html#a407b80598e360087a413ca04f28e0f50">BusWriteChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_linear_pan_channel_internal.html#a9698156f05712b0c24a646eaf331551d">LinearPanChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_channel_mixer_channel_internal.html#a145d487589d95f1a8a503e28f4beca64">ChannelMixerChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_unit_mixer_channel_internal.html#a95afee6e27c4ddf5ea37a8af4f949749">UnitMixerChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_mul_add_channel_internal.html#aaf4af1d9304ff606c33213cb1704aa90">MulAddChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_patch_channel_internal.html#a90faaacbafab18f723d3b0fd816d3021">PatchChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_unary_op_channel_internal.html#a353a2adf0af4d24d39771a6af6f73ca9">UnaryOpChannelInternal&lt; SampleType, op &gt;</a>, <a class="el" href="class_variable_channel_internal.html#aafa0e65b94fb18db7af30e858977cc9f">VariableChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_proxy_owner_channel_internal.html#a66b854dcf0db11c050c69dff2f3e374f">ProxyOwnerChannelInternal&lt; SampleType, ChannelData&lt; PatchChannelInternal&lt; SampleType &gt; &gt; &gt;</a>, <a class="el" href="class_proxy_owner_channel_internal.html#a66b854dcf0db11c050c69dff2f3e374f">ProxyOwnerChannelInternal&lt; ShapeType::SampleDataType, ShapeType::Data &gt;</a>, <a class="el" href="class_proxy_owner_channel_internal.html#a66b854dcf0db11c050c69dff2f3e374f">ProxyOwnerChannelInternal&lt; SampleType, ChannelData&lt; UnitMixerChannelInternal&lt; SampleType &gt; &gt; &gt;</a>, <a class="el" href="class_proxy_owner_channel_internal.html#a66b854dcf0db11c050c69dff2f3e374f">ProxyOwnerChannelInternal&lt; FormType::SampleDataType, FormType::Data &gt;</a>, <a class="el" href="class_proxy_owner_channel_internal.html#a66b854dcf0db11c050c69dff2f3e374f">ProxyOwnerChannelInternal&lt; SampleType, ChannelData&lt; ThreadedChannelInternal&lt; SampleType &gt; &gt; &gt;</a>, <a class="el" href="class_proxy_owner_channel_internal.html#a66b854dcf0db11c050c69dff2f3e374f">ProxyOwnerChannelInternal&lt; SampleType, ChannelData&lt; FilePlayChannelInternal&lt; SampleType &gt; &gt; &gt;</a>, and <a class="el" href="class_proxy_owner_channel_internal.html#a66b854dcf0db11c050c69dff2f3e374f">ProxyOwnerChannelInternal&lt; SampleType, ChannelInternalCore::Data &gt;</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a9edab70c3d38bb8adb2e816dfb578cf1"></a><!-- doxytag: member="ChannelInternal::Internal" ref="a9edab70c3d38bb8adb2e816dfb578cf1" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType, class DataType&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_channel_internal_base.html">ChannelInternalBase</a>&lt;SampleType&gt; <a class="el" href="class_channel_internal.html">ChannelInternal</a>&lt; SampleType, DataType &gt;::<a class="el" href="class_receiver_internal.html#ac1910adc042a53336c1316a1303eafcc">Internal</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="class_receiver_internal.html#ac1910adc042a53336c1316a1303eafcc">ReceiverInternal&lt; SenderContainerBaseType &gt;</a>.</p>
-
-<p>Reimplemented in <a class="el" href="class_proxy_channel_internal.html#a45fef42bbcde9a0716ab7c22a9f70126">ProxyChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_proxy_owner_channel_internal.html#aa9a9d2faaa7e36be592755c2b40cfba7">ProxyOwnerChannelInternal&lt; SampleType, DataType &gt;</a>, <a class="el" href="class_envelope_channel_internal.html#a7719059627b883eedec3714727c4ec6b">EnvelopeChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_overlap_make_channel_internal.html#a9712bfcabb33b162a1b47a300ebecb77">OverlapMakeChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_overlap_mix_channel_internal.html#a16a811cf9e7ab5b38ee9971c49a58b2e">OverlapMixChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_resample_channel_internal.html#ae115187e90a0fdc76aa17ec4d166dd1a">ResampleChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_threaded_channel_internal.html#a83c8d8b6a434976878101c5670312985">ThreadedChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_delay1_param_channel_internal.html#abf8614ee1e1d32cc0f52932d6f3f914b">Delay1ParamChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_delay2_param_channel_internal.html#a69f59782b47f16b75a592733229d84ba">Delay2ParamChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_delay3_param_channel_internal.html#a0d981c096ff4874679da4ba8b0f143b0">Delay3ParamChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_delay4_param_channel_internal.html#ac5bf342efb07e0c2b96dd5518222ea9a">Delay4ParamChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_delay_channel_internal_base.html#a5b83efa17d7bf51d4389fb2a3cdf3ce9">DelayChannelInternalBase&lt; FormType &gt;</a>, <a class="el" href="class_f_f_t_channel_internal.html#a811eef2e8bce285dbd63f134e58cf5a5">FFTChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_i_f_f_t_channel_internal.html#a18741a89ca04e5371203e7eb2f957d56">IFFTChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_filter_channel_internal.html#affcf4ca9856d0708cd9683e289e2294f">FilterChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_filter_coeffs1_param_channel_internal.html#ab57c9148e652d477d442efa73315e9c6">FilterCoeffs1ParamChannelInternal&lt; ShapeType &gt;</a>, <a class="el" href="class_filter_coeffs2_param_channel_internal.html#ad271d80e235fc004cec984147b28ca91">FilterCoeffs2ParamChannelInternal&lt; ShapeType &gt;</a>, <a class="el" href="class_filter_coeffs3_param_channel_internal.html#a829f0f1920e30f23f7c3671df5bbbab9">FilterCoeffs3ParamChannelInternal&lt; ShapeType &gt;</a>, <a class="el" href="class_file_play_channel_internal.html#a45647a651615d55987565d7b139d7b78">FilePlayChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_saw_channel_internal.html#a58823f555d697be81997deccc003efb2">SawChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_signal_play_channel_internal.html#a334c7391591d990e561022cf12ef2bba">SignalPlayChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_table_channel_internal.html#a9f3a25e2729503f481fbe12c365d96c0">TableChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_white_noise_channel_internal.html#a4373880744f732a6b53de11fde12b639">WhiteNoiseChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_atomic_variable_channel_internal.html#a9d55bf1d6c6b63dc2da26c6df3a2854e">AtomicVariableChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_binary_op_channel_internal.html#a8b51eda8b6c2d7ba7a140818984d32db">BinaryOpChannelInternal&lt; SampleType, op &gt;</a>, <a class="el" href="class_block_channel_internal.html#a6930f7c54f2aa10cdeff500f8b7e2752">BlockChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_bus_read_channel_internal.html#a058ce7ee5a4b805b7543d82c505799bd">BusReadChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_bus_write_channel_internal.html#a000de253cbe3cbd42bb54b708363708f">BusWriteChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_constant_channel_internal.html#a4b653cfc545e385879cf3d4e04fd15f6">ConstantChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_null_channel_internal.html#ad38860324ce263d99c1a94610707093f">NullChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_linear_pan_channel_internal.html#a8a2b2d6293f459cb7d97c7eaa9d9a748">LinearPanChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_channel_mixer_channel_internal.html#abec4851083785b6c1a38da78b39ec4d8">ChannelMixerChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_unit_mixer_channel_internal.html#a7c3df8e34d5a201d191258a58ea34b85">UnitMixerChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_mul_add_channel_internal.html#a323d416988f71a4abb52c2893e6236a3">MulAddChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_patch_channel_internal.html#acc0fb3143198421d2e2c19d401aafd75">PatchChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_unary_op_channel_internal.html#ad3868022bd78f0a6a4c9ed7cd74f0445">UnaryOpChannelInternal&lt; SampleType, op &gt;</a>, <a class="el" href="class_variable_channel_internal.html#a940027be746f221d90931d9877f4175c">VariableChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_proxy_owner_channel_internal.html#aa9a9d2faaa7e36be592755c2b40cfba7">ProxyOwnerChannelInternal&lt; SampleType, ChannelData&lt; PatchChannelInternal&lt; SampleType &gt; &gt; &gt;</a>, <a class="el" href="class_proxy_owner_channel_internal.html#aa9a9d2faaa7e36be592755c2b40cfba7">ProxyOwnerChannelInternal&lt; ShapeType::SampleDataType, ShapeType::Data &gt;</a>, <a class="el" href="class_proxy_owner_channel_internal.html#aa9a9d2faaa7e36be592755c2b40cfba7">ProxyOwnerChannelInternal&lt; SampleType, ChannelData&lt; UnitMixerChannelInternal&lt; SampleType &gt; &gt; &gt;</a>, <a class="el" href="class_proxy_owner_channel_internal.html#aa9a9d2faaa7e36be592755c2b40cfba7">ProxyOwnerChannelInternal&lt; FormType::SampleDataType, FormType::Data &gt;</a>, <a class="el" href="class_proxy_owner_channel_internal.html#aa9a9d2faaa7e36be592755c2b40cfba7">ProxyOwnerChannelInternal&lt; SampleType, ChannelData&lt; ThreadedChannelInternal&lt; SampleType &gt; &gt; &gt;</a>, <a class="el" href="class_proxy_owner_channel_internal.html#aa9a9d2faaa7e36be592755c2b40cfba7">ProxyOwnerChannelInternal&lt; SampleType, ChannelData&lt; FilePlayChannelInternal&lt; SampleType &gt; &gt; &gt;</a>, and <a class="el" href="class_proxy_owner_channel_internal.html#aa9a9d2faaa7e36be592755c2b40cfba7">ProxyOwnerChannelInternal&lt; SampleType, ChannelInternalCore::Data &gt;</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a3b121d7cdac860b370de05f3540c81ae"></a><!-- doxytag: member="ChannelInternal::UnitType" ref="a3b121d7cdac860b370de05f3540c81ae" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType, class DataType&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_unit_base.html">UnitBase</a>&lt;SampleType&gt; <a class="el" href="class_channel_internal.html">ChannelInternal</a>&lt; SampleType, DataType &gt;::<a class="el" href="class_unit_base.html">UnitType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="class_channel_internal_base.html#a0cb29485ae52554fa6695e45772b9aa2">ChannelInternalBase&lt; SampleType &gt;</a>.</p>
-
-<p>Reimplemented in <a class="el" href="class_proxy_channel_internal.html#aa7b31bd3a8536c8a11c9ccb46a1aa60d">ProxyChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_proxy_owner_channel_internal.html#a9135c6d7afca6dbda99167e84c27586d">ProxyOwnerChannelInternal&lt; SampleType, DataType &gt;</a>, <a class="el" href="class_envelope_channel_internal.html#a7e7ed1c0d46a74c5410dae0f19c97968">EnvelopeChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_overlap_make_channel_internal.html#a6aa45a3657a55b5ea9c8892a12f779a9">OverlapMakeChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_overlap_mix_channel_internal.html#a0d2afd82168a31b6487ec68cb7638b85">OverlapMixChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_resample_channel_internal.html#ac883161b4470aa9c873559176cf8a7e6">ResampleChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_threaded_channel_internal.html#a0ef4188ae34f905163d096cc9d424109">ThreadedChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_delay1_param_channel_internal.html#a294a708bab56c641c726b7c21c7765d7">Delay1ParamChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_delay2_param_channel_internal.html#a0ff92f8fd185bce2b437d6dfd04ade00">Delay2ParamChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_delay3_param_channel_internal.html#a09c0cac08645353fd93c8c9e62f3e1ff">Delay3ParamChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_delay4_param_channel_internal.html#a8d3e21c415b006ea885c7f6e6d206098">Delay4ParamChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_delay_channel_internal_base.html#a8d5051d03ab3575068def5e9d1a8f283">DelayChannelInternalBase&lt; FormType &gt;</a>, <a class="el" href="class_f_f_t_channel_internal.html#ad802ea9e4454a7a74dec2dbafcb018a7">FFTChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_i_f_f_t_channel_internal.html#ac797e5c917b18d8c52a4e46e5b4d1c58">IFFTChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_filter_channel_internal.html#abd4be12437a7f495452c4cd64d9cf262">FilterChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_filter_coeffs1_param_channel_internal.html#a13c77da9265384ba29ba0abefb569d72">FilterCoeffs1ParamChannelInternal&lt; ShapeType &gt;</a>, <a class="el" href="class_filter_coeffs2_param_channel_internal.html#adeeaf67d9dadbf8fc49e348faf7ce73e">FilterCoeffs2ParamChannelInternal&lt; ShapeType &gt;</a>, <a class="el" href="class_filter_coeffs3_param_channel_internal.html#a5412c61648c0b577d2fe81820f1ddc81">FilterCoeffs3ParamChannelInternal&lt; ShapeType &gt;</a>, <a class="el" href="class_file_play_channel_internal.html#a1d0a96b3eebe5a9c96c2cf1d552998d4">FilePlayChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_saw_channel_internal.html#a8e983ff3261968b13523b750764e0d22">SawChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_signal_play_channel_internal.html#ac16e2558545dfa434447612cadb0ee9c">SignalPlayChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_table_channel_internal.html#ab6dc924501a1f97e39da9c60205cf075">TableChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_white_noise_channel_internal.html#a7b2af8543cc8af2b9368c9c2a0b17f69">WhiteNoiseChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_atomic_variable_channel_internal.html#a052ec2abc968d1f7bea225afa84e5c0f">AtomicVariableChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_binary_op_channel_internal.html#a3df9b0d02210bd4d8a62d13fd2ccc5cb">BinaryOpChannelInternal&lt; SampleType, op &gt;</a>, <a class="el" href="class_block_channel_internal.html#a917d2f87f53d075f66d47cf54d0ece5b">BlockChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_bus_read_channel_internal.html#aa526ec188b9b9ba5fcaee694b718a574">BusReadChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_bus_write_channel_internal.html#a2ab9869ee89b9bba4f711c6c039b913c">BusWriteChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_linear_pan_channel_internal.html#a82b2055732c73361f50718d7a90e1457">LinearPanChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_channel_mixer_channel_internal.html#af3b50bb40e2c374b23965a934afc6a4a">ChannelMixerChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_unit_mixer_channel_internal.html#aa6c4d8af86e4cab58f7eeab1d3f73e0c">UnitMixerChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_mul_add_channel_internal.html#ad4643f25335a7c4690de2d2ececb0763">MulAddChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_patch_channel_internal.html#af842acc580d8a1d8008c7db71411cbd2">PatchChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_unary_op_channel_internal.html#a2725ad82d83a2eb6c4971128a5d72eed">UnaryOpChannelInternal&lt; SampleType, op &gt;</a>, <a class="el" href="class_variable_channel_internal.html#ae9492fe982e154e1774e71987866fa5f">VariableChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_proxy_owner_channel_internal.html#a9135c6d7afca6dbda99167e84c27586d">ProxyOwnerChannelInternal&lt; SampleType, ChannelData&lt; PatchChannelInternal&lt; SampleType &gt; &gt; &gt;</a>, <a class="el" href="class_proxy_owner_channel_internal.html#a9135c6d7afca6dbda99167e84c27586d">ProxyOwnerChannelInternal&lt; ShapeType::SampleDataType, ShapeType::Data &gt;</a>, <a class="el" href="class_proxy_owner_channel_internal.html#a9135c6d7afca6dbda99167e84c27586d">ProxyOwnerChannelInternal&lt; SampleType, ChannelData&lt; UnitMixerChannelInternal&lt; SampleType &gt; &gt; &gt;</a>, <a class="el" href="class_proxy_owner_channel_internal.html#a9135c6d7afca6dbda99167e84c27586d">ProxyOwnerChannelInternal&lt; FormType::SampleDataType, FormType::Data &gt;</a>, <a class="el" href="class_proxy_owner_channel_internal.html#a9135c6d7afca6dbda99167e84c27586d">ProxyOwnerChannelInternal&lt; SampleType, ChannelData&lt; ThreadedChannelInternal&lt; SampleType &gt; &gt; &gt;</a>, <a class="el" href="class_proxy_owner_channel_internal.html#a9135c6d7afca6dbda99167e84c27586d">ProxyOwnerChannelInternal&lt; SampleType, ChannelData&lt; FilePlayChannelInternal&lt; SampleType &gt; &gt; &gt;</a>, and <a class="el" href="class_proxy_owner_channel_internal.html#a9135c6d7afca6dbda99167e84c27586d">ProxyOwnerChannelInternal&lt; SampleType, ChannelInternalCore::Data &gt;</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a16c6a9a8471f62660653e9c5921aac70"></a><!-- doxytag: member="ChannelInternal::Buffer" ref="a16c6a9a8471f62660653e9c5921aac70" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType, class DataType&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt;SampleType&gt; <a class="el" href="class_channel_internal.html">ChannelInternal</a>&lt; SampleType, DataType &gt;::<a class="el" href="class_numerical_array.html">Buffer</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="class_channel_internal_base.html#a581a118960640949bacdd3d1474e7266">ChannelInternalBase&lt; SampleType &gt;</a>.</p>
-
-<p>Reimplemented in <a class="el" href="class_proxy_channel_internal.html#abb12698db4f8ceed9ac2062a35a37ca4">ProxyChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_proxy_owner_channel_internal.html#abc5718f7325a88f1b4f589e306f683b5">ProxyOwnerChannelInternal&lt; SampleType, DataType &gt;</a>, <a class="el" href="class_overlap_make_channel_internal.html#a0d1773d58a5b2764eef63bf82ff7428a">OverlapMakeChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_overlap_mix_channel_internal.html#a07a883fe5580359cf629a17d1fd3c987">OverlapMixChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_resample_channel_internal.html#ac2cf99da24985e0140555ae41dfc7e34">ResampleChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_threaded_channel_internal.html#a9d6fc018124e80d6fef28bd0acbea494">ThreadedChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_delay1_param_channel_internal.html#a0a73a4434d1df137dde22b27ed5510c0">Delay1ParamChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_delay2_param_channel_internal.html#acd111bb5e7ea8d873088a6b79525a1d5">Delay2ParamChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_delay3_param_channel_internal.html#a0ef0336efe6c4a406640e8627fc24694">Delay3ParamChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_delay4_param_channel_internal.html#ae492f64dbde87816dadbb0055be93ecb">Delay4ParamChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_delay_channel_internal_base.html#a7787e378a14d9c8c3b483ff24b793072">DelayChannelInternalBase&lt; FormType &gt;</a>, <a class="el" href="class_f_f_t_channel_internal.html#a2d0ebf995c97e0f96ad48979d9efe29a">FFTChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_i_f_f_t_channel_internal.html#aff2b545ff984ad10710fb710c422aa60">IFFTChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_filter_channel_internal.html#a38e673fc3c2bd57433ce5c758e39d5b8">FilterChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_filter_coeffs1_param_channel_internal.html#a85773c6307fc5eb159b44accb9c06410">FilterCoeffs1ParamChannelInternal&lt; ShapeType &gt;</a>, <a class="el" href="class_filter_coeffs2_param_channel_internal.html#a2b1059092344012b86ae6570212bc4c1">FilterCoeffs2ParamChannelInternal&lt; ShapeType &gt;</a>, <a class="el" href="class_filter_coeffs3_param_channel_internal.html#ae7ed731bf9ca912757a86409786cb67f">FilterCoeffs3ParamChannelInternal&lt; ShapeType &gt;</a>, <a class="el" href="class_file_play_channel_internal.html#a458cd0f64287fd29c2b340b1cfb995b5">FilePlayChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_signal_play_channel_internal.html#aebcf56d16abeaa37325bfd7f2b937965">SignalPlayChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_table_channel_internal.html#a961757d09df6cdbe120620fbff8f5928">TableChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_atomic_variable_channel_internal.html#a6bbd1e07c8d900efcf39bc61f273b7db">AtomicVariableChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_binary_op_channel_internal.html#a24310a31645493d2904a91124d045b47">BinaryOpChannelInternal&lt; SampleType, op &gt;</a>, <a class="el" href="class_block_channel_internal.html#a825de657ff05901ca011065337365969">BlockChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_bus_read_channel_internal.html#a61e636256ff2555769314682f7ed659e">BusReadChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_bus_write_channel_internal.html#a58c0ead34f6454d11a15cc9a2c4326ad">BusWriteChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_constant_channel_internal.html#aaec7234ab670bf637138ed81a7aaa589">ConstantChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_linear_pan_channel_internal.html#a8d8b10544bea6a9009e604ba16d9d426">LinearPanChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_channel_mixer_channel_internal.html#a0d31249c6130576a85c9d28aae0a8ad9">ChannelMixerChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_unit_mixer_channel_internal.html#ac94a8db479c5d62962aa4b63b82b7156">UnitMixerChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_mul_add_channel_internal.html#a4c038f2ff883ba0f3cd6968f29b92a72">MulAddChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_patch_channel_internal.html#abb4bfe563a5290046557d9121490fb55">PatchChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_unary_op_channel_internal.html#af1c7eff229b11df13ccfa7bafa7789cb">UnaryOpChannelInternal&lt; SampleType, op &gt;</a>, <a class="el" href="class_variable_channel_internal.html#a4ff9598e3b13563aa0df642873412c35">VariableChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_proxy_owner_channel_internal.html#abc5718f7325a88f1b4f589e306f683b5">ProxyOwnerChannelInternal&lt; SampleType, ChannelData&lt; PatchChannelInternal&lt; SampleType &gt; &gt; &gt;</a>, <a class="el" href="class_proxy_owner_channel_internal.html#abc5718f7325a88f1b4f589e306f683b5">ProxyOwnerChannelInternal&lt; ShapeType::SampleDataType, ShapeType::Data &gt;</a>, <a class="el" href="class_proxy_owner_channel_internal.html#abc5718f7325a88f1b4f589e306f683b5">ProxyOwnerChannelInternal&lt; SampleType, ChannelData&lt; UnitMixerChannelInternal&lt; SampleType &gt; &gt; &gt;</a>, <a class="el" href="class_proxy_owner_channel_internal.html#abc5718f7325a88f1b4f589e306f683b5">ProxyOwnerChannelInternal&lt; FormType::SampleDataType, FormType::Data &gt;</a>, <a class="el" href="class_proxy_owner_channel_internal.html#abc5718f7325a88f1b4f589e306f683b5">ProxyOwnerChannelInternal&lt; SampleType, ChannelData&lt; ThreadedChannelInternal&lt; SampleType &gt; &gt; &gt;</a>, <a class="el" href="class_proxy_owner_channel_internal.html#abc5718f7325a88f1b4f589e306f683b5">ProxyOwnerChannelInternal&lt; SampleType, ChannelData&lt; FilePlayChannelInternal&lt; SampleType &gt; &gt; &gt;</a>, and <a class="el" href="class_proxy_owner_channel_internal.html#abc5718f7325a88f1b4f589e306f683b5">ProxyOwnerChannelInternal&lt; SampleType, ChannelInternalCore::Data &gt;</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="aaad27a4ef43a757a678695a406757706"></a><!-- doxytag: member="ChannelInternal::Inputs" ref="aaad27a4ef43a757a678695a406757706" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType, class DataType&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_input_dictionary.html">InputDictionary</a> <a class="el" href="class_channel_internal.html">ChannelInternal</a>&lt; SampleType, DataType &gt;::<a class="el" href="class_input_dictionary.html">Inputs</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="class_channel_internal_base.html#a788fb7e56be3ae5b9cc9b0ba477276c0">ChannelInternalBase&lt; SampleType &gt;</a>.</p>
-
-<p>Reimplemented in <a class="el" href="class_proxy_channel_internal.html#afa6ce98a6b6d4dd3f617aa83f8b9c992">ProxyChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_proxy_owner_channel_internal.html#ae43c4c8567ce1a67c51281a7c546ca06">ProxyOwnerChannelInternal&lt; SampleType, DataType &gt;</a>, <a class="el" href="class_envelope_channel_internal.html#ab83d7943609eea9ca2b6c2641af89000">EnvelopeChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_overlap_make_channel_internal.html#a2ead4dba9f40432e364111ec7e61d410">OverlapMakeChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_overlap_mix_channel_internal.html#a220703f35a8feafa22daabda7fce1756">OverlapMixChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_resample_channel_internal.html#a6ae02a0deed420e68d32ebe2050c3cc7">ResampleChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_threaded_channel_internal.html#a6c5d8040ebdd7a12a3f78346df4e684c">ThreadedChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_type_channel_internal.html#a54db8ef2574c87a2f3e303cf2614f943">TypeChannelInternal&lt; OutputSampleType, InputSampleType &gt;</a>, <a class="el" href="class_delay1_param_channel_internal.html#aaa09a18a5f1c3ea9f1dc7c4d173659e1">Delay1ParamChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_delay2_param_channel_internal.html#aa42ed4f24a4d6f29087bac7b573d2045">Delay2ParamChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_delay3_param_channel_internal.html#a79172aacd36a99756cb2669f3e018035">Delay3ParamChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_delay4_param_channel_internal.html#af1720094ca81c6b380cfed1b00632a12">Delay4ParamChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_delay_channel_internal_base.html#a407d9e81dba868607789b3484c6de254">DelayChannelInternalBase&lt; FormType &gt;</a>, <a class="el" href="class_f_f_t_channel_internal.html#af68d6fcd6a63b5d9f5b59401094360b3">FFTChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_i_f_f_t_channel_internal.html#a3f6b1a618b0dd00152e403df15808d63">IFFTChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_filter_channel_internal.html#af59382fca9af355bc26b9fd7dbdf989b">FilterChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_filter_coeffs1_param_channel_internal.html#a710e1ee16b04feb32cafc36f6c571416">FilterCoeffs1ParamChannelInternal&lt; ShapeType &gt;</a>, <a class="el" href="class_filter_coeffs2_param_channel_internal.html#ac1497894293b4ebd8fdb68c3aa6283e2">FilterCoeffs2ParamChannelInternal&lt; ShapeType &gt;</a>, <a class="el" href="class_filter_coeffs3_param_channel_internal.html#a3374b8f21a1459ed5c8d960c1cb7356f">FilterCoeffs3ParamChannelInternal&lt; ShapeType &gt;</a>, <a class="el" href="class_file_play_channel_internal.html#a3b5f994d7ed7c3136ed42292b209673f">FilePlayChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_saw_channel_internal.html#aaaacc965611abeb62bf081e838bea0f2">SawChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_signal_play_channel_internal.html#a663c2e2f995f3fbac387bd073828c73a">SignalPlayChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_table_channel_internal.html#a9569ce0e43dd6e0c06613ad4ab11e495">TableChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_white_noise_channel_internal.html#ac3ec2ae00a5b9c9c7e2498948aef19af">WhiteNoiseChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_atomic_variable_channel_internal.html#ad05c40ec04c4e4f114d0958628dc2b86">AtomicVariableChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_binary_op_channel_internal.html#a869cc88044fc071047ef4b115328e787">BinaryOpChannelInternal&lt; SampleType, op &gt;</a>, <a class="el" href="class_block_channel_internal.html#ae08954f5c38c38b6e17fc9cbb02d9aca">BlockChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_bus_read_channel_internal.html#a39740ee3ad87504cffe2f1eae674c38e">BusReadChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_bus_write_channel_internal.html#a6366549656a18696accba0d76d41078c">BusWriteChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_constant_channel_internal.html#a42c674e488d641d895e6b2bd5e818428">ConstantChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_linear_pan_channel_internal.html#af88415e41073c4bc7e1640e11f80c2c3">LinearPanChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_channel_mixer_channel_internal.html#a1c508d53e892eb06397edbb28bd84fa7">ChannelMixerChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_unit_mixer_channel_internal.html#aa50bdecd5991929900176b7aee7f60e7">UnitMixerChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_mul_add_channel_internal.html#a04289d759c7f5b6792110f95dd72ec28">MulAddChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_patch_channel_internal.html#a3cc31a8d754afa9b4b57efd5cf6fe997">PatchChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_unary_op_channel_internal.html#aa347bfe58e600de97d1202476510b68f">UnaryOpChannelInternal&lt; SampleType, op &gt;</a>, <a class="el" href="class_variable_channel_internal.html#a11f25727db237ce0761c4bd4b7d57e60">VariableChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_proxy_owner_channel_internal.html#ae43c4c8567ce1a67c51281a7c546ca06">ProxyOwnerChannelInternal&lt; SampleType, ChannelData&lt; PatchChannelInternal&lt; SampleType &gt; &gt; &gt;</a>, <a class="el" href="class_proxy_owner_channel_internal.html#ae43c4c8567ce1a67c51281a7c546ca06">ProxyOwnerChannelInternal&lt; ShapeType::SampleDataType, ShapeType::Data &gt;</a>, <a class="el" href="class_proxy_owner_channel_internal.html#ae43c4c8567ce1a67c51281a7c546ca06">ProxyOwnerChannelInternal&lt; SampleType, ChannelData&lt; UnitMixerChannelInternal&lt; SampleType &gt; &gt; &gt;</a>, <a class="el" href="class_proxy_owner_channel_internal.html#ae43c4c8567ce1a67c51281a7c546ca06">ProxyOwnerChannelInternal&lt; FormType::SampleDataType, FormType::Data &gt;</a>, <a class="el" href="class_proxy_owner_channel_internal.html#ae43c4c8567ce1a67c51281a7c546ca06">ProxyOwnerChannelInternal&lt; SampleType, ChannelData&lt; ThreadedChannelInternal&lt; SampleType &gt; &gt; &gt;</a>, <a class="el" href="class_proxy_owner_channel_internal.html#ae43c4c8567ce1a67c51281a7c546ca06">ProxyOwnerChannelInternal&lt; SampleType, ChannelData&lt; FilePlayChannelInternal&lt; SampleType &gt; &gt; &gt;</a>, and <a class="el" href="class_proxy_owner_channel_internal.html#ae43c4c8567ce1a67c51281a7c546ca06">ProxyOwnerChannelInternal&lt; SampleType, ChannelInternalCore::Data &gt;</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a5ebd3022e26f5eb6eb05de9eb842989c"></a><!-- doxytag: member="ChannelInternal::Container" ref="a5ebd3022e26f5eb6eb05de9eb842989c" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType, class DataType&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_channel_base.html">ChannelBase</a>&lt;SampleType&gt; <a class="el" href="class_channel_internal.html">ChannelInternal</a>&lt; SampleType, DataType &gt;::<a class="el" href="class_channel_base.html">Container</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="class_channel_internal_base.html#ad6396cd057b0ad33c64d6f56a43acbde">ChannelInternalBase&lt; SampleType &gt;</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a2494fe6f33d165fd94c08600755fc4a2"></a><!-- doxytag: member="ChannelInternal::BaseData" ref="a2494fe6f33d165fd94c08600755fc4a2" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType, class DataType&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="struct_channel_data_3_01_channel_internal_core_01_4.html">ChannelInternalCore::Data</a> <a class="el" href="class_channel_internal.html">ChannelInternal</a>&lt; SampleType, DataType &gt;::<a class="el" href="struct_channel_data_3_01_channel_internal_core_01_4.html">BaseData</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<hr/><h2>Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a3ba837b76e7bc19364c701b49acc613a"></a><!-- doxytag: member="ChannelInternal::ChannelInternal" ref="a3ba837b76e7bc19364c701b49acc613a" args="(Inputs const &amp;inputDictionary, DataType const &amp;initState, BlockSize const &amp;blockSize, SampleRate const &amp;sampleRate)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType, class DataType&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_channel_internal.html">ChannelInternal</a>&lt; SampleType, DataType &gt;::<a class="el" href="class_channel_internal.html">ChannelInternal</a> </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_input_dictionary.html">Inputs</a> const &amp;&#160;</td>
-          <td class="paramname"><em>inputDictionary</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">DataType const &amp;&#160;</td>
-          <td class="paramname"><em>initState</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="class_block_size.html">BlockSize</a> const &amp;&#160;</td>
-          <td class="paramname"><em>blockSize</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="class_sample_rate.html">SampleRate</a> const &amp;&#160;</td>
-          <td class="paramname"><em>sampleRate</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a86bdb17b03a3f896ce8d9e6510aab466"></a><!-- doxytag: member="ChannelInternal::~ChannelInternal" ref="a86bdb17b03a3f896ce8d9e6510aab466" args="()" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType, class DataType&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_channel_internal.html">ChannelInternal</a>&lt; SampleType, DataType &gt;::~<a class="el" href="class_channel_internal.html">ChannelInternal</a> </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td><code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="aa0fba1693bbfe6dae4dfedaa0cc0f079"></a><!-- doxytag: member="ChannelInternal::getState" ref="aa0fba1693bbfe6dae4dfedaa0cc0f079" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType, class DataType&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">const DataType&amp; <a class="el" href="class_channel_internal.html">ChannelInternal</a>&lt; SampleType, DataType &gt;::getState </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a8708ae6b7f2c2cf43fbc465549d49c94"></a><!-- doxytag: member="ChannelInternal::getState" ref="a8708ae6b7f2c2cf43fbc465549d49c94" args="()" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType, class DataType&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">DataType&amp; <a class="el" href="class_channel_internal.html">ChannelInternal</a>&lt; SampleType, DataType &gt;::getState </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="aa03065dc474226453a0334dc82bae624"></a><!-- doxytag: member="ChannelInternal::setSampleRate" ref="aa03065dc474226453a0334dc82bae624" args="(SampleRate const &amp;newSampleRate)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType, class DataType&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="class_channel_internal.html">ChannelInternal</a>&lt; SampleType, DataType &gt;::setSampleRate </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_sample_rate.html">SampleRate</a> const &amp;&#160;</td>
-          <td class="paramname"><em>newSampleRate</em></td><td>)</td>
-          <td>  throw ()<code> [inline, virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Implements <a class="el" href="class_channel_internal_base.html#a48039ca3b5394533ad1ecf28e95df627">ChannelInternalBase&lt; SampleType &gt;</a>.</p>
-
-<p>Reimplemented in <a class="el" href="class_proxy_owner_channel_internal.html#abafbbd9538b9b60fe67fdb9d704d42d2">ProxyOwnerChannelInternal&lt; SampleType, DataType &gt;</a>, <a class="el" href="class_proxy_owner_channel_internal.html#abafbbd9538b9b60fe67fdb9d704d42d2">ProxyOwnerChannelInternal&lt; SampleType, ChannelData&lt; PatchChannelInternal&lt; SampleType &gt; &gt; &gt;</a>, <a class="el" href="class_proxy_owner_channel_internal.html#abafbbd9538b9b60fe67fdb9d704d42d2">ProxyOwnerChannelInternal&lt; ShapeType::SampleDataType, ShapeType::Data &gt;</a>, <a class="el" href="class_proxy_owner_channel_internal.html#abafbbd9538b9b60fe67fdb9d704d42d2">ProxyOwnerChannelInternal&lt; SampleType, ChannelData&lt; UnitMixerChannelInternal&lt; SampleType &gt; &gt; &gt;</a>, <a class="el" href="class_proxy_owner_channel_internal.html#abafbbd9538b9b60fe67fdb9d704d42d2">ProxyOwnerChannelInternal&lt; FormType::SampleDataType, FormType::Data &gt;</a>, <a class="el" href="class_proxy_owner_channel_internal.html#abafbbd9538b9b60fe67fdb9d704d42d2">ProxyOwnerChannelInternal&lt; SampleType, ChannelData&lt; ThreadedChannelInternal&lt; SampleType &gt; &gt; &gt;</a>, <a class="el" href="class_proxy_owner_channel_internal.html#abafbbd9538b9b60fe67fdb9d704d42d2">ProxyOwnerChannelInternal&lt; SampleType, ChannelData&lt; FilePlayChannelInternal&lt; SampleType &gt; &gt; &gt;</a>, and <a class="el" href="class_proxy_owner_channel_internal.html#abafbbd9538b9b60fe67fdb9d704d42d2">ProxyOwnerChannelInternal&lt; SampleType, ChannelInternalCore::Data &gt;</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a69a895f1fb4feef65421a5059e98ebc3"></a><!-- doxytag: member="ChannelInternal::setOverlap" ref="a69a895f1fb4feef65421a5059e98ebc3" args="(DoubleVariable const &amp;newOverlap)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType, class DataType&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="class_channel_internal.html">ChannelInternal</a>&lt; SampleType, DataType &gt;::setOverlap </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_variable.html">DoubleVariable</a> const &amp;&#160;</td>
-          <td class="paramname"><em>newOverlap</em></td><td>)</td>
-          <td>  throw ()<code> [inline, virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Implements <a class="el" href="class_channel_internal_base.html#a9bdb734ff582bf6563feab0c0601a8c0">ChannelInternalBase&lt; SampleType &gt;</a>.</p>
-
-<p>Reimplemented in <a class="el" href="class_proxy_owner_channel_internal.html#aa359090b3118808786ef920c9656e148">ProxyOwnerChannelInternal&lt; SampleType, DataType &gt;</a>, <a class="el" href="class_proxy_owner_channel_internal.html#aa359090b3118808786ef920c9656e148">ProxyOwnerChannelInternal&lt; SampleType, ChannelData&lt; PatchChannelInternal&lt; SampleType &gt; &gt; &gt;</a>, <a class="el" href="class_proxy_owner_channel_internal.html#aa359090b3118808786ef920c9656e148">ProxyOwnerChannelInternal&lt; ShapeType::SampleDataType, ShapeType::Data &gt;</a>, <a class="el" href="class_proxy_owner_channel_internal.html#aa359090b3118808786ef920c9656e148">ProxyOwnerChannelInternal&lt; SampleType, ChannelData&lt; UnitMixerChannelInternal&lt; SampleType &gt; &gt; &gt;</a>, <a class="el" href="class_proxy_owner_channel_internal.html#aa359090b3118808786ef920c9656e148">ProxyOwnerChannelInternal&lt; FormType::SampleDataType, FormType::Data &gt;</a>, <a class="el" href="class_proxy_owner_channel_internal.html#aa359090b3118808786ef920c9656e148">ProxyOwnerChannelInternal&lt; SampleType, ChannelData&lt; ThreadedChannelInternal&lt; SampleType &gt; &gt; &gt;</a>, <a class="el" href="class_proxy_owner_channel_internal.html#aa359090b3118808786ef920c9656e148">ProxyOwnerChannelInternal&lt; SampleType, ChannelData&lt; FilePlayChannelInternal&lt; SampleType &gt; &gt; &gt;</a>, and <a class="el" href="class_proxy_owner_channel_internal.html#aa359090b3118808786ef920c9656e148">ProxyOwnerChannelInternal&lt; SampleType, ChannelInternalCore::Data &gt;</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a9243aead95b3f12bab5f8afdd482f4fe"></a><!-- doxytag: member="ChannelInternal::changed" ref="a9243aead95b3f12bab5f8afdd482f4fe" args="(DoubleVariable::Sender const &amp;source)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType, class DataType&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="class_channel_internal.html">ChannelInternal</a>&lt; SampleType, DataType &gt;::changed </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_variable.html">DoubleVariable::Sender</a> const &amp;&#160;</td>
-          <td class="paramname"><em>source</em></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="class_channel_internal_base.html#a956dfa9531d9a5ef758d505409201eba">ChannelInternalBase&lt; SampleType &gt;</a>.</p>
-
-<p>Reimplemented in <a class="el" href="class_filter_coeffs1_param_channel_internal.html#a590df3a221129ef3940c4c2fce48456b">FilterCoeffs1ParamChannelInternal&lt; ShapeType &gt;</a>, <a class="el" href="class_filter_coeffs2_param_channel_internal.html#a71e1fde005ab607d6bb041cb70b3b177">FilterCoeffs2ParamChannelInternal&lt; ShapeType &gt;</a>, and <a class="el" href="class_filter_coeffs3_param_channel_internal.html#adadce9f74fd3095aa355c7ebbff99169">FilterCoeffs3ParamChannelInternal&lt; ShapeType &gt;</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a0ee4bd3249bc1c00df03672302779a33"></a><!-- doxytag: member="ChannelInternal::updateSampleRateInData" ref="a0ee4bd3249bc1c00df03672302779a33" args="()" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType, class DataType&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="class_channel_internal.html">ChannelInternal</a>&lt; SampleType, DataType &gt;::updateSampleRateInData </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<hr/>The documentation for this class was generated from the following file:<ul>
+</div><hr/>The documentation for this class was generated from the following file:<ul>
 <li><a class="el" href="plonk___channel_internal_8h_source.html">plonk_ChannelInternal.h</a></li>
 </ul>
 </div>
@@ -440,7 +93,7 @@ template&lt;class SampleType, class DataType&gt; </div>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Properties</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -449,7 +102,7 @@ template&lt;class SampleType, class DataType&gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 5 2012 17:05:00 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 8 2014 12:26:52 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

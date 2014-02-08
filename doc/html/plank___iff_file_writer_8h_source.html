@@ -20,7 +20,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="pl-nk-logo-small.png"/></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">pl-nk</div>
+   <div id="projectname">pl-nk&#160;<span id="projectnumber">v0.4.5</span></div>
+   <div id="projectbrief">Plonk|Plink|Plank are a set of cross-platform C/C++ frameworks for audio software development</div>
   </td>
  </tr>
  </tbody>
@@ -29,8 +30,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -54,7 +55,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
       <li><a href="files.html"><span>File&#160;List</span></a></li>
-      <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
 <div class="header">
@@ -62,14 +62,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">plank_IffFileWriter.h</div>  </div>
 </div>
 <div class="contents">
-<a href="plank___iff_file_writer_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*</span>
+<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*</span>
 <a name="l00002"></a>00002 <span class="comment"> -------------------------------------------------------------------------------</span>
 <a name="l00003"></a>00003 <span class="comment"> This file is part of the Plink, Plonk, Plank libraries</span>
 <a name="l00004"></a>00004 <span class="comment">  by Martin Robinson</span>
 <a name="l00005"></a>00005 <span class="comment"> </span>
 <a name="l00006"></a>00006 <span class="comment"> http://code.google.com/p/pl-nk/</span>
 <a name="l00007"></a>00007 <span class="comment"> </span>
-<a name="l00008"></a>00008 <span class="comment"> Copyright University of the West of England, Bristol 2011-12</span>
+<a name="l00008"></a>00008 <span class="comment"> Copyright University of the West of England, Bristol 2011-14</span>
 <a name="l00009"></a>00009 <span class="comment"> All rights reserved.</span>
 <a name="l00010"></a>00010 <span class="comment"> </span>
 <a name="l00011"></a>00011 <span class="comment"> Redistribution and use in source and binary forms, with or without</span>
@@ -103,58 +103,80 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00039"></a>00039 <span class="preprocessor">#ifndef PLANK_IFFFILEWRITER_H</span>
 <a name="l00040"></a>00040 <span class="preprocessor"></span><span class="preprocessor">#define PLANK_IFFFILEWRITER_H</span>
 <a name="l00041"></a>00041 <span class="preprocessor"></span>
-<a name="l00042"></a>00042 <span class="preprocessor">#include &quot;<a class="code" href="plank___iff_file_common_8h.html">plank_IffFileCommon.h</a>&quot;</span>
-<a name="l00043"></a>00043 <span class="preprocessor">#include &quot;<a class="code" href="plank___file_8h.html">plank_File.h</a>&quot;</span>
+<a name="l00042"></a>00042 <span class="preprocessor">#include &quot;plank_IffFileCommon.h&quot;</span>
+<a name="l00043"></a>00043 <span class="preprocessor">#include &quot;plank_File.h&quot;</span>
 <a name="l00044"></a>00044 
-<a name="l00045"></a>00045 <a class="code" href="plank___standard_header_8h.html#a04d6b0df91a3ec64f89589fab47dff92">PLANK_BEGIN_C_LINKAGE</a>
-<a name="l00046"></a>00046 
-<a name="l00055"></a><a class="code" href="group___plank_iff_file_writer_class.html#ga0d6081668c3925c23293e1cdb5a12992">00055</a> <span class="keyword">typedef</span> <span class="keyword">struct </span>PlankIffFileWriter* <a class="code" href="group___plank_iff_file_writer_class.html#ga0d6081668c3925c23293e1cdb5a12992" title="An opaque reference to the Plank IffFileWriter object.">PlankIffFileWriterRef</a>; 
-<a name="l00056"></a>00056 
-<a name="l00059"></a>00059 <a class="code" href="group___plank_iff_file_writer_class.html#ga0d6081668c3925c23293e1cdb5a12992" title="An opaque reference to the Plank IffFileWriter object.">PlankIffFileWriterRef</a> <a class="code" href="group___plank_iff_file_writer_class.html#ga97aadfd2116c3c03b0f9b47af315d1fe" title="Create and initialise a Plank IffFileWriter object and return an oqaque reference to it...">pl_IffFileWriter_CreateAndInit</a>();
-<a name="l00060"></a>00060 
-<a name="l00063"></a>00063 <a class="code" href="group___plank_iff_file_writer_class.html#ga0d6081668c3925c23293e1cdb5a12992" title="An opaque reference to the Plank IffFileWriter object.">PlankIffFileWriterRef</a> <a class="code" href="group___plank_iff_file_writer_class.html#ga9abb84d6bac7ce3f7ef47236dfafa246" title="Create a Plank IffFileWriter object and return an oqaque reference to it.">pl_IffFileWriter_Create</a>();
-<a name="l00064"></a>00064 
-<a name="l00068"></a>00068 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_iff_file_writer_class.html#gaaa11aa4a252c1a0652b54b94317d4c5a" title="Initialise a Plank IffFileWriter object.">pl_IffFileWriter_Init</a> (<a class="code" href="group___plank_iff_file_writer_class.html#ga0d6081668c3925c23293e1cdb5a12992" title="An opaque reference to the Plank IffFileWriter object.">PlankIffFileWriterRef</a> p);
-<a name="l00069"></a>00069 
-<a name="l00073"></a>00073 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_iff_file_writer_class.html#ga80973d46c4a2eda262f972b64281defb" title="Deinitialise a Plank IffFileWriter object.">pl_IffFileWriter_DeInit</a> (<a class="code" href="group___plank_iff_file_writer_class.html#ga0d6081668c3925c23293e1cdb5a12992" title="An opaque reference to the Plank IffFileWriter object.">PlankIffFileWriterRef</a> p);
-<a name="l00074"></a>00074 
-<a name="l00078"></a>00078 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_iff_file_writer_class.html#gacb64daae92638c7e966f8f5fcc51d916" title="Destroy a Plank IffFileWriter object.">pl_IffFileWriter_Destroy</a> (<a class="code" href="group___plank_iff_file_writer_class.html#ga0d6081668c3925c23293e1cdb5a12992" title="An opaque reference to the Plank IffFileWriter object.">PlankIffFileWriterRef</a> p);
-<a name="l00079"></a>00079 
-<a name="l00084"></a>00084 <a class="code" href="group___plank_file_class.html#ga7a3834c3811eceffb81213155fd14e59" title="An opaque reference to the Plank File object.">PlankFileRef</a> <a class="code" href="group___plank_iff_file_writer_class.html#ga3ad9675af0d8fff53d497c9058204b85" title="Gets the underlying Plank File object.">pl_IffFileWriter_GetFile</a> (<a class="code" href="group___plank_iff_file_writer_class.html#ga0d6081668c3925c23293e1cdb5a12992" title="An opaque reference to the Plank IffFileWriter object.">PlankIffFileWriterRef</a> p);
+<a name="l00045"></a>00045 <span class="preprocessor">#define PLANKIFFFILEWRITER_MODEREPLACEGROW      0</span>
+<a name="l00046"></a>00046 <span class="preprocessor"></span><span class="preprocessor">#define PLANKIFFFILEWRITER_MODEREPLACESHRINK    1</span>
+<a name="l00047"></a>00047 <span class="preprocessor"></span><span class="preprocessor">#define PLANKIFFFILEWRITER_MODEAPPEND           2</span>
+<a name="l00048"></a>00048 <span class="preprocessor"></span>
+<a name="l00049"></a>00049 PLANK_BEGIN_C_LINKAGE
+<a name="l00050"></a>00050 
+<a name="l00059"></a><a class="code" href="group___plank_iff_file_writer_class.html#ga0d6081668c3925c23293e1cdb5a12992">00059</a> <span class="keyword">typedef</span> <span class="keyword">struct </span>PlankIffFileWriter* <a class="code" href="group___plank_iff_file_writer_class.html#ga0d6081668c3925c23293e1cdb5a12992" title="An opaque reference to the Plank IffFileWriter object.">PlankIffFileWriterRef</a>; 
+<a name="l00060"></a>00060 <span class="keyword">typedef</span> <span class="keyword">struct </span>PlankIffFileWriterChunkInfo* PlankIffFileWriterChunkInfoRef;
+<a name="l00061"></a>00061 <span class="keyword">typedef</span> <span class="keywordtype">int</span> PlankIffFileWriterMode;
+<a name="l00062"></a>00062 
+<a name="l00065"></a>00065 <a class="code" href="group___plank_iff_file_writer_class.html#ga0d6081668c3925c23293e1cdb5a12992" title="An opaque reference to the Plank IffFileWriter object.">PlankIffFileWriterRef</a> <a class="code" href="group___plank_iff_file_writer_class.html#ga97aadfd2116c3c03b0f9b47af315d1fe" title="Create and initialise a Plank IffFileWriter object and return an oqaque reference to it...">pl_IffFileWriter_CreateAndInit</a>();
+<a name="l00066"></a>00066 
+<a name="l00069"></a>00069 <a class="code" href="group___plank_iff_file_writer_class.html#ga0d6081668c3925c23293e1cdb5a12992" title="An opaque reference to the Plank IffFileWriter object.">PlankIffFileWriterRef</a> <a class="code" href="group___plank_iff_file_writer_class.html#ga9abb84d6bac7ce3f7ef47236dfafa246" title="Create a Plank IffFileWriter object and return an oqaque reference to it.">pl_IffFileWriter_Create</a>();
+<a name="l00070"></a>00070 
+<a name="l00074"></a>00074 PlankResult <a class="code" href="group___plank_iff_file_writer_class.html#gaaa11aa4a252c1a0652b54b94317d4c5a" title="Initialise a Plank IffFileWriter object.">pl_IffFileWriter_Init</a> (<a class="code" href="group___plank_iff_file_writer_class.html#ga0d6081668c3925c23293e1cdb5a12992" title="An opaque reference to the Plank IffFileWriter object.">PlankIffFileWriterRef</a> p);
+<a name="l00075"></a>00075 
+<a name="l00079"></a>00079 PlankResult <a class="code" href="group___plank_iff_file_writer_class.html#ga80973d46c4a2eda262f972b64281defb" title="Deinitialise a Plank IffFileWriter object.">pl_IffFileWriter_DeInit</a> (<a class="code" href="group___plank_iff_file_writer_class.html#ga0d6081668c3925c23293e1cdb5a12992" title="An opaque reference to the Plank IffFileWriter object.">PlankIffFileWriterRef</a> p);
+<a name="l00080"></a>00080 
+<a name="l00084"></a>00084 PlankResult <a class="code" href="group___plank_iff_file_writer_class.html#gacb64daae92638c7e966f8f5fcc51d916" title="Destroy a Plank IffFileWriter object.">pl_IffFileWriter_Destroy</a> (<a class="code" href="group___plank_iff_file_writer_class.html#ga0d6081668c3925c23293e1cdb5a12992" title="An opaque reference to the Plank IffFileWriter object.">PlankIffFileWriterRef</a> p);
 <a name="l00085"></a>00085 
-<a name="l00087"></a>00087 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_iff_file_writer_class.html#gaa4681c05f017debe9c2a6f24f67a073f">pl_IffFileWriter_OpenReplacing</a> (<a class="code" href="group___plank_iff_file_writer_class.html#ga0d6081668c3925c23293e1cdb5a12992" title="An opaque reference to the Plank IffFileWriter object.">PlankIffFileWriterRef</a> p, 
-<a name="l00088"></a>00088                                             <span class="keyword">const</span> <span class="keywordtype">char</span>* filepath, 
-<a name="l00089"></a>00089                                             <span class="keyword">const</span> <a class="code" href="plank___standard_header_8h.html#a77a635edbd85b965990b54c23abd2a7a">PlankB</a> bigEndian, 
-<a name="l00090"></a>00090                                             <span class="keyword">const</span> <a class="code" href="plank___standard_header_8h.html#a7f6d46cbd6808d436e42ab5afcd69a81">PlankFourCharCode</a> mainID, 
-<a name="l00091"></a>00091                                             <span class="keyword">const</span> <a class="code" href="plank___standard_header_8h.html#a7f6d46cbd6808d436e42ab5afcd69a81">PlankFourCharCode</a> formatID);
-<a name="l00092"></a>00092 
-<a name="l00094"></a>00094 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_iff_file_writer_class.html#gaf43a2841ddad2d11daaf75aefb84c502">pl_IffFileWriter_Close</a> (<a class="code" href="group___plank_iff_file_writer_class.html#ga0d6081668c3925c23293e1cdb5a12992" title="An opaque reference to the Plank IffFileWriter object.">PlankIffFileWriterRef</a> p);
-<a name="l00095"></a>00095 
-<a name="l00097"></a>00097 <span class="comment">//PlankResult pl_IffFileWriter_AddChunk (PlankIffFileWriterRef p, PlankFourCharCode chunkID, PlankLL chunkLength);</span>
-<a name="l00098"></a>00098 
-<a name="l00101"></a>00101 <a class="code" href="plank___standard_header_8h.html#a5f78f73f0b53faac6c264036f55232e4">PLANK_END_C_LINKAGE</a>
-<a name="l00102"></a>00102 
-<a name="l00103"></a>00103 <span class="preprocessor">#if !DOXYGEN</span>
-<a name="l00104"></a>00104 <span class="preprocessor"></span><span class="keyword">typedef</span> <span class="keyword">struct </span>PlankIffFileWriterChunkInfo
-<a name="l00105"></a>00105 {
-<a name="l00106"></a>00106     <a class="code" href="plank___standard_header_8h.html#a7f6d46cbd6808d436e42ab5afcd69a81">PlankFourCharCode</a> chunkID;
-<a name="l00107"></a>00107     <a class="code" href="plank___standard_header_8h.html#a854e96ed6d678b7cbcbedffce1c0844d">PlankLL</a> chunkLength;
-<a name="l00108"></a>00108     <a class="code" href="plank___standard_header_8h.html#a854e96ed6d678b7cbcbedffce1c0844d">PlankLL</a> chunkPos;
-<a name="l00109"></a>00109 } PlankIffFileWriterChunkInfo;
-<a name="l00110"></a>00110 
-<a name="l00111"></a>00111 <span class="keyword">typedef</span> <span class="keyword">struct </span>PlankIffFileWriter
-<a name="l00112"></a>00112 {
-<a name="l00113"></a>00113     PlankFile file;
-<a name="l00114"></a>00114     <a class="code" href="struct_plank_iff_file_header_info.html">PlankIffFileHeaderInfo</a> headerInfo;
-<a name="l00115"></a>00115     
-<a name="l00116"></a>00116     <span class="keywordtype">int</span> allocatedChunks;
-<a name="l00117"></a>00117     <span class="keywordtype">int</span> numChunks;
-<a name="l00118"></a>00118     PlankIffFileWriterChunkInfo* chunkInfo;
-<a name="l00119"></a>00119     
-<a name="l00120"></a>00120 } PlankIffFileWriter;
-<a name="l00121"></a>00121 <span class="preprocessor">#endif</span>
-<a name="l00122"></a>00122 <span class="preprocessor"></span>
-<a name="l00123"></a>00123 <span class="preprocessor">#endif // PLANK_IFFFILEWRITER_H</span>
+<a name="l00090"></a>00090 <a class="code" href="group___plank_file_class.html#ga7a3834c3811eceffb81213155fd14e59" title="An opaque reference to the Plank File object.">PlankFileRef</a> <a class="code" href="group___plank_iff_file_writer_class.html#ga3ad9675af0d8fff53d497c9058204b85" title="Gets the underlying Plank File object.">pl_IffFileWriter_GetFile</a> (<a class="code" href="group___plank_iff_file_writer_class.html#ga0d6081668c3925c23293e1cdb5a12992" title="An opaque reference to the Plank IffFileWriter object.">PlankIffFileWriterRef</a> p);
+<a name="l00091"></a>00091 
+<a name="l00093"></a>00093 PlankResult pl_IffFileWriter_OpenReplacing (<a class="code" href="group___plank_iff_file_writer_class.html#ga0d6081668c3925c23293e1cdb5a12992" title="An opaque reference to the Plank IffFileWriter object.">PlankIffFileWriterRef</a> p, 
+<a name="l00094"></a>00094                                             <span class="keyword">const</span> <span class="keywordtype">char</span>* filepath, 
+<a name="l00095"></a>00095                                             <span class="keyword">const</span> PlankB bigEndian, 
+<a name="l00096"></a>00096                                             <span class="keyword">const</span> <span class="keywordtype">char</span>* mainID, 
+<a name="l00097"></a>00097                                             <span class="keyword">const</span> <span class="keywordtype">char</span>* formatID,
+<a name="l00098"></a>00098                                             <span class="keyword">const</span> <span class="keywordtype">int</span> idType);
+<a name="l00099"></a>00099 
+<a name="l00100"></a>00100 PlankResult pl_IffFileWriter_OpenWithFile (<a class="code" href="group___plank_iff_file_writer_class.html#ga0d6081668c3925c23293e1cdb5a12992" title="An opaque reference to the Plank IffFileWriter object.">PlankIffFileWriterRef</a> p,
+<a name="l00101"></a>00101                                            <a class="code" href="group___plank_file_class.html#ga7a3834c3811eceffb81213155fd14e59" title="An opaque reference to the Plank File object.">PlankFileRef</a> file,
+<a name="l00102"></a>00102                                            <span class="keyword">const</span> <span class="keywordtype">char</span>* mainID,
+<a name="l00103"></a>00103                                            <span class="keyword">const</span> <span class="keywordtype">char</span>* formatID,
+<a name="l00104"></a>00104                                            <span class="keyword">const</span> <span class="keywordtype">int</span> idType);
+<a name="l00105"></a>00105 
+<a name="l00107"></a>00107 PlankResult pl_IffFileWriter_Close (<a class="code" href="group___plank_iff_file_writer_class.html#ga0d6081668c3925c23293e1cdb5a12992" title="An opaque reference to the Plank IffFileWriter object.">PlankIffFileWriterRef</a> p);
+<a name="l00108"></a>00108 PlankResult pl_IffFileWriter_WriteHeader (<a class="code" href="group___plank_iff_file_writer_class.html#ga0d6081668c3925c23293e1cdb5a12992" title="An opaque reference to the Plank IffFileWriter object.">PlankIffFileWriterRef</a> p);
+<a name="l00109"></a>00109 PlankResult pl_IffFileWriter_SeekChunk (<a class="code" href="group___plank_iff_file_writer_class.html#ga0d6081668c3925c23293e1cdb5a12992" title="An opaque reference to the Plank IffFileWriter object.">PlankIffFileWriterRef</a> p, <span class="keyword">const</span> PlankLL startPosition, <span class="keyword">const</span> <span class="keywordtype">char</span>* chunkID, PlankIffFileWriterChunkInfoRef* chunkInfo, PlankB* isLastChunk);
+<a name="l00110"></a>00110 PlankResult pl_IffFileWriter_WriteChunk (<a class="code" href="group___plank_iff_file_writer_class.html#ga0d6081668c3925c23293e1cdb5a12992" title="An opaque reference to the Plank IffFileWriter object.">PlankIffFileWriterRef</a> p, <span class="keyword">const</span> PlankLL startPosition, <span class="keyword">const</span> <span class="keywordtype">char</span>* chunkID, <span class="keyword">const</span> <span class="keywordtype">void</span>* data, <span class="keyword">const</span> PlankUI dataLength, <span class="keyword">const</span> PlankIffFileWriterMode mode);
+<a name="l00111"></a>00111 PlankResult pl_IffFileWriter_RenameChunk (<a class="code" href="group___plank_iff_file_writer_class.html#ga0d6081668c3925c23293e1cdb5a12992" title="An opaque reference to the Plank IffFileWriter object.">PlankIffFileWriterRef</a> p, <span class="keyword">const</span> PlankLL startPosition, <span class="keyword">const</span> <span class="keywordtype">char</span>* oldChunkID, <span class="keyword">const</span> <span class="keywordtype">char</span>* newChunkID);
+<a name="l00112"></a>00112 PlankResult pl_IffFileWriter_ResizeChunk (<a class="code" href="group___plank_iff_file_writer_class.html#ga0d6081668c3925c23293e1cdb5a12992" title="An opaque reference to the Plank IffFileWriter object.">PlankIffFileWriterRef</a> p, <span class="keyword">const</span> PlankLL startPosition, <span class="keyword">const</span> <span class="keywordtype">char</span>* chunkID, <span class="keyword">const</span> PlankLL newLength, <span class="keyword">const</span> PlankB concatenateJunk);
+<a name="l00113"></a>00113 PlankResult pl_IffFileWriter_PrepareChunk (<a class="code" href="group___plank_iff_file_writer_class.html#ga0d6081668c3925c23293e1cdb5a12992" title="An opaque reference to the Plank IffFileWriter object.">PlankIffFileWriterRef</a> p, <span class="keyword">const</span> PlankLL startPosition, <span class="keyword">const</span> <span class="keywordtype">char</span>* chunkID, <span class="keyword">const</span> <span class="keywordtype">void</span>* data, <span class="keyword">const</span> PlankUI dataLength);
+<a name="l00114"></a>00114 PlankResult pl_IffFileWriter_PurgeChunkInfos (<a class="code" href="group___plank_iff_file_writer_class.html#ga0d6081668c3925c23293e1cdb5a12992" title="An opaque reference to the Plank IffFileWriter object.">PlankIffFileWriterRef</a> p);
+<a name="l00115"></a>00115 PlankIffFileWriterChunkInfoRef pl_IffFileWriter_GetCurrentChunk (<a class="code" href="group___plank_iff_file_writer_class.html#ga0d6081668c3925c23293e1cdb5a12992" title="An opaque reference to the Plank IffFileWriter object.">PlankIffFileWriterRef</a> p);
+<a name="l00116"></a>00116 
+<a name="l00117"></a>00117 
+<a name="l00120"></a>00120 PLANK_END_C_LINKAGE
+<a name="l00121"></a>00121 
+<a name="l00122"></a>00122 <span class="preprocessor">#if !DOXYGEN</span>
+<a name="l00123"></a>00123 <span class="preprocessor"></span><span class="keyword">typedef</span> <span class="keyword">struct </span>PlankIffFileWriterChunkInfo
+<a name="l00124"></a>00124 {
+<a name="l00125"></a>00125     PlankIffID chunkID;
+<a name="l00126"></a>00126     PlankLL chunkLength;
+<a name="l00127"></a>00127     PlankLL chunkPos;
+<a name="l00128"></a>00128 } PlankIffFileWriterChunkInfo;
+<a name="l00129"></a>00129 
+<a name="l00130"></a>00130 <span class="keyword">typedef</span> <span class="keyword">struct </span>PlankIffFileWriter
+<a name="l00131"></a>00131 {
+<a name="l00132"></a>00132     PlankIffFile common;
+<a name="l00133"></a>00133     
+<a name="l00134"></a>00134     PlankDynamicArray chunkInfos;
+<a name="l00135"></a>00135     PlankIffFileWriterChunkInfo* currentChunk;
+<a name="l00136"></a>00136     
+<a name="l00137"></a>00137 } PlankIffFileWriter;
+<a name="l00138"></a>00138 <span class="preprocessor">#endif</span>
+<a name="l00139"></a>00139 <span class="preprocessor"></span>
+<a name="l00140"></a>00140 <span class="comment">//------------------------------------------------------------------------------</span>
+<a name="l00141"></a>00141 
+<a name="l00142"></a>00142 
+<a name="l00143"></a>00143 
+<a name="l00144"></a>00144 <span class="preprocessor">#endif // PLANK_IFFFILEWRITER_H</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -162,7 +184,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Properties</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -171,7 +193,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 5 2012 17:04:52 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 8 2014 12:26:46 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

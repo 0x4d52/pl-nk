@@ -20,7 +20,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="pl-nk-logo-small.png"/></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">pl-nk</div>
+   <div id="projectname">pl-nk&#160;<span id="projectnumber">v0.4.5</span></div>
+   <div id="projectbrief">Plonk|Plink|Plank are a set of cross-platform C/C++ frameworks for audio software development</div>
   </td>
  </tr>
  </tbody>
@@ -29,8 +30,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -71,51 +72,19 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <!-- doxytag: class="FilterCoeffs3ParamChannelInternal" --><!-- doxytag: inherits="ProxyOwnerChannelInternal&lt; ShapeType::SampleDataType, ShapeType::Data &gt;" -->
 <p>Filter coefficient generator from two control parameters.  
  <a href="class_filter_coeffs3_param_channel_internal.html#details">More...</a></p>
-<div class="dynheader">
-Inheritance diagram for FilterCoeffs3ParamChannelInternal&lt; ShapeType &gt;:</div>
-<div class="dyncontent">
- <div class="center">
-  <img src="class_filter_coeffs3_param_channel_internal.png" usemap="#FilterCoeffs3ParamChannelInternal&lt; ShapeType &gt;_map" alt=""/>
-  <map id="FilterCoeffs3ParamChannelInternal&lt; ShapeType &gt;_map" name="FilterCoeffs3ParamChannelInternal&lt; ShapeType &gt;_map">
-<area href="class_proxy_owner_channel_internal.html" alt="ProxyOwnerChannelInternal&lt; ShapeType::SampleDataType, ShapeType::Data &gt;" shape="rect" coords="714,280,1180,304"/>
-<area href="class_channel_internal.html" alt="ChannelInternal&lt; ShapeType::SampleDataType, ShapeType::Data &gt;" shape="rect" coords="714,224,1180,248"/>
-<area href="class_channel_internal_base.html" alt="ChannelInternalBase&lt; ShapeType::SampleDataType &gt;" shape="rect" coords="476,168,942,192"/>
-<area href="class_receiver_internal.html" alt="ReceiverInternal&lt; SenderContainerBaseType &gt;" shape="rect" coords="952,168,1418,192"/>
-<area href="class_sender_internal.html" alt="SenderInternal&lt; ChannelBase&lt; ShapeType::SampleDataType &gt; &gt;" shape="rect" coords="0,112,466,136"/>
-<area href="class_channel_internal_core.html" title="The base, core class for all internal channel processes." alt="ChannelInternalCore" shape="rect" coords="476,112,942,136"/>
-<area href="class_receiver_internal.html" alt="ReceiverInternal&lt; SenderContainerBaseType &gt;" shape="rect" coords="952,112,1418,136"/>
-<area href="class_smart_pointer.html" title="Reference counted pointer base class." alt="SmartPointer" shape="rect" coords="0,56,466,80"/>
-<area href="class_plonk_base.html" alt="PlonkBase" shape="rect" coords="0,0,466,24"/>
-</map>
- </div></div>
+
+<p>Inherits <a class="el" href="class_proxy_owner_channel_internal.html">ProxyOwnerChannelInternal&lt; ShapeType::SampleDataType, ShapeType::Data &gt;</a>.</p>
 
 <p><a href="class_filter_coeffs3_param_channel_internal-members.html">List of all members.</a></p>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef ShapeType::SampleDataType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_filter_coeffs3_param_channel_internal.html#a641d7f979be31a1025dd1e34cd80bc47">SampleType</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef ShapeType::Data&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_filter_coeffs3_param_channel_internal.html#aaa86364bb16d79668b2782c60bf333de">Data</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">To store channel state data.  <a href="#aaa86364bb16d79668b2782c60bf333de"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef ShapeType::FormType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_filter_coeffs3_param_channel_internal.html#a2963d340257923fb0eb7c8f40dd974e9">FormType</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_channel_base.html">ChannelBase</a>&lt; <a class="el" href="class_filter_coeffs3_param_channel_internal.html#a641d7f979be31a1025dd1e34cd80bc47">SampleType</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_filter_coeffs3_param_channel_internal.html#a9b417ef1a79072ad7458e37666a569af">ChannelType</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_object_array.html">ObjectArray</a>&lt; <a class="el" href="class_channel_base.html">ChannelType</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_filter_coeffs3_param_channel_internal.html#ac01d41ca45e5e699f7de4bbb097e9358">ChannelArrayType</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <br class="typebreak"/>
-<a class="el" href="class_proxy_owner_channel_internal.html">ProxyOwnerChannelInternal</a><br class="typebreak"/>
-&lt; <a class="el" href="class_filter_coeffs3_param_channel_internal.html#a641d7f979be31a1025dd1e34cd80bc47">SampleType</a>, <a class="el" href="struct_channel_data_3_01_channel_internal_core_01_4.html">Data</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_filter_coeffs3_param_channel_internal.html#a829f0f1920e30f23f7c3671df5bbbab9">Internal</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_unit_base.html">UnitBase</a>&lt; <a class="el" href="class_filter_coeffs3_param_channel_internal.html#a641d7f979be31a1025dd1e34cd80bc47">SampleType</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_filter_coeffs3_param_channel_internal.html#a5412c61648c0b577d2fe81820f1ddc81">UnitType</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_input_dictionary.html">InputDictionary</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_filter_coeffs3_param_channel_internal.html#a3374b8f21a1459ed5c8d960c1cb7356f">Inputs</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a><br class="typebreak"/>
-&lt; <a class="el" href="class_filter_coeffs3_param_channel_internal.html#a641d7f979be31a1025dd1e34cd80bc47">SampleType</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_filter_coeffs3_param_channel_internal.html#ae7ed731bf9ca912757a86409786cb67f">Buffer</a></td></tr>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_filter_coeffs3_param_channel_internal.html#a3473e22f3c90f7f7df9e1b1f07dfe16e">FilterCoeffs3ParamChannelInternal</a> (<a class="el" href="class_input_dictionary.html">Inputs</a> const &amp;inputs, <a class="el" href="struct_channel_data_3_01_channel_internal_core_01_4.html">Data</a> const &amp;data, <a class="el" href="class_block_size.html">BlockSize</a> const &amp;blockSize, <a class="el" href="class_sample_rate.html">SampleRate</a> const &amp;sampleRate, <a class="el" href="class_object_array.html">ChannelArrayType</a> &amp;channels)  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_filter_coeffs3_param_channel_internal.html#ac3c300f5723b76b2c74156687886055e">~FilterCoeffs3ParamChannelInternal</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_text.html">Text</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_filter_coeffs3_param_channel_internal.html#a806a338a639caacd7152f65252f8adb7">getName</a> () const   throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_numerical_array.html">IntArray</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_filter_coeffs3_param_channel_internal.html#a08dc16224b90d6d743db1a1b3b3e460e">getInputKeys</a> () const   throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_filter_coeffs3_param_channel_internal.html#a87970ef615ae4f5b8b6ae06166742735">initChannel</a> (const int channel)  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Called to initialise the channel's initial value.  <a href="#a87970ef615ae4f5b8b6ae06166742735"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_filter_coeffs3_param_channel_internal.html#adadce9f74fd3095aa355c7ebbff99169">changed</a> (<a class="el" href="class_variable.html">DoubleVariable::Sender</a> const &amp;source)  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_filter_coeffs3_param_channel_internal.html#a3a45d71619e3abeee3bc11b67356c90c">updateFilterSampleRateInData</a> ()  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_filter_coeffs3_param_channel_internal.html#af2c3ddfed9f9c8ff522ea4f0309c90ba">process</a> (<a class="el" href="class_process_info.html">ProcessInfo</a> &amp;info, const int)  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">The DSP function.  <a href="#af2c3ddfed9f9c8ff522ea4f0309c90ba"></a><br/></td></tr>
 </table>
@@ -125,21 +94,6 @@ class FilterCoeffs3ParamChannelInternal&lt; ShapeType &gt;</h3>
 
 <p>Filter coefficient generator from two control parameters. </p>
 </div><hr/><h2>Member Typedef Documentation</h2>
-<a class="anchor" id="a641d7f979be31a1025dd1e34cd80bc47"></a><!-- doxytag: member="FilterCoeffs3ParamChannelInternal::SampleType" ref="a641d7f979be31a1025dd1e34cd80bc47" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class ShapeType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef ShapeType::SampleDataType <a class="el" href="class_filter_coeffs3_param_channel_internal.html">FilterCoeffs3ParamChannelInternal</a>&lt; ShapeType &gt;::<a class="el" href="class_filter_coeffs3_param_channel_internal.html#a641d7f979be31a1025dd1e34cd80bc47">SampleType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 <a class="anchor" id="aaa86364bb16d79668b2782c60bf333de"></a><!-- doxytag: member="FilterCoeffs3ParamChannelInternal::Data" ref="aaa86364bb16d79668b2782c60bf333de" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -147,7 +101,7 @@ template&lt;class ShapeType &gt; </div>
 template&lt;class ShapeType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef ShapeType::Data <a class="el" href="class_filter_coeffs3_param_channel_internal.html">FilterCoeffs3ParamChannelInternal</a>&lt; ShapeType &gt;::<a class="el" href="struct_channel_data_3_01_channel_internal_core_01_4.html">Data</a></td>
+          <td class="memname">typedef ShapeType::Data <a class="el" href="class_filter_coeffs3_param_channel_internal.html">FilterCoeffs3ParamChannelInternal</a>&lt; ShapeType &gt;::<a class="el" href="class_channel_internal_core.html#a09763233582f6f0985461449aa262ae5">Data</a></td>
         </tr>
       </table>
 </div>
@@ -160,230 +114,7 @@ template&lt;class ShapeType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a2963d340257923fb0eb7c8f40dd974e9"></a><!-- doxytag: member="FilterCoeffs3ParamChannelInternal::FormType" ref="a2963d340257923fb0eb7c8f40dd974e9" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class ShapeType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef ShapeType::FormType <a class="el" href="class_filter_coeffs3_param_channel_internal.html">FilterCoeffs3ParamChannelInternal</a>&lt; ShapeType &gt;::<a class="el" href="class_filter_coeffs3_param_channel_internal.html#a2963d340257923fb0eb7c8f40dd974e9">FormType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a9b417ef1a79072ad7458e37666a569af"></a><!-- doxytag: member="FilterCoeffs3ParamChannelInternal::ChannelType" ref="a9b417ef1a79072ad7458e37666a569af" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class ShapeType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_channel_base.html">ChannelBase</a>&lt;<a class="el" href="class_filter_coeffs3_param_channel_internal.html#a641d7f979be31a1025dd1e34cd80bc47">SampleType</a>&gt; <a class="el" href="class_filter_coeffs3_param_channel_internal.html">FilterCoeffs3ParamChannelInternal</a>&lt; ShapeType &gt;::<a class="el" href="class_channel_base.html">ChannelType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="class_proxy_owner_channel_internal.html#a66b854dcf0db11c050c69dff2f3e374f">ProxyOwnerChannelInternal&lt; ShapeType::SampleDataType, ShapeType::Data &gt;</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ac01d41ca45e5e699f7de4bbb097e9358"></a><!-- doxytag: member="FilterCoeffs3ParamChannelInternal::ChannelArrayType" ref="ac01d41ca45e5e699f7de4bbb097e9358" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class ShapeType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_object_array.html">ObjectArray</a>&lt;<a class="el" href="class_channel_base.html">ChannelType</a>&gt; <a class="el" href="class_filter_coeffs3_param_channel_internal.html">FilterCoeffs3ParamChannelInternal</a>&lt; ShapeType &gt;::<a class="el" href="class_object_array.html">ChannelArrayType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="class_proxy_owner_channel_internal.html#a73b428803deec77d33f77e5198c8aca1">ProxyOwnerChannelInternal&lt; ShapeType::SampleDataType, ShapeType::Data &gt;</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a829f0f1920e30f23f7c3671df5bbbab9"></a><!-- doxytag: member="FilterCoeffs3ParamChannelInternal::Internal" ref="a829f0f1920e30f23f7c3671df5bbbab9" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class ShapeType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_proxy_owner_channel_internal.html">ProxyOwnerChannelInternal</a>&lt;<a class="el" href="class_filter_coeffs3_param_channel_internal.html#a641d7f979be31a1025dd1e34cd80bc47">SampleType</a>,<a class="el" href="struct_channel_data_3_01_channel_internal_core_01_4.html">Data</a>&gt; <a class="el" href="class_filter_coeffs3_param_channel_internal.html">FilterCoeffs3ParamChannelInternal</a>&lt; ShapeType &gt;::<a class="el" href="class_receiver_internal.html#ac1910adc042a53336c1316a1303eafcc">Internal</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="class_proxy_owner_channel_internal.html#aa9a9d2faaa7e36be592755c2b40cfba7">ProxyOwnerChannelInternal&lt; ShapeType::SampleDataType, ShapeType::Data &gt;</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a5412c61648c0b577d2fe81820f1ddc81"></a><!-- doxytag: member="FilterCoeffs3ParamChannelInternal::UnitType" ref="a5412c61648c0b577d2fe81820f1ddc81" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class ShapeType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_unit_base.html">UnitBase</a>&lt;<a class="el" href="class_filter_coeffs3_param_channel_internal.html#a641d7f979be31a1025dd1e34cd80bc47">SampleType</a>&gt; <a class="el" href="class_filter_coeffs3_param_channel_internal.html">FilterCoeffs3ParamChannelInternal</a>&lt; ShapeType &gt;::<a class="el" href="class_unit_base.html">UnitType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="class_proxy_owner_channel_internal.html#a9135c6d7afca6dbda99167e84c27586d">ProxyOwnerChannelInternal&lt; ShapeType::SampleDataType, ShapeType::Data &gt;</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a3374b8f21a1459ed5c8d960c1cb7356f"></a><!-- doxytag: member="FilterCoeffs3ParamChannelInternal::Inputs" ref="a3374b8f21a1459ed5c8d960c1cb7356f" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class ShapeType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_input_dictionary.html">InputDictionary</a> <a class="el" href="class_filter_coeffs3_param_channel_internal.html">FilterCoeffs3ParamChannelInternal</a>&lt; ShapeType &gt;::<a class="el" href="class_input_dictionary.html">Inputs</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="class_proxy_owner_channel_internal.html#ae43c4c8567ce1a67c51281a7c546ca06">ProxyOwnerChannelInternal&lt; ShapeType::SampleDataType, ShapeType::Data &gt;</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ae7ed731bf9ca912757a86409786cb67f"></a><!-- doxytag: member="FilterCoeffs3ParamChannelInternal::Buffer" ref="ae7ed731bf9ca912757a86409786cb67f" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class ShapeType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt;<a class="el" href="class_filter_coeffs3_param_channel_internal.html#a641d7f979be31a1025dd1e34cd80bc47">SampleType</a>&gt; <a class="el" href="class_filter_coeffs3_param_channel_internal.html">FilterCoeffs3ParamChannelInternal</a>&lt; ShapeType &gt;::<a class="el" href="class_numerical_array.html">Buffer</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="class_proxy_owner_channel_internal.html#abc5718f7325a88f1b4f589e306f683b5">ProxyOwnerChannelInternal&lt; ShapeType::SampleDataType, ShapeType::Data &gt;</a>.</p>
-
-</div>
-</div>
-<hr/><h2>Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a3473e22f3c90f7f7df9e1b1f07dfe16e"></a><!-- doxytag: member="FilterCoeffs3ParamChannelInternal::FilterCoeffs3ParamChannelInternal" ref="a3473e22f3c90f7f7df9e1b1f07dfe16e" args="(Inputs const &amp;inputs, Data const &amp;data, BlockSize const &amp;blockSize, SampleRate const &amp;sampleRate, ChannelArrayType &amp;channels)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class ShapeType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_filter_coeffs3_param_channel_internal.html">FilterCoeffs3ParamChannelInternal</a>&lt; ShapeType &gt;::<a class="el" href="class_filter_coeffs3_param_channel_internal.html">FilterCoeffs3ParamChannelInternal</a> </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_input_dictionary.html">Inputs</a> const &amp;&#160;</td>
-          <td class="paramname"><em>inputs</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="struct_channel_data_3_01_channel_internal_core_01_4.html">Data</a> const &amp;&#160;</td>
-          <td class="paramname"><em>data</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="class_block_size.html">BlockSize</a> const &amp;&#160;</td>
-          <td class="paramname"><em>blockSize</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="class_sample_rate.html">SampleRate</a> const &amp;&#160;</td>
-          <td class="paramname"><em>sampleRate</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="class_object_array.html">ChannelArrayType</a> &amp;&#160;</td>
-          <td class="paramname"><em>channels</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ac3c300f5723b76b2c74156687886055e"></a><!-- doxytag: member="FilterCoeffs3ParamChannelInternal::~FilterCoeffs3ParamChannelInternal" ref="ac3c300f5723b76b2c74156687886055e" args="()" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class ShapeType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_filter_coeffs3_param_channel_internal.html">FilterCoeffs3ParamChannelInternal</a>&lt; ShapeType &gt;::~<a class="el" href="class_filter_coeffs3_param_channel_internal.html">FilterCoeffs3ParamChannelInternal</a> </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td><code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a806a338a639caacd7152f65252f8adb7"></a><!-- doxytag: member="FilterCoeffs3ParamChannelInternal::getName" ref="a806a338a639caacd7152f65252f8adb7" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class ShapeType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_text.html">Text</a> <a class="el" href="class_filter_coeffs3_param_channel_internal.html">FilterCoeffs3ParamChannelInternal</a>&lt; ShapeType &gt;::getName </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline, virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Implements <a class="el" href="class_channel_internal_core.html#afab91268bb677531d7a921554681ffae">ChannelInternalCore</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a08dc16224b90d6d743db1a1b3b3e460e"></a><!-- doxytag: member="FilterCoeffs3ParamChannelInternal::getInputKeys" ref="a08dc16224b90d6d743db1a1b3b3e460e" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class ShapeType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_numerical_array.html">IntArray</a> <a class="el" href="class_filter_coeffs3_param_channel_internal.html">FilterCoeffs3ParamChannelInternal</a>&lt; ShapeType &gt;::getInputKeys </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline, virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Implements <a class="el" href="class_channel_internal_core.html#a5f731843efea658e869a27e0529b5c6c">ChannelInternalCore</a>.</p>
-
-</div>
-</div>
 <a class="anchor" id="a87970ef615ae4f5b8b6ae06166742735"></a><!-- doxytag: member="FilterCoeffs3ParamChannelInternal::initChannel" ref="a87970ef615ae4f5b8b6ae06166742735" args="(const int channel)" -->
 <div class="memitem">
 <div class="memproto">
@@ -402,48 +133,9 @@ template&lt;class ShapeType &gt; </div>
 <div class="memdoc">
 
 <p>Called to initialise the channel's initial value. </p>
-<p>The <a class="el" href="class_channel_internal.html" title="The base class from which most ChannelInternals should be derived.">ChannelInternal</a> subclass should initialise itself using this channel of its inputs, calling <a class="el" href="class_channel_internal_base.html#aed88288e0eb608e998b3f7ccf6bf2aaf">initValue()</a>. </p>
+<p>The <a class="el" href="class_channel_internal.html" title="The base class from which most ChannelInternals should be derived.">ChannelInternal</a> subclass should initialise itself using this channel of its inputs, calling initValue(). </p>
 
 <p>Implements <a class="el" href="class_channel_internal_core.html#a0d5725cc71173dcff25b08f992acf1ea">ChannelInternalCore</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="adadce9f74fd3095aa355c7ebbff99169"></a><!-- doxytag: member="FilterCoeffs3ParamChannelInternal::changed" ref="adadce9f74fd3095aa355c7ebbff99169" args="(DoubleVariable::Sender const &amp;source)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class ShapeType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="class_filter_coeffs3_param_channel_internal.html">FilterCoeffs3ParamChannelInternal</a>&lt; ShapeType &gt;::changed </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_variable.html">DoubleVariable::Sender</a> const &amp;&#160;</td>
-          <td class="paramname"><em>source</em></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="class_channel_internal.html#a9243aead95b3f12bab5f8afdd482f4fe">ChannelInternal&lt; ShapeType::SampleDataType, ShapeType::Data &gt;</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a3a45d71619e3abeee3bc11b67356c90c"></a><!-- doxytag: member="FilterCoeffs3ParamChannelInternal::updateFilterSampleRateInData" ref="a3a45d71619e3abeee3bc11b67356c90c" args="()" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class ShapeType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="class_filter_coeffs3_param_channel_internal.html">FilterCoeffs3ParamChannelInternal</a>&lt; ShapeType &gt;::updateFilterSampleRateInData </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
 
 </div>
 </div>
@@ -490,7 +182,7 @@ template&lt;class ShapeType &gt; </div>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Properties</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -499,7 +191,7 @@ template&lt;class ShapeType &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 5 2012 17:05:03 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 8 2014 12:26:52 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

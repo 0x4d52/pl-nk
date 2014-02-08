@@ -20,7 +20,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="pl-nk-logo-small.png"/></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">pl-nk</div>
+   <div id="projectname">pl-nk&#160;<span id="projectnumber">v0.4.5</span></div>
+   <div id="projectbrief">Plonk|Plink|Plank are a set of cross-platform C/C++ frameworks for audio software development</div>
   </td>
  </tr>
  </tbody>
@@ -29,8 +30,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -65,122 +66,31 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="struct_plank_u_i24.html">PlankUI24</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_misc_functions.html#ga12d4aea1c2eccf219229930a7d7b2d1b">pl_ConvertUIToUI24</a> (const <a class="el" href="plank___standard_header_8h.html#a534ce6be2740f71e6fdde856c4ce8ee2">PlankUI</a> i32)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert an unsigned 32-bit int into to an unsigned 24-bit int.  <a href="#ga12d4aea1c2eccf219229930a7d7b2d1b"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="plank___standard_header_8h.html#a534ce6be2740f71e6fdde856c4ce8ee2">PlankUI</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_misc_functions.html#gaa379ad95d94bc0bac21cd19e41a13ba9">pl_ConvertUI24ToUI</a> (const <a class="el" href="struct_plank_u_i24.html">PlankUI24</a> i24)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert an unsigned 24-bit int into to an unsigned 32-bit int.  <a href="#gaa379ad95d94bc0bac21cd19e41a13ba9"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="struct_plank_i24.html">PlankI24</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_misc_functions.html#ga4cc22ee75977dccf974b63af39d9df5d">pl_ConvertIToI24</a> (const <a class="el" href="plank___standard_header_8h.html#adc55cc3e1effd5d94c88cc90d1117ce5">PlankI</a> i32)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert a 32-bit int into to a 24-bit int.  <a href="#ga4cc22ee75977dccf974b63af39d9df5d"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="plank___standard_header_8h.html#adc55cc3e1effd5d94c88cc90d1117ce5">PlankI</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_misc_functions.html#ga849950922a5ac6275b060f7dccd3d7af">pl_ConvertI24ToI</a> (const <a class="el" href="struct_plank_i24.html">PlankI24</a> i24)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert a 24-bit int into to a 32-bit int.  <a href="#ga849950922a5ac6275b060f7dccd3d7af"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="plank___standard_header_8h.html#a7f6d46cbd6808d436e42ab5afcd69a81">PlankFourCharCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_misc_functions.html#gadf1a3d67636994e54900cb2cc1a3d54f">pl_FourCharCode</a> (const char *data)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert four characters to a int as used by IFF file formats to identify data chunks.  <a href="#gadf1a3d67636994e54900cb2cc1a3d54f"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga12d4aea1c2eccf219229930a7d7b2d1b"></a><!-- doxytag: member="PlankMiscFunctions::pl_ConvertUIToUI24" ref="ga12d4aea1c2eccf219229930a7d7b2d1b" args="(const PlankUI i32)" -->
+static <a class="el" href="struct_plank_u_i24.html">PlankUI24</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_misc_functions.html#ga12d4aea1c2eccf219229930a7d7b2d1b">pl_ConvertUIToUI24</a> (const PlankUI i32)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert an unsigned 32-bit int into to an unsigned 24-bit int. <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gaa379ad95d94bc0bac21cd19e41a13ba9"></a><!-- doxytag: member="PlankMiscFunctions::pl_ConvertUI24ToUI" ref="gaa379ad95d94bc0bac21cd19e41a13ba9" args="(const PlankUI24 i24)" -->
+static PlankUI&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_misc_functions.html#gaa379ad95d94bc0bac21cd19e41a13ba9">pl_ConvertUI24ToUI</a> (const <a class="el" href="struct_plank_u_i24.html">PlankUI24</a> i24)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert an unsigned 24-bit int into to an unsigned 32-bit int. <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga4cc22ee75977dccf974b63af39d9df5d"></a><!-- doxytag: member="PlankMiscFunctions::pl_ConvertIToI24" ref="ga4cc22ee75977dccf974b63af39d9df5d" args="(const PlankI i32)" -->
+static <a class="el" href="struct_plank_i24.html">PlankI24</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_misc_functions.html#ga4cc22ee75977dccf974b63af39d9df5d">pl_ConvertIToI24</a> (const PlankI i32)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert a 32-bit int into to a 24-bit int. <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga849950922a5ac6275b060f7dccd3d7af"></a><!-- doxytag: member="PlankMiscFunctions::pl_ConvertI24ToI" ref="ga849950922a5ac6275b060f7dccd3d7af" args="(const PlankI24 i24)" -->
+static PlankI&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_misc_functions.html#ga849950922a5ac6275b060f7dccd3d7af">pl_ConvertI24ToI</a> (const <a class="el" href="struct_plank_i24.html">PlankI24</a> i24)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert a 24-bit int into to a 32-bit int. <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gadf1a3d67636994e54900cb2cc1a3d54f"></a><!-- doxytag: member="PlankMiscFunctions::pl_FourCharCode" ref="gadf1a3d67636994e54900cb2cc1a3d54f" args="(const char *data)" -->
+static PlankFourCharCode&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_misc_functions.html#gadf1a3d67636994e54900cb2cc1a3d54f">pl_FourCharCode</a> (const char *data)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert four characters to a int as used by IFF file formats to identify data chunks. <br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <p>Plank misc functions... </p>
-<hr/><h2>Function Documentation</h2>
-<a class="anchor" id="ga12d4aea1c2eccf219229930a7d7b2d1b"></a><!-- doxytag: member="plank_ContainersMisc.h::pl_ConvertUIToUI24" ref="ga12d4aea1c2eccf219229930a7d7b2d1b" args="(const PlankUI i32)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">static <a class="el" href="struct_plank_u_i24.html">PlankUI24</a> pl_ConvertUIToUI24 </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="plank___standard_header_8h.html#a534ce6be2740f71e6fdde856c4ce8ee2">PlankUI</a>&#160;</td>
-          <td class="paramname"><em>i32</em></td><td>)</td>
-          <td><code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Convert an unsigned 32-bit int into to an unsigned 24-bit int. </p>
-
-</div>
-</div>
-<a class="anchor" id="gaa379ad95d94bc0bac21cd19e41a13ba9"></a><!-- doxytag: member="plank_ContainersMisc.h::pl_ConvertUI24ToUI" ref="gaa379ad95d94bc0bac21cd19e41a13ba9" args="(const PlankUI24 i24)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">static <a class="el" href="plank___standard_header_8h.html#a534ce6be2740f71e6fdde856c4ce8ee2">PlankUI</a> pl_ConvertUI24ToUI </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="struct_plank_u_i24.html">PlankUI24</a>&#160;</td>
-          <td class="paramname"><em>i24</em></td><td>)</td>
-          <td><code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Convert an unsigned 24-bit int into to an unsigned 32-bit int. </p>
-
-</div>
-</div>
-<a class="anchor" id="ga4cc22ee75977dccf974b63af39d9df5d"></a><!-- doxytag: member="plank_ContainersMisc.h::pl_ConvertIToI24" ref="ga4cc22ee75977dccf974b63af39d9df5d" args="(const PlankI i32)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">static <a class="el" href="struct_plank_i24.html">PlankI24</a> pl_ConvertIToI24 </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="plank___standard_header_8h.html#adc55cc3e1effd5d94c88cc90d1117ce5">PlankI</a>&#160;</td>
-          <td class="paramname"><em>i32</em></td><td>)</td>
-          <td><code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Convert a 32-bit int into to a 24-bit int. </p>
-
-</div>
-</div>
-<a class="anchor" id="ga849950922a5ac6275b060f7dccd3d7af"></a><!-- doxytag: member="plank_ContainersMisc.h::pl_ConvertI24ToI" ref="ga849950922a5ac6275b060f7dccd3d7af" args="(const PlankI24 i24)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">static <a class="el" href="plank___standard_header_8h.html#adc55cc3e1effd5d94c88cc90d1117ce5">PlankI</a> pl_ConvertI24ToI </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="struct_plank_i24.html">PlankI24</a>&#160;</td>
-          <td class="paramname"><em>i24</em></td><td>)</td>
-          <td><code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Convert a 24-bit int into to a 32-bit int. </p>
-
-</div>
-</div>
-<a class="anchor" id="gadf1a3d67636994e54900cb2cc1a3d54f"></a><!-- doxytag: member="plank_ContainersMisc.h::pl_FourCharCode" ref="gadf1a3d67636994e54900cb2cc1a3d54f" args="(const char *data)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">static <a class="el" href="plank___standard_header_8h.html#a7f6d46cbd6808d436e42ab5afcd69a81">PlankFourCharCode</a> pl_FourCharCode </td>
-          <td>(</td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>data</em></td><td>)</td>
-          <td><code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Convert four characters to a int as used by IFF file formats to identify data chunks. </p>
-
-</div>
-</div>
 </div>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Properties</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -189,7 +99,7 @@ Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 5 2012 17:04:57 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 8 2014 12:26:52 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

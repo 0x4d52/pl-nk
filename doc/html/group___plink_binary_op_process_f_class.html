@@ -20,7 +20,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="pl-nk-logo-small.png"/></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">pl-nk</div>
+   <div id="projectname">pl-nk&#160;<span id="projectnumber">v0.4.5</span></div>
+   <div id="projectbrief">Plonk|Plink|Plank are a set of cross-platform C/C++ frameworks for audio software development</div>
   </td>
  </tr>
  </tbody>
@@ -29,8 +30,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -53,9 +54,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   </div>
 </div>
 <div class="header">
-  <div class="summary">
-<a href="#typedef-members">Typedefs</a> &#124;
-<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">Plink BinaryOpProcessF classes</div>  </div>
 <div class="ingroups"><a class="el" href="group___plink_classes.html">Classes</a></div></div>
@@ -64,316 +62,16 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <p>A binary operator processes.  
 <a href="#details">More...</a></p>
 <table class="memberdecls">
-<tr><td colspan="2"><h2><a name="typedef-members"></a>
-Typedefs</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="struct_plink_state.html">PlinkState</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plink_binary_op_process_f_class.html#ga839107e454981adf3151e2dd533ec1b9">BinaryState</a></td></tr>
-<tr><td colspan="2"><h2><a name="func-members"></a>
-Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plink_binary_op_process_f_class.html#gaecba8dfb8cce0ec407dba1adca39236d">PLINK_BINARYOPPROCESS_DECLARE</a> (Add, F) PLINK_BINARYOPPROCESS_DECLARE(Sub</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">F&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plink_binary_op_process_f_class.html#ga119c41a416e2673c8197c8f4786f0bf0">PLINK_BINARYOPPROCESS_DECLARE</a> (Mul, F) PLINK_BINARYOPPROCESS_DECLARE(Div</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">F F&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plink_binary_op_process_f_class.html#gaaebdcdcde11d41709b3dfd1d00e222d3">PLINK_BINARYOPPROCESS_DECLARE</a> (Min, F) PLINK_BINARYOPPROCESS_DECLARE(Max</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">F F F&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plink_binary_op_process_f_class.html#gae9c39142616aea85e306473ece3efc5f">PLINK_BINARYOPPROCESS_DECLARE</a> (Pow, F) PLINK_BINARYOPPROCESS_DECLARE(IsEqualTo</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">F F F F&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plink_binary_op_process_f_class.html#ga789f5427667dd00a315b631762ac9b6c">PLINK_BINARYOPPROCESS_DECLARE</a> (IsNotEqualTo, F) PLINK_BINARYOPPROCESS_DECLARE(IsGreaterThan</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">F F F F F&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plink_binary_op_process_f_class.html#gaee607f985e5a70b85ede5725558271f6">PLINK_BINARYOPPROCESS_DECLARE</a> (IsGreaterThanOrEqualTo, F) PLINK_BINARYOPPROCESS_DECLARE(IsLessThan</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">F F F F F F&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plink_binary_op_process_f_class.html#gadb70e3b5e7d7df805812607570282847">PLINK_BINARYOPPROCESS_DECLARE</a> (IsLessThanOrEqualTo, F) PLINK_BINARYOPPROCESS_DECLARE(Hypot</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">F F F F F F F&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plink_binary_op_process_f_class.html#ga02649038e696dedafa640d35f746297a">PLINK_BINARYOPPROCESS_DECLARE</a> (Atan2, F) PLINK_BINARYOPPROCESS_DECLARE(SumSqr</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">F F F F F F F F&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plink_binary_op_process_f_class.html#gae8960ac2a4f8103223c69e0109331928">PLINK_BINARYOPPROCESS_DECLARE</a> (DifSqr, F) PLINK_BINARYOPPROCESS_DECLARE(SqrSum</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">F F F F F F F F F&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plink_binary_op_process_f_class.html#ga31f9de33b55ec8e78311bf25f311fb82">PLINK_BINARYOPPROCESS_DECLARE</a> (SqrDif, F) PLINK_BINARYOPPROCESS_DECLARE(AbsDif</td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <p>A binary operator processes. </p>
-<hr/><h2>Typedef Documentation</h2>
-<a class="anchor" id="ga839107e454981adf3151e2dd533ec1b9"></a><!-- doxytag: member="plink_BinaryOpProcess.h::BinaryState" ref="ga839107e454981adf3151e2dd533ec1b9" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="struct_plink_state.html">PlinkState</a> <a class="el" href="struct_plink_state.html">BinaryState</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<hr/><h2>Function Documentation</h2>
-<a class="anchor" id="gaecba8dfb8cce0ec407dba1adca39236d"></a><!-- doxytag: member="plink_BinaryOpProcess.h::PLINK_BINARYOPPROCESS_DECLARE" ref="gaecba8dfb8cce0ec407dba1adca39236d" args="(Add, F) PLINK_BINARYOPPROCESS_DECLARE(Sub" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">PLINK_BINARYOPPROCESS_DECLARE </td>
-          <td>(</td>
-          <td class="paramtype">Add&#160;</td>
-          <td class="paramname">, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">F&#160;</td>
-          <td class="paramname">&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ga119c41a416e2673c8197c8f4786f0bf0"></a><!-- doxytag: member="plink_BinaryOpProcess.h::PLINK_BINARYOPPROCESS_DECLARE" ref="ga119c41a416e2673c8197c8f4786f0bf0" args="(Mul, F) PLINK_BINARYOPPROCESS_DECLARE(Div" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">F PLINK_BINARYOPPROCESS_DECLARE </td>
-          <td>(</td>
-          <td class="paramtype">Mul&#160;</td>
-          <td class="paramname">, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">F&#160;</td>
-          <td class="paramname">&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="gaaebdcdcde11d41709b3dfd1d00e222d3"></a><!-- doxytag: member="plink_BinaryOpProcess.h::PLINK_BINARYOPPROCESS_DECLARE" ref="gaaebdcdcde11d41709b3dfd1d00e222d3" args="(Min, F) PLINK_BINARYOPPROCESS_DECLARE(Max" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">F F PLINK_BINARYOPPROCESS_DECLARE </td>
-          <td>(</td>
-          <td class="paramtype">Min&#160;</td>
-          <td class="paramname">, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">F&#160;</td>
-          <td class="paramname">&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="gae9c39142616aea85e306473ece3efc5f"></a><!-- doxytag: member="plink_BinaryOpProcess.h::PLINK_BINARYOPPROCESS_DECLARE" ref="gae9c39142616aea85e306473ece3efc5f" args="(Pow, F) PLINK_BINARYOPPROCESS_DECLARE(IsEqualTo" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">F F F PLINK_BINARYOPPROCESS_DECLARE </td>
-          <td>(</td>
-          <td class="paramtype">Pow&#160;</td>
-          <td class="paramname">, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">F&#160;</td>
-          <td class="paramname">&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ga789f5427667dd00a315b631762ac9b6c"></a><!-- doxytag: member="plink_BinaryOpProcess.h::PLINK_BINARYOPPROCESS_DECLARE" ref="ga789f5427667dd00a315b631762ac9b6c" args="(IsNotEqualTo, F) PLINK_BINARYOPPROCESS_DECLARE(IsGreaterThan" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">F F F F PLINK_BINARYOPPROCESS_DECLARE </td>
-          <td>(</td>
-          <td class="paramtype">IsNotEqualTo&#160;</td>
-          <td class="paramname">, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">F&#160;</td>
-          <td class="paramname">&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="gaee607f985e5a70b85ede5725558271f6"></a><!-- doxytag: member="plink_BinaryOpProcess.h::PLINK_BINARYOPPROCESS_DECLARE" ref="gaee607f985e5a70b85ede5725558271f6" args="(IsGreaterThanOrEqualTo, F) PLINK_BINARYOPPROCESS_DECLARE(IsLessThan" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">F F F F F PLINK_BINARYOPPROCESS_DECLARE </td>
-          <td>(</td>
-          <td class="paramtype">IsGreaterThanOrEqualTo&#160;</td>
-          <td class="paramname">, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">F&#160;</td>
-          <td class="paramname">&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="gadb70e3b5e7d7df805812607570282847"></a><!-- doxytag: member="plink_BinaryOpProcess.h::PLINK_BINARYOPPROCESS_DECLARE" ref="gadb70e3b5e7d7df805812607570282847" args="(IsLessThanOrEqualTo, F) PLINK_BINARYOPPROCESS_DECLARE(Hypot" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">F F F F F F PLINK_BINARYOPPROCESS_DECLARE </td>
-          <td>(</td>
-          <td class="paramtype">IsLessThanOrEqualTo&#160;</td>
-          <td class="paramname">, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">F&#160;</td>
-          <td class="paramname">&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ga02649038e696dedafa640d35f746297a"></a><!-- doxytag: member="plink_BinaryOpProcess.h::PLINK_BINARYOPPROCESS_DECLARE" ref="ga02649038e696dedafa640d35f746297a" args="(Atan2, F) PLINK_BINARYOPPROCESS_DECLARE(SumSqr" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">F F F F F F F PLINK_BINARYOPPROCESS_DECLARE </td>
-          <td>(</td>
-          <td class="paramtype">Atan2&#160;</td>
-          <td class="paramname">, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">F&#160;</td>
-          <td class="paramname">&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="gae8960ac2a4f8103223c69e0109331928"></a><!-- doxytag: member="plink_BinaryOpProcess.h::PLINK_BINARYOPPROCESS_DECLARE" ref="gae8960ac2a4f8103223c69e0109331928" args="(DifSqr, F) PLINK_BINARYOPPROCESS_DECLARE(SqrSum" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">F F F F F F F F PLINK_BINARYOPPROCESS_DECLARE </td>
-          <td>(</td>
-          <td class="paramtype">DifSqr&#160;</td>
-          <td class="paramname">, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">F&#160;</td>
-          <td class="paramname">&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ga31f9de33b55ec8e78311bf25f311fb82"></a><!-- doxytag: member="plink_BinaryOpProcess.h::PLINK_BINARYOPPROCESS_DECLARE" ref="ga31f9de33b55ec8e78311bf25f311fb82" args="(SqrDif, F) PLINK_BINARYOPPROCESS_DECLARE(AbsDif" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">F F F F F F F F F PLINK_BINARYOPPROCESS_DECLARE </td>
-          <td>(</td>
-          <td class="paramtype">SqrDif&#160;</td>
-          <td class="paramname">, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">F&#160;</td>
-          <td class="paramname">&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 </div>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Properties</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -382,7 +80,7 @@ Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 5 2012 17:04:58 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 8 2014 12:26:52 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

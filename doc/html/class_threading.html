@@ -20,7 +20,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="pl-nk-logo-small.png"/></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">pl-nk</div>
+   <div id="projectname">pl-nk&#160;<span id="projectnumber">v0.4.5</span></div>
+   <div id="projectbrief">Plonk|Plink|Plank are a set of cross-platform C/C++ frameworks for audio software development</div>
   </td>
  </tr>
  </tbody>
@@ -29,8 +30,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -63,9 +64,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#pub-types">Public Types</a> &#124;
-<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
-<a href="#friends">Friends</a>  </div>
+<a href="#pub-static-methods">Static Public Member Functions</a>  </div>
   <div class="headertitle">
 <div class="title">Threading Class Reference</div>  </div>
 </div>
@@ -80,47 +79,42 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 Classes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_threading_1_1_thread.html">Thread</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="class_threading_1_1_thread.html" title="The Thread class itself.">Thread</a> class itself.  <a href="class_threading_1_1_thread.html#details">More...</a><br/></td></tr>
-<tr><td colspan="2"><h2><a name="pub-types"></a>
-Public Types</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="group___plank_thread_class.html#ga8e4ce91496e1d22a26bac03aba31d9f3">PlankThreadID</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_threading.html#ac072dacd374bc2543081179faa801e27">ID</a></td></tr>
 <tr><td colspan="2"><h2><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="plonk___standard_header_8h.html#a677077d87aa175d7a3ee2e5c9e51c2e7">ResultCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_threading.html#af06e4d7a02ac3054e17b01ae78e39684">sleep</a> (const double seconds)  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static ResultCode&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_threading.html#af06e4d7a02ac3054e17b01ae78e39684">sleep</a> (const double seconds)  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Sleeps the current thread.  <a href="#af06e4d7a02ac3054e17b01ae78e39684"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="plonk___standard_header_8h.html#a677077d87aa175d7a3ee2e5c9e51c2e7">ResultCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_threading.html#a064c003b9a820cabb3768f7466d4d05a">yield</a> ()  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static ResultCode&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_threading.html#a064c003b9a820cabb3768f7466d4d05a">yield</a> ()  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Yield the current thread.  <a href="#a064c003b9a820cabb3768f7466d4d05a"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_threading.html#ac072dacd374bc2543081179faa801e27">Threading::ID</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_threading.html#a9453710636ee4e1b579bd1153b00c25c">getCurrentThreadID</a> ()  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static Threading::ID&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_threading.html#a9453710636ee4e1b579bd1153b00c25c">getCurrentThreadID</a> ()  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the calling thread ID.  <a href="#a9453710636ee4e1b579bd1153b00c25c"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_threading.html#ac072dacd374bc2543081179faa801e27">Threading::ID</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_threading.html#acb3e4038e1bca654e09cd3d270e9d259">getAudioThreadID</a> ()  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_threading.html#a80cbc490a9390a7a6faadff865ea3ca2">setAudioThreadID</a> (const <a class="el" href="class_threading.html#ac072dacd374bc2543081179faa801e27">Threading::ID</a> theID)  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_threading.html#a68419efc1cc64978766b5fcc3a15c60a">currentThreadIsAudioThread</a> ()  throw ()</td></tr>
-<tr><td colspan="2"><h2><a name="friends"></a>
-Friends</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">class&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_threading.html#adbc148eaddd341d7ae4d07c9e9e33bfd">Thread</a></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Crossplatform threading support. </p>
-</div><hr/><h2>Member Typedef Documentation</h2>
-<a class="anchor" id="ac072dacd374bc2543081179faa801e27"></a><!-- doxytag: member="Threading::ID" ref="ac072dacd374bc2543081179faa801e27" args="" -->
+</div><hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="a9453710636ee4e1b579bd1153b00c25c"></a><!-- doxytag: member="Threading::getCurrentThreadID" ref="a9453710636ee4e1b579bd1153b00c25c" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="group___plank_thread_class.html#ga8e4ce91496e1d22a26bac03aba31d9f3">PlankThreadID</a> <a class="el" href="class_threading.html#ac072dacd374bc2543081179faa801e27">Threading::ID</a></td>
+          <td class="memname">Threading::ID Threading::getCurrentThreadID </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()<code> [static]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
+<p>Get the calling thread ID. </p>
+
 </div>
 </div>
-<hr/><h2>Member Function Documentation</h2>
 <a class="anchor" id="af06e4d7a02ac3054e17b01ae78e39684"></a><!-- doxytag: member="Threading::sleep" ref="af06e4d7a02ac3054e17b01ae78e39684" args="(const double seconds)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="plonk___standard_header_8h.html#a677077d87aa175d7a3ee2e5c9e51c2e7">ResultCode</a> Threading::sleep </td>
+          <td class="memname">ResultCode Threading::sleep </td>
           <td>(</td>
           <td class="paramtype">const double&#160;</td>
           <td class="paramname"><em>seconds</em></td><td>)</td>
@@ -140,7 +134,7 @@ Friends</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="plonk___standard_header_8h.html#a677077d87aa175d7a3ee2e5c9e51c2e7">ResultCode</a> Threading::yield </td>
+          <td class="memname">ResultCode Threading::yield </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td>  throw ()<code> [static]</code></td>
@@ -154,90 +148,9 @@ Friends</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a9453710636ee4e1b579bd1153b00c25c"></a><!-- doxytag: member="Threading::getCurrentThreadID" ref="a9453710636ee4e1b579bd1153b00c25c" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_threading.html#ac072dacd374bc2543081179faa801e27">Threading::ID</a> Threading::getCurrentThreadID </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Get the calling thread ID. </p>
-
-</div>
-</div>
-<a class="anchor" id="acb3e4038e1bca654e09cd3d270e9d259"></a><!-- doxytag: member="Threading::getAudioThreadID" ref="acb3e4038e1bca654e09cd3d270e9d259" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_threading.html#ac072dacd374bc2543081179faa801e27">Threading::ID</a> Threading::getAudioThreadID </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a80cbc490a9390a7a6faadff865ea3ca2"></a><!-- doxytag: member="Threading::setAudioThreadID" ref="a80cbc490a9390a7a6faadff865ea3ca2" args="(const Threading::ID theID)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool Threading::setAudioThreadID </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="class_threading.html#ac072dacd374bc2543081179faa801e27">Threading::ID</a>&#160;</td>
-          <td class="paramname"><em>theID</em></td><td>)</td>
-          <td>  throw ()<code> [static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a68419efc1cc64978766b5fcc3a15c60a"></a><!-- doxytag: member="Threading::currentThreadIsAudioThread" ref="a68419efc1cc64978766b5fcc3a15c60a" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool Threading::currentThreadIsAudioThread </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<hr/><h2>Friends And Related Function Documentation</h2>
-<a class="anchor" id="adbc148eaddd341d7ae4d07c9e9e33bfd"></a><!-- doxytag: member="Threading::Thread" ref="adbc148eaddd341d7ae4d07c9e9e33bfd" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">friend class <a class="el" href="class_threading_1_1_thread.html">Thread</a><code> [friend]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li><a class="el" href="plonk___thread_8h_source.html">plonk_Thread.h</a></li>
-<li><a class="el" href="plonk___thread_8cpp.html">plonk_Thread.cpp</a></li>
+<li>plonk_Thread.cpp</li>
 </ul>
 </div>
 <!-- window showing the filter options -->
@@ -245,7 +158,7 @@ Friends</h2></td></tr>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Properties</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -254,7 +167,7 @@ Friends</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 5 2012 17:05:11 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 8 2014 12:26:52 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

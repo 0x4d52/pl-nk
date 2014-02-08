@@ -20,7 +20,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="pl-nk-logo-small.png"/></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">pl-nk</div>
+   <div id="projectname">pl-nk&#160;<span id="projectnumber">v0.4.5</span></div>
+   <div id="projectbrief">Plonk|Plink|Plank are a set of cross-platform C/C++ frameworks for audio software development</div>
   </td>
  </tr>
  </tbody>
@@ -29,8 +30,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -54,7 +55,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
       <li><a href="files.html"><span>File&#160;List</span></a></li>
-      <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
 <div class="header">
@@ -62,14 +62,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">plonk_ObjectMemoryDeferFree.h</div>  </div>
 </div>
 <div class="contents">
-<a href="plonk___object_memory_defer_free_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*</span>
+<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*</span>
 <a name="l00002"></a>00002 <span class="comment"> -------------------------------------------------------------------------------</span>
 <a name="l00003"></a>00003 <span class="comment"> This file is part of the Plink, Plonk, Plank libraries</span>
 <a name="l00004"></a>00004 <span class="comment">  by Martin Robinson</span>
 <a name="l00005"></a>00005 <span class="comment"> </span>
 <a name="l00006"></a>00006 <span class="comment"> http://code.google.com/p/pl-nk/</span>
 <a name="l00007"></a>00007 <span class="comment"> </span>
-<a name="l00008"></a>00008 <span class="comment"> Copyright University of the West of England, Bristol 2011-12</span>
+<a name="l00008"></a>00008 <span class="comment"> Copyright University of the West of England, Bristol 2011-14</span>
 <a name="l00009"></a>00009 <span class="comment"> All rights reserved.</span>
 <a name="l00010"></a>00010 <span class="comment"> </span>
 <a name="l00011"></a>00011 <span class="comment"> Redistribution and use in source and binary forms, with or without</span>
@@ -103,36 +103,36 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00039"></a>00039 <span class="preprocessor">#ifndef PLONK_ObjectMemoryDeferFree_H</span>
 <a name="l00040"></a>00040 <span class="preprocessor"></span><span class="preprocessor">#define PLONK_ObjectMemoryDeferFree_H</span>
 <a name="l00041"></a>00041 <span class="preprocessor"></span>
-<a name="l00042"></a><a class="code" href="class_object_memory_defer_free.html">00042</a> <span class="keyword">class </span><a class="code" href="class_object_memory_defer_free.html">ObjectMemoryDeferFree</a> :   <span class="keyword">public</span> <a class="code" href="class_object_memory_base.html" title="Manage a custom memory allocation system.">ObjectMemoryBase</a>,
-<a name="l00043"></a>00043                                 <span class="keyword">public</span> <a class="code" href="class_threading.html" title="Crossplatform threading support.">Threading</a>::<a class="code" href="class_threading_1_1_thread.html#ae985d730801d4679590869393ef044a8">Thread</a>
+<a name="l00042"></a>00042 <span class="keyword">class </span>ObjectMemoryDeferFree :   <span class="keyword">public</span> <a class="code" href="class_object_memory_base.html" title="Manage a custom memory allocation system.">ObjectMemoryBase</a>,
+<a name="l00043"></a>00043                                 <span class="keyword">public</span> <a class="code" href="class_threading.html" title="Crossplatform threading support.">Threading</a>::Thread
 <a name="l00044"></a>00044 {
 <a name="l00045"></a>00045 <span class="keyword">public</span>:   
 <a name="l00046"></a>00046     
-<a name="l00047"></a><a class="code" href="class_object_memory_defer_free_1_1_element.html">00047</a>     <span class="keyword">class </span><a class="code" href="class_object_memory_defer_free_1_1_element.html">Element</a> : <span class="keyword">public</span> <a class="code" href="class_plonk_base.html">PlonkBase</a>
+<a name="l00047"></a>00047     <span class="keyword">class </span>Element : <span class="keyword">public</span> PlonkBase
 <a name="l00048"></a>00048     {
 <a name="l00049"></a>00049     <span class="keyword">public</span>:
-<a name="l00050"></a><a class="code" href="class_object_memory_defer_free_1_1_element.html#a45d90ac7cf77213c91bb35466f38e63d">00050</a>         <a class="code" href="class_object_memory_defer_free_1_1_element.html#a45d90ac7cf77213c91bb35466f38e63d">Element</a>() : <a class="code" href="class_object_memory_defer_free_1_1_element.html#a220deb7ae03b52c9a005d22ca95f3130">ptr</a> (0) { }
-<a name="l00051"></a><a class="code" href="class_object_memory_defer_free_1_1_element.html#a61abcf02487635a409c441183930dc05">00051</a>         <a class="code" href="class_object_memory_defer_free_1_1_element.html#a61abcf02487635a409c441183930dc05">Element</a> (<span class="keywordtype">void</span>* p) : <a class="code" href="class_object_memory_defer_free_1_1_element.html#a220deb7ae03b52c9a005d22ca95f3130">ptr</a> (p) { }
+<a name="l00050"></a>00050         Element() : ptr (0) { }
+<a name="l00051"></a>00051         Element (<span class="keywordtype">void</span>* p) : ptr (p) { }
 <a name="l00052"></a>00052 
-<a name="l00053"></a><a class="code" href="class_object_memory_defer_free_1_1_element.html#a220deb7ae03b52c9a005d22ca95f3130">00053</a>         <span class="keywordtype">void</span>* <a class="code" href="class_object_memory_defer_free_1_1_element.html#a220deb7ae03b52c9a005d22ca95f3130">ptr</a>;
+<a name="l00053"></a>00053         <span class="keywordtype">void</span>* ptr;
 <a name="l00054"></a>00054     };
 <a name="l00055"></a>00055             
-<a name="l00056"></a>00056     <a class="code" href="class_object_memory_defer_free.html#aba76c80d123c3d23318841664cf61742">ObjectMemoryDeferFree</a> (<a class="code" href="class_memory.html">Memory</a>&amp; memory) <span class="keywordflow">throw</span>();
-<a name="l00057"></a>00057     <a class="code" href="class_object_memory_defer_free.html#adcf5b94a154ceea3ee61946ba6be8ba0">~ObjectMemoryDeferFree</a>();
+<a name="l00056"></a>00056     ObjectMemoryDeferFree (Memory&amp; memory) <span class="keywordflow">throw</span>();
+<a name="l00057"></a>00057     ~ObjectMemoryDeferFree();
 <a name="l00058"></a>00058     
-<a name="l00059"></a><a class="code" href="class_object_memory_defer_free.html#abb08cdaef3857a2f6bb32dc1a35d37d1">00059</a>     <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="class_object_memory_defer_free.html#abb08cdaef3857a2f6bb32dc1a35d37d1" title="Must implement, normally this starts a background thread.">init</a>() throw() { <a class="code" href="class_threading_1_1_thread.html#aec62063348aad6daca0c6c51d7270b2d">start</a>(); }
-<a name="l00060"></a>00060     <a class="code" href="plonk___standard_header_8h.html#a677077d87aa175d7a3ee2e5c9e51c2e7">ResultCode</a> <a class="code" href="class_object_memory_defer_free.html#aa72e25ddb0652cdda6cb8bc4018a4e2e" title="The run() function: you must implement this in your sublcass.">run</a>() throw();
+<a name="l00059"></a>00059     <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="class_object_memory_base.html#ae64795a840be11636927a027e0270f0d" title="Must implement, normally this starts a background thread.">init</a>() throw() { start(); }
+<a name="l00060"></a>00060     ResultCode run() throw();
 <a name="l00061"></a>00061     
-<a name="l00062"></a>00062     static <span class="keywordtype">void</span>* <a class="code" href="class_object_memory_defer_free.html#ac3c2497b17f81c6cbd64ba79162ba7f8">staticAlloc</a> (<span class="keywordtype">void</span>* userData, <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> size);
-<a name="l00063"></a>00063     static <span class="keywordtype">void</span> <a class="code" href="class_object_memory_defer_free.html#a87190d40adca430cf1b9745f1a6b9325">staticFree</a> (<span class="keywordtype">void</span>* userData, <span class="keywordtype">void</span>* ptr);
+<a name="l00062"></a>00062     static <span class="keywordtype">void</span>* staticAlloc (<span class="keywordtype">void</span>* userData, PlankUL size);
+<a name="l00063"></a>00063     static <span class="keywordtype">void</span> staticFree (<span class="keywordtype">void</span>* userData, <span class="keywordtype">void</span>* ptr);
 <a name="l00064"></a>00064     
-<a name="l00065"></a>00065     <span class="keywordtype">void</span>* <a class="code" href="class_object_memory_defer_free.html#a1c6f9d4916fe14259f8378b53e7d3d3f">allocateBytes</a> (<a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> size);
-<a name="l00066"></a>00066     <span class="keywordtype">void</span> <a class="code" href="class_object_memory_defer_free.html#a11b2f2a69b4b9fdd63517070e0f9bad0">free</a> (<span class="keywordtype">void</span>* ptr);
+<a name="l00065"></a>00065     <span class="keywordtype">void</span>* allocateBytes (PlankUL size);
+<a name="l00066"></a>00066     <span class="keywordtype">void</span> free (<span class="keywordtype">void</span>* ptr);
 <a name="l00067"></a>00067 
 <a name="l00068"></a>00068 <span class="comment">//    void increaseQueueCache (const int count) throw();</span>
 <a name="l00069"></a>00069     
 <a name="l00070"></a>00070 private:
-<a name="l00071"></a>00071     <a class="code" href="class_lock_free_queue.html">LockFreeQueue</a>&lt;Element&gt;* queue;
+<a name="l00071"></a>00071     LockFreeQueue&lt;Element&gt;* queue;
 <a name="l00072"></a>00072     
 <a name="l00073"></a>00073     
 <a name="l00074"></a>00074 };
@@ -145,7 +145,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Properties</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -154,7 +154,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 5 2012 17:04:55 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 8 2014 12:26:49 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

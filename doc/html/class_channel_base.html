@@ -20,7 +20,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="pl-nk-logo-small.png"/></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">pl-nk</div>
+   <div id="projectname">pl-nk&#160;<span id="projectnumber">v0.4.5</span></div>
+   <div id="projectbrief">Plonk|Plink|Plank are a set of cross-platform C/C++ frameworks for audio software development</div>
   </td>
  </tr>
  </tbody>
@@ -29,8 +30,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -62,43 +63,20 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="header">
   <div class="summary">
-<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
-<a href="#pro-types">Protected Types</a>  </div>
+<a href="#pub-static-methods">Static Public Member Functions</a>  </div>
   <div class="headertitle">
 <div class="title">ChannelBase&lt; SampleType &gt; Class Template Reference</div>  </div>
 </div>
 <div class="contents">
-<!-- doxytag: class="ChannelBase" --><!-- doxytag: inherits="SmartPointerContainer&lt; ChannelInternalBase&lt; SampleType &gt; &gt;" -->
+<!-- doxytag: class="ChannelBase" --><!-- doxytag: inherits="SmartPointerContainer" -->
 <p>A single output signal.  
  <a href="class_channel_base.html#details">More...</a></p>
-<div class="dynheader">
-Inheritance diagram for ChannelBase&lt; SampleType &gt;:</div>
-<div class="dyncontent">
- <div class="center">
-  <img src="class_channel_base.png" usemap="#ChannelBase&lt; SampleType &gt;_map" alt=""/>
-  <map id="ChannelBase&lt; SampleType &gt;_map" name="ChannelBase&lt; SampleType &gt;_map">
-<area href="class_smart_pointer_container.html" alt="SmartPointerContainer&lt; ChannelInternalBase&lt; SampleType &gt; &gt;" shape="rect" coords="0,112,401,136"/>
-<area href="class_smart_pointer_container_base.html" alt="SmartPointerContainerBase&lt; ChannelInternalBase&lt; SampleType &gt; &gt;" shape="rect" coords="0,56,401,80"/>
-<area href="class_plonk_base.html" alt="PlonkBase" shape="rect" coords="0,0,401,24"/>
-</map>
- </div></div>
+
+<p>Inherits SmartPointerContainer&lt; SmartPointerType, enableWeak &gt;.</p>
 
 <p><a href="class_channel_base-members.html">List of all members.</a></p>
 <table class="memberdecls">
-<tr><td colspan="2"><h2><a name="pub-types"></a>
-Public Types</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_channel_internal_base.html">ChannelInternalBase</a><br class="typebreak"/>
-&lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_channel_base.html#a423ef691ba3afd8b0108c9b8c56dd4e3">Internal</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_smart_pointer_container.html">SmartPointerContainer</a><br class="typebreak"/>
-&lt; <a class="el" href="class_channel_internal_base.html">Internal</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_channel_base.html#a34996b539f4009e0c080fc75be637ebe">Base</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_weak_pointer_container.html">WeakPointerContainer</a><br class="typebreak"/>
-&lt; <a class="el" href="class_channel_base.html">ChannelBase</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_channel_base.html#a74ff7048c5bf1474b099637fd38bbbde">Weak</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a><br class="typebreak"/>
-&lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_channel_base.html#a6d087cc738687bab84ad387ba60c20e2">Buffer</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_input_dictionary.html">InputDictionary</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_channel_base.html#a0a813aa6639962ec02341ff7154c5b7a">Inputs</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_variable.html">Variable</a>&lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_channel_base.html#a11f0812b92ab17ee5233b163ba998702">VariableType</a></td></tr>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_channel_base.html#ab7eaf4e3fd5527c073278b4dbe4c0452">ChannelBase</a> ()  throw ()</td></tr>
@@ -116,56 +94,11 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class ValueType &gt; </td></tr>
 <tr><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_channel_base.html#a04602ede01be492e75ca5e9f6f0bd6a0">ChannelBase</a> (ValueType const &amp;valueInit)  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a channel that generates a constant.  <a href="#a04602ede01be492e75ca5e9f6f0bd6a0"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_channel_base.html#a8e1db907f77f6031c5c53646ca0887c6">isNull</a> () const   throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_channel_base.html#a3ed60efd2c54e401f751d8175b2ca832">isNotNull</a> () const   throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_channel_base.html#a15685e288cf8e1ce8989a8e54e9a1e15">isConstant</a> () const   throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_channel_base.html#adecc3f16c4027ef59fa0a5cee6bcafa2">isNotConstant</a> () const   throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_channel_base.html#a3e64368746d634490bdbda9051657ecc">isTypeConverter</a> () const   throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">const <a class="el" href="class_text.html">Text</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_channel_base.html#a675b10c306bb15820385822123de10c2">getName</a> () const   throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">const <a class="el" href="class_text.html">Text</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_channel_base.html#ae3f39bae0657634c279181b06d8443a7">getLabel</a> () const   throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_channel_base.html#a48d2923a8bc9d6b4efe8352f31653458">setLabel</a> (<a class="el" href="class_text.html">Text</a> const &amp;newId)  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">const <a class="el" href="class_text.html">Text</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_channel_base.html#a079da9c191fc61132b6911f4d848f9a6">getOutputTypeName</a> () const   throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">const <a class="el" href="class_text.html">Text</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_channel_base.html#a74f1d43e25c566be973b9e8b0fe11f75">getInputTypeName</a> () const   throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_channel_base.html#ad3de7039cffdc9c3b86019f2ed554bf2">getOutputTypeCode</a> () const   throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_channel_base.html#ac900b0a75df3f4c83d1c656545740d73">getInputTypeCode</a> () const   throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">const <a class="el" href="class_block_size.html">BlockSize</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_channel_base.html#a30918e0a1b89c35ed13011b734b539d9">getBlockSize</a> () const   throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_block_size.html">BlockSize</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_channel_base.html#a02122f227ca6903e4efd783cca46eff8">getBlockSize</a> ()  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_channel_base.html#a2288639c8e81dccadf64700e326e0186">setBlockSize</a> (<a class="el" href="class_block_size.html">BlockSize</a> const &amp;newBlockSize)  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">const <a class="el" href="class_sample_rate.html">SampleRate</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_channel_base.html#ab04adc2054ab366e516ef827ee415f37">getSampleRate</a> () const   throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_sample_rate.html">SampleRate</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_channel_base.html#a8ba3e3a029dc41719bae9aba569840ef">getSampleRate</a> ()  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_channel_base.html#aeed4398ae9f246586ced1c7f5613ad81">setSampleRate</a> (<a class="el" href="class_sample_rate.html">SampleRate</a> const &amp;newSampleRate)  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_channel_base.html#a81b9a245ed843bc9452495a7c337b277">getSampleDurationInTicks</a> () const   throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_channel_base.html#aec0e19a6be4c0fe6d89cf4075b7e5d63">getBlockDurationInTicks</a> () const   throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">const <a class="el" href="class_variable.html">DoubleVariable</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_channel_base.html#af8a9f915f875a16a98c18000593a3699">getOverlap</a> () const   throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_variable.html">DoubleVariable</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_channel_base.html#a5a969bbb28550c898758f04f093f876f">getOverlap</a> ()  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_channel_base.html#a6eb6bf7c482fcd2d65e4a3ee80e08bbc">setOverlap</a> (<a class="el" href="class_variable.html">DoubleVariable</a> const &amp;newOverlap)  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">const <a class="el" href="class_input_dictionary.html">Inputs</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_channel_base.html#ace77231c70691c1247c57f2702f0e9d7">getInputs</a> () const   throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_input_dictionary.html">Inputs</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_channel_base.html#a2522bba1d88036157ea354d6e8a5b0ba">getInputs</a> ()  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">const <a class="el" href="class_numerical_array.html">Buffer</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_channel_base.html#ab19ffa16e989077d1eb7d7ab5bf9e38c">getOutputBuffer</a> () const   throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_numerical_array.html">Buffer</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_channel_base.html#aec73b2ba68a97f0df03c86a5054e0c5d">getOutputBuffer</a> ()  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">const SampleType *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_channel_base.html#aa535c6c94db3858dc7c8f0d205946e63">getOutputSamples</a> () const   throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">SampleType *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_channel_base.html#af26b93f5d5cb7a85586c6802ecce4e71">getOutputSamples</a> ()  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_channel_base.html#abc2b39a0ea0f1425ccc4da256f98108b">setOutputBuffer</a> (<a class="el" href="class_numerical_array.html">Buffer</a> const &amp;externalBuffer)  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_channel_base.html#a4cb3af5acf6392800838b4a6c250e0c8">getNumChannels</a> () const   throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_channel_base.html#ac28aedb608797008cec817c4c454aa36">initValue</a> (SampleType const &amp;value)  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_channel_base.html#aabe8e0ee05f00cee85cee5ab5464fb0e">initChannel</a> (const int index)  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">const SampleType &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_channel_base.html#a3755b8dc86d2fc3513f9388ce2e17f16">getValue</a> () const   throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_channel_base.html">ChannelBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_channel_base.html#a6632bfb902f7cf61931eb18035c93868">getChannel</a> (const int index)  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_channel_base.html">ChannelBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_channel_base.html#a561f751d233ead555375117475d1a839">operator[]</a> (const int index)  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">const <a class="el" href="class_time_stamp.html">TimeStamp</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_channel_base.html#aaa244c3ac6a3714ec1346383cd690060">getNextTimeStamp</a> () const   throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_channel_base.html#a5136a964e5d4a60aee04b04e041bebb3">shouldBeDeletedNow</a> (<a class="el" href="class_time_stamp.html">TimeStamp</a> const &amp;time) const   throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_channel_base.html#a6ec7684a9994296def9b581674e0fa61">process</a> (<a class="el" href="class_process_info.html">ProcessInfo</a> &amp;info, const int channel)  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_channel_base.html#a53d9b13c460b5449f70435834a6f6ca0">getTypeCode</a> () const   throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_channel_base.html#a54bbf006332c4eb79aebd377eb05d1b1">getSampleTypeCode</a> () const   throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_channel_base.html#a9b2815328e92bb1947ca2e6c5da88bca">needsToProcess</a> (<a class="el" href="class_process_info.html">ProcessInfo</a> const &amp;info) const   throw ()</td></tr>
 <tr><td colspan="2"><h2><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_channel_base.html">ChannelBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_channel_base.html#a6696996610312a7c53805056ec79de50">fromWeak</a> (<a class="el" href="class_weak_pointer_container.html">Weak</a> const &amp;weak)  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a weakly linked copy of this object.  <a href="#a6696996610312a7c53805056ec79de50"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static const <a class="el" href="class_channel_base.html">ChannelBase</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_channel_base.html#ac7425a8ffd4ac897bf05b24a008f0d15">getNull</a> ()  throw ()</td></tr>
-<tr><td colspan="2"><h2><a name="pro-types"></a>
-Protected Types</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a><br class="typebreak"/>
-&lt; <a class="el" href="class_channel_base.html">ChannelBase</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_channel_base.html#a12faeeef00b1dbd883a3fba380acce07">UnitType</a></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><h3>template&lt;class SampleType&gt;<br/>
@@ -173,113 +106,7 @@ class ChannelBase&lt; SampleType &gt;</h3>
 
 <p>A single output signal. </p>
 <p>Channel objects may have multiple inputs but only one output. Multiple outputs are achieve by using arrays of Channel objects or a Unit object. True multiple input / multiple output Unit objects are achieved using a proxy system. </p>
-</div><hr/><h2>Member Typedef Documentation</h2>
-<a class="anchor" id="a12faeeef00b1dbd883a3fba380acce07"></a><!-- doxytag: member="ChannelBase::UnitType" ref="a12faeeef00b1dbd883a3fba380acce07" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt;<a class="el" href="class_channel_base.html">ChannelBase</a>&gt; <a class="el" href="class_channel_base.html">ChannelBase</a>&lt; SampleType &gt;::<a class="el" href="class_numerical_array.html">UnitType</a><code> [protected]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a423ef691ba3afd8b0108c9b8c56dd4e3"></a><!-- doxytag: member="ChannelBase::Internal" ref="a423ef691ba3afd8b0108c9b8c56dd4e3" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_channel_internal_base.html">ChannelInternalBase</a>&lt;SampleType&gt; <a class="el" href="class_channel_base.html">ChannelBase</a>&lt; SampleType &gt;::<a class="el" href="class_channel_internal_base.html">Internal</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a34996b539f4009e0c080fc75be637ebe"></a><!-- doxytag: member="ChannelBase::Base" ref="a34996b539f4009e0c080fc75be637ebe" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_smart_pointer_container.html">SmartPointerContainer</a>&lt;<a class="el" href="class_channel_internal_base.html">Internal</a>&gt; <a class="el" href="class_channel_base.html">ChannelBase</a>&lt; SampleType &gt;::<a class="el" href="class_smart_pointer_container.html">Base</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a74ff7048c5bf1474b099637fd38bbbde"></a><!-- doxytag: member="ChannelBase::Weak" ref="a74ff7048c5bf1474b099637fd38bbbde" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_weak_pointer_container.html">WeakPointerContainer</a>&lt;<a class="el" href="class_channel_base.html">ChannelBase</a>&gt; <a class="el" href="class_channel_base.html">ChannelBase</a>&lt; SampleType &gt;::<a class="el" href="class_weak_pointer_container.html">Weak</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a6d087cc738687bab84ad387ba60c20e2"></a><!-- doxytag: member="ChannelBase::Buffer" ref="a6d087cc738687bab84ad387ba60c20e2" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt;SampleType&gt; <a class="el" href="class_channel_base.html">ChannelBase</a>&lt; SampleType &gt;::<a class="el" href="class_numerical_array.html">Buffer</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a0a813aa6639962ec02341ff7154c5b7a"></a><!-- doxytag: member="ChannelBase::Inputs" ref="a0a813aa6639962ec02341ff7154c5b7a" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_input_dictionary.html">InputDictionary</a> <a class="el" href="class_channel_base.html">ChannelBase</a>&lt; SampleType &gt;::<a class="el" href="class_input_dictionary.html">Inputs</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a11f0812b92ab17ee5233b163ba998702"></a><!-- doxytag: member="ChannelBase::VariableType" ref="a11f0812b92ab17ee5233b163ba998702" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt;SampleType&gt; <a class="el" href="class_channel_base.html">ChannelBase</a>&lt; SampleType &gt;::<a class="el" href="class_variable.html">VariableType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<hr/><h2>Constructor &amp; Destructor Documentation</h2>
+</div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="ab7eaf4e3fd5527c073278b4dbe4c0452"></a><!-- doxytag: member="ChannelBase::ChannelBase" ref="ab7eaf4e3fd5527c073278b4dbe4c0452" args="()" -->
 <div class="memitem">
 <div class="memproto">
@@ -410,27 +237,6 @@ template&lt;class ValueType &gt; </div>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="ac591b46c587bf555ef73fcac2219d347"></a><!-- doxytag: member="ChannelBase::operator=" ref="ac591b46c587bf555ef73fcac2219d347" args="(ChannelBase const &amp;other)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_channel_base.html">ChannelBase</a>&amp; <a class="el" href="class_channel_base.html">ChannelBase</a>&lt; SampleType &gt;::operator= </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_channel_base.html">ChannelBase</a>&lt; SampleType &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>other</em></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Assignment operator. </p>
-
-</div>
-</div>
 <a class="anchor" id="a6696996610312a7c53805056ec79de50"></a><!-- doxytag: member="ChannelBase::fromWeak" ref="a6696996610312a7c53805056ec79de50" args="(Weak const &amp;weak)" -->
 <div class="memitem">
 <div class="memproto">
@@ -453,784 +259,44 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="ac7425a8ffd4ac897bf05b24a008f0d15"></a><!-- doxytag: member="ChannelBase::getNull" ref="ac7425a8ffd4ac897bf05b24a008f0d15" args="()" -->
+<a class="anchor" id="a9b2815328e92bb1947ca2e6c5da88bca"></a><!-- doxytag: member="ChannelBase::needsToProcess" ref="a9b2815328e92bb1947ca2e6c5da88bca" args="(ProcessInfo const &amp;info) const " -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">static const <a class="el" href="class_channel_base.html">ChannelBase</a>&amp; <a class="el" href="class_channel_base.html">ChannelBase</a>&lt; SampleType &gt;::getNull </td>
+          <td class="memname">bool <a class="el" href="class_channel_base.html">ChannelBase</a>&lt; SampleType &gt;::needsToProcess </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a8e1db907f77f6031c5c53646ca0887c6"></a><!-- doxytag: member="ChannelBase::isNull" ref="a8e1db907f77f6031c5c53646ca0887c6" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">bool <a class="el" href="class_channel_base.html">ChannelBase</a>&lt; SampleType &gt;::isNull </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype"><a class="el" href="class_process_info.html">ProcessInfo</a> const &amp;&#160;</td>
+          <td class="paramname"><em>info</em></td><td>)</td>
           <td> const  throw ()<code> [inline]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="class_smart_pointer_container_base.html#aac32791ba8b99b3192c00d9a8f8c8230">SmartPointerContainerBase&lt; ChannelInternalBase&lt; SampleType &gt; &gt;</a>.</p>
+<p>Returns <code>true</code> if this unit needs to process for the given timestamp. </p>
 
 </div>
 </div>
-<a class="anchor" id="a3ed60efd2c54e401f751d8175b2ca832"></a><!-- doxytag: member="ChannelBase::isNotNull" ref="a3ed60efd2c54e401f751d8175b2ca832" args="() const " -->
+<a class="anchor" id="ac591b46c587bf555ef73fcac2219d347"></a><!-- doxytag: member="ChannelBase::operator=" ref="ac591b46c587bf555ef73fcac2219d347" args="(ChannelBase const &amp;other)" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">bool <a class="el" href="class_channel_base.html">ChannelBase</a>&lt; SampleType &gt;::isNotNull </td>
+          <td class="memname"><a class="el" href="class_channel_base.html">ChannelBase</a>&amp; <a class="el" href="class_channel_base.html">ChannelBase</a>&lt; SampleType &gt;::operator= </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="class_smart_pointer_container_base.html#a9255ebf1edd50a68f0e13fb44bb64b96">SmartPointerContainerBase&lt; ChannelInternalBase&lt; SampleType &gt; &gt;</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a15685e288cf8e1ce8989a8e54e9a1e15"></a><!-- doxytag: member="ChannelBase::isConstant" ref="a15685e288cf8e1ce8989a8e54e9a1e15" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">bool <a class="el" href="class_channel_base.html">ChannelBase</a>&lt; SampleType &gt;::isConstant </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="adecc3f16c4027ef59fa0a5cee6bcafa2"></a><!-- doxytag: member="ChannelBase::isNotConstant" ref="adecc3f16c4027ef59fa0a5cee6bcafa2" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">bool <a class="el" href="class_channel_base.html">ChannelBase</a>&lt; SampleType &gt;::isNotConstant </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a3e64368746d634490bdbda9051657ecc"></a><!-- doxytag: member="ChannelBase::isTypeConverter" ref="a3e64368746d634490bdbda9051657ecc" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">bool <a class="el" href="class_channel_base.html">ChannelBase</a>&lt; SampleType &gt;::isTypeConverter </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a675b10c306bb15820385822123de10c2"></a><!-- doxytag: member="ChannelBase::getName" ref="a675b10c306bb15820385822123de10c2" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">const <a class="el" href="class_text.html">Text</a> <a class="el" href="class_channel_base.html">ChannelBase</a>&lt; SampleType &gt;::getName </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ae3f39bae0657634c279181b06d8443a7"></a><!-- doxytag: member="ChannelBase::getLabel" ref="ae3f39bae0657634c279181b06d8443a7" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">const <a class="el" href="class_text.html">Text</a> <a class="el" href="class_channel_base.html">ChannelBase</a>&lt; SampleType &gt;::getLabel </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a48d2923a8bc9d6b4efe8352f31653458"></a><!-- doxytag: member="ChannelBase::setLabel" ref="a48d2923a8bc9d6b4efe8352f31653458" args="(Text const &amp;newId)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="class_channel_base.html">ChannelBase</a>&lt; SampleType &gt;::setLabel </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_text.html">Text</a> const &amp;&#160;</td>
-          <td class="paramname"><em>newId</em></td><td>)</td>
+          <td class="paramtype"><a class="el" href="class_channel_base.html">ChannelBase</a>&lt; SampleType &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
           <td>  throw ()<code> [inline]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-</div>
-</div>
-<a class="anchor" id="a079da9c191fc61132b6911f4d848f9a6"></a><!-- doxytag: member="ChannelBase::getOutputTypeName" ref="a079da9c191fc61132b6911f4d848f9a6" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">const <a class="el" href="class_text.html">Text</a> <a class="el" href="class_channel_base.html">ChannelBase</a>&lt; SampleType &gt;::getOutputTypeName </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a74f1d43e25c566be973b9e8b0fe11f75"></a><!-- doxytag: member="ChannelBase::getInputTypeName" ref="a74f1d43e25c566be973b9e8b0fe11f75" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">const <a class="el" href="class_text.html">Text</a> <a class="el" href="class_channel_base.html">ChannelBase</a>&lt; SampleType &gt;::getInputTypeName </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ad3de7039cffdc9c3b86019f2ed554bf2"></a><!-- doxytag: member="ChannelBase::getOutputTypeCode" ref="ad3de7039cffdc9c3b86019f2ed554bf2" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">int <a class="el" href="class_channel_base.html">ChannelBase</a>&lt; SampleType &gt;::getOutputTypeCode </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ac900b0a75df3f4c83d1c656545740d73"></a><!-- doxytag: member="ChannelBase::getInputTypeCode" ref="ac900b0a75df3f4c83d1c656545740d73" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">int <a class="el" href="class_channel_base.html">ChannelBase</a>&lt; SampleType &gt;::getInputTypeCode </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a30918e0a1b89c35ed13011b734b539d9"></a><!-- doxytag: member="ChannelBase::getBlockSize" ref="a30918e0a1b89c35ed13011b734b539d9" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">const <a class="el" href="class_block_size.html">BlockSize</a>&amp; <a class="el" href="class_channel_base.html">ChannelBase</a>&lt; SampleType &gt;::getBlockSize </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a02122f227ca6903e4efd783cca46eff8"></a><!-- doxytag: member="ChannelBase::getBlockSize" ref="a02122f227ca6903e4efd783cca46eff8" args="()" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_block_size.html">BlockSize</a>&amp; <a class="el" href="class_channel_base.html">ChannelBase</a>&lt; SampleType &gt;::getBlockSize </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a2288639c8e81dccadf64700e326e0186"></a><!-- doxytag: member="ChannelBase::setBlockSize" ref="a2288639c8e81dccadf64700e326e0186" args="(BlockSize const &amp;newBlockSize)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="class_channel_base.html">ChannelBase</a>&lt; SampleType &gt;::setBlockSize </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_block_size.html">BlockSize</a> const &amp;&#160;</td>
-          <td class="paramname"><em>newBlockSize</em></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ab04adc2054ab366e516ef827ee415f37"></a><!-- doxytag: member="ChannelBase::getSampleRate" ref="ab04adc2054ab366e516ef827ee415f37" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">const <a class="el" href="class_sample_rate.html">SampleRate</a>&amp; <a class="el" href="class_channel_base.html">ChannelBase</a>&lt; SampleType &gt;::getSampleRate </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a8ba3e3a029dc41719bae9aba569840ef"></a><!-- doxytag: member="ChannelBase::getSampleRate" ref="a8ba3e3a029dc41719bae9aba569840ef" args="()" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_sample_rate.html">SampleRate</a>&amp; <a class="el" href="class_channel_base.html">ChannelBase</a>&lt; SampleType &gt;::getSampleRate </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="aeed4398ae9f246586ced1c7f5613ad81"></a><!-- doxytag: member="ChannelBase::setSampleRate" ref="aeed4398ae9f246586ced1c7f5613ad81" args="(SampleRate const &amp;newSampleRate)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="class_channel_base.html">ChannelBase</a>&lt; SampleType &gt;::setSampleRate </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_sample_rate.html">SampleRate</a> const &amp;&#160;</td>
-          <td class="paramname"><em>newSampleRate</em></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a81b9a245ed843bc9452495a7c337b277"></a><!-- doxytag: member="ChannelBase::getSampleDurationInTicks" ref="a81b9a245ed843bc9452495a7c337b277" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">double <a class="el" href="class_channel_base.html">ChannelBase</a>&lt; SampleType &gt;::getSampleDurationInTicks </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="aec0e19a6be4c0fe6d89cf4075b7e5d63"></a><!-- doxytag: member="ChannelBase::getBlockDurationInTicks" ref="aec0e19a6be4c0fe6d89cf4075b7e5d63" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">double <a class="el" href="class_channel_base.html">ChannelBase</a>&lt; SampleType &gt;::getBlockDurationInTicks </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="af8a9f915f875a16a98c18000593a3699"></a><!-- doxytag: member="ChannelBase::getOverlap" ref="af8a9f915f875a16a98c18000593a3699" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">const <a class="el" href="class_variable.html">DoubleVariable</a>&amp; <a class="el" href="class_channel_base.html">ChannelBase</a>&lt; SampleType &gt;::getOverlap </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a5a969bbb28550c898758f04f093f876f"></a><!-- doxytag: member="ChannelBase::getOverlap" ref="a5a969bbb28550c898758f04f093f876f" args="()" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_variable.html">DoubleVariable</a>&amp; <a class="el" href="class_channel_base.html">ChannelBase</a>&lt; SampleType &gt;::getOverlap </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a6eb6bf7c482fcd2d65e4a3ee80e08bbc"></a><!-- doxytag: member="ChannelBase::setOverlap" ref="a6eb6bf7c482fcd2d65e4a3ee80e08bbc" args="(DoubleVariable const &amp;newOverlap)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="class_channel_base.html">ChannelBase</a>&lt; SampleType &gt;::setOverlap </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_variable.html">DoubleVariable</a> const &amp;&#160;</td>
-          <td class="paramname"><em>newOverlap</em></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ace77231c70691c1247c57f2702f0e9d7"></a><!-- doxytag: member="ChannelBase::getInputs" ref="ace77231c70691c1247c57f2702f0e9d7" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">const <a class="el" href="class_input_dictionary.html">Inputs</a>&amp; <a class="el" href="class_channel_base.html">ChannelBase</a>&lt; SampleType &gt;::getInputs </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a2522bba1d88036157ea354d6e8a5b0ba"></a><!-- doxytag: member="ChannelBase::getInputs" ref="a2522bba1d88036157ea354d6e8a5b0ba" args="()" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_input_dictionary.html">Inputs</a> <a class="el" href="class_channel_base.html">ChannelBase</a>&lt; SampleType &gt;::getInputs </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ab19ffa16e989077d1eb7d7ab5bf9e38c"></a><!-- doxytag: member="ChannelBase::getOutputBuffer" ref="ab19ffa16e989077d1eb7d7ab5bf9e38c" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">const <a class="el" href="class_numerical_array.html">Buffer</a>&amp; <a class="el" href="class_channel_base.html">ChannelBase</a>&lt; SampleType &gt;::getOutputBuffer </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="aec73b2ba68a97f0df03c86a5054e0c5d"></a><!-- doxytag: member="ChannelBase::getOutputBuffer" ref="aec73b2ba68a97f0df03c86a5054e0c5d" args="()" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_numerical_array.html">Buffer</a>&amp; <a class="el" href="class_channel_base.html">ChannelBase</a>&lt; SampleType &gt;::getOutputBuffer </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="aa535c6c94db3858dc7c8f0d205946e63"></a><!-- doxytag: member="ChannelBase::getOutputSamples" ref="aa535c6c94db3858dc7c8f0d205946e63" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">const SampleType* <a class="el" href="class_channel_base.html">ChannelBase</a>&lt; SampleType &gt;::getOutputSamples </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="af26b93f5d5cb7a85586c6802ecce4e71"></a><!-- doxytag: member="ChannelBase::getOutputSamples" ref="af26b93f5d5cb7a85586c6802ecce4e71" args="()" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">SampleType* <a class="el" href="class_channel_base.html">ChannelBase</a>&lt; SampleType &gt;::getOutputSamples </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="abc2b39a0ea0f1425ccc4da256f98108b"></a><!-- doxytag: member="ChannelBase::setOutputBuffer" ref="abc2b39a0ea0f1425ccc4da256f98108b" args="(Buffer const &amp;externalBuffer)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="class_channel_base.html">ChannelBase</a>&lt; SampleType &gt;::setOutputBuffer </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_numerical_array.html">Buffer</a> const &amp;&#160;</td>
-          <td class="paramname"><em>externalBuffer</em></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a4cb3af5acf6392800838b4a6c250e0c8"></a><!-- doxytag: member="ChannelBase::getNumChannels" ref="a4cb3af5acf6392800838b4a6c250e0c8" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">int <a class="el" href="class_channel_base.html">ChannelBase</a>&lt; SampleType &gt;::getNumChannels </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ac28aedb608797008cec817c4c454aa36"></a><!-- doxytag: member="ChannelBase::initValue" ref="ac28aedb608797008cec817c4c454aa36" args="(SampleType const &amp;value)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="class_channel_base.html">ChannelBase</a>&lt; SampleType &gt;::initValue </td>
-          <td>(</td>
-          <td class="paramtype">SampleType const &amp;&#160;</td>
-          <td class="paramname"><em>value</em></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="aabe8e0ee05f00cee85cee5ab5464fb0e"></a><!-- doxytag: member="ChannelBase::initChannel" ref="aabe8e0ee05f00cee85cee5ab5464fb0e" args="(const int index)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="class_channel_base.html">ChannelBase</a>&lt; SampleType &gt;::initChannel </td>
-          <td>(</td>
-          <td class="paramtype">const int&#160;</td>
-          <td class="paramname"><em>index</em></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a3755b8dc86d2fc3513f9388ce2e17f16"></a><!-- doxytag: member="ChannelBase::getValue" ref="a3755b8dc86d2fc3513f9388ce2e17f16" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">const SampleType&amp; <a class="el" href="class_channel_base.html">ChannelBase</a>&lt; SampleType &gt;::getValue </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a6632bfb902f7cf61931eb18035c93868"></a><!-- doxytag: member="ChannelBase::getChannel" ref="a6632bfb902f7cf61931eb18035c93868" args="(const int index)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_channel_base.html">ChannelBase</a> <a class="el" href="class_channel_base.html">ChannelBase</a>&lt; SampleType &gt;::getChannel </td>
-          <td>(</td>
-          <td class="paramtype">const int&#160;</td>
-          <td class="paramname"><em>index</em></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a561f751d233ead555375117475d1a839"></a><!-- doxytag: member="ChannelBase::operator[]" ref="a561f751d233ead555375117475d1a839" args="(const int index)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_channel_base.html">ChannelBase</a> <a class="el" href="class_channel_base.html">ChannelBase</a>&lt; SampleType &gt;::operator[] </td>
-          <td>(</td>
-          <td class="paramtype">const int&#160;</td>
-          <td class="paramname"><em>index</em></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="aaa244c3ac6a3714ec1346383cd690060"></a><!-- doxytag: member="ChannelBase::getNextTimeStamp" ref="aaa244c3ac6a3714ec1346383cd690060" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">const <a class="el" href="class_time_stamp.html">TimeStamp</a> <a class="el" href="class_channel_base.html">ChannelBase</a>&lt; SampleType &gt;::getNextTimeStamp </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a5136a964e5d4a60aee04b04e041bebb3"></a><!-- doxytag: member="ChannelBase::shouldBeDeletedNow" ref="a5136a964e5d4a60aee04b04e041bebb3" args="(TimeStamp const &amp;time) const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">bool <a class="el" href="class_channel_base.html">ChannelBase</a>&lt; SampleType &gt;::shouldBeDeletedNow </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_time_stamp.html">TimeStamp</a> const &amp;&#160;</td>
-          <td class="paramname"><em>time</em></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a6ec7684a9994296def9b581674e0fa61"></a><!-- doxytag: member="ChannelBase::process" ref="a6ec7684a9994296def9b581674e0fa61" args="(ProcessInfo &amp;info, const int channel)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="class_channel_base.html">ChannelBase</a>&lt; SampleType &gt;::process </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_process_info.html">ProcessInfo</a> &amp;&#160;</td>
-          <td class="paramname"><em>info</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const int&#160;</td>
-          <td class="paramname"><em>channel</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a53d9b13c460b5449f70435834a6f6ca0"></a><!-- doxytag: member="ChannelBase::getTypeCode" ref="a53d9b13c460b5449f70435834a6f6ca0" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">int <a class="el" href="class_channel_base.html">ChannelBase</a>&lt; SampleType &gt;::getTypeCode </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a54bbf006332c4eb79aebd377eb05d1b1"></a><!-- doxytag: member="ChannelBase::getSampleTypeCode" ref="a54bbf006332c4eb79aebd377eb05d1b1" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">int <a class="el" href="class_channel_base.html">ChannelBase</a>&lt; SampleType &gt;::getSampleTypeCode </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
+<p>Assignment operator. </p>
 
 </div>
 </div>
@@ -1243,7 +309,7 @@ template&lt;class SampleType &gt; </div>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Properties</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -1252,7 +318,7 @@ template&lt;class SampleType &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 5 2012 17:05:00 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 8 2014 12:26:52 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

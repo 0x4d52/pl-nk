@@ -20,7 +20,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="pl-nk-logo-small.png"/></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">pl-nk</div>
+   <div id="projectname">pl-nk&#160;<span id="projectnumber">v0.4.5</span></div>
+   <div id="projectbrief">Plonk|Plink|Plank are a set of cross-platform C/C++ frameworks for audio software development</div>
   </td>
  </tr>
  </tbody>
@@ -29,8 +30,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -54,7 +55,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
       <li><a href="files.html"><span>File&#160;List</span></a></li>
-      <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
 <div class="header">
@@ -62,14 +62,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">plonk_BlockSize.h</div>  </div>
 </div>
 <div class="contents">
-<a href="plonk___block_size_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*</span>
+<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*</span>
 <a name="l00002"></a>00002 <span class="comment"> -------------------------------------------------------------------------------</span>
 <a name="l00003"></a>00003 <span class="comment"> This file is part of the Plink, Plonk, Plank libraries</span>
 <a name="l00004"></a>00004 <span class="comment">  by Martin Robinson</span>
 <a name="l00005"></a>00005 <span class="comment"> </span>
 <a name="l00006"></a>00006 <span class="comment"> http://code.google.com/p/pl-nk/</span>
 <a name="l00007"></a>00007 <span class="comment"> </span>
-<a name="l00008"></a>00008 <span class="comment"> Copyright University of the West of England, Bristol 2011-12</span>
+<a name="l00008"></a>00008 <span class="comment"> Copyright University of the West of England, Bristol 2011-14</span>
 <a name="l00009"></a>00009 <span class="comment"> All rights reserved.</span>
 <a name="l00010"></a>00010 <span class="comment"> </span>
 <a name="l00011"></a>00011 <span class="comment"> Redistribution and use in source and binary forms, with or without</span>
@@ -108,32 +108,32 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00044"></a>00044 <span class="preprocessor">#include &quot;../../core/plonk_Receiver.h&quot;</span>
 <a name="l00045"></a>00045 <span class="preprocessor">#include &quot;../../maths/plonk_InlineCommonOps.h&quot;</span>
 <a name="l00046"></a>00046 
-<a name="l00047"></a>00047 <span class="keyword">class </span><a class="code" href="class_block_size_default.html">BlockSizeDefault</a>;
-<a name="l00048"></a>00048 <span class="keyword">class </span><a class="code" href="class_block_size_no_preference.html">BlockSizeNoPreference</a>;
+<a name="l00047"></a>00047 <span class="keyword">class </span>BlockSizeDefault;
+<a name="l00048"></a>00048 <span class="keyword">class </span>BlockSizeNoPreference;
 <a name="l00049"></a>00049 
-<a name="l00063"></a><a class="code" href="class_block_size.html">00063</a> <span class="keyword">class </span><a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a> : <span class="keyword">public</span> <a class="code" href="class_variable.html" title="A template class for storing any variable type.">IntVariable</a>
+<a name="l00063"></a><a class="code" href="class_block_size.html">00063</a> <span class="keyword">class </span><a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a> : <span class="keyword">public</span> <a class="code" href="class_variable.html">IntVariable</a>
 <a name="l00064"></a>00064 {
 <a name="l00065"></a>00065 <span class="keyword">public</span>:
-<a name="l00066"></a><a class="code" href="class_block_size.html#a4040584c77fe568474f4d8cfd0486dd8">00066</a>     <span class="keyword">typedef</span> <a class="code" href="class_variable_internal.html">VariableInternal&lt;int&gt;</a>           <a class="code" href="class_block_size.html#a4040584c77fe568474f4d8cfd0486dd8">Internal</a>;
-<a name="l00067"></a><a class="code" href="class_block_size.html#a9a8590ac83812328fbd25ab0a0b0a6a0">00067</a>     <span class="keyword">typedef</span> <a class="code" href="class_variable.html" title="A template class for storing any variable type.">IntVariable</a>                     <a class="code" href="class_block_size.html#a9a8590ac83812328fbd25ab0a0b0a6a0">Base</a>;    
-<a name="l00068"></a><a class="code" href="class_block_size.html#abc106659fc8fa174e2d80df9caa1d6ae">00068</a>     <span class="keyword">typedef</span> <a class="code" href="class_weak_pointer_container.html" title="This stores a weak reference using a WeakPointer.">WeakPointerContainer&lt;BlockSize&gt;</a> <a class="code" href="class_block_size.html#abc106659fc8fa174e2d80df9caa1d6ae">Weak</a>;
+<a name="l00066"></a>00066     <span class="keyword">typedef</span> VariableInternal&lt;int&gt;           Internal;
+<a name="l00067"></a>00067     <span class="keyword">typedef</span> <a class="code" href="class_variable.html">IntVariable</a>                     Base;    
+<a name="l00068"></a>00068     <span class="keyword">typedef</span> <a class="code" href="class_weak_pointer_container.html" title="This stores a weak reference using a WeakPointer.">WeakPointerContainer&lt;BlockSize&gt;</a> <a class="code" href="class_weak_pointer_container.html" title="This stores a weak reference using a WeakPointer.">Weak</a>;
 <a name="l00069"></a>00069     
-<a name="l00070"></a>00070     <a class="code" href="class_block_size.html#a9382fb3b82ae5150202f22c196720651">BlockSize</a>() throw();
+<a name="l00070"></a>00070     <a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a>() <span class="keywordflow">throw</span>();
 <a name="l00071"></a>00071     
-<a name="l00073"></a>00073     <a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a> (<a class="code" href="class_sample_rate.html" title="A specialised Variable&lt;double&gt; for handling sample rates.">SampleRate</a> const&amp; sampleRate) throw();
+<a name="l00073"></a>00073     <a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a> (<a class="code" href="class_sample_rate.html" title="A specialised Variable&lt;double&gt; for handling sample rates.">SampleRate</a> <span class="keyword">const</span>&amp; sampleRate) <span class="keywordflow">throw</span>();
 <a name="l00074"></a>00074     
-<a name="l00076"></a>00076     <a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a> (const <span class="keywordtype">int</span> initValue) throw();
+<a name="l00076"></a>00076     <a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a> (<span class="keyword">const</span> <span class="keywordtype">int</span> initValue) <span class="keywordflow">throw</span>();
 <a name="l00077"></a>00077     
-<a name="l00079"></a>00079     <a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a> (<a class="code" href="class_variable.html" title="A template class for storing any variable type.">IntVariable</a> const&amp; initValue) throw();
+<a name="l00079"></a>00079     <a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a> (<a class="code" href="class_variable.html">IntVariable</a> <span class="keyword">const</span>&amp; initValue) <span class="keywordflow">throw</span>();
 <a name="l00080"></a>00080     
-<a name="l00082"></a>00082     <a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a> (<a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a> const&amp; copy) throw();
+<a name="l00082"></a>00082     <a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a> (<a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a> <span class="keyword">const</span>&amp; copy) <span class="keywordflow">throw</span>();
 <a name="l00083"></a>00083     
-<a name="l00084"></a>00084     <a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a> (<a class="code" href="class_block_size_default.html">BlockSizeDefault</a> const&amp; copy) throw();
-<a name="l00085"></a>00085     <a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a> (<a class="code" href="class_block_size_no_preference.html">BlockSizeNoPreference</a> const&amp; copy) throw();
+<a name="l00084"></a>00084     <a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a> (BlockSizeDefault <span class="keyword">const</span>&amp; copy) <span class="keywordflow">throw</span>();
+<a name="l00085"></a>00085     <a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a> (BlockSizeNoPreference <span class="keyword">const</span>&amp; copy) <span class="keywordflow">throw</span>();
 <a name="l00086"></a>00086         
-<a name="l00091"></a>00091     template&lt;class OtherType&gt;
-<a name="l00092"></a><a class="code" href="class_block_size.html#a38a8b440dbc0e857af8b3ec993ccc7e6">00092</a>     <a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a> (OtherType const&amp; initValue) throw()
-<a name="l00093"></a>00093     :   <a class="code" href="class_sender_container.html">Base</a> (initValue)
+<a name="l00091"></a>00091     <span class="keyword">template</span>&lt;<span class="keyword">class</span> OtherType&gt;
+<a name="l00092"></a><a class="code" href="class_block_size.html#a38a8b440dbc0e857af8b3ec993ccc7e6">00092</a>     <a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a> (OtherType <span class="keyword">const</span>&amp; initValue) <span class="keywordflow">throw</span>()
+<a name="l00093"></a>00093     :   Base (initValue)
 <a name="l00094"></a>00094     {
 <a name="l00095"></a>00095     }
 <a name="l00096"></a>00096     
@@ -141,13 +141,13 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00105"></a>00105     
 <a name="l00108"></a>00108     static <a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a>&amp; <a class="code" href="class_block_size.html#a0b63924e21af360f0e44fdaccb56c14d" title="Gets the default control rate block size.">getControlRateBlockSize</a>() throw();
 <a name="l00109"></a>00109     
-<a name="l00112"></a>00112     static const <a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a> <a class="code" href="class_block_size.html#a692b89b56a9004c70c1aeaf8f6cb1d09" title="Create a block size that is a fraction of the default block size.">getFractionOfDefault</a> (<a class="code" href="class_variable.html" title="A template class for storing any variable type.">IntVariable</a> const&amp; divisor) throw();
+<a name="l00112"></a>00112     static const <a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a> <a class="code" href="class_block_size.html#a692b89b56a9004c70c1aeaf8f6cb1d09" title="Create a block size that is a fraction of the default block size.">getFractionOfDefault</a> (<a class="code" href="class_variable.html">IntVariable</a> const&amp; divisor) throw();
 <a name="l00113"></a>00113     
-<a name="l00116"></a>00116     static const <a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a> <a class="code" href="class_block_size.html#a5130faee8cc5b8862d39ecfecca4c16c" title="Create a block size that is a multiple of the default block size.">getMultipleOfDefault</a> (<a class="code" href="class_variable.html" title="A template class for storing any variable type.">IntVariable</a> const&amp; factor) throw();    
-<a name="l00117"></a><a class="code" href="class_block_size.html#a78aaaf5a6aacd02ecaaf51af8c25f2fe">00117</a>     inline static const <a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a> <a class="code" href="class_block_size.html#a5130faee8cc5b8862d39ecfecca4c16c" title="Create a block size that is a multiple of the default block size.">getMultipleOfDefault</a> (const <span class="keywordtype">int</span> factor) throw() { <span class="keywordflow">return</span> <a class="code" href="class_block_size.html#a78aaaf5a6aacd02ecaaf51af8c25f2fe">getMultipleOfDefault</a> (<a class="code" href="class_variable.html" title="A template class for storing any variable type.">IntVariable</a> (factor)); }
+<a name="l00116"></a>00116     static const <a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a> <a class="code" href="class_block_size.html#a5130faee8cc5b8862d39ecfecca4c16c" title="Create a block size that is a multiple of the default block size.">getMultipleOfDefault</a> (<a class="code" href="class_variable.html">IntVariable</a> const&amp; factor) throw();    
+<a name="l00117"></a>00117     inline static const <a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a> <a class="code" href="class_block_size.html#a5130faee8cc5b8862d39ecfecca4c16c" title="Create a block size that is a multiple of the default block size.">getMultipleOfDefault</a> (const <span class="keywordtype">int</span> factor) throw() { <span class="keywordflow">return</span> <a class="code" href="class_block_size.html#a5130faee8cc5b8862d39ecfecca4c16c" title="Create a block size that is a multiple of the default block size.">getMultipleOfDefault</a> (<a class="code" href="class_variable.html">IntVariable</a> (factor)); }
 <a name="l00118"></a>00118    
 <a name="l00119"></a>00119     <span class="keyword">static</span> <span class="keyword">const</span> <a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a> <a class="code" href="class_block_size.html#a5130faee8cc5b8862d39ecfecca4c16c" title="Create a block size that is a multiple of the default block size.">getMultipleOfDefault</a> (<a class="code" href="class_variable.html">DoubleVariable</a> <span class="keyword">const</span>&amp; factor) <span class="keywordflow">throw</span>();    
-<a name="l00120"></a><a class="code" href="class_block_size.html#a4677711209117060b10dfb120c18d410">00120</a>     <span class="keyword">inline</span> <span class="keyword">static</span> <span class="keyword">const</span> <a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a> <a class="code" href="class_block_size.html#a4677711209117060b10dfb120c18d410">getMultipleOfDefault</a> (<span class="keyword">const</span> <span class="keywordtype">double</span> factor) <span class="keywordflow">throw</span>() { <span class="keywordflow">return</span> <a class="code" href="class_block_size.html#a4677711209117060b10dfb120c18d410">getMultipleOfDefault</a> (<a class="code" href="class_variable.html">DoubleVariable</a> (factor)); }
+<a name="l00120"></a>00120     <span class="keyword">inline</span> <span class="keyword">static</span> <span class="keyword">const</span> <a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a> <a class="code" href="class_block_size.html#a5130faee8cc5b8862d39ecfecca4c16c" title="Create a block size that is a multiple of the default block size.">getMultipleOfDefault</a> (<span class="keyword">const</span> <span class="keywordtype">double</span> factor) <span class="keywordflow">throw</span>() { <span class="keywordflow">return</span> <a class="code" href="class_block_size.html#a5130faee8cc5b8862d39ecfecca4c16c" title="Create a block size that is a multiple of the default block size.">getMultipleOfDefault</a> (<a class="code" href="class_variable.html">DoubleVariable</a> (factor)); }
 <a name="l00121"></a>00121 
 <a name="l00122"></a>00122     
 <a name="l00126"></a>00126     <span class="keyword">static</span> <span class="keyword">const</span> <a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a>&amp; <a class="code" href="class_block_size.html#aa6ada18e533ad70d58aae4e0549fab84" title="A dummy block size used to indicate no preference.">noPreference</a>() throw();
@@ -157,28 +157,28 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00137"></a>00137     static <a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a> <a class="code" href="class_block_size.html#afcc989dcc540a3d62f67d939f16c6457" title="Select a block size based on a unit&#39;s preference and its inputs.">decide</a> (<a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a> const&amp; inputBlockSize, 
 <a name="l00138"></a>00138                              <a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a> const&amp; preferredBlockSize) throw();
 <a name="l00139"></a>00139     
-<a name="l00140"></a><a class="code" href="class_block_size.html#a1df8868d2a850ee865b206a72175f0eb">00140</a>     <a class="code" href="plonk___smart_pointer_container_8h.html#a0544c934438d4bc87b159fc1675a69fd">PLONK_OBJECTARROWOPERATOR</a>(<a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a>);
+<a name="l00140"></a>00140     PLONK_OBJECTARROWOPERATOR(<a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a>);
 <a name="l00141"></a>00141 
 <a name="l00142"></a>00142 private:
 <a name="l00143"></a>00143     static const BlockSize <a class="code" href="class_block_size.html#a5130faee8cc5b8862d39ecfecca4c16c" title="Create a block size that is a multiple of the default block size.">getMultipleOfDefault</a> (<a class="code" href="class_sample_rate.html" title="A specialised Variable&lt;double&gt; for handling sample rates.">SampleRate</a> const&amp; factor) throw();    
 <a name="l00144"></a>00144 };
 <a name="l00145"></a>00145 
-<a name="l00146"></a><a class="code" href="plonk___block_size_8h.html#af6a3c25e69d5ee74664deec2b5d2e859">00146</a> typedef <a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">NumericalArray</a>&lt;BlockSize&gt; <a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">BlockSizes</a>;
+<a name="l00146"></a>00146 typedef <a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">NumericalArray</a>&lt;BlockSize&gt; <a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">BlockSizes</a>;
 <a name="l00147"></a>00147 
 <a name="l00148"></a>00148 <span class="comment">//------------------------------------------------------------------------------</span>
 <a name="l00149"></a>00149 
-<a name="l00150"></a><a class="code" href="class_block_size_default.html">00150</a> class <a class="code" href="class_block_size_default.html">BlockSizeDefault</a> : public BlockSize
+<a name="l00150"></a>00150 class BlockSizeDefault : public BlockSize
 <a name="l00151"></a>00151 {
 <a name="l00152"></a>00152 <span class="keyword">public</span>:
-<a name="l00153"></a><a class="code" href="class_block_size_default.html#ac395142659bc9db8f6773e6018caa07b">00153</a>     <span class="keyword">inline</span> <a class="code" href="class_block_size_default.html#ac395142659bc9db8f6773e6018caa07b">BlockSizeDefault</a>() : BlockSize (BlockSize::<a class="code" href="class_block_size.html#ac022f97ed4f42a64936fdc0f3479c1cb" title="Gets the default block size.">getDefault</a>()) { }
+<a name="l00153"></a>00153     <span class="keyword">inline</span> BlockSizeDefault() : BlockSize (BlockSize::<a class="code" href="class_block_size.html#ac022f97ed4f42a64936fdc0f3479c1cb" title="Gets the default block size.">getDefault</a>()) { }
 <a name="l00154"></a>00154 };
 <a name="l00155"></a>00155 
 <a name="l00156"></a>00156 <span class="comment">//------------------------------------------------------------------------------</span>
 <a name="l00157"></a>00157 
-<a name="l00158"></a><a class="code" href="class_block_size_no_preference.html">00158</a> <span class="keyword">class </span><a class="code" href="class_block_size_no_preference.html">BlockSizeNoPreference</a> : <span class="keyword">public</span> <a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a>
+<a name="l00158"></a>00158 <span class="keyword">class </span>BlockSizeNoPreference : <span class="keyword">public</span> <a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a>
 <a name="l00159"></a>00159 {
 <a name="l00160"></a>00160 <span class="keyword">public</span>:
-<a name="l00161"></a><a class="code" href="class_block_size_no_preference.html#a426fa25458bcddc0cb4d965f8c8ea860">00161</a>     <span class="keyword">inline</span> <a class="code" href="class_block_size_no_preference.html#a426fa25458bcddc0cb4d965f8c8ea860">BlockSizeNoPreference</a>() : <a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a> (<a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a>::<a class="code" href="class_block_size.html#ac022f97ed4f42a64936fdc0f3479c1cb" title="Gets the default block size.">getDefault</a>()) { }
+<a name="l00161"></a>00161     <span class="keyword">inline</span> BlockSizeNoPreference() : <a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a> (<a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a>::<a class="code" href="class_block_size.html#ac022f97ed4f42a64936fdc0f3479c1cb" title="Gets the default block size.">getDefault</a>()) { }
 <a name="l00162"></a>00162 };
 <a name="l00163"></a>00163 
 <a name="l00164"></a>00164 
@@ -192,7 +192,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Properties</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -201,7 +201,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 5 2012 17:04:52 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 8 2014 12:26:47 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

@@ -20,7 +20,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="pl-nk-logo-small.png"/></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">pl-nk</div>
+   <div id="projectname">pl-nk&#160;<span id="projectnumber">v0.4.5</span></div>
+   <div id="projectbrief">Plonk|Plink|Plank are a set of cross-platform C/C++ frameworks for audio software development</div>
   </td>
  </tr>
  </tbody>
@@ -29,8 +30,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -54,7 +55,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
       <li><a href="files.html"><span>File&#160;List</span></a></li>
-      <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
 <div class="header">
@@ -62,14 +62,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">plonk_InlineCommonOps.h</div>  </div>
 </div>
 <div class="contents">
-<a href="plonk___inline_common_ops_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*</span>
+<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*</span>
 <a name="l00002"></a>00002 <span class="comment"> -------------------------------------------------------------------------------</span>
 <a name="l00003"></a>00003 <span class="comment"> This file is part of the Plink, Plonk, Plank libraries</span>
 <a name="l00004"></a>00004 <span class="comment">  by Martin Robinson</span>
 <a name="l00005"></a>00005 <span class="comment"> </span>
 <a name="l00006"></a>00006 <span class="comment"> http://code.google.com/p/pl-nk/</span>
 <a name="l00007"></a>00007 <span class="comment"> </span>
-<a name="l00008"></a>00008 <span class="comment"> Copyright University of the West of England, Bristol 2011-12</span>
+<a name="l00008"></a>00008 <span class="comment"> Copyright University of the West of England, Bristol 2011-14</span>
 <a name="l00009"></a>00009 <span class="comment"> All rights reserved.</span>
 <a name="l00010"></a>00010 <span class="comment"> </span>
 <a name="l00011"></a>00011 <span class="comment"> Redistribution and use in source and binary forms, with or without</span>
@@ -104,39 +104,44 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00040"></a>00040 <span class="preprocessor"></span><span class="preprocessor">#define PLONK_INLINECOMMONOPS_H</span>
 <a name="l00041"></a>00041 <span class="preprocessor"></span>
 <a name="l00042"></a>00042 <span class="preprocessor">#include &lt;math.h&gt;</span>
-<a name="l00043"></a>00043 <span class="preprocessor">#include &quot;<a class="code" href="plonk___constants_8h.html">plonk_Constants.h</a>&quot;</span>
+<a name="l00043"></a>00043 <span class="preprocessor">#include &quot;plonk_Constants.h&quot;</span>
 <a name="l00044"></a>00044 
 <a name="l00045"></a>00045 
 <a name="l00046"></a>00046 <span class="comment">// common unary</span>
 <a name="l00047"></a>00047 
 <a name="l00050"></a><a class="code" href="group___plonk_unary_op_functions.html#ga06d0709c8d848fd8a378b06a3483ff11">00050</a> <span class="keyword">template</span>&lt;<span class="keyword">class</span> Type&gt; <span class="keyword">inline</span> Type <a class="code" href="group___plonk_unary_op_functions.html#ga06d0709c8d848fd8a378b06a3483ff11" title="Returns the absolute of the input argument.">abs</a> (Type <span class="keyword">const</span>&amp; a) <span class="keywordflow">throw</span>() { <span class="keywordflow">return</span> (a &lt; <a class="code" href="class_math.html" title="Some useful maths constants.">Math&lt;Type&gt;::get0</a>()) ? -a : a; }
 <a name="l00051"></a>00051 
-<a name="l00052"></a>00052 
-<a name="l00053"></a>00053 <span class="comment">// common binary</span>
+<a name="l00052"></a>00052 <span class="keyword">inline</span> <span class="keywordtype">float</span> <a class="code" href="group___plonk_unary_op_functions.html#ga06d0709c8d848fd8a378b06a3483ff11" title="Returns the absolute of the input argument.">abs</a>  (<span class="keywordtype">float</span> <span class="keyword">const</span>&amp; a) <span class="keywordflow">throw</span>() { <span class="keywordflow">return</span> <a class="code" href="group___plank_maths_functions.html#ga32c5e9ec697355c3e2a153b3f3950393" title="Returns the absolute of the input argument.">pl_AbsF</a> (a); }
+<a name="l00053"></a>00053 <span class="keyword">inline</span> <span class="keywordtype">double</span> <a class="code" href="group___plonk_unary_op_functions.html#ga06d0709c8d848fd8a378b06a3483ff11" title="Returns the absolute of the input argument.">abs</a>  (<span class="keywordtype">double</span> <span class="keyword">const</span>&amp; a) <span class="keywordflow">throw</span>() { <span class="keywordflow">return</span> <a class="code" href="group___plank_maths_functions.html#ga3abed4819ea079935becaee097c1b131" title="Returns the absolute of the input argument.">pl_AbsD</a> (a); }
 <a name="l00054"></a>00054 
-<a name="l00057"></a><a class="code" href="group___plonk_binary_op_functions.html#gabf9e7fd23a39c53e897cf66aaf90a68a">00057</a> <span class="keyword">template</span>&lt;<span class="keyword">class</span> Type&gt; <span class="keyword">inline</span> Type <a class="code" href="group___plonk_binary_op_functions.html#gabf9e7fd23a39c53e897cf66aaf90a68a" title="Returns minimum of a and b.">min</a> (Type <span class="keyword">const</span>&amp; a, Type <span class="keyword">const</span>&amp; b) <span class="keywordflow">throw</span>() { <span class="keywordflow">return</span> (a &gt; b) ? b : a; }
-<a name="l00058"></a>00058 
-<a name="l00061"></a><a class="code" href="group___plonk_binary_op_functions.html#gae9767f40737087f6253040a0aaee4146">00061</a> <span class="keyword">template</span>&lt;<span class="keyword">class</span> Type&gt; <span class="keyword">inline</span> Type <a class="code" href="group___plonk_binary_op_functions.html#gae9767f40737087f6253040a0aaee4146" title="Returns maximum of a and b.">max</a> (Type <span class="keyword">const</span>&amp; a, Type <span class="keyword">const</span>&amp; b) <span class="keywordflow">throw</span>() { <span class="keywordflow">return</span> (a &lt; b) ? b : a; }
-<a name="l00062"></a>00062 
-<a name="l00065"></a><a class="code" href="group___plonk_binary_op_functions.html#ga0efbcd57e8a17ef548e238ea9f35bc62">00065</a> <span class="keyword">template</span>&lt;<span class="keyword">class</span> Type&gt; <span class="keyword">inline</span> Type <a class="code" href="group___plonk_binary_op_functions.html#ga0efbcd57e8a17ef548e238ea9f35bc62" title="Returns a raised to the power b.">pow</a> (Type <span class="keyword">const</span>&amp; a, Type <span class="keyword">const</span>&amp; b) <span class="keywordflow">throw</span>() { <a class="code" href="group___plonk_binary_op_functions.html#ga0efbcd57e8a17ef548e238ea9f35bc62" title="Returns a raised to the power b.">return ::pow</a> ((<span class="keywordtype">double</span>)a, (<span class="keywordtype">double</span>)b);    }
-<a name="l00066"></a>00066 
-<a name="l00069"></a><a class="code" href="group___plonk_binary_op_functions.html#ga3edabf0b05f53c9399cd27330d6bbb04">00069</a> <span class="keyword">template</span>&lt;<span class="keyword">class</span> Type&gt; <span class="keyword">inline</span> Type <a class="code" href="group___plonk_binary_op_functions.html#ga3edabf0b05f53c9399cd27330d6bbb04" title="Returns the input argument squared.">squared</a> (Type <span class="keyword">const</span>&amp; a) <span class="keywordflow">throw</span>()       { <span class="keywordflow">return</span> a * a; }
-<a name="l00070"></a>00070 
-<a name="l00073"></a><a class="code" href="group___plonk_binary_op_functions.html#gadd1d6f37c63b4d84d7ccec97ce802376">00073</a> <span class="keyword">template</span>&lt;<span class="keyword">class</span> Type&gt; <span class="keyword">inline</span> Type <a class="code" href="group___plonk_binary_op_functions.html#gadd1d6f37c63b4d84d7ccec97ce802376" title="Returns the input argument cubed.">cubed</a> (Type <span class="keyword">const</span>&amp; a) <span class="keywordflow">throw</span>()         { <span class="keywordflow">return</span> a * a * a;      }
-<a name="l00074"></a>00074 
+<a name="l00055"></a>00055 <span class="comment">// common binary</span>
+<a name="l00056"></a>00056 
+<a name="l00059"></a><a class="code" href="group___plonk_binary_op_functions.html#gabf9e7fd23a39c53e897cf66aaf90a68a">00059</a> <span class="keyword">template</span>&lt;<span class="keyword">class</span> Type&gt; <span class="keyword">inline</span> Type <a class="code" href="group___plonk_binary_op_functions.html#gabf9e7fd23a39c53e897cf66aaf90a68a" title="Returns minimum of a and b.">min</a> (Type <span class="keyword">const</span>&amp; a, Type <span class="keyword">const</span>&amp; b) <span class="keywordflow">throw</span>() { <span class="keywordflow">return</span> (a &gt; b) ? b : a; }
+<a name="l00060"></a>00060 
+<a name="l00063"></a><a class="code" href="group___plonk_binary_op_functions.html#gae9767f40737087f6253040a0aaee4146">00063</a> <span class="keyword">template</span>&lt;<span class="keyword">class</span> Type&gt; <span class="keyword">inline</span> Type <a class="code" href="group___plonk_binary_op_functions.html#gae9767f40737087f6253040a0aaee4146" title="Returns maximum of a and b.">max</a> (Type <span class="keyword">const</span>&amp; a, Type <span class="keyword">const</span>&amp; b) <span class="keywordflow">throw</span>() { <span class="keywordflow">return</span> (a &lt; b) ? b : a; }
+<a name="l00064"></a>00064 
+<a name="l00067"></a><a class="code" href="group___plonk_binary_op_functions.html#ga0efbcd57e8a17ef548e238ea9f35bc62">00067</a> <span class="keyword">template</span>&lt;<span class="keyword">class</span> Type&gt; <span class="keyword">inline</span> Type <a class="code" href="group___plonk_binary_op_functions.html#ga0efbcd57e8a17ef548e238ea9f35bc62" title="Returns a raised to the power b.">pow</a> (Type <span class="keyword">const</span>&amp; a, Type <span class="keyword">const</span>&amp; b) <span class="keywordflow">throw</span>() { <span class="keywordflow">return</span> (Type)<a class="code" href="group___plonk_binary_op_functions.html#ga0efbcd57e8a17ef548e238ea9f35bc62" title="Returns a raised to the power b.">::pow</a> ((double)a, (<span class="keywordtype">double</span>)b);    }
+<a name="l00068"></a>00068 
+<a name="l00069"></a>00069 <span class="keyword">inline</span> <span class="keywordtype">float</span> <a class="code" href="group___plonk_binary_op_functions.html#ga0efbcd57e8a17ef548e238ea9f35bc62" title="Returns a raised to the power b.">pow</a>  (<span class="keywordtype">float</span> <span class="keyword">const</span>&amp; a, <span class="keywordtype">float</span> <span class="keyword">const</span>&amp; b) <span class="keywordflow">throw</span>() { <span class="keywordflow">return</span> <a class="code" href="group___plank_maths_functions.html#ga1636222e26b467dba7c062207545cdbd" title="Returns a raised to the power b.">pl_PowF</a> (a, b); }
+<a name="l00070"></a>00070 <span class="keyword">inline</span> <span class="keywordtype">double</span> <a class="code" href="group___plonk_binary_op_functions.html#ga0efbcd57e8a17ef548e238ea9f35bc62" title="Returns a raised to the power b.">pow</a>  (<span class="keywordtype">double</span> <span class="keyword">const</span>&amp; a, <span class="keywordtype">double</span> <span class="keyword">const</span>&amp; b) <span class="keywordflow">throw</span>() { <span class="keywordflow">return</span> <a class="code" href="group___plank_maths_functions.html#ga8a45dc6511a59d71dc2d06467b7f9965" title="Returns a raised to the power b.">pl_PowD</a> (a, b); }
+<a name="l00071"></a>00071 
+<a name="l00074"></a><a class="code" href="group___plonk_binary_op_functions.html#ga3edabf0b05f53c9399cd27330d6bbb04">00074</a> <span class="keyword">template</span>&lt;<span class="keyword">class</span> Type&gt; <span class="keyword">inline</span> Type <a class="code" href="group___plonk_binary_op_functions.html#ga3edabf0b05f53c9399cd27330d6bbb04" title="Returns the input argument squared.">squared</a> (Type <span class="keyword">const</span>&amp; a) <span class="keywordflow">throw</span>()       { <span class="keywordflow">return</span> a * a; }
 <a name="l00075"></a>00075 
-<a name="l00076"></a>00076 <span class="comment">// common misc</span>
-<a name="l00077"></a>00077 
-<a name="l00080"></a><a class="code" href="group___plonk_misc_arithmetic_functions.html#ga866b0e714cabbe22cf1d110c7e4ac5cf">00080</a> <span class="keyword">template</span>&lt;<span class="keyword">class</span> Type&gt; <span class="keyword">inline</span> Type <a class="code" href="group___plonk_binary_op_functions.html#gabf9e7fd23a39c53e897cf66aaf90a68a" title="Returns minimum of a and b.">min</a> (Type <span class="keyword">const</span>&amp; a, Type <span class="keyword">const</span>&amp; b, Type <span class="keyword">const</span>&amp; c) <span class="keywordflow">throw</span>() { <span class="keywordflow">return</span> <a class="code" href="group___plonk_binary_op_functions.html#gabf9e7fd23a39c53e897cf66aaf90a68a" title="Returns minimum of a and b.">min</a> (<a class="code" href="group___plonk_binary_op_functions.html#gabf9e7fd23a39c53e897cf66aaf90a68a" title="Returns minimum of a and b.">min</a> (a, b), c); }
-<a name="l00081"></a>00081 
-<a name="l00084"></a><a class="code" href="group___plonk_misc_arithmetic_functions.html#ga02d2b04c0cf840df7095800c36a40c08">00084</a> <span class="keyword">template</span>&lt;<span class="keyword">class</span> Type&gt; <span class="keyword">inline</span> Type <a class="code" href="group___plonk_binary_op_functions.html#gabf9e7fd23a39c53e897cf66aaf90a68a" title="Returns minimum of a and b.">min</a> (Type <span class="keyword">const</span>&amp; a, Type <span class="keyword">const</span>&amp; b, Type <span class="keyword">const</span>&amp; c, Type <span class="keyword">const</span>&amp; d) <span class="keywordflow">throw</span>() { <span class="keywordflow">return</span> <a class="code" href="group___plonk_binary_op_functions.html#gabf9e7fd23a39c53e897cf66aaf90a68a" title="Returns minimum of a and b.">min</a> (<a class="code" href="group___plonk_binary_op_functions.html#gabf9e7fd23a39c53e897cf66aaf90a68a" title="Returns minimum of a and b.">min</a> (a, b), <a class="code" href="group___plonk_binary_op_functions.html#gabf9e7fd23a39c53e897cf66aaf90a68a" title="Returns minimum of a and b.">min</a> (c, d)); }
-<a name="l00085"></a>00085 
-<a name="l00088"></a><a class="code" href="group___plonk_misc_arithmetic_functions.html#gafab0b7afa53a4ea09ed8b1c702fef079">00088</a> <span class="keyword">template</span>&lt;<span class="keyword">class</span> Type&gt; <span class="keyword">inline</span> Type <a class="code" href="group___plonk_binary_op_functions.html#gae9767f40737087f6253040a0aaee4146" title="Returns maximum of a and b.">max</a> (Type <span class="keyword">const</span>&amp; a, Type <span class="keyword">const</span>&amp; b, Type <span class="keyword">const</span>&amp; c) <span class="keywordflow">throw</span>() { <span class="keywordflow">return</span> <a class="code" href="group___plonk_binary_op_functions.html#gae9767f40737087f6253040a0aaee4146" title="Returns maximum of a and b.">max</a> (<a class="code" href="group___plonk_binary_op_functions.html#gae9767f40737087f6253040a0aaee4146" title="Returns maximum of a and b.">max</a> (a, b), c); }
-<a name="l00089"></a>00089 
-<a name="l00092"></a><a class="code" href="group___plonk_misc_arithmetic_functions.html#ga53da7dc27040df1b26257548d202912a">00092</a> <span class="keyword">template</span>&lt;<span class="keyword">class</span> Type&gt; <span class="keyword">inline</span> Type <a class="code" href="group___plonk_binary_op_functions.html#gae9767f40737087f6253040a0aaee4146" title="Returns maximum of a and b.">max</a> (Type <span class="keyword">const</span>&amp; a, Type <span class="keyword">const</span>&amp; b, Type <span class="keyword">const</span>&amp; c, Type <span class="keyword">const</span>&amp; d) <span class="keywordflow">throw</span>() { <span class="keywordflow">return</span> <a class="code" href="group___plonk_binary_op_functions.html#gae9767f40737087f6253040a0aaee4146" title="Returns maximum of a and b.">max</a> (<a class="code" href="group___plonk_binary_op_functions.html#gae9767f40737087f6253040a0aaee4146" title="Returns maximum of a and b.">max</a> (a, b), <a class="code" href="group___plonk_binary_op_functions.html#gae9767f40737087f6253040a0aaee4146" title="Returns maximum of a and b.">max</a> (c, d)); }
-<a name="l00093"></a>00093 
+<a name="l00078"></a><a class="code" href="group___plonk_binary_op_functions.html#gadd1d6f37c63b4d84d7ccec97ce802376">00078</a> <span class="keyword">template</span>&lt;<span class="keyword">class</span> Type&gt; <span class="keyword">inline</span> Type <a class="code" href="group___plonk_binary_op_functions.html#gadd1d6f37c63b4d84d7ccec97ce802376" title="Returns the input argument cubed.">cubed</a> (Type <span class="keyword">const</span>&amp; a) <span class="keywordflow">throw</span>()         { <span class="keywordflow">return</span> a * a * a;      }
+<a name="l00079"></a>00079 
+<a name="l00080"></a>00080 
+<a name="l00081"></a>00081 <span class="comment">// common misc</span>
+<a name="l00082"></a>00082 
+<a name="l00085"></a><a class="code" href="group___plonk_misc_arithmetic_functions.html#ga866b0e714cabbe22cf1d110c7e4ac5cf">00085</a> <span class="keyword">template</span>&lt;<span class="keyword">class</span> Type&gt; <span class="keyword">inline</span> Type <a class="code" href="group___plonk_binary_op_functions.html#gabf9e7fd23a39c53e897cf66aaf90a68a" title="Returns minimum of a and b.">min</a> (Type <span class="keyword">const</span>&amp; a, Type <span class="keyword">const</span>&amp; b, Type <span class="keyword">const</span>&amp; c) <span class="keywordflow">throw</span>() { <span class="keywordflow">return</span> <a class="code" href="group___plonk_binary_op_functions.html#gabf9e7fd23a39c53e897cf66aaf90a68a" title="Returns minimum of a and b.">min</a> (<a class="code" href="group___plonk_binary_op_functions.html#gabf9e7fd23a39c53e897cf66aaf90a68a" title="Returns minimum of a and b.">min</a> (a, b), c); }
+<a name="l00086"></a>00086 
+<a name="l00089"></a><a class="code" href="group___plonk_misc_arithmetic_functions.html#ga02d2b04c0cf840df7095800c36a40c08">00089</a> <span class="keyword">template</span>&lt;<span class="keyword">class</span> Type&gt; <span class="keyword">inline</span> Type <a class="code" href="group___plonk_binary_op_functions.html#gabf9e7fd23a39c53e897cf66aaf90a68a" title="Returns minimum of a and b.">min</a> (Type <span class="keyword">const</span>&amp; a, Type <span class="keyword">const</span>&amp; b, Type <span class="keyword">const</span>&amp; c, Type <span class="keyword">const</span>&amp; d) <span class="keywordflow">throw</span>() { <span class="keywordflow">return</span> <a class="code" href="group___plonk_binary_op_functions.html#gabf9e7fd23a39c53e897cf66aaf90a68a" title="Returns minimum of a and b.">min</a> (<a class="code" href="group___plonk_binary_op_functions.html#gabf9e7fd23a39c53e897cf66aaf90a68a" title="Returns minimum of a and b.">min</a> (a, b), <a class="code" href="group___plonk_binary_op_functions.html#gabf9e7fd23a39c53e897cf66aaf90a68a" title="Returns minimum of a and b.">min</a> (c, d)); }
+<a name="l00090"></a>00090 
+<a name="l00093"></a><a class="code" href="group___plonk_misc_arithmetic_functions.html#gafab0b7afa53a4ea09ed8b1c702fef079">00093</a> <span class="keyword">template</span>&lt;<span class="keyword">class</span> Type&gt; <span class="keyword">inline</span> Type <a class="code" href="group___plonk_binary_op_functions.html#gae9767f40737087f6253040a0aaee4146" title="Returns maximum of a and b.">max</a> (Type <span class="keyword">const</span>&amp; a, Type <span class="keyword">const</span>&amp; b, Type <span class="keyword">const</span>&amp; c) <span class="keywordflow">throw</span>() { <span class="keywordflow">return</span> <a class="code" href="group___plonk_binary_op_functions.html#gae9767f40737087f6253040a0aaee4146" title="Returns maximum of a and b.">max</a> (<a class="code" href="group___plonk_binary_op_functions.html#gae9767f40737087f6253040a0aaee4146" title="Returns maximum of a and b.">max</a> (a, b), c); }
 <a name="l00094"></a>00094 
-<a name="l00095"></a>00095 <span class="preprocessor">#endif // PLONK_INLINECOMMONOPS_H</span>
+<a name="l00097"></a><a class="code" href="group___plonk_misc_arithmetic_functions.html#ga53da7dc27040df1b26257548d202912a">00097</a> <span class="keyword">template</span>&lt;<span class="keyword">class</span> Type&gt; <span class="keyword">inline</span> Type <a class="code" href="group___plonk_binary_op_functions.html#gae9767f40737087f6253040a0aaee4146" title="Returns maximum of a and b.">max</a> (Type <span class="keyword">const</span>&amp; a, Type <span class="keyword">const</span>&amp; b, Type <span class="keyword">const</span>&amp; c, Type <span class="keyword">const</span>&amp; d) <span class="keywordflow">throw</span>() { <span class="keywordflow">return</span> <a class="code" href="group___plonk_binary_op_functions.html#gae9767f40737087f6253040a0aaee4146" title="Returns maximum of a and b.">max</a> (<a class="code" href="group___plonk_binary_op_functions.html#gae9767f40737087f6253040a0aaee4146" title="Returns maximum of a and b.">max</a> (a, b), <a class="code" href="group___plonk_binary_op_functions.html#gae9767f40737087f6253040a0aaee4146" title="Returns maximum of a and b.">max</a> (c, d)); }
+<a name="l00098"></a>00098 
+<a name="l00099"></a>00099 
+<a name="l00100"></a>00100 <span class="preprocessor">#endif // PLONK_INLINECOMMONOPS_H</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -144,7 +149,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Properties</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -153,7 +158,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 5 2012 17:04:55 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 8 2014 12:26:49 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

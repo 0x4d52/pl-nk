@@ -20,7 +20,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="pl-nk-logo-small.png"/></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">pl-nk</div>
+   <div id="projectname">pl-nk&#160;<span id="projectnumber">v0.4.5</span></div>
+   <div id="projectbrief">Plonk|Plink|Plank are a set of cross-platform C/C++ frameworks for audio software development</div>
   </td>
  </tr>
  </tbody>
@@ -29,8 +30,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -62,7 +63,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="header">
   <div class="summary">
-<a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="#friends">Friends</a>  </div>
   <div class="headertitle">
 <div class="title">SmartPointer Class Reference</div>  </div>
@@ -71,242 +71,43 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <!-- doxytag: class="SmartPointer" --><!-- doxytag: inherits="PlonkBase" -->
 <p>Reference counted pointer base class.  
  <a href="class_smart_pointer.html#details">More...</a></p>
-<div class="dynheader">
-Inheritance diagram for SmartPointer:</div>
-<div class="dyncontent">
- <div class="center">
-  <img src="class_smart_pointer.png" usemap="#SmartPointer_map" alt=""/>
-  <map id="SmartPointer_map" name="SmartPointer_map">
-<area href="class_plonk_base.html" alt="PlonkBase" shape="rect" coords="0,0,540,24"/>
-<area href="class_audio_file_reader_internal.html" alt="AudioFileReaderInternal" shape="rect" coords="550,112,1090,136"/>
-<area href="class_binary_file_internal.html" alt="BinaryFileInternal" shape="rect" coords="550,168,1090,192"/>
-<area href="class_bus_buffer_internal.html" alt="BusBufferInternal&lt; SampleType &gt;" shape="rect" coords="550,224,1090,248"/>
-<area href="class_dictionary_internal.html" alt="DictionaryInternal&lt; ValueType, KeyType &gt;" shape="rect" coords="550,280,1090,304"/>
-<area href="class_dynamic_internal.html" alt="DynamicInternal" shape="rect" coords="550,336,1090,360"/>
-<area href="class_f_f_t_engine_internal_3_01float_01_4.html" alt="FFTEngineInternal&lt; float &gt;" shape="rect" coords="550,392,1090,416"/>
-<area href="class_function_caller_internal.html" alt="FunctionCallerInternal&lt; FunctionType, ReturnType, ArgType1, ArgType2, ArgType3 &gt;" shape="rect" coords="550,448,1090,472"/>
-<area href="class_function_caller_internal_3_01_function_type_00_01_return_type_01_4.html" alt="FunctionCallerInternal&lt; FunctionType, ReturnType &gt;" shape="rect" coords="550,504,1090,528"/>
-<area href="class_function_caller_internal_3_01_function_type_00_01_return_type_00_01_arg_type1_01_4.html" alt="FunctionCallerInternal&lt; FunctionType, ReturnType, ArgType1 &gt;" shape="rect" coords="550,560,1090,584"/>
-<area href="class_function_caller_internal_3_01_function_type_00_01_return_type_00_01_arg_type1_00_01_arg_type2_01_4.html" alt="FunctionCallerInternal&lt; FunctionType, ReturnType, ArgType1, ArgType2 &gt;" shape="rect" coords="550,616,1090,640"/>
-<area href="class_function_proxy_caller_internal.html" alt="FunctionProxyCallerInternal&lt; FunctionType, ReturnType, ArgType1, ArgType2, ArgType3 &gt;" shape="rect" coords="550,672,1090,696"/>
-<area href="class_function_proxy_caller_internal_3_01_function_type_00_01_return_type_01_4.html" alt="FunctionProxyCallerInternal&lt; FunctionType, ReturnType &gt;" shape="rect" coords="550,728,1090,752"/>
-<area href="class_function_proxy_caller_internal_3_01_function_type_00_01_return_type_00_01_arg_type1_01_4.html" alt="FunctionProxyCallerInternal&lt; FunctionType, ReturnType, ArgType1 &gt;" shape="rect" coords="550,784,1090,808"/>
-<area href="class_function_proxy_caller_internal_3_01_function_type_00_01_return_type_00_01_arg_type1_00_01_arg_type2_01_4.html" alt="FunctionProxyCallerInternal&lt; FunctionType, ReturnType, ArgType1, ArgType2 &gt;" shape="rect" coords="550,840,1090,864"/>
-<area href="class_locked_value_internal.html" alt="LockedValueInternal&lt; ValueType &gt;" shape="rect" coords="550,896,1090,920"/>
-<area href="class_lock_free_queue_internal.html" alt="LockFreeQueueInternal&lt; ValueType &gt;" shape="rect" coords="550,952,1090,976"/>
-<area href="class_lock_free_queue_internal_3_01_value_type_01_5_01_4.html" alt="LockFreeQueueInternal&lt; ValueType * &gt;" shape="rect" coords="550,1008,1090,1032"/>
-<area href="class_lock_free_stack_internal.html" alt="LockFreeStackInternal&lt; ValueType &gt;" shape="rect" coords="550,1064,1090,1088"/>
-<area href="class_lock_free_stack_internal_3_01_value_type_01_5_01_4.html" alt="LockFreeStackInternal&lt; ValueType * &gt;" shape="rect" coords="550,1120,1090,1144"/>
-<area href="class_lock_internal_base.html" alt="LockInternalBase" shape="rect" coords="550,1176,1090,1200"/>
-<area href="class_r_n_g_internal.html" alt="RNGInternal" shape="rect" coords="550,1232,1090,1256"/>
-<area href="class_sender_internal.html" alt="SenderInternal&lt; SenderContainerBaseType &gt;" shape="rect" coords="550,1288,1090,1312"/>
-<area href="class_sender_internal.html" alt="SenderInternal&lt; BreakpointBase&lt; SampleType &gt; &gt;" shape="rect" coords="550,1344,1090,1368"/>
-<area href="class_sender_internal.html" alt="SenderInternal&lt; BreakpointsBase&lt; SampleType &gt; &gt;" shape="rect" coords="550,1400,1090,1424"/>
-<area href="class_sender_internal.html" alt="SenderInternal&lt; ChannelBase&lt; FormType::SampleDataType &gt; &gt;" shape="rect" coords="550,1456,1090,1480"/>
-<area href="class_sender_internal.html" alt="SenderInternal&lt; ChannelBase&lt; OutputSampleType &gt; &gt;" shape="rect" coords="550,1512,1090,1536"/>
-<area href="class_sender_internal.html" alt="SenderInternal&lt; ChannelBase&lt; SampleType &gt; &gt;" shape="rect" coords="550,1568,1090,1592"/>
-<area href="class_sender_internal.html" alt="SenderInternal&lt; ChannelBase&lt; ShapeType::SampleDataType &gt; &gt;" shape="rect" coords="550,1624,1090,1648"/>
-<area href="class_sender_internal.html" alt="SenderInternal&lt; ProcessInfo &gt;" shape="rect" coords="550,1680,1090,1704"/>
-<area href="class_sender_internal.html" alt="SenderInternal&lt; Variable&lt; Type &gt; &gt;" shape="rect" coords="550,1736,1090,1760"/>
-<area href="class_signal_internal.html" alt="SignalInternal&lt; SampleType &gt;" shape="rect" coords="550,1792,1090,1816"/>
-<area href="class_simple_linked_list_internal.html" alt="SimpleLinkedListInternal&lt; ValueType &gt;" shape="rect" coords="550,1848,1090,1872"/>
-<area href="class_simple_linked_list_internal_3_01_value_type_01_5_01_4.html" alt="SimpleLinkedListInternal&lt; ValueType * &gt;" shape="rect" coords="550,1904,1090,1928"/>
-<area href="class_simple_queue_internal.html" alt="SimpleQueueInternal&lt; ValueType &gt;" shape="rect" coords="550,1960,1090,1984"/>
-<area href="class_simple_queue_internal_3_01_value_type_01_5_01_4.html" alt="SimpleQueueInternal&lt; ValueType * &gt;" shape="rect" coords="550,2016,1090,2040"/>
-<area href="class_simple_stack_internal.html" alt="SimpleStackInternal&lt; ValueType &gt;" shape="rect" coords="550,2072,1090,2096"/>
-<area href="class_simple_stack_internal_3_01_value_type_01_5_01_4.html" alt="SimpleStackInternal&lt; ValueType * &gt;" shape="rect" coords="550,2128,1090,2152"/>
-<area href="class_text_file_internal.html" alt="TextFileInternal" shape="rect" coords="550,2184,1090,2208"/>
-<area href="class_variable_internal_3_01_type_01_6_01_4.html" alt="VariableInternal&lt; Type &amp; &gt;" shape="rect" coords="550,2240,1090,2264"/>
-<area href="class_weak_pointer.html" title="Holds a weak reference to a SmartPointer." alt="WeakPointer" shape="rect" coords="550,2296,1090,2320"/>
-</map>
- </div></div>
+
+<p>Inherits PlonkBase.</p>
+
+<p>Inherited by AudioFileReaderInternal, AudioFileWriterInternalBase&lt; SampleType &gt;, AudioFileWriterInternalBase&lt; Char &gt;, AudioFileWriterInternalBase&lt; Double &gt;, AudioFileWriterInternalBase&lt; Float &gt;, AudioFileWriterInternalBase&lt; Int &gt;, AudioFileWriterInternalBase&lt; Int24 &gt;, AudioFileWriterInternalBase&lt; Short &gt;, Base64Internal, BinaryFileInternal, BusBufferInternal&lt; SampleType &gt;, DictionaryInternal&lt; ValueType, KeyType &gt;, DynamicInternal, FFTEngineInternal&lt; float &gt;, FilePathInternal, FunctionCallerInternal&lt; FunctionType, ReturnType, ArgType1, ArgType2, ArgType3 &gt;, FunctionCallerInternal&lt; FunctionType, ReturnType &gt;, FunctionCallerInternal&lt; FunctionType, ReturnType, ArgType1 &gt;, FunctionCallerInternal&lt; FunctionType, ReturnType, ArgType1, ArgType2 &gt;, FunctionProxyCallerInternal&lt; FunctionType, ReturnType, ArgType1, ArgType2, ArgType3 &gt;, FunctionProxyCallerInternal&lt; FunctionType, ReturnType &gt;, FunctionProxyCallerInternal&lt; FunctionType, ReturnType, ArgType1 &gt;, FunctionProxyCallerInternal&lt; FunctionType, ReturnType, ArgType1, ArgType2 &gt;, LockedValueInternal&lt; ValueType &gt;, LockFreeQueueInternal&lt; ValueType &gt;, LockFreeQueueInternal&lt; ValueType * &gt;, LockFreeStackInternal&lt; ValueType &gt;, LockFreeStackInternal&lt; ValueType * &gt;, LockInternalBase, NeuralNetworkInternal&lt; ValueType &gt;, NeuralNetworkInternal&lt; float &gt;, RNGInternal, SenderInternal&lt; SenderContainerBaseType &gt;, SenderInternal&lt; BreakpointBase&lt; SampleType &gt; &gt;, SenderInternal&lt; BreakpointsBase&lt; SampleType &gt; &gt;, SenderInternal&lt; ChannelBase&lt; FormType::SampleDataType &gt; &gt;, SenderInternal&lt; ChannelBase&lt; OutputSampleType &gt; &gt;, SenderInternal&lt; ChannelBase&lt; SampleType &gt; &gt;, SenderInternal&lt; ChannelBase&lt; ShapeType::SampleDataType &gt; &gt;, SenderInternal&lt; ProcessInfo &gt;, SenderInternal&lt; Variable&lt; Type &gt; &gt;, SignalInternal&lt; SampleType &gt;, SimpleLinkedListInternal&lt; ValueType &gt;, SimpleLinkedListInternal&lt; ValueType * &gt;, SimpleQueueInternal&lt; ValueType &gt;, SimpleQueueInternal&lt; ValueType * &gt;, SimpleStackInternal&lt; ValueType &gt;, SimpleStackInternal&lt; ValueType * &gt;, TaskBufferInternal&lt; SampleType &gt;, TaskMessageInternal, TextFileInternal, VariableInternal&lt; Type &amp; &gt;, <a class="el" href="class_weak_pointer.html">WeakPointer</a>, and ZipInternal.</p>
 
 <p><a href="class_smart_pointer-members.html">List of all members.</a></p>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr><td colspan="2"><div class="groupHeader">Construction and destruction</div></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_smart_pointer.html#a279a99170aded5dad1d4cf939bbc8fbe">SmartPointer</a> (const bool allocateWeakPointer=true)  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_smart_pointer.html#a961ec2a7684ba32d0aaff86969c28099">~SmartPointer</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_smart_pointer.html#ad9196fe14d4e4d9b1c28982738436544">incrementRefCount</a> ()  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_smart_pointer.html#acea9f749c0ab920d2833d4bb81f6eb9f">decrementRefCount</a> ()  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a279a99170aded5dad1d4cf939bbc8fbe"></a><!-- doxytag: member="SmartPointer::SmartPointer" ref="a279a99170aded5dad1d4cf939bbc8fbe" args="(const bool allocateWeakPointer=true)" -->
+&#160;</td><td class="memItemRight" valign="bottom"><b>SmartPointer</b> (const bool allocateWeakPointer=true)  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a961ec2a7684ba32d0aaff86969c28099"></a><!-- doxytag: member="SmartPointer::~SmartPointer" ref="a961ec2a7684ba32d0aaff86969c28099" args="()" -->
+virtual&#160;</td><td class="memItemRight" valign="bottom"><b>~SmartPointer</b> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad9196fe14d4e4d9b1c28982738436544"></a><!-- doxytag: member="SmartPointer::incrementRefCount" ref="ad9196fe14d4e4d9b1c28982738436544" args="()" -->
+void&#160;</td><td class="memItemRight" valign="bottom"><b>incrementRefCount</b> ()  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acea9f749c0ab920d2833d4bb81f6eb9f"></a><!-- doxytag: member="SmartPointer::decrementRefCount" ref="acea9f749c0ab920d2833d4bb81f6eb9f" args="()" -->
+void&#160;</td><td class="memItemRight" valign="bottom"><b>decrementRefCount</b> ()  throw ()</td></tr>
 <tr><td colspan="2"><div class="groupHeader">Miscellaneous</div></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_smart_pointer.html#a91e9d2ec0e1ed1d0d34344f4c8b63994">update</a> ()  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_smart_pointer.html#afce7e04754b78ffcb484c8b5108d799a">getWeak</a> () const   throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_smart_pointer.html#a02d93e0dab37f421808dc02dc348d7fd">getRefCount</a> () const   throw ()</td></tr>
-<tr><td colspan="2"><h2><a name="pro-attribs"></a>
-Protected Attributes</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_smart_pointer_counter.html">SmartPointerCounter</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_smart_pointer.html#a7ba301343cc7433dab04868a57419aba">counter</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_atomic_value.html">AtomicValue</a>&lt; void * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_smart_pointer.html#a9d43530959d2bb8831e77832fe9a7271">weakPointer</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afce7e04754b78ffcb484c8b5108d799a"></a><!-- doxytag: member="SmartPointer::getWeak" ref="afce7e04754b78ffcb484c8b5108d799a" args="() const " -->
+void *&#160;</td><td class="memItemRight" valign="bottom"><b>getWeak</b> () const   throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a02d93e0dab37f421808dc02dc348d7fd"></a><!-- doxytag: member="SmartPointer::getRefCount" ref="a02d93e0dab37f421808dc02dc348d7fd" args="() const " -->
+int&#160;</td><td class="memItemRight" valign="bottom"><b>getRefCount</b> () const   throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a11dff93b64ce3f49ababf04d032d755d"></a><!-- doxytag: member="SmartPointer::deepCopy" ref="a11dff93b64ce3f49ababf04d032d755d" args="() const " -->
+virtual <a class="el" href="class_smart_pointer.html">SmartPointer</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>deepCopy</b> () const   throw ()</td></tr>
 <tr><td colspan="2"><h2><a name="friends"></a>
 Friends</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">class&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_smart_pointer.html#ae9317dca421926e7b6140f0675ee70d9">WeakPointer</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae9317dca421926e7b6140f0675ee70d9"></a><!-- doxytag: member="SmartPointer::WeakPointer" ref="ae9317dca421926e7b6140f0675ee70d9" args="" -->
+class&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_smart_pointer.html#ae9317dca421926e7b6140f0675ee70d9">WeakPointer</a></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Reference counted pointer base class. </p>
 <p>One of the most important classes. In fact on the internal side of things this perhaps is the most important class. It handles reference counting of all internal objects allocated using the new operator. The object deletes itself when its reference count reaches zero. This helps manage object lifetimes especially with dynamically allocated audio components. A 'weak' version of this pointer can also be obtained which will not affect the reference count but will get set to 0 when its <a class="el" href="class_smart_pointer.html" title="Reference counted pointer base class.">SmartPointer</a> peer is deleted. </p>
-<dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="class_weak_pointer.html" title="Holds a weak reference to a SmartPointer.">WeakPointer</a>, <a class="el" href="class_smart_pointer_container.html">SmartPointerContainer</a> </dd></dl>
-</div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a279a99170aded5dad1d4cf939bbc8fbe"></a><!-- doxytag: member="SmartPointer::SmartPointer" ref="a279a99170aded5dad1d4cf939bbc8fbe" args="(const bool allocateWeakPointer=true)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">SmartPointer::SmartPointer </td>
-          <td>(</td>
-          <td class="paramtype">const bool&#160;</td>
-          <td class="paramname"><em>allocateWeakPointer</em> = <code>true</code></td><td>)</td>
-          <td>  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a961ec2a7684ba32d0aaff86969c28099"></a><!-- doxytag: member="SmartPointer::~SmartPointer" ref="a961ec2a7684ba32d0aaff86969c28099" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">SmartPointer::~SmartPointer </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td><code> [virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="ad9196fe14d4e4d9b1c28982738436544"></a><!-- doxytag: member="SmartPointer::incrementRefCount" ref="ad9196fe14d4e4d9b1c28982738436544" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void SmartPointer::incrementRefCount </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="acea9f749c0ab920d2833d4bb81f6eb9f"></a><!-- doxytag: member="SmartPointer::decrementRefCount" ref="acea9f749c0ab920d2833d4bb81f6eb9f" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void SmartPointer::decrementRefCount </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a91e9d2ec0e1ed1d0d34344f4c8b63994"></a><!-- doxytag: member="SmartPointer::update" ref="a91e9d2ec0e1ed1d0d34344f4c8b63994" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void SmartPointer::update </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Reimplemented in <a class="el" href="class_sender_internal.html#a3c1c3d0839c682179b82ef1b93dd6ec1">SenderInternal&lt; SenderContainerBaseType &gt;</a>, <a class="el" href="class_sender_internal.html#a3c1c3d0839c682179b82ef1b93dd6ec1">SenderInternal&lt; ChannelBase&lt; SampleType &gt; &gt;</a>, <a class="el" href="class_sender_internal.html#a3c1c3d0839c682179b82ef1b93dd6ec1">SenderInternal&lt; ChannelBase&lt; FormType::SampleDataType &gt; &gt;</a>, <a class="el" href="class_sender_internal.html#a3c1c3d0839c682179b82ef1b93dd6ec1">SenderInternal&lt; ProcessInfo &gt;</a>, <a class="el" href="class_sender_internal.html#a3c1c3d0839c682179b82ef1b93dd6ec1">SenderInternal&lt; Variable&lt; Type &gt; &gt;</a>, <a class="el" href="class_sender_internal.html#a3c1c3d0839c682179b82ef1b93dd6ec1">SenderInternal&lt; ChannelBase&lt; OutputSampleType &gt; &gt;</a>, <a class="el" href="class_sender_internal.html#a3c1c3d0839c682179b82ef1b93dd6ec1">SenderInternal&lt; BreakpointsBase&lt; SampleType &gt; &gt;</a>, <a class="el" href="class_sender_internal.html#a3c1c3d0839c682179b82ef1b93dd6ec1">SenderInternal&lt; ChannelBase&lt; ShapeType::SampleDataType &gt; &gt;</a>, and <a class="el" href="class_sender_internal.html#a3c1c3d0839c682179b82ef1b93dd6ec1">SenderInternal&lt; BreakpointBase&lt; SampleType &gt; &gt;</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="afce7e04754b78ffcb484c8b5108d799a"></a><!-- doxytag: member="SmartPointer::getWeak" ref="afce7e04754b78ffcb484c8b5108d799a" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void * SmartPointer::getWeak </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a02d93e0dab37f421808dc02dc348d7fd"></a><!-- doxytag: member="SmartPointer::getRefCount" ref="a02d93e0dab37f421808dc02dc348d7fd" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int SmartPointer::getRefCount </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<hr/><h2>Friends And Related Function Documentation</h2>
-<a class="anchor" id="ae9317dca421926e7b6140f0675ee70d9"></a><!-- doxytag: member="SmartPointer::WeakPointer" ref="ae9317dca421926e7b6140f0675ee70d9" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">friend class <a class="el" href="class_weak_pointer.html">WeakPointer</a><code> [friend]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<hr/><h2>Member Data Documentation</h2>
-<a class="anchor" id="a7ba301343cc7433dab04868a57419aba"></a><!-- doxytag: member="SmartPointer::counter" ref="a7ba301343cc7433dab04868a57419aba" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_smart_pointer_counter.html">SmartPointerCounter</a>* <a class="el" href="class_smart_pointer.html#a7ba301343cc7433dab04868a57419aba">SmartPointer::counter</a><code> [protected]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a9d43530959d2bb8831e77832fe9a7271"></a><!-- doxytag: member="SmartPointer::weakPointer" ref="a9d43530959d2bb8831e77832fe9a7271" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_atomic_value.html">AtomicValue</a>&lt;void*&gt; <a class="el" href="class_smart_pointer.html#a9d43530959d2bb8831e77832fe9a7271">SmartPointer::weakPointer</a><code> [protected]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<hr/>The documentation for this class was generated from the following files:<ul>
+<dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="class_weak_pointer.html" title="Holds a weak reference to a SmartPointer.">WeakPointer</a>, SmartPointerContainer </dd></dl>
+</div><hr/>The documentation for this class was generated from the following files:<ul>
 <li><a class="el" href="plonk___smart_pointer_8h_source.html">plonk_SmartPointer.h</a></li>
-<li><a class="el" href="plonk___smart_pointer_8cpp.html">plonk_SmartPointer.cpp</a></li>
+<li>plonk_SmartPointer.cpp</li>
 </ul>
 </div>
 <!-- window showing the filter options -->
@@ -314,7 +115,7 @@ Friends</h2></td></tr>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Properties</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -323,7 +124,7 @@ Friends</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 5 2012 17:05:10 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 8 2014 12:26:52 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

@@ -20,7 +20,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="pl-nk-logo-small.png"/></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">pl-nk</div>
+   <div id="projectname">pl-nk&#160;<span id="projectnumber">v0.4.5</span></div>
+   <div id="projectbrief">Plonk|Plink|Plank are a set of cross-platform C/C++ frameworks for audio software development</div>
   </td>
  </tr>
  </tbody>
@@ -29,8 +30,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -61,10 +62,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   </div>
 </div>
 <div class="header">
-  <div class="summary">
-<a href="#pub-types">Public Types</a> &#124;
-<a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pub-static-methods">Static Public Member Functions</a>  </div>
   <div class="headertitle">
 <div class="title">SmartPointerContainerBase&lt; SmartPointerType &gt; Class Template Reference</div>  </div>
 </div>
@@ -72,361 +69,22 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <!-- doxytag: class="SmartPointerContainerBase" --><!-- doxytag: inherits="PlonkBase" -->
 <p>This manages a <a class="el" href="class_smart_pointer.html" title="Reference counted pointer base class.">SmartPointer</a> pointer.  
  <a href="class_smart_pointer_container_base.html#details">More...</a></p>
-<div class="dynheader">
-Inheritance diagram for SmartPointerContainerBase&lt; SmartPointerType &gt;:</div>
-<div class="dyncontent">
- <div class="center">
-  <img src="class_smart_pointer_container_base.png" usemap="#SmartPointerContainerBase&lt; SmartPointerType &gt;_map" alt=""/>
-  <map id="SmartPointerContainerBase&lt; SmartPointerType &gt;_map" name="SmartPointerContainerBase&lt; SmartPointerType &gt;_map">
-<area href="class_plonk_base.html" alt="PlonkBase" shape="rect" coords="877,0,1218,24"/>
-<area href="class_smart_pointer_container.html" alt="SmartPointerContainer&lt; SmartPointerType, enableWeak &gt;" shape="rect" coords="702,112,1043,136"/>
-<area href="class_smart_pointer_container_3_01_smart_pointer_type_00_01true_01_4.html" alt="SmartPointerContainer&lt; SmartPointerType, true &gt;" shape="rect" coords="1053,112,1394,136"/>
-<area href="class_dictionary.html" alt="Dictionary&lt; Dynamic &gt;" shape="rect" coords="0,168,341,192"/>
-<area href="class_dictionary.html" alt="Dictionary&lt; Dynamic, int &gt;" shape="rect" coords="351,168,692,192"/>
-<area href="class_simple_array.html" alt="SimpleArray&lt; Receiver * &gt;" shape="rect" coords="702,168,1043,192"/>
-<area href="class_simple_array.html" alt="SimpleArray&lt; WeakChannelType &gt;" shape="rect" coords="1053,168,1394,192"/>
-<area href="class_simple_array.html" alt="SimpleArray&lt; WeakPointer * &gt;" shape="rect" coords="1404,168,1745,192"/>
-<area href="class_input_dictionary.html" title="For storing named Dynamic objects." alt="InputDictionary" shape="rect" coords="351,224,692,248"/>
-</map>
- </div></div>
+
+<p>Inherits PlonkBase.</p>
+
+<p>Inherited by SmartPointerContainer&lt; SmartPointerType, enableWeak &gt;, and SmartPointerContainer&lt; SmartPointerType, true &gt;.</p>
 
 <p><a href="class_smart_pointer_container_base-members.html">List of all members.</a></p>
 <table class="memberdecls">
-<tr><td colspan="2"><h2><a name="pub-types"></a>
-Public Types</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_atomic_value.html">AtomicValue</a><br class="typebreak"/>
-&lt; SmartPointerType * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_smart_pointer_container_base.html#aa31289c51ec8b1e8b8c8195a65c4d7d6">AtomicPointer</a></td></tr>
-<tr><td colspan="2"><h2><a name="pub-methods"></a>
-Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_smart_pointer_container_base.html#abf47d2517e818529f0245f288db2758c">SmartPointerContainerBase</a> ()  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_smart_pointer_container_base.html#ae4a87725d290a54126ec2e784bcbbbac">SmartPointerContainerBase</a> (SmartPointerType *internalToUse)  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_smart_pointer_container_base.html#a800cd098744c578cb4e753ff760747e9">~SmartPointerContainerBase</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">SmartPointerType *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_smart_pointer_container_base.html#a6d288e885102290e991d01ae06eaacde">getInternal</a> () const   throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">SmartPointerType *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_smart_pointer_container_base.html#ab65284d17f2082ce89f6b1017011e418">operator-&gt;</a> ()  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">const SmartPointerType *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_smart_pointer_container_base.html#a2ba4f8902c0316ee3b8dbe10c3332002">operator-&gt;</a> () const   throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_smart_pointer_container_base.html#aac32791ba8b99b3192c00d9a8f8c8230">isNull</a> () const   throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_smart_pointer_container_base.html#a9255ebf1edd50a68f0e13fb44bb64b96">isNotNull</a> () const   throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_smart_pointer_container_base.html#a0937fdc04eafc3a2146a6af5320e5a37">setInternal</a> (SmartPointerType *newInternal)  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_smart_pointer_container_base.html#a49dec06541146fd3ff775138ce5f1bf4">swapWith</a> (<a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase</a> &amp;other)  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_smart_pointer_container_base.html#ab97a4bb2acb102167efbdb7bb5f4194e">SmartPointerContainerBase</a> (<a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase</a> const &amp;copy)  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_smart_pointer_container_base.html#a20a9af201c3d587dd03efcef71bce49a">operator=</a> (<a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase</a> const &amp;other)  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_smart_pointer_container_base.html#ad23798be71a0bd1efabcb953c2c46790">operator==</a> (<a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase</a> const &amp;other) const   throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_smart_pointer_container_base.html#a92b2a81394b783ca08efd9971a723339">operator!=</a> (<a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase</a> const &amp;other) const   throw ()</td></tr>
-<tr><td colspan="2"><h2><a name="pub-static-methods"></a>
-Static Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static SmartPointerType *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_smart_pointer_container_base.html#af5db6ee7c8278547417d184f1db79569">getNullSmartPointer</a> ()  throw ()</td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><h3>template&lt;class SmartPointerType&gt;<br/>
 class SmartPointerContainerBase&lt; SmartPointerType &gt;</h3>
 
 <p>This manages a <a class="el" href="class_smart_pointer.html" title="Reference counted pointer base class.">SmartPointer</a> pointer. </p>
-<p>This class and its subclasses are passed around by value (or reference) and if a copy is made it actually just copies the <a class="el" href="class_smart_pointer.html" title="Reference counted pointer base class.">SmartPointer</a> it contains incrementing its reference count. As <a class="el" href="class_smart_pointer_container.html">SmartPointerContainer</a> objects are deleted the reference count of its contained <a class="el" href="class_smart_pointer.html" title="Reference counted pointer base class.">SmartPointer</a> are decremented (thus deleting them only if the reference count reaches zero). Almost all other Plonk concepts (i.e., arrays, channels, units) comprise an 'internal' (which is a subclass of <a class="el" href="class_smart_pointer.html" title="Reference counted pointer base class.">SmartPointer</a>) and 'external' (which is a subclass of <a class="el" href="class_smart_pointer_container.html">SmartPointerContainer</a>) representation. </p>
-<dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="class_sender_container.html">SenderContainer</a> </dd></dl>
-</div><hr/><h2>Member Typedef Documentation</h2>
-<a class="anchor" id="aa31289c51ec8b1e8b8c8195a65c4d7d6"></a><!-- doxytag: member="SmartPointerContainerBase::AtomicPointer" ref="aa31289c51ec8b1e8b8c8195a65c4d7d6" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SmartPointerType&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_atomic_value.html">AtomicValue</a>&lt;SmartPointerType*&gt; <a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase</a>&lt; SmartPointerType &gt;::<a class="el" href="class_atomic_value.html">AtomicPointer</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<hr/><h2>Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="abf47d2517e818529f0245f288db2758c"></a><!-- doxytag: member="SmartPointerContainerBase::SmartPointerContainerBase" ref="abf47d2517e818529f0245f288db2758c" args="()" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SmartPointerType&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase</a>&lt; SmartPointerType &gt;::<a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase</a> </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ae4a87725d290a54126ec2e784bcbbbac"></a><!-- doxytag: member="SmartPointerContainerBase::SmartPointerContainerBase" ref="ae4a87725d290a54126ec2e784bcbbbac" args="(SmartPointerType *internalToUse)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SmartPointerType&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase</a>&lt; SmartPointerType &gt;::<a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase</a> </td>
-          <td>(</td>
-          <td class="paramtype">SmartPointerType *&#160;</td>
-          <td class="paramname"><em>internalToUse</em></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a800cd098744c578cb4e753ff760747e9"></a><!-- doxytag: member="SmartPointerContainerBase::~SmartPointerContainerBase" ref="a800cd098744c578cb4e753ff760747e9" args="()" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SmartPointerType&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase</a>&lt; SmartPointerType &gt;::~<a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase</a> </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td><code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ab97a4bb2acb102167efbdb7bb5f4194e"></a><!-- doxytag: member="SmartPointerContainerBase::SmartPointerContainerBase" ref="ab97a4bb2acb102167efbdb7bb5f4194e" args="(SmartPointerContainerBase const &amp;copy)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SmartPointerType&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase</a>&lt; SmartPointerType &gt;::<a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase</a> </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase</a>&lt; SmartPointerType &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>copy</em></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="af5db6ee7c8278547417d184f1db79569"></a><!-- doxytag: member="SmartPointerContainerBase::getNullSmartPointer" ref="af5db6ee7c8278547417d184f1db79569" args="()" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SmartPointerType&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">static SmartPointerType* <a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase</a>&lt; SmartPointerType &gt;::getNullSmartPointer </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a6d288e885102290e991d01ae06eaacde"></a><!-- doxytag: member="SmartPointerContainerBase::getInternal" ref="a6d288e885102290e991d01ae06eaacde" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SmartPointerType&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">SmartPointerType* <a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase</a>&lt; SmartPointerType &gt;::getInternal </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ab65284d17f2082ce89f6b1017011e418"></a><!-- doxytag: member="SmartPointerContainerBase::operator&#45;&gt;" ref="ab65284d17f2082ce89f6b1017011e418" args="()" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SmartPointerType&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">SmartPointerType* <a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase</a>&lt; SmartPointerType &gt;::operator-&gt; </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Reimplemented in <a class="el" href="class_breakpoint_base.html#a023a332b219c3b5a86980e7973ce7f7e">BreakpointBase&lt; SampleType &gt;</a>, <a class="el" href="class_breakpoints_base.html#aa83201b2b80de5a83531ad7d935c8215">BreakpointsBase&lt; SampleType &gt;</a>, <a class="el" href="class_dictionary.html#a7a7216ec346e85989ff8246aef1e806f">Dictionary&lt; ValueType, KeyType &gt;</a>, <a class="el" href="class_dynamic.html#a6dfef1c068fb0a27c863314a1a0c5fe4">Dynamic</a>, <a class="el" href="class_lock_free_queue.html#a22c625cadfe57595b39c9df0eb586910">LockFreeQueue&lt; ValueType &gt;</a>, <a class="el" href="class_lock_free_stack.html#a059158ab89d9b53e7a190bc4249cca64">LockFreeStack&lt; ValueType &gt;</a>, <a class="el" href="class_numerical_array.html#a8eb7fb87741fcb4f53a8c8580ea5f68d">NumericalArray&lt; NumericalType &gt;</a>, <a class="el" href="class_numerical_array2_d.html#a24dfa3964d51a4c50b55efcc421e2e42">NumericalArray2D&lt; NumericalType, RowType &gt;</a>, <a class="el" href="class_object_array.html#ab5fac0ee11cf250bbc316953b08bd5da">ObjectArray&lt; ObjectType &gt;</a>, <a class="el" href="class_object_array2_d.html#a1735a1cdf79753358cbf88619978f92f">ObjectArray2D&lt; ArrayType, RowType &gt;</a>, <a class="el" href="class_signal_base.html#a0ab5a6e9a6b55a8a029d9a5d48de75f7">SignalBase&lt; SampleType &gt;</a>, <a class="el" href="class_simple_array.html#a7131034acf7087260d558bacd69e27ab">SimpleArray&lt; ObjectType &gt;</a>, <a class="el" href="class_simple_linked_list.html#a0dfd855862e841b850b7fa89d06e3493">SimpleLinkedList&lt; ValueType &gt;</a>, <a class="el" href="class_simple_queue.html#aa185f6138c634d9fe2d9128d1ef3e67e">SimpleQueue&lt; ValueType &gt;</a>, <a class="el" href="class_simple_stack.html#a3edcf86b0155dafbec3420dded091ca0">SimpleStack&lt; ValueType &gt;</a>, <a class="el" href="class_text.html#a587940ae3d26fc08a2032439b13cb504">Text</a>, <a class="el" href="class_text_array.html#a44fafe9b6ccb773495521a2362bce202">TextArray</a>, <a class="el" href="class_wavetable_base.html#a66b2d7c7ba152a36242e3e686ee4b4f5">WavetableBase&lt; SampleType &gt;</a>, <a class="el" href="class_variable_3_01_type_01_6_01_4.html#a503a1c30cf04ad71a2db12cc0a04ad47">Variable&lt; Type &amp; &gt;</a>, <a class="el" href="class_lock.html#a9550682bd3f13d699e3f740c73d41b9f">Lock</a>, <a class="el" href="class_locked_value.html#ae9cde87bf58e560649c4b9e9e327aab3">LockedValue&lt; Type &gt;</a>, <a class="el" href="class_binary_file.html#a7b1621b3329910dec697d96c78124e59">BinaryFile</a>, <a class="el" href="class_text_file.html#af3755bb184a081d7588b824fb892594a">TextFile</a>, <a class="el" href="class_unit_base.html#abc0513028b2305fd7423c74cf6ae8cd4">UnitBase&lt; SampleType &gt;</a>, <a class="el" href="class_block_size.html#a587b509c45d6de7a40881c30f1f7d434">BlockSize</a>, <a class="el" href="class_bus_buffer.html#ad36329cdff85460411a5dee651be52f2">BusBuffer&lt; SampleType &gt;</a>, <a class="el" href="class_input_dictionary.html#a9deee976aa50b7a376b619731311e67f">InputDictionary</a>, <a class="el" href="class_process_info.html#a8825c685800fe66da3426cbcd7c68836">ProcessInfo</a>, <a class="el" href="class_sample_rate.html#aee8b329f8bdb14c3ce170faba35027af">SampleRate</a>, <a class="el" href="class_r_n_g.html#a80ae0c62a18121e55840f4e3f8c886d0">RNG</a>, <a class="el" href="class_dictionary.html#a7a7216ec346e85989ff8246aef1e806f">Dictionary&lt; Dynamic &gt;</a>, <a class="el" href="class_dictionary.html#a7a7216ec346e85989ff8246aef1e806f">Dictionary&lt; Text, Function &gt;</a>, <a class="el" href="class_dictionary.html#a7a7216ec346e85989ff8246aef1e806f">Dictionary&lt; Dynamic, int &gt;</a>, <a class="el" href="class_lock_free_queue.html#a22c625cadfe57595b39c9df0eb586910">LockFreeQueue&lt; Element &gt;</a>, <a class="el" href="class_lock_free_queue.html#a22c625cadfe57595b39c9df0eb586910">LockFreeQueue&lt; Buffer &gt;</a>, <a class="el" href="class_numerical_array.html#a8eb7fb87741fcb4f53a8c8580ea5f68d">NumericalArray&lt; ShapeType::SampleDataType &gt;</a>, <a class="el" href="class_numerical_array.html#a8eb7fb87741fcb4f53a8c8580ea5f68d">NumericalArray&lt; SampleType &gt;</a>, <a class="el" href="class_numerical_array.html#a8eb7fb87741fcb4f53a8c8580ea5f68d">NumericalArray&lt; Float &gt;</a>, <a class="el" href="class_numerical_array.html#a8eb7fb87741fcb4f53a8c8580ea5f68d">NumericalArray&lt; OutputSampleType &gt;</a>, <a class="el" href="class_numerical_array.html#a8eb7fb87741fcb4f53a8c8580ea5f68d">NumericalArray&lt; ChannelBase&lt; SampleType &gt; &gt;</a>, <a class="el" href="class_numerical_array.html#a8eb7fb87741fcb4f53a8c8580ea5f68d">NumericalArray&lt; const SampleType * &gt;</a>, <a class="el" href="class_numerical_array.html#a8eb7fb87741fcb4f53a8c8580ea5f68d">NumericalArray&lt; Int &gt;</a>, <a class="el" href="class_numerical_array.html#a8eb7fb87741fcb4f53a8c8580ea5f68d">NumericalArray&lt; BusType &gt;</a>, <a class="el" href="class_numerical_array.html#a8eb7fb87741fcb4f53a8c8580ea5f68d">NumericalArray&lt; FormType::SampleDataType &gt;</a>, <a class="el" href="class_numerical_array.html#a8eb7fb87741fcb4f53a8c8580ea5f68d">NumericalArray&lt; Char &gt;</a>, <a class="el" href="class_numerical_array.html#a8eb7fb87741fcb4f53a8c8580ea5f68d">NumericalArray&lt; SampleType * &gt;</a>, <a class="el" href="class_numerical_array.html#a8eb7fb87741fcb4f53a8c8580ea5f68d">NumericalArray&lt; float * &gt;</a>, <a class="el" href="class_numerical_array.html#a8eb7fb87741fcb4f53a8c8580ea5f68d">NumericalArray&lt; const float * &gt;</a>, <a class="el" href="class_numerical_array.html#a8eb7fb87741fcb4f53a8c8580ea5f68d">NumericalArray&lt; ChannelBase&lt; float &gt; &gt;</a>, <a class="el" href="class_numerical_array2_d.html#a24dfa3964d51a4c50b55efcc421e2e42">NumericalArray2D&lt; SampleType &gt;</a>, <a class="el" href="class_object_array.html#ab5fac0ee11cf250bbc316953b08bd5da">ObjectArray&lt; ShapeType::SampleDataType &gt;</a>, <a class="el" href="class_object_array.html#ab5fac0ee11cf250bbc316953b08bd5da">ObjectArray&lt; NumericalType &gt;</a>, <a class="el" href="class_object_array.html#ab5fac0ee11cf250bbc316953b08bd5da">ObjectArray&lt; SampleType &gt;</a>, <a class="el" href="class_object_array.html#ab5fac0ee11cf250bbc316953b08bd5da">ObjectArray&lt; Float &gt;</a>, <a class="el" href="class_object_array.html#ab5fac0ee11cf250bbc316953b08bd5da">ObjectArray&lt; OutputSampleType &gt;</a>, <a class="el" href="class_object_array.html#ab5fac0ee11cf250bbc316953b08bd5da">ObjectArray&lt; RowType &gt;</a>, <a class="el" href="class_object_array.html#ab5fac0ee11cf250bbc316953b08bd5da">ObjectArray&lt; KeyType &gt;</a>, <a class="el" href="class_object_array.html#ab5fac0ee11cf250bbc316953b08bd5da">ObjectArray&lt; ChannelBase&lt; SampleType &gt; &gt;</a>, <a class="el" href="class_object_array.html#ab5fac0ee11cf250bbc316953b08bd5da">ObjectArray&lt; const SampleType * &gt;</a>, <a class="el" href="class_object_array.html#ab5fac0ee11cf250bbc316953b08bd5da">ObjectArray&lt; Int &gt;</a>, <a class="el" href="class_object_array.html#ab5fac0ee11cf250bbc316953b08bd5da">ObjectArray&lt; BusType &gt;</a>, <a class="el" href="class_object_array.html#ab5fac0ee11cf250bbc316953b08bd5da">ObjectArray&lt; FormType::SampleDataType &gt;</a>, <a class="el" href="class_object_array.html#ab5fac0ee11cf250bbc316953b08bd5da">ObjectArray&lt; Char &gt;</a>, <a class="el" href="class_object_array.html#ab5fac0ee11cf250bbc316953b08bd5da">ObjectArray&lt; SampleType * &gt;</a>, <a class="el" href="class_object_array.html#ab5fac0ee11cf250bbc316953b08bd5da">ObjectArray&lt; ValueType &gt;</a>, <a class="el" href="class_object_array.html#ab5fac0ee11cf250bbc316953b08bd5da">ObjectArray&lt; BreakpointType &gt;</a>, <a class="el" href="class_object_array.html#ab5fac0ee11cf250bbc316953b08bd5da">ObjectArray&lt; float * &gt;</a>, <a class="el" href="class_object_array.html#ab5fac0ee11cf250bbc316953b08bd5da">ObjectArray&lt; const float * &gt;</a>, <a class="el" href="class_object_array.html#ab5fac0ee11cf250bbc316953b08bd5da">ObjectArray&lt; ChannelBase&lt; float &gt; &gt;</a>, <a class="el" href="class_object_array.html#ab5fac0ee11cf250bbc316953b08bd5da">ObjectArray&lt; IOInfo &gt;</a>, <a class="el" href="class_object_array.html#ab5fac0ee11cf250bbc316953b08bd5da">ObjectArray&lt; Text &gt;</a>, <a class="el" href="class_object_array.html#ab5fac0ee11cf250bbc316953b08bd5da">ObjectArray&lt; DelayState &gt;</a>, <a class="el" href="class_object_array.html#ab5fac0ee11cf250bbc316953b08bd5da">ObjectArray&lt; Buffer &gt;</a>, <a class="el" href="class_simple_array.html#a7131034acf7087260d558bacd69e27ab">SimpleArray&lt; WeakChannelType &gt;</a>, <a class="el" href="class_simple_array.html#a7131034acf7087260d558bacd69e27ab">SimpleArray&lt; WeakPointer * &gt;</a>, <a class="el" href="class_simple_array.html#a7131034acf7087260d558bacd69e27ab">SimpleArray&lt; Receiver * &gt;</a>, and <a class="el" href="class_unit_base.html#abc0513028b2305fd7423c74cf6ae8cd4">UnitBase&lt; float &gt;</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a2ba4f8902c0316ee3b8dbe10c3332002"></a><!-- doxytag: member="SmartPointerContainerBase::operator&#45;&gt;" ref="a2ba4f8902c0316ee3b8dbe10c3332002" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SmartPointerType&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">const SmartPointerType* <a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase</a>&lt; SmartPointerType &gt;::operator-&gt; </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Reimplemented in <a class="el" href="class_breakpoint_base.html#ac1a126ae5061c8ff25b46a5c3e5158bd">BreakpointBase&lt; SampleType &gt;</a>, <a class="el" href="class_breakpoints_base.html#a5fd37bdc7f608d9643eb67c992eba402">BreakpointsBase&lt; SampleType &gt;</a>, <a class="el" href="class_dictionary.html#a96a4c8347ab8a0373033e49e49ded93b">Dictionary&lt; ValueType, KeyType &gt;</a>, <a class="el" href="class_dynamic.html#a802330a8bb96c2e80234ed56adae990c">Dynamic</a>, <a class="el" href="class_lock_free_queue.html#a761bca97fd15e7dc4d8db86a5553fdfd">LockFreeQueue&lt; ValueType &gt;</a>, <a class="el" href="class_lock_free_stack.html#a7721983f28760f41a4c0a2b30875f3a5">LockFreeStack&lt; ValueType &gt;</a>, <a class="el" href="class_numerical_array.html#a41102ee59673f3abead0fcabb23b5e8b">NumericalArray&lt; NumericalType &gt;</a>, <a class="el" href="class_numerical_array2_d.html#a7841d3f3122ccfac7ea7e719c139e5c1">NumericalArray2D&lt; NumericalType, RowType &gt;</a>, <a class="el" href="class_object_array.html#a3db3cdbeddafbd785924fc3b7d07e4da">ObjectArray&lt; ObjectType &gt;</a>, <a class="el" href="class_object_array2_d.html#abaaec1aecf9e3efea2d3bd62867547ea">ObjectArray2D&lt; ArrayType, RowType &gt;</a>, <a class="el" href="class_signal_base.html#a04ee879d3cf2219580a8f77c10510467">SignalBase&lt; SampleType &gt;</a>, <a class="el" href="class_simple_array.html#a1064c11ec3e28a173651904fda3d13f7">SimpleArray&lt; ObjectType &gt;</a>, <a class="el" href="class_simple_linked_list.html#aa29db8e916611df7478f26516adeff2e">SimpleLinkedList&lt; ValueType &gt;</a>, <a class="el" href="class_simple_queue.html#a3d0f8601b775eaf2cc93c97076e71a55">SimpleQueue&lt; ValueType &gt;</a>, <a class="el" href="class_simple_stack.html#a9eb467c0908a44fee4d201b877b25c47">SimpleStack&lt; ValueType &gt;</a>, <a class="el" href="class_text.html#a08f8fa766d32ed5a8bae34d256a3c5e2">Text</a>, <a class="el" href="class_text_array.html#aebe21683a46f8af45422051bf62a3323">TextArray</a>, <a class="el" href="class_wavetable_base.html#a9b23de9b07c5b2c97c376a4da0da6389">WavetableBase&lt; SampleType &gt;</a>, <a class="el" href="class_variable_3_01_type_01_6_01_4.html#af98e40e55c6f7e943a45ebf1af763908">Variable&lt; Type &amp; &gt;</a>, <a class="el" href="class_lock.html#a28193ba951baa41796263f1788aed3bd">Lock</a>, <a class="el" href="class_locked_value.html#acc3e83eaee6f5d084a2fec7c4fac8828">LockedValue&lt; Type &gt;</a>, <a class="el" href="class_binary_file.html#a7a2f685b16278fc8a11a653ecc80a513">BinaryFile</a>, <a class="el" href="class_text_file.html#a118567e5e33227b3a5d4984bbdcc6502">TextFile</a>, <a class="el" href="class_unit_base.html#adffe277c06e098888002052483cf955c">UnitBase&lt; SampleType &gt;</a>, <a class="el" href="class_block_size.html#a1df8868d2a850ee865b206a72175f0eb">BlockSize</a>, <a class="el" href="class_bus_buffer.html#a5fb065871500ef9da393e85418757c8f">BusBuffer&lt; SampleType &gt;</a>, <a class="el" href="class_input_dictionary.html#ab8a1a75c1c4034efdb3f3f4f815d4b64">InputDictionary</a>, <a class="el" href="class_process_info.html#aa4f1abf334000f7fed0285d63d5dac18">ProcessInfo</a>, <a class="el" href="class_sample_rate.html#a9248ebc92ec2e41be25d0b30d76f2066">SampleRate</a>, <a class="el" href="class_r_n_g.html#a21111ad2877f2b0bfaf36fd09fce256b">RNG</a>, <a class="el" href="class_dictionary.html#a96a4c8347ab8a0373033e49e49ded93b">Dictionary&lt; Dynamic &gt;</a>, <a class="el" href="class_dictionary.html#a96a4c8347ab8a0373033e49e49ded93b">Dictionary&lt; Text, Function &gt;</a>, <a class="el" href="class_dictionary.html#a96a4c8347ab8a0373033e49e49ded93b">Dictionary&lt; Dynamic, int &gt;</a>, <a class="el" href="class_lock_free_queue.html#a761bca97fd15e7dc4d8db86a5553fdfd">LockFreeQueue&lt; Element &gt;</a>, <a class="el" href="class_lock_free_queue.html#a761bca97fd15e7dc4d8db86a5553fdfd">LockFreeQueue&lt; Buffer &gt;</a>, <a class="el" href="class_numerical_array.html#a41102ee59673f3abead0fcabb23b5e8b">NumericalArray&lt; ShapeType::SampleDataType &gt;</a>, <a class="el" href="class_numerical_array.html#a41102ee59673f3abead0fcabb23b5e8b">NumericalArray&lt; SampleType &gt;</a>, <a class="el" href="class_numerical_array.html#a41102ee59673f3abead0fcabb23b5e8b">NumericalArray&lt; Float &gt;</a>, <a class="el" href="class_numerical_array.html#a41102ee59673f3abead0fcabb23b5e8b">NumericalArray&lt; OutputSampleType &gt;</a>, <a class="el" href="class_numerical_array.html#a41102ee59673f3abead0fcabb23b5e8b">NumericalArray&lt; ChannelBase&lt; SampleType &gt; &gt;</a>, <a class="el" href="class_numerical_array.html#a41102ee59673f3abead0fcabb23b5e8b">NumericalArray&lt; const SampleType * &gt;</a>, <a class="el" href="class_numerical_array.html#a41102ee59673f3abead0fcabb23b5e8b">NumericalArray&lt; Int &gt;</a>, <a class="el" href="class_numerical_array.html#a41102ee59673f3abead0fcabb23b5e8b">NumericalArray&lt; BusType &gt;</a>, <a class="el" href="class_numerical_array.html#a41102ee59673f3abead0fcabb23b5e8b">NumericalArray&lt; FormType::SampleDataType &gt;</a>, <a class="el" href="class_numerical_array.html#a41102ee59673f3abead0fcabb23b5e8b">NumericalArray&lt; Char &gt;</a>, <a class="el" href="class_numerical_array.html#a41102ee59673f3abead0fcabb23b5e8b">NumericalArray&lt; SampleType * &gt;</a>, <a class="el" href="class_numerical_array.html#a41102ee59673f3abead0fcabb23b5e8b">NumericalArray&lt; float * &gt;</a>, <a class="el" href="class_numerical_array.html#a41102ee59673f3abead0fcabb23b5e8b">NumericalArray&lt; const float * &gt;</a>, <a class="el" href="class_numerical_array.html#a41102ee59673f3abead0fcabb23b5e8b">NumericalArray&lt; ChannelBase&lt; float &gt; &gt;</a>, <a class="el" href="class_numerical_array2_d.html#a7841d3f3122ccfac7ea7e719c139e5c1">NumericalArray2D&lt; SampleType &gt;</a>, <a class="el" href="class_object_array.html#a3db3cdbeddafbd785924fc3b7d07e4da">ObjectArray&lt; ShapeType::SampleDataType &gt;</a>, <a class="el" href="class_object_array.html#a3db3cdbeddafbd785924fc3b7d07e4da">ObjectArray&lt; NumericalType &gt;</a>, <a class="el" href="class_object_array.html#a3db3cdbeddafbd785924fc3b7d07e4da">ObjectArray&lt; SampleType &gt;</a>, <a class="el" href="class_object_array.html#a3db3cdbeddafbd785924fc3b7d07e4da">ObjectArray&lt; Float &gt;</a>, <a class="el" href="class_object_array.html#a3db3cdbeddafbd785924fc3b7d07e4da">ObjectArray&lt; OutputSampleType &gt;</a>, <a class="el" href="class_object_array.html#a3db3cdbeddafbd785924fc3b7d07e4da">ObjectArray&lt; RowType &gt;</a>, <a class="el" href="class_object_array.html#a3db3cdbeddafbd785924fc3b7d07e4da">ObjectArray&lt; KeyType &gt;</a>, <a class="el" href="class_object_array.html#a3db3cdbeddafbd785924fc3b7d07e4da">ObjectArray&lt; ChannelBase&lt; SampleType &gt; &gt;</a>, <a class="el" href="class_object_array.html#a3db3cdbeddafbd785924fc3b7d07e4da">ObjectArray&lt; const SampleType * &gt;</a>, <a class="el" href="class_object_array.html#a3db3cdbeddafbd785924fc3b7d07e4da">ObjectArray&lt; Int &gt;</a>, <a class="el" href="class_object_array.html#a3db3cdbeddafbd785924fc3b7d07e4da">ObjectArray&lt; BusType &gt;</a>, <a class="el" href="class_object_array.html#a3db3cdbeddafbd785924fc3b7d07e4da">ObjectArray&lt; FormType::SampleDataType &gt;</a>, <a class="el" href="class_object_array.html#a3db3cdbeddafbd785924fc3b7d07e4da">ObjectArray&lt; Char &gt;</a>, <a class="el" href="class_object_array.html#a3db3cdbeddafbd785924fc3b7d07e4da">ObjectArray&lt; SampleType * &gt;</a>, <a class="el" href="class_object_array.html#a3db3cdbeddafbd785924fc3b7d07e4da">ObjectArray&lt; ValueType &gt;</a>, <a class="el" href="class_object_array.html#a3db3cdbeddafbd785924fc3b7d07e4da">ObjectArray&lt; BreakpointType &gt;</a>, <a class="el" href="class_object_array.html#a3db3cdbeddafbd785924fc3b7d07e4da">ObjectArray&lt; float * &gt;</a>, <a class="el" href="class_object_array.html#a3db3cdbeddafbd785924fc3b7d07e4da">ObjectArray&lt; const float * &gt;</a>, <a class="el" href="class_object_array.html#a3db3cdbeddafbd785924fc3b7d07e4da">ObjectArray&lt; ChannelBase&lt; float &gt; &gt;</a>, <a class="el" href="class_object_array.html#a3db3cdbeddafbd785924fc3b7d07e4da">ObjectArray&lt; IOInfo &gt;</a>, <a class="el" href="class_object_array.html#a3db3cdbeddafbd785924fc3b7d07e4da">ObjectArray&lt; Text &gt;</a>, <a class="el" href="class_object_array.html#a3db3cdbeddafbd785924fc3b7d07e4da">ObjectArray&lt; DelayState &gt;</a>, <a class="el" href="class_object_array.html#a3db3cdbeddafbd785924fc3b7d07e4da">ObjectArray&lt; Buffer &gt;</a>, <a class="el" href="class_simple_array.html#a1064c11ec3e28a173651904fda3d13f7">SimpleArray&lt; WeakChannelType &gt;</a>, <a class="el" href="class_simple_array.html#a1064c11ec3e28a173651904fda3d13f7">SimpleArray&lt; WeakPointer * &gt;</a>, <a class="el" href="class_simple_array.html#a1064c11ec3e28a173651904fda3d13f7">SimpleArray&lt; Receiver * &gt;</a>, and <a class="el" href="class_unit_base.html#adffe277c06e098888002052483cf955c">UnitBase&lt; float &gt;</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="aac32791ba8b99b3192c00d9a8f8c8230"></a><!-- doxytag: member="SmartPointerContainerBase::isNull" ref="aac32791ba8b99b3192c00d9a8f8c8230" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SmartPointerType&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">bool <a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase</a>&lt; SmartPointerType &gt;::isNull </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Reimplemented in <a class="el" href="class_channel_base.html#a8e1db907f77f6031c5c53646ca0887c6">ChannelBase&lt; SampleType &gt;</a>, <a class="el" href="class_unit_base.html#a2b9e0433de29cce99dfa9e04cf7b4074">UnitBase&lt; SampleType &gt;</a>, and <a class="el" href="class_unit_base.html#a2b9e0433de29cce99dfa9e04cf7b4074">UnitBase&lt; float &gt;</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a9255ebf1edd50a68f0e13fb44bb64b96"></a><!-- doxytag: member="SmartPointerContainerBase::isNotNull" ref="a9255ebf1edd50a68f0e13fb44bb64b96" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SmartPointerType&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">bool <a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase</a>&lt; SmartPointerType &gt;::isNotNull </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Reimplemented in <a class="el" href="class_channel_base.html#a3ed60efd2c54e401f751d8175b2ca832">ChannelBase&lt; SampleType &gt;</a>, <a class="el" href="class_unit_base.html#afebc412bbc462492297cb0bb96d2b46a">UnitBase&lt; SampleType &gt;</a>, and <a class="el" href="class_unit_base.html#afebc412bbc462492297cb0bb96d2b46a">UnitBase&lt; float &gt;</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a0937fdc04eafc3a2146a6af5320e5a37"></a><!-- doxytag: member="SmartPointerContainerBase::setInternal" ref="a0937fdc04eafc3a2146a6af5320e5a37" args="(SmartPointerType *newInternal)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SmartPointerType&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase</a>&lt; SmartPointerType &gt;::setInternal </td>
-          <td>(</td>
-          <td class="paramtype">SmartPointerType *&#160;</td>
-          <td class="paramname"><em>newInternal</em></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a49dec06541146fd3ff775138ce5f1bf4"></a><!-- doxytag: member="SmartPointerContainerBase::swapWith" ref="a49dec06541146fd3ff775138ce5f1bf4" args="(SmartPointerContainerBase &amp;other)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SmartPointerType&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase</a>&lt; SmartPointerType &gt;::swapWith </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase</a>&lt; SmartPointerType &gt; &amp;&#160;</td>
-          <td class="paramname"><em>other</em></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a20a9af201c3d587dd03efcef71bce49a"></a><!-- doxytag: member="SmartPointerContainerBase::operator=" ref="a20a9af201c3d587dd03efcef71bce49a" args="(SmartPointerContainerBase const &amp;other)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SmartPointerType&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase</a>&amp; <a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase</a>&lt; SmartPointerType &gt;::operator= </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase</a>&lt; SmartPointerType &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>other</em></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ad23798be71a0bd1efabcb953c2c46790"></a><!-- doxytag: member="SmartPointerContainerBase::operator==" ref="ad23798be71a0bd1efabcb953c2c46790" args="(SmartPointerContainerBase const &amp;other) const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SmartPointerType&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">bool <a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase</a>&lt; SmartPointerType &gt;::operator== </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase</a>&lt; SmartPointerType &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>other</em></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a92b2a81394b783ca08efd9971a723339"></a><!-- doxytag: member="SmartPointerContainerBase::operator!=" ref="a92b2a81394b783ca08efd9971a723339" args="(SmartPointerContainerBase const &amp;other) const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SmartPointerType&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">bool <a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase</a>&lt; SmartPointerType &gt;::operator!= </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase</a>&lt; SmartPointerType &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>other</em></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<hr/>The documentation for this class was generated from the following file:<ul>
+<p>This class and its subclasses are passed around by value (or reference) and if a copy is made it actually just copies the <a class="el" href="class_smart_pointer.html" title="Reference counted pointer base class.">SmartPointer</a> it contains incrementing its reference count. As SmartPointerContainer objects are deleted the reference count of its contained <a class="el" href="class_smart_pointer.html" title="Reference counted pointer base class.">SmartPointer</a> are decremented (thus deleting them only if the reference count reaches zero). Almost all other Plonk concepts (i.e., arrays, channels, units) comprise an 'internal' (which is a subclass of <a class="el" href="class_smart_pointer.html" title="Reference counted pointer base class.">SmartPointer</a>) and 'external' (which is a subclass of SmartPointerContainer) representation. </p>
+<dl class="see"><dt><b>See also:</b></dt><dd>SenderContainer </dd></dl>
+</div><hr/>The documentation for this class was generated from the following file:<ul>
 <li><a class="el" href="plonk___smart_pointer_container_8h_source.html">plonk_SmartPointerContainer.h</a></li>
 </ul>
 </div>
@@ -435,7 +93,7 @@ template&lt;class SmartPointerType&gt; </div>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Properties</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -444,7 +102,7 @@ template&lt;class SmartPointerType&gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 5 2012 17:05:11 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 8 2014 12:26:52 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

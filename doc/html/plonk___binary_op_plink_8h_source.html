@@ -20,7 +20,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="pl-nk-logo-small.png"/></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">pl-nk</div>
+   <div id="projectname">pl-nk&#160;<span id="projectnumber">v0.4.5</span></div>
+   <div id="projectbrief">Plonk|Plink|Plank are a set of cross-platform C/C++ frameworks for audio software development</div>
   </td>
  </tr>
  </tbody>
@@ -29,8 +30,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -54,7 +55,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
       <li><a href="files.html"><span>File&#160;List</span></a></li>
-      <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
 <div class="header">
@@ -62,14 +62,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">plonk_BinaryOpPlink.h</div>  </div>
 </div>
 <div class="contents">
-<a href="plonk___binary_op_plink_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*</span>
+<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*</span>
 <a name="l00002"></a>00002 <span class="comment"> -------------------------------------------------------------------------------</span>
 <a name="l00003"></a>00003 <span class="comment"> This file is part of the Plink, Plonk, Plank libraries</span>
 <a name="l00004"></a>00004 <span class="comment">  by Martin Robinson</span>
 <a name="l00005"></a>00005 <span class="comment"> </span>
 <a name="l00006"></a>00006 <span class="comment"> http://code.google.com/p/pl-nk/</span>
 <a name="l00007"></a>00007 <span class="comment"> </span>
-<a name="l00008"></a>00008 <span class="comment"> Copyright University of the West of England, Bristol 2011-12</span>
+<a name="l00008"></a>00008 <span class="comment"> Copyright University of the West of England, Bristol 2011-14</span>
 <a name="l00009"></a>00009 <span class="comment"> All rights reserved.</span>
 <a name="l00010"></a>00010 <span class="comment"> </span>
 <a name="l00011"></a>00011 <span class="comment"> Redistribution and use in source and binary forms, with or without</span>
@@ -103,125 +103,128 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00039"></a>00039 <span class="preprocessor">#ifndef PLONK_BINARYOPPLINK_H</span>
 <a name="l00040"></a>00040 <span class="preprocessor"></span><span class="preprocessor">#define PLONK_BINARYOPPLINK_H</span>
 <a name="l00041"></a>00041 <span class="preprocessor"></span>
-<a name="l00042"></a>00042 <span class="preprocessor">#include &quot;<a class="code" href="plonk___binary_op_channel_8h.html">plonk_BinaryOpChannel.h</a>&quot;</span>
+<a name="l00042"></a>00042 <span class="preprocessor">#include &quot;plonk_BinaryOpChannel.h&quot;</span>
 <a name="l00043"></a>00043 
-<a name="l00044"></a><a class="code" href="plonk___binary_op_plink_8h.html#a2bfa361459a6eaaa769d077853a6e741">00044</a> <span class="preprocessor">#define PLONK_PLINK_BINARYOPCHANNEL_COMMON_START(PLONKOP) \</span>
+<a name="l00044"></a>00044 <span class="preprocessor">#define PLONK_PLINK_BINARYOPCHANNEL_COMMON_START(PLONKOP) \</span>
 <a name="l00045"></a>00045 <span class="preprocessor">    template&lt;&gt;\</span>
-<a name="l00046"></a>00046 <span class="preprocessor">    class BinaryOpChannelInternal&lt;float, PLONKOP&gt; : public ChannelInternal&lt;float, ChannelInternalCore::Data&gt;\</span>
-<a name="l00047"></a>00047 <span class="preprocessor">    {\</span>
-<a name="l00048"></a>00048 <span class="preprocessor">    public:\</span>
-<a name="l00049"></a>00049 <span class="preprocessor">        typedef ChannelInternalCore::Data               Data;\</span>
-<a name="l00050"></a>00050 <span class="preprocessor">        typedef ChannelBase&lt;float&gt;                      ChannelType;\</span>
-<a name="l00051"></a>00051 <span class="preprocessor">        typedef BinaryOpChannelInternal&lt;float,PLONKOP&gt;  BinaryOpInternal;\</span>
-<a name="l00052"></a>00052 <span class="preprocessor">        typedef ChannelInternal&lt;float,Data&gt;             Internal;\</span>
-<a name="l00053"></a>00053 <span class="preprocessor">        typedef ChannelInternalBase&lt;float&gt;              InternalBase;\</span>
-<a name="l00054"></a>00054 <span class="preprocessor">        typedef UnitBase&lt;float&gt;                         UnitType;\</span>
-<a name="l00055"></a>00055 <span class="preprocessor">        typedef InputDictionary                         Inputs;\</span>
-<a name="l00056"></a>00056 <span class="preprocessor">        typedef NumericalArray&lt;float&gt;                   Buffer;\</span>
-<a name="l00057"></a>00057 <span class="preprocessor">        typedef BinaryOpUtility&lt;float&gt;                  UtilityType;\</span>
-<a name="l00058"></a>00058 <span class="preprocessor">        \</span>
-<a name="l00059"></a>00059 <span class="preprocessor">        enum InputIndices { LeftOperand, RightOperand, NumInputs };\</span>
-<a name="l00060"></a>00060 <span class="preprocessor">        enum Outputs { Output, NumOutputs };\</span>
-<a name="l00061"></a>00061 <span class="preprocessor">        enum Buffers { OutputBuffer, LeftOperandBuffer, RightOperandBuffer, NumBuffers };\</span>
-<a name="l00062"></a>00062 <span class="preprocessor">        typedef PlinkProcess&lt;NumBuffers&gt; Process;\</span>
-<a name="l00063"></a>00063 <span class="preprocessor">        \</span>
-<a name="l00064"></a>00064 <span class="preprocessor">        BinaryOpChannelInternal (Inputs const&amp; inputs, Data const&amp; data,\</span>
-<a name="l00065"></a>00065 <span class="preprocessor">                                 BlockSize const&amp; blockSize, SampleRate const&amp; sampleRate) throw()\</span>
-<a name="l00066"></a>00066 <span class="preprocessor">        :   Internal (inputs, data, blockSize, sampleRate)\</span>
-<a name="l00067"></a>00067 <span class="preprocessor">        {\</span>
-<a name="l00068"></a>00068 <span class="preprocessor">            plonk_staticassert (NumBuffers == (NumInputs + NumOutputs));\</span>
-<a name="l00069"></a>00069 <span class="preprocessor">            Process::init (&amp;p, this, NumOutputs, NumInputs);\</span>
-<a name="l00070"></a>00070 <span class="preprocessor">        }</span>
-<a name="l00071"></a>00071 <span class="preprocessor"></span>        
-<a name="l00072"></a>00072 
-<a name="l00073"></a><a class="code" href="plonk___binary_op_plink_8h.html#a0c4985800f49e4d5504940902867c95d">00073</a> <span class="preprocessor">#define PLONK_PLINK_BINARYOPCHANNEL_COMMON_END\</span>
-<a name="l00074"></a>00074 <span class="preprocessor">    private:\</span>
-<a name="l00075"></a>00075 <span class="preprocessor">        Process p;\</span>
-<a name="l00076"></a>00076 <span class="preprocessor">    };</span>
-<a name="l00077"></a>00077 <span class="preprocessor"></span>
-<a name="l00078"></a><a class="code" href="plonk___binary_op_plink_8h.html#a6b8a6dbe536f67c8fd9cbb6018cd6de5">00078</a> <span class="preprocessor">#define PLONK_PLINK_BINARYOPCHANNEL_FUNCTION(PLANKOP,TYPECODE) plink_BinaryOpProcess##PLANKOP##TYPECODE</span>
+<a name="l00046"></a>00046 <span class="preprocessor">    class BinaryOpChannelInternal&lt;float, BinaryOpFunctionsHelper&lt;float&gt;::BinaryOpFunctionsType::PLONKOP&gt;\</span>
+<a name="l00047"></a>00047 <span class="preprocessor">    : public ChannelInternal&lt;float, ChannelInternalCore::Data&gt;\</span>
+<a name="l00048"></a>00048 <span class="preprocessor">    {\</span>
+<a name="l00049"></a>00049 <span class="preprocessor">    public:\</span>
+<a name="l00050"></a>00050 <span class="preprocessor">        typedef ChannelInternalCore::Data                                       Data;\</span>
+<a name="l00051"></a>00051 <span class="preprocessor">        typedef BinaryOpFunctionsHelper&lt;float&gt;::BinaryOpFunctionsType           BinaryOpFunctionsType;\</span>
+<a name="l00052"></a>00052 <span class="preprocessor">        typedef ChannelBase&lt;float&gt;                                              ChannelType;\</span>
+<a name="l00053"></a>00053 <span class="preprocessor">        typedef BinaryOpChannelInternal&lt;float,BinaryOpFunctionsType::PLONKOP&gt;   BinaryOpInternal;\</span>
+<a name="l00054"></a>00054 <span class="preprocessor">        typedef ChannelInternal&lt;float,Data&gt;                                     Internal;\</span>
+<a name="l00055"></a>00055 <span class="preprocessor">        typedef ChannelInternalBase&lt;float&gt;                                      InternalBase;\</span>
+<a name="l00056"></a>00056 <span class="preprocessor">        typedef UnitBase&lt;float&gt;                                                 UnitType;\</span>
+<a name="l00057"></a>00057 <span class="preprocessor">        typedef InputDictionary                                                 Inputs;\</span>
+<a name="l00058"></a>00058 <span class="preprocessor">        typedef NumericalArray&lt;float&gt;                                           Buffer;\</span>
+<a name="l00059"></a>00059 <span class="preprocessor">        typedef BinaryOpUtility&lt;float&gt;                                          UtilityType;\</span>
+<a name="l00060"></a>00060 <span class="preprocessor">        \</span>
+<a name="l00061"></a>00061 <span class="preprocessor">        enum InputIndices { LeftOperand, RightOperand, NumInputs };\</span>
+<a name="l00062"></a>00062 <span class="preprocessor">        enum Outputs { Output, NumOutputs };\</span>
+<a name="l00063"></a>00063 <span class="preprocessor">        enum Buffers { OutputBuffer, LeftOperandBuffer, RightOperandBuffer, NumBuffers };\</span>
+<a name="l00064"></a>00064 <span class="preprocessor">        typedef PlinkProcess&lt;NumBuffers&gt; Process;\</span>
+<a name="l00065"></a>00065 <span class="preprocessor">        \</span>
+<a name="l00066"></a>00066 <span class="preprocessor">        BinaryOpChannelInternal (Inputs const&amp; inputs, Data const&amp; data,\</span>
+<a name="l00067"></a>00067 <span class="preprocessor">                                 BlockSize const&amp; blockSize, SampleRate const&amp; sampleRate) throw()\</span>
+<a name="l00068"></a>00068 <span class="preprocessor">        :   Internal (inputs, data, blockSize, sampleRate)\</span>
+<a name="l00069"></a>00069 <span class="preprocessor">        {\</span>
+<a name="l00070"></a>00070 <span class="preprocessor">            plonk_staticassert (NumBuffers == (NumInputs + NumOutputs));\</span>
+<a name="l00071"></a>00071 <span class="preprocessor">            Process::init (&amp;p, this, NumOutputs, NumInputs);\</span>
+<a name="l00072"></a>00072 <span class="preprocessor">        }</span>
+<a name="l00073"></a>00073 <span class="preprocessor"></span>        
+<a name="l00074"></a>00074 
+<a name="l00075"></a>00075 <span class="preprocessor">#define PLONK_PLINK_BINARYOPCHANNEL_COMMON_END\</span>
+<a name="l00076"></a>00076 <span class="preprocessor">    private:\</span>
+<a name="l00077"></a>00077 <span class="preprocessor">        Process p;\</span>
+<a name="l00078"></a>00078 <span class="preprocessor">    };</span>
 <a name="l00079"></a>00079 <span class="preprocessor"></span>
-<a name="l00080"></a><a class="code" href="plonk___binary_op_plink_8h.html#a2f456bc6b85e67e56a6845c2c18a7057">00080</a> <span class="preprocessor">#define PLONK_PLINK_BINARYOPCHANNEL_PROCESS(PLONKOP, PLANKOP) \</span>
-<a name="l00081"></a>00081 <span class="preprocessor">    Text getName() const throw() {\</span>
-<a name="l00082"></a>00082 <span class="preprocessor">        Text variant = UtilityType::global().getName (PLONKOP);\</span>
-<a name="l00083"></a>00083 <span class="preprocessor">        if (variant.length() &lt; 1) variant = &quot;unknown type&quot;;\</span>
-<a name="l00084"></a>00084 <span class="preprocessor">        return &quot;Binary Operator (&quot; + variant + &quot;)&quot;;\</span>
-<a name="l00085"></a>00085 <span class="preprocessor">    }\</span>
-<a name="l00086"></a>00086 <span class="preprocessor">    \</span>
-<a name="l00087"></a>00087 <span class="preprocessor">    IntArray getInputKeys() const throw() {\</span>
-<a name="l00088"></a>00088 <span class="preprocessor">        const IntArray keys (IOKey::LeftOperand, IOKey::RightOperand);\</span>
-<a name="l00089"></a>00089 <span class="preprocessor">        return keys;\</span>
-<a name="l00090"></a>00090 <span class="preprocessor">    }\</span>
-<a name="l00091"></a>00091 <span class="preprocessor">    \</span>
-<a name="l00092"></a>00092 <span class="preprocessor">    InternalBase* getChannel (const int index) throw() {\</span>
-<a name="l00093"></a>00093 <span class="preprocessor">        const Inputs channelInputs = this-&gt;getInputs().getChannel (index);\</span>
-<a name="l00094"></a>00094 <span class="preprocessor">        return new BinaryOpInternal (channelInputs, this-&gt;getState(), this-&gt;getBlockSize(), this-&gt;getSampleRate());\</span>
-<a name="l00095"></a>00095 <span class="preprocessor">    }\</span>
-<a name="l00096"></a>00096 <span class="preprocessor">    \</span>
-<a name="l00097"></a>00097 <span class="preprocessor">    void initChannel (const int channel) throw() {\</span>
-<a name="l00098"></a>00098 <span class="preprocessor">        const UnitType&amp; leftUnit = this-&gt;getInputAsUnit (IOKey::LeftOperand);\</span>
-<a name="l00099"></a>00099 <span class="preprocessor">        const float leftValue = leftUnit.getValue (channel);\</span>
-<a name="l00100"></a>00100 <span class="preprocessor">        const UnitType&amp; rightUnit = this-&gt;getInputAsUnit (IOKey::RightOperand);\</span>
-<a name="l00101"></a>00101 <span class="preprocessor">        const float rightValue = rightUnit.getValue (channel);\</span>
-<a name="l00102"></a>00102 <span class="preprocessor">        this-&gt;setBlockSize (BlockSize::decide (leftUnit.getBlockSize (channel).selectMax (rightUnit.getBlockSize (channel)),\</span>
-<a name="l00103"></a>00103 <span class="preprocessor">                                               this-&gt;getBlockSize()));\</span>
-<a name="l00104"></a>00104 <span class="preprocessor">        this-&gt;setSampleRate (SampleRate::decide (leftUnit.getSampleRate (channel).selectMax (rightUnit.getSampleRate (channel)),\</span>
-<a name="l00105"></a>00105 <span class="preprocessor">                                                 this-&gt;getSampleRate()));\</span>
-<a name="l00106"></a>00106 <span class="preprocessor">        const DoubleVariable leftOverlap = leftUnit.getOverlap (channel);\</span>
-<a name="l00107"></a>00107 <span class="preprocessor">        const DoubleVariable rightOverlap = rightUnit.getOverlap (channel);\</span>
-<a name="l00108"></a>00108 <span class="preprocessor">        if (leftOverlap == rightOverlap)            this-&gt;setOverlap (leftOverlap);\</span>
-<a name="l00109"></a>00109 <span class="preprocessor">        else if (leftUnit.isConstant (channel))     this-&gt;setOverlap (rightOverlap);\</span>
-<a name="l00110"></a>00110 <span class="preprocessor">        else if (rightUnit.isConstant (channel))    this-&gt;setOverlap (leftOverlap);\</span>
-<a name="l00111"></a>00111 <span class="preprocessor">        else plonk_assertfalse;\</span>
-<a name="l00112"></a>00112 <span class="preprocessor">        this-&gt;initValue (pl_##PLANKOP##F (leftValue, rightValue));\</span>
-<a name="l00113"></a>00113 <span class="preprocessor">    }\</span>
-<a name="l00114"></a>00114 <span class="preprocessor">    \</span>
-<a name="l00115"></a>00115 <span class="preprocessor">    void process (ProcessInfo&amp; info, const int channel) throw() {\</span>
-<a name="l00116"></a>00116 <span class="preprocessor">        UnitType&amp; leftUnit (this-&gt;getInputAsUnit (IOKey::LeftOperand));\</span>
-<a name="l00117"></a>00117 <span class="preprocessor">        UnitType&amp; rightUnit (this-&gt;getInputAsUnit  (IOKey::RightOperand));\</span>
-<a name="l00118"></a>00118 <span class="preprocessor">        \</span>
-<a name="l00119"></a>00119 <span class="preprocessor">        const Buffer&amp; leftBuffer (leftUnit.process (info, channel));\</span>
-<a name="l00120"></a>00120 <span class="preprocessor">        const Buffer&amp; rightBuffer (rightUnit.process (info, channel));\</span>
-<a name="l00121"></a>00121 <span class="preprocessor">        \</span>
-<a name="l00122"></a>00122 <span class="preprocessor">        p.buffers[0].bufferSize = this-&gt;getOutputBuffer().length();\</span>
-<a name="l00123"></a>00123 <span class="preprocessor">        p.buffers[0].buffer = this-&gt;getOutputSamples();\</span>
-<a name="l00124"></a>00124 <span class="preprocessor">        p.buffers[1].bufferSize = leftBuffer.length();\</span>
-<a name="l00125"></a>00125 <span class="preprocessor">        p.buffers[1].buffer = leftBuffer.getArray();\</span>
-<a name="l00126"></a>00126 <span class="preprocessor">        p.buffers[2].bufferSize = rightBuffer.length();\</span>
-<a name="l00127"></a>00127 <span class="preprocessor">        p.buffers[2].buffer = rightBuffer.getArray();\</span>
-<a name="l00128"></a>00128 <span class="preprocessor">        \</span>
-<a name="l00129"></a>00129 <span class="preprocessor">        PLONK_PLINK_BINARYOPCHANNEL_FUNCTION(PLANKOP,F) (&amp;p,0);\</span>
-<a name="l00130"></a>00130 <span class="preprocessor">    }</span>
-<a name="l00131"></a>00131 <span class="preprocessor"></span>
-<a name="l00132"></a><a class="code" href="plonk___binary_op_plink_8h.html#a3afd255216c834cf9f051faedfc76ba4">00132</a> <span class="preprocessor">#define PLONK_PLINK_BINARYOPCHANNEL(PLONKOP, PLANKOP)\</span>
-<a name="l00133"></a>00133 <span class="preprocessor">    PLONK_PLINK_BINARYOPCHANNEL_COMMON_START(PLONKOP)\</span>
-<a name="l00134"></a>00134 <span class="preprocessor">    PLONK_PLINK_BINARYOPCHANNEL_PROCESS(PLONKOP, PLANKOP)\</span>
-<a name="l00135"></a>00135 <span class="preprocessor">    PLONK_PLINK_BINARYOPCHANNEL_COMMON_END</span>
-<a name="l00136"></a>00136 <span class="preprocessor"></span>
-<a name="l00137"></a>00137 <a class="code" href="plonk___binary_op_plink_8h.html#a3afd255216c834cf9f051faedfc76ba4">PLONK_PLINK_BINARYOPCHANNEL</a>(<a class="code" href="group___plonk_binary_op_functions.html#ga8aed5431429725b65a406ad5cd4c4d59" title="Convenient inline function for the &#39;+&#39; operator.">plonk::addop</a>, Add);
-<a name="l00138"></a>00138 <a class="code" href="plonk___binary_op_plink_8h.html#a3afd255216c834cf9f051faedfc76ba4">PLONK_PLINK_BINARYOPCHANNEL</a>(<a class="code" href="group___plonk_binary_op_functions.html#gae83e120cc4ef16930adcfa5225dd8e22" title="Convenient inline function for the &#39;-&#39; operator.">plonk::subop</a>, Sub);
-<a name="l00139"></a>00139 <a class="code" href="plonk___binary_op_plink_8h.html#a3afd255216c834cf9f051faedfc76ba4">PLONK_PLINK_BINARYOPCHANNEL</a>(<a class="code" href="group___plonk_binary_op_functions.html#ga19d5763435e67473c6d33bd68e8ab84b" title="Convenient inline function for the &#39;*&#39; operator.">plonk::mulop</a>, Mul);
-<a name="l00140"></a>00140 <a class="code" href="plonk___binary_op_plink_8h.html#a3afd255216c834cf9f051faedfc76ba4">PLONK_PLINK_BINARYOPCHANNEL</a>(<a class="code" href="group___plonk_binary_op_functions.html#ga2d1760b9a86fa164a4138d8653375646" title="Convenient inline function for the &#39;/&#39; operator.">plonk::divop</a>, Div);
-<a name="l00141"></a>00141 <a class="code" href="plonk___binary_op_plink_8h.html#a3afd255216c834cf9f051faedfc76ba4">PLONK_PLINK_BINARYOPCHANNEL</a>(<a class="code" href="group___plonk_binary_op_functions.html#gabf9e7fd23a39c53e897cf66aaf90a68a" title="Returns minimum of a and b.">plonk::min</a>, Min);
-<a name="l00142"></a>00142 <a class="code" href="plonk___binary_op_plink_8h.html#a3afd255216c834cf9f051faedfc76ba4">PLONK_PLINK_BINARYOPCHANNEL</a>(<a class="code" href="group___plonk_binary_op_functions.html#gae9767f40737087f6253040a0aaee4146" title="Returns maximum of a and b.">plonk::max</a>, Max);
-<a name="l00143"></a>00143 <a class="code" href="plonk___binary_op_plink_8h.html#a3afd255216c834cf9f051faedfc76ba4">PLONK_PLINK_BINARYOPCHANNEL</a>(<a class="code" href="group___plonk_binary_op_functions.html#ga0efbcd57e8a17ef548e238ea9f35bc62" title="Returns a raised to the power b.">plonk::pow</a>, Pow);
-<a name="l00144"></a>00144 <a class="code" href="plonk___binary_op_plink_8h.html#a3afd255216c834cf9f051faedfc76ba4">PLONK_PLINK_BINARYOPCHANNEL</a>(<a class="code" href="group___plonk_binary_op_functions.html#ga4fede61eeb7c6df5cf700c59267ff483" title="Returns 1 if the inputs are equal otherwise returns 0.">plonk::isEqualTo</a>, IsEqualTo);
-<a name="l00145"></a>00145 <a class="code" href="plonk___binary_op_plink_8h.html#a3afd255216c834cf9f051faedfc76ba4">PLONK_PLINK_BINARYOPCHANNEL</a>(<a class="code" href="group___plonk_binary_op_functions.html#gab96605a7aafbad650ce77b525fa21426" title="Returns 1 if the inputs are not equal otherwise returns 0.">plonk::isNotEqualTo</a>, IsNotEqualTo);
-<a name="l00146"></a>00146 <a class="code" href="plonk___binary_op_plink_8h.html#a3afd255216c834cf9f051faedfc76ba4">PLONK_PLINK_BINARYOPCHANNEL</a>(<a class="code" href="group___plonk_binary_op_functions.html#ga592c0921ce238e5178ae0e55a8ef80ba" title="Returns 1 if the a is greater than b otherwise returns 0.">plonk::isGreaterThan</a>, IsGreaterThan);
-<a name="l00147"></a>00147 <a class="code" href="plonk___binary_op_plink_8h.html#a3afd255216c834cf9f051faedfc76ba4">PLONK_PLINK_BINARYOPCHANNEL</a>(<a class="code" href="group___plonk_binary_op_functions.html#gad044dff716c0cf73eab922c838a55829" title="Returns 1 if the a is greater than or equal to b otherwise returns 0.">plonk::isGreaterThanOrEqualTo</a>, IsGreaterThanOrEqualTo);
-<a name="l00148"></a>00148 <a class="code" href="plonk___binary_op_plink_8h.html#a3afd255216c834cf9f051faedfc76ba4">PLONK_PLINK_BINARYOPCHANNEL</a>(<a class="code" href="group___plonk_binary_op_functions.html#ga8b5df4a62179fe535aa6365f5a1b8c41" title="Returns 1 if the a is less than b otherwise returns 0.">plonk::isLessThan</a>, IsLessThan);
-<a name="l00149"></a>00149 <a class="code" href="plonk___binary_op_plink_8h.html#a3afd255216c834cf9f051faedfc76ba4">PLONK_PLINK_BINARYOPCHANNEL</a>(<a class="code" href="group___plonk_binary_op_functions.html#gaf43825d912a328a5d349ba3c36fd75bf" title="Returns 1 if the a is less than or equal to b otherwise returns 0.">plonk::isLessThanOrEqualTo</a>, IsLessThanOrEqualTo);
-<a name="l00150"></a>00150 <a class="code" href="plonk___binary_op_plink_8h.html#a3afd255216c834cf9f051faedfc76ba4">PLONK_PLINK_BINARYOPCHANNEL</a>(<a class="code" href="group___plonk_binary_op_functions.html#gad11e580e7a49db13e0b8fcd6babc4841" title="Returns .">plonk::hypot</a>, Hypot);
-<a name="l00151"></a>00151 <a class="code" href="plonk___binary_op_plink_8h.html#a3afd255216c834cf9f051faedfc76ba4">PLONK_PLINK_BINARYOPCHANNEL</a>(<a class="code" href="group___plonk_binary_op_functions.html#ga8c0089d2d96d98ca8394950fc062f1f8" title="Returns .">plonk::atan2</a>, Atan2);
-<a name="l00152"></a>00152 <a class="code" href="plonk___binary_op_plink_8h.html#a3afd255216c834cf9f051faedfc76ba4">PLONK_PLINK_BINARYOPCHANNEL</a>(<a class="code" href="group___plonk_binary_op_functions.html#ga1ecf161d4fc9111638e590270e05163c" title="Returns .">plonk::sumsqr</a>, SumSqr);
-<a name="l00153"></a>00153 <a class="code" href="plonk___binary_op_plink_8h.html#a3afd255216c834cf9f051faedfc76ba4">PLONK_PLINK_BINARYOPCHANNEL</a>(<a class="code" href="group___plonk_binary_op_functions.html#ga84eca012c2ffbe3375630ea38f38fd30" title="Returns .">plonk::difsqr</a>, DifSqr);
-<a name="l00154"></a>00154 <a class="code" href="plonk___binary_op_plink_8h.html#a3afd255216c834cf9f051faedfc76ba4">PLONK_PLINK_BINARYOPCHANNEL</a>(<a class="code" href="group___plonk_binary_op_functions.html#gaa8816d0ec4c2bfd0de5603a9b6c9badc" title="Returns .">plonk::sqrsum</a>, SqrSum);
-<a name="l00155"></a>00155 <a class="code" href="plonk___binary_op_plink_8h.html#a3afd255216c834cf9f051faedfc76ba4">PLONK_PLINK_BINARYOPCHANNEL</a>(<a class="code" href="group___plonk_binary_op_functions.html#gabed19764b5f97b7ca5f6c29fb706ce23" title="Returns .">plonk::sqrdif</a>, SqrDif);
-<a name="l00156"></a>00156 <a class="code" href="plonk___binary_op_plink_8h.html#a3afd255216c834cf9f051faedfc76ba4">PLONK_PLINK_BINARYOPCHANNEL</a>(<a class="code" href="group___plonk_binary_op_functions.html#ga01a457334184e3bbf13e3fbc60819a1a" title="Returns the absolute difference between the input arguments.">plonk::absdif</a>, AbsDif);
-<a name="l00157"></a>00157 <a class="code" href="plonk___binary_op_plink_8h.html#a3afd255216c834cf9f051faedfc76ba4">PLONK_PLINK_BINARYOPCHANNEL</a>(<a class="code" href="group___plonk_binary_op_functions.html#ga76b312f2fe7db734a1165f47a998f34c" title="If a is less than b returns 0 otherwise return a.">plonk::thresh</a>, Thresh);
-<a name="l00158"></a>00158 
-<a name="l00159"></a>00159 
-<a name="l00160"></a>00160 <span class="preprocessor">#endif // PLONK_BINARYOPPLINK_H</span>
+<a name="l00080"></a>00080 <span class="preprocessor">#define PLONK_PLINK_BINARYOPCHANNEL_FUNCTION(PLANKOP,TYPECODE) plink_BinaryOpProcess##PLANKOP##TYPECODE</span>
+<a name="l00081"></a>00081 <span class="preprocessor"></span>
+<a name="l00082"></a>00082 <span class="preprocessor">#define PLONK_PLINK_BINARYOPCHANNEL_PROCESS(PLONKOP, PLANKOP) \</span>
+<a name="l00083"></a>00083 <span class="preprocessor">    Text getName() const throw() {\</span>
+<a name="l00084"></a>00084 <span class="preprocessor">        Text variant = UtilityType::global().getName (BinaryOpFunctionsType::PLONKOP);\</span>
+<a name="l00085"></a>00085 <span class="preprocessor">        if (variant.length() &lt; 1) variant = &quot;unknown type&quot;;\</span>
+<a name="l00086"></a>00086 <span class="preprocessor">        return &quot;Binary Operator (&quot; + variant + &quot;)&quot;;\</span>
+<a name="l00087"></a>00087 <span class="preprocessor">    }\</span>
+<a name="l00088"></a>00088 <span class="preprocessor">    \</span>
+<a name="l00089"></a>00089 <span class="preprocessor">    IntArray getInputKeys() const throw() {\</span>
+<a name="l00090"></a>00090 <span class="preprocessor">        const IntArray keys (IOKey::LeftOperand, IOKey::RightOperand);\</span>
+<a name="l00091"></a>00091 <span class="preprocessor">        return keys;\</span>
+<a name="l00092"></a>00092 <span class="preprocessor">    }\</span>
+<a name="l00093"></a>00093 <span class="preprocessor">    \</span>
+<a name="l00094"></a>00094 <span class="preprocessor">    InternalBase* getChannel (const int index) throw() {\</span>
+<a name="l00095"></a>00095 <span class="preprocessor">        const Inputs channelInputs = this-&gt;getInputs().getChannel (index);\</span>
+<a name="l00096"></a>00096 <span class="preprocessor">        return new BinaryOpInternal (channelInputs, this-&gt;getState(), this-&gt;getBlockSize(), this-&gt;getSampleRate());\</span>
+<a name="l00097"></a>00097 <span class="preprocessor">    }\</span>
+<a name="l00098"></a>00098 <span class="preprocessor">    \</span>
+<a name="l00099"></a>00099 <span class="preprocessor">    void initChannel (const int channel) throw() {\</span>
+<a name="l00100"></a>00100 <span class="preprocessor">        const UnitType&amp; leftUnit = this-&gt;getInputAsUnit (IOKey::LeftOperand);\</span>
+<a name="l00101"></a>00101 <span class="preprocessor">        const float leftValue = leftUnit.getValue (channel);\</span>
+<a name="l00102"></a>00102 <span class="preprocessor">        const UnitType&amp; rightUnit = this-&gt;getInputAsUnit (IOKey::RightOperand);\</span>
+<a name="l00103"></a>00103 <span class="preprocessor">        const float rightValue = rightUnit.getValue (channel);\</span>
+<a name="l00104"></a>00104 <span class="preprocessor">        this-&gt;setBlockSize (BlockSize::decide (leftUnit.getBlockSize (channel).selectMax (rightUnit.getBlockSize (channel)),\</span>
+<a name="l00105"></a>00105 <span class="preprocessor">                                               this-&gt;getBlockSize()));\</span>
+<a name="l00106"></a>00106 <span class="preprocessor">        this-&gt;setSampleRate (SampleRate::decide (leftUnit.getSampleRate (channel).selectMax (rightUnit.getSampleRate (channel)),\</span>
+<a name="l00107"></a>00107 <span class="preprocessor">                                                 this-&gt;getSampleRate()));\</span>
+<a name="l00108"></a>00108 <span class="preprocessor">        const DoubleVariable leftOverlap = leftUnit.getOverlap (channel);\</span>
+<a name="l00109"></a>00109 <span class="preprocessor">        const DoubleVariable rightOverlap = rightUnit.getOverlap (channel);\</span>
+<a name="l00110"></a>00110 <span class="preprocessor">        if (leftOverlap == rightOverlap)            this-&gt;setOverlap (leftOverlap);\</span>
+<a name="l00111"></a>00111 <span class="preprocessor">        else if (leftUnit.isConstant (channel))     this-&gt;setOverlap (rightOverlap);\</span>
+<a name="l00112"></a>00112 <span class="preprocessor">        else if (rightUnit.isConstant (channel))    this-&gt;setOverlap (leftOverlap);\</span>
+<a name="l00113"></a>00113 <span class="preprocessor">        else plonk_assertfalse;\</span>
+<a name="l00114"></a>00114 <span class="preprocessor">        this-&gt;initValue (pl_##PLANKOP##F (leftValue, rightValue));\</span>
+<a name="l00115"></a>00115 <span class="preprocessor">    }\</span>
+<a name="l00116"></a>00116 <span class="preprocessor">    \</span>
+<a name="l00117"></a>00117 <span class="preprocessor">    void process (ProcessInfo&amp; info, const int channel) throw() {\</span>
+<a name="l00118"></a>00118 <span class="preprocessor">        UnitType&amp; leftUnit (this-&gt;getInputAsUnit (IOKey::LeftOperand));\</span>
+<a name="l00119"></a>00119 <span class="preprocessor">        UnitType&amp; rightUnit (this-&gt;getInputAsUnit  (IOKey::RightOperand));\</span>
+<a name="l00120"></a>00120 <span class="preprocessor">        \</span>
+<a name="l00121"></a>00121 <span class="preprocessor">        const Buffer&amp; leftBuffer (leftUnit.process (info, channel));\</span>
+<a name="l00122"></a>00122 <span class="preprocessor">        const Buffer&amp; rightBuffer (rightUnit.process (info, channel));\</span>
+<a name="l00123"></a>00123 <span class="preprocessor">        \</span>
+<a name="l00124"></a>00124 <span class="preprocessor">        p.buffers[0].bufferSize = this-&gt;getOutputBuffer().length();\</span>
+<a name="l00125"></a>00125 <span class="preprocessor">        p.buffers[0].buffer = this-&gt;getOutputSamples();\</span>
+<a name="l00126"></a>00126 <span class="preprocessor">        p.buffers[1].bufferSize = leftBuffer.length();\</span>
+<a name="l00127"></a>00127 <span class="preprocessor">        p.buffers[1].buffer = leftBuffer.getArray();\</span>
+<a name="l00128"></a>00128 <span class="preprocessor">        p.buffers[2].bufferSize = rightBuffer.length();\</span>
+<a name="l00129"></a>00129 <span class="preprocessor">        p.buffers[2].buffer = rightBuffer.getArray();\</span>
+<a name="l00130"></a>00130 <span class="preprocessor">        \</span>
+<a name="l00131"></a>00131 <span class="preprocessor">        PLONK_PLINK_BINARYOPCHANNEL_FUNCTION(PLANKOP,F) (&amp;p,0);\</span>
+<a name="l00132"></a>00132 <span class="preprocessor">    }</span>
+<a name="l00133"></a>00133 <span class="preprocessor"></span>
+<a name="l00134"></a>00134 <span class="preprocessor">#define PLONK_PLINK_BINARYOPCHANNEL(PLONKOP, PLANKOP)\</span>
+<a name="l00135"></a>00135 <span class="preprocessor">    PLONK_PLINK_BINARYOPCHANNEL_COMMON_START(PLONKOP)\</span>
+<a name="l00136"></a>00136 <span class="preprocessor">    PLONK_PLINK_BINARYOPCHANNEL_PROCESS(PLONKOP, PLANKOP)\</span>
+<a name="l00137"></a>00137 <span class="preprocessor">    PLONK_PLINK_BINARYOPCHANNEL_COMMON_END</span>
+<a name="l00138"></a>00138 <span class="preprocessor"></span>
+<a name="l00139"></a>00139 PLONK_PLINK_BINARYOPCHANNEL(<a class="code" href="group___plonk_binary_op_functions.html#ga8aed5431429725b65a406ad5cd4c4d59" title="Convenient inline function for the &#39;+&#39; operator.">addop</a>, Add);
+<a name="l00140"></a>00140 PLONK_PLINK_BINARYOPCHANNEL(<a class="code" href="group___plonk_binary_op_functions.html#gae83e120cc4ef16930adcfa5225dd8e22" title="Convenient inline function for the &#39;-&#39; operator.">subop</a>, Sub);
+<a name="l00141"></a>00141 PLONK_PLINK_BINARYOPCHANNEL(<a class="code" href="group___plonk_binary_op_functions.html#ga19d5763435e67473c6d33bd68e8ab84b" title="Convenient inline function for the &#39;*&#39; operator.">mulop</a>, Mul);
+<a name="l00142"></a>00142 PLONK_PLINK_BINARYOPCHANNEL(<a class="code" href="group___plonk_binary_op_functions.html#ga2d1760b9a86fa164a4138d8653375646" title="Convenient inline function for the &#39;/&#39; operator.">divop</a>, Div);
+<a name="l00143"></a>00143 PLONK_PLINK_BINARYOPCHANNEL(<a class="code" href="group___plonk_binary_op_functions.html#gac0c80e9bf4c33240c601bcae8a1fe11c" title="Convenient inline function for the &#39;%&#39; operator.">modop</a>, Mod);
+<a name="l00144"></a>00144 PLONK_PLINK_BINARYOPCHANNEL(<a class="code" href="group___plonk_binary_op_functions.html#gabf9e7fd23a39c53e897cf66aaf90a68a" title="Returns minimum of a and b.">min</a>, Min);
+<a name="l00145"></a>00145 PLONK_PLINK_BINARYOPCHANNEL(<a class="code" href="group___plonk_binary_op_functions.html#gae9767f40737087f6253040a0aaee4146" title="Returns maximum of a and b.">max</a>, Max);
+<a name="l00146"></a>00146 PLONK_PLINK_BINARYOPCHANNEL(<a class="code" href="group___plonk_binary_op_functions.html#ga0efbcd57e8a17ef548e238ea9f35bc62" title="Returns a raised to the power b.">pow</a>, Pow);
+<a name="l00147"></a>00147 PLONK_PLINK_BINARYOPCHANNEL(<a class="code" href="group___plonk_binary_op_functions.html#ga4fede61eeb7c6df5cf700c59267ff483" title="Returns 1 if the inputs are equal otherwise returns 0.">isEqualTo</a>, IsEqualTo);
+<a name="l00148"></a>00148 PLONK_PLINK_BINARYOPCHANNEL(<a class="code" href="group___plonk_binary_op_functions.html#gab96605a7aafbad650ce77b525fa21426" title="Returns 1 if the inputs are not equal otherwise returns 0.">isNotEqualTo</a>, IsNotEqualTo);
+<a name="l00149"></a>00149 PLONK_PLINK_BINARYOPCHANNEL(<a class="code" href="group___plonk_binary_op_functions.html#ga592c0921ce238e5178ae0e55a8ef80ba" title="Returns 1 if the a is greater than b otherwise returns 0.">isGreaterThan</a>, IsGreaterThan);
+<a name="l00150"></a>00150 PLONK_PLINK_BINARYOPCHANNEL(<a class="code" href="group___plonk_binary_op_functions.html#gad044dff716c0cf73eab922c838a55829" title="Returns 1 if the a is greater than or equal to b otherwise returns 0.">isGreaterThanOrEqualTo</a>, IsGreaterThanOrEqualTo);
+<a name="l00151"></a>00151 PLONK_PLINK_BINARYOPCHANNEL(<a class="code" href="group___plonk_binary_op_functions.html#ga8b5df4a62179fe535aa6365f5a1b8c41" title="Returns 1 if the a is less than b otherwise returns 0.">isLessThan</a>, IsLessThan);
+<a name="l00152"></a>00152 PLONK_PLINK_BINARYOPCHANNEL(<a class="code" href="group___plonk_binary_op_functions.html#gaf43825d912a328a5d349ba3c36fd75bf" title="Returns 1 if the a is less than or equal to b otherwise returns 0.">isLessThanOrEqualTo</a>, IsLessThanOrEqualTo);
+<a name="l00153"></a>00153 PLONK_PLINK_BINARYOPCHANNEL(<a class="code" href="group___plonk_binary_op_functions.html#gad11e580e7a49db13e0b8fcd6babc4841" title="Returns .">hypot</a>, Hypot);
+<a name="l00154"></a>00154 PLONK_PLINK_BINARYOPCHANNEL(<a class="code" href="group___plonk_binary_op_functions.html#ga8c0089d2d96d98ca8394950fc062f1f8" title="Returns .">atan2</a>, Atan2);
+<a name="l00155"></a>00155 PLONK_PLINK_BINARYOPCHANNEL(<a class="code" href="group___plonk_binary_op_functions.html#ga1ecf161d4fc9111638e590270e05163c" title="Returns .">sumsqr</a>, SumSqr);
+<a name="l00156"></a>00156 PLONK_PLINK_BINARYOPCHANNEL(<a class="code" href="group___plonk_binary_op_functions.html#ga84eca012c2ffbe3375630ea38f38fd30" title="Returns .">difsqr</a>, DifSqr);
+<a name="l00157"></a>00157 PLONK_PLINK_BINARYOPCHANNEL(<a class="code" href="group___plonk_binary_op_functions.html#gaa8816d0ec4c2bfd0de5603a9b6c9badc" title="Returns .">sqrsum</a>, SqrSum);
+<a name="l00158"></a>00158 PLONK_PLINK_BINARYOPCHANNEL(<a class="code" href="group___plonk_binary_op_functions.html#gabed19764b5f97b7ca5f6c29fb706ce23" title="Returns .">sqrdif</a>, SqrDif);
+<a name="l00159"></a>00159 PLONK_PLINK_BINARYOPCHANNEL(<a class="code" href="group___plonk_binary_op_functions.html#ga01a457334184e3bbf13e3fbc60819a1a" title="Returns the absolute difference between the input arguments.">absdif</a>, AbsDif);
+<a name="l00160"></a>00160 PLONK_PLINK_BINARYOPCHANNEL(<a class="code" href="group___plonk_binary_op_functions.html#ga76b312f2fe7db734a1165f47a998f34c" title="If a is less than b returns 0 otherwise return a.">thresh</a>, Thresh);
+<a name="l00161"></a>00161 
+<a name="l00162"></a>00162 
+<a name="l00163"></a>00163 <span class="preprocessor">#endif // PLONK_BINARYOPPLINK_H</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -229,7 +232,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Properties</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -238,7 +241,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 5 2012 17:04:52 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 8 2014 12:26:47 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

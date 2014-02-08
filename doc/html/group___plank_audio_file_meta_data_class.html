@@ -20,7 +20,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="pl-nk-logo-small.png"/></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">pl-nk</div>
+   <div id="projectname">pl-nk&#160;<span id="projectnumber">v0.4.5</span></div>
+   <div id="projectbrief">Plonk|Plink|Plank are a set of cross-platform C/C++ frameworks for audio software development</div>
   </td>
  </tr>
  </tbody>
@@ -29,8 +30,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -54,7 +55,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="header">
   <div class="summary">
-<a href="#typedef-members">Typedefs</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">Plank AudioFileMetaData class</div>  </div>
@@ -64,45 +64,204 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <p>An audio file meta data container.  
 <a href="#details">More...</a></p>
 <table class="memberdecls">
-<tr><td colspan="2"><h2><a name="typedef-members"></a>
-Typedefs</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef struct <br class="typebreak"/>
-PlankAudioFileMetaData *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_audio_file_meta_data_class.html#ga9d100fc87010612f2a0ab37d7ea6a1c9">PlankAudioFileMetaDataRef</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">An opaque reference to the <em>Plank AudioFileMetaData</em> object.  <a href="#ga9d100fc87010612f2a0ab37d7ea6a1c9"></a><br/></td></tr>
 <tr><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="group___plank_audio_file_meta_data_class.html#ga9d100fc87010612f2a0ab37d7ea6a1c9">PlankAudioFileMetaDataRef</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_audio_file_meta_data_class.html#ga3b21891bfb34d84f5606c288cc726f0a">pl_AudioFileMetaData_Create</a> ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a <em>Plank AudioFileMetaData</em> object and return an oqaque reference to it.  <a href="#ga3b21891bfb34d84f5606c288cc726f0a"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_audio_file_meta_data_class.html#gaac83aebcd2f0a8153c2f10e22f98e35b">pl_AudioFileMetaData_Destroy</a> (<a class="el" href="group___plank_audio_file_meta_data_class.html#ga9d100fc87010612f2a0ab37d7ea6a1c9">PlankAudioFileMetaDataRef</a> p)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy a <em>Plank AudioFileMetaData</em> object.  <a href="#gaac83aebcd2f0a8153c2f10e22f98e35b"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">PlankResult&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_audio_file_meta_data_class.html#ga51bd122a72dbefa8794757eb8f5296a3">pl_AudioFileMetaData_CreateSharedPtr</a> (PlankAudioFileMetaDataRef *pp)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a <em>Plank AudioFileMetaData</em> object and return an oqaque reference to it.  <a href="#ga51bd122a72dbefa8794757eb8f5296a3"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">PlankResult&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_audio_file_meta_data_class.html#ga375c660140b598242f3bc8ab21554acb">pl_AudioFileMetaData_AddCuePoint</a> (PlankAudioFileMetaDataRef p, PlankAudioFileCuePointRef cuePoint)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a cue point.  <a href="#ga375c660140b598242f3bc8ab21554acb"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">PlankResult&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_audio_file_meta_data_class.html#ga29a81159d3539113fc7c98a2aea249b1">pl_AudioFileMetaData_FindCuePointWithID</a> (PlankAudioFileMetaDataRef p, const PlankUI cueID, PlankAudioFileCuePointRef *cuePoint, PlankL *index)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove a cue point.  <a href="#ga29a81159d3539113fc7c98a2aea249b1"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">PlankResult&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_audio_file_meta_data_class.html#ga7a9cd75ca79eaed36715d2ee4394c60c">pl_AudioFileMetaData_RemoveCuePointWithID</a> (PlankAudioFileMetaDataRef p, const PlankUI cueID, PlankAudioFileCuePointRef *cuePoint, PlankB *success)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove a cue point.  <a href="#ga7a9cd75ca79eaed36715d2ee4394c60c"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">PlankResult&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_audio_file_meta_data_class.html#gab5ce96e796df5beda8b85e975e743258">pl_AudioFileMetaData_GetNextCueID</a> (PlankAudioFileMetaDataRef p, PlankUI *cueID)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Searches the metadata for the highest numbered cue ID and returns this with 1 added.  <a href="#gab5ce96e796df5beda8b85e975e743258"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">PlankResult&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_audio_file_meta_data_class.html#ga379c0c8fd3759aefcaf5ff461b826e9d">pl_AudioFileMetaData_AddRegion</a> (PlankAudioFileMetaDataRef p, PlankAudioFileRegionRef region)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a region.  <a href="#ga379c0c8fd3759aefcaf5ff461b826e9d"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">PlankResult&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_audio_file_meta_data_class.html#ga309200e1078bbcb7a68904b89114b04c">pl_AudioFileMetaData_ConvertCuePointsToRegions</a> (PlankAudioFileMetaDataRef p, const double totalDuration, const PlankB removeCuePoints)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Coverts cue points to regions.  <a href="#ga309200e1078bbcb7a68904b89114b04c"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">PlankResult&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_audio_file_meta_data_class.html#ga03ddc693b07ed6fb57ba5ee41ebe254e">pl_AudioFileMetaData_AddLoopPoint</a> (PlankAudioFileMetaDataRef p, PlankAudioFileRegionRef region)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a loop.  <a href="#ga03ddc693b07ed6fb57ba5ee41ebe254e"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">PlankResult&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_audio_file_meta_data_class.html#ga135bdcab86656782c22f1453732036a8">pl_AudioFileMetaData_AddFormatSpecificBlock</a> (PlankAudioFileMetaDataRef p, <a class="el" href="group___plank_dynamic_array_class.html#ga7ed3f04247baaec4f09394dee060950d">PlankDynamicArrayRef</a> block)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a format specific block of data.  <a href="#ga135bdcab86656782c22f1453732036a8"></a><br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <p>An audio file meta data container. </p>
-<hr/><h2>Typedef Documentation</h2>
-<a class="anchor" id="ga9d100fc87010612f2a0ab37d7ea6a1c9"></a><!-- doxytag: member="plank_AudioFileMetaData.h::PlankAudioFileMetaDataRef" ref="ga9d100fc87010612f2a0ab37d7ea6a1c9" args="" -->
+<hr/><h2>Function Documentation</h2>
+<a class="anchor" id="ga375c660140b598242f3bc8ab21554acb"></a><!-- doxytag: member="plank_AudioFileMetaData.h::pl_AudioFileMetaData_AddCuePoint" ref="ga375c660140b598242f3bc8ab21554acb" args="(PlankAudioFileMetaDataRef p, PlankAudioFileCuePointRef cuePoint)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef struct PlankAudioFileMetaData* <a class="el" href="group___plank_audio_file_meta_data_class.html#ga9d100fc87010612f2a0ab37d7ea6a1c9">PlankAudioFileMetaDataRef</a></td>
+          <td class="memname">PlankResult pl_AudioFileMetaData_AddCuePoint </td>
+          <td>(</td>
+          <td class="paramtype">PlankAudioFileMetaDataRef&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">PlankAudioFileCuePointRef&#160;</td>
+          <td class="paramname"><em>cuePoint</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>An opaque reference to the <em>Plank AudioFileMetaData</em> object. </p>
+<p>Adds a cue point. </p>
+<p>Cue points are reference counted. The meta data takes ownership - do not decrement the reference count after this returns. </p>
 
 </div>
 </div>
-<hr/><h2>Function Documentation</h2>
-<a class="anchor" id="ga3b21891bfb34d84f5606c288cc726f0a"></a><!-- doxytag: member="plank_AudioFileMetaData.h::pl_AudioFileMetaData_Create" ref="ga3b21891bfb34d84f5606c288cc726f0a" args="()" -->
+<a class="anchor" id="ga135bdcab86656782c22f1453732036a8"></a><!-- doxytag: member="plank_AudioFileMetaData.h::pl_AudioFileMetaData_AddFormatSpecificBlock" ref="ga135bdcab86656782c22f1453732036a8" args="(PlankAudioFileMetaDataRef p, PlankDynamicArrayRef block)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group___plank_audio_file_meta_data_class.html#ga9d100fc87010612f2a0ab37d7ea6a1c9">PlankAudioFileMetaDataRef</a> pl_AudioFileMetaData_Create </td>
+          <td class="memname">PlankResult pl_AudioFileMetaData_AddFormatSpecificBlock </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">PlankAudioFileMetaDataRef&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___plank_dynamic_array_class.html#ga7ed3f04247baaec4f09394dee060950d">PlankDynamicArrayRef</a>&#160;</td>
+          <td class="paramname"><em>block</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Adds a format specific block of data. </p>
+<p>The AudioFileMetaData object takes ownership of the block. </p>
+
+</div>
+</div>
+<a class="anchor" id="ga03ddc693b07ed6fb57ba5ee41ebe254e"></a><!-- doxytag: member="plank_AudioFileMetaData.h::pl_AudioFileMetaData_AddLoopPoint" ref="ga03ddc693b07ed6fb57ba5ee41ebe254e" args="(PlankAudioFileMetaDataRef p, PlankAudioFileRegionRef region)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">PlankResult pl_AudioFileMetaData_AddLoopPoint </td>
+          <td>(</td>
+          <td class="paramtype">PlankAudioFileMetaDataRef&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">PlankAudioFileRegionRef&#160;</td>
+          <td class="paramname"><em>region</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Adds a loop. </p>
+<p>Loops are reference counted. The meta data takes ownership - do not decrement the reference count after this returns. </p>
+
+</div>
+</div>
+<a class="anchor" id="ga379c0c8fd3759aefcaf5ff461b826e9d"></a><!-- doxytag: member="plank_AudioFileMetaData.h::pl_AudioFileMetaData_AddRegion" ref="ga379c0c8fd3759aefcaf5ff461b826e9d" args="(PlankAudioFileMetaDataRef p, PlankAudioFileRegionRef region)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">PlankResult pl_AudioFileMetaData_AddRegion </td>
+          <td>(</td>
+          <td class="paramtype">PlankAudioFileMetaDataRef&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">PlankAudioFileRegionRef&#160;</td>
+          <td class="paramname"><em>region</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Adds a region. </p>
+<p>Regions are reference counted. The meta data takes ownership - do not decrement the reference count after this returns. </p>
+
+</div>
+</div>
+<a class="anchor" id="ga309200e1078bbcb7a68904b89114b04c"></a><!-- doxytag: member="plank_AudioFileMetaData.h::pl_AudioFileMetaData_ConvertCuePointsToRegions" ref="ga309200e1078bbcb7a68904b89114b04c" args="(PlankAudioFileMetaDataRef p, const double totalDuration, const PlankB removeCuePoints)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">PlankResult pl_AudioFileMetaData_ConvertCuePointsToRegions </td>
+          <td>(</td>
+          <td class="paramtype">PlankAudioFileMetaDataRef&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname"><em>totalDuration</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const PlankB&#160;</td>
+          <td class="paramname"><em>removeCuePoints</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Coverts cue points to regions. </p>
+<p>This creates regions starting at frame zero and creating a regions between each cue point and from the last cue point to the end of the file. This requires the user to pass in the number of frames in the audio file. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>The meta data object. </td></tr>
+    <tr><td class="paramname">totalDuration</td><td>The duration of the source audio file. </td></tr>
+    <tr><td class="paramname">removeCuePoints</td><td>A boolean flag to indicate whether these cue points should be removed fromt he metadata. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The result code for the operation. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ga51bd122a72dbefa8794757eb8f5296a3"></a><!-- doxytag: member="plank_AudioFileMetaData.h::pl_AudioFileMetaData_CreateSharedPtr" ref="ga51bd122a72dbefa8794757eb8f5296a3" args="(PlankAudioFileMetaDataRef *pp)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">PlankResult pl_AudioFileMetaData_CreateSharedPtr </td>
+          <td>(</td>
+          <td class="paramtype">PlankAudioFileMetaDataRef *&#160;</td>
+          <td class="paramname"><em>pp</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -114,28 +273,116 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="gaac83aebcd2f0a8153c2f10e22f98e35b"></a><!-- doxytag: member="plank_AudioFileMetaData.h::pl_AudioFileMetaData_Destroy" ref="gaac83aebcd2f0a8153c2f10e22f98e35b" args="(PlankAudioFileMetaDataRef p)" -->
+<a class="anchor" id="ga29a81159d3539113fc7c98a2aea249b1"></a><!-- doxytag: member="plank_AudioFileMetaData.h::pl_AudioFileMetaData_FindCuePointWithID" ref="ga29a81159d3539113fc7c98a2aea249b1" args="(PlankAudioFileMetaDataRef p, const PlankUI cueID, PlankAudioFileCuePointRef *cuePoint, PlankL *index)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void pl_AudioFileMetaData_Destroy </td>
+          <td class="memname">PlankResult pl_AudioFileMetaData_FindCuePointWithID </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group___plank_audio_file_meta_data_class.html#ga9d100fc87010612f2a0ab37d7ea6a1c9">PlankAudioFileMetaDataRef</a>&#160;</td>
-          <td class="paramname"><em>p</em></td><td>)</td>
+          <td class="paramtype">PlankAudioFileMetaDataRef&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">const PlankUI&#160;</td>
+          <td class="paramname"><em>cueID</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">PlankAudioFileCuePointRef *&#160;</td>
+          <td class="paramname"><em>cuePoint</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">PlankL *&#160;</td>
+          <td class="paramname"><em>index</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Destroy a <em>Plank AudioFileMetaData</em> object. </p>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">p</td><td>The <em>Plank AudioFileMetaData</em> object. </td></tr>
-  </table>
-  </dd>
-</dl>
+<p>Remove a cue point. </p>
+<p>Cue points are reference counted. This returns a cue point into cuePoint but does not change the reference count. </p>
+
+</div>
+</div>
+<a class="anchor" id="gab5ce96e796df5beda8b85e975e743258"></a><!-- doxytag: member="plank_AudioFileMetaData.h::pl_AudioFileMetaData_GetNextCueID" ref="gab5ce96e796df5beda8b85e975e743258" args="(PlankAudioFileMetaDataRef p, PlankUI *cueID)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">PlankResult pl_AudioFileMetaData_GetNextCueID </td>
+          <td>(</td>
+          <td class="paramtype">PlankAudioFileMetaDataRef&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">PlankUI *&#160;</td>
+          <td class="paramname"><em>cueID</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Searches the metadata for the highest numbered cue ID and returns this with 1 added. </p>
+
+</div>
+</div>
+<a class="anchor" id="ga7a9cd75ca79eaed36715d2ee4394c60c"></a><!-- doxytag: member="plank_AudioFileMetaData.h::pl_AudioFileMetaData_RemoveCuePointWithID" ref="ga7a9cd75ca79eaed36715d2ee4394c60c" args="(PlankAudioFileMetaDataRef p, const PlankUI cueID, PlankAudioFileCuePointRef *cuePoint, PlankB *success)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">PlankResult pl_AudioFileMetaData_RemoveCuePointWithID </td>
+          <td>(</td>
+          <td class="paramtype">PlankAudioFileMetaDataRef&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const PlankUI&#160;</td>
+          <td class="paramname"><em>cueID</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">PlankAudioFileCuePointRef *&#160;</td>
+          <td class="paramname"><em>cuePoint</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">PlankB *&#160;</td>
+          <td class="paramname"><em>success</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Remove a cue point. </p>
+<p>Cue points are reference counted. If the value returned in cuePoint is not null, the caller has taken ownship and must decrement the reference count once finished with it. </p>
 
 </div>
 </div>
@@ -145,7 +392,7 @@ Functions</h2></td></tr>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Properties</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -154,7 +401,7 @@ Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 5 2012 17:04:57 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 8 2014 12:26:52 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

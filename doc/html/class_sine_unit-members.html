@@ -20,7 +20,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="pl-nk-logo-small.png"/></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">pl-nk</div>
+   <div id="projectname">pl-nk&#160;<span id="projectnumber">v0.4.5</span></div>
+   <div id="projectbrief">Plonk|Plink|Plank are a set of cross-platform C/C++ frameworks for audio software development</div>
   </td>
  </tr>
  </tbody>
@@ -29,8 +30,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -67,26 +68,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="contents">
 This is the complete list of members for <a class="el" href="class_sine_unit.html">SineUnit&lt; SampleType &gt;</a>, including all inherited members.<table>
   <tr class="memlist"><td><a class="el" href="class_sine_unit.html#a3a5dee949336bc3a5291179568a9805e">ar</a>(FrequencyUnitType const &amp;frequency=FrequencyType(440), UnitType const &amp;mul=SampleType(1), UnitType const &amp;add=SampleType(0), BlockSize const &amp;preferredBlockSize=BlockSize::getDefault(), SampleRate const &amp;preferredSampleRate=SampleRate::getDefault())</td><td><a class="el" href="class_sine_unit.html">SineUnit&lt; SampleType &gt;</a></td><td><code> [inline, static]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_sine_unit.html#afeff49d5c26e77f42264cf62e99f0695">ChannelType</a> typedef</td><td><a class="el" href="class_sine_unit.html">SineUnit&lt; SampleType &gt;</a></td><td></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_sine_unit.html#abb2e08e1913916b03822bb882b338de5">Data</a> typedef</td><td><a class="el" href="class_sine_unit.html">SineUnit&lt; SampleType &gt;</a></td><td></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_sine_unit.html#af949bc500de2adb7fc2133f0df496bcc">FrequencyBufferType</a> typedef</td><td><a class="el" href="class_sine_unit.html">SineUnit&lt; SampleType &gt;</a></td><td></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_sine_unit.html#a370ad58cf836a0a127b48bd49a61a4b8">FrequencyType</a> typedef</td><td><a class="el" href="class_sine_unit.html">SineUnit&lt; SampleType &gt;</a></td><td></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_sine_unit.html#ac4f61fb9f1776a1c1bb51e7a239468f2">FrequencyUnitType</a> typedef</td><td><a class="el" href="class_sine_unit.html">SineUnit&lt; SampleType &gt;</a></td><td></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_sine_unit.html#ac77db8979031da62dcbb8b1fa764bc85">getInfo</a>()</td><td><a class="el" href="class_sine_unit.html">SineUnit&lt; SampleType &gt;</a></td><td><code> [inline, static]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_sine_unit.html#a09e602b3fcbbe4e0d50bd51ef85451bf">Inputs</a> typedef</td><td><a class="el" href="class_sine_unit.html">SineUnit&lt; SampleType &gt;</a></td><td></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_sine_unit.html#a4b52fa43dd75bb997997907ad6bbe142">Internal</a> typedef</td><td><a class="el" href="class_sine_unit.html">SineUnit&lt; SampleType &gt;</a></td><td></td></tr>
   <tr class="memlist"><td><a class="el" href="class_sine_unit.html#a83bb481d279a888b7caec0df17b7ce8e">kr</a>(FrequencyUnitType const &amp;frequency, UnitType const &amp;mul=SampleType(1), UnitType const &amp;add=SampleType(0))</td><td><a class="el" href="class_sine_unit.html">SineUnit&lt; SampleType &gt;</a></td><td><code> [inline, static]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_sine_unit.html#a938c848968e5497f90cf908d23e9aba9">TableInternal</a> typedef</td><td><a class="el" href="class_sine_unit.html">SineUnit&lt; SampleType &gt;</a></td><td></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_sine_unit.html#af9e27ae3d77e97791b1af9e61924ef2e">TableType</a> typedef</td><td><a class="el" href="class_sine_unit.html">SineUnit&lt; SampleType &gt;</a></td><td></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_sine_unit.html#a51c8ed0a761baf796bb7b64b5e0bbde3">UnitType</a> typedef</td><td><a class="el" href="class_sine_unit.html">SineUnit&lt; SampleType &gt;</a></td><td></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_sine_unit.html#a61d97f3bd2646e988b09af8ab6e16efd">WavetableType</a> typedef</td><td><a class="el" href="class_sine_unit.html">SineUnit&lt; SampleType &gt;</a></td><td></td></tr>
 </table></div>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Properties</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -95,7 +84,7 @@ This is the complete list of members for <a class="el" href="class_sine_unit.htm
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 5 2012 17:05:10 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 8 2014 12:26:52 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

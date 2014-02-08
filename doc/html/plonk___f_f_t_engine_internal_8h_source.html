@@ -20,7 +20,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="pl-nk-logo-small.png"/></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">pl-nk</div>
+   <div id="projectname">pl-nk&#160;<span id="projectnumber">v0.4.5</span></div>
+   <div id="projectbrief">Plonk|Plink|Plank are a set of cross-platform C/C++ frameworks for audio software development</div>
   </td>
  </tr>
  </tbody>
@@ -29,8 +30,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -54,7 +55,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
       <li><a href="files.html"><span>File&#160;List</span></a></li>
-      <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
 <div class="header">
@@ -62,14 +62,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">plonk_FFTEngineInternal.h</div>  </div>
 </div>
 <div class="contents">
-<a href="plonk___f_f_t_engine_internal_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*</span>
+<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*</span>
 <a name="l00002"></a>00002 <span class="comment"> -------------------------------------------------------------------------------</span>
 <a name="l00003"></a>00003 <span class="comment"> This file is part of the Plink, Plonk, Plank libraries</span>
 <a name="l00004"></a>00004 <span class="comment">  by Martin Robinson</span>
 <a name="l00005"></a>00005 <span class="comment"> </span>
 <a name="l00006"></a>00006 <span class="comment"> http://code.google.com/p/pl-nk/</span>
 <a name="l00007"></a>00007 <span class="comment"> </span>
-<a name="l00008"></a>00008 <span class="comment"> Copyright University of the West of England, Bristol 2011-12</span>
+<a name="l00008"></a>00008 <span class="comment"> Copyright University of the West of England, Bristol 2011-14</span>
 <a name="l00009"></a>00009 <span class="comment"> All rights reserved.</span>
 <a name="l00010"></a>00010 <span class="comment"> </span>
 <a name="l00011"></a>00011 <span class="comment"> Redistribution and use in source and binary forms, with or without</span>
@@ -104,56 +104,58 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00040"></a>00040 <span class="preprocessor"></span><span class="preprocessor">#define PLONK_FFTENGINEINTERNAL_H</span>
 <a name="l00041"></a>00041 <span class="preprocessor"></span>
 <a name="l00042"></a>00042 <span class="keyword">template</span>&lt;<span class="keyword">class</span> SampleType&gt;
-<a name="l00043"></a><a class="code" href="class_f_f_t_engine_internal.html">00043</a> <span class="keyword">class </span><a class="code" href="class_f_f_t_engine_internal.html">FFTEngineInternal</a>
+<a name="l00043"></a>00043 <span class="keyword">class </span>FFTEngineInternal
 <a name="l00044"></a>00044 {
 <a name="l00045"></a>00045 <span class="keyword">private</span>:
-<a name="l00046"></a>00046     <a class="code" href="class_f_f_t_engine_internal.html">FFTEngineInternal</a>();
+<a name="l00046"></a>00046     FFTEngineInternal();
 <a name="l00047"></a>00047 };
 <a name="l00048"></a>00048 
 <a name="l00049"></a>00049 <span class="keyword">template</span>&lt;&gt;
-<a name="l00050"></a><a class="code" href="class_f_f_t_engine_internal_3_01float_01_4.html">00050</a> <span class="keyword">class </span><a class="code" href="class_f_f_t_engine_internal.html">FFTEngineInternal</a>&lt;float&gt; : <span class="keyword">public</span> <a class="code" href="class_smart_pointer.html" title="Reference counted pointer base class.">SmartPointer</a>
+<a name="l00050"></a>00050 <span class="keyword">class </span>FFTEngineInternal&lt;float&gt; : <span class="keyword">public</span> <a class="code" href="class_smart_pointer.html" title="Reference counted pointer base class.">SmartPointer</a>
 <a name="l00051"></a>00051 {
 <a name="l00052"></a>00052 <span class="keyword">public</span>:
-<a name="l00053"></a><a class="code" href="class_f_f_t_engine_internal_3_01float_01_4.html#a7b9db1a96c0c200a33234a7be7ee4981">00053</a>     <span class="keyword">typedef</span> <a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">NumericalArray&lt;float&gt;</a>  <a class="code" href="class_f_f_t_engine_internal_3_01float_01_4.html#a7b9db1a96c0c200a33234a7be7ee4981">Buffer</a>;
+<a name="l00053"></a>00053     <span class="keyword">typedef</span> <a class="code" href="class_numerical_array.html">NumericalArray&lt;float&gt;</a>  <a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">Buffer</a>;
 <a name="l00054"></a>00054 
-<a name="l00055"></a><a class="code" href="class_f_f_t_engine_internal_3_01float_01_4.html#a8ce3c69b0d8d76e44b4e479bc562f82f">00055</a>     <a class="code" href="class_f_f_t_engine_internal.html">FFTEngineInternal</a> (<span class="keyword">const</span> <span class="keywordtype">long</span> length) <span class="keywordflow">throw</span>()
+<a name="l00055"></a>00055     FFTEngineInternal (<span class="keyword">const</span> <span class="keywordtype">long</span> length) <span class="keywordflow">throw</span>()
 <a name="l00056"></a>00056     :   fft (<a class="code" href="group___plank_f_f_t_f_class.html#ga4d5a51ebb526b6da9e003faad7e2745e" title="Create a Plank FFTF object and return an oqaque reference to it.">pl_FFTF_Create</a>())
 <a name="l00057"></a>00057     {
 <a name="l00058"></a>00058         <a class="code" href="group___plank_f_f_t_f_class.html#ga08189e7ca2694321a80f4bb3d7b29dfd" title="Initialise a Plank FFTF object.">pl_FFTF_InitWithLength</a> (this-&gt;fft, length);
 <a name="l00059"></a>00059     }
 <a name="l00060"></a>00060     
-<a name="l00061"></a><a class="code" href="class_f_f_t_engine_internal_3_01float_01_4.html#a7b90aa9658a2d14e8c9110d1b39d0dac">00061</a>     ~<a class="code" href="class_f_f_t_engine_internal.html">FFTEngineInternal</a>()
+<a name="l00061"></a>00061     ~FFTEngineInternal()
 <a name="l00062"></a>00062     {
 <a name="l00063"></a>00063         <a class="code" href="group___plank_f_f_t_f_class.html#ga9a785765c0551f8c0add01eb4a8fe04b" title="Destroy a Plank FFTF object.">pl_FFTF_Destroy</a> (this-&gt;fft);
 <a name="l00064"></a>00064         this-&gt;fft = 0;
 <a name="l00065"></a>00065     }
 <a name="l00066"></a>00066     
-<a name="l00067"></a><a class="code" href="class_f_f_t_engine_internal_3_01float_01_4.html#acf2842aa49a32eaa230bf94b81f3b70e">00067</a>     <span class="keyword">inline</span> <span class="keywordtype">void</span> forward (<span class="keywordtype">float</span>* output, <span class="keyword">const</span> <span class="keywordtype">float</span>* input) <span class="keywordflow">throw</span>()
+<a name="l00067"></a>00067     <span class="keyword">inline</span> <span class="keywordtype">void</span> forward (<span class="keywordtype">float</span>* output, <span class="keyword">const</span> <span class="keywordtype">float</span>* input) <span class="keywordflow">throw</span>()
 <a name="l00068"></a>00068     {
-<a name="l00069"></a>00069         <a class="code" href="group___plank_f_f_t_f_class.html#gae8de8981be43638abe68f206f4e596ad" title="Apply the FFT to the input and place the result in output.">pl_FFTF_Forward</a> (this-&gt;fft, output, input);
-<a name="l00070"></a>00070     }
-<a name="l00071"></a>00071         
-<a name="l00072"></a><a class="code" href="class_f_f_t_engine_internal_3_01float_01_4.html#ace76748268746bbbcc65c91fd27cd266">00072</a>     <span class="keyword">inline</span> <span class="keywordtype">void</span> inverse (<span class="keywordtype">float</span>* output, <span class="keyword">const</span> <span class="keywordtype">float</span>* input) <span class="keywordflow">throw</span>()
-<a name="l00073"></a>00073     {
-<a name="l00074"></a>00074         <a class="code" href="group___plank_f_f_t_f_class.html#ga58f9deb1c96c5dc9313b302fc03f6289" title="Apply the inverse-FFT to the input and place the result in output.">pl_FFTF_Inverse</a> (this-&gt;fft, output, input);
-<a name="l00075"></a>00075     }
-<a name="l00076"></a>00076     
-<a name="l00077"></a><a class="code" href="class_f_f_t_engine_internal_3_01float_01_4.html#aa0183619c171a82495ba8a0987456dea">00077</a>     <span class="keyword">inline</span> <span class="keywordtype">long</span> length()<span class="keyword"> const</span>
-<a name="l00078"></a>00078 <span class="keyword">    </span>{
-<a name="l00079"></a>00079         <span class="keywordflow">return</span> <a class="code" href="group___plank_f_f_t_f_class.html#gacba55adc5154dd0186cfc2d86e279de7" title="Get the FFT size.">pl_FFTF_Length</a> (this-&gt;fft);
-<a name="l00080"></a>00080     }
-<a name="l00081"></a>00081     
-<a name="l00082"></a><a class="code" href="class_f_f_t_engine_internal_3_01float_01_4.html#a25b36d5338f5b4ab3cdf0a4cae467176">00082</a>     <span class="keyword">inline</span> <span class="keywordtype">long</span> halfLength()<span class="keyword"> const</span>
-<a name="l00083"></a>00083 <span class="keyword">    </span>{
-<a name="l00084"></a>00084         <span class="keywordflow">return</span> <a class="code" href="group___plank_f_f_t_f_class.html#gab72a69072a99acdbaa71c599bd0aabe0" title="Get half FFT size.">pl_FFTF_HalfLength</a> (this-&gt;fft);
-<a name="l00085"></a>00085     }
-<a name="l00086"></a>00086     
-<a name="l00087"></a>00087     
-<a name="l00088"></a>00088 <span class="keyword">private</span>:
-<a name="l00089"></a>00089     <a class="code" href="group___plank_f_f_t_f_class.html#ga89d883ebc7fce22b9ab8345bfa66d9a7" title="An opaque reference to the Plank FFTF object.">PlankFFTFRef</a> fft;
-<a name="l00090"></a>00090 };
-<a name="l00091"></a>00091 
-<a name="l00092"></a>00092 <span class="preprocessor">#endif // PLONK_FFTENGINEINTERNAL_H</span>
+<a name="l00069"></a>00069         plonk_assert (output != input);
+<a name="l00070"></a>00070         <a class="code" href="group___plank_f_f_t_f_class.html#gae8de8981be43638abe68f206f4e596ad" title="Apply the FFT to the input and place the result in output.">pl_FFTF_Forward</a> (this-&gt;fft, output, input);
+<a name="l00071"></a>00071     }
+<a name="l00072"></a>00072         
+<a name="l00073"></a>00073     <span class="keyword">inline</span> <span class="keywordtype">void</span> inverse (<span class="keywordtype">float</span>* output, <span class="keyword">const</span> <span class="keywordtype">float</span>* input) <span class="keywordflow">throw</span>()
+<a name="l00074"></a>00074     {
+<a name="l00075"></a>00075         plonk_assert (output != input);
+<a name="l00076"></a>00076         <a class="code" href="group___plank_f_f_t_f_class.html#ga58f9deb1c96c5dc9313b302fc03f6289" title="Apply the inverse-FFT to the input and place the result in output.">pl_FFTF_Inverse</a> (this-&gt;fft, output, input);
+<a name="l00077"></a>00077     }
+<a name="l00078"></a>00078     
+<a name="l00079"></a>00079     <span class="keyword">inline</span> <span class="keywordtype">long</span> length()<span class="keyword"> const</span>
+<a name="l00080"></a>00080 <span class="keyword">    </span>{
+<a name="l00081"></a>00081         <span class="keywordflow">return</span> <a class="code" href="group___plank_f_f_t_f_class.html#gacba55adc5154dd0186cfc2d86e279de7" title="Get the FFT size.">pl_FFTF_Length</a> (this-&gt;fft);
+<a name="l00082"></a>00082     }
+<a name="l00083"></a>00083     
+<a name="l00084"></a>00084     <span class="keyword">inline</span> <span class="keywordtype">long</span> halfLength()<span class="keyword"> const</span>
+<a name="l00085"></a>00085 <span class="keyword">    </span>{
+<a name="l00086"></a>00086         <span class="keywordflow">return</span> <a class="code" href="group___plank_f_f_t_f_class.html#gab72a69072a99acdbaa71c599bd0aabe0" title="Get half FFT size.">pl_FFTF_HalfLength</a> (this-&gt;fft);
+<a name="l00087"></a>00087     }
+<a name="l00088"></a>00088     
+<a name="l00089"></a>00089     
+<a name="l00090"></a>00090 <span class="keyword">private</span>:
+<a name="l00091"></a>00091     <a class="code" href="group___plank_f_f_t_f_class.html#ga89d883ebc7fce22b9ab8345bfa66d9a7" title="An opaque reference to the Plank FFTF object.">PlankFFTFRef</a> fft;
+<a name="l00092"></a>00092 };
+<a name="l00093"></a>00093 
+<a name="l00094"></a>00094 <span class="preprocessor">#endif // PLONK_FFTENGINEINTERNAL_H</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -161,7 +163,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Properties</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -170,7 +172,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 5 2012 17:04:54 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 8 2014 12:26:48 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

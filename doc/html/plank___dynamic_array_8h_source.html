@@ -20,7 +20,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="pl-nk-logo-small.png"/></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">pl-nk</div>
+   <div id="projectname">pl-nk&#160;<span id="projectnumber">v0.4.5</span></div>
+   <div id="projectbrief">Plonk|Plink|Plank are a set of cross-platform C/C++ frameworks for audio software development</div>
   </td>
  </tr>
  </tbody>
@@ -29,8 +30,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -54,7 +55,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
       <li><a href="files.html"><span>File&#160;List</span></a></li>
-      <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
 <div class="header">
@@ -62,14 +62,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">plank_DynamicArray.h</div>  </div>
 </div>
 <div class="contents">
-<a href="plank___dynamic_array_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*</span>
+<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*</span>
 <a name="l00002"></a>00002 <span class="comment"> -------------------------------------------------------------------------------</span>
 <a name="l00003"></a>00003 <span class="comment"> This file is part of the Plink, Plonk, Plank libraries</span>
 <a name="l00004"></a>00004 <span class="comment">  by Martin Robinson</span>
 <a name="l00005"></a>00005 <span class="comment"> </span>
 <a name="l00006"></a>00006 <span class="comment"> http://code.google.com/p/pl-nk/</span>
 <a name="l00007"></a>00007 <span class="comment"> </span>
-<a name="l00008"></a>00008 <span class="comment"> Copyright University of the West of England, Bristol 2011-12</span>
+<a name="l00008"></a>00008 <span class="comment"> Copyright University of the West of England, Bristol 2011-14</span>
 <a name="l00009"></a>00009 <span class="comment"> All rights reserved.</span>
 <a name="l00010"></a>00010 <span class="comment"> </span>
 <a name="l00011"></a>00011 <span class="comment"> Redistribution and use in source and binary forms, with or without</span>
@@ -103,60 +103,95 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00039"></a>00039 <span class="preprocessor">#ifndef PLANK_DYNAMICARRAY_H</span>
 <a name="l00040"></a>00040 <span class="preprocessor"></span><span class="preprocessor">#define PLANK_DYNAMICARRAY_H</span>
 <a name="l00041"></a>00041 <span class="preprocessor"></span>
-<a name="l00042"></a><a class="code" href="plank___dynamic_array_8h.html#ac98251b2c1401d84c5ba95f6179b8ee5">00042</a> <span class="preprocessor">#define PLANKDYNAMICARRAY_DEFAULTGRANULARITY 8</span>
-<a name="l00043"></a><a class="code" href="plank___dynamic_array_8h.html#a3d0143c55702d5eb00828a40b9411120">00043</a> <span class="preprocessor"></span><span class="preprocessor">#define PLANKDYNAMICARRAY_DEFAULTITEMSIZE 4</span>
+<a name="l00042"></a>00042 <span class="preprocessor">#define PLANKDYNAMICARRAY_DEFAULTGRANULARITY 8</span>
+<a name="l00043"></a>00043 <span class="preprocessor"></span><span class="preprocessor">#define PLANKDYNAMICARRAY_DEFAULTITEMSIZE 4</span>
 <a name="l00044"></a>00044 <span class="preprocessor"></span>
-<a name="l00045"></a>00045 <a class="code" href="plank___standard_header_8h.html#a04d6b0df91a3ec64f89589fab47dff92">PLANK_BEGIN_C_LINKAGE</a>
+<a name="l00045"></a>00045 PLANK_BEGIN_C_LINKAGE
 <a name="l00046"></a>00046 
 <a name="l00055"></a><a class="code" href="group___plank_dynamic_array_class.html#ga7ed3f04247baaec4f09394dee060950d">00055</a> <span class="keyword">typedef</span> <span class="keyword">struct </span>PlankDynamicArray* <a class="code" href="group___plank_dynamic_array_class.html#ga7ed3f04247baaec4f09394dee060950d" title="An opaque reference to the Plank DynamicArray object.">PlankDynamicArrayRef</a>; 
 <a name="l00056"></a>00056 
-<a name="l00059"></a>00059 <a class="code" href="group___plank_dynamic_array_class.html#ga7ed3f04247baaec4f09394dee060950d" title="An opaque reference to the Plank DynamicArray object.">PlankDynamicArrayRef</a> <a class="code" href="group___plank_dynamic_array_class.html#gacd75d8697297ad44f47d69594f6976dd" title="Creates and intialises a Plank DynamicArray object and return an oqaque reference to it...">pl_DynamicArray_CreateAndInit</a>();
-<a name="l00060"></a>00060 
-<a name="l00063"></a>00063 <a class="code" href="group___plank_dynamic_array_class.html#ga7ed3f04247baaec4f09394dee060950d" title="An opaque reference to the Plank DynamicArray object.">PlankDynamicArrayRef</a> <a class="code" href="group___plank_dynamic_array_class.html#gabc45b142d8e106c0a4727df63b291c14" title="Create a Plank DynamicArray object and return an oqaque reference to it.">pl_DynamicArray_Create</a>();
-<a name="l00064"></a>00064 
-<a name="l00068"></a>00068 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_dynamic_array_class.html#ga3207fd62b42b6ee9ebb0f50daf3d7ecb" title="Initialise the array.">pl_DynamicArray_Init</a> (<a class="code" href="group___plank_dynamic_array_class.html#ga7ed3f04247baaec4f09394dee060950d" title="An opaque reference to the Plank DynamicArray object.">PlankDynamicArrayRef</a> p);
+<a name="l00060"></a><a class="code" href="group___plank_dynamic_array_class.html#gae4efb9f0aa585778c10fd2696fc091e3">00060</a> <span class="keyword">typedef</span> PlankB (*<a class="code" href="group___plank_dynamic_array_class.html#gae4efb9f0aa585778c10fd2696fc091e3" title="Compare function.">PlankDynamicArrayCompareFunction</a>)(PlankP, PlankP);
+<a name="l00061"></a>00061 
+<a name="l00064"></a>00064 <a class="code" href="group___plank_dynamic_array_class.html#ga7ed3f04247baaec4f09394dee060950d" title="An opaque reference to the Plank DynamicArray object.">PlankDynamicArrayRef</a> <a class="code" href="group___plank_dynamic_array_class.html#gacd75d8697297ad44f47d69594f6976dd" title="Creates and intialises a Plank DynamicArray object and return an oqaque reference to it...">pl_DynamicArray_CreateAndInit</a>();
+<a name="l00065"></a>00065 
+<a name="l00068"></a>00068 <a class="code" href="group___plank_dynamic_array_class.html#ga7ed3f04247baaec4f09394dee060950d" title="An opaque reference to the Plank DynamicArray object.">PlankDynamicArrayRef</a> <a class="code" href="group___plank_dynamic_array_class.html#gabc45b142d8e106c0a4727df63b291c14" title="Create a Plank DynamicArray object and return an oqaque reference to it.">pl_DynamicArray_Create</a>();
 <a name="l00069"></a>00069 
-<a name="l00073"></a>00073 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_dynamic_array_class.html#ga93c518be357b715a0461dc5df76b2d77" title="Initialise the array.">pl_DynamicArray_InitWithItemSize</a> (<a class="code" href="group___plank_dynamic_array_class.html#ga7ed3f04247baaec4f09394dee060950d" title="An opaque reference to the Plank DynamicArray object.">PlankDynamicArrayRef</a> p, <span class="keyword">const</span> <a class="code" href="plank___standard_header_8h.html#a854e96ed6d678b7cbcbedffce1c0844d">PlankLL</a> itemSize);
+<a name="l00073"></a>00073 PlankResult <a class="code" href="group___plank_dynamic_array_class.html#ga3207fd62b42b6ee9ebb0f50daf3d7ecb" title="Initialise the array.">pl_DynamicArray_Init</a> (<a class="code" href="group___plank_dynamic_array_class.html#ga7ed3f04247baaec4f09394dee060950d" title="An opaque reference to the Plank DynamicArray object.">PlankDynamicArrayRef</a> p);
 <a name="l00074"></a>00074 
-<a name="l00078"></a>00078 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_dynamic_array_class.html#ga8ab6404ed84dfdc58846c2d6e5c3a316" title="Initialise the array with specified capacity.">pl_DynamicArray_InitWithItemSizeAndCapacity</a> (<a class="code" href="group___plank_dynamic_array_class.html#ga7ed3f04247baaec4f09394dee060950d" title="An opaque reference to the Plank DynamicArray object.">PlankDynamicArrayRef</a> p, <span class="keyword">const</span> <a class="code" href="plank___standard_header_8h.html#a854e96ed6d678b7cbcbedffce1c0844d">PlankLL</a> itemSize, <span class="keyword">const</span> <a class="code" href="plank___standard_header_8h.html#a854e96ed6d678b7cbcbedffce1c0844d">PlankLL</a> initialCapacity);
-<a name="l00079"></a>00079 
-<a name="l00083"></a>00083 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_dynamic_array_class.html#ga6bee60c8f55eb626e187331fbec4aa2a" title="Denitialise the array.">pl_DynamicArray_DeInit</a> (<a class="code" href="group___plank_dynamic_array_class.html#ga7ed3f04247baaec4f09394dee060950d" title="An opaque reference to the Plank DynamicArray object.">PlankDynamicArrayRef</a> p);
-<a name="l00084"></a>00084 
-<a name="l00088"></a>00088 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_dynamic_array_class.html#ga63ed4ec36b9f70f4ae773f561ce9a6a7" title="Destroy a Plank DynamicArray object.">pl_DynamicArray_Destroy</a> (<a class="code" href="group___plank_dynamic_array_class.html#ga7ed3f04247baaec4f09394dee060950d" title="An opaque reference to the Plank DynamicArray object.">PlankDynamicArrayRef</a> p);
+<a name="l00075"></a>00075 PlankResult pl_DynamicArray_InitCopy (<a class="code" href="group___plank_dynamic_array_class.html#ga7ed3f04247baaec4f09394dee060950d" title="An opaque reference to the Plank DynamicArray object.">PlankDynamicArrayRef</a> p, <a class="code" href="group___plank_dynamic_array_class.html#ga7ed3f04247baaec4f09394dee060950d" title="An opaque reference to the Plank DynamicArray object.">PlankDynamicArrayRef</a> original);
+<a name="l00076"></a>00076 
+<a name="l00077"></a>00077 
+<a name="l00081"></a>00081 PlankResult <a class="code" href="group___plank_dynamic_array_class.html#gacab7680417ce92f64a02c0293b184345" title="Initialise the array.">pl_DynamicArray_InitWithItemSize</a> (<a class="code" href="group___plank_dynamic_array_class.html#ga7ed3f04247baaec4f09394dee060950d" title="An opaque reference to the Plank DynamicArray object.">PlankDynamicArrayRef</a> p, <span class="keyword">const</span> PlankL itemSize);
+<a name="l00082"></a>00082 
+<a name="l00086"></a>00086 PlankResult <a class="code" href="group___plank_dynamic_array_class.html#ga78480d26cd03a22d4c9c55295705fc46" title="Initialise the array with specified capacity.">pl_DynamicArray_InitWithItemSizeAndCapacity</a> (<a class="code" href="group___plank_dynamic_array_class.html#ga7ed3f04247baaec4f09394dee060950d" title="An opaque reference to the Plank DynamicArray object.">PlankDynamicArrayRef</a> p, <span class="keyword">const</span> PlankL itemSize, <span class="keyword">const</span> PlankL initialCapacity);
+<a name="l00087"></a>00087 
+<a name="l00088"></a>00088 PlankResult pl_DynamicArray_InitWithItemSizeAndSize (<a class="code" href="group___plank_dynamic_array_class.html#ga7ed3f04247baaec4f09394dee060950d" title="An opaque reference to the Plank DynamicArray object.">PlankDynamicArrayRef</a> p, <span class="keyword">const</span> PlankL itemSize, <span class="keyword">const</span> PlankL initialCapacity, PlankB zero);
 <a name="l00089"></a>00089 
-<a name="l00091"></a>00091 <a class="code" href="plank___standard_header_8h.html#a77a635edbd85b965990b54c23abd2a7a">PlankB</a> <a class="code" href="group___plank_dynamic_array_class.html#gab43136126bbaa28b651868b227f380d7" title="Determines if an index is in range for this array.">pl_DynamicArray_IsIndexInRange</a> (<a class="code" href="group___plank_dynamic_array_class.html#ga7ed3f04247baaec4f09394dee060950d" title="An opaque reference to the Plank DynamicArray object.">PlankDynamicArrayRef</a> p, <span class="keyword">const</span> <a class="code" href="plank___standard_header_8h.html#a854e96ed6d678b7cbcbedffce1c0844d">PlankLL</a> index);
-<a name="l00092"></a>00092 
-<a name="l00094"></a>00094 <a class="code" href="plank___standard_header_8h.html#a854e96ed6d678b7cbcbedffce1c0844d">PlankLL</a> <a class="code" href="group___plank_dynamic_array_class.html#ga9959b3818ed920725f60982f2e621313" title="Get the number of items stored in the array.">pl_DynamicArray_GetSize</a> (<a class="code" href="group___plank_dynamic_array_class.html#ga7ed3f04247baaec4f09394dee060950d" title="An opaque reference to the Plank DynamicArray object.">PlankDynamicArrayRef</a> p);
-<a name="l00095"></a>00095 
-<a name="l00102"></a>00102 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_dynamic_array_class.html#gaa561452eee42c9d3516bd5f7f30e3099" title="Add an item to the array.">pl_DynamicArray_AddItem</a> (<a class="code" href="group___plank_dynamic_array_class.html#ga7ed3f04247baaec4f09394dee060950d" title="An opaque reference to the Plank DynamicArray object.">PlankDynamicArrayRef</a> p, <span class="keyword">const</span> <a class="code" href="plank___standard_header_8h.html#a6461616175af5df334c3067edbe0b6c3">PlankP</a> item);
-<a name="l00103"></a>00103 
-<a name="l00111"></a>00111 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_dynamic_array_class.html#gab9e5b64eec198af6feb6b55d50690c72" title="Copies an item to the specified index.">pl_DynamicArray_SetItem</a> (<a class="code" href="group___plank_dynamic_array_class.html#ga7ed3f04247baaec4f09394dee060950d" title="An opaque reference to the Plank DynamicArray object.">PlankDynamicArrayRef</a> p, <span class="keyword">const</span> <a class="code" href="plank___standard_header_8h.html#a854e96ed6d678b7cbcbedffce1c0844d">PlankLL</a> index, <span class="keyword">const</span> <a class="code" href="plank___standard_header_8h.html#a6461616175af5df334c3067edbe0b6c3">PlankP</a> item);
-<a name="l00112"></a>00112 
-<a name="l00122"></a>00122 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_dynamic_array_class.html#ga0f943c760ec60620c38aa3669e934a2e" title="Inserts an item into the specified index.">pl_DynamicArray_InsertItem</a> (<a class="code" href="group___plank_dynamic_array_class.html#ga7ed3f04247baaec4f09394dee060950d" title="An opaque reference to the Plank DynamicArray object.">PlankDynamicArrayRef</a> p, <span class="keyword">const</span> <a class="code" href="plank___standard_header_8h.html#a854e96ed6d678b7cbcbedffce1c0844d">PlankLL</a> index, <span class="keyword">const</span> <a class="code" href="plank___standard_header_8h.html#a6461616175af5df334c3067edbe0b6c3">PlankP</a> item);
-<a name="l00123"></a>00123 
-<a name="l00130"></a>00130 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_dynamic_array_class.html#gaec671807f28d5b3d89c2717e88029741" title="Retrieves an item at the specified index.">pl_DynamicArray_GetItem</a> (<a class="code" href="group___plank_dynamic_array_class.html#ga7ed3f04247baaec4f09394dee060950d" title="An opaque reference to the Plank DynamicArray object.">PlankDynamicArrayRef</a> p, <span class="keyword">const</span> <a class="code" href="plank___standard_header_8h.html#a854e96ed6d678b7cbcbedffce1c0844d">PlankLL</a> index, <a class="code" href="plank___standard_header_8h.html#a6461616175af5df334c3067edbe0b6c3">PlankP</a> item);
-<a name="l00131"></a>00131 
-<a name="l00136"></a>00136 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_dynamic_array_class.html#gab9368552c890756c74a4d81004f917f3" title="Removes an item from the specified index.">pl_DynamicArray_RemoveItem</a> (<a class="code" href="group___plank_dynamic_array_class.html#ga7ed3f04247baaec4f09394dee060950d" title="An opaque reference to the Plank DynamicArray object.">PlankDynamicArrayRef</a> p, <span class="keyword">const</span> <a class="code" href="plank___standard_header_8h.html#a854e96ed6d678b7cbcbedffce1c0844d">PlankLL</a> index);
-<a name="l00137"></a>00137 
-<a name="l00145"></a>00145 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_dynamic_array_class.html#ga419418a3b9949d20152f7145c31ec537" title="Ensures that the array is sufficient to hold a certain number of items.">pl_DynamicArray_EnsureSize</a> (<a class="code" href="group___plank_dynamic_array_class.html#ga7ed3f04247baaec4f09394dee060950d" title="An opaque reference to the Plank DynamicArray object.">PlankDynamicArrayRef</a> p, <span class="keyword">const</span> <a class="code" href="plank___standard_header_8h.html#a854e96ed6d678b7cbcbedffce1c0844d">PlankLL</a> capacity);
+<a name="l00093"></a>00093 PlankResult <a class="code" href="group___plank_dynamic_array_class.html#ga6bee60c8f55eb626e187331fbec4aa2a" title="Denitialise the array.">pl_DynamicArray_DeInit</a> (<a class="code" href="group___plank_dynamic_array_class.html#ga7ed3f04247baaec4f09394dee060950d" title="An opaque reference to the Plank DynamicArray object.">PlankDynamicArrayRef</a> p);
+<a name="l00094"></a>00094 
+<a name="l00098"></a>00098 PlankResult <a class="code" href="group___plank_dynamic_array_class.html#ga63ed4ec36b9f70f4ae773f561ce9a6a7" title="Destroy a Plank DynamicArray object.">pl_DynamicArray_Destroy</a> (<a class="code" href="group___plank_dynamic_array_class.html#ga7ed3f04247baaec4f09394dee060950d" title="An opaque reference to the Plank DynamicArray object.">PlankDynamicArrayRef</a> p);
+<a name="l00099"></a>00099 
+<a name="l00101"></a>00101 PlankB <a class="code" href="group___plank_dynamic_array_class.html#ga0ac3ea147371d9f24c45d798383c7a72" title="Determines if an index is in range for this array.">pl_DynamicArray_IsIndexInRange</a> (<a class="code" href="group___plank_dynamic_array_class.html#ga7ed3f04247baaec4f09394dee060950d" title="An opaque reference to the Plank DynamicArray object.">PlankDynamicArrayRef</a> p, <span class="keyword">const</span> PlankL index);
+<a name="l00102"></a>00102 
+<a name="l00104"></a>00104 PlankL <a class="code" href="group___plank_dynamic_array_class.html#gafd5c751e1deff283b1a1d3b9deb7c079" title="Get the number of items stored in the array.">pl_DynamicArray_GetSize</a> (<a class="code" href="group___plank_dynamic_array_class.html#ga7ed3f04247baaec4f09394dee060950d" title="An opaque reference to the Plank DynamicArray object.">PlankDynamicArrayRef</a> p);
+<a name="l00105"></a>00105 
+<a name="l00107"></a>00107 PlankL <a class="code" href="group___plank_dynamic_array_class.html#ga2ad1ad51985b6c22b4bfafc52629c7f6" title="Get the size of a single item stored in the array.">pl_DynamicArray_GetItemSize</a> (<a class="code" href="group___plank_dynamic_array_class.html#ga7ed3f04247baaec4f09394dee060950d" title="An opaque reference to the Plank DynamicArray object.">PlankDynamicArrayRef</a> p);
+<a name="l00108"></a>00108 
+<a name="l00109"></a>00109 
+<a name="l00110"></a>00110 PlankResult pl_DynamicArray_SetSize (<a class="code" href="group___plank_dynamic_array_class.html#ga7ed3f04247baaec4f09394dee060950d" title="An opaque reference to the Plank DynamicArray object.">PlankDynamicArrayRef</a> p, <span class="keyword">const</span> PlankL capacity);
+<a name="l00111"></a>00111 
+<a name="l00112"></a>00112 PlankResult pl_DynamicArray_Zero (<a class="code" href="group___plank_dynamic_array_class.html#ga7ed3f04247baaec4f09394dee060950d" title="An opaque reference to the Plank DynamicArray object.">PlankDynamicArrayRef</a> p);
+<a name="l00113"></a>00113 
+<a name="l00114"></a>00114 
+<a name="l00116"></a>00116 PlankP <a class="code" href="group___plank_dynamic_array_class.html#gaa9fa4d38189371ddd9d7952a2c331535" title="Get the raw array.">pl_DynamicArray_GetArray</a> (<a class="code" href="group___plank_dynamic_array_class.html#ga7ed3f04247baaec4f09394dee060950d" title="An opaque reference to the Plank DynamicArray object.">PlankDynamicArrayRef</a> p);
+<a name="l00117"></a>00117 
+<a name="l00124"></a>00124 PlankResult <a class="code" href="group___plank_dynamic_array_class.html#gaa561452eee42c9d3516bd5f7f30e3099" title="Add an item to the array.">pl_DynamicArray_AddItem</a> (<a class="code" href="group___plank_dynamic_array_class.html#ga7ed3f04247baaec4f09394dee060950d" title="An opaque reference to the Plank DynamicArray object.">PlankDynamicArrayRef</a> p, <span class="keyword">const</span> PlankP item);
+<a name="l00125"></a>00125 
+<a name="l00126"></a>00126 PlankResult pl_DynamicArray_AddItems (<a class="code" href="group___plank_dynamic_array_class.html#ga7ed3f04247baaec4f09394dee060950d" title="An opaque reference to the Plank DynamicArray object.">PlankDynamicArrayRef</a> p, PlankConstantP items, <span class="keyword">const</span> PlankL numItems);
+<a name="l00127"></a>00127 
+<a name="l00135"></a>00135 PlankResult <a class="code" href="group___plank_dynamic_array_class.html#gae8d22a2c6d1fbac22678651177c5130b" title="Copies an item to the specified index.">pl_DynamicArray_SetItem</a> (<a class="code" href="group___plank_dynamic_array_class.html#ga7ed3f04247baaec4f09394dee060950d" title="An opaque reference to the Plank DynamicArray object.">PlankDynamicArrayRef</a> p, <span class="keyword">const</span> PlankL index, <span class="keyword">const</span> PlankP item);
+<a name="l00136"></a>00136 
+<a name="l00137"></a>00137 PlankResult pl_DynamicArray_SetAsClearText (<a class="code" href="group___plank_dynamic_array_class.html#ga7ed3f04247baaec4f09394dee060950d" title="An opaque reference to the Plank DynamicArray object.">PlankDynamicArrayRef</a> p, <span class="keyword">const</span> PlankL length);
+<a name="l00138"></a>00138 
+<a name="l00139"></a>00139 PlankResult pl_DynamicArray_SetAsText (<a class="code" href="group___plank_dynamic_array_class.html#ga7ed3f04247baaec4f09394dee060950d" title="An opaque reference to the Plank DynamicArray object.">PlankDynamicArrayRef</a> p, <span class="keyword">const</span> <span class="keywordtype">char</span>* text);
+<a name="l00140"></a>00140 
+<a name="l00141"></a>00141 PlankResult pl_DynamicArray_AppendText (<a class="code" href="group___plank_dynamic_array_class.html#ga7ed3f04247baaec4f09394dee060950d" title="An opaque reference to the Plank DynamicArray object.">PlankDynamicArrayRef</a> p, <span class="keyword">const</span> <span class="keywordtype">char</span>* text);
+<a name="l00142"></a>00142 
+<a name="l00143"></a>00143 PlankResult pl_DynamicArray_AppendTextLine (<a class="code" href="group___plank_dynamic_array_class.html#ga7ed3f04247baaec4f09394dee060950d" title="An opaque reference to the Plank DynamicArray object.">PlankDynamicArrayRef</a> p, <span class="keyword">const</span> <span class="keywordtype">char</span>* text, <span class="keyword">const</span> <span class="keywordtype">char</span>* seps);
+<a name="l00144"></a>00144 PlankResult pl_DynamicArray_AppendTextLineLF (<a class="code" href="group___plank_dynamic_array_class.html#ga7ed3f04247baaec4f09394dee060950d" title="An opaque reference to the Plank DynamicArray object.">PlankDynamicArrayRef</a> p, <span class="keyword">const</span> <span class="keywordtype">char</span>* text);
+<a name="l00145"></a>00145 PlankResult pl_DynamicArray_AppendTextLineCRLF (<a class="code" href="group___plank_dynamic_array_class.html#ga7ed3f04247baaec4f09394dee060950d" title="An opaque reference to the Plank DynamicArray object.">PlankDynamicArrayRef</a> p, <span class="keyword">const</span> <span class="keywordtype">char</span>* text);
 <a name="l00146"></a>00146 
-<a name="l00151"></a>00151 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_dynamic_array_class.html#ga877d22e866939a3311db08fa78799ccf" title="Inreases the array&#39;s capcity by a spefcified number of items.">pl_DynamicArray_Grow</a> (<a class="code" href="group___plank_dynamic_array_class.html#ga7ed3f04247baaec4f09394dee060950d" title="An opaque reference to the Plank DynamicArray object.">PlankDynamicArrayRef</a> p, <span class="keyword">const</span> <span class="keywordtype">int</span> amount);
-<a name="l00152"></a>00152 
-<a name="l00158"></a>00158 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_dynamic_array_class.html#ga638b78468ffe31abf386279973441359" title="Reduces the amount of memory the array uses to the minimum.">pl_DynamicArray_Purge</a> (<a class="code" href="group___plank_dynamic_array_class.html#ga7ed3f04247baaec4f09394dee060950d" title="An opaque reference to the Plank DynamicArray object.">PlankDynamicArrayRef</a> p);
+<a name="l00147"></a>00147 
+<a name="l00148"></a>00148 
+<a name="l00158"></a>00158 PlankResult <a class="code" href="group___plank_dynamic_array_class.html#ga814b47d52dcad65d9281e0a2dc859634" title="Inserts an item into the specified index.">pl_DynamicArray_InsertItem</a> (<a class="code" href="group___plank_dynamic_array_class.html#ga7ed3f04247baaec4f09394dee060950d" title="An opaque reference to the Plank DynamicArray object.">PlankDynamicArrayRef</a> p, <span class="keyword">const</span> PlankL index, <span class="keyword">const</span> PlankP item);
 <a name="l00159"></a>00159 
-<a name="l00162"></a>00162 <a class="code" href="plank___standard_header_8h.html#a5f78f73f0b53faac6c264036f55232e4">PLANK_END_C_LINKAGE</a>
-<a name="l00163"></a>00163 
-<a name="l00164"></a>00164 <span class="preprocessor">#if !DOXYGEN</span>
-<a name="l00165"></a>00165 <span class="preprocessor"></span><span class="keyword">typedef</span> <span class="keyword">struct </span>PlankDynamicArray
-<a name="l00166"></a>00166 {
-<a name="l00167"></a>00167     <a class="code" href="plank___standard_header_8h.html#a854e96ed6d678b7cbcbedffce1c0844d">PlankLL</a> itemSize;
-<a name="l00168"></a>00168     <a class="code" href="plank___standard_header_8h.html#a854e96ed6d678b7cbcbedffce1c0844d">PlankLL</a> allocatedItems;
-<a name="l00169"></a>00169     <a class="code" href="plank___standard_header_8h.html#a854e96ed6d678b7cbcbedffce1c0844d">PlankLL</a> usedItems;
-<a name="l00170"></a>00170     <a class="code" href="plank___standard_header_8h.html#a6461616175af5df334c3067edbe0b6c3">PlankP</a> data;
-<a name="l00171"></a>00171 } PlankDynamicArray;
-<a name="l00172"></a>00172 <span class="preprocessor">#endif</span>
-<a name="l00173"></a>00173 <span class="preprocessor"></span>
-<a name="l00174"></a>00174 <span class="preprocessor">#endif // PLANK_DYNAMICARRAY_H</span>
+<a name="l00166"></a>00166 PlankResult <a class="code" href="group___plank_dynamic_array_class.html#ga64a79e5dd0613914b0f26179927fd3d2" title="Retrieves an item at the specified index.">pl_DynamicArray_GetItem</a> (<a class="code" href="group___plank_dynamic_array_class.html#ga7ed3f04247baaec4f09394dee060950d" title="An opaque reference to the Plank DynamicArray object.">PlankDynamicArrayRef</a> p, <span class="keyword">const</span> PlankL index, PlankP item);
+<a name="l00167"></a>00167 
+<a name="l00168"></a>00168 PlankResult pl_DynamicArray_PutItem (<a class="code" href="group___plank_dynamic_array_class.html#ga7ed3f04247baaec4f09394dee060950d" title="An opaque reference to the Plank DynamicArray object.">PlankDynamicArrayRef</a> p, <span class="keyword">const</span> PlankL index, PlankP item);
+<a name="l00169"></a>00169 
+<a name="l00174"></a>00174 PlankResult <a class="code" href="group___plank_dynamic_array_class.html#ga5b8d82f0053a66f44af8980b87c308df" title="Removes an item from the specified index.">pl_DynamicArray_RemoveItem</a> (<a class="code" href="group___plank_dynamic_array_class.html#ga7ed3f04247baaec4f09394dee060950d" title="An opaque reference to the Plank DynamicArray object.">PlankDynamicArrayRef</a> p, <span class="keyword">const</span> PlankL index);
+<a name="l00175"></a>00175 
+<a name="l00176"></a>00176 PlankResult pl_DynamicArray_Sort (<a class="code" href="group___plank_dynamic_array_class.html#ga7ed3f04247baaec4f09394dee060950d" title="An opaque reference to the Plank DynamicArray object.">PlankDynamicArrayRef</a> p, <a class="code" href="group___plank_dynamic_array_class.html#gae4efb9f0aa585778c10fd2696fc091e3" title="Compare function.">PlankDynamicArrayCompareFunction</a> comparator);
+<a name="l00177"></a>00177 
+<a name="l00185"></a>00185 PlankResult <a class="code" href="group___plank_dynamic_array_class.html#ga5307c7c1534d366764e3d50da2ca8df3" title="Ensures that the array is sufficient to hold a certain number of items.">pl_DynamicArray_EnsureSize</a> (<a class="code" href="group___plank_dynamic_array_class.html#ga7ed3f04247baaec4f09394dee060950d" title="An opaque reference to the Plank DynamicArray object.">PlankDynamicArrayRef</a> p, <span class="keyword">const</span> PlankL capacity);
+<a name="l00186"></a>00186 
+<a name="l00191"></a>00191 PlankResult <a class="code" href="group___plank_dynamic_array_class.html#ga877d22e866939a3311db08fa78799ccf" title="Inreases the array&#39;s capcity by a spefcified number of items.">pl_DynamicArray_Grow</a> (<a class="code" href="group___plank_dynamic_array_class.html#ga7ed3f04247baaec4f09394dee060950d" title="An opaque reference to the Plank DynamicArray object.">PlankDynamicArrayRef</a> p, <span class="keyword">const</span> <span class="keywordtype">int</span> amount);
+<a name="l00192"></a>00192 
+<a name="l00198"></a>00198 PlankResult <a class="code" href="group___plank_dynamic_array_class.html#ga638b78468ffe31abf386279973441359" title="Reduces the amount of memory the array uses to the minimum.">pl_DynamicArray_Purge</a> (<a class="code" href="group___plank_dynamic_array_class.html#ga7ed3f04247baaec4f09394dee060950d" title="An opaque reference to the Plank DynamicArray object.">PlankDynamicArrayRef</a> p);
+<a name="l00199"></a>00199 
+<a name="l00202"></a>00202 PLANK_END_C_LINKAGE
+<a name="l00203"></a>00203 
+<a name="l00204"></a>00204 <span class="preprocessor">#if !DOXYGEN</span>
+<a name="l00205"></a>00205 <span class="preprocessor"></span><span class="keyword">typedef</span> <span class="keyword">struct </span>PlankDynamicArray
+<a name="l00206"></a>00206 {
+<a name="l00207"></a>00207     PlankL itemSize;
+<a name="l00208"></a>00208     PlankL allocatedItems;
+<a name="l00209"></a>00209     PlankL usedItems;
+<a name="l00210"></a>00210     PlankP data;
+<a name="l00211"></a>00211 } PlankDynamicArray;
+<a name="l00212"></a>00212 <span class="preprocessor">#endif</span>
+<a name="l00213"></a>00213 <span class="preprocessor"></span>
+<a name="l00214"></a>00214 <span class="preprocessor">#endif // PLANK_DYNAMICARRAY_H</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -164,7 +199,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Properties</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -173,7 +208,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 5 2012 17:04:52 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 8 2014 12:26:46 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

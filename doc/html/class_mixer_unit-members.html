@@ -20,7 +20,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="pl-nk-logo-small.png"/></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">pl-nk</div>
+   <div id="projectname">pl-nk&#160;<span id="projectnumber">v0.4.5</span></div>
+   <div id="projectbrief">Plonk|Plink|Plank are a set of cross-platform C/C++ frameworks for audio software development</div>
   </td>
  </tr>
  </tbody>
@@ -29,8 +30,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -67,21 +68,15 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="contents">
 This is the complete list of members for <a class="el" href="class_mixer_unit.html">MixerUnit&lt; SampleType &gt;</a>, including all inherited members.<table>
   <tr class="memlist"><td><a class="el" href="class_mixer_unit.html#ac6358840aff51693d2061dcab5f72c07">ar</a>(UnitType const &amp;input, const bool allowAutoDelete=true, UnitType const &amp;mul=SampleType(1), UnitType const &amp;add=SampleType(0), BlockSize const &amp;preferredBlockSize=BlockSize::getDefault(), SampleRate const &amp;preferredSampleRate=SampleRate::getDefault())</td><td><a class="el" href="class_mixer_unit.html">MixerUnit&lt; SampleType &gt;</a></td><td><code> [inline, static]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_mixer_unit.html#adfd0de31dcb88611aa84271f0b08954b">ar</a>(UnitsType const &amp;array, const bool allowAutoDelete=true, const bool purgeNullUnits=true, const int preferredNumChannels=0, UnitType const &amp;mul=SampleType(1), UnitType const &amp;add=SampleType(0), BlockSize const &amp;preferredBlockSize=BlockSize::getDefault(), SampleRate const &amp;preferredSampleRate=SampleRate::getDefault())</td><td><a class="el" href="class_mixer_unit.html">MixerUnit&lt; SampleType &gt;</a></td><td><code> [inline, static]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_mixer_unit.html#abd49365087145834b66d3d34e4e6f18b">ChannelMixerInternal</a> typedef</td><td><a class="el" href="class_mixer_unit.html">MixerUnit&lt; SampleType &gt;</a></td><td></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_mixer_unit.html#a7ab67f31a5cd6ebf9b9e8fe14a4953e7">ChannelType</a> typedef</td><td><a class="el" href="class_mixer_unit.html">MixerUnit&lt; SampleType &gt;</a></td><td></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_mixer_unit.html#aa506d87dd77592f76328b8ac9590af44">getInfo</a>()</td><td><a class="el" href="class_mixer_unit.html">MixerUnit&lt; SampleType &gt;</a></td><td><code> [inline, static]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_mixer_unit.html#a0804a497dee6afd342acf30352eee6a2">Inputs</a> typedef</td><td><a class="el" href="class_mixer_unit.html">MixerUnit&lt; SampleType &gt;</a></td><td></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_mixer_unit.html#a971817184104f9b5d5c6f06bc7978f27">UnitMixerInternal</a> typedef</td><td><a class="el" href="class_mixer_unit.html">MixerUnit&lt; SampleType &gt;</a></td><td></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_mixer_unit.html#a0e2caa939a3b86248ec0f8471cd85715">UnitsType</a> typedef</td><td><a class="el" href="class_mixer_unit.html">MixerUnit&lt; SampleType &gt;</a></td><td></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_mixer_unit.html#a06319e63fdb9682de95614e4bcb4f6e0">UnitType</a> typedef</td><td><a class="el" href="class_mixer_unit.html">MixerUnit&lt; SampleType &gt;</a></td><td></td></tr>
+  <tr class="memlist"><td><a class="el" href="class_mixer_unit.html#a9a3e9346d5ed3cf4844a40052c8f8d3a">ar</a>(UnitsType const &amp;array, const bool allowAutoDelete=true, const bool purgeExpiredUnits=true, const int preferredNumChannels=0, UnitType const &amp;mul=SampleType(1), UnitType const &amp;add=SampleType(0), BlockSize const &amp;preferredBlockSize=BlockSize::getDefault(), SampleRate const &amp;preferredSampleRate=SampleRate::getDefault())</td><td><a class="el" href="class_mixer_unit.html">MixerUnit&lt; SampleType &gt;</a></td><td><code> [inline, static]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="class_mixer_unit.html#a415f72cec6230bd0e6ef971441abcd05">ar</a>(QueueType const &amp;queue, const bool allowAutoDelete=true, const bool purgeExpiredUnits=true, const int preferredNumChannels=0, UnitType const &amp;mul=SampleType(1), UnitType const &amp;add=SampleType(0), BlockSize const &amp;preferredBlockSize=BlockSize::getDefault(), SampleRate const &amp;preferredSampleRate=SampleRate::getDefault())</td><td><a class="el" href="class_mixer_unit.html">MixerUnit&lt; SampleType &gt;</a></td><td><code> [inline, static]</code></td></tr>
 </table></div>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Properties</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -90,7 +85,7 @@ This is the complete list of members for <a class="el" href="class_mixer_unit.ht
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 5 2012 17:05:06 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 8 2014 12:26:52 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

@@ -20,7 +20,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="pl-nk-logo-small.png"/></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">pl-nk</div>
+   <div id="projectname">pl-nk&#160;<span id="projectnumber">v0.4.5</span></div>
+   <div id="projectbrief">Plonk|Plink|Plank are a set of cross-platform C/C++ frameworks for audio software development</div>
   </td>
  </tr>
  </tbody>
@@ -29,8 +30,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -78,6 +79,13 @@ Functions</h2></td></tr>
 <tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_binary_op_functions.html#ga2d1760b9a86fa164a4138d8653375646">divop</a> (Type const &amp;a, Type const &amp;b)  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenient inline function for the '/' operator.  <a href="#ga2d1760b9a86fa164a4138d8653375646"></a><br/></td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class Type &gt; </td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_binary_op_functions.html#gac0c80e9bf4c33240c601bcae8a1fe11c">modop</a> (Type const &amp;a, Type const &amp;b)  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenient inline function for the '%' operator.  <a href="#gac0c80e9bf4c33240c601bcae8a1fe11c"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plonk_binary_op_functions.html#ga823bdbe35ca18e968ecf8f78e0311a29">modop</a> (float const &amp;a, float const &amp;b)  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenient inline function for the '%' operator (float).  <a href="#ga823bdbe35ca18e968ecf8f78e0311a29"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plonk_binary_op_functions.html#ga37dd9cdd3f2b51b9e75ce468fc8f5383">modop</a> (double const &amp;a, double const &amp;b)  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenient inline function for the '%' operator (double).  <a href="#ga37dd9cdd3f2b51b9e75ce468fc8f5383"></a><br/></td></tr>
+<tr><td class="memTemplParams" colspan="2">template&lt;class Type &gt; </td></tr>
 <tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_binary_op_functions.html#ga4fede61eeb7c6df5cf700c59267ff483">isEqualTo</a> (Type const &amp;a, Type const &amp;b)  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns 1 if the inputs are equal otherwise returns 0.  <a href="#ga4fede61eeb7c6df5cf700c59267ff483"></a><br/></td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class Type &gt; </td></tr>
@@ -119,35 +127,61 @@ Functions</h2></td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class Type &gt; </td></tr>
 <tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_binary_op_functions.html#ga76b312f2fe7db734a1165f47a998f34c">thresh</a> (Type const &amp;a, Type const &amp;b)  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">If <em>a</em> is less than <em>b</em> returns 0 otherwise return <em>a</em>.  <a href="#ga76b312f2fe7db734a1165f47a998f34c"></a><br/></td></tr>
-<tr><td class="memTemplParams" colspan="2">template&lt;class Type &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_binary_op_functions.html#ga324267060ce21c18f1255e69f823edc3">round</a> (Type const &amp;a, Type const &amp;b)  throw ()</td></tr>
-<tr><td class="memTemplParams" colspan="2">template&lt;class Type &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_binary_op_functions.html#ga75d8fa9b7b406f54c8aa0d0d9bc3199a">trunc</a> (Type const &amp;a, Type const &amp;b)  throw ()</td></tr>
-<tr><td class="memTemplParams" colspan="2">template&lt;class Type &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_binary_op_functions.html#gaa90f158fd60651ace12bf4e2e170332d">clip2</a> (Type const &amp;value, Type const &amp;range)  throw ()</td></tr>
-<tr><td class="memTemplParams" colspan="2">template&lt;class Type &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_binary_op_functions.html#gadbd2cee522ab1adcf5fd33508931d47b">wrap</a> (Type const &amp;value, Type const &amp;upper)  throw ()</td></tr>
-<tr><td class="memTemplParams" colspan="2">template&lt;class Type &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_binary_op_functions.html#gaf4d669544b6444eabbd898f6d559bec4">decayFeedback</a> (Type const &amp;delayTime, Type const &amp;decayTime)  throw ()</td></tr>
-<tr><td class="memTemplParams" colspan="2">template&lt;class Type &gt; </td></tr>
+<tr><td class="memTemplParams" colspan="2"><a class="anchor" id="gabf9e7fd23a39c53e897cf66aaf90a68a"></a><!-- doxytag: member="PlonkBinaryOpFunctions::min" ref="gabf9e7fd23a39c53e897cf66aaf90a68a" args="(Type const &amp;a, Type const &amp;b)" -->
+template&lt;class Type &gt; </td></tr>
 <tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_binary_op_functions.html#gabf9e7fd23a39c53e897cf66aaf90a68a">min</a> (Type const &amp;a, Type const &amp;b)  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns minimum of <code>a</code> and <code>b</code>.  <a href="#gabf9e7fd23a39c53e897cf66aaf90a68a"></a><br/></td></tr>
-<tr><td class="memTemplParams" colspan="2">template&lt;class Type &gt; </td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns minimum of <code>a</code> and <code>b</code>. <br/></td></tr>
+<tr><td class="memTemplParams" colspan="2"><a class="anchor" id="gae9767f40737087f6253040a0aaee4146"></a><!-- doxytag: member="PlonkBinaryOpFunctions::max" ref="gae9767f40737087f6253040a0aaee4146" args="(Type const &amp;a, Type const &amp;b)" -->
+template&lt;class Type &gt; </td></tr>
 <tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_binary_op_functions.html#gae9767f40737087f6253040a0aaee4146">max</a> (Type const &amp;a, Type const &amp;b)  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns maximum of <code>a</code> and <code>b</code>.  <a href="#gae9767f40737087f6253040a0aaee4146"></a><br/></td></tr>
-<tr><td class="memTemplParams" colspan="2">template&lt;class Type &gt; </td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns maximum of <code>a</code> and <code>b</code>. <br/></td></tr>
+<tr><td class="memTemplParams" colspan="2"><a class="anchor" id="ga0efbcd57e8a17ef548e238ea9f35bc62"></a><!-- doxytag: member="PlonkBinaryOpFunctions::pow" ref="ga0efbcd57e8a17ef548e238ea9f35bc62" args="(Type const &amp;a, Type const &amp;b)" -->
+template&lt;class Type &gt; </td></tr>
 <tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_binary_op_functions.html#ga0efbcd57e8a17ef548e238ea9f35bc62">pow</a> (Type const &amp;a, Type const &amp;b)  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns <em>a</em> raised to the power <em>b</em>.  <a href="#ga0efbcd57e8a17ef548e238ea9f35bc62"></a><br/></td></tr>
-<tr><td class="memTemplParams" colspan="2">template&lt;class Type &gt; </td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns <em>a</em> raised to the power <em>b</em>. <br/></td></tr>
+<tr><td class="memTemplParams" colspan="2"><a class="anchor" id="ga3edabf0b05f53c9399cd27330d6bbb04"></a><!-- doxytag: member="PlonkBinaryOpFunctions::squared" ref="ga3edabf0b05f53c9399cd27330d6bbb04" args="(Type const &amp;a)" -->
+template&lt;class Type &gt; </td></tr>
 <tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_binary_op_functions.html#ga3edabf0b05f53c9399cd27330d6bbb04">squared</a> (Type const &amp;a)  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the input argument squared.  <a href="#ga3edabf0b05f53c9399cd27330d6bbb04"></a><br/></td></tr>
-<tr><td class="memTemplParams" colspan="2">template&lt;class Type &gt; </td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the input argument squared. <br/></td></tr>
+<tr><td class="memTemplParams" colspan="2"><a class="anchor" id="gadd1d6f37c63b4d84d7ccec97ce802376"></a><!-- doxytag: member="PlonkBinaryOpFunctions::cubed" ref="gadd1d6f37c63b4d84d7ccec97ce802376" args="(Type const &amp;a)" -->
+template&lt;class Type &gt; </td></tr>
 <tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_binary_op_functions.html#gadd1d6f37c63b4d84d7ccec97ce802376">cubed</a> (Type const &amp;a)  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the input argument cubed.  <a href="#gadd1d6f37c63b4d84d7ccec97ce802376"></a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the input argument cubed. <br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <p>Binary arithmetic operator functions. </p>
 <hr/><h2>Function Documentation</h2>
+<a class="anchor" id="ga01a457334184e3bbf13e3fbc60819a1a"></a><!-- doxytag: member="plonk_InlineBinaryOps.h::absdif" ref="ga01a457334184e3bbf13e3fbc60819a1a" args="(Type const &amp;a, Type const &amp;b)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Type &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">Type absdif </td>
+          <td>(</td>
+          <td class="paramtype">Type const &amp;&#160;</td>
+          <td class="paramname"><em>a</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Type const &amp;&#160;</td>
+          <td class="paramname"><em>b</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Returns the absolute difference between the input arguments. </p>
+
+</div>
+</div>
 <a class="anchor" id="ga8aed5431429725b65a406ad5cd4c4d59"></a><!-- doxytag: member="plonk_InlineBinaryOps.h::addop" ref="ga8aed5431429725b65a406ad5cd4c4d59" args="(Type const &amp;a, Type const &amp;b)" -->
 <div class="memitem">
 <div class="memproto">
@@ -179,14 +213,14 @@ template&lt;class Type &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="gae83e120cc4ef16930adcfa5225dd8e22"></a><!-- doxytag: member="plonk_InlineBinaryOps.h::subop" ref="gae83e120cc4ef16930adcfa5225dd8e22" args="(Type const &amp;a, Type const &amp;b)" -->
+<a class="anchor" id="ga8c0089d2d96d98ca8394950fc062f1f8"></a><!-- doxytag: member="plonk_InlineBinaryOps.h::atan2" ref="ga8c0089d2d96d98ca8394950fc062f1f8" args="(Type const &amp;a, Type const &amp;b)" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class Type &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">Type subop </td>
+          <td class="memname">Type atan2 </td>
           <td>(</td>
           <td class="paramtype">Type const &amp;&#160;</td>
           <td class="paramname"><em>a</em>, </td>
@@ -206,18 +240,18 @@ template&lt;class Type &gt; </div>
 </div>
 <div class="memdoc">
 
-<p>Convenient inline function for the '-' operator. </p>
+<p>Returns <img class="formulaInl" alt="$ atan2(a,b) $" src="form_6.png"/>. </p>
 
 </div>
 </div>
-<a class="anchor" id="ga19d5763435e67473c6d33bd68e8ab84b"></a><!-- doxytag: member="plonk_InlineBinaryOps.h::mulop" ref="ga19d5763435e67473c6d33bd68e8ab84b" args="(Type const &amp;a, Type const &amp;b)" -->
+<a class="anchor" id="ga84eca012c2ffbe3375630ea38f38fd30"></a><!-- doxytag: member="plonk_InlineBinaryOps.h::difsqr" ref="ga84eca012c2ffbe3375630ea38f38fd30" args="(Type const &amp;a, Type const &amp;b)" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class Type &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">Type mulop </td>
+          <td class="memname">Type difsqr </td>
           <td>(</td>
           <td class="paramtype">Type const &amp;&#160;</td>
           <td class="paramname"><em>a</em>, </td>
@@ -237,7 +271,7 @@ template&lt;class Type &gt; </div>
 </div>
 <div class="memdoc">
 
-<p>Convenient inline function for the '*' operator. </p>
+<p>Returns <img class="formulaInl" alt="$ a * a - b * b $" src="form_8.png"/>. </p>
 
 </div>
 </div>
@@ -272,6 +306,37 @@ template&lt;class Type &gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="gad11e580e7a49db13e0b8fcd6babc4841"></a><!-- doxytag: member="plonk_InlineBinaryOps.h::hypot" ref="gad11e580e7a49db13e0b8fcd6babc4841" args="(Type const &amp;a, Type const &amp;b)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Type &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">Type hypot </td>
+          <td>(</td>
+          <td class="paramtype">Type const &amp;&#160;</td>
+          <td class="paramname"><em>a</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Type const &amp;&#160;</td>
+          <td class="paramname"><em>b</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Returns <img class="formulaInl" alt="$ \sqrt{ a^2 + b^2 } $" src="form_5.png"/>. </p>
+
+</div>
+</div>
 <a class="anchor" id="ga4fede61eeb7c6df5cf700c59267ff483"></a><!-- doxytag: member="plonk_InlineBinaryOps.h::isEqualTo" ref="ga4fede61eeb7c6df5cf700c59267ff483" args="(Type const &amp;a, Type const &amp;b)" -->
 <div class="memitem">
 <div class="memproto">
@@ -300,37 +365,6 @@ template&lt;class Type &gt; </div>
 <div class="memdoc">
 
 <p>Returns 1 if the inputs are equal otherwise returns 0. </p>
-
-</div>
-</div>
-<a class="anchor" id="gab96605a7aafbad650ce77b525fa21426"></a><!-- doxytag: member="plonk_InlineBinaryOps.h::isNotEqualTo" ref="gab96605a7aafbad650ce77b525fa21426" args="(Type const &amp;a, Type const &amp;b)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">Type isNotEqualTo </td>
-          <td>(</td>
-          <td class="paramtype">Type const &amp;&#160;</td>
-          <td class="paramname"><em>a</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Type const &amp;&#160;</td>
-          <td class="paramname"><em>b</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Returns 1 if the inputs are not equal otherwise returns 0. </p>
 
 </div>
 </div>
@@ -458,14 +492,14 @@ template&lt;class Type &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="gad11e580e7a49db13e0b8fcd6babc4841"></a><!-- doxytag: member="plonk_InlineBinaryOps.h::hypot" ref="gad11e580e7a49db13e0b8fcd6babc4841" args="(Type const &amp;a, Type const &amp;b)" -->
+<a class="anchor" id="gab96605a7aafbad650ce77b525fa21426"></a><!-- doxytag: member="plonk_InlineBinaryOps.h::isNotEqualTo" ref="gab96605a7aafbad650ce77b525fa21426" args="(Type const &amp;a, Type const &amp;b)" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class Type &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">Type hypot </td>
+          <td class="memname">Type isNotEqualTo </td>
           <td>(</td>
           <td class="paramtype">Type const &amp;&#160;</td>
           <td class="paramname"><em>a</em>, </td>
@@ -485,18 +519,47 @@ template&lt;class Type &gt; </div>
 </div>
 <div class="memdoc">
 
-<p>Returns <img class="formulaInl" alt="$ \sqrt{ a^2 + b^2 } $" src="form_5.png"/>. </p>
+<p>Returns 1 if the inputs are not equal otherwise returns 0. </p>
 
 </div>
 </div>
-<a class="anchor" id="ga8c0089d2d96d98ca8394950fc062f1f8"></a><!-- doxytag: member="plonk_InlineBinaryOps.h::atan2" ref="ga8c0089d2d96d98ca8394950fc062f1f8" args="(Type const &amp;a, Type const &amp;b)" -->
+<a class="anchor" id="ga37dd9cdd3f2b51b9e75ce468fc8f5383"></a><!-- doxytag: member="plonk_InlineBinaryOps.h::modop" ref="ga37dd9cdd3f2b51b9e75ce468fc8f5383" args="(double const &amp;a, double const &amp;b)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double modop </td>
+          <td>(</td>
+          <td class="paramtype">double const &amp;&#160;</td>
+          <td class="paramname"><em>a</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double const &amp;&#160;</td>
+          <td class="paramname"><em>b</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Convenient inline function for the '%' operator (double). </p>
+
+</div>
+</div>
+<a class="anchor" id="gac0c80e9bf4c33240c601bcae8a1fe11c"></a><!-- doxytag: member="plonk_InlineBinaryOps.h::modop" ref="gac0c80e9bf4c33240c601bcae8a1fe11c" args="(Type const &amp;a, Type const &amp;b)" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class Type &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">Type atan2 </td>
+          <td class="memname">Type modop </td>
           <td>(</td>
           <td class="paramtype">Type const &amp;&#160;</td>
           <td class="paramname"><em>a</em>, </td>
@@ -516,18 +579,47 @@ template&lt;class Type &gt; </div>
 </div>
 <div class="memdoc">
 
-<p>Returns <img class="formulaInl" alt="$ atan2(a,b) $" src="form_6.png"/>. </p>
+<p>Convenient inline function for the '%' operator. </p>
 
 </div>
 </div>
-<a class="anchor" id="ga1ecf161d4fc9111638e590270e05163c"></a><!-- doxytag: member="plonk_InlineBinaryOps.h::sumsqr" ref="ga1ecf161d4fc9111638e590270e05163c" args="(Type const &amp;a, Type const &amp;b)" -->
+<a class="anchor" id="ga823bdbe35ca18e968ecf8f78e0311a29"></a><!-- doxytag: member="plonk_InlineBinaryOps.h::modop" ref="ga823bdbe35ca18e968ecf8f78e0311a29" args="(float const &amp;a, float const &amp;b)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float modop </td>
+          <td>(</td>
+          <td class="paramtype">float const &amp;&#160;</td>
+          <td class="paramname"><em>a</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float const &amp;&#160;</td>
+          <td class="paramname"><em>b</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Convenient inline function for the '%' operator (float). </p>
+
+</div>
+</div>
+<a class="anchor" id="ga19d5763435e67473c6d33bd68e8ab84b"></a><!-- doxytag: member="plonk_InlineBinaryOps.h::mulop" ref="ga19d5763435e67473c6d33bd68e8ab84b" args="(Type const &amp;a, Type const &amp;b)" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class Type &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">Type sumsqr </td>
+          <td class="memname">Type mulop </td>
           <td>(</td>
           <td class="paramtype">Type const &amp;&#160;</td>
           <td class="paramname"><em>a</em>, </td>
@@ -547,69 +639,7 @@ template&lt;class Type &gt; </div>
 </div>
 <div class="memdoc">
 
-<p>Returns <img class="formulaInl" alt="$ a * a + b * b $" src="form_7.png"/>. </p>
-
-</div>
-</div>
-<a class="anchor" id="ga84eca012c2ffbe3375630ea38f38fd30"></a><!-- doxytag: member="plonk_InlineBinaryOps.h::difsqr" ref="ga84eca012c2ffbe3375630ea38f38fd30" args="(Type const &amp;a, Type const &amp;b)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">Type difsqr </td>
-          <td>(</td>
-          <td class="paramtype">Type const &amp;&#160;</td>
-          <td class="paramname"><em>a</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Type const &amp;&#160;</td>
-          <td class="paramname"><em>b</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Returns <img class="formulaInl" alt="$ a * a - b * b $" src="form_8.png"/>. </p>
-
-</div>
-</div>
-<a class="anchor" id="gaa8816d0ec4c2bfd0de5603a9b6c9badc"></a><!-- doxytag: member="plonk_InlineBinaryOps.h::sqrsum" ref="gaa8816d0ec4c2bfd0de5603a9b6c9badc" args="(Type const &amp;a, Type const &amp;b)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">Type sqrsum </td>
-          <td>(</td>
-          <td class="paramtype">Type const &amp;&#160;</td>
-          <td class="paramname"><em>a</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Type const &amp;&#160;</td>
-          <td class="paramname"><em>b</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Returns <img class="formulaInl" alt="$ (a + b) * (a + b) $" src="form_9.png"/>. </p>
+<p>Convenient inline function for the '*' operator. </p>
 
 </div>
 </div>
@@ -644,14 +674,14 @@ template&lt;class Type &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="ga01a457334184e3bbf13e3fbc60819a1a"></a><!-- doxytag: member="plonk_InlineBinaryOps.h::absdif" ref="ga01a457334184e3bbf13e3fbc60819a1a" args="(Type const &amp;a, Type const &amp;b)" -->
+<a class="anchor" id="gaa8816d0ec4c2bfd0de5603a9b6c9badc"></a><!-- doxytag: member="plonk_InlineBinaryOps.h::sqrsum" ref="gaa8816d0ec4c2bfd0de5603a9b6c9badc" args="(Type const &amp;a, Type const &amp;b)" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class Type &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">Type absdif </td>
+          <td class="memname">Type sqrsum </td>
           <td>(</td>
           <td class="paramtype">Type const &amp;&#160;</td>
           <td class="paramname"><em>a</em>, </td>
@@ -671,7 +701,69 @@ template&lt;class Type &gt; </div>
 </div>
 <div class="memdoc">
 
-<p>Returns the absolute difference between the input arguments. </p>
+<p>Returns <img class="formulaInl" alt="$ (a + b) * (a + b) $" src="form_9.png"/>. </p>
+
+</div>
+</div>
+<a class="anchor" id="gae83e120cc4ef16930adcfa5225dd8e22"></a><!-- doxytag: member="plonk_InlineBinaryOps.h::subop" ref="gae83e120cc4ef16930adcfa5225dd8e22" args="(Type const &amp;a, Type const &amp;b)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Type &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">Type subop </td>
+          <td>(</td>
+          <td class="paramtype">Type const &amp;&#160;</td>
+          <td class="paramname"><em>a</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Type const &amp;&#160;</td>
+          <td class="paramname"><em>b</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Convenient inline function for the '-' operator. </p>
+
+</div>
+</div>
+<a class="anchor" id="ga1ecf161d4fc9111638e590270e05163c"></a><!-- doxytag: member="plonk_InlineBinaryOps.h::sumsqr" ref="ga1ecf161d4fc9111638e590270e05163c" args="(Type const &amp;a, Type const &amp;b)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Type &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">Type sumsqr </td>
+          <td>(</td>
+          <td class="paramtype">Type const &amp;&#160;</td>
+          <td class="paramname"><em>a</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Type const &amp;&#160;</td>
+          <td class="paramname"><em>b</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Returns <img class="formulaInl" alt="$ a * a + b * b $" src="form_7.png"/>. </p>
 
 </div>
 </div>
@@ -706,293 +798,13 @@ template&lt;class Type &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="ga324267060ce21c18f1255e69f823edc3"></a><!-- doxytag: member="plonk_InlineBinaryOps.h::round" ref="ga324267060ce21c18f1255e69f823edc3" args="(Type const &amp;a, Type const &amp;b)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">Type round </td>
-          <td>(</td>
-          <td class="paramtype">Type const &amp;&#160;</td>
-          <td class="paramname"><em>a</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Type const &amp;&#160;</td>
-          <td class="paramname"><em>b</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ga75d8fa9b7b406f54c8aa0d0d9bc3199a"></a><!-- doxytag: member="plonk_InlineBinaryOps.h::trunc" ref="ga75d8fa9b7b406f54c8aa0d0d9bc3199a" args="(Type const &amp;a, Type const &amp;b)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">Type trunc </td>
-          <td>(</td>
-          <td class="paramtype">Type const &amp;&#160;</td>
-          <td class="paramname"><em>a</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Type const &amp;&#160;</td>
-          <td class="paramname"><em>b</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="gaa90f158fd60651ace12bf4e2e170332d"></a><!-- doxytag: member="plonk_InlineBinaryOps.h::clip2" ref="gaa90f158fd60651ace12bf4e2e170332d" args="(Type const &amp;value, Type const &amp;range)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">Type clip2 </td>
-          <td>(</td>
-          <td class="paramtype">Type const &amp;&#160;</td>
-          <td class="paramname"><em>value</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Type const &amp;&#160;</td>
-          <td class="paramname"><em>range</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="gadbd2cee522ab1adcf5fd33508931d47b"></a><!-- doxytag: member="plonk_InlineBinaryOps.h::wrap" ref="gadbd2cee522ab1adcf5fd33508931d47b" args="(Type const &amp;value, Type const &amp;upper)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">Type wrap </td>
-          <td>(</td>
-          <td class="paramtype">Type const &amp;&#160;</td>
-          <td class="paramname"><em>value</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Type const &amp;&#160;</td>
-          <td class="paramname"><em>upper</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="gaf4d669544b6444eabbd898f6d559bec4"></a><!-- doxytag: member="plonk_InlineBinaryOps.h::decayFeedback" ref="gaf4d669544b6444eabbd898f6d559bec4" args="(Type const &amp;delayTime, Type const &amp;decayTime)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">Type decayFeedback </td>
-          <td>(</td>
-          <td class="paramtype">Type const &amp;&#160;</td>
-          <td class="paramname"><em>delayTime</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Type const &amp;&#160;</td>
-          <td class="paramname"><em>decayTime</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="gabf9e7fd23a39c53e897cf66aaf90a68a"></a><!-- doxytag: member="plonk_InlineCommonOps.h::min" ref="gabf9e7fd23a39c53e897cf66aaf90a68a" args="(Type const &amp;a, Type const &amp;b)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">Type min </td>
-          <td>(</td>
-          <td class="paramtype">Type const &amp;&#160;</td>
-          <td class="paramname"><em>a</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Type const &amp;&#160;</td>
-          <td class="paramname"><em>b</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Returns minimum of <code>a</code> and <code>b</code>. </p>
-
-</div>
-</div>
-<a class="anchor" id="gae9767f40737087f6253040a0aaee4146"></a><!-- doxytag: member="plonk_InlineCommonOps.h::max" ref="gae9767f40737087f6253040a0aaee4146" args="(Type const &amp;a, Type const &amp;b)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">Type max </td>
-          <td>(</td>
-          <td class="paramtype">Type const &amp;&#160;</td>
-          <td class="paramname"><em>a</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Type const &amp;&#160;</td>
-          <td class="paramname"><em>b</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Returns maximum of <code>a</code> and <code>b</code>. </p>
-
-</div>
-</div>
-<a class="anchor" id="ga0efbcd57e8a17ef548e238ea9f35bc62"></a><!-- doxytag: member="plonk_InlineCommonOps.h::pow" ref="ga0efbcd57e8a17ef548e238ea9f35bc62" args="(Type const &amp;a, Type const &amp;b)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">Type pow </td>
-          <td>(</td>
-          <td class="paramtype">Type const &amp;&#160;</td>
-          <td class="paramname"><em>a</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Type const &amp;&#160;</td>
-          <td class="paramname"><em>b</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Returns <em>a</em> raised to the power <em>b</em>. </p>
-
-</div>
-</div>
-<a class="anchor" id="ga3edabf0b05f53c9399cd27330d6bbb04"></a><!-- doxytag: member="plonk_InlineCommonOps.h::squared" ref="ga3edabf0b05f53c9399cd27330d6bbb04" args="(Type const &amp;a)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">Type squared </td>
-          <td>(</td>
-          <td class="paramtype">Type const &amp;&#160;</td>
-          <td class="paramname"><em>a</em></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Returns the input argument squared. </p>
-
-</div>
-</div>
-<a class="anchor" id="gadd1d6f37c63b4d84d7ccec97ce802376"></a><!-- doxytag: member="plonk_InlineCommonOps.h::cubed" ref="gadd1d6f37c63b4d84d7ccec97ce802376" args="(Type const &amp;a)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">Type cubed </td>
-          <td>(</td>
-          <td class="paramtype">Type const &amp;&#160;</td>
-          <td class="paramname"><em>a</em></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Returns the input argument cubed. </p>
-
-</div>
-</div>
 </div>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Properties</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -1001,7 +813,7 @@ template&lt;class Type &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 5 2012 17:04:58 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 8 2014 12:26:52 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

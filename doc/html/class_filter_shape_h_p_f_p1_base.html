@@ -20,7 +20,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="pl-nk-logo-small.png"/></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">pl-nk</div>
+   <div id="projectname">pl-nk&#160;<span id="projectnumber">v0.4.5</span></div>
+   <div id="projectbrief">Plonk|Plink|Plank are a set of cross-platform C/C++ frameworks for audio software development</div>
   </td>
  </tr>
  </tbody>
@@ -29,8 +30,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -61,243 +62,25 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   </div>
 </div>
 <div class="header">
-  <div class="summary">
-<a href="#pub-types">Public Types</a> &#124;
-<a href="#pub-static-methods">Static Public Member Functions</a>  </div>
   <div class="headertitle">
 <div class="title">FilterShapeHPFP1Base&lt; SampleType &gt; Class Template Reference</div>  </div>
 </div>
 <div class="contents">
-<!-- doxytag: class="FilterShapeHPFP1Base" --><!-- doxytag: inherits="FilterShape&lt; SampleType, FilterFormType::P1, FilterShapeType::HPF &gt;" -->
+<!-- doxytag: class="FilterShapeHPFP1Base" --><!-- doxytag: inherits="FilterShape" -->
 <p>One-pole high-pass filter shape.  
  <a href="class_filter_shape_h_p_f_p1_base.html#details">More...</a></p>
-<div class="dynheader">
-Inheritance diagram for FilterShapeHPFP1Base&lt; SampleType &gt;:</div>
-<div class="dyncontent">
- <div class="center">
-  <img src="class_filter_shape_h_p_f_p1_base.png" usemap="#FilterShapeHPFP1Base&lt; SampleType &gt;_map" alt=""/>
-  <map id="FilterShapeHPFP1Base&lt; SampleType &gt;_map" name="FilterShapeHPFP1Base&lt; SampleType &gt;_map">
-<area href="class_filter_shape.html" alt="FilterShape&lt; SampleType, FilterFormType::P1, FilterShapeType::HPF &gt;" shape="rect" coords="0,0,419,24"/>
-</map>
- </div></div>
+
+<p>Inherits FilterShape&lt; SampleType, Form, Shape &gt;.</p>
 
 <p><a href="class_filter_shape_h_p_f_p1_base-members.html">List of all members.</a></p>
 <table class="memberdecls">
-<tr><td colspan="2"><h2><a name="pub-types"></a>
-Public Types</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_filter_shape_h_p_f_p1_base.html#a0e496d7d5c07c9bc109cf76574a04e76">Params</a> { <a class="el" href="class_filter_shape_h_p_f_p1_base.html#a0e496d7d5c07c9bc109cf76574a04e76a42ca272843c795c10f03172d95a4373d">Frequency</a>, 
-<a class="el" href="class_filter_shape_h_p_f_p1_base.html#a0e496d7d5c07c9bc109cf76574a04e76a5d6ff3a502a54ef52cd82b541280f75e">NumParams</a>
- }</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_filter_form.html">FilterForm</a>&lt; SampleType, <br class="typebreak"/>
-FilterFormType::P1 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_filter_shape_h_p_f_p1_base.html#a33150f9f28a5221b01a7fa235406b364">FormType</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="struct_filter_data.html">FormType::Data</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_filter_shape_h_p_f_p1_base.html#ab0306b811a47f9f59a46436b5813306b">FormData</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="struct_filter_shape_data.html">FilterShapeData</a><br class="typebreak"/>
-&lt; SampleType, <br class="typebreak"/>
-FormType::NumCoeffs, NumParams &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_filter_shape_h_p_f_p1_base.html#a747317b3c416f508cf9f2855728da4e1">Data</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_type_utility.html">TypeUtility</a><br class="typebreak"/>
-&lt; SampleType &gt;::IndexType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_filter_shape_h_p_f_p1_base.html#ac32fff295d97b835e9cb3f2de0d6a5ec">CalcType</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt; <a class="el" href="class_filter_shape_h_p_f_p1_base.html#ac32fff295d97b835e9cb3f2de0d6a5ec">CalcType</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_filter_shape_h_p_f_p1_base.html#a2b8cec4dc52aa1ad5ac5710d51a17a9c">CalcTypes</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_filter_unit.html">FilterUnit</a>&lt; <a class="el" href="class_filter_form_3_01_sample_type_00_01_filter_form_type_1_1_p1_01_4.html">FormType</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_filter_shape_h_p_f_p1_base.html#aee86357e2b3cffbacabcddd7b94784c5">Unit</a></td></tr>
-<tr><td colspan="2"><h2><a name="pub-static-methods"></a>
-Static Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_numerical_array.html">IntArray</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_filter_shape_h_p_f_p1_base.html#a5ea9fd20af5716867b25c84a40fdee75">getInputKeys</a> ()  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static SampleType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_filter_shape_h_p_f_p1_base.html#a0822a29daef4fb112f2ce80b85ee2c46">process</a> (SampleType const &amp;input, <a class="el" href="struct_filter_shape_data.html">Data</a> const &amp;data, <a class="el" href="struct_filter_data.html">FormData</a> &amp;form)  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_filter_shape_h_p_f_p1_base.html#aaf75fd9a7688300ef4bfa273abec605b">calculate</a> (<a class="el" href="struct_filter_shape_data.html">Data</a> &amp;data)  throw ()</td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><h3>template&lt;class SampleType&gt;<br/>
 class FilterShapeHPFP1Base&lt; SampleType &gt;</h3>
 
 <p>One-pole high-pass filter shape. </p>
-</div><hr/><h2>Member Typedef Documentation</h2>
-<a class="anchor" id="a33150f9f28a5221b01a7fa235406b364"></a><!-- doxytag: member="FilterShapeHPFP1Base::FormType" ref="a33150f9f28a5221b01a7fa235406b364" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_filter_form.html">FilterForm</a>&lt;SampleType,FilterFormType::P1&gt; <a class="el" href="class_filter_shape_h_p_f_p1_base.html">FilterShapeHPFP1Base</a>&lt; SampleType &gt;::<a class="el" href="class_filter_form_3_01_sample_type_00_01_filter_form_type_1_1_p1_01_4.html">FormType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ab0306b811a47f9f59a46436b5813306b"></a><!-- doxytag: member="FilterShapeHPFP1Base::FormData" ref="ab0306b811a47f9f59a46436b5813306b" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="struct_filter_data.html">FormType::Data</a> <a class="el" href="class_filter_shape_h_p_f_p1_base.html">FilterShapeHPFP1Base</a>&lt; SampleType &gt;::<a class="el" href="struct_filter_data.html">FormData</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a747317b3c416f508cf9f2855728da4e1"></a><!-- doxytag: member="FilterShapeHPFP1Base::Data" ref="a747317b3c416f508cf9f2855728da4e1" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="struct_filter_shape_data.html">FilterShapeData</a>&lt;SampleType,FormType::NumCoeffs,NumParams&gt; <a class="el" href="class_filter_shape_h_p_f_p1_base.html">FilterShapeHPFP1Base</a>&lt; SampleType &gt;::<a class="el" href="struct_filter_shape_data.html">Data</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ac32fff295d97b835e9cb3f2de0d6a5ec"></a><!-- doxytag: member="FilterShapeHPFP1Base::CalcType" ref="ac32fff295d97b835e9cb3f2de0d6a5ec" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_type_utility.html">TypeUtility</a>&lt;SampleType&gt;::IndexType <a class="el" href="class_filter_shape_h_p_f_p1_base.html">FilterShapeHPFP1Base</a>&lt; SampleType &gt;::<a class="el" href="class_filter_shape_h_p_f_p1_base.html#ac32fff295d97b835e9cb3f2de0d6a5ec">CalcType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a2b8cec4dc52aa1ad5ac5710d51a17a9c"></a><!-- doxytag: member="FilterShapeHPFP1Base::CalcTypes" ref="a2b8cec4dc52aa1ad5ac5710d51a17a9c" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt;<a class="el" href="class_filter_shape_h_p_f_p1_base.html#ac32fff295d97b835e9cb3f2de0d6a5ec">CalcType</a>&gt; <a class="el" href="class_filter_shape_h_p_f_p1_base.html">FilterShapeHPFP1Base</a>&lt; SampleType &gt;::<a class="el" href="class_numerical_array.html">CalcTypes</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="aee86357e2b3cffbacabcddd7b94784c5"></a><!-- doxytag: member="FilterShapeHPFP1Base::Unit" ref="aee86357e2b3cffbacabcddd7b94784c5" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_filter_unit.html">FilterUnit</a>&lt;<a class="el" href="class_filter_form_3_01_sample_type_00_01_filter_form_type_1_1_p1_01_4.html">FormType</a>&gt; <a class="el" href="class_filter_shape_h_p_f_p1_base.html">FilterShapeHPFP1Base</a>&lt; SampleType &gt;::<a class="el" href="class_filter_unit.html">Unit</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<hr/><h2>Member Enumeration Documentation</h2>
-<a class="anchor" id="a0e496d7d5c07c9bc109cf76574a04e76"></a><!-- doxytag: member="FilterShapeHPFP1Base::Params" ref="a0e496d7d5c07c9bc109cf76574a04e76" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">enum <a class="el" href="class_filter_shape_h_p_f_p1_base.html#a0e496d7d5c07c9bc109cf76574a04e76">FilterShapeHPFP1Base::Params</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<dl><dt><b>Enumerator: </b></dt><dd><table border="0" cellspacing="2" cellpadding="0">
-<tr><td valign="top"><em><a class="anchor" id="a0e496d7d5c07c9bc109cf76574a04e76a42ca272843c795c10f03172d95a4373d"></a><!-- doxytag: member="Frequency" ref="a0e496d7d5c07c9bc109cf76574a04e76a42ca272843c795c10f03172d95a4373d" args="" -->Frequency</em>&nbsp;</td><td>
-</td></tr>
-<tr><td valign="top"><em><a class="anchor" id="a0e496d7d5c07c9bc109cf76574a04e76a5d6ff3a502a54ef52cd82b541280f75e"></a><!-- doxytag: member="NumParams" ref="a0e496d7d5c07c9bc109cf76574a04e76a5d6ff3a502a54ef52cd82b541280f75e" args="" -->NumParams</em>&nbsp;</td><td>
-</td></tr>
-</table>
-</dd>
-</dl>
-
-</div>
-</div>
-<hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a5ea9fd20af5716867b25c84a40fdee75"></a><!-- doxytag: member="FilterShapeHPFP1Base::getInputKeys" ref="a5ea9fd20af5716867b25c84a40fdee75" args="()" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">static <a class="el" href="class_numerical_array.html">IntArray</a> <a class="el" href="class_filter_shape_h_p_f_p1_base.html">FilterShapeHPFP1Base</a>&lt; SampleType &gt;::getInputKeys </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a0822a29daef4fb112f2ce80b85ee2c46"></a><!-- doxytag: member="FilterShapeHPFP1Base::process" ref="a0822a29daef4fb112f2ce80b85ee2c46" args="(SampleType const &amp;input, Data const &amp;data, FormData &amp;form)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">static SampleType <a class="el" href="class_filter_shape_h_p_f_p1_base.html">FilterShapeHPFP1Base</a>&lt; SampleType &gt;::process </td>
-          <td>(</td>
-          <td class="paramtype">SampleType const &amp;&#160;</td>
-          <td class="paramname"><em>input</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="struct_filter_shape_data.html">Data</a> const &amp;&#160;</td>
-          <td class="paramname"><em>data</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="struct_filter_data.html">FormData</a> &amp;&#160;</td>
-          <td class="paramname"><em>form</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td>  throw ()<code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="aaf75fd9a7688300ef4bfa273abec605b"></a><!-- doxytag: member="FilterShapeHPFP1Base::calculate" ref="aaf75fd9a7688300ef4bfa273abec605b" args="(Data &amp;data)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">static void <a class="el" href="class_filter_shape_h_p_f_p1_base.html">FilterShapeHPFP1Base</a>&lt; SampleType &gt;::calculate </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_filter_shape_data.html">Data</a> &amp;&#160;</td>
-          <td class="paramname"><em>data</em></td><td>)</td>
-          <td>  throw ()<code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<hr/>The documentation for this class was generated from the following file:<ul>
+</div><hr/>The documentation for this class was generated from the following file:<ul>
 <li><a class="el" href="plonk___filter_shapes_simple_8h_source.html">plonk_FilterShapesSimple.h</a></li>
 </ul>
 </div>
@@ -306,7 +89,7 @@ template&lt;class SampleType &gt; </div>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Properties</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -315,7 +98,7 @@ template&lt;class SampleType &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 5 2012 17:05:03 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 8 2014 12:26:52 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

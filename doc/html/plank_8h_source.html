@@ -20,7 +20,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="pl-nk-logo-small.png"/></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">pl-nk</div>
+   <div id="projectname">pl-nk&#160;<span id="projectnumber">v0.4.5</span></div>
+   <div id="projectbrief">Plonk|Plink|Plank are a set of cross-platform C/C++ frameworks for audio software development</div>
   </td>
  </tr>
  </tbody>
@@ -29,8 +30,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -54,7 +55,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
       <li><a href="files.html"><span>File&#160;List</span></a></li>
-      <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
 <div class="header">
@@ -62,14 +62,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">plank.h</div>  </div>
 </div>
 <div class="contents">
-<a href="plank_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*</span>
+<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*</span>
 <a name="l00002"></a>00002 <span class="comment"> -------------------------------------------------------------------------------</span>
 <a name="l00003"></a>00003 <span class="comment"> This file is part of the Plink, Plonk, Plank libraries</span>
 <a name="l00004"></a>00004 <span class="comment">  by Martin Robinson</span>
 <a name="l00005"></a>00005 <span class="comment"></span>
 <a name="l00006"></a>00006 <span class="comment"> http://code.google.com/p/pl-nk/</span>
 <a name="l00007"></a>00007 <span class="comment"> </span>
-<a name="l00008"></a>00008 <span class="comment"> Copyright University of the West of England, Bristol 2011-12</span>
+<a name="l00008"></a>00008 <span class="comment"> Copyright University of the West of England, Bristol 2011-14</span>
 <a name="l00009"></a>00009 <span class="comment"> All rights reserved.</span>
 <a name="l00010"></a>00010 <span class="comment"> </span>
 <a name="l00011"></a>00011 <span class="comment"> Redistribution and use in source and binary forms, with or without</span>
@@ -104,69 +104,80 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00040"></a>00040 <span class="preprocessor">#ifndef PLANK_H</span>
 <a name="l00041"></a>00041 <span class="preprocessor"></span><span class="preprocessor">#define PLANK_H</span>
 <a name="l00042"></a>00042 <span class="preprocessor"></span>
-<a name="l00043"></a>00043 <span class="comment">/* 19/8/2012 </span>
-<a name="l00044"></a>00044 <span class="comment"> http://cloc.sourceforge.net v 1.52  T=0.5 s (188.0 files/s, 40740.0 lines/s)</span>
+<a name="l00043"></a>00043 <span class="comment">/* 14/12/2013 </span>
+<a name="l00044"></a>00044 <span class="comment"> http://cloc.sourceforge.net v 1.52  T=0.5 s (190.0 files/s, 81070.0 lines/s)</span>
 <a name="l00045"></a>00045 <span class="comment"> -------------------------------------------------------------------------------</span>
 <a name="l00046"></a>00046 <span class="comment"> Language                     files          blank        comment           code</span>
 <a name="l00047"></a>00047 <span class="comment"> -------------------------------------------------------------------------------</span>
-<a name="l00048"></a>00048 <span class="comment"> C/C++ Header                    63           2839           4183           4981</span>
-<a name="l00049"></a>00049 <span class="comment"> C                               30           1734           1666           4899</span>
-<a name="l00050"></a>00050 <span class="comment"> C++                              1             13             32             23</span>
+<a name="l00048"></a>00048 <span class="comment"> C                               40           5435           2871          18951</span>
+<a name="l00049"></a>00049 <span class="comment"> C/C++ Header                    54           2550           4379           6284</span>
+<a name="l00050"></a>00050 <span class="comment"> C++                              1             11             31             23</span>
 <a name="l00051"></a>00051 <span class="comment"> -------------------------------------------------------------------------------</span>
-<a name="l00052"></a>00052 <span class="comment"> SUM:                            94           4586           5881           9903</span>
+<a name="l00052"></a>00052 <span class="comment"> SUM:                            95           7996           7281          25258</span>
 <a name="l00053"></a>00053 <span class="comment"> -------------------------------------------------------------------------------</span>
-<a name="l00054"></a>00054 <span class="comment"></span>
-<a name="l00055"></a>00055 <span class="comment"> */</span> 
-<a name="l00056"></a>00056 
-<a name="l00057"></a>00057 <span class="comment">// this must be before the standard header incase we want it different in user code?</span>
-<a name="l00058"></a><a class="code" href="plank_8h.html#a6522da35316dd43654418c06ff6e0500">00058</a> <span class="preprocessor">#define PLANK_API </span>
-<a name="l00059"></a>00059 <span class="preprocessor"></span>
-<a name="l00060"></a>00060 <span class="preprocessor">#include &quot;<a class="code" href="plank___standard_header_8h.html">core/plank_StandardHeader.h</a>&quot;</span>
-<a name="l00061"></a>00061 <span class="preprocessor">#include &quot;<a class="code" href="plank___lock_8h.html">core/plank_Lock.h</a>&quot;</span>
-<a name="l00062"></a>00062 <span class="preprocessor">#include &quot;<a class="code" href="plank___spin_lock_8h.html">core/plank_SpinLock.h</a>&quot;</span>
-<a name="l00063"></a>00063 <span class="preprocessor">#include &quot;<a class="code" href="plank___thread_spin_lock_8h.html">core/plank_ThreadSpinLock.h</a>&quot;</span>
-<a name="l00064"></a>00064 <span class="preprocessor">#include &quot;<a class="code" href="plank___thread_8h.html">core/plank_Thread.h</a>&quot;</span>
-<a name="l00065"></a>00065 <span class="preprocessor">#include &quot;<a class="code" href="plank___lock_free_memory_8h.html">core/plank_LockFreeMemory.h</a>&quot;</span>
-<a name="l00066"></a>00066 
-<a name="l00067"></a>00067 <span class="preprocessor">#include &quot;<a class="code" href="plank___containers_misc_8h.html">containers/plank_ContainersMisc.h</a>&quot;</span>
-<a name="l00068"></a>00068 <span class="preprocessor">#include &quot;<a class="code" href="plank___atomic_8h.html">containers/plank_Atomic.h</a>&quot;</span>
-<a name="l00069"></a>00069 <span class="preprocessor">#include &quot;<a class="code" href="plank___dynamic_array_8h.html">containers/plank_DynamicArray.h</a>&quot;</span>
-<a name="l00070"></a>00070 <span class="preprocessor">#include &quot;<a class="code" href="plank___lock_free_dynamic_array_8h.html">containers/plank_LockFreeDynamicArray.h</a>&quot;</span>
-<a name="l00071"></a>00071 <span class="preprocessor">#include &quot;<a class="code" href="plank___lock_free_queue_8h.html">containers/plank_LockFreeQueue.h</a>&quot;</span>
-<a name="l00072"></a>00072 <span class="preprocessor">#include &quot;<a class="code" href="plank___lock_free_stack_8h.html">containers/plank_LockFreeStack.h</a>&quot;</span>
-<a name="l00073"></a>00073 <span class="preprocessor">#include &quot;<a class="code" href="plank___simple_queue_8h.html">containers/plank_SimpleQueue.h</a>&quot;</span>
-<a name="l00074"></a>00074 <span class="preprocessor">#include &quot;<a class="code" href="plank___simple_stack_8h.html">containers/plank_SimpleStack.h</a>&quot;</span>
-<a name="l00075"></a>00075 <span class="preprocessor">#include &quot;<a class="code" href="plank___simple_linked_list_8h.html">containers/plank_SimpleLinkedList.h</a>&quot;</span>
-<a name="l00076"></a>00076 <span class="preprocessor">#include &quot;<a class="code" href="plank___simple_map_8h.html">containers/plank_SimpleMap.h</a>&quot;</span>
-<a name="l00077"></a>00077 <span class="preprocessor">#include &quot;<a class="code" href="plank___lock_free_linked_list_element_8h.html">containers/plank_LockFreeLinkedListElement.h</a>&quot;</span>
-<a name="l00078"></a>00078 <span class="preprocessor">#include &quot;<a class="code" href="plank___thread_local_storage_8h.html">containers/plank_ThreadLocalStorage.h</a>&quot;</span>
+<a name="l00054"></a>00054 <span class="comment"> */</span>
+<a name="l00055"></a>00055 
+<a name="l00056"></a>00056 <span class="comment">// this must be before the standard header incase we want it different in user code?</span>
+<a name="l00057"></a>00057 <span class="preprocessor">#define PLANK_API </span>
+<a name="l00058"></a>00058 <span class="preprocessor"></span>
+<a name="l00059"></a>00059 <span class="preprocessor">#include &quot;core/plank_StandardHeader.h&quot;</span>
+<a name="l00060"></a>00060 <span class="preprocessor">#include &quot;core/plank_Lock.h&quot;</span>
+<a name="l00061"></a>00061 <span class="preprocessor">#include &quot;core/plank_SpinLock.h&quot;</span>
+<a name="l00062"></a>00062 <span class="preprocessor">#include &quot;core/plank_ThreadSpinLock.h&quot;</span>
+<a name="l00063"></a>00063 <span class="preprocessor">#include &quot;core/plank_Thread.h&quot;</span>
+<a name="l00064"></a>00064 <span class="preprocessor">#include &quot;core/plank_LockFreeMemory.h&quot;</span>
+<a name="l00065"></a>00065 
+<a name="l00066"></a>00066 <span class="preprocessor">#include &quot;containers/atomic/plank_Atomic.h&quot;</span>
+<a name="l00067"></a>00067 <span class="preprocessor">#include &quot;containers/plank_ContainersMisc.h&quot;</span>
+<a name="l00068"></a>00068 <span class="preprocessor">#include &quot;containers/plank_SharedPtr.h&quot;</span>
+<a name="l00069"></a>00069 <span class="preprocessor">#include &quot;containers/plank_DynamicArray.h&quot;</span>
+<a name="l00070"></a>00070 <span class="preprocessor">#include &quot;containers/plank_LockFreeDynamicArray.h&quot;</span>
+<a name="l00071"></a>00071 <span class="preprocessor">#include &quot;containers/plank_LockFreeQueue.h&quot;</span>
+<a name="l00072"></a>00072 <span class="preprocessor">#include &quot;containers/plank_LockFreeStack.h&quot;</span>
+<a name="l00073"></a>00073 <span class="preprocessor">#include &quot;containers/plank_SimpleQueue.h&quot;</span>
+<a name="l00074"></a>00074 <span class="preprocessor">#include &quot;containers/plank_SimpleStack.h&quot;</span>
+<a name="l00075"></a>00075 <span class="preprocessor">#include &quot;containers/plank_SimpleLinkedList.h&quot;</span>
+<a name="l00076"></a>00076 <span class="preprocessor">#include &quot;containers/plank_SimpleMap.h&quot;</span>
+<a name="l00077"></a>00077 <span class="preprocessor">#include &quot;containers/plank_LockFreeLinkedListElement.h&quot;</span>
+<a name="l00078"></a>00078 <span class="preprocessor">#include &quot;containers/plank_ThreadLocalStorage.h&quot;</span>
 <a name="l00079"></a>00079 
-<a name="l00080"></a>00080 <span class="preprocessor">#include &quot;<a class="code" href="plank___maths_8h.html">maths/plank_Maths.h</a>&quot;</span>
-<a name="l00081"></a>00081 <span class="preprocessor">#include &quot;<a class="code" href="plank___vectors_8h.html">maths/vectors/plank_Vectors.h</a>&quot;</span>
+<a name="l00080"></a>00080 <span class="preprocessor">#include &quot;maths/plank_Maths.h&quot;</span>
+<a name="l00081"></a>00081 <span class="preprocessor">#include &quot;maths/vectors/plank_Vectors.h&quot;</span>
 <a name="l00082"></a>00082 
-<a name="l00083"></a>00083 <span class="preprocessor">#include &quot;<a class="code" href="plank___file_8h.html">files/plank_File.h</a>&quot;</span>
-<a name="l00084"></a>00084 <span class="preprocessor">#include &quot;<a class="code" href="plank___iff_file_reader_8h.html">files/plank_IffFileReader.h</a>&quot;</span>
-<a name="l00085"></a>00085 <span class="preprocessor">#include &quot;<a class="code" href="plank___iff_file_writer_8h.html">files/plank_IffFileWriter.h</a>&quot;</span>
+<a name="l00083"></a>00083 <span class="preprocessor">#include &quot;misc/nn/plank_NeuralNode.h&quot;</span>
+<a name="l00084"></a>00084 <span class="preprocessor">#include &quot;misc/nn/plank_NeuralLayer.h&quot;</span>
+<a name="l00085"></a>00085 <span class="preprocessor">#include &quot;misc/nn/plank_NeuralNetwork.h&quot;</span>
 <a name="l00086"></a>00086 
-<a name="l00087"></a>00087 <span class="preprocessor">#include &quot;<a class="code" href="plank___audio_file_reader_8h.html">files/audio/plank_AudioFileReader.h</a>&quot;</span>
-<a name="l00088"></a>00088 <span class="preprocessor">#include &quot;<a class="code" href="plank___audio_file_writer_8h.html">files/audio/plank_AudioFileWriter.h</a>&quot;</span>
-<a name="l00089"></a>00089 <span class="preprocessor">#include &quot;<a class="code" href="plank___audio_file_meta_data_8h.html">files/audio/plank_AudioFileMetaData.h</a>&quot;</span>
-<a name="l00090"></a>00090 <span class="preprocessor">#include &quot;<a class="code" href="plank___audio_file_cue_point_8h.html">files/audio/plank_AudioFileCuePoint.h</a>&quot;</span>
-<a name="l00091"></a>00091 <span class="preprocessor">#include &quot;<a class="code" href="plank___audio_file_region_8h.html">files/audio/plank_AudioFileRegion.h</a>&quot;</span>
-<a name="l00092"></a>00092 
-<a name="l00093"></a>00093 <span class="preprocessor">#include &quot;<a class="code" href="plank___r_n_g_8h.html">random/plank_RNG.h</a>&quot;</span>
-<a name="l00094"></a>00094 <span class="preprocessor">#include &quot;<a class="code" href="plank___f_f_t_8h.html">fft/plank_FFT.h</a>&quot;</span>
-<a name="l00095"></a>00095 
-<a name="l00108"></a>00108 <span class="comment">//-------------------------------------------------------------------------plank</span>
-<a name="l00172"></a>00172 <span class="comment"></span><span class="comment">//-------------------------------------------------------------------------plank</span>
-<a name="l00173"></a>00173 
-<a name="l00174"></a>00174 
-<a name="l00175"></a>00175 <span class="comment">//------------------------------------------------------------plank/fundamentals</span>
-<a name="l00179"></a>00179 <span class="comment"></span><span class="comment">//------------------------------------------------------------plank/fundamentals</span>
-<a name="l00180"></a>00180 
-<a name="l00181"></a>00181 
-<a name="l00182"></a>00182 
-<a name="l00183"></a>00183 <span class="preprocessor">#endif // PLANK_H</span>
+<a name="l00087"></a>00087 <span class="preprocessor">#include &quot;misc/json/plank_JSON.h&quot;</span>
+<a name="l00088"></a>00088 <span class="preprocessor">#include &quot;misc/base64/plank_Base64.h&quot;</span>
+<a name="l00089"></a>00089 <span class="preprocessor">#include &quot;misc/zip/plank_Zip.h&quot;</span>
+<a name="l00090"></a>00090 
+<a name="l00091"></a>00091 <span class="preprocessor">#include &quot;files/plank_Path.h&quot;</span>
+<a name="l00092"></a>00092 <span class="preprocessor">#include &quot;files/plank_File.h&quot;</span>
+<a name="l00093"></a>00093 <span class="preprocessor">#include &quot;files/plank_MultiFileReader.h&quot;</span>
+<a name="l00094"></a>00094 <span class="preprocessor">#include &quot;files/plank_IffFileReader.h&quot;</span>
+<a name="l00095"></a>00095 <span class="preprocessor">#include &quot;files/plank_IffFileWriter.h&quot;</span>
+<a name="l00096"></a>00096 
+<a name="l00097"></a>00097 <span class="preprocessor">#include &quot;files/audio/plank_AudioFileCommon.h&quot;</span>
+<a name="l00098"></a>00098 <span class="preprocessor">#include &quot;files/audio/plank_AudioFileReader.h&quot;</span>
+<a name="l00099"></a>00099 <span class="preprocessor">#include &quot;files/audio/plank_AudioFileWriter.h&quot;</span>
+<a name="l00100"></a>00100 <span class="preprocessor">#include &quot;files/audio/plank_AudioFileMetaData.h&quot;</span>
+<a name="l00101"></a>00101 <span class="preprocessor">#include &quot;files/audio/plank_AudioFileCuePoint.h&quot;</span>
+<a name="l00102"></a>00102 <span class="preprocessor">#include &quot;files/audio/plank_AudioFileRegion.h&quot;</span>
+<a name="l00103"></a>00103 
+<a name="l00104"></a>00104 <span class="preprocessor">#include &quot;random/plank_RNG.h&quot;</span>
+<a name="l00105"></a>00105 <span class="preprocessor">#include &quot;fft/plank_FFT.h&quot;</span>
+<a name="l00106"></a>00106 
+<a name="l00119"></a>00119 <span class="comment">//-------------------------------------------------------------------------plank</span>
+<a name="l00183"></a>00183 <span class="comment"></span><span class="comment">//-------------------------------------------------------------------------plank</span>
+<a name="l00184"></a>00184 
+<a name="l00185"></a>00185 
+<a name="l00186"></a>00186 <span class="comment">//------------------------------------------------------------plank/fundamentals</span>
+<a name="l00190"></a>00190 <span class="comment"></span><span class="comment">//------------------------------------------------------------plank/fundamentals</span>
+<a name="l00191"></a>00191 
+<a name="l00192"></a>00192 
+<a name="l00193"></a>00193 
+<a name="l00194"></a>00194 <span class="preprocessor">#endif // PLANK_H</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -174,7 +185,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Properties</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -183,7 +194,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 5 2012 17:04:52 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 8 2014 12:26:46 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

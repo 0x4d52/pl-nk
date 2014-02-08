@@ -20,7 +20,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="pl-nk-logo-small.png"/></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">pl-nk</div>
+   <div id="projectname">pl-nk&#160;<span id="projectnumber">v0.4.5</span></div>
+   <div id="projectbrief">Plonk|Plink|Plank are a set of cross-platform C/C++ frameworks for audio software development</div>
   </td>
  </tr>
  </tbody>
@@ -29,8 +30,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -62,37 +63,20 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="header">
   <div class="summary">
-<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a>  </div>
   <div class="headertitle">
 <div class="title">BinaryFile Class Reference<div class="ingroups"><a class="el" href="group___plonk_other_user_classes.html">Other Plonk user classes</a></div></div>  </div>
 </div>
 <div class="contents">
-<!-- doxytag: class="BinaryFile" --><!-- doxytag: inherits="SmartPointerContainer&lt; BinaryFileInternal &gt;" -->
+<!-- doxytag: class="BinaryFile" --><!-- doxytag: inherits="SmartPointerContainer" -->
 <p>A utility class for reading and writing binary files.  
  <a href="class_binary_file.html#details">More...</a></p>
-<div class="dynheader">
-Inheritance diagram for BinaryFile:</div>
-<div class="dyncontent">
- <div class="center">
-  <img src="class_binary_file.png" usemap="#BinaryFile_map" alt=""/>
-  <map id="BinaryFile_map" name="BinaryFile_map">
-<area href="class_smart_pointer_container.html" alt="SmartPointerContainer&lt; BinaryFileInternal &gt;" shape="rect" coords="0,112,291,136"/>
-<area href="class_smart_pointer_container_base.html" alt="SmartPointerContainerBase&lt; BinaryFileInternal &gt;" shape="rect" coords="0,56,291,80"/>
-<area href="class_plonk_base.html" alt="PlonkBase" shape="rect" coords="0,0,291,24"/>
-</map>
- </div></div>
+
+<p>Inherits SmartPointerContainer&lt; SmartPointerType, enableWeak &gt;.</p>
 
 <p><a href="class_binary_file-members.html">List of all members.</a></p>
 <table class="memberdecls">
-<tr><td colspan="2"><h2><a name="pub-types"></a>
-Public Types</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_binary_file_internal.html">BinaryFileInternal</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_binary_file.html#a32868bebf98cc1838d00eebce5b89bf6">Internal</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_smart_pointer_container.html">SmartPointerContainer</a><br class="typebreak"/>
-&lt; <a class="el" href="class_binary_file_internal.html">Internal</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_binary_file.html#ab5014faa5dd78d9c7c1fd578e4ef5fbc">Base</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_weak_pointer_container.html">WeakPointerContainer</a><br class="typebreak"/>
-&lt; <a class="el" href="class_binary_file.html">BinaryFile</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_binary_file.html#acf120428c8a74a8ade22ca78f7a4558b">Weak</a></td></tr>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_binary_file.html#a3d0f10cc9ccdc8bb5d6cb648096fc5a7">BinaryFile</a> ()  throw ()</td></tr>
@@ -105,14 +89,19 @@ Public Member Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a binary file reader from the given path.  <a href="#a8e61b1ff78693bd03ebbc87653ebc017"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_binary_file.html#a204a9c30fc73cd3ff69c5883f75fa581">BinaryFile</a> (const char *path, const bool writable, const bool clearContents, const bool bigEndian=PLANK_BIGENDIAN)  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a binary file reader from the given path.  <a href="#a204a9c30fc73cd3ff69c5883f75fa581"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_binary_file.html#a646133528e09c372f0e0cf296bb30d57">BinaryFile</a> (<a class="el" href="class_binary_file_internal.html">Internal</a> *internalToUse)  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa899e81a61130cc67514c0ff03788f2b"></a><!-- doxytag: member="BinaryFile::BinaryFile" ref="aa899e81a61130cc67514c0ff03788f2b" args="(ByteArray const &amp;bytes, const bool writable=false)" -->
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_binary_file.html#aa899e81a61130cc67514c0ff03788f2b">BinaryFile</a> (<a class="el" href="class_numerical_array.html">ByteArray</a> const &amp;bytes, const bool writable=false)  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Memory stream. <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a95a7e2c729b3080cfa03a8ae94a7c53e"></a><!-- doxytag: member="BinaryFile::BinaryFile" ref="a95a7e2c729b3080cfa03a8ae94a7c53e" args="(FilePathArray const &amp;fileArray, const int multiMode, const bool bigEndian=PLANK_BIGENDIAN)" -->
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_binary_file.html#a95a7e2c729b3080cfa03a8ae94a7c53e">BinaryFile</a> (<a class="el" href="class_object_array.html">FilePathArray</a> const &amp;fileArray, const int multiMode, const bool bigEndian=PLANK_BIGENDIAN)  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a multiple binary file reader from the array of files. <br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_binary_file.html#ae44cc94b641221314da2c157c4293c61">BinaryFile</a> (<a class="el" href="class_binary_file.html">BinaryFile</a> const &amp;copy)  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy constructor.  <a href="#ae44cc94b641221314da2c157c4293c61"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_binary_file.html">BinaryFile</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_binary_file.html#aafe776f527c875a94f4172dc2e2b458a">operator=</a> (<a class="el" href="class_binary_file.html">BinaryFile</a> const &amp;other)  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Assignment operator.  <a href="#aafe776f527c875a94f4172dc2e2b458a"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="plonk___standard_header_8h.html#a4cc04fb5f1e8703e725c5952c9601ef5">LongLong</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_binary_file.html#a36fae2aecda26143ed6bd04346f3eef7">getPosition</a> ()  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">LongLong&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_binary_file.html#a36fae2aecda26143ed6bd04346f3eef7">getPosition</a> ()  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the position of the file stream.  <a href="#a36fae2aecda26143ed6bd04346f3eef7"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_binary_file.html#a6e1149fe6d5d17341c981a53bde320a1">setPosition</a> (const <a class="el" href="plonk___standard_header_8h.html#a4cc04fb5f1e8703e725c5952c9601ef5">LongLong</a> position)  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_binary_file.html#a6e1149fe6d5d17341c981a53bde320a1">setPosition</a> (const LongLong position)  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the position of the file stream.  <a href="#a6e1149fe6d5d17341c981a53bde320a1"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_binary_file.html#aec74973dc081b0e904e161cef0860af1">setEof</a> ()  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the position of the file stream to the end of the file.  <a href="#aec74973dc081b0e904e161cef0860af1"></a><br/></td></tr>
@@ -127,8 +116,6 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class ValueType &gt; </td></tr>
 <tr><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_binary_file.html#a8470cddb92f785bcde9845ef78735f41">write</a> (const ValueType value)  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Write a numerical value to the file.  <a href="#a8470cddb92f785bcde9845ef78735f41"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_binary_file.html">BinaryFile</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_binary_file.html#a7b1621b3329910dec697d96c78124e59">operator-&gt;</a> ()  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">const <a class="el" href="class_binary_file.html">BinaryFile</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_binary_file.html#a7a2f685b16278fc8a11a653ecc80a513">operator-&gt;</a> () const   throw ()</td></tr>
 <tr><td colspan="2"><h2><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_binary_file.html">BinaryFile</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_binary_file.html#ae343de37e61e0a652e39ace0ccdfd5b7">fromWeak</a> (<a class="el" href="class_weak_pointer_container.html">Weak</a> const &amp;weak)  throw ()</td></tr>
@@ -139,47 +126,7 @@ Static Public Member Functions</h2></td></tr>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>A utility class for reading and writing binary files. </p>
 <dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="class_text_file.html" title="A utility class for reading and writing text files.">TextFile</a> </dd></dl>
-</div><hr/><h2>Member Typedef Documentation</h2>
-<a class="anchor" id="a32868bebf98cc1838d00eebce5b89bf6"></a><!-- doxytag: member="BinaryFile::Internal" ref="a32868bebf98cc1838d00eebce5b89bf6" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_binary_file_internal.html">BinaryFileInternal</a> <a class="el" href="class_binary_file_internal.html">BinaryFile::Internal</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ab5014faa5dd78d9c7c1fd578e4ef5fbc"></a><!-- doxytag: member="BinaryFile::Base" ref="ab5014faa5dd78d9c7c1fd578e4ef5fbc" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_smart_pointer_container.html">SmartPointerContainer</a>&lt;<a class="el" href="class_binary_file_internal.html">Internal</a>&gt; <a class="el" href="class_smart_pointer_container.html">BinaryFile::Base</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="acf120428c8a74a8ade22ca78f7a4558b"></a><!-- doxytag: member="BinaryFile::Weak" ref="acf120428c8a74a8ade22ca78f7a4558b" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_weak_pointer_container.html">WeakPointerContainer</a>&lt;<a class="el" href="class_binary_file.html">BinaryFile</a>&gt; <a class="el" href="class_weak_pointer_container.html">BinaryFile::Weak</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<hr/><h2>Constructor &amp; Destructor Documentation</h2>
+</div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a3d0f10cc9ccdc8bb5d6cb648096fc5a7"></a><!-- doxytag: member="BinaryFile::BinaryFile" ref="a3d0f10cc9ccdc8bb5d6cb648096fc5a7" args="()" -->
 <div class="memitem">
 <div class="memproto">
@@ -371,23 +318,6 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a646133528e09c372f0e0cf296bb30d57"></a><!-- doxytag: member="BinaryFile::BinaryFile" ref="a646133528e09c372f0e0cf296bb30d57" args="(Internal *internalToUse)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">BinaryFile::BinaryFile </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_binary_file_internal.html">Internal</a> *&#160;</td>
-          <td class="paramname"><em>internalToUse</em></td><td>)</td>
-          <td>  throw ()<code> [inline, explicit]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 <a class="anchor" id="ae44cc94b641221314da2c157c4293c61"></a><!-- doxytag: member="BinaryFile::BinaryFile" ref="ae44cc94b641221314da2c157c4293c61" args="(BinaryFile const &amp;copy)" -->
 <div class="memitem">
 <div class="memproto">
@@ -409,22 +339,23 @@ Static Public Member Functions</h2></td></tr>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="aafe776f527c875a94f4172dc2e2b458a"></a><!-- doxytag: member="BinaryFile::operator=" ref="aafe776f527c875a94f4172dc2e2b458a" args="(BinaryFile const &amp;other)" -->
+<a class="anchor" id="ae0dc1dd415db7429c7eeaf8040d4c2e9"></a><!-- doxytag: member="BinaryFile::chunkID" ref="ae0dc1dd415db7429c7eeaf8040d4c2e9" args="(const char *const fourCharCode)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_binary_file.html">BinaryFile</a>&amp; BinaryFile::operator= </td>
+          <td class="memname">static int BinaryFile::chunkID </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_binary_file.html">BinaryFile</a> const &amp;&#160;</td>
-          <td class="paramname"><em>other</em></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
+          <td class="paramtype">const char *const&#160;</td>
+          <td class="paramname"><em>fourCharCode</em></td><td>)</td>
+          <td>  throw ()<code> [inline, static]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Assignment operator. </p>
+<p>Creates a chunk name identifier. </p>
+<p>A convenience function for creating an interger to write to a file for chunk IDs in many IFF-type files. </p>
 
 </div>
 </div>
@@ -453,7 +384,7 @@ Static Public Member Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="plonk___standard_header_8h.html#a4cc04fb5f1e8703e725c5952c9601ef5">LongLong</a> BinaryFile::getPosition </td>
+          <td class="memname">LongLong BinaryFile::getPosition </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td>  throw ()<code> [inline]</code></td>
@@ -463,44 +394,6 @@ Static Public Member Functions</h2></td></tr>
 <div class="memdoc">
 
 <p>Gets the position of the file stream. </p>
-
-</div>
-</div>
-<a class="anchor" id="a6e1149fe6d5d17341c981a53bde320a1"></a><!-- doxytag: member="BinaryFile::setPosition" ref="a6e1149fe6d5d17341c981a53bde320a1" args="(const LongLong position)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void BinaryFile::setPosition </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="plonk___standard_header_8h.html#a4cc04fb5f1e8703e725c5952c9601ef5">LongLong</a>&#160;</td>
-          <td class="paramname"><em>position</em></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Sets the position of the file stream. </p>
-<p>0 is the start of the stream. </p>
-
-</div>
-</div>
-<a class="anchor" id="aec74973dc081b0e904e161cef0860af1"></a><!-- doxytag: member="BinaryFile::setEof" ref="aec74973dc081b0e904e161cef0860af1" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void BinaryFile::setEof </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Sets the position of the file stream to the end of the file. </p>
 
 </div>
 </div>
@@ -519,6 +412,25 @@ Static Public Member Functions</h2></td></tr>
 <div class="memdoc">
 
 <p>Determines if the file stream is positioned at its end. </p>
+
+</div>
+</div>
+<a class="anchor" id="aafe776f527c875a94f4172dc2e2b458a"></a><!-- doxytag: member="BinaryFile::operator=" ref="aafe776f527c875a94f4172dc2e2b458a" args="(BinaryFile const &amp;other)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_binary_file.html">BinaryFile</a>&amp; BinaryFile::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_binary_file.html">BinaryFile</a> const &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Assignment operator. </p>
 
 </div>
 </div>
@@ -565,6 +477,44 @@ template&lt;class ValueType &gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="aec74973dc081b0e904e161cef0860af1"></a><!-- doxytag: member="BinaryFile::setEof" ref="aec74973dc081b0e904e161cef0860af1" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void BinaryFile::setEof </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Sets the position of the file stream to the end of the file. </p>
+
+</div>
+</div>
+<a class="anchor" id="a6e1149fe6d5d17341c981a53bde320a1"></a><!-- doxytag: member="BinaryFile::setPosition" ref="a6e1149fe6d5d17341c981a53bde320a1" args="(const LongLong position)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void BinaryFile::setPosition </td>
+          <td>(</td>
+          <td class="paramtype">const LongLong&#160;</td>
+          <td class="paramname"><em>position</em></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Sets the position of the file stream. </p>
+<p>0 is the start of the stream. </p>
+
+</div>
+</div>
 <a class="anchor" id="a8470cddb92f785bcde9845ef78735f41"></a><!-- doxytag: member="BinaryFile::write" ref="a8470cddb92f785bcde9845ef78735f41" args="(const ValueType value)" -->
 <div class="memitem">
 <div class="memproto">
@@ -587,62 +537,6 @@ template&lt;class ValueType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="ae0dc1dd415db7429c7eeaf8040d4c2e9"></a><!-- doxytag: member="BinaryFile::chunkID" ref="ae0dc1dd415db7429c7eeaf8040d4c2e9" args="(const char *const fourCharCode)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">static int BinaryFile::chunkID </td>
-          <td>(</td>
-          <td class="paramtype">const char *const&#160;</td>
-          <td class="paramname"><em>fourCharCode</em></td><td>)</td>
-          <td>  throw ()<code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Creates a chunk name identifier. </p>
-<p>A convenience function for creating an interger to write to a file for chunk IDs in many IFF-type files. </p>
-
-</div>
-</div>
-<a class="anchor" id="a7b1621b3329910dec697d96c78124e59"></a><!-- doxytag: member="BinaryFile::operator&#45;&gt;" ref="a7b1621b3329910dec697d96c78124e59" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_binary_file.html">BinaryFile</a>* BinaryFile::operator-&gt; </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="class_smart_pointer_container_base.html#ab65284d17f2082ce89f6b1017011e418">SmartPointerContainerBase&lt; BinaryFileInternal &gt;</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a7a2f685b16278fc8a11a653ecc80a513"></a><!-- doxytag: member="BinaryFile::operator&#45;&gt;" ref="a7a2f685b16278fc8a11a653ecc80a513" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const <a class="el" href="class_binary_file.html">BinaryFile</a>* BinaryFile::operator-&gt; </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="class_smart_pointer_container_base.html#a2ba4f8902c0316ee3b8dbe10c3332002">SmartPointerContainerBase&lt; BinaryFileInternal &gt;</a>.</p>
-
-</div>
-</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li><a class="el" href="plonk___binary_file_8h_source.html">plonk_BinaryFile.h</a></li>
 </ul>
@@ -652,7 +546,7 @@ template&lt;class ValueType &gt; </div>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Properties</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -661,7 +555,7 @@ template&lt;class ValueType &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 5 2012 17:04:59 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 8 2014 12:26:52 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

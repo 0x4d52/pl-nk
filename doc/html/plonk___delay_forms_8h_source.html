@@ -20,7 +20,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="pl-nk-logo-small.png"/></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">pl-nk</div>
+   <div id="projectname">pl-nk&#160;<span id="projectnumber">v0.4.5</span></div>
+   <div id="projectbrief">Plonk|Plink|Plank are a set of cross-platform C/C++ frameworks for audio software development</div>
   </td>
  </tr>
  </tbody>
@@ -29,8 +30,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -54,7 +55,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
       <li><a href="files.html"><span>File&#160;List</span></a></li>
-      <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
 <div class="header">
@@ -62,14 +62,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">plonk_DelayForms.h</div>  </div>
 </div>
 <div class="contents">
-<a href="plonk___delay_forms_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*</span>
+<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*</span>
 <a name="l00002"></a>00002 <span class="comment"> -------------------------------------------------------------------------------</span>
 <a name="l00003"></a>00003 <span class="comment"> This file is part of the Plink, Plonk, Plank libraries</span>
 <a name="l00004"></a>00004 <span class="comment">  by Martin Robinson</span>
 <a name="l00005"></a>00005 <span class="comment"> </span>
 <a name="l00006"></a>00006 <span class="comment"> http://code.google.com/p/pl-nk/</span>
 <a name="l00007"></a>00007 <span class="comment"> </span>
-<a name="l00008"></a>00008 <span class="comment"> Copyright University of the West of England, Bristol 2011-12</span>
+<a name="l00008"></a>00008 <span class="comment"> Copyright University of the West of England, Bristol 2011-14</span>
 <a name="l00009"></a>00009 <span class="comment"> All rights reserved.</span>
 <a name="l00010"></a>00010 <span class="comment"> </span>
 <a name="l00011"></a>00011 <span class="comment"> Redistribution and use in source and binary forms, with or without</span>
@@ -104,62 +104,62 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00040"></a>00040 <span class="preprocessor"></span><span class="preprocessor">#define PLONK_DELAYFORMS_H</span>
 <a name="l00041"></a>00041 <span class="preprocessor"></span>
 <a name="l00042"></a>00042 <span class="preprocessor">#include &quot;../channel/plonk_ChannelInternalCore.h&quot;</span>
-<a name="l00043"></a>00043 <span class="preprocessor">#include &quot;<a class="code" href="plonk___delay_forward_declarations_8h.html">plonk_DelayForwardDeclarations.h</a>&quot;</span>
+<a name="l00043"></a>00043 <span class="preprocessor">#include &quot;plonk_DelayForwardDeclarations.h&quot;</span>
 <a name="l00044"></a>00044 
 <a name="l00045"></a>00045 <span class="keyword">template</span>&lt;<span class="keyword">class</span> SampleType, <span class="keywordtype">signed</span> Form, <span class="keywordtype">signed</span> NumInParams, <span class="keywordtype">signed</span> NumOutParams&gt;
-<a name="l00046"></a><a class="code" href="struct_delay_form_data.html">00046</a> <span class="keyword">struct </span><a class="code" href="struct_delay_form_data.html">DelayFormData</a>
+<a name="l00046"></a>00046 <span class="keyword">struct </span>DelayFormData
 <a name="l00047"></a>00047 {    
-<a name="l00048"></a><a class="code" href="struct_delay_form_data.html#abebbc446e88a288fa2b5f30aa8bb7a14">00048</a>     <span class="keyword">typedef</span> <span class="keyword">typename</span> <a class="code" href="class_type_utility.html" title="A utility for finding out information about certain other classes and types.">TypeUtility&lt;SampleType&gt;::IndexType</a> <a class="code" href="struct_delay_form_data.html#abebbc446e88a288fa2b5f30aa8bb7a14">IndexType</a>;
+<a name="l00048"></a>00048     <span class="keyword">typedef</span> <span class="keyword">typename</span> <a class="code" href="class_type_utility.html" title="A utility for finding out information about certain other classes and types.">TypeUtility&lt;SampleType&gt;::IndexType</a> IndexType;
 <a name="l00049"></a>00049     
-<a name="l00050"></a><a class="code" href="struct_delay_form_data.html#a3c95958e406ae815707d476efc2e1eae">00050</a>     <a class="code" href="struct_channel_data_3_01_channel_internal_core_01_4.html">ChannelInternalCore::Data</a> <a class="code" href="struct_delay_form_data.html#a3c95958e406ae815707d476efc2e1eae">base</a>;
+<a name="l00050"></a>00050     <a class="code" href="class_channel_internal_core.html#a09763233582f6f0985461449aa262ae5" title="To store channel state data.">ChannelInternalCore::Data</a> base;
 <a name="l00051"></a>00051     
-<a name="l00052"></a><a class="code" href="struct_delay_form_data.html#a966d3a5bdcae0cc6544d53bad70d38bc">00052</a>     <a class="code" href="struct_delay_form_data.html#abebbc446e88a288fa2b5f30aa8bb7a14">IndexType</a> <a class="code" href="struct_delay_form_data.html#a966d3a5bdcae0cc6544d53bad70d38bc">maximumDuration</a>;
-<a name="l00053"></a><a class="code" href="struct_delay_form_data.html#a964e592303f60c0611b3427cd60ae7f7">00053</a>     <span class="keywordtype">int</span> <a class="code" href="struct_delay_form_data.html#a964e592303f60c0611b3427cd60ae7f7">writePosition</a>;
+<a name="l00052"></a>00052     IndexType maximumDuration;
+<a name="l00053"></a>00053     <span class="keywordtype">int</span> writePosition;
 <a name="l00054"></a>00054     
-<a name="l00055"></a><a class="code" href="struct_delay_form_data_1_1_delay_state.html">00055</a>     <span class="keyword">struct </span><a class="code" href="struct_delay_form_data_1_1_delay_state.html">DelayState</a>
+<a name="l00055"></a>00055     <span class="keyword">struct </span>DelayState
 <a name="l00056"></a>00056     {        
-<a name="l00057"></a><a class="code" href="struct_delay_form_data_1_1_delay_state.html#ad58997f5c23b137da052681e286416b0">00057</a>         SampleType* <a class="code" href="struct_delay_form_data_1_1_delay_state.html#ad58997f5c23b137da052681e286416b0">outputSamples</a>;
-<a name="l00058"></a><a class="code" href="struct_delay_form_data_1_1_delay_state.html#ae6f462892c7edc4d694d66ff867509bb">00058</a>         <span class="keywordtype">int</span> <a class="code" href="struct_delay_form_data_1_1_delay_state.html#ae6f462892c7edc4d694d66ff867509bb">outputBufferLength</a>;
-<a name="l00059"></a><a class="code" href="struct_delay_form_data_1_1_delay_state.html#a3b47dbc5c9e47ec2cd7ea720c3e19c2d">00059</a>         <span class="keyword">const</span> SampleType* <a class="code" href="struct_delay_form_data_1_1_delay_state.html#a3b47dbc5c9e47ec2cd7ea720c3e19c2d">inputSamples</a>;
-<a name="l00060"></a><a class="code" href="struct_delay_form_data_1_1_delay_state.html#a367a30cee3501b2867775d03dcd2d287">00060</a>         SampleType* <a class="code" href="struct_delay_form_data_1_1_delay_state.html#a367a30cee3501b2867775d03dcd2d287">bufferSamples</a>;
-<a name="l00061"></a><a class="code" href="struct_delay_form_data_1_1_delay_state.html#a351d1845e6cccddb96f56f1ebc469374">00061</a>         <span class="keywordtype">int</span> <a class="code" href="struct_delay_form_data_1_1_delay_state.html#a351d1845e6cccddb96f56f1ebc469374">bufferLength</a>;
-<a name="l00062"></a><a class="code" href="struct_delay_form_data_1_1_delay_state.html#aa2f64f46b3fe4184d5243aebedfccb91">00062</a>         <a class="code" href="struct_delay_form_data.html#abebbc446e88a288fa2b5f30aa8bb7a14">IndexType</a> <a class="code" href="struct_delay_form_data_1_1_delay_state.html#aa2f64f46b3fe4184d5243aebedfccb91">bufferLengthIndex</a>;
-<a name="l00063"></a><a class="code" href="struct_delay_form_data_1_1_delay_state.html#aa8f420066dedb3d6389cc7d30d50d3cc">00063</a>         <a class="code" href="struct_delay_form_data.html#abebbc446e88a288fa2b5f30aa8bb7a14">IndexType</a> <a class="code" href="struct_delay_form_data_1_1_delay_state.html#aa8f420066dedb3d6389cc7d30d50d3cc">buffer0</a>;
+<a name="l00057"></a>00057         SampleType* outputSamples;
+<a name="l00058"></a>00058         <span class="keywordtype">int</span> outputBufferLength;
+<a name="l00059"></a>00059         <span class="keyword">const</span> SampleType* inputSamples;
+<a name="l00060"></a>00060         SampleType* bufferSamples;
+<a name="l00061"></a>00061         <span class="keywordtype">int</span> bufferLength;
+<a name="l00062"></a>00062         IndexType bufferLengthIndex;
+<a name="l00063"></a>00063         IndexType buffer0;
 <a name="l00064"></a>00064 
-<a name="l00065"></a><a class="code" href="struct_delay_form_data_1_1_delay_state.html#afd53152a828c669ffa2c6dcc31f3590d">00065</a>         <span class="keywordtype">int</span> <a class="code" href="struct_delay_form_data_1_1_delay_state.html#afd53152a828c669ffa2c6dcc31f3590d">writePosition</a>;
+<a name="l00065"></a>00065         <span class="keywordtype">int</span> writePosition;
 <a name="l00066"></a>00066         
-<a name="l00067"></a><a class="code" href="struct_delay_form_data_1_1_delay_state.html#aafef16600ffa97e3de2120dcdab07f25">00067</a>         SampleType <a class="code" href="struct_delay_form_data_1_1_delay_state.html#aafef16600ffa97e3de2120dcdab07f25">inputValue</a>;
-<a name="l00068"></a><a class="code" href="struct_delay_form_data_1_1_delay_state.html#af218dc3ebc3edbe95625d28de3edb150">00068</a>         SampleType <a class="code" href="struct_delay_form_data_1_1_delay_state.html#af218dc3ebc3edbe95625d28de3edb150">readValue</a>;
-<a name="l00069"></a><a class="code" href="struct_delay_form_data_1_1_delay_state.html#aa6c9f358368dc5e9f21e7e78b65b71bc">00069</a>         SampleType <a class="code" href="struct_delay_form_data_1_1_delay_state.html#aa6c9f358368dc5e9f21e7e78b65b71bc">writeValue</a>;
-<a name="l00070"></a><a class="code" href="struct_delay_form_data_1_1_delay_state.html#a11e87f3a2dffb78ead8a05e0ea5b3f40">00070</a>         SampleType <a class="code" href="struct_delay_form_data_1_1_delay_state.html#a11e87f3a2dffb78ead8a05e0ea5b3f40">outputValue</a>;
+<a name="l00067"></a>00067         SampleType inputValue;
+<a name="l00068"></a>00068         SampleType readValue;
+<a name="l00069"></a>00069         SampleType writeValue;
+<a name="l00070"></a>00070         SampleType outputValue;
 <a name="l00071"></a>00071         
-<a name="l00072"></a><a class="code" href="struct_delay_form_data_1_1_delay_state.html#ae4ffe6833e723f6881d71d80ffdf5619">00072</a>         <a class="code" href="struct_delay_form_data.html#abebbc446e88a288fa2b5f30aa8bb7a14">IndexType</a> <a class="code" href="struct_delay_form_data_1_1_delay_state.html#ae4ffe6833e723f6881d71d80ffdf5619">paramsOut</a>[NumOutParams];
-<a name="l00073"></a><a class="code" href="struct_delay_form_data_1_1_delay_state.html#a3583e14aeddbac82c145af4e2ea7f1ed">00073</a>         <a class="code" href="struct_delay_form_data.html#abebbc446e88a288fa2b5f30aa8bb7a14">IndexType</a> <a class="code" href="struct_delay_form_data_1_1_delay_state.html#a3583e14aeddbac82c145af4e2ea7f1ed">paramsIn</a>[NumInParams];
+<a name="l00072"></a>00072         IndexType paramsOut[NumOutParams];
+<a name="l00073"></a>00073         IndexType paramsIn[NumInParams];
 <a name="l00074"></a>00074     };
 <a name="l00075"></a>00075 };      
 <a name="l00076"></a>00076 
 <a name="l00077"></a>00077 <span class="comment">//------------------------------------------------------------------------------</span>
 <a name="l00078"></a>00078 
 <a name="l00079"></a>00079 <span class="keyword">template</span>&lt;<span class="keyword">class</span> SampleType, <span class="keywordtype">signed</span> Form, <span class="keywordtype">signed</span> NumInParams, <span class="keywordtype">signed</span> NumOutParams&gt;
-<a name="l00080"></a><a class="code" href="class_delay_form_base.html">00080</a> <span class="keyword">class </span><a class="code" href="class_delay_form_base.html">DelayFormBase</a>
+<a name="l00080"></a>00080 <span class="keyword">class </span>DelayFormBase
 <a name="l00081"></a>00081 {
 <a name="l00082"></a>00082 <span class="keyword">public</span>:    
-<a name="l00083"></a><a class="code" href="class_delay_form_base.html#a80e9bb39491b9b5567cad05555ef09bc">00083</a>     <span class="keyword">static</span> <span class="keyword">inline</span> <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> <a class="code" href="class_delay_form_base.html#a80e9bb39491b9b5567cad05555ef09bc">getName</a>() throw()
+<a name="l00083"></a>00083     <span class="keyword">static</span> <span class="keyword">inline</span> <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> getName() throw()
 <a name="l00084"></a>00084     {
-<a name="l00085"></a>00085         <span class="keywordflow">return</span> <a class="code" href="class_delay_form_base.html#a80e9bb39491b9b5567cad05555ef09bc">DelayFormType::getName</a> (Form);
+<a name="l00085"></a>00085         <span class="keywordflow">return</span> DelayFormType::getName (Form);
 <a name="l00086"></a>00086     }        
 <a name="l00087"></a>00087     
-<a name="l00088"></a><a class="code" href="class_delay_form_base.html#a906a8342bb6c6ae3852f1644564ef4e1">00088</a>     <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">int</span> <a class="code" href="class_delay_form_base.html#a906a8342bb6c6ae3852f1644564ef4e1">getNumCircularBuffers</a>() throw()
+<a name="l00088"></a>00088     <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">int</span> getNumCircularBuffers() throw()
 <a name="l00089"></a>00089     {
 <a name="l00090"></a>00090         <span class="keywordflow">return</span> 1;
 <a name="l00091"></a>00091     }
 <a name="l00092"></a>00092 };
 <a name="l00093"></a>00093 
 <a name="l00094"></a>00094 <span class="keyword">template</span>&lt;<span class="keyword">class</span> SampleType, <span class="keywordtype">signed</span> Form, <span class="keywordtype">signed</span> NumInParams, <span class="keywordtype">signed</span> NumOutParams&gt;
-<a name="l00095"></a><a class="code" href="class_delay_form.html">00095</a> <span class="keyword">class </span><a class="code" href="class_delay_form.html">DelayForm</a> : <span class="keyword">public</span> <a class="code" href="class_delay_form_base.html">DelayFormBase</a>&lt;SampleType, Form, NumInParams, NumOutParams&gt;
+<a name="l00095"></a>00095 <span class="keyword">class </span>DelayForm : <span class="keyword">public</span> DelayFormBase&lt;SampleType, Form, NumInParams, NumOutParams&gt;
 <a name="l00096"></a>00096 {
 <a name="l00097"></a>00097 <span class="keyword">public</span>:
-<a name="l00098"></a><a class="code" href="class_delay_form.html#abae4f58219c9e1c77361ffc2f44a1efc">00098</a>     <span class="keyword">typedef</span> <a class="code" href="struct_delay_form_data.html">DelayFormData&lt;SampleType, Form, NumInParams, NumOutParams&gt;</a>     <a class="code" href="class_delay_form.html#abae4f58219c9e1c77361ffc2f44a1efc">Data</a>;
+<a name="l00098"></a>00098     <span class="keyword">typedef</span> DelayFormData&lt;SampleType, Form, NumInParams, NumOutParams&gt;     Data;
 <a name="l00099"></a>00099 };
 <a name="l00100"></a>00100 
 <a name="l00101"></a>00101 
@@ -175,7 +175,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Properties</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -184,7 +184,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 5 2012 17:04:54 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 8 2014 12:26:48 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

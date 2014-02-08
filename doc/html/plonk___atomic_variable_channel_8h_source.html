@@ -20,7 +20,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="pl-nk-logo-small.png"/></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">pl-nk</div>
+   <div id="projectname">pl-nk&#160;<span id="projectnumber">v0.4.5</span></div>
+   <div id="projectbrief">Plonk|Plink|Plank are a set of cross-platform C/C++ frameworks for audio software development</div>
   </td>
  </tr>
  </tbody>
@@ -29,8 +30,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -54,7 +55,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
       <li><a href="files.html"><span>File&#160;List</span></a></li>
-      <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
 <div class="header">
@@ -62,14 +62,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">plonk_AtomicVariableChannel.h</div>  </div>
 </div>
 <div class="contents">
-<a href="plonk___atomic_variable_channel_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*</span>
+<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*</span>
 <a name="l00002"></a>00002 <span class="comment"> -------------------------------------------------------------------------------</span>
 <a name="l00003"></a>00003 <span class="comment"> This file is part of the Plink, Plonk, Plank libraries</span>
 <a name="l00004"></a>00004 <span class="comment">  by Martin Robinson</span>
 <a name="l00005"></a>00005 <span class="comment"> </span>
 <a name="l00006"></a>00006 <span class="comment"> http://code.google.com/p/pl-nk/</span>
 <a name="l00007"></a>00007 <span class="comment"> </span>
-<a name="l00008"></a>00008 <span class="comment"> Copyright University of the West of England, Bristol 2011-12</span>
+<a name="l00008"></a>00008 <span class="comment"> Copyright University of the West of England, Bristol 2011-14</span>
 <a name="l00009"></a>00009 <span class="comment"> All rights reserved.</span>
 <a name="l00010"></a>00010 <span class="comment"> </span>
 <a name="l00011"></a>00011 <span class="comment"> Redistribution and use in source and binary forms, with or without</span>
@@ -111,56 +111,56 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00048"></a>00048 :   <span class="keyword">public</span> <a class="code" href="class_channel_internal.html" title="The base class from which most ChannelInternals should be derived.">ChannelInternal</a>&lt;SampleType, ChannelInternalCore::Data&gt;
 <a name="l00049"></a>00049 {
 <a name="l00050"></a>00050 <span class="keyword">public</span>:
-<a name="l00051"></a><a class="code" href="class_atomic_variable_channel_internal.html#ae5d8233ceb9c921e5410531f3256129c">00051</a>     <span class="keyword">typedef</span> <a class="code" href="struct_channel_data_3_01_channel_internal_core_01_4.html">ChannelInternalCore::Data</a>                           <a class="code" href="class_atomic_variable_channel_internal.html#ae5d8233ceb9c921e5410531f3256129c" title="To store channel state data.">Data</a>;
-<a name="l00052"></a><a class="code" href="class_atomic_variable_channel_internal.html#afc0421758139da3739045d3404a8b61f">00052</a>     <span class="keyword">typedef</span> <a class="code" href="class_channel_base.html" title="A single output signal.">ChannelBase&lt;SampleType&gt;</a>                             <a class="code" href="class_atomic_variable_channel_internal.html#afc0421758139da3739045d3404a8b61f">ChannelType</a>;
-<a name="l00053"></a><a class="code" href="class_atomic_variable_channel_internal.html#a9b6ed0dd83ecee4fa11985f3b74caa6a">00053</a>     <span class="keyword">typedef</span> <a class="code" href="class_atomic_variable_channel_internal.html" title="Atomic variable channel.">AtomicVariableChannelInternal&lt;SampleType&gt;</a>           <a class="code" href="class_atomic_variable_channel_internal.html#a9b6ed0dd83ecee4fa11985f3b74caa6a">AtomicVariableChannelInternalType</a>;
-<a name="l00054"></a><a class="code" href="class_atomic_variable_channel_internal.html#a9d55bf1d6c6b63dc2da26c6df3a2854e">00054</a>     <span class="keyword">typedef</span> <a class="code" href="class_channel_internal.html" title="The base class from which most ChannelInternals should be derived.">ChannelInternal&lt;SampleType,Data&gt;</a>                    <a class="code" href="class_atomic_variable_channel_internal.html#a9d55bf1d6c6b63dc2da26c6df3a2854e">Internal</a>;
-<a name="l00055"></a><a class="code" href="class_atomic_variable_channel_internal.html#aaeddfc38f6413d4e7107a2788ccac6b2">00055</a>     <span class="keyword">typedef</span> <a class="code" href="class_channel_internal_base.html" title="The templated base class for all internal channel processes.">ChannelInternalBase&lt;SampleType&gt;</a>                     <a class="code" href="class_atomic_variable_channel_internal.html#aaeddfc38f6413d4e7107a2788ccac6b2">InternalBase</a>;
-<a name="l00056"></a><a class="code" href="class_atomic_variable_channel_internal.html#a052ec2abc968d1f7bea225afa84e5c0f">00056</a>     <span class="keyword">typedef</span> <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase&lt;SampleType&gt;</a>                                <a class="code" href="class_atomic_variable_channel_internal.html#a052ec2abc968d1f7bea225afa84e5c0f">UnitType</a>;
-<a name="l00057"></a><a class="code" href="class_atomic_variable_channel_internal.html#ad05c40ec04c4e4f114d0958628dc2b86">00057</a>     <span class="keyword">typedef</span> <a class="code" href="class_input_dictionary.html" title="For storing named Dynamic objects.">InputDictionary</a>                                     <a class="code" href="class_atomic_variable_channel_internal.html#ad05c40ec04c4e4f114d0958628dc2b86">Inputs</a>;
-<a name="l00058"></a><a class="code" href="class_atomic_variable_channel_internal.html#a6bbd1e07c8d900efcf39bc61f273b7db">00058</a>     <span class="keyword">typedef</span> <a class="code" href="class_numerical_array.html">NumericalArray&lt;SampleType&gt;</a>                          <a class="code" href="class_atomic_variable_channel_internal.html#a6bbd1e07c8d900efcf39bc61f273b7db">Buffer</a>;
-<a name="l00059"></a><a class="code" href="class_atomic_variable_channel_internal.html#ae6c8ec0edd952abeac991df097a94757">00059</a>     <span class="keyword">typedef</span> <a class="code" href="class_atomic_value.html" title="Enables atomic operations on a range of types.">AtomicValue&lt;SampleType&gt;</a>                             <a class="code" href="class_atomic_variable_channel_internal.html#ae6c8ec0edd952abeac991df097a94757">AtomicType</a>;
-<a name="l00060"></a><a class="code" href="class_atomic_variable_channel_internal.html#a4e2e0820572e220368900051a77b5d05">00060</a>     <span class="keyword">typedef</span> <a class="code" href="class_variable.html" title="A template class for storing any variable type.">Variable&lt;AtomicType&amp;&gt;</a>                               <a class="code" href="class_atomic_variable_channel_internal.html#a4e2e0820572e220368900051a77b5d05">AtomicVariableType</a>;
+<a name="l00051"></a><a class="code" href="class_atomic_variable_channel_internal.html#ae5d8233ceb9c921e5410531f3256129c">00051</a>     <span class="keyword">typedef</span> <a class="code" href="class_channel_internal_core.html#a09763233582f6f0985461449aa262ae5" title="To store channel state data.">ChannelInternalCore::Data</a>                           <a class="code" href="class_atomic_variable_channel_internal.html#ae5d8233ceb9c921e5410531f3256129c" title="To store channel state data.">Data</a>;
+<a name="l00052"></a>00052     <span class="keyword">typedef</span> <a class="code" href="class_channel_base.html" title="A single output signal.">ChannelBase&lt;SampleType&gt;</a>                             <a class="code" href="class_channel_base.html" title="A single output signal.">ChannelType</a>;
+<a name="l00053"></a>00053     <span class="keyword">typedef</span> <a class="code" href="class_atomic_variable_channel_internal.html" title="Atomic variable channel.">AtomicVariableChannelInternal&lt;SampleType&gt;</a>           <a class="code" href="class_atomic_variable_channel_internal.html" title="Atomic variable channel.">AtomicVariableChannelInternalType</a>;
+<a name="l00054"></a>00054     <span class="keyword">typedef</span> <a class="code" href="class_channel_internal.html" title="The base class from which most ChannelInternals should be derived.">ChannelInternal&lt;SampleType,Data&gt;</a>                    Internal;
+<a name="l00055"></a>00055     <span class="keyword">typedef</span> <a class="code" href="class_channel_internal_base.html" title="The templated base class for all internal channel processes.">ChannelInternalBase&lt;SampleType&gt;</a>                     <a class="code" href="class_channel_internal_base.html" title="The templated base class for all internal channel processes.">InternalBase</a>;
+<a name="l00056"></a>00056     <span class="keyword">typedef</span> <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase&lt;SampleType&gt;</a>                                <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitType</a>;
+<a name="l00057"></a>00057     <span class="keyword">typedef</span> <a class="code" href="class_input_dictionary.html" title="For storing named Dynamic objects.">InputDictionary</a>                                     <a class="code" href="class_input_dictionary.html" title="For storing named Dynamic objects.">Inputs</a>;
+<a name="l00058"></a>00058     <span class="keyword">typedef</span> <a class="code" href="class_numerical_array.html">NumericalArray&lt;SampleType&gt;</a>                          <a class="code" href="class_numerical_array.html">Buffer</a>;
+<a name="l00059"></a>00059     <span class="keyword">typedef</span> <a class="code" href="class_atomic_value.html" title="Enables atomic operations on a range of types.">AtomicValue&lt;SampleType&gt;</a>                             <a class="code" href="class_atomic_value.html" title="Enables atomic operations on a range of types.">AtomicType</a>;
+<a name="l00060"></a>00060     <span class="keyword">typedef</span> <a class="code" href="class_variable.html" title="A template class for storing any variable type.">Variable&lt;AtomicType&amp;&gt;</a>                               <a class="code" href="class_variable.html" title="A template class for storing any variable type.">AtomicVariableType</a>;
 <a name="l00061"></a>00061     
-<a name="l00062"></a><a class="code" href="class_atomic_variable_channel_internal.html#a2c9cd2c45279f2384e968738574d7831">00062</a>     <a class="code" href="class_atomic_variable_channel_internal.html#a2c9cd2c45279f2384e968738574d7831">AtomicVariableChannelInternal</a> (<a class="code" href="class_input_dictionary.html" title="For storing named Dynamic objects.">Inputs</a> <span class="keyword">const</span>&amp; inputs, 
-<a name="l00063"></a>00063                                    <a class="code" href="struct_channel_data_3_01_channel_internal_core_01_4.html">Data</a> <span class="keyword">const</span>&amp; data, 
+<a name="l00062"></a>00062     <a class="code" href="class_atomic_variable_channel_internal.html" title="Atomic variable channel.">AtomicVariableChannelInternal</a> (<a class="code" href="class_input_dictionary.html" title="For storing named Dynamic objects.">Inputs</a> <span class="keyword">const</span>&amp; inputs, 
+<a name="l00063"></a>00063                                    <a class="code" href="class_channel_internal_core.html#a09763233582f6f0985461449aa262ae5" title="To store channel state data.">Data</a> <span class="keyword">const</span>&amp; data, 
 <a name="l00064"></a>00064                                    <a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a> <span class="keyword">const</span>&amp; blockSize,
 <a name="l00065"></a>00065                                    <a class="code" href="class_sample_rate.html" title="A specialised Variable&lt;double&gt; for handling sample rates.">SampleRate</a> <span class="keyword">const</span>&amp; sampleRate) <span class="keywordflow">throw</span>()
-<a name="l00066"></a>00066     :   <a class="code" href="class_atomic_variable_channel_internal.html#a9d55bf1d6c6b63dc2da26c6df3a2854e">Internal</a> (inputs, data, blockSize, sampleRate)
+<a name="l00066"></a>00066     :   Internal (inputs, data, blockSize, sampleRate)
 <a name="l00067"></a>00067     {
 <a name="l00068"></a>00068     }
 <a name="l00069"></a>00069     
-<a name="l00070"></a><a class="code" href="class_atomic_variable_channel_internal.html#a6fda034abb71eb01dbb124ed4b083350">00070</a>     <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> <a class="code" href="class_atomic_variable_channel_internal.html#a6fda034abb71eb01dbb124ed4b083350">getName</a>() <span class="keyword">const</span> throw()
+<a name="l00070"></a>00070     <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> getName() <span class="keyword">const</span> throw()
 <a name="l00071"></a>00071     {        
 <a name="l00072"></a>00072         <span class="keywordflow">return</span> <span class="stringliteral">&quot;Atomic Variable&quot;</span>;
 <a name="l00073"></a>00073     }        
 <a name="l00074"></a>00074     
-<a name="l00075"></a><a class="code" href="class_atomic_variable_channel_internal.html#ab0c05bbb1af95bb072814016e45924e0">00075</a>     <a class="code" href="class_numerical_array.html">IntArray</a> <a class="code" href="class_atomic_variable_channel_internal.html#ab0c05bbb1af95bb072814016e45924e0">getInputKeys</a>() <span class="keyword">const</span> throw()
+<a name="l00075"></a>00075     <a class="code" href="class_numerical_array.html">IntArray</a> getInputKeys() <span class="keyword">const</span> throw()
 <a name="l00076"></a>00076     {
-<a name="l00077"></a>00077         <span class="keyword">const</span> <a class="code" href="class_numerical_array.html">IntArray</a> keys (<a class="code" href="class_i_o_key.html#a31bc497f7606db39aa57aa0366b87e37a4eadfe5541a72ecfd424cab25c1599ef" title="An atomic variable.">IOKey::AtomicVariable</a>);
+<a name="l00077"></a>00077         <span class="keyword">const</span> <a class="code" href="class_numerical_array.html">IntArray</a> keys (IOKey::AtomicVariable);
 <a name="l00078"></a>00078         <span class="keywordflow">return</span> keys;
 <a name="l00079"></a>00079     }    
 <a name="l00080"></a>00080     
-<a name="l00081"></a><a class="code" href="class_atomic_variable_channel_internal.html#a2db84fb8c3a92caa2a5f3654eda03078">00081</a>     <a class="code" href="class_channel_internal_base.html" title="The templated base class for all internal channel processes.">InternalBase</a>* <a class="code" href="class_atomic_variable_channel_internal.html#a2db84fb8c3a92caa2a5f3654eda03078">getChannel</a> (<span class="keyword">const</span> <span class="keywordtype">int</span> <span class="comment">/*index*/</span>) throw()
+<a name="l00081"></a>00081     InternalBase* getChannel (<span class="keyword">const</span> <span class="keywordtype">int</span> <span class="comment">/*index*/</span>) throw()
 <a name="l00082"></a>00082     {
 <a name="l00083"></a>00083         <span class="keywordflow">return</span> <span class="keyword">this</span>;
 <a name="l00084"></a>00084     }        
 <a name="l00085"></a>00085     
 <a name="l00086"></a><a class="code" href="class_atomic_variable_channel_internal.html#a3abb1e2656fbe211fe51d6d0a7e76768">00086</a>     <span class="keywordtype">void</span> <a class="code" href="class_atomic_variable_channel_internal.html#a3abb1e2656fbe211fe51d6d0a7e76768" title="Called to initialise the channel&#39;s initial value.">initChannel</a> (<span class="keyword">const</span> <span class="keywordtype">int</span> <span class="comment">/*channel*/</span>) throw()
 <a name="l00087"></a>00087     {
-<a name="l00088"></a>00088         <a class="code" href="class_variable.html" title="A template class for storing any variable type.">AtomicVariableType</a>&amp; atomicVariable = ChannelInternalCore::getInputAs&lt;AtomicVariableType&gt; (<a class="code" href="class_i_o_key.html#a31bc497f7606db39aa57aa0366b87e37a4eadfe5541a72ecfd424cab25c1599ef" title="An atomic variable.">IOKey::AtomicVariable</a>);
+<a name="l00088"></a>00088         <a class="code" href="class_variable.html" title="A template class for storing any variable type.">AtomicVariableType</a>&amp; atomicVariable = ChannelInternalCore::getInputAs&lt;AtomicVariableType&gt; (IOKey::AtomicVariable);
 <a name="l00089"></a>00089         <a class="code" href="class_atomic_value.html" title="Enables atomic operations on a range of types.">AtomicType</a>&amp; atomicValue = atomicVariable.<a class="code" href="class_variable.html#a3f05fc2768b1de80706b39ee14f3c360" title="Returns the current value.">getValue</a>();
 <a name="l00090"></a>00090 
-<a name="l00091"></a>00091         this-&gt;<a class="code" href="class_channel_internal_base.html#aed88288e0eb608e998b3f7ccf6bf2aaf">initValue</a> (atomicValue.getValue());
+<a name="l00091"></a>00091         this-&gt;initValue (atomicValue.getValue());
 <a name="l00092"></a>00092     }    
 <a name="l00093"></a>00093     
 <a name="l00094"></a><a class="code" href="class_atomic_variable_channel_internal.html#abe3308ee16f52608b094e86b6a39f9a5">00094</a>     <span class="keywordtype">void</span> <a class="code" href="class_atomic_variable_channel_internal.html#abe3308ee16f52608b094e86b6a39f9a5" title="The DSP function.">process</a> (<a class="code" href="class_process_info.html" title="Holds information about the Unit graph.">ProcessInfo</a>&amp; <span class="comment">/*info*/</span>, <span class="keyword">const</span> <span class="keywordtype">int</span> <span class="comment">/*channel*/</span>) throw()
 <a name="l00095"></a>00095     {                
-<a name="l00096"></a>00096         <a class="code" href="class_variable.html" title="A template class for storing any variable type.">AtomicVariableType</a>&amp; atomicVariable = ChannelInternalCore::getInputAs&lt;AtomicVariableType&gt; (<a class="code" href="class_i_o_key.html#a31bc497f7606db39aa57aa0366b87e37a4eadfe5541a72ecfd424cab25c1599ef" title="An atomic variable.">IOKey::AtomicVariable</a>);
+<a name="l00096"></a>00096         <a class="code" href="class_variable.html" title="A template class for storing any variable type.">AtomicVariableType</a>&amp; atomicVariable = ChannelInternalCore::getInputAs&lt;AtomicVariableType&gt; (IOKey::AtomicVariable);
 <a name="l00097"></a>00097         <a class="code" href="class_atomic_value.html" title="Enables atomic operations on a range of types.">AtomicType</a>&amp; atomicValue = atomicVariable.<a class="code" href="class_variable.html#a3f05fc2768b1de80706b39ee14f3c360" title="Returns the current value.">getValue</a>();
 <a name="l00098"></a>00098         
-<a name="l00099"></a>00099         SampleType* <span class="keyword">const</span> outputSamples = this-&gt;<a class="code" href="class_channel_internal_base.html#a87680feef8745429802ff10ca3887012">getOutputSamples</a>();
-<a name="l00100"></a>00100         <span class="keyword">const</span> <span class="keywordtype">int</span> outputBufferLength = this-&gt;<a class="code" href="class_channel_internal_base.html#a48f5cfad8e3c1977412e357a2e41b41f">getOutputBuffer</a>().<a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a>();        
+<a name="l00099"></a>00099         SampleType* <span class="keyword">const</span> outputSamples = this-&gt;getOutputSamples();
+<a name="l00100"></a>00100         <span class="keyword">const</span> <span class="keywordtype">int</span> outputBufferLength = this-&gt;getOutputBuffer().<a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a>();        
 <a name="l00101"></a>00101         
 <a name="l00102"></a>00102         <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; outputBufferLength; ++i) 
 <a name="l00103"></a>00103             outputSamples[i] = atomicValue.getValue();          
@@ -177,46 +177,46 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00125"></a><a class="code" href="class_atomic_variable_unit.html">00125</a> <span class="keyword">class </span><a class="code" href="class_atomic_variable_unit.html" title="Atomic variable unit.">AtomicVariableUnit</a>
 <a name="l00126"></a>00126 {
 <a name="l00127"></a>00127 <span class="keyword">public</span>:    
-<a name="l00128"></a><a class="code" href="class_atomic_variable_unit.html#af824d1dcdbad07aa1fa89ebc8537161b">00128</a>     <span class="keyword">typedef</span> <a class="code" href="class_atomic_variable_channel_internal.html" title="Atomic variable channel.">AtomicVariableChannelInternal&lt;SampleType&gt;</a>               <a class="code" href="class_atomic_variable_unit.html#af824d1dcdbad07aa1fa89ebc8537161b">AtomicVariableChannelInternalType</a>;
-<a name="l00129"></a><a class="code" href="class_atomic_variable_unit.html#a88f05a3090772db1fa244c076282e16a">00129</a>     <span class="keyword">typedef</span> <span class="keyword">typename</span> <a class="code" href="struct_channel_data_3_01_channel_internal_core_01_4.html">AtomicVariableChannelInternalType::Data</a>        <a class="code" href="class_atomic_variable_unit.html#a88f05a3090772db1fa244c076282e16a">Data</a>;
-<a name="l00130"></a><a class="code" href="class_atomic_variable_unit.html#a523c8b24979efcc1c0a469923b4bcbd1">00130</a>     <span class="keyword">typedef</span> <a class="code" href="class_channel_base.html" title="A single output signal.">ChannelBase&lt;SampleType&gt;</a>                                 <a class="code" href="class_atomic_variable_unit.html#a523c8b24979efcc1c0a469923b4bcbd1">ChannelType</a>;
-<a name="l00131"></a><a class="code" href="class_atomic_variable_unit.html#aa845b20ce9dd65adfa3e19571c868495">00131</a>     <span class="keyword">typedef</span> <a class="code" href="class_channel_internal.html" title="The base class from which most ChannelInternals should be derived.">ChannelInternal&lt;SampleType,Data&gt;</a>                        <a class="code" href="class_atomic_variable_unit.html#aa845b20ce9dd65adfa3e19571c868495">Internal</a>;
-<a name="l00132"></a><a class="code" href="class_atomic_variable_unit.html#a9379729520abd5f62ecf5ff48f3ebd36">00132</a>     <span class="keyword">typedef</span> <a class="code" href="class_channel_internal_base.html" title="The templated base class for all internal channel processes.">ChannelInternalBase&lt;SampleType&gt;</a>                         <a class="code" href="class_atomic_variable_unit.html#a9379729520abd5f62ecf5ff48f3ebd36">InternaBase</a>;
-<a name="l00133"></a><a class="code" href="class_atomic_variable_unit.html#ab7551c8e9e01ad67c6d4807a70bda1be">00133</a>     <span class="keyword">typedef</span> <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase&lt;SampleType&gt;</a>                                    <a class="code" href="class_atomic_variable_unit.html#ab7551c8e9e01ad67c6d4807a70bda1be">UnitType</a>;
-<a name="l00134"></a><a class="code" href="class_atomic_variable_unit.html#ab24bff99d4f1c3495e8ff55a87160969">00134</a>     <span class="keyword">typedef</span> <a class="code" href="class_input_dictionary.html" title="For storing named Dynamic objects.">InputDictionary</a>                                         <a class="code" href="class_atomic_variable_unit.html#ab24bff99d4f1c3495e8ff55a87160969">Inputs</a>;
-<a name="l00135"></a><a class="code" href="class_atomic_variable_unit.html#aa770f101c431159062578ba1be743c3f">00135</a>     <span class="keyword">typedef</span> <a class="code" href="class_numerical_array.html">NumericalArray&lt;SampleType&gt;</a>                              <a class="code" href="class_atomic_variable_unit.html#aa770f101c431159062578ba1be743c3f">Buffer</a>;
-<a name="l00136"></a><a class="code" href="class_atomic_variable_unit.html#a727550665659de5e55bc54fd51af2d86">00136</a>     <span class="keyword">typedef</span> <a class="code" href="class_atomic_value.html" title="Enables atomic operations on a range of types.">AtomicValue&lt;SampleType&gt;</a>                                 <a class="code" href="class_atomic_variable_unit.html#a727550665659de5e55bc54fd51af2d86">AtomicType</a>;
-<a name="l00137"></a><a class="code" href="class_atomic_variable_unit.html#adad4e3ae02ac0f70ece3ad47f31af0d4">00137</a>     <span class="keyword">typedef</span> <a class="code" href="class_variable.html" title="A template class for storing any variable type.">Variable&lt;AtomicType&amp;&gt;</a>                                   <a class="code" href="class_atomic_variable_unit.html#adad4e3ae02ac0f70ece3ad47f31af0d4">AtomicVariableType</a>;
+<a name="l00128"></a>00128     <span class="keyword">typedef</span> <a class="code" href="class_atomic_variable_channel_internal.html" title="Atomic variable channel.">AtomicVariableChannelInternal&lt;SampleType&gt;</a>               <a class="code" href="class_atomic_variable_channel_internal.html" title="Atomic variable channel.">AtomicVariableChannelInternalType</a>;
+<a name="l00129"></a>00129     <span class="keyword">typedef</span> <span class="keyword">typename</span> <a class="code" href="class_atomic_variable_channel_internal.html#ae5d8233ceb9c921e5410531f3256129c" title="To store channel state data.">AtomicVariableChannelInternalType::Data</a>        Data;
+<a name="l00130"></a>00130     <span class="keyword">typedef</span> <a class="code" href="class_channel_base.html" title="A single output signal.">ChannelBase&lt;SampleType&gt;</a>                                 <a class="code" href="class_channel_base.html" title="A single output signal.">ChannelType</a>;
+<a name="l00131"></a>00131     <span class="keyword">typedef</span> <a class="code" href="class_channel_internal.html" title="The base class from which most ChannelInternals should be derived.">ChannelInternal&lt;SampleType,Data&gt;</a>                        <a class="code" href="class_channel_internal.html" title="The base class from which most ChannelInternals should be derived.">Internal</a>;
+<a name="l00132"></a>00132     <span class="keyword">typedef</span> <a class="code" href="class_channel_internal_base.html" title="The templated base class for all internal channel processes.">ChannelInternalBase&lt;SampleType&gt;</a>                         <a class="code" href="class_channel_internal_base.html" title="The templated base class for all internal channel processes.">InternaBase</a>;
+<a name="l00133"></a>00133     <span class="keyword">typedef</span> <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase&lt;SampleType&gt;</a>                                    <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitType</a>;
+<a name="l00134"></a>00134     <span class="keyword">typedef</span> <a class="code" href="class_input_dictionary.html" title="For storing named Dynamic objects.">InputDictionary</a>                                         <a class="code" href="class_input_dictionary.html" title="For storing named Dynamic objects.">Inputs</a>;
+<a name="l00135"></a>00135     <span class="keyword">typedef</span> <a class="code" href="class_numerical_array.html">NumericalArray&lt;SampleType&gt;</a>                              <a class="code" href="class_numerical_array.html">Buffer</a>;
+<a name="l00136"></a>00136     <span class="keyword">typedef</span> <a class="code" href="class_atomic_value.html" title="Enables atomic operations on a range of types.">AtomicValue&lt;SampleType&gt;</a>                                 <a class="code" href="class_atomic_value.html" title="Enables atomic operations on a range of types.">AtomicType</a>;
+<a name="l00137"></a>00137     <span class="keyword">typedef</span> <a class="code" href="class_variable.html" title="A template class for storing any variable type.">Variable&lt;AtomicType&amp;&gt;</a>                                   <a class="code" href="class_variable.html" title="A template class for storing any variable type.">AtomicVariableType</a>;
 <a name="l00138"></a>00138     
-<a name="l00139"></a><a class="code" href="class_atomic_variable_unit.html#a8b252b563d15e39ef5a5255ff192d234">00139</a>     <span class="keyword">static</span> <span class="keyword">inline</span> <a class="code" href="class_object_array.html" title="This is the base class for arrays.">UnitInfos</a> <a class="code" href="class_atomic_variable_unit.html#a8b252b563d15e39ef5a5255ff192d234">getInfo</a>() throw()
+<a name="l00139"></a>00139     <span class="keyword">static</span> <span class="keyword">inline</span> <a class="code" href="class_object_array.html" title="This is the base class for arrays.">UnitInfos</a> getInfo() <span class="keywordflow">throw</span>()
 <a name="l00140"></a>00140     {
 <a name="l00141"></a>00141         <span class="keyword">const</span> <span class="keywordtype">double</span> blockSize = (double)<a class="code" href="class_block_size.html#ac022f97ed4f42a64936fdc0f3479c1cb" title="Gets the default block size.">BlockSize::getDefault</a>().<a class="code" href="class_variable.html#a3f05fc2768b1de80706b39ee14f3c360" title="Returns the current value.">getValue</a>();
 <a name="l00142"></a>00142 <span class="comment">//        const double sampleRate = SampleRate::getDefault().getValue();</span>
 <a name="l00143"></a>00143 
-<a name="l00144"></a>00144         <span class="keywordflow">return</span> <a class="code" href="class_unit_info.html">UnitInfo</a> (<span class="stringliteral">&quot;Atomic Variable&quot;</span>, <span class="stringliteral">&quot;An atomic variable value.&quot;</span>,
+<a name="l00144"></a>00144         <span class="keywordflow">return</span> UnitInfo (<span class="stringliteral">&quot;Atomic Variable&quot;</span>, <span class="stringliteral">&quot;An atomic variable value.&quot;</span>,
 <a name="l00145"></a>00145                          
 <a name="l00146"></a>00146                          <span class="comment">// output</span>
 <a name="l00147"></a>00147                          1, 
-<a name="l00148"></a>00148                          <a class="code" href="class_i_o_key.html#a31bc497f7606db39aa57aa0366b87e37aa60b1c99f5ef2914e94ca6115fba0983" title="A generic audio (commonly used where there is only one input or output).">IOKey::Generic</a>,            <a class="code" href="class_measure.html#af74c37cd245b1262c0602548b4027e86a07021d5ac257538d56b6eb30c5c2000e" title="None i.e., not applicable.">Measure::None</a>,      <a class="code" href="class_i_o_info.html#a9023a2547ca686e6c0def6032c02145c">IOInfo::NoDefault</a>,  <a class="code" href="class_i_o_limit.html#a221d406cacbba8286e3fde4220ffe263a59a0af582036349f1b8d209f197154ee">IOLimit::None</a>, 
-<a name="l00149"></a>00149                          <a class="code" href="class_i_o_key.html#a31bc497f7606db39aa57aa0366b87e37ab4c7f3ea28d6e5e763b97934501d650c" title="Used to terminate a list of IOKeys.">IOKey::End</a>,
+<a name="l00148"></a>00148                          IOKey::Generic,            Measure::None,      IOInfo::NoDefault,  IOLimit::None, 
+<a name="l00149"></a>00149                          IOKey::End,
 <a name="l00150"></a>00150                          
 <a name="l00151"></a>00151                          <span class="comment">// inputs</span>
-<a name="l00152"></a>00152                          <a class="code" href="class_i_o_key.html#a31bc497f7606db39aa57aa0366b87e37a4eadfe5541a72ecfd424cab25c1599ef" title="An atomic variable.">IOKey::AtomicVariable</a>,     <a class="code" href="class_measure.html#af74c37cd245b1262c0602548b4027e86a07021d5ac257538d56b6eb30c5c2000e" title="None i.e., not applicable.">Measure::None</a>,      0.0,        <a class="code" href="class_i_o_limit.html#a221d406cacbba8286e3fde4220ffe263a59a0af582036349f1b8d209f197154ee">IOLimit::None</a>,
-<a name="l00153"></a>00153                          <a class="code" href="class_i_o_key.html#a31bc497f7606db39aa57aa0366b87e37ab9487086113a53cfe13ff5785e8dad24" title="Audio processing block size.">IOKey::BlockSize</a>,          <a class="code" href="class_measure.html#af74c37cd245b1262c0602548b4027e86ad61a89d635b70cb1d07df5a4f73cbfaa" title="A number of audio samples.">Measure::Samples</a>,   blockSize,  <a class="code" href="class_i_o_limit.html#a221d406cacbba8286e3fde4220ffe263a54bbbe9142ad0dafcbeba7afd0311fc1">IOLimit::Minimum</a>, <a class="code" href="class_measure.html#af74c37cd245b1262c0602548b4027e86ad61a89d635b70cb1d07df5a4f73cbfaa" title="A number of audio samples.">Measure::Samples</a>,             1.0,
-<a name="l00154"></a>00154                          <a class="code" href="class_i_o_key.html#a31bc497f7606db39aa57aa0366b87e37ab4c7f3ea28d6e5e763b97934501d650c" title="Used to terminate a list of IOKeys.">IOKey::End</a>);
+<a name="l00152"></a>00152                          IOKey::AtomicVariable,     Measure::None,      0.0,        IOLimit::None,
+<a name="l00153"></a>00153                          IOKey::BlockSize,          Measure::Samples,   blockSize,  IOLimit::Minimum, Measure::Samples,             1.0,
+<a name="l00154"></a>00154                          IOKey::End);
 <a name="l00155"></a>00155     }    
 <a name="l00156"></a>00156     
 <a name="l00158"></a><a class="code" href="class_atomic_variable_unit.html#a166ad3b50f39b033ae5328c710e8efc7">00158</a>     <span class="keyword">static</span> <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitType</a> <a class="code" href="class_atomic_variable_unit.html#a166ad3b50f39b033ae5328c710e8efc7" title="Create control rate variable.">ar</a> (<a class="code" href="class_variable.html" title="A template class for storing any variable type.">AtomicVariableType</a> <span class="keyword">const</span>&amp; atomicVariable = SampleType (0),
 <a name="l00159"></a>00159                         <a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a> <span class="keyword">const</span>&amp; preferredBlockSize = <a class="code" href="class_block_size.html#ac022f97ed4f42a64936fdc0f3479c1cb" title="Gets the default block size.">BlockSize::getDefault</a>()) throw()
 <a name="l00160"></a>00160     {        
 <a name="l00161"></a>00161         <a class="code" href="class_input_dictionary.html" title="For storing named Dynamic objects.">Inputs</a> inputs;
-<a name="l00162"></a>00162         inputs.<a class="code" href="class_dictionary.html#a6ee81b793caf6c652e9d6545ce848a13" title="Put an item into the dicionary associated with the specified key.">put</a> (<a class="code" href="class_i_o_key.html#a31bc497f7606db39aa57aa0366b87e37a4eadfe5541a72ecfd424cab25c1599ef" title="An atomic variable.">IOKey::AtomicVariable</a>, atomicVariable);
+<a name="l00162"></a>00162         inputs.<a class="code" href="class_dictionary.html#a6ee81b793caf6c652e9d6545ce848a13" title="Put an item into the dicionary associated with the specified key.">put</a> (IOKey::AtomicVariable, atomicVariable);
 <a name="l00163"></a>00163         
-<a name="l00164"></a>00164         <a class="code" href="struct_channel_data_3_01_channel_internal_core_01_4.html">Data</a> data = { -1.0, -1.0 };
+<a name="l00164"></a>00164         Data data = { -1.0, -1.0 };
 <a name="l00165"></a>00165         
 <a name="l00166"></a>00166         <span class="keyword">const</span> <a class="code" href="class_sample_rate.html" title="A specialised Variable&lt;double&gt; for handling sample rates.">SampleRate</a> preferredSampleRate = (preferredBlockSize == <a class="code" href="class_block_size.html#ac022f97ed4f42a64936fdc0f3479c1cb" title="Gets the default block size.">BlockSize::getDefault</a>()) ?
-<a name="l00167"></a>00167                                                 <a class="code" href="class_sample_rate.html#a892e4d1aae2bee986ee38fd371011f04">SampleRate::getDefault</a>() :
-<a name="l00168"></a>00168                                                 (<a class="code" href="class_sample_rate.html#a892e4d1aae2bee986ee38fd371011f04">SampleRate::getDefault</a>() / <a class="code" href="class_block_size.html#ac022f97ed4f42a64936fdc0f3479c1cb" title="Gets the default block size.">BlockSize::getDefault</a>()) * preferredBlockSize;
+<a name="l00167"></a>00167                                                 SampleRate::getDefault() :
+<a name="l00168"></a>00168                                                 (SampleRate::getDefault() / <a class="code" href="class_block_size.html#ac022f97ed4f42a64936fdc0f3479c1cb" title="Gets the default block size.">BlockSize::getDefault</a>()) * preferredBlockSize;
 <a name="l00169"></a>00169         
 <a name="l00170"></a>00170         <span class="keywordflow">return</span> UnitType::template createFromInputs&lt;AtomicVariableChannelInternalType&gt; (inputs, 
 <a name="l00171"></a>00171                                                                                        data, 
@@ -224,17 +224,17 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00173"></a>00173                                                                                        preferredSampleRate);
 <a name="l00174"></a>00174     }   
 <a name="l00175"></a>00175 
-<a name="l00176"></a><a class="code" href="class_atomic_variable_unit.html#a5e98a96fd1e26b52a5944817fef78316">00176</a>     <span class="keyword">static</span> <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitType</a> <a class="code" href="class_atomic_variable_unit.html#a5e98a96fd1e26b52a5944817fef78316">kr</a> (<a class="code" href="class_variable.html" title="A template class for storing any variable type.">AtomicVariableType</a> <span class="keyword">const</span>&amp; atomicVariable = SampleType (0)) throw()
+<a name="l00176"></a>00176     <span class="keyword">static</span> UnitType kr (AtomicVariableType <span class="keyword">const</span>&amp; atomicVariable = SampleType (0)) throw()
 <a name="l00177"></a>00177     {
-<a name="l00178"></a>00178         <a class="code" href="class_input_dictionary.html" title="For storing named Dynamic objects.">Inputs</a> inputs;
-<a name="l00179"></a>00179         inputs.<a class="code" href="class_dictionary.html#a6ee81b793caf6c652e9d6545ce848a13" title="Put an item into the dicionary associated with the specified key.">put</a> (<a class="code" href="class_i_o_key.html#a31bc497f7606db39aa57aa0366b87e37a4eadfe5541a72ecfd424cab25c1599ef" title="An atomic variable.">IOKey::AtomicVariable</a>, atomicVariable);
+<a name="l00178"></a>00178         Inputs inputs;
+<a name="l00179"></a>00179         inputs.<a class="code" href="class_dictionary.html#a6ee81b793caf6c652e9d6545ce848a13" title="Put an item into the dicionary associated with the specified key.">put</a> (IOKey::AtomicVariable, atomicVariable);
 <a name="l00180"></a>00180         
-<a name="l00181"></a>00181         <a class="code" href="struct_channel_data_3_01_channel_internal_core_01_4.html">Data</a> data = { -1.0, -1.0 };
+<a name="l00181"></a>00181         Data data = { -1.0, -1.0 };
 <a name="l00182"></a>00182                 
 <a name="l00183"></a>00183         <span class="keywordflow">return</span> UnitType::template createFromInputs&lt;AtomicVariableChannelInternalType&gt; (inputs, 
 <a name="l00184"></a>00184                                                                                        data, 
 <a name="l00185"></a>00185                                                                                        <a class="code" href="class_block_size.html#a0b63924e21af360f0e44fdaccb56c14d" title="Gets the default control rate block size.">BlockSize::getControlRateBlockSize</a>(), 
-<a name="l00186"></a>00186                                                                                        <a class="code" href="class_sample_rate.html#a4622d6e02aafefc7426d760160df7bbb">SampleRate::getControlRate</a>());        
+<a name="l00186"></a>00186                                                                                        SampleRate::getControlRate());        
 <a name="l00187"></a>00187     }
 <a name="l00188"></a>00188 };
 <a name="l00189"></a>00189 
@@ -251,7 +251,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Properties</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -260,7 +260,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 5 2012 17:04:52 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 8 2014 12:26:47 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

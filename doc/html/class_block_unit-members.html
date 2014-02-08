@@ -20,7 +20,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="pl-nk-logo-small.png"/></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">pl-nk</div>
+   <div id="projectname">pl-nk&#160;<span id="projectnumber">v0.4.5</span></div>
+   <div id="projectbrief">Plonk|Plink|Plank are a set of cross-platform C/C++ frameworks for audio software development</div>
   </td>
  </tr>
  </tbody>
@@ -29,8 +30,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -67,23 +68,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="contents">
 This is the complete list of members for <a class="el" href="class_block_unit.html">BlockUnit&lt; SampleType &gt;</a>, including all inherited members.<table>
   <tr class="memlist"><td><a class="el" href="class_block_unit.html#a1586e4455c2dcec6c70a0f3d1bf8e2e0">ar</a>(Buffer const &amp;buffer, DoubleVariable const &amp;overlap=Math&lt; DoubleVariable &gt;::get1(), BlockSize const &amp;preferredBlockSize=BlockSize::noPreference(), SampleRate const &amp;preferredSampleRate=SampleRate::getDefault())</td><td><a class="el" href="class_block_unit.html">BlockUnit&lt; SampleType &gt;</a></td><td><code> [inline, static]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_block_unit.html#a6afecb4efa0fc854d27b5568aab413f7">BlockInternal</a> typedef</td><td><a class="el" href="class_block_unit.html">BlockUnit&lt; SampleType &gt;</a></td><td></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_block_unit.html#aa07e7d8459d0bc9a2bd77f15dfdcdd59">Buffer</a> typedef</td><td><a class="el" href="class_block_unit.html">BlockUnit&lt; SampleType &gt;</a></td><td></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_block_unit.html#ab2773d2a69b9c35d25e513b278bc2aae">ChannelType</a> typedef</td><td><a class="el" href="class_block_unit.html">BlockUnit&lt; SampleType &gt;</a></td><td></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_block_unit.html#a6c74199ecdc63ab107e64e14ac9ef2ff">Data</a> typedef</td><td><a class="el" href="class_block_unit.html">BlockUnit&lt; SampleType &gt;</a></td><td></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_block_unit.html#ae9b2a1d73cd1ee176ce5a33aa358f57b">getInfo</a>()</td><td><a class="el" href="class_block_unit.html">BlockUnit&lt; SampleType &gt;</a></td><td><code> [inline, static]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_block_unit.html#a6bfc34a7749d29da0db386db831b0447">Inputs</a> typedef</td><td><a class="el" href="class_block_unit.html">BlockUnit&lt; SampleType &gt;</a></td><td></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_block_unit.html#a5132eb5cc14ab9cb710b5dacf3004709">InternaBase</a> typedef</td><td><a class="el" href="class_block_unit.html">BlockUnit&lt; SampleType &gt;</a></td><td></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_block_unit.html#a6fa20284968a0dbb8bef5148fe1b0d23">Internal</a> typedef</td><td><a class="el" href="class_block_unit.html">BlockUnit&lt; SampleType &gt;</a></td><td></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_block_unit.html#a1252bdcc5c06b9750935326afd3e2775">kr</a>(Buffer const &amp;buffer, DoubleVariable const &amp;overlap=Math&lt; DoubleVariable &gt;::get1())</td><td><a class="el" href="class_block_unit.html">BlockUnit&lt; SampleType &gt;</a></td><td><code> [inline, static]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_block_unit.html#a41163e7af50605678aaa6c107fc15e62">UnitType</a> typedef</td><td><a class="el" href="class_block_unit.html">BlockUnit&lt; SampleType &gt;</a></td><td></td></tr>
+  <tr class="memlist"><td><a class="el" href="class_block_unit.html#add4451655e57fac19a2b98b61bc89e6b">ar</a>(BufferArray const &amp;buffers, DoubleVariable const &amp;overlap=Math&lt; DoubleVariable &gt;::get1(), BlockSize const &amp;preferredBlockSize=BlockSize::noPreference(), SampleRate const &amp;preferredSampleRate=SampleRate::getDefault())</td><td><a class="el" href="class_block_unit.html">BlockUnit&lt; SampleType &gt;</a></td><td><code> [inline, static]</code></td></tr>
 </table></div>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Properties</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -92,7 +84,7 @@ This is the complete list of members for <a class="el" href="class_block_unit.ht
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 5 2012 17:05:00 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 8 2014 12:26:52 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

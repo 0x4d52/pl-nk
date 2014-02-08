@@ -20,7 +20,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="pl-nk-logo-small.png"/></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">pl-nk</div>
+   <div id="projectname">pl-nk&#160;<span id="projectnumber">v0.4.5</span></div>
+   <div id="projectbrief">Plonk|Plink|Plank are a set of cross-platform C/C++ frameworks for audio software development</div>
   </td>
  </tr>
  </tbody>
@@ -29,8 +30,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -54,7 +55,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
       <li><a href="files.html"><span>File&#160;List</span></a></li>
-      <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
 <div class="header">
@@ -62,14 +62,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">plonk_SmartPointer.h</div>  </div>
 </div>
 <div class="contents">
-<a href="plonk___smart_pointer_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*</span>
+<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*</span>
 <a name="l00002"></a>00002 <span class="comment"> -------------------------------------------------------------------------------</span>
 <a name="l00003"></a>00003 <span class="comment"> This file is part of the Plink, Plonk, Plank libraries</span>
 <a name="l00004"></a>00004 <span class="comment">  by Martin Robinson</span>
 <a name="l00005"></a>00005 <span class="comment"> </span>
 <a name="l00006"></a>00006 <span class="comment"> http://code.google.com/p/pl-nk/</span>
 <a name="l00007"></a>00007 <span class="comment"> </span>
-<a name="l00008"></a>00008 <span class="comment"> Copyright University of the West of England, Bristol 2011-12</span>
+<a name="l00008"></a>00008 <span class="comment"> Copyright University of the West of England, Bristol 2011-14</span>
 <a name="l00009"></a>00009 <span class="comment"> All rights reserved.</span>
 <a name="l00010"></a>00010 <span class="comment"> </span>
 <a name="l00011"></a>00011 <span class="comment"> Redistribution and use in source and binary forms, with or without</span>
@@ -103,12 +103,12 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00039"></a>00039 <span class="preprocessor">#ifndef PLONK_SMARTPOINTER_H</span>
 <a name="l00040"></a>00040 <span class="preprocessor"></span><span class="preprocessor">#define PLONK_SMARTPOINTER_H</span>
 <a name="l00041"></a>00041 <span class="preprocessor"></span>
-<a name="l00042"></a>00042 <span class="preprocessor">#include &quot;<a class="code" href="plonk___core_forward_declarations_8h.html">plonk_CoreForwardDeclarations.h</a>&quot;</span>
+<a name="l00042"></a>00042 <span class="preprocessor">#include &quot;plonk_CoreForwardDeclarations.h&quot;</span>
 <a name="l00043"></a>00043 <span class="preprocessor">#include &quot;../containers/plonk_ContainerForwardDeclarations.h&quot;</span>
 <a name="l00044"></a>00044 <span class="preprocessor">#include &quot;../containers/plonk_Atomic.h&quot;</span>
 <a name="l00045"></a>00045 
-<a name="l00046"></a><a class="code" href="plonk___smart_pointer_8h.html#a55553051ef186799d55d40e67115ffba">00046</a> <span class="preprocessor">#define PLONK_SMARTPOINTER_DEBUG 0</span>
-<a name="l00047"></a><a class="code" href="plonk___smart_pointer_8h.html#a1d13fb6066eb6b5abc6b4f094d926a02">00047</a> <span class="preprocessor"></span><span class="preprocessor">#define PLONK_SMARTPOINTER_DEBUGLOG 0</span>
+<a name="l00046"></a>00046 <span class="preprocessor">#define PLONK_SMARTPOINTER_DEBUG 0</span>
+<a name="l00047"></a>00047 <span class="preprocessor"></span><span class="preprocessor">#define PLONK_SMARTPOINTER_DEBUGLOG 0</span>
 <a name="l00048"></a>00048 <span class="preprocessor"></span>
 <a name="l00049"></a>00049 <span class="preprocessor">#ifndef PLONK_SMARTPOINTER_DEBUG</span>
 <a name="l00050"></a>00050 <span class="preprocessor"></span><span class="preprocessor">    #ifdef PLONK_DEBUG</span>
@@ -127,105 +127,107 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00063"></a>00063 <span class="comment">//------------------------------------------------------------------------------</span>
 <a name="l00064"></a>00064 
 <a name="l00065"></a>00065 <span class="preprocessor">#if PLONK_SMARTPOINTER_DEBUG</span>
-<a name="l00066"></a>00066 <span class="preprocessor"></span><span class="keyword">const</span> <a class="code" href="plonk___standard_header_8h.html#a951638d5b3c1bbe3b063e48121b4ae0a">Long</a> getTotalSmartPointers() throw();
-<a name="l00067"></a>00067 const <a class="code" href="plonk___standard_header_8h.html#a951638d5b3c1bbe3b063e48121b4ae0a">Long</a> getTotalSmartPointerCounters() throw();
+<a name="l00066"></a>00066 <span class="preprocessor"></span><span class="keyword">const</span> Long getTotalSmartPointers() throw();
+<a name="l00067"></a>00067 const Long getTotalSmartPointerCounters() throw();
 <a name="l00068"></a>00068 <span class="preprocessor">#endif</span>
 <a name="l00069"></a>00069 <span class="preprocessor"></span>
-<a name="l00070"></a><a class="code" href="class_plonk_base.html">00070</a> <span class="keyword">class </span><a class="code" href="class_plonk_base.html">PlonkBase</a>
+<a name="l00070"></a>00070 <span class="keyword">class </span>PlonkBase
 <a name="l00071"></a>00071 {
 <a name="l00072"></a>00072 <span class="keyword">public</span>:
-<a name="l00073"></a><a class="code" href="class_plonk_base.html#a52a540ab018929c9224336d44be9e31e">00073</a>     <a class="code" href="class_plonk_base.html#a52a540ab018929c9224336d44be9e31e">PlonkBase</a>() throw() { }
-<a name="l00074"></a><a class="code" href="class_plonk_base.html#abec18f8588d85a52bbda28c350a9afaf">00074</a>     <a class="code" href="class_plonk_base.html#abec18f8588d85a52bbda28c350a9afaf">~PlonkBase</a>() { } <span class="comment">// doesn&#39;t need to be virtual as we never need to call delete on a PlonkBase pointer</span>
-<a name="l00075"></a>00075     <span class="keyword">static</span> <span class="keywordtype">void</span>* <a class="code" href="class_plonk_base.html#a26fcb87fd8b6743b76bdffb74bdef2fd">operator new </a>(<span class="keywordtype">size_t</span> size); 
-<a name="l00076"></a>00076     <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="class_plonk_base.html#a2a6cd5929fffe586119920e4e8ec272d">operator delete </a>(<span class="keywordtype">void</span>* ptr);
-<a name="l00077"></a>00077     <span class="keyword">static</span> <span class="keywordtype">void</span>* <a class="code" href="class_plonk_base.html#a272539263843cc0178dcfe406730ab67">operator new[] </a>(<span class="keywordtype">size_t</span> size); 
-<a name="l00078"></a>00078     <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="class_plonk_base.html#a675fca1c9385594a8f85c5be86cbbf8a">operator delete[] </a>(<span class="keywordtype">void</span>* ptr);
+<a name="l00073"></a>00073     PlonkBase() throw() { }
+<a name="l00074"></a>00074     ~PlonkBase() { } <span class="comment">// doesn&#39;t need to be virtual as we never need to call delete on a PlonkBase pointer</span>
+<a name="l00075"></a>00075     <span class="keyword">static</span> <span class="keywordtype">void</span>* operator new (<span class="keywordtype">size_t</span> size); 
+<a name="l00076"></a>00076     <span class="keyword">static</span> <span class="keywordtype">void</span> operator delete (<span class="keywordtype">void</span>* ptr);
+<a name="l00077"></a>00077     <span class="keyword">static</span> <span class="keywordtype">void</span>* operator new[] (<span class="keywordtype">size_t</span> size); 
+<a name="l00078"></a>00078     <span class="keyword">static</span> <span class="keywordtype">void</span> operator delete[] (<span class="keywordtype">void</span>* ptr);
 <a name="l00079"></a>00079 
 <a name="l00080"></a>00080 };
 <a name="l00081"></a>00081 
-<a name="l00092"></a><a class="code" href="class_smart_pointer.html">00092</a> <span class="keyword">class </span><a class="code" href="class_smart_pointer.html" title="Reference counted pointer base class.">SmartPointer</a> : <span class="keyword">public</span> <a class="code" href="class_plonk_base.html">PlonkBase</a>
+<a name="l00092"></a><a class="code" href="class_smart_pointer.html">00092</a> <span class="keyword">class </span><a class="code" href="class_smart_pointer.html" title="Reference counted pointer base class.">SmartPointer</a> : <span class="keyword">public</span> PlonkBase
 <a name="l00093"></a>00093 {
 <a name="l00094"></a>00094 <span class="keyword">public</span>:
 <a name="l00095"></a>00095         
 <a name="l00098"></a>00098         
-<a name="l00099"></a>00099         <a class="code" href="class_smart_pointer.html#a279a99170aded5dad1d4cf939bbc8fbe">SmartPointer</a> (<span class="keyword">const</span> <span class="keywordtype">bool</span> allocateWeakPointer = <span class="keyword">true</span>) <span class="keywordflow">throw</span>();
-<a name="l00100"></a>00100     <span class="keyword">virtual</span> <a class="code" href="class_smart_pointer.html#a961ec2a7684ba32d0aaff86969c28099">~SmartPointer</a>(); <span class="comment">// MUST be virtual unless PlonkBase gains the need to be virtual    </span>
+<a name="l00099"></a>00099         <a class="code" href="class_smart_pointer.html" title="Reference counted pointer base class.">SmartPointer</a> (<span class="keyword">const</span> <span class="keywordtype">bool</span> allocateWeakPointer = <span class="keyword">true</span>) <span class="keywordflow">throw</span>();
+<a name="l00100"></a>00100     <span class="keyword">virtual</span> ~<a class="code" href="class_smart_pointer.html" title="Reference counted pointer base class.">SmartPointer</a>(); <span class="comment">// MUST be virtual unless PlonkBase gains the need to be virtual    </span>
 <a name="l00101"></a>00101     
-<a name="l00102"></a>00102         <span class="keywordtype">void</span> <a class="code" href="class_smart_pointer.html#ad9196fe14d4e4d9b1c28982738436544">incrementRefCount</a>() <span class="keywordflow">throw</span>();    
-<a name="l00103"></a>00103     <span class="keywordtype">void</span> <a class="code" href="class_smart_pointer.html#acea9f749c0ab920d2833d4bb81f6eb9f">decrementRefCount</a>() <span class="keywordflow">throw</span>();
+<a name="l00102"></a>00102         <span class="keywordtype">void</span> incrementRefCount() <span class="keywordflow">throw</span>();    
+<a name="l00103"></a>00103     <span class="keywordtype">void</span> decrementRefCount() <span class="keywordflow">throw</span>();
 <a name="l00104"></a>00104     
 <a name="l00106"></a>00106         
 <a name="l00109"></a>00109         
-<a name="l00110"></a><a class="code" href="class_smart_pointer.html#a91e9d2ec0e1ed1d0d34344f4c8b63994">00110</a>     <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="class_smart_pointer.html#a91e9d2ec0e1ed1d0d34344f4c8b63994">update</a>() throw() { } <span class="comment">// needed as a dummy in place of Sender::update?</span>
-<a name="l00111"></a>00111     <span class="keywordtype">void</span>* <a class="code" href="class_smart_pointer.html#afce7e04754b78ffcb484c8b5108d799a">getWeak</a>() <span class="keyword">const</span> throw();
-<a name="l00112"></a>00112     <span class="keywordtype">int</span> <a class="code" href="class_smart_pointer.html#a02d93e0dab37f421808dc02dc348d7fd">getRefCount</a>() const throw();    
+<a name="l00110"></a>00110 <span class="comment">//    inline void update (Text const&amp; message, Dynamic const&amp; payload) throw() { (void)message; (void)payload; } // needed as a dummy in place of Sender::update?</span>
+<a name="l00111"></a>00111     <span class="keywordtype">void</span>* getWeak() <span class="keyword">const</span> <span class="keywordflow">throw</span>();
+<a name="l00112"></a>00112     <span class="keywordtype">int</span> getRefCount() <span class="keyword">const</span> <span class="keywordflow">throw</span>();
 <a name="l00113"></a>00113     
+<a name="l00114"></a>00114     <span class="keyword">virtual</span> <a class="code" href="class_smart_pointer.html" title="Reference counted pointer base class.">SmartPointer</a>* deepCopy() <span class="keyword">const</span> <span class="keywordflow">throw</span>() { <span class="keywordflow">return</span> 0; }
 <a name="l00115"></a>00115     
-<a name="l00116"></a><a class="code" href="class_smart_pointer.html#ae9317dca421926e7b6140f0675ee70d9">00116</a>     friend class <a class="code" href="class_weak_pointer.html" title="Holds a weak reference to a SmartPointer.">WeakPointer</a>;
 <a name="l00117"></a>00117     
-<a name="l00118"></a>00118 protected:    
-<a name="l00119"></a><a class="code" href="class_smart_pointer.html#a7ba301343cc7433dab04868a57419aba">00119</a>     <a class="code" href="class_smart_pointer_counter.html">SmartPointerCounter</a>* <a class="code" href="class_smart_pointer.html#a7ba301343cc7433dab04868a57419aba">counter</a>;
-<a name="l00120"></a><a class="code" href="class_smart_pointer.html#a9d43530959d2bb8831e77832fe9a7271">00120</a>     <a class="code" href="class_atomic_value.html" title="Enables atomic operations on a range of types.">AtomicValue</a>&lt;<span class="keywordtype">void</span>*&gt; <a class="code" href="class_smart_pointer.html#a9d43530959d2bb8831e77832fe9a7271">weakPointer</a>;
-<a name="l00121"></a>00121         
-<a name="l00122"></a>00122 private:
-<a name="l00123"></a>00123         <a class="code" href="class_smart_pointer.html" title="Reference counted pointer base class.">SmartPointer</a> (const <a class="code" href="class_smart_pointer.html" title="Reference counted pointer base class.">SmartPointer</a>&amp;);
-<a name="l00124"></a>00124     SmartPointer&amp; operator= (const SmartPointer&amp;);
-<a name="l00125"></a>00125 };
-<a name="l00126"></a>00126 
-<a name="l00127"></a>00127 <span class="comment">//------------------------------------------------------------------------------</span>
+<a name="l00118"></a>00118     <span class="keyword">friend</span> <span class="keyword">class </span><a class="code" href="class_weak_pointer.html" title="Holds a weak reference to a SmartPointer.">WeakPointer</a>;
+<a name="l00119"></a>00119     
+<a name="l00120"></a>00120 <span class="keyword">protected</span>:    
+<a name="l00121"></a>00121     SmartPointerCounter* counter;
+<a name="l00122"></a>00122     <a class="code" href="class_atomic_value.html" title="Enables atomic operations on a range of types.">AtomicValue&lt;void*&gt;</a> weakPointer;
+<a name="l00123"></a>00123         
+<a name="l00124"></a>00124 <span class="keyword">private</span>:
+<a name="l00125"></a>00125         <a class="code" href="class_smart_pointer.html" title="Reference counted pointer base class.">SmartPointer</a> (<span class="keyword">const</span> <a class="code" href="class_smart_pointer.html" title="Reference counted pointer base class.">SmartPointer</a>&amp;);
+<a name="l00126"></a>00126     <a class="code" href="class_smart_pointer.html" title="Reference counted pointer base class.">SmartPointer</a>&amp; operator= (<span class="keyword">const</span> <a class="code" href="class_smart_pointer.html" title="Reference counted pointer base class.">SmartPointer</a>&amp;);
+<a name="l00127"></a>00127 };
 <a name="l00128"></a>00128 
-<a name="l00129"></a><a class="code" href="class_smart_pointer_counter.html">00129</a> class <a class="code" href="class_smart_pointer_counter.html">SmartPointerCounter</a> : public <a class="code" href="class_plonk_base.html">PlonkBase</a>
-<a name="l00130"></a>00130 {
-<a name="l00131"></a>00131 <span class="keyword">public</span>:
-<a name="l00132"></a>00132     <a class="code" href="class_smart_pointer_counter.html">SmartPointerCounter</a> (SmartPointer* smartPointer) <span class="keywordflow">throw</span>();    
-<a name="l00133"></a>00133     ~<a class="code" href="class_smart_pointer_counter.html">SmartPointerCounter</a>();    
-<a name="l00134"></a>00134     
-<a name="l00135"></a>00135     SmartPointer* getSmartPointer() <span class="keyword">const</span> <span class="keywordflow">throw</span>();
+<a name="l00129"></a>00129 <span class="comment">//------------------------------------------------------------------------------</span>
+<a name="l00130"></a>00130 
+<a name="l00131"></a>00131 <span class="keyword">class </span>SmartPointerCounter : <span class="keyword">public</span> PlonkBase
+<a name="l00132"></a>00132 {
+<a name="l00133"></a>00133 <span class="keyword">public</span>:
+<a name="l00134"></a>00134     SmartPointerCounter (<a class="code" href="class_smart_pointer.html" title="Reference counted pointer base class.">SmartPointer</a>* smartPointer) <span class="keywordflow">throw</span>();    
+<a name="l00135"></a>00135     ~SmartPointerCounter();    
 <a name="l00136"></a>00136     
-<a name="l00137"></a>00137     <span class="keywordtype">void</span> <a class="code" href="class_smart_pointer.html#ad9196fe14d4e4d9b1c28982738436544">incrementRefCount</a>() <span class="keywordflow">throw</span>();    
-<a name="l00138"></a>00138     <span class="keywordtype">void</span> <a class="code" href="class_smart_pointer.html#acea9f749c0ab920d2833d4bb81f6eb9f">decrementRefCount</a>() <span class="keywordflow">throw</span>();
-<a name="l00139"></a>00139     <span class="keywordtype">int</span> <a class="code" href="class_smart_pointer.html#a02d93e0dab37f421808dc02dc348d7fd">getRefCount</a>() <span class="keyword">const</span> <span class="keywordflow">throw</span>();   
-<a name="l00140"></a>00140     
-<a name="l00141"></a>00141     <span class="keywordtype">void</span> incrementWeakCount() <span class="keywordflow">throw</span>();    
-<a name="l00142"></a>00142     <span class="keywordtype">void</span> decrementWeakCount() <span class="keywordflow">throw</span>();
-<a name="l00143"></a>00143     <span class="keywordtype">int</span> getWeakCount() <span class="keyword">const</span> <span class="keywordflow">throw</span>();    
-<a name="l00144"></a>00144 
-<a name="l00145"></a>00145     <span class="keywordtype">void</span> incrementCounts() <span class="keywordflow">throw</span>();    
-<a name="l00146"></a>00146     <span class="keywordtype">void</span> decrementCounts() <span class="keywordflow">throw</span>();    
-<a name="l00147"></a>00147 
-<a name="l00148"></a>00148 <span class="keyword">private</span>:
-<a name="l00149"></a>00149     <a class="code" href="class_atomic_extended.html">AtomicExtended&lt;SmartPointer*&gt;</a> atom;
-<a name="l00150"></a>00150     
-<a name="l00151"></a>00151     <span class="keyword">struct </span>Counts
-<a name="l00152"></a>00152     {
-<a name="l00153"></a>00153         <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> refCount:PLONK_HALFWORDBITS;
-<a name="l00154"></a>00154         <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> weakCount:PLONK_HALFWORDBITS;
-<a name="l00155"></a>00155     };
-<a name="l00156"></a>00156     
-<a name="l00157"></a>00157     <span class="keyword">struct </span>Parts
-<a name="l00158"></a>00158     {
-<a name="l00159"></a>00159         SmartPointer* smartPointer;
-<a name="l00160"></a>00160         Counts counts;    
-<a name="l00161"></a>00161     };
-<a name="l00162"></a>00162     
-<a name="l00163"></a>00163     <span class="keyword">struct </span>Halves
-<a name="l00164"></a>00164     {
-<a name="l00165"></a>00165         SmartPointer* ptr;
-<a name="l00166"></a>00166         <a class="code" href="plonk___standard_header_8h.html#a951638d5b3c1bbe3b063e48121b4ae0a">Long</a> extra;
-<a name="l00167"></a>00167     };
-<a name="l00168"></a>00168     
-<a name="l00169"></a>00169     <span class="keyword">union </span>Element
-<a name="l00170"></a>00170     {
-<a name="l00171"></a>00171         Parts parts;
-<a name="l00172"></a>00172         Halves halves;
-<a name="l00173"></a>00173     };        
-<a name="l00174"></a>00174 };
-<a name="l00175"></a>00175 
-<a name="l00176"></a>00176 
-<a name="l00177"></a>00177 <span class="comment">//------------------------------------------------------------------------------</span>
+<a name="l00137"></a>00137     <a class="code" href="class_smart_pointer.html" title="Reference counted pointer base class.">SmartPointer</a>* getSmartPointer() <span class="keyword">const</span> throw();
+<a name="l00138"></a>00138     
+<a name="l00139"></a>00139     <span class="keywordtype">void</span> incrementRefCount() throw();    
+<a name="l00140"></a>00140     <span class="keywordtype">void</span> decrementRefCount() throw();
+<a name="l00141"></a>00141     <span class="keywordtype">int</span> getRefCount() const throw();   
+<a name="l00142"></a>00142     
+<a name="l00143"></a>00143     <span class="keywordtype">void</span> incrementWeakCount() throw();    
+<a name="l00144"></a>00144     <span class="keywordtype">void</span> decrementWeakCount() throw();
+<a name="l00145"></a>00145     <span class="keywordtype">int</span> getWeakCount() const throw();    
+<a name="l00146"></a>00146 
+<a name="l00147"></a>00147     <span class="keywordtype">void</span> incrementCounts() throw();    
+<a name="l00148"></a>00148     <span class="keywordtype">void</span> decrementCounts() throw();    
+<a name="l00149"></a>00149 
+<a name="l00150"></a>00150 private:
+<a name="l00151"></a>00151     <a class="code" href="class_atomic_extended.html" title="Enables atomic operations on a pointer with additional security.">AtomicExtended</a>&lt;<a class="code" href="class_smart_pointer.html" title="Reference counted pointer base class.">SmartPointer</a>*&gt; atom;
+<a name="l00152"></a>00152     
+<a name="l00153"></a>00153 <span class="comment">//    struct Counts</span>
+<a name="l00154"></a>00154 <span class="comment">//    {</span>
+<a name="l00155"></a>00155 <span class="comment">//        unsigned int refCount:PLONK_HALFWORDBITS;</span>
+<a name="l00156"></a>00156 <span class="comment">//        unsigned int weakCount:PLONK_HALFWORDBITS;</span>
+<a name="l00157"></a>00157 <span class="comment">//    };</span>
+<a name="l00158"></a>00158 <span class="comment">//    </span>
+<a name="l00159"></a>00159 <span class="comment">//    struct Parts</span>
+<a name="l00160"></a>00160 <span class="comment">//    {</span>
+<a name="l00161"></a>00161 <span class="comment">//        SmartPointer* smartPointer;</span>
+<a name="l00162"></a>00162 <span class="comment">//        Counts counts;    </span>
+<a name="l00163"></a>00163 <span class="comment">//    };</span>
+<a name="l00164"></a>00164 <span class="comment">//    </span>
+<a name="l00165"></a>00165 <span class="comment">//    struct Halves</span>
+<a name="l00166"></a>00166 <span class="comment">//    {</span>
+<a name="l00167"></a>00167 <span class="comment">//        SmartPointer* ptr;</span>
+<a name="l00168"></a>00168 <span class="comment">//        Long extra;</span>
+<a name="l00169"></a>00169 <span class="comment">//    };</span>
+<a name="l00170"></a>00170 <span class="comment">//    </span>
+<a name="l00171"></a>00171 <span class="comment">//    union Element</span>
+<a name="l00172"></a>00172 <span class="comment">//    {</span>
+<a name="l00173"></a>00173 <span class="comment">//        Parts parts;</span>
+<a name="l00174"></a>00174 <span class="comment">//        Halves halves;</span>
+<a name="l00175"></a>00175 <span class="comment">//    };        </span>
+<a name="l00176"></a>00176 };
+<a name="l00177"></a>00177 
 <a name="l00178"></a>00178 
-<a name="l00179"></a>00179 
-<a name="l00180"></a>00180 <span class="preprocessor">#endif // PLONK_SMARTPOINTER_H</span>
+<a name="l00179"></a>00179 <span class="comment">//------------------------------------------------------------------------------</span>
+<a name="l00180"></a>00180 
+<a name="l00181"></a>00181 
+<a name="l00182"></a>00182 <span class="preprocessor">#endif // PLONK_SMARTPOINTER_H</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -233,7 +235,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Properties</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -242,7 +244,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 5 2012 17:04:55 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 8 2014 12:26:50 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

@@ -20,7 +20,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="pl-nk-logo-small.png"/></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">pl-nk</div>
+   <div id="projectname">pl-nk&#160;<span id="projectnumber">v0.4.5</span></div>
+   <div id="projectbrief">Plonk|Plink|Plank are a set of cross-platform C/C++ frameworks for audio software development</div>
   </td>
  </tr>
  </tbody>
@@ -29,8 +30,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -71,23 +72,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <!-- doxytag: class="UnitMixerChannelInternal" --><!-- doxytag: inherits="ProxyOwnerChannelInternal&lt; SampleType, ChannelData&lt; UnitMixerChannelInternal&lt; SampleType &gt; &gt; &gt;" -->
 <p>Mix an array of units to a multichannel unit.  
  <a href="class_unit_mixer_channel_internal.html#details">More...</a></p>
-<div class="dynheader">
-Inheritance diagram for UnitMixerChannelInternal&lt; SampleType &gt;:</div>
-<div class="dyncontent">
- <div class="center">
-  <img src="class_unit_mixer_channel_internal.png" usemap="#UnitMixerChannelInternal&lt; SampleType &gt;_map" alt=""/>
-  <map id="UnitMixerChannelInternal&lt; SampleType &gt;_map" name="UnitMixerChannelInternal&lt; SampleType &gt;_map">
-<area href="class_proxy_owner_channel_internal.html" alt="ProxyOwnerChannelInternal&lt; SampleType, ChannelData&lt; UnitMixerChannelInternal&lt; SampleType &gt; &gt; &gt;" shape="rect" coords="924,280,1530,304"/>
-<area href="class_channel_internal.html" alt="ChannelInternal&lt; SampleType, ChannelData&lt; UnitMixerChannelInternal&lt; SampleType &gt; &gt; &gt;" shape="rect" coords="924,224,1530,248"/>
-<area href="class_channel_internal_base.html" title="The templated base class for all internal channel processes." alt="ChannelInternalBase&lt; SampleType &gt;" shape="rect" coords="616,168,1222,192"/>
-<area href="class_receiver_internal.html" alt="ReceiverInternal&lt; SenderContainerBaseType &gt;" shape="rect" coords="1232,168,1838,192"/>
-<area href="class_sender_internal.html" alt="SenderInternal&lt; ChannelBase&lt; SampleType &gt; &gt;" shape="rect" coords="0,112,606,136"/>
-<area href="class_channel_internal_core.html" title="The base, core class for all internal channel processes." alt="ChannelInternalCore" shape="rect" coords="616,112,1222,136"/>
-<area href="class_receiver_internal.html" alt="ReceiverInternal&lt; SenderContainerBaseType &gt;" shape="rect" coords="1232,112,1838,136"/>
-<area href="class_smart_pointer.html" title="Reference counted pointer base class." alt="SmartPointer" shape="rect" coords="0,56,606,80"/>
-<area href="class_plonk_base.html" alt="PlonkBase" shape="rect" coords="0,0,606,24"/>
-</map>
- </div></div>
+
+<p>Inherits <a class="el" href="class_proxy_owner_channel_internal.html">ProxyOwnerChannelInternal&lt; SampleType, ChannelData&lt; UnitMixerChannelInternal&lt; SampleType &gt; &gt; &gt;</a>.</p>
 
 <p><a href="class_unit_mixer_channel_internal-members.html">List of all members.</a></p>
 <table class="memberdecls">
@@ -97,22 +83,8 @@ Public Types</h2></td></tr>
 &lt; <a class="el" href="class_unit_mixer_channel_internal.html">UnitMixerChannelInternal</a><br class="typebreak"/>
 &lt; SampleType &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_mixer_channel_internal.html#ad7cb37537a5fd4961cd2528c44b4da5b">Data</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">To store channel state data.  <a href="#ad7cb37537a5fd4961cd2528c44b4da5b"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_channel_base.html">ChannelBase</a>&lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_mixer_channel_internal.html#a95afee6e27c4ddf5ea37a8af4f949749">ChannelType</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_object_array.html">ObjectArray</a>&lt; <a class="el" href="class_channel_base.html">ChannelType</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_mixer_channel_internal.html#a59c15e827ac8629d5c11db2119a74053">ChannelArrayType</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <br class="typebreak"/>
-<a class="el" href="class_proxy_owner_channel_internal.html">ProxyOwnerChannelInternal</a><br class="typebreak"/>
-&lt; SampleType, <a class="el" href="struct_channel_data_3_01_channel_internal_core_01_4.html">Data</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_mixer_channel_internal.html#a7c3df8e34d5a201d191258a58ea34b85">Internal</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_mixer_channel_internal.html#aa6c4d8af86e4cab58f7eeab1d3f73e0c">UnitType</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_input_dictionary.html">InputDictionary</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_mixer_channel_internal.html#aa50bdecd5991929900176b7aee7f60e7">Inputs</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a><br class="typebreak"/>
-&lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_mixer_channel_internal.html#ac94a8db479c5d62962aa4b63b82b7156">Buffer</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_numerical_array2_d.html">NumericalArray2D</a><br class="typebreak"/>
-&lt; <a class="el" href="class_channel_base.html">ChannelType</a>, <a class="el" href="class_unit_base.html">UnitType</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_mixer_channel_internal.html#adf683b7c5b892103c1ec0e886858af02">UnitsType</a></td></tr>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_mixer_channel_internal.html#ac2627222a82a21c09f0d06d650731fe3">UnitMixerChannelInternal</a> (<a class="el" href="class_input_dictionary.html">Inputs</a> const &amp;inputs, <a class="el" href="struct_channel_data_3_01_channel_internal_core_01_4.html">Data</a> const &amp;data, <a class="el" href="class_block_size.html">BlockSize</a> const &amp;blockSize, <a class="el" href="class_sample_rate.html">SampleRate</a> const &amp;sampleRate, <a class="el" href="class_object_array.html">ChannelArrayType</a> &amp;channels)  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_text.html">Text</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_mixer_channel_internal.html#af7a98ce1ab30a0b83aeecd81c642dd7c">getName</a> () const   throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_numerical_array.html">IntArray</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_mixer_channel_internal.html#a752d6f45f61710185210be7e88abe819">getInputKeys</a> () const   throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_mixer_channel_internal.html#a98f1d1e153c8ebf516b828cc7937a5ac">initChannel</a> (const int channel)  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Called to initialise the channel's initial value.  <a href="#a98f1d1e153c8ebf516b828cc7937a5ac"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_mixer_channel_internal.html#a9f40889dc26b61f8fa8340ce4d2d6f50">process</a> (<a class="el" href="class_process_info.html">ProcessInfo</a> &amp;info, const int)  throw ()</td></tr>
@@ -131,7 +103,7 @@ class UnitMixerChannelInternal&lt; SampleType &gt;</h3>
 template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="struct_channel_data.html">ChannelData</a>&lt; <a class="el" href="class_unit_mixer_channel_internal.html">UnitMixerChannelInternal</a> &lt; SampleType &gt; &gt; <a class="el" href="class_unit_mixer_channel_internal.html">UnitMixerChannelInternal</a>&lt; SampleType &gt;::<a class="el" href="struct_channel_data_3_01_channel_internal_core_01_4.html">Data</a></td>
+          <td class="memname">typedef <a class="el" href="struct_channel_data.html">ChannelData</a>&lt; <a class="el" href="class_unit_mixer_channel_internal.html">UnitMixerChannelInternal</a> &lt; SampleType &gt; &gt; <a class="el" href="class_unit_mixer_channel_internal.html">UnitMixerChannelInternal</a>&lt; SampleType &gt;::<a class="el" href="class_channel_internal_core.html#a09763233582f6f0985461449aa262ae5">Data</a></td>
         </tr>
       </table>
 </div>
@@ -144,214 +116,7 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a95afee6e27c4ddf5ea37a8af4f949749"></a><!-- doxytag: member="UnitMixerChannelInternal::ChannelType" ref="a95afee6e27c4ddf5ea37a8af4f949749" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_channel_base.html">ChannelBase</a>&lt;SampleType&gt; <a class="el" href="class_unit_mixer_channel_internal.html">UnitMixerChannelInternal</a>&lt; SampleType &gt;::<a class="el" href="class_channel_base.html">ChannelType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="class_proxy_owner_channel_internal.html#a66b854dcf0db11c050c69dff2f3e374f">ProxyOwnerChannelInternal&lt; SampleType, ChannelData&lt; UnitMixerChannelInternal&lt; SampleType &gt; &gt; &gt;</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a59c15e827ac8629d5c11db2119a74053"></a><!-- doxytag: member="UnitMixerChannelInternal::ChannelArrayType" ref="a59c15e827ac8629d5c11db2119a74053" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_object_array.html">ObjectArray</a>&lt;<a class="el" href="class_channel_base.html">ChannelType</a>&gt; <a class="el" href="class_unit_mixer_channel_internal.html">UnitMixerChannelInternal</a>&lt; SampleType &gt;::<a class="el" href="class_object_array.html">ChannelArrayType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="class_proxy_owner_channel_internal.html#a73b428803deec77d33f77e5198c8aca1">ProxyOwnerChannelInternal&lt; SampleType, ChannelData&lt; UnitMixerChannelInternal&lt; SampleType &gt; &gt; &gt;</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a7c3df8e34d5a201d191258a58ea34b85"></a><!-- doxytag: member="UnitMixerChannelInternal::Internal" ref="a7c3df8e34d5a201d191258a58ea34b85" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_proxy_owner_channel_internal.html">ProxyOwnerChannelInternal</a>&lt;SampleType,<a class="el" href="struct_channel_data_3_01_channel_internal_core_01_4.html">Data</a>&gt; <a class="el" href="class_unit_mixer_channel_internal.html">UnitMixerChannelInternal</a>&lt; SampleType &gt;::<a class="el" href="class_receiver_internal.html#ac1910adc042a53336c1316a1303eafcc">Internal</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="class_proxy_owner_channel_internal.html#aa9a9d2faaa7e36be592755c2b40cfba7">ProxyOwnerChannelInternal&lt; SampleType, ChannelData&lt; UnitMixerChannelInternal&lt; SampleType &gt; &gt; &gt;</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="aa6c4d8af86e4cab58f7eeab1d3f73e0c"></a><!-- doxytag: member="UnitMixerChannelInternal::UnitType" ref="aa6c4d8af86e4cab58f7eeab1d3f73e0c" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_unit_base.html">UnitBase</a>&lt;SampleType&gt; <a class="el" href="class_unit_mixer_channel_internal.html">UnitMixerChannelInternal</a>&lt; SampleType &gt;::<a class="el" href="class_unit_base.html">UnitType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="class_proxy_owner_channel_internal.html#a9135c6d7afca6dbda99167e84c27586d">ProxyOwnerChannelInternal&lt; SampleType, ChannelData&lt; UnitMixerChannelInternal&lt; SampleType &gt; &gt; &gt;</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="aa50bdecd5991929900176b7aee7f60e7"></a><!-- doxytag: member="UnitMixerChannelInternal::Inputs" ref="aa50bdecd5991929900176b7aee7f60e7" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_input_dictionary.html">InputDictionary</a> <a class="el" href="class_unit_mixer_channel_internal.html">UnitMixerChannelInternal</a>&lt; SampleType &gt;::<a class="el" href="class_input_dictionary.html">Inputs</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="class_proxy_owner_channel_internal.html#ae43c4c8567ce1a67c51281a7c546ca06">ProxyOwnerChannelInternal&lt; SampleType, ChannelData&lt; UnitMixerChannelInternal&lt; SampleType &gt; &gt; &gt;</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ac94a8db479c5d62962aa4b63b82b7156"></a><!-- doxytag: member="UnitMixerChannelInternal::Buffer" ref="ac94a8db479c5d62962aa4b63b82b7156" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt;SampleType&gt; <a class="el" href="class_unit_mixer_channel_internal.html">UnitMixerChannelInternal</a>&lt; SampleType &gt;::<a class="el" href="class_numerical_array.html">Buffer</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="class_proxy_owner_channel_internal.html#abc5718f7325a88f1b4f589e306f683b5">ProxyOwnerChannelInternal&lt; SampleType, ChannelData&lt; UnitMixerChannelInternal&lt; SampleType &gt; &gt; &gt;</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="adf683b7c5b892103c1ec0e886858af02"></a><!-- doxytag: member="UnitMixerChannelInternal::UnitsType" ref="adf683b7c5b892103c1ec0e886858af02" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_numerical_array2_d.html">NumericalArray2D</a>&lt;<a class="el" href="class_channel_base.html">ChannelType</a>,<a class="el" href="class_unit_base.html">UnitType</a>&gt; <a class="el" href="class_unit_mixer_channel_internal.html">UnitMixerChannelInternal</a>&lt; SampleType &gt;::<a class="el" href="class_numerical_array2_d.html">UnitsType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="class_channel_internal_base.html#a781176121faad375a63fd74102eb23f2">ChannelInternalBase&lt; SampleType &gt;</a>.</p>
-
-</div>
-</div>
-<hr/><h2>Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="ac2627222a82a21c09f0d06d650731fe3"></a><!-- doxytag: member="UnitMixerChannelInternal::UnitMixerChannelInternal" ref="ac2627222a82a21c09f0d06d650731fe3" args="(Inputs const &amp;inputs, Data const &amp;data, BlockSize const &amp;blockSize, SampleRate const &amp;sampleRate, ChannelArrayType &amp;channels)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_unit_mixer_channel_internal.html">UnitMixerChannelInternal</a>&lt; SampleType &gt;::<a class="el" href="class_unit_mixer_channel_internal.html">UnitMixerChannelInternal</a> </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_input_dictionary.html">Inputs</a> const &amp;&#160;</td>
-          <td class="paramname"><em>inputs</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="struct_channel_data_3_01_channel_internal_core_01_4.html">Data</a> const &amp;&#160;</td>
-          <td class="paramname"><em>data</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="class_block_size.html">BlockSize</a> const &amp;&#160;</td>
-          <td class="paramname"><em>blockSize</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="class_sample_rate.html">SampleRate</a> const &amp;&#160;</td>
-          <td class="paramname"><em>sampleRate</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="class_object_array.html">ChannelArrayType</a> &amp;&#160;</td>
-          <td class="paramname"><em>channels</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="af7a98ce1ab30a0b83aeecd81c642dd7c"></a><!-- doxytag: member="UnitMixerChannelInternal::getName" ref="af7a98ce1ab30a0b83aeecd81c642dd7c" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_text.html">Text</a> <a class="el" href="class_unit_mixer_channel_internal.html">UnitMixerChannelInternal</a>&lt; SampleType &gt;::getName </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline, virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Implements <a class="el" href="class_channel_internal_core.html#afab91268bb677531d7a921554681ffae">ChannelInternalCore</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a752d6f45f61710185210be7e88abe819"></a><!-- doxytag: member="UnitMixerChannelInternal::getInputKeys" ref="a752d6f45f61710185210be7e88abe819" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_numerical_array.html">IntArray</a> <a class="el" href="class_unit_mixer_channel_internal.html">UnitMixerChannelInternal</a>&lt; SampleType &gt;::getInputKeys </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline, virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Implements <a class="el" href="class_channel_internal_core.html#a5f731843efea658e869a27e0529b5c6c">ChannelInternalCore</a>.</p>
-
-</div>
-</div>
 <a class="anchor" id="a98f1d1e153c8ebf516b828cc7937a5ac"></a><!-- doxytag: member="UnitMixerChannelInternal::initChannel" ref="a98f1d1e153c8ebf516b828cc7937a5ac" args="(const int channel)" -->
 <div class="memitem">
 <div class="memproto">
@@ -370,7 +135,7 @@ template&lt;class SampleType &gt; </div>
 <div class="memdoc">
 
 <p>Called to initialise the channel's initial value. </p>
-<p>The <a class="el" href="class_channel_internal.html" title="The base class from which most ChannelInternals should be derived.">ChannelInternal</a> subclass should initialise itself using this channel of its inputs, calling <a class="el" href="class_channel_internal_base.html#aed88288e0eb608e998b3f7ccf6bf2aaf">initValue()</a>. </p>
+<p>The <a class="el" href="class_channel_internal.html" title="The base class from which most ChannelInternals should be derived.">ChannelInternal</a> subclass should initialise itself using this channel of its inputs, calling initValue(). </p>
 
 <p>Implements <a class="el" href="class_channel_internal_core.html#a0d5725cc71173dcff25b08f992acf1ea">ChannelInternalCore</a>.</p>
 
@@ -419,7 +184,7 @@ template&lt;class SampleType &gt; </div>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Properties</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -428,7 +193,7 @@ template&lt;class SampleType &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 5 2012 17:05:14 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 8 2014 12:26:53 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

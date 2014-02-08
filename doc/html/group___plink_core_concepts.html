@@ -20,7 +20,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="pl-nk-logo-small.png"/></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">pl-nk</div>
+   <div id="projectname">pl-nk&#160;<span id="projectnumber">v0.4.5</span></div>
+   <div id="projectbrief">Plonk|Plink|Plank are a set of cross-platform C/C++ frameworks for audio software development</div>
   </td>
  </tr>
  </tbody>
@@ -29,8 +30,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -66,42 +67,42 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <p>Plink has the concept of processes, which are data structures that contain audio and control data buffers and information about the buffers such as size and the number of input and/or output buffers.</p>
 <div class="fragment"><pre class="fragment"> <span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="struct_plink_buffer_f.html" title="Stores a buffer of floats.">PlinkBufferF</a>
  {
-    <span class="keywordtype">int</span> <a class="code" href="struct_plink_buffer_f.html#af9d6912af1ac11881688c2c513c87822">bufferSize</a>;
-    <span class="keywordtype">float</span>* <a class="code" href="struct_plink_buffer_f.html#a0a1696199ec176b74b0edf0e06241f97">buffer</a>;
- } <a class="code" href="plink___process_8h.html#ae8537c11f045046d2ed5610e8f7cb296" title="Stores a buffer of floats.">PlinkBufferF</a>;
+    <span class="keywordtype">int</span> bufferSize;
+    <span class="keywordtype">float</span>* buffer;
+ } <a class="code" href="struct_plink_buffer_f.html" title="Stores a buffer of floats.">PlinkBufferF</a>;
  
- <span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="struct_plink_process_base.html">PlinkProcessBase</a>
+ <span class="keyword">typedef</span> <span class="keyword">struct </span>PlinkProcessBase
  {
-    <span class="keywordtype">void</span>* <a class="code" href="struct_plink_process_base.html#a3d7179dc7d11c54601f02aade89fde24">userData</a>;
-    <span class="keywordtype">int</span> <a class="code" href="struct_plink_process_base.html#aa070a75ca71551481e2b4f2869eaba17">numOutputs</a>;
-    <span class="keywordtype">int</span> <a class="code" href="struct_plink_process_base.html#a0a77350359df5f02157170453cf1a5ad">numInputs</a>;
-    <span class="keywordtype">int</span> <a class="code" href="struct_plink_process_base.html#a18cede34b310d3cdb6661c69d96c4472">numBuffers</a>;
- } <a class="code" href="plink___process_8h.html#a0e1a3763b95512620b140272b11b7cba">PlinkProcessBase</a>;
+    <span class="keywordtype">void</span>* userData;
+    <span class="keywordtype">int</span> numOutputs;
+    <span class="keywordtype">int</span> numInputs;
+    <span class="keywordtype">int</span> numBuffers;
+ } PlinkProcessBase;
  
- <span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="struct_plink_process_f.html">PlinkProcessF</a>
+ <span class="keyword">typedef</span> <span class="keyword">struct </span>PlinkProcessF
  {
-    <a class="code" href="struct_plink_process_base.html">PlinkProcessBase</a> <a class="code" href="struct_plink_process_f.html#aa2561a28bf3e192f4e387b38085e34ba">base</a>;
-    <a class="code" href="struct_plink_buffer_f.html" title="Stores a buffer of floats.">PlinkBufferF</a> <a class="code" href="struct_plink_process_f.html#a440db1a32fdab5dba495483a8ae0ab8b">buffers</a>[1];
- } <a class="code" href="plink___process_8h.html#a1694155c45511e9605a6bd1923397456">PlinkProcessF</a>;
+    PlinkProcessBase base;
+    <a class="code" href="struct_plink_buffer_f.html" title="Stores a buffer of floats.">PlinkBufferF</a> buffers[1];
+ } PlinkProcessF;
  
- <span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="struct_plink_state.html">PlinkState</a>
+ <span class="keyword">typedef</span> <span class="keyword">struct </span>PlinkState
  {
-    <span class="keywordtype">double</span> <a class="code" href="struct_plink_state.html#a51f3551afb6480524d4ade2f29309265">sampleRate</a>;
-    <span class="keywordtype">double</span> <a class="code" href="struct_plink_state.html#a825328a175088e699b4946475e2f8b0f">sampleDuration</a>;
- } <a class="code" href="plink___process_8h.html#ab668a82ae93095ab02ae6d4b286cbd98">PlinkState</a>;
+    <span class="keywordtype">double</span> sampleRate;
+    <span class="keywordtype">double</span> sampleDuration;
+ } PlinkState;
 </pre></div><p><b>Processing functions</b></p>
 <p>Processing functions operate on process structs. Processing is achieved using a primary function, which branches into subfunctions according to the input and output block sizes specified in the process struct. Thus for a sawtooth generator we have the following prototypes:</p>
-<div class="fragment"><pre class="fragment"> <span class="keywordtype">void</span> <a class="code" href="group___plink_saw_process_f_class.html#ga5ed9d49a24fbdbcb248f155eba87b88d">plink_SawProcessF_NN</a> (<span class="keywordtype">void</span>* pp, <a class="code" href="struct_saw_process_state_f.html">SawProcessStateF</a>* state);
- <span class="keywordtype">void</span> <a class="code" href="group___plink_saw_process_f_class.html#ga9de42dd78ca26ec94c477222ffaf127e">plink_SawProcessF_N1</a> (<span class="keywordtype">void</span>* pp, <a class="code" href="struct_saw_process_state_f.html">SawProcessStateF</a>* state);
- <span class="keywordtype">void</span> <a class="code" href="group___plink_saw_process_f_class.html#ga5de41161312efadbbf014edc6ed03080">plink_SawProcessF_Nn</a> (<span class="keywordtype">void</span>* pp, <a class="code" href="struct_saw_process_state_f.html">SawProcessStateF</a>* state);
- <span class="keywordtype">void</span> <a class="code" href="group___plink_saw_process_f_class.html#ga79426e94eeec66d2af483bb7980afe42">plink_SawProcessF</a>    (<span class="keywordtype">void</span>* pp, <a class="code" href="struct_saw_process_state_f.html">SawProcessStateF</a>* state);
-</pre></div><p><a class="el" href="group___plink_saw_process_f_class.html#ga79426e94eeec66d2af483bb7980afe42">plink_SawProcessF()</a> is the primary function. The subfunctions use a function suffix notation to indicate the number and size of the buffers they expect to process.</p>
+<div class="fragment"><pre class="fragment"> <span class="keywordtype">void</span> plink_SawProcessF_NN (<span class="keywordtype">void</span>* pp, SawProcessStateF* state);
+ <span class="keywordtype">void</span> plink_SawProcessF_N1 (<span class="keywordtype">void</span>* pp, SawProcessStateF* state);
+ <span class="keywordtype">void</span> plink_SawProcessF_Nn (<span class="keywordtype">void</span>* pp, SawProcessStateF* state);
+ <span class="keywordtype">void</span> plink_SawProcessF    (<span class="keywordtype">void</span>* pp, SawProcessStateF* state);
+</pre></div><p>plink_SawProcessF() is the primary function. The subfunctions use a function suffix notation to indicate the number and size of the buffers they expect to process.</p>
 <ul>
 <li><code>N</code> indicates the output buffer's block size in samples.</li>
 <li>1 indicates block size is 1 sample.</li>
 <li><code>n</code> indicates some other arbitrary blocksize that is neither <code>N</code> nor 1. <code>n</code> appearing in the list more than once might be a different value of <code>n</code>, <code>n</code> could be larger than <code>N</code>.</li>
 </ul>
-<p>So in the above <a class="el" href="group___plink_saw_process_f_class.html#ga79426e94eeec66d2af483bb7980afe42">plink_SawProcessF()</a> example, we can see that the function expects to have 2 buffers to process. NN indicates that both buffers have the same size. <code>N1</code> indicates that the input buffer is of size 1, and <code>Nn</code> indicates that the input buffer is of some arbitrary size. e.g. for N=512:</p>
+<p>So in the above plink_SawProcessF() example, we can see that the function expects to have 2 buffers to process. NN indicates that both buffers have the same size. <code>N1</code> indicates that the input buffer is of size 1, and <code>Nn</code> indicates that the input buffer is of some arbitrary size. e.g. for N=512:</p>
 <ul>
 <li>Nn could be 512, 64</li>
 <li>NN would be 512, 512 </li>
@@ -112,7 +113,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Properties</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -121,7 +122,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 5 2012 17:04:57 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 8 2014 12:26:52 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

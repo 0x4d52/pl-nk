@@ -20,7 +20,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="pl-nk-logo-small.png"/></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">pl-nk</div>
+   <div id="projectname">pl-nk&#160;<span id="projectnumber">v0.4.5</span></div>
+   <div id="projectbrief">Plonk|Plink|Plank are a set of cross-platform C/C++ frameworks for audio software development</div>
   </td>
  </tr>
  </tbody>
@@ -29,8 +30,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -66,26 +67,15 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="contents">
 This is the complete list of members for <a class="el" href="class_signal_play_unit.html">SignalPlayUnit&lt; SampleType &gt;</a>, including all inherited members.<table>
-  <tr class="memlist"><td><a class="el" href="class_signal_play_unit.html#aa3dff9d3c4f781c0c58c45dae1a0ee64">ar</a>(SignalType const &amp;signal, RateUnitType const &amp;rate=RateType(1), UnitType const &amp;mul=SampleType(1), UnitType const &amp;add=SampleType(0), BlockSize const &amp;preferredBlockSize=BlockSize::getDefault(), SampleRate const &amp;preferredSampleRate=SampleRate::getDefault())</td><td><a class="el" href="class_signal_play_unit.html">SignalPlayUnit&lt; SampleType &gt;</a></td><td><code> [inline, static]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_signal_play_unit.html#ab7a0759ced863e48c770486e47c0038f">ChannelType</a> typedef</td><td><a class="el" href="class_signal_play_unit.html">SignalPlayUnit&lt; SampleType &gt;</a></td><td></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_signal_play_unit.html#a0b38c31e95e401a92725df8f8802ede9">Data</a> typedef</td><td><a class="el" href="class_signal_play_unit.html">SignalPlayUnit&lt; SampleType &gt;</a></td><td></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_signal_play_unit.html#a2d12c192ced4f8ce323a9bb54869db18">getInfo</a>()</td><td><a class="el" href="class_signal_play_unit.html">SignalPlayUnit&lt; SampleType &gt;</a></td><td><code> [inline, static]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_signal_play_unit.html#a764b092d55322256773c030fb2a9567e">Inputs</a> typedef</td><td><a class="el" href="class_signal_play_unit.html">SignalPlayUnit&lt; SampleType &gt;</a></td><td></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_signal_play_unit.html#a460cf7f57069d983c6f0ebb067017754">Internal</a> typedef</td><td><a class="el" href="class_signal_play_unit.html">SignalPlayUnit&lt; SampleType &gt;</a></td><td></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_signal_play_unit.html#a69acf0edb40c6ac07522627cb2f36e45">kr</a>(SignalType const &amp;signal, RateUnitType const &amp;rate, UnitType const &amp;mul=SampleType(1), UnitType const &amp;add=SampleType(0))</td><td><a class="el" href="class_signal_play_unit.html">SignalPlayUnit&lt; SampleType &gt;</a></td><td><code> [inline, static]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_signal_play_unit.html#a2fbac57d1c46097be037cb88771f1c22">RateBufferType</a> typedef</td><td><a class="el" href="class_signal_play_unit.html">SignalPlayUnit&lt; SampleType &gt;</a></td><td></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_signal_play_unit.html#a80092d2b541518e59b9e11ce595d5e26">RateType</a> typedef</td><td><a class="el" href="class_signal_play_unit.html">SignalPlayUnit&lt; SampleType &gt;</a></td><td></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_signal_play_unit.html#a7964f5388d1e59af56f8ec1d684f9891">RateUnitType</a> typedef</td><td><a class="el" href="class_signal_play_unit.html">SignalPlayUnit&lt; SampleType &gt;</a></td><td></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_signal_play_unit.html#a79123e1b1ce3b2026ac3ad1f882932e9">SignalPlayInternal</a> typedef</td><td><a class="el" href="class_signal_play_unit.html">SignalPlayUnit&lt; SampleType &gt;</a></td><td></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_signal_play_unit.html#ac8d1757b39333b6a74e931409eebd7ca">SignalType</a> typedef</td><td><a class="el" href="class_signal_play_unit.html">SignalPlayUnit&lt; SampleType &gt;</a></td><td></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_signal_play_unit.html#a9025e0896aee24077085bce4500e5b63">UnitType</a> typedef</td><td><a class="el" href="class_signal_play_unit.html">SignalPlayUnit&lt; SampleType &gt;</a></td><td></td></tr>
+  <tr class="memlist"><td><a class="el" href="class_signal_play_unit.html#a57e8b75bed5b361f7038ab2369903aa2">ar</a>(SignalType const &amp;signal, RateUnitType const &amp;rate=RateType(1), UnitType const &amp;loop=SampleType(1), UnitType const &amp;mul=SampleType(1), UnitType const &amp;add=SampleType(0), const bool deleteWhenDone=true, BlockSize const &amp;preferredBlockSize=BlockSize::getDefault(), SampleRate const &amp;preferredSampleRate=SampleRate::getDefault())</td><td><a class="el" href="class_signal_play_unit.html">SignalPlayUnit&lt; SampleType &gt;</a></td><td><code> [inline, static]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="class_signal_play_unit.html#a44b523a0bde794fa71f9a3c4de48251b">kr</a>(SignalType const &amp;signal, RateUnitType const &amp;rate, UnitType const &amp;loop=SampleType(1), UnitType const &amp;mul=SampleType(1), UnitType const &amp;add=SampleType(0), const bool deleteWhenDone=true)</td><td><a class="el" href="class_signal_play_unit.html">SignalPlayUnit&lt; SampleType &gt;</a></td><td><code> [inline, static]</code></td></tr>
 </table></div>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Properties</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -94,7 +84,7 @@ This is the complete list of members for <a class="el" href="class_signal_play_u
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 5 2012 17:05:10 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 8 2014 12:26:52 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

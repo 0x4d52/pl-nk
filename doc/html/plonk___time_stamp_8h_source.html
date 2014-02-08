@@ -20,7 +20,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="pl-nk-logo-small.png"/></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">pl-nk</div>
+   <div id="projectname">pl-nk&#160;<span id="projectnumber">v0.4.5</span></div>
+   <div id="projectbrief">Plonk|Plink|Plank are a set of cross-platform C/C++ frameworks for audio software development</div>
   </td>
  </tr>
  </tbody>
@@ -29,8 +30,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -54,7 +55,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
       <li><a href="files.html"><span>File&#160;List</span></a></li>
-      <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
 <div class="header">
@@ -62,14 +62,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">plonk_TimeStamp.h</div>  </div>
 </div>
 <div class="contents">
-<a href="plonk___time_stamp_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*</span>
+<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*</span>
 <a name="l00002"></a>00002 <span class="comment"> -------------------------------------------------------------------------------</span>
 <a name="l00003"></a>00003 <span class="comment"> This file is part of the Plink, Plonk, Plank libraries</span>
 <a name="l00004"></a>00004 <span class="comment">  by Martin Robinson</span>
 <a name="l00005"></a>00005 <span class="comment"> </span>
 <a name="l00006"></a>00006 <span class="comment"> http://code.google.com/p/pl-nk/</span>
 <a name="l00007"></a>00007 <span class="comment"> </span>
-<a name="l00008"></a>00008 <span class="comment"> Copyright University of the West of England, Bristol 2011-12</span>
+<a name="l00008"></a>00008 <span class="comment"> Copyright University of the West of England, Bristol 2011-14</span>
 <a name="l00009"></a>00009 <span class="comment"> All rights reserved.</span>
 <a name="l00010"></a>00010 <span class="comment"> </span>
 <a name="l00011"></a>00011 <span class="comment"> Redistribution and use in source and binary forms, with or without</span>
@@ -106,147 +106,154 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00047"></a><a class="code" href="class_time_stamp.html">00047</a> <span class="keyword">class </span><a class="code" href="class_time_stamp.html" title="Measures time.">TimeStamp</a>
 <a name="l00048"></a>00048 {
 <a name="l00049"></a>00049 <span class="keyword">public</span>:
-<a name="l00050"></a>00050     <a class="code" href="class_time_stamp.html#ac2421bf37bdf6dfc067ec4a5117d2ce0">TimeStamp</a> (<span class="keywordtype">int</span> initialTime) <span class="keywordflow">throw</span>();
-<a name="l00051"></a>00051     <a class="code" href="class_time_stamp.html#ac2421bf37bdf6dfc067ec4a5117d2ce0">TimeStamp</a> (<a class="code" href="plonk___standard_header_8h.html#a4cc04fb5f1e8703e725c5952c9601ef5">LongLong</a> initialTime) <span class="keywordflow">throw</span>();
-<a name="l00052"></a>00052     <a class="code" href="class_time_stamp.html#ac2421bf37bdf6dfc067ec4a5117d2ce0">TimeStamp</a> (<a class="code" href="plonk___standard_header_8h.html#a4cc04fb5f1e8703e725c5952c9601ef5">LongLong</a> initialTime = 0, <span class="keywordtype">double</span> initialFraction = 0.0) <span class="keywordflow">throw</span>();
+<a name="l00050"></a>00050     <a class="code" href="class_time_stamp.html" title="Measures time.">TimeStamp</a> (<span class="keywordtype">int</span> initialTime) <span class="keywordflow">throw</span>();
+<a name="l00051"></a>00051     <a class="code" href="class_time_stamp.html" title="Measures time.">TimeStamp</a> (LongLong initialTime) <span class="keywordflow">throw</span>();
+<a name="l00052"></a>00052     <a class="code" href="class_time_stamp.html" title="Measures time.">TimeStamp</a> (LongLong initialTime = 0, <span class="keywordtype">double</span> initialFraction = 0.0) <span class="keywordflow">throw</span>();
 <a name="l00053"></a>00053     
-<a name="l00054"></a>00054     <a class="code" href="class_time_stamp.html#ac2421bf37bdf6dfc067ec4a5117d2ce0">TimeStamp</a> (<a class="code" href="class_time_stamp.html" title="Measures time.">TimeStamp</a> <span class="keyword">const</span>&amp; other) <span class="keywordflow">throw</span>();
-<a name="l00055"></a>00055     <a class="code" href="class_time_stamp.html" title="Measures time.">TimeStamp</a>&amp; <a class="code" href="class_time_stamp.html#a96477988b28487014163e97f16ad07cb">operator= </a>(<a class="code" href="class_time_stamp.html" title="Measures time.">TimeStamp</a> <span class="keyword">const</span>&amp; other) <span class="keywordflow">throw</span>();
+<a name="l00054"></a>00054     <a class="code" href="class_time_stamp.html" title="Measures time.">TimeStamp</a> (<a class="code" href="class_time_stamp.html" title="Measures time.">TimeStamp</a> <span class="keyword">const</span>&amp; other) <span class="keywordflow">throw</span>();
+<a name="l00055"></a>00055     <a class="code" href="class_time_stamp.html" title="Measures time.">TimeStamp</a>&amp; operator= (<a class="code" href="class_time_stamp.html" title="Measures time.">TimeStamp</a> <span class="keyword">const</span>&amp; other) <span class="keywordflow">throw</span>();
 <a name="l00056"></a>00056     
-<a name="l00057"></a>00057     <span class="keywordtype">bool</span> <a class="code" href="class_time_stamp.html#a53455ae1c9bbf80a4382dac698592c40">isFinite</a>() <span class="keyword">const</span> <span class="keywordflow">throw</span>();
-<a name="l00058"></a>00058     <span class="keywordtype">bool</span> <a class="code" href="class_time_stamp.html#adda2a0a3ac8275f7d5e056f527306d74">isInfinite</a>() <span class="keyword">const</span> <span class="keywordflow">throw</span>();
+<a name="l00057"></a>00057     <span class="keywordtype">bool</span> isFinite() <span class="keyword">const</span> <span class="keywordflow">throw</span>();
+<a name="l00058"></a>00058     <span class="keywordtype">bool</span> isInfinite() <span class="keyword">const</span> <span class="keywordflow">throw</span>();
 <a name="l00059"></a>00059     
-<a name="l00060"></a>00060     <a class="code" href="class_time_stamp.html" title="Measures time.">TimeStamp</a>&amp; <a class="code" href="class_time_stamp.html#aa3e63843143326c61c3c32d1e27147d1">operator+= </a>(<span class="keyword">const</span> <span class="keywordtype">double</span> offset) <span class="keywordflow">throw</span>();
-<a name="l00061"></a>00061     <a class="code" href="class_time_stamp.html" title="Measures time.">TimeStamp</a>&amp; <a class="code" href="class_time_stamp.html#aa3e63843143326c61c3c32d1e27147d1">operator+= </a>(<a class="code" href="class_time_stamp.html" title="Measures time.">TimeStamp</a> <span class="keyword">const</span>&amp; other) <span class="keywordflow">throw</span>();
-<a name="l00062"></a>00062     <a class="code" href="class_time_stamp.html" title="Measures time.">TimeStamp</a> <a class="code" href="class_time_stamp.html#a178d6c33ce38e3dddb0afb974cf5e635">operator+ </a>(<span class="keyword">const</span> <span class="keywordtype">double</span> offset) <span class="keyword">const</span> <span class="keywordflow">throw</span>();
-<a name="l00063"></a>00063     <a class="code" href="class_time_stamp.html" title="Measures time.">TimeStamp</a> <a class="code" href="class_time_stamp.html#a178d6c33ce38e3dddb0afb974cf5e635">operator+ </a>(<a class="code" href="class_time_stamp.html" title="Measures time.">TimeStamp</a> <span class="keyword">const</span>&amp; other) <span class="keyword">const</span> <span class="keywordflow">throw</span>();
+<a name="l00060"></a>00060     <a class="code" href="class_time_stamp.html" title="Measures time.">TimeStamp</a>&amp; operator+= (<span class="keyword">const</span> <span class="keywordtype">double</span> offset) <span class="keywordflow">throw</span>();
+<a name="l00061"></a>00061     <a class="code" href="class_time_stamp.html" title="Measures time.">TimeStamp</a>&amp; operator+= (<a class="code" href="class_time_stamp.html" title="Measures time.">TimeStamp</a> <span class="keyword">const</span>&amp; other) <span class="keywordflow">throw</span>();
+<a name="l00062"></a>00062     <a class="code" href="class_time_stamp.html" title="Measures time.">TimeStamp</a> operator+ (<span class="keyword">const</span> <span class="keywordtype">double</span> offset) <span class="keyword">const</span> <span class="keywordflow">throw</span>();
+<a name="l00063"></a>00063     <a class="code" href="class_time_stamp.html" title="Measures time.">TimeStamp</a> operator+ (<a class="code" href="class_time_stamp.html" title="Measures time.">TimeStamp</a> <span class="keyword">const</span>&amp; other) <span class="keyword">const</span> <span class="keywordflow">throw</span>();
 <a name="l00064"></a>00064     
-<a name="l00065"></a>00065     <a class="code" href="class_time_stamp.html" title="Measures time.">TimeStamp</a>&amp; <a class="code" href="class_time_stamp.html#ac60a05ad956c01ae79f77bc8aec03065">operator-= </a>(<span class="keyword">const</span> <span class="keywordtype">double</span> offset) <span class="keywordflow">throw</span>();
-<a name="l00066"></a>00066     <a class="code" href="class_time_stamp.html" title="Measures time.">TimeStamp</a>&amp; <a class="code" href="class_time_stamp.html#ac60a05ad956c01ae79f77bc8aec03065">operator-= </a>(<a class="code" href="class_time_stamp.html" title="Measures time.">TimeStamp</a> <span class="keyword">const</span>&amp; other) <span class="keywordflow">throw</span>();
-<a name="l00067"></a>00067     <a class="code" href="class_time_stamp.html" title="Measures time.">TimeStamp</a> <a class="code" href="class_time_stamp.html#a8aaafba4380df61710ddb361c1f2869f">operator- </a>(<span class="keyword">const</span> <span class="keywordtype">double</span> offset) <span class="keyword">const</span> <span class="keywordflow">throw</span>();
-<a name="l00068"></a>00068     <a class="code" href="class_time_stamp.html" title="Measures time.">TimeStamp</a> <a class="code" href="class_time_stamp.html#a8aaafba4380df61710ddb361c1f2869f">operator- </a>(<a class="code" href="class_time_stamp.html" title="Measures time.">TimeStamp</a> <span class="keyword">const</span>&amp; other) <span class="keyword">const</span> <span class="keywordflow">throw</span>();
+<a name="l00065"></a>00065     <a class="code" href="class_time_stamp.html" title="Measures time.">TimeStamp</a>&amp; operator-= (<span class="keyword">const</span> <span class="keywordtype">double</span> offset) <span class="keywordflow">throw</span>();
+<a name="l00066"></a>00066     <a class="code" href="class_time_stamp.html" title="Measures time.">TimeStamp</a>&amp; operator-= (<a class="code" href="class_time_stamp.html" title="Measures time.">TimeStamp</a> <span class="keyword">const</span>&amp; other) <span class="keywordflow">throw</span>();
+<a name="l00067"></a>00067     <a class="code" href="class_time_stamp.html" title="Measures time.">TimeStamp</a> operator- (<span class="keyword">const</span> <span class="keywordtype">double</span> offset) <span class="keyword">const</span> <span class="keywordflow">throw</span>();
+<a name="l00068"></a>00068     <a class="code" href="class_time_stamp.html" title="Measures time.">TimeStamp</a> operator- (<a class="code" href="class_time_stamp.html" title="Measures time.">TimeStamp</a> <span class="keyword">const</span>&amp; other) <span class="keyword">const</span> <span class="keywordflow">throw</span>();
 <a name="l00069"></a>00069     
 <a name="l00070"></a>00070     
-<a name="l00071"></a>00071     <span class="keywordtype">void</span> <span class="keyword">set</span> (<a class="code" href="plonk___standard_header_8h.html#a4cc04fb5f1e8703e725c5952c9601ef5">LongLong</a> newTime, <span class="keywordtype">double</span> newFraction = 0.0) <span class="keywordflow">throw</span>();
-<a name="l00072"></a><a class="code" href="class_time_stamp.html#a8f76bf0a76946c10f6cb8a103cf7c4a0">00072</a>     <span class="keyword">inline</span> <a class="code" href="plonk___standard_header_8h.html#a4cc04fb5f1e8703e725c5952c9601ef5">LongLong</a> <a class="code" href="class_time_stamp.html#a8f76bf0a76946c10f6cb8a103cf7c4a0">getTime</a>() <span class="keyword">const</span> throw() { <span class="keywordflow">return</span> time; }
-<a name="l00073"></a><a class="code" href="class_time_stamp.html#a513254a5db567ed79238f744eecb2dc5">00073</a>     <span class="keyword">inline</span> <span class="keywordtype">double</span> <a class="code" href="class_time_stamp.html#a513254a5db567ed79238f744eecb2dc5">getFraction</a>() <span class="keyword">const</span> throw() { <span class="keywordflow">return</span> fraction; }
-<a name="l00074"></a><a class="code" href="class_time_stamp.html#a213ba0bf3ec944cb10ccea4904b7a519">00074</a>     <span class="keyword">inline</span> <span class="keywordtype">int</span> <a class="code" href="class_time_stamp.html#a213ba0bf3ec944cb10ccea4904b7a519">getFractionInTicks</a>() <span class="keyword">const</span> throw() { <span class="keywordflow">return</span> int (fraction * <a class="code" href="class_time_stamp.html#a9b07cd3f2f12e3a11834f55c2400e130">getTicks</a>()); }
+<a name="l00071"></a>00071     <span class="keywordtype">void</span> <span class="keyword">set</span> (LongLong newTime, <span class="keywordtype">double</span> newFraction = 0.0) <span class="keywordflow">throw</span>();
+<a name="l00072"></a>00072     <span class="keyword">inline</span> LongLong getTime() <span class="keyword">const</span> <span class="keywordflow">throw</span>() { <span class="keywordflow">return</span> time; }
+<a name="l00073"></a>00073     <span class="keyword">inline</span> <span class="keywordtype">double</span> getFraction() <span class="keyword">const</span> <span class="keywordflow">throw</span>() { <span class="keywordflow">return</span> fraction; }
+<a name="l00074"></a>00074     <span class="keyword">inline</span> <span class="keywordtype">int</span> getFractionInTicks() <span class="keyword">const</span> <span class="keywordflow">throw</span>() { <span class="keywordflow">return</span> int (fraction * getTicks()); }
 <a name="l00075"></a>00075     
-<a name="l00076"></a><a class="code" href="class_time_stamp.html#aa5a1e08676f574769f440faad8a46f5d">00076</a>     <span class="keyword">inline</span> <span class="keywordtype">double</span> <a class="code" href="class_time_stamp.html#aa5a1e08676f574769f440faad8a46f5d">getValue</a>() <span class="keyword">const</span> throw() 
+<a name="l00076"></a>00076     <span class="keyword">inline</span> <span class="keywordtype">double</span> getValue() <span class="keyword">const</span> <span class="keywordflow">throw</span>() 
 <a name="l00077"></a>00077     { 
-<a name="l00078"></a>00078         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (((<span class="keywordtype">double</span> (time) + 1.0) - (<span class="keywordtype">double</span> (time))) == 1.0); <span class="comment">// lost precision</span>
+<a name="l00078"></a>00078         plonk_assert (((<span class="keywordtype">double</span> (time) + 1.0) - (<span class="keywordtype">double</span> (time))) == 1.0); <span class="comment">// lost precision</span>
 <a name="l00079"></a>00079         <span class="keywordflow">return</span> double (time) + fraction; 
 <a name="l00080"></a>00080     }
 <a name="l00081"></a>00081     
-<a name="l00082"></a><a class="code" href="class_time_stamp.html#a3958acdc3545fa8ee00df707889957db">00082</a>     <span class="keyword">inline</span> <a class="code" href="class_time_stamp.html#a3958acdc3545fa8ee00df707889957db">operator double </a>() <span class="keyword">const</span> throw() { <span class="keywordflow">return</span> this-&gt;<a class="code" href="class_time_stamp.html#aa5a1e08676f574769f440faad8a46f5d">getValue</a>(); }
-<a name="l00083"></a><a class="code" href="class_time_stamp.html#a95fd21f8cc377a9542b91b92469c931e">00083</a>     <span class="keyword">inline</span> <span class="keywordtype">double</span> <a class="code" href="class_time_stamp.html#a95fd21f8cc377a9542b91b92469c931e">toSeconds</a>() <span class="keyword">const</span> throw() { <span class="keywordflow">return</span> this-&gt;<a class="code" href="class_time_stamp.html#aa5a1e08676f574769f440faad8a46f5d">getValue</a>() * <a class="code" href="class_time_stamp.html#ac366fab0b7035c309585a1f58ec58ff2">getReciprocalTicks</a>(); }
-<a name="l00084"></a>00084     <span class="keywordtype">double</span> <a class="code" href="class_time_stamp.html#a87d1c72796a49c111ce0e7107f980c66">toSamples</a> (<span class="keyword">const</span> <span class="keywordtype">double</span> sampleRate) <span class="keyword">const</span> <span class="keywordflow">throw</span>();
+<a name="l00082"></a>00082     <span class="keyword">inline</span> operator double () <span class="keyword">const</span> <span class="keywordflow">throw</span>() { <span class="keywordflow">return</span> this-&gt;getValue(); }
+<a name="l00083"></a>00083     <span class="keyword">inline</span> <span class="keywordtype">double</span> toSeconds() <span class="keyword">const</span> <span class="keywordflow">throw</span>() { <span class="keywordflow">return</span> this-&gt;getValue() * getReciprocalTicks(); }
+<a name="l00084"></a>00084     <span class="keywordtype">double</span> toSamples (<span class="keyword">const</span> <span class="keywordtype">double</span> sampleRate) <span class="keyword">const</span> <span class="keywordflow">throw</span>();
 <a name="l00085"></a>00085     
-<a name="l00086"></a>00086     <span class="keywordtype">bool</span> <a class="code" href="class_time_stamp.html#a819fa595c1dc09bac855de5c3279d99a">operator== </a>(<a class="code" href="class_time_stamp.html" title="Measures time.">TimeStamp</a> <span class="keyword">const</span>&amp; other) <span class="keyword">const</span> <span class="keywordflow">throw</span>();
-<a name="l00087"></a>00087     <span class="keywordtype">bool</span> <a class="code" href="class_time_stamp.html#a825ba6468c8d61887c5c34ac48e28192">operator!= </a>(<a class="code" href="class_time_stamp.html" title="Measures time.">TimeStamp</a> <span class="keyword">const</span>&amp; other) <span class="keyword">const</span> <span class="keywordflow">throw</span>();
+<a name="l00086"></a>00086     <span class="keywordtype">bool</span> operator== (<a class="code" href="class_time_stamp.html" title="Measures time.">TimeStamp</a> <span class="keyword">const</span>&amp; other) <span class="keyword">const</span> <span class="keywordflow">throw</span>();
+<a name="l00087"></a>00087     <span class="keywordtype">bool</span> operator!= (<a class="code" href="class_time_stamp.html" title="Measures time.">TimeStamp</a> <span class="keyword">const</span>&amp; other) <span class="keyword">const</span> <span class="keywordflow">throw</span>();
 <a name="l00088"></a>00088     
-<a name="l00089"></a>00089     <span class="keywordtype">bool</span> <a class="code" href="class_time_stamp.html#a141bd249206b7df9f5ebb97937b6196e">operator&lt;  </a>(<a class="code" href="class_time_stamp.html" title="Measures time.">TimeStamp</a> <span class="keyword">const</span>&amp; other) <span class="keyword">const</span> <span class="keywordflow">throw</span>();
-<a name="l00090"></a>00090     <span class="keywordtype">bool</span> <a class="code" href="class_time_stamp.html#adc5a82c21e8348d9f76590889f908b5a">operator&lt;= </a>(<a class="code" href="class_time_stamp.html" title="Measures time.">TimeStamp</a> <span class="keyword">const</span>&amp; other) <span class="keyword">const</span> <span class="keywordflow">throw</span>();
-<a name="l00091"></a>00091     <span class="keywordtype">bool</span> <a class="code" href="class_time_stamp.html#a59247e46d54cafe7ccfc5422d4e5b9ea">operator&gt;  </a>(<a class="code" href="class_time_stamp.html" title="Measures time.">TimeStamp</a> <span class="keyword">const</span>&amp; other) <span class="keyword">const</span> <span class="keywordflow">throw</span>();
-<a name="l00092"></a>00092     <span class="keywordtype">bool</span> <a class="code" href="class_time_stamp.html#a58c0709897399c8029f767c190b44752">operator&gt;= </a>(<a class="code" href="class_time_stamp.html" title="Measures time.">TimeStamp</a> <span class="keyword">const</span>&amp; other) <span class="keyword">const</span> <span class="keywordflow">throw</span>();
+<a name="l00089"></a>00089     <span class="keywordtype">bool</span> operator&lt;  (<a class="code" href="class_time_stamp.html" title="Measures time.">TimeStamp</a> <span class="keyword">const</span>&amp; other) <span class="keyword">const</span> <span class="keywordflow">throw</span>();
+<a name="l00090"></a>00090     <span class="keywordtype">bool</span> operator&lt;= (<a class="code" href="class_time_stamp.html" title="Measures time.">TimeStamp</a> <span class="keyword">const</span>&amp; other) <span class="keyword">const</span> <span class="keywordflow">throw</span>();
+<a name="l00091"></a>00091     <span class="keywordtype">bool</span> operator&gt;  (<a class="code" href="class_time_stamp.html" title="Measures time.">TimeStamp</a> <span class="keyword">const</span>&amp; other) <span class="keyword">const</span> <span class="keywordflow">throw</span>();
+<a name="l00092"></a>00092     <span class="keywordtype">bool</span> operator&gt;= (<a class="code" href="class_time_stamp.html" title="Measures time.">TimeStamp</a> <span class="keyword">const</span>&amp; other) <span class="keyword">const</span> <span class="keywordflow">throw</span>();
 <a name="l00093"></a>00093     
-<a name="l00094"></a>00094     <span class="keyword">static</span> <span class="keywordtype">double</span> <a class="code" href="class_time_stamp.html#a9b07cd3f2f12e3a11834f55c2400e130">getTicks</a>() throw();
-<a name="l00095"></a>00095     static <span class="keywordtype">double</span> <a class="code" href="class_time_stamp.html#ac366fab0b7035c309585a1f58ec58ff2">getReciprocalTicks</a>() throw();
+<a name="l00094"></a>00094     <span class="keyword">static</span> <span class="keywordtype">double</span> getTicks() <span class="keywordflow">throw</span>();
+<a name="l00095"></a>00095     <span class="keyword">static</span> <span class="keywordtype">double</span> getReciprocalTicks() <span class="keywordflow">throw</span>();
 <a name="l00096"></a>00096     
-<a name="l00097"></a>00097     static <a class="code" href="class_time_stamp.html" title="Measures time.">TimeStamp</a> <a class="code" href="class_time_stamp.html#aafc4cea1f46fa878bc141573cfe28062">fromSeconds</a> (const <span class="keywordtype">double</span> seconds) throw();
-<a name="l00098"></a>00098     static <a class="code" href="class_time_stamp.html" title="Measures time.">TimeStamp</a> <a class="code" href="class_time_stamp.html#a9e39bf8505e06f1cc2fec88c6ed55fe4">fromSamples</a> (const <span class="keywordtype">double</span> samples, const <span class="keywordtype">double</span> sampleRate) throw();
-<a name="l00099"></a>00099     static const <a class="code" href="class_time_stamp.html" title="Measures time.">TimeStamp</a>&amp; <a class="code" href="class_time_stamp.html#a3b177f0b402c2d1bb51c404e0397449b">getZero</a>() throw();
-<a name="l00100"></a>00100     static const <a class="code" href="class_time_stamp.html" title="Measures time.">TimeStamp</a>&amp; <a class="code" href="class_time_stamp.html#ab0dd73c80396763164d4596580227351">getMaximum</a>() throw();
-<a name="l00101"></a>00101 
-<a name="l00102"></a>00102 private:
-<a name="l00103"></a>00103     <a class="code" href="plonk___standard_header_8h.html#a4cc04fb5f1e8703e725c5952c9601ef5">LongLong</a> time;
-<a name="l00104"></a>00104     <span class="keywordtype">double</span> fraction;
-<a name="l00105"></a>00105     
-<a name="l00106"></a>00106     static <span class="keywordtype">bool</span> fractionIsValid (const <span class="keywordtype">double</span> f) throw();
-<a name="l00107"></a>00107 };
-<a name="l00108"></a>00108 
-<a name="l00109"></a>00109 <span class="comment">//------------------------------------------------------------------------------</span>
-<a name="l00110"></a>00110 
-<a name="l00111"></a><a class="code" href="class_time_stamp.html#a53455ae1c9bbf80a4382dac698592c40">00111</a> inline <span class="keywordtype">bool</span> <a class="code" href="class_time_stamp.html" title="Measures time.">TimeStamp</a>::<a class="code" href="class_time_stamp.html#a53455ae1c9bbf80a4382dac698592c40">isFinite</a>() const throw()
-<a name="l00112"></a>00112 {
-<a name="l00113"></a>00113     <span class="keywordflow">return</span> ! <a class="code" href="class_time_stamp.html#adda2a0a3ac8275f7d5e056f527306d74">isInfinite</a>();
-<a name="l00114"></a>00114 }
-<a name="l00115"></a>00115 
-<a name="l00116"></a><a class="code" href="class_time_stamp.html#adda2a0a3ac8275f7d5e056f527306d74">00116</a> <span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code" href="class_time_stamp.html#adda2a0a3ac8275f7d5e056f527306d74">TimeStamp::isInfinite</a>() <span class="keyword">const</span> throw()
-<a name="l00117"></a>00117 {
-<a name="l00118"></a>00118     <span class="keywordflow">return</span> <a class="code" href="group___plank_maths_functions.html#ga4752651a060cce9faa75c0f5ea938680">pl_IsInfD</a> (fraction) != 0;
-<a name="l00119"></a>00119 }
-<a name="l00120"></a>00120 
-<a name="l00121"></a><a class="code" href="class_time_stamp.html#a58c0709897399c8029f767c190b44752">00121</a> <span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code" href="class_time_stamp.html#a58c0709897399c8029f767c190b44752">TimeStamp::operator&gt;= </a>(<a class="code" href="class_time_stamp.html" title="Measures time.">TimeStamp</a> <span class="keyword">const</span>&amp; other) <span class="keyword">const</span> <span class="keywordflow">throw</span>()
-<a name="l00122"></a>00122 {
-<a name="l00123"></a>00123     <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (fractionIsValid (this-&gt;fraction));
-<a name="l00124"></a>00124     <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (fractionIsValid (other.fraction));
-<a name="l00125"></a>00125     
-<a name="l00126"></a>00126     <span class="keywordflow">if</span> (this-&gt;<a class="code" href="class_time_stamp.html#adda2a0a3ac8275f7d5e056f527306d74">isInfinite</a>())
-<a name="l00127"></a>00127     {
-<a name="l00128"></a>00128         <span class="keywordflow">if</span> (other.<a class="code" href="class_time_stamp.html#adda2a0a3ac8275f7d5e056f527306d74">isInfinite</a>())
-<a name="l00129"></a>00129             <span class="keywordflow">return</span> <span class="keyword">false</span>;
-<a name="l00130"></a>00130         <span class="keywordflow">else</span>
-<a name="l00131"></a>00131             <span class="keywordflow">return</span> <span class="keyword">true</span>;
-<a name="l00132"></a>00132     }
-<a name="l00133"></a>00133     <span class="keywordflow">else</span> <span class="keywordflow">return</span> ((time &gt; other.time) || ((time == other.time) &amp;&amp; (fraction &gt;= other.fraction)));
-<a name="l00134"></a>00134 }
-<a name="l00135"></a>00135 
-<a name="l00136"></a><a class="code" href="class_time_stamp.html#a9b07cd3f2f12e3a11834f55c2400e130">00136</a> <span class="keyword">inline</span> <span class="keywordtype">double</span> <a class="code" href="class_time_stamp.html#a9b07cd3f2f12e3a11834f55c2400e130">TimeStamp::getTicks</a>() throw()
-<a name="l00137"></a>00137 {
-<a name="l00138"></a>00138     <span class="keywordflow">return</span> 1000000.0; <span class="comment">// microseconds</span>
-<a name="l00139"></a>00139 }
-<a name="l00140"></a>00140 
-<a name="l00141"></a><a class="code" href="class_time_stamp.html#ac366fab0b7035c309585a1f58ec58ff2">00141</a> <span class="keyword">inline</span> <span class="keywordtype">double</span> <a class="code" href="class_time_stamp.html#ac366fab0b7035c309585a1f58ec58ff2">TimeStamp::getReciprocalTicks</a>() throw()
-<a name="l00142"></a>00142 {
-<a name="l00143"></a>00143     <span class="keywordflow">return</span> 1.0 / 1000000.0; <span class="comment">// 1/microseconds</span>
-<a name="l00144"></a>00144 }
-<a name="l00145"></a>00145 
-<a name="l00146"></a><a class="code" href="class_time_stamp.html#a3b177f0b402c2d1bb51c404e0397449b">00146</a> <span class="keyword">inline</span> <span class="keyword">const</span> <a class="code" href="class_time_stamp.html" title="Measures time.">TimeStamp</a>&amp; <a class="code" href="class_time_stamp.html#a3b177f0b402c2d1bb51c404e0397449b">TimeStamp::getZero</a>() throw()
-<a name="l00147"></a>00147 {
-<a name="l00148"></a>00148     <span class="keyword">static</span> <span class="keyword">const</span> <a class="code" href="class_time_stamp.html" title="Measures time.">TimeStamp</a>* timeZero = <span class="keyword">new</span> <a class="code" href="class_time_stamp.html#ac2421bf37bdf6dfc067ec4a5117d2ce0">TimeStamp</a> (0, 0.0);
-<a name="l00149"></a>00149     <span class="keywordflow">return</span> *timeZero;
-<a name="l00150"></a>00150 }
-<a name="l00151"></a>00151 
-<a name="l00152"></a><a class="code" href="class_time_stamp.html#a96477988b28487014163e97f16ad07cb">00152</a> <span class="keyword">inline</span> <a class="code" href="class_time_stamp.html" title="Measures time.">TimeStamp</a>&amp; <a class="code" href="class_time_stamp.html#a96477988b28487014163e97f16ad07cb">TimeStamp::operator= </a>(<a class="code" href="class_time_stamp.html" title="Measures time.">TimeStamp</a> <span class="keyword">const</span>&amp; other) <span class="keywordflow">throw</span>()
-<a name="l00153"></a>00153 {
-<a name="l00154"></a>00154     <span class="keywordflow">if</span> (&amp;other != <span class="keyword">this</span>)
-<a name="l00155"></a>00155     {
-<a name="l00156"></a>00156         this-&gt;time = other.time;
-<a name="l00157"></a>00157         this-&gt;fraction = other.fraction;
-<a name="l00158"></a>00158     }
-<a name="l00159"></a>00159     
-<a name="l00160"></a>00160     <span class="keywordflow">return</span> *<span class="keyword">this</span>;
-<a name="l00161"></a>00161 }
-<a name="l00162"></a>00162 
-<a name="l00163"></a><a class="code" href="class_time_stamp.html#aa3e63843143326c61c3c32d1e27147d1">00163</a> <span class="keyword">inline</span> <a class="code" href="class_time_stamp.html" title="Measures time.">TimeStamp</a>&amp; <a class="code" href="class_time_stamp.html#aa3e63843143326c61c3c32d1e27147d1">TimeStamp::operator+= </a>(<span class="keyword">const</span> <span class="keywordtype">double</span> offset) <span class="keywordflow">throw</span>()
-<a name="l00164"></a>00164 {
-<a name="l00165"></a>00165     <span class="keywordflow">if</span> (<a class="code" href="group___plank_maths_functions.html#ga4752651a060cce9faa75c0f5ea938680">pl_IsInfD</a> (offset))
-<a name="l00166"></a>00166     {
-<a name="l00167"></a>00167         this-&gt;time = 0;
-<a name="l00168"></a>00168         this-&gt;fraction = offset;
-<a name="l00169"></a>00169     }
-<a name="l00170"></a>00170     <span class="keywordflow">else</span>
-<a name="l00171"></a>00171     {
-<a name="l00172"></a>00172         <span class="keyword">const</span> <span class="keywordtype">double</span> correctedOffset = offset + this-&gt;fraction;
-<a name="l00173"></a>00173         <span class="keyword">const</span> <a class="code" href="plonk___standard_header_8h.html#a4cc04fb5f1e8703e725c5952c9601ef5">LongLong</a> timeOffset = <a class="code" href="plonk___standard_header_8h.html#a4cc04fb5f1e8703e725c5952c9601ef5">LongLong</a> (correctedOffset);
-<a name="l00174"></a>00174         this-&gt;time += timeOffset;
-<a name="l00175"></a>00175         this-&gt;fraction = correctedOffset - timeOffset; <span class="comment">// carry the fraction</span>
-<a name="l00176"></a>00176         
-<a name="l00177"></a>00177         <span class="keywordflow">if</span> (this-&gt;fraction &lt; 0.0)
-<a name="l00178"></a>00178         {
-<a name="l00179"></a>00179             this-&gt;time--;
-<a name="l00180"></a>00180             this-&gt;fraction += 1.0;
-<a name="l00181"></a>00181         }
-<a name="l00182"></a>00182         
-<a name="l00183"></a>00183         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (fractionIsValid (this-&gt;fraction));
-<a name="l00184"></a>00184     }
-<a name="l00185"></a>00185     
-<a name="l00186"></a>00186     <span class="keywordflow">return</span> *<span class="keyword">this</span>;
-<a name="l00187"></a>00187 }
-<a name="l00188"></a>00188 
-<a name="l00189"></a>00189 
-<a name="l00190"></a>00190 <span class="preprocessor">#endif // PLONK_TIMESTAMP_H</span>
+<a name="l00097"></a>00097     <span class="keyword">static</span> <a class="code" href="class_time_stamp.html" title="Measures time.">TimeStamp</a> fromSeconds (<span class="keyword">const</span> <span class="keywordtype">double</span> seconds) <span class="keywordflow">throw</span>();
+<a name="l00098"></a>00098     <span class="keyword">static</span> <a class="code" href="class_time_stamp.html" title="Measures time.">TimeStamp</a> fromSamples (<span class="keyword">const</span> <span class="keywordtype">double</span> samples, <span class="keyword">const</span> <span class="keywordtype">double</span> sampleRate) <span class="keywordflow">throw</span>();
+<a name="l00099"></a>00099     <span class="keyword">static</span> <span class="keyword">const</span> <a class="code" href="class_time_stamp.html" title="Measures time.">TimeStamp</a>&amp; getSentinel() <span class="keywordflow">throw</span>();
+<a name="l00100"></a>00100     <span class="keyword">static</span> <span class="keyword">const</span> <a class="code" href="class_time_stamp.html" title="Measures time.">TimeStamp</a>&amp; getZero() <span class="keywordflow">throw</span>();
+<a name="l00101"></a>00101     <span class="keyword">static</span> <span class="keyword">const</span> <a class="code" href="class_time_stamp.html" title="Measures time.">TimeStamp</a>&amp; getMaximum() <span class="keywordflow">throw</span>();
+<a name="l00102"></a>00102 
+<a name="l00103"></a>00103 <span class="keyword">private</span>:
+<a name="l00104"></a>00104     LongLong time;
+<a name="l00105"></a>00105     <span class="keywordtype">double</span> fraction;
+<a name="l00106"></a>00106     
+<a name="l00107"></a>00107     <span class="keyword">static</span> <span class="keywordtype">bool</span> fractionIsValid (<span class="keyword">const</span> <span class="keywordtype">double</span> f) <span class="keywordflow">throw</span>();
+<a name="l00108"></a>00108 };
+<a name="l00109"></a>00109 
+<a name="l00110"></a>00110 <span class="comment">//------------------------------------------------------------------------------</span>
+<a name="l00111"></a>00111 
+<a name="l00112"></a>00112 <span class="keyword">inline</span> <span class="keywordtype">bool</span> TimeStamp::isFinite() <span class="keyword">const</span> throw()
+<a name="l00113"></a>00113 {
+<a name="l00114"></a>00114     <span class="keywordflow">return</span> ! isInfinite();
+<a name="l00115"></a>00115 }
+<a name="l00116"></a>00116 
+<a name="l00117"></a>00117 <span class="keyword">inline</span> <span class="keywordtype">bool</span> TimeStamp::isInfinite() <span class="keyword">const</span> throw()
+<a name="l00118"></a>00118 {
+<a name="l00119"></a>00119     <span class="keywordflow">return</span> pl_IsInfD (fraction) != 0;
+<a name="l00120"></a>00120 }
+<a name="l00121"></a>00121 
+<a name="l00122"></a>00122 <span class="keyword">inline</span> <span class="keywordtype">bool</span> TimeStamp::operator&gt;= (<a class="code" href="class_time_stamp.html" title="Measures time.">TimeStamp</a> <span class="keyword">const</span>&amp; other) <span class="keyword">const</span> <span class="keywordflow">throw</span>()
+<a name="l00123"></a>00123 {
+<a name="l00124"></a>00124     plonk_assert (fractionIsValid (this-&gt;fraction));
+<a name="l00125"></a>00125     plonk_assert (fractionIsValid (other.fraction));
+<a name="l00126"></a>00126     
+<a name="l00127"></a>00127     <span class="keywordflow">if</span> (this-&gt;isInfinite())
+<a name="l00128"></a>00128     {
+<a name="l00129"></a>00129         <span class="keywordflow">if</span> (other.isInfinite())
+<a name="l00130"></a>00130             <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00131"></a>00131         <span class="keywordflow">else</span>
+<a name="l00132"></a>00132             <span class="keywordflow">return</span> <span class="keyword">true</span>;
+<a name="l00133"></a>00133     }
+<a name="l00134"></a>00134     <span class="keywordflow">else</span> <span class="keywordflow">return</span> ((time &gt; other.time) || ((time == other.time) &amp;&amp; (fraction &gt;= other.fraction)));
+<a name="l00135"></a>00135 }
+<a name="l00136"></a>00136 
+<a name="l00137"></a>00137 <span class="keyword">inline</span> <span class="keywordtype">double</span> TimeStamp::getTicks() throw()
+<a name="l00138"></a>00138 {
+<a name="l00139"></a>00139     <span class="keywordflow">return</span> 1000000.0; <span class="comment">// microseconds</span>
+<a name="l00140"></a>00140 }
+<a name="l00141"></a>00141 
+<a name="l00142"></a>00142 <span class="keyword">inline</span> <span class="keywordtype">double</span> TimeStamp::getReciprocalTicks() throw()
+<a name="l00143"></a>00143 {
+<a name="l00144"></a>00144     <span class="keywordflow">return</span> 1.0 / 1000000.0; <span class="comment">// 1/microseconds</span>
+<a name="l00145"></a>00145 }
+<a name="l00146"></a>00146 
+<a name="l00147"></a>00147 <span class="keyword">inline</span> <span class="keyword">const</span> <a class="code" href="class_time_stamp.html" title="Measures time.">TimeStamp</a>&amp; TimeStamp::getZero() throw()
+<a name="l00148"></a>00148 {
+<a name="l00149"></a>00149     <span class="keyword">static</span> <span class="keyword">const</span> <a class="code" href="class_time_stamp.html" title="Measures time.">TimeStamp</a>* timeZero = <span class="keyword">new</span> <a class="code" href="class_time_stamp.html" title="Measures time.">TimeStamp</a> (0, 0.0);
+<a name="l00150"></a>00150     <span class="keywordflow">return</span> *timeZero;
+<a name="l00151"></a>00151 }
+<a name="l00152"></a>00152 
+<a name="l00153"></a>00153 <span class="keyword">inline</span> <span class="keyword">const</span> <a class="code" href="class_time_stamp.html" title="Measures time.">TimeStamp</a>&amp; TimeStamp::getSentinel() throw()
+<a name="l00154"></a>00154 {
+<a name="l00155"></a>00155     <span class="keyword">static</span> <span class="keyword">const</span> <a class="code" href="class_time_stamp.html" title="Measures time.">TimeStamp</a>* sentinel = <span class="keyword">new</span> <a class="code" href="class_time_stamp.html" title="Measures time.">TimeStamp</a> (-1, 0.0);
+<a name="l00156"></a>00156     <span class="keywordflow">return</span> *sentinel;
+<a name="l00157"></a>00157 }
+<a name="l00158"></a>00158 
+<a name="l00159"></a>00159 <span class="keyword">inline</span> <a class="code" href="class_time_stamp.html" title="Measures time.">TimeStamp</a>&amp; TimeStamp::operator= (<a class="code" href="class_time_stamp.html" title="Measures time.">TimeStamp</a> <span class="keyword">const</span>&amp; other) <span class="keywordflow">throw</span>()
+<a name="l00160"></a>00160 {
+<a name="l00161"></a>00161     <span class="keywordflow">if</span> (&amp;other != <span class="keyword">this</span>)
+<a name="l00162"></a>00162     {
+<a name="l00163"></a>00163         this-&gt;time = other.time;
+<a name="l00164"></a>00164         this-&gt;fraction = other.fraction;
+<a name="l00165"></a>00165     }
+<a name="l00166"></a>00166     
+<a name="l00167"></a>00167     <span class="keywordflow">return</span> *<span class="keyword">this</span>;
+<a name="l00168"></a>00168 }
+<a name="l00169"></a>00169 
+<a name="l00170"></a>00170 <span class="keyword">inline</span> <a class="code" href="class_time_stamp.html" title="Measures time.">TimeStamp</a>&amp; TimeStamp::operator+= (<span class="keyword">const</span> <span class="keywordtype">double</span> offset) <span class="keywordflow">throw</span>()
+<a name="l00171"></a>00171 {
+<a name="l00172"></a>00172     <span class="keywordflow">if</span> (pl_IsInfD (offset))
+<a name="l00173"></a>00173     {
+<a name="l00174"></a>00174         this-&gt;time = 0;
+<a name="l00175"></a>00175         this-&gt;fraction = offset;
+<a name="l00176"></a>00176     }
+<a name="l00177"></a>00177     <span class="keywordflow">else</span>
+<a name="l00178"></a>00178     {
+<a name="l00179"></a>00179         <span class="keyword">const</span> <span class="keywordtype">double</span> correctedOffset = offset + this-&gt;fraction;
+<a name="l00180"></a>00180         <span class="keyword">const</span> LongLong timeOffset = LongLong (correctedOffset);
+<a name="l00181"></a>00181         this-&gt;time += timeOffset;
+<a name="l00182"></a>00182         this-&gt;fraction = correctedOffset - timeOffset; <span class="comment">// carry the fraction</span>
+<a name="l00183"></a>00183         
+<a name="l00184"></a>00184         <span class="keywordflow">if</span> (this-&gt;fraction &lt; 0.0)
+<a name="l00185"></a>00185         {
+<a name="l00186"></a>00186             this-&gt;time--;
+<a name="l00187"></a>00187             this-&gt;fraction += 1.0;
+<a name="l00188"></a>00188         }
+<a name="l00189"></a>00189         
+<a name="l00190"></a>00190         plonk_assert (fractionIsValid (this-&gt;fraction));
+<a name="l00191"></a>00191     }
+<a name="l00192"></a>00192     
+<a name="l00193"></a>00193     <span class="keywordflow">return</span> *<span class="keyword">this</span>;
+<a name="l00194"></a>00194 }
+<a name="l00195"></a>00195 
+<a name="l00196"></a>00196 
+<a name="l00197"></a>00197 <span class="preprocessor">#endif // PLONK_TIMESTAMP_H</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -254,7 +261,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Properties</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -263,7 +270,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 5 2012 17:04:56 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 8 2014 12:26:50 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

@@ -20,7 +20,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="pl-nk-logo-small.png"/></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">pl-nk</div>
+   <div id="projectname">pl-nk&#160;<span id="projectnumber">v0.4.5</span></div>
+   <div id="projectbrief">Plonk|Plink|Plank are a set of cross-platform C/C++ frameworks for audio software development</div>
   </td>
  </tr>
  </tbody>
@@ -29,8 +30,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -66,429 +67,141 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="contents">
 <div class="textblock">This inheritance list is sorted roughly, but not completely, alphabetically:</div><ul>
-<li><a class="el" href="class_allpass_decay_unit.html">AllpassDecayUnit&lt; SampleType &gt;</a></li>
-<li><a class="el" href="class_allpass_f_f_f_b_unit.html">AllpassFFFBUnit&lt; SampleType &gt;</a></li>
-<li><a class="el" href="classffft_1_1_array.html">ffft::Array&lt; T, LEN &gt;</a></li>
+<li><a class="el" href="class_allpass_decay_unit.html">AllpassDecayUnit&lt; SampleType, InterpTypeCode &gt;</a></li>
+<li><a class="el" href="class_allpass_f_f_f_b_unit.html">AllpassFFFBUnit&lt; SampleType, InterpTypeCode &gt;</a></li>
 <li><a class="el" href="class_array_allocator.html">ArrayAllocator&lt; Type &gt;</a></li>
 <li><a class="el" href="class_array_allocator_3_01_type_01_5_01_4.html">ArrayAllocator&lt; Type * &gt;</a></li>
 <li><a class="el" href="class_array_allocator_built_in.html">ArrayAllocatorBuiltIn&lt; Type &gt;</a></li>
-<li><a class="el" href="class_array_allocator_built_in.html">ArrayAllocatorBuiltIn&lt; Bool &gt;</a><ul>
-<li><a class="el" href="class_array_allocator_3_01_bool_01_4.html">ArrayAllocator&lt; Bool &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_array_allocator_built_in.html">ArrayAllocatorBuiltIn&lt; Char &gt;</a><ul>
-<li><a class="el" href="class_array_allocator_3_01_char_01_4.html">ArrayAllocator&lt; Char &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_array_allocator_built_in.html">ArrayAllocatorBuiltIn&lt; Double &gt;</a><ul>
-<li><a class="el" href="class_array_allocator_3_01_double_01_4.html">ArrayAllocator&lt; Double &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_array_allocator_built_in.html">ArrayAllocatorBuiltIn&lt; Float &gt;</a><ul>
-<li><a class="el" href="class_array_allocator_3_01_float_01_4.html">ArrayAllocator&lt; Float &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_array_allocator_built_in.html">ArrayAllocatorBuiltIn&lt; Int &gt;</a><ul>
-<li><a class="el" href="class_array_allocator_3_01_int_01_4.html">ArrayAllocator&lt; Int &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_array_allocator_built_in.html">ArrayAllocatorBuiltIn&lt; Int24 &gt;</a><ul>
-<li><a class="el" href="class_array_allocator_3_01_int24_01_4.html">ArrayAllocator&lt; Int24 &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_array_allocator_built_in.html">ArrayAllocatorBuiltIn&lt; Long &gt;</a><ul>
-<li><a class="el" href="class_array_allocator_3_01_long_01_4.html">ArrayAllocator&lt; Long &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_array_allocator_built_in.html">ArrayAllocatorBuiltIn&lt; LongLong &gt;</a><ul>
-<li><a class="el" href="class_array_allocator_3_01_long_long_01_4.html">ArrayAllocator&lt; LongLong &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_array_allocator_built_in.html">ArrayAllocatorBuiltIn&lt; Short &gt;</a><ul>
-<li><a class="el" href="class_array_allocator_3_01_short_01_4.html">ArrayAllocator&lt; Short &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_array_allocator_built_in.html">ArrayAllocatorBuiltIn&lt; UnsignedChar &gt;</a><ul>
-<li><a class="el" href="class_array_allocator_3_01_unsigned_char_01_4.html">ArrayAllocator&lt; UnsignedChar &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_array_allocator_built_in.html">ArrayAllocatorBuiltIn&lt; UnsignedInt &gt;</a><ul>
-<li><a class="el" href="class_array_allocator_3_01_unsigned_int_01_4.html">ArrayAllocator&lt; UnsignedInt &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_array_allocator_built_in.html">ArrayAllocatorBuiltIn&lt; UnsignedLong &gt;</a><ul>
-<li><a class="el" href="class_array_allocator_3_01_unsigned_long_01_4.html">ArrayAllocator&lt; UnsignedLong &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_array_allocator_built_in.html">ArrayAllocatorBuiltIn&lt; UnsignedLongLong &gt;</a><ul>
-<li><a class="el" href="class_array_allocator_3_01_unsigned_long_long_01_4.html">ArrayAllocator&lt; UnsignedLongLong &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_array_allocator_built_in.html">ArrayAllocatorBuiltIn&lt; UnsignedShort &gt;</a><ul>
-<li><a class="el" href="class_array_allocator_3_01_unsigned_short_01_4.html">ArrayAllocator&lt; UnsignedShort &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_atomic_ops.html">AtomicOps</a><ul>
-<li><a class="el" href="class_atomic_base.html">AtomicBase&lt; Type &gt;</a><ul>
+<li><a class="el" href="class_array_allocator_built_in.html">ArrayAllocatorBuiltIn&lt; Bool &gt;</a></li>
+<li><a class="el" href="class_array_allocator_built_in.html">ArrayAllocatorBuiltIn&lt; Char &gt;</a></li>
+<li><a class="el" href="class_array_allocator_built_in.html">ArrayAllocatorBuiltIn&lt; Double &gt;</a></li>
+<li><a class="el" href="class_array_allocator_built_in.html">ArrayAllocatorBuiltIn&lt; Float &gt;</a></li>
+<li><a class="el" href="class_array_allocator_built_in.html">ArrayAllocatorBuiltIn&lt; Int &gt;</a></li>
+<li><a class="el" href="class_array_allocator_built_in.html">ArrayAllocatorBuiltIn&lt; Int24 &gt;</a></li>
+<li><a class="el" href="class_array_allocator_built_in.html">ArrayAllocatorBuiltIn&lt; Long &gt;</a></li>
+<li><a class="el" href="class_array_allocator_built_in.html">ArrayAllocatorBuiltIn&lt; LongLong &gt;</a></li>
+<li><a class="el" href="class_array_allocator_built_in.html">ArrayAllocatorBuiltIn&lt; Short &gt;</a></li>
+<li><a class="el" href="class_array_allocator_built_in.html">ArrayAllocatorBuiltIn&lt; UnsignedChar &gt;</a></li>
+<li><a class="el" href="class_array_allocator_built_in.html">ArrayAllocatorBuiltIn&lt; UnsignedInt &gt;</a></li>
+<li><a class="el" href="class_array_allocator_built_in.html">ArrayAllocatorBuiltIn&lt; UnsignedLong &gt;</a></li>
+<li><a class="el" href="class_array_allocator_built_in.html">ArrayAllocatorBuiltIn&lt; UnsignedLongLong &gt;</a></li>
+<li><a class="el" href="class_array_allocator_built_in.html">ArrayAllocatorBuiltIn&lt; UnsignedShort &gt;</a></li>
 <li><a class="el" href="class_atomic_extended.html">AtomicExtended&lt; Type &gt;</a></li>
+<li><a class="el" href="class_atomic_ops.html">AtomicOps</a></li>
 <li><a class="el" href="class_atomic_value.html">AtomicValue&lt; Type &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_atomic_base.html">AtomicBase&lt; AudioFileReaderInternal * &gt;</a><ul>
 <li><a class="el" href="class_atomic_value.html">AtomicValue&lt; AudioFileReaderInternal * &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_atomic_base.html">AtomicBase&lt; BinaryFileInternal * &gt;</a><ul>
+<li><a class="el" href="class_atomic_value.html">AtomicValue&lt; AudioFileWriterInternal&lt; SampleType &gt; * &gt;</a></li>
+<li><a class="el" href="class_atomic_value.html">AtomicValue&lt; Base64Internal * &gt;</a></li>
 <li><a class="el" href="class_atomic_value.html">AtomicValue&lt; BinaryFileInternal * &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_atomic_base.html">AtomicBase&lt; BreakpointInternal&lt; SampleType &gt; * &gt;</a><ul>
 <li><a class="el" href="class_atomic_value.html">AtomicValue&lt; BreakpointInternal&lt; SampleType &gt; * &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_atomic_base.html">AtomicBase&lt; BreakpointsInternal&lt; SampleType &gt; * &gt;</a><ul>
 <li><a class="el" href="class_atomic_value.html">AtomicValue&lt; BreakpointsInternal&lt; SampleType &gt; * &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_atomic_base.html">AtomicBase&lt; BusBufferInternal&lt; SampleType &gt; * &gt;</a><ul>
 <li><a class="el" href="class_atomic_value.html">AtomicValue&lt; BusBufferInternal&lt; SampleType &gt; * &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_atomic_base.html">AtomicBase&lt; ChannelInternalBase&lt; SampleType &gt; * &gt;</a><ul>
 <li><a class="el" href="class_atomic_value.html">AtomicValue&lt; ChannelInternalBase&lt; SampleType &gt; * &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_atomic_base.html">AtomicBase&lt; DictionaryInternal&lt; Dynamic, int &gt; * &gt;</a><ul>
 <li><a class="el" href="class_atomic_value.html">AtomicValue&lt; DictionaryInternal&lt; Dynamic, int &gt; * &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_atomic_base.html">AtomicBase&lt; DictionaryInternal&lt; Dynamic, KeyType &gt; * &gt;</a><ul>
 <li><a class="el" href="class_atomic_value.html">AtomicValue&lt; DictionaryInternal&lt; Dynamic, KeyType &gt; * &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_atomic_base.html">AtomicBase&lt; DictionaryInternal&lt; ValueType, KeyType &gt; * &gt;</a><ul>
 <li><a class="el" href="class_atomic_value.html">AtomicValue&lt; DictionaryInternal&lt; ValueType, KeyType &gt; * &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_atomic_base.html">AtomicBase&lt; DynamicInternal * &gt;</a><ul>
 <li><a class="el" href="class_atomic_value.html">AtomicValue&lt; DynamicInternal * &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_atomic_base.html">AtomicBase&lt; FFTEngineInternal&lt; float &gt; * &gt;</a><ul>
 <li><a class="el" href="class_atomic_value.html">AtomicValue&lt; FFTEngineInternal&lt; float &gt; * &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_atomic_base.html">AtomicBase&lt; FunctionCallerInternal&lt; FunctionType, FunctionType::Return, ArgType1, ArgType2, ArgType3 &gt; * &gt;</a><ul>
+<li><a class="el" href="class_atomic_value.html">AtomicValue&lt; FilePathInternal * &gt;</a></li>
 <li><a class="el" href="class_atomic_value.html">AtomicValue&lt; FunctionCallerInternal&lt; FunctionType, FunctionType::Return, ArgType1, ArgType2, ArgType3 &gt; * &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_atomic_base.html">AtomicBase&lt; FunctionCallerInternal&lt; FunctionType, FunctionType::Return, FunctionType::Arg1, ArgType2, ArgType3 &gt; * &gt;</a><ul>
 <li><a class="el" href="class_atomic_value.html">AtomicValue&lt; FunctionCallerInternal&lt; FunctionType, FunctionType::Return, FunctionType::Arg1, ArgType2, ArgType3 &gt; * &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_atomic_base.html">AtomicBase&lt; FunctionCallerInternal&lt; FunctionType, FunctionType::Return, FunctionType::Arg1, FunctionType::Arg2, ArgType3 &gt; * &gt;</a><ul>
 <li><a class="el" href="class_atomic_value.html">AtomicValue&lt; FunctionCallerInternal&lt; FunctionType, FunctionType::Return, FunctionType::Arg1, FunctionType::Arg2, ArgType3 &gt; * &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_atomic_base.html">AtomicBase&lt; FunctionCallerInternal&lt; FunctionType, FunctionType::Return, FunctionType::Arg1, FunctionType::Arg2, FunctionType::Arg3 &gt; * &gt;</a><ul>
 <li><a class="el" href="class_atomic_value.html">AtomicValue&lt; FunctionCallerInternal&lt; FunctionType, FunctionType::Return, FunctionType::Arg1, FunctionType::Arg2, FunctionType::Arg3 &gt; * &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_atomic_base.html">AtomicBase&lt; FunctionCallerInternal&lt; FunctionType, ReturnType &gt; * &gt;</a><ul>
 <li><a class="el" href="class_atomic_value.html">AtomicValue&lt; FunctionCallerInternal&lt; FunctionType, ReturnType &gt; * &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_atomic_base.html">AtomicBase&lt; FunctionCallerInternal&lt; FunctionType, ReturnType, ArgType1 &gt; * &gt;</a><ul>
 <li><a class="el" href="class_atomic_value.html">AtomicValue&lt; FunctionCallerInternal&lt; FunctionType, ReturnType, ArgType1 &gt; * &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_atomic_base.html">AtomicBase&lt; FunctionCallerInternal&lt; FunctionType, ReturnType, ArgType1, ArgType2 &gt; * &gt;</a><ul>
 <li><a class="el" href="class_atomic_value.html">AtomicValue&lt; FunctionCallerInternal&lt; FunctionType, ReturnType, ArgType1, ArgType2 &gt; * &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_atomic_base.html">AtomicBase&lt; FunctionCallerInternal&lt; FunctionType, ReturnType, ArgType1, ArgType2, ArgType3 &gt; * &gt;</a><ul>
 <li><a class="el" href="class_atomic_value.html">AtomicValue&lt; FunctionCallerInternal&lt; FunctionType, ReturnType, ArgType1, ArgType2, ArgType3 &gt; * &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_atomic_base.html">AtomicBase&lt; FunctionProxyCallerInternal&lt; FunctionType, FunctionType::Return, ArgType1, ArgType2, ArgType3 &gt; * &gt;</a><ul>
 <li><a class="el" href="class_atomic_value.html">AtomicValue&lt; FunctionProxyCallerInternal&lt; FunctionType, FunctionType::Return, ArgType1, ArgType2, ArgType3 &gt; * &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_atomic_base.html">AtomicBase&lt; FunctionProxyCallerInternal&lt; FunctionType, FunctionType::Return, FunctionType::Arg1, ArgType2, ArgType3 &gt; * &gt;</a><ul>
 <li><a class="el" href="class_atomic_value.html">AtomicValue&lt; FunctionProxyCallerInternal&lt; FunctionType, FunctionType::Return, FunctionType::Arg1, ArgType2, ArgType3 &gt; * &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_atomic_base.html">AtomicBase&lt; FunctionProxyCallerInternal&lt; FunctionType, FunctionType::Return, FunctionType::Arg1, FunctionType::Arg2, ArgType3 &gt; * &gt;</a><ul>
 <li><a class="el" href="class_atomic_value.html">AtomicValue&lt; FunctionProxyCallerInternal&lt; FunctionType, FunctionType::Return, FunctionType::Arg1, FunctionType::Arg2, ArgType3 &gt; * &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_atomic_base.html">AtomicBase&lt; FunctionProxyCallerInternal&lt; FunctionType, FunctionType::Return, FunctionType::Arg1, FunctionType::Arg2, FunctionType::Arg3 &gt; * &gt;</a><ul>
 <li><a class="el" href="class_atomic_value.html">AtomicValue&lt; FunctionProxyCallerInternal&lt; FunctionType, FunctionType::Return, FunctionType::Arg1, FunctionType::Arg2, FunctionType::Arg3 &gt; * &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_atomic_base.html">AtomicBase&lt; FunctionProxyCallerInternal&lt; FunctionType, ReturnType &gt; * &gt;</a><ul>
 <li><a class="el" href="class_atomic_value.html">AtomicValue&lt; FunctionProxyCallerInternal&lt; FunctionType, ReturnType &gt; * &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_atomic_base.html">AtomicBase&lt; FunctionProxyCallerInternal&lt; FunctionType, ReturnType, ArgType1 &gt; * &gt;</a><ul>
 <li><a class="el" href="class_atomic_value.html">AtomicValue&lt; FunctionProxyCallerInternal&lt; FunctionType, ReturnType, ArgType1 &gt; * &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_atomic_base.html">AtomicBase&lt; FunctionProxyCallerInternal&lt; FunctionType, ReturnType, ArgType1, ArgType2 &gt; * &gt;</a><ul>
 <li><a class="el" href="class_atomic_value.html">AtomicValue&lt; FunctionProxyCallerInternal&lt; FunctionType, ReturnType, ArgType1, ArgType2 &gt; * &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_atomic_base.html">AtomicBase&lt; FunctionProxyCallerInternal&lt; FunctionType, ReturnType, ArgType1, ArgType2, ArgType3 &gt; * &gt;</a><ul>
 <li><a class="el" href="class_atomic_value.html">AtomicValue&lt; FunctionProxyCallerInternal&lt; FunctionType, ReturnType, ArgType1, ArgType2, ArgType3 &gt; * &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_atomic_base.html">AtomicBase&lt; Int &gt;</a><ul>
-<li><a class="el" href="class_atomic_extended_3_01_short_01_4.html">AtomicExtended&lt; Short &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_atomic_base.html">AtomicBase&lt; LockedValueInternal&lt; Type &gt; * &gt;</a><ul>
+<li><a class="el" href="class_atomic_value.html">AtomicValue&lt; Int &gt;</a></li>
+<li><a class="el" href="class_atomic_value.html">AtomicValue&lt; Internal &gt;</a></li>
 <li><a class="el" href="class_atomic_value.html">AtomicValue&lt; LockedValueInternal&lt; Type &gt; * &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_atomic_base.html">AtomicBase&lt; LockFreeQueueInternal&lt; ValueType &gt; * &gt;</a><ul>
 <li><a class="el" href="class_atomic_value.html">AtomicValue&lt; LockFreeQueueInternal&lt; ValueType &gt; * &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_atomic_base.html">AtomicBase&lt; LockFreeStackInternal&lt; ValueType &gt; * &gt;</a><ul>
 <li><a class="el" href="class_atomic_value.html">AtomicValue&lt; LockFreeStackInternal&lt; ValueType &gt; * &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_atomic_base.html">AtomicBase&lt; LockInternalBase * &gt;</a><ul>
 <li><a class="el" href="class_atomic_value.html">AtomicValue&lt; LockInternalBase * &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_atomic_base.html">AtomicBase&lt; Long &gt;</a><ul>
-<li><a class="el" href="class_atomic_extended_3_01_long_01_4.html">AtomicExtended&lt; Long &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_atomic_base.html">AtomicBase&lt; LongLong &gt;</a><ul>
-<li><a class="el" href="class_atomic_extended_3_01_int_01_4.html">AtomicExtended&lt; Int &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_atomic_base.html">AtomicBase&lt; ObjectArrayInternal&lt; Buffer &gt; * &gt;</a><ul>
+<li><a class="el" href="class_atomic_value.html">AtomicValue&lt; NeuralNetworkInternal&lt; ValueType &gt; * &gt;</a></li>
 <li><a class="el" href="class_atomic_value.html">AtomicValue&lt; ObjectArrayInternal&lt; Buffer &gt; * &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_atomic_base.html">AtomicBase&lt; ObjectArrayInternal&lt; BusType &gt; * &gt;</a><ul>
 <li><a class="el" href="class_atomic_value.html">AtomicValue&lt; ObjectArrayInternal&lt; BusType &gt; * &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_atomic_base.html">AtomicBase&lt; ObjectArrayInternal&lt; ChannelBase&lt; float &gt; &gt; * &gt;</a><ul>
 <li><a class="el" href="class_atomic_value.html">AtomicValue&lt; ObjectArrayInternal&lt; ChannelBase&lt; float &gt; &gt; * &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_atomic_base.html">AtomicBase&lt; ObjectArrayInternal&lt; ChannelBase&lt; SampleType &gt; &gt; * &gt;</a><ul>
 <li><a class="el" href="class_atomic_value.html">AtomicValue&lt; ObjectArrayInternal&lt; ChannelBase&lt; SampleType &gt; &gt; * &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_atomic_base.html">AtomicBase&lt; ObjectArrayInternal&lt; const float * &gt; * &gt;</a><ul>
 <li><a class="el" href="class_atomic_value.html">AtomicValue&lt; ObjectArrayInternal&lt; const float * &gt; * &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_atomic_base.html">AtomicBase&lt; ObjectArrayInternal&lt; float * &gt; * &gt;</a><ul>
 <li><a class="el" href="class_atomic_value.html">AtomicValue&lt; ObjectArrayInternal&lt; float * &gt; * &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_atomic_base.html">AtomicBase&lt; ObjectArrayInternal&lt; FormType::SampleDataType &gt; * &gt;</a><ul>
+<li><a class="el" href="class_atomic_value.html">AtomicValue&lt; ObjectArrayInternal&lt; float &gt; * &gt;</a></li>
 <li><a class="el" href="class_atomic_value.html">AtomicValue&lt; ObjectArrayInternal&lt; FormType::SampleDataType &gt; * &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_atomic_base.html">AtomicBase&lt; ObjectArrayInternal&lt; NumericalType &gt; * &gt;</a><ul>
 <li><a class="el" href="class_atomic_value.html">AtomicValue&lt; ObjectArrayInternal&lt; NumericalType &gt; * &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_atomic_base.html">AtomicBase&lt; ObjectArrayInternal&lt; ObjectType &gt; * &gt;</a><ul>
 <li><a class="el" href="class_atomic_value.html">AtomicValue&lt; ObjectArrayInternal&lt; ObjectType &gt; * &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_atomic_base.html">AtomicBase&lt; ObjectArrayInternal&lt; ObjectType, SmartPointer &gt; * &gt;</a><ul>
 <li><a class="el" href="class_atomic_value.html">AtomicValue&lt; ObjectArrayInternal&lt; ObjectType, SmartPointer &gt; * &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_atomic_base.html">AtomicBase&lt; ObjectArrayInternal&lt; OutputSampleType &gt; * &gt;</a><ul>
 <li><a class="el" href="class_atomic_value.html">AtomicValue&lt; ObjectArrayInternal&lt; OutputSampleType &gt; * &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_atomic_base.html">AtomicBase&lt; ObjectArrayInternal&lt; Receiver *, SmartPointer &gt; * &gt;</a><ul>
 <li><a class="el" href="class_atomic_value.html">AtomicValue&lt; ObjectArrayInternal&lt; Receiver *, SmartPointer &gt; * &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_atomic_base.html">AtomicBase&lt; ObjectArrayInternal&lt; RowType &gt; * &gt;</a><ul>
 <li><a class="el" href="class_atomic_value.html">AtomicValue&lt; ObjectArrayInternal&lt; RowType &gt; * &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_atomic_base.html">AtomicBase&lt; ObjectArrayInternal&lt; SampleType &gt; * &gt;</a><ul>
 <li><a class="el" href="class_atomic_value.html">AtomicValue&lt; ObjectArrayInternal&lt; SampleType &gt; * &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_atomic_base.html">AtomicBase&lt; ObjectArrayInternal&lt; ShapeType::SampleDataType &gt; * &gt;</a><ul>
 <li><a class="el" href="class_atomic_value.html">AtomicValue&lt; ObjectArrayInternal&lt; ShapeType::SampleDataType &gt; * &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_atomic_base.html">AtomicBase&lt; ObjectArrayInternal&lt; Text &gt; * &gt;</a><ul>
 <li><a class="el" href="class_atomic_value.html">AtomicValue&lt; ObjectArrayInternal&lt; Text &gt; * &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_atomic_base.html">AtomicBase&lt; ObjectArrayInternal&lt; WeakChannelType, SmartPointer &gt; * &gt;</a><ul>
 <li><a class="el" href="class_atomic_value.html">AtomicValue&lt; ObjectArrayInternal&lt; WeakChannelType, SmartPointer &gt; * &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_atomic_base.html">AtomicBase&lt; ObjectArrayInternal&lt; WeakPointer *, SmartPointer &gt; * &gt;</a><ul>
 <li><a class="el" href="class_atomic_value.html">AtomicValue&lt; ObjectArrayInternal&lt; WeakPointer *, SmartPointer &gt; * &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_atomic_base.html">AtomicBase&lt; ObjectMemoryBase * &gt;</a><ul>
-<li><a class="el" href="class_atomic_value.html">AtomicValue&lt; ObjectMemoryBase * &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_atomic_base.html">AtomicBase&lt; PlankD &gt;</a><ul>
-<li><a class="el" href="class_atomic_value_3_01_plank_d_01_4.html">AtomicValue&lt; PlankD &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_atomic_base.html">AtomicBase&lt; PlankF &gt;</a><ul>
-<li><a class="el" href="class_atomic_value_3_01_plank_f_01_4.html">AtomicValue&lt; PlankF &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_atomic_base.html">AtomicBase&lt; PlankI &gt;</a><ul>
-<li><a class="el" href="class_atomic_value_3_01_plank_i_01_4.html">AtomicValue&lt; PlankI &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_atomic_base.html">AtomicBase&lt; PlankL &gt;</a><ul>
-<li><a class="el" href="class_atomic_value_3_01_plank_l_01_4.html">AtomicValue&lt; PlankL &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_atomic_base.html">AtomicBase&lt; PlankLL &gt;</a><ul>
-<li><a class="el" href="class_atomic_value_3_01_plank_l_l_01_4.html">AtomicValue&lt; PlankLL &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_atomic_base.html">AtomicBase&lt; PlankUI &gt;</a><ul>
-<li><a class="el" href="class_atomic_value_3_01_plank_u_i_01_4.html">AtomicValue&lt; PlankUI &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_atomic_base.html">AtomicBase&lt; PlankUL &gt;</a><ul>
-<li><a class="el" href="class_atomic_value_3_01_plank_u_l_01_4.html">AtomicValue&lt; PlankUL &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_atomic_base.html">AtomicBase&lt; PlankULL &gt;</a><ul>
-<li><a class="el" href="class_atomic_value_3_01_plank_u_l_l_01_4.html">AtomicValue&lt; PlankULL &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_atomic_base.html">AtomicBase&lt; ProcessInfoInternal * &gt;</a><ul>
 <li><a class="el" href="class_atomic_value.html">AtomicValue&lt; ProcessInfoInternal * &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_atomic_base.html">AtomicBase&lt; ReceiverInternalType * &gt;</a><ul>
 <li><a class="el" href="class_atomic_value.html">AtomicValue&lt; ReceiverInternalType * &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_atomic_base.html">AtomicBase&lt; RNGInternal * &gt;</a><ul>
 <li><a class="el" href="class_atomic_value.html">AtomicValue&lt; RNGInternal * &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_atomic_base.html">AtomicBase&lt; SenderInternalType * &gt;</a><ul>
 <li><a class="el" href="class_atomic_value.html">AtomicValue&lt; SenderInternalType * &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_atomic_base.html">AtomicBase&lt; SignalInternal&lt; SampleType &gt; * &gt;</a><ul>
 <li><a class="el" href="class_atomic_value.html">AtomicValue&lt; SignalInternal&lt; SampleType &gt; * &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_atomic_base.html">AtomicBase&lt; SimpleLinkedListInternal&lt; ValueType &gt; * &gt;</a><ul>
 <li><a class="el" href="class_atomic_value.html">AtomicValue&lt; SimpleLinkedListInternal&lt; ValueType &gt; * &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_atomic_base.html">AtomicBase&lt; SimpleQueueInternal&lt; ValueType &gt; * &gt;</a><ul>
 <li><a class="el" href="class_atomic_value.html">AtomicValue&lt; SimpleQueueInternal&lt; ValueType &gt; * &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_atomic_base.html">AtomicBase&lt; SimpleStackInternal&lt; ValueType &gt; * &gt;</a><ul>
 <li><a class="el" href="class_atomic_value.html">AtomicValue&lt; SimpleStackInternal&lt; ValueType &gt; * &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_atomic_base.html">AtomicBase&lt; TextFileInternal * &gt;</a><ul>
+<li><a class="el" href="class_atomic_value.html">AtomicValue&lt; TaskBufferInternal&lt; SampleType &gt; * &gt;</a></li>
+<li><a class="el" href="class_atomic_value.html">AtomicValue&lt; TaskMessageInternal * &gt;</a></li>
 <li><a class="el" href="class_atomic_value.html">AtomicValue&lt; TextFileInternal * &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_atomic_base_3_01_type_01_5_01_4.html">AtomicBase&lt; Type * &gt;</a><ul>
-<li><a class="el" href="class_atomic_extended_3_01_type_01_5_01_4.html">AtomicExtended&lt; Type * &gt;</a></li>
-<li><a class="el" href="class_atomic_value_3_01_type_01_5_01_4.html">AtomicValue&lt; Type * &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_atomic_base.html">AtomicBase&lt; VariableInternal&lt; Type &amp; &gt; * &gt;</a><ul>
 <li><a class="el" href="class_atomic_value.html">AtomicValue&lt; VariableInternal&lt; Type &amp; &gt; * &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_atomic_base.html">AtomicBase&lt; VariableInternalBase&lt; Type &gt; * &gt;</a><ul>
 <li><a class="el" href="class_atomic_value.html">AtomicValue&lt; VariableInternalBase&lt; Type &gt; * &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_atomic_base_3_01void_01_5_01_4.html">AtomicBase&lt; void * &gt;</a><ul>
-<li><a class="el" href="class_atomic_value_3_01void_01_5_01_4.html">AtomicValue&lt; void * &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_atomic_base.html">AtomicBase&lt; WeakPointer * &gt;</a><ul>
 <li><a class="el" href="class_atomic_value.html">AtomicValue&lt; WeakPointer * &gt;</a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li><a class="el" href="class_atomic_value.html">AtomicValue&lt; ZipInternal * &gt;</a></li>
 <li><a class="el" href="class_atomic_variable_unit.html">AtomicVariableUnit&lt; SampleType &gt;</a></li>
 <li><a class="el" href="class_audio_file.html">AudioFile</a></li>
-<li><a class="el" href="class_audio_host_base.html">AudioHostBase&lt; SampleType &gt;</a></li>
-<li><a class="el" href="class_audio_host_base.html">AudioHostBase&lt; float &gt;</a><ul>
-<li><a class="el" href="class_i_o_s_audio_host.html">IOSAudioHost</a></li>
-<li><a class="el" href="class_juce_audio_host.html">JuceAudioHost</a></li>
-<li><a class="el" href="class_port_audio_audio_host.html">PortAudioAudioHost</a></li>
+<li><a class="el" href="class_audio_file_reader.html">AudioFileReader</a></li>
+<li><a class="el" href="class_audio_file_writer.html">AudioFileWriter&lt; SampleType &gt;</a></li>
+<li><a class="el" href="class_audio_host_base.html">AudioHostBase&lt; SampleType &gt;</a><ul>
+<li><a class="el" href="class_p_l_o_n_k___n_a_m_e_s_p_a_c_e_1_1_i_o_s_audio_host_base.html">PLONK_NAMESPACE::IOSAudioHostBase&lt; SampleType &gt;</a></li>
 </ul>
 </li>
-<li><a class="el" href="class_auto_lock.html">AutoLock</a></li>
-<li><a class="el" href="class_auto_try_lock.html">AutoTryLock</a></li>
-<li><a class="el" href="class_auto_unlock.html">AutoUnlock</a></li>
-<li><a class="el" href="class_binary_op_type_utility.html">BinaryOpTypeUtility&lt; TypeA, TypeB &gt;</a></li>
-<li><a class="el" href="class_binary_op_type_utility_3_01char_00_01_int24_01_4.html">BinaryOpTypeUtility&lt; char, Int24 &gt;</a></li>
-<li><a class="el" href="class_binary_op_type_utility_3_01double_00_01_int24_01_4.html">BinaryOpTypeUtility&lt; double, Int24 &gt;</a></li>
-<li><a class="el" href="class_binary_op_type_utility_3_01_int24_00_01char_01_4.html">BinaryOpTypeUtility&lt; Int24, char &gt;</a></li>
-<li><a class="el" href="class_binary_op_type_utility_3_01_int24_00_01double_01_4.html">BinaryOpTypeUtility&lt; Int24, double &gt;</a></li>
-<li><a class="el" href="class_binary_op_type_utility_3_01_int24_00_01_int24_01_4.html">BinaryOpTypeUtility&lt; Int24, Int24 &gt;</a></li>
-<li><a class="el" href="class_binary_op_type_utility_3_01_int24_00_01_long_long_01_4.html">BinaryOpTypeUtility&lt; Int24, LongLong &gt;</a></li>
-<li><a class="el" href="class_binary_op_type_utility_3_01_int24_00_01short_01_4.html">BinaryOpTypeUtility&lt; Int24, short &gt;</a></li>
-<li><a class="el" href="class_binary_op_type_utility_3_01_long_long_00_01_int24_01_4.html">BinaryOpTypeUtility&lt; LongLong, Int24 &gt;</a></li>
-<li><a class="el" href="class_binary_op_type_utility_3_01short_00_01_int24_01_4.html">BinaryOpTypeUtility&lt; short, Int24 &gt;</a></li>
-<li><a class="el" href="class_binary_op_utility.html">BinaryOpUtility&lt; SampleType &gt;</a></li>
+<li><a class="el" href="class_audio_host_base.html">AudioHostBase&lt; float &gt;</a><ul>
+<li><a class="el" href="class_p_l_o_n_k___n_a_m_e_s_p_a_c_e_1_1_i_o_s_audio_host_base.html">PLONK_NAMESPACE::IOSAudioHostBase&lt; float &gt;</a></li>
+</ul>
+</li>
+<li><a class="el" href="class_base64.html">Base64</a></li>
+<li><a class="el" href="class_binary_file.html">BinaryFile</a></li>
 <li><a class="el" href="class_bits.html">Bits</a></li>
-<li><a class="el" href="class_bits_base.html">BitsBase&lt; Type, NumBits &gt;</a></li>
-<li><a class="el" href="class_bits_base_3_01_type_00_011_01_4.html">BitsBase&lt; Type, 1 &gt;</a></li>
-<li><a class="el" href="class_bits_base_3_01_type_00_012_01_4.html">BitsBase&lt; Type, 2 &gt;</a></li>
-<li><a class="el" href="class_bits_base_3_01_type_00_014_01_4.html">BitsBase&lt; Type, 4 &gt;</a></li>
-<li><a class="el" href="class_bits_base_3_01_type_00_018_01_4.html">BitsBase&lt; Type, 8 &gt;</a></li>
+<li><a class="el" href="class_block_size.html">BlockSize</a></li>
 <li><a class="el" href="class_block_unit.html">BlockUnit&lt; SampleType &gt;</a></li>
-<li><a class="el" href="class_b_p_f_unit.html">BPFUnit&lt; SampleType &gt;</a></li>
-<li><a class="el" href="class_b_r_f_unit.html">BRFUnit&lt; SampleType &gt;</a></li>
+<li><a class="el" href="class_b_p_f_unit.html">BPFUnit&lt; SampleType, InterpTypeCode &gt;</a></li>
+<li><a class="el" href="class_b_r_f_unit.html">BRFUnit&lt; SampleType, InterpTypeCode &gt;</a></li>
+<li><a class="el" href="class_bus_buffer.html">BusBuffer&lt; SampleType &gt;</a></li>
 <li><a class="el" href="class_bus_read_unit.html">BusReadUnit&lt; SampleType &gt;</a></li>
 <li><a class="el" href="class_bus_write_unit.html">BusWriteUnit&lt; SampleType &gt;</a></li>
-<li><a class="el" href="class_channel_count.html">ChannelCount</a></li>
+<li><a class="el" href="class_channel_base.html">ChannelBase&lt; SampleType &gt;</a></li>
 <li><a class="el" href="struct_channel_data.html">ChannelData&lt; OwnerType &gt;</a></li>
-<li><a class="el" href="struct_channel_data_3_01_channel_internal_core_01_4.html">ChannelData&lt; ChannelInternalCore &gt;</a></li>
-<li><a class="el" href="struct_channel_data_3_01_channel_mixer_channel_internal_3_01_sample_type_01_4_01_4.html">ChannelData&lt; ChannelMixerChannelInternal&lt; SampleType &gt; &gt;</a></li>
-<li><a class="el" href="struct_channel_data_3_01_envelope_channel_internal_3_01_sample_type_01_4_01_4.html">ChannelData&lt; EnvelopeChannelInternal&lt; SampleType &gt; &gt;</a></li>
-<li><a class="el" href="struct_channel_data_3_01_file_play_channel_internal_3_01_sample_type_01_4_01_4.html">ChannelData&lt; FilePlayChannelInternal&lt; SampleType &gt; &gt;</a></li>
-<li><a class="el" href="struct_channel_data_3_01_patch_channel_internal_3_01_sample_type_01_4_01_4.html">ChannelData&lt; PatchChannelInternal&lt; SampleType &gt; &gt;</a></li>
-<li><a class="el" href="struct_channel_data_3_01_saw_channel_internal_3_01double_01_4_01_4.html">ChannelData&lt; SawChannelInternal&lt; double &gt; &gt;</a></li>
-<li><a class="el" href="struct_channel_data_3_01_saw_channel_internal_3_01float_01_4_01_4.html">ChannelData&lt; SawChannelInternal&lt; float &gt; &gt;</a></li>
-<li><a class="el" href="struct_channel_data_3_01_saw_channel_internal_3_01int_01_4_01_4.html">ChannelData&lt; SawChannelInternal&lt; int &gt; &gt;</a></li>
-<li><a class="el" href="struct_channel_data_3_01_saw_channel_internal_3_01_sample_type_01_4_01_4.html">ChannelData&lt; SawChannelInternal&lt; SampleType &gt; &gt;</a></li>
-<li><a class="el" href="struct_channel_data_3_01_saw_channel_internal_3_01short_01_4_01_4.html">ChannelData&lt; SawChannelInternal&lt; short &gt; &gt;</a></li>
-<li><a class="el" href="struct_channel_data_3_01_signal_play_channel_internal_3_01_sample_type_01_4_01_4.html">ChannelData&lt; SignalPlayChannelInternal&lt; SampleType &gt; &gt;</a></li>
-<li><a class="el" href="struct_channel_data_3_01_table_channel_internal_3_01_sample_type_01_4_01_4.html">ChannelData&lt; TableChannelInternal&lt; SampleType &gt; &gt;</a></li>
-<li><a class="el" href="struct_channel_data_3_01_threaded_channel_internal_3_01_sample_type_01_4_01_4.html">ChannelData&lt; ThreadedChannelInternal&lt; SampleType &gt; &gt;</a></li>
-<li><a class="el" href="struct_channel_data_3_01_unit_mixer_channel_internal_3_01_sample_type_01_4_01_4.html">ChannelData&lt; UnitMixerChannelInternal&lt; SampleType &gt; &gt;</a></li>
-<li><a class="el" href="struct_channel_data_3_01_white_noise_channel_internal_3_01_sample_type_01_4_01_4.html">ChannelData&lt; WhiteNoiseChannelInternal&lt; SampleType &gt; &gt;</a></li>
-<li><a class="el" href="struct_channel_data_3_01_white_noise_channel_internal_3_01short_01_4_01_4.html">ChannelData&lt; WhiteNoiseChannelInternal&lt; short &gt; &gt;</a></li>
+<li><a class="el" href="struct_channel_data.html">ChannelData&lt; ChannelMixerChannelInternal&lt; SampleType &gt; &gt;</a></li>
+<li><a class="el" href="struct_channel_data.html">ChannelData&lt; EnvelopeChannelInternal&lt; SampleType &gt; &gt;</a></li>
+<li><a class="el" href="struct_channel_data.html">ChannelData&lt; FilePlayChannelInternal&lt; SampleType &gt; &gt;</a></li>
+<li><a class="el" href="struct_channel_data.html">ChannelData&lt; ImpulseChannelInternal&lt; SampleType &gt; &gt;</a></li>
+<li><a class="el" href="struct_channel_data.html">ChannelData&lt; InputTaskChannelInternal&lt; SampleType, InterpTypeCode &gt; &gt;</a></li>
+<li><a class="el" href="struct_channel_data.html">ChannelData&lt; LookupChannelInternal&lt; SampleType &gt; &gt;</a></li>
+<li><a class="el" href="struct_channel_data.html">ChannelData&lt; OverlapMakeChannelInternal&lt; SampleType &gt; &gt;</a></li>
+<li><a class="el" href="struct_channel_data.html">ChannelData&lt; PatchChannelInternal&lt; SampleType &gt; &gt;</a></li>
+<li><a class="el" href="struct_channel_data.html">ChannelData&lt; QueueChannelInternal&lt; SampleType &gt; &gt;</a></li>
+<li><a class="el" href="struct_channel_data.html">ChannelData&lt; QueueMixerChannelInternal&lt; SampleType &gt; &gt;</a></li>
+<li><a class="el" href="struct_channel_data.html">ChannelData&lt; SawChannelInternal&lt; SampleType &gt; &gt;</a></li>
+<li><a class="el" href="struct_channel_data.html">ChannelData&lt; SchmidtChannelInternal&lt; SampleType &gt; &gt;</a></li>
+<li><a class="el" href="struct_channel_data.html">ChannelData&lt; SignalPlayChannelInternal&lt; SampleType &gt; &gt;</a></li>
+<li><a class="el" href="struct_channel_data.html">ChannelData&lt; SignalReadChannelInternal&lt; SampleType &gt; &gt;</a></li>
+<li><a class="el" href="struct_channel_data.html">ChannelData&lt; TableChannelInternal&lt; SampleType &gt; &gt;</a></li>
+<li><a class="el" href="struct_channel_data.html">ChannelData&lt; TriggerChannelInternal&lt; SampleType &gt; &gt;</a></li>
+<li><a class="el" href="struct_channel_data.html">ChannelData&lt; UnitMixerChannelInternal&lt; SampleType &gt; &gt;</a></li>
+<li><a class="el" href="struct_channel_data.html">ChannelData&lt; WhiteNoiseChannelInternal&lt; SampleType &gt; &gt;</a></li>
 <li><a class="el" href="class_channel_internal_core.html">ChannelInternalCore</a><ul>
 <li><a class="el" href="class_channel_internal_base.html">ChannelInternalBase&lt; SampleType &gt;</a><ul>
 <li><a class="el" href="class_channel_internal.html">ChannelInternal&lt; SampleType, DataType &gt;</a><ul>
@@ -510,9 +223,45 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </li>
 </ul>
 </li>
+<li><a class="el" href="class_channel_internal.html">ChannelInternal&lt; SampleType, ChannelData&lt; ImpulseChannelInternal&lt; SampleType &gt; &gt; &gt;</a><ul>
+<li><a class="el" href="class_impulse_channel_internal.html">ImpulseChannelInternal&lt; SampleType &gt;</a></li>
+</ul>
+</li>
+<li><a class="el" href="class_channel_internal.html">ChannelInternal&lt; SampleType, ChannelData&lt; InputTaskChannelInternal&lt; SampleType, InterpTypeCode &gt; &gt; &gt;</a><ul>
+<li><a class="el" href="class_proxy_owner_channel_internal.html">ProxyOwnerChannelInternal&lt; SampleType, ChannelData&lt; InputTaskChannelInternal&lt; SampleType, InterpTypeCode &gt; &gt; &gt;</a><ul>
+<li><a class="el" href="class_input_task_channel_internal.html">InputTaskChannelInternal&lt; SampleType, InterpTypeCode &gt;</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="el" href="class_channel_internal.html">ChannelInternal&lt; SampleType, ChannelData&lt; LookupChannelInternal&lt; SampleType &gt; &gt; &gt;</a><ul>
+<li><a class="el" href="class_lookup_channel_internal.html">LookupChannelInternal&lt; SampleType &gt;</a></li>
+</ul>
+</li>
+<li><a class="el" href="class_channel_internal.html">ChannelInternal&lt; SampleType, ChannelData&lt; OverlapMakeChannelInternal&lt; SampleType &gt; &gt; &gt;</a><ul>
+<li><a class="el" href="class_proxy_owner_channel_internal.html">ProxyOwnerChannelInternal&lt; SampleType, ChannelData&lt; OverlapMakeChannelInternal&lt; SampleType &gt; &gt; &gt;</a><ul>
+<li><a class="el" href="class_overlap_make_channel_internal.html">OverlapMakeChannelInternal&lt; SampleType &gt;</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li><a class="el" href="class_channel_internal.html">ChannelInternal&lt; SampleType, ChannelData&lt; PatchChannelInternal&lt; SampleType &gt; &gt; &gt;</a><ul>
 <li><a class="el" href="class_proxy_owner_channel_internal.html">ProxyOwnerChannelInternal&lt; SampleType, ChannelData&lt; PatchChannelInternal&lt; SampleType &gt; &gt; &gt;</a><ul>
 <li><a class="el" href="class_patch_channel_internal.html">PatchChannelInternal&lt; SampleType &gt;</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="el" href="class_channel_internal.html">ChannelInternal&lt; SampleType, ChannelData&lt; QueueChannelInternal&lt; SampleType &gt; &gt; &gt;</a><ul>
+<li><a class="el" href="class_proxy_owner_channel_internal.html">ProxyOwnerChannelInternal&lt; SampleType, ChannelData&lt; QueueChannelInternal&lt; SampleType &gt; &gt; &gt;</a><ul>
+<li><a class="el" href="class_queue_channel_internal.html">QueueChannelInternal&lt; SampleType &gt;</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="el" href="class_channel_internal.html">ChannelInternal&lt; SampleType, ChannelData&lt; QueueMixerChannelInternal&lt; SampleType &gt; &gt; &gt;</a><ul>
+<li><a class="el" href="class_proxy_owner_channel_internal.html">ProxyOwnerChannelInternal&lt; SampleType, ChannelData&lt; QueueMixerChannelInternal&lt; SampleType &gt; &gt; &gt;</a><ul>
+<li><a class="el" href="class_queue_mixer_channel_internal.html">QueueMixerChannelInternal&lt; SampleType &gt;</a></li>
 </ul>
 </li>
 </ul>
@@ -521,19 +270,24 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li><a class="el" href="class_saw_channel_internal.html">SawChannelInternal&lt; SampleType &gt;</a></li>
 </ul>
 </li>
+<li><a class="el" href="class_channel_internal.html">ChannelInternal&lt; SampleType, ChannelData&lt; SchmidtChannelInternal&lt; SampleType &gt; &gt; &gt;</a><ul>
+<li><a class="el" href="class_schmidt_channel_internal.html">SchmidtChannelInternal&lt; SampleType &gt;</a></li>
+</ul>
+</li>
 <li><a class="el" href="class_channel_internal.html">ChannelInternal&lt; SampleType, ChannelData&lt; SignalPlayChannelInternal&lt; SampleType &gt; &gt; &gt;</a><ul>
 <li><a class="el" href="class_signal_play_channel_internal.html">SignalPlayChannelInternal&lt; SampleType &gt;</a></li>
+</ul>
+</li>
+<li><a class="el" href="class_channel_internal.html">ChannelInternal&lt; SampleType, ChannelData&lt; SignalReadChannelInternal&lt; SampleType &gt; &gt; &gt;</a><ul>
+<li><a class="el" href="class_signal_read_channel_internal.html">SignalReadChannelInternal&lt; SampleType &gt;</a></li>
 </ul>
 </li>
 <li><a class="el" href="class_channel_internal.html">ChannelInternal&lt; SampleType, ChannelData&lt; TableChannelInternal&lt; SampleType &gt; &gt; &gt;</a><ul>
 <li><a class="el" href="class_table_channel_internal.html">TableChannelInternal&lt; SampleType &gt;</a></li>
 </ul>
 </li>
-<li><a class="el" href="class_channel_internal.html">ChannelInternal&lt; SampleType, ChannelData&lt; ThreadedChannelInternal&lt; SampleType &gt; &gt; &gt;</a><ul>
-<li><a class="el" href="class_proxy_owner_channel_internal.html">ProxyOwnerChannelInternal&lt; SampleType, ChannelData&lt; ThreadedChannelInternal&lt; SampleType &gt; &gt; &gt;</a><ul>
-<li><a class="el" href="class_threaded_channel_internal.html">ThreadedChannelInternal&lt; SampleType &gt;</a></li>
-</ul>
-</li>
+<li><a class="el" href="class_channel_internal.html">ChannelInternal&lt; SampleType, ChannelData&lt; TriggerChannelInternal&lt; SampleType &gt; &gt; &gt;</a><ul>
+<li><a class="el" href="class_trigger_channel_internal.html">TriggerChannelInternal&lt; SampleType &gt;</a></li>
 </ul>
 </li>
 <li><a class="el" href="class_channel_internal.html">ChannelInternal&lt; SampleType, ChannelData&lt; UnitMixerChannelInternal&lt; SampleType &gt; &gt; &gt;</a><ul>
@@ -557,19 +311,19 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li><a class="el" href="class_null_channel_internal.html">NullChannelInternal&lt; SampleType &gt;</a></li>
 </ul>
 </li>
+<li><a class="el" href="class_f_f_t_channel_internal.html">FFTChannelInternal&lt; SampleType &gt;</a></li>
 <li><a class="el" href="class_i_f_f_t_channel_internal.html">IFFTChannelInternal&lt; SampleType &gt;</a></li>
 <li><a class="el" href="class_mul_add_channel_internal.html">MulAddChannelInternal&lt; SampleType &gt;</a></li>
-<li><a class="el" href="class_overlap_make_channel_internal.html">OverlapMakeChannelInternal&lt; SampleType &gt;</a></li>
-<li><a class="el" href="class_overlap_mix_channel_internal.html">OverlapMixChannelInternal&lt; SampleType &gt;</a></li>
-<li><a class="el" href="class_proxy_channel_internal.html">ProxyChannelInternal&lt; SampleType &gt;</a></li>
+<li><a class="el" href="class_param_channel_internal.html">ParamChannelInternal&lt; SampleType &gt;</a></li>
 <li><a class="el" href="class_proxy_owner_channel_internal.html">ProxyOwnerChannelInternal&lt; SampleType, ChannelInternalCore::Data &gt;</a><ul>
-<li><a class="el" href="class_f_f_t_channel_internal.html">FFTChannelInternal&lt; SampleType &gt;</a></li>
 <li><a class="el" href="class_linear_pan_channel_internal.html">LinearPanChannelInternal&lt; SampleType &gt;</a></li>
+<li><a class="el" href="class_overlap_mix_channel_internal.html">OverlapMixChannelInternal&lt; SampleType &gt;</a></li>
+<li><a class="el" href="class_resample_channel_internal.html">ResampleChannelInternal&lt; SampleType, InterpTypeCode &gt;</a></li>
 </ul>
 </li>
-<li><a class="el" href="class_resample_channel_internal.html">ResampleChannelInternal&lt; SampleType &gt;</a></li>
+<li><a class="el" href="class_reblock_channel_internal.html">ReblockChannelInternal&lt; SampleType &gt;</a></li>
 <li><a class="el" href="class_unary_op_channel_internal.html">UnaryOpChannelInternal&lt; SampleType, op &gt;</a></li>
-<li><a class="el" href="class_variable_channel_internal.html">VariableChannelInternal&lt; SampleType &gt;</a></li>
+<li><a class="el" href="class_z_mul_channel_internal.html">ZMulChannelInternal&lt; SampleType &gt;</a></li>
 </ul>
 </li>
 </ul>
@@ -577,16 +331,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li><a class="el" href="class_channel_internal_base.html">ChannelInternalBase&lt; FormType::SampleDataType &gt;</a><ul>
 <li><a class="el" href="class_channel_internal.html">ChannelInternal&lt; FormType::SampleDataType, FormType::Data &gt;</a><ul>
 <li><a class="el" href="class_filter_channel_internal.html">FilterChannelInternal&lt; FormType &gt;</a></li>
-<li><a class="el" href="class_proxy_owner_channel_internal.html">ProxyOwnerChannelInternal&lt; FormType::SampleDataType, FormType::Data &gt;</a><ul>
-<li><a class="el" href="class_delay_channel_internal_base.html">DelayChannelInternalBase&lt; FormType &gt;</a><ul>
-<li><a class="el" href="class_delay1_param_channel_internal.html">Delay1ParamChannelInternal&lt; FormType &gt;</a></li>
-<li><a class="el" href="class_delay2_param_channel_internal.html">Delay2ParamChannelInternal&lt; FormType &gt;</a></li>
-<li><a class="el" href="class_delay3_param_channel_internal.html">Delay3ParamChannelInternal&lt; FormType &gt;</a></li>
-<li><a class="el" href="class_delay4_param_channel_internal.html">Delay4ParamChannelInternal&lt; FormType &gt;</a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li><a class="el" href="class_proxy_owner_channel_internal.html">ProxyOwnerChannelInternal&lt; FormType::SampleDataType, FormType::Data &gt;</a></li>
 </ul>
 </li>
 </ul>
@@ -612,615 +357,85 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </li>
 </ul>
 </li>
-<li><a class="el" href="class_comb_decay_unit.html">CombDecayUnit&lt; SampleType &gt;</a></li>
-<li><a class="el" href="class_comb_f_b_unit.html">CombFBUnit&lt; SampleType &gt;</a></li>
-<li><a class="el" href="class_comb_filter1_param_unit.html">CombFilter1ParamUnit&lt; FilterShape &gt;</a></li>
-<li><a class="el" href="class_decay_unit.html">DecayUnit&lt; SampleType &gt;</a></li>
-<li><a class="el" href="class_delay_form_base.html">DelayFormBase&lt; SampleType, Form, NumInParams, NumOutParams &gt;</a><ul>
-<li><a class="el" href="class_delay_form.html">DelayForm&lt; SampleType, Form, NumInParams, NumOutParams &gt;</a></li>
-<li><a class="el" href="class_delay_form.html">DelayForm&lt; SampleType, DelayFormType::AllpassFFFB, 2, 2 &gt;</a><ul>
-<li><a class="el" href="class_delay_form_allpass_f_f_f_b.html">DelayFormAllpassFFFB&lt; SampleType &gt;</a><ul>
-<li><a class="el" href="class_delay_form_allpass_decay.html">DelayFormAllpassDecay&lt; SampleType &gt;</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="el" href="class_delay_form.html">DelayForm&lt; SampleType, DelayFormType::CombFB, 2, 2 &gt;</a><ul>
-<li><a class="el" href="class_delay_form_comb_f_b.html">DelayFormCombFB&lt; SampleType &gt;</a><ul>
-<li><a class="el" href="class_delay_form_comb_decay.html">DelayFormCombDecay&lt; SampleType &gt;</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="el" href="class_delay_form.html">DelayForm&lt; SampleType, DelayFormType::Delay, 1, 1 &gt;</a><ul>
-<li><a class="el" href="class_delay_form_delay.html">DelayFormDelay&lt; SampleType &gt;</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="el" href="class_delay_form_base.html">DelayFormBase&lt; FilterShape::SampleDataType, Form, NumInParams, NumOutParams &gt;</a><ul>
-<li><a class="el" href="class_delay_form.html">DelayForm&lt; FilterShape::SampleDataType, DelayFormType::CombFilter1Param, 3, 3 &gt;</a><ul>
-<li><a class="el" href="class_delay_form_comb_filter1_param.html">DelayFormCombFilter1Param&lt; FilterShape &gt;</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="el" href="struct_delay_form_data.html">DelayFormData&lt; SampleType, Form, NumInParams, NumOutParams &gt;</a></li>
-<li><a class="el" href="class_delay_form_type.html">DelayFormType</a></li>
-<li><a class="el" href="struct_delay_form_data_1_1_delay_state.html">DelayFormData&lt; SampleType, Form, NumInParams, NumOutParams &gt;::DelayState</a><ul>
-<li><a class="el" href="struct_delay_form_comb_filter1_param_1_1_delay_state.html">DelayFormCombFilter1Param&lt; FilterShape &gt;::DelayState</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_delay_unit.html">DelayUnit&lt; SampleType &gt;</a></li>
-<li><a class="el" href="classffft_1_1_dyn_array.html">ffft::DynArray&lt; T &gt;</a></li>
-<li><a class="el" href="class_endian.html">Endian</a><ul>
-<li><a class="el" href="class_endian_if_big.html">EndianIfBig</a></li>
-<li><a class="el" href="class_endian_if_little.html">EndianIfLittle</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_endian_utility.html">EndianUtility&lt; length &gt;</a></li>
-<li><a class="el" href="class_endian_utility_3_011_01_4.html">EndianUtility&lt; 1 &gt;</a></li>
-<li><a class="el" href="class_endian_utility_3_012_01_4.html">EndianUtility&lt; 2 &gt;</a></li>
-<li><a class="el" href="class_endian_utility_3_013_01_4.html">EndianUtility&lt; 3 &gt;</a></li>
-<li><a class="el" href="class_endian_utility_3_014_01_4.html">EndianUtility&lt; 4 &gt;</a></li>
-<li><a class="el" href="class_endian_utility_3_018_01_4.html">EndianUtility&lt; 8 &gt;</a></li>
-<li><a class="el" href="class_envelope_unit.html">EnvelopeUnit&lt; SampleType &gt;</a></li>
-<li><a class="el" href="class_f_f_t_engine_base.html">FFTEngineBase&lt; SampleType &gt;</a></li>
-<li><a class="el" href="class_f_f_t_engine_internal.html">FFTEngineInternal&lt; SampleType &gt;</a></li>
-<li><a class="el" href="classffft_1_1_f_f_t_real.html">ffft::FFTReal&lt; DT &gt;</a></li>
-<li><a class="el" href="classffft_1_1_f_f_t_real_fix_len.html">ffft::FFTRealFixLen&lt; LL2 &gt;</a></li>
-<li><a class="el" href="classffft_1_1_f_f_t_real_fix_len_param.html">ffft::FFTRealFixLenParam</a></li>
-<li><a class="el" href="classffft_1_1_f_f_t_real_pass_direct.html">ffft::FFTRealPassDirect&lt; PASS &gt;</a></li>
-<li><a class="el" href="classffft_1_1_f_f_t_real_pass_inverse.html">ffft::FFTRealPassInverse&lt; PASS &gt;</a></li>
-<li><a class="el" href="classffft_1_1_f_f_t_real_select.html">ffft::FFTRealSelect&lt; P &gt;</a></li>
-<li><a class="el" href="classffft_1_1_f_f_t_real_use_trigo.html">ffft::FFTRealUseTrigo&lt; ALGO &gt;</a></li>
-<li><a class="el" href="class_f_f_t_unit.html">FFTUnit&lt; SampleType &gt;</a></li>
-<li><a class="el" href="class_file_play_unit.html">FilePlayUnit&lt; SampleType &gt;</a></li>
-<li><a class="el" href="class_filter_coeffs1_param_unit.html">FilterCoeffs1ParamUnit&lt; ShapeType &gt;</a></li>
-<li><a class="el" href="class_filter_coeffs2_param_unit.html">FilterCoeffs2ParamUnit&lt; ShapeType &gt;</a></li>
-<li><a class="el" href="class_filter_coeffs3_param_unit.html">FilterCoeffs3ParamUnit&lt; ShapeType &gt;</a></li>
-<li><a class="el" href="struct_filter_data.html">FilterData&lt; SampleType, Form &gt;</a></li>
-<li><a class="el" href="struct_filter_data_3_01_sample_type_00_01_filter_form_type_1_1_b2_01_4.html">FilterData&lt; SampleType, FilterFormType::B2 &gt;</a></li>
-<li><a class="el" href="struct_filter_data_3_01_sample_type_00_01_filter_form_type_1_1_p2_z2_01_4.html">FilterData&lt; SampleType, FilterFormType::P2Z2 &gt;</a></li>
-<li><a class="el" href="class_filter_form_base.html">FilterFormBase&lt; SampleType, Form &gt;</a><ul>
-<li><a class="el" href="class_filter_form.html">FilterForm&lt; SampleType, Form &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_filter_form_base.html">FilterFormBase&lt; SampleType, FilterFormType::B2 &gt;</a><ul>
-<li><a class="el" href="class_filter_form_3_01_sample_type_00_01_filter_form_type_1_1_b2_01_4.html">FilterForm&lt; SampleType, FilterFormType::B2 &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_filter_form_base.html">FilterFormBase&lt; SampleType, FilterFormType::P1 &gt;</a><ul>
-<li><a class="el" href="class_filter_form_3_01_sample_type_00_01_filter_form_type_1_1_p1_01_4.html">FilterForm&lt; SampleType, FilterFormType::P1 &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_filter_form_base.html">FilterFormBase&lt; SampleType, FilterFormType::P1a &gt;</a><ul>
-<li><a class="el" href="class_filter_form_3_01_sample_type_00_01_filter_form_type_1_1_p1a_01_4.html">FilterForm&lt; SampleType, FilterFormType::P1a &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_filter_form_base.html">FilterFormBase&lt; SampleType, FilterFormType::P2Z2 &gt;</a><ul>
-<li><a class="el" href="class_filter_form_3_01_sample_type_00_01_filter_form_type_1_1_p2_z2_01_4.html">FilterForm&lt; SampleType, FilterFormType::P2Z2 &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_filter_form_type.html">FilterFormType</a></li>
-<li><a class="el" href="class_filter_shape.html">FilterShape&lt; SampleType, Form, Shape &gt;</a></li>
-<li><a class="el" href="class_filter_shape.html">FilterShape&lt; SampleType, FilterFormType::B2, FilterShapeType::HPF &gt;</a><ul>
-<li><a class="el" href="class_filter_shape_h_p_f_base.html">FilterShapeHPFBase&lt; SampleType &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_filter_shape.html">FilterShape&lt; SampleType, FilterFormType::B2, FilterShapeType::LPF &gt;</a><ul>
-<li><a class="el" href="class_filter_shape_l_p_f_base.html">FilterShapeLPFBase&lt; SampleType &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_filter_shape.html">FilterShape&lt; SampleType, FilterFormType::P1, FilterShapeType::HPF &gt;</a><ul>
-<li><a class="el" href="class_filter_shape_h_p_f_p1_base.html">FilterShapeHPFP1Base&lt; SampleType &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_filter_shape.html">FilterShape&lt; SampleType, FilterFormType::P1, FilterShapeType::Other &gt;</a><ul>
-<li><a class="el" href="class_filter_shape_decay_base.html">FilterShapeDecayBase&lt; SampleType &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_filter_shape.html">FilterShape&lt; SampleType, FilterFormType::P1a, FilterShapeType::LPF &gt;</a><ul>
-<li><a class="el" href="class_filter_shape_lag_base.html">FilterShapeLagBase&lt; SampleType &gt;</a></li>
-<li><a class="el" href="class_filter_shape_l_p_f_p1_base.html">FilterShapeLPFP1Base&lt; SampleType &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_filter_shape.html">FilterShape&lt; SampleType, FilterFormType::P2Z2, FilterShapeType::BPF &gt;</a><ul>
-<li><a class="el" href="class_filter_shape_b_p_f_base.html">FilterShapeBPFBase&lt; SampleType &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_filter_shape.html">FilterShape&lt; SampleType, FilterFormType::P2Z2, FilterShapeType::BRF &gt;</a><ul>
-<li><a class="el" href="class_filter_shape_b_r_f_base.html">FilterShapeBRFBase&lt; SampleType &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_filter_shape.html">FilterShape&lt; SampleType, FilterFormType::P2Z2, FilterShapeType::HighShelf &gt;</a><ul>
-<li><a class="el" href="class_filter_shape_high_shelf_base.html">FilterShapeHighShelfBase&lt; SampleType &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_filter_shape.html">FilterShape&lt; SampleType, FilterFormType::P2Z2, FilterShapeType::HPF &gt;</a><ul>
-<li><a class="el" href="class_filter_shape_r_h_p_f_base.html">FilterShapeRHPFBase&lt; SampleType &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_filter_shape.html">FilterShape&lt; SampleType, FilterFormType::P2Z2, FilterShapeType::LowShelf &gt;</a><ul>
-<li><a class="el" href="class_filter_shape_low_shelf_base.html">FilterShapeLowShelfBase&lt; SampleType &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_filter_shape.html">FilterShape&lt; SampleType, FilterFormType::P2Z2, FilterShapeType::LPF &gt;</a><ul>
-<li><a class="el" href="class_filter_shape_r_l_p_f_base.html">FilterShapeRLPFBase&lt; SampleType &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_filter_shape.html">FilterShape&lt; SampleType, FilterFormType::P2Z2, FilterShapeType::Notch &gt;</a><ul>
-<li><a class="el" href="class_filter_shape_notch_base.html">FilterShapeNotchBase&lt; SampleType &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="struct_filter_shape_data.html">FilterShapeData&lt; SampleType, NumCoeffs, NumParams &gt;</a></li>
-<li><a class="el" href="class_filter_shape_type.html">FilterShapeType</a></li>
-<li><a class="el" href="class_filter_unit.html">FilterUnit&lt; FormType &gt;</a></li>
-<li><a class="el" href="struct_force_error_struct.html">ForceErrorStruct</a></li>
-<li><a class="el" href="class_function.html">Function</a></li>
-<li><a class="el" href="class_function_caller.html">FunctionCaller&lt; FunctionType, argumentCount, isProxy &gt;</a></li>
-<li><a class="el" href="class_function_container_proxy.html">FunctionContainerProxy&lt; ReturnType, ArgType1, ArgType2, ArgType3 &gt;</a></li>
-<li><a class="el" href="class_function_container_proxy_3_01_return_type_01_4.html">FunctionContainerProxy&lt; ReturnType &gt;</a></li>
-<li><a class="el" href="class_function_container_proxy_3_01_return_type_00_01_arg_type1_01_4.html">FunctionContainerProxy&lt; ReturnType, ArgType1 &gt;</a></li>
-<li><a class="el" href="class_function_container_proxy_3_01_return_type_00_01_arg_type1_00_01_arg_type2_01_4.html">FunctionContainerProxy&lt; ReturnType, ArgType1, ArgType2 &gt;</a></li>
-<li><a class="el" href="class_harmonic_saw_unit.html">HarmonicSawUnit&lt; SampleType &gt;</a></li>
-<li><a class="el" href="class_harmonic_square_unit.html">HarmonicSquareUnit&lt; SampleType &gt;</a></li>
-<li><a class="el" href="class_high_shelf_unit.html">HighShelfUnit&lt; SampleType &gt;</a></li>
-<li><a class="el" href="class_h_p_f_p1_unit.html">HPFP1Unit&lt; SampleType &gt;</a></li>
-<li><a class="el" href="class_h_p_f_unit.html">HPFUnit&lt; SampleType &gt;</a></li>
-<li><a class="el" href="class_i_f_f_t_unit.html">IFFTUnit&lt; SampleType &gt;</a></li>
-<li><a class="el" href="class_numerical_array_1_1_initial_number.html">NumericalArray&lt; NumericalType &gt;::InitialNumber</a></li>
-<li><a class="el" href="class_object_array_1_1_initial_object.html">ObjectArray&lt; ObjectType &gt;::InitialObject</a></li>
-<li><a class="el" href="class_unit_base_1_1_initial_unit.html">UnitBase&lt; SampleType &gt;::InitialUnit</a></li>
-<li><a class="el" href="class_int24.html">Int24</a></li>
-<li><a class="el" href="class_int24_ops.html">Int24Ops&lt; OtherType &gt;</a></li>
-<li><a class="el" href="class_interp_base.html">InterpBase&lt; ValueType, IndexType &gt;</a></li>
-<li><a class="el" href="class_interp_linear.html">InterpLinear&lt; ValueType, IndexType &gt;</a></li>
-<li><a class="el" href="class_interp_linear_3_01_value_type_00_01int_01_4.html">InterpLinear&lt; ValueType, int &gt;</a></li>
-<li><a class="el" href="class_i_o_info.html">IOInfo</a></li>
-<li><a class="el" href="class_i_o_key.html">IOKey</a></li>
-<li><a class="el" href="class_i_o_limit.html">IOLimit</a></li>
-<li><a class="el" href="class_key_value_pair.html">KeyValuePair&lt; ValueType, KeyType &gt;</a></li>
-<li><a class="el" href="class_lag_unit.html">LagUnit&lt; SampleType &gt;</a></li>
-<li><a class="el" href="class_linear_pan_unit.html">LinearPanUnit&lt; SampleType &gt;</a></li>
-<li><a class="el" href="class_low_shelf_unit.html">LowShelfUnit&lt; SampleType &gt;</a></li>
-<li><a class="el" href="class_l_p_f_p1_unit.html">LPFP1Unit&lt; SampleType &gt;</a></li>
-<li><a class="el" href="class_l_p_f_unit.html">LPFUnit&lt; SampleType &gt;</a></li>
-<li><a class="el" href="class_math.html">Math&lt; Type &gt;</a></li>
-<li><a class="el" href="class_measure.html">Measure</a></li>
-<li><a class="el" href="class_memory.html">Memory</a></li>
-<li><a class="el" href="class_mixer_unit.html">MixerUnit&lt; SampleType &gt;</a></li>
-<li><a class="el" href="class_mul_add_unit.html">MulAddUnit&lt; SampleType &gt;</a></li>
-<li><a class="el" href="class_notch_unit.html">NotchUnit&lt; SampleType &gt;</a></li>
-<li><a class="el" href="class_numerical_array_binary_op_base.html">NumericalArrayBinaryOpBase&lt; NumericalType, op &gt;</a><ul>
-<li><a class="el" href="class_numerical_array_binary_op.html">NumericalArrayBinaryOp&lt; NumericalType, op &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_numerical_array_converter_base.html">NumericalArrayConverterBase&lt; NumericalType, OtherType &gt;</a><ul>
-<li><a class="el" href="class_numerical_array_converter.html">NumericalArrayConverter&lt; NumericalType, OtherType &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_numerical_array_converter_base_3_01char_00_01float_01_4.html">NumericalArrayConverterBase&lt; char, float &gt;</a></li>
-<li><a class="el" href="class_numerical_array_converter_base_3_01float_00_01char_01_4.html">NumericalArrayConverterBase&lt; float, char &gt;</a></li>
-<li><a class="el" href="class_numerical_array_converter_base_3_01float_00_01int_01_4.html">NumericalArrayConverterBase&lt; float, int &gt;</a></li>
-<li><a class="el" href="class_numerical_array_converter_base_3_01float_00_01_int24_01_4.html">NumericalArrayConverterBase&lt; float, Int24 &gt;</a></li>
-<li><a class="el" href="class_numerical_array_converter_base_3_01float_00_01short_01_4.html">NumericalArrayConverterBase&lt; float, short &gt;</a></li>
-<li><a class="el" href="class_numerical_array_converter_base_3_01int_00_01float_01_4.html">NumericalArrayConverterBase&lt; int, float &gt;</a></li>
-<li><a class="el" href="class_numerical_array_converter_base_3_01_int24_00_01float_01_4.html">NumericalArrayConverterBase&lt; Int24, float &gt;</a></li>
-<li><a class="el" href="class_numerical_array_converter_base_3_01short_00_01float_01_4.html">NumericalArrayConverterBase&lt; short, float &gt;</a></li>
-<li><a class="el" href="class_numerical_array_converter_s_i_m_d.html">NumericalArrayConverterSIMD&lt; SrcType &gt;</a></li>
-<li><a class="el" href="class_numerical_array_converter_s_i_m_d_3_01double_01_4.html">NumericalArrayConverterSIMD&lt; double &gt;</a></li>
-<li><a class="el" href="class_numerical_array_converter_s_i_m_d_3_01float_01_4.html">NumericalArrayConverterSIMD&lt; float &gt;</a></li>
-<li><a class="el" href="class_numerical_array_filler_base.html">NumericalArrayFillerBase&lt; NumericalType &gt;</a><ul>
-<li><a class="el" href="class_numerical_array_filler.html">NumericalArrayFiller&lt; NumericalType &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_numerical_array_filler_base.html">NumericalArrayFillerBase&lt; double &gt;</a><ul>
-<li><a class="el" href="class_numerical_array_filler_3_01double_01_4.html">NumericalArrayFiller&lt; double &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_numerical_array_filler_base.html">NumericalArrayFillerBase&lt; float &gt;</a><ul>
-<li><a class="el" href="class_numerical_array_filler_3_01float_01_4.html">NumericalArrayFiller&lt; float &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_numerical_array_spec.html">NumericalArraySpec</a></li>
-<li><a class="el" href="class_numerical_array_unary_op_base.html">NumericalArrayUnaryOpBase&lt; NumericalType, op &gt;</a><ul>
-<li><a class="el" href="class_numerical_array_unary_op.html">NumericalArrayUnaryOp&lt; NumericalType, op &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_numerical_converter.html">NumericalConverter</a></li>
-<li><a class="el" href="class_object_array_internal_base.html">ObjectArrayInternalBase&lt; ObjectType, BaseType &gt;</a><ul>
-<li><a class="el" href="class_object_array_internal.html">ObjectArrayInternal&lt; ObjectType, BaseType &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_object_memory.html">ObjectMemory&lt; ObjectMemoryType &gt;</a></li>
-<li><a class="el" href="class_object_memory_base.html">ObjectMemoryBase</a><ul>
-<li><a class="el" href="class_object_memory_default.html">ObjectMemoryDefault</a></li>
-<li><a class="el" href="class_object_memory_defer_free.html">ObjectMemoryDeferFree</a></li>
-<li><a class="el" href="class_object_memory_pools.html">ObjectMemoryPools</a></li>
-</ul>
-</li>
-<li><a class="el" href="classffft_1_1_osc_sin_cos.html">ffft::OscSinCos&lt; T &gt;</a></li>
-<li><a class="el" href="class_overlap_make_unit.html">OverlapMakeUnit&lt; SampleType &gt;</a></li>
-<li><a class="el" href="class_overlap_mix_unit.html">OverlapMixUnit&lt; SampleType &gt;</a></li>
-<li><a class="el" href="class_patch_unit.html">PatchUnit&lt; SampleType &gt;</a></li>
-<li><a class="el" href="union_p_l_a_n_k___m_s_v_c___e_v_i_l___f_l_o_a_t___h_a_c_k.html">PLANK_MSVC_EVIL_FLOAT_HACK</a></li>
-<li><a class="el" href="struct_plank_audio_file_format_info.html">PlankAudioFileFormatInfo</a></li>
-<li><a class="el" href="struct_plank_f80.html">PlankF80</a></li>
-<li><a class="el" href="struct_plank_i24.html">PlankI24</a></li>
-<li><a class="el" href="struct_plank_iff_file_header_info.html">PlankIffFileHeaderInfo</a></li>
-<li><a class="el" href="struct_plank_pascal_string255.html">PlankPascalString255</a></li>
-<li><a class="el" href="struct_plank_u_i24.html">PlankUI24</a></li>
-<li><a class="el" href="interface_p_l_audio_host.html">PLAudioHost</a></li>
-<li><a class="el" href="protocol_p_l_audio_host_delegate-p.html">&lt;PLAudioHostDelegate&gt;</a></li>
-<li><a class="el" href="struct_plink_buffer_f.html">PlinkBufferF</a></li>
-<li><a class="el" href="struct_plink_process_base.html">PlinkProcessBase</a></li>
-<li><a class="el" href="struct_plink_process_f.html">PlinkProcessF</a></li>
-<li><a class="el" href="struct_plink_state.html">PlinkState</a></li>
-<li><a class="el" href="class_plonk_base.html">PlonkBase</a><ul>
-<li><a class="el" href="class_function_container_base.html">FunctionContainerBase</a><ul>
-<li><a class="el" href="class_function_container.html">FunctionContainer&lt; ReturnType, ArgType1, ArgType2, ArgType3 &gt;</a></li>
-<li><a class="el" href="class_function_container_3_01_return_type_01_4.html">FunctionContainer&lt; ReturnType &gt;</a></li>
-<li><a class="el" href="class_function_container_3_01_return_type_00_01_arg_type1_01_4.html">FunctionContainer&lt; ReturnType, ArgType1 &gt;</a></li>
-<li><a class="el" href="class_function_container_3_01_return_type_00_01_arg_type1_00_01_arg_type2_01_4.html">FunctionContainer&lt; ReturnType, ArgType1, ArgType2 &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_object_memory_defer_free_1_1_element.html">ObjectMemoryDeferFree::Element</a></li>
-<li><a class="el" href="class_object_memory_pools_1_1_element.html">ObjectMemoryPools::Element</a></li>
-<li><a class="el" href="class_smart_pointer.html">SmartPointer</a><ul>
-<li><a class="el" href="class_audio_file_reader_internal.html">AudioFileReaderInternal</a></li>
-<li><a class="el" href="class_binary_file_internal.html">BinaryFileInternal</a></li>
-<li><a class="el" href="class_bus_buffer_internal.html">BusBufferInternal&lt; SampleType &gt;</a></li>
-<li><a class="el" href="class_dictionary_internal.html">DictionaryInternal&lt; ValueType, KeyType &gt;</a></li>
-<li><a class="el" href="class_dynamic_internal.html">DynamicInternal</a></li>
-<li><a class="el" href="class_f_f_t_engine_internal_3_01float_01_4.html">FFTEngineInternal&lt; float &gt;</a></li>
-<li><a class="el" href="class_function_caller_internal.html">FunctionCallerInternal&lt; FunctionType, ReturnType, ArgType1, ArgType2, ArgType3 &gt;</a></li>
-<li><a class="el" href="class_function_caller_internal_3_01_function_type_00_01_return_type_01_4.html">FunctionCallerInternal&lt; FunctionType, ReturnType &gt;</a></li>
-<li><a class="el" href="class_function_caller_internal_3_01_function_type_00_01_return_type_00_01_arg_type1_01_4.html">FunctionCallerInternal&lt; FunctionType, ReturnType, ArgType1 &gt;</a></li>
-<li><a class="el" href="class_function_caller_internal_3_01_function_type_00_01_return_type_00_01_arg_type1_00_01_arg_type2_01_4.html">FunctionCallerInternal&lt; FunctionType, ReturnType, ArgType1, ArgType2 &gt;</a></li>
-<li><a class="el" href="class_function_proxy_caller_internal.html">FunctionProxyCallerInternal&lt; FunctionType, ReturnType, ArgType1, ArgType2, ArgType3 &gt;</a></li>
-<li><a class="el" href="class_function_proxy_caller_internal_3_01_function_type_00_01_return_type_01_4.html">FunctionProxyCallerInternal&lt; FunctionType, ReturnType &gt;</a></li>
-<li><a class="el" href="class_function_proxy_caller_internal_3_01_function_type_00_01_return_type_00_01_arg_type1_01_4.html">FunctionProxyCallerInternal&lt; FunctionType, ReturnType, ArgType1 &gt;</a></li>
-<li><a class="el" href="class_function_proxy_caller_internal_3_01_function_type_00_01_return_type_00_01_arg_type1_00_01_arg_type2_01_4.html">FunctionProxyCallerInternal&lt; FunctionType, ReturnType, ArgType1, ArgType2 &gt;</a></li>
-<li><a class="el" href="class_locked_value_internal.html">LockedValueInternal&lt; ValueType &gt;</a></li>
-<li><a class="el" href="class_lock_free_queue_internal.html">LockFreeQueueInternal&lt; ValueType &gt;</a></li>
-<li><a class="el" href="class_lock_free_queue_internal_3_01_value_type_01_5_01_4.html">LockFreeQueueInternal&lt; ValueType * &gt;</a></li>
-<li><a class="el" href="class_lock_free_stack_internal.html">LockFreeStackInternal&lt; ValueType &gt;</a></li>
-<li><a class="el" href="class_lock_free_stack_internal_3_01_value_type_01_5_01_4.html">LockFreeStackInternal&lt; ValueType * &gt;</a></li>
-<li><a class="el" href="class_lock_internal_base.html">LockInternalBase</a><ul>
-<li><a class="el" href="class_lock_internal.html">LockInternal</a></li>
-<li><a class="el" href="class_no_lock_internal.html">NoLockInternal</a></li>
-<li><a class="el" href="class_spin_lock_internal.html">SpinLockInternal</a></li>
-<li><a class="el" href="class_thread_spin_lock_internal.html">ThreadSpinLockInternal</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_r_n_g_internal.html">RNGInternal</a></li>
-<li><a class="el" href="class_sender_internal.html">SenderInternal&lt; SenderContainerBaseType &gt;</a></li>
-<li><a class="el" href="class_sender_internal.html">SenderInternal&lt; BreakpointBase&lt; SampleType &gt; &gt;</a><ul>
-<li><a class="el" href="class_breakpoint_internal.html">BreakpointInternal&lt; SampleType &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_sender_internal.html">SenderInternal&lt; BreakpointsBase&lt; SampleType &gt; &gt;</a><ul>
-<li><a class="el" href="class_breakpoints_internal.html">BreakpointsInternal&lt; SampleType &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_sender_internal.html">SenderInternal&lt; ChannelBase&lt; FormType::SampleDataType &gt; &gt;</a><ul>
-<li><a class="el" href="class_channel_internal_base.html">ChannelInternalBase&lt; FormType::SampleDataType &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_sender_internal.html">SenderInternal&lt; ChannelBase&lt; OutputSampleType &gt; &gt;</a><ul>
-<li><a class="el" href="class_channel_internal_base.html">ChannelInternalBase&lt; OutputSampleType &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_sender_internal.html">SenderInternal&lt; ChannelBase&lt; SampleType &gt; &gt;</a><ul>
-<li><a class="el" href="class_channel_internal_base.html">ChannelInternalBase&lt; SampleType &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_sender_internal.html">SenderInternal&lt; ChannelBase&lt; ShapeType::SampleDataType &gt; &gt;</a><ul>
-<li><a class="el" href="class_channel_internal_base.html">ChannelInternalBase&lt; ShapeType::SampleDataType &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_sender_internal.html">SenderInternal&lt; ProcessInfo &gt;</a><ul>
-<li><a class="el" href="class_process_info_internal.html">ProcessInfoInternal</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_sender_internal.html">SenderInternal&lt; Variable&lt; Type &gt; &gt;</a><ul>
-<li><a class="el" href="class_variable_internal_base.html">VariableInternalBase&lt; Type &gt;</a><ul>
-<li><a class="el" href="class_binary_op_variable_internal.html">BinaryOpVariableInternal&lt; Type, op &gt;</a></li>
-<li><a class="el" href="class_type_variable_internal.html">TypeVariableInternal&lt; Type, OtherType &gt;</a></li>
-<li><a class="el" href="class_unary_op_variable_internal.html">UnaryOpVariableInternal&lt; Type, op &gt;</a></li>
-<li><a class="el" href="class_variable_internal.html">VariableInternal&lt; Type &gt;</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="el" href="class_signal_internal.html">SignalInternal&lt; SampleType &gt;</a></li>
-<li><a class="el" href="class_simple_linked_list_internal.html">SimpleLinkedListInternal&lt; ValueType &gt;</a></li>
-<li><a class="el" href="class_simple_linked_list_internal_3_01_value_type_01_5_01_4.html">SimpleLinkedListInternal&lt; ValueType * &gt;</a></li>
-<li><a class="el" href="class_simple_queue_internal.html">SimpleQueueInternal&lt; ValueType &gt;</a></li>
-<li><a class="el" href="class_simple_queue_internal_3_01_value_type_01_5_01_4.html">SimpleQueueInternal&lt; ValueType * &gt;</a></li>
-<li><a class="el" href="class_simple_stack_internal.html">SimpleStackInternal&lt; ValueType &gt;</a></li>
-<li><a class="el" href="class_simple_stack_internal_3_01_value_type_01_5_01_4.html">SimpleStackInternal&lt; ValueType * &gt;</a></li>
-<li><a class="el" href="class_text_file_internal.html">TextFileInternal</a></li>
-<li><a class="el" href="class_variable_internal_3_01_type_01_6_01_4.html">VariableInternal&lt; Type &amp; &gt;</a></li>
-<li><a class="el" href="class_weak_pointer.html">WeakPointer</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; SmartPointerType &gt;</a><ul>
-<li><a class="el" href="class_smart_pointer_container.html">SmartPointerContainer&lt; SmartPointerType, enableWeak &gt;</a><ul>
+<li><a class="el" href="class_comb_decay_unit.html">CombDecayUnit&lt; SampleType, InterpTypeCode &gt;</a></li>
+<li><a class="el" href="class_comb_f_b_unit.html">CombFBUnit&lt; SampleType, InterpTypeCode &gt;</a></li>
+<li><a class="el" href="class_comb_filter1_param_unit.html">CombFilter1ParamUnit&lt; FilterShape, InterpTypeCode &gt;</a></li>
+<li><a class="el" href="class_d_c_unit.html">DCUnit&lt; SampleType, InterpTypeCode &gt;</a></li>
+<li><a class="el" href="class_decay_unit.html">DecayUnit&lt; SampleType, InterpTypeCode &gt;</a></li>
+<li><a class="el" href="class_delay1_param_channel_internal.html">Delay1ParamChannelInternal&lt; FormType &gt;</a></li>
+<li><a class="el" href="class_delay2_param_channel_internal.html">Delay2ParamChannelInternal&lt; FormType &gt;</a></li>
+<li><a class="el" href="class_delay3_param_channel_internal.html">Delay3ParamChannelInternal&lt; FormType &gt;</a></li>
+<li><a class="el" href="class_delay4_param_channel_internal.html">Delay4ParamChannelInternal&lt; FormType &gt;</a></li>
+<li><a class="el" href="class_delay_unit.html">DelayUnit&lt; SampleType, InterpTypeCode &gt;</a></li>
+<li><a class="el" href="class_dictionary.html">Dictionary&lt; ValueType, KeyType &gt;</a></li>
 <li><a class="el" href="class_dictionary.html">Dictionary&lt; Dynamic &gt;</a></li>
 <li><a class="el" href="class_dictionary.html">Dictionary&lt; Dynamic, int &gt;</a><ul>
 <li><a class="el" href="class_input_dictionary.html">InputDictionary</a></li>
 </ul>
 </li>
-<li><a class="el" href="class_simple_array.html">SimpleArray&lt; Receiver * &gt;</a></li>
-<li><a class="el" href="class_simple_array.html">SimpleArray&lt; WeakChannelType &gt;</a></li>
-<li><a class="el" href="class_simple_array.html">SimpleArray&lt; WeakPointer * &gt;</a></li>
+<li><a class="el" href="class_endian.html">Endian</a><ul>
+<li><a class="el" href="class_endian_if_big.html">EndianIfBig</a></li>
+<li><a class="el" href="class_endian_if_little.html">EndianIfLittle</a></li>
 </ul>
 </li>
-<li><a class="el" href="class_smart_pointer_container_3_01_smart_pointer_type_00_01true_01_4.html">SmartPointerContainer&lt; SmartPointerType, true &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; AudioFileReaderInternal &gt;</a><ul>
-<li><a class="el" href="class_smart_pointer_container.html">SmartPointerContainer&lt; AudioFileReaderInternal &gt;</a><ul>
-<li><a class="el" href="class_audio_file_reader.html">AudioFileReader</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; BinaryFileInternal &gt;</a><ul>
-<li><a class="el" href="class_smart_pointer_container.html">SmartPointerContainer&lt; BinaryFileInternal &gt;</a><ul>
-<li><a class="el" href="class_binary_file.html">BinaryFile</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; BreakpointInternal&lt; SampleType &gt; &gt;</a><ul>
-<li><a class="el" href="class_smart_pointer_container.html">SmartPointerContainer&lt; BreakpointInternal&lt; SampleType &gt; &gt;</a><ul>
-<li><a class="el" href="class_sender_container.html">SenderContainer&lt; BreakpointInternal&lt; SampleType &gt; &gt;</a><ul>
-<li><a class="el" href="class_breakpoint_base.html">BreakpointBase&lt; SampleType &gt;</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; BreakpointsInternal&lt; SampleType &gt; &gt;</a><ul>
-<li><a class="el" href="class_smart_pointer_container.html">SmartPointerContainer&lt; BreakpointsInternal&lt; SampleType &gt; &gt;</a><ul>
-<li><a class="el" href="class_sender_container.html">SenderContainer&lt; BreakpointsInternal&lt; SampleType &gt; &gt;</a><ul>
-<li><a class="el" href="class_breakpoints_base.html">BreakpointsBase&lt; SampleType &gt;</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; BusBufferInternal&lt; SampleType &gt; &gt;</a><ul>
-<li><a class="el" href="class_smart_pointer_container.html">SmartPointerContainer&lt; BusBufferInternal&lt; SampleType &gt; &gt;</a><ul>
-<li><a class="el" href="class_bus_buffer.html">BusBuffer&lt; SampleType &gt;</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; ChannelInternalBase&lt; SampleType &gt; &gt;</a><ul>
-<li><a class="el" href="class_smart_pointer_container.html">SmartPointerContainer&lt; ChannelInternalBase&lt; SampleType &gt; &gt;</a><ul>
-<li><a class="el" href="class_channel_base.html">ChannelBase&lt; SampleType &gt;</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; DictionaryInternal&lt; Dynamic, int &gt; &gt;</a><ul>
-<li><a class="el" href="class_smart_pointer_container.html">SmartPointerContainer&lt; DictionaryInternal&lt; Dynamic, int &gt; &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; DictionaryInternal&lt; Dynamic, KeyType &gt; &gt;</a><ul>
-<li><a class="el" href="class_smart_pointer_container.html">SmartPointerContainer&lt; DictionaryInternal&lt; Dynamic, KeyType &gt; &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; DictionaryInternal&lt; ValueType, KeyType &gt; &gt;</a><ul>
-<li><a class="el" href="class_smart_pointer_container.html">SmartPointerContainer&lt; DictionaryInternal&lt; ValueType, KeyType &gt; &gt;</a><ul>
-<li><a class="el" href="class_dictionary.html">Dictionary&lt; ValueType, KeyType &gt;</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; DynamicInternal &gt;</a><ul>
-<li><a class="el" href="class_smart_pointer_container.html">SmartPointerContainer&lt; DynamicInternal &gt;</a><ul>
-<li><a class="el" href="class_dynamic.html">Dynamic</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; FFTEngineInternal&lt; float &gt; &gt;</a><ul>
-<li><a class="el" href="class_smart_pointer_container.html">SmartPointerContainer&lt; FFTEngineInternal&lt; float &gt; &gt;</a><ul>
+<li><a class="el" href="class_envelope_unit.html">EnvelopeUnit&lt; SampleType &gt;</a></li>
 <li><a class="el" href="class_f_f_t_engine_base_3_01float_01_4.html">FFTEngineBase&lt; float &gt;</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; FunctionCallerInternal&lt; FunctionType, FunctionType::Return, ArgType1, ArgType2, ArgType3 &gt; &gt;</a><ul>
-<li><a class="el" href="class_smart_pointer_container.html">SmartPointerContainer&lt; FunctionCallerInternal&lt; FunctionType, FunctionType::Return, ArgType1, ArgType2, ArgType3 &gt; &gt;</a><ul>
-<li><a class="el" href="class_function_caller_base.html">FunctionCallerBase&lt; FunctionType, FunctionType::Return &gt;</a><ul>
-<li><a class="el" href="class_function_caller_3_01_function_type_00_010_00_01false_01_4.html">FunctionCaller&lt; FunctionType, 0, false &gt;</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; FunctionCallerInternal&lt; FunctionType, FunctionType::Return, FunctionType::Arg1, ArgType2, ArgType3 &gt; &gt;</a><ul>
-<li><a class="el" href="class_smart_pointer_container.html">SmartPointerContainer&lt; FunctionCallerInternal&lt; FunctionType, FunctionType::Return, FunctionType::Arg1, ArgType2, ArgType3 &gt; &gt;</a><ul>
-<li><a class="el" href="class_function_caller_base.html">FunctionCallerBase&lt; FunctionType, FunctionType::Return, FunctionType::Arg1 &gt;</a><ul>
-<li><a class="el" href="class_function_caller_3_01_function_type_00_011_00_01false_01_4.html">FunctionCaller&lt; FunctionType, 1, false &gt;</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; FunctionCallerInternal&lt; FunctionType, FunctionType::Return, FunctionType::Arg1, FunctionType::Arg2, ArgType3 &gt; &gt;</a><ul>
-<li><a class="el" href="class_smart_pointer_container.html">SmartPointerContainer&lt; FunctionCallerInternal&lt; FunctionType, FunctionType::Return, FunctionType::Arg1, FunctionType::Arg2, ArgType3 &gt; &gt;</a><ul>
-<li><a class="el" href="class_function_caller_base.html">FunctionCallerBase&lt; FunctionType, FunctionType::Return, FunctionType::Arg1, FunctionType::Arg2 &gt;</a><ul>
-<li><a class="el" href="class_function_caller_3_01_function_type_00_012_00_01false_01_4.html">FunctionCaller&lt; FunctionType, 2, false &gt;</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; FunctionCallerInternal&lt; FunctionType, FunctionType::Return, FunctionType::Arg1, FunctionType::Arg2, FunctionType::Arg3 &gt; &gt;</a><ul>
-<li><a class="el" href="class_smart_pointer_container.html">SmartPointerContainer&lt; FunctionCallerInternal&lt; FunctionType, FunctionType::Return, FunctionType::Arg1, FunctionType::Arg2, FunctionType::Arg3 &gt; &gt;</a><ul>
-<li><a class="el" href="class_function_caller_base.html">FunctionCallerBase&lt; FunctionType, FunctionType::Return, FunctionType::Arg1, FunctionType::Arg2, FunctionType::Arg3 &gt;</a><ul>
-<li><a class="el" href="class_function_caller_3_01_function_type_00_013_00_01false_01_4.html">FunctionCaller&lt; FunctionType, 3, false &gt;</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; FunctionCallerInternal&lt; FunctionType, ReturnType &gt; &gt;</a><ul>
-<li><a class="el" href="class_smart_pointer_container.html">SmartPointerContainer&lt; FunctionCallerInternal&lt; FunctionType, ReturnType &gt; &gt;</a><ul>
-<li><a class="el" href="class_function_caller_base_3_01_function_type_00_01_return_type_01_4.html">FunctionCallerBase&lt; FunctionType, ReturnType &gt;</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; FunctionCallerInternal&lt; FunctionType, ReturnType, ArgType1 &gt; &gt;</a><ul>
-<li><a class="el" href="class_smart_pointer_container.html">SmartPointerContainer&lt; FunctionCallerInternal&lt; FunctionType, ReturnType, ArgType1 &gt; &gt;</a><ul>
-<li><a class="el" href="class_function_caller_base_3_01_function_type_00_01_return_type_00_01_arg_type1_01_4.html">FunctionCallerBase&lt; FunctionType, ReturnType, ArgType1 &gt;</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; FunctionCallerInternal&lt; FunctionType, ReturnType, ArgType1, ArgType2 &gt; &gt;</a><ul>
-<li><a class="el" href="class_smart_pointer_container.html">SmartPointerContainer&lt; FunctionCallerInternal&lt; FunctionType, ReturnType, ArgType1, ArgType2 &gt; &gt;</a><ul>
-<li><a class="el" href="class_function_caller_base_3_01_function_type_00_01_return_type_00_01_arg_type1_00_01_arg_type2_01_4.html">FunctionCallerBase&lt; FunctionType, ReturnType, ArgType1, ArgType2 &gt;</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; FunctionCallerInternal&lt; FunctionType, ReturnType, ArgType1, ArgType2, ArgType3 &gt; &gt;</a><ul>
-<li><a class="el" href="class_smart_pointer_container.html">SmartPointerContainer&lt; FunctionCallerInternal&lt; FunctionType, ReturnType, ArgType1, ArgType2, ArgType3 &gt; &gt;</a><ul>
-<li><a class="el" href="class_function_caller_base.html">FunctionCallerBase&lt; FunctionType, ReturnType, ArgType1, ArgType2, ArgType3 &gt;</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; FunctionProxyCallerInternal&lt; FunctionType, FunctionType::Return, ArgType1, ArgType2, ArgType3 &gt; &gt;</a><ul>
-<li><a class="el" href="class_smart_pointer_container.html">SmartPointerContainer&lt; FunctionProxyCallerInternal&lt; FunctionType, FunctionType::Return, ArgType1, ArgType2, ArgType3 &gt; &gt;</a><ul>
-<li><a class="el" href="class_function_proxy_caller_base.html">FunctionProxyCallerBase&lt; FunctionType, FunctionType::Return &gt;</a><ul>
-<li><a class="el" href="class_function_caller_3_01_function_type_00_010_00_01true_01_4.html">FunctionCaller&lt; FunctionType, 0, true &gt;</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; FunctionProxyCallerInternal&lt; FunctionType, FunctionType::Return, FunctionType::Arg1, ArgType2, ArgType3 &gt; &gt;</a><ul>
-<li><a class="el" href="class_smart_pointer_container.html">SmartPointerContainer&lt; FunctionProxyCallerInternal&lt; FunctionType, FunctionType::Return, FunctionType::Arg1, ArgType2, ArgType3 &gt; &gt;</a><ul>
-<li><a class="el" href="class_function_proxy_caller_base.html">FunctionProxyCallerBase&lt; FunctionType, FunctionType::Return, FunctionType::Arg1 &gt;</a><ul>
-<li><a class="el" href="class_function_caller_3_01_function_type_00_011_00_01true_01_4.html">FunctionCaller&lt; FunctionType, 1, true &gt;</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; FunctionProxyCallerInternal&lt; FunctionType, FunctionType::Return, FunctionType::Arg1, FunctionType::Arg2, ArgType3 &gt; &gt;</a><ul>
-<li><a class="el" href="class_smart_pointer_container.html">SmartPointerContainer&lt; FunctionProxyCallerInternal&lt; FunctionType, FunctionType::Return, FunctionType::Arg1, FunctionType::Arg2, ArgType3 &gt; &gt;</a><ul>
-<li><a class="el" href="class_function_proxy_caller_base.html">FunctionProxyCallerBase&lt; FunctionType, FunctionType::Return, FunctionType::Arg1, FunctionType::Arg2 &gt;</a><ul>
-<li><a class="el" href="class_function_caller_3_01_function_type_00_012_00_01true_01_4.html">FunctionCaller&lt; FunctionType, 2, true &gt;</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; FunctionProxyCallerInternal&lt; FunctionType, FunctionType::Return, FunctionType::Arg1, FunctionType::Arg2, FunctionType::Arg3 &gt; &gt;</a><ul>
-<li><a class="el" href="class_smart_pointer_container.html">SmartPointerContainer&lt; FunctionProxyCallerInternal&lt; FunctionType, FunctionType::Return, FunctionType::Arg1, FunctionType::Arg2, FunctionType::Arg3 &gt; &gt;</a><ul>
-<li><a class="el" href="class_function_proxy_caller_base.html">FunctionProxyCallerBase&lt; FunctionType, FunctionType::Return, FunctionType::Arg1, FunctionType::Arg2, FunctionType::Arg3 &gt;</a><ul>
-<li><a class="el" href="class_function_caller_3_01_function_type_00_013_00_01true_01_4.html">FunctionCaller&lt; FunctionType, 3, true &gt;</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; FunctionProxyCallerInternal&lt; FunctionType, ReturnType &gt; &gt;</a><ul>
-<li><a class="el" href="class_smart_pointer_container.html">SmartPointerContainer&lt; FunctionProxyCallerInternal&lt; FunctionType, ReturnType &gt; &gt;</a><ul>
-<li><a class="el" href="class_function_proxy_caller_base_3_01_function_type_00_01_return_type_01_4.html">FunctionProxyCallerBase&lt; FunctionType, ReturnType &gt;</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; FunctionProxyCallerInternal&lt; FunctionType, ReturnType, ArgType1 &gt; &gt;</a><ul>
-<li><a class="el" href="class_smart_pointer_container.html">SmartPointerContainer&lt; FunctionProxyCallerInternal&lt; FunctionType, ReturnType, ArgType1 &gt; &gt;</a><ul>
-<li><a class="el" href="class_function_proxy_caller_base_3_01_function_type_00_01_return_type_00_01_arg_type1_01_4.html">FunctionProxyCallerBase&lt; FunctionType, ReturnType, ArgType1 &gt;</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; FunctionProxyCallerInternal&lt; FunctionType, ReturnType, ArgType1, ArgType2 &gt; &gt;</a><ul>
-<li><a class="el" href="class_smart_pointer_container.html">SmartPointerContainer&lt; FunctionProxyCallerInternal&lt; FunctionType, ReturnType, ArgType1, ArgType2 &gt; &gt;</a><ul>
-<li><a class="el" href="class_function_proxy_caller_base_3_01_function_type_00_01_return_type_00_01_arg_type1_00_01_arg_type2_01_4.html">FunctionProxyCallerBase&lt; FunctionType, ReturnType, ArgType1, ArgType2 &gt;</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; FunctionProxyCallerInternal&lt; FunctionType, ReturnType, ArgType1, ArgType2, ArgType3 &gt; &gt;</a><ul>
-<li><a class="el" href="class_smart_pointer_container.html">SmartPointerContainer&lt; FunctionProxyCallerInternal&lt; FunctionType, ReturnType, ArgType1, ArgType2, ArgType3 &gt; &gt;</a><ul>
-<li><a class="el" href="class_function_proxy_caller_base.html">FunctionProxyCallerBase&lt; FunctionType, ReturnType, ArgType1, ArgType2, ArgType3 &gt;</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; LockedValueInternal&lt; Type &gt; &gt;</a><ul>
-<li><a class="el" href="class_smart_pointer_container.html">SmartPointerContainer&lt; LockedValueInternal&lt; Type &gt; &gt;</a><ul>
+<li><a class="el" href="class_f_f_t_unit.html">FFTUnit&lt; SampleType &gt;</a></li>
+<li><a class="el" href="class_file_path.html">FilePath</a></li>
+<li><a class="el" href="class_file_play_unit.html">FilePlayUnit&lt; SampleType &gt;</a></li>
+<li><a class="el" href="class_filter_coeffs1_param_unit.html">FilterCoeffs1ParamUnit&lt; ShapeType &gt;</a></li>
+<li><a class="el" href="class_filter_coeffs2_param_unit.html">FilterCoeffs2ParamUnit&lt; ShapeType &gt;</a></li>
+<li><a class="el" href="class_filter_coeffs3_param_unit.html">FilterCoeffs3ParamUnit&lt; ShapeType &gt;</a></li>
+<li><a class="el" href="class_filter_form_3_01_sample_type_00_01_filter_form_type_1_1_b2_01_4.html">FilterForm&lt; SampleType, FilterFormType::B2 &gt;</a></li>
+<li><a class="el" href="class_filter_form_3_01_sample_type_00_01_filter_form_type_1_1_p1_01_4.html">FilterForm&lt; SampleType, FilterFormType::P1 &gt;</a></li>
+<li><a class="el" href="class_filter_form_3_01_sample_type_00_01_filter_form_type_1_1_p1a_01_4.html">FilterForm&lt; SampleType, FilterFormType::P1a &gt;</a></li>
+<li><a class="el" href="class_filter_form_3_01_sample_type_00_01_filter_form_type_1_1_p1b_01_4.html">FilterForm&lt; SampleType, FilterFormType::P1b &gt;</a></li>
+<li><a class="el" href="class_filter_form_3_01_sample_type_00_01_filter_form_type_1_1_p2_z2_01_4.html">FilterForm&lt; SampleType, FilterFormType::P2Z2 &gt;</a></li>
+<li><a class="el" href="class_filter_shape_b_p_f_base.html">FilterShapeBPFBase&lt; SampleType &gt;</a></li>
+<li><a class="el" href="class_filter_shape_b_r_f_base.html">FilterShapeBRFBase&lt; SampleType &gt;</a></li>
+<li><a class="el" href="class_filter_shape_decay_base.html">FilterShapeDecayBase&lt; SampleType &gt;</a></li>
+<li><a class="el" href="class_filter_shape_high_shelf_base.html">FilterShapeHighShelfBase&lt; SampleType &gt;</a></li>
+<li><a class="el" href="class_filter_shape_h_p_f_base.html">FilterShapeHPFBase&lt; SampleType &gt;</a></li>
+<li><a class="el" href="class_filter_shape_h_p_f_p1_base.html">FilterShapeHPFP1Base&lt; SampleType &gt;</a></li>
+<li><a class="el" href="class_filter_shape_lag_base.html">FilterShapeLagBase&lt; SampleType &gt;</a></li>
+<li><a class="el" href="class_filter_shape_low_shelf_base.html">FilterShapeLowShelfBase&lt; SampleType &gt;</a></li>
+<li><a class="el" href="class_filter_shape_l_p_f_base.html">FilterShapeLPFBase&lt; SampleType &gt;</a></li>
+<li><a class="el" href="class_filter_shape_l_p_f_p1_base.html">FilterShapeLPFP1Base&lt; SampleType &gt;</a></li>
+<li><a class="el" href="class_filter_shape_notch_base.html">FilterShapeNotchBase&lt; SampleType &gt;</a></li>
+<li><a class="el" href="class_filter_shape_r_h_p_f_base.html">FilterShapeRHPFBase&lt; SampleType &gt;</a></li>
+<li><a class="el" href="class_filter_shape_r_l_p_f_base.html">FilterShapeRLPFBase&lt; SampleType &gt;</a></li>
+<li><a class="el" href="class_filter_unit.html">FilterUnit&lt; FormType &gt;</a></li>
+<li><a class="el" href="class_fix.html">Fix&lt; Base, IBits, FBits &gt;</a></li>
+<li><a class="el" href="struct_p_l_o_n_k___n_a_m_e_s_p_a_c_e_1_1_force_error_struct.html">PLONK_NAMESPACE::ForceErrorStruct</a></li>
+<li><a class="el" href="class_harmonic_saw_unit.html">HarmonicSawUnit&lt; SampleType &gt;</a></li>
+<li><a class="el" href="class_harmonic_square_unit.html">HarmonicSquareUnit&lt; SampleType &gt;</a></li>
+<li><a class="el" href="class_harmonic_tri_unit.html">HarmonicTriUnit&lt; SampleType &gt;</a></li>
+<li><a class="el" href="class_high_shelf_unit.html">HighShelfUnit&lt; SampleType, InterpTypeCode &gt;</a></li>
+<li><a class="el" href="class_h_p_f_p1_unit.html">HPFP1Unit&lt; SampleType, InterpTypeCode &gt;</a></li>
+<li><a class="el" href="class_h_p_f_unit.html">HPFUnit&lt; SampleType, InterpTypeCode &gt;</a></li>
+<li><a class="el" href="class_i_f_f_t_unit.html">IFFTUnit&lt; SampleType &gt;</a></li>
+<li><a class="el" href="class_impulse_unit.html">ImpulseUnit&lt; SampleType &gt;</a></li>
+<li><a class="el" href="class_input_task_unit.html">InputTaskUnit&lt; SampleType, InterpTypeCode &gt;</a></li>
+<li><a class="el" href="class_int24.html">Int24</a></li>
+<li><a class="el" href="class_p_l_o_n_k___n_a_m_e_s_p_a_c_e_1_1_i_o_s_utilities.html">PLONK_NAMESPACE::IOSUtilities</a></li>
+<li><a class="el" href="class_lag_unit.html">LagUnit&lt; SampleType, InterpTypeCode &gt;</a></li>
+<li><a class="el" href="class_linear_pan_unit.html">LinearPanUnit&lt; SampleType &gt;</a></li>
 <li><a class="el" href="class_locked_value.html">LockedValue&lt; Type &gt;</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; LockFreeQueueInternal&lt; ValueType &gt; &gt;</a><ul>
-<li><a class="el" href="class_smart_pointer_container.html">SmartPointerContainer&lt; LockFreeQueueInternal&lt; ValueType &gt; &gt;</a><ul>
-<li><a class="el" href="class_lock_free_queue.html">LockFreeQueue&lt; ValueType &gt;</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; LockFreeStackInternal&lt; ValueType &gt; &gt;</a><ul>
-<li><a class="el" href="class_smart_pointer_container.html">SmartPointerContainer&lt; LockFreeStackInternal&lt; ValueType &gt; &gt;</a><ul>
-<li><a class="el" href="class_lock_free_stack.html">LockFreeStack&lt; ValueType &gt;</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; LockInternalBase &gt;</a><ul>
-<li><a class="el" href="class_smart_pointer_container.html">SmartPointerContainer&lt; LockInternalBase &gt;</a><ul>
-<li><a class="el" href="class_lock.html">Lock</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; ObjectArrayInternal&lt; Buffer &gt; &gt;</a><ul>
-<li><a class="el" href="class_smart_pointer_container.html">SmartPointerContainer&lt; ObjectArrayInternal&lt; Buffer &gt; &gt;</a><ul>
+<li><a class="el" href="class_lookup_unit.html">LookupUnit&lt; SampleType &gt;</a></li>
+<li><a class="el" href="class_low_shelf_unit.html">LowShelfUnit&lt; SampleType, InterpTypeCode &gt;</a></li>
+<li><a class="el" href="class_l_p_f_p1_unit.html">LPFP1Unit&lt; SampleType, InterpTypeCode &gt;</a></li>
+<li><a class="el" href="class_l_p_f_unit.html">LPFUnit&lt; SampleType, InterpTypeCode &gt;</a></li>
+<li><a class="el" href="class_math.html">Math&lt; Type &gt;</a></li>
+<li><a class="el" href="class_mixer_unit.html">MixerUnit&lt; SampleType &gt;</a></li>
+<li><a class="el" href="class_notch_unit.html">NotchUnit&lt; SampleType, InterpTypeCode &gt;</a></li>
+<li><a class="el" href="class_numerical_array_spec.html">NumericalArraySpec</a></li>
+<li><a class="el" href="class_numerical_converter.html">NumericalConverter</a></li>
+<li><a class="el" href="class_object_array.html">ObjectArray&lt; ObjectType &gt;</a></li>
 <li><a class="el" href="class_object_array.html">ObjectArray&lt; Buffer &gt;</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; ObjectArrayInternal&lt; BusType &gt; &gt;</a><ul>
-<li><a class="el" href="class_smart_pointer_container.html">SmartPointerContainer&lt; ObjectArrayInternal&lt; BusType &gt; &gt;</a><ul>
 <li><a class="el" href="class_object_array.html">ObjectArray&lt; BusType &gt;</a><ul>
 <li><a class="el" href="class_numerical_array.html">NumericalArray&lt; BusType &gt;</a></li>
 </ul>
 </li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; ObjectArrayInternal&lt; ChannelBase&lt; float &gt; &gt; &gt;</a><ul>
-<li><a class="el" href="class_smart_pointer_container.html">SmartPointerContainer&lt; ObjectArrayInternal&lt; ChannelBase&lt; float &gt; &gt; &gt;</a><ul>
 <li><a class="el" href="class_object_array.html">ObjectArray&lt; ChannelBase&lt; float &gt; &gt;</a><ul>
 <li><a class="el" href="class_numerical_array.html">NumericalArray&lt; ChannelBase&lt; float &gt; &gt;</a><ul>
 <li><a class="el" href="class_unit_base.html">UnitBase&lt; float &gt;</a></li>
@@ -1228,12 +443,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </li>
 </ul>
 </li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; ObjectArrayInternal&lt; ChannelBase&lt; SampleType &gt; &gt; &gt;</a><ul>
-<li><a class="el" href="class_smart_pointer_container.html">SmartPointerContainer&lt; ObjectArrayInternal&lt; ChannelBase&lt; SampleType &gt; &gt; &gt;</a><ul>
 <li><a class="el" href="class_object_array.html">ObjectArray&lt; ChannelBase&lt; SampleType &gt; &gt;</a><ul>
 <li><a class="el" href="class_numerical_array.html">NumericalArray&lt; ChannelBase&lt; SampleType &gt; &gt;</a><ul>
 <li><a class="el" href="class_unit_base.html">UnitBase&lt; SampleType &gt;</a></li>
@@ -1241,600 +450,155 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </li>
 </ul>
 </li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; ObjectArrayInternal&lt; const float * &gt; &gt;</a><ul>
-<li><a class="el" href="class_smart_pointer_container.html">SmartPointerContainer&lt; ObjectArrayInternal&lt; const float * &gt; &gt;</a><ul>
 <li><a class="el" href="class_object_array.html">ObjectArray&lt; const float * &gt;</a><ul>
 <li><a class="el" href="class_numerical_array.html">NumericalArray&lt; const float * &gt;</a></li>
 </ul>
 </li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; ObjectArrayInternal&lt; float * &gt; &gt;</a><ul>
-<li><a class="el" href="class_smart_pointer_container.html">SmartPointerContainer&lt; ObjectArrayInternal&lt; float * &gt; &gt;</a><ul>
 <li><a class="el" href="class_object_array.html">ObjectArray&lt; float * &gt;</a><ul>
 <li><a class="el" href="class_numerical_array.html">NumericalArray&lt; float * &gt;</a></li>
 </ul>
 </li>
+<li><a class="el" href="class_object_array.html">ObjectArray&lt; float &gt;</a><ul>
+<li><a class="el" href="class_numerical_array.html">NumericalArray&lt; float &gt;</a></li>
 </ul>
 </li>
-</ul>
-</li>
-<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; ObjectArrayInternal&lt; FormType::SampleDataType &gt; &gt;</a><ul>
-<li><a class="el" href="class_smart_pointer_container.html">SmartPointerContainer&lt; ObjectArrayInternal&lt; FormType::SampleDataType &gt; &gt;</a><ul>
 <li><a class="el" href="class_object_array.html">ObjectArray&lt; FormType::SampleDataType &gt;</a><ul>
 <li><a class="el" href="class_numerical_array.html">NumericalArray&lt; FormType::SampleDataType &gt;</a></li>
 </ul>
 </li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; ObjectArrayInternal&lt; NumericalType &gt; &gt;</a><ul>
-<li><a class="el" href="class_smart_pointer_container.html">SmartPointerContainer&lt; ObjectArrayInternal&lt; NumericalType &gt; &gt;</a><ul>
 <li><a class="el" href="class_object_array.html">ObjectArray&lt; NumericalType &gt;</a><ul>
 <li><a class="el" href="class_numerical_array.html">NumericalArray&lt; NumericalType &gt;</a></li>
 </ul>
 </li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; ObjectArrayInternal&lt; ObjectType &gt; &gt;</a><ul>
-<li><a class="el" href="class_smart_pointer_container.html">SmartPointerContainer&lt; ObjectArrayInternal&lt; ObjectType &gt; &gt;</a><ul>
-<li><a class="el" href="class_object_array.html">ObjectArray&lt; ObjectType &gt;</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; ObjectArrayInternal&lt; ObjectType, SmartPointer &gt; &gt;</a><ul>
-<li><a class="el" href="class_smart_pointer_container.html">SmartPointerContainer&lt; ObjectArrayInternal&lt; ObjectType, SmartPointer &gt; &gt;</a><ul>
-<li><a class="el" href="class_simple_array.html">SimpleArray&lt; ObjectType &gt;</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; ObjectArrayInternal&lt; OutputSampleType &gt; &gt;</a><ul>
-<li><a class="el" href="class_smart_pointer_container.html">SmartPointerContainer&lt; ObjectArrayInternal&lt; OutputSampleType &gt; &gt;</a><ul>
 <li><a class="el" href="class_object_array.html">ObjectArray&lt; OutputSampleType &gt;</a><ul>
 <li><a class="el" href="class_numerical_array.html">NumericalArray&lt; OutputSampleType &gt;</a></li>
 </ul>
 </li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; ObjectArrayInternal&lt; Receiver *, SmartPointer &gt; &gt;</a><ul>
-<li><a class="el" href="class_smart_pointer_container.html">SmartPointerContainer&lt; ObjectArrayInternal&lt; Receiver *, SmartPointer &gt; &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; ObjectArrayInternal&lt; RowType &gt; &gt;</a><ul>
-<li><a class="el" href="class_smart_pointer_container.html">SmartPointerContainer&lt; ObjectArrayInternal&lt; RowType &gt; &gt;</a><ul>
-<li><a class="el" href="class_object_array.html">ObjectArray&lt; RowType &gt;</a><ul>
-<li><a class="el" href="class_object_array2_d_base.html">ObjectArray2DBase&lt; ArrayType, RowType &gt;</a><ul>
-<li><a class="el" href="class_object_array2_d.html">ObjectArray2D&lt; ArrayType, RowType &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_object_array2_d_base.html">ObjectArray2DBase&lt; NumericalType, RowType &gt;</a><ul>
-<li><a class="el" href="class_numerical_array2_d.html">NumericalArray2D&lt; NumericalType, RowType &gt;</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; ObjectArrayInternal&lt; SampleType &gt; &gt;</a><ul>
-<li><a class="el" href="class_smart_pointer_container.html">SmartPointerContainer&lt; ObjectArrayInternal&lt; SampleType &gt; &gt;</a><ul>
+<li><a class="el" href="class_object_array.html">ObjectArray&lt; RowType &gt;</a></li>
 <li><a class="el" href="class_object_array.html">ObjectArray&lt; SampleType &gt;</a><ul>
-<li><a class="el" href="class_numerical_array.html">NumericalArray&lt; SampleType &gt;</a><ul>
-<li><a class="el" href="class_wavetable_base.html">WavetableBase&lt; SampleType &gt;</a></li>
+<li><a class="el" href="class_numerical_array.html">NumericalArray&lt; SampleType &gt;</a></li>
 </ul>
 </li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; ObjectArrayInternal&lt; ShapeType::SampleDataType &gt; &gt;</a><ul>
-<li><a class="el" href="class_smart_pointer_container.html">SmartPointerContainer&lt; ObjectArrayInternal&lt; ShapeType::SampleDataType &gt; &gt;</a><ul>
 <li><a class="el" href="class_object_array.html">ObjectArray&lt; ShapeType::SampleDataType &gt;</a><ul>
 <li><a class="el" href="class_numerical_array.html">NumericalArray&lt; ShapeType::SampleDataType &gt;</a></li>
 </ul>
 </li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; ObjectArrayInternal&lt; Text &gt; &gt;</a><ul>
-<li><a class="el" href="class_smart_pointer_container.html">SmartPointerContainer&lt; ObjectArrayInternal&lt; Text &gt; &gt;</a><ul>
-<li><a class="el" href="class_object_array.html">ObjectArray&lt; Text &gt;</a><ul>
-<li><a class="el" href="class_object_array2_d_base.html">ObjectArray2DBase&lt; char, Text &gt;</a><ul>
-<li><a class="el" href="class_text_array.html">TextArray</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; ObjectArrayInternal&lt; WeakChannelType, SmartPointer &gt; &gt;</a><ul>
-<li><a class="el" href="class_smart_pointer_container.html">SmartPointerContainer&lt; ObjectArrayInternal&lt; WeakChannelType, SmartPointer &gt; &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; ObjectArrayInternal&lt; WeakPointer *, SmartPointer &gt; &gt;</a><ul>
-<li><a class="el" href="class_smart_pointer_container.html">SmartPointerContainer&lt; ObjectArrayInternal&lt; WeakPointer *, SmartPointer &gt; &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; ProcessInfoInternal &gt;</a><ul>
-<li><a class="el" href="class_smart_pointer_container.html">SmartPointerContainer&lt; ProcessInfoInternal &gt;</a><ul>
-<li><a class="el" href="class_sender_container.html">SenderContainer&lt; ProcessInfoInternal &gt;</a><ul>
+<li><a class="el" href="class_object_array.html">ObjectArray&lt; Text &gt;</a></li>
+<li><a class="el" href="class_object_memory_base.html">ObjectMemoryBase</a></li>
+<li><a class="el" href="class_overlap_make_unit.html">OverlapMakeUnit&lt; SampleType &gt;</a></li>
+<li><a class="el" href="class_overlap_mix_unit.html">OverlapMixUnit&lt; SampleType &gt;</a></li>
+<li><a class="el" href="class_param_unit.html">ParamUnit&lt; SampleType &gt;</a></li>
+<li><a class="el" href="class_patch_unit.html">PatchUnit&lt; SampleType &gt;</a></li>
+<li><a class="el" href="struct_plank_f80.html">PlankF80</a></li>
+<li><a class="el" href="struct_plank_i24.html">PlankI24</a></li>
+<li><a class="el" href="struct_plank_pascal_string255.html">PlankPascalString255</a></li>
+<li><a class="el" href="struct_plank_u_i24.html">PlankUI24</a></li>
+<li><a class="el" href="interface_p_l_audio_host.html">PLAudioHost</a></li>
+<li><a class="el" href="protocol_p_l_audio_host_delegate-p.html">&lt;PLAudioHostDelegate&gt;</a></li>
+<li><a class="el" href="struct_plink_buffer_f.html">PlinkBufferF</a></li>
 <li><a class="el" href="class_process_info.html">ProcessInfo</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; ReceiverInternalType &gt;</a><ul>
-<li><a class="el" href="class_smart_pointer_container.html">SmartPointerContainer&lt; ReceiverInternalType &gt;</a><ul>
-<li><a class="el" href="class_receiver_container.html">ReceiverContainer&lt; ReceiverInternalType &gt;</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; RNGInternal &gt;</a><ul>
-<li><a class="el" href="class_smart_pointer_container.html">SmartPointerContainer&lt; RNGInternal &gt;</a><ul>
+<li><a class="el" href="class_queue_unit.html">QueueUnit&lt; SampleType &gt;</a></li>
+<li><a class="el" href="class_reblock_unit.html">ReblockUnit&lt; SampleType &gt;</a></li>
+<li><a class="el" href="class_resample_unit.html">ResampleUnit&lt; SampleType, InterpTypeCode &gt;</a></li>
+<li><a class="el" href="class_r_h_p_f_unit.html">RHPFUnit&lt; SampleType, InterpTypeCode &gt;</a></li>
+<li><a class="el" href="class_r_l_p_f_unit.html">RLPFUnit&lt; SampleType, InterpTypeCode &gt;</a></li>
 <li><a class="el" href="class_r_n_g.html">RNG</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; SenderInternalType &gt;</a><ul>
-<li><a class="el" href="class_smart_pointer_container.html">SmartPointerContainer&lt; SenderInternalType &gt;</a><ul>
-<li><a class="el" href="class_sender_container.html">SenderContainer&lt; SenderInternalType &gt;</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; SignalInternal&lt; SampleType &gt; &gt;</a><ul>
-<li><a class="el" href="class_smart_pointer_container.html">SmartPointerContainer&lt; SignalInternal&lt; SampleType &gt; &gt;</a><ul>
-<li><a class="el" href="class_signal_base.html">SignalBase&lt; SampleType &gt;</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; SimpleLinkedListInternal&lt; ValueType &gt; &gt;</a><ul>
-<li><a class="el" href="class_smart_pointer_container.html">SmartPointerContainer&lt; SimpleLinkedListInternal&lt; ValueType &gt; &gt;</a><ul>
-<li><a class="el" href="class_simple_linked_list.html">SimpleLinkedList&lt; ValueType &gt;</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; SimpleQueueInternal&lt; ValueType &gt; &gt;</a><ul>
-<li><a class="el" href="class_smart_pointer_container.html">SmartPointerContainer&lt; SimpleQueueInternal&lt; ValueType &gt; &gt;</a><ul>
-<li><a class="el" href="class_simple_queue.html">SimpleQueue&lt; ValueType &gt;</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; SimpleStackInternal&lt; ValueType &gt; &gt;</a><ul>
-<li><a class="el" href="class_smart_pointer_container.html">SmartPointerContainer&lt; SimpleStackInternal&lt; ValueType &gt; &gt;</a><ul>
-<li><a class="el" href="class_simple_stack.html">SimpleStack&lt; ValueType &gt;</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; TextFileInternal &gt;</a><ul>
-<li><a class="el" href="class_smart_pointer_container.html">SmartPointerContainer&lt; TextFileInternal &gt;</a><ul>
-<li><a class="el" href="class_text_file.html">TextFile</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; VariableInternal&lt; Type &amp; &gt; &gt;</a><ul>
-<li><a class="el" href="class_smart_pointer_container.html">SmartPointerContainer&lt; VariableInternal&lt; Type &amp; &gt; &gt;</a><ul>
-<li><a class="el" href="class_variable_3_01_type_01_6_01_4.html">Variable&lt; Type &amp; &gt;</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; VariableInternalBase&lt; Type &gt; &gt;</a><ul>
-<li><a class="el" href="class_smart_pointer_container.html">SmartPointerContainer&lt; VariableInternalBase&lt; Type &gt; &gt;</a><ul>
-<li><a class="el" href="class_sender_container.html">SenderContainer&lt; VariableInternalBase&lt; Type &gt; &gt;</a><ul>
-<li><a class="el" href="class_variable.html">Variable&lt; Type &gt;</a><ul>
-<li><a class="el" href="class_block_size.html">BlockSize</a><ul>
-<li><a class="el" href="class_block_size_default.html">BlockSizeDefault</a></li>
-<li><a class="el" href="class_block_size_no_preference.html">BlockSizeNoPreference</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_sample_rate.html">SampleRate</a><ul>
-<li><a class="el" href="class_sample_rate_default.html">SampleRateDefault</a></li>
-<li><a class="el" href="class_sample_rate_no_preference.html">SampleRateNoPreference</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; WeakPointer &gt;</a><ul>
-<li><a class="el" href="class_smart_pointer_container.html">SmartPointerContainer&lt; WeakPointer, false &gt;</a><ul>
-<li><a class="el" href="class_weak_pointer_container.html">WeakPointerContainer&lt; OriginalType &gt;</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="el" href="class_smart_pointer_counter.html">SmartPointerCounter</a></li>
-</ul>
-</li>
-<li><a class="el" href="struct_plonk_static_assert_utility_3_01true_01_4.html">PlonkStaticAssertUtility&lt; true &gt;</a></li>
-<li><a class="el" href="class_quaternary_op_type_utility.html">QuaternaryOpTypeUtility&lt; TypeA, TypeB, TypeC, TypeD &gt;</a></li>
-<li><a class="el" href="class_quinary_op_type_utility.html">QuinaryOpTypeUtility&lt; TypeA, TypeB, TypeC, TypeD, TypeE &gt;</a></li>
-<li><a class="el" href="class_receiver_internal.html">ReceiverInternal&lt; SenderContainerBaseType &gt;</a><ul>
-<li><a class="el" href="class_binary_op_variable_internal.html">BinaryOpVariableInternal&lt; Type, op &gt;</a></li>
-<li><a class="el" href="class_bus_buffer_internal.html">BusBufferInternal&lt; SampleType &gt;</a></li>
-<li><a class="el" href="class_channel_internal.html">ChannelInternal&lt; SampleType, DataType &gt;</a></li>
-<li><a class="el" href="class_channel_internal.html">ChannelInternal&lt; FormType::SampleDataType, FormType::Data &gt;</a></li>
-<li><a class="el" href="class_channel_internal.html">ChannelInternal&lt; OutputSampleType, ChannelInternalCore::Data &gt;</a></li>
-<li><a class="el" href="class_channel_internal.html">ChannelInternal&lt; SampleType, ChannelData&lt; ChannelMixerChannelInternal&lt; SampleType &gt; &gt; &gt;</a></li>
-<li><a class="el" href="class_channel_internal.html">ChannelInternal&lt; SampleType, ChannelData&lt; EnvelopeChannelInternal&lt; SampleType &gt; &gt; &gt;</a></li>
-<li><a class="el" href="class_channel_internal.html">ChannelInternal&lt; SampleType, ChannelData&lt; FilePlayChannelInternal&lt; SampleType &gt; &gt; &gt;</a></li>
-<li><a class="el" href="class_channel_internal.html">ChannelInternal&lt; SampleType, ChannelData&lt; PatchChannelInternal&lt; SampleType &gt; &gt; &gt;</a></li>
-<li><a class="el" href="class_channel_internal.html">ChannelInternal&lt; SampleType, ChannelData&lt; SawChannelInternal&lt; SampleType &gt; &gt; &gt;</a></li>
-<li><a class="el" href="class_channel_internal.html">ChannelInternal&lt; SampleType, ChannelData&lt; SignalPlayChannelInternal&lt; SampleType &gt; &gt; &gt;</a></li>
-<li><a class="el" href="class_channel_internal.html">ChannelInternal&lt; SampleType, ChannelData&lt; TableChannelInternal&lt; SampleType &gt; &gt; &gt;</a></li>
-<li><a class="el" href="class_channel_internal.html">ChannelInternal&lt; SampleType, ChannelData&lt; ThreadedChannelInternal&lt; SampleType &gt; &gt; &gt;</a></li>
-<li><a class="el" href="class_channel_internal.html">ChannelInternal&lt; SampleType, ChannelData&lt; UnitMixerChannelInternal&lt; SampleType &gt; &gt; &gt;</a></li>
-<li><a class="el" href="class_channel_internal.html">ChannelInternal&lt; SampleType, ChannelData&lt; WhiteNoiseChannelInternal&lt; SampleType &gt; &gt; &gt;</a></li>
-<li><a class="el" href="class_channel_internal.html">ChannelInternal&lt; SampleType, ChannelInternalCore::Data &gt;</a></li>
-<li><a class="el" href="class_channel_internal.html">ChannelInternal&lt; ShapeType::SampleDataType, ShapeType::Data &gt;</a></li>
-<li><a class="el" href="class_channel_internal_base.html">ChannelInternalBase&lt; SampleType &gt;</a></li>
-<li><a class="el" href="class_channel_internal_base.html">ChannelInternalBase&lt; FormType::SampleDataType &gt;</a></li>
-<li><a class="el" href="class_channel_internal_base.html">ChannelInternalBase&lt; OutputSampleType &gt;</a></li>
-<li><a class="el" href="class_channel_internal_base.html">ChannelInternalBase&lt; ShapeType::SampleDataType &gt;</a></li>
-<li><a class="el" href="class_type_variable_internal.html">TypeVariableInternal&lt; Type, OtherType &gt;</a></li>
-<li><a class="el" href="class_unary_op_variable_internal.html">UnaryOpVariableInternal&lt; Type, op &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_resample_unit.html">ResampleUnit&lt; SampleType &gt;</a></li>
-<li><a class="el" href="class_r_h_p_f_unit.html">RHPFUnit&lt; SampleType &gt;</a></li>
-<li><a class="el" href="class_r_l_p_f_unit.html">RLPFUnit&lt; SampleType &gt;</a></li>
-<li><a class="el" href="struct_saw_process_state_f.html">SawProcessStateF</a></li>
+<li><a class="el" href="class_sample_rate.html">SampleRate</a></li>
 <li><a class="el" href="class_saw_unit.html">SawUnit&lt; SampleType &gt;</a></li>
-<li><a class="el" href="class_scoped_pointer_container.html">ScopedPointerContainer&lt; ScopedPointerType &gt;</a></li>
-<li><a class="el" href="class_scoped_pointer_container.html">ScopedPointerContainer&lt; ObjectMemoryBase &gt;</a></li>
+<li><a class="el" href="class_schmidt_unit.html">SchmidtUnit&lt; SampleType &gt;</a></li>
 <li><a class="el" href="class_signal_play_unit.html">SignalPlayUnit&lt; SampleType &gt;</a></li>
+<li><a class="el" href="class_signal_read_unit.html">SignalReadUnit&lt; SampleType &gt;</a></li>
+<li><a class="el" href="class_file_play_unit_1_1_simple.html">FilePlayUnit&lt; SampleType &gt;::Simple</a></li>
 <li><a class="el" href="class_sine_unit.html">SineUnit&lt; SampleType &gt;</a></li>
-<li><a class="el" href="struct_table_process_state_f.html">TableProcessStateF</a></li>
-<li><a class="el" href="class_table_unit.html">TableUnit&lt; SampleType &gt;</a></li>
-<li><a class="el" href="class_ternary_op_type_utility.html">TernaryOpTypeUtility&lt; TypeA, TypeB, TypeC &gt;</a></li>
-<li><a class="el" href="class_text.html">Text</a></li>
-<li><a class="el" href="class_threading_1_1_thread.html">Threading::Thread</a><ul>
-<li><a class="el" href="class_object_memory_defer_free.html">ObjectMemoryDeferFree</a></li>
-<li><a class="el" href="class_object_memory_pools.html">ObjectMemoryPools</a></li>
-<li><a class="el" href="class_threaded_channel_internal_1_1_thread.html">ThreadedChannelInternal&lt; SampleType &gt;::Thread</a></li>
+<li><a class="el" href="class_smart_pointer.html">SmartPointer</a><ul>
+<li><a class="el" href="class_weak_pointer.html">WeakPointer</a></li>
 </ul>
 </li>
-<li><a class="el" href="class_threaded_unit.html">ThreadedUnit&lt; SampleType &gt;</a></li>
+<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; SmartPointerType &gt;</a></li>
+<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; AudioFileReaderInternal &gt;</a></li>
+<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; AudioFileWriterInternal&lt; SampleType &gt; &gt;</a></li>
+<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; Base64Internal &gt;</a></li>
+<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; BinaryFileInternal &gt;</a></li>
+<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; BreakpointInternal&lt; SampleType &gt; &gt;</a></li>
+<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; BreakpointsInternal&lt; SampleType &gt; &gt;</a></li>
+<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; BusBufferInternal&lt; SampleType &gt; &gt;</a></li>
+<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; ChannelInternalBase&lt; SampleType &gt; &gt;</a></li>
+<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; DictionaryInternal&lt; Dynamic, int &gt; &gt;</a></li>
+<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; DictionaryInternal&lt; Dynamic, KeyType &gt; &gt;</a></li>
+<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; DictionaryInternal&lt; ValueType, KeyType &gt; &gt;</a></li>
+<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; DynamicInternal &gt;</a></li>
+<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; FFTEngineInternal&lt; float &gt; &gt;</a></li>
+<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; FilePathInternal &gt;</a></li>
+<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; FunctionCallerInternal&lt; FunctionType, FunctionType::Return, ArgType1, ArgType2, ArgType3 &gt; &gt;</a></li>
+<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; FunctionCallerInternal&lt; FunctionType, FunctionType::Return, FunctionType::Arg1, ArgType2, ArgType3 &gt; &gt;</a></li>
+<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; FunctionCallerInternal&lt; FunctionType, FunctionType::Return, FunctionType::Arg1, FunctionType::Arg2, ArgType3 &gt; &gt;</a></li>
+<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; FunctionCallerInternal&lt; FunctionType, FunctionType::Return, FunctionType::Arg1, FunctionType::Arg2, FunctionType::Arg3 &gt; &gt;</a></li>
+<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; FunctionCallerInternal&lt; FunctionType, ReturnType &gt; &gt;</a></li>
+<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; FunctionCallerInternal&lt; FunctionType, ReturnType, ArgType1 &gt; &gt;</a></li>
+<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; FunctionCallerInternal&lt; FunctionType, ReturnType, ArgType1, ArgType2 &gt; &gt;</a></li>
+<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; FunctionCallerInternal&lt; FunctionType, ReturnType, ArgType1, ArgType2, ArgType3 &gt; &gt;</a></li>
+<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; FunctionProxyCallerInternal&lt; FunctionType, FunctionType::Return, ArgType1, ArgType2, ArgType3 &gt; &gt;</a></li>
+<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; FunctionProxyCallerInternal&lt; FunctionType, FunctionType::Return, FunctionType::Arg1, ArgType2, ArgType3 &gt; &gt;</a></li>
+<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; FunctionProxyCallerInternal&lt; FunctionType, FunctionType::Return, FunctionType::Arg1, FunctionType::Arg2, ArgType3 &gt; &gt;</a></li>
+<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; FunctionProxyCallerInternal&lt; FunctionType, FunctionType::Return, FunctionType::Arg1, FunctionType::Arg2, FunctionType::Arg3 &gt; &gt;</a></li>
+<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; FunctionProxyCallerInternal&lt; FunctionType, ReturnType &gt; &gt;</a></li>
+<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; FunctionProxyCallerInternal&lt; FunctionType, ReturnType, ArgType1 &gt; &gt;</a></li>
+<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; FunctionProxyCallerInternal&lt; FunctionType, ReturnType, ArgType1, ArgType2 &gt; &gt;</a></li>
+<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; FunctionProxyCallerInternal&lt; FunctionType, ReturnType, ArgType1, ArgType2, ArgType3 &gt; &gt;</a></li>
+<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; LockedValueInternal&lt; Type &gt; &gt;</a></li>
+<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; LockFreeQueueInternal&lt; ValueType &gt; &gt;</a></li>
+<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; LockFreeStackInternal&lt; ValueType &gt; &gt;</a></li>
+<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; LockInternalBase &gt;</a></li>
+<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; NeuralNetworkInternal&lt; ValueType &gt; &gt;</a></li>
+<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; ObjectArrayInternal&lt; Buffer &gt; &gt;</a></li>
+<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; ObjectArrayInternal&lt; BusType &gt; &gt;</a></li>
+<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; ObjectArrayInternal&lt; ChannelBase&lt; float &gt; &gt; &gt;</a></li>
+<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; ObjectArrayInternal&lt; ChannelBase&lt; SampleType &gt; &gt; &gt;</a></li>
+<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; ObjectArrayInternal&lt; const float * &gt; &gt;</a></li>
+<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; ObjectArrayInternal&lt; float * &gt; &gt;</a></li>
+<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; ObjectArrayInternal&lt; float &gt; &gt;</a></li>
+<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; ObjectArrayInternal&lt; FormType::SampleDataType &gt; &gt;</a></li>
+<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; ObjectArrayInternal&lt; NumericalType &gt; &gt;</a></li>
+<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; ObjectArrayInternal&lt; ObjectType &gt; &gt;</a></li>
+<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; ObjectArrayInternal&lt; ObjectType, SmartPointer &gt; &gt;</a></li>
+<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; ObjectArrayInternal&lt; OutputSampleType &gt; &gt;</a></li>
+<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; ObjectArrayInternal&lt; Receiver *, SmartPointer &gt; &gt;</a></li>
+<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; ObjectArrayInternal&lt; RowType &gt; &gt;</a></li>
+<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; ObjectArrayInternal&lt; SampleType &gt; &gt;</a></li>
+<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; ObjectArrayInternal&lt; ShapeType::SampleDataType &gt; &gt;</a></li>
+<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; ObjectArrayInternal&lt; Text &gt; &gt;</a></li>
+<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; ObjectArrayInternal&lt; WeakChannelType, SmartPointer &gt; &gt;</a></li>
+<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; ObjectArrayInternal&lt; WeakPointer *, SmartPointer &gt; &gt;</a></li>
+<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; ProcessInfoInternal &gt;</a></li>
+<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; ReceiverInternalType &gt;</a></li>
+<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; RNGInternal &gt;</a></li>
+<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; SenderInternalType &gt;</a></li>
+<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; SignalInternal&lt; SampleType &gt; &gt;</a></li>
+<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; SimpleLinkedListInternal&lt; ValueType &gt; &gt;</a></li>
+<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; SimpleQueueInternal&lt; ValueType &gt; &gt;</a></li>
+<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; SimpleStackInternal&lt; ValueType &gt; &gt;</a></li>
+<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; TaskBufferInternal&lt; SampleType &gt; &gt;</a></li>
+<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; TaskMessageInternal &gt;</a></li>
+<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; TextFileInternal &gt;</a></li>
+<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; VariableInternal&lt; Type &amp; &gt; &gt;</a></li>
+<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; VariableInternalBase&lt; Type &gt; &gt;</a></li>
+<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; WeakPointer &gt;</a></li>
+<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; ZipInternal &gt;</a></li>
+<li><a class="el" href="class_table_unit.html">TableUnit&lt; SampleType &gt;</a></li>
+<li><a class="el" href="class_text.html">Text</a></li>
+<li><a class="el" href="class_text_file.html">TextFile</a></li>
+<li><a class="el" href="class_threading_1_1_thread.html">Threading::Thread</a></li>
 <li><a class="el" href="class_threading.html">Threading</a></li>
 <li><a class="el" href="class_time_stamp.html">TimeStamp</a></li>
+<li><a class="el" href="class_trigger_unit.html">TriggerUnit&lt; SampleType &gt;</a></li>
 <li><a class="el" href="class_type_code.html">TypeCode</a></li>
-<li><a class="el" href="class_type_unit_base.html">TypeUnitBase&lt; OutputSampleType, InputSampleType &gt;</a><ul>
-<li><a class="el" href="class_type_unit.html">TypeUnit&lt; OutputSampleType, InputSampleType &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_type_utility_base.html">TypeUtilityBase&lt; Type &gt;</a><ul>
+<li><a class="el" href="class_type_unit_base.html">TypeUnitBase&lt; OutputSampleType, InputSampleType &gt;</a></li>
 <li><a class="el" href="class_type_utility.html">TypeUtility&lt; Type &gt;</a></li>
-</ul>
-</li>
-<li><a class="el" href="class_type_utility_base_3_01_atomic_double_01_4.html">TypeUtilityBase&lt; AtomicDouble &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_atomic_double_variable_01_4.html">TypeUtilityBase&lt; AtomicDoubleVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_atomic_dynamic_pointer_01_4.html">TypeUtilityBase&lt; AtomicDynamicPointer &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_atomic_dynamic_pointer_variable_01_4.html">TypeUtilityBase&lt; AtomicDynamicPointerVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_atomic_extended_pointer_01_4.html">TypeUtilityBase&lt; AtomicExtendedPointer &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_atomic_extended_pointer_variable_01_4.html">TypeUtilityBase&lt; AtomicExtendedPointerVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_atomic_float_01_4.html">TypeUtilityBase&lt; AtomicFloat &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_atomic_float_variable_01_4.html">TypeUtilityBase&lt; AtomicFloatVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_atomic_int_01_4.html">TypeUtilityBase&lt; AtomicInt &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_atomic_int_variable_01_4.html">TypeUtilityBase&lt; AtomicIntVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_atomic_long_long_01_4.html">TypeUtilityBase&lt; AtomicLongLong &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_atomic_long_variable_01_4.html">TypeUtilityBase&lt; AtomicLongVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_atomic_pointer_01_4.html">TypeUtilityBase&lt; AtomicPointer &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_atomic_pointer_variable_01_4.html">TypeUtilityBase&lt; AtomicPointerVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_audio_file_reader_01_4.html">TypeUtilityBase&lt; AudioFileReader &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01bool_01_4.html">TypeUtilityBase&lt; bool &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_bool_array_01_4.html">TypeUtilityBase&lt; BoolArray &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_bool_array_variable_01_4.html">TypeUtilityBase&lt; BoolArrayVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_bool_variable_01_4.html">TypeUtilityBase&lt; BoolVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01char_01_4.html">TypeUtilityBase&lt; char &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_char_array_01_4.html">TypeUtilityBase&lt; CharArray &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_char_array_variable_01_4.html">TypeUtilityBase&lt; CharArrayVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_char_variable_01_4.html">TypeUtilityBase&lt; CharVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_atomic_double_01_4.html">TypeUtilityBase&lt; const AtomicDouble &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_atomic_double_variable_01_4.html">TypeUtilityBase&lt; const AtomicDoubleVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_atomic_dynamic_pointer_01_4.html">TypeUtilityBase&lt; const AtomicDynamicPointer &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_atomic_dynamic_pointer_variable_01_4.html">TypeUtilityBase&lt; const AtomicDynamicPointerVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_atomic_extended_pointer_01_4.html">TypeUtilityBase&lt; const AtomicExtendedPointer &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_atomic_extended_pointer_variable_01_4.html">TypeUtilityBase&lt; const AtomicExtendedPointerVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_atomic_float_01_4.html">TypeUtilityBase&lt; const AtomicFloat &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_atomic_float_variable_01_4.html">TypeUtilityBase&lt; const AtomicFloatVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_atomic_int_01_4.html">TypeUtilityBase&lt; const AtomicInt &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_atomic_int_variable_01_4.html">TypeUtilityBase&lt; const AtomicIntVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_atomic_long_long_01_4.html">TypeUtilityBase&lt; const AtomicLongLong &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_atomic_long_variable_01_4.html">TypeUtilityBase&lt; const AtomicLongVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_atomic_pointer_01_4.html">TypeUtilityBase&lt; const AtomicPointer &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_atomic_pointer_variable_01_4.html">TypeUtilityBase&lt; const AtomicPointerVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_audio_file_reader_01_4.html">TypeUtilityBase&lt; const AudioFileReader &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_bool_array_01_4.html">TypeUtilityBase&lt; const BoolArray &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_bool_array_variable_01_4.html">TypeUtilityBase&lt; const BoolArrayVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_bool_variable_01_4.html">TypeUtilityBase&lt; const BoolVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_char_array_01_4.html">TypeUtilityBase&lt; const CharArray &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_char_array_variable_01_4.html">TypeUtilityBase&lt; const CharArrayVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_char_variable_01_4.html">TypeUtilityBase&lt; const CharVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_double_array_01_4.html">TypeUtilityBase&lt; const DoubleArray &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_double_array_variable_01_4.html">TypeUtilityBase&lt; const DoubleArrayVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_double_breakpoints_01_4.html">TypeUtilityBase&lt; const DoubleBreakpoints &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_double_breakpoints_variable_01_4.html">TypeUtilityBase&lt; const DoubleBreakpointsVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_double_bus_01_4.html">TypeUtilityBase&lt; const DoubleBus &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_double_busses_01_4.html">TypeUtilityBase&lt; const DoubleBusses &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_double_busses_variable_01_4.html">TypeUtilityBase&lt; const DoubleBussesVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_double_bus_variable_01_4.html">TypeUtilityBase&lt; const DoubleBusVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_double_channel_01_4.html">TypeUtilityBase&lt; const DoubleChannel &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_double_channel_variable_01_4.html">TypeUtilityBase&lt; const DoubleChannelVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_double_signal_01_4.html">TypeUtilityBase&lt; const DoubleSignal &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_double_signal_variable_01_4.html">TypeUtilityBase&lt; const DoubleSignalVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_double_unit_01_4.html">TypeUtilityBase&lt; const DoubleUnit &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_double_units_01_4.html">TypeUtilityBase&lt; const DoubleUnits &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_double_units_variable_01_4.html">TypeUtilityBase&lt; const DoubleUnitsVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_double_unit_variable_01_4.html">TypeUtilityBase&lt; const DoubleUnitVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_double_variable_01_4.html">TypeUtilityBase&lt; const DoubleVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_double_wavetable_01_4.html">TypeUtilityBase&lt; const DoubleWavetable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_double_wavetable_variable_01_4.html">TypeUtilityBase&lt; const DoubleWavetableVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_dynamic_01_4.html">TypeUtilityBase&lt; const Dynamic &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_float_array_01_4.html">TypeUtilityBase&lt; const FloatArray &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_float_array_variable_01_4.html">TypeUtilityBase&lt; const FloatArrayVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_float_breakpoints_01_4.html">TypeUtilityBase&lt; const FloatBreakpoints &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_float_breakpoints_variable_01_4.html">TypeUtilityBase&lt; const FloatBreakpointsVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_float_bus_01_4.html">TypeUtilityBase&lt; const FloatBus &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_float_busses_01_4.html">TypeUtilityBase&lt; const FloatBusses &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_float_busses_variable_01_4.html">TypeUtilityBase&lt; const FloatBussesVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_float_bus_variable_01_4.html">TypeUtilityBase&lt; const FloatBusVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_float_channel_01_4.html">TypeUtilityBase&lt; const FloatChannel &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_float_channel_variable_01_4.html">TypeUtilityBase&lt; const FloatChannelVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_float_signal_01_4.html">TypeUtilityBase&lt; const FloatSignal &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_float_signal_variable_01_4.html">TypeUtilityBase&lt; const FloatSignalVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_float_unit_01_4.html">TypeUtilityBase&lt; const FloatUnit &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_float_units_01_4.html">TypeUtilityBase&lt; const FloatUnits &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_float_units_variable_01_4.html">TypeUtilityBase&lt; const FloatUnitsVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_float_unit_variable_01_4.html">TypeUtilityBase&lt; const FloatUnitVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_float_variable_01_4.html">TypeUtilityBase&lt; const FloatVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_float_wavetable_01_4.html">TypeUtilityBase&lt; const FloatWavetable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_float_wavetable_variable_01_4.html">TypeUtilityBase&lt; const FloatWavetableVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_int24_array_01_4.html">TypeUtilityBase&lt; const Int24Array &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_int24_array_variable_01_4.html">TypeUtilityBase&lt; const Int24ArrayVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_int24_breakpoints_01_4.html">TypeUtilityBase&lt; const Int24Breakpoints &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_int24_breakpoints_variable_01_4.html">TypeUtilityBase&lt; const Int24BreakpointsVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_int24_bus_01_4.html">TypeUtilityBase&lt; const Int24Bus &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_int24_busses_01_4.html">TypeUtilityBase&lt; const Int24Busses &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_int24_busses_variable_01_4.html">TypeUtilityBase&lt; const Int24BussesVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_int24_bus_variable_01_4.html">TypeUtilityBase&lt; const Int24BusVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_int24_channel_01_4.html">TypeUtilityBase&lt; const Int24Channel &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_int24_channel_variable_01_4.html">TypeUtilityBase&lt; const Int24ChannelVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_int24_signal_01_4.html">TypeUtilityBase&lt; const Int24Signal &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_int24_signal_variable_01_4.html">TypeUtilityBase&lt; const Int24SignalVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_int24_unit_01_4.html">TypeUtilityBase&lt; const Int24Unit &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_int24_units_01_4.html">TypeUtilityBase&lt; const Int24Units &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_int24_units_variable_01_4.html">TypeUtilityBase&lt; const Int24UnitsVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_int24_unit_variable_01_4.html">TypeUtilityBase&lt; const Int24UnitVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_int24_variable_01_4.html">TypeUtilityBase&lt; const Int24Variable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_int24_wavetable_01_4.html">TypeUtilityBase&lt; const Int24Wavetable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_int24_wavetable_variable_01_4.html">TypeUtilityBase&lt; const Int24WavetableVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_int_array_01_4.html">TypeUtilityBase&lt; const IntArray &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_int_array_variable_01_4.html">TypeUtilityBase&lt; const IntArrayVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_int_breakpoints_01_4.html">TypeUtilityBase&lt; const IntBreakpoints &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_int_breakpoints_variable_01_4.html">TypeUtilityBase&lt; const IntBreakpointsVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_int_bus_01_4.html">TypeUtilityBase&lt; const IntBus &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_int_busses_01_4.html">TypeUtilityBase&lt; const IntBusses &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_int_busses_variable_01_4.html">TypeUtilityBase&lt; const IntBussesVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_int_bus_variable_01_4.html">TypeUtilityBase&lt; const IntBusVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_int_channel_01_4.html">TypeUtilityBase&lt; const IntChannel &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_int_channel_variable_01_4.html">TypeUtilityBase&lt; const IntChannelVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_int_signal_01_4.html">TypeUtilityBase&lt; const IntSignal &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_int_signal_variable_01_4.html">TypeUtilityBase&lt; const IntSignalVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_int_unit_01_4.html">TypeUtilityBase&lt; const IntUnit &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_int_units_01_4.html">TypeUtilityBase&lt; const IntUnits &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_int_units_variable_01_4.html">TypeUtilityBase&lt; const IntUnitsVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_int_unit_variable_01_4.html">TypeUtilityBase&lt; const IntUnitVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_int_variable_01_4.html">TypeUtilityBase&lt; const IntVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_int_wavetable_01_4.html">TypeUtilityBase&lt; const IntWavetable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_int_wavetable_variable_01_4.html">TypeUtilityBase&lt; const IntWavetableVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_long_array_01_4.html">TypeUtilityBase&lt; const LongArray &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_long_array_variable_01_4.html">TypeUtilityBase&lt; const LongArrayVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_long_breakpoints_01_4.html">TypeUtilityBase&lt; const LongBreakpoints &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_long_breakpoints_variable_01_4.html">TypeUtilityBase&lt; const LongBreakpointsVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_long_bus_01_4.html">TypeUtilityBase&lt; const LongBus &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_long_busses_01_4.html">TypeUtilityBase&lt; const LongBusses &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_long_busses_variable_01_4.html">TypeUtilityBase&lt; const LongBussesVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_long_bus_variable_01_4.html">TypeUtilityBase&lt; const LongBusVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_long_channel_01_4.html">TypeUtilityBase&lt; const LongChannel &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_long_channel_variable_01_4.html">TypeUtilityBase&lt; const LongChannelVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_long_signal_01_4.html">TypeUtilityBase&lt; const LongSignal &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_long_signal_variable_01_4.html">TypeUtilityBase&lt; const LongSignalVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_long_unit_01_4.html">TypeUtilityBase&lt; const LongUnit &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_long_units_01_4.html">TypeUtilityBase&lt; const LongUnits &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_long_units_variable_01_4.html">TypeUtilityBase&lt; const LongUnitsVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_long_unit_variable_01_4.html">TypeUtilityBase&lt; const LongUnitVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_long_variable_01_4.html">TypeUtilityBase&lt; const LongVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_long_wavetable_01_4.html">TypeUtilityBase&lt; const LongWavetable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_long_wavetable_variable_01_4.html">TypeUtilityBase&lt; const LongWavetableVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01plonk_1_1_text_01_4.html">TypeUtilityBase&lt; const plonk::Text &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01plonk_1_1_text_variable_01_4.html">TypeUtilityBase&lt; const plonk::TextVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_short_array_01_4.html">TypeUtilityBase&lt; const ShortArray &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_short_array_variable_01_4.html">TypeUtilityBase&lt; const ShortArrayVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_short_breakpoints_01_4.html">TypeUtilityBase&lt; const ShortBreakpoints &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_short_breakpoints_variable_01_4.html">TypeUtilityBase&lt; const ShortBreakpointsVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_short_bus_01_4.html">TypeUtilityBase&lt; const ShortBus &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_short_busses_01_4.html">TypeUtilityBase&lt; const ShortBusses &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_short_busses_variable_01_4.html">TypeUtilityBase&lt; const ShortBussesVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_short_bus_variable_01_4.html">TypeUtilityBase&lt; const ShortBusVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_short_channel_01_4.html">TypeUtilityBase&lt; const ShortChannel &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_short_channel_variable_01_4.html">TypeUtilityBase&lt; const ShortChannelVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_short_signal_01_4.html">TypeUtilityBase&lt; const ShortSignal &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_short_signal_variable_01_4.html">TypeUtilityBase&lt; const ShortSignalVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_short_unit_01_4.html">TypeUtilityBase&lt; const ShortUnit &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_short_units_01_4.html">TypeUtilityBase&lt; const ShortUnits &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_short_units_variable_01_4.html">TypeUtilityBase&lt; const ShortUnitsVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_short_unit_variable_01_4.html">TypeUtilityBase&lt; const ShortUnitVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_short_variable_01_4.html">TypeUtilityBase&lt; const ShortVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_short_wavetable_01_4.html">TypeUtilityBase&lt; const ShortWavetable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_short_wavetable_variable_01_4.html">TypeUtilityBase&lt; const ShortWavetableVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_text_array_01_4.html">TypeUtilityBase&lt; const TextArray &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01const_01_text_array_variable_01_4.html">TypeUtilityBase&lt; const TextArrayVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01double_01_4.html">TypeUtilityBase&lt; double &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_double_array_01_4.html">TypeUtilityBase&lt; DoubleArray &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_double_array_variable_01_4.html">TypeUtilityBase&lt; DoubleArrayVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_double_breakpoints_01_4.html">TypeUtilityBase&lt; DoubleBreakpoints &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_double_breakpoints_variable_01_4.html">TypeUtilityBase&lt; DoubleBreakpointsVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_double_bus_01_4.html">TypeUtilityBase&lt; DoubleBus &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_double_busses_01_4.html">TypeUtilityBase&lt; DoubleBusses &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_double_busses_variable_01_4.html">TypeUtilityBase&lt; DoubleBussesVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_double_bus_variable_01_4.html">TypeUtilityBase&lt; DoubleBusVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_double_channel_01_4.html">TypeUtilityBase&lt; DoubleChannel &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_double_channel_variable_01_4.html">TypeUtilityBase&lt; DoubleChannelVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_double_signal_01_4.html">TypeUtilityBase&lt; DoubleSignal &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_double_signal_variable_01_4.html">TypeUtilityBase&lt; DoubleSignalVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_double_unit_01_4.html">TypeUtilityBase&lt; DoubleUnit &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_double_units_01_4.html">TypeUtilityBase&lt; DoubleUnits &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_double_units_variable_01_4.html">TypeUtilityBase&lt; DoubleUnitsVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_double_unit_variable_01_4.html">TypeUtilityBase&lt; DoubleUnitVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_double_variable_01_4.html">TypeUtilityBase&lt; DoubleVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_double_wavetable_01_4.html">TypeUtilityBase&lt; DoubleWavetable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_double_wavetable_variable_01_4.html">TypeUtilityBase&lt; DoubleWavetableVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_dynamic_01_4.html">TypeUtilityBase&lt; Dynamic &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01float_01_4.html">TypeUtilityBase&lt; float &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_float_array_01_4.html">TypeUtilityBase&lt; FloatArray &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_float_array_variable_01_4.html">TypeUtilityBase&lt; FloatArrayVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_float_breakpoints_01_4.html">TypeUtilityBase&lt; FloatBreakpoints &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_float_breakpoints_variable_01_4.html">TypeUtilityBase&lt; FloatBreakpointsVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_float_bus_01_4.html">TypeUtilityBase&lt; FloatBus &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_float_busses_01_4.html">TypeUtilityBase&lt; FloatBusses &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_float_busses_variable_01_4.html">TypeUtilityBase&lt; FloatBussesVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_float_bus_variable_01_4.html">TypeUtilityBase&lt; FloatBusVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_float_channel_01_4.html">TypeUtilityBase&lt; FloatChannel &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_float_channel_variable_01_4.html">TypeUtilityBase&lt; FloatChannelVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_float_signal_01_4.html">TypeUtilityBase&lt; FloatSignal &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_float_signal_variable_01_4.html">TypeUtilityBase&lt; FloatSignalVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_float_unit_01_4.html">TypeUtilityBase&lt; FloatUnit &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_float_units_01_4.html">TypeUtilityBase&lt; FloatUnits &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_float_units_variable_01_4.html">TypeUtilityBase&lt; FloatUnitsVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_float_unit_variable_01_4.html">TypeUtilityBase&lt; FloatUnitVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_float_variable_01_4.html">TypeUtilityBase&lt; FloatVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_float_wavetable_01_4.html">TypeUtilityBase&lt; FloatWavetable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_float_wavetable_variable_01_4.html">TypeUtilityBase&lt; FloatWavetableVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01int_01_4.html">TypeUtilityBase&lt; int &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_int24_01_4.html">TypeUtilityBase&lt; Int24 &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_int24_array_01_4.html">TypeUtilityBase&lt; Int24Array &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_int24_array_variable_01_4.html">TypeUtilityBase&lt; Int24ArrayVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_int24_breakpoints_01_4.html">TypeUtilityBase&lt; Int24Breakpoints &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_int24_breakpoints_variable_01_4.html">TypeUtilityBase&lt; Int24BreakpointsVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_int24_bus_01_4.html">TypeUtilityBase&lt; Int24Bus &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_int24_busses_01_4.html">TypeUtilityBase&lt; Int24Busses &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_int24_busses_variable_01_4.html">TypeUtilityBase&lt; Int24BussesVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_int24_bus_variable_01_4.html">TypeUtilityBase&lt; Int24BusVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_int24_channel_01_4.html">TypeUtilityBase&lt; Int24Channel &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_int24_channel_variable_01_4.html">TypeUtilityBase&lt; Int24ChannelVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_int24_signal_01_4.html">TypeUtilityBase&lt; Int24Signal &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_int24_signal_variable_01_4.html">TypeUtilityBase&lt; Int24SignalVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_int24_unit_01_4.html">TypeUtilityBase&lt; Int24Unit &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_int24_units_01_4.html">TypeUtilityBase&lt; Int24Units &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_int24_units_variable_01_4.html">TypeUtilityBase&lt; Int24UnitsVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_int24_unit_variable_01_4.html">TypeUtilityBase&lt; Int24UnitVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_int24_variable_01_4.html">TypeUtilityBase&lt; Int24Variable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_int24_wavetable_01_4.html">TypeUtilityBase&lt; Int24Wavetable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_int24_wavetable_variable_01_4.html">TypeUtilityBase&lt; Int24WavetableVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_int_array_01_4.html">TypeUtilityBase&lt; IntArray &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_int_array_variable_01_4.html">TypeUtilityBase&lt; IntArrayVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_int_breakpoints_01_4.html">TypeUtilityBase&lt; IntBreakpoints &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_int_breakpoints_variable_01_4.html">TypeUtilityBase&lt; IntBreakpointsVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_int_bus_01_4.html">TypeUtilityBase&lt; IntBus &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_int_busses_01_4.html">TypeUtilityBase&lt; IntBusses &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_int_busses_variable_01_4.html">TypeUtilityBase&lt; IntBussesVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_int_bus_variable_01_4.html">TypeUtilityBase&lt; IntBusVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_int_channel_01_4.html">TypeUtilityBase&lt; IntChannel &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_int_channel_variable_01_4.html">TypeUtilityBase&lt; IntChannelVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_int_signal_01_4.html">TypeUtilityBase&lt; IntSignal &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_int_signal_variable_01_4.html">TypeUtilityBase&lt; IntSignalVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_int_unit_01_4.html">TypeUtilityBase&lt; IntUnit &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_int_units_01_4.html">TypeUtilityBase&lt; IntUnits &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_int_units_variable_01_4.html">TypeUtilityBase&lt; IntUnitsVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_int_unit_variable_01_4.html">TypeUtilityBase&lt; IntUnitVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_int_variable_01_4.html">TypeUtilityBase&lt; IntVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_int_wavetable_01_4.html">TypeUtilityBase&lt; IntWavetable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_int_wavetable_variable_01_4.html">TypeUtilityBase&lt; IntWavetableVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_long_array_01_4.html">TypeUtilityBase&lt; LongArray &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_long_array_variable_01_4.html">TypeUtilityBase&lt; LongArrayVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_long_breakpoints_01_4.html">TypeUtilityBase&lt; LongBreakpoints &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_long_breakpoints_variable_01_4.html">TypeUtilityBase&lt; LongBreakpointsVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_long_bus_01_4.html">TypeUtilityBase&lt; LongBus &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_long_busses_01_4.html">TypeUtilityBase&lt; LongBusses &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_long_busses_variable_01_4.html">TypeUtilityBase&lt; LongBussesVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_long_bus_variable_01_4.html">TypeUtilityBase&lt; LongBusVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_long_channel_01_4.html">TypeUtilityBase&lt; LongChannel &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_long_channel_variable_01_4.html">TypeUtilityBase&lt; LongChannelVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_long_long_01_4.html">TypeUtilityBase&lt; LongLong &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_long_signal_01_4.html">TypeUtilityBase&lt; LongSignal &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_long_signal_variable_01_4.html">TypeUtilityBase&lt; LongSignalVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_long_unit_01_4.html">TypeUtilityBase&lt; LongUnit &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_long_units_01_4.html">TypeUtilityBase&lt; LongUnits &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_long_units_variable_01_4.html">TypeUtilityBase&lt; LongUnitsVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_long_unit_variable_01_4.html">TypeUtilityBase&lt; LongUnitVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_long_variable_01_4.html">TypeUtilityBase&lt; LongVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_long_wavetable_01_4.html">TypeUtilityBase&lt; LongWavetable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_long_wavetable_variable_01_4.html">TypeUtilityBase&lt; LongWavetableVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01plonk_1_1_text_01_4.html">TypeUtilityBase&lt; plonk::Text &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01plonk_1_1_text_variable_01_4.html">TypeUtilityBase&lt; plonk::TextVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01short_01_4.html">TypeUtilityBase&lt; short &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_short_array_01_4.html">TypeUtilityBase&lt; ShortArray &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_short_array_variable_01_4.html">TypeUtilityBase&lt; ShortArrayVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_short_breakpoints_01_4.html">TypeUtilityBase&lt; ShortBreakpoints &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_short_breakpoints_variable_01_4.html">TypeUtilityBase&lt; ShortBreakpointsVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_short_bus_01_4.html">TypeUtilityBase&lt; ShortBus &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_short_busses_01_4.html">TypeUtilityBase&lt; ShortBusses &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_short_busses_variable_01_4.html">TypeUtilityBase&lt; ShortBussesVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_short_bus_variable_01_4.html">TypeUtilityBase&lt; ShortBusVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_short_channel_01_4.html">TypeUtilityBase&lt; ShortChannel &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_short_channel_variable_01_4.html">TypeUtilityBase&lt; ShortChannelVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_short_signal_01_4.html">TypeUtilityBase&lt; ShortSignal &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_short_signal_variable_01_4.html">TypeUtilityBase&lt; ShortSignalVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_short_unit_01_4.html">TypeUtilityBase&lt; ShortUnit &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_short_units_01_4.html">TypeUtilityBase&lt; ShortUnits &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_short_units_variable_01_4.html">TypeUtilityBase&lt; ShortUnitsVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_short_unit_variable_01_4.html">TypeUtilityBase&lt; ShortUnitVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_short_variable_01_4.html">TypeUtilityBase&lt; ShortVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_short_wavetable_01_4.html">TypeUtilityBase&lt; ShortWavetable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_short_wavetable_variable_01_4.html">TypeUtilityBase&lt; ShortWavetableVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_text_array_01_4.html">TypeUtilityBase&lt; TextArray &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_text_array_variable_01_4.html">TypeUtilityBase&lt; TextArrayVariable &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_type_01_6_01_4.html">TypeUtilityBase&lt; Type &amp; &gt;</a></li>
-<li><a class="el" href="class_type_utility_base_3_01_type_01const_01_6_01_4.html">TypeUtilityBase&lt; Type const &amp; &gt;</a></li>
-<li><a class="el" href="class_unary_op_utility.html">UnaryOpUtility&lt; SampleType &gt;</a></li>
-<li><a class="el" href="class_unit_info.html">UnitInfo</a></li>
-<li><a class="el" href="class_variable_unit.html">VariableUnit&lt; SampleType &gt;</a></li>
-<li><a class="el" href="struct_void_return.html">VoidReturn</a></li>
-<li><a class="el" href="struct_white_noise_process_state_f.html">WhiteNoiseProcessStateF</a></li>
+<li><a class="el" href="class_variable.html">Variable&lt; Type &gt;</a></li>
+<li><a class="el" href="class_variable_3_01_type_01_6_01_4.html">Variable&lt; Type &amp; &gt;</a></li>
+<li><a class="el" href="class_weak_pointer_container.html">WeakPointerContainer&lt; OriginalType &gt;</a></li>
 <li><a class="el" href="class_white_noise_unit.html">WhiteNoiseUnit&lt; SampleType &gt;</a></li>
+<li><a class="el" href="class_z_mul_unit.html">ZMulUnit&lt; SampleType &gt;</a></li>
 </ul>
 </div>
 <!-- window showing the filter options -->
@@ -1842,7 +606,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Properties</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -1851,7 +615,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 5 2012 17:04:58 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 8 2014 12:26:52 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

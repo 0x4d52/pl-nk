@@ -20,7 +20,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="pl-nk-logo-small.png"/></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">pl-nk</div>
+   <div id="projectname">pl-nk&#160;<span id="projectnumber">v0.4.5</span></div>
+   <div id="projectbrief">Plonk|Plink|Plank are a set of cross-platform C/C++ frameworks for audio software development</div>
   </td>
  </tr>
  </tbody>
@@ -29,8 +30,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -61,425 +62,26 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   </div>
 </div>
 <div class="header">
-  <div class="summary">
-<a href="#pub-types">Public Types</a> &#124;
-<a href="#pub-methods">Public Member Functions</a>  </div>
   <div class="headertitle">
 <div class="title">Variable&lt; Type &amp; &gt; Class Template Reference</div>  </div>
 </div>
 <div class="contents">
-<!-- doxytag: class="Variable&lt; Type &amp; &gt;" --><!-- doxytag: inherits="SmartPointerContainer&lt; VariableInternal&lt; Type &amp; &gt; &gt;" -->
+<!-- doxytag: class="Variable&lt; Type &amp; &gt;" --><!-- doxytag: inherits="SmartPointerContainer" -->
 <p>A variable container for objects.  
  <a href="class_variable_3_01_type_01_6_01_4.html#details">More...</a></p>
-<div class="dynheader">
-Inheritance diagram for Variable&lt; Type &amp; &gt;:</div>
-<div class="dyncontent">
- <div class="center">
-  <img src="class_variable_3_01_type_01_6_01_4.png" usemap="#Variable&lt; Type &amp; &gt;_map" alt=""/>
-  <map id="Variable&lt; Type &amp; &gt;_map" name="Variable&lt; Type &amp; &gt;_map">
-<area href="class_smart_pointer_container.html" alt="SmartPointerContainer&lt; VariableInternal&lt; Type &amp; &gt; &gt;" shape="rect" coords="0,112,347,136"/>
-<area href="class_smart_pointer_container_base.html" alt="SmartPointerContainerBase&lt; VariableInternal&lt; Type &amp; &gt; &gt;" shape="rect" coords="0,56,347,80"/>
-<area href="class_plonk_base.html" alt="PlonkBase" shape="rect" coords="0,0,347,24"/>
-</map>
- </div></div>
+
+<p>Inherits SmartPointerContainer&lt; SmartPointerType, enableWeak &gt;.</p>
 
 <p><a href="class_variable_3_01_type_01_6_01_4-members.html">List of all members.</a></p>
 <table class="memberdecls">
-<tr><td colspan="2"><h2><a name="pub-types"></a>
-Public Types</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_variable_internal.html">VariableInternal</a>&lt; Type &amp; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_variable_3_01_type_01_6_01_4.html#a4c3b39b4cf19ebbfaf961ba2256e3f57">Internal</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_smart_pointer_container.html">SmartPointerContainer</a><br class="typebreak"/>
-&lt; <a class="el" href="class_variable_internal_3_01_type_01_6_01_4.html">Internal</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_variable_3_01_type_01_6_01_4.html#a79f642f7a1e26e7987a8621fc884a4a1">Base</a></td></tr>
-<tr><td colspan="2"><h2><a name="pub-methods"></a>
-Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_variable_3_01_type_01_6_01_4.html#a8b131173d84a4b2a302eeea8453705e8">Variable</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_variable_3_01_type_01_6_01_4.html#a499997fa9a606b270f492d7f558c1f50">Variable</a> (<a class="el" href="class_variable.html">Variable</a> const &amp;copy)  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_variable_3_01_type_01_6_01_4.html#af87376557641b973d2611f26d763e1b7">Variable</a> (Type &amp;initValue)  throw ()</td></tr>
-<tr><td class="memTemplParams" colspan="2">template&lt;class ValueType &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_variable_3_01_type_01_6_01_4.html#a544af2175fd266f98d9b2f0a1e4435ee">Variable</a> (ValueType const &amp;initValue)  throw ()</td></tr>
-<tr><td class="memTemplParams" colspan="2">template&lt;class ValueType &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="class_variable.html">Variable</a> &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_variable_3_01_type_01_6_01_4.html#ad2e28b9b3d3712d5194361664b6f896d">operator=</a> (ValueType const &amp;newValue)  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_variable.html">Variable</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_variable_3_01_type_01_6_01_4.html#a8182aaee5498f9417ceaaacb57aa5250">operator=</a> (<a class="el" href="class_variable.html">Variable</a> const &amp;other)  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">Type &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_variable_3_01_type_01_6_01_4.html#a80a7732e5de85ace6ea7600b0b5f9fa8">getValue</a> ()  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">const Type &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_variable_3_01_type_01_6_01_4.html#ace5143bc9e54aa84348e0321164c78c8">getValue</a> () const   throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_variable_3_01_type_01_6_01_4.html#a4b344e862fde7266bb566811bffcbad5">operator Type &amp;</a> ()  throw ()</td></tr>
-<tr><td class="memTemplParams" colspan="2">template&lt;class ValueType &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_variable_3_01_type_01_6_01_4.html#ad71d4ea882851e62583db715727cf84b">operator ValueType</a> ()  throw ()</td></tr>
-<tr><td class="memTemplParams" colspan="2">template&lt;class ValueType &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_variable_3_01_type_01_6_01_4.html#a5651990d1dab951184978b5b493d7b54">setValue</a> (ValueType const &amp;newValue)  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_variable_3_01_type_01_6_01_4.html#a372a2f41e5f3dc448902a5d4dc4032d4">swapValues</a> (Type &amp;other)  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_variable_3_01_type_01_6_01_4.html#a5d426cb02252e07bf4f33117e1d4cdd5">swapValues</a> (<a class="el" href="class_variable.html">Variable</a> const &amp;other)  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_variable_3_01_type_01_6_01_4.html#aeb5a3871da40e6d0df73842623f5f23e">isValueNull</a> () const   throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_variable_3_01_type_01_6_01_4.html#a6ba853af5378e1079c99506ae3f923e0">isValueNotNull</a> () const   throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_variable.html">Variable</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_variable_3_01_type_01_6_01_4.html#a503a1c30cf04ad71a2db12cc0a04ad47">operator-&gt;</a> ()  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">const <a class="el" href="class_variable.html">Variable</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_variable_3_01_type_01_6_01_4.html#af98e40e55c6f7e943a45ebf1af763908">operator-&gt;</a> () const   throw ()</td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><h3>template&lt;class Type&gt;<br/>
 class Variable&lt; Type &amp; &gt;</h3>
 
 <p>A variable container for objects. </p>
-<p>This is designed to store subclasses of <a class="el" href="class_smart_pointer_container.html">SmartPointerContainer</a> which covers most objects in Plonk (e.g., units, arrays). This makes it possible to store object variables that need to be swapped atomically to assist with multithreaded access. </p>
-</div><hr/><h2>Member Typedef Documentation</h2>
-<a class="anchor" id="a4c3b39b4cf19ebbfaf961ba2256e3f57"></a><!-- doxytag: member="Variable&lt; Type &amp; &gt;::Internal" ref="a4c3b39b4cf19ebbfaf961ba2256e3f57" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_variable_internal.html">VariableInternal</a>&lt;Type&amp;&gt; <a class="el" href="class_variable.html">Variable</a>&lt; Type &amp; &gt;::<a class="el" href="class_variable_internal_3_01_type_01_6_01_4.html">Internal</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a79f642f7a1e26e7987a8621fc884a4a1"></a><!-- doxytag: member="Variable&lt; Type &amp; &gt;::Base" ref="a79f642f7a1e26e7987a8621fc884a4a1" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_smart_pointer_container.html">SmartPointerContainer</a>&lt;<a class="el" href="class_variable_internal_3_01_type_01_6_01_4.html">Internal</a>&gt; <a class="el" href="class_variable.html">Variable</a>&lt; Type &amp; &gt;::<a class="el" href="class_smart_pointer_container.html">Base</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<hr/><h2>Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a8b131173d84a4b2a302eeea8453705e8"></a><!-- doxytag: member="Variable&lt; Type &amp; &gt;::Variable" ref="a8b131173d84a4b2a302eeea8453705e8" args="()" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_variable.html">Variable</a>&lt; Type &amp; &gt;::<a class="el" href="class_variable.html">Variable</a> </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td><code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a499997fa9a606b270f492d7f558c1f50"></a><!-- doxytag: member="Variable&lt; Type &amp; &gt;::Variable" ref="a499997fa9a606b270f492d7f558c1f50" args="(Variable const &amp;copy)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_variable.html">Variable</a>&lt; Type &amp; &gt;::<a class="el" href="class_variable.html">Variable</a> </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_variable.html">Variable</a>&lt; Type &amp; &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>copy</em></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="af87376557641b973d2611f26d763e1b7"></a><!-- doxytag: member="Variable&lt; Type &amp; &gt;::Variable" ref="af87376557641b973d2611f26d763e1b7" args="(Type &amp;initValue)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_variable.html">Variable</a>&lt; Type &amp; &gt;::<a class="el" href="class_variable.html">Variable</a> </td>
-          <td>(</td>
-          <td class="paramtype">Type &amp;&#160;</td>
-          <td class="paramname"><em>initValue</em></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a544af2175fd266f98d9b2f0a1e4435ee"></a><!-- doxytag: member="Variable&lt; Type &amp; &gt;::Variable" ref="a544af2175fd266f98d9b2f0a1e4435ee" args="(ValueType const &amp;initValue)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type &gt; </div>
-<div class="memtemplate">
-template&lt;class ValueType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_variable.html">Variable</a>&lt; Type &amp; &gt;::<a class="el" href="class_variable.html">Variable</a> </td>
-          <td>(</td>
-          <td class="paramtype">ValueType const &amp;&#160;</td>
-          <td class="paramname"><em>initValue</em></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="ad2e28b9b3d3712d5194361664b6f896d"></a><!-- doxytag: member="Variable&lt; Type &amp; &gt;::operator=" ref="ad2e28b9b3d3712d5194361664b6f896d" args="(ValueType const &amp;newValue)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type &gt; </div>
-<div class="memtemplate">
-template&lt;class ValueType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_variable.html">Variable</a>&amp; <a class="el" href="class_variable.html">Variable</a>&lt; Type &amp; &gt;::operator= </td>
-          <td>(</td>
-          <td class="paramtype">ValueType const &amp;&#160;</td>
-          <td class="paramname"><em>newValue</em></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a8182aaee5498f9417ceaaacb57aa5250"></a><!-- doxytag: member="Variable&lt; Type &amp; &gt;::operator=" ref="a8182aaee5498f9417ceaaacb57aa5250" args="(Variable const &amp;other)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_variable.html">Variable</a>&amp; <a class="el" href="class_variable.html">Variable</a>&lt; Type &amp; &gt;::operator= </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_variable.html">Variable</a>&lt; Type &amp; &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>other</em></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a80a7732e5de85ace6ea7600b0b5f9fa8"></a><!-- doxytag: member="Variable&lt; Type &amp; &gt;::getValue" ref="a80a7732e5de85ace6ea7600b0b5f9fa8" args="()" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">Type&amp; <a class="el" href="class_variable.html">Variable</a>&lt; Type &amp; &gt;::getValue </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ace5143bc9e54aa84348e0321164c78c8"></a><!-- doxytag: member="Variable&lt; Type &amp; &gt;::getValue" ref="ace5143bc9e54aa84348e0321164c78c8" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">const Type&amp; <a class="el" href="class_variable.html">Variable</a>&lt; Type &amp; &gt;::getValue </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a4b344e862fde7266bb566811bffcbad5"></a><!-- doxytag: member="Variable&lt; Type &amp; &gt;::operator Type &amp;" ref="a4b344e862fde7266bb566811bffcbad5" args="()" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_variable.html">Variable</a>&lt; Type &amp; &gt;::operator Type &amp; </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ad71d4ea882851e62583db715727cf84b"></a><!-- doxytag: member="Variable&lt; Type &amp; &gt;::operator ValueType" ref="ad71d4ea882851e62583db715727cf84b" args="()" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type &gt; </div>
-<div class="memtemplate">
-template&lt;class ValueType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_variable.html">Variable</a>&lt; Type &amp; &gt;::operator ValueType </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a5651990d1dab951184978b5b493d7b54"></a><!-- doxytag: member="Variable&lt; Type &amp; &gt;::setValue" ref="a5651990d1dab951184978b5b493d7b54" args="(ValueType const &amp;newValue)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type &gt; </div>
-<div class="memtemplate">
-template&lt;class ValueType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="class_variable.html">Variable</a>&lt; Type &amp; &gt;::setValue </td>
-          <td>(</td>
-          <td class="paramtype">ValueType const &amp;&#160;</td>
-          <td class="paramname"><em>newValue</em></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a372a2f41e5f3dc448902a5d4dc4032d4"></a><!-- doxytag: member="Variable&lt; Type &amp; &gt;::swapValues" ref="a372a2f41e5f3dc448902a5d4dc4032d4" args="(Type &amp;other)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="class_variable.html">Variable</a>&lt; Type &amp; &gt;::swapValues </td>
-          <td>(</td>
-          <td class="paramtype">Type &amp;&#160;</td>
-          <td class="paramname"><em>other</em></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a5d426cb02252e07bf4f33117e1d4cdd5"></a><!-- doxytag: member="Variable&lt; Type &amp; &gt;::swapValues" ref="a5d426cb02252e07bf4f33117e1d4cdd5" args="(Variable const &amp;other)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="class_variable.html">Variable</a>&lt; Type &amp; &gt;::swapValues </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_variable.html">Variable</a>&lt; Type &amp; &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>other</em></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="aeb5a3871da40e6d0df73842623f5f23e"></a><!-- doxytag: member="Variable&lt; Type &amp; &gt;::isValueNull" ref="aeb5a3871da40e6d0df73842623f5f23e" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">bool <a class="el" href="class_variable.html">Variable</a>&lt; Type &amp; &gt;::isValueNull </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a6ba853af5378e1079c99506ae3f923e0"></a><!-- doxytag: member="Variable&lt; Type &amp; &gt;::isValueNotNull" ref="a6ba853af5378e1079c99506ae3f923e0" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">bool <a class="el" href="class_variable.html">Variable</a>&lt; Type &amp; &gt;::isValueNotNull </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a503a1c30cf04ad71a2db12cc0a04ad47"></a><!-- doxytag: member="Variable&lt; Type &amp; &gt;::operator&#45;&gt;" ref="a503a1c30cf04ad71a2db12cc0a04ad47" args="()" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_variable.html">Variable</a>* <a class="el" href="class_variable.html">Variable</a>&lt; Type &amp; &gt;::operator-&gt; </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="class_smart_pointer_container_base.html#ab65284d17f2082ce89f6b1017011e418">SmartPointerContainerBase&lt; VariableInternal&lt; Type &amp; &gt; &gt;</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="af98e40e55c6f7e943a45ebf1af763908"></a><!-- doxytag: member="Variable&lt; Type &amp; &gt;::operator&#45;&gt;" ref="af98e40e55c6f7e943a45ebf1af763908" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">const <a class="el" href="class_variable.html">Variable</a>* <a class="el" href="class_variable.html">Variable</a>&lt; Type &amp; &gt;::operator-&gt; </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="class_smart_pointer_container_base.html#a2ba4f8902c0316ee3b8dbe10c3332002">SmartPointerContainerBase&lt; VariableInternal&lt; Type &amp; &gt; &gt;</a>.</p>
-
-</div>
-</div>
-<hr/>The documentation for this class was generated from the following file:<ul>
+<p>This is designed to store subclasses of SmartPointerContainer which covers most objects in Plonk (e.g., units, arrays). This makes it possible to store object variables that need to be swapped atomically to assist with multithreaded access. </p>
+</div><hr/>The documentation for this class was generated from the following file:<ul>
 <li><a class="el" href="plonk___variable_8h_source.html">plonk_Variable.h</a></li>
 </ul>
 </div>
@@ -488,7 +90,7 @@ template&lt;class Type &gt; </div>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Properties</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -497,7 +99,7 @@ template&lt;class Type &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 5 2012 17:05:14 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 8 2014 12:26:53 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

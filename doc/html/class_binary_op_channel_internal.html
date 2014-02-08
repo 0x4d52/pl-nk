@@ -20,7 +20,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="pl-nk-logo-small.png"/></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">pl-nk</div>
+   <div id="projectname">pl-nk&#160;<span id="projectnumber">v0.4.5</span></div>
+   <div id="projectbrief">Plonk|Plink|Plank are a set of cross-platform C/C++ frameworks for audio software development</div>
   </td>
  </tr>
  </tbody>
@@ -29,8 +30,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -71,49 +72,17 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <!-- doxytag: class="BinaryOpChannelInternal" --><!-- doxytag: inherits="ChannelInternal&lt; SampleType, ChannelInternalCore::Data &gt;" -->
 <p>For applying binary operators.  
  <a href="class_binary_op_channel_internal.html#details">More...</a></p>
-<div class="dynheader">
-Inheritance diagram for BinaryOpChannelInternal&lt; SampleType, op &gt;:</div>
-<div class="dyncontent">
- <div class="center">
-  <img src="class_binary_op_channel_internal.png" usemap="#BinaryOpChannelInternal&lt; SampleType, op &gt;_map" alt=""/>
-  <map id="BinaryOpChannelInternal&lt; SampleType, op &gt;_map" name="BinaryOpChannelInternal&lt; SampleType, op &gt;_map">
-<area href="class_channel_internal.html" alt="ChannelInternal&lt; SampleType, ChannelInternalCore::Data &gt;" shape="rect" coords="543,224,895,248"/>
-<area href="class_channel_internal_base.html" title="The templated base class for all internal channel processes." alt="ChannelInternalBase&lt; SampleType &gt;" shape="rect" coords="362,168,714,192"/>
-<area href="class_receiver_internal.html" alt="ReceiverInternal&lt; SenderContainerBaseType &gt;" shape="rect" coords="724,168,1076,192"/>
-<area href="class_sender_internal.html" alt="SenderInternal&lt; ChannelBase&lt; SampleType &gt; &gt;" shape="rect" coords="0,112,352,136"/>
-<area href="class_channel_internal_core.html" title="The base, core class for all internal channel processes." alt="ChannelInternalCore" shape="rect" coords="362,112,714,136"/>
-<area href="class_receiver_internal.html" alt="ReceiverInternal&lt; SenderContainerBaseType &gt;" shape="rect" coords="724,112,1076,136"/>
-<area href="class_smart_pointer.html" title="Reference counted pointer base class." alt="SmartPointer" shape="rect" coords="0,56,352,80"/>
-<area href="class_plonk_base.html" alt="PlonkBase" shape="rect" coords="0,0,352,24"/>
-</map>
- </div></div>
+
+<p>Inherits <a class="el" href="class_channel_internal.html">ChannelInternal&lt; SampleType, ChannelInternalCore::Data &gt;</a>.</p>
 
 <p><a href="class_binary_op_channel_internal-members.html">List of all members.</a></p>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="struct_channel_data_3_01_channel_internal_core_01_4.html">ChannelInternalCore::Data</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_binary_op_channel_internal.html#a2f9034200615d396daa33c4977d83c8c">Data</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_channel_internal_core.html#a09763233582f6f0985461449aa262ae5">ChannelInternalCore::Data</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_binary_op_channel_internal.html#a2f9034200615d396daa33c4977d83c8c">Data</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">To store channel state data.  <a href="#a2f9034200615d396daa33c4977d83c8c"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_channel_base.html">ChannelBase</a>&lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_binary_op_channel_internal.html#a21a6edb5b81e598eefb00a5aaa69ae65">ChannelType</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <br class="typebreak"/>
-<a class="el" href="class_binary_op_channel_internal.html">BinaryOpChannelInternal</a><br class="typebreak"/>
-&lt; SampleType, op &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_binary_op_channel_internal.html#aca8e3b31d9a371081167456a09a4d87e">BinaryOpInternal</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_channel_internal.html">ChannelInternal</a><br class="typebreak"/>
-&lt; SampleType, <a class="el" href="struct_channel_data_3_01_channel_internal_core_01_4.html">Data</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_binary_op_channel_internal.html#a8b51eda8b6c2d7ba7a140818984d32db">Internal</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_channel_internal_base.html">ChannelInternalBase</a><br class="typebreak"/>
-&lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_binary_op_channel_internal.html#a8aa12ffbca8ce4a677f4d50e0530755c">InternalBase</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_binary_op_channel_internal.html#a3df9b0d02210bd4d8a62d13fd2ccc5cb">UnitType</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_input_dictionary.html">InputDictionary</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_binary_op_channel_internal.html#a869cc88044fc071047ef4b115328e787">Inputs</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a><br class="typebreak"/>
-&lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_binary_op_channel_internal.html#a24310a31645493d2904a91124d045b47">Buffer</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_binary_op_utility.html">BinaryOpUtility</a><br class="typebreak"/>
-&lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_binary_op_channel_internal.html#a653f2f4a2e27ce4e874fd21ad9758737">UtilityType</a></td></tr>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_binary_op_channel_internal.html#a30bf28111759e7b2f849c458d8e72ea7">BinaryOpChannelInternal</a> (<a class="el" href="class_input_dictionary.html">Inputs</a> const &amp;inputs, <a class="el" href="struct_channel_data_3_01_channel_internal_core_01_4.html">Data</a> const &amp;data, <a class="el" href="class_block_size.html">BlockSize</a> const &amp;blockSize, <a class="el" href="class_sample_rate.html">SampleRate</a> const &amp;sampleRate)  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_text.html">Text</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_binary_op_channel_internal.html#a68839caf34c45f689679bfc3c1edc934">getName</a> () const   throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_numerical_array.html">IntArray</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_binary_op_channel_internal.html#acbbbdb209f372596bf5c26cd7b05b733">getInputKeys</a> () const   throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_channel_internal_base.html">InternalBase</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_binary_op_channel_internal.html#aa7c9dc051c0e0857509b50edffebdf81">getChannel</a> (const int index)  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_binary_op_channel_internal.html#a6cce05045798b04331cdaa3f08dcfb42">initChannel</a> (const int channel)  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Called to initialise the channel's initial value.  <a href="#a6cce05045798b04331cdaa3f08dcfb42"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_binary_op_channel_internal.html#a57c1d145616f0f8c9498268e5c9bfd6b">process</a> (<a class="el" href="class_process_info.html">ProcessInfo</a> &amp;info, const int channel)  throw ()</td></tr>
@@ -132,7 +101,7 @@ class BinaryOpChannelInternal&lt; SampleType, op &gt;</h3>
 template&lt;class SampleType , SampleType(*)(SampleTypeconst &amp;, SampleTypeconst &amp;) op&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="struct_channel_data_3_01_channel_internal_core_01_4.html">ChannelInternalCore::Data</a> <a class="el" href="class_binary_op_channel_internal.html">BinaryOpChannelInternal</a>&lt; SampleType, op &gt;::<a class="el" href="struct_channel_data_3_01_channel_internal_core_01_4.html">Data</a></td>
+          <td class="memname">typedef <a class="el" href="class_channel_internal_core.html#a09763233582f6f0985461449aa262ae5">ChannelInternalCore::Data</a> <a class="el" href="class_binary_op_channel_internal.html">BinaryOpChannelInternal</a>&lt; SampleType, op &gt;::<a class="el" href="class_channel_internal_core.html#a09763233582f6f0985461449aa262ae5">Data</a></td>
         </tr>
       </table>
 </div>
@@ -145,240 +114,7 @@ template&lt;class SampleType , SampleType(*)(SampleTypeconst &amp;, SampleTypeco
 
 </div>
 </div>
-<a class="anchor" id="a21a6edb5b81e598eefb00a5aaa69ae65"></a><!-- doxytag: member="BinaryOpChannelInternal::ChannelType" ref="a21a6edb5b81e598eefb00a5aaa69ae65" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType , SampleType(*)(SampleTypeconst &amp;, SampleTypeconst &amp;) op&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_channel_base.html">ChannelBase</a>&lt;SampleType&gt; <a class="el" href="class_binary_op_channel_internal.html">BinaryOpChannelInternal</a>&lt; SampleType, op &gt;::<a class="el" href="class_channel_base.html">ChannelType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="class_channel_internal.html#a3ff51af2f5629cdb9f81c7af3a3ec672">ChannelInternal&lt; SampleType, ChannelInternalCore::Data &gt;</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="aca8e3b31d9a371081167456a09a4d87e"></a><!-- doxytag: member="BinaryOpChannelInternal::BinaryOpInternal" ref="aca8e3b31d9a371081167456a09a4d87e" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType , SampleType(*)(SampleTypeconst &amp;, SampleTypeconst &amp;) op&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_binary_op_channel_internal.html">BinaryOpChannelInternal</a>&lt;SampleType,op&gt; <a class="el" href="class_binary_op_channel_internal.html">BinaryOpChannelInternal</a>&lt; SampleType, op &gt;::<a class="el" href="class_binary_op_channel_internal.html">BinaryOpInternal</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a8b51eda8b6c2d7ba7a140818984d32db"></a><!-- doxytag: member="BinaryOpChannelInternal::Internal" ref="a8b51eda8b6c2d7ba7a140818984d32db" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType , SampleType(*)(SampleTypeconst &amp;, SampleTypeconst &amp;) op&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_channel_internal.html">ChannelInternal</a>&lt;SampleType,<a class="el" href="struct_channel_data_3_01_channel_internal_core_01_4.html">Data</a>&gt; <a class="el" href="class_binary_op_channel_internal.html">BinaryOpChannelInternal</a>&lt; SampleType, op &gt;::<a class="el" href="class_receiver_internal.html#ac1910adc042a53336c1316a1303eafcc">Internal</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="class_channel_internal.html#a9edab70c3d38bb8adb2e816dfb578cf1">ChannelInternal&lt; SampleType, ChannelInternalCore::Data &gt;</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a8aa12ffbca8ce4a677f4d50e0530755c"></a><!-- doxytag: member="BinaryOpChannelInternal::InternalBase" ref="a8aa12ffbca8ce4a677f4d50e0530755c" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType , SampleType(*)(SampleTypeconst &amp;, SampleTypeconst &amp;) op&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_channel_internal_base.html">ChannelInternalBase</a>&lt;SampleType&gt; <a class="el" href="class_binary_op_channel_internal.html">BinaryOpChannelInternal</a>&lt; SampleType, op &gt;::<a class="el" href="class_channel_internal_base.html">InternalBase</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a3df9b0d02210bd4d8a62d13fd2ccc5cb"></a><!-- doxytag: member="BinaryOpChannelInternal::UnitType" ref="a3df9b0d02210bd4d8a62d13fd2ccc5cb" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType , SampleType(*)(SampleTypeconst &amp;, SampleTypeconst &amp;) op&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_unit_base.html">UnitBase</a>&lt;SampleType&gt; <a class="el" href="class_binary_op_channel_internal.html">BinaryOpChannelInternal</a>&lt; SampleType, op &gt;::<a class="el" href="class_unit_base.html">UnitType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="class_channel_internal.html#a3b121d7cdac860b370de05f3540c81ae">ChannelInternal&lt; SampleType, ChannelInternalCore::Data &gt;</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a869cc88044fc071047ef4b115328e787"></a><!-- doxytag: member="BinaryOpChannelInternal::Inputs" ref="a869cc88044fc071047ef4b115328e787" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType , SampleType(*)(SampleTypeconst &amp;, SampleTypeconst &amp;) op&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_input_dictionary.html">InputDictionary</a> <a class="el" href="class_binary_op_channel_internal.html">BinaryOpChannelInternal</a>&lt; SampleType, op &gt;::<a class="el" href="class_input_dictionary.html">Inputs</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="class_channel_internal.html#aaad27a4ef43a757a678695a406757706">ChannelInternal&lt; SampleType, ChannelInternalCore::Data &gt;</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a24310a31645493d2904a91124d045b47"></a><!-- doxytag: member="BinaryOpChannelInternal::Buffer" ref="a24310a31645493d2904a91124d045b47" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType , SampleType(*)(SampleTypeconst &amp;, SampleTypeconst &amp;) op&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt;SampleType&gt; <a class="el" href="class_binary_op_channel_internal.html">BinaryOpChannelInternal</a>&lt; SampleType, op &gt;::<a class="el" href="class_numerical_array.html">Buffer</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="class_channel_internal.html#a16c6a9a8471f62660653e9c5921aac70">ChannelInternal&lt; SampleType, ChannelInternalCore::Data &gt;</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a653f2f4a2e27ce4e874fd21ad9758737"></a><!-- doxytag: member="BinaryOpChannelInternal::UtilityType" ref="a653f2f4a2e27ce4e874fd21ad9758737" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType , SampleType(*)(SampleTypeconst &amp;, SampleTypeconst &amp;) op&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_binary_op_utility.html">BinaryOpUtility</a>&lt;SampleType&gt; <a class="el" href="class_binary_op_channel_internal.html">BinaryOpChannelInternal</a>&lt; SampleType, op &gt;::<a class="el" href="class_binary_op_utility.html">UtilityType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<hr/><h2>Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a30bf28111759e7b2f849c458d8e72ea7"></a><!-- doxytag: member="BinaryOpChannelInternal::BinaryOpChannelInternal" ref="a30bf28111759e7b2f849c458d8e72ea7" args="(Inputs const &amp;inputs, Data const &amp;data, BlockSize const &amp;blockSize, SampleRate const &amp;sampleRate)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType , SampleType(*)(SampleTypeconst &amp;, SampleTypeconst &amp;) op&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_binary_op_channel_internal.html">BinaryOpChannelInternal</a>&lt; SampleType, op &gt;::<a class="el" href="class_binary_op_channel_internal.html">BinaryOpChannelInternal</a> </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_input_dictionary.html">Inputs</a> const &amp;&#160;</td>
-          <td class="paramname"><em>inputs</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="struct_channel_data_3_01_channel_internal_core_01_4.html">Data</a> const &amp;&#160;</td>
-          <td class="paramname"><em>data</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="class_block_size.html">BlockSize</a> const &amp;&#160;</td>
-          <td class="paramname"><em>blockSize</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="class_sample_rate.html">SampleRate</a> const &amp;&#160;</td>
-          <td class="paramname"><em>sampleRate</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a68839caf34c45f689679bfc3c1edc934"></a><!-- doxytag: member="BinaryOpChannelInternal::getName" ref="a68839caf34c45f689679bfc3c1edc934" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType , SampleType(*)(SampleTypeconst &amp;, SampleTypeconst &amp;) op&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_text.html">Text</a> <a class="el" href="class_binary_op_channel_internal.html">BinaryOpChannelInternal</a>&lt; SampleType, op &gt;::getName </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline, virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Implements <a class="el" href="class_channel_internal_core.html#afab91268bb677531d7a921554681ffae">ChannelInternalCore</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="acbbbdb209f372596bf5c26cd7b05b733"></a><!-- doxytag: member="BinaryOpChannelInternal::getInputKeys" ref="acbbbdb209f372596bf5c26cd7b05b733" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType , SampleType(*)(SampleTypeconst &amp;, SampleTypeconst &amp;) op&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_numerical_array.html">IntArray</a> <a class="el" href="class_binary_op_channel_internal.html">BinaryOpChannelInternal</a>&lt; SampleType, op &gt;::getInputKeys </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline, virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Implements <a class="el" href="class_channel_internal_core.html#a5f731843efea658e869a27e0529b5c6c">ChannelInternalCore</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="aa7c9dc051c0e0857509b50edffebdf81"></a><!-- doxytag: member="BinaryOpChannelInternal::getChannel" ref="aa7c9dc051c0e0857509b50edffebdf81" args="(const int index)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType , SampleType(*)(SampleTypeconst &amp;, SampleTypeconst &amp;) op&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_channel_internal_base.html">InternalBase</a>* <a class="el" href="class_binary_op_channel_internal.html">BinaryOpChannelInternal</a>&lt; SampleType, op &gt;::getChannel </td>
-          <td>(</td>
-          <td class="paramtype">const int&#160;</td>
-          <td class="paramname"><em>index</em></td><td>)</td>
-          <td>  throw ()<code> [inline, virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Implements <a class="el" href="class_channel_internal_base.html#a73d7491f2a14b4724f7852272fd6632d">ChannelInternalBase&lt; SampleType &gt;</a>.</p>
-
-</div>
-</div>
 <a class="anchor" id="a6cce05045798b04331cdaa3f08dcfb42"></a><!-- doxytag: member="BinaryOpChannelInternal::initChannel" ref="a6cce05045798b04331cdaa3f08dcfb42" args="(const int channel)" -->
 <div class="memitem">
 <div class="memproto">
@@ -397,7 +133,7 @@ template&lt;class SampleType , SampleType(*)(SampleTypeconst &amp;, SampleTypeco
 <div class="memdoc">
 
 <p>Called to initialise the channel's initial value. </p>
-<p>The <a class="el" href="class_channel_internal.html" title="The base class from which most ChannelInternals should be derived.">ChannelInternal</a> subclass should initialise itself using this channel of its inputs, calling <a class="el" href="class_channel_internal_base.html#aed88288e0eb608e998b3f7ccf6bf2aaf">initValue()</a>. </p>
+<p>The <a class="el" href="class_channel_internal.html" title="The base class from which most ChannelInternals should be derived.">ChannelInternal</a> subclass should initialise itself using this channel of its inputs, calling initValue(). </p>
 
 <p>Implements <a class="el" href="class_channel_internal_core.html#a0d5725cc71173dcff25b08f992acf1ea">ChannelInternalCore</a>.</p>
 
@@ -446,7 +182,7 @@ template&lt;class SampleType , SampleType(*)(SampleTypeconst &amp;, SampleTypeco
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Properties</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -455,7 +191,7 @@ template&lt;class SampleType , SampleType(*)(SampleTypeconst &amp;, SampleTypeco
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 5 2012 17:05:00 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 8 2014 12:26:52 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

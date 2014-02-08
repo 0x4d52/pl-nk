@@ -20,7 +20,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="pl-nk-logo-small.png"/></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">pl-nk</div>
+   <div id="projectname">pl-nk&#160;<span id="projectnumber">v0.4.5</span></div>
+   <div id="projectbrief">Plonk|Plink|Plank are a set of cross-platform C/C++ frameworks for audio software development</div>
   </td>
  </tr>
  </tbody>
@@ -29,8 +30,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -62,121 +63,34 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="header">
   <div class="summary">
-<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a>  </div>
   <div class="headertitle">
 <div class="title">WeakPointerContainer&lt; OriginalType &gt; Class Template Reference</div>  </div>
 </div>
 <div class="contents">
-<!-- doxytag: class="WeakPointerContainer" --><!-- doxytag: inherits="SmartPointerContainer&lt; WeakPointer, false &gt;" -->
+<!-- doxytag: class="WeakPointerContainer" --><!-- doxytag: inherits="SmartPointerContainer" -->
 <p>This stores a weak reference using a <a class="el" href="class_weak_pointer.html" title="Holds a weak reference to a SmartPointer.">WeakPointer</a>.  
  <a href="class_weak_pointer_container.html#details">More...</a></p>
-<div class="dynheader">
-Inheritance diagram for WeakPointerContainer&lt; OriginalType &gt;:</div>
-<div class="dyncontent">
- <div class="center">
-  <img src="class_weak_pointer_container.png" usemap="#WeakPointerContainer&lt; OriginalType &gt;_map" alt=""/>
-  <map id="WeakPointerContainer&lt; OriginalType &gt;_map" name="WeakPointerContainer&lt; OriginalType &gt;_map">
-<area href="class_smart_pointer_container.html" alt="SmartPointerContainer&lt; WeakPointer, false &gt;" shape="rect" coords="0,112,270,136"/>
-<area href="class_smart_pointer_container_base.html" alt="SmartPointerContainerBase&lt; WeakPointer &gt;" shape="rect" coords="0,56,270,80"/>
-<area href="class_plonk_base.html" alt="PlonkBase" shape="rect" coords="0,0,270,24"/>
-</map>
- </div></div>
+
+<p>Inherits SmartPointerContainer&lt; SmartPointerType, enableWeak &gt;.</p>
 
 <p><a href="class_weak_pointer_container-members.html">List of all members.</a></p>
 <table class="memberdecls">
-<tr><td colspan="2"><h2><a name="pub-types"></a>
-Public Types</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_smart_pointer_container.html">SmartPointerContainer</a><br class="typebreak"/>
-&lt; <a class="el" href="class_weak_pointer.html">WeakPointer</a>, false &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_weak_pointer_container.html#af14de2adf4b7d8a5ccac86777458eb7a">Base</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef OriginalType::Internal&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_weak_pointer_container.html#a07948c8f778175c3db5d90e427171f88">OriginalInternal</a></td></tr>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_weak_pointer_container.html#afd82ebdddf280992805de44026fb0761">WeakPointerContainer</a> ()  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_weak_pointer_container.html#af0822f18c361c5dbed526edb46e6fbe1">~WeakPointerContainer</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_weak_pointer_container.html#aff51da46d7d9c2350a79ab0f98b7f977">WeakPointerContainer</a> (<a class="el" href="class_weak_pointer_container.html">WeakPointerContainer</a> const &amp;copy)  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy constructor.  <a href="#aff51da46d7d9c2350a79ab0f98b7f977"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_weak_pointer_container.html">WeakPointerContainer</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_weak_pointer_container.html#a7cc4fd4a750be063bb921930ca43f6e0">operator=</a> (<a class="el" href="class_weak_pointer_container.html">WeakPointerContainer</a> const &amp;other)  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Assignment operator.  <a href="#a7cc4fd4a750be063bb921930ca43f6e0"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_weak_pointer_container.html#a93b505a54bac4d5a367dcb3911dc16f6">WeakPointerContainer</a> (OriginalType const &amp;original)  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_weak_pointer_container.html#a39ed5ecf1d4ca85df6f54ffad7944485">isAlive</a> () const   throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">OriginalType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_weak_pointer_container.html#a1a2a9be892a44fbb1d0e2c8657e61629">fromWeak</a> () const   throw ()</td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><h3>template&lt;class OriginalType&gt;<br/>
 class WeakPointerContainer&lt; OriginalType &gt;</h3>
 
 <p>This stores a weak reference using a <a class="el" href="class_weak_pointer.html" title="Holds a weak reference to a SmartPointer.">WeakPointer</a>. </p>
-<p>The orginal object can be obtained using <a class="el" href="class_weak_pointer_container.html#a1a2a9be892a44fbb1d0e2c8657e61629">fromWeak()</a> but if the object has been since deleted the object return will be a new, default object of the specified type rather than the original. This is useful for avoiding circular dependencies in reference counted situations. </p>
+<p>The orginal object can be obtained using fromWeak() but if the object has been since deleted the object return will be a new, default object of the specified type rather than the original. This is useful for avoiding circular dependencies in reference counted situations. </p>
 <dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="class_weak_pointer.html" title="Holds a weak reference to a SmartPointer.">WeakPointer</a> </dd></dl>
-</div><hr/><h2>Member Typedef Documentation</h2>
-<a class="anchor" id="af14de2adf4b7d8a5ccac86777458eb7a"></a><!-- doxytag: member="WeakPointerContainer::Base" ref="af14de2adf4b7d8a5ccac86777458eb7a" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class OriginalType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_smart_pointer_container.html">SmartPointerContainer</a>&lt;<a class="el" href="class_weak_pointer.html">WeakPointer</a>,false&gt; <a class="el" href="class_weak_pointer_container.html">WeakPointerContainer</a>&lt; OriginalType &gt;::<a class="el" href="class_smart_pointer_container.html">Base</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a07948c8f778175c3db5d90e427171f88"></a><!-- doxytag: member="WeakPointerContainer::OriginalInternal" ref="a07948c8f778175c3db5d90e427171f88" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class OriginalType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef OriginalType::Internal <a class="el" href="class_weak_pointer_container.html">WeakPointerContainer</a>&lt; OriginalType &gt;::<a class="el" href="class_weak_pointer_container.html#a07948c8f778175c3db5d90e427171f88">OriginalInternal</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<hr/><h2>Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="afd82ebdddf280992805de44026fb0761"></a><!-- doxytag: member="WeakPointerContainer::WeakPointerContainer" ref="afd82ebdddf280992805de44026fb0761" args="()" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class OriginalType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_weak_pointer_container.html">WeakPointerContainer</a>&lt; OriginalType &gt;::<a class="el" href="class_weak_pointer_container.html">WeakPointerContainer</a> </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="af0822f18c361c5dbed526edb46e6fbe1"></a><!-- doxytag: member="WeakPointerContainer::~WeakPointerContainer" ref="af0822f18c361c5dbed526edb46e6fbe1" args="()" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class OriginalType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_weak_pointer_container.html">WeakPointerContainer</a>&lt; OriginalType &gt;::~<a class="el" href="class_weak_pointer_container.html">WeakPointerContainer</a> </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td><code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
+</div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="aff51da46d7d9c2350a79ab0f98b7f977"></a><!-- doxytag: member="WeakPointerContainer::WeakPointerContainer" ref="aff51da46d7d9c2350a79ab0f98b7f977" args="(WeakPointerContainer const &amp;copy)" -->
 <div class="memitem">
 <div class="memproto">
@@ -196,25 +110,6 @@ template&lt;class OriginalType &gt; </div>
 
 <p>Copy constructor. </p>
 <p>Note that a deep copy is not made, the copy will refer to exactly the same data. </p>
-
-</div>
-</div>
-<a class="anchor" id="a93b505a54bac4d5a367dcb3911dc16f6"></a><!-- doxytag: member="WeakPointerContainer::WeakPointerContainer" ref="a93b505a54bac4d5a367dcb3911dc16f6" args="(OriginalType const &amp;original)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class OriginalType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_weak_pointer_container.html">WeakPointerContainer</a>&lt; OriginalType &gt;::<a class="el" href="class_weak_pointer_container.html">WeakPointerContainer</a> </td>
-          <td>(</td>
-          <td class="paramtype">OriginalType const &amp;&#160;</td>
-          <td class="paramname"><em>original</em></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
 
 </div>
 </div>
@@ -240,42 +135,6 @@ template&lt;class OriginalType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a39ed5ecf1d4ca85df6f54ffad7944485"></a><!-- doxytag: member="WeakPointerContainer::isAlive" ref="a39ed5ecf1d4ca85df6f54ffad7944485" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class OriginalType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">bool <a class="el" href="class_weak_pointer_container.html">WeakPointerContainer</a>&lt; OriginalType &gt;::isAlive </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a1a2a9be892a44fbb1d0e2c8657e61629"></a><!-- doxytag: member="WeakPointerContainer::fromWeak" ref="a1a2a9be892a44fbb1d0e2c8657e61629" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class OriginalType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">OriginalType <a class="el" href="class_weak_pointer_container.html">WeakPointerContainer</a>&lt; OriginalType &gt;::fromWeak </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li><a class="el" href="plonk___weak_pointer_container_8h_source.html">plonk_WeakPointerContainer.h</a></li>
 </ul>
@@ -285,7 +144,7 @@ template&lt;class OriginalType &gt; </div>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Properties</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -294,7 +153,7 @@ template&lt;class OriginalType &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 5 2012 17:05:14 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 8 2014 12:26:53 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

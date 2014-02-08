@@ -20,7 +20,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="pl-nk-logo-small.png"/></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">pl-nk</div>
+   <div id="projectname">pl-nk&#160;<span id="projectnumber">v0.4.5</span></div>
+   <div id="projectbrief">Plonk|Plink|Plank are a set of cross-platform C/C++ frameworks for audio software development</div>
   </td>
  </tr>
  </tbody>
@@ -29,8 +30,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -72,30 +73,22 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="contents">
 This is the complete list of members for <a class="el" href="class_threading_1_1_thread.html">Threading::Thread</a>, including all inherited members.<table>
-  <tr class="memlist"><td><a class="el" href="class_threading_1_1_thread.html#a161d0f429aa7f7a1ae63e11dca204fa6">cancel</a>()</td><td><a class="el" href="class_threading_1_1_thread.html">Threading::Thread</a></td><td></td></tr>
   <tr class="memlist"><td><a class="el" href="class_threading_1_1_thread.html#ae8f792258076e7a3d886cf3eca777b8c">getID</a>()</td><td><a class="el" href="class_threading_1_1_thread.html">Threading::Thread</a></td><td></td></tr>
   <tr class="memlist"><td><a class="el" href="class_threading_1_1_thread.html#a8f420000728f97481fda9c4be5388c3e">getShouldExit</a>()</td><td><a class="el" href="class_threading_1_1_thread.html">Threading::Thread</a></td><td></td></tr>
   <tr class="memlist"><td><a class="el" href="class_threading_1_1_thread.html#aa09e7addc297931a3dab8740e88b624f">isRunning</a>()</td><td><a class="el" href="class_threading_1_1_thread.html">Threading::Thread</a></td><td></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_threading_1_1_thread.html#a9403dc7ff1d22254e706a720bed6297f">pause</a>(const double duration=PLONK_INFINITY)</td><td><a class="el" href="class_threading_1_1_thread.html">Threading::Thread</a></td><td></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_threading_1_1_thread.html#adcdf6643b10513084505dd9403be5e13">resume</a>()</td><td><a class="el" href="class_threading_1_1_thread.html">Threading::Thread</a></td><td></td></tr>
   <tr class="memlist"><td><a class="el" href="class_threading_1_1_thread.html#a30d723c645d98a76e58f692d5ac26b32">run</a>()=0</td><td><a class="el" href="class_threading_1_1_thread.html">Threading::Thread</a></td><td><code> [pure virtual]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_threading_1_1_thread.html#ad8398a87c8ecb0fdd33b86dc3846df4e">setPriority</a>(const int priority)</td><td><a class="el" href="class_threading_1_1_thread.html">Threading::Thread</a></td><td></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_threading_1_1_thread.html#a631c4fb0ed54e287f49adbea112dc0fb">setPriorityAudio</a>(const int blockSize, const double sampleRate)</td><td><a class="el" href="class_threading_1_1_thread.html">Threading::Thread</a></td><td></td></tr>
   <tr class="memlist"><td><a class="el" href="class_threading_1_1_thread.html#af7b4f2a7a1cd0fac3734f3873dfa96c9">setShouldExit</a>()</td><td><a class="el" href="class_threading_1_1_thread.html">Threading::Thread</a></td><td></td></tr>
   <tr class="memlist"><td><a class="el" href="class_threading_1_1_thread.html#afac6cb66c5ab59a6a3f371dbea00e898">setShouldExitAndWait</a>(const double interval=0.000001)</td><td><a class="el" href="class_threading_1_1_thread.html">Threading::Thread</a></td><td></td></tr>
   <tr class="memlist"><td><a class="el" href="class_threading_1_1_thread.html#a6e52ef55ffcba982eb270909564f607e">sleep</a>(const double seconds)</td><td><a class="el" href="class_threading_1_1_thread.html">Threading::Thread</a></td><td><code> [protected, static]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_threading_1_1_thread.html#aec62063348aad6daca0c6c51d7270b2d">start</a>()</td><td><a class="el" href="class_threading_1_1_thread.html">Threading::Thread</a></td><td></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_threading_1_1_thread.html#ae985d730801d4679590869393ef044a8">Thread</a>(const char *name=0)</td><td><a class="el" href="class_threading_1_1_thread.html">Threading::Thread</a></td><td></td></tr>
   <tr class="memlist"><td><a class="el" href="class_threading_1_1_thread.html#a69a1d2b26ec63699833c4b3c86719fb4">wait</a>()</td><td><a class="el" href="class_threading_1_1_thread.html">Threading::Thread</a></td><td></td></tr>
   <tr class="memlist"><td><a class="el" href="class_threading_1_1_thread.html#afd1de33dbda00617731d7b5498af1b88">yield</a>()</td><td><a class="el" href="class_threading_1_1_thread.html">Threading::Thread</a></td><td><code> [protected, static]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_threading_1_1_thread.html#a7fb203f137956ef48da44e4426b73ab1">~Thread</a>()</td><td><a class="el" href="class_threading_1_1_thread.html">Threading::Thread</a></td><td><code> [virtual]</code></td></tr>
 </table></div>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Properties</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -104,7 +97,7 @@ This is the complete list of members for <a class="el" href="class_threading_1_1
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 5 2012 17:05:11 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 8 2014 12:26:53 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

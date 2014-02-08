@@ -20,7 +20,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="pl-nk-logo-small.png"/></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">pl-nk</div>
+   <div id="projectname">pl-nk&#160;<span id="projectnumber">v0.4.5</span></div>
+   <div id="projectbrief">Plonk|Plink|Plank are a set of cross-platform C/C++ frameworks for audio software development</div>
   </td>
  </tr>
  </tbody>
@@ -29,8 +30,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -53,9 +54,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   </div>
 </div>
 <div class="header">
-  <div class="summary">
-<a href="#typedef-members">Typedefs</a> &#124;
-<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">Plank LockFreeStack class</div>  </div>
 <div class="ingroups"><a class="el" href="group___plank_classes.html">Plank classes</a></div></div>
@@ -64,258 +62,16 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <p>A lock-free stack (LIFO).  
 <a href="#details">More...</a></p>
 <table class="memberdecls">
-<tr><td colspan="2"><h2><a name="typedef-members"></a>
-Typedefs</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef struct PlankLockFreeStack *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_lock_free_stack_class.html#ga6bf7810cd5a0685c6ebe9527f5c62db1">PlankLockFreeStackRef</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_lock_free_stack_class.html#ga7d1252dca488e19cf79449365ecb69d0">PlankLockFreeStackFreeElementDataFunction</a> )(<a class="el" href="plank___standard_header_8h.html#a6461616175af5df334c3067edbe0b6c3">PlankP</a>)</td></tr>
-<tr><td colspan="2"><h2><a name="func-members"></a>
-Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="group___plank_lock_free_stack_class.html#ga6bf7810cd5a0685c6ebe9527f5c62db1">PlankLockFreeStackRef</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_lock_free_stack_class.html#ga745aaa107bf9adbd401222bba55dd811">pl_LockFreeStack_CreateAndInit</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="group___plank_lock_free_stack_class.html#ga6bf7810cd5a0685c6ebe9527f5c62db1">PlankLockFreeStackRef</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_lock_free_stack_class.html#gac17269a2c19d694f88ae086ff42ecd42">pl_LockFreeStack_Create</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_lock_free_stack_class.html#gaddc69ded0456187c92a5ebfcb33337cb">pl_LockFreeStack_Init</a> (<a class="el" href="group___plank_lock_free_stack_class.html#ga6bf7810cd5a0685c6ebe9527f5c62db1">PlankLockFreeStackRef</a> p)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_lock_free_stack_class.html#gafe933037e6ec2880e385f141fc44189f">pl_LockFreeStack_DeInit</a> (<a class="el" href="group___plank_lock_free_stack_class.html#ga6bf7810cd5a0685c6ebe9527f5c62db1">PlankLockFreeStackRef</a> p)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_lock_free_stack_class.html#gaee7344205868c3de735f98095ecd5d9d">pl_LockFreeStack_Destroy</a> (<a class="el" href="group___plank_lock_free_stack_class.html#ga6bf7810cd5a0685c6ebe9527f5c62db1">PlankLockFreeStackRef</a> p)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_lock_free_stack_class.html#ga60eaca465fabdce7ad31a34d14409850">pl_LockFreeStack_Clear</a> (<a class="el" href="group___plank_lock_free_stack_class.html#ga6bf7810cd5a0685c6ebe9527f5c62db1">PlankLockFreeStackRef</a> p)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_lock_free_stack_class.html#ga39214de5a5c16cfd7cdb4d97e50d4e59">pl_LockFreeStack_SetFreeElementDataFunction</a> (<a class="el" href="group___plank_lock_free_stack_class.html#ga6bf7810cd5a0685c6ebe9527f5c62db1">PlankLockFreeStackRef</a> p, <a class="el" href="group___plank_lock_free_stack_class.html#ga7d1252dca488e19cf79449365ecb69d0">PlankLockFreeStackFreeElementDataFunction</a> freeFunction)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_lock_free_stack_class.html#ga8953750a9ffb431b31af262977897a2c">pl_LockFreeStack_Push</a> (<a class="el" href="group___plank_lock_free_stack_class.html#ga6bf7810cd5a0685c6ebe9527f5c62db1">PlankLockFreeStackRef</a> p, const <a class="el" href="group___plank_lock_free_linked_list_element_class.html#gabf39c325f308a07d59544c1f006b7d25">PlankLockFreeStackElementRef</a> element)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_lock_free_stack_class.html#gaec8cd4b5d15cb9bf5a7f9b3888e7968a">pl_LockFreeStack_Pop</a> (<a class="el" href="group___plank_lock_free_stack_class.html#ga6bf7810cd5a0685c6ebe9527f5c62db1">PlankLockFreeStackRef</a> p, <a class="el" href="group___plank_lock_free_linked_list_element_class.html#gabf39c325f308a07d59544c1f006b7d25">PlankLockFreeStackElementRef</a> *element)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="plank___standard_header_8h.html#a854e96ed6d678b7cbcbedffce1c0844d">PlankLL</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_lock_free_stack_class.html#ga2d6f9c9741ec3a5d7cb3ba296c713937">pl_LockFreeStack_GetSize</a> (<a class="el" href="group___plank_lock_free_stack_class.html#ga6bf7810cd5a0685c6ebe9527f5c62db1">PlankLockFreeStackRef</a> p)</td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <p>A lock-free stack (LIFO). </p>
-<hr/><h2>Typedef Documentation</h2>
-<a class="anchor" id="ga6bf7810cd5a0685c6ebe9527f5c62db1"></a><!-- doxytag: member="plank_LockFreeStack.h::PlankLockFreeStackRef" ref="ga6bf7810cd5a0685c6ebe9527f5c62db1" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef struct PlankLockFreeStack* <a class="el" href="group___plank_lock_free_stack_class.html#ga6bf7810cd5a0685c6ebe9527f5c62db1">PlankLockFreeStackRef</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ga7d1252dca488e19cf79449365ecb69d0"></a><!-- doxytag: member="plank_LockFreeStack.h::PlankLockFreeStackFreeElementDataFunction" ref="ga7d1252dca488e19cf79449365ecb69d0" args=")(PlankP)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a>(* <a class="el" href="group___plank_lock_free_stack_class.html#ga7d1252dca488e19cf79449365ecb69d0">PlankLockFreeStackFreeElementDataFunction</a>)(<a class="el" href="plank___standard_header_8h.html#a6461616175af5df334c3067edbe0b6c3">PlankP</a>)</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<hr/><h2>Function Documentation</h2>
-<a class="anchor" id="ga745aaa107bf9adbd401222bba55dd811"></a><!-- doxytag: member="plank_LockFreeStack.h::pl_LockFreeStack_CreateAndInit" ref="ga745aaa107bf9adbd401222bba55dd811" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="group___plank_lock_free_stack_class.html#ga6bf7810cd5a0685c6ebe9527f5c62db1">PlankLockFreeStackRef</a> pl_LockFreeStack_CreateAndInit </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="gac17269a2c19d694f88ae086ff42ecd42"></a><!-- doxytag: member="plank_LockFreeStack.h::pl_LockFreeStack_Create" ref="gac17269a2c19d694f88ae086ff42ecd42" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="group___plank_lock_free_stack_class.html#ga6bf7810cd5a0685c6ebe9527f5c62db1">PlankLockFreeStackRef</a> pl_LockFreeStack_Create </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="gaddc69ded0456187c92a5ebfcb33337cb"></a><!-- doxytag: member="plank_LockFreeStack.h::pl_LockFreeStack_Init" ref="gaddc69ded0456187c92a5ebfcb33337cb" args="(PlankLockFreeStackRef p)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_LockFreeStack_Init </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="group___plank_lock_free_stack_class.html#ga6bf7810cd5a0685c6ebe9527f5c62db1">PlankLockFreeStackRef</a>&#160;</td>
-          <td class="paramname"><em>p</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="gafe933037e6ec2880e385f141fc44189f"></a><!-- doxytag: member="plank_LockFreeStack.h::pl_LockFreeStack_DeInit" ref="gafe933037e6ec2880e385f141fc44189f" args="(PlankLockFreeStackRef p)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_LockFreeStack_DeInit </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="group___plank_lock_free_stack_class.html#ga6bf7810cd5a0685c6ebe9527f5c62db1">PlankLockFreeStackRef</a>&#160;</td>
-          <td class="paramname"><em>p</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="gaee7344205868c3de735f98095ecd5d9d"></a><!-- doxytag: member="plank_LockFreeStack.h::pl_LockFreeStack_Destroy" ref="gaee7344205868c3de735f98095ecd5d9d" args="(PlankLockFreeStackRef p)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_LockFreeStack_Destroy </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="group___plank_lock_free_stack_class.html#ga6bf7810cd5a0685c6ebe9527f5c62db1">PlankLockFreeStackRef</a>&#160;</td>
-          <td class="paramname"><em>p</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ga60eaca465fabdce7ad31a34d14409850"></a><!-- doxytag: member="plank_LockFreeStack.h::pl_LockFreeStack_Clear" ref="ga60eaca465fabdce7ad31a34d14409850" args="(PlankLockFreeStackRef p)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_LockFreeStack_Clear </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="group___plank_lock_free_stack_class.html#ga6bf7810cd5a0685c6ebe9527f5c62db1">PlankLockFreeStackRef</a>&#160;</td>
-          <td class="paramname"><em>p</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ga39214de5a5c16cfd7cdb4d97e50d4e59"></a><!-- doxytag: member="plank_LockFreeStack.h::pl_LockFreeStack_SetFreeElementDataFunction" ref="ga39214de5a5c16cfd7cdb4d97e50d4e59" args="(PlankLockFreeStackRef p, PlankLockFreeStackFreeElementDataFunction freeFunction)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_LockFreeStack_SetFreeElementDataFunction </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="group___plank_lock_free_stack_class.html#ga6bf7810cd5a0685c6ebe9527f5c62db1">PlankLockFreeStackRef</a>&#160;</td>
-          <td class="paramname"><em>p</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="group___plank_lock_free_stack_class.html#ga7d1252dca488e19cf79449365ecb69d0">PlankLockFreeStackFreeElementDataFunction</a>&#160;</td>
-          <td class="paramname"><em>freeFunction</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ga8953750a9ffb431b31af262977897a2c"></a><!-- doxytag: member="plank_LockFreeStack.h::pl_LockFreeStack_Push" ref="ga8953750a9ffb431b31af262977897a2c" args="(PlankLockFreeStackRef p, const PlankLockFreeStackElementRef element)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_LockFreeStack_Push </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="group___plank_lock_free_stack_class.html#ga6bf7810cd5a0685c6ebe9527f5c62db1">PlankLockFreeStackRef</a>&#160;</td>
-          <td class="paramname"><em>p</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="group___plank_lock_free_linked_list_element_class.html#gabf39c325f308a07d59544c1f006b7d25">PlankLockFreeStackElementRef</a>&#160;</td>
-          <td class="paramname"><em>element</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="gaec8cd4b5d15cb9bf5a7f9b3888e7968a"></a><!-- doxytag: member="plank_LockFreeStack.h::pl_LockFreeStack_Pop" ref="gaec8cd4b5d15cb9bf5a7f9b3888e7968a" args="(PlankLockFreeStackRef p, PlankLockFreeStackElementRef *element)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_LockFreeStack_Pop </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="group___plank_lock_free_stack_class.html#ga6bf7810cd5a0685c6ebe9527f5c62db1">PlankLockFreeStackRef</a>&#160;</td>
-          <td class="paramname"><em>p</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="group___plank_lock_free_linked_list_element_class.html#gabf39c325f308a07d59544c1f006b7d25">PlankLockFreeStackElementRef</a> *&#160;</td>
-          <td class="paramname"><em>element</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ga2d6f9c9741ec3a5d7cb3ba296c713937"></a><!-- doxytag: member="plank_LockFreeStack.h::pl_LockFreeStack_GetSize" ref="ga2d6f9c9741ec3a5d7cb3ba296c713937" args="(PlankLockFreeStackRef p)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="plank___standard_header_8h.html#a854e96ed6d678b7cbcbedffce1c0844d">PlankLL</a> pl_LockFreeStack_GetSize </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="group___plank_lock_free_stack_class.html#ga6bf7810cd5a0685c6ebe9527f5c62db1">PlankLockFreeStackRef</a>&#160;</td>
-          <td class="paramname"><em>p</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 </div>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Properties</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -324,7 +80,7 @@ Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 5 2012 17:04:57 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 8 2014 12:26:51 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

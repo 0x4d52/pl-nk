@@ -20,7 +20,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="pl-nk-logo-small.png"/></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">pl-nk</div>
+   <div id="projectname">pl-nk&#160;<span id="projectnumber">v0.4.5</span></div>
+   <div id="projectbrief">Plonk|Plink|Plank are a set of cross-platform C/C++ frameworks for audio software development</div>
   </td>
  </tr>
  </tbody>
@@ -29,8 +30,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -54,7 +55,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
       <li><a href="files.html"><span>File&#160;List</span></a></li>
-      <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
 <div class="header">
@@ -62,14 +62,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">plonk_PortAudioAudioHost.h</div>  </div>
 </div>
 <div class="contents">
-<a href="plonk___port_audio_audio_host_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*</span>
+<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*</span>
 <a name="l00002"></a>00002 <span class="comment"> -------------------------------------------------------------------------------</span>
 <a name="l00003"></a>00003 <span class="comment"> This file is part of the Plink, Plonk, Plank libraries</span>
 <a name="l00004"></a>00004 <span class="comment"> by Martin Robinson</span>
 <a name="l00005"></a>00005 <span class="comment"> </span>
 <a name="l00006"></a>00006 <span class="comment"> http://code.google.com/p/pl-nk/</span>
 <a name="l00007"></a>00007 <span class="comment"> </span>
-<a name="l00008"></a>00008 <span class="comment"> Copyright University of the West of England, Bristol 2011-12</span>
+<a name="l00008"></a>00008 <span class="comment"> Copyright University of the West of England, Bristol 2011-14</span>
 <a name="l00009"></a>00009 <span class="comment"> All rights reserved.</span>
 <a name="l00010"></a>00010 <span class="comment"> </span>
 <a name="l00011"></a>00011 <span class="comment"> Redistribution and use in source and binary forms, with or without</span>
@@ -103,40 +103,52 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00039"></a>00039 <span class="preprocessor">#ifndef PLONK_PORTAUDIOAUDIOHOST_H</span>
 <a name="l00040"></a>00040 <span class="preprocessor"></span><span class="preprocessor">#define PLONK_PORTAUDIOAUDIOHOST_H</span>
 <a name="l00041"></a>00041 <span class="preprocessor"></span>
-<a name="l00042"></a>00042 <span class="preprocessor">#include &quot;portaudio.h&quot;</span>
+<a name="l00042"></a>00042 <span class="preprocessor">#include &quot;../../../../ext/portaudio/portaudio/portaudio.h&quot;</span>
 <a name="l00043"></a>00043 
-<a name="l00044"></a>00044 <a class="code" href="plonk___standard_header_8h.html#a354c7e075ff01d6be5f26b53c752e8d5">BEGIN_PLONK_NAMESPACE</a>
+<a name="l00044"></a>00044 BEGIN_PLONK_NAMESPACE
 <a name="l00045"></a>00045 
-<a name="l00046"></a><a class="code" href="class_port_audio_audio_host.html">00046</a> <span class="keyword">class </span><a class="code" href="class_port_audio_audio_host.html">PortAudioAudioHost</a> : <span class="keyword">public</span> <a class="code" href="class_audio_host_base.html" title="An abstract class to interface with audio devices.">AudioHostBase</a>&lt;float&gt;
-<a name="l00047"></a>00047 {
-<a name="l00048"></a>00048 <span class="keyword">public</span>:
-<a name="l00049"></a><a class="code" href="class_port_audio_audio_host.html#a17bee8805f1c9767b92573becdd692ee">00049</a>     <span class="keyword">typedef</span> <a class="code" href="class_audio_host_base.html" title="An abstract class to interface with audio devices.">AudioHostBase&lt;float&gt;::BufferArray</a>      <a class="code" href="class_port_audio_audio_host.html#a17bee8805f1c9767b92573becdd692ee">BufferArray</a>;
-<a name="l00050"></a><a class="code" href="class_port_audio_audio_host.html#aace4cd12b923dcbc60a278383798ea77">00050</a>     <span class="keyword">typedef</span> <a class="code" href="class_audio_host_base.html" title="An abstract class to interface with audio devices.">AudioHostBase&lt;float&gt;::ConstBufferArray</a> <a class="code" href="class_port_audio_audio_host.html#aace4cd12b923dcbc60a278383798ea77">ConstBufferArray</a>;
-<a name="l00051"></a>00051 
-<a name="l00053"></a>00053     <a class="code" href="class_port_audio_audio_host.html#a2a5c2178f7ea135a6db5eb2b92b3bf7d" title="Default constructor.">PortAudioAudioHost</a> (<a class="code" href="class_object_memory_base.html" title="Manage a custom memory allocation system.">ObjectMemoryBase</a>* omb = <a class="code" href="class_object_memory.html">ObjectMemory&lt;ObjectMemoryDefault&gt;::create</a>()) throw();
-<a name="l00054"></a>00054     ~<a class="code" href="class_port_audio_audio_host.html">PortAudioAudioHost</a>();
-<a name="l00055"></a>00055     
-<a name="l00056"></a>00056     <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> <a class="code" href="class_port_audio_audio_host.html#a57229bcdd1ed0bf0758ea8730cd0adbe" title="Get the name of the audio host.">getHostName</a>() const throw();
-<a name="l00057"></a>00057     <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> <a class="code" href="class_port_audio_audio_host.html#a8153804facf8763b46931ab58ea24fcd" title="Get the name of the native host audio API.">getNativeHostName</a>() const throw();
-<a name="l00058"></a>00058     <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> <a class="code" href="class_port_audio_audio_host.html#a593b705d936549cc02cef5b9f1c88c23" title="Get the name of the audio input device.">getInputName</a>() const throw();
-<a name="l00059"></a>00059     <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> <a class="code" href="class_port_audio_audio_host.html#a4dede4e5a0a8bf6cb63702bcac0359f7" title="Get the name of the audio output device.">getOutputName</a>() const throw();
-<a name="l00060"></a>00060     <span class="keywordtype">double</span> <a class="code" href="class_port_audio_audio_host.html#a0452b64734b12bdb056830dc1e11d309" title="Get the current CPU usage for the DSP loop.">getCpuUsage</a>() const throw();
-<a name="l00061"></a>00061 
-<a name="l00062"></a>00062     <span class="keywordtype">void</span> <a class="code" href="class_port_audio_audio_host.html#a96e8b27c731da3bbc836fa0eb511d008" title="Start the host.">startHost</a>() throw();
-<a name="l00063"></a>00063     <span class="keywordtype">void</span> <a class="code" href="class_port_audio_audio_host.html#aa25807e2d7528daf1cf348c7af2acb6f" title="Stop the host.">stopHost</a>() throw();
-<a name="l00064"></a>00064     
-<a name="l00065"></a>00065     <span class="keywordtype">int</span> <a class="code" href="class_port_audio_audio_host.html#abf62aede8c425de31aa5aa16d5bf210f">callback</a> (const <span class="keywordtype">float</span>** inputData, <span class="keywordtype">float</span>** outputData,
-<a name="l00066"></a>00066                   <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> frameCount,
-<a name="l00067"></a>00067                   const PaStreamCallbackTimeInfo* timeInfo,
-<a name="l00068"></a>00068                   PaStreamCallbackFlags statusFlags) throw();
-<a name="l00069"></a>00069                 
-<a name="l00070"></a>00070 private:
-<a name="l00071"></a>00071     PaStream* stream;    
-<a name="l00072"></a>00072 };
-<a name="l00073"></a>00073 
-<a name="l00074"></a>00074 <a class="code" href="plonk___standard_header_8h.html#a688348aeb9da024d63e43762196b102b">END_PLONK_NAMESPACE</a>
-<a name="l00075"></a>00075 
-<a name="l00076"></a>00076 <span class="preprocessor">#endif  // PLONK_PORTAUDIOAUDIOHOST_H</span>
+<a name="l00046"></a>00046 <span class="keyword">template</span>&lt;<span class="keyword">class</span> SampleType&gt;
+<a name="l00047"></a>00047 <span class="keyword">class </span>PortAudioAudioHostBase : <span class="keyword">public</span> <a class="code" href="class_audio_host_base.html" title="An abstract class to interface with audio devices.">AudioHostBase</a>&lt;SampleType&gt;
+<a name="l00048"></a>00048 {
+<a name="l00049"></a>00049 <span class="keyword">public</span>:
+<a name="l00050"></a>00050     <span class="keyword">typedef</span> <a class="code" href="class_numerical_array.html">NumericalArray&lt;SampleType*&gt;</a>            BufferArray;
+<a name="l00051"></a>00051     <span class="keyword">typedef</span> <a class="code" href="class_numerical_array.html">NumericalArray&lt;const SampleType*&gt;</a>      ConstBufferArray;
+<a name="l00052"></a>00052 
+<a name="l00054"></a>00054     PortAudioAudioHostBase() throw();
+<a name="l00055"></a>00055     ~PortAudioAudioHostBase();
+<a name="l00056"></a>00056     
+<a name="l00057"></a>00057     <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> getHostName() const throw();
+<a name="l00058"></a>00058     <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> getNativeHostName() const throw();
+<a name="l00059"></a>00059     <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> getInputName() const throw();
+<a name="l00060"></a>00060     <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> getOutputName() const throw();
+<a name="l00061"></a>00061     <span class="keywordtype">double</span> getCpuUsage() const throw();
+<a name="l00062"></a>00062 
+<a name="l00063"></a>00063     <span class="keywordtype">void</span> startHost() throw();
+<a name="l00064"></a>00064     <span class="keywordtype">void</span> stopHost() throw();
+<a name="l00065"></a>00065     
+<a name="l00066"></a>00066     <span class="keywordtype">int</span> callback (const SampleType** inputData, SampleType** outputData,
+<a name="l00067"></a>00067                   <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> frameCount,
+<a name="l00068"></a>00068                   const PaStreamCallbackTimeInfo* timeInfo,
+<a name="l00069"></a>00069                   PaStreamCallbackFlags statusFlags) throw();
+<a name="l00070"></a>00070                 
+<a name="l00071"></a>00071 private:
+<a name="l00072"></a>00072     PaStream* stream;    
+<a name="l00073"></a>00073 };
+<a name="l00074"></a>00074 
+<a name="l00075"></a>00075 class PortAudioAudioHost : public PortAudioAudioHostBase&lt;<span class="keywordtype">float</span>&gt;
+<a name="l00076"></a>00076 {
+<a name="l00077"></a>00077 <span class="keyword">public</span>:
+<a name="l00078"></a>00078     PortAudioAudioHost() throw();
+<a name="l00079"></a>00079     ~PortAudioAudioHost();
+<a name="l00080"></a>00080 };
+<a name="l00081"></a>00081 
+<a name="l00082"></a>00082 <span class="preprocessor">#define PLANK_INLINING_FUNCTIONS 1</span>
+<a name="l00083"></a>00083 <span class="preprocessor"></span><span class="preprocessor">#include &quot;plonk_PortAudioAudioHostInline.h&quot;</span>
+<a name="l00084"></a>00084 <span class="preprocessor">#undef PLANK_INLINING_FUNCTIONS</span>
+<a name="l00085"></a>00085 <span class="preprocessor"></span>
+<a name="l00086"></a>00086 END_PLONK_NAMESPACE
+<a name="l00087"></a>00087 
+<a name="l00088"></a>00088 <span class="preprocessor">#endif  // PLONK_PORTAUDIOAUDIOHOST_H</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -144,7 +156,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Properties</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -153,7 +165,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 5 2012 17:04:55 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 8 2014 12:26:49 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

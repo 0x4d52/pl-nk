@@ -20,7 +20,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="pl-nk-logo-small.png"/></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">pl-nk</div>
+   <div id="projectname">pl-nk&#160;<span id="projectnumber">v0.4.5</span></div>
+   <div id="projectbrief">Plonk|Plink|Plank are a set of cross-platform C/C++ frameworks for audio software development</div>
   </td>
  </tr>
  </tbody>
@@ -29,8 +30,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -54,7 +55,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
       <li><a href="files.html"><span>File&#160;List</span></a></li>
-      <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
 <div class="header">
@@ -62,14 +62,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">plank_IffFileCommon.h</div>  </div>
 </div>
 <div class="contents">
-<a href="plank___iff_file_common_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*</span>
+<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*</span>
 <a name="l00002"></a>00002 <span class="comment"> -------------------------------------------------------------------------------</span>
 <a name="l00003"></a>00003 <span class="comment"> This file is part of the Plink, Plonk, Plank libraries</span>
 <a name="l00004"></a>00004 <span class="comment">  by Martin Robinson</span>
 <a name="l00005"></a>00005 <span class="comment"> </span>
 <a name="l00006"></a>00006 <span class="comment"> http://code.google.com/p/pl-nk/</span>
 <a name="l00007"></a>00007 <span class="comment"> </span>
-<a name="l00008"></a>00008 <span class="comment"> Copyright University of the West of England, Bristol 2011-12</span>
+<a name="l00008"></a>00008 <span class="comment"> Copyright University of the West of England, Bristol 2011-14</span>
 <a name="l00009"></a>00009 <span class="comment"> All rights reserved.</span>
 <a name="l00010"></a>00010 <span class="comment"> </span>
 <a name="l00011"></a>00011 <span class="comment"> Redistribution and use in source and binary forms, with or without</span>
@@ -103,17 +103,223 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00039"></a>00039 <span class="preprocessor">#ifndef PLANK_IFFFILECOMMON_H</span>
 <a name="l00040"></a>00040 <span class="preprocessor"></span><span class="preprocessor">#define PLANK_IFFFILECOMMON_H</span>
 <a name="l00041"></a>00041 <span class="preprocessor"></span>
-<a name="l00042"></a><a class="code" href="plank___iff_file_common_8h.html#a2ac24c9475336a8ebcb9e843a6b27cec">00042</a> <span class="preprocessor">#define PLANKIFFFILE_FIRSTCHUNKPOSITION 12</span>
-<a name="l00043"></a>00043 <span class="preprocessor"></span>
-<a name="l00044"></a><a class="code" href="struct_plank_iff_file_header_info.html">00044</a> <span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="struct_plank_iff_file_header_info.html">PlankIffFileHeaderInfo</a>
-<a name="l00045"></a>00045 {
-<a name="l00046"></a><a class="code" href="struct_plank_iff_file_header_info.html#aeccdc672d153e222ad2d35c13d2d4de8">00046</a>     <a class="code" href="plank___standard_header_8h.html#a7f6d46cbd6808d436e42ab5afcd69a81">PlankFourCharCode</a> <a class="code" href="struct_plank_iff_file_header_info.html#aeccdc672d153e222ad2d35c13d2d4de8">mainID</a>;
-<a name="l00047"></a><a class="code" href="struct_plank_iff_file_header_info.html#af40f1ae6b78fd03d0000adf6fee82e1b">00047</a>     <a class="code" href="plank___standard_header_8h.html#a7f6d46cbd6808d436e42ab5afcd69a81">PlankFourCharCode</a> <a class="code" href="struct_plank_iff_file_header_info.html#af40f1ae6b78fd03d0000adf6fee82e1b">formatID</a>;
-<a name="l00048"></a><a class="code" href="struct_plank_iff_file_header_info.html#aec315d6f25175931ba7635e91cb04078">00048</a>     <a class="code" href="plank___standard_header_8h.html#a854e96ed6d678b7cbcbedffce1c0844d">PlankLL</a> <a class="code" href="struct_plank_iff_file_header_info.html#aec315d6f25175931ba7635e91cb04078">mainLength</a>;
-<a name="l00049"></a><a class="code" href="struct_plank_iff_file_header_info.html#adbd5d16f6bc4af7d887b7ad74196e85d">00049</a>     <a class="code" href="plank___standard_header_8h.html#a854e96ed6d678b7cbcbedffce1c0844d">PlankLL</a> <a class="code" href="struct_plank_iff_file_header_info.html#adbd5d16f6bc4af7d887b7ad74196e85d">mainEnd</a>;    
-<a name="l00050"></a>00050 } <a class="code" href="plank___iff_file_common_8h.html#a2dcb53e87b25f96ce4ba23645d35f0ab">PlankIffFileHeaderInfo</a>;
-<a name="l00051"></a>00051 
-<a name="l00052"></a>00052 <span class="preprocessor">#endif // PLANK_IFFFILECOMMON_H</span>
+<a name="l00042"></a>00042 <span class="preprocessor">#include &quot;plank_File.h&quot;</span>
+<a name="l00043"></a>00043 
+<a name="l00044"></a>00044 <span class="preprocessor">#define PLANKIFFFILE_CURRENTCHUNKPOSITION   -1</span>
+<a name="l00045"></a>00045 <span class="preprocessor"></span><span class="comment">//#define PLANKIFFFILE_ANYCHUNKID             -1</span>
+<a name="l00046"></a>00046 <span class="preprocessor">#define PLANKIFFFILE_ID_FCC                  1</span>
+<a name="l00047"></a>00047 <span class="preprocessor"></span><span class="preprocessor">#define PLANKIFFFILE_ID_GUID                 2</span>
+<a name="l00048"></a>00048 <span class="preprocessor"></span>
+<a name="l00049"></a>00049 <span class="preprocessor">#define PLANKIFFFILE_W64_RIFF_ID          &quot;riff-912E-11CF-A5D6-28DB04C10000&quot;</span>
+<a name="l00050"></a>00050 <span class="preprocessor"></span><span class="preprocessor">#define PLANKIFFFILE_W64_LIST_ID          &quot;list-912F-11CF-A5D6-28DB04C10000&quot;</span>
+<a name="l00051"></a>00051 <span class="preprocessor"></span><span class="preprocessor">#define PLANKIFFFILE_W64_JUNK_ID          &quot;junk-ACF3-11D3-8CD1-00C04F8EDB8A&quot;</span>
+<a name="l00052"></a>00052 <span class="preprocessor"></span><span class="preprocessor">#define PLANKIFFFILE_ANYCHUNKID       &quot;FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF&quot;</span>
+<a name="l00053"></a>00053 <span class="preprocessor"></span>
+<a name="l00054"></a>00054 <span class="keyword">typedef</span> <span class="keyword">union </span>PlankIffID
+<a name="l00055"></a>00055 {
+<a name="l00056"></a>00056     PlankFourCharCode fcc;
+<a name="l00057"></a>00057     PlankGUID guid;
+<a name="l00058"></a>00058 } PlankIffID;
+<a name="l00059"></a>00059 
+<a name="l00060"></a>00060 <span class="keyword">typedef</span> <span class="keyword">struct </span>PlankIffFileHeaderInfo
+<a name="l00061"></a>00061 {
+<a name="l00062"></a>00062     PlankIffID mainID;
+<a name="l00063"></a>00063     PlankIffID formatID;
+<a name="l00064"></a>00064     PlankIffID junkID;
+<a name="l00065"></a>00065     
+<a name="l00066"></a>00066     PlankLL mainLength;
+<a name="l00067"></a>00067 
+<a name="l00068"></a>00068     PlankUC lengthSize;
+<a name="l00069"></a>00069     PlankUC idType;
+<a name="l00070"></a>00070     PlankUC headerLength;
+<a name="l00071"></a>00071     PlankUC reserved3;
+<a name="l00072"></a>00072     PlankUC mainHeaderEnd;
+<a name="l00073"></a>00073     PlankUC initMainLength;
+<a name="l00074"></a>00074     PlankUC alignment;
+<a name="l00075"></a>00075     PlankUC reserved7;
+<a name="l00076"></a>00076     
+<a name="l00077"></a>00077 } PlankIffFileHeaderInfo;
+<a name="l00078"></a>00078 
+<a name="l00079"></a>00079 <span class="keyword">typedef</span> <span class="keyword">struct </span>PlankIffFile* PlankIffFileRef;
+<a name="l00080"></a>00080 <span class="keyword">typedef</span> <span class="keyword">struct </span>PlankIffFile
+<a name="l00081"></a>00081 {
+<a name="l00082"></a>00082     PlankFile file;
+<a name="l00083"></a>00083     PlankIffFileHeaderInfo headerInfo;
+<a name="l00084"></a>00084 } PlankIffFile;
+<a name="l00085"></a>00085 
+<a name="l00086"></a>00086 <span class="keyword">static</span> <span class="keyword">inline</span> PlankResult pl_IffFile_WriteChunkLength (PlankIffFileRef p, <span class="keyword">const</span> PlankLL length)
+<a name="l00087"></a>00087 {
+<a name="l00088"></a>00088     <span class="keywordflow">if</span> (p-&gt;headerInfo.lengthSize == 4)
+<a name="l00089"></a>00089     {
+<a name="l00090"></a>00090         <span class="keywordflow">return</span> <a class="code" href="group___plank_file_class.html#gac232eadb468ceecfdac10225f320db2f" title="Write an unsigned int to the file (32-bit int).">pl_File_WriteUI</a> (&amp;p-&gt;file, length &lt; 0xffffffff ? (PlankUI)length : 0xffffffff);
+<a name="l00091"></a>00091     }
+<a name="l00092"></a>00092     <span class="keywordflow">else</span> <span class="keywordflow">if</span> (p-&gt;headerInfo.lengthSize == 8)
+<a name="l00093"></a>00093     {
+<a name="l00094"></a>00094         <span class="keywordflow">switch</span> (p-&gt;headerInfo.idType)
+<a name="l00095"></a>00095         {
+<a name="l00096"></a>00096             <span class="keywordflow">case</span> PLANKIFFFILE_ID_FCC:   <span class="keywordflow">return</span> <a class="code" href="group___plank_file_class.html#gaa8f23f4d4f62c1f2bc16c2db28652c7a" title="Write a long to the file.">pl_File_WriteLL</a> (&amp;p-&gt;file, length);
+<a name="l00097"></a>00097             <span class="keywordflow">case</span> PLANKIFFFILE_ID_GUID:  <span class="keywordflow">return</span> <a class="code" href="group___plank_file_class.html#gaa8f23f4d4f62c1f2bc16c2db28652c7a" title="Write a long to the file.">pl_File_WriteLL</a> (&amp;p-&gt;file, length + p-&gt;headerInfo.lengthSize + sizeof (PlankGUID)); <span class="comment">// includes the chunk header</span>
+<a name="l00098"></a>00098             <span class="keywordflow">default</span>: <span class="keywordflow">return</span> PlankResult_UnknownError;
+<a name="l00099"></a>00099         }
+<a name="l00100"></a>00100     }
+<a name="l00101"></a>00101     <span class="keywordflow">else</span>
+<a name="l00102"></a>00102     {
+<a name="l00103"></a>00103         <span class="keywordflow">return</span> PlankResult_UnknownError;
+<a name="l00104"></a>00104     }
+<a name="l00105"></a>00105 }
+<a name="l00106"></a>00106 
+<a name="l00107"></a>00107 <span class="keyword">static</span> <span class="keyword">inline</span> PlankResult pl_IffFile_ReadChunkLength (PlankIffFileRef p, PlankLL *length)
+<a name="l00108"></a>00108 {
+<a name="l00109"></a>00109     PlankResult result;
+<a name="l00110"></a>00110     PlankUI length32;
+<a name="l00111"></a>00111     
+<a name="l00112"></a>00112     result = PlankResult_OK;
+<a name="l00113"></a>00113     
+<a name="l00114"></a>00114     <span class="keywordflow">if</span> (p-&gt;headerInfo.lengthSize == 4)
+<a name="l00115"></a>00115     {
+<a name="l00116"></a>00116         <span class="keywordflow">if</span> ((result = <a class="code" href="group___plank_file_class.html#gae3c80fd2b556c056ded0d31ff3d07db4" title="Read an unsigned int from the file (32-bit int).">pl_File_ReadUI</a> (&amp;p-&gt;file, &amp;length32)) != PlankResult_OK) <span class="keywordflow">goto</span> exit;
+<a name="l00117"></a>00117         *length = length32;
+<a name="l00118"></a>00118     }
+<a name="l00119"></a>00119     <span class="keywordflow">else</span> <span class="keywordflow">if</span> (p-&gt;headerInfo.lengthSize == 8)
+<a name="l00120"></a>00120     {
+<a name="l00121"></a>00121         <span class="keywordflow">switch</span> (p-&gt;headerInfo.idType)
+<a name="l00122"></a>00122         {
+<a name="l00123"></a>00123             <span class="keywordflow">case</span> PLANKIFFFILE_ID_FCC:
+<a name="l00124"></a>00124                 result = <a class="code" href="group___plank_file_class.html#ga4758673a34464a71ad6b923ff1328c2e" title="Read a long from the file.">pl_File_ReadLL</a> (&amp;p-&gt;file, length);
+<a name="l00125"></a>00125                 <span class="keywordflow">break</span>;
+<a name="l00126"></a>00126             <span class="keywordflow">case</span> PLANKIFFFILE_ID_GUID:
+<a name="l00127"></a>00127                 <span class="keywordflow">if</span> ((result = <a class="code" href="group___plank_file_class.html#ga4758673a34464a71ad6b923ff1328c2e" title="Read a long from the file.">pl_File_ReadLL</a> (&amp;p-&gt;file, length)) != PlankResult_OK) <span class="keywordflow">goto</span> exit;
+<a name="l00128"></a>00128                 *length -= p-&gt;headerInfo.lengthSize + <span class="keyword">sizeof</span> (PlankGUID); <span class="comment">// includes the chunk header</span>
+<a name="l00129"></a>00129                 <span class="keywordflow">break</span>;
+<a name="l00130"></a>00130             <span class="keywordflow">default</span>:
+<a name="l00131"></a>00131                 result = PlankResult_UnknownError;
+<a name="l00132"></a>00132         }
+<a name="l00133"></a>00133     }
+<a name="l00134"></a>00134     <span class="keywordflow">else</span>
+<a name="l00135"></a>00135     {
+<a name="l00136"></a>00136         result = PlankResult_UnknownError;
+<a name="l00137"></a>00137     }
+<a name="l00138"></a>00138     
+<a name="l00139"></a>00139 exit:
+<a name="l00140"></a>00140     <span class="keywordflow">return</span> result;
+<a name="l00141"></a>00141 }
+<a name="l00142"></a>00142 
+<a name="l00143"></a>00143 <span class="keyword">static</span> <span class="keyword">inline</span> PlankResult pl_IffFile_InitID (PlankIffFileRef p, <span class="keyword">const</span> <span class="keywordtype">char</span>* <span class="keywordtype">string</span>, PlankIffID* chunkID)
+<a name="l00144"></a>00144 {
+<a name="l00145"></a>00145     <span class="keywordtype">int</span> length;
+<a name="l00146"></a>00146     
+<a name="l00147"></a>00147         (void)p;
+<a name="l00148"></a>00148 
+<a name="l00149"></a>00149     <span class="keywordflow">if</span> (!<span class="keywordtype">string</span>)
+<a name="l00150"></a>00150     {
+<a name="l00151"></a>00151         pl_MemoryZero (chunkID, <span class="keyword">sizeof</span> (PlankIffID));
+<a name="l00152"></a>00152         <span class="keywordflow">return</span> PlankResult_OK;
+<a name="l00153"></a>00153     }
+<a name="l00154"></a>00154     <span class="keywordflow">else</span>
+<a name="l00155"></a>00155     {
+<a name="l00156"></a>00156         length = (int)strlen (<span class="keywordtype">string</span>);
+<a name="l00157"></a>00157         
+<a name="l00158"></a>00158         <span class="keywordflow">switch</span> (length)
+<a name="l00159"></a>00159         {
+<a name="l00160"></a>00160             <span class="keywordflow">case</span> 4:  chunkID-&gt;fcc = <a class="code" href="group___plank_misc_functions.html#gadf1a3d67636994e54900cb2cc1a3d54f" title="Convert four characters to a int as used by IFF file formats to identify data chunks.">pl_FourCharCode</a> (<span class="keywordtype">string</span>); <span class="keywordflow">return</span> PlankResult_OK;
+<a name="l00161"></a>00161             <span class="keywordflow">case</span> 36: pl_GUID_InitString (&amp;chunkID-&gt;guid, <span class="keywordtype">string</span>); <span class="keywordflow">return</span> PlankResult_OK;
+<a name="l00162"></a>00162             <span class="keywordflow">default</span>: <span class="keywordflow">return</span> PlankResult_UnknownError;
+<a name="l00163"></a>00163         }
+<a name="l00164"></a>00164     }
+<a name="l00165"></a>00165 }
+<a name="l00166"></a>00166 
+<a name="l00167"></a>00167 <span class="keyword">static</span> <span class="keyword">inline</span> PlankResult pl_IffFile_WriteChunkID (PlankIffFileRef p, <span class="keyword">const</span> PlankIffID* chunkID)
+<a name="l00168"></a>00168 {
+<a name="l00169"></a>00169     <span class="keywordflow">switch</span> (p-&gt;headerInfo.idType)
+<a name="l00170"></a>00170     {
+<a name="l00171"></a>00171         <span class="keywordflow">case</span> PLANKIFFFILE_ID_FCC:   <span class="keywordflow">return</span> pl_File_WriteFourCharCode (&amp;p-&gt;file, chunkID-&gt;fcc);
+<a name="l00172"></a>00172         <span class="keywordflow">case</span> PLANKIFFFILE_ID_GUID:  <span class="keywordflow">return</span> pl_File_WriteGUID (&amp;p-&gt;file, &amp;chunkID-&gt;guid);
+<a name="l00173"></a>00173         <span class="keywordflow">default</span>: <span class="keywordflow">return</span> PLANK_FALSE;
+<a name="l00174"></a>00174     }
+<a name="l00175"></a>00175 }
+<a name="l00176"></a>00176 
+<a name="l00177"></a>00177 <span class="keyword">static</span> <span class="keyword">inline</span> PlankResult pl_IffFile_ReadChunkID (PlankIffFileRef p, PlankIffID* chunkID)
+<a name="l00178"></a>00178 {
+<a name="l00179"></a>00179     <span class="keywordflow">switch</span> (p-&gt;headerInfo.idType)
+<a name="l00180"></a>00180     {
+<a name="l00181"></a>00181         <span class="keywordflow">case</span> PLANKIFFFILE_ID_FCC:   <span class="keywordflow">return</span> pl_File_ReadFourCharCode (&amp;p-&gt;file, &amp;chunkID-&gt;fcc);
+<a name="l00182"></a>00182         <span class="keywordflow">case</span> PLANKIFFFILE_ID_GUID:  <span class="keywordflow">return</span> pl_File_ReadGUID (&amp;p-&gt;file, &amp;chunkID-&gt;guid);
+<a name="l00183"></a>00183         <span class="keywordflow">default</span>: <span class="keywordflow">return</span> PLANK_FALSE;
+<a name="l00184"></a>00184     }
+<a name="l00185"></a>00185 }
+<a name="l00186"></a>00186 
+<a name="l00187"></a>00187 <span class="keyword">static</span> <span class="keyword">inline</span> PlankB pl_IffFile_EqualIDs (PlankIffFileRef p, <span class="keyword">const</span> PlankIffID* id1,  <span class="keyword">const</span> PlankIffID* id2)
+<a name="l00188"></a>00188 {
+<a name="l00189"></a>00189     <span class="keywordflow">switch</span> (p-&gt;headerInfo.idType)
+<a name="l00190"></a>00190     {
+<a name="l00191"></a>00191         <span class="keywordflow">case</span> PLANKIFFFILE_ID_FCC:   <span class="keywordflow">return</span> id1-&gt;fcc == id2-&gt;fcc;
+<a name="l00192"></a>00192         <span class="keywordflow">case</span> PLANKIFFFILE_ID_GUID:  <span class="keywordflow">return</span> pl_GUID_Equal (&amp;id1-&gt;guid, &amp;id2-&gt;guid);
+<a name="l00193"></a>00193         <span class="keywordflow">default</span>: <span class="keywordflow">return</span> PLANK_FALSE;
+<a name="l00194"></a>00194     }
+<a name="l00195"></a>00195 }
+<a name="l00196"></a>00196 
+<a name="l00197"></a>00197 <span class="keyword">static</span> <span class="keyword">inline</span> PlankB pl_IffFile_IsNullID (PlankIffFileRef p, <span class="keyword">const</span> PlankIffID* chunkID)
+<a name="l00198"></a>00198 {
+<a name="l00199"></a>00199     <span class="keywordflow">switch</span> (p-&gt;headerInfo.idType)
+<a name="l00200"></a>00200     {
+<a name="l00201"></a>00201         <span class="keywordflow">case</span> PLANKIFFFILE_ID_FCC:   <span class="keywordflow">return</span> chunkID-&gt;fcc == 0;
+<a name="l00202"></a>00202         <span class="keywordflow">case</span> PLANKIFFFILE_ID_GUID:  <span class="keywordflow">return</span> pl_GUID_IsNull (&amp;chunkID-&gt;guid);
+<a name="l00203"></a>00203         <span class="keywordflow">default</span>: <span class="keywordflow">return</span> PLANK_FALSE;
+<a name="l00204"></a>00204     }
+<a name="l00205"></a>00205 }
+<a name="l00206"></a>00206 
+<a name="l00207"></a>00207 <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> pl_IffFile_ChunkIDString (PlankIffFileRef p, <span class="keyword">const</span> PlankIffID* chunkID, <span class="keywordtype">char</span>* <span class="keywordtype">string</span>)
+<a name="l00208"></a>00208 {
+<a name="l00209"></a>00209     PlankFourCharCodeString fccs;
+<a name="l00210"></a>00210 
+<a name="l00211"></a>00211     <span class="keywordflow">switch</span> (p-&gt;headerInfo.idType)
+<a name="l00212"></a>00212     {
+<a name="l00213"></a>00213         <span class="keywordflow">case</span> PLANKIFFFILE_ID_FCC:  {
+<a name="l00214"></a>00214             fccs = pl_FourCharCode2String (chunkID-&gt;fcc);
+<a name="l00215"></a>00215             strcpy (<span class="keywordtype">string</span>, fccs.string); <span class="keywordflow">return</span>;
+<a name="l00216"></a>00216         }
+<a name="l00217"></a>00217         <span class="keywordflow">case</span> PLANKIFFFILE_ID_GUID:  pl_GUID_HexString (&amp;chunkID-&gt;guid, PLANK_FALSE, <span class="keywordtype">string</span>); <span class="keywordflow">return</span>;
+<a name="l00218"></a>00218         <span class="keywordflow">default</span>: <span class="keywordtype">string</span>[0] = <span class="charliteral">&#39;\0&#39;</span>; <span class="keywordflow">return</span>;
+<a name="l00219"></a>00219     }
+<a name="l00220"></a>00220 }
+<a name="l00221"></a>00221 
+<a name="l00222"></a>00222 <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">int</span> pl_IffFile_ChunkIDLength (PlankIffFileRef p)
+<a name="l00223"></a>00223 {
+<a name="l00224"></a>00224     <span class="keywordflow">switch</span> (p-&gt;headerInfo.idType)
+<a name="l00225"></a>00225     {
+<a name="l00226"></a>00226         <span class="keywordflow">case</span> PLANKIFFFILE_ID_FCC:   <span class="keywordflow">return</span> 4;
+<a name="l00227"></a>00227         <span class="keywordflow">case</span> PLANKIFFFILE_ID_GUID:  <span class="keywordflow">return</span> 16;
+<a name="l00228"></a>00228         <span class="keywordflow">default</span>: <span class="keywordflow">return</span> 0;
+<a name="l00229"></a>00229     }
+<a name="l00230"></a>00230 }
+<a name="l00231"></a>00231 
+<a name="l00232"></a>00232 <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keyword">const</span> PlankIffID* pl_IffFileAnyID()
+<a name="l00233"></a>00233 {
+<a name="l00234"></a>00234     <span class="keyword">static</span> PlankIffID any;
+<a name="l00235"></a>00235     <span class="keyword">static</span> PlankB firstTime = PLANK_TRUE;
+<a name="l00236"></a>00236     
+<a name="l00237"></a>00237     <span class="keywordflow">if</span> (firstTime)
+<a name="l00238"></a>00238     {
+<a name="l00239"></a>00239         any.guid.data1 = 0xffffffff;
+<a name="l00240"></a>00240         any.guid.data2 = 0xffff;
+<a name="l00241"></a>00241         any.guid.data3 = 0xffff;
+<a name="l00242"></a>00242         any.guid.data4[0] = 0xff;
+<a name="l00243"></a>00243         any.guid.data4[1] = 0xff;
+<a name="l00244"></a>00244         any.guid.data4[2] = 0xff;
+<a name="l00245"></a>00245         any.guid.data4[3] = 0xff;
+<a name="l00246"></a>00246         any.guid.data4[4] = 0xff;
+<a name="l00247"></a>00247         any.guid.data4[5] = 0xff;
+<a name="l00248"></a>00248         any.guid.data4[6] = 0xff;
+<a name="l00249"></a>00249         any.guid.data4[7] = 0xff;
+<a name="l00250"></a>00250     }
+<a name="l00251"></a>00251     
+<a name="l00252"></a>00252     <span class="keywordflow">return</span> &amp;any;
+<a name="l00253"></a>00253 }
+<a name="l00254"></a>00254 
+<a name="l00255"></a>00255 
+<a name="l00256"></a>00256 
+<a name="l00257"></a>00257 
+<a name="l00258"></a>00258 <span class="preprocessor">#endif // PLANK_IFFFILECOMMON_H</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -121,7 +327,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Properties</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -130,7 +336,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 5 2012 17:04:52 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 8 2014 12:26:46 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

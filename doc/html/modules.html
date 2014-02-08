@@ -20,7 +20,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="pl-nk-logo-small.png"/></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">pl-nk</div>
+   <div id="projectname">pl-nk&#160;<span id="projectnumber">v0.4.5</span></div>
+   <div id="projectbrief">Plonk|Plink|Plank are a set of cross-platform C/C++ frameworks for audio software development</div>
   </td>
  </tr>
  </tbody>
@@ -29,8 +30,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li class="current"><a href="modules.html"><span>Modules</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -65,48 +66,52 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </li>
 <li><a class="el" href="group___plank_classes.html">Plank classes</a><ul>
 <li><a class="el" href="group___plank_atomic_classes.html">Plank Atomic operation classes</a><ul>
+<li><a class="el" href="group___plank_atomic_d_class.html">Plank AtomicD class</a></li>
+<li><a class="el" href="group___plank_atomic_f_class.html">Plank AtomicF class</a></li>
 <li><a class="el" href="group___plank_atomic_i_class.html">Plank AtomicI class</a></li>
 <li><a class="el" href="group___plank_atomic_l_class.html">Plank AtomicL class</a></li>
 <li><a class="el" href="group___plank_atomic_l_l_class.html">Plank AtomicLL class</a></li>
-<li><a class="el" href="group___plank_atomic_f_class.html">Plank AtomicF class</a></li>
-<li><a class="el" href="group___plank_atomic_d_class.html">Plank AtomicD class</a></li>
 <li><a class="el" href="group___plank_atomic_p_class.html">Plank AtomicP class</a></li>
 <li><a class="el" href="group___plank_atomic_p_x_class.html">Plank AtomicPX class</a></li>
-<li><a class="el" href="group___plank_atomic_l_x_class.html">Plank AtomicLX class</a></li>
 </ul>
 </li>
-<li><a class="el" href="group___plank_dynamic_array_class.html">Plank DynamicArray class</a></li>
-<li><a class="el" href="group___plank_lock_free_dynamic_array_class.html">Plank LockFreeDynamicArray class</a></li>
-<li><a class="el" href="group___plank_lock_free_linked_list_element_class.html">Plank LockFreeLinkedListElement class</a></li>
-<li><a class="el" href="group___plank_lock_free_queue_class.html">Plank LockFreeQueue class</a></li>
-<li><a class="el" href="group___plank_lock_free_stack_class.html">Plank LockFreeStack class</a></li>
-<li><a class="el" href="group___plank_simple_linked_list_class.html">Plank SimpleLinkedList class</a></li>
-<li><a class="el" href="group___plank_simple_linked_list_element_class.html">Plank SimpleLinkedListElement class</a></li>
-<li><a class="el" href="group___plank_simple_map_class.html">Plank SimpleMap class</a></li>
-<li><a class="el" href="group___plank_simple_stack_class.html">Plank SimpleStack class</a></li>
-<li><a class="el" href="group___plank_thread_local_storage_class.html">Plank ThreadLocalStorage class</a></li>
-<li><a class="el" href="group___plank_lock_class.html">Plank Lock class</a></li>
-<li><a class="el" href="group___plank_spin_lock_class.html">Plank SpinLock class</a></li>
-<li><a class="el" href="group___plank_thread_class.html">Plank Thread class</a></li>
-<li><a class="el" href="group___plank_thread_spin_lock_class.html">Plank ThreadSpinLock class</a></li>
-<li><a class="el" href="group___plank_f_f_t_f_class.html">Plank FFTF class</a></li>
 <li><a class="el" href="group___plank_audio_file_cue_point_class.html">Plank AudioFileCuePoint class</a></li>
 <li><a class="el" href="group___plank_audio_file_meta_data_class.html">Plank AudioFileMetaData class</a></li>
 <li><a class="el" href="group___plank_audio_file_reader_class.html">Plank AudioFileReader class</a></li>
 <li><a class="el" href="group___plank_audio_file_region_class.html">Plank AudioFileRegion class</a></li>
 <li><a class="el" href="group___plank_audio_file_writer_class.html">Plank AudioFileWriter class</a></li>
+<li><a class="el" href="group___plank_dynamic_array_class.html">Plank DynamicArray class</a></li>
+<li><a class="el" href="group___plank_f_f_t_f_class.html">Plank FFTF class</a></li>
 <li><a class="el" href="group___plank_file_class.html">Plank File class</a></li>
+<li><a class="el" href="group___plank_g_u_i_d.html">Plank GUID class</a></li>
 <li><a class="el" href="group___plank_iff_file_reader_class.html">Plank IffFileReader class</a></li>
 <li><a class="el" href="group___plank_iff_file_writer_class.html">Plank IffFileWriter class</a></li>
+<li><a class="el" href="group___plank_lock_class.html">Plank Lock class</a></li>
+<li><a class="el" href="group___plank_lock_free_dynamic_array_class.html">Plank LockFreeDynamicArray class</a></li>
+<li><a class="el" href="group___plank_lock_free_linked_list_element_class.html">Plank LockFreeLinkedListElement class</a></li>
+<li><a class="el" href="group___plank_lock_free_queue_class.html">Plank LockFreeQueue class</a></li>
+<li><a class="el" href="group___plank_lock_free_stack_class.html">Plank LockFreeStack class</a></li>
+<li><a class="el" href="group___plank_multi_file_class.html">Plank MultiFile class</a></li>
+<li><a class="el" href="group___plank_neural_layer_f_class.html">Plank NeuralNetwork class</a></li>
+<li><a class="el" href="group___plank_neural_node_f_class.html">Plank NeuralNode class</a></li>
 <li><a class="el" href="group___plank_r_n_g_class.html">Plank RNG class</a></li>
+<li><a class="el" href="group___plank_shared_ptr_class.html">Plank SharedPtr class</a></li>
+<li><a class="el" href="group___plank_simple_linked_list_class.html">Plank SimpleLinkedList class</a></li>
+<li><a class="el" href="group___plank_simple_linked_list_element_class.html">Plank SimpleLinkedListElement class</a></li>
+<li><a class="el" href="group___plank_simple_map_class.html">Plank SimpleMap class</a></li>
+<li><a class="el" href="group___plank_simple_stack_class.html">Plank SimpleStack class</a></li>
+<li><a class="el" href="group___plank_spin_lock_class.html">Plank SpinLock class</a></li>
+<li><a class="el" href="group___plank_thread_class.html">Plank Thread class</a></li>
+<li><a class="el" href="group___plank_thread_local_storage_class.html">Plank ThreadLocalStorage class</a></li>
+<li><a class="el" href="group___plank_thread_spin_lock_class.html">Plank ThreadSpinLock class</a></li>
 </ul>
 </li>
 <li><a class="el" href="group___plank_functions.html">Plank functions</a><ul>
 <li><a class="el" href="group___plank_bitwise_functions.html">Plank bitwise functions</a></li>
 <li><a class="el" href="group___plank_endian_functions.html">Plank endian functions</a></li>
 <li><a class="el" href="group___plank_maths_functions.html">Plank maths functions</a></li>
-<li><a class="el" href="group___plank_vector_functions.html">Plank vector functions</a></li>
 <li><a class="el" href="group___plank_misc_functions.html">Plank misc functions</a></li>
+<li><a class="el" href="group___plank_vector_functions.html">Plank vector functions</a></li>
 </ul>
 </li>
 <li><a class="el" href="group___plank_internal_macros.html">Plank internal macros</a><ul>
@@ -115,18 +120,19 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </li>
 </ul>
 </li>
+<li><a class="el" href="group___plank_neural_network_f_class.html">Plank NeuralNetwork class</a></li>
 <li><a class="el" href="group___plink_modules.html">Plink</a><ul>
-<li><a class="el" href="group___plink_fundamentals.html">Fundamentals</a><ul>
-<li><a class="el" href="group___plink_core_concepts.html">Core Plink concepts.</a></li>
-</ul>
-</li>
 <li><a class="el" href="group___plink_classes.html">Classes</a><ul>
-<li><a class="el" href="group___plink_saw_process_f_class.html">Plink SawProcessF class</a></li>
-<li><a class="el" href="group___plink_table_process_f_class.html">Plink TableProcessF class</a></li>
-<li><a class="el" href="group___plink_white_noise_process_f_class.html">Plink WhiteNoiseProcessStateF class</a></li>
 <li><a class="el" href="group___plink_binary_op_process_f_class.html">Plink BinaryOpProcessF classes</a></li>
 <li><a class="el" href="group___plink_mul_add_process_f_class.html">Plink MulAddProcessF class</a></li>
+<li><a class="el" href="group___plink_saw_process_f_class.html">Plink SawProcessF class</a></li>
+<li><a class="el" href="group___plink_table_process_f_class.html">Plink TableProcessF class</a></li>
 <li><a class="el" href="group___plink_unary_op_process_f_class.html">Plink UnaryOpProcessF classes</a></li>
+<li><a class="el" href="group___plink_white_noise_process_f_class.html">Plink WhiteNoiseProcessStateF class</a></li>
+</ul>
+</li>
+<li><a class="el" href="group___plink_fundamentals.html">Fundamentals</a><ul>
+<li><a class="el" href="group___plink_core_concepts.html">Core Plink concepts.</a></li>
 </ul>
 </li>
 <li><a class="el" href="group___plink_internal_macros.html">Plink internal macros</a><ul>
@@ -137,25 +143,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </ul>
 </li>
 <li><a class="el" href="group___plonk_modules.html">Plonk</a><ul>
+<li><a class="el" href="group___plonk_extras.html">Extras</a></li>
 <li><a class="el" href="group___plonk_fundamentals.html">Fundamentals</a><ul>
 <li><a class="el" href="group___plonk_core_concepts.html">Core Plonk concepts.</a></li>
 </ul>
 </li>
-<li><a class="el" href="group___plonk_unit_categogies.html">Unit categories</a><ul>
-<li><a class="el" href="group___generator_units.html">Oscillator unit classes.</a></li>
-<li><a class="el" href="group___filter_units.html">Filter unit classes.</a></li>
-<li><a class="el" href="group___noise_units.html">Noise unit classes.</a></li>
-<li><a class="el" href="group___f_f_t_units.html">FFT-based unit classes.</a></li>
-<li><a class="el" href="group___maths_units.html">Mathemetical unit classes.</a></li>
-<li><a class="el" href="group___envelope_units.html">Envelope unit classes.</a></li>
-<li><a class="el" href="group___delay_units.html">Delay units classes.</a></li>
-<li><a class="el" href="group___control_units.html">Control unit classes.</a></li>
-<li><a class="el" href="group___sound_file_units.html">Sound file unit classes.</a></li>
-<li><a class="el" href="group___converter_units.html">Converter unit classes.</a></li>
-<li><a class="el" href="group___misc_units.html">Miscellaneous unit class.</a></li>
-</ul>
-</li>
-<li><a class="el" href="group___plonk_container_classes.html">Plonk container classes</a></li>
 <li><a class="el" href="group___plonk_other_user_classes.html">Other Plonk user classes</a></li>
 <li><a class="el" href="group___plonk_other_user_functions.html">Other Plonk user functions</a><ul>
 <li><a class="el" href="group___plonk_binary_op_functions.html">Binary arithmetic operator functions</a></li>
@@ -163,7 +155,21 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li><a class="el" href="group___plonk_unary_op_functions.html">Unary arithmetic operator functions</a></li>
 </ul>
 </li>
-<li><a class="el" href="group___plonk_extras.html">Extras</a></li>
+<li><a class="el" href="group___plonk_container_classes.html">Plonk container classes</a></li>
+<li><a class="el" href="group___plonk_unit_categogies.html">Unit categories</a><ul>
+<li><a class="el" href="group___control_units.html">Control unit classes.</a></li>
+<li><a class="el" href="group___converter_units.html">Converter unit classes.</a></li>
+<li><a class="el" href="group___delay_units.html">Delay units classes.</a></li>
+<li><a class="el" href="group___envelope_units.html">Envelope unit classes.</a></li>
+<li><a class="el" href="group___f_f_t_units.html">FFT-based unit classes.</a></li>
+<li><a class="el" href="group___filter_units.html">Filter unit classes.</a></li>
+<li><a class="el" href="group___maths_units.html">Mathemetical unit classes.</a></li>
+<li><a class="el" href="group___misc_units.html">Miscellaneous unit class.</a></li>
+<li><a class="el" href="group___noise_units.html">Noise unit classes.</a></li>
+<li><a class="el" href="group___generator_units.html">Oscillator unit classes.</a></li>
+<li><a class="el" href="group___sound_file_units.html">Sound file unit classes.</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -173,7 +179,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Properties</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -182,7 +188,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 5 2012 17:04:58 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 8 2014 12:26:52 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

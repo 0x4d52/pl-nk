@@ -20,7 +20,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="pl-nk-logo-small.png"/></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">pl-nk</div>
+   <div id="projectname">pl-nk&#160;<span id="projectnumber">v0.4.5</span></div>
+   <div id="projectbrief">Plonk|Plink|Plank are a set of cross-platform C/C++ frameworks for audio software development</div>
   </td>
  </tr>
  </tbody>
@@ -29,8 +30,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -54,7 +55,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
       <li><a href="files.html"><span>File&#160;List</span></a></li>
-      <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
 <div class="header">
@@ -62,14 +62,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">plank_AudioFileWriter.h</div>  </div>
 </div>
 <div class="contents">
-<a href="plank___audio_file_writer_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*</span>
+<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*</span>
 <a name="l00002"></a>00002 <span class="comment"> -------------------------------------------------------------------------------</span>
 <a name="l00003"></a>00003 <span class="comment"> This file is part of the Plink, Plonk, Plank libraries</span>
 <a name="l00004"></a>00004 <span class="comment">  by Martin Robinson</span>
 <a name="l00005"></a>00005 <span class="comment"> </span>
 <a name="l00006"></a>00006 <span class="comment"> http://code.google.com/p/pl-nk/</span>
 <a name="l00007"></a>00007 <span class="comment"> </span>
-<a name="l00008"></a>00008 <span class="comment"> Copyright University of the West of England, Bristol 2011-12</span>
+<a name="l00008"></a>00008 <span class="comment"> Copyright University of the West of England, Bristol 2011-14</span>
 <a name="l00009"></a>00009 <span class="comment"> All rights reserved.</span>
 <a name="l00010"></a>00010 <span class="comment"> </span>
 <a name="l00011"></a>00011 <span class="comment"> Redistribution and use in source and binary forms, with or without</span>
@@ -103,9 +103,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00039"></a>00039 <span class="preprocessor">#ifndef PLANK_AUDIOFILEWRITER_H</span>
 <a name="l00040"></a>00040 <span class="preprocessor"></span><span class="preprocessor">#define PLANK_AUDIOFILEWRITER_H</span>
 <a name="l00041"></a>00041 <span class="preprocessor"></span>
-<a name="l00042"></a>00042 <span class="preprocessor">#include &quot;<a class="code" href="plank___audio_file_common_8h.html">plank_AudioFileCommon.h</a>&quot;</span>
+<a name="l00042"></a>00042 <span class="preprocessor">#include &quot;plank_AudioFileCommon.h&quot;</span>
 <a name="l00043"></a>00043 
-<a name="l00044"></a>00044 <a class="code" href="plank___standard_header_8h.html#a04d6b0df91a3ec64f89589fab47dff92">PLANK_BEGIN_C_LINKAGE</a>
+<a name="l00044"></a>00044 PLANK_BEGIN_C_LINKAGE
 <a name="l00045"></a>00045 
 <a name="l00054"></a><a class="code" href="group___plank_audio_file_writer_class.html#ga0443905cb8b979bb5e7cf68edfabf7d3">00054</a> <span class="keyword">typedef</span> <span class="keyword">struct </span>PlankAudioFileWriter* <a class="code" href="group___plank_audio_file_writer_class.html#ga0443905cb8b979bb5e7cf68edfabf7d3" title="An opaque reference to the Plank AudioFileWriter object.">PlankAudioFileWriterRef</a>; 
 <a name="l00055"></a>00055 
@@ -113,30 +113,82 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00059"></a>00059 
 <a name="l00062"></a>00062 <a class="code" href="group___plank_audio_file_writer_class.html#ga0443905cb8b979bb5e7cf68edfabf7d3" title="An opaque reference to the Plank AudioFileWriter object.">PlankAudioFileWriterRef</a> <a class="code" href="group___plank_audio_file_writer_class.html#gae81c11ca2793bae61c247159438db94a" title="Create a Plank AudioFileWriter object and return an oqaque reference to it.">pl_AudioFileWriter_Create</a>();
 <a name="l00063"></a>00063 
-<a name="l00067"></a>00067 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_audio_file_writer_class.html#ga75b1e9d0eb60730587c8eda08a884f2c" title="Inititalise a Plank AudioFileWriter object.">pl_AudioFileWriter_Init</a> (<a class="code" href="group___plank_audio_file_writer_class.html#ga0443905cb8b979bb5e7cf68edfabf7d3" title="An opaque reference to the Plank AudioFileWriter object.">PlankAudioFileWriterRef</a> p);
+<a name="l00067"></a>00067 PlankResult <a class="code" href="group___plank_audio_file_writer_class.html#ga75b1e9d0eb60730587c8eda08a884f2c" title="Inititalise a Plank AudioFileWriter object.">pl_AudioFileWriter_Init</a> (<a class="code" href="group___plank_audio_file_writer_class.html#ga0443905cb8b979bb5e7cf68edfabf7d3" title="An opaque reference to the Plank AudioFileWriter object.">PlankAudioFileWriterRef</a> p);
 <a name="l00068"></a>00068 
-<a name="l00072"></a>00072 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_audio_file_writer_class.html#ga451ab87a5455da84f80a3b754de4c8d7" title="Deinitialise a Plank AudioFileWriter object.">pl_AudioFileWriter_DeInit</a> (<a class="code" href="group___plank_audio_file_writer_class.html#ga0443905cb8b979bb5e7cf68edfabf7d3" title="An opaque reference to the Plank AudioFileWriter object.">PlankAudioFileWriterRef</a> p);
+<a name="l00072"></a>00072 PlankResult <a class="code" href="group___plank_audio_file_writer_class.html#ga451ab87a5455da84f80a3b754de4c8d7" title="Deinitialise a Plank AudioFileWriter object.">pl_AudioFileWriter_DeInit</a> (<a class="code" href="group___plank_audio_file_writer_class.html#ga0443905cb8b979bb5e7cf68edfabf7d3" title="An opaque reference to the Plank AudioFileWriter object.">PlankAudioFileWriterRef</a> p);
 <a name="l00073"></a>00073 
-<a name="l00077"></a>00077 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_audio_file_writer_class.html#gac31cf7fba4e88acde197ff642f02e9b5" title="Destroy a Plank AudioFileWriter object.">pl_AudioFileWriter_Destroy</a> (<a class="code" href="group___plank_audio_file_writer_class.html#ga0443905cb8b979bb5e7cf68edfabf7d3" title="An opaque reference to the Plank AudioFileWriter object.">PlankAudioFileWriterRef</a> p);
+<a name="l00077"></a>00077 PlankResult <a class="code" href="group___plank_audio_file_writer_class.html#gac31cf7fba4e88acde197ff642f02e9b5" title="Destroy a Plank AudioFileWriter object.">pl_AudioFileWriter_Destroy</a> (<a class="code" href="group___plank_audio_file_writer_class.html#ga0443905cb8b979bb5e7cf68edfabf7d3" title="An opaque reference to the Plank AudioFileWriter object.">PlankAudioFileWriterRef</a> p);
 <a name="l00078"></a>00078 
 <a name="l00083"></a>00083 <a class="code" href="group___plank_file_class.html#ga7a3834c3811eceffb81213155fd14e59" title="An opaque reference to the Plank File object.">PlankFileRef</a> <a class="code" href="group___plank_audio_file_writer_class.html#gae27c3ac6a31d563bede50e9d22674629" title="Gets the underlying Plank File object.">pl_AudioFileWriter_GetFile</a> (<a class="code" href="group___plank_audio_file_writer_class.html#ga0443905cb8b979bb5e7cf68edfabf7d3" title="An opaque reference to the Plank AudioFileWriter object.">PlankAudioFileWriterRef</a> p);
 <a name="l00084"></a>00084 
-<a name="l00086"></a>00086 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_audio_file_writer_class.html#ga561b59dbe51b1f87ba87108269ba31e7">pl_AudioFileWriter_Open</a> (<a class="code" href="group___plank_audio_file_writer_class.html#ga0443905cb8b979bb5e7cf68edfabf7d3" title="An opaque reference to the Plank AudioFileWriter object.">PlankAudioFileWriterRef</a> p, <span class="keyword">const</span> <span class="keywordtype">char</span>* filepath);
-<a name="l00087"></a>00087 
-<a name="l00089"></a>00089 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_audio_file_writer_class.html#gabda47171a44d03c520aab7b86a23c685">pl_AudioFileWriter_Close</a> (<a class="code" href="group___plank_audio_file_writer_class.html#ga0443905cb8b979bb5e7cf68edfabf7d3" title="An opaque reference to the Plank AudioFileWriter object.">PlankAudioFileWriterRef</a> p);
+<a name="l00087"></a>00087 PlankAudioFileFormatInfo* <a class="code" href="group___plank_audio_file_writer_class.html#ga009020d9179124eea96a710b06edbc5b" title="Get format before open.">pl_AudioFileWriter_GetFormatInfo</a> (<a class="code" href="group___plank_audio_file_writer_class.html#ga0443905cb8b979bb5e7cf68edfabf7d3" title="An opaque reference to the Plank AudioFileWriter object.">PlankAudioFileWriterRef</a> p);
+<a name="l00088"></a>00088 
+<a name="l00089"></a>00089 <span class="keyword">const</span> PlankAudioFileFormatInfo* pl_AudioFileWriter_GetFormatInfoReadOnly (<a class="code" href="group___plank_audio_file_writer_class.html#ga0443905cb8b979bb5e7cf68edfabf7d3" title="An opaque reference to the Plank AudioFileWriter object.">PlankAudioFileWriterRef</a> p);
 <a name="l00090"></a>00090 
-<a name="l00093"></a>00093 <a class="code" href="plank___standard_header_8h.html#a5f78f73f0b53faac6c264036f55232e4">PLANK_END_C_LINKAGE</a>
-<a name="l00094"></a>00094 
-<a name="l00095"></a>00095 <span class="preprocessor">#if !DOXYGEN</span>
-<a name="l00096"></a>00096 <span class="preprocessor"></span><span class="keyword">typedef</span> <span class="keyword">struct </span>PlankAudioFileWriter
-<a name="l00097"></a>00097 {
-<a name="l00098"></a>00098     PlankIffFileWriter iff;
-<a name="l00099"></a>00099     <a class="code" href="struct_plank_audio_file_format_info.html">PlankAudioFileFormatInfo</a> formatInfo;
-<a name="l00100"></a>00100     
-<a name="l00101"></a>00101 } PlankAudioFileWriter;
-<a name="l00102"></a>00102 <span class="preprocessor">#endif</span>
-<a name="l00103"></a>00103 <span class="preprocessor"></span>
-<a name="l00104"></a>00104 <span class="preprocessor">#endif // PLANK_AUDIOFILEWRITER_H</span>
+<a name="l00091"></a>00091 PlankAudioFileMetaDataIOFlags pl_AudioFileWriter_GetMetaDataIOFlags (<a class="code" href="group___plank_audio_file_writer_class.html#ga0443905cb8b979bb5e7cf68edfabf7d3" title="An opaque reference to the Plank AudioFileWriter object.">PlankAudioFileWriterRef</a> p);
+<a name="l00092"></a>00092 PlankResult pl_AudioFileWriter_SetMetaDataIOFlags (<a class="code" href="group___plank_audio_file_writer_class.html#ga0443905cb8b979bb5e7cf68edfabf7d3" title="An opaque reference to the Plank AudioFileWriter object.">PlankAudioFileWriterRef</a> p, PlankAudioFileMetaDataIOFlags metaDataIOFlags);
+<a name="l00093"></a>00093 PlankAudioFileMetaDataRef pl_AudioFileWriter_GetMetaData (<a class="code" href="group___plank_audio_file_writer_class.html#ga0443905cb8b979bb5e7cf68edfabf7d3" title="An opaque reference to the Plank AudioFileWriter object.">PlankAudioFileWriterRef</a> p);
+<a name="l00094"></a>00094 PlankResult pl_AudioFileWriter_SetMetaData (<a class="code" href="group___plank_audio_file_writer_class.html#ga0443905cb8b979bb5e7cf68edfabf7d3" title="An opaque reference to the Plank AudioFileWriter object.">PlankAudioFileWriterRef</a> p, PlankAudioFileMetaDataRef metaData);
+<a name="l00095"></a>00095 
+<a name="l00096"></a>00096 
+<a name="l00097"></a>00097 PlankResult pl_AudioFileWriter_SetFormatWAV (<a class="code" href="group___plank_audio_file_writer_class.html#ga0443905cb8b979bb5e7cf68edfabf7d3" title="An opaque reference to the Plank AudioFileWriter object.">PlankAudioFileWriterRef</a> p, <span class="keyword">const</span> <span class="keywordtype">int</span> bitsPerSample, <span class="keyword">const</span> PlankChannelLayout channelLayout, <span class="keyword">const</span> <span class="keywordtype">double</span> sampleRate, <span class="keyword">const</span> PlankB isFloat);
+<a name="l00098"></a>00098 PlankResult pl_AudioFileWriter_SetFormatAIFF (<a class="code" href="group___plank_audio_file_writer_class.html#ga0443905cb8b979bb5e7cf68edfabf7d3" title="An opaque reference to the Plank AudioFileWriter object.">PlankAudioFileWriterRef</a> p, <span class="keyword">const</span> <span class="keywordtype">int</span> bitsPerSample, <span class="keyword">const</span> PlankChannelLayout channelLayout, <span class="keyword">const</span> <span class="keywordtype">double</span> sampleRate);
+<a name="l00099"></a>00099 PlankResult pl_AudioFileWriter_SetFormatAIFC (<a class="code" href="group___plank_audio_file_writer_class.html#ga0443905cb8b979bb5e7cf68edfabf7d3" title="An opaque reference to the Plank AudioFileWriter object.">PlankAudioFileWriterRef</a> p, <span class="keyword">const</span> <span class="keywordtype">int</span> bitsPerSample, <span class="keyword">const</span> PlankChannelLayout channelLayout, <span class="keyword">const</span> <span class="keywordtype">double</span> sampleRate, <span class="keyword">const</span> PlankB isFloat, <span class="keyword">const</span> PlankB isLittleEndian);
+<a name="l00100"></a>00100 PlankResult pl_AudioFileWriter_SetFormatCAF (<a class="code" href="group___plank_audio_file_writer_class.html#ga0443905cb8b979bb5e7cf68edfabf7d3" title="An opaque reference to the Plank AudioFileWriter object.">PlankAudioFileWriterRef</a> p, <span class="keyword">const</span> <span class="keywordtype">int</span> bitsPerSample, <span class="keyword">const</span> PlankChannelLayout channelLayout, <span class="keyword">const</span> <span class="keywordtype">double</span> sampleRate, <span class="keyword">const</span> PlankB isFloat, <span class="keyword">const</span> PlankB isLittleEndian);
+<a name="l00101"></a>00101 PlankResult pl_AudioFileWriter_SetFormatW64 (<a class="code" href="group___plank_audio_file_writer_class.html#ga0443905cb8b979bb5e7cf68edfabf7d3" title="An opaque reference to the Plank AudioFileWriter object.">PlankAudioFileWriterRef</a> p, <span class="keyword">const</span> <span class="keywordtype">int</span> bitsPerSample, <span class="keyword">const</span> PlankChannelLayout channelLayout, <span class="keyword">const</span> <span class="keywordtype">double</span> sampleRate, <span class="keyword">const</span> PlankB isFloat);
+<a name="l00102"></a>00102 PlankResult pl_AudioFileWriter_SetFormatOggVorbis (<a class="code" href="group___plank_audio_file_writer_class.html#ga0443905cb8b979bb5e7cf68edfabf7d3" title="An opaque reference to the Plank AudioFileWriter object.">PlankAudioFileWriterRef</a> p, <span class="keyword">const</span> <span class="keywordtype">float</span> quality, <span class="keyword">const</span> PlankChannelLayout channelLayout, <span class="keyword">const</span> <span class="keywordtype">double</span> sampleRate);
+<a name="l00103"></a>00103 PlankResult pl_AudioFileWriter_SetFormatOggVorbisManaged (<a class="code" href="group___plank_audio_file_writer_class.html#ga0443905cb8b979bb5e7cf68edfabf7d3" title="An opaque reference to the Plank AudioFileWriter object.">PlankAudioFileWriterRef</a> p, <span class="keyword">const</span> <span class="keywordtype">int</span> minBitRate, <span class="keyword">const</span> <span class="keywordtype">int</span> nominalBitRate, <span class="keyword">const</span> <span class="keywordtype">int</span> maxBitRate, <span class="keyword">const</span> PlankChannelLayout channelLayout, <span class="keyword">const</span> <span class="keywordtype">double</span> sampleRate);
+<a name="l00104"></a>00104 PlankResult pl_AudioFileWriter_SetFormatOpus (<a class="code" href="group___plank_audio_file_writer_class.html#ga0443905cb8b979bb5e7cf68edfabf7d3" title="An opaque reference to the Plank AudioFileWriter object.">PlankAudioFileWriterRef</a> p, <span class="keyword">const</span> <span class="keywordtype">float</span> quality, <span class="keyword">const</span> PlankChannelLayout channelLayout, <span class="keyword">const</span> <span class="keywordtype">double</span> sampleRate, <span class="keyword">const</span> <span class="keywordtype">double</span> frameDuration);
+<a name="l00105"></a>00105 PlankResult pl_AudioFileWriter_SetFormatOpusManaged (<a class="code" href="group___plank_audio_file_writer_class.html#ga0443905cb8b979bb5e7cf68edfabf7d3" title="An opaque reference to the Plank AudioFileWriter object.">PlankAudioFileWriterRef</a> p, <span class="keyword">const</span> <span class="keywordtype">int</span> nominalBitRate, <span class="keyword">const</span> PlankChannelLayout channelLayout, <span class="keyword">const</span> <span class="keywordtype">double</span> sampleRate, <span class="keyword">const</span> <span class="keywordtype">double</span> frameDuration);
+<a name="l00106"></a>00106 
+<a name="l00108"></a>00108 PlankResult pl_AudioFileWriter_Open (<a class="code" href="group___plank_audio_file_writer_class.html#ga0443905cb8b979bb5e7cf68edfabf7d3" title="An opaque reference to the Plank AudioFileWriter object.">PlankAudioFileWriterRef</a> p, <span class="keyword">const</span> <span class="keywordtype">char</span>* filepath);
+<a name="l00109"></a>00109 
+<a name="l00110"></a>00110 PlankResult pl_AudioFileWriter_OpenWithFile (<a class="code" href="group___plank_audio_file_writer_class.html#ga0443905cb8b979bb5e7cf68edfabf7d3" title="An opaque reference to the Plank AudioFileWriter object.">PlankAudioFileWriterRef</a> p, <a class="code" href="group___plank_file_class.html#ga7a3834c3811eceffb81213155fd14e59" title="An opaque reference to the Plank File object.">PlankFileRef</a> file);
+<a name="l00111"></a>00111 
+<a name="l00113"></a>00113 PlankResult pl_AudioFileWriter_Close (<a class="code" href="group___plank_audio_file_writer_class.html#ga0443905cb8b979bb5e7cf68edfabf7d3" title="An opaque reference to the Plank AudioFileWriter object.">PlankAudioFileWriterRef</a> p);
+<a name="l00114"></a>00114 
+<a name="l00115"></a>00115 PlankResult pl_AudioFileWriter_WriteHeader (<a class="code" href="group___plank_audio_file_writer_class.html#ga0443905cb8b979bb5e7cf68edfabf7d3" title="An opaque reference to the Plank AudioFileWriter object.">PlankAudioFileWriterRef</a> p);
+<a name="l00116"></a>00116 
+<a name="l00117"></a>00117 PlankResult pl_AudioFileWriter_WriteFrames (<a class="code" href="group___plank_audio_file_writer_class.html#ga0443905cb8b979bb5e7cf68edfabf7d3" title="An opaque reference to the Plank AudioFileWriter object.">PlankAudioFileWriterRef</a> p, <span class="keyword">const</span> PlankB convertByteOrder, <span class="keyword">const</span> <span class="keywordtype">int</span> numFrames, <span class="keyword">const</span> <span class="keywordtype">void</span>* data);
+<a name="l00118"></a>00118 
+<a name="l00119"></a>00119 PlankB pl_AudioFileWriter_IsEncodingNativeEndian (<a class="code" href="group___plank_audio_file_writer_class.html#ga0443905cb8b979bb5e7cf68edfabf7d3" title="An opaque reference to the Plank AudioFileWriter object.">PlankAudioFileWriterRef</a> p);
+<a name="l00120"></a>00120 
+<a name="l00121"></a>00121 PlankResult pl_AudioFileWriter_SetHeaderPad (<a class="code" href="group___plank_audio_file_writer_class.html#ga0443905cb8b979bb5e7cf68edfabf7d3" title="An opaque reference to the Plank AudioFileWriter object.">PlankAudioFileWriterRef</a> p, <span class="keyword">const</span> PlankUI headerPad);
+<a name="l00122"></a>00122 
+<a name="l00123"></a>00123 PlankResult pl_AudioFileWriter_SetChannelItentifier (<a class="code" href="group___plank_audio_file_writer_class.html#ga0443905cb8b979bb5e7cf68edfabf7d3" title="An opaque reference to the Plank AudioFileWriter object.">PlankAudioFileWriterRef</a> p, <span class="keyword">const</span> <span class="keywordtype">int</span> channel, <span class="keyword">const</span> PlankChannelIdentifier channelIdentifier);
+<a name="l00124"></a>00124 PlankResult pl_AudioFileWriter_GetChannelItentifier (<a class="code" href="group___plank_audio_file_writer_class.html#ga0443905cb8b979bb5e7cf68edfabf7d3" title="An opaque reference to the Plank AudioFileWriter object.">PlankAudioFileWriterRef</a> p, <span class="keyword">const</span> <span class="keywordtype">int</span> channel, PlankChannelIdentifier* identifier);
+<a name="l00125"></a>00125 PlankB pl_AudioFileWriter_SetChanneLayout (<a class="code" href="group___plank_audio_file_writer_class.html#ga0443905cb8b979bb5e7cf68edfabf7d3" title="An opaque reference to the Plank AudioFileWriter object.">PlankAudioFileWriterRef</a> p, <span class="keyword">const</span> PlankChannelLayout layout);
+<a name="l00126"></a>00126 PlankResult pl_AudioFileWriter_GetChannelLayout (<a class="code" href="group___plank_audio_file_writer_class.html#ga0443905cb8b979bb5e7cf68edfabf7d3" title="An opaque reference to the Plank AudioFileWriter object.">PlankAudioFileWriterRef</a> p, PlankChannelLayout* layout);
+<a name="l00127"></a>00127 PlankResult pl_AudioFileWriter_GetNumChannels (<a class="code" href="group___plank_audio_file_writer_class.html#ga0443905cb8b979bb5e7cf68edfabf7d3" title="An opaque reference to the Plank AudioFileWriter object.">PlankAudioFileWriterRef</a> p, <span class="keywordtype">int</span>* numChannels);
+<a name="l00128"></a>00128 
+<a name="l00129"></a>00129 
+<a name="l00132"></a>00132 PLANK_END_C_LINKAGE
+<a name="l00133"></a>00133 
+<a name="l00134"></a>00134 <span class="preprocessor">#if !DOXYGEN</span>
+<a name="l00135"></a>00135 <span class="preprocessor"></span><span class="keyword">typedef</span> <span class="keyword">struct </span>PlankAudioFileWriter
+<a name="l00136"></a>00136 {    
+<a name="l00137"></a>00137     PlankP peer;
+<a name="l00138"></a>00138     PlankAudioFileFormatInfo formatInfo;
+<a name="l00139"></a>00139     
+<a name="l00140"></a>00140     PlankLL numFrames;
+<a name="l00141"></a>00141     PlankLL dataPosition;
+<a name="l00142"></a>00142     PlankLL metaDataChunkPosition;  <span class="comment">// this is the position of the chunk header of the first optional metadata chunk after</span>
+<a name="l00143"></a>00143     PlankUI headerPad;              <span class="comment">// this is the number of bytes exlcuding the chunk header to pad the header with</span>
+<a name="l00144"></a>00144     PlankUC dataOffset; <span class="comment">// into data chunk</span>
+<a name="l00145"></a>00145     PlankUC reserved1;
+<a name="l00146"></a>00146     PlankUC reserved2;
+<a name="l00147"></a>00147     PlankUC reserved3;
+<a name="l00148"></a>00148     
+<a name="l00149"></a>00149     PlankAudioFileMetaDataIOFlags metaDataIOFlags;
+<a name="l00150"></a>00150     PlankAudioFileMetaDataRef metaData;
+<a name="l00151"></a>00151     
+<a name="l00152"></a>00152     PlankM writeFramesFunction;
+<a name="l00153"></a>00153     PlankM writeHeaderFunction;
+<a name="l00154"></a>00154 
+<a name="l00155"></a>00155 } PlankAudioFileWriter;
+<a name="l00156"></a>00156 <span class="preprocessor">#endif</span>
+<a name="l00157"></a>00157 <span class="preprocessor"></span>
+<a name="l00158"></a>00158 <span class="preprocessor">#endif // PLANK_AUDIOFILEWRITER_H</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -144,7 +196,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Properties</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -153,7 +205,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 5 2012 17:04:52 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 8 2014 12:26:46 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

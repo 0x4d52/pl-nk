@@ -20,7 +20,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="pl-nk-logo-small.png"/></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">pl-nk</div>
+   <div id="projectname">pl-nk&#160;<span id="projectnumber">v0.4.5</span></div>
+   <div id="projectbrief">Plonk|Plink|Plank are a set of cross-platform C/C++ frameworks for audio software development</div>
   </td>
  </tr>
  </tbody>
@@ -29,8 +30,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -54,7 +55,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
       <li><a href="files.html"><span>File&#160;List</span></a></li>
-      <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
 <div class="header">
@@ -62,14 +62,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">plink_UnaryOpProcess.h</div>  </div>
 </div>
 <div class="contents">
-<a href="plink___unary_op_process_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*</span>
+<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*</span>
 <a name="l00002"></a>00002 <span class="comment"> -------------------------------------------------------------------------------</span>
 <a name="l00003"></a>00003 <span class="comment"> This file is part of the Plink, Plonk, Plank libraries</span>
 <a name="l00004"></a>00004 <span class="comment">  by Martin Robinson</span>
 <a name="l00005"></a>00005 <span class="comment"> </span>
 <a name="l00006"></a>00006 <span class="comment"> http://code.google.com/p/pl-nk/</span>
 <a name="l00007"></a>00007 <span class="comment"> </span>
-<a name="l00008"></a>00008 <span class="comment"> Copyright University of the West of England, Bristol 2011-12</span>
+<a name="l00008"></a>00008 <span class="comment"> Copyright University of the West of England, Bristol 2011-14</span>
 <a name="l00009"></a>00009 <span class="comment"> All rights reserved.</span>
 <a name="l00010"></a>00010 <span class="comment"> </span>
 <a name="l00011"></a>00011 <span class="comment"> Redistribution and use in source and binary forms, with or without</span>
@@ -106,7 +106,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00042"></a>00042 <span class="preprocessor">#include &quot;../plink_Process.h&quot;</span>
 <a name="l00043"></a>00043 
 <a name="l00044"></a>00044 
-<a name="l00052"></a><a class="code" href="group___plink_unary_op_macros.html#gab5ae30ca4d116ae46307a1b37a668990">00052</a> <span class="preprocessor">#define PLINK_UNARYOPPROCESS_DEFINE_NN(OPNAME, TYPECODE)\</span>
+<a name="l00052"></a>00052 <span class="preprocessor">#define PLINK_UNARYOPPROCESS_DEFINE_NN(OPNAME, TYPECODE)\</span>
 <a name="l00053"></a>00053 <span class="preprocessor">    void plink_UnaryOpProcess ## OPNAME ## TYPECODE ## _NN (void* ppv, UnaryState* state) {\</span>
 <a name="l00054"></a>00054 <span class="preprocessor">        PlinkProcess##TYPECODE* pp; PlankUL N; Plank##TYPECODE* output; const Plank##TYPECODE* input;\</span>
 <a name="l00055"></a>00055 <span class="preprocessor">        (void)state;\</span>
@@ -117,7 +117,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00060"></a>00060 <span class="preprocessor">        PLANK_VECTORUNARYOP_NAME(OPNAME,TYPECODE) (output, input, N);\</span>
 <a name="l00061"></a>00061 <span class="preprocessor">    }</span>
 <a name="l00062"></a>00062 <span class="preprocessor"></span>
-<a name="l00063"></a><a class="code" href="group___plink_unary_op_macros.html#gae74bb983d094e4729927f7445c30b9f9">00063</a> <span class="preprocessor">#define PLINK_UNARYOPPROCESS_DEFINE_N1(OPNAME, TYPECODE)\</span>
+<a name="l00063"></a>00063 <span class="preprocessor">#define PLINK_UNARYOPPROCESS_DEFINE_N1(OPNAME, TYPECODE)\</span>
 <a name="l00064"></a>00064 <span class="preprocessor">    void plink_UnaryOpProcess ## OPNAME ## TYPECODE ## _N1 (void* ppv, UnaryState* state) {\</span>
 <a name="l00065"></a>00065 <span class="preprocessor">        PlinkProcess##TYPECODE* pp; PlankUL N; Plank##TYPECODE* output; Plank##TYPECODE value;\</span>
 <a name="l00066"></a>00066 <span class="preprocessor">        (void)state;\</span>
@@ -128,7 +128,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00071"></a>00071 <span class="preprocessor">        PLANK_VECTORFILL_NAME(TYPECODE) (output, value, N);\</span>
 <a name="l00072"></a>00072 <span class="preprocessor">    }</span>
 <a name="l00073"></a>00073 <span class="preprocessor"></span>
-<a name="l00074"></a><a class="code" href="group___plink_unary_op_macros.html#gae6bfcffe8d73b6700a1f67d41b489cfd">00074</a> <span class="preprocessor">#define PLINK_UNARYOPPROCESS_DEFINE_Nn(OPNAME, TYPECODE)\</span>
+<a name="l00074"></a>00074 <span class="preprocessor">#define PLINK_UNARYOPPROCESS_DEFINE_Nn(OPNAME, TYPECODE)\</span>
 <a name="l00075"></a>00075 <span class="preprocessor">    void plink_UnaryOpProcess ## OPNAME ## TYPECODE ## _Nn (void* ppv, UnaryState* state) {\</span>
 <a name="l00076"></a>00076 <span class="preprocessor">        PlinkProcess##TYPECODE* pp; PlankUL N, i; Plank##TYPECODE* output; const Plank##TYPECODE* input;\</span>
 <a name="l00077"></a>00077 <span class="preprocessor">        double inputPos, inputInc;\</span>
@@ -145,7 +145,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00088"></a>00088 <span class="preprocessor">        }\</span>
 <a name="l00089"></a>00089 <span class="preprocessor">    }</span>
 <a name="l00090"></a>00090 <span class="preprocessor"></span>
-<a name="l00091"></a><a class="code" href="group___plink_unary_op_macros.html#ga13383242c905cb665a28a000fa4ab127">00091</a> <span class="preprocessor">#define PLINK_UNARYOPPROCESS_DEFINE_SELECT(OPNAME, TYPECODE)\</span>
+<a name="l00091"></a>00091 <span class="preprocessor">#define PLINK_UNARYOPPROCESS_DEFINE_SELECT(OPNAME, TYPECODE)\</span>
 <a name="l00092"></a>00092 <span class="preprocessor">    void plink_UnaryOpProcess ## OPNAME ## TYPECODE (void* ppv, UnaryState* state) {\</span>
 <a name="l00093"></a>00093 <span class="preprocessor">        PlinkProcess##TYPECODE* pp; PlankUL N, n;\</span>
 <a name="l00094"></a>00094 <span class="preprocessor">        (void)state;\</span>
@@ -158,13 +158,13 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00101"></a>00101 <span class="preprocessor">    }</span>
 <a name="l00102"></a>00102 <span class="preprocessor"></span>
 <a name="l00103"></a>00103 
-<a name="l00104"></a><a class="code" href="group___plink_unary_op_macros.html#ga7dd10ddfa605955ab5d98e972af5ba19">00104</a> <span class="preprocessor">#define PLINK_UNARYOPPROCESS_DECLARE(OPNAME, TYPECODE)\</span>
+<a name="l00104"></a>00104 <span class="preprocessor">#define PLINK_UNARYOPPROCESS_DECLARE(OPNAME, TYPECODE)\</span>
 <a name="l00105"></a>00105 <span class="preprocessor">    void PLINK_API plink_UnaryOpProcess ## OPNAME ## TYPECODE ## _NN (void* pp, UnaryState* state);\</span>
 <a name="l00106"></a>00106 <span class="preprocessor">    void PLINK_API plink_UnaryOpProcess ## OPNAME ## TYPECODE ## _N1 (void* pp, UnaryState* state);\</span>
 <a name="l00107"></a>00107 <span class="preprocessor">    void PLINK_API plink_UnaryOpProcess ## OPNAME ## TYPECODE ## _Nn (void* pp, UnaryState* state);\</span>
 <a name="l00108"></a>00108 <span class="preprocessor">    void PLINK_API plink_UnaryOpProcess ## OPNAME ## TYPECODE (void* pp, UnaryState* state);</span>
 <a name="l00109"></a>00109 <span class="preprocessor"></span>
-<a name="l00110"></a><a class="code" href="group___plink_unary_op_macros.html#ga5bf163439bc53d1b9570c2eb1851bbce">00110</a> <span class="preprocessor">#define PLINK_UNARYOPPROCESS_DEFINE(OPNAME, TYPECODE)\</span>
+<a name="l00110"></a>00110 <span class="preprocessor">#define PLINK_UNARYOPPROCESS_DEFINE(OPNAME, TYPECODE)\</span>
 <a name="l00111"></a>00111 <span class="preprocessor">    PLINK_UNARYOPPROCESS_DEFINE_NN(OPNAME, TYPECODE)\</span>
 <a name="l00112"></a>00112 <span class="preprocessor">    PLINK_UNARYOPPROCESS_DEFINE_N1(OPNAME, TYPECODE)\</span>
 <a name="l00113"></a>00113 <span class="preprocessor">    PLINK_UNARYOPPROCESS_DEFINE_Nn(OPNAME, TYPECODE)\</span>
@@ -172,47 +172,48 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00115"></a>00115 <span class="preprocessor"></span>
 <a name="l00117"></a>00117 
 <a name="l00118"></a>00118 
-<a name="l00119"></a>00119 <a class="code" href="plink___standard_header_8h.html#a655701e76491767a3c7eae3f5ad8bc75">PLINK_BEGIN_C_LINKAGE</a>
+<a name="l00119"></a>00119 PLINK_BEGIN_C_LINKAGE
 <a name="l00120"></a>00120 
-<a name="l00128"></a><a class="code" href="group___plink_unary_op_process_f_class.html#gae01d899bf97813c6ddd1ba5c07772ac2">00128</a> <span class="keyword">typedef</span> <a class="code" href="struct_plink_state.html">PlinkState</a> <a class="code" href="group___plink_unary_op_process_f_class.html#gae01d899bf97813c6ddd1ba5c07772ac2">UnaryState</a>;
+<a name="l00128"></a>00128 <span class="keyword">typedef</span> PlinkState UnaryState;
 <a name="l00129"></a>00129 
-<a name="l00130"></a>00130 <a class="code" href="group___plink_unary_op_macros.html#ga7dd10ddfa605955ab5d98e972af5ba19">PLINK_UNARYOPPROCESS_DECLARE</a>(Move, F)
-<a name="l00131"></a>00131 <a class="code" href="group___plink_unary_op_macros.html#ga7dd10ddfa605955ab5d98e972af5ba19">PLINK_UNARYOPPROCESS_DECLARE</a>(Neg, F)
-<a name="l00132"></a>00132 <a class="code" href="group___plink_unary_op_macros.html#ga7dd10ddfa605955ab5d98e972af5ba19">PLINK_UNARYOPPROCESS_DECLARE</a>(Abs, F)
-<a name="l00133"></a>00133 <a class="code" href="group___plink_unary_op_macros.html#ga7dd10ddfa605955ab5d98e972af5ba19">PLINK_UNARYOPPROCESS_DECLARE</a>(Log2, F)
-<a name="l00134"></a>00134 <a class="code" href="group___plink_unary_op_macros.html#ga7dd10ddfa605955ab5d98e972af5ba19">PLINK_UNARYOPPROCESS_DECLARE</a>(Reciprocal, F)
-<a name="l00135"></a>00135 <a class="code" href="group___plink_unary_op_macros.html#ga7dd10ddfa605955ab5d98e972af5ba19">PLINK_UNARYOPPROCESS_DECLARE</a>(Sin, F)
-<a name="l00136"></a>00136 <a class="code" href="group___plink_unary_op_macros.html#ga7dd10ddfa605955ab5d98e972af5ba19">PLINK_UNARYOPPROCESS_DECLARE</a>(Cos, F)
-<a name="l00137"></a>00137 <a class="code" href="group___plink_unary_op_macros.html#ga7dd10ddfa605955ab5d98e972af5ba19">PLINK_UNARYOPPROCESS_DECLARE</a>(Tan, F)
-<a name="l00138"></a>00138 <a class="code" href="group___plink_unary_op_macros.html#ga7dd10ddfa605955ab5d98e972af5ba19">PLINK_UNARYOPPROCESS_DECLARE</a>(Asin, F)
-<a name="l00139"></a>00139 <a class="code" href="group___plink_unary_op_macros.html#ga7dd10ddfa605955ab5d98e972af5ba19">PLINK_UNARYOPPROCESS_DECLARE</a>(Acos, F)
-<a name="l00140"></a>00140 <a class="code" href="group___plink_unary_op_macros.html#ga7dd10ddfa605955ab5d98e972af5ba19">PLINK_UNARYOPPROCESS_DECLARE</a>(Atan, F)
-<a name="l00141"></a>00141 <a class="code" href="group___plink_unary_op_macros.html#ga7dd10ddfa605955ab5d98e972af5ba19">PLINK_UNARYOPPROCESS_DECLARE</a>(Sinh, F)
-<a name="l00142"></a>00142 <a class="code" href="group___plink_unary_op_macros.html#ga7dd10ddfa605955ab5d98e972af5ba19">PLINK_UNARYOPPROCESS_DECLARE</a>(Cosh, F)
-<a name="l00143"></a>00143 <a class="code" href="group___plink_unary_op_macros.html#ga7dd10ddfa605955ab5d98e972af5ba19">PLINK_UNARYOPPROCESS_DECLARE</a>(Tanh, F)
-<a name="l00144"></a>00144 <a class="code" href="group___plink_unary_op_macros.html#ga7dd10ddfa605955ab5d98e972af5ba19">PLINK_UNARYOPPROCESS_DECLARE</a>(Sqrt, F)
-<a name="l00145"></a>00145 <a class="code" href="group___plink_unary_op_macros.html#ga7dd10ddfa605955ab5d98e972af5ba19">PLINK_UNARYOPPROCESS_DECLARE</a>(Log, F)
-<a name="l00146"></a>00146 <a class="code" href="group___plink_unary_op_macros.html#ga7dd10ddfa605955ab5d98e972af5ba19">PLINK_UNARYOPPROCESS_DECLARE</a>(Log10, F)
-<a name="l00147"></a>00147 <a class="code" href="group___plink_unary_op_macros.html#ga7dd10ddfa605955ab5d98e972af5ba19">PLINK_UNARYOPPROCESS_DECLARE</a>(Exp, F)
-<a name="l00148"></a>00148 <a class="code" href="group___plink_unary_op_macros.html#ga7dd10ddfa605955ab5d98e972af5ba19">PLINK_UNARYOPPROCESS_DECLARE</a>(Squared, F)
-<a name="l00149"></a>00149 <a class="code" href="group___plink_unary_op_macros.html#ga7dd10ddfa605955ab5d98e972af5ba19">PLINK_UNARYOPPROCESS_DECLARE</a>(Cubed, F)
-<a name="l00150"></a>00150 <a class="code" href="group___plink_unary_op_macros.html#ga7dd10ddfa605955ab5d98e972af5ba19">PLINK_UNARYOPPROCESS_DECLARE</a>(Ceil, F)
-<a name="l00151"></a>00151 <a class="code" href="group___plink_unary_op_macros.html#ga7dd10ddfa605955ab5d98e972af5ba19">PLINK_UNARYOPPROCESS_DECLARE</a>(Floor, F)
-<a name="l00152"></a>00152 <a class="code" href="group___plink_unary_op_macros.html#ga7dd10ddfa605955ab5d98e972af5ba19">PLINK_UNARYOPPROCESS_DECLARE</a>(Frac, F)
-<a name="l00153"></a>00153 <a class="code" href="group___plink_unary_op_macros.html#ga7dd10ddfa605955ab5d98e972af5ba19">PLINK_UNARYOPPROCESS_DECLARE</a>(Sign, F)
-<a name="l00154"></a>00154 <a class="code" href="group___plink_unary_op_macros.html#ga7dd10ddfa605955ab5d98e972af5ba19">PLINK_UNARYOPPROCESS_DECLARE</a>(M2F, F)
-<a name="l00155"></a>00155 <a class="code" href="group___plink_unary_op_macros.html#ga7dd10ddfa605955ab5d98e972af5ba19">PLINK_UNARYOPPROCESS_DECLARE</a>(F2M, F)
-<a name="l00156"></a>00156 <a class="code" href="group___plink_unary_op_macros.html#ga7dd10ddfa605955ab5d98e972af5ba19">PLINK_UNARYOPPROCESS_DECLARE</a>(A2dB, F)
-<a name="l00157"></a>00157 <a class="code" href="group___plink_unary_op_macros.html#ga7dd10ddfa605955ab5d98e972af5ba19">PLINK_UNARYOPPROCESS_DECLARE</a>(dB2A, F)
-<a name="l00158"></a>00158 <a class="code" href="group___plink_unary_op_macros.html#ga7dd10ddfa605955ab5d98e972af5ba19">PLINK_UNARYOPPROCESS_DECLARE</a>(D2R, F)
-<a name="l00159"></a>00159 <a class="code" href="group___plink_unary_op_macros.html#ga7dd10ddfa605955ab5d98e972af5ba19">PLINK_UNARYOPPROCESS_DECLARE</a>(R2D, F)
-<a name="l00160"></a>00160 <a class="code" href="group___plink_unary_op_macros.html#ga7dd10ddfa605955ab5d98e972af5ba19">PLINK_UNARYOPPROCESS_DECLARE</a>(Distort, F)
-<a name="l00161"></a>00161 <a class="code" href="group___plink_unary_op_macros.html#ga7dd10ddfa605955ab5d98e972af5ba19">PLINK_UNARYOPPROCESS_DECLARE</a>(Zap, F)
-<a name="l00162"></a>00162 
-<a name="l00164"></a>00164 
-<a name="l00165"></a>00165 <a class="code" href="plink___standard_header_8h.html#a6ad1826e88571e104dbae167ddcdbe3e">PLINK_END_C_LINKAGE</a>
-<a name="l00166"></a>00166 
-<a name="l00167"></a>00167 <span class="preprocessor">#endif // PLINK_UNARYOPPROCESS_H</span>
+<a name="l00130"></a>00130 PLINK_UNARYOPPROCESS_DECLARE(Move, F)
+<a name="l00131"></a>00131 PLINK_UNARYOPPROCESS_DECLARE(Inc, F)
+<a name="l00132"></a>00132 PLINK_UNARYOPPROCESS_DECLARE(Neg, F)
+<a name="l00133"></a>00133 PLINK_UNARYOPPROCESS_DECLARE(Abs, F)
+<a name="l00134"></a>00134 PLINK_UNARYOPPROCESS_DECLARE(Log2, F)
+<a name="l00135"></a>00135 PLINK_UNARYOPPROCESS_DECLARE(Reciprocal, F)
+<a name="l00136"></a>00136 PLINK_UNARYOPPROCESS_DECLARE(Sin, F)
+<a name="l00137"></a>00137 PLINK_UNARYOPPROCESS_DECLARE(Cos, F)
+<a name="l00138"></a>00138 PLINK_UNARYOPPROCESS_DECLARE(Tan, F)
+<a name="l00139"></a>00139 PLINK_UNARYOPPROCESS_DECLARE(Asin, F)
+<a name="l00140"></a>00140 PLINK_UNARYOPPROCESS_DECLARE(Acos, F)
+<a name="l00141"></a>00141 PLINK_UNARYOPPROCESS_DECLARE(Atan, F)
+<a name="l00142"></a>00142 PLINK_UNARYOPPROCESS_DECLARE(Sinh, F)
+<a name="l00143"></a>00143 PLINK_UNARYOPPROCESS_DECLARE(Cosh, F)
+<a name="l00144"></a>00144 PLINK_UNARYOPPROCESS_DECLARE(Tanh, F)
+<a name="l00145"></a>00145 PLINK_UNARYOPPROCESS_DECLARE(Sqrt, F)
+<a name="l00146"></a>00146 PLINK_UNARYOPPROCESS_DECLARE(Log, F)
+<a name="l00147"></a>00147 PLINK_UNARYOPPROCESS_DECLARE(Log10, F)
+<a name="l00148"></a>00148 PLINK_UNARYOPPROCESS_DECLARE(Exp, F)
+<a name="l00149"></a>00149 PLINK_UNARYOPPROCESS_DECLARE(Squared, F)
+<a name="l00150"></a>00150 PLINK_UNARYOPPROCESS_DECLARE(Cubed, F)
+<a name="l00151"></a>00151 PLINK_UNARYOPPROCESS_DECLARE(Ceil, F)
+<a name="l00152"></a>00152 PLINK_UNARYOPPROCESS_DECLARE(Floor, F)
+<a name="l00153"></a>00153 PLINK_UNARYOPPROCESS_DECLARE(Frac, F)
+<a name="l00154"></a>00154 PLINK_UNARYOPPROCESS_DECLARE(Sign, F)
+<a name="l00155"></a>00155 PLINK_UNARYOPPROCESS_DECLARE(M2F, F)
+<a name="l00156"></a>00156 PLINK_UNARYOPPROCESS_DECLARE(F2M, F)
+<a name="l00157"></a>00157 PLINK_UNARYOPPROCESS_DECLARE(A2dB, F)
+<a name="l00158"></a>00158 PLINK_UNARYOPPROCESS_DECLARE(dB2A, F)
+<a name="l00159"></a>00159 PLINK_UNARYOPPROCESS_DECLARE(D2R, F)
+<a name="l00160"></a>00160 PLINK_UNARYOPPROCESS_DECLARE(R2D, F)
+<a name="l00161"></a>00161 PLINK_UNARYOPPROCESS_DECLARE(Distort, F)
+<a name="l00162"></a>00162 PLINK_UNARYOPPROCESS_DECLARE(Zap, F)
+<a name="l00163"></a>00163 
+<a name="l00165"></a>00165 
+<a name="l00166"></a>00166 PLINK_END_C_LINKAGE
+<a name="l00167"></a>00167 
+<a name="l00168"></a>00168 <span class="preprocessor">#endif // PLINK_UNARYOPPROCESS_H</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -220,7 +221,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Properties</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -229,7 +230,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 5 2012 17:04:52 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 8 2014 12:26:46 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

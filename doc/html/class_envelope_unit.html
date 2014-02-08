@@ -20,7 +20,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="pl-nk-logo-small.png"/></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">pl-nk</div>
+   <div id="projectname">pl-nk&#160;<span id="projectnumber">v0.4.5</span></div>
+   <div id="projectbrief">Plonk|Plink|Plank are a set of cross-platform C/C++ frameworks for audio software development</div>
   </td>
  </tr>
  </tbody>
@@ -29,8 +30,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -62,7 +63,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="header">
   <div class="summary">
-<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a>  </div>
   <div class="headertitle">
 <div class="title">EnvelopeUnit&lt; SampleType &gt; Class Template Reference<div class="ingroups"><a class="el" href="group___envelope_units.html">Envelope unit classes.</a></div></div>  </div>
@@ -74,27 +74,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <p><a href="class_envelope_unit-members.html">List of all members.</a></p>
 <table class="memberdecls">
-<tr><td colspan="2"><h2><a name="pub-types"></a>
-Public Types</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <br class="typebreak"/>
-<a class="el" href="class_envelope_channel_internal.html">EnvelopeChannelInternal</a><br class="typebreak"/>
-&lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_envelope_unit.html#ac0b20b078766fcbbd0f0e5db1249da86">EnvelopeInternal</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="struct_channel_data_3_01_envelope_channel_internal_3_01_sample_type_01_4_01_4.html">EnvelopeInternal::Data</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_envelope_unit.html#a567345f598f8e1ffc8fff18c10943383">Data</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_channel_base.html">ChannelBase</a>&lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_envelope_unit.html#a9ac4252493b0a84904fbcf7d91049788">ChannelType</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_channel_internal.html">ChannelInternal</a><br class="typebreak"/>
-&lt; SampleType, <a class="el" href="struct_channel_data_3_01_envelope_channel_internal_3_01_sample_type_01_4_01_4.html">Data</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_envelope_unit.html#a53ca1d172ee40a344f7163be2a39648a">Internal</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_channel_internal_base.html">ChannelInternalBase</a><br class="typebreak"/>
-&lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_envelope_unit.html#a1c1e9040df41dc34d342af50fbd65bf1">InternaBase</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_envelope_unit.html#a65bdd3b9b261c617bd26d585462912b9">UnitType</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_input_dictionary.html">InputDictionary</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_envelope_unit.html#a0ede5b714ec4c77cab39b5eefb65aa30">Inputs</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_breakpoints_base.html">BreakpointsBase</a><br class="typebreak"/>
-&lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_envelope_unit.html#a06fc9cbc5a1d142b6b86d2166a36debf">BreakpointsType</a></td></tr>
 <tr><td colspan="2"><h2><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_object_array.html">UnitInfos</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_envelope_unit.html#ab9c3c5f3d6dbf577828740800b3206c7">getInfo</a> ()  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_unit_base.html">UnitType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_envelope_unit.html#a6d9ba57b2c959d64b1bff74992c6876d">ar</a> (<a class="el" href="class_breakpoints_base.html">BreakpointsType</a> const &amp;breakpoints, <a class="el" href="class_unit_base.html">UnitType</a> const &amp;gate=SampleType(1), const bool deleteWhenDone=true, <a class="el" href="class_block_size.html">BlockSize</a> const &amp;preferredBlockSize=BlockSize::getDefault(), <a class="el" href="class_sample_rate.html">SampleRate</a> const &amp;preferredSampleRate=SampleRate::getDefault())  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_unit_base.html">UnitType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_envelope_unit.html#a6d9ba57b2c959d64b1bff74992c6876d">ar</a> (BreakpointsType const &amp;breakpoints, <a class="el" href="class_unit_base.html">UnitType</a> const &amp;gate=SampleType(1), const bool deleteWhenDone=true, <a class="el" href="class_block_size.html">BlockSize</a> const &amp;preferredBlockSize=BlockSize::getDefault(), <a class="el" href="class_sample_rate.html">SampleRate</a> const &amp;preferredSampleRate=SampleRate::getDefault())  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create an audio rate envelope generator.  <a href="#a6d9ba57b2c959d64b1bff74992c6876d"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_unit_base.html">UnitType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_envelope_unit.html#ad419ad7942ca9f5837db3fb477e006b1">kr</a> (<a class="el" href="class_breakpoints_base.html">BreakpointsType</a> const &amp;breakpoints, <a class="el" href="class_unit_base.html">UnitType</a> const &amp;gate=SampleType(1), const bool deleteWhenDone=true)  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_unit_base.html">UnitType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_envelope_unit.html#ad419ad7942ca9f5837db3fb477e006b1">kr</a> (BreakpointsType const &amp;breakpoints, <a class="el" href="class_unit_base.html">UnitType</a> const &amp;gate=SampleType(1), const bool deleteWhenDone=true)  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a control rate envelope generator.  <a href="#ad419ad7942ca9f5837db3fb477e006b1"></a><br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
@@ -102,147 +86,15 @@ Static Public Member Functions</h2></td></tr>
 class EnvelopeUnit&lt; SampleType &gt;</h3>
 
 <p>Envelope unit performs a series of breakpoints. </p>
-<p>[args-todo] </p>
-</div><hr/><h2>Member Typedef Documentation</h2>
-<a class="anchor" id="ac0b20b078766fcbbd0f0e5db1249da86"></a><!-- doxytag: member="EnvelopeUnit::EnvelopeInternal" ref="ac0b20b078766fcbbd0f0e5db1249da86" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_envelope_channel_internal.html">EnvelopeChannelInternal</a>&lt;SampleType&gt; <a class="el" href="class_envelope_unit.html">EnvelopeUnit</a>&lt; SampleType &gt;::<a class="el" href="class_envelope_channel_internal.html">EnvelopeInternal</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a567345f598f8e1ffc8fff18c10943383"></a><!-- doxytag: member="EnvelopeUnit::Data" ref="a567345f598f8e1ffc8fff18c10943383" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="struct_channel_data_3_01_envelope_channel_internal_3_01_sample_type_01_4_01_4.html">EnvelopeInternal::Data</a> <a class="el" href="class_envelope_unit.html">EnvelopeUnit</a>&lt; SampleType &gt;::<a class="el" href="struct_channel_data_3_01_envelope_channel_internal_3_01_sample_type_01_4_01_4.html">Data</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a9ac4252493b0a84904fbcf7d91049788"></a><!-- doxytag: member="EnvelopeUnit::ChannelType" ref="a9ac4252493b0a84904fbcf7d91049788" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_channel_base.html">ChannelBase</a>&lt;SampleType&gt; <a class="el" href="class_envelope_unit.html">EnvelopeUnit</a>&lt; SampleType &gt;::<a class="el" href="class_channel_base.html">ChannelType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a53ca1d172ee40a344f7163be2a39648a"></a><!-- doxytag: member="EnvelopeUnit::Internal" ref="a53ca1d172ee40a344f7163be2a39648a" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_channel_internal.html">ChannelInternal</a>&lt;SampleType,<a class="el" href="struct_channel_data_3_01_envelope_channel_internal_3_01_sample_type_01_4_01_4.html">Data</a>&gt; <a class="el" href="class_envelope_unit.html">EnvelopeUnit</a>&lt; SampleType &gt;::<a class="el" href="class_channel_internal.html">Internal</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a1c1e9040df41dc34d342af50fbd65bf1"></a><!-- doxytag: member="EnvelopeUnit::InternaBase" ref="a1c1e9040df41dc34d342af50fbd65bf1" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_channel_internal_base.html">ChannelInternalBase</a>&lt;SampleType&gt; <a class="el" href="class_envelope_unit.html">EnvelopeUnit</a>&lt; SampleType &gt;::<a class="el" href="class_channel_internal_base.html">InternaBase</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a65bdd3b9b261c617bd26d585462912b9"></a><!-- doxytag: member="EnvelopeUnit::UnitType" ref="a65bdd3b9b261c617bd26d585462912b9" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_unit_base.html">UnitBase</a>&lt;SampleType&gt; <a class="el" href="class_envelope_unit.html">EnvelopeUnit</a>&lt; SampleType &gt;::<a class="el" href="class_unit_base.html">UnitType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a0ede5b714ec4c77cab39b5eefb65aa30"></a><!-- doxytag: member="EnvelopeUnit::Inputs" ref="a0ede5b714ec4c77cab39b5eefb65aa30" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_input_dictionary.html">InputDictionary</a> <a class="el" href="class_envelope_unit.html">EnvelopeUnit</a>&lt; SampleType &gt;::<a class="el" href="class_input_dictionary.html">Inputs</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a06fc9cbc5a1d142b6b86d2166a36debf"></a><!-- doxytag: member="EnvelopeUnit::BreakpointsType" ref="a06fc9cbc5a1d142b6b86d2166a36debf" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_breakpoints_base.html">BreakpointsBase</a>&lt;SampleType&gt; <a class="el" href="class_envelope_unit.html">EnvelopeUnit</a>&lt; SampleType &gt;::<a class="el" href="class_breakpoints_base.html">BreakpointsType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="ab9c3c5f3d6dbf577828740800b3206c7"></a><!-- doxytag: member="EnvelopeUnit::getInfo" ref="ab9c3c5f3d6dbf577828740800b3206c7" args="()" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">static <a class="el" href="class_object_array.html">UnitInfos</a> <a class="el" href="class_envelope_unit.html">EnvelopeUnit</a>&lt; SampleType &gt;::getInfo </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
+<p>[args-todo]</p>
+<ul>
+<li>breakpoints: (breakpoints) the series of breakpoints to perform.</li>
+<li>gate: (unit) controls the envelope</li>
+<li>allowAutoDelete: (bool) whether this unit can be casued to be deleted by the unit it contains</li>
+<li>preferredBlockSize: the preferred output block size (for advanced usage, leave on default if unsure)</li>
+<li>preferredSampleRate: the preferred output sample rate (for advanced usage, leave on default if unsure) </li>
+</ul>
+</div><hr/><h2>Member Function Documentation</h2>
 <a class="anchor" id="a6d9ba57b2c959d64b1bff74992c6876d"></a><!-- doxytag: member="EnvelopeUnit::ar" ref="a6d9ba57b2c959d64b1bff74992c6876d" args="(BreakpointsType const &amp;breakpoints, UnitType const &amp;gate=SampleType(1), const bool deleteWhenDone=true, BlockSize const &amp;preferredBlockSize=BlockSize::getDefault(), SampleRate const &amp;preferredSampleRate=SampleRate::getDefault())" -->
 <div class="memitem">
 <div class="memproto">
@@ -252,7 +104,7 @@ template&lt;class SampleType &gt; </div>
         <tr>
           <td class="memname">static <a class="el" href="class_unit_base.html">UnitType</a> <a class="el" href="class_envelope_unit.html">EnvelopeUnit</a>&lt; SampleType &gt;::ar </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_breakpoints_base.html">BreakpointsType</a> const &amp;&#160;</td>
+          <td class="paramtype">BreakpointsType const &amp;&#160;</td>
           <td class="paramname"><em>breakpoints</em>, </td>
         </tr>
         <tr>
@@ -301,7 +153,7 @@ template&lt;class SampleType &gt; </div>
         <tr>
           <td class="memname">static <a class="el" href="class_unit_base.html">UnitType</a> <a class="el" href="class_envelope_unit.html">EnvelopeUnit</a>&lt; SampleType &gt;::kr </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_breakpoints_base.html">BreakpointsType</a> const &amp;&#160;</td>
+          <td class="paramtype">BreakpointsType const &amp;&#160;</td>
           <td class="paramname"><em>breakpoints</em>, </td>
         </tr>
         <tr>
@@ -338,7 +190,7 @@ template&lt;class SampleType &gt; </div>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Properties</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -347,7 +199,7 @@ template&lt;class SampleType &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 5 2012 17:05:02 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 8 2014 12:26:52 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

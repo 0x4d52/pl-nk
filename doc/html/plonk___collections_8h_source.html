@@ -20,7 +20,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="pl-nk-logo-small.png"/></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">pl-nk</div>
+   <div id="projectname">pl-nk&#160;<span id="projectnumber">v0.4.5</span></div>
+   <div id="projectbrief">Plonk|Plink|Plank are a set of cross-platform C/C++ frameworks for audio software development</div>
   </td>
  </tr>
  </tbody>
@@ -29,8 +30,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -54,7 +55,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
       <li><a href="files.html"><span>File&#160;List</span></a></li>
-      <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
 <div class="header">
@@ -62,14 +62,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">plonk_Collections.h</div>  </div>
 </div>
 <div class="contents">
-<a href="plonk___collections_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*</span>
+<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*</span>
 <a name="l00002"></a>00002 <span class="comment"> -------------------------------------------------------------------------------</span>
 <a name="l00003"></a>00003 <span class="comment"> This file is part of the Plink, Plonk, Plank libraries</span>
 <a name="l00004"></a>00004 <span class="comment">  by Martin Robinson</span>
 <a name="l00005"></a>00005 <span class="comment"> </span>
 <a name="l00006"></a>00006 <span class="comment"> http://code.google.com/p/pl-nk/</span>
 <a name="l00007"></a>00007 <span class="comment"> </span>
-<a name="l00008"></a>00008 <span class="comment"> Copyright University of the West of England, Bristol 2011-12</span>
+<a name="l00008"></a>00008 <span class="comment"> Copyright University of the West of England, Bristol 2011-14</span>
 <a name="l00009"></a>00009 <span class="comment"> All rights reserved.</span>
 <a name="l00010"></a>00010 <span class="comment"> </span>
 <a name="l00011"></a>00011 <span class="comment"> Redistribution and use in source and binary forms, with or without</span>
@@ -104,52 +104,52 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00040"></a>00040 <span class="preprocessor"></span><span class="preprocessor">#define PLONK_COLLECTIONS_H</span>
 <a name="l00041"></a>00041 <span class="preprocessor"></span>
 <a name="l00042"></a>00042 <span class="preprocessor">#include &quot;../core/plonk_CoreForwardDeclarations.h&quot;</span>
-<a name="l00043"></a>00043 <span class="preprocessor">#include &quot;<a class="code" href="plonk___container_forward_declarations_8h.html">plonk_ContainerForwardDeclarations.h</a>&quot;</span>
-<a name="l00044"></a>00044 <span class="preprocessor">#include &quot;<a class="code" href="plonk___dynamic_container_8h.html">plonk_DynamicContainer.h</a>&quot;</span>
+<a name="l00043"></a>00043 <span class="preprocessor">#include &quot;plonk_ContainerForwardDeclarations.h&quot;</span>
+<a name="l00044"></a>00044 <span class="preprocessor">#include &quot;plonk_DynamicContainer.h&quot;</span>
 <a name="l00045"></a>00045 
 <a name="l00046"></a>00046 <span class="preprocessor">#include &quot;../core/plonk_SmartPointer.h&quot;</span>
 <a name="l00047"></a>00047 <span class="preprocessor">#include &quot;../core/plonk_WeakPointer.h&quot;</span>
 <a name="l00048"></a>00048 <span class="preprocessor">#include &quot;../core/plonk_Thread.h&quot;</span>
-<a name="l00049"></a>00049 <span class="preprocessor">#include &quot;<a class="code" href="plonk___object_array_8h.html">plonk_ObjectArray.h</a>&quot;</span>
-<a name="l00050"></a>00050 <span class="preprocessor">#include &quot;<a class="code" href="plonk___simple_array_8h.html">plonk_SimpleArray.h</a>&quot;</span>
+<a name="l00049"></a>00049 <span class="preprocessor">#include &quot;plonk_ObjectArray.h&quot;</span>
+<a name="l00050"></a>00050 <span class="preprocessor">#include &quot;plonk_SimpleArray.h&quot;</span>
 <a name="l00051"></a>00051 
 <a name="l00052"></a>00052 
 <a name="l00053"></a>00053 <span class="keyword">template</span>&lt;<span class="keyword">class</span> ValueType, <span class="keyword">class</span> KeyType&gt;
-<a name="l00054"></a><a class="code" href="class_dictionary_internal.html">00054</a> <span class="keyword">class </span><a class="code" href="class_dictionary_internal.html">DictionaryInternal</a> : <span class="keyword">public</span> <a class="code" href="class_smart_pointer.html" title="Reference counted pointer base class.">SmartPointer</a>
+<a name="l00054"></a>00054 <span class="keyword">class </span>DictionaryInternal : <span class="keyword">public</span> <a class="code" href="class_smart_pointer.html" title="Reference counted pointer base class.">SmartPointer</a>
 <a name="l00055"></a>00055 {
 <a name="l00056"></a>00056 <span class="keyword">public</span>:
-<a name="l00057"></a><a class="code" href="class_dictionary_internal.html#a89f6548aa9f32faf2f3a886c4bae537c">00057</a>     <span class="keyword">typedef</span> <a class="code" href="class_dictionary.html" title="A dictionary class for storing key/value pairs.">Dictionary&lt;ValueType,KeyType&gt;</a> <a class="code" href="class_dictionary_internal.html#a89f6548aa9f32faf2f3a886c4bae537c">Container</a>;
+<a name="l00057"></a>00057     <span class="keyword">typedef</span> <a class="code" href="class_dictionary.html" title="A dictionary class for storing key/value pairs.">Dictionary&lt;ValueType,KeyType&gt;</a> Container;
 <a name="l00058"></a>00058     
-<a name="l00059"></a><a class="code" href="class_dictionary_internal.html#a093ab3ac6fd8a1f603d8453bcf8349fe">00059</a>         <a class="code" href="class_dictionary_internal.html#a093ab3ac6fd8a1f603d8453bcf8349fe">DictionaryInternal</a>() throw()
+<a name="l00059"></a>00059         DictionaryInternal() throw()
 <a name="l00060"></a>00060         {
 <a name="l00061"></a>00061         }
 <a name="l00062"></a>00062         
-<a name="l00063"></a><a class="code" href="class_dictionary_internal.html#a6fb1d58214c21b2cebc3e225bedae946">00063</a>     <a class="code" href="class_dictionary_internal.html#a093ab3ac6fd8a1f603d8453bcf8349fe">DictionaryInternal</a> (<span class="keyword">const</span> <span class="keywordtype">int</span> initialCapacity) <span class="keywordflow">throw</span>()
+<a name="l00063"></a>00063     DictionaryInternal (<span class="keyword">const</span> <span class="keywordtype">int</span> initialCapacity) <span class="keywordflow">throw</span>()
 <a name="l00064"></a>00064     :   values (<a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt;ValueType&gt;::emptyWithAllocatedSize</a> (initialCapacity)),
 <a name="l00065"></a>00065         keys (<a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt;KeyType&gt;::emptyWithAllocatedSize</a> (initialCapacity))
 <a name="l00066"></a>00066         {
 <a name="l00067"></a>00067         }
 <a name="l00068"></a>00068     
-<a name="l00069"></a><a class="code" href="class_dictionary_internal.html#ad72a28431c610b8ebbda342385199491">00069</a>         <a class="code" href="class_dictionary_internal.html#ad72a28431c610b8ebbda342385199491">~DictionaryInternal</a>()
+<a name="l00069"></a>00069         ~DictionaryInternal()
 <a name="l00070"></a>00070         {
 <a name="l00071"></a>00071         }
 <a name="l00072"></a>00072         
-<a name="l00073"></a><a class="code" href="class_dictionary_internal.html#a36bccc6e1feee685ee490b3a272d2d24">00073</a>         <a class="code" href="class_object_array.html">ObjectArray&lt;ValueType&gt;</a>&amp; <a class="code" href="class_dictionary_internal.html#a36bccc6e1feee685ee490b3a272d2d24">getValues</a>() throw()
+<a name="l00073"></a>00073         <a class="code" href="class_object_array.html">ObjectArray&lt;ValueType&gt;</a>&amp; getValues() throw()
 <a name="l00074"></a>00074         {
 <a name="l00075"></a>00075                 <span class="keywordflow">return</span> values;
 <a name="l00076"></a>00076         }
 <a name="l00077"></a>00077         
-<a name="l00078"></a><a class="code" href="class_dictionary_internal.html#a72823f26cd4365315a0ff78d8c7b7030">00078</a>         <a class="code" href="class_object_array.html">ObjectArray&lt;KeyType&gt;</a>&amp; <a class="code" href="class_dictionary_internal.html#a72823f26cd4365315a0ff78d8c7b7030">getKeys</a>() throw()
+<a name="l00078"></a>00078         <a class="code" href="class_object_array.html">ObjectArray&lt;KeyType&gt;</a>&amp; getKeys() throw()
 <a name="l00079"></a>00079         {
 <a name="l00080"></a>00080                 <span class="keywordflow">return</span> keys;
 <a name="l00081"></a>00081         }
 <a name="l00082"></a>00082         
-<a name="l00083"></a><a class="code" href="class_dictionary_internal.html#a3b8496e8af7d39332822189bad5f6fd5">00083</a>         <span class="keyword">const</span> <a class="code" href="class_object_array.html">ObjectArray&lt;ValueType&gt;</a>&amp; <a class="code" href="class_dictionary_internal.html#a36bccc6e1feee685ee490b3a272d2d24">getValues</a>() <span class="keyword">const</span> throw()
+<a name="l00083"></a>00083         <span class="keyword">const</span> <a class="code" href="class_object_array.html">ObjectArray&lt;ValueType&gt;</a>&amp; getValues() <span class="keyword">const</span> throw()
 <a name="l00084"></a>00084         {
 <a name="l00085"></a>00085                 <span class="keywordflow">return</span> values;
 <a name="l00086"></a>00086         }
 <a name="l00087"></a>00087         
-<a name="l00088"></a><a class="code" href="class_dictionary_internal.html#abbdbf76620904fcffcfa24e5a35b055a">00088</a>         <span class="keyword">const</span> <a class="code" href="class_object_array.html">ObjectArray&lt;KeyType&gt;</a>&amp; <a class="code" href="class_dictionary_internal.html#a72823f26cd4365315a0ff78d8c7b7030">getKeys</a>() <span class="keyword">const</span> throw()
+<a name="l00088"></a>00088         <span class="keyword">const</span> <a class="code" href="class_object_array.html">ObjectArray&lt;KeyType&gt;</a>&amp; getKeys() <span class="keyword">const</span> throw()
 <a name="l00089"></a>00089         {
 <a name="l00090"></a>00090                 <span class="keywordflow">return</span> keys;
 <a name="l00091"></a>00091         }
@@ -163,26 +163,26 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00099"></a>00099 <span class="comment">//------------------------------------------------------------------------------</span>
 <a name="l00100"></a>00100 
 <a name="l00102"></a>00102 <span class="keyword">template</span>&lt;<span class="keyword">class</span> ValueType, <span class="keyword">class</span> KeyType&gt;
-<a name="l00103"></a><a class="code" href="class_key_value_pair.html">00103</a> <span class="keyword">class </span><a class="code" href="class_key_value_pair.html">KeyValuePair</a>
+<a name="l00103"></a>00103 <span class="keyword">class </span>KeyValuePair
 <a name="l00104"></a>00104 {
 <a name="l00105"></a>00105 <span class="keyword">public</span>:
-<a name="l00106"></a><a class="code" href="class_key_value_pair.html#aed2d8e6c2cf9638e1699ac8f59a5ae58">00106</a>         <a class="code" href="class_key_value_pair.html#aed2d8e6c2cf9638e1699ac8f59a5ae58">KeyValuePair</a>() throw()
+<a name="l00106"></a>00106         KeyValuePair() throw()
 <a name="l00107"></a>00107         {
 <a name="l00108"></a>00108         }
 <a name="l00109"></a>00109         
-<a name="l00110"></a><a class="code" href="class_key_value_pair.html#a75ace5a43c873520c2f3978682739a51">00110</a>         <a class="code" href="class_key_value_pair.html#aed2d8e6c2cf9638e1699ac8f59a5ae58">KeyValuePair</a> (KeyType <span class="keyword">const</span>&amp; key, ValueType <span class="keyword">const</span>&amp; value) <span class="keywordflow">throw</span>()
+<a name="l00110"></a>00110         KeyValuePair (KeyType <span class="keyword">const</span>&amp; key, ValueType <span class="keyword">const</span>&amp; value) <span class="keywordflow">throw</span>()
 <a name="l00111"></a>00111         :       v (value), 
 <a name="l00112"></a>00112         k (key)
 <a name="l00113"></a>00113         {
 <a name="l00114"></a>00114         }
 <a name="l00115"></a>00115     
-<a name="l00116"></a><a class="code" href="class_key_value_pair.html#a439e9514a21ea30a0ce8f89094e9a223">00116</a>     <a class="code" href="class_key_value_pair.html#aed2d8e6c2cf9638e1699ac8f59a5ae58">KeyValuePair</a> (<a class="code" href="class_key_value_pair.html">KeyValuePair</a> <span class="keyword">const</span>&amp; copy) <span class="keywordflow">throw</span>()
+<a name="l00116"></a>00116     KeyValuePair (KeyValuePair <span class="keyword">const</span>&amp; copy) <span class="keywordflow">throw</span>()
 <a name="l00117"></a>00117     :   v (copy.v),
 <a name="l00118"></a>00118         k (copy.k)
 <a name="l00119"></a>00119     {
 <a name="l00120"></a>00120     }
 <a name="l00121"></a>00121     
-<a name="l00122"></a><a class="code" href="class_key_value_pair.html#a1fcd5a3d9584a367fada0a1405008860">00122</a>     <a class="code" href="class_key_value_pair.html">KeyValuePair</a> <a class="code" href="class_key_value_pair.html#a1fcd5a3d9584a367fada0a1405008860">operator= </a>(<a class="code" href="class_key_value_pair.html">KeyValuePair</a> <span class="keyword">const</span>&amp; other) <span class="keywordflow">throw</span>()
+<a name="l00122"></a>00122     KeyValuePair operator= (KeyValuePair <span class="keyword">const</span>&amp; other) <span class="keywordflow">throw</span>()
 <a name="l00123"></a>00123     {
 <a name="l00124"></a>00124         <span class="keywordflow">if</span> (<span class="keyword">this</span> != &amp;other)
 <a name="l00125"></a>00125         {
@@ -193,8 +193,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00130"></a>00130         <span class="keywordflow">return</span> *<span class="keyword">this</span>;
 <a name="l00131"></a>00131     }
 <a name="l00132"></a>00132         
-<a name="l00133"></a><a class="code" href="class_key_value_pair.html#a9b8736baf516f61f4ea487a340e6b805">00133</a>         <span class="keyword">const</span> KeyType&amp; <a class="code" href="class_key_value_pair.html#a9b8736baf516f61f4ea487a340e6b805">getKey</a>() <span class="keyword">const</span> throw() { <span class="keywordflow">return</span> k; }
-<a name="l00134"></a><a class="code" href="class_key_value_pair.html#ae41b94662641097bd62fbd591c3fca9b">00134</a>         <span class="keyword">const</span> ValueType&amp; <a class="code" href="class_key_value_pair.html#ae41b94662641097bd62fbd591c3fca9b">getValue</a>() <span class="keyword">const</span> throw() { <span class="keywordflow">return</span> v; }
+<a name="l00133"></a>00133         <span class="keyword">const</span> KeyType&amp; getKey() <span class="keyword">const</span> throw() { <span class="keywordflow">return</span> k; }
+<a name="l00134"></a>00134         <span class="keyword">const</span> ValueType&amp; getValue() <span class="keyword">const</span> throw() { <span class="keywordflow">return</span> v; }
 <a name="l00135"></a>00135         
 <a name="l00136"></a>00136 <span class="keyword">private</span>:
 <a name="l00137"></a>00137         ValueType v;
@@ -206,45 +206,45 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00143"></a>00143 
 <a name="l00144"></a>00144 
 <a name="l00150"></a>00150 <span class="keyword">template</span>&lt;<span class="keyword">class</span> ValueType, <span class="keyword">class</span> KeyType&gt;
-<a name="l00151"></a><a class="code" href="class_dictionary.html">00151</a> <span class="keyword">class </span><a class="code" href="class_dictionary.html" title="A dictionary class for storing key/value pairs.">Dictionary</a> : <span class="keyword">public</span> <a class="code" href="class_smart_pointer_container.html">SmartPointerContainer</a>&lt; DictionaryInternal&lt;ValueType,KeyType&gt; &gt;
+<a name="l00151"></a><a class="code" href="class_dictionary.html">00151</a> <span class="keyword">class </span><a class="code" href="class_dictionary.html" title="A dictionary class for storing key/value pairs.">Dictionary</a> : <span class="keyword">public</span> SmartPointerContainer&lt; DictionaryInternal&lt;ValueType,KeyType&gt; &gt;
 <a name="l00152"></a>00152 {
 <a name="l00153"></a>00153 <span class="keyword">public</span>:
-<a name="l00154"></a><a class="code" href="class_dictionary.html#a0b3f09eea5f8e05629a2cb8cd33cb725">00154</a>         <span class="keyword">typedef</span> <a class="code" href="class_key_value_pair.html">KeyValuePair&lt;ValueType,KeyType&gt;</a>         <a class="code" href="class_dictionary.html#a0b3f09eea5f8e05629a2cb8cd33cb725">KeyValuePairType</a>;
-<a name="l00155"></a><a class="code" href="class_dictionary.html#a0bddc64bd133c842bfcd40f03341e10b">00155</a>         <span class="keyword">typedef</span> <a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt;KeyValuePairType&gt;</a>           <a class="code" href="class_dictionary.html#a0bddc64bd133c842bfcd40f03341e10b">KeyValuePairArrayType</a>;
+<a name="l00154"></a>00154         <span class="keyword">typedef</span> KeyValuePair&lt;ValueType,KeyType&gt;         KeyValuePairType;
+<a name="l00155"></a>00155         <span class="keyword">typedef</span> <a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt;KeyValuePairType&gt;</a>           <a class="code" href="class_object_array.html" title="This is the base class for arrays.">KeyValuePairArrayType</a>;
 <a name="l00156"></a>00156 
-<a name="l00157"></a><a class="code" href="class_dictionary.html#a18da9048a4cd48e33fc65c0a5cf66cf9">00157</a>     <span class="keyword">typedef</span> <a class="code" href="class_dictionary_internal.html">DictionaryInternal&lt;ValueType,KeyType&gt;</a>   <a class="code" href="class_dictionary.html#a18da9048a4cd48e33fc65c0a5cf66cf9">Internal</a>;
-<a name="l00158"></a><a class="code" href="class_dictionary.html#a63fa6492d520e66be961871b7533f385">00158</a>     <span class="keyword">typedef</span> <a class="code" href="class_smart_pointer_container.html">SmartPointerContainer&lt;Internal&gt;</a>         <a class="code" href="class_dictionary.html#a63fa6492d520e66be961871b7533f385">Base</a>;
-<a name="l00159"></a><a class="code" href="class_dictionary.html#a93150b94ceaf76c1dad10f5894fe7d34">00159</a>     <span class="keyword">typedef</span> <a class="code" href="class_weak_pointer_container.html" title="This stores a weak reference using a WeakPointer.">WeakPointerContainer&lt;Dictionary&gt;</a>        <a class="code" href="class_dictionary.html#a93150b94ceaf76c1dad10f5894fe7d34">Weak</a>;    
+<a name="l00157"></a>00157     <span class="keyword">typedef</span> DictionaryInternal&lt;ValueType,KeyType&gt;   Internal;
+<a name="l00158"></a>00158     <span class="keyword">typedef</span> SmartPointerContainer&lt;Internal&gt;         Base;
+<a name="l00159"></a>00159     <span class="keyword">typedef</span> <a class="code" href="class_weak_pointer_container.html" title="This stores a weak reference using a WeakPointer.">WeakPointerContainer&lt;Dictionary&gt;</a>        <a class="code" href="class_weak_pointer_container.html" title="This stores a weak reference using a WeakPointer.">Weak</a>;    
 <a name="l00160"></a>00160     
 <a name="l00162"></a><a class="code" href="class_dictionary.html#a1d86bdbd4c09c1f8df5ad17162bb6ada">00162</a>         <a class="code" href="class_dictionary.html#a1d86bdbd4c09c1f8df5ad17162bb6ada" title="Creates an empty dictionary.">Dictionary</a>() throw()
-<a name="l00163"></a>00163         :       <a class="code" href="class_smart_pointer_container.html">Base</a> (new <a class="code" href="class_dictionary_internal.html">Internal</a>())
+<a name="l00163"></a>00163         :       Base (new Internal())
 <a name="l00164"></a>00164         {
 <a name="l00165"></a>00165         }
 <a name="l00166"></a>00166         
-<a name="l00167"></a><a class="code" href="class_dictionary.html#a5c3b118f3ff9eb98bcdd7877b19c9a3e">00167</a>     <span class="keyword">explicit</span> <a class="code" href="class_dictionary.html#a1d86bdbd4c09c1f8df5ad17162bb6ada" title="Creates an empty dictionary.">Dictionary</a> (<span class="keyword">const</span> <span class="keywordtype">int</span> initialCapacity) <span class="keywordflow">throw</span>()
-<a name="l00168"></a>00168         :       <a class="code" href="class_dictionary.html#a63fa6492d520e66be961871b7533f385">Base</a> (<span class="keyword">new</span> <a class="code" href="class_dictionary_internal.html">Internal</a> (initialCapacity))
+<a name="l00167"></a>00167     <span class="keyword">explicit</span> <a class="code" href="class_dictionary.html#a1d86bdbd4c09c1f8df5ad17162bb6ada" title="Creates an empty dictionary.">Dictionary</a> (<span class="keyword">const</span> <span class="keywordtype">int</span> initialCapacity) <span class="keywordflow">throw</span>()
+<a name="l00168"></a>00168         :       Base (<span class="keyword">new</span> Internal (initialCapacity))
 <a name="l00169"></a>00169         {
 <a name="l00170"></a>00170         }
 <a name="l00171"></a>00171     
-<a name="l00172"></a><a class="code" href="class_dictionary.html#ac4fc8f00a4db2b7696e17713fa0b95c3">00172</a>     <span class="keyword">explicit</span> <a class="code" href="class_dictionary.html#a1d86bdbd4c09c1f8df5ad17162bb6ada" title="Creates an empty dictionary.">Dictionary</a> (<a class="code" href="class_dictionary_internal.html">Internal</a>* internalToUse) <span class="keywordflow">throw</span>() 
-<a name="l00173"></a>00173         :       <a class="code" href="class_dictionary.html#a63fa6492d520e66be961871b7533f385">Base</a> (internalToUse)
+<a name="l00172"></a>00172     <span class="keyword">explicit</span> <a class="code" href="class_dictionary.html#a1d86bdbd4c09c1f8df5ad17162bb6ada" title="Creates an empty dictionary.">Dictionary</a> (Internal* internalToUse) <span class="keywordflow">throw</span>() 
+<a name="l00173"></a>00173         :       Base (internalToUse)
 <a name="l00174"></a>00174         {
 <a name="l00175"></a>00175         } 
 <a name="l00176"></a>00176     
-<a name="l00177"></a><a class="code" href="class_dictionary.html#a043ac2aceafdcf92cf104e5bfd2b6795">00177</a>     <a class="code" href="class_dictionary.html#a1d86bdbd4c09c1f8df5ad17162bb6ada" title="Creates an empty dictionary.">Dictionary</a> (<a class="code" href="class_dictionary.html" title="A dictionary class for storing key/value pairs.">Dictionary</a> <span class="keyword">const</span>&amp; copy) <span class="keywordflow">throw</span>()
-<a name="l00178"></a>00178         :       <a class="code" href="class_dictionary.html#a63fa6492d520e66be961871b7533f385">Base</a> (static_cast&lt;Base const&amp;&gt; (copy))
+<a name="l00177"></a>00177     <a class="code" href="class_dictionary.html#a1d86bdbd4c09c1f8df5ad17162bb6ada" title="Creates an empty dictionary.">Dictionary</a> (<a class="code" href="class_dictionary.html" title="A dictionary class for storing key/value pairs.">Dictionary</a> <span class="keyword">const</span>&amp; copy) <span class="keywordflow">throw</span>()
+<a name="l00178"></a>00178         :       Base (static_cast&lt;Base const&amp;&gt; (copy))
 <a name="l00179"></a>00179         {
 <a name="l00180"></a>00180         }        
 <a name="l00181"></a>00181     
-<a name="l00182"></a><a class="code" href="class_dictionary.html#a49abeb6f5747938493095d1d670ceda8">00182</a>     <a class="code" href="class_dictionary.html#a1d86bdbd4c09c1f8df5ad17162bb6ada" title="Creates an empty dictionary.">Dictionary</a> (<a class="code" href="class_dynamic.html">Dynamic</a> <span class="keyword">const</span>&amp; other) <span class="keywordflow">throw</span>()
-<a name="l00183"></a>00183     :   <a class="code" href="class_dictionary.html#a63fa6492d520e66be961871b7533f385">Base</a> (other.as&lt;<a class="code" href="class_dictionary.html" title="A dictionary class for storing key/value pairs.">Dictionary</a>&gt;().<a class="code" href="class_smart_pointer_container_base.html#a6d288e885102290e991d01ae06eaacde">getInternal</a>())
+<a name="l00182"></a>00182     <a class="code" href="class_dictionary.html#a1d86bdbd4c09c1f8df5ad17162bb6ada" title="Creates an empty dictionary.">Dictionary</a> (Dynamic <span class="keyword">const</span>&amp; other) <span class="keywordflow">throw</span>()
+<a name="l00183"></a>00183     :   Base (other.as&lt;<a class="code" href="class_dictionary.html" title="A dictionary class for storing key/value pairs.">Dictionary</a>&gt;().getInternal())
 <a name="l00184"></a>00184     {
 <a name="l00185"></a>00185     }    
 <a name="l00186"></a>00186     
 <a name="l00188"></a><a class="code" href="class_dictionary.html#afc6c389dfa64984c8afb22d67fc0c538">00188</a>     <a class="code" href="class_dictionary.html" title="A dictionary class for storing key/value pairs.">Dictionary</a>&amp; <a class="code" href="class_dictionary.html#afc6c389dfa64984c8afb22d67fc0c538" title="Assignment operator.">operator= </a>(<a class="code" href="class_dictionary.html" title="A dictionary class for storing key/value pairs.">Dictionary</a> <span class="keyword">const</span>&amp; other) <span class="keywordflow">throw</span>()
 <a name="l00189"></a>00189         {
 <a name="l00190"></a>00190                 <span class="keywordflow">if</span> (<span class="keyword">this</span> != &amp;other)
-<a name="l00191"></a>00191             this-&gt;<a class="code" href="class_smart_pointer_container_base.html#a0937fdc04eafc3a2146a6af5320e5a37">setInternal</a> (other.getInternal());<span class="comment">//this-&gt;setInternal (other.containerCopy().getInternal());</span>
+<a name="l00191"></a>00191             this-&gt;setInternal (other.getInternal());<span class="comment">//this-&gt;setInternal (other.containerCopy().getInternal());</span>
 <a name="l00192"></a>00192         
 <a name="l00193"></a>00193         <span class="keywordflow">return</span> *<span class="keyword">this</span>;
 <a name="l00194"></a>00194         }
@@ -254,42 +254,42 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00201"></a>00201         <span class="keywordflow">return</span> weak.<a class="code" href="class_dictionary.html#a57cd3afaeee69cab52b38b1a34e9da5c" title="Get a weakly linked copy of this object.">fromWeak</a>();
 <a name="l00202"></a>00202     }    
 <a name="l00203"></a>00203 
-<a name="l00204"></a><a class="code" href="class_dictionary.html#a6931d4128351acd8496c0e735a1dace8">00204</a>     <span class="keyword">static</span> <span class="keyword">const</span> <a class="code" href="class_dictionary.html" title="A dictionary class for storing key/value pairs.">Dictionary</a>&amp; <a class="code" href="class_dictionary.html#a6931d4128351acd8496c0e735a1dace8">getNull</a>() throw()
+<a name="l00204"></a>00204     <span class="keyword">static</span> <span class="keyword">const</span> <a class="code" href="class_dictionary.html" title="A dictionary class for storing key/value pairs.">Dictionary</a>&amp; getNull() throw()
 <a name="l00205"></a>00205         {
 <a name="l00206"></a>00206                 <span class="keyword">static</span> <a class="code" href="class_dictionary.html" title="A dictionary class for storing key/value pairs.">Dictionary</a> null;
 <a name="l00207"></a>00207                 <span class="keywordflow">return</span> null;
 <a name="l00208"></a>00208         }                                       
 <a name="l00209"></a>00209     
 <a name="l00211"></a><a class="code" href="class_dictionary.html#ab31d318b9c8288cfe441035b6136839b">00211</a>         <a class="code" href="class_dictionary.html#a1d86bdbd4c09c1f8df5ad17162bb6ada" title="Creates an empty dictionary.">Dictionary</a> (<a class="code" href="class_object_array.html" title="This is the base class for arrays.">KeyValuePairArrayType</a> <span class="keyword">const</span>&amp; pairs) <span class="keywordflow">throw</span>()
-<a name="l00212"></a>00212         :       <a class="code" href="class_dictionary.html#a63fa6492d520e66be961871b7533f385">Base</a> (<span class="keyword">new</span> <a class="code" href="class_dictionary.html#a18da9048a4cd48e33fc65c0a5cf66cf9">Internal</a>())
+<a name="l00212"></a>00212         :       Base (<span class="keyword">new</span> Internal())
 <a name="l00213"></a>00213         {
 <a name="l00214"></a>00214                 <a class="code" href="class_dictionary.html#a6ee81b793caf6c652e9d6545ce848a13" title="Put an item into the dicionary associated with the specified key.">put</a> (pairs);
 <a name="l00215"></a>00215         }
 <a name="l00216"></a>00216     
 <a name="l00218"></a><a class="code" href="class_dictionary.html#a2b7ad3dfd1e62023c5fc063e9f31802f">00218</a>         <span class="keyword">const</span> <a class="code" href="class_object_array.html">ObjectArray&lt;ValueType&gt;</a>&amp; <a class="code" href="class_dictionary.html#a2b7ad3dfd1e62023c5fc063e9f31802f" title="Returns the array of values.">getValues</a>() <span class="keyword">const</span> throw()
 <a name="l00219"></a>00219         { 
-<a name="l00220"></a>00220                 <span class="keywordflow">return</span> this-&gt;<a class="code" href="class_smart_pointer_container_base.html#a6d288e885102290e991d01ae06eaacde">getInternal</a>()-&gt;getValues(); 
+<a name="l00220"></a>00220                 <span class="keywordflow">return</span> this-&gt;getInternal()-&gt;getValues(); 
 <a name="l00221"></a>00221         }
 <a name="l00222"></a>00222         
 <a name="l00224"></a><a class="code" href="class_dictionary.html#a83ed3edd33080fbc502ea7da5e0047a3">00224</a>         <span class="keyword">const</span> <a class="code" href="class_object_array.html">ObjectArray&lt;KeyType&gt;</a>&amp; <a class="code" href="class_dictionary.html#a83ed3edd33080fbc502ea7da5e0047a3" title="Returns the array of keys.">getKeys</a>() <span class="keyword">const</span> throw()
 <a name="l00225"></a>00225         {
-<a name="l00226"></a>00226                 <span class="keywordflow">return</span> this-&gt;<a class="code" href="class_smart_pointer_container_base.html#a6d288e885102290e991d01ae06eaacde">getInternal</a>()-&gt;getKeys(); 
+<a name="l00226"></a>00226                 <span class="keywordflow">return</span> this-&gt;getInternal()-&gt;getKeys(); 
 <a name="l00227"></a>00227         }
-<a name="l00228"></a>00228         
+<a name="l00228"></a>00228 
 <a name="l00230"></a><a class="code" href="class_dictionary.html#a0bb89703d9eecc0b0fe2d596daeab015">00230</a>         <a class="code" href="class_object_array.html" title="This is the base class for arrays.">KeyValuePairArrayType</a> <a class="code" href="class_dictionary.html#a0bb89703d9eecc0b0fe2d596daeab015" title="Returns an array of the key/value pairs.">getPairs</a>() <span class="keyword">const</span> throw()
 <a name="l00231"></a>00231         {
 <a name="l00232"></a>00232                 <a class="code" href="class_object_array.html" title="This is the base class for arrays.">KeyValuePairArrayType</a> pairs = <a class="code" href="class_object_array.html#acfdcf984b61c960961710910fcf4b64e" title="Returns an array with a given size.">KeyValuePairArrayType::withSize</a> (<a class="code" href="class_dictionary.html#a4af4232a588a2777343008309a2d1faf" title="Get the number of items stored in the dictionary.">length</a>());
 <a name="l00233"></a>00233                 
 <a name="l00234"></a>00234                 <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; <a class="code" href="class_dictionary.html#a4af4232a588a2777343008309a2d1faf" title="Get the number of items stored in the dictionary.">length</a>(); ++i)
-<a name="l00235"></a>00235                         pairs[i] = <a class="code" href="class_key_value_pair.html">KeyValuePairType</a> (<a class="code" href="class_dictionary.html#a17ce658ebb6fe914bb044e60a3c5ae6d" title="Get a key at a particular index.">key</a> (i), <a class="code" href="class_dictionary.html#ae92215cec3ad9533f2aa85d761504945" title="Get a value at a particular index.">value</a> (i));
+<a name="l00235"></a>00235                         pairs[i] = KeyValuePairType (<a class="code" href="class_dictionary.html#a17ce658ebb6fe914bb044e60a3c5ae6d" title="Get a key at a particular index.">key</a> (i), <a class="code" href="class_dictionary.html#ae92215cec3ad9533f2aa85d761504945" title="Get a value at a particular index.">value</a> (i));
 <a name="l00236"></a>00236                 
 <a name="l00237"></a>00237                 <span class="keywordflow">return</span> pairs;
 <a name="l00238"></a>00238         }
 <a name="l00239"></a>00239         
 <a name="l00244"></a><a class="code" href="class_dictionary.html#a6ee81b793caf6c652e9d6545ce848a13">00244</a>         ValueType <a class="code" href="class_dictionary.html#a6ee81b793caf6c652e9d6545ce848a13" title="Put an item into the dicionary associated with the specified key.">put</a> (KeyType <span class="keyword">const</span>&amp; <a class="code" href="class_dictionary.html#a17ce658ebb6fe914bb044e60a3c5ae6d" title="Get a key at a particular index.">key</a>, ValueType <span class="keyword">const</span>&amp; <a class="code" href="class_dictionary.html#ae92215cec3ad9533f2aa85d761504945" title="Get a value at a particular index.">value</a>) <span class="keywordflow">throw</span>()
 <a name="l00245"></a>00245         {
-<a name="l00246"></a>00246                 <a class="code" href="class_object_array.html">ObjectArray&lt;ValueType&gt;</a>&amp; values = this-&gt;<a class="code" href="class_smart_pointer_container_base.html#a6d288e885102290e991d01ae06eaacde">getInternal</a>()-&gt;getValues();
-<a name="l00247"></a>00247                 <a class="code" href="class_object_array.html">ObjectArray&lt;KeyType&gt;</a>&amp; keys = this-&gt;<a class="code" href="class_smart_pointer_container_base.html#a6d288e885102290e991d01ae06eaacde">getInternal</a>()-&gt;getKeys();
+<a name="l00246"></a>00246                 <a class="code" href="class_object_array.html">ObjectArray&lt;ValueType&gt;</a>&amp; values = this-&gt;getInternal()-&gt;getValues();
+<a name="l00247"></a>00247                 <a class="code" href="class_object_array.html">ObjectArray&lt;KeyType&gt;</a>&amp; keys = this-&gt;getInternal()-&gt;getKeys();
 <a name="l00248"></a>00248 
 <a name="l00249"></a>00249                 <span class="keywordtype">int</span> index = keys.<a class="code" href="class_object_array.html#ad2065d1c59f281fb17c78cce33f62b41" title="Gets the index of a particular item.">indexOf</a> (<a class="code" href="class_dictionary.html#a17ce658ebb6fe914bb044e60a3c5ae6d" title="Get a key at a particular index.">key</a>);
 <a name="l00250"></a>00250                 
@@ -307,31 +307,31 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00262"></a>00262                 }
 <a name="l00263"></a>00263         }
 <a name="l00264"></a>00264         
-<a name="l00265"></a><a class="code" href="class_dictionary.html#a1eda5d5d1cebd9141d11c1965e510f3b">00265</a>         ValueType <a class="code" href="class_dictionary.html#a6ee81b793caf6c652e9d6545ce848a13" title="Put an item into the dicionary associated with the specified key.">put</a> (<a class="code" href="class_key_value_pair.html">KeyValuePairType</a> <span class="keyword">const</span>&amp; pair) <span class="keywordflow">throw</span>()
+<a name="l00265"></a>00265         ValueType <a class="code" href="class_dictionary.html#a6ee81b793caf6c652e9d6545ce848a13" title="Put an item into the dicionary associated with the specified key.">put</a> (KeyValuePairType <span class="keyword">const</span>&amp; pair) <span class="keywordflow">throw</span>()
 <a name="l00266"></a>00266         {
 <a name="l00267"></a>00267                 <span class="keywordflow">return</span> <a class="code" href="class_dictionary.html#a6ee81b793caf6c652e9d6545ce848a13" title="Put an item into the dicionary associated with the specified key.">put</a> (pair.getKey(), pair.getValue());
 <a name="l00268"></a>00268         }
 <a name="l00269"></a>00269         
-<a name="l00270"></a><a class="code" href="class_dictionary.html#aa1cdb298d38f1b6e5a9f7ff41ebcb1b9">00270</a>         <span class="keywordtype">void</span> <a class="code" href="class_dictionary.html#a6ee81b793caf6c652e9d6545ce848a13" title="Put an item into the dicionary associated with the specified key.">put</a> (<a class="code" href="class_object_array.html" title="This is the base class for arrays.">KeyValuePairArrayType</a> <span class="keyword">const</span>&amp; pairs) <span class="keywordflow">throw</span>()
+<a name="l00270"></a>00270         <span class="keywordtype">void</span> <a class="code" href="class_dictionary.html#a6ee81b793caf6c652e9d6545ce848a13" title="Put an item into the dicionary associated with the specified key.">put</a> (KeyValuePairArrayType <span class="keyword">const</span>&amp; pairs) <span class="keywordflow">throw</span>()
 <a name="l00271"></a>00271         {
 <a name="l00272"></a>00272                 <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; pairs.length(); ++i)
 <a name="l00273"></a>00273                         <a class="code" href="class_dictionary.html#a6ee81b793caf6c652e9d6545ce848a13" title="Put an item into the dicionary associated with the specified key.">put</a> (pairs[i]);
 <a name="l00274"></a>00274         }
 <a name="l00275"></a>00275         
-<a name="l00276"></a><a class="code" href="class_dictionary.html#a1e11339ada757437f1723e7f22915e00">00276</a>     <span class="keywordtype">bool</span> <a class="code" href="class_dictionary.html#a1e11339ada757437f1723e7f22915e00">containsKey</a> (KeyType <span class="keyword">const</span>&amp; <a class="code" href="class_dictionary.html#a17ce658ebb6fe914bb044e60a3c5ae6d" title="Get a key at a particular index.">key</a>) <span class="keywordflow">throw</span>()
+<a name="l00276"></a>00276     <span class="keywordtype">bool</span> containsKey (KeyType <span class="keyword">const</span>&amp; <a class="code" href="class_dictionary.html#a17ce658ebb6fe914bb044e60a3c5ae6d" title="Get a key at a particular index.">key</a>) <span class="keywordflow">throw</span>()
 <a name="l00277"></a>00277         {
-<a name="l00278"></a>00278                 <span class="keywordflow">return</span> this-&gt;<a class="code" href="class_smart_pointer_container_base.html#a6d288e885102290e991d01ae06eaacde">getInternal</a>()-&gt;getKeys().contains (<a class="code" href="class_dictionary.html#a17ce658ebb6fe914bb044e60a3c5ae6d" title="Get a key at a particular index.">key</a>);
+<a name="l00278"></a>00278                 <span class="keywordflow">return</span> this-&gt;getInternal()-&gt;getKeys().contains (<a class="code" href="class_dictionary.html#a17ce658ebb6fe914bb044e60a3c5ae6d" title="Get a key at a particular index.">key</a>);
 <a name="l00279"></a>00279         }
 <a name="l00280"></a>00280 
-<a name="l00281"></a><a class="code" href="class_dictionary.html#aa1dfe7a241bbb2aa86d19b5b757d6b37">00281</a>     <span class="keywordtype">bool</span> <a class="code" href="class_dictionary.html#aa1dfe7a241bbb2aa86d19b5b757d6b37">containsValue</a> (ValueType <span class="keyword">const</span>&amp; <a class="code" href="class_dictionary.html#ae92215cec3ad9533f2aa85d761504945" title="Get a value at a particular index.">value</a>) <span class="keywordflow">throw</span>()
+<a name="l00281"></a>00281     <span class="keywordtype">bool</span> containsValue (ValueType <span class="keyword">const</span>&amp; <a class="code" href="class_dictionary.html#ae92215cec3ad9533f2aa85d761504945" title="Get a value at a particular index.">value</a>) <span class="keywordflow">throw</span>()
 <a name="l00282"></a>00282         {
-<a name="l00283"></a>00283                 <span class="keywordflow">return</span> this-&gt;<a class="code" href="class_smart_pointer_container_base.html#a6d288e885102290e991d01ae06eaacde">getInternal</a>()-&gt;getValues().contains (<a class="code" href="class_dictionary.html#ae92215cec3ad9533f2aa85d761504945" title="Get a value at a particular index.">value</a>);
+<a name="l00283"></a>00283                 <span class="keywordflow">return</span> this-&gt;getInternal()-&gt;getValues().contains (<a class="code" href="class_dictionary.html#ae92215cec3ad9533f2aa85d761504945" title="Get a value at a particular index.">value</a>);
 <a name="l00284"></a>00284         }
 <a name="l00285"></a>00285     
 <a name="l00288"></a><a class="code" href="class_dictionary.html#a83c2739092b4a8d164b5c8d5575801d2">00288</a>         ValueType&amp; <a class="code" href="class_dictionary.html#a83c2739092b4a8d164b5c8d5575801d2" title="Return a value at the specified key.">at</a> (KeyType <span class="keyword">const</span>&amp; <a class="code" href="class_dictionary.html#a17ce658ebb6fe914bb044e60a3c5ae6d" title="Get a key at a particular index.">key</a>) <span class="keywordflow">throw</span>()
 <a name="l00289"></a>00289         {
-<a name="l00290"></a>00290                 <a class="code" href="class_object_array.html">ObjectArray&lt;ValueType&gt;</a>&amp; values = this-&gt;<a class="code" href="class_smart_pointer_container_base.html#a6d288e885102290e991d01ae06eaacde">getInternal</a>()-&gt;getValues();
-<a name="l00291"></a>00291                 <a class="code" href="class_object_array.html">ObjectArray&lt;KeyType&gt;</a>&amp; keys = this-&gt;<a class="code" href="class_smart_pointer_container_base.html#a6d288e885102290e991d01ae06eaacde">getInternal</a>()-&gt;getKeys();
+<a name="l00290"></a>00290                 <a class="code" href="class_object_array.html">ObjectArray&lt;ValueType&gt;</a>&amp; values = this-&gt;getInternal()-&gt;getValues();
+<a name="l00291"></a>00291                 <a class="code" href="class_object_array.html">ObjectArray&lt;KeyType&gt;</a>&amp; keys = this-&gt;getInternal()-&gt;getKeys();
 <a name="l00292"></a>00292                 
 <a name="l00293"></a>00293                 <span class="keyword">const</span> <span class="keywordtype">int</span> index = keys.<a class="code" href="class_object_array.html#ad2065d1c59f281fb17c78cce33f62b41" title="Gets the index of a particular item.">indexOf</a> (<a class="code" href="class_dictionary.html#a17ce658ebb6fe914bb044e60a3c5ae6d" title="Get a key at a particular index.">key</a>);
 <a name="l00294"></a>00294                 <span class="keywordflow">return</span> values[index];
@@ -346,25 +346,25 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00305"></a>00305                 <span class="keywordflow">return</span> values[index];
 <a name="l00306"></a>00306         }
 <a name="l00307"></a>00307         
-<a name="l00308"></a><a class="code" href="class_dictionary.html#a0f935fa9dfff2e72e9ec8f24d2aeecbb">00308</a>     ValueType&amp; <a class="code" href="class_dictionary.html#a0f935fa9dfff2e72e9ec8f24d2aeecbb">atIndex</a> (<span class="keyword">const</span> <span class="keywordtype">int</span> index) <span class="keywordflow">throw</span>()
+<a name="l00308"></a>00308     ValueType&amp; atIndex (<span class="keyword">const</span> <span class="keywordtype">int</span> index) <span class="keywordflow">throw</span>()
 <a name="l00309"></a>00309         {
-<a name="l00310"></a>00310                 <a class="code" href="class_object_array.html">ObjectArray&lt;ValueType&gt;</a>&amp; values = this-&gt;<a class="code" href="class_smart_pointer_container_base.html#a6d288e885102290e991d01ae06eaacde">getInternal</a>()-&gt;getValues();              
+<a name="l00310"></a>00310                 <a class="code" href="class_object_array.html">ObjectArray&lt;ValueType&gt;</a>&amp; values = this-&gt;getInternal()-&gt;getValues();              
 <a name="l00311"></a>00311                 <span class="keywordflow">return</span> values[index];
 <a name="l00312"></a>00312         }    
 <a name="l00313"></a>00313     
-<a name="l00314"></a><a class="code" href="class_dictionary.html#a636e8741538ebbc686639a33d3c6d0eb">00314</a>     <span class="keyword">const</span> ValueType&amp; <a class="code" href="class_dictionary.html#a0f935fa9dfff2e72e9ec8f24d2aeecbb">atIndex</a> (<span class="keyword">const</span> <span class="keywordtype">int</span> index) <span class="keyword">const</span> <span class="keywordflow">throw</span>()
+<a name="l00314"></a>00314     <span class="keyword">const</span> ValueType&amp; atIndex (<span class="keyword">const</span> <span class="keywordtype">int</span> index) <span class="keyword">const</span> <span class="keywordflow">throw</span>()
 <a name="l00315"></a>00315         {
 <a name="l00316"></a>00316                 <a class="code" href="class_object_array.html">ObjectArray&lt;ValueType&gt;</a> <span class="keyword">const</span>&amp; values = <a class="code" href="class_dictionary.html#a2b7ad3dfd1e62023c5fc063e9f31802f" title="Returns the array of values.">getValues</a>();             
 <a name="l00317"></a>00317                 <span class="keywordflow">return</span> values[index];
 <a name="l00318"></a>00318         }
 <a name="l00319"></a>00319     
-<a name="l00320"></a><a class="code" href="class_dictionary.html#a1e0760a3f11b5f660b64b917af8df650">00320</a>     ValueType&amp; <a class="code" href="class_dictionary.html#a1e0760a3f11b5f660b64b917af8df650">atIndexUnchecked</a> (<span class="keyword">const</span> <span class="keywordtype">int</span> index) <span class="keywordflow">throw</span>()
+<a name="l00320"></a>00320     ValueType&amp; atIndexUnchecked (<span class="keyword">const</span> <span class="keywordtype">int</span> index) <span class="keywordflow">throw</span>()
 <a name="l00321"></a>00321         {
-<a name="l00322"></a>00322                 <a class="code" href="class_object_array.html">ObjectArray&lt;ValueType&gt;</a>&amp; values = this-&gt;<a class="code" href="class_smart_pointer_container_base.html#a6d288e885102290e991d01ae06eaacde">getInternal</a>()-&gt;getValues();              
+<a name="l00322"></a>00322                 <a class="code" href="class_object_array.html">ObjectArray&lt;ValueType&gt;</a>&amp; values = this-&gt;getInternal()-&gt;getValues();              
 <a name="l00323"></a>00323                 <span class="keywordflow">return</span> values.<a class="code" href="class_object_array.html#a3027a6cfd4eef94f604a7d446c244cfc" title="Returns a new array by iterating through an array of indices provided.">atUnchecked</a> (index);
 <a name="l00324"></a>00324         }    
 <a name="l00325"></a>00325     
-<a name="l00326"></a><a class="code" href="class_dictionary.html#ab1678cc6826efbfd6a0801beb4a8e517">00326</a>     <span class="keyword">const</span> ValueType&amp; <a class="code" href="class_dictionary.html#a1e0760a3f11b5f660b64b917af8df650">atIndexUnchecked</a> (<span class="keyword">const</span> <span class="keywordtype">int</span> index) <span class="keyword">const</span> <span class="keywordflow">throw</span>()
+<a name="l00326"></a>00326     <span class="keyword">const</span> ValueType&amp; atIndexUnchecked (<span class="keyword">const</span> <span class="keywordtype">int</span> index) <span class="keyword">const</span> <span class="keywordflow">throw</span>()
 <a name="l00327"></a>00327         {
 <a name="l00328"></a>00328                 <a class="code" href="class_object_array.html">ObjectArray&lt;ValueType&gt;</a> <span class="keyword">const</span>&amp; values = <a class="code" href="class_dictionary.html#a2b7ad3dfd1e62023c5fc063e9f31802f" title="Returns the array of values.">getValues</a>();             
 <a name="l00329"></a>00329                 <span class="keywordflow">return</span> values.<a class="code" href="class_object_array.html#a3027a6cfd4eef94f604a7d446c244cfc" title="Returns a new array by iterating through an array of indices provided.">atUnchecked</a> (index);
@@ -372,8 +372,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00331"></a>00331     
 <a name="l00334"></a><a class="code" href="class_dictionary.html#a41988ece0789b19039c7367a2abb3e72">00334</a>         ValueType&amp; <a class="code" href="class_dictionary.html#a41988ece0789b19039c7367a2abb3e72" title="Return a value at the specified key.">operator[] </a>(KeyType <span class="keyword">const</span>&amp; <a class="code" href="class_dictionary.html#a17ce658ebb6fe914bb044e60a3c5ae6d" title="Get a key at a particular index.">key</a>) <span class="keywordflow">throw</span>()
 <a name="l00335"></a>00335         {
-<a name="l00336"></a>00336                 <a class="code" href="class_object_array.html">ObjectArray&lt;ValueType&gt;</a>&amp; values = this-&gt;<a class="code" href="class_smart_pointer_container_base.html#a6d288e885102290e991d01ae06eaacde">getInternal</a>()-&gt;getValues();
-<a name="l00337"></a>00337                 <a class="code" href="class_object_array.html">ObjectArray&lt;KeyType&gt;</a>&amp; keys = this-&gt;<a class="code" href="class_smart_pointer_container_base.html#a6d288e885102290e991d01ae06eaacde">getInternal</a>()-&gt;getKeys();
+<a name="l00336"></a>00336                 <a class="code" href="class_object_array.html">ObjectArray&lt;ValueType&gt;</a>&amp; values = this-&gt;getInternal()-&gt;getValues();
+<a name="l00337"></a>00337                 <a class="code" href="class_object_array.html">ObjectArray&lt;KeyType&gt;</a>&amp; keys = this-&gt;getInternal()-&gt;getKeys();
 <a name="l00338"></a>00338                 
 <a name="l00339"></a>00339                 <span class="keyword">const</span> <span class="keywordtype">int</span> index = keys.<a class="code" href="class_object_array.html#ad2065d1c59f281fb17c78cce33f62b41" title="Gets the index of a particular item.">indexOf</a> (<a class="code" href="class_dictionary.html#a17ce658ebb6fe914bb044e60a3c5ae6d" title="Get a key at a particular index.">key</a>);
 <a name="l00340"></a>00340                 <span class="keywordflow">return</span> values[index];
@@ -390,8 +390,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00353"></a>00353         
 <a name="l00356"></a><a class="code" href="class_dictionary.html#aee8b8fb99e32739a8c9f55a81c6ca01b">00356</a>         ValueType <span class="keyword">remove</span> (KeyType <span class="keyword">const</span>&amp; <a class="code" href="class_dictionary.html#a17ce658ebb6fe914bb044e60a3c5ae6d" title="Get a key at a particular index.">key</a>) <span class="keywordflow">throw</span>()
 <a name="l00357"></a>00357         {
-<a name="l00358"></a>00358                 <a class="code" href="class_object_array.html">ObjectArray&lt;ValueType&gt;</a>&amp; values = this-&gt;<a class="code" href="class_smart_pointer_container_base.html#a6d288e885102290e991d01ae06eaacde">getInternal</a>()-&gt;getValues();
-<a name="l00359"></a>00359                 <a class="code" href="class_object_array.html">ObjectArray&lt;KeyType&gt;</a>&amp; keys = this-&gt;<a class="code" href="class_smart_pointer_container_base.html#a6d288e885102290e991d01ae06eaacde">getInternal</a>()-&gt;getKeys();
+<a name="l00358"></a>00358                 <a class="code" href="class_object_array.html">ObjectArray&lt;ValueType&gt;</a>&amp; values = this-&gt;getInternal()-&gt;getValues();
+<a name="l00359"></a>00359                 <a class="code" href="class_object_array.html">ObjectArray&lt;KeyType&gt;</a>&amp; keys = this-&gt;getInternal()-&gt;getKeys();
 <a name="l00360"></a>00360                 
 <a name="l00361"></a>00361                 <span class="keyword">const</span> <span class="keywordtype">int</span> index = keys.<a class="code" href="class_object_array.html#ad2065d1c59f281fb17c78cce33f62b41" title="Gets the index of a particular item.">indexOf</a> (<a class="code" href="class_dictionary.html#a17ce658ebb6fe914bb044e60a3c5ae6d" title="Get a key at a particular index.">key</a>);
 <a name="l00362"></a>00362                 
@@ -441,7 +441,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00412"></a>00412         {
 <a name="l00413"></a>00413                 <a class="code" href="class_object_array.html">ObjectArray&lt;ValueType&gt;</a> <span class="keyword">const</span>&amp; values = <a class="code" href="class_dictionary.html#a2b7ad3dfd1e62023c5fc063e9f31802f" title="Returns the array of values.">getValues</a>();
 <a name="l00414"></a>00414                 
-<a name="l00415"></a>00415                 <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (values.<a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a>() == <a class="code" href="class_dictionary.html#a83ed3edd33080fbc502ea7da5e0047a3" title="Returns the array of keys.">getKeys</a>().<a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a>()); <span class="comment">// these should be the same length!</span>
+<a name="l00415"></a>00415                 plonk_assert (values.<a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a>() == <a class="code" href="class_dictionary.html#a83ed3edd33080fbc502ea7da5e0047a3" title="Returns the array of keys.">getKeys</a>().<a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a>()); <span class="comment">// these should be the same length!</span>
 <a name="l00416"></a>00416                 
 <a name="l00417"></a>00417                 <span class="keywordflow">return</span> values.<a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a>();
 <a name="l00418"></a>00418         }
@@ -451,12 +451,12 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00423"></a>00423                 <a class="code" href="class_object_array.html">ObjectArray&lt;ValueType&gt;</a> <span class="keyword">const</span>&amp; values = <a class="code" href="class_dictionary.html#a2b7ad3dfd1e62023c5fc063e9f31802f" title="Returns the array of values.">getValues</a>();
 <a name="l00424"></a>00424                 <a class="code" href="class_object_array.html">ObjectArray&lt;KeyType&gt;</a> <span class="keyword">const</span>&amp; keys = <a class="code" href="class_dictionary.html#a83ed3edd33080fbc502ea7da5e0047a3" title="Returns the array of keys.">getKeys</a>();
 <a name="l00425"></a>00425                 
-<a name="l00426"></a>00426                 <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (values.<a class="code" href="class_object_array.html#a53983ca686506e7f8c87b77175b148fb" title="Size is the actual number of elements of storage needed for the array.">size</a>() == keys.<a class="code" href="class_object_array.html#a53983ca686506e7f8c87b77175b148fb" title="Size is the actual number of elements of storage needed for the array.">size</a>()); <span class="comment">// these should be the same size!</span>
+<a name="l00426"></a>00426                 plonk_assert (values.<a class="code" href="class_object_array.html#a53983ca686506e7f8c87b77175b148fb" title="Size is the actual number of elements of storage needed for the array.">size</a>() == keys.<a class="code" href="class_object_array.html#a53983ca686506e7f8c87b77175b148fb" title="Size is the actual number of elements of storage needed for the array.">size</a>()); <span class="comment">// these should be the same size!</span>
 <a name="l00427"></a>00427                 
 <a name="l00428"></a>00428                 <span class="keywordflow">return</span> values.<a class="code" href="class_object_array.html#a53983ca686506e7f8c87b77175b148fb" title="Size is the actual number of elements of storage needed for the array.">size</a>();
 <a name="l00429"></a>00429         }
 <a name="l00430"></a>00430     
-<a name="l00431"></a><a class="code" href="class_dictionary.html#a96a4c8347ab8a0373033e49e49ded93b">00431</a>     <a class="code" href="plonk___smart_pointer_container_8h.html#a0544c934438d4bc87b159fc1675a69fd">PLONK_OBJECTARROWOPERATOR</a>(<a class="code" href="class_dictionary.html" title="A dictionary class for storing key/value pairs.">Dictionary</a>);
+<a name="l00431"></a>00431     PLONK_OBJECTARROWOPERATOR(<a class="code" href="class_dictionary.html" title="A dictionary class for storing key/value pairs.">Dictionary</a>);
 <a name="l00432"></a>00432 
 <a name="l00433"></a>00433 };
 <a name="l00434"></a>00434 
@@ -622,7 +622,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Properties</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -631,7 +631,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 5 2012 17:04:52 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 8 2014 12:26:47 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

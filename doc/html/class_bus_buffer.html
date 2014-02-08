@@ -20,7 +20,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="pl-nk-logo-small.png"/></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">pl-nk</div>
+   <div id="projectname">pl-nk&#160;<span id="projectnumber">v0.4.5</span></div>
+   <div id="projectbrief">Plonk|Plink|Plank are a set of cross-platform C/C++ frameworks for audio software development</div>
   </td>
  </tr>
  </tbody>
@@ -29,8 +30,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -62,77 +63,25 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="header">
   <div class="summary">
-<a href="#pub-types">Public Types</a> &#124;
-<a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pub-static-methods">Static Public Member Functions</a>  </div>
+<a href="#pub-methods">Public Member Functions</a>  </div>
   <div class="headertitle">
 <div class="title">BusBuffer&lt; SampleType &gt; Class Template Reference</div>  </div>
 </div>
 <div class="contents">
-<!-- doxytag: class="BusBuffer" --><!-- doxytag: inherits="SmartPointerContainer&lt; BusBufferInternal&lt; SampleType &gt; &gt;" -->
+<!-- doxytag: class="BusBuffer" --><!-- doxytag: inherits="SmartPointerContainer" -->
 <p>Enables the storage of globally accessible buffers to be used as signal busses.  
  <a href="class_bus_buffer.html#details">More...</a></p>
-<div class="dynheader">
-Inheritance diagram for BusBuffer&lt; SampleType &gt;:</div>
-<div class="dyncontent">
- <div class="center">
-  <img src="class_bus_buffer.png" usemap="#BusBuffer&lt; SampleType &gt;_map" alt=""/>
-  <map id="BusBuffer&lt; SampleType &gt;_map" name="BusBuffer&lt; SampleType &gt;_map">
-<area href="class_smart_pointer_container.html" alt="SmartPointerContainer&lt; BusBufferInternal&lt; SampleType &gt; &gt;" shape="rect" coords="0,112,382,136"/>
-<area href="class_smart_pointer_container_base.html" alt="SmartPointerContainerBase&lt; BusBufferInternal&lt; SampleType &gt; &gt;" shape="rect" coords="0,56,382,80"/>
-<area href="class_plonk_base.html" alt="PlonkBase" shape="rect" coords="0,0,382,24"/>
-</map>
- </div></div>
+
+<p>Inherits SmartPointerContainer&lt; SmartPointerType, enableWeak &gt;.</p>
 
 <p><a href="class_bus_buffer-members.html">List of all members.</a></p>
 <table class="memberdecls">
-<tr><td colspan="2"><h2><a name="pub-types"></a>
-Public Types</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_bus_buffer_internal.html">BusBufferInternal</a><br class="typebreak"/>
-&lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bus_buffer.html#a9d65ae671eec29f3144edcc636d7fb66">Internal</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_smart_pointer_container.html">SmartPointerContainer</a><br class="typebreak"/>
-&lt; <a class="el" href="class_bus_buffer_internal.html">Internal</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bus_buffer.html#a37e31664a64d1c194e1ecff06cca6071">Base</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a><br class="typebreak"/>
-&lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bus_buffer.html#a3c8ec3d1bd2b6a508385cfa5e1d4f56f">Buffer</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_bus_buffer.html">BusBuffer</a>&lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bus_buffer.html#af8aba676c6113d4a59b90ca5f27acb7f">BusType</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_dictionary.html">Dictionary</a>&lt; <a class="el" href="class_bus_buffer.html">BusType</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bus_buffer.html#aeddfc1e21281970e4c8e35940112c71d">BusDictionary</a></td></tr>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bus_buffer.html#a69133a68d65ef4e90885a6e50136254e">BusBuffer</a> ()  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bus_buffer.html#aad2f7af0a28020941d9af8de1ca92602">BusBuffer</a> (<a class="el" href="class_text.html">Text</a> const &amp;name)  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bus_buffer.html#ad2a2d5bf9acc9c89ddad7a357ca39139">BusBuffer</a> (const int number)  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bus_buffer.html#ab73fade45cdf7e4ca0b4f0986a290218">BusBuffer</a> (const char *name)  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bus_buffer.html#aa567d31e558a6375e7ae17ce63b157fa">BusBuffer</a> (<a class="el" href="class_block_size.html">BlockSize</a> const &amp;bufferSize, <a class="el" href="class_block_size.html">BlockSize</a> const &amp;writeBlockSize, <a class="el" href="class_sample_rate.html">SampleRate</a> const &amp;sampleRate)  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bus_buffer.html#afcbea9b602d4f163fdadb4a456b63718">BusBuffer</a> (<a class="el" href="class_bus_buffer_internal.html">Internal</a> *internal)  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bus_buffer.html#a8ae662703ffdd8d9eddcb937257e458e">BusBuffer</a> (<a class="el" href="class_bus_buffer.html">BusBuffer</a> const &amp;copy)  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bus_buffer.html#a8857b0ea69879fb9685a3727593422c7">growBufferSize</a> ()  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">const <a class="el" href="class_block_size.html">BlockSize</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bus_buffer.html#a19451420b7bad641bc22c218851e1d36">getBufferSize</a> () const   throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_block_size.html">BlockSize</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bus_buffer.html#a0495178baa0fe2a9fd1a4dac36f42b10">getBufferSize</a> ()  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">const <a class="el" href="class_block_size.html">BlockSize</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bus_buffer.html#a79667b1d3c7df70edbaa1c26aca6e0ea">getWriteBlockSize</a> () const   throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_block_size.html">BlockSize</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bus_buffer.html#a42ba81dd10744b208a705502334976f9">getWriteBlockSize</a> ()  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">const <a class="el" href="class_sample_rate.html">SampleRate</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bus_buffer.html#a76c95b300fd5ec00e1af8364ca97640f">getSampleRate</a> () const   throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_sample_rate.html">SampleRate</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bus_buffer.html#ae608678cbfdf7899808431688e7aa4da">getSampleRate</a> ()  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bus_buffer.html#a4ce9e18e511d8bc54abfff43acc1bf14">getDuration</a> ()  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">const <a class="el" href="class_time_stamp.html">TimeStamp</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bus_buffer.html#ab0b3f68c0456b55ebf7e58dac4d00955">getLatestValidTime</a> () const   throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">const <a class="el" href="class_time_stamp.html">TimeStamp</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bus_buffer.html#a286819212db9ba3962c9eca24f0f1aaf">getEarliestValidTime</a> () const   throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_text.html">Text</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bus_buffer.html#ab412c6a21a27696483f37d3a6f975a02">getLabel</a> () const   throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bus_buffer.html#ac9ae17b3cb84c75def4997251f18589d">setLabel</a> (<a class="el" href="class_text.html">Text</a> const &amp;newId)  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bus_buffer.html#ae76e0dd292d0dab294b509c530ac357c">write</a> (<a class="el" href="class_time_stamp.html">TimeStamp</a> const &amp;timeStamp, const int numSamples, const SampleType *sourceData)  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Write data with a given time stampe start to the bus.  <a href="#ae76e0dd292d0dab294b509c530ac357c"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bus_buffer.html#aedba0840daab8295fcabd4b70fda1452">read</a> (<a class="el" href="class_time_stamp.html">TimeStamp</a> &amp;timeStamp, const int numSamples, SampleType *destData)  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Read data from the bus with a given time stamp.  <a href="#aedba0840daab8295fcabd4b70fda1452"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_text.html">Text</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bus_buffer.html#aa9b781560f5080769f6a7bd9c79507aa">getName</a> () const   throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bus_buffer.html#a05008872078e5c47d585ff575673867c">getTypeCode</a> () const   throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bus_buffer.html#a78317e65223f396f139090fedf077a63">getSampleTypeCode</a> () const   throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_bus_buffer.html">BusBuffer</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bus_buffer.html#ad36329cdff85460411a5dee651be52f2">operator-&gt;</a> ()  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">const <a class="el" href="class_bus_buffer.html">BusBuffer</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bus_buffer.html#a5fb065871500ef9da393e85418757c8f">operator-&gt;</a> () const   throw ()</td></tr>
-<tr><td colspan="2"><h2><a name="pub-static-methods"></a>
-Static Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static const <a class="el" href="class_bus_buffer.html">BusBuffer</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bus_buffer.html#a2cb2e42b6c36795ebf865006aed7a0ff">getNull</a> ()  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_bus_buffer.html">BusBuffer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bus_buffer.html#a79cd7a86daa1b82ba15cb151bcb9bb2d">getBus</a> (<a class="el" href="class_text.html">Text</a> const &amp;name)  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bus_buffer.html#a539a8701afff1ac9e399bc17dbf90c68">addBus</a> (<a class="el" href="class_text.html">Text</a> const &amp;name, <a class="el" href="class_block_size.html">BlockSize</a> const &amp;bufferSize=BusBuffer::getDefaultBufferSize(), <a class="el" href="class_block_size.html">BlockSize</a> const &amp;writeBlockSize=BlockSize::getDefault(), <a class="el" href="class_sample_rate.html">SampleRate</a> const &amp;sampleRate=SampleRate::getDefault())  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bus_buffer.html#a1464583e6e1d5eb9c1ff3cd7440e9165">removeBus</a> (<a class="el" href="class_text.html">Text</a> const &amp;name)  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_block_size.html">BlockSize</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bus_buffer.html#aeb250831a7b7a6f7b84112eb7d6eb842">getDefaultBufferSize</a> ()  throw ()</td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><h3>template&lt;class SampleType&gt;<br/>
@@ -140,181 +89,30 @@ class BusBuffer&lt; SampleType &gt;</h3>
 
 <p>Enables the storage of globally accessible buffers to be used as signal busses. </p>
 <p>This stores a time stamped circular buffer such that BusRead units can read from the bus at "any" block size and get enough data to fill their output. Of course this depends on the buffer size being large enough (although the buffer should automatically resize if you try to read in larger chunks than the current buffer size allows). </p>
-</div><hr/><h2>Member Typedef Documentation</h2>
-<a class="anchor" id="a9d65ae671eec29f3144edcc636d7fb66"></a><!-- doxytag: member="BusBuffer::Internal" ref="a9d65ae671eec29f3144edcc636d7fb66" args="" -->
+</div><hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="aedba0840daab8295fcabd4b70fda1452"></a><!-- doxytag: member="BusBuffer::read" ref="aedba0840daab8295fcabd4b70fda1452" args="(TimeStamp &amp;timeStamp, const int numSamples, SampleType *destData)" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_bus_buffer_internal.html">BusBufferInternal</a>&lt;SampleType&gt; <a class="el" href="class_bus_buffer.html">BusBuffer</a>&lt; SampleType &gt;::<a class="el" href="class_bus_buffer_internal.html">Internal</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a37e31664a64d1c194e1ecff06cca6071"></a><!-- doxytag: member="BusBuffer::Base" ref="a37e31664a64d1c194e1ecff06cca6071" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_smart_pointer_container.html">SmartPointerContainer</a>&lt;<a class="el" href="class_bus_buffer_internal.html">Internal</a>&gt; <a class="el" href="class_bus_buffer.html">BusBuffer</a>&lt; SampleType &gt;::<a class="el" href="class_smart_pointer_container.html">Base</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a3c8ec3d1bd2b6a508385cfa5e1d4f56f"></a><!-- doxytag: member="BusBuffer::Buffer" ref="a3c8ec3d1bd2b6a508385cfa5e1d4f56f" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt;SampleType&gt; <a class="el" href="class_bus_buffer.html">BusBuffer</a>&lt; SampleType &gt;::<a class="el" href="class_numerical_array.html">Buffer</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="af8aba676c6113d4a59b90ca5f27acb7f"></a><!-- doxytag: member="BusBuffer::BusType" ref="af8aba676c6113d4a59b90ca5f27acb7f" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_bus_buffer.html">BusBuffer</a>&lt;SampleType&gt; <a class="el" href="class_bus_buffer.html">BusBuffer</a>&lt; SampleType &gt;::<a class="el" href="class_bus_buffer.html">BusType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="aeddfc1e21281970e4c8e35940112c71d"></a><!-- doxytag: member="BusBuffer::BusDictionary" ref="aeddfc1e21281970e4c8e35940112c71d" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_dictionary.html">Dictionary</a>&lt;<a class="el" href="class_bus_buffer.html">BusType</a>&gt; <a class="el" href="class_bus_buffer.html">BusBuffer</a>&lt; SampleType &gt;::<a class="el" href="class_dictionary.html">BusDictionary</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<hr/><h2>Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a69133a68d65ef4e90885a6e50136254e"></a><!-- doxytag: member="BusBuffer::BusBuffer" ref="a69133a68d65ef4e90885a6e50136254e" args="()" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_bus_buffer.html">BusBuffer</a>&lt; SampleType &gt;::<a class="el" href="class_bus_buffer.html">BusBuffer</a> </td>
+          <td class="memname">void <a class="el" href="class_bus_buffer.html">BusBuffer</a>&lt; SampleType &gt;::read </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
+          <td class="paramtype"><a class="el" href="class_time_stamp.html">TimeStamp</a> &amp;&#160;</td>
+          <td class="paramname"><em>timeStamp</em>, </td>
         </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="aad2f7af0a28020941d9af8de1ca92602"></a><!-- doxytag: member="BusBuffer::BusBuffer" ref="aad2f7af0a28020941d9af8de1ca92602" args="(Text const &amp;name)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_bus_buffer.html">BusBuffer</a>&lt; SampleType &gt;::<a class="el" href="class_bus_buffer.html">BusBuffer</a> </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_text.html">Text</a> const &amp;&#160;</td>
-          <td class="paramname"><em>name</em></td><td>)</td>
-          <td>  throw ()<code> [inline, explicit]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ad2a2d5bf9acc9c89ddad7a357ca39139"></a><!-- doxytag: member="BusBuffer::BusBuffer" ref="ad2a2d5bf9acc9c89ddad7a357ca39139" args="(const int number)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_bus_buffer.html">BusBuffer</a>&lt; SampleType &gt;::<a class="el" href="class_bus_buffer.html">BusBuffer</a> </td>
-          <td>(</td>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">const int&#160;</td>
-          <td class="paramname"><em>number</em></td><td>)</td>
-          <td>  throw ()<code> [inline, explicit]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ab73fade45cdf7e4ca0b4f0986a290218"></a><!-- doxytag: member="BusBuffer::BusBuffer" ref="ab73fade45cdf7e4ca0b4f0986a290218" args="(const char *name)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_bus_buffer.html">BusBuffer</a>&lt; SampleType &gt;::<a class="el" href="class_bus_buffer.html">BusBuffer</a> </td>
-          <td>(</td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>name</em></td><td>)</td>
-          <td>  throw ()<code> [inline, explicit]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="aa567d31e558a6375e7ae17ce63b157fa"></a><!-- doxytag: member="BusBuffer::BusBuffer" ref="aa567d31e558a6375e7ae17ce63b157fa" args="(BlockSize const &amp;bufferSize, BlockSize const &amp;writeBlockSize, SampleRate const &amp;sampleRate)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_bus_buffer.html">BusBuffer</a>&lt; SampleType &gt;::<a class="el" href="class_bus_buffer.html">BusBuffer</a> </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_block_size.html">BlockSize</a> const &amp;&#160;</td>
-          <td class="paramname"><em>bufferSize</em>, </td>
+          <td class="paramname"><em>numSamples</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="class_block_size.html">BlockSize</a> const &amp;&#160;</td>
-          <td class="paramname"><em>writeBlockSize</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="class_sample_rate.html">SampleRate</a> const &amp;&#160;</td>
-          <td class="paramname"><em>sampleRate</em>&#160;</td>
+          <td class="paramtype">SampleType *&#160;</td>
+          <td class="paramname"><em>destData</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -325,279 +123,7 @@ template&lt;class SampleType &gt; </div>
 </div>
 <div class="memdoc">
 
-</div>
-</div>
-<a class="anchor" id="afcbea9b602d4f163fdadb4a456b63718"></a><!-- doxytag: member="BusBuffer::BusBuffer" ref="afcbea9b602d4f163fdadb4a456b63718" args="(Internal *internal)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_bus_buffer.html">BusBuffer</a>&lt; SampleType &gt;::<a class="el" href="class_bus_buffer.html">BusBuffer</a> </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_bus_buffer_internal.html">Internal</a> *&#160;</td>
-          <td class="paramname"><em>internal</em></td><td>)</td>
-          <td>  throw ()<code> [inline, explicit]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a8ae662703ffdd8d9eddcb937257e458e"></a><!-- doxytag: member="BusBuffer::BusBuffer" ref="a8ae662703ffdd8d9eddcb937257e458e" args="(BusBuffer const &amp;copy)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_bus_buffer.html">BusBuffer</a>&lt; SampleType &gt;::<a class="el" href="class_bus_buffer.html">BusBuffer</a> </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_bus_buffer.html">BusBuffer</a>&lt; SampleType &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>copy</em></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a2cb2e42b6c36795ebf865006aed7a0ff"></a><!-- doxytag: member="BusBuffer::getNull" ref="a2cb2e42b6c36795ebf865006aed7a0ff" args="()" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">static const <a class="el" href="class_bus_buffer.html">BusBuffer</a>&amp; <a class="el" href="class_bus_buffer.html">BusBuffer</a>&lt; SampleType &gt;::getNull </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a8857b0ea69879fb9685a3727593422c7"></a><!-- doxytag: member="BusBuffer::growBufferSize" ref="a8857b0ea69879fb9685a3727593422c7" args="()" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="class_bus_buffer.html">BusBuffer</a>&lt; SampleType &gt;::growBufferSize </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a19451420b7bad641bc22c218851e1d36"></a><!-- doxytag: member="BusBuffer::getBufferSize" ref="a19451420b7bad641bc22c218851e1d36" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">const <a class="el" href="class_block_size.html">BlockSize</a> <a class="el" href="class_bus_buffer.html">BusBuffer</a>&lt; SampleType &gt;::getBufferSize </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a0495178baa0fe2a9fd1a4dac36f42b10"></a><!-- doxytag: member="BusBuffer::getBufferSize" ref="a0495178baa0fe2a9fd1a4dac36f42b10" args="()" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_block_size.html">BlockSize</a> <a class="el" href="class_bus_buffer.html">BusBuffer</a>&lt; SampleType &gt;::getBufferSize </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a79667b1d3c7df70edbaa1c26aca6e0ea"></a><!-- doxytag: member="BusBuffer::getWriteBlockSize" ref="a79667b1d3c7df70edbaa1c26aca6e0ea" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">const <a class="el" href="class_block_size.html">BlockSize</a> <a class="el" href="class_bus_buffer.html">BusBuffer</a>&lt; SampleType &gt;::getWriteBlockSize </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a42ba81dd10744b208a705502334976f9"></a><!-- doxytag: member="BusBuffer::getWriteBlockSize" ref="a42ba81dd10744b208a705502334976f9" args="()" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_block_size.html">BlockSize</a> <a class="el" href="class_bus_buffer.html">BusBuffer</a>&lt; SampleType &gt;::getWriteBlockSize </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a76c95b300fd5ec00e1af8364ca97640f"></a><!-- doxytag: member="BusBuffer::getSampleRate" ref="a76c95b300fd5ec00e1af8364ca97640f" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">const <a class="el" href="class_sample_rate.html">SampleRate</a> <a class="el" href="class_bus_buffer.html">BusBuffer</a>&lt; SampleType &gt;::getSampleRate </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ae608678cbfdf7899808431688e7aa4da"></a><!-- doxytag: member="BusBuffer::getSampleRate" ref="ae608678cbfdf7899808431688e7aa4da" args="()" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_sample_rate.html">SampleRate</a> <a class="el" href="class_bus_buffer.html">BusBuffer</a>&lt; SampleType &gt;::getSampleRate </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a4ce9e18e511d8bc54abfff43acc1bf14"></a><!-- doxytag: member="BusBuffer::getDuration" ref="a4ce9e18e511d8bc54abfff43acc1bf14" args="()" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">double <a class="el" href="class_bus_buffer.html">BusBuffer</a>&lt; SampleType &gt;::getDuration </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ab0b3f68c0456b55ebf7e58dac4d00955"></a><!-- doxytag: member="BusBuffer::getLatestValidTime" ref="ab0b3f68c0456b55ebf7e58dac4d00955" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">const <a class="el" href="class_time_stamp.html">TimeStamp</a>&amp; <a class="el" href="class_bus_buffer.html">BusBuffer</a>&lt; SampleType &gt;::getLatestValidTime </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a286819212db9ba3962c9eca24f0f1aaf"></a><!-- doxytag: member="BusBuffer::getEarliestValidTime" ref="a286819212db9ba3962c9eca24f0f1aaf" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">const <a class="el" href="class_time_stamp.html">TimeStamp</a> <a class="el" href="class_bus_buffer.html">BusBuffer</a>&lt; SampleType &gt;::getEarliestValidTime </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ab412c6a21a27696483f37d3a6f975a02"></a><!-- doxytag: member="BusBuffer::getLabel" ref="ab412c6a21a27696483f37d3a6f975a02" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_text.html">Text</a> <a class="el" href="class_bus_buffer.html">BusBuffer</a>&lt; SampleType &gt;::getLabel </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ac9ae17b3cb84c75def4997251f18589d"></a><!-- doxytag: member="BusBuffer::setLabel" ref="ac9ae17b3cb84c75def4997251f18589d" args="(Text const &amp;newId)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="class_bus_buffer.html">BusBuffer</a>&lt; SampleType &gt;::setLabel </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_text.html">Text</a> const &amp;&#160;</td>
-          <td class="paramname"><em>newId</em></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
+<p>Read data from the bus with a given time stamp. </p>
 
 </div>
 </div>
@@ -638,234 +164,6 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="aedba0840daab8295fcabd4b70fda1452"></a><!-- doxytag: member="BusBuffer::read" ref="aedba0840daab8295fcabd4b70fda1452" args="(TimeStamp &amp;timeStamp, const int numSamples, SampleType *destData)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="class_bus_buffer.html">BusBuffer</a>&lt; SampleType &gt;::read </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_time_stamp.html">TimeStamp</a> &amp;&#160;</td>
-          <td class="paramname"><em>timeStamp</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const int&#160;</td>
-          <td class="paramname"><em>numSamples</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">SampleType *&#160;</td>
-          <td class="paramname"><em>destData</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Read data from the bus with a given time stamp. </p>
-
-</div>
-</div>
-<a class="anchor" id="aa9b781560f5080769f6a7bd9c79507aa"></a><!-- doxytag: member="BusBuffer::getName" ref="aa9b781560f5080769f6a7bd9c79507aa" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_text.html">Text</a> <a class="el" href="class_bus_buffer.html">BusBuffer</a>&lt; SampleType &gt;::getName </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a79cd7a86daa1b82ba15cb151bcb9bb2d"></a><!-- doxytag: member="BusBuffer::getBus" ref="a79cd7a86daa1b82ba15cb151bcb9bb2d" args="(Text const &amp;name)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">static <a class="el" href="class_bus_buffer.html">BusBuffer</a> <a class="el" href="class_bus_buffer.html">BusBuffer</a>&lt; SampleType &gt;::getBus </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_text.html">Text</a> const &amp;&#160;</td>
-          <td class="paramname"><em>name</em></td><td>)</td>
-          <td>  throw ()<code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a539a8701afff1ac9e399bc17dbf90c68"></a><!-- doxytag: member="BusBuffer::addBus" ref="a539a8701afff1ac9e399bc17dbf90c68" args="(Text const &amp;name, BlockSize const &amp;bufferSize=BusBuffer::getDefaultBufferSize(), BlockSize const &amp;writeBlockSize=BlockSize::getDefault(), SampleRate const &amp;sampleRate=SampleRate::getDefault())" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">static void <a class="el" href="class_bus_buffer.html">BusBuffer</a>&lt; SampleType &gt;::addBus </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_text.html">Text</a> const &amp;&#160;</td>
-          <td class="paramname"><em>name</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="class_block_size.html">BlockSize</a> const &amp;&#160;</td>
-          <td class="paramname"><em>bufferSize</em> = <code><a class="el" href="class_bus_buffer.html">BusBuffer</a>&lt;&#160;SampleType&#160;&gt;::getDefaultBufferSize()</code>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="class_block_size.html">BlockSize</a> const &amp;&#160;</td>
-          <td class="paramname"><em>writeBlockSize</em> = <code>BlockSize::getDefault()</code>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="class_sample_rate.html">SampleRate</a> const &amp;&#160;</td>
-          <td class="paramname"><em>sampleRate</em> = <code>SampleRate::getDefault()</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td>  throw ()<code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a1464583e6e1d5eb9c1ff3cd7440e9165"></a><!-- doxytag: member="BusBuffer::removeBus" ref="a1464583e6e1d5eb9c1ff3cd7440e9165" args="(Text const &amp;name)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">static void <a class="el" href="class_bus_buffer.html">BusBuffer</a>&lt; SampleType &gt;::removeBus </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_text.html">Text</a> const &amp;&#160;</td>
-          <td class="paramname"><em>name</em></td><td>)</td>
-          <td>  throw ()<code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="aeb250831a7b7a6f7b84112eb7d6eb842"></a><!-- doxytag: member="BusBuffer::getDefaultBufferSize" ref="aeb250831a7b7a6f7b84112eb7d6eb842" args="()" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">static <a class="el" href="class_block_size.html">BlockSize</a> <a class="el" href="class_bus_buffer.html">BusBuffer</a>&lt; SampleType &gt;::getDefaultBufferSize </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a05008872078e5c47d585ff575673867c"></a><!-- doxytag: member="BusBuffer::getTypeCode" ref="a05008872078e5c47d585ff575673867c" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">int <a class="el" href="class_bus_buffer.html">BusBuffer</a>&lt; SampleType &gt;::getTypeCode </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a78317e65223f396f139090fedf077a63"></a><!-- doxytag: member="BusBuffer::getSampleTypeCode" ref="a78317e65223f396f139090fedf077a63" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">int <a class="el" href="class_bus_buffer.html">BusBuffer</a>&lt; SampleType &gt;::getSampleTypeCode </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ad36329cdff85460411a5dee651be52f2"></a><!-- doxytag: member="BusBuffer::operator&#45;&gt;" ref="ad36329cdff85460411a5dee651be52f2" args="()" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_bus_buffer.html">BusBuffer</a>* <a class="el" href="class_bus_buffer.html">BusBuffer</a>&lt; SampleType &gt;::operator-&gt; </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="class_smart_pointer_container_base.html#ab65284d17f2082ce89f6b1017011e418">SmartPointerContainerBase&lt; BusBufferInternal&lt; SampleType &gt; &gt;</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a5fb065871500ef9da393e85418757c8f"></a><!-- doxytag: member="BusBuffer::operator&#45;&gt;" ref="a5fb065871500ef9da393e85418757c8f" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">const <a class="el" href="class_bus_buffer.html">BusBuffer</a>* <a class="el" href="class_bus_buffer.html">BusBuffer</a>&lt; SampleType &gt;::operator-&gt; </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="class_smart_pointer_container_base.html#a2ba4f8902c0316ee3b8dbe10c3332002">SmartPointerContainerBase&lt; BusBufferInternal&lt; SampleType &gt; &gt;</a>.</p>
-
-</div>
-</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li><a class="el" href="plonk___bus_8h_source.html">plonk_Bus.h</a></li>
 </ul>
@@ -875,7 +173,7 @@ template&lt;class SampleType &gt; </div>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Properties</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -884,7 +182,7 @@ template&lt;class SampleType &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 5 2012 17:05:00 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 8 2014 12:26:52 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

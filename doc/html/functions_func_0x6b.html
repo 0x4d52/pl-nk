@@ -20,7 +20,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="pl-nk-logo-small.png"/></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">pl-nk</div>
+   <div id="projectname">pl-nk&#160;<span id="projectnumber">v0.4.5</span></div>
+   <div id="projectbrief">Plonk|Plink|Plank are a set of cross-platform C/C++ frameworks for audio software development</div>
   </td>
  </tr>
  </tbody>
@@ -29,8 +30,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -63,12 +64,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="functions.html"><span>All</span></a></li>
       <li class="current"><a href="functions_func.html"><span>Functions</span></a></li>
-      <li><a href="functions_vars.html"><span>Variables</span></a></li>
       <li><a href="functions_type.html"><span>Typedefs</span></a></li>
       <li><a href="functions_enum.html"><span>Enumerations</span></a></li>
       <li><a href="functions_eval.html"><span>Enumerator</span></a></li>
       <li><a href="functions_prop.html"><span>Properties</span></a></li>
-      <li><a href="functions_rela.html"><span>Related&#160;Functions</span></a></li>
     </ul>
   </div>
   <div id="navrow4" class="tabs3">
@@ -82,7 +81,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="functions_func_0x67.html#index_g"><span>g</span></a></li>
       <li><a href="functions_func_0x68.html#index_h"><span>h</span></a></li>
       <li><a href="functions_func_0x69.html#index_i"><span>i</span></a></li>
-      <li><a href="functions_func_0x6a.html#index_j"><span>j</span></a></li>
       <li class="current"><a href="functions_func_0x6b.html#index_k"><span>k</span></a></li>
       <li><a href="functions_func_0x6c.html#index_l"><span>l</span></a></li>
       <li><a href="functions_func_0x6d.html#index_m"><span>m</span></a></li>
@@ -111,41 +109,36 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>keyForValue()
 : <a class="el" href="class_dictionary.html#ac15f5b7945d4fc918e098015f11c0136">Dictionary&lt; ValueType, KeyType &gt;</a>
 </li>
-<li>KeyValuePair()
-: <a class="el" href="class_key_value_pair.html#aed2d8e6c2cf9638e1699ac8f59a5ae58">KeyValuePair&lt; ValueType, KeyType &gt;</a>
-</li>
 <li>kr()
-: <a class="el" href="class_atomic_variable_unit.html#a5e98a96fd1e26b52a5944817fef78316">AtomicVariableUnit&lt; SampleType &gt;</a>
-, <a class="el" href="class_unit_base.html#aed961676c5ecaa5d53538debb3fea7fc">UnitBase&lt; SampleType &gt;</a>
+: <a class="el" href="class_unit_base.html#a22cfa757eda1d3f2d3e47575133343b4">UnitBase&lt; SampleType &gt;</a>
 , <a class="el" href="class_white_noise_unit.html#a7078022f458c95a5a92a9b5eb7959a98">WhiteNoiseUnit&lt; SampleType &gt;</a>
+, <a class="el" href="class_harmonic_tri_unit.html#a1576449cdd604163d3250a7ff3268e81">HarmonicTriUnit&lt; SampleType &gt;</a>
 , <a class="el" href="class_harmonic_square_unit.html#a5fe0c0c4671d095c0cac7e273fbf47ec">HarmonicSquareUnit&lt; SampleType &gt;</a>
 , <a class="el" href="class_harmonic_saw_unit.html#ad7d4bdd281699619b76bdadfcb5d6582">HarmonicSawUnit&lt; SampleType &gt;</a>
 , <a class="el" href="class_sine_unit.html#a83bb481d279a888b7caec0df17b7ce8e">SineUnit&lt; SampleType &gt;</a>
 , <a class="el" href="class_table_unit.html#a9eddb6c7b178640c71cb56c95752fe48">TableUnit&lt; SampleType &gt;</a>
-, <a class="el" href="class_signal_play_unit.html#a69acf0edb40c6ac07522627cb2f36e45">SignalPlayUnit&lt; SampleType &gt;</a>
+, <a class="el" href="class_signal_read_unit.html#aea696eb86b0658cbb567ffe19e4f92da">SignalReadUnit&lt; SampleType &gt;</a>
+, <a class="el" href="class_signal_play_unit.html#a44b523a0bde794fa71f9a3c4de48251b">SignalPlayUnit&lt; SampleType &gt;</a>
 , <a class="el" href="class_saw_unit.html#abe23c3c05371f372fea7606b83e02eee">SawUnit&lt; SampleType &gt;</a>
-, <a class="el" href="class_h_p_f_unit.html#a7004ab50104e46450b68c4b6f760591b">HPFUnit&lt; SampleType &gt;</a>
-, <a class="el" href="class_l_p_f_unit.html#a875160e638b9f5ae49903ad441eef3b6">LPFUnit&lt; SampleType &gt;</a>
-, <a class="el" href="class_b_r_f_unit.html#ac6edf64495ebf38d72cdf1f1e462f7fc">BRFUnit&lt; SampleType &gt;</a>
-, <a class="el" href="class_b_p_f_unit.html#a3f00e8a3e7f0e330d0b3dc81a7ecfd76">BPFUnit&lt; SampleType &gt;</a>
-, <a class="el" href="class_notch_unit.html#a69ab4c17ce11ba2a3be1fdfe543af1e8">NotchUnit&lt; SampleType &gt;</a>
-, <a class="el" href="class_high_shelf_unit.html#a9fd6c0dd9fc35390258006de4ad322d8">HighShelfUnit&lt; SampleType &gt;</a>
-, <a class="el" href="class_low_shelf_unit.html#a8c7b2caadef12487bc4726d539b65485">LowShelfUnit&lt; SampleType &gt;</a>
-, <a class="el" href="class_r_h_p_f_unit.html#a73871a6507f93f4448952ecab603fe9b">RHPFUnit&lt; SampleType &gt;</a>
-, <a class="el" href="class_r_l_p_f_unit.html#a30abf3ce1a99e6edb841646142a0c157">RLPFUnit&lt; SampleType &gt;</a>
-, <a class="el" href="class_decay_unit.html#af4637003a9bb97b2dbc80035817c1a14">DecayUnit&lt; SampleType &gt;</a>
-, <a class="el" href="class_h_p_f_p1_unit.html#aa0e34eecd09671fe3612394f28e7de5d">HPFP1Unit&lt; SampleType &gt;</a>
-, <a class="el" href="class_lag_unit.html#a02b40278225965faaefce16cfc9fbb16">LagUnit&lt; SampleType &gt;</a>
-, <a class="el" href="class_l_p_f_p1_unit.html#a4610f436b69e4726873b9ba8efb7c35d">LPFP1Unit&lt; SampleType &gt;</a>
-, <a class="el" href="class_type_unit_base.html#a7863de147494bf4166bb787b7c2892f5">TypeUnitBase&lt; OutputSampleType, InputSampleType &gt;</a>
-, <a class="el" href="class_resample_unit.html#a73bd3dc5bb0e2ceef39dc401dfad1cc5">ResampleUnit&lt; SampleType &gt;</a>
+, <a class="el" href="class_lookup_unit.html#a73e3fcfd63b98a1aac6cd2566605df23">LookupUnit&lt; SampleType &gt;</a>
+, <a class="el" href="class_impulse_unit.html#ad3a3b2cc50ad80d373d4b4a84066f783">ImpulseUnit&lt; SampleType &gt;</a>
+, <a class="el" href="class_h_p_f_unit.html#aa49588487c9e2590475ca6ed7688ada8">HPFUnit&lt; SampleType, InterpTypeCode &gt;</a>
+, <a class="el" href="class_l_p_f_unit.html#a4567ee2529e67739617c2f0a76290f1e">LPFUnit&lt; SampleType, InterpTypeCode &gt;</a>
+, <a class="el" href="class_b_r_f_unit.html#a4749f3495aaedba740fb7b0203bee6e9">BRFUnit&lt; SampleType, InterpTypeCode &gt;</a>
+, <a class="el" href="class_b_p_f_unit.html#a49fedf3fbbc053c0919ab236fd0b8595">BPFUnit&lt; SampleType, InterpTypeCode &gt;</a>
+, <a class="el" href="class_notch_unit.html#a9561f93ddf666186f4c13e2d9afbcb13">NotchUnit&lt; SampleType, InterpTypeCode &gt;</a>
+, <a class="el" href="class_high_shelf_unit.html#a76007a1caaefa175688abf198bfa2b28">HighShelfUnit&lt; SampleType, InterpTypeCode &gt;</a>
+, <a class="el" href="class_low_shelf_unit.html#a8abaa708d322cf710dd9b5158177378d">LowShelfUnit&lt; SampleType, InterpTypeCode &gt;</a>
+, <a class="el" href="class_r_h_p_f_unit.html#a02062b36e8a2567b3b1574adcba74105">RHPFUnit&lt; SampleType, InterpTypeCode &gt;</a>
+, <a class="el" href="class_r_l_p_f_unit.html#aaea275203569c624284d737e209ca360">RLPFUnit&lt; SampleType, InterpTypeCode &gt;</a>
+, <a class="el" href="class_d_c_unit.html#a44e2010392342d6c57159b2fd42c6d42">DCUnit&lt; SampleType, InterpTypeCode &gt;</a>
+, <a class="el" href="class_decay_unit.html#a7b427dc25f25e20b10b6cb836cd6c0f7">DecayUnit&lt; SampleType, InterpTypeCode &gt;</a>
+, <a class="el" href="class_h_p_f_p1_unit.html#aec057b7a4341f9de22aa49ffd2fec4f9">HPFP1Unit&lt; SampleType, InterpTypeCode &gt;</a>
+, <a class="el" href="class_lag_unit.html#a86c6e0ff3332e320d299f489e3670832">LagUnit&lt; SampleType, InterpTypeCode &gt;</a>
+, <a class="el" href="class_l_p_f_p1_unit.html#a7a672ed7daefc43579140af8091b1c3f">LPFP1Unit&lt; SampleType, InterpTypeCode &gt;</a>
 , <a class="el" href="class_envelope_unit.html#ad419ad7942ca9f5837db3fb477e006b1">EnvelopeUnit&lt; SampleType &gt;</a>
-, <a class="el" href="class_variable.html#a608f4ab21fe3e5a22bc142fd95037ba7">Variable&lt; Type &gt;</a>
-, <a class="el" href="class_mul_add_unit.html#afeaad9853f433a22f6b2f77902ae12ce">MulAddUnit&lt; SampleType &gt;</a>
-, <a class="el" href="class_bus_write_unit.html#abe26fbff51099cf9e639567eb816e19d">BusWriteUnit&lt; SampleType &gt;</a>
-, <a class="el" href="class_variable_unit.html#a0f34f7a0165b269930400921f4240c54">VariableUnit&lt; SampleType &gt;</a>
-, <a class="el" href="class_block_unit.html#a1252bdcc5c06b9750935326afd3e2775">BlockUnit&lt; SampleType &gt;</a>
-, <a class="el" href="class_bus_read_unit.html#aea774cf3ce1d7b93e31f00e9b9624777">BusReadUnit&lt; SampleType &gt;</a>
+, <a class="el" href="class_unit_base.html#aed961676c5ecaa5d53538debb3fea7fc">UnitBase&lt; SampleType &gt;</a>
+, <a class="el" href="class_param_unit.html#a628bc46a451a32aaf89736941c220e77">ParamUnit&lt; SampleType &gt;</a>
 </li>
 </ul>
 </div>
@@ -154,7 +147,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Properties</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -163,7 +156,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 5 2012 17:04:58 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 8 2014 12:26:52 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

@@ -20,7 +20,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="pl-nk-logo-small.png"/></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">pl-nk</div>
+   <div id="projectname">pl-nk&#160;<span id="projectnumber">v0.4.5</span></div>
+   <div id="projectbrief">Plonk|Plink|Plank are a set of cross-platform C/C++ frameworks for audio software development</div>
   </td>
  </tr>
  </tbody>
@@ -29,8 +30,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -54,7 +55,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
       <li><a href="files.html"><span>File&#160;List</span></a></li>
-      <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
 <div class="header">
@@ -62,14 +62,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">plonk_ObjectArray2D.h</div>  </div>
 </div>
 <div class="contents">
-<a href="plonk___object_array2_d_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*</span>
+<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*</span>
 <a name="l00002"></a>00002 <span class="comment"> -------------------------------------------------------------------------------</span>
 <a name="l00003"></a>00003 <span class="comment"> This file is part of the Plink, Plonk, Plank libraries</span>
 <a name="l00004"></a>00004 <span class="comment">  by Martin Robinson</span>
 <a name="l00005"></a>00005 <span class="comment"> </span>
 <a name="l00006"></a>00006 <span class="comment"> http://code.google.com/p/pl-nk/</span>
 <a name="l00007"></a>00007 <span class="comment"> </span>
-<a name="l00008"></a>00008 <span class="comment"> Copyright University of the West of England, Bristol 2011-12</span>
+<a name="l00008"></a>00008 <span class="comment"> Copyright University of the West of England, Bristol 2011-14</span>
 <a name="l00009"></a>00009 <span class="comment"> All rights reserved.</span>
 <a name="l00010"></a>00010 <span class="comment"> </span>
 <a name="l00011"></a>00011 <span class="comment"> Redistribution and use in source and binary forms, with or without</span>
@@ -104,63 +104,63 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00040"></a>00040 <span class="preprocessor"></span><span class="preprocessor">#define PLONK_OBJECTARRAY2D_H</span>
 <a name="l00041"></a>00041 <span class="preprocessor"></span>
 <a name="l00042"></a>00042 <span class="preprocessor">#include &quot;../core/plonk_CoreForwardDeclarations.h&quot;</span>
-<a name="l00043"></a>00043 <span class="preprocessor">#include &quot;<a class="code" href="plonk___container_forward_declarations_8h.html">plonk_ContainerForwardDeclarations.h</a>&quot;</span>
-<a name="l00044"></a>00044 <span class="preprocessor">#include &quot;<a class="code" href="plonk___dynamic_container_8h.html">plonk_DynamicContainer.h</a>&quot;</span>
+<a name="l00043"></a>00043 <span class="preprocessor">#include &quot;plonk_ContainerForwardDeclarations.h&quot;</span>
+<a name="l00044"></a>00044 <span class="preprocessor">#include &quot;plonk_DynamicContainer.h&quot;</span>
 <a name="l00045"></a>00045 
 <a name="l00047"></a>00047 <span class="keyword">template</span>&lt;<span class="keyword">class</span> ArrayType, <span class="keyword">class</span> RowType&gt;
-<a name="l00048"></a><a class="code" href="class_object_array2_d_base.html">00048</a> <span class="keyword">class </span><a class="code" href="class_object_array2_d_base.html">ObjectArray2DBase</a> : <span class="keyword">public</span> <a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray</a>&lt;RowType&gt;
+<a name="l00048"></a>00048 <span class="keyword">class </span>ObjectArray2DBase : <span class="keyword">public</span> <a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray</a>&lt;RowType&gt;
 <a name="l00049"></a>00049 {
 <a name="l00050"></a>00050 <span class="keyword">public</span>:
-<a name="l00051"></a><a class="code" href="class_object_array2_d_base.html#a141a85933e2f5cbd19112237189e1dbb">00051</a>     <span class="keyword">typedef</span> <a class="code" href="class_object_array_internal.html">ObjectArrayInternal&lt;RowType&gt;</a>                <a class="code" href="class_object_array2_d_base.html#a141a85933e2f5cbd19112237189e1dbb">Internal</a>;
-<a name="l00052"></a><a class="code" href="class_object_array2_d_base.html#a9a46eca4c5a894f4ecb3d7cbf7a3462c">00052</a>     <span class="keyword">typedef</span> <a class="code" href="class_object_array.html">ObjectArray&lt;RowType&gt;</a>                        <a class="code" href="class_object_array2_d_base.html#a9a46eca4c5a894f4ecb3d7cbf7a3462c">Base</a>;    
-<a name="l00053"></a><a class="code" href="class_object_array2_d_base.html#ab9129e37869c62293f498c4fb3708b27">00053</a>     <span class="keyword">typedef</span> <a class="code" href="class_weak_pointer_container.html" title="This stores a weak reference using a WeakPointer.">WeakPointerContainer&lt;ObjectArray2DBase&gt;</a>     <a class="code" href="class_object_array2_d_base.html#ab9129e37869c62293f498c4fb3708b27">Weak</a>;
+<a name="l00051"></a>00051     <span class="keyword">typedef</span> ObjectArrayInternal&lt;RowType&gt;                Internal;
+<a name="l00052"></a>00052     <span class="keyword">typedef</span> <a class="code" href="class_object_array.html">ObjectArray&lt;RowType&gt;</a>                        Base;    
+<a name="l00053"></a>00053     <span class="keyword">typedef</span> <a class="code" href="class_weak_pointer_container.html" title="This stores a weak reference using a WeakPointer.">WeakPointerContainer&lt;ObjectArray2DBase&gt;</a>     Weak;
 <a name="l00054"></a>00054     
-<a name="l00055"></a><a class="code" href="class_object_array2_d_base.html#ac0172794d04ff0e0a3b53991cacc064e">00055</a>     <span class="keyword">typedef</span> <a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt;ArrayType&gt;</a>                      <a class="code" href="class_object_array2_d_base.html#ac0172794d04ff0e0a3b53991cacc064e">ObjectArrayType</a>;
-<a name="l00056"></a><a class="code" href="class_object_array2_d_base.html#ae89d9e78a5541db757f788be14fd8ffa">00056</a>     <span class="keyword">typedef</span> <a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt;ObjectArrayType&gt;</a>                <a class="code" href="class_object_array2_d_base.html#ae89d9e78a5541db757f788be14fd8ffa">ObjectArray2DType</a>;
-<a name="l00057"></a><a class="code" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">00057</a>     <span class="keyword">typedef</span> <span class="keyword">typename</span> Base::InitialObject                <a class="code" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a>;
+<a name="l00055"></a>00055     <span class="keyword">typedef</span> <a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt;ArrayType&gt;</a>                      ObjectArrayType;
+<a name="l00056"></a>00056     <span class="keyword">typedef</span> <a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt;ObjectArrayType&gt;</a>                ObjectArray2DType;
+<a name="l00057"></a>00057     <span class="keyword">typedef</span> <span class="keyword">typename</span> Base::InitialObject                InitialObject;
 <a name="l00058"></a>00058     
-<a name="l00059"></a><a class="code" href="class_object_array2_d_base.html#adfea50ecaa644057453f697343f44ed2">00059</a>         <a class="code" href="class_object_array2_d_base.html#adfea50ecaa644057453f697343f44ed2">ObjectArray2DBase</a> (<span class="keyword">const</span> <span class="keywordtype">int</span> rows = 0) throw()
+<a name="l00059"></a>00059         ObjectArray2DBase (<span class="keyword">const</span> <span class="keywordtype">int</span> rows = 0) throw()
 <a name="l00060"></a>00060         :       <a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray</a>&lt;RowType&gt; (rows &lt; 0 ? 0 : rows, false) 
 <a name="l00061"></a>00061         {
 <a name="l00062"></a>00062         }
 <a name="l00063"></a>00063     
-<a name="l00064"></a><a class="code" href="class_object_array2_d_base.html#aa3f6a3a1b9ec039a71199abbe6e516cb">00064</a>         <a class="code" href="class_object_array2_d_base.html#adfea50ecaa644057453f697343f44ed2">ObjectArray2DBase</a> (RowType <span class="keyword">const</span>&amp; single) <span class="keywordflow">throw</span>()
+<a name="l00064"></a>00064         ObjectArray2DBase (RowType <span class="keyword">const</span>&amp; single) <span class="keywordflow">throw</span>()
 <a name="l00065"></a>00065         :       <a class="code" href="class_object_array.html">ObjectArray&lt;RowType&gt;</a> (single)
 <a name="l00066"></a>00066         {
 <a name="l00067"></a>00067         }
 <a name="l00068"></a>00068     
-<a name="l00069"></a><a class="code" href="class_object_array2_d_base.html#a2dfba8ad0e553f8547ca510141490330">00069</a>     <span class="keyword">explicit</span> <a class="code" href="class_object_array2_d_base.html#adfea50ecaa644057453f697343f44ed2">ObjectArray2DBase</a> (<a class="code" href="class_object_array_internal.html">Internal</a>* internalToUse) <span class="keywordflow">throw</span>() 
+<a name="l00069"></a>00069     <span class="keyword">explicit</span> ObjectArray2DBase (Internal* internalToUse) <span class="keywordflow">throw</span>() 
 <a name="l00070"></a>00070         :       <a class="code" href="class_object_array.html">ObjectArray&lt;RowType&gt;</a> (internalToUse)
 <a name="l00071"></a>00071         {
 <a name="l00072"></a>00072         } 
 <a name="l00073"></a>00073     
-<a name="l00076"></a><a class="code" href="class_object_array2_d_base.html#a65ea43d76cb0db02c537214afedfa681">00076</a>     <a class="code" href="class_object_array2_d_base.html#adfea50ecaa644057453f697343f44ed2">ObjectArray2DBase</a> (<a class="code" href="class_object_array2_d_base.html">ObjectArray2DBase</a> <span class="keyword">const</span>&amp; <a class="code" href="class_object_array.html#a03baa6c06a77a576a05e1898b9ccd19f" title="Creates a deep copy of the array.">copy</a>) <span class="keywordflow">throw</span>()
-<a name="l00077"></a>00077     :   <a class="code" href="class_object_array2_d_base.html#a9a46eca4c5a894f4ecb3d7cbf7a3462c">Base</a> (static_cast&lt;Base const&amp;&gt; (<a class="code" href="class_object_array.html#a03baa6c06a77a576a05e1898b9ccd19f" title="Creates a deep copy of the array.">copy</a>))
+<a name="l00076"></a>00076     ObjectArray2DBase (ObjectArray2DBase <span class="keyword">const</span>&amp; copy) <span class="keywordflow">throw</span>()
+<a name="l00077"></a>00077     :   Base (static_cast&lt;Base const&amp;&gt; (copy))
 <a name="l00078"></a>00078     {
 <a name="l00079"></a>00079     }
 <a name="l00080"></a>00080     
-<a name="l00081"></a><a class="code" href="class_object_array2_d_base.html#a4ec5ba03d39166042be95c1a5efa2022">00081</a>     <a class="code" href="class_object_array2_d_base.html#adfea50ecaa644057453f697343f44ed2">ObjectArray2DBase</a> (<a class="code" href="class_dynamic.html">Dynamic</a> <span class="keyword">const</span>&amp; other) <span class="keywordflow">throw</span>()
-<a name="l00082"></a>00082     :   <a class="code" href="class_object_array2_d_base.html#a9a46eca4c5a894f4ecb3d7cbf7a3462c">Base</a> (other.as&lt;<a class="code" href="class_object_array2_d_base.html">ObjectArray2DBase</a>&gt;().<a class="code" href="class_smart_pointer_container_base.html#a6d288e885102290e991d01ae06eaacde">getInternal</a>())
+<a name="l00081"></a>00081     ObjectArray2DBase (Dynamic <span class="keyword">const</span>&amp; other) <span class="keywordflow">throw</span>()
+<a name="l00082"></a>00082     :   Base (other.as&lt;ObjectArray2DBase&gt;().getInternal())
 <a name="l00083"></a>00083     {
 <a name="l00084"></a>00084     }    
 <a name="l00085"></a>00085     
-<a name="l00087"></a><a class="code" href="class_object_array2_d_base.html#a859f7ef320df9065003bfc7d2466edbb">00087</a>     <a class="code" href="class_object_array2_d_base.html">ObjectArray2DBase</a>&amp; <a class="code" href="class_object_array2_d_base.html#a859f7ef320df9065003bfc7d2466edbb" title="Assignment operator.">operator= </a>(<a class="code" href="class_object_array2_d_base.html">ObjectArray2DBase</a> <span class="keyword">const</span>&amp; other) <span class="keywordflow">throw</span>()
+<a name="l00087"></a>00087     ObjectArray2DBase&amp; <a class="code" href="class_object_array.html#a6e8493adbcc71c1592875360bffaa6a7" title="Assignment operator.">operator= </a>(ObjectArray2DBase <span class="keyword">const</span>&amp; other) <span class="keywordflow">throw</span>()
 <a name="l00088"></a>00088         {
 <a name="l00089"></a>00089                 <span class="keywordflow">if</span> (<span class="keyword">this</span> != &amp;other)
-<a name="l00090"></a>00090             this-&gt;<a class="code" href="class_smart_pointer_container_base.html#a0937fdc04eafc3a2146a6af5320e5a37">setInternal</a> (other.getInternal());<span class="comment">//this-&gt;setInternal (other.containerCopy().getInternal());</span>
+<a name="l00090"></a>00090             this-&gt;setInternal (other.getInternal());<span class="comment">//this-&gt;setInternal (other.containerCopy().getInternal());</span>
 <a name="l00091"></a>00091         
 <a name="l00092"></a>00092         <span class="keywordflow">return</span> *<span class="keyword">this</span>;
 <a name="l00093"></a>00093         }
 <a name="l00094"></a>00094 
-<a name="l00095"></a><a class="code" href="class_object_array2_d_base.html#ad6379689c32fc1486e239c4817899b5f">00095</a>         <a class="code" href="class_object_array2_d_base.html#adfea50ecaa644057453f697343f44ed2">ObjectArray2DBase</a> (<a class="code" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> <span class="keyword">const</span> &amp;i00,
-<a name="l00096"></a>00096                                            <a class="code" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> <span class="keyword">const</span> &amp;i01,
-<a name="l00097"></a>00097                                            <a class="code" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> <span class="keyword">const</span> &amp;i02,
-<a name="l00098"></a>00098                                            <a class="code" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> <span class="keyword">const</span> &amp;i03 = <a class="code" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a>()) throw()
-<a name="l00099"></a>00099         :       <a class="code" href="class_smart_pointer_container.html">Base</a> (i00, i01, i02, i03) 
+<a name="l00095"></a>00095         ObjectArray2DBase (InitialObject <span class="keyword">const</span> &amp;i00,
+<a name="l00096"></a>00096                                            InitialObject <span class="keyword">const</span> &amp;i01,
+<a name="l00097"></a>00097                                            InitialObject <span class="keyword">const</span> &amp;i02,
+<a name="l00098"></a>00098                                            InitialObject <span class="keyword">const</span> &amp;i03 = InitialObject()) throw()
+<a name="l00099"></a>00099         :       Base (i00, i01, i02, i03) 
 <a name="l00100"></a>00100         {
 <a name="l00101"></a>00101         }
 <a name="l00102"></a>00102     
-<a name="l00103"></a><a class="code" href="class_object_array2_d_base.html#a7b07f733d12e88933b37e55d21dc6a1a">00103</a>         <a class="code" href="class_object_array2_d_base.html#adfea50ecaa644057453f697343f44ed2">ObjectArray2DBase</a> (RowType <span class="keyword">const</span> &amp;i00,
+<a name="l00103"></a>00103         ObjectArray2DBase (RowType <span class="keyword">const</span> &amp;i00,
 <a name="l00104"></a>00104                                            RowType <span class="keyword">const</span> &amp;i01,
 <a name="l00105"></a>00105                                            RowType <span class="keyword">const</span> &amp;i02,
 <a name="l00106"></a>00106                                            RowType <span class="keyword">const</span> &amp;i03,
@@ -168,12 +168,12 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00108"></a>00108                                            RowType <span class="keyword">const</span> &amp;i05 = RowType(),
 <a name="l00109"></a>00109                                            RowType <span class="keyword">const</span> &amp;i06 = RowType(),
 <a name="l00110"></a>00110                                            RowType <span class="keyword">const</span> &amp;i07 = RowType()) throw()
-<a name="l00111"></a>00111         :       <a class="code" href="class_smart_pointer_container.html">Base</a> (i00, i01, i02, i03,
+<a name="l00111"></a>00111         :       Base (i00, i01, i02, i03,
 <a name="l00112"></a>00112               i04, i05, i06, i07)
 <a name="l00113"></a>00113         {
 <a name="l00114"></a>00114         }
 <a name="l00115"></a>00115     
-<a name="l00116"></a><a class="code" href="class_object_array2_d_base.html#a23cce44048e6ca3f26ee87b6d2154817">00116</a>         <a class="code" href="class_object_array2_d_base.html#adfea50ecaa644057453f697343f44ed2">ObjectArray2DBase</a> (RowType <span class="keyword">const</span> &amp;i00,
+<a name="l00116"></a>00116         ObjectArray2DBase (RowType <span class="keyword">const</span> &amp;i00,
 <a name="l00117"></a>00117                                            RowType <span class="keyword">const</span> &amp;i01,
 <a name="l00118"></a>00118                                            RowType <span class="keyword">const</span> &amp;i02,
 <a name="l00119"></a>00119                                            RowType <span class="keyword">const</span> &amp;i03,
@@ -189,14 +189,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00129"></a>00129                                            RowType <span class="keyword">const</span> &amp;i13 = RowType(),
 <a name="l00130"></a>00130                                            RowType <span class="keyword">const</span> &amp;i14 = RowType(),
 <a name="l00131"></a>00131                                            RowType <span class="keyword">const</span> &amp;i15 = RowType()) throw()
-<a name="l00132"></a>00132         :       <a class="code" href="class_smart_pointer_container.html">Base</a> (i00, i01, i02, i03,
+<a name="l00132"></a>00132         :       Base (i00, i01, i02, i03,
 <a name="l00133"></a>00133               i04, i05, i06, i07,
 <a name="l00134"></a>00134               i08, i09, i10, i11,
 <a name="l00135"></a>00135               i12, i13, i14, i15)
 <a name="l00136"></a>00136         {
 <a name="l00137"></a>00137         }
 <a name="l00138"></a>00138     
-<a name="l00139"></a><a class="code" href="class_object_array2_d_base.html#a75da4622e910481c754e2c78ca4c0d57">00139</a>         <a class="code" href="class_object_array2_d_base.html#adfea50ecaa644057453f697343f44ed2">ObjectArray2DBase</a> (RowType <span class="keyword">const</span> &amp;i00,
+<a name="l00139"></a>00139         ObjectArray2DBase (RowType <span class="keyword">const</span> &amp;i00,
 <a name="l00140"></a>00140                                            RowType <span class="keyword">const</span> &amp;i01,
 <a name="l00141"></a>00141                                            RowType <span class="keyword">const</span> &amp;i02,
 <a name="l00142"></a>00142                                            RowType <span class="keyword">const</span> &amp;i03,
@@ -228,7 +228,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00168"></a>00168                                            RowType <span class="keyword">const</span> &amp;i29 = RowType(),
 <a name="l00169"></a>00169                                            RowType <span class="keyword">const</span> &amp;i30 = RowType(),
 <a name="l00170"></a>00170                                            RowType <span class="keyword">const</span> &amp;i31 = RowType()) throw()
-<a name="l00171"></a>00171         :       <a class="code" href="class_smart_pointer_container.html">Base</a> (i00, i01, i02, i03,
+<a name="l00171"></a>00171         :       Base (i00, i01, i02, i03,
 <a name="l00172"></a>00172               i04, i05, i06, i07,
 <a name="l00173"></a>00173               i08, i09, i10, i11,
 <a name="l00174"></a>00174               i12, i13, i14, i15,
@@ -475,30 +475,30 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00415"></a>00415 <span class="comment">//              if (i31.length() &gt; 0) thisArray[31] = i31; else return;</span>
 <a name="l00416"></a>00416 <span class="comment">//      }</span>
 <a name="l00417"></a>00417     
-<a name="l00418"></a>00418         <a class="code" href="class_object_array2_d_base.html#a228f1b0ffdd13ea3d0f88cffe994afbb">ObjectArrayAssignmentDefinition</a>(<a class="code" href="class_object_array2_d_base.html">ObjectArray2DBase</a>, RowType);
+<a name="l00418"></a>00418         ObjectArrayAssignmentDefinition(ObjectArray2DBase, RowType);
 <a name="l00419"></a>00419         
-<a name="l00420"></a><a class="code" href="class_object_array2_d_base.html#ab892943135a6777ce7c6a5f490cbeeee">00420</a>         <a class="code" href="class_object_array2_d_base.html#adfea50ecaa644057453f697343f44ed2">ObjectArray2DBase</a> (<a class="code" href="class_object_array2_d_base.html">ObjectArray2DBase&lt;ArrayType,RowType&gt;</a> <span class="keyword">const</span>&amp; array0, 
-<a name="l00421"></a>00421                                            <a class="code" href="class_object_array2_d_base.html">ObjectArray2DBase&lt;ArrayType,RowType&gt;</a> <span class="keyword">const</span>&amp; array1) <span class="keywordflow">throw</span>()
+<a name="l00420"></a>00420         ObjectArray2DBase (ObjectArray2DBase&lt;ArrayType,RowType&gt; <span class="keyword">const</span>&amp; array0, 
+<a name="l00421"></a>00421                                            ObjectArray2DBase&lt;ArrayType,RowType&gt; <span class="keyword">const</span>&amp; array1) <span class="keywordflow">throw</span>()
 <a name="l00422"></a>00422         :       <a class="code" href="class_object_array.html">ObjectArray&lt; RowType &gt;</a> (array0, array1)
 <a name="l00423"></a>00423         {
 <a name="l00424"></a>00424         }
 <a name="l00425"></a>00425     
-<a name="l00427"></a><a class="code" href="class_object_array2_d_base.html#a5f92c4180cdc093b9d2efe80c53f1769">00427</a>         <span class="keywordtype">bool</span> <a class="code" href="class_object_array2_d_base.html#a5f92c4180cdc093b9d2efe80c53f1769" title="Does the item contain a particular item.">contains</a> (ArrayType <span class="keyword">const</span>&amp; item) <span class="keyword">const</span> <span class="keywordflow">throw</span>()
+<a name="l00427"></a>00427         <span class="keywordtype">bool</span> <a class="code" href="class_object_array.html#ad87075a49fe1cea5bcdaf54f15873c4e" title="Returns whether the array contains a particular item.">contains</a> (ArrayType <span class="keyword">const</span>&amp; item) <span class="keyword">const</span> <span class="keywordflow">throw</span>()
 <a name="l00428"></a>00428         {
-<a name="l00429"></a>00429                 <span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code" href="class_object_array2_d_base.html#abab907a4c2f115abd51b2b74b92bcd11" title="Return the number rows in the 2D array.">numRows</a> = this-&gt;<a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a>();
-<a name="l00430"></a>00430                 <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; <a class="code" href="class_object_array2_d_base.html#abab907a4c2f115abd51b2b74b92bcd11" title="Return the number rows in the 2D array.">numRows</a>; ++i)
+<a name="l00429"></a>00429                 <span class="keyword">const</span> <span class="keywordtype">int</span> numRows = this-&gt;<a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a>();
+<a name="l00430"></a>00430                 <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; numRows; ++i)
 <a name="l00431"></a>00431                 {
-<a name="l00432"></a>00432                         <span class="keywordflow">if</span> (this-&gt;<a class="code" href="class_object_array.html#a3027a6cfd4eef94f604a7d446c244cfc" title="Returns a new array by iterating through an array of indices provided.">atUnchecked</a> (i).<a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt;ArrayType&gt;::contains</a> (item))
+<a name="l00432"></a>00432                         <span class="keywordflow">if</span> (this-&gt;atUnchecked (i).<a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt;ArrayType&gt;::contains</a> (item))
 <a name="l00433"></a>00433                                 <span class="keywordflow">return</span> <span class="keyword">true</span>;
 <a name="l00434"></a>00434                 }
 <a name="l00435"></a>00435                 
 <a name="l00436"></a>00436                 <span class="keywordflow">return</span> <span class="keyword">false</span>;
 <a name="l00437"></a>00437         }
 <a name="l00438"></a>00438         
-<a name="l00443"></a><a class="code" href="class_object_array2_d_base.html#a554c8525c50532a264c3c7d63f554141">00443</a>         <span class="keywordtype">void</span> <a class="code" href="class_object_array2_d_base.html#a554c8525c50532a264c3c7d63f554141" title="Search for the row and column index of an item.">indexOf</a> (ArrayType <span class="keyword">const</span>&amp; item, <span class="keywordtype">int</span>&amp; row, <span class="keywordtype">int</span>&amp; column) <span class="keyword">const</span> <span class="keywordflow">throw</span>()
+<a name="l00443"></a>00443         <span class="keywordtype">void</span> <a class="code" href="class_object_array.html#ad2065d1c59f281fb17c78cce33f62b41" title="Gets the index of a particular item.">indexOf</a> (ArrayType <span class="keyword">const</span>&amp; item, <span class="keywordtype">int</span>&amp; row, <span class="keywordtype">int</span>&amp; column) <span class="keyword">const</span> <span class="keywordflow">throw</span>()
 <a name="l00444"></a>00444         {
-<a name="l00445"></a>00445                 <span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code" href="class_object_array2_d_base.html#abab907a4c2f115abd51b2b74b92bcd11" title="Return the number rows in the 2D array.">numRows</a> = this-&gt;<a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a>();
-<a name="l00446"></a>00446                 <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = row &lt; 0 ? 0 : row; i &lt; <a class="code" href="class_object_array2_d_base.html#abab907a4c2f115abd51b2b74b92bcd11" title="Return the number rows in the 2D array.">numRows</a>; ++i)
+<a name="l00445"></a>00445                 <span class="keyword">const</span> <span class="keywordtype">int</span> numRows = this-&gt;<a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a>();
+<a name="l00446"></a>00446                 <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = row &lt; 0 ? 0 : row; i &lt; numRows; ++i)
 <a name="l00447"></a>00447                 {
 <a name="l00448"></a>00448                         <span class="keywordtype">int</span> c = this-&gt;<a class="code" href="class_object_array.html#a3027a6cfd4eef94f604a7d446c244cfc" title="Returns a new array by iterating through an array of indices provided.">atUnchecked</a> (i).ObjectArray&lt;ArrayType&gt;::indexOf (item, column);
 <a name="l00449"></a>00449                         <span class="keywordflow">if</span> (c &gt;= 0)
@@ -513,55 +513,55 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00458"></a>00458                 column = -1;
 <a name="l00459"></a>00459         }
 <a name="l00460"></a>00460         
-<a name="l00462"></a><a class="code" href="class_object_array2_d_base.html#a45476db2dcbb85fd62d1f193cc99a5ba">00462</a>         <span class="keywordtype">bool</span> <a class="code" href="class_object_array2_d_base.html#a45476db2dcbb85fd62d1f193cc99a5ba" title="Does each of the rows of the 2D array contain the same number of items.">isMatrix</a>() <span class="keyword">const</span> throw()
+<a name="l00462"></a>00462         <span class="keywordtype">bool</span> isMatrix() <span class="keyword">const</span> throw()
 <a name="l00463"></a>00463         {
-<a name="l00464"></a>00464                 <span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code" href="class_object_array2_d_base.html#abab907a4c2f115abd51b2b74b92bcd11" title="Return the number rows in the 2D array.">numRows</a> = this-&gt;<a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a>();
+<a name="l00464"></a>00464                 <span class="keyword">const</span> <span class="keywordtype">int</span> numRows = this-&gt;<a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a>();
 <a name="l00465"></a>00465                 <span class="keywordflow">if</span> (numRows &lt; 2) <span class="keywordflow">return</span> <span class="keyword">false</span>;
 <a name="l00466"></a>00466                 
-<a name="l00467"></a>00467                 <span class="keywordtype">int</span> <a class="code" href="class_object_array2_d_base.html#a7f18891a5476fbfc4c71ed05cc7a4946" title="Return the largest length row in each of the rows in the 2D array.">numColumns</a> = this-&gt;<a class="code" href="class_object_array.html#a3027a6cfd4eef94f604a7d446c244cfc" title="Returns a new array by iterating through an array of indices provided.">atUnchecked</a> (0).<a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a>();
+<a name="l00467"></a>00467                 <span class="keywordtype">int</span> numColumns = this-&gt;<a class="code" href="class_object_array.html#a3027a6cfd4eef94f604a7d446c244cfc" title="Returns a new array by iterating through an array of indices provided.">atUnchecked</a> (0).length();
 <a name="l00468"></a>00468                 <span class="keywordflow">if</span> (numColumns &lt; 2) <span class="keywordflow">return</span> <span class="keyword">false</span>;
 <a name="l00469"></a>00469                 
-<a name="l00470"></a>00470                 <span class="keywordtype">int</span> prevNumColumns = <a class="code" href="class_object_array2_d_base.html#a7f18891a5476fbfc4c71ed05cc7a4946" title="Return the largest length row in each of the rows in the 2D array.">numColumns</a>;
-<a name="l00471"></a>00471                 <span class="keywordflow">for</span> (<span class="keywordtype">int</span> row = 1; row &lt; <a class="code" href="class_object_array2_d_base.html#abab907a4c2f115abd51b2b74b92bcd11" title="Return the number rows in the 2D array.">numRows</a>; ++row)
+<a name="l00470"></a>00470                 <span class="keywordtype">int</span> prevNumColumns = numColumns;
+<a name="l00471"></a>00471                 <span class="keywordflow">for</span> (<span class="keywordtype">int</span> row = 1; row &lt; numRows; ++row)
 <a name="l00472"></a>00472                 {
-<a name="l00473"></a>00473                         numColumns = this-&gt;<a class="code" href="class_object_array.html#a3027a6cfd4eef94f604a7d446c244cfc" title="Returns a new array by iterating through an array of indices provided.">atUnchecked</a> (row).<a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a>();
+<a name="l00473"></a>00473                         numColumns = this-&gt;<a class="code" href="class_object_array.html#a3027a6cfd4eef94f604a7d446c244cfc" title="Returns a new array by iterating through an array of indices provided.">atUnchecked</a> (row).length();
 <a name="l00474"></a>00474                         <span class="keywordflow">if</span> (numColumns != prevNumColumns)
 <a name="l00475"></a>00475                                 <span class="keywordflow">return</span> <span class="keyword">false</span>;
 <a name="l00476"></a>00476                         
-<a name="l00477"></a>00477                         prevNumColumns = <a class="code" href="class_object_array2_d_base.html#a7f18891a5476fbfc4c71ed05cc7a4946" title="Return the largest length row in each of the rows in the 2D array.">numColumns</a>;
+<a name="l00477"></a>00477                         prevNumColumns = numColumns;
 <a name="l00478"></a>00478                 }
 <a name="l00479"></a>00479                 
 <a name="l00480"></a>00480                 <span class="keywordflow">return</span> <span class="keyword">true</span>;
 <a name="l00481"></a>00481         }
 <a name="l00482"></a>00482         
-<a name="l00484"></a><a class="code" href="class_object_array2_d_base.html#abab907a4c2f115abd51b2b74b92bcd11">00484</a>         <span class="keywordtype">int</span> <a class="code" href="class_object_array2_d_base.html#abab907a4c2f115abd51b2b74b92bcd11" title="Return the number rows in the 2D array.">numRows</a>() <span class="keyword">const</span> throw()
+<a name="l00484"></a>00484         <span class="keywordtype">int</span> numRows() <span class="keyword">const</span> throw()
 <a name="l00485"></a>00485         {
 <a name="l00486"></a>00486                 <span class="keywordflow">return</span> this-&gt;<a class="code" href="class_object_array.html#a53983ca686506e7f8c87b77175b148fb" title="Size is the actual number of elements of storage needed for the array.">size</a>();
 <a name="l00487"></a>00487         }
 <a name="l00488"></a>00488         
-<a name="l00492"></a><a class="code" href="class_object_array2_d_base.html#a7f18891a5476fbfc4c71ed05cc7a4946">00492</a>         <span class="keywordtype">int</span> <a class="code" href="class_object_array2_d_base.html#a7f18891a5476fbfc4c71ed05cc7a4946" title="Return the largest length row in each of the rows in the 2D array.">numColumns</a>() <span class="keyword">const</span> throw()
+<a name="l00492"></a>00492         <span class="keywordtype">int</span> numColumns() <span class="keyword">const</span> throw()
 <a name="l00493"></a>00493         {
-<a name="l00494"></a>00494                 <span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code" href="class_object_array2_d_base.html#abab907a4c2f115abd51b2b74b92bcd11" title="Return the number rows in the 2D array.">numRows</a> = this-&gt;<a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a>();
+<a name="l00494"></a>00494                 <span class="keyword">const</span> <span class="keywordtype">int</span> numRows = this-&gt;<a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a>();
 <a name="l00495"></a>00495                 <span class="keywordflow">if</span> (numRows &lt; 1) <span class="keywordflow">return</span> 0;
 <a name="l00496"></a>00496                 
-<a name="l00497"></a>00497                 <span class="keywordtype">int</span> <a class="code" href="class_object_array2_d_base.html#a7f18891a5476fbfc4c71ed05cc7a4946" title="Return the largest length row in each of the rows in the 2D array.">numColumns</a> = this-&gt;<a class="code" href="class_object_array.html#a3027a6cfd4eef94f604a7d446c244cfc" title="Returns a new array by iterating through an array of indices provided.">atUnchecked</a>(0).<a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a>();
+<a name="l00497"></a>00497                 <span class="keywordtype">int</span> numColumns = this-&gt;<a class="code" href="class_object_array.html#a3027a6cfd4eef94f604a7d446c244cfc" title="Returns a new array by iterating through an array of indices provided.">atUnchecked</a>(0).length();
 <a name="l00498"></a>00498                 
-<a name="l00499"></a>00499                 <span class="keywordtype">int</span> maxNumColumns = <a class="code" href="class_object_array2_d_base.html#a7f18891a5476fbfc4c71ed05cc7a4946" title="Return the largest length row in each of the rows in the 2D array.">numColumns</a>;
-<a name="l00500"></a>00500                 <span class="keywordflow">for</span> (<span class="keywordtype">int</span> row = 1; row &lt; <a class="code" href="class_object_array2_d_base.html#abab907a4c2f115abd51b2b74b92bcd11" title="Return the number rows in the 2D array.">numRows</a>; ++row)
+<a name="l00499"></a>00499                 <span class="keywordtype">int</span> maxNumColumns = numColumns;
+<a name="l00500"></a>00500                 <span class="keywordflow">for</span> (<span class="keywordtype">int</span> row = 1; row &lt; numRows; ++row)
 <a name="l00501"></a>00501                 {
-<a name="l00502"></a>00502                         numColumns = this-&gt;<a class="code" href="class_object_array.html#a3027a6cfd4eef94f604a7d446c244cfc" title="Returns a new array by iterating through an array of indices provided.">atUnchecked</a> (row).<a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a>();
+<a name="l00502"></a>00502                         numColumns = this-&gt;<a class="code" href="class_object_array.html#a3027a6cfd4eef94f604a7d446c244cfc" title="Returns a new array by iterating through an array of indices provided.">atUnchecked</a> (row).length();
 <a name="l00503"></a>00503                         <span class="keywordflow">if</span> (numColumns &gt; maxNumColumns)
-<a name="l00504"></a>00504                                 maxNumColumns = <a class="code" href="class_object_array2_d_base.html#a7f18891a5476fbfc4c71ed05cc7a4946" title="Return the largest length row in each of the rows in the 2D array.">numColumns</a>;
+<a name="l00504"></a>00504                                 maxNumColumns = numColumns;
 <a name="l00505"></a>00505                 }
 <a name="l00506"></a>00506                 
 <a name="l00507"></a>00507                 <span class="keywordflow">return</span> maxNumColumns;
 <a name="l00508"></a>00508         }
 <a name="l00509"></a>00509     
-<a name="l00511"></a><a class="code" href="class_object_array2_d_base.html#adbed4457ecfc4ead043257d91ae700dd">00511</a>         RowType <a class="code" href="class_object_array2_d_base.html#adbed4457ecfc4ead043257d91ae700dd" title="Flatten the array to a one dimensional array.">flatten</a>() <span class="keyword">const</span> throw()
+<a name="l00511"></a>00511         RowType flatten() <span class="keyword">const</span> throw()
 <a name="l00512"></a>00512         {
 <a name="l00513"></a>00513                 RowType result;
-<a name="l00514"></a>00514                 <span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code" href="class_object_array2_d_base.html#abab907a4c2f115abd51b2b74b92bcd11" title="Return the number rows in the 2D array.">numRows</a> = this-&gt;<a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a>();
-<a name="l00515"></a>00515                 <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; <a class="code" href="class_object_array2_d_base.html#abab907a4c2f115abd51b2b74b92bcd11" title="Return the number rows in the 2D array.">numRows</a>; ++i)
+<a name="l00514"></a>00514                 <span class="keyword">const</span> <span class="keywordtype">int</span> numRows = this-&gt;<a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a>();
+<a name="l00515"></a>00515                 <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; numRows; ++i)
 <a name="l00516"></a>00516                 {
 <a name="l00517"></a>00517                         <span class="keyword">const</span> RowType&amp; item = this-&gt;<a class="code" href="class_object_array.html#a3027a6cfd4eef94f604a7d446c244cfc" title="Returns a new array by iterating through an array of indices provided.">atUnchecked</a> (i);
 <a name="l00518"></a>00518                         result &lt;&lt;= item;
@@ -570,12 +570,12 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00521"></a>00521                 <span class="keywordflow">return</span> result;
 <a name="l00522"></a>00522         }
 <a name="l00523"></a>00523     
-<a name="l00524"></a><a class="code" href="class_object_array2_d_base.html#aebfb577a164022b86222822e1187318e">00524</a>     RowType <a class="code" href="class_object_array2_d_base.html#aebfb577a164022b86222822e1187318e">columnWrapAt</a> (<span class="keyword">const</span> <span class="keywordtype">int</span> index) <span class="keywordflow">throw</span>()
+<a name="l00524"></a>00524     RowType columnWrapAt (<span class="keyword">const</span> <span class="keywordtype">int</span> index) <span class="keywordflow">throw</span>()
 <a name="l00525"></a>00525     {
-<a name="l00526"></a>00526         <span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code" href="class_object_array2_d_base.html#abab907a4c2f115abd51b2b74b92bcd11" title="Return the number rows in the 2D array.">numRows</a> = this-&gt;<a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a>();
+<a name="l00526"></a>00526         <span class="keyword">const</span> <span class="keywordtype">int</span> numRows = this-&gt;<a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a>();
 <a name="l00527"></a>00527         RowType result (RowType::withSize (numRows));
 <a name="l00528"></a>00528         
-<a name="l00529"></a>00529         <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; <a class="code" href="class_object_array2_d_base.html#abab907a4c2f115abd51b2b74b92bcd11" title="Return the number rows in the 2D array.">numRows</a>; ++i)
+<a name="l00529"></a>00529         <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; numRows; ++i)
 <a name="l00530"></a>00530                 {
 <a name="l00531"></a>00531                         <span class="keyword">const</span> RowType&amp; row = this-&gt;<a class="code" href="class_object_array.html#a3027a6cfd4eef94f604a7d446c244cfc" title="Returns a new array by iterating through an array of indices provided.">atUnchecked</a> (i);
 <a name="l00532"></a>00532                         result.put (i, row.wrapAt (index));
@@ -584,26 +584,26 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00535"></a>00535         <span class="keywordflow">return</span> result;
 <a name="l00536"></a>00536     }
 <a name="l00537"></a>00537     
-<a name="l00552"></a><a class="code" href="class_object_array2_d_base.html#a48a1a46956adc5c15b0cfec6d297f3dd">00552</a>     <a class="code" href="class_object_array.html">ObjectArrayType</a> <a class="code" href="class_object_array2_d_base.html#a48a1a46956adc5c15b0cfec6d297f3dd" title="Interleave the 2D array into one dimension.">interleave</a>() throw()
+<a name="l00552"></a>00552     ObjectArrayType interleave() throw()
 <a name="l00553"></a>00553     {
 <a name="l00554"></a>00554         <span class="keywordtype">int</span> i, j;
 <a name="l00555"></a>00555         <span class="keywordtype">int</span> actualSize = 0;
-<a name="l00556"></a>00556         <span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code" href="class_object_array2_d_base.html#abab907a4c2f115abd51b2b74b92bcd11" title="Return the number rows in the 2D array.">numRows</a> = this-&gt;<a class="code" href="class_object_array2_d_base.html#abab907a4c2f115abd51b2b74b92bcd11" title="Return the number rows in the 2D array.">numRows</a>();
+<a name="l00556"></a>00556         <span class="keyword">const</span> <span class="keywordtype">int</span> numRows = this-&gt;numRows();
 <a name="l00557"></a>00557         
-<a name="l00558"></a>00558         <a class="code" href="class_object_array.html">ObjectArrayType</a> result = <a class="code" href="class_object_array.html#acfdcf984b61c960961710910fcf4b64e" title="Returns an array with a given size.">ObjectArrayType::withSize</a> (numRows * this-&gt;<a class="code" href="class_object_array2_d_base.html#a7f18891a5476fbfc4c71ed05cc7a4946" title="Return the largest length row in each of the rows in the 2D array.">numColumns</a>());
+<a name="l00558"></a>00558         ObjectArrayType result = <a class="code" href="class_object_array.html#acfdcf984b61c960961710910fcf4b64e" title="Returns an array with a given size.">ObjectArrayType::withSize</a> (numRows * this-&gt;numColumns());
 <a name="l00559"></a>00559         <span class="keyword">const</span> RowType* <span class="keyword">const</span> rows = this-&gt;<a class="code" href="class_object_array.html#a49f3b9719cdeefc07c0ac52f1735d93d" title="Returns a pointer to the raw array.">getArray</a>();
 <a name="l00560"></a>00560         
-<a name="l00561"></a>00561         <span class="keywordflow">for</span> (i = 0; i &lt; <a class="code" href="class_object_array2_d_base.html#abab907a4c2f115abd51b2b74b92bcd11" title="Return the number rows in the 2D array.">numRows</a>; ++i)
+<a name="l00561"></a>00561         <span class="keywordflow">for</span> (i = 0; i &lt; numRows; ++i)
 <a name="l00562"></a>00562         {
 <a name="l00563"></a>00563             <span class="keyword">const</span> ArrayType* <span class="keyword">const</span> sourceArray = rows[i].getArray();
-<a name="l00564"></a>00564             <span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code" href="class_object_array2_d_base.html#a7f18891a5476fbfc4c71ed05cc7a4946" title="Return the largest length row in each of the rows in the 2D array.">numColumns</a> = rows[i].length();
-<a name="l00565"></a>00565             ArrayType* resultArray = result.<a class="code" href="class_object_array.html#a49f3b9719cdeefc07c0ac52f1735d93d" title="Returns a pointer to the raw array.">getArray</a>() + i;
+<a name="l00564"></a>00564             <span class="keyword">const</span> <span class="keywordtype">int</span> numColumns = rows[i].length();
+<a name="l00565"></a>00565             ArrayType* resultArray = result.getArray() + i;
 <a name="l00566"></a>00566             
-<a name="l00567"></a>00567             <span class="keywordflow">for</span> (j = 0; j &lt; <a class="code" href="class_object_array2_d_base.html#a7f18891a5476fbfc4c71ed05cc7a4946" title="Return the largest length row in each of the rows in the 2D array.">numColumns</a>; ++j, resultArray += <a class="code" href="class_object_array2_d_base.html#abab907a4c2f115abd51b2b74b92bcd11" title="Return the number rows in the 2D array.">numRows</a>, ++actualSize)
+<a name="l00567"></a>00567             <span class="keywordflow">for</span> (j = 0; j &lt; numColumns; ++j, resultArray += numRows, ++actualSize)
 <a name="l00568"></a>00568                 *resultArray = sourceArray[j];
 <a name="l00569"></a>00569         }
 <a name="l00570"></a>00570         
-<a name="l00571"></a>00571         result.<a class="code" href="class_object_array.html#a33721e5dd4e7ed9374073ca2b8b6f750" title="Sets a new size for the array.">setSize</a> (actualSize, <span class="keyword">true</span>); <span class="comment">// shrink the size if needed</span>
+<a name="l00571"></a>00571         result.setSize (actualSize, <span class="keyword">true</span>); <span class="comment">// shrink the size if needed</span>
 <a name="l00572"></a>00572         
 <a name="l00573"></a>00573         <span class="keywordflow">return</span> result;
 <a name="l00574"></a>00574     }
@@ -618,59 +618,59 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00583"></a>00583 
 <a name="l00584"></a>00584 
 <a name="l00585"></a>00585 <span class="keyword">template</span>&lt;<span class="keyword">class</span> ArrayType, <span class="keyword">class</span> RowType&gt;
-<a name="l00586"></a><a class="code" href="class_object_array2_d.html">00586</a> <span class="keyword">class </span><a class="code" href="class_object_array2_d.html">ObjectArray2D</a> : <span class="keyword">public</span> <a class="code" href="class_object_array2_d_base.html">ObjectArray2DBase</a>&lt;ArrayType,RowType&gt;
+<a name="l00586"></a>00586 <span class="keyword">class </span>ObjectArray2D : <span class="keyword">public</span> ObjectArray2DBase&lt;ArrayType,RowType&gt;
 <a name="l00587"></a>00587 {
 <a name="l00588"></a>00588 <span class="keyword">public</span>:
-<a name="l00589"></a><a class="code" href="class_object_array2_d.html#ad8251c75a6aff77fc497241a07d4ae67">00589</a>     <span class="keyword">typedef</span> <a class="code" href="class_object_array_internal.html">ObjectArrayInternal&lt;RowType&gt;</a>            <a class="code" href="class_object_array2_d.html#ad8251c75a6aff77fc497241a07d4ae67">Internal</a>; 
-<a name="l00590"></a><a class="code" href="class_object_array2_d.html#aa6956459229b6dfe6a1b7efc5de322e6">00590</a>     <span class="keyword">typedef</span> <a class="code" href="class_object_array2_d_base.html">ObjectArray2DBase&lt;ArrayType,RowType&gt;</a>    <a class="code" href="class_object_array2_d.html#aa6956459229b6dfe6a1b7efc5de322e6">Base</a>;    
-<a name="l00591"></a><a class="code" href="class_object_array2_d.html#a34387565e8e74e2e94e434ea1eeaad46">00591</a>     <span class="keyword">typedef</span> <a class="code" href="class_weak_pointer_container.html" title="This stores a weak reference using a WeakPointer.">WeakPointerContainer&lt;ObjectArray2D&gt;</a>     <a class="code" href="class_object_array2_d.html#a34387565e8e74e2e94e434ea1eeaad46">Weak</a>;
+<a name="l00589"></a>00589     <span class="keyword">typedef</span> ObjectArrayInternal&lt;RowType&gt;            Internal; 
+<a name="l00590"></a>00590     <span class="keyword">typedef</span> ObjectArray2DBase&lt;ArrayType,RowType&gt;    Base;    
+<a name="l00591"></a>00591     <span class="keyword">typedef</span> <a class="code" href="class_weak_pointer_container.html" title="This stores a weak reference using a WeakPointer.">WeakPointerContainer&lt;ObjectArray2D&gt;</a>     Weak;
 <a name="l00592"></a>00592     
-<a name="l00593"></a><a class="code" href="class_object_array2_d.html#a8d99d21cb7cb69c657200fe52ab30144">00593</a>     <span class="keyword">typedef</span> <a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt;ArrayType&gt;</a>                  <a class="code" href="class_object_array2_d.html#a8d99d21cb7cb69c657200fe52ab30144">ObjectArrayType</a>;
-<a name="l00594"></a><a class="code" href="class_object_array2_d.html#afb24269ea2a87c3820774bed41d0e5a8">00594</a>     <span class="keyword">typedef</span> <a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt;ObjectArrayType&gt;</a>            <a class="code" href="class_object_array2_d.html#afb24269ea2a87c3820774bed41d0e5a8">ObjectArray2DType</a>;
-<a name="l00595"></a><a class="code" href="class_object_array2_d.html#a0c1ef8383f9b39c7f67b266eb41e16b7">00595</a>     <span class="keyword">typedef</span> <span class="keyword">typename</span> <a class="code" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">Base::InitialObject</a>            <a class="code" href="class_object_array2_d.html#a0c1ef8383f9b39c7f67b266eb41e16b7">InitialObject</a>;
+<a name="l00593"></a>00593     <span class="keyword">typedef</span> <a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt;ArrayType&gt;</a>                  ObjectArrayType;
+<a name="l00594"></a>00594     <span class="keyword">typedef</span> <a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt;ObjectArrayType&gt;</a>            ObjectArray2DType;
+<a name="l00595"></a>00595     <span class="keyword">typedef</span> <span class="keyword">typename</span> Base::InitialObject            InitialObject;
 <a name="l00596"></a>00596 
 <a name="l00597"></a>00597         
-<a name="l00598"></a><a class="code" href="class_object_array2_d.html#a12582954a69635c22c80015c10d9b49f">00598</a>     <span class="keyword">explicit</span> <a class="code" href="class_object_array2_d.html#a12582954a69635c22c80015c10d9b49f">ObjectArray2D</a> (<a class="code" href="class_object_array_internal.html">Internal</a>* internalToUse) <span class="keywordflow">throw</span>() 
-<a name="l00599"></a>00599         :       <a class="code" href="class_object_array2_d.html#aa6956459229b6dfe6a1b7efc5de322e6">Base</a> (internalToUse)
+<a name="l00598"></a>00598     <span class="keyword">explicit</span> ObjectArray2D (Internal* internalToUse) <span class="keywordflow">throw</span>() 
+<a name="l00599"></a>00599         :       Base (internalToUse)
 <a name="l00600"></a>00600         {
 <a name="l00601"></a>00601         } 
 <a name="l00602"></a>00602     
-<a name="l00605"></a><a class="code" href="class_object_array2_d.html#a7ce6f33b080d4ad7d3fc7f678944ff05">00605</a>     <a class="code" href="class_object_array2_d.html#a12582954a69635c22c80015c10d9b49f">ObjectArray2D</a> (<a class="code" href="class_object_array2_d.html">ObjectArray2D</a> <span class="keyword">const</span>&amp; <a class="code" href="class_object_array.html#a03baa6c06a77a576a05e1898b9ccd19f" title="Creates a deep copy of the array.">copy</a>) <span class="keywordflow">throw</span>()
-<a name="l00606"></a>00606     :   <a class="code" href="class_object_array2_d.html#aa6956459229b6dfe6a1b7efc5de322e6">Base</a> (static_cast&lt;Base const&amp;&gt; (<a class="code" href="class_object_array.html#a03baa6c06a77a576a05e1898b9ccd19f" title="Creates a deep copy of the array.">copy</a>))
+<a name="l00605"></a>00605     ObjectArray2D (ObjectArray2D <span class="keyword">const</span>&amp; copy) <span class="keywordflow">throw</span>()
+<a name="l00606"></a>00606     :   Base (static_cast&lt;Base const&amp;&gt; (copy))
 <a name="l00607"></a>00607     {
 <a name="l00608"></a>00608     }
 <a name="l00609"></a>00609     
-<a name="l00610"></a><a class="code" href="class_object_array2_d.html#a1f479b4c68317d3ce965f9e7c13a5840">00610</a>     <a class="code" href="class_object_array2_d.html#a12582954a69635c22c80015c10d9b49f">ObjectArray2D</a> (<a class="code" href="class_dynamic.html">Dynamic</a> <span class="keyword">const</span>&amp; other) <span class="keywordflow">throw</span>()
-<a name="l00611"></a>00611     :   <a class="code" href="class_object_array2_d.html#aa6956459229b6dfe6a1b7efc5de322e6">Base</a> (other.as&lt;<a class="code" href="class_object_array2_d.html">ObjectArray2D</a>&gt;().<a class="code" href="class_smart_pointer_container_base.html#a6d288e885102290e991d01ae06eaacde">getInternal</a>())
+<a name="l00610"></a>00610     ObjectArray2D (Dynamic <span class="keyword">const</span>&amp; other) <span class="keywordflow">throw</span>()
+<a name="l00611"></a>00611     :   Base (other.as&lt;ObjectArray2D&gt;().getInternal())
 <a name="l00612"></a>00612     {
 <a name="l00613"></a>00613     }    
 <a name="l00614"></a>00614     
-<a name="l00616"></a><a class="code" href="class_object_array2_d.html#afd8b937c3824c4eac56ae0c077bea880">00616</a>     <a class="code" href="class_object_array2_d.html">ObjectArray2D</a>&amp; <a class="code" href="class_object_array2_d.html#afd8b937c3824c4eac56ae0c077bea880" title="Assignment operator.">operator= </a>(<a class="code" href="class_object_array2_d.html">ObjectArray2D</a> <span class="keyword">const</span>&amp; other) <span class="keywordflow">throw</span>()
+<a name="l00616"></a>00616     ObjectArray2D&amp; operator= (ObjectArray2D <span class="keyword">const</span>&amp; other) <span class="keywordflow">throw</span>()
 <a name="l00617"></a>00617         {
 <a name="l00618"></a>00618                 <span class="keywordflow">if</span> (<span class="keyword">this</span> != &amp;other)
-<a name="l00619"></a>00619             this-&gt;<a class="code" href="class_smart_pointer_container_base.html#a0937fdc04eafc3a2146a6af5320e5a37">setInternal</a> (other.getInternal());<span class="comment">//this-&gt;setInternal (other.containerCopy().getInternal());</span>
+<a name="l00619"></a>00619             this-&gt;setInternal (other.getInternal());<span class="comment">//this-&gt;setInternal (other.containerCopy().getInternal());</span>
 <a name="l00620"></a>00620         
 <a name="l00621"></a>00621         <span class="keywordflow">return</span> *<span class="keyword">this</span>;
 <a name="l00622"></a>00622         }
 <a name="l00623"></a>00623     
-<a name="l00627"></a><a class="code" href="class_object_array2_d.html#add78e9b1c4d4c397b5158dc40a5fdeaf">00627</a>     <span class="keyword">static</span> <a class="code" href="class_object_array2_d.html">ObjectArray2D</a> <a class="code" href="class_object_array2_d.html#add78e9b1c4d4c397b5158dc40a5fdeaf" title="Get a weakly linked copy of this object.">fromWeak</a> (<a class="code" href="class_weak_pointer_container.html" title="This stores a weak reference using a WeakPointer.">Weak</a> <span class="keyword">const</span>&amp; weak) <span class="keywordflow">throw</span>()
+<a name="l00627"></a>00627     <span class="keyword">static</span> ObjectArray2D fromWeak (Weak <span class="keyword">const</span>&amp; weak) <span class="keywordflow">throw</span>()
 <a name="l00628"></a>00628     {
-<a name="l00629"></a>00629         <span class="keywordflow">return</span> weak.<a class="code" href="class_object_array2_d.html#add78e9b1c4d4c397b5158dc40a5fdeaf" title="Get a weakly linked copy of this object.">fromWeak</a>();
+<a name="l00629"></a>00629         <span class="keywordflow">return</span> weak.fromWeak();
 <a name="l00630"></a>00630     }    
 <a name="l00631"></a>00631         
-<a name="l00632"></a><a class="code" href="class_object_array2_d.html#ae2b57af76bb0e493bb0747389dfd815a">00632</a>     <span class="keyword">static</span> <span class="keyword">const</span> <a class="code" href="class_object_array2_d.html">ObjectArray2D</a>&amp; <a class="code" href="class_object_array2_d.html#ae2b57af76bb0e493bb0747389dfd815a">getNull</a>() throw()
+<a name="l00632"></a>00632     <span class="keyword">static</span> <span class="keyword">const</span> ObjectArray2D&amp; getNull() throw()
 <a name="l00633"></a>00633         {
-<a name="l00634"></a>00634                 <span class="keyword">static</span> <a class="code" href="class_object_array2_d.html">ObjectArray2D</a> null;
+<a name="l00634"></a>00634                 <span class="keyword">static</span> ObjectArray2D null;
 <a name="l00635"></a>00635                 <span class="keywordflow">return</span> null;
 <a name="l00636"></a>00636         }                       
 <a name="l00637"></a>00637     
-<a name="l00638"></a><a class="code" href="class_object_array2_d.html#ac96530521a49123daa828c036490c676">00638</a>     <a class="code" href="class_object_array2_d.html#a12582954a69635c22c80015c10d9b49f">ObjectArray2D</a> (<span class="keyword">const</span> <span class="keywordtype">int</span> rows = 0) throw()
-<a name="l00639"></a>00639         :       <a class="code" href="class_object_array.html">Base</a> (rows &lt; 0 ? 0 : rows)
+<a name="l00638"></a>00638     ObjectArray2D (<span class="keyword">const</span> <span class="keywordtype">int</span> rows = 0) throw()
+<a name="l00639"></a>00639         :       Base (rows &lt; 0 ? 0 : rows)
 <a name="l00640"></a>00640         {
 <a name="l00641"></a>00641         }
 <a name="l00642"></a>00642     
-<a name="l00643"></a><a class="code" href="class_object_array2_d.html#abde2d32fd776b9e2e9f9bc95799eba0b">00643</a>         <a class="code" href="class_object_array2_d.html#a12582954a69635c22c80015c10d9b49f">ObjectArray2D</a> (<span class="keyword">const</span> <span class="keywordtype">int</span> rows, <span class="keyword">const</span> <span class="keywordtype">int</span> columns) <span class="keywordflow">throw</span>()
-<a name="l00644"></a>00644         :       <a class="code" href="class_object_array2_d.html#aa6956459229b6dfe6a1b7efc5de322e6">Base</a> (rows &lt; 0 ? 0 : rows)
+<a name="l00643"></a>00643         ObjectArray2D (<span class="keyword">const</span> <span class="keywordtype">int</span> rows, <span class="keyword">const</span> <span class="keywordtype">int</span> columns) <span class="keywordflow">throw</span>()
+<a name="l00644"></a>00644         :       Base (rows &lt; 0 ? 0 : rows)
 <a name="l00645"></a>00645         {
 <a name="l00646"></a>00646                 <span class="keywordflow">if</span> (columns &gt; 0 &amp;&amp; rows &gt; 0)
 <a name="l00647"></a>00647                 {
@@ -681,88 +681,88 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00652"></a>00652                 }
 <a name="l00653"></a>00653         }
 <a name="l00654"></a>00654     
-<a name="l00655"></a><a class="code" href="class_object_array2_d.html#ad08db4741056b70cafd8a52de9bdf5fe">00655</a>         <a class="code" href="class_object_array2_d.html#a12582954a69635c22c80015c10d9b49f">ObjectArray2D</a> (RowType <span class="keyword">const</span>&amp; single) <span class="keywordflow">throw</span>()
-<a name="l00656"></a>00656         :       <a class="code" href="class_object_array2_d.html#aa6956459229b6dfe6a1b7efc5de322e6">Base</a> (single)
+<a name="l00655"></a>00655         ObjectArray2D (RowType <span class="keyword">const</span>&amp; single) <span class="keywordflow">throw</span>()
+<a name="l00656"></a>00656         :       Base (single)
 <a name="l00657"></a>00657         {
 <a name="l00658"></a>00658         }
 <a name="l00659"></a>00659     
-<a name="l00660"></a><a class="code" href="class_object_array2_d.html#acb7b630358423c624480d798fa9500f6">00660</a>         <a class="code" href="class_object_array2_d.html#a12582954a69635c22c80015c10d9b49f">ObjectArray2D</a> (<a class="code" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> <span class="keyword">const</span> &amp;i00,
-<a name="l00661"></a>00661                                    <a class="code" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> <span class="keyword">const</span> &amp;i01,
-<a name="l00662"></a>00662                                    <a class="code" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> <span class="keyword">const</span> &amp;i02 = <a class="code" href="class_object_array2_d.html#a0c1ef8383f9b39c7f67b266eb41e16b7">InitialObject</a>(),
-<a name="l00663"></a>00663                                    <a class="code" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> <span class="keyword">const</span> &amp;i03 = <a class="code" href="class_object_array2_d.html#a0c1ef8383f9b39c7f67b266eb41e16b7">InitialObject</a>()) throw()
-<a name="l00664"></a>00664         :       <a class="code" href="class_object_array.html">Base</a> (i00, i01, i02, i03) 
+<a name="l00660"></a>00660         ObjectArray2D (InitialObject <span class="keyword">const</span> &amp;i00,
+<a name="l00661"></a>00661                                    InitialObject <span class="keyword">const</span> &amp;i01,
+<a name="l00662"></a>00662                                    InitialObject <span class="keyword">const</span> &amp;i02 = InitialObject(),
+<a name="l00663"></a>00663                                    InitialObject <span class="keyword">const</span> &amp;i03 = InitialObject()) throw()
+<a name="l00664"></a>00664         :       Base (i00, i01, i02, i03) 
 <a name="l00665"></a>00665         {
 <a name="l00666"></a>00666         }
 <a name="l00667"></a>00667     
-<a name="l00668"></a><a class="code" href="class_object_array2_d.html#a82e1d8df4a6dd5b1a0a6b50b62a9ba38">00668</a>         <a class="code" href="class_object_array2_d.html#a12582954a69635c22c80015c10d9b49f">ObjectArray2D</a> (<a class="code" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> <span class="keyword">const</span> &amp;i00,
-<a name="l00669"></a>00669                                    <a class="code" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> <span class="keyword">const</span> &amp;i01,
-<a name="l00670"></a>00670                                    <a class="code" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> <span class="keyword">const</span> &amp;i02,
-<a name="l00671"></a>00671                                    <a class="code" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> <span class="keyword">const</span> &amp;i03,
-<a name="l00672"></a>00672                                    <a class="code" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> <span class="keyword">const</span> &amp;i04,
-<a name="l00673"></a>00673                                    <a class="code" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> <span class="keyword">const</span> &amp;i05 = <a class="code" href="class_object_array2_d.html#a0c1ef8383f9b39c7f67b266eb41e16b7">InitialObject</a>(),
-<a name="l00674"></a>00674                                    <a class="code" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> <span class="keyword">const</span> &amp;i06 = <a class="code" href="class_object_array2_d.html#a0c1ef8383f9b39c7f67b266eb41e16b7">InitialObject</a>(),
-<a name="l00675"></a>00675                                    <a class="code" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> <span class="keyword">const</span> &amp;i07 = <a class="code" href="class_object_array2_d.html#a0c1ef8383f9b39c7f67b266eb41e16b7">InitialObject</a>()) throw()
-<a name="l00676"></a>00676         :       <a class="code" href="class_object_array.html">Base</a> (i00, i01, i02, i03,
+<a name="l00668"></a>00668         ObjectArray2D (InitialObject <span class="keyword">const</span> &amp;i00,
+<a name="l00669"></a>00669                                    InitialObject <span class="keyword">const</span> &amp;i01,
+<a name="l00670"></a>00670                                    InitialObject <span class="keyword">const</span> &amp;i02,
+<a name="l00671"></a>00671                                    InitialObject <span class="keyword">const</span> &amp;i03,
+<a name="l00672"></a>00672                                    InitialObject <span class="keyword">const</span> &amp;i04,
+<a name="l00673"></a>00673                                    InitialObject <span class="keyword">const</span> &amp;i05 = InitialObject(),
+<a name="l00674"></a>00674                                    InitialObject <span class="keyword">const</span> &amp;i06 = InitialObject(),
+<a name="l00675"></a>00675                                    InitialObject <span class="keyword">const</span> &amp;i07 = InitialObject()) throw()
+<a name="l00676"></a>00676         :       Base (i00, i01, i02, i03,
 <a name="l00677"></a>00677               i04, i05, i06, i07) 
 <a name="l00678"></a>00678         {
 <a name="l00679"></a>00679         }
 <a name="l00680"></a>00680     
-<a name="l00681"></a><a class="code" href="class_object_array2_d.html#a33a407c77a9b27da03518e293eebd5fd">00681</a>         <a class="code" href="class_object_array2_d.html#a12582954a69635c22c80015c10d9b49f">ObjectArray2D</a> (<a class="code" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> <span class="keyword">const</span> &amp;i00,
-<a name="l00682"></a>00682                                    <a class="code" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> <span class="keyword">const</span> &amp;i01,
-<a name="l00683"></a>00683                                    <a class="code" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> <span class="keyword">const</span> &amp;i02,
-<a name="l00684"></a>00684                                    <a class="code" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> <span class="keyword">const</span> &amp;i03,
-<a name="l00685"></a>00685                                    <a class="code" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> <span class="keyword">const</span> &amp;i04,
-<a name="l00686"></a>00686                                    <a class="code" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> <span class="keyword">const</span> &amp;i05,
-<a name="l00687"></a>00687                                    <a class="code" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> <span class="keyword">const</span> &amp;i06,
-<a name="l00688"></a>00688                                    <a class="code" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> <span class="keyword">const</span> &amp;i07,
-<a name="l00689"></a>00689                                    <a class="code" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> <span class="keyword">const</span> &amp;i08,
-<a name="l00690"></a>00690                                    <a class="code" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> <span class="keyword">const</span> &amp;i09 = <a class="code" href="class_object_array2_d.html#a0c1ef8383f9b39c7f67b266eb41e16b7">InitialObject</a>(),
-<a name="l00691"></a>00691                                    <a class="code" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> <span class="keyword">const</span> &amp;i10 = <a class="code" href="class_object_array2_d.html#a0c1ef8383f9b39c7f67b266eb41e16b7">InitialObject</a>(),
-<a name="l00692"></a>00692                                    <a class="code" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> <span class="keyword">const</span> &amp;i11 = <a class="code" href="class_object_array2_d.html#a0c1ef8383f9b39c7f67b266eb41e16b7">InitialObject</a>(),
-<a name="l00693"></a>00693                                    <a class="code" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> <span class="keyword">const</span> &amp;i12 = <a class="code" href="class_object_array2_d.html#a0c1ef8383f9b39c7f67b266eb41e16b7">InitialObject</a>(),
-<a name="l00694"></a>00694                                    <a class="code" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> <span class="keyword">const</span> &amp;i13 = <a class="code" href="class_object_array2_d.html#a0c1ef8383f9b39c7f67b266eb41e16b7">InitialObject</a>(),
-<a name="l00695"></a>00695                                    <a class="code" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> <span class="keyword">const</span> &amp;i14 = <a class="code" href="class_object_array2_d.html#a0c1ef8383f9b39c7f67b266eb41e16b7">InitialObject</a>(),
-<a name="l00696"></a>00696                                    <a class="code" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> <span class="keyword">const</span> &amp;i15 = <a class="code" href="class_object_array2_d.html#a0c1ef8383f9b39c7f67b266eb41e16b7">InitialObject</a>()) throw()
-<a name="l00697"></a>00697         :       <a class="code" href="class_object_array.html">Base</a> (i00, i01, i02, i03,
+<a name="l00681"></a>00681         ObjectArray2D (InitialObject <span class="keyword">const</span> &amp;i00,
+<a name="l00682"></a>00682                                    InitialObject <span class="keyword">const</span> &amp;i01,
+<a name="l00683"></a>00683                                    InitialObject <span class="keyword">const</span> &amp;i02,
+<a name="l00684"></a>00684                                    InitialObject <span class="keyword">const</span> &amp;i03,
+<a name="l00685"></a>00685                                    InitialObject <span class="keyword">const</span> &amp;i04,
+<a name="l00686"></a>00686                                    InitialObject <span class="keyword">const</span> &amp;i05,
+<a name="l00687"></a>00687                                    InitialObject <span class="keyword">const</span> &amp;i06,
+<a name="l00688"></a>00688                                    InitialObject <span class="keyword">const</span> &amp;i07,
+<a name="l00689"></a>00689                                    InitialObject <span class="keyword">const</span> &amp;i08,
+<a name="l00690"></a>00690                                    InitialObject <span class="keyword">const</span> &amp;i09 = InitialObject(),
+<a name="l00691"></a>00691                                    InitialObject <span class="keyword">const</span> &amp;i10 = InitialObject(),
+<a name="l00692"></a>00692                                    InitialObject <span class="keyword">const</span> &amp;i11 = InitialObject(),
+<a name="l00693"></a>00693                                    InitialObject <span class="keyword">const</span> &amp;i12 = InitialObject(),
+<a name="l00694"></a>00694                                    InitialObject <span class="keyword">const</span> &amp;i13 = InitialObject(),
+<a name="l00695"></a>00695                                    InitialObject <span class="keyword">const</span> &amp;i14 = InitialObject(),
+<a name="l00696"></a>00696                                    InitialObject <span class="keyword">const</span> &amp;i15 = InitialObject()) throw()
+<a name="l00697"></a>00697         :       Base (i00, i01, i02, i03,
 <a name="l00698"></a>00698               i04, i05, i06, i07,
 <a name="l00699"></a>00699               i08, i09, i10, i11, 
 <a name="l00700"></a>00700               i12, i13, i14, i15)
 <a name="l00701"></a>00701         {
 <a name="l00702"></a>00702         }
 <a name="l00703"></a>00703     
-<a name="l00704"></a><a class="code" href="class_object_array2_d.html#ad45cba7cb86fbb8405f79e997ac1c712">00704</a>         <a class="code" href="class_object_array2_d.html#a12582954a69635c22c80015c10d9b49f">ObjectArray2D</a> (<a class="code" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> <span class="keyword">const</span> &amp;i00,
-<a name="l00705"></a>00705                                    <a class="code" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> <span class="keyword">const</span> &amp;i01,
-<a name="l00706"></a>00706                                    <a class="code" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> <span class="keyword">const</span> &amp;i02,
-<a name="l00707"></a>00707                                    <a class="code" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> <span class="keyword">const</span> &amp;i03,
-<a name="l00708"></a>00708                                    <a class="code" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> <span class="keyword">const</span> &amp;i04,
-<a name="l00709"></a>00709                                    <a class="code" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> <span class="keyword">const</span> &amp;i05,
-<a name="l00710"></a>00710                                    <a class="code" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> <span class="keyword">const</span> &amp;i06,
-<a name="l00711"></a>00711                                    <a class="code" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> <span class="keyword">const</span> &amp;i07,
-<a name="l00712"></a>00712                                    <a class="code" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> <span class="keyword">const</span> &amp;i08,
-<a name="l00713"></a>00713                                    <a class="code" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> <span class="keyword">const</span> &amp;i09,
-<a name="l00714"></a>00714                                    <a class="code" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> <span class="keyword">const</span> &amp;i10,
-<a name="l00715"></a>00715                                    <a class="code" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> <span class="keyword">const</span> &amp;i11,
-<a name="l00716"></a>00716                                    <a class="code" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> <span class="keyword">const</span> &amp;i12,
-<a name="l00717"></a>00717                                    <a class="code" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> <span class="keyword">const</span> &amp;i13,
-<a name="l00718"></a>00718                                    <a class="code" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> <span class="keyword">const</span> &amp;i14,
-<a name="l00719"></a>00719                                    <a class="code" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> <span class="keyword">const</span> &amp;i15,
-<a name="l00720"></a>00720                                    <a class="code" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> <span class="keyword">const</span> &amp;i16,
-<a name="l00721"></a>00721                                    <a class="code" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> <span class="keyword">const</span> &amp;i17 = <a class="code" href="class_object_array2_d.html#a0c1ef8383f9b39c7f67b266eb41e16b7">InitialObject</a>(),
-<a name="l00722"></a>00722                                    <a class="code" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> <span class="keyword">const</span> &amp;i18 = <a class="code" href="class_object_array2_d.html#a0c1ef8383f9b39c7f67b266eb41e16b7">InitialObject</a>(),
-<a name="l00723"></a>00723                                    <a class="code" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> <span class="keyword">const</span> &amp;i19 = <a class="code" href="class_object_array2_d.html#a0c1ef8383f9b39c7f67b266eb41e16b7">InitialObject</a>(),
-<a name="l00724"></a>00724                                    <a class="code" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> <span class="keyword">const</span> &amp;i20 = <a class="code" href="class_object_array2_d.html#a0c1ef8383f9b39c7f67b266eb41e16b7">InitialObject</a>(),
-<a name="l00725"></a>00725                                    <a class="code" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> <span class="keyword">const</span> &amp;i21 = <a class="code" href="class_object_array2_d.html#a0c1ef8383f9b39c7f67b266eb41e16b7">InitialObject</a>(),
-<a name="l00726"></a>00726                                    <a class="code" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> <span class="keyword">const</span> &amp;i22 = <a class="code" href="class_object_array2_d.html#a0c1ef8383f9b39c7f67b266eb41e16b7">InitialObject</a>(),
-<a name="l00727"></a>00727                                    <a class="code" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> <span class="keyword">const</span> &amp;i23 = <a class="code" href="class_object_array2_d.html#a0c1ef8383f9b39c7f67b266eb41e16b7">InitialObject</a>(),
-<a name="l00728"></a>00728                                    <a class="code" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> <span class="keyword">const</span> &amp;i24 = <a class="code" href="class_object_array2_d.html#a0c1ef8383f9b39c7f67b266eb41e16b7">InitialObject</a>(),
-<a name="l00729"></a>00729                                    <a class="code" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> <span class="keyword">const</span> &amp;i25 = <a class="code" href="class_object_array2_d.html#a0c1ef8383f9b39c7f67b266eb41e16b7">InitialObject</a>(),
-<a name="l00730"></a>00730                                    <a class="code" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> <span class="keyword">const</span> &amp;i26 = <a class="code" href="class_object_array2_d.html#a0c1ef8383f9b39c7f67b266eb41e16b7">InitialObject</a>(),
-<a name="l00731"></a>00731                                    <a class="code" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> <span class="keyword">const</span> &amp;i27 = <a class="code" href="class_object_array2_d.html#a0c1ef8383f9b39c7f67b266eb41e16b7">InitialObject</a>(),
-<a name="l00732"></a>00732                                    <a class="code" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> <span class="keyword">const</span> &amp;i28 = <a class="code" href="class_object_array2_d.html#a0c1ef8383f9b39c7f67b266eb41e16b7">InitialObject</a>(),
-<a name="l00733"></a>00733                                    <a class="code" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> <span class="keyword">const</span> &amp;i29 = <a class="code" href="class_object_array2_d.html#a0c1ef8383f9b39c7f67b266eb41e16b7">InitialObject</a>(),
-<a name="l00734"></a>00734                                    <a class="code" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> <span class="keyword">const</span> &amp;i30 = <a class="code" href="class_object_array2_d.html#a0c1ef8383f9b39c7f67b266eb41e16b7">InitialObject</a>(),
-<a name="l00735"></a>00735                                    <a class="code" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> <span class="keyword">const</span> &amp;i31 = <a class="code" href="class_object_array2_d.html#a0c1ef8383f9b39c7f67b266eb41e16b7">InitialObject</a>()) throw()
-<a name="l00736"></a>00736         :       <a class="code" href="class_object_array.html">Base</a> (i00, i01, i02, i03,
+<a name="l00704"></a>00704         ObjectArray2D (InitialObject <span class="keyword">const</span> &amp;i00,
+<a name="l00705"></a>00705                                    InitialObject <span class="keyword">const</span> &amp;i01,
+<a name="l00706"></a>00706                                    InitialObject <span class="keyword">const</span> &amp;i02,
+<a name="l00707"></a>00707                                    InitialObject <span class="keyword">const</span> &amp;i03,
+<a name="l00708"></a>00708                                    InitialObject <span class="keyword">const</span> &amp;i04,
+<a name="l00709"></a>00709                                    InitialObject <span class="keyword">const</span> &amp;i05,
+<a name="l00710"></a>00710                                    InitialObject <span class="keyword">const</span> &amp;i06,
+<a name="l00711"></a>00711                                    InitialObject <span class="keyword">const</span> &amp;i07,
+<a name="l00712"></a>00712                                    InitialObject <span class="keyword">const</span> &amp;i08,
+<a name="l00713"></a>00713                                    InitialObject <span class="keyword">const</span> &amp;i09,
+<a name="l00714"></a>00714                                    InitialObject <span class="keyword">const</span> &amp;i10,
+<a name="l00715"></a>00715                                    InitialObject <span class="keyword">const</span> &amp;i11,
+<a name="l00716"></a>00716                                    InitialObject <span class="keyword">const</span> &amp;i12,
+<a name="l00717"></a>00717                                    InitialObject <span class="keyword">const</span> &amp;i13,
+<a name="l00718"></a>00718                                    InitialObject <span class="keyword">const</span> &amp;i14,
+<a name="l00719"></a>00719                                    InitialObject <span class="keyword">const</span> &amp;i15,
+<a name="l00720"></a>00720                                    InitialObject <span class="keyword">const</span> &amp;i16,
+<a name="l00721"></a>00721                                    InitialObject <span class="keyword">const</span> &amp;i17 = InitialObject(),
+<a name="l00722"></a>00722                                    InitialObject <span class="keyword">const</span> &amp;i18 = InitialObject(),
+<a name="l00723"></a>00723                                    InitialObject <span class="keyword">const</span> &amp;i19 = InitialObject(),
+<a name="l00724"></a>00724                                    InitialObject <span class="keyword">const</span> &amp;i20 = InitialObject(),
+<a name="l00725"></a>00725                                    InitialObject <span class="keyword">const</span> &amp;i21 = InitialObject(),
+<a name="l00726"></a>00726                                    InitialObject <span class="keyword">const</span> &amp;i22 = InitialObject(),
+<a name="l00727"></a>00727                                    InitialObject <span class="keyword">const</span> &amp;i23 = InitialObject(),
+<a name="l00728"></a>00728                                    InitialObject <span class="keyword">const</span> &amp;i24 = InitialObject(),
+<a name="l00729"></a>00729                                    InitialObject <span class="keyword">const</span> &amp;i25 = InitialObject(),
+<a name="l00730"></a>00730                                    InitialObject <span class="keyword">const</span> &amp;i26 = InitialObject(),
+<a name="l00731"></a>00731                                    InitialObject <span class="keyword">const</span> &amp;i27 = InitialObject(),
+<a name="l00732"></a>00732                                    InitialObject <span class="keyword">const</span> &amp;i28 = InitialObject(),
+<a name="l00733"></a>00733                                    InitialObject <span class="keyword">const</span> &amp;i29 = InitialObject(),
+<a name="l00734"></a>00734                                    InitialObject <span class="keyword">const</span> &amp;i30 = InitialObject(),
+<a name="l00735"></a>00735                                    InitialObject <span class="keyword">const</span> &amp;i31 = InitialObject()) throw()
+<a name="l00736"></a>00736         :       Base (i00, i01, i02, i03,
 <a name="l00737"></a>00737               i04, i05, i06, i07,
 <a name="l00738"></a>00738               i08, i09, i10, i11, 
 <a name="l00739"></a>00739               i12, i13, i14, i15, 
@@ -773,15 +773,15 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00744"></a>00744         {
 <a name="l00745"></a>00745         }
 <a name="l00746"></a>00746     
-<a name="l00747"></a>00747         <a class="code" href="class_object_array2_d.html#a406a0eb24d38ef4d5bd6e76eef8a8012">ObjectArrayAssignmentDefinition</a>(<a class="code" href="class_object_array2_d.html">ObjectArray2D</a>, RowType);
+<a name="l00747"></a>00747         ObjectArrayAssignmentDefinition(ObjectArray2D, RowType);
 <a name="l00748"></a>00748     
-<a name="l00749"></a><a class="code" href="class_object_array2_d.html#af8082dcb0d717810c66550e375563b30">00749</a>         <a class="code" href="class_object_array2_d.html#a12582954a69635c22c80015c10d9b49f">ObjectArray2D</a> (<a class="code" href="class_object_array2_d.html">ObjectArray2D&lt;ArrayType,RowType&gt;</a> <span class="keyword">const</span>&amp; array0, 
-<a name="l00750"></a>00750                                    <a class="code" href="class_object_array2_d.html">ObjectArray2D&lt;ArrayType,RowType&gt;</a> <span class="keyword">const</span>&amp; array1) <span class="keywordflow">throw</span>()
-<a name="l00751"></a>00751         :       <a class="code" href="class_object_array2_d.html#aa6956459229b6dfe6a1b7efc5de322e6">Base</a> (array0, array1)
+<a name="l00749"></a>00749         ObjectArray2D (ObjectArray2D&lt;ArrayType,RowType&gt; <span class="keyword">const</span>&amp; array0, 
+<a name="l00750"></a>00750                                    ObjectArray2D&lt;ArrayType,RowType&gt; <span class="keyword">const</span>&amp; array1) <span class="keywordflow">throw</span>()
+<a name="l00751"></a>00751         :       Base (array0, array1)
 <a name="l00752"></a>00752         {
 <a name="l00753"></a>00753         }
 <a name="l00754"></a>00754     
-<a name="l00755"></a><a class="code" href="class_object_array2_d.html#abaaec1aecf9e3efea2d3bd62867547ea">00755</a>     <a class="code" href="plonk___smart_pointer_container_8h.html#a0544c934438d4bc87b159fc1675a69fd">PLONK_OBJECTARROWOPERATOR</a>(<a class="code" href="class_object_array2_d.html">ObjectArray2D</a>);
+<a name="l00755"></a>00755     PLONK_OBJECTARROWOPERATOR(ObjectArray2D);
 <a name="l00756"></a>00756 
 <a name="l00757"></a>00757 };
 <a name="l00758"></a>00758 
@@ -795,7 +795,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Properties</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -804,7 +804,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 5 2012 17:04:55 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 8 2014 12:26:49 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>
