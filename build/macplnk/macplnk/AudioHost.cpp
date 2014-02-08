@@ -40,7 +40,6 @@
 #include "AudioHost.h"
 
 AudioHost::AudioHost()
-:   PortAudioAudioHost (ObjectMemory<ObjectMemoryPools>::create())
 {
 }
 

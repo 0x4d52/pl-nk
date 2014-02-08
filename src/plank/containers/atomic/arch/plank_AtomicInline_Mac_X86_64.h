@@ -852,22 +852,32 @@ static inline PlankP pl_AtomicPX_Decrement (PlankAtomicPXRef p)
     return pl_AtomicPX_Add (p, (PlankL)(-1));
 }
 
+//static inline  PlankB pl_AtomicPX_CompareAndSwap (PlankAtomicPXRef p, PlankP oldPtr, PlankUL oldExtra, PlankP newPtr, PlankUL newExtra)
+//{
+//    char success;
+//#if __PIC__
+//    __asm__ __volatile__("xchg %%rsi, %%rbx;"
+//                         "lock; cmpxchg16b %0; setz %3;"
+//                         "xchg %%rbx, %%rsi;"
+//                         : "+m" (*p), "+a" (oldPtr), "+d" (oldExtra), "=q" (success)
+//                         : "S" (newPtr), "c" (newExtra)
+//                         : "cc", "memory");
+//#else // !__PIC__
+//    __asm__ __volatile__("lock; cmpxchg16b %0; setz %1"
+//                         : "=m"(*p), "=a"(success)
+//                         : "m"(*p), "d" (oldExtra), "a" (oldPtr), "c" (newExtra), "b" (newPtr)
+//                         : "cc", "memory");
+//#endif
+//    return success;
+//}
+
 static inline  PlankB pl_AtomicPX_CompareAndSwap (PlankAtomicPXRef p, PlankP oldPtr, PlankUL oldExtra, PlankP newPtr, PlankUL newExtra)
 {
     char success;
-#if __PIC__
-    __asm__ __volatile__("xchg %%rsi, %%rbx;"
-                         "lock; cmpxchg16b %0; setz %3;"
-                         "xchg %%rbx, %%rsi;"
-                         : "+m" (*p), "+a" (oldPtr), "+d" (oldExtra), "=q" (success)
-                         : "S" (newPtr), "c" (newExtra)
-                         : "memory");
-#else // !__PIC__
     __asm__ __volatile__("lock; cmpxchg16b %0; setz %1"
                          : "=m"(*p), "=a"(success)
                          : "m"(*p), "d" (oldExtra), "a" (oldPtr), "c" (newExtra), "b" (newPtr)
-                         : "memory");
-#endif
+                         : "cc", "memory");
     return success;
 }
 

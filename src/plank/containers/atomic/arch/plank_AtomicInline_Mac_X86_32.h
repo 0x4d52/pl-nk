@@ -853,24 +853,34 @@ static inline PlankP pl_AtomicPX_Decrement (PlankAtomicPXRef p)
     return pl_AtomicPX_Add (p, (PlankL)(-1));
 }
 
+//static inline  PlankB pl_AtomicPX_CompareAndSwap (PlankAtomicPXRef p, PlankP oldPtr, PlankUL oldExtra, PlankP newPtr, PlankUL newExtra)
+//{
+//    char success;
+//#if __PIC__
+//    __asm__ __volatile__("pushl %%ebx;"
+//                         "movl %6,%%ebx;"
+//                         "lock; cmpxchg8b %0; setz %1;"
+//                         "pop %%ebx;"
+//                         : "=m"(*p), "=a"(success)
+//                         : "m"(*p), "d" (oldExtra), "a" (oldPtr), "c" (newExtra), "m" (newPtr)
+//                         : "cc", "memory");
+//#else // !__PIC__
+//    __asm__ __volatile__("lock; cmpxchg8b %0; setz %1;"
+//                         : "=m"(*p), "=a"(success)
+//                         : "m"(*p), "d" (oldExtra), "a" (oldPtr), "c" (newExtra), "b" (newPtr)
+//                         : "cc", "memory");
+//#endif
+//    return success;
+//}
+
 static inline  PlankB pl_AtomicPX_CompareAndSwap (PlankAtomicPXRef p, PlankP oldPtr, PlankUL oldExtra, PlankP newPtr, PlankUL newExtra)
 {
-    char success;
-#if __PIC__
-    __asm__ __volatile__("pushl %%ebx;"
-                         "movl %6,%%ebx;"
-                         "lock; cmpxchg8b %0; setz %1;"
-                         "pop %%ebx;"
-                         : "=m"(*p), "=a"(success)
-                         : "m"(*p), "d" (oldExtra), "a" (oldPtr), "c" (newExtra), "m" (newPtr)
-                         : "memory");
-#else // !__PIC__
-    __asm__ __volatile__("lock; cmpxchg8b %0; setz %1;"
-                         : "=m"(*p), "=a"(success)
-                         : "m"(*p), "d" (oldExtra), "a" (oldPtr), "c" (newExtra), "b" (newPtr)
-                         : "memory");
-#endif
-    return success;
+    PlankAtomicPX oldAll = { oldPtr, oldExtra };
+    PlankAtomicPX newAll = { newPtr, newExtra };
+    
+    return __sync_bool_compare_and_swap ((volatile PlankLL*)p,
+                                         *(PlankLL*)&oldAll,
+                                         *(PlankLL*)&newAll);
 }
 
 static inline PlankB pl_AtomicPX_CompareAndSwapP (PlankAtomicPXRef p, PlankP oldPtr, PlankP newPtr)
