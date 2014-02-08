@@ -144,7 +144,7 @@ static inline void pl_AtomicMemoryBarrier()
 
 //------------------------------------------------------------------------------
 
-static PlankResult pl_AtomicI_Init (PlankAtomicIRef p)
+static inline PlankResult pl_AtomicI_Init (PlankAtomicIRef p)
 {
     if (p == PLANK_NULL)
         return PlankResult_MemoryError;
@@ -154,7 +154,7 @@ static PlankResult pl_AtomicI_Init (PlankAtomicIRef p)
     return PlankResult_OK;
 }
 
-static PlankResult pl_AtomicI_DeInit (PlankAtomicIRef p)
+static inline PlankResult pl_AtomicI_DeInit (PlankAtomicIRef p)
 {
     if (p == PLANK_NULL)
         return PlankResult_MemoryError;
@@ -232,7 +232,7 @@ static inline PlankI pl_AtomicI_Decrement (PlankAtomicIRef p)
 
 //------------------------------------------------------------------------------
 
-static PlankResult pl_AtomicL_Init (PlankAtomicLRef p)
+static inline PlankResult pl_AtomicL_Init (PlankAtomicLRef p)
 {
     if (p == PLANK_NULL)
         return PlankResult_MemoryError;
@@ -242,7 +242,7 @@ static PlankResult pl_AtomicL_Init (PlankAtomicLRef p)
     return PlankResult_OK;
 }
 
-static PlankResult pl_AtomicL_DeInit (PlankAtomicLRef p)
+static inline PlankResult pl_AtomicL_DeInit (PlankAtomicLRef p)
 {
     if (p == PLANK_NULL)
         return PlankResult_MemoryError;
@@ -487,7 +487,7 @@ static inline PlankLL pl_AtomicLL_Decrement (PlankAtomicLLRef p)
 
 //------------------------------------------------------------------------------
 
-static PlankResult pl_AtomicF_Init (PlankAtomicFRef p)
+static inline PlankResult pl_AtomicF_Init (PlankAtomicFRef p)
 {
     if (p == PLANK_NULL)
         return PlankResult_MemoryError;
@@ -497,7 +497,7 @@ static PlankResult pl_AtomicF_Init (PlankAtomicFRef p)
     return PlankResult_OK;
 }
 
-static PlankResult pl_AtomicF_DeInit (PlankAtomicFRef p)
+static inline PlankResult pl_AtomicF_DeInit (PlankAtomicFRef p)
 {
     if (p == PLANK_NULL)
         return PlankResult_MemoryError;
@@ -706,7 +706,7 @@ static inline PlankD pl_AtomicD_Decrement (PlankAtomicDRef p)
 
 //------------------------------------------------------------------------------
 
-static PlankResult pl_AtomicP_Init (PlankAtomicPRef p)
+static inline PlankResult pl_AtomicP_Init (PlankAtomicPRef p)
 {
     if (p == PLANK_NULL)
         return PlankResult_MemoryError;
@@ -716,7 +716,7 @@ static PlankResult pl_AtomicP_Init (PlankAtomicPRef p)
     return PlankResult_OK;
 }
 
-static PlankResult pl_AtomicP_DeInit (PlankAtomicPRef p)
+static inline PlankResult pl_AtomicP_DeInit (PlankAtomicPRef p)
 {
     if (p == PLANK_NULL)
         return PlankResult_MemoryError;
@@ -1064,7 +1064,7 @@ static inline PlankB pl_AtomicPX_CompareAndSwapP (PlankAtomicPXRef p, PlankP old
     return pl_AtomicP_CompareAndSwap ((PlankAtomicPRef)p, oldPtr, newPtr);
 }
 
-static void pl_AtomicPX_SetAllUnchecked (PlankAtomicPXRef p, PlankP newPtr, PlankUL newExtra)
+static inline void pl_AtomicPX_SetAllUnchecked (PlankAtomicPXRef p, PlankP newPtr, PlankUL newExtra)
 {
     p->ptr = newPtr;
     p->extra = newExtra;

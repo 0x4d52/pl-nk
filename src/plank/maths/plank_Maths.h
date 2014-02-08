@@ -146,7 +146,8 @@ static inline float pl_AbsF (float a)               { return fabsf (a); }
 static inline double pl_AbsD (double a)             { return fabs (a); }
 
 
-#if (defined (_WIN32) || defined (_WIN64))
+
+#if PLANK_WIN || PLANK_ANDROID
 static inline float pl_Log2F (float a)              { return logf (a) / logf (2.f); }
 static inline double pl_Log2D (double a)            { return log (a) / log (2.0); }
 #else

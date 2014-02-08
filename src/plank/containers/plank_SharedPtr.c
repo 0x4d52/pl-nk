@@ -62,30 +62,6 @@ PlankAtomicL* pl_SharedPtrGlobalCount()
 
 //////////////////////////////// Helpers ///////////////////////////////////////
 
-//typedef struct PlankSharedPtrCounts
-//{
-//    unsigned int refCount  : PLANK_ATOMIC_XREFCOUNTBITS;
-//    unsigned int weakCount : PLANK_ATOMIC_XWEAKCOUNTBITS;
-//} PlankSharedPtrCounts;
-//
-//typedef struct PlankSharedPtrParts
-//{
-//    PlankSharedPtrRef ptr;
-//    PlankSharedPtrCounts counts;
-//} PlankSharedPtrParts;
-//
-//typedef struct PlankSharedPtrHalves
-//{
-//    PlankSharedPtrRef ptr;
-//    PlankL extra;
-//} PlankSharedPtrHalves;
-//
-//typedef union PlankSharedPtrElement
-//{
-//    PlankSharedPtrParts  parts;
-//    PlankSharedPtrHalves halves;
-//} PlankSharedPtrElement;
-
 typedef struct PlankSharedPtrCounter
 {
     PLANK_ALIGN(PLANK_WIDESIZE) PlankAtomicPX atom;

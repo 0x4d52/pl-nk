@@ -78,12 +78,12 @@ PlankAtomicIRef pl_AtomicI_Create();
 /** Initialise a <i>Plank %AtomicI</i> object. 
  @param p The <i>Plank %AtomicI</i> object. 
  @return PlankResult_OK if successful, otherwise an error code. */
-static PlankResult pl_AtomicI_Init (PlankAtomicIRef p);
+static inline PlankResult pl_AtomicI_Init (PlankAtomicIRef p);
 
 /** Deinitialise a <i>Plank %AtomicI</i> object. 
  @param p The <i>Plank %AtomicI</i> object. 
  @return PlankResult_OK if successful, otherwise an error code. */
-static PlankResult pl_AtomicI_DeInit (PlankAtomicIRef p);
+static inline PlankResult pl_AtomicI_DeInit (PlankAtomicIRef p);
 
 /** Destroy a <i>Plank %AtomicI</i> object. 
  @param p The <i>Plank %AtomicI</i> object. 
@@ -194,12 +194,12 @@ PlankAtomicLRef pl_AtomicL_Create();
 /** Initialise a <i>Plank %AtomicL</i> object. 
  @param p The <i>Plank %AtomicL</i> object. 
  @return PlankResult_OK if successful, otherwise an error code. */
-static PlankResult pl_AtomicL_Init (PlankAtomicLRef p);
+static inline PlankResult pl_AtomicL_Init (PlankAtomicLRef p);
 
 /** Deinitialise a <i>Plank %AtomicL</i> object. 
  @param p The <i>Plank %AtomicL</i> object. 
  @return PlankResult_OK if successful, otherwise an error code. */
-static PlankResult pl_AtomicL_DeInit (PlankAtomicLRef p);
+static inline PlankResult pl_AtomicL_DeInit (PlankAtomicLRef p);
 
 /** Destroy a <i>Plank %AtomicL</i> object. 
  @param p The <i>Plank %AtomicL</i> object. 
@@ -424,12 +424,12 @@ PlankAtomicFRef pl_AtomicF_Create();
 /** Initialise a <i>Plank %AtomicF</i> object. 
  @param p The <i>Plank %AtomicF</i> object. 
  @return PlankResult_OK if successful, otherwise an error code. */
-static PlankResult pl_AtomicF_Init (PlankAtomicFRef p);
+static inline PlankResult pl_AtomicF_Init (PlankAtomicFRef p);
 
 /** Deinitialise a <i>Plank %AtomicF</i> object. 
  @param p The <i>Plank %AtomicF</i> object. 
  @return PlankResult_OK if successful, otherwise an error code. */
-static PlankResult pl_AtomicF_DeInit (PlankAtomicFRef p);
+static inline PlankResult pl_AtomicF_DeInit (PlankAtomicFRef p);
 
 /** Destroy a <i>Plank %AtomicF</i> object. 
  @param p The <i>Plank %AtomicF</i> object. 
@@ -665,12 +665,12 @@ PlankAtomicPRef pl_AtomicP_Create();
 /** Initialise a <i>Plank %AtomicP</i> object. 
  @param p The <i>Plank %AtomicP</i> object. 
  @return PlankResult_OK if successful, otherwise an error code. */
-static PlankResult pl_AtomicP_Init (PlankAtomicPRef p);
+static inline PlankResult pl_AtomicP_Init (PlankAtomicPRef p);
 
 /** Deinitialise a <i>Plank %AtomicP</i> object. 
  @param p The <i>Plank %AtomicP</i> object. 
  @return PlankResult_OK if successful, otherwise an error code. */
-static PlankResult pl_AtomicP_DeInit (PlankAtomicPRef p);
+static inline PlankResult pl_AtomicP_DeInit (PlankAtomicPRef p);
 
 /** Destroy a <i>Plank %AtomicP</i> object. 
  @param p The <i>Plank %AtomicP</i> object. 
@@ -852,7 +852,7 @@ static void pl_AtomicPX_SwapOther (PlankAtomicPXRef p1, PlankAtomicPXRef p2);
  @param newExtra The new extra tag to store. */
 static void pl_AtomicPX_SetAll (PlankAtomicPXRef p, PlankP newPtr, PlankUL newExtra);
 
-static void pl_AtomicPX_SetAllUnchecked (PlankAtomicPXRef p, PlankP newPtr, PlankUL newExtra);
+static inline void pl_AtomicPX_SetAllUnchecked (PlankAtomicPXRef p, PlankP newPtr, PlankUL newExtra);
 
 /** Set the current pointer to a new pointer. 
  This also increments the extra tag by 1.

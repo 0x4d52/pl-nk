@@ -44,6 +44,8 @@ class JSON
 {
 public:
     inline JSON() throw() : json (0) { }
+    inline JSON (const char value) throw() : json (pl_JSON_Int (LongLong (value))) { }
+    inline JSON (const int value) throw() : json (pl_JSON_Int (LongLong (value))) { }
     inline JSON (const Long value) throw() : json (pl_JSON_Int (LongLong (value))) { }
     inline JSON (const LongLong value) throw() : json (pl_JSON_Int (value)) { }
     inline JSON (const float value) throw() : json (pl_JSON_Float (value)) { }

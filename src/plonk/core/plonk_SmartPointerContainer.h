@@ -319,13 +319,13 @@ public:
     template<class OtherType>
     inline bool operator== (OtherType const& other) const throw()
 	{
-		return internal.getPtrUnchcked() == other;
+		return internal.getPtrUnchecked() == other;
 	}
 	
     template<class OtherType>
 	inline bool operator!= (OtherType const& other) const throw()
 	{
-		return internal.getPtrUnchcked() != other;
+		return internal.getPtrUnchecked() != other;
 	}
         
 private:
