@@ -193,6 +193,8 @@
 #include "../graph/control/plonk_EnvelopeChannel.h"
 #include "../graph/control/plonk_TriggerChannel.h"
 #include "../graph/control/plonk_SchmidtChannel.h"
+#include "../graph/control/plonk_DiffChannel.h"
+#include "../graph/control/plonk_PauseChannel.h"
 
 #include "../graph/fft/plonk_FFTChannel.h"
 #include "../graph/fft/plonk_IFFTChannel.h"

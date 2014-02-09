@@ -237,6 +237,108 @@ public:
 };
 typedef LagUnit<PLONK_TYPE_DEFAULT> Lag;
 
+/** Exponential asymetrical lag filter.
+ Useful for smoothing control signals.
+ 
+ @par Factory functions:
+ - ar (input, attack=0.05, release=0.2, mul=1, add=0, preferredBlockSize=default, preferredSampleRate=default)
+ - kr (input attack=0.05, release=0.2, mul=1, add=0)
+ 
+ @par Inputs:
+ - input: (unit, multi) the unit to filter
+ - attack: (unit, multi) The -60dB lag time in seconds for increasing signals
+ - release: (unit, multi) The -60dB lag time in seconds for decreasing signals
+ - mul: (unit, multi) the multiplier applied to the output
+ - add: (unit, multi) the offset aded to the output
+ - preferredBlockSize: the preferred output block size (for advanced usage, leave on default if unsure)
+ - preferredSampleRate: the preferred output sample rate (for advanced usage, leave on default if unsure)
+ 
+ @ingroup AllUnits FilterUnits ControlUnits */
+template<class SampleType, Interp::TypeCode InterpTypeCode = Interp::Linear>
+class LagAsymUnit
+{
+public:
+    typedef UnitBase<SampleType>                            UnitType;
+    typedef FilterShapeLagAsymBase<SampleType>              Shape;
+    typedef FilterCoeffs2ParamUnit<Shape>                   FilterCoeffsType;
+    typedef typename FilterCoeffsType::FormType             FormType;
+    typedef FilterUnit<FormType>                            FilterType;
+    typedef ResampleUnit<SampleType,InterpTypeCode>         ResampleType;
+    typedef LagAsymUnit<SampleType,Interp::Lagrange3>       HQ;
+    
+    static inline UnitInfos getInfo() throw()
+    {
+        const double sampleRate = SampleRate::getDefault().getValue();
+        
+        return UnitInfo ("LagAsym", "One-pole exponential asymetrical lag filter.",
+                         
+                         // output
+                         ChannelCount::VariableChannelCount,
+                         IOKey::Generic,            Measure::Unknown,   0.0,                IOLimit::None,
+                         IOKey::End,
+                         
+                         // inputs
+                         IOKey::Generic,            Measure::Unknown,   IOInfo::NoDefault,  IOLimit::None,
+                         IOKey::Attack,             Measure::Seconds,   0.05,               IOLimit::Minimum,   Measure::Seconds,   0.0,
+                         IOKey::Release,            Measure::Seconds,   0.2,                IOLimit::Minimum,   Measure::Seconds,   0.0,
+                         IOKey::Multiply,           Measure::Factor,    1.0,                IOLimit::None,
+                         IOKey::Add,                Measure::None,      0.0,                IOLimit::None,
+                         IOKey::FilterSampleRate,   Measure::Hertz,     sampleRate,         IOLimit::Minimum,   Measure::Hertz,     0.0,
+                         IOKey::BlockSize,          Measure::Samples,   0.0,                IOLimit::Minimum,   Measure::Samples,   1.0,
+                         IOKey::SampleRate,         Measure::Hertz,    -1.0,                IOLimit::Minimum,   Measure::Hertz,     0.0,
+                         IOKey::End);
+    }
+    
+    /** Creates an exponential lag filter (one-pole low-pass filter).
+     @param input The input signal to filter.
+     @param attack The -60dB lag time for increasing signals.
+     @param release The -60dB lag time for decreasing signals.
+     @param mul An optional multiplier.
+     @param add An optional offset.
+     @param preferredBlockSize (Optional) The preferred block size for the process.
+     @param preferredSampleRate (Optional) The preferred sample rate for the process. */
+    static UnitType ar (UnitType const& input,
+                        UnitType const& attack = SampleType (0.05),
+                        UnitType const& release = SampleType (0.2),
+                        UnitType const& mul = SampleType (1),
+                        UnitType const& add = SampleType (0),
+                        BlockSize const& preferredBlockSize = BlockSize::noPreference(),
+                        SampleRate const& preferredSampleRate = SampleRate::noPreference()) throw()
+    {
+        UnitType coeffs = FilterCoeffsType::ar (attack, release, input.getSampleRates());
+        
+        if (!attack.isConstant() || !release.isConstant())
+            for (int i = 0; i < coeffs.getNumChannels(); ++i)
+                coeffs.put (i, ResampleType::ar (coeffs[i]));
+                
+        return FilterType::ar (input, coeffs, mul, add, preferredBlockSize, preferredSampleRate);
+    }
+    
+    /** Creates a control rate exponential lag filter (one-pole low-pass filter).
+     @param input The input signal to filter.
+     @param attack The -60dB lag time for increasing signals.
+     @param release The -60dB lag time for decreasing signals.
+     @param mul An optional multiplier.
+     @param add An optional offset. */
+    static UnitType kr (UnitType const& input,
+                        UnitType const& attack = SampleType (0.05),
+                        UnitType const& release = SampleType (0.2),
+                        UnitType const& mul = SampleType (1),
+                        UnitType const& add = SampleType (0)) throw()
+    {
+        UnitType coeffs = FilterCoeffsType::ar (attack, release, input.getSampleRates());
+        
+        if (!attack.isConstant() || !release.isConstant())
+            for (int i = 0; i < coeffs.getNumChannels(); ++i)
+                coeffs.put (i, ResampleType::ar (coeffs[i]));
+                
+        return FilterType::ar (input.kr(), coeffs, mul, add,
+                               BlockSize::getControlRateBlockSize(),
+                               SampleRate::getControlRate());
+    }    
+};
+typedef LagAsymUnit<PLONK_TYPE_DEFAULT> LagAsym;
+
 /** One-pole high-pass filter. 
  
  @par Factory functions:

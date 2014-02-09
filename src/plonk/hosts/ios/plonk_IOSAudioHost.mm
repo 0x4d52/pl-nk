@@ -600,6 +600,21 @@ using namespace plonk;
     }
 }
 
+- (void)process:(Dynamic)unit
+{
+    if (peer == nil) return;
+    
+    switch ((const int)type)
+    {
+        case TypeCode::Float:   static_cast< IOSAudioHostPeer<float>* > (peer)->process (unit.asUnchecked<FloatUnit>()); break;
+        case TypeCode::Short:   static_cast< IOSAudioHostPeer<short>* > (peer)->process (unit.asUnchecked<ShortUnit>()); break;
+        case TypeCode::Int:     static_cast< IOSAudioHostPeer<int>* > (peer)->process (unit.asUnchecked<IntUnit>()); break;
+        case TypeCode::Double:  static_cast< IOSAudioHostPeer<double>* > (peer)->process (unit.asUnchecked<DoubleUnit>()); break;
+        default: { }
+    }
+}
+
+
 - (id)delegate
 {
     return delegate;

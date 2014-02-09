@@ -787,6 +787,11 @@ public:
         return MixerUnit<SampleType>::ar (*this, false);
     }
     
+    inline UnitBase diff() const throw()
+    {
+        return DiffUnit<SampleType>::ar (*this);
+    }
+    
     /** Create an overlapping process from this unit's contrinuous stream. */
     UnitBase overlapMake (DoubleVariable const& overlap = Math<DoubleVariable>::get0_5(), const bool zeroPad = false) const throw()
     {

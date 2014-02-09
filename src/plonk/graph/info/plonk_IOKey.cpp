@@ -65,7 +65,9 @@ IOKey::Name IOKey::fromInt (const int value) throw()
         IOKey::Bandwidth,
         IOKey::Time,
         IOKey::Duration,
+        IOKey::Attack,
         IOKey::Decay,
+        IOKey::Release,
         IOKey::Feedback,
         IOKey::Feedforward,
         IOKey::Coeffs,
@@ -151,7 +153,9 @@ Text IOKey::getName (const int keyIndex) throw()
         "Bandwidth",
         "Time",
         "Duration",
+        "Attack",
         "Decay",
+        "Release",
         "Feedback",
         "Feedforward"
         "Coeffs",
@@ -229,7 +233,9 @@ IOKey::IOType IOKey::getType (const int keyIndex) throw()
         IOKey::TypeUnit,            //"Bandwidth",
         IOKey::TypeUnit,            //"Time"
         IOKey::TypeUnit,            //"Duration"
+        IOKey::TypeUnit,            //"Attack"
         IOKey::TypeUnit,            //"Decay"
+        IOKey::TypeUnit,            //"Release"
         IOKey::TypeUnit,            //"Feedback"
         IOKey::TypeUnit,            //"Feedforward"
         IOKey::TypeUnit,            //"Coeffs",
@@ -306,7 +312,9 @@ Text IOKey::getTypeName (const int keyIndex) throw()
         "Unit",             //"Bandwidth",
         "Unit",             //"Time",
         "Unit",             //"Duration",
+        "Unit",             //"Attack",
         "Unit",             //"Decay",
+        "Unit",             //"Release",
         "Unit",             //"Feedback",
         "Unit",             //"Feedforward",
 

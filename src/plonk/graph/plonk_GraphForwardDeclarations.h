@@ -97,6 +97,7 @@ template<class SampleType,
          Interp::TypeCode InterpTypeCode = Interp::Linear>              class LagUnit;
 template<class SampleType,
          Interp::TypeCode InterpTypeCode = Interp::Linear>              class DCUnit;
+template<class SampleType>                                              class DiffUnit;
 
 // type conversion units
 template<class OutputSampleType, class InputSampleType>                 class TypeUnit;

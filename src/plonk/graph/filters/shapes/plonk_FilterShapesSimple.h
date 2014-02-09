@@ -133,6 +133,53 @@ public:
 };
 typedef FilterShapeLagBase<PLONK_TYPE_DEFAULT> FilterShapeLag;
 
+/** One-pole aysmmetical lag shape. */
+template<class SampleType>
+class FilterShapeLagAsymBase
+:   public FilterShape<SampleType, FilterFormType::P1c, FilterShapeType::LPF>
+{
+public:
+    enum Params
+    {
+        Attack,
+        Release,
+        NumParams
+    };
+    
+    typedef FilterForm<SampleType,FilterFormType::P1c>                  FormType;
+    typedef typename FormType::Data                                     FormData;
+    typedef FilterShapeData<SampleType,FormType::NumCoeffs,NumParams>   Data;
+    typedef typename TypeUtility<SampleType>::IndexType                 CalcType;
+    typedef NumericalArray<CalcType>                                    CalcTypes;
+    typedef FilterUnit<FormType>                                        Unit;
+    
+    static IntArray getInputKeys() throw()
+    {
+        const IntArray keys (IOKey::Attack, IOKey::Release);
+        return keys;
+    }
+    
+    static inline SampleType process (SampleType const& input, Data const& data, FormData& form) throw()
+    {
+        return FormType::process (input, data.coeffs, form);
+    }
+    
+    static inline void calculate (Data& data) throw()
+    {
+        const CalcType zero (Math<CalcType>::get0());
+        const CalcType log0_001 (Math<CalcType>::getLog0_001());
+        
+        const CalcType attack = data.params[Attack];
+        const CalcType release = data.params[Release];
+        data.coeffs[FormType::CoeffB1u] = (attack == zero) ? zero : plonk::exp (log0_001 / (attack * data.filterSampleRate));
+        data.coeffs[FormType::CoeffB1d] = (attack == zero) ? zero : plonk::exp (log0_001 / (release * data.filterSampleRate));
+        
+        plonk_assert (data.coeffs[FormType::CoeffB1u] >= CalcType (0));
+        plonk_assert (data.coeffs[FormType::CoeffB1d] >= CalcType (0));
+    }
+};
+typedef FilterShapeLagAsymBase<PLONK_TYPE_DEFAULT> FilterShapeLagAsym;
+
 
 /** One-pole high-pass filter shape. */
 template<class SampleType>

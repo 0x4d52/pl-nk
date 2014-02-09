@@ -429,6 +429,120 @@ public:
 
 //------------------------------------------------------------------------------
 
+/** Asymetrical one-pole form, for low pass.
+ Direct Form II implementation. */
+template<class SampleType>
+class FilterForm<SampleType, FilterFormType::P1c>
+:   public FilterFormBase<SampleType, FilterFormType::P1c>
+{
+public:
+    typedef SampleType                                          SampleDataType;
+    typedef UnitBase<SampleType>                                UnitType;
+    typedef NumericalArray<SampleType>                          Buffer;
+    typedef FilterData<SampleType, FilterFormType::P1c>         Data;
+    
+    enum Coeffs
+    {
+        CoeffB1u,
+        CoeffB1d,
+        NumCoeffs
+    };
+    
+    static inline SampleType process (SampleType const& input,
+                                      SampleType const& b1u,
+                                      SampleType const& b1d,
+                                      SampleType& y1) throw()
+    {
+        const SampleType y0 = input;
+        
+        y1 = y0 > y1 ?
+             y0 + b1u * (y1 - y0)
+             :
+             y0 + b1d * (y1 - y0);
+
+        return y1;
+    }
+    
+    static inline SampleType process (SampleType const& input,
+                                      const SampleType* coeffs,
+                                      Data& data) throw()
+    {
+        return process (input, coeffs[CoeffB1u], coeffs[CoeffB1d], data.y1);
+    }
+    
+    static void process (SampleType* const outputSamples,
+                         const int outputLength,
+                         UnitType& inputUnit,
+                         UnitType& coeffsUnit,
+                         Data& data,
+                         ProcessInfo& info,
+                         const int channel) throw()
+    {
+        const int firstCoeff = NumCoeffs * channel;
+        const Buffer& inputBuffer (inputUnit.process (info, channel));
+        const SampleType* const inputSamples = inputBuffer.getArray();
+        
+        const Buffer& b1uBuffer (coeffsUnit.process (info, firstCoeff + CoeffB1u));
+        const SampleType* const b1uSamples = b1uBuffer.getArray();
+        const int b1uLength = b1uBuffer.length();
+
+        const Buffer& b1dBuffer (coeffsUnit.process (info, firstCoeff + CoeffB1d));
+        const SampleType* const b1dSamples = b1dBuffer.getArray();
+        const int inputLength = inputBuffer.length();
+        
+        plonk_assert (b1uLength == b1dBuffer.length());
+                      
+        SampleType y1 = data.y1;
+        int i;
+        
+        if (inputLength == outputLength)
+        {
+            if (b1uLength == inputLength)
+            {
+                for (i = 0; i < outputLength; ++i)
+                    outputSamples[i] = process (inputSamples[i], b1uSamples[i], b1dSamples[i], y1);
+            }
+            else if (b1uLength == 1)
+            {
+                const SampleType b1u = b1uSamples[0];
+                const SampleType b1d = b1dSamples[0];
+                
+                for (i = 0; i < outputLength; ++i)
+                    outputSamples[i] = process (inputSamples[i], b1u, b1d, y1);
+            }
+            else
+            {
+                double coeffPosition = 0.0;
+                const double coeffIncrement = double (b1uLength) / double (outputLength);
+                
+                for (i = 0; i < outputLength; ++i)
+                {
+                    outputSamples[i] = process (inputSamples[i], b1uSamples[int (coeffPosition)], b1dSamples[int (coeffPosition)], y1);
+                    coeffPosition += coeffIncrement;
+                }
+            }
+        }
+        else
+        {
+            const SampleType b1u = b1uSamples[0];
+            const SampleType b1d = b1dSamples[0];
+            
+            double inputPosition = 0.0;
+            const double inputIncrement = double (inputLength) / double (outputLength);
+            
+            for (i = 0; i < outputLength; ++i)
+            {
+                outputSamples[i] = process (inputSamples[int (inputPosition)], b1u, b1d, y1);
+                inputPosition += inputIncrement;
+            }
+        }
+        
+        data.y1 = zap (y1);
+    }
+};
+
+//------------------------------------------------------------------------------
+
 /** Two-pole, two-zero form. 
  Direct Form II implementation. */
 template<class SampleType>

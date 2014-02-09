@@ -123,6 +123,8 @@ public:
     virtual void pauseHost() throw() { plonk_assertfalse; }     // the host implementation needs to support pausing
     virtual void resumeHost() throw() { plonk_assertfalse; }    // the host implementation needs to support pausing
     
+    void process (UnitType& unit) throw() { unit.process (this->info); }
+
 protected:
     /** Get the input buffers. @internal */
     inline const ConstBufferArray& getInputs() const throw()    { return this->inputs; }
@@ -195,7 +197,7 @@ protected:
                 this->inputs.atUnchecked (i) += graphBlockSize;
             }
             
-            this->outputUnit.process (info);
+            this->outputUnit.process (this->info);
             
             if (this->outputUnit.isNotNull())
             {
@@ -226,7 +228,7 @@ protected:
         this->outputs.zero();
 #endif
     }
-    
+        
     /** @internal */
     void startHostInternal() throw()
     {

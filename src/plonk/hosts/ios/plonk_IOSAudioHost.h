@@ -225,6 +225,8 @@ using namespace plonk;
 
 - (void)setCustomRenderCallbacksWithRef:(void*)refCon pre:(RenderCallbackFunction)preFunc post:(RenderCallbackFunction)postFunc;
 
+- (void)process:(Dynamic)unit;
+
 @end
 
 #endif

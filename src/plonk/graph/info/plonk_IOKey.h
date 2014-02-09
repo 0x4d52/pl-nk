@@ -103,7 +103,9 @@ public:
         Bandwidth,      ///< Bandwidth (could be in Semitones, Octaves or Hertz).
         Time,           ///< Time position in seconds.
         Duration,       ///< Duration in seconds.
+        Attack,         ///< Attack time in seconds
         Decay,          ///< Decay time in seconds
+        Release,        ///< Release time in seconds
         Feedback,       ///< A feedback amount
         Feedforward,    ///< A feedforward amount
         Coeffs,         ///< Filter coefficients
