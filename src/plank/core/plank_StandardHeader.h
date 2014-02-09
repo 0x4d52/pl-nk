@@ -400,9 +400,10 @@ typedef struct PlankFourCharCodeString
 #define PLANK_PRESTRING2(a) #a
 #define PLANK_PRESTRING(a) PLANK_PRESTRING2(a)
 
+// from now on: odd build numbers are development versions, even are releases
 #define PLANK_MAJOR_VERSION      0
 #define PLANK_MINOR_VERSION      4
-#define PLANK_BUILDNUMBER        5
+#define PLANK_BUILDNUMBER        7
 #define PLANK_VERSION           "v" PLANK_PRESTRING(PLANK_MAJOR_VERSION) "." PLANK_PRESTRING(PLANK_MINOR_VERSION) "." PLANK_PRESTRING(PLANK_BUILDNUMBER)
 
 static inline double pl_TimeNow()

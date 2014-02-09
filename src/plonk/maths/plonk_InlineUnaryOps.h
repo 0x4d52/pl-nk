@@ -269,6 +269,25 @@ template<class Type> inline Type a2dB (Type const& amp) throw()        { return 
 /** Returns the input argument converted from decibels to linear amplitude where 0dB is an amplitude of 1. */
 template<class Type> inline Type dB2a (Type const& db) throw()         { return pow (Math<Type>::get10(), db / Math<Type>::get20()); }
 
+/** Returns the input argument converted from q to bandwidth in octaves. */
+template<class Type> inline Type q2bw (Type const& q) throw()
+{
+    const Type q2 = q * q;
+    const Type q22 = Math<Type>::get2() * q2;
+    const Type q221 = q22 + Math<Type>::get1();
+    const Type a = q221 / q22;
+    const Type b = q221 / q2;
+    const Type b2 = b * b;
+    const Type c = plonk::sqrt (b2 * Math<Type>::get0_25() - Math<Type>::get1());
+    return plonk::log2 (a + c);
+}
+
+/** Returns the input argument converted from bandwidth in octaves to q. */
+template<class Type> inline Type bw2Q (Type const& bw) throw()
+{
+    return plonk::pow (Math<Type>::get2(), bw * Math<Type>::get0_5()) / (plonk::pow (Math<Type>::get2(), bw) - Math<Type>::get1());
+}
+
 /** Returns the input argument converted from degrees to radians. */
 template<class Type> inline Type d2r (Type const& deg) throw()         { return deg * Math<Type>::get1_360() * Math<Type>::get2Pi(); }
 
