@@ -40,23 +40,26 @@
 
 #import <Foundation/Foundation.h>
 #import "PAEFoward.h"
-#import "PAEProcess.h"
+#import "PAESource.h"
 
 /** @file */
 
-/** A signal amplitude follower. */
-@interface PAEFollower : PAEProcess
+/** A buffer player driven by playback rate.
+ The default plays the buffer back at normal speed in a loop. */
+@interface PAEBufferPlayer : PAESource
 
-/** The lag time in seconds applied to the amplitude as it is rising.
- This defaults to having a constant of 0.01 patched to its input. 
+/** The buffer being played. */
+@property (strong, nonatomic, readonly) PAEBuffer* buffer;
+
+/** The playback rate.
+ The default is a constant of 1.
  This may be repatched with any other PAESource object as desired. */
-@property (strong, nonatomic, readonly) PAEProcess* attackTime;
+@property (strong, nonatomic, readonly) PAEProcess* rate;
 
-/** The lag time in seconds applied to the amplitude as it is falling.
- This defaults to having a constant of 0.01 patched to its input. 
- This may be repatched with any other PAESource object as desired. */
-@property (strong, nonatomic, readonly) PAEProcess* releaseTime;
+/** Whether the buffer will loop playback.
+ The default is YES. */
+@property (nonatomic) BOOL loop;
 
-/** Create a follower. */
-+(PAEFollower*)followerWithNumInputs:(int)numInputs;
+/** Create a new buffer player source. */
++(PAEBufferPlayer*)bufferPlayerWithBuffer:(PAEBuffer*)buffer;
 @end

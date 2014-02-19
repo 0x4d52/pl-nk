@@ -315,7 +315,7 @@ private:
  - table: (wavetable) the wavetable to use for the oscillator
  - frequency: (unit, multi) the frequency of the oscillator in Hz
  - mul: (unit, multi) the multiplier applied to the output
- - add: (unit, multi) the offset aded to the output
+ - add: (unit, multi) the offset added to the output
  - preferredBlockSize: the preferred output block size (for advanced usage, leave on default if unsure)
  - preferredSampleRate: the preferred output sample rate (for advanced usage, leave on default if unsure)
 
@@ -409,7 +409,7 @@ typedef TableUnit<PLONK_TYPE_DEFAULT> Table;
  @par Inputs:
  - frequency: (unit, multi) the frequency of the oscillator in Hz
  - mul: (unit, multi) the multiplier applied to the output
- - add: (unit, multi) the offset aded to the output
+ - add: (unit, multi) the offset added to the output
  - preferredBlockSize: the preferred output block size (for advanced usage, leave on default if unsure)
  - preferredSampleRate: the preferred output sample rate (for advanced usage, leave on default if unsure)
  
@@ -483,7 +483,7 @@ typedef SineUnit<PLONK_TYPE_DEFAULT> Sine;
  @par Inputs:
  - frequency: (unit, multi) the frequency of the oscillator in Hz
  - mul: (unit, multi) the multiplier applied to the output
- - add: (unit, multi) the offset aded to the output
+ - add: (unit, multi) the offset added to the output
  - numHarmonics: (int) the number of harmonics to generate
  - preferredBlockSize: the preferred output block size (for advanced usage, leave on default if unsure)
  - preferredSampleRate: the preferred output sample rate (for advanced usage, leave on default if unsure)
@@ -565,7 +565,7 @@ typedef HarmonicSawUnit<PLONK_TYPE_DEFAULT> HarmonicSaw;
  @par Inputs:
  - frequency: (unit, multi) the frequency of the oscillator in Hz
  - mul: (unit, multi) the multiplier applied to the output
- - add: (unit, multi) the offset aded to the output
+ - add: (unit, multi) the offset added to the output
  - numHarmonics: (int) the number of harmonics to generate
  - preferredBlockSize: the preferred output block size (for advanced usage, leave on default if unsure)
  - preferredSampleRate: the preferred output sample rate (for advanced usage, leave on default if unsure)
@@ -646,7 +646,7 @@ typedef HarmonicSquareUnit<PLONK_TYPE_DEFAULT> HarmonicSquare;
  @par Inputs:
  - frequency: (unit, multi) the frequency of the oscillator in Hz
  - mul: (unit, multi) the multiplier applied to the output
- - add: (unit, multi) the offset aded to the output
+ - add: (unit, multi) the offset added to the output
  - numHarmonics: (int) the number of harmonics to generate
  - preferredBlockSize: the preferred output block size (for advanced usage, leave on default if unsure)
  - preferredSampleRate: the preferred output sample rate (for advanced usage, leave on default if unsure)

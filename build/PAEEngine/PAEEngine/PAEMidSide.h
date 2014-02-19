@@ -44,19 +44,14 @@
 
 /** @file */
 
-/** A signal amplitude follower. */
-@interface PAEFollower : PAEProcess
+/** Convert mid-side to left-right or vice versa.
+ This converts pairs of channels in the source to mid-side or left-right. If the
+ input pairs are mid-side then the output will be left-right pairs. If the input pairs
+ are left-right then the output will be mid-side pairs. This is becasue the conversion
+ in either direction is the same. */
+@interface PAEMidSide : PAEProcess
 
-/** The lag time in seconds applied to the amplitude as it is rising.
- This defaults to having a constant of 0.01 patched to its input. 
- This may be repatched with any other PAESource object as desired. */
-@property (strong, nonatomic, readonly) PAEProcess* attackTime;
-
-/** The lag time in seconds applied to the amplitude as it is falling.
- This defaults to having a constant of 0.01 patched to its input. 
- This may be repatched with any other PAESource object as desired. */
-@property (strong, nonatomic, readonly) PAEProcess* releaseTime;
-
-/** Create a follower. */
-+(PAEFollower*)followerWithNumInputs:(int)numInputs;
+/** Create a new mid-side converter.
+ If numInputs is odd it will be rounded up to the net even number. */
++(PAEMidSide*)midSideWithNumInputs:(int)numInputs;
 @end

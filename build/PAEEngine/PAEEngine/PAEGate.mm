@@ -13,6 +13,7 @@
 @property (strong, nonatomic) PAEProcess* attackTime;
 @property (strong, nonatomic) PAEProcess* releaseTime;
 @property (strong, nonatomic) PAEProcess* threshold;
+@property (strong, nonatomic) PAESource* control;
 @end
 
 @implementation PAESimpleGate
@@ -26,7 +27,7 @@
     if (self = [super initWithNumInputs:numInputs])
     {
         self.follower = [PAEFollower followerWithNumInputs:numInputs];
-        self.follower.inputUnit = self.patchUnit;
+        self.follower.inputUnit = self.patchUnit.mix();
         
         self.attackTime        = [[PAEProcess alloc] initWithNumInputs:1];
         self.attackTime.input  = [PAEConstant constantWithValue:0.01];
@@ -37,8 +38,10 @@
 
         Unit input = self.follower.outputUnit;
         Unit trigger = input > self.threshold.patchUnit;
-        Unit control = LagAsym::ar (trigger, self.attackTime.patchUnit, self.releaseTime.patchUnit);
-        self.outputUnit = self.patchUnit * control;
+        
+        self.control = [[PAESource alloc] init];
+        self.control.outputUnit = LagAsym::ar (trigger, self.attackTime.patchUnit, self.releaseTime.patchUnit);
+        self.outputUnit = self.patchUnit * self.control.outputUnit;
     }
     
     return self;
@@ -54,6 +57,7 @@
 @property (strong, nonatomic) PAEProcess* releaseTime;
 @property (strong, nonatomic) PAEProcess* attackThreshold;
 @property (strong, nonatomic) PAEProcess* releaseThreshold;
+@property (strong, nonatomic) PAESource* control;
 @end
 
 @implementation PAEGate
@@ -67,7 +71,7 @@
     if (self = [super initWithNumInputs:numInputs])
     {
         self.follower = [PAEFollower followerWithNumInputs:numInputs];
-        self.follower.inputUnit = self.patchUnit;
+        self.follower.inputUnit = self.patchUnit.mix();
         
         self.attackTime             = [[PAEProcess alloc] initWithNumInputs:1];
         self.attackTime.input       = [PAEConstant constantWithValue:0.01];
@@ -80,8 +84,10 @@
         
         Unit input = self.follower.outputUnit;
         Unit trigger = Schmidt::ar(input, self.releaseThreshold.patchUnit, self.attackThreshold.patchUnit);
-        Unit control = LagAsym::ar (trigger, self.attackTime.patchUnit, self.releaseTime.patchUnit);
-        self.outputUnit = self.patchUnit * control;
+        
+        self.control = [[PAESource alloc] init];
+        self.control.outputUnit = LagAsym::ar (trigger, self.attackTime.patchUnit, self.releaseTime.patchUnit);
+        self.outputUnit = self.patchUnit * self.control.outputUnit;
     }
     
     return self;

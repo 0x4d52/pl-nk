@@ -58,6 +58,8 @@
         case PAEMapTypeExponentialToLinear:
             return plonk::explin (input, self.inputMinimum, self.inputMaximum, self.outputMinimum, self.outputMaximum);
     }
+    
+    return 0.f;
 }
 
 -(float)mapOutputToInput:(float)output
@@ -71,7 +73,39 @@
         case PAEMapTypeExponentialToLinear:
             return plonk::linexp (output, self.outputMinimum, self.outputMaximum, self.inputMinimum, self.inputMaximum);
     }
+    
+    return 0.f;
 }
+
+-(float)randomWithinInputRange
+{
+    switch (self.type)
+    {
+        case PAEMapTypeLinearToLinear:
+        case PAEMapTypeLinearToExponential:
+            return plonk::rand (self.inputMinimum, self.inputMaximum);
+        case PAEMapTypeExponentialToLinear:
+            return plonk::exprand (self.inputMinimum, self.inputMaximum);
+    }
+    
+    return 0.f;
+}
+
+-(float)randomWithinOutputRange
+{
+    switch (self.type)
+    {
+        case PAEMapTypeLinearToLinear:
+        case PAEMapTypeExponentialToLinear:
+            return plonk::rand (self.outputMinimum, self.outputMaximum);
+        case PAEMapTypeLinearToExponential:
+            return plonk::exprand (self.outputMinimum, self.outputMaximum);
+    }
+    
+    return 0.f;
+
+}
+
 
 +(float)midiNoteToFrequency:(float)midiNote
 {
@@ -103,6 +137,26 @@
     return plonk::bw2Q (bandwidth);
 }
 
+-(PAERange)inputRange
+{
+    return PAERangeMake (self.inputMinimum, self.inputMaximum);
+}
 
+-(PAERange)outputRange
+{
+    return PAERangeMake (self.outputMinimum, self.outputMaximum);
+}
+
+-(void)setInputRange:(PAERange)inputRange
+{
+    self.inputMinimum = inputRange.minimum;
+    self.inputMaximum = inputRange.maximum;
+}
+
+-(void)setOutputRange:(PAERange)outputRange
+{
+    self.outputMinimum = outputRange.minimum;
+    self.outputMaximum = outputRange.maximum;
+}
 
 @end

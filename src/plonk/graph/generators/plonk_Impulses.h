@@ -251,7 +251,7 @@ private:
  @par Inputs:
  - frequency: (unit, multi) the frequency of the oscillator in Hz
  - mul: (unit, multi) the multiplier applied to the output
- - add: (unit, multi) the offset aded to the output
+ - add: (unit, multi) the offset added to the output
  - preferredBlockSize: the preferred output block size (for advanced usage, leave on default if unsure)
  - preferredSampleRate: the preferred output sample rate (for advanced usage, leave on default if unsure)
 

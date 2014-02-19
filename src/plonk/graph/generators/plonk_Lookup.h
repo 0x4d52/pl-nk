@@ -179,7 +179,7 @@ private:
  - table: (wavetable) the wavetable to use
  - position: (unit, multi) the read position between 0..1 (wrapped to this range)
  - mul: (unit, multi) the multiplier applied to the output
- - add: (unit, multi) the offset aded to the output
+ - add: (unit, multi) the offset added to the output
  - preferredBlockSize: the preferred output block size (for advanced usage, leave on default if unsure)
  - preferredSampleRate: the preferred output sample rate (for advanced usage, leave on default if unsure)
 

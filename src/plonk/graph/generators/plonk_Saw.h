@@ -327,7 +327,7 @@ private:
  @par Inputs:
  - frequency: (unit, multi) the frequency of the oscillator in Hz
  - mul: (unit, multi) the multiplier applied to the output
- - add: (unit, multi) the offset aded to the output
+ - add: (unit, multi) the offset added to the output
  - preferredBlockSize: the preferred output block size (for advanced usage, leave on default if unsure)
  - preferredSampleRate: the preferred output sample rate (for advanced usage, leave on default if unsure)
  
@@ -384,7 +384,9 @@ public:
                 
         const LongLong peak = SampleType (TypeUtility<SampleType>::getTypePeak());
         
-        Data data = { { -1.0, -1.0 }, 0, peak, peak * 2 };
+        Data data = { { -1.0, -1.0 }, 0, 0, 0 };
+        data.peak = peak;
+        data.peak2peak = peak * 2;
         
         return UnitType::template createFromInputs<SawInternal> (inputs, 
                                                                  data, 

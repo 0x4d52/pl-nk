@@ -500,7 +500,7 @@ private:
  - file: (audiofilereader, multi) the audio file reader to use
  - loopCount: (value) a control to tell the file player how many times to loop (0=infinite)
  - mul: (unit, multi) the multiplier applied to the output
- - add: (unit, multi) the offset aded to the output
+ - add: (unit, multi) the offset added to the output
  - allowAutoDelete: (bool) whether this unit can be caused to be deleted by the unit it contains
  - preferredBlockSize: the preferred output block size (for advanced usage, leave on default if unsure)
  - preferredSampleRate: the preferred output sample rate (for advanced usage, leave on default if unsure)

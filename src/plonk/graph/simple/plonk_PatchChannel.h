@@ -290,7 +290,7 @@ private:
  - preferredNumChannels: (int) force this unit to have a certain number of channels (0= the channel count in initialSource)
  - fadeDuration: (unit, mono) the crossfade time in seconds to be used when patch sources are changed
  - mul: (unit) the multiplier applied to the output (NB NOT multi)
- - add: (unit) the offset aded to the output (NB NOT multi)
+ - add: (unit) the offset added to the output (NB NOT multi)
  - preferredBlockSize: the preferred output block size (for advanced usage, leave on default if unsure)
  - preferredSampleRate: the preferred output sample rate (for advanced usage, leave on default if unsure)
 

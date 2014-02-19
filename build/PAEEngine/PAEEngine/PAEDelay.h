@@ -44,19 +44,35 @@
 
 /** @file */
 
-/** A signal amplitude follower. */
-@interface PAEFollower : PAEProcess
+////////////////////////////////////////////////////////////////////////////////
+/** A delay process. */
+@interface PAEDelay : PAEProcess
 
-/** The lag time in seconds applied to the amplitude as it is rising.
- This defaults to having a constant of 0.01 patched to its input. 
+/** The delay time in seconds.
+ The default is the maximum delay time. Care must be taken to keep the delay time in range.
  This may be repatched with any other PAESource object as desired. */
-@property (strong, nonatomic, readonly) PAEProcess* attackTime;
+@property (strong, nonatomic, readonly) PAEProcess* delayTime;
 
-/** The lag time in seconds applied to the amplitude as it is falling.
- This defaults to having a constant of 0.01 patched to its input. 
+/** Create a compressor. 
+ The maxDelayTime allocates the internal buffer. */
++(PAEDelay*)delayWithNumInputs:(int)numInputs maxDelayTime:(float)maxDelayTime;
+@end
+
+////////////////////////////////////////////////////////////////////////////////
+/** A delay process with feedback. */
+@interface PAEComb : PAEProcess
+
+/** The delay time in seconds.
+ The default is the maximum delay time. Care must be taken to keep the delay time in range.
  This may be repatched with any other PAESource object as desired. */
-@property (strong, nonatomic, readonly) PAEProcess* releaseTime;
+@property (strong, nonatomic, readonly) PAEProcess* delayTime;
 
-/** Create a follower. */
-+(PAEFollower*)followerWithNumInputs:(int)numInputs;
+/** The feedback coefficient.
+ The default is 0.5. Care must be taken to keep the delay time in range -1 to 1.
+ This may be repatched with any other PAESource object as desired. */
+@property (strong, nonatomic, readonly) PAEProcess* feedback;
+
+/** Create a compressor.
+ The maxDelayTime allocates the internal buffer. */
++(PAEComb*)combWithNumInputs:(int)numInputs maxDelayTime:(float)maxDelayTime;
 @end

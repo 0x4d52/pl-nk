@@ -269,7 +269,7 @@ private:
  - rate: (unit, multi) the rate of playback (1= normal speed)
  - loop: (unit, multi) a flag to tell the file player to loop
  - mul: (unit, multi) the multiplier applied to the output
- - add: (unit, multi) the offset aded to the output
+ - add: (unit, multi) the offset added to the output
  - allowAutoDelete: (bool) whether this unit can be caused to be deleted by the unit it contains
  - preferredBlockSize: the preferred output block size (for advanced usage, leave on default if unsure)
  - preferredSampleRate: the preferred output sample rate (for advanced usage, leave on default if unsure)

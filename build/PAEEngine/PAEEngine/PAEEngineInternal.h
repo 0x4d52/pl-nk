@@ -9,5 +9,6 @@
 #import "PAEEngine.h"
 #import "PAESourceInternal.h"
 #import "PAEProcessInternal.h"
+#import "PAEBufferInternal.h"
 #include "plonk.h"
 

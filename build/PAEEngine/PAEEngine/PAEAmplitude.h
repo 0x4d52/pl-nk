@@ -44,19 +44,13 @@
 
 /** @file */
 
-/** A signal amplitude follower. */
-@interface PAEFollower : PAEProcess
+@interface PAEAmplitude : PAEProcess
 
-/** The lag time in seconds applied to the amplitude as it is rising.
- This defaults to having a constant of 0.01 patched to its input. 
+/** The level control expressed as linear amplitude.
+ The default is a constant of 1.
  This may be repatched with any other PAESource object as desired. */
-@property (strong, nonatomic, readonly) PAEProcess* attackTime;
+@property (strong, nonatomic, readonly) PAEProcess* level;
 
-/** The lag time in seconds applied to the amplitude as it is falling.
- This defaults to having a constant of 0.01 patched to its input. 
- This may be repatched with any other PAESource object as desired. */
-@property (strong, nonatomic, readonly) PAEProcess* releaseTime;
-
-/** Create a follower. */
-+(PAEFollower*)followerWithNumInputs:(int)numInputs;
+/** Create an amplitude process. */
++(PAEAmplitude*)amplitudeWithNumInputs:(int)numInputs;
 @end

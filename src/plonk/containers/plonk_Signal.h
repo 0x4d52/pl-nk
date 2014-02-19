@@ -267,6 +267,11 @@ public:
         return this->getInternal()->getNumFrames();
     }
     
+    inline double getDuration() const throw()
+    {
+        return this->getInternal()->getNumFrames() / this->getInternal()->sampleRate.getValue();
+    }
+    
     inline int getNumChannels() const throw()
     {
         return this->getInternal()->getNumChannels();

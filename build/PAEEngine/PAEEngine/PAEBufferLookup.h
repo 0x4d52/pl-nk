@@ -40,23 +40,27 @@
 
 #import <Foundation/Foundation.h>
 #import "PAEFoward.h"
-#import "PAEProcess.h"
+#import "PAESource.h"
 
 /** @file */
 
-/** A signal amplitude follower. */
-@interface PAEFollower : PAEProcess
+/** A buffer player driven by playback position.
+ The default plays the buffer back at normal speed in a loop. */
+@interface PAEBufferLookup : PAESource
 
-/** The lag time in seconds applied to the amplitude as it is rising.
- This defaults to having a constant of 0.01 patched to its input. 
+/** The buffer being played. */
+@property (strong, nonatomic, readonly) PAEBuffer* buffer;
+
+/** The playback position in seconds. 
+ The default is a sawtooth wave created like this:
+ @code
+ [PAESaw sawWithFrequency:1.0 / buffer.duration
+                amplitude:buffer.duration / 2.0
+                   offset:buffer.duration / 2.0];
+ @endcode 
  This may be repatched with any other PAESource object as desired. */
-@property (strong, nonatomic, readonly) PAEProcess* attackTime;
+@property (strong, nonatomic, readonly) PAEProcess* position;
 
-/** The lag time in seconds applied to the amplitude as it is falling.
- This defaults to having a constant of 0.01 patched to its input. 
- This may be repatched with any other PAESource object as desired. */
-@property (strong, nonatomic, readonly) PAEProcess* releaseTime;
-
-/** Create a follower. */
-+(PAEFollower*)followerWithNumInputs:(int)numInputs;
+/** Create a new buffer lookup source. */
++(PAEBufferLookup*)bufferLookupWithBuffer:(PAEBuffer*)buffer;
 @end

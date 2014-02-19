@@ -40,23 +40,52 @@
 
 #import <Foundation/Foundation.h>
 #import "PAEFoward.h"
-#import "PAEProcess.h"
 
 /** @file */
 
-/** A signal amplitude follower. */
-@interface PAEFollower : PAEProcess
+/** A buffer stores audio data. */
+@interface PAEBuffer : NSObject
 
-/** The lag time in seconds applied to the amplitude as it is rising.
- This defaults to having a constant of 0.01 patched to its input. 
- This may be repatched with any other PAESource object as desired. */
-@property (strong, nonatomic, readonly) PAEProcess* attackTime;
+/** The number of channels in the buffer. */
+@property (nonatomic, readonly) int numChannels;
 
-/** The lag time in seconds applied to the amplitude as it is falling.
- This defaults to having a constant of 0.01 patched to its input. 
- This may be repatched with any other PAESource object as desired. */
-@property (strong, nonatomic, readonly) PAEProcess* releaseTime;
+/** The duration of the buffer in seconds. */
+@property (nonatomic, readonly) NSTimeInterval duration;
 
-/** Create a follower. */
-+(PAEFollower*)followerWithNumInputs:(int)numInputs;
+/** The duration of the buffer in frames. */
+@property (nonatomic, readonly) int numFrames;
+
+/** The sample rate of the buffer. */
+@property (nonatomic, readonly) double sampleRate;
+
+/** Create a buffer from an audio file */
++(PAEBuffer*)bufferNamed:(NSString*)name;
+
+/** Create an empty buffer. */
++(PAEBuffer*)bufferWithSize:(int)numFrames channels:(int)numChannels sampleRate:(double)sampleRate;
+
+/** Get a sample at a specific index on a specific channel. */
+-(float)sampleAtIndex:(int)index channel:(int)channel;
+
+/** Get a sample interpolated at a specific time on a specific channel. */
+-(float)sampleAtTime:(NSTimeInterval)time channel:(int)channel;
+
+/** Get a sample interpolated at a specific phase (time mapped to 0 to 1) on a specific channel. */
+-(float)sampleAtPhase:(NSTimeInterval)phase channel:(int)channel;
+
+/** Get a sample at a specific index on channel 0. */
+-(float)sampleAtIndex:(int)index;
+
+/** Get a sample interpolated at a specific time on channel 0. */
+-(float)sampleAtTime:(NSTimeInterval)time;
+
+/** Get a sample interpolated at a specific phase (time mapped to 0 to 1) on channel 0. */
+-(float)sampleAtPhase:(NSTimeInterval)phase;
+
+/** Get the minimum and maximum sample values between the indices. */
+-(PAERange)limitsBetween:(int)startIndex end:(int)endIndex channel:(int)channel;
+
+/** Set a sample at a specific index on a specific channel. */
+-(void)setSample:(float)value index:(int)index channel:(int)channel;
+
 @end

@@ -216,7 +216,7 @@ public:
  - duration: (unit, multi) the delay duration in seconds
  - maximumDuration: (real) the maximum delay time in seconds (this can be equal to duration if duration is a constant)
  - mul: (unit, multi) the multiplier applied to the output
- - add: (unit, multi) the offset aded to the output
+ - add: (unit, multi) the offset added to the output
  - preferredBlockSize: the preferred output block size (for advanced usage, leave on default if unsure)
  - preferredSampleRate: the preferred output sample rate (for advanced usage, leave on default if unsure)
 

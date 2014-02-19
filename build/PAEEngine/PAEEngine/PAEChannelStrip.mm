@@ -38,10 +38,7 @@
 {
     if (self = [super initWithNumInputs:numInputs])
     {
-        self.level       = [[PAEProcess alloc] initWithNumInputs:1];
-        self.level.input = [PAEConstant constantWithValue:1];
-        self.outputUnit  = Patch::ar (_insertGraphVariable, false, numOutputs, PAERepatchFadeTime) * self.level.patchUnit;
-        
+        self.outputUnit  = Patch::ar (_insertGraphVariable, false, numOutputs, PAERepatchFadeTime);        
         _insertGraphVariable.setValue (self.patchUnit);
     }
     

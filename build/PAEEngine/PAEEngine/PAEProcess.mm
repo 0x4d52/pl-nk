@@ -12,6 +12,7 @@
 {
     UnitVariable _inputUnitVariable;
     Unit _patchUnit;
+    FloatVariable _repatchFadeTime;
 }
 @end
 
@@ -23,7 +24,9 @@
 {
     if (self = [super init])
     {
-        _patchUnit = Patch::ar (_inputUnitVariable, false, numInputs, PAERepatchFadeTime);
+        _repatchFadeTime.setValue (0.f);
+        _patchUnit = Patch::ar (_inputUnitVariable, false, numInputs, _repatchFadeTime);
+        _repatchFadeTime.setValue (PAERepatchFadeTime);
     }
     
     return self;
@@ -40,6 +43,11 @@
     _input = input;
 }
 
+-(int)numInputs
+{
+    return _patchUnit.getNumChannels();
+}
+
 -(Unit)inputUnit
 {
     return _inputUnitVariable.getValue();
@@ -53,6 +61,16 @@
 -(Unit)patchUnit
 {
     return _patchUnit;
+}
+
+-(float)repatchFadeTime
+{
+    return _repatchFadeTime.getValue();
+}
+
+-(void)setRepatchFadeTime:(float)repatchFadeTime
+{
+    _repatchFadeTime.setValue (repatchFadeTime);
 }
 
 @end

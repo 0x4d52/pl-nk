@@ -67,4 +67,60 @@
     return _outputUnitVariable.getValue().getValue (channel);
 }
 
+-(PAESource*)sourceWithChannel:(int)channel
+{
+    PAESource* proxy = [[PAESource alloc] init];
+    proxy.outputUnit = _outputUnitVariable.getValue() [channel];
+    return proxy;
+}
+
+-(PAESource*)sourcePhaseInverted
+{
+    PAESource* proxy = [[PAESource alloc] init];
+    proxy.outputUnit = _outputUnitVariable.getValue().neg();
+    return proxy;
+}
+
+-(PAESource*)sourceWithAppendedChannels:(PAESource*)source
+{
+    PAESource* proxy = [[PAESource alloc] init];
+    proxy.outputUnit = Unit (self.outputUnit, source.outputUnit);
+    return proxy;
+}
+
+-(PAESource*)sourceByFlatteningArray:(NSArray*)sources
+{
+    Unit unit;
+    
+    for (PAESource* source in sources)
+    {
+        if (unit.isNull())
+        {
+            unit = source.outputUnit;
+        }
+        else
+        {
+            unit = Unit (unit, source.outputUnit);
+        }
+    }
+    
+    PAESource* proxy = [[PAESource alloc] init];
+    proxy.outputUnit = unit;
+    return proxy;
+}
+
+-(PAESource*)sourceClippedToMinimum:(float)minimum maximimum:(float)maximum
+{
+    PAESource* proxy = [[PAESource alloc] init];
+    proxy.outputUnit = _outputUnitVariable.getValue().max (minimum).min (maximum);
+    return proxy;
+}
+
+-(PAESource*)sourceMixed
+{
+    PAESource* proxy = [[PAESource alloc] init];
+    proxy.outputUnit = _outputUnitVariable.getValue().mix();
+    return proxy;
+}
+
 @end

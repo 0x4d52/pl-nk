@@ -44,19 +44,14 @@
 
 /** @file */
 
-/** A signal amplitude follower. */
-@interface PAEFollower : PAEProcess
+/** A send process.
+ This may be used to create auxilliary sends that can be mixed separately. */
+@interface PAESend : PAEProcess
 
-/** The lag time in seconds applied to the amplitude as it is rising.
- This defaults to having a constant of 0.01 patched to its input. 
- This may be repatched with any other PAESource object as desired. */
-@property (strong, nonatomic, readonly) PAEProcess* attackTime;
+/** The output signal of the send. 
+ Control the level property of this to control the send amount. */
+@property (strong, nonatomic, readonly) PAEAmplitude* send;
 
-/** The lag time in seconds applied to the amplitude as it is falling.
- This defaults to having a constant of 0.01 patched to its input. 
- This may be repatched with any other PAESource object as desired. */
-@property (strong, nonatomic, readonly) PAEProcess* releaseTime;
-
-/** Create a follower. */
-+(PAEFollower*)followerWithNumInputs:(int)numInputs;
+/** Create an amplitude process. */
++(PAESend*)sendWithNumInputs:(int)numInputs;
 @end

@@ -24,11 +24,17 @@
     return [[PAEAudioFilePlayer alloc] initFromPath:[NSString stringWithUTF8String:path.fullpath()]];
 }
 
++(PAEAudioFilePlayer*)audioFilePlayerFromPath:(NSString*)path
+{
+    return [[PAEAudioFilePlayer alloc] initFromPath:path];
+}
+
 -(id)initFromPath:(NSString*)path
 {
     if (self = [super init])
     {
         _reader = AudioFileReader ([path UTF8String]);
+        _loopCount.setValue (0);
         
         if (!_reader.isReady())
             return nil;
@@ -36,7 +42,6 @@
         self.rate       = [[PAEProcess alloc] initWithNumInputs:1];
         self.rate.input = [PAEConstant constantWithValue:1];
 //        self.outputUnit = FilePlay::Simple::ar (_reader, self.rate.patchUnit, _loopCount);
-//        self.outputUnit = FilePlay::ar (_reader, _loopCount);
         self.outputUnit = ResampleLinear::ar (FilePlay::ar (_reader, _loopCount), self.rate.patchUnit);
     }
     
@@ -66,6 +71,16 @@
 -(NSTimeInterval)duration
 {
     return _reader.getDuration();
+}
+
+-(PAEInt64)numFrames
+{
+    return _reader.getNumFrames();
+}
+
+-(double)sampleRate
+{
+    return _reader.getSampleRate();
 }
 
 -(NSString*)name

@@ -1,5 +1,5 @@
 //
-//  PAEProcessInternal.h
+//  PAEBufferInternal.h
 //  PAEEngine
 //
 //  Created by Martin Robinson on 03/02/2014.
@@ -8,10 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import "PAEFoward.h"
-#import "PAEProcess.h"
 #include "plonk.h"
 
-@interface PAEProcess ()
-@property (nonatomic) Unit inputUnit;
-@property (nonatomic, readonly) Unit patchUnit;
+@interface PAEBuffer ()
+@property (nonatomic, readonly) Signal signal;
 @end
+

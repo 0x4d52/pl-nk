@@ -56,7 +56,7 @@
  - input: (unit, multi) the unit to filter
  - frequency: (unit, multi) the -3dB point cut-off frequency in Hz
  - mul: (unit, multi) the multiplier applied to the output
- - add: (unit, multi) the offset aded to the output
+ - add: (unit, multi) the offset added to the output
  - preferredBlockSize: the preferred output block size (for advanced usage, leave on default if unsure)
  - preferredSampleRate: the preferred output sample rate (for advanced usage, leave on default if unsure)
 
@@ -152,7 +152,7 @@ typedef LPFP1Unit<PLONK_TYPE_DEFAULT> LPFP1;
  - input: (unit, multi) the unit to filter
  - duration: (unit, multi) The -60dB lag time in seconds
  - mul: (unit, multi) the multiplier applied to the output
- - add: (unit, multi) the offset aded to the output
+ - add: (unit, multi) the offset added to the output
  - preferredBlockSize: the preferred output block size (for advanced usage, leave on default if unsure)
  - preferredSampleRate: the preferred output sample rate (for advanced usage, leave on default if unsure)
 
@@ -249,7 +249,7 @@ typedef LagUnit<PLONK_TYPE_DEFAULT> Lag;
  - attack: (unit, multi) The -60dB lag time in seconds for increasing signals
  - release: (unit, multi) The -60dB lag time in seconds for decreasing signals
  - mul: (unit, multi) the multiplier applied to the output
- - add: (unit, multi) the offset aded to the output
+ - add: (unit, multi) the offset added to the output
  - preferredBlockSize: the preferred output block size (for advanced usage, leave on default if unsure)
  - preferredSampleRate: the preferred output sample rate (for advanced usage, leave on default if unsure)
  
@@ -349,7 +349,7 @@ typedef LagAsymUnit<PLONK_TYPE_DEFAULT> LagAsym;
  - input: (unit, multi) the unit to filter
  - frequency: (unit, multi) the -3dB point cut-off frequency in Hz
  - mul: (unit, multi) the multiplier applied to the output
- - add: (unit, multi) the offset aded to the output
+ - add: (unit, multi) the offset added to the output
  - preferredBlockSize: the preferred output block size (for advanced usage, leave on default if unsure)
  - preferredSampleRate: the preferred output sample rate (for advanced usage, leave on default if unsure)
 
@@ -445,7 +445,7 @@ typedef HPFP1Unit<PLONK_TYPE_DEFAULT> HPFP1;
  - input: (unit, multi) the unit to filter
  - duration: (unit, multi) The -60dB decay time in seconds
  - mul: (unit, multi) the multiplier applied to the output
- - add: (unit, multi) the offset aded to the output
+ - add: (unit, multi) the offset added to the output
  - preferredBlockSize: the preferred output block size (for advanced usage, leave on default if unsure)
  - preferredSampleRate: the preferred output sample rate (for advanced usage, leave on default if unsure)
 
@@ -541,7 +541,7 @@ typedef DecayUnit<PLONK_TYPE_DEFAULT> Decay;
  - input: (unit, multi) the unit to filter
  - control: (unit, multi) the leakage control coefficient
  - mul: (unit, multi) the multiplier applied to the output
- - add: (unit, multi) the offset aded to the output
+ - add: (unit, multi) the offset added to the output
  - preferredBlockSize: the preferred output block size (for advanced usage, leave on default if unsure)
  - preferredSampleRate: the preferred output sample rate (for advanced usage, leave on default if unsure)
  
@@ -627,7 +627,7 @@ typedef DCUnit<PLONK_TYPE_DEFAULT> DC;
  - frequency: (unit, multi) the -3dB point cut-off frequency in Hz
  - q: (unit, multi) the filter Q factor
  - mul: (unit, multi) the multiplier applied to the output
- - add: (unit, multi) the offset aded to the output
+ - add: (unit, multi) the offset added to the output
  - preferredBlockSize: the preferred output block size (for advanced usage, leave on default if unsure)
  - preferredSampleRate: the preferred output sample rate (for advanced usage, leave on default if unsure)
 
@@ -728,7 +728,7 @@ typedef RLPFUnit<PLONK_TYPE_DEFAULT> RLPF;
  - frequency: (unit, multi) the -3dB point cut-off frequency in Hz
  - q: (unit, multi) the filter Q factor
  - mul: (unit, multi) the multiplier applied to the output
- - add: (unit, multi) the offset aded to the output
+ - add: (unit, multi) the offset added to the output
  - preferredBlockSize: the preferred output block size (for advanced usage, leave on default if unsure)
  - preferredSampleRate: the preferred output sample rate (for advanced usage, leave on default if unsure)
 
@@ -830,7 +830,7 @@ typedef RHPFUnit<PLONK_TYPE_DEFAULT> RHPF;
  - s: (unit, multi) the slope factor (keep to 1 or below for no strange resonances)
  - gain: (unit, multi) the cut/boost in gain dB
  - mul: (unit, multi) the multiplier applied to the output
- - add: (unit, multi) the offset aded to the output
+ - add: (unit, multi) the offset added to the output
  - preferredBlockSize: the preferred output block size (for advanced usage, leave on default if unsure)
  - preferredSampleRate: the preferred output sample rate (for advanced usage, leave on default if unsure)
 
@@ -939,7 +939,7 @@ typedef LowShelfUnit<PLONK_TYPE_DEFAULT> LowShelf;
  - s: (unit, multi) the slope factor (keep to 1 or below for no strange resonances)
  - gain: (unit, multi) the cut/boost in gain dB
  - mul: (unit, multi) the multiplier applied to the output
- - add: (unit, multi) the offset aded to the output
+ - add: (unit, multi) the offset added to the output
  - preferredBlockSize: the preferred output block size (for advanced usage, leave on default if unsure)
  - preferredSampleRate: the preferred output sample rate (for advanced usage, leave on default if unsure)
 
@@ -1048,7 +1048,7 @@ typedef HighShelfUnit<PLONK_TYPE_DEFAULT> HighShelf;
  - q: (unit, multi) the filter Q factor
  - gain: (unit, multi) the cut/boost in gain dB
  - mul: (unit, multi) the multiplier applied to the output
- - add: (unit, multi) the offset aded to the output
+ - add: (unit, multi) the offset added to the output
  - preferredBlockSize: the preferred output block size (for advanced usage, leave on default if unsure)
  - preferredSampleRate: the preferred output sample rate (for advanced usage, leave on default if unsure)
 
@@ -1156,7 +1156,7 @@ typedef NotchUnit<PLONK_TYPE_DEFAULT> Notch;
  - frequency: (unit, multi) the -3dB point cut-off frequency in Hz
  - bandwidth: (unit, multi) The bandwidth of the passband in octaves
  - mul: (unit, multi) the multiplier applied to the output
- - add: (unit, multi) the offset aded to the output
+ - add: (unit, multi) the offset added to the output
  - preferredBlockSize: the preferred output block size (for advanced usage, leave on default if unsure)
  - preferredSampleRate: the preferred output sample rate (for advanced usage, leave on default if unsure)
 
@@ -1257,7 +1257,7 @@ typedef BPFUnit<PLONK_TYPE_DEFAULT> BPF;
  - frequency: (unit, multi) the -3dB point cut-off frequency in Hz
  - bandwidth: (unit, multi) The bandwidth of the stopband in octaves
  - mul: (unit, multi) the multiplier applied to the output
- - add: (unit, multi) the offset aded to the output
+ - add: (unit, multi) the offset added to the output
  - preferredBlockSize: the preferred output block size (for advanced usage, leave on default if unsure)
  - preferredSampleRate: the preferred output sample rate (for advanced usage, leave on default if unsure)
 
@@ -1361,7 +1361,7 @@ typedef BRFUnit<PLONK_TYPE_DEFAULT> BRF;
  - input: (unit, multi) the unit to filter
  - frequency: (unit, multi) the -3dB point cut-off frequency in Hz
  - mul: (unit, multi) the multiplier applied to the output
- - add: (unit, multi) the offset aded to the output
+ - add: (unit, multi) the offset added to the output
  - preferredBlockSize: the preferred output block size (for advanced usage, leave on default if unsure)
  - preferredSampleRate: the preferred output sample rate (for advanced usage, leave on default if unsure)
 
@@ -1459,7 +1459,7 @@ typedef LPFUnit<PLONK_TYPE_DEFAULT> LPF;
  - input: (unit, multi) the unit to filter
  - frequency: (unit, multi) the -3dB point cut-off frequency in Hz
  - mul: (unit, multi) the multiplier applied to the output
- - add: (unit, multi) the offset aded to the output
+ - add: (unit, multi) the offset added to the output
  - preferredBlockSize: the preferred output block size (for advanced usage, leave on default if unsure)
  - preferredSampleRate: the preferred output sample rate (for advanced usage, leave on default if unsure)
 

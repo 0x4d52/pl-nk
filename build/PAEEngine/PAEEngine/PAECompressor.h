@@ -44,19 +44,39 @@
 
 /** @file */
 
-/** A signal amplitude follower. */
-@interface PAEFollower : PAEProcess
+/** A compressor. */
+@interface PAECompressor : PAEProcess
 
-/** The lag time in seconds applied to the amplitude as it is rising.
- This defaults to having a constant of 0.01 patched to its input. 
+/** The PAEFollower object used to perform the amplitude tracking. 
+ To use a different side chain the input of the follower can be repatched. */
+@property (strong, nonatomic, readonly) PAEFollower* follower;
+
+/** The attack time in seconds for the envelope applied to the compressor.
+ The default is a constant of 0.01.
+ This is independent of the follower's attack time. 
  This may be repatched with any other PAESource object as desired. */
 @property (strong, nonatomic, readonly) PAEProcess* attackTime;
 
-/** The lag time in seconds applied to the amplitude as it is falling.
- This defaults to having a constant of 0.01 patched to its input. 
+/** The release time in seconds for the envelope applied to the compressor.
+ The default is a constant of 0.1.
+ This is independent of the follower's release time. 
  This may be repatched with any other PAESource object as desired. */
 @property (strong, nonatomic, readonly) PAEProcess* releaseTime;
 
-/** Create a follower. */
-+(PAEFollower*)followerWithNumInputs:(int)numInputs;
+/** The compressor threshold expressed in linear amplitude. 
+ The default is a constant of 0.2.
+ This may be repatched with any other PAESource object as desired. */
+@property (strong, nonatomic, readonly) PAEProcess* threshold;
+
+/** The compressor ratio, n:1
+ The default is a constant of 0.5, ie. 2:1
+ This may be repatched with any other PAESource object as desired. */
+@property (strong, nonatomic, readonly) PAEProcess* ratio;
+
+/** Access to the internal compressor control state. */
+@property (strong, nonatomic, readonly) PAESource* control;
+
+/** Create a compressor. */
++(PAECompressor*)compressorWithNumInputs:(int)numInputs;
 @end
+
