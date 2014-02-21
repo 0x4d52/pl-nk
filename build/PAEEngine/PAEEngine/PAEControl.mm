@@ -16,6 +16,8 @@
 
 @implementation PAEControl
 
+@synthesize map = _map;
+
 +(PAEControl*)control
 {
     return [[PAEControl alloc] initWithValue:0.f];
@@ -44,12 +46,31 @@
 
 -(float)value
 {
-    return _value.getValue();
+    const float currentOutputValue = _value.getValue();    
+    return self.map ? [self.map mapOutputToInput:currentOutputValue] : currentOutputValue;
 }
 
 -(void)setValue:(float)value
 {
-    _value.setValue (value);
+    const float newOutputValue = self.map ? [self.map mapInputToOutput:value] : value;
+    _value.setValue (newOutputValue);
+}
+
+-(PAEMap*)map
+{
+    return _map;
+}
+
+-(void)setMap:(PAEMap *)map
+{
+    const float oldValue = self.value; // may unmap
+    _map = map;
+    self.value = oldValue; // may remap
+}
+
+-(float)mappedValue
+{
+    return _value.getValue();
 }
 
 

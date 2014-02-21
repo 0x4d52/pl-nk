@@ -49,8 +49,16 @@
  during the running of the application. */
 @interface PAEControl : PAESource
 
-/** The current value. */
+/** The current control input value. 
+ This will be the same as mappedValue if the map is nil. */
 @property (nonatomic) float value;
+
+/** The current mapped value used for audio processing.
+ This will have had the map applied or be the same as value if the map is nil. */
+@property (nonatomic, readonly) float mappedValue;
+
+/** A mapping to use for the control. */
+@property (strong, nonatomic) PAEMap* map;
 
 /** Create a control with a initial value of zero. */
 +(PAEControl*)control;

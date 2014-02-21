@@ -12,5 +12,7 @@
 
 @interface PAEBuffer ()
 @property (nonatomic, readonly) Signal signal;
+@property (nonatomic, readonly) int frameStride;
+-(float*)samples:(int)channel;
 @end
 

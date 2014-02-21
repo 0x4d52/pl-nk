@@ -69,7 +69,10 @@
 #import "PAEAmplitude.h"
 #import "PAESend.h"
 
-#define PAEENGINE_VERSION "0.1.6"
+// UI
+#import "PAEBufferView.h"
+
+#define PAEENGINE_VERSION "0.1.8"
 
 /**
 @mainpage Documentation

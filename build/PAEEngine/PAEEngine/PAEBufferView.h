@@ -38,21 +38,20 @@
  -------------------------------------------------------------------------------
  */
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 #import "PAEFoward.h"
-#import "PAEProcess.h"
 
 /** @file */
 
-/** An amplitude processor.
- Use this to control the amplitude of the output of other sources. */
-@interface PAEAmplitude : PAEProcess
+/** Display a buffer in a view.
+ This creates as many subviews as there are channels in the buffer.*/
+@interface PAEBufferView : UIView
 
-/** The level control expressed as linear amplitude.
- The default is a constant of 1.
- This may be repatched with any other PAESource object as desired. */
-@property (strong, nonatomic, readonly) PAEProcess* level;
+/** The buffer to display. */
+@property (strong, nonatomic) PAEBuffer* buffer;
 
-/** Create an amplitude process. */
-+(PAEAmplitude*)amplitudeWithNumInputs:(int)numInputs;
+@property (strong, nonatomic) UIColor* borderColor;
+
+@property (strong, nonatomic) UIColor* traceColor;
+
 @end

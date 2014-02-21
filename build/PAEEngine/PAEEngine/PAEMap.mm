@@ -160,3 +160,55 @@
 }
 
 @end
+
+////////////////////////////////////////////////////////////////////////////////
+
+
+//@implementation PAEProcessMap
+//{
+//    PAEProcess* _mapper;
+//}
+//
+//@synthesize map = _map;
+//
+//-(id)initWithNumInputs:(int)numInputs
+//{
+//    if (self = [super initWithNumInputs:numInputs])
+//    {
+//        _mapper = [[PAEProcess alloc] initWithNumInputs:numInputs];
+//        _mapper.inputUnit = self.patchUnit;
+//        self.outputUnit = _mapper.outputUnit;
+//    }
+//    
+//    return self;
+//}
+//
+//-(PAEMap*)map
+//{
+//    return _map;
+//}
+//
+//-(void)setMap:(PAEMap *)map
+//{
+//    if (!map)
+//    {
+//        _mapper.inputUnit = self.patchUnit;
+//    }
+//    else
+//    {
+//        switch (map.type)
+//        {
+//            case PAEMapTypeLinearToLinear:
+//                _mapper.inputUnit = self.patchUnit.linlin(map.inputMinimum, map.input, <#const plonk::UnitBase<float> &outLow#>, <#const plonk::UnitBase<float> &outHigh#>)
+//                break;
+//            case PAEMapTypeLinearToExponential:
+//                break;
+//            case PAEMapTypeExponentialToLinear:
+//                break;
+//        }
+//    }
+//    
+//    _map = map;
+//}
+//
+//@end

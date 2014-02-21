@@ -33,7 +33,9 @@
         self.rate       = [[PAEProcess alloc] initWithNumInputs:1];
         self.rate.input = [PAEConstant constantWithValue:1];
                 
-        self.outputUnit = SignalPlay::ar (self.buffer.signal, self.rate.patchUnit, _loopFlag.kr());
+        self.outputUnit = SignalPlay::ar (self.buffer.signal,
+                                          self.rate.patchUnit,
+                                          _loopFlag.kr());
     }
     
     return self;

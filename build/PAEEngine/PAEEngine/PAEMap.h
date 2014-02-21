@@ -141,3 +141,10 @@ enum
 +(float)bandwidthToQ:(float)bandwidth;
 
 @end
+
+///** Source value mapping.
+// This maps the output value of a source*/
+//@interface PAEProcessMap : PAEProcess
+//@property (nonatomic, strong) PAEMap* map;
+//@end
+

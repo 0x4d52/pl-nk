@@ -48,7 +48,8 @@
 @class PAETestTone;
 @class PAEMixer;
 @class PAEBuffer;
-//struct PAERange;
+@class PAEBufferView;
+struct PAERange;
 
 /** The default fade time applied when repatching sources.
  Default 0.005s = 5ms. */

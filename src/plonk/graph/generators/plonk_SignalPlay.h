@@ -158,87 +158,90 @@ public:
     {        
         Data& data = this->getState();
         
-        RateUnitType& rateUnit = ChannelInternalCore::getInputAs<RateUnitType> (IOKey::Rate);
-        const RateBufferType& rateBuffer (rateUnit.process (info, channel));
-        
         SampleType* outputSamples = this->getOutputSamples();
         const int outputBufferLength = this->getOutputBuffer().length();
-        
-        const RateType* rateSamples = rateBuffer.getArray();
-        const int rateBufferLength = rateBuffer.length();
-        
-        UnitType& loop (this->getInputAsUnit (IOKey::Loop));
-        const Buffer& loopBuffer (loop.process (info, channel));
-        const SampleType* const loopSamples = loopBuffer.getArray();
-        const bool loopFlag = loopSamples[0] >= SampleType (0.5);
-        
-        const SignalType& signal (this->getInputAsSignal (IOKey::Signal));
-        const SampleType* const signalSamples = signal.getSamples (channel);         
-        const unsigned int signalFrameStride = signal.getFrameStride();
-        const unsigned int numSignalFrames (signal.getNumFrames());
-        const RateType rateScale (signal.getSampleRate().getValue() * data.base.sampleDuration);
-        
         int numSamplesRemaining = outputBufferLength;
-        
-        if (rateBufferLength == outputBufferLength)
+
+        if (!data.done)
         {
-            while (numSamplesRemaining--)
-            {
-                const unsigned int sampleA (data.currentPosition);
-                const unsigned int sampleB (sampleA + 1);
-                const RateType frac (plonk::frac (data.currentPosition));
-                
-                *outputSamples++ = InterpType::interp (signalSamples[(sampleA % numSignalFrames) * signalFrameStride],
-                                                       signalSamples[(sampleB % numSignalFrames) * signalFrameStride], 
-                                                       frac);
-                
-                data.currentPosition += *rateSamples++ * rateScale;
-                
-                if (checkPosition (info, data, numSignalFrames, loopFlag))
-                    break;
-            }
-        }
-        else if (rateBufferLength == 1)
-        {
-            const RateType increment = rateSamples[0] * rateScale;
+            RateUnitType& rateUnit = ChannelInternalCore::getInputAs<RateUnitType> (IOKey::Rate);
+            const RateBufferType& rateBuffer (rateUnit.process (info, channel));
             
-            while (numSamplesRemaining--)
-            {
-                const unsigned int sampleA (data.currentPosition);
-                const unsigned int sampleB (sampleA + 1);
-                const RateType frac (plonk::frac (data.currentPosition));
-                
-                *outputSamples++ = InterpType::interp (signalSamples[(sampleA % numSignalFrames) * signalFrameStride],
-                                                       signalSamples[(sampleB % numSignalFrames) * signalFrameStride], 
-                                                       frac);
-                data.currentPosition += increment;
-                
-                if (checkPosition (info, data, numSignalFrames, loopFlag))
-                    break;
-            }
-        }
-        else
-        {
-            double ratePosition = 0.0;
-            const double rateIncrement = double (rateBufferLength) / double (outputBufferLength);
+            const RateType* rateSamples = rateBuffer.getArray();
+            const int rateBufferLength = rateBuffer.length();
             
-            while (numSamplesRemaining--)
+            UnitType& loop (this->getInputAsUnit (IOKey::Loop));
+            const Buffer& loopBuffer (loop.process (info, channel));
+            const SampleType* const loopSamples = loopBuffer.getArray();
+            const bool loopFlag = loopSamples[0] >= SampleType (0.5);
+            
+            const SignalType& signal (this->getInputAsSignal (IOKey::Signal));
+            const SampleType* const signalSamples = signal.getSamples (channel);         
+            const unsigned int signalFrameStride = signal.getFrameStride();
+            const unsigned int numSignalFrames (signal.getNumFrames());
+            const RateType rateScale (signal.getSampleRate().getValue() * data.base.sampleDuration);
+            
+            
+            if (rateBufferLength == outputBufferLength)
             {
-                const unsigned int sampleA (data.currentPosition);
-                const unsigned int sampleB (sampleA + 1);
-                const RateType frac (plonk::frac (data.currentPosition));
+                while (numSamplesRemaining--)
+                {
+                    const unsigned int sampleA (data.currentPosition);
+                    const unsigned int sampleB (sampleA + 1);
+                    const RateType frac (plonk::frac (data.currentPosition));
+                    
+                    *outputSamples++ = InterpType::interp (signalSamples[(sampleA % numSignalFrames) * signalFrameStride],
+                                                           signalSamples[(sampleB % numSignalFrames) * signalFrameStride], 
+                                                           frac);
+                    
+                    data.currentPosition += *rateSamples++ * rateScale;
+                    
+                    if (checkPosition (info, data, numSignalFrames, loopFlag))
+                        break;
+                }
+            }
+            else if (rateBufferLength == 1)
+            {
+                const RateType increment = rateSamples[0] * rateScale;
                 
-                *outputSamples++ = InterpType::interp (signalSamples[(sampleA % numSignalFrames) * signalFrameStride],
-                                                       signalSamples[(sampleB % numSignalFrames) * signalFrameStride], 
-                                                       frac);
+                while (numSamplesRemaining--)
+                {
+                    const unsigned int sampleA (data.currentPosition);
+                    const unsigned int sampleB (sampleA + 1);
+                    const RateType frac (plonk::frac (data.currentPosition));
+                    
+                    *outputSamples++ = InterpType::interp (signalSamples[(sampleA % numSignalFrames) * signalFrameStride],
+                                                           signalSamples[(sampleB % numSignalFrames) * signalFrameStride], 
+                                                           frac);
+                    data.currentPosition += increment;
+                    
+                    if (checkPosition (info, data, numSignalFrames, loopFlag))
+                        break;
+                }
+            }
+            else
+            {
+                double ratePosition = 0.0;
+                const double rateIncrement = double (rateBufferLength) / double (outputBufferLength);
                 
-                data.currentPosition += rateSamples[int (ratePosition)] * rateScale;
-                
-                if (checkPosition (info, data, numSignalFrames, loopFlag))
-                    break;
-                
-                ratePosition += rateIncrement;
-            }                    
+                while (numSamplesRemaining--)
+                {
+                    const unsigned int sampleA (data.currentPosition);
+                    const unsigned int sampleB (sampleA + 1);
+                    const RateType frac (plonk::frac (data.currentPosition));
+                    
+                    *outputSamples++ = InterpType::interp (signalSamples[(sampleA % numSignalFrames) * signalFrameStride],
+                                                           signalSamples[(sampleB % numSignalFrames) * signalFrameStride], 
+                                                           frac);
+                    
+                    data.currentPosition += rateSamples[int (ratePosition)] * rateScale;
+                    
+                    if (checkPosition (info, data, numSignalFrames, loopFlag))
+                        break;
+                    
+                    ratePosition += rateIncrement;
+                }                    
+            }
         }
         
         if (numSamplesRemaining > 0)

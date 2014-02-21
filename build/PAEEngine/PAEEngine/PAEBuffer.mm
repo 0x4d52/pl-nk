@@ -19,21 +19,6 @@
     return [[PAEBuffer alloc] initFromPath:[NSString stringWithUTF8String:path.fullpath()]];
 }   
 
-//-(id)initFromPath:(NSString*)path
-//{
-//    if (self = [super init])
-//    {
-//        AudioFileReader reader ([path UTF8String]);
-//        
-//        if (!reader.isReady())
-//            return nil;
-//        
-//        _signal = reader.getSignal();
-//    }
-//    
-//    return self;
-//}
-
 -(id)initFromPath:(NSString*)path
 {
     if (self = [super init])
@@ -103,6 +88,16 @@
 -(double)sampleRate
 {
     return _signal.getSampleRate().getValue();
+}
+
+-(int)frameStride
+{
+    return _signal.getFrameStride();
+}
+
+-(float*)samples:(int)channel
+{
+    return _signal.getSamples (channel);
 }
 
 -(float)sampleAtIndex:(int)index channel:(int)channel
