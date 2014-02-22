@@ -122,6 +122,7 @@ public:
         this->initValue (0);//this->getState().currentPosition);
     }
     
+private:
     inline bool checkPosition (ProcessInfo& info, Data& data, const int numSignalFrames, const bool loop) throw()
     {        
         if (data.currentPosition >= numSignalFrames)
@@ -154,6 +155,7 @@ public:
         return data.done;
     }
     
+public:
     void process (ProcessInfo& info, const int channel) throw()
     {        
         Data& data = this->getState();

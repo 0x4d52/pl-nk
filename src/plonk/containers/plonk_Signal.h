@@ -62,7 +62,10 @@ public:
     typedef NumericalArray<SampleVariable>  SampleVariableArray;
     
     inline SignalInternal() throw()
-    :   numInterleavedChannels (1)
+    :   numInterleavedChannels (1),
+        channel (-1),
+        offset (0),
+        numFrames (-1)
     {
         init();
     }
@@ -71,7 +74,10 @@ public:
                            SampleRate const& sampleRateToUse) throw()
     :   buffers (buffersToUse),
         sampleRate (sampleRateToUse),
-        numInterleavedChannels (1)
+        numInterleavedChannels (1),
+        channel (-1),
+        offset (0),
+        numFrames (-1)
     {
         plonk_assert ((buffers.length() == 1) || buffers.isMatrix()); // each channel must be the same length
         init();
@@ -82,7 +88,27 @@ public:
                            const int interleavedChannelsInBuffer) throw()
     :   buffers (buffer),
         sampleRate (sampleRateToUse),
-        numInterleavedChannels (interleavedChannelsInBuffer)
+        numInterleavedChannels (interleavedChannelsInBuffer),
+        channel (-1),
+        offset (0),
+        numFrames (-1)
+    {
+        plonk_assert (numInterleavedChannels > 0);
+        init();
+    }
+    
+    inline SignalInternal (Buffers const& buffersToUse,
+                           SampleRate const& sampleRateToUse,
+                           const int interleavedChannelsInBuffer,
+                           const int channelToUse,
+                           const int offsetToUse,
+                           const int numFramesToUse) throw()
+    :   buffers (buffersToUse),
+        sampleRate (sampleRateToUse),
+        numInterleavedChannels (interleavedChannelsInBuffer),
+        channel (channelToUse),
+        offset (offsetToUse),
+        numFrames (numFramesToUse)
     {
         plonk_assert (numInterleavedChannels > 0);
         init();
@@ -91,12 +117,17 @@ public:
     inline int getNumFrames() const throw()
     {   
         const int numFramesPerBuffer = buffers.numColumns();
-        return numFramesPerBuffer / numInterleavedChannels;
+        const int bufferFrames = (numFramesPerBuffer / numInterleavedChannels) - offset;
+        return numFrames < 0 ? bufferFrames : plonk::min (numFrames, bufferFrames);
     }
     
     inline int getNumChannels() const throw()
     {
-        if (numInterleavedChannels > 1)
+        if (channel >= 0)
+        {
+            return 1;
+        }
+        else if (numInterleavedChannels > 1)
         {
             plonk_assert (buffers.numRows() == 1);
             return numInterleavedChannels;
@@ -107,29 +138,30 @@ public:
         }
     }
     
+//    inline int getFrameStride() const throw()
+//    {
+//        return isInterleaved() ? getNumChannels() : 1;
+//    }
+
     inline int getFrameStride() const throw()
     {
-        return isInterleaved() ? getNumChannels() : 1;
+        return isInterleaved() ? numInterleavedChannels : 1;
     }
-    
+        
     SampleType* getSamples (const int channel) throw()
     {
-        const int wrappedChannel = plonk::wrap (channel, 0, getNumChannels());
-        return isInterleaved() 
-               ? 
-               buffers.atUnchecked (0).getArray() + wrappedChannel
-               :
-               buffers.atUnchecked (wrappedChannel).getArray();
+        const int wrappedChannel = channel < 0 ? channel : plonk::wrap (channel, 0, getNumChannels());
+        return isInterleaved() ? buffers.atUnchecked (0).getArray() + offset * numInterleavedChannels + wrappedChannel
+                                 :
+                                 buffers.atUnchecked (wrappedChannel).getArray() + offset;
     }
     
     const SampleType* getSamples (const int channel) const throw()
     {
-        const int wrappedChannel = plonk::wrap (channel, 0, getNumChannels());
-        return isInterleaved() 
-               ? 
-               buffers.atUnchecked (0).getArray() + wrappedChannel
-               :
-               buffers.atUnchecked (wrappedChannel).getArray();
+        const int wrappedChannel = channel < 0 ? channel : plonk::wrap (channel, 0, getNumChannels());
+        return isInterleaved() ? buffers.atUnchecked (0).getArray() + offset * numInterleavedChannels + wrappedChannel
+                                 :
+                                 buffers.atUnchecked (wrappedChannel).getArray() + offset;
     }
 
     inline bool isInterleaved() const throw()
@@ -138,20 +170,20 @@ public:
         return (numInterleavedChannels > 1) || (buffers.numRows() == 1);
     }
     
-    inline Buffer getInterleaved() const throw()
-    {
-        plonk_assert(buffers.length() > 0);
-        return (isInterleaved()) ? buffers.atUnchecked (0) : buffers.interleave();
-    }
-    
-    inline Buffers getDeinterleaved() const throw()
-    {        
-        plonk_assert(buffers.length() > 0);
-        if (isInterleaved()) 
-            return buffers.atUnchecked (0).deinterleave (numInterleavedChannels);
-        else
-            return buffers;
-    }
+//    inline Buffer getInterleaved() const throw()
+//    {
+//        plonk_assert(buffers.length() > 0);
+//        return (isInterleaved()) ? buffers.atUnchecked (0) : buffers.interleave();
+//    }
+//    
+//    inline Buffers getDeinterleaved() const throw()
+//    {        
+//        plonk_assert(buffers.length() > 0);
+//        if (isInterleaved()) 
+//            return buffers.atUnchecked (0).deinterleave (numInterleavedChannels);
+//        else
+//            return buffers;
+//    }
     
     friend class SignalBase<SampleType>;
     
@@ -159,6 +191,9 @@ private:
     Buffers buffers;
     SampleRate sampleRate;
     const int numInterleavedChannels;
+    int channel;
+    int offset;
+    int numFrames;
         
     SampleVariableArray sampleVariables;
     IntVariableArray intVariables;
@@ -217,13 +252,13 @@ public:
     SignalBase (Dynamic const& other) throw()
     :   Base (other.as<SignalBase>().getInternal())
     {
-    }    
+    }
     
     /** Assignment operator. */
     SignalBase& operator= (SignalBase const& other) throw()
 	{
         if (this != &other)
-            this->setInternal (other.getInternal());//this->setInternal (other.containerCopy().getInternal());
+            this->setInternal (other.getInternal());
         
         return *this;
 	}
@@ -240,17 +275,43 @@ public:
     {
         static SignalBase null;        
         return null;
-    }	           
+    }
     
-    inline const Buffers& getBuffers() const throw()
+    SignalBase getSelection (const int offset, const int numFrames = -1) const throw()
     {
-        return this->getInternal()->buffers;
-    }
+        int offsetToUse = plonk::clip (offset, 0, this->getNumFrames());
 
-    inline Buffers& getBuffers() throw()
-    {
-        return this->getInternal()->buffers;
+        Internal* internal = new Internal (this->getInternal()->buffers,
+                                           this->getInternal()->sampleRate,
+                                           this->getInternal()->numInterleavedChannels,
+                                           this->getInternal()->channel,
+                                           plonk::clip (this->getInternal()->offset + offsetToUse,
+                                                        this->getInternal()->offset,
+                                                        this->getInternal()->offset + this->getNumFrames()),
+                                           plonk::clip (numFrames, -1, this->getNumFrames() - offsetToUse));
+        return SignalBase (internal);
     }
+    
+    SignalBase getChannel (const int channel) const throw()
+    {
+        Internal* internal = new Internal (this->getInternal()->buffers,
+                                           this->getInternal()->sampleRate,
+                                           this->getInternal()->numInterleavedChannels,
+                                           this->getInternal()->channel < 0 ? channel : this->getInternal()->channel,
+                                           this->getInternal()->offset,
+                                           this->getInternal()->numFrames);
+        return SignalBase (internal);
+    }
+    
+//    inline const Buffers& getBuffers() const throw()
+//    {
+//        return this->getInternal()->buffers;
+//    }
+//
+//    inline Buffers& getBuffers() throw()
+//    {
+//        return this->getInternal()->buffers;
+//    }
 
     inline const SampleRate& getSampleRate() const throw()
     {
@@ -297,15 +358,15 @@ public:
         return this->getInternal()->isInterleaved();
     }
 
-    inline Buffer getInterleaved() const throw()
-    {
-        return this->getInternal()->getInterleaved();
-    }
-    
-    inline Buffers getDeinterleaved() const throw()
-    {
-        return this->getInternal()->getDeinterleaved();
-    }
+//    inline Buffer getInterleaved() const throw()
+//    {
+//        return this->getInternal()->getInterleaved();
+//    }
+//    
+//    inline Buffers getDeinterleaved() const throw()
+//    {
+//        return this->getInternal()->getDeinterleaved();
+//    }
     
     inline SampleVariableArray& getSampleVariables() throw()
     {

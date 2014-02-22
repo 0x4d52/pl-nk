@@ -80,12 +80,19 @@
 -(float)sampleAtTime:(NSTimeInterval)time;
 
 /** Get a sample interpolated at a specific phase (time mapped to 0 to 1) on channel 0. */
--(float)sampleAtPhase:(NSTimeInterval)phase;
+-(float)sampleAtPhase:(double)phase;
 
 /** Get the minimum and maximum sample values between the indices. */
 -(PAERange)limitsBetween:(int)startIndex end:(int)endIndex channel:(int)channel;
 
 /** Set a sample at a specific index on a specific channel. */
 -(void)setSample:(float)value index:(int)index channel:(int)channel;
+
+-(PAEBuffer*)bufferFrom:(int)startIndexOffset numFrames:(int)numFrames;
+
+-(PAEBuffer*)bufferFromTime:(NSTimeInterval)startTimeOffset duration:(NSTimeInterval)duration;
+
+-(PAEBuffer*)bufferWithChannel:(int)channel;
+
 
 @end

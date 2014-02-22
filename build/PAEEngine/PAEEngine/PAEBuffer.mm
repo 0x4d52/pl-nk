@@ -161,6 +161,8 @@
     if (self = [super init])
     {
         self.internal = [[PAEBufferInternal alloc] initFromPath:path];
+        self.localNumFrames = self.internal.numFrames;
+        self.localChannel = -1;
     }
     
     return self;
@@ -180,6 +182,8 @@
         self.internal = [[PAEBufferInternal alloc] initWithSize:numFrames
                                                        channels:numChannels
                                                      sampleRate:sampleRate];
+        self.localNumFrames = self.internal.numFrames;
+        self.localChannel = -1;
     }
     
     return self;
@@ -192,17 +196,17 @@
 
 -(int)numChannels
 {
-    return self.internal.numChannels;
+    return self.localChannel < 0 ? self.internal.numChannels : 1;
 }
 
 -(NSTimeInterval)duration
 {
-    return self.internal.duration;
+    return self.localNumFrames / self.sampleRate;
 }
 
 -(int)numFrames
 {
-    return self.internal.numFrames;
+    return self.localNumFrames;
 }
 
 -(double)sampleRate
@@ -217,52 +221,98 @@
 
 -(float*)samples:(int)channel
 {
-    return [self.internal samples:channel];
+    return [self.internal samples:self.localChannel < 0 ? channel : self.localChannel] + self.localStartOffset * self.frameStride;
 }
 
 -(float)sampleAtIndex:(int)index channel:(int)channel
 {
-    return [self.internal sampleAtIndex:index
+    return [self.internal sampleAtIndex:index + self.localStartOffset
                                 channel:channel];
 }
 
 -(float)sampleAtTime:(NSTimeInterval)time channel:(int)channel
 {
-    return [self.internal sampleAtTime:time
+    return [self.internal sampleAtTime:time + (self.localStartOffset / self.sampleRate)
                                channel:channel];
 }
 
 -(float)sampleAtPhase:(NSTimeInterval)phase channel:(int)channel
 {
-    return [self.internal sampleAtTime:phase * self.duration
+    return [self.internal sampleAtTime:phase * self.duration + (self.localStartOffset / self.sampleRate)
                                channel:channel];
 }
 
 -(float)sampleAtIndex:(int)index
 {
-    return [self sampleAtIndex:index channel:0];
+    return [self sampleAtIndex:index
+                       channel:self.localChannel < 0 ? 0 : self.localChannel];
 }
 
 -(float)sampleAtTime:(NSTimeInterval)time
 {
-    return [self sampleAtTime:time channel:0];
+    return [self sampleAtTime:time
+                      channel:self.localChannel < 0 ? 0 : self.localChannel];
 }
 
--(float)sampleAtPhase:(NSTimeInterval)phase
+-(float)sampleAtPhase:(double)phase
 {
-    return [self sampleAtPhase:phase channel:0];
+    return [self sampleAtPhase:phase
+                       channel:self.localChannel < 0 ? 0 : self.localChannel];
 }
 
 -(PAERange)limitsBetween:(int)startIndex end:(int)endIndex channel:(int)channel
 {
-    return [self.internal limitsBetween:startIndex end:endIndex channel:channel];
+    return [self.internal limitsBetween:startIndex + self.localStartOffset
+                                    end:endIndex + self.localStartOffset
+                                channel:self.localChannel < 0 ? channel : self.localChannel];
 }
 
 -(void)setSample:(float)value index:(int)index channel:(int)channel
 {
     [self.internal setSample:value
-                       index:index
-                     channel:channel];
+                       index:index + self.localStartOffset
+                     channel:self.localChannel < 0 ? channel : self.localChannel];
+}
+
+-(PAEBuffer*)bufferFrom:(int)startIndexOffset numFrames:(int)numFrames
+{
+    PAEBuffer* buffer = [PAEBuffer new];
+    
+    if (buffer)
+    {
+        buffer.internal         = self.internal;
+        
+        startIndexOffset        = plonk::clip (startIndexOffset, 0, self.localNumFrames);
+        numFrames               = numFrames < 0 ? self.localNumFrames - startIndexOffset : numFrames;
+        buffer.localStartOffset = plonk::clip (self.localStartOffset + startIndexOffset,
+                                               self.localStartOffset,
+                                               self.localStartOffset + self.localNumFrames);
+        buffer.localNumFrames   = plonk::clip (numFrames, 0, self.localNumFrames - startIndexOffset);
+        buffer.localChannel     = self.localChannel;
+    }
+    
+    return buffer;
+}
+
+-(PAEBuffer*)bufferFromTime:(NSTimeInterval)startTimeOffset duration:(NSTimeInterval)duration
+{
+    return [self bufferFrom:int (startTimeOffset * self.sampleRate + 0.5)
+                  numFrames:int (duration * self.sampleRate + 0.5)];
+}
+
+-(PAEBuffer*)bufferWithChannel:(int)channel
+{
+    PAEBuffer* buffer = [PAEBuffer new];
+
+    if (buffer)
+    {
+        buffer.internal         = self.internal;
+        buffer.localStartOffset = self.localStartOffset;
+        buffer.localNumFrames   = self.localNumFrames;
+        buffer.localChannel     = self.localChannel < 0 ? channel : self.localChannel;
+    }
+    
+    return buffer;
 }
 
 @end
