@@ -8,16 +8,10 @@
 
 #import "PAEEngineInternal.h"
 
-@implementation PAEBuffer
+@implementation PAEBufferInternal
 {
     Signal _signal;
 }
-
-+(PAEBuffer*)bufferNamed:(NSString*)name
-{
-    FilePath path (FilePath::system (FilePath::App).child (name.UTF8String).fullpath());
-    return [[PAEBuffer alloc] initFromPath:[NSString stringWithUTF8String:path.fullpath()]];
-}   
 
 -(id)initFromPath:(NSString*)path
 {
@@ -47,11 +41,6 @@
     }
     
     return self;
-}
-
-+(PAEBuffer*)bufferWithSize:(int)numFrames channels:(int)numChannels sampleRate:(double)sampleRate
-{
-    return [[PAEBuffer alloc] initWithSize:numFrames channels:numChannels sampleRate:sampleRate];
 }
 
 -(id)initWithSize:(int)numFrames channels:(int)numChannels sampleRate:(double)sampleRate
@@ -122,27 +111,6 @@
     return value;
 }
 
--(float)sampleAtPhase:(NSTimeInterval)phase channel:(int)channel
-{
-    return [self sampleAtTime:phase * self.duration
-                      channel:channel];
-}
-
--(float)sampleAtIndex:(int)index
-{
-    return [self sampleAtIndex:index channel:0];
-}
-
--(float)sampleAtTime:(NSTimeInterval)time
-{
-    return [self sampleAtTime:time channel:0];
-}
-
--(float)sampleAtPhase:(NSTimeInterval)phase
-{
-    return [self sampleAtPhase:phase channel:0];
-}
-
 -(PAERange)limitsBetween:(int)startIndex end:(int)endIndex channel:(int)channel
 {
     const float* samples = _signal.getSamples (channel);
@@ -177,3 +145,130 @@
 }
 
 @end
+
+////////////////////////////////////////////////////////////////////////////////
+
+@implementation PAEBuffer
+
++(PAEBuffer*)bufferNamed:(NSString*)name
+{
+    FilePath path (FilePath::system (FilePath::App).child (name.UTF8String).fullpath());
+    return [[PAEBuffer alloc] initFromPath:[NSString stringWithUTF8String:path.fullpath()]];
+}
+
+-(id)initFromPath:(NSString*)path
+{
+    if (self = [super init])
+    {
+        self.internal = [[PAEBufferInternal alloc] initFromPath:path];
+    }
+    
+    return self;
+}
+
++(PAEBuffer*)bufferWithSize:(int)numFrames channels:(int)numChannels sampleRate:(double)sampleRate
+{
+    return [[PAEBuffer alloc] initWithSize:numFrames
+                                  channels:numChannels
+                                sampleRate:sampleRate];
+}
+
+-(id)initWithSize:(int)numFrames channels:(int)numChannels sampleRate:(double)sampleRate
+{
+    if (self = [super init])
+    {
+        self.internal = [[PAEBufferInternal alloc] initWithSize:numFrames
+                                                       channels:numChannels
+                                                     sampleRate:sampleRate];
+    }
+    
+    return self;
+}
+
+-(Signal)signal
+{
+    return self.internal.signal;
+}
+
+-(int)numChannels
+{
+    return self.internal.numChannels;
+}
+
+-(NSTimeInterval)duration
+{
+    return self.internal.duration;
+}
+
+-(int)numFrames
+{
+    return self.internal.numFrames;
+}
+
+-(double)sampleRate
+{
+    return self.internal.sampleRate;
+}
+
+-(int)frameStride
+{
+    return self.internal.frameStride;
+}
+
+-(float*)samples:(int)channel
+{
+    return [self.internal samples:channel];
+}
+
+-(float)sampleAtIndex:(int)index channel:(int)channel
+{
+    return [self.internal sampleAtIndex:index
+                                channel:channel];
+}
+
+-(float)sampleAtTime:(NSTimeInterval)time channel:(int)channel
+{
+    return [self.internal sampleAtTime:time
+                               channel:channel];
+}
+
+-(float)sampleAtPhase:(NSTimeInterval)phase channel:(int)channel
+{
+    return [self.internal sampleAtTime:phase * self.duration
+                               channel:channel];
+}
+
+-(float)sampleAtIndex:(int)index
+{
+    return [self sampleAtIndex:index channel:0];
+}
+
+-(float)sampleAtTime:(NSTimeInterval)time
+{
+    return [self sampleAtTime:time channel:0];
+}
+
+-(float)sampleAtPhase:(NSTimeInterval)phase
+{
+    return [self sampleAtPhase:phase channel:0];
+}
+
+-(PAERange)limitsBetween:(int)startIndex end:(int)endIndex channel:(int)channel
+{
+    return [self.internal limitsBetween:startIndex end:endIndex channel:channel];
+}
+
+-(void)setSample:(float)value index:(int)index channel:(int)channel
+{
+    [self.internal setSample:value
+                       index:index
+                     channel:channel];
+}
+
+@end
+
+
+
+
+
+
