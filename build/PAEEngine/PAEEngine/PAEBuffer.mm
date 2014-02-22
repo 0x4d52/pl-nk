@@ -54,9 +54,24 @@
     return self;
 }
 
--(Signal)signal
+-(id)initWithSignal:(Signal)signal offset:(int)offset numFrames:(int)numFrames
 {
-    return _signal;
+    if (self = [super init])
+    {
+        _signal = signal.getSelection (offset, numFrames);
+    }
+    
+    return self;
+}
+
+-(id)initWithSignal:(Signal)signal channel:(int)channel
+{
+    if (self = [super init])
+    {
+        _signal = signal.getChannel(channel);
+    }
+    
+    return self;
 }
 
 -(int)numChannels
@@ -161,8 +176,6 @@
     if (self = [super init])
     {
         self.internal = [[PAEBufferInternal alloc] initFromPath:path];
-        self.localNumFrames = self.internal.numFrames;
-        self.localChannel = -1;
     }
     
     return self;
@@ -182,8 +195,6 @@
         self.internal = [[PAEBufferInternal alloc] initWithSize:numFrames
                                                        channels:numChannels
                                                      sampleRate:sampleRate];
-        self.localNumFrames = self.internal.numFrames;
-        self.localChannel = -1;
     }
     
     return self;
@@ -196,17 +207,17 @@
 
 -(int)numChannels
 {
-    return self.localChannel < 0 ? self.internal.numChannels : 1;
+    return self.internal.numChannels;
 }
 
 -(NSTimeInterval)duration
 {
-    return self.localNumFrames / self.sampleRate;
+    return self.internal.duration;
 }
 
 -(int)numFrames
 {
-    return self.localNumFrames;
+    return self.internal.numFrames;
 }
 
 -(double)sampleRate
@@ -221,58 +232,78 @@
 
 -(float*)samples:(int)channel
 {
-    return [self.internal samples:self.localChannel < 0 ? channel : self.localChannel] + self.localStartOffset * self.frameStride;
+    return [self.internal samples:channel];
 }
 
 -(float)sampleAtIndex:(int)index channel:(int)channel
 {
-    return [self.internal sampleAtIndex:index + self.localStartOffset
+    return [self.internal sampleAtIndex:index
                                 channel:channel];
 }
 
 -(float)sampleAtTime:(NSTimeInterval)time channel:(int)channel
 {
-    return [self.internal sampleAtTime:time + (self.localStartOffset / self.sampleRate)
+    return [self.internal sampleAtTime:time
                                channel:channel];
 }
 
 -(float)sampleAtPhase:(NSTimeInterval)phase channel:(int)channel
 {
-    return [self.internal sampleAtTime:phase * self.duration + (self.localStartOffset / self.sampleRate)
+    return [self.internal sampleAtTime:phase * self.duration
                                channel:channel];
 }
 
 -(float)sampleAtIndex:(int)index
 {
     return [self sampleAtIndex:index
-                       channel:self.localChannel < 0 ? 0 : self.localChannel];
+                       channel:0];
 }
 
 -(float)sampleAtTime:(NSTimeInterval)time
 {
     return [self sampleAtTime:time
-                      channel:self.localChannel < 0 ? 0 : self.localChannel];
+                      channel:0];
 }
 
 -(float)sampleAtPhase:(double)phase
 {
     return [self sampleAtPhase:phase
-                       channel:self.localChannel < 0 ? 0 : self.localChannel];
+                       channel:0];
 }
 
 -(PAERange)limitsBetween:(int)startIndex end:(int)endIndex channel:(int)channel
 {
-    return [self.internal limitsBetween:startIndex + self.localStartOffset
-                                    end:endIndex + self.localStartOffset
-                                channel:self.localChannel < 0 ? channel : self.localChannel];
+    return [self.internal limitsBetween:startIndex
+                                    end:endIndex
+                                channel:0];
 }
 
 -(void)setSample:(float)value index:(int)index channel:(int)channel
 {
     [self.internal setSample:value
-                       index:index + self.localStartOffset
-                     channel:self.localChannel < 0 ? channel : self.localChannel];
+                       index:index
+                     channel:0];
 }
+
+//-(PAEBuffer*)bufferFrom:(int)startIndexOffset numFrames:(int)numFrames
+//{
+//    PAEBuffer* buffer = [PAEBuffer new];
+//    
+//    if (buffer)
+//    {
+//        buffer.internal         = self.internal;
+//        
+//        startIndexOffset        = plonk::clip (startIndexOffset, 0, self.localNumFrames);
+//        numFrames               = numFrames < 0 ? self.localNumFrames - startIndexOffset : numFrames;
+//        buffer.localStartOffset = plonk::clip (self.localStartOffset + startIndexOffset,
+//                                               self.localStartOffset,
+//                                               self.localStartOffset + self.localNumFrames);
+//        buffer.localNumFrames   = plonk::clip (numFrames, 0, self.localNumFrames - startIndexOffset);
+//        buffer.localChannel     = self.localChannel;
+//    }
+//    
+//    return buffer;
+//}
 
 -(PAEBuffer*)bufferFrom:(int)startIndexOffset numFrames:(int)numFrames
 {
@@ -280,15 +311,9 @@
     
     if (buffer)
     {
-        buffer.internal         = self.internal;
-        
-        startIndexOffset        = plonk::clip (startIndexOffset, 0, self.localNumFrames);
-        numFrames               = numFrames < 0 ? self.localNumFrames - startIndexOffset : numFrames;
-        buffer.localStartOffset = plonk::clip (self.localStartOffset + startIndexOffset,
-                                               self.localStartOffset,
-                                               self.localStartOffset + self.localNumFrames);
-        buffer.localNumFrames   = plonk::clip (numFrames, 0, self.localNumFrames - startIndexOffset);
-        buffer.localChannel     = self.localChannel;
+        buffer.internal = [[PAEBufferInternal alloc] initWithSignal:self.internal.signal
+                                                             offset:startIndexOffset
+                                                          numFrames:numFrames];
     }
     
     return buffer;
@@ -306,10 +331,8 @@
 
     if (buffer)
     {
-        buffer.internal         = self.internal;
-        buffer.localStartOffset = self.localStartOffset;
-        buffer.localNumFrames   = self.localNumFrames;
-        buffer.localChannel     = self.localChannel < 0 ? channel : self.localChannel;
+        buffer.internal = [[PAEBufferInternal alloc] initWithSignal:self.internal.signal
+                                                            channel:channel];
     }
     
     return buffer;

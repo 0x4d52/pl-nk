@@ -29,9 +29,6 @@
 @interface PAEBuffer ()
 @property (strong, nonatomic) PAEBufferInternal* internal;
 @property (nonatomic, readonly) Signal signal;
-@property (nonatomic) int localStartOffset;
-@property (nonatomic) int localNumFrames;
-@property (nonatomic) int localChannel;
 @end
 
 
