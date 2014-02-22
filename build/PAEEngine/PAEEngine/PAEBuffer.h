@@ -88,10 +88,15 @@
 /** Set a sample at a specific index on a specific channel. */
 -(void)setSample:(float)value index:(int)index channel:(int)channel;
 
+/** Get a selection of this buffer as a buffer.
+ Start and end points are specified in frames */
 -(PAEBuffer*)bufferFrom:(int)startIndexOffset numFrames:(int)numFrames;
 
+/** Get a selection of this buffer as a buffer.
+ Start and end points are specified in seconds */
 -(PAEBuffer*)bufferFromTime:(NSTimeInterval)startTimeOffset duration:(NSTimeInterval)duration;
 
+/** Get one of the channels of this buffer as a buffer. */
 -(PAEBuffer*)bufferWithChannel:(int)channel;
 
 

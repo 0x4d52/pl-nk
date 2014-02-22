@@ -52,7 +52,7 @@ typedef struct PAERange
 } PAERange;
 
 /** Convenience function to create a PAERange. */
-inline PAERange PAERangeMake (float minimum, float maximum)
+static inline PAERange PAERangeMake (float minimum, float maximum)
 {
     PAERange r = { minimum, maximum };
     return r;
@@ -142,9 +142,10 @@ enum
 
 @end
 
-///** Source value mapping.
-// This maps the output value of a source*/
-//@interface PAEProcessMap : PAEProcess
-//@property (nonatomic, strong) PAEMap* map;
-//@end
+/** Source value mapping.
+ This maps the output value of a source*/
+@interface PAEProcessMap : PAEProcess
+@property (nonatomic, strong) PAEMap* map;
++(PAEProcessMap*)processMapWithNumInputs:(int)numInputs;
+@end
 

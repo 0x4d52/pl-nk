@@ -27,6 +27,7 @@
         _repatchFadeTime.setValue (0.f);
         _patchUnit = Patch::ar (_inputUnitVariable, false, numInputs, _repatchFadeTime);
         _repatchFadeTime.setValue (PAERepatchFadeTime);
+        self.outputUnit = _patchUnit; // pass through as default
     }
     
     return self;

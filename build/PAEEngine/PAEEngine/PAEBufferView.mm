@@ -134,16 +134,21 @@
         [view performSelector:@selector(removeFromSuperview)];
     }
  
-    NSMutableArray* subviews = [[NSMutableArray alloc] initWithCapacity:buffer.numChannels];
-
-    for (int i = 0; i < buffer.numChannels; ++i)
+    NSMutableArray* subviews;
+    
+    if (buffer && buffer.numChannels > 0)
     {
-        PAEBufferChannelView* bufferChannelView = [[PAEBufferChannelView alloc] init];
-        bufferChannelView.parent = self;
-        bufferChannelView.buffer = buffer;
-        bufferChannelView.channel = i;
-        [self addSubview:bufferChannelView];
-        [subviews addObject:bufferChannelView];
+        subviews = [[NSMutableArray alloc] initWithCapacity:buffer.numChannels];
+
+        for (int i = 0; i < buffer.numChannels; ++i)
+        {
+            PAEBufferChannelView* bufferChannelView = [[PAEBufferChannelView alloc] init];
+            bufferChannelView.parent = self;
+            bufferChannelView.buffer = buffer;
+            bufferChannelView.channel = i;
+            [self addSubview:bufferChannelView];
+            [subviews addObject:bufferChannelView];
+        }
     }
     
     _buffer = buffer;

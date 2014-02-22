@@ -25,6 +25,9 @@
 
 -(id)initWithBuffer:(PAEBuffer*)buffer
 {
+    if (!buffer)
+        return nil;
+
     if (self = [super init])
     {
         self.buffer = buffer;

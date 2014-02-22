@@ -61,6 +61,7 @@
 /** The number of channels in the input of the process. */
 @property (nonatomic, readonly) int numInputs;
 
+/** The duration of the crossfade applied when input is repatched. */
 @property (nonatomic) float repatchFadeTime;
 
 @end
