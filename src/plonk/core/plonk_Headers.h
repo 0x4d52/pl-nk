@@ -152,6 +152,7 @@
 #include "../graph/simple/plonk_AtomicVariableChannel.h"
 #include "../graph/simple/plonk_PatchChannel.h"
 #include "../graph/simple/plonk_QueueChannel.h"
+#include "../graph/simple/plonk_BufferQueueChannel.h"
 
 #include "../graph/generators/plonk_Saw.h"
 #include "../graph/generators/plonk_WhiteNoise.h"

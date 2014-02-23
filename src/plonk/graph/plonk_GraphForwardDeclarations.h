@@ -231,5 +231,15 @@ typedef LockFreeQueue< UnitBase<Int24> >                    Int24UnitQueue;
 typedef LockFreeQueue< UnitBase<Long> >                     LongUnitQueue;
 typedef LockFreeQueue< UnitBase<PLONK_TYPE_DEFAULT> >       UnitQueue;
 
+template<class SampleType>                                  class QueueBuffer;
+typedef LockFreeQueue< QueueBuffer<float> >                    FloatBufferQueue;
+typedef LockFreeQueue< QueueBuffer<double> >                   DoubleBufferQueue;
+typedef LockFreeQueue< QueueBuffer<short> >                    ShortBufferQueue;
+typedef LockFreeQueue< QueueBuffer<char> >                     CharBufferQueue;
+typedef LockFreeQueue< QueueBuffer<int> >                      IntBufferQueue;
+typedef LockFreeQueue< QueueBuffer<Int24> >                    Int24BufferQueue;
+typedef LockFreeQueue< QueueBuffer<Long> >                     LongBufferQueue;
+typedef LockFreeQueue< QueueBuffer<PLONK_TYPE_DEFAULT> >       BufferQueue;
+
 
 #endif // PLONK_GRAPHFORWARDDECLARATIONS_H

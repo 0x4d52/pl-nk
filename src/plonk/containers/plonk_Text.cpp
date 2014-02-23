@@ -491,6 +491,12 @@ const Text& Text::getMessageCuePoint() throw()
 	return t;
 }
 
+const Text& Text::getMessageQueueBuffer() throw()
+{
+    static const Text t = "queue.buffer";
+	return t;
+}
+
 /* add a toBinary function?
  for (int i = 31; i >= 0; --i)
  {

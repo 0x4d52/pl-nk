@@ -118,6 +118,7 @@ public:
         AudioFileReader,
         
         FloatUnitQueue, DoubleUnitQueue, ShortUnitQueue, CharUnitQueue, IntUnitQueue, Int24UnitQueue, LongUnitQueue,
+        FloatBufferQueue, DoubleBufferQueue, ShortBufferQueue, CharBufferQueue, IntBufferQueue, Int24BufferQueue, LongBufferQueue,
 
         
     // count (??)
@@ -185,7 +186,8 @@ public:
 
             "AudioFileReader",
             
-            "FloatUnitQueue", "DoubleUnitQueue", "ShortUnitQueue", "CharUnitQueue", "IntUnitQueue", "Int24UnitQueue", "LongUnitQueue"
+            "FloatUnitQueue", "DoubleUnitQueue", "ShortUnitQueue", "CharUnitQueue", "IntUnitQueue", "Int24UnitQueue", "LongUnitQueue",
+            "FloatBufferQueue", "DoublBufferQueue", "ShortBufferQueue", "CharBufferQueue", "IntBufferQueue", "Int24BufferQueue", "LongBufferQueue"
         };
         
         if ((code >= 0) && (code < TypeCode::NumTypeCodes))
@@ -249,6 +251,7 @@ public:
     static inline bool isSignal (const int code) throw()            { return (code >= TypeCode::FloatSignal) && (code <= TypeCode::LongSignal); }
     static inline bool isAudioFileReader (const int code) throw()   { return (code == TypeCode::AudioFileReader); }
     static inline bool isUnitQueue (const int code) throw()         { return (code >= TypeCode::FloatUnitQueue) && (code <= TypeCode::LongUnitQueue); }
+    static inline bool isBufferQueue (const int code) throw()       { return (code >= TypeCode::FloatBufferQueue) && (code <= TypeCode::LongBufferQueue); }
 
     // could replace these later by designing the enum to be bit-mask based
     
@@ -4673,6 +4676,176 @@ public:
     typedef double ScaleType;
 };
 
+template<>
+class TypeUtilityBase<FloatBufferQueue>
+{
+public:
+    typedef FloatBufferQueue               TypeName;
+    typedef FloatBufferQueue               OriginalType;
+    typedef FloatBufferQueue const&        PassType;
+    typedef float                        IndexType;
+    static inline int  getTypeCode() { return TypeCode::FloatBufferQueue; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef int PeakType;
+    typedef double ScaleType;
+};
+
+template<>
+class TypeUtilityBase<const FloatBufferQueue>
+{
+public:
+    typedef const FloatBufferQueue         TypeName;
+    typedef FloatBufferQueue               OriginalType;
+    typedef FloatBufferQueue const&        PassType;
+    typedef float                        IndexType;
+    static inline int  getTypeCode() { return TypeCode::FloatBufferQueue; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef int PeakType;
+    typedef double ScaleType;
+};
+
+template<>
+class TypeUtilityBase<DoubleBufferQueue>
+{
+public:
+    typedef DoubleBufferQueue              TypeName;
+    typedef DoubleBufferQueue              OriginalType;
+    typedef DoubleBufferQueue const&       PassType;
+    typedef double                  IndexType;
+    static inline int  getTypeCode() { return TypeCode::DoubleBufferQueue; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef int PeakType;
+    typedef double ScaleType;
+};
+
+template<>
+class TypeUtilityBase<const DoubleBufferQueue>
+{
+public:
+    typedef const DoubleBufferQueue        TypeName;
+    typedef DoubleBufferQueue              OriginalType;
+    typedef DoubleBufferQueue const&       PassType;
+    typedef double                  IndexType;
+    static inline int  getTypeCode() { return TypeCode::DoubleBufferQueue; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef int PeakType;
+    typedef double ScaleType;
+};
+
+template<>
+class TypeUtilityBase<IntBufferQueue>
+{
+public:
+    typedef IntBufferQueue             TypeName;
+    typedef IntBufferQueue             OriginalType;
+    typedef IntBufferQueue const&      PassType;
+    typedef float               IndexType;
+    static inline int  getTypeCode() { return TypeCode::IntBufferQueue; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef int PeakType;
+    typedef double ScaleType;
+};
+
+template<>
+class TypeUtilityBase<const IntBufferQueue>
+{
+public:
+    typedef const IntBufferQueue       TypeName;
+    typedef IntBufferQueue             OriginalType;
+    typedef IntBufferQueue const&      PassType;
+    typedef float               IndexType;
+    static inline int  getTypeCode() { return TypeCode::IntBufferQueue; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef int PeakType;
+    typedef double ScaleType;
+};
+
+template<>
+class TypeUtilityBase<ShortBufferQueue>
+{
+public:
+    typedef ShortBufferQueue           TypeName;
+    typedef ShortBufferQueue           OriginalType;
+    typedef ShortBufferQueue const&    PassType;
+    typedef float               IndexType;
+    static inline int  getTypeCode() { return TypeCode::ShortBufferQueue; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef int PeakType;
+    typedef double ScaleType;
+};
+
+template<>
+class TypeUtilityBase<const ShortBufferQueue>
+{
+public:
+    typedef const ShortBufferQueue     TypeName;
+    typedef ShortBufferQueue           OriginalType;
+    typedef ShortBufferQueue const&    PassType;
+    typedef float               IndexType;
+    static inline int  getTypeCode() { return TypeCode::ShortBufferQueue; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef int PeakType;
+    typedef double ScaleType;
+};
+
+template<>
+class TypeUtilityBase<Int24BufferQueue>
+{
+public:
+    typedef Int24BufferQueue           TypeName;
+    typedef Int24BufferQueue           OriginalType;
+    typedef Int24BufferQueue const&    PassType;
+    typedef float               IndexType;
+    static inline int  getTypeCode() { return TypeCode::Int24BufferQueue; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef int PeakType;
+    typedef double ScaleType;
+};
+
+template<>
+class TypeUtilityBase<const Int24BufferQueue>
+{
+public:
+    typedef const Int24BufferQueue     TypeName;
+    typedef Int24BufferQueue           OriginalType;
+    typedef Int24BufferQueue const&    PassType;
+    typedef float               IndexType;
+    static inline int  getTypeCode() { return TypeCode::Int24BufferQueue; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef int PeakType;
+    typedef double ScaleType;
+};
+
+template<>
+class TypeUtilityBase<LongBufferQueue>
+{
+public:
+    typedef LongBufferQueue            TypeName;
+    typedef LongBufferQueue            OriginalType;
+    typedef LongBufferQueue const&     PassType;
+    typedef float               IndexType;
+    static inline int  getTypeCode() { return TypeCode::LongBufferQueue; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef int PeakType;
+    typedef double ScaleType;
+};
+
+template<>
+class TypeUtilityBase<const LongBufferQueue>
+{
+public:
+    typedef const LongBufferQueue      TypeName;
+    typedef LongBufferQueue            OriginalType;
+    typedef LongBufferQueue const&     PassType;
+    typedef float               IndexType;
+    static inline int  getTypeCode() { return TypeCode::LongBufferQueue; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef int PeakType;
+    typedef double ScaleType;
+};
+
+
+
 //------------------------------------------------------------------------------
 
 /** A utility for finding out information about certain other classes and types.
@@ -4709,6 +4882,7 @@ public:
     static inline bool isSignal() throw()            { return TypeCode::isSignal (TypeUtility<Type>::getTypeCode()); }
     static inline bool isAudioFileReader() throw()   { return TypeCode::isAudioFileReader (TypeUtility<Type>::getTypeCode()); }
     static inline bool isUnitQueue() throw()         { return TypeCode::isUnitQueue (TypeUtility<Type>::getTypeCode()); }
+    static inline bool isBufferQueue() throw()       { return TypeCode::isBufferQueue (TypeUtility<Type>::getTypeCode()); }
     
     static inline bool isFloatType() throw()         { return TypeCode::isFloatType (TypeUtility<Type>::getTypeCode()); }
     static inline bool isDoubleType() throw()        { return TypeCode::isDoubleType (TypeUtility<Type>::getTypeCode()); }

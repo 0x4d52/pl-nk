@@ -65,6 +65,8 @@ public:
     typedef WavetableBase<SampleType>               WavetableType;
     typedef SignalBase<SampleType>                  SignalType;
     typedef LockFreeQueue<UnitType>                 QueueType;
+    typedef QueueBuffer<SampleType>                 QueueBufferType;
+    typedef LockFreeQueue<QueueBufferType>          BufferQueueType;
 
     ChannelInternalBase (Inputs const& inputDictionary, 
                          BlockSize const& blockSize, 
@@ -97,6 +99,7 @@ public:
     inline const BlockSize& getInputAsBlockSize (const int key) const throw()               { return this->template getInputAs<BlockSize> (key); }
     inline const AudioFileReader& getInputAsAudioFileReader (const int key) const throw()   { return this->template getInputAs<AudioFileReader> (key); }
     inline const QueueType& getInputAsUnitQueue (const int key) const throw()               { return this->template getInputAs<QueueType> (key); }
+    inline const BufferQueueType& getInputAsBufferQueue (const int key) const throw()       { return this->template getInputAs<BufferQueueType> (key); }
 
     inline UnitType& getInputAsUnit (const int key) throw()                                 { return this->template getInputAs<UnitType> (key); }
     inline UnitsType& getInputAsUnits (const int key) throw()                               { return this->template getInputAs<UnitsType> (key); }
@@ -111,6 +114,7 @@ public:
     inline BlockSize& getInputAsBlockSize (const int key) throw()                           { return this->template getInputAs<BlockSize> (key); }
     inline AudioFileReader& getInputAsAudioFileReader (const int key) throw()               { return this->template getInputAs<AudioFileReader> (key); }
     inline QueueType& getInputAsUnitQueue (const int key) throw()                           { return this->template getInputAs<QueueType> (key); }
+    inline BufferQueueType& getInputAsBufferQueue (const int key) throw()                   { return this->template getInputAs<BufferQueueType> (key); }
 
     inline const Buffer& getOutputBuffer() const throw()                                    { return outputBuffer; }
     inline Buffer& getOutputBuffer() throw()                                                { return outputBuffer; }

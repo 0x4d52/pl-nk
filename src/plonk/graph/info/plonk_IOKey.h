@@ -70,6 +70,7 @@ public:
         TypeBreakpointsVariable,
         TypeAudioFileReader,
         TypeUnitQueue,
+        TypeBufferQueue,
         TypeBlockSize,
         TypeSampleRate,
 //        TypeBlockSizes,
@@ -144,8 +145,9 @@ public:
         
         AudioFileReader,        ///< An AudioFileReader
         UnitQueue,              ///< A unit queue
+        BufferQueue,            ///< A buffer queue
 
-        AutoDeleteFlag, ///< To control the auto deletion
+        AutoDeleteFlag,         ///< To control the auto deletion
         PurgeExpiredUnitsFlag,
         HarmonicCount,
         BufferCount,
