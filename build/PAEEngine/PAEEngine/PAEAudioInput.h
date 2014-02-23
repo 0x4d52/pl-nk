@@ -44,7 +44,10 @@
 
 /** @file */
 
-/** Not working yet. */
+/** Get audio input from the system.
+ You must have created the PAEAudioHost with a input channel count of greater than zero. */
 @interface PAEAudioInput : PAESource
+
+/** Create an audio input source. */
 +(PAEAudioInput*)audioInputWithNumChannels:(int)numChannels;
 @end
