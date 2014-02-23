@@ -49,6 +49,7 @@
 #import "PAEBuffer.h"
 
 // sources
+#import "PAEAudioInput.h"
 #import "PAEConstant.h"
 #import "PAEControl.h"
 #import "PAETestTone.h"

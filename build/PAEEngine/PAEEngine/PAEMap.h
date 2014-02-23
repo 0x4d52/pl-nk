@@ -143,9 +143,15 @@ enum
 @end
 
 /** Source value mapping.
- This maps the output value of a source*/
+ This maps the signal output value of a source using a map.
+ This allows simple translation of linear or exponential value ranges.
+ Useful for parameter modulattion. */
 @interface PAEProcessMap : PAEProcess
+
+/** The map to use. */
 @property (nonatomic, strong) PAEMap* map;
+
+/** Create a new process map. */
 +(PAEProcessMap*)processMapWithNumInputs:(int)numInputs;
 @end
 

@@ -123,4 +123,33 @@
     return proxy;
 }
 
+-(PAESource*)addedTo:(PAESource*)source
+{
+    PAESource* proxy = [[PAESource alloc] init];
+    proxy.outputUnit = self.outputUnit + source.outputUnit;
+    return proxy;
+}
+
+-(PAESource*)subtractedFrom:(PAESource*)source
+{
+    PAESource* proxy = [[PAESource alloc] init];
+    proxy.outputUnit = source.outputUnit - self.outputUnit;
+    return proxy;
+}
+
+-(PAESource*)multipliedBy:(PAESource*)source
+{
+    PAESource* proxy = [[PAESource alloc] init];
+    proxy.outputUnit = self.outputUnit * source.outputUnit;
+    return proxy;
+}
+
+-(PAESource*)dividedBy:(PAESource*)source
+{
+    PAESource* proxy = [[PAESource alloc] init];
+    proxy.outputUnit = self.outputUnit / source.outputUnit;
+    return proxy;
+}
+
+
 @end

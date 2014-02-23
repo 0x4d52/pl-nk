@@ -40,53 +40,11 @@
 
 #import <Foundation/Foundation.h>
 #import "PAEFoward.h"
+#import "PAESource.h"
 
 /** @file */
 
-/** The base source class.
- This is used as the base class for more specific audio and control sources. 
- You would not normally instantiate a PAESource object but instead create one
- of its subclasses (see class diagram). */
-@interface PAESource : NSObject
-
-/** The number of channels in the output of the source. */
-@property (nonatomic, readonly) int numChannels;
-
-/** The type name of the source.
- This will be the same name as the class name with the "PAE" prefix removed.
- For example PAESource is named "Source", PAEChannelStrip is named "ChannelStrip". */
-@property (nonatomic, readonly) NSString* type;
-
-/** A label for the object.
- The default name is the type name with a unique index appended (e.g., ChannelStrip3)
- This is not used for any purpose internally, but is provided to help identify objects in 
- user applications. */
-@property (nonatomic, strong) NSString* label;
-
-/** Get the current output value of a source. */
--(float)currentValueOnChannel:(int)channel;
-
-/** Get one of the channels as a new source. */
--(PAESource*)sourceWithChannel:(int)channel;
-
-/** Get a version of this source with inverted phase. */
--(PAESource*)sourcePhaseInverted;
-
-/** Create a source by appending channels from two sources. */
--(PAESource*)sourceWithAppendedChannels:(PAESource*)source;
-
-/** Create a source by appending channels from an array of sources. */
--(PAESource*)sourceByFlatteningArray:(NSArray*)sources;
-
-/** Create a source by clipping another source to a set range. */
--(PAESource*)sourceClippedToMinimum:(float)minimum maximimum:(float)maximum;
-
-/** Create a source by mixing down the channels in the source. */
--(PAESource*)sourceMixed;
-
--(PAESource*)addedTo:(PAESource*)source;
--(PAESource*)subtractedFrom:(PAESource*)source;
--(PAESource*)multipliedBy:(PAESource*)source;
--(PAESource*)dividedBy:(PAESource*)source;
-
+/** Not working yet. */
+@interface PAEAudioInput : PAESource
++(PAEAudioInput*)audioInputWithNumChannels:(int)numChannels;
 @end
