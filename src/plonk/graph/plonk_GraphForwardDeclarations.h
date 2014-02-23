@@ -231,15 +231,24 @@ typedef LockFreeQueue< UnitBase<Int24> >                    Int24UnitQueue;
 typedef LockFreeQueue< UnitBase<Long> >                     LongUnitQueue;
 typedef LockFreeQueue< UnitBase<PLONK_TYPE_DEFAULT> >       UnitQueue;
 
-template<class SampleType>                                  class QueueBuffer;
-typedef LockFreeQueue< QueueBuffer<float> >                    FloatBufferQueue;
-typedef LockFreeQueue< QueueBuffer<double> >                   DoubleBufferQueue;
-typedef LockFreeQueue< QueueBuffer<short> >                    ShortBufferQueue;
-typedef LockFreeQueue< QueueBuffer<char> >                     CharBufferQueue;
-typedef LockFreeQueue< QueueBuffer<int> >                      IntBufferQueue;
-typedef LockFreeQueue< QueueBuffer<Int24> >                    Int24BufferQueue;
-typedef LockFreeQueue< QueueBuffer<Long> >                     LongBufferQueue;
-typedef LockFreeQueue< QueueBuffer<PLONK_TYPE_DEFAULT> >       BufferQueue;
+template<class SampleType>                                  class QueueBufferBase;
+typedef QueueBufferBase<float>                              FloatQueueBuffer;
+typedef QueueBufferBase<double>                             DoubleQueueBuffer;
+typedef QueueBufferBase<short>                              ShortQueueBuffer;
+typedef QueueBufferBase<char>                               CharQueueBuffer;
+typedef QueueBufferBase<int>                                IntQueueBuffer;
+typedef QueueBufferBase<Int24>                              Int24QueueBuffer;
+typedef QueueBufferBase<Long>                               LongQueueBuffer;
+typedef QueueBufferBase<PLONK_TYPE_DEFAULT>                 QueueBuffer;
+
+typedef LockFreeQueue< QueueBufferBase<float> >                    FloatBufferQueue;
+typedef LockFreeQueue< QueueBufferBase<double> >                   DoubleBufferQueue;
+typedef LockFreeQueue< QueueBufferBase<short> >                    ShortBufferQueue;
+typedef LockFreeQueue< QueueBufferBase<char> >                     CharBufferQueue;
+typedef LockFreeQueue< QueueBufferBase<int> >                      IntBufferQueue;
+typedef LockFreeQueue< QueueBufferBase<Int24> >                    Int24BufferQueue;
+typedef LockFreeQueue< QueueBufferBase<Long> >                     LongBufferQueue;
+typedef LockFreeQueue< QueueBufferBase<PLONK_TYPE_DEFAULT> >       BufferQueue;
 
 
 #endif // PLONK_GRAPHFORWARDDECLARATIONS_H

@@ -243,6 +243,11 @@ public:
         pl_LockFreeQueue_DeInit (&queue);
     }
     
+    static inline ValueType* getNullValue() throw()
+    {
+        return 0;
+    }
+    
     void push (ValueType* const value) throw()
     {
         PlankLockFreeQueueElementRef element = pl_LockFreeQueueElement_CreateAndInit();
@@ -324,7 +329,8 @@ class LockFreeQueue : public SmartPointerContainer<LockFreeQueueInternal<ValueTy
 public:
     typedef LockFreeQueueInternal<ValueType>    Internal;
     typedef SmartPointerContainer<Internal>     Base;
-    typedef WeakPointerContainer<LockFreeQueue> Weak;    
+    typedef WeakPointerContainer<LockFreeQueue> Weak;
+    typedef ValueType                           Value;
 
     inline LockFreeQueue()
     :   Base (new Internal())
@@ -363,6 +369,11 @@ public:
         
         return *this;
 	}
+    
+    static ValueType getNullValue() throw()
+    {
+        return Internal::getNullValue();
+    }
     
     inline void push (ValueType const& value) throw()
     {

@@ -49,29 +49,45 @@
 #include "../plonk_GraphForwardDeclarations.h"
 
 template<class SampleType>
+class QueueBufferBase;
+
+template<class SampleType>
 class QueueBufferInternal : public SmartPointer
 {
 public:
-    typedef NumericalArray<SampleType>  Buffer;
-    typedef ObjectArray<Buffer>         BufferArray;
+    typedef NumericalArray<SampleType>      Buffer;
+    typedef NumericalArray2D<SampleType>    BufferArray;
     
+    QueueBufferInternal (const int numChannels, const int blockSize) throw()
+    :   buffers (numChannels, blockSize, false)
+    {
+    }
+    
+    friend class QueueBufferBase<SampleType>;
+    
+private:
     BufferArray buffers;
     TimeStamp timestamp;
 };
 
 template<class SampleType>
-class QueueBuffer : public SmartPointerContainer< QueueBufferInternal<SampleType> >
+class QueueBufferBase : public SmartPointerContainer< QueueBufferInternal<SampleType> >
 {
 public:
     typedef QueueBufferInternal<SampleType>     Internal;
     typedef SmartPointerContainer<Internal>     Base;
     typedef WeakPointerContainer<QueueBuffer>   Weak;
+    typedef NumericalArray<SampleType>          Buffer;
+    typedef NumericalArray2D<SampleType>        BufferArray;
 
-    QueueBuffer() throw()
-    :   Base (new Internal())
+    QueueBufferBase (const int numChannels = 1, const int blockSize = BlockSize::getDefault().getValue()) throw()
+    :   Base (new Internal (numChannels, blockSize))
     {
     }
     
+    BufferArray& getBuffers() throw() { return this->getInternal()->buffers; }
+    TimeStamp getTimeStamp() const throw() { return this->getInternal()->timestamp; }
+    void setTimeStamp (TimeStamp const& timeStamp) throw() { this->getInternal()->timestamp = timeStamp; }
 };
 
 template<class SampleType> class BufferQueueRecordChannelInternal;
@@ -95,8 +111,8 @@ public:
     typedef UnitBase<SampleType>                                                    UnitType;
     typedef InputDictionary                                                         Inputs;
     typedef NumericalArray<SampleType>                                              Buffer;
-    typedef ObjectArray<Buffer>                                                     BufferArray;
-    typedef QueueBuffer<SampleType>                                                 QueueBufferType;
+    typedef NumericalArray2D<SampleType>                                            BufferArray;
+    typedef QueueBufferBase<SampleType>                                             QueueBufferType;
     typedef LockFreeQueue<QueueBufferType>                                          BufferQueueType;
     
     BufferQueueRecordChannelInternal (Inputs const& inputs,
@@ -144,18 +160,18 @@ public:
             UnitType& inputUnit (this->getInputAsUnit (IOKey::Generic));
             
             const int numUnitChannels = this->getNumChannels();
-            const int numBufferChannels = currentBuffer.buffers.length();
+            const int numBufferChannels = currentBuffer.getBuffers().length();
         
             for (int i = 0; i < plonk::min (numUnitChannels, numBufferChannels); ++i)
             {
-                currentBuffer.atUnchecked (i).setSize (inputUnit.getBlockSize (i).getValue());
+                currentBuffer.getBuffers().atUnchecked (i).setSize (inputUnit.getBlockSize (i).getValue(), false);
             }
         }
     }
 
     void process (ProcessInfo& info, const int /*channel*/) throw()
     {
-        const Data& data = this->getState();
+        //const Data& data = this->getState();
         
         if (currentBuffer == BufferQueueType::getNullValue())
             getNextBuffer();
@@ -167,27 +183,26 @@ public:
         
         if (currentBuffer != BufferQueueType::getNullValue())
         {
-            const int numBufferChannels = currentBuffer.buffers.length();
-            currentBuffer.timestamp = info.getTimeStamp();
+            const int numBufferChannels = currentBuffer.getBuffers().length();
+            currentBuffer.setTimeStamp (info.getTimeStamp());
             
             for (channel = 0; channel < numChannels; ++channel)
             {
                 const Buffer& inputBuffer (inputUnit.process (info, channel));
                 const SampleType* const inputSamples = inputBuffer.getArray();
-                const int inputBufferLength = inputBuffer.length();
                 
                 Buffer outputBuffer = this->getOutputBuffer (channel);
                 SampleType* const outputSamples = outputBuffer.getArray();
                 const int outputBufferLength = outputBuffer.length();
 
-                plonk_assert (inputBufferLength == outputBufferLength);
+                plonk_assert (inputBuffer.length() == outputBufferLength);
                 
                 Buffer::copyData (outputSamples, inputSamples, outputBufferLength);
 
                 if (channel < numBufferChannels)
                 {
-                    plonk_assert (inputBufferLength == currentBuffer.buffers.atUnchecked (channel).length());
-                    SampleType* const bufferSamples = currentBuffer.buffers.atUnchecked (channel).getArray();
+                    plonk_assert (outputBufferLength == currentBuffer.getBuffers().atUnchecked (channel).length());
+                    SampleType* const bufferSamples = currentBuffer.getBuffers().atUnchecked (channel).getArray();
                     Buffer::copyData (bufferSamples, outputSamples, outputBufferLength);
                 }
             }
@@ -201,13 +216,12 @@ public:
             {
                 const Buffer& inputBuffer (inputUnit.process (info, channel));
                 const SampleType* const inputSamples = inputBuffer.getArray();
-                const int inputBufferLength = inputBuffer.length();
                 
                 Buffer outputBuffer = this->getOutputBuffer (channel);
                 SampleType* const outputSamples = outputBuffer.getArray();
                 const int outputBufferLength = outputBuffer.length();
                 
-                plonk_assert (inputBufferLength == outputBufferLength);
+                plonk_assert (inputBuffer.length() == outputBufferLength);
                 Buffer::copyData (outputSamples, inputSamples, outputBufferLength);
             }
         }
@@ -246,8 +260,8 @@ public:
     typedef UnitBase<SampleType>                            UnitType;
     typedef InputDictionary                                 Inputs;
     typedef NumericalArray<SampleType>                      Buffer;
-    typedef ObjectArray<SampleType>                         BufferArray;
-    typedef QueueBuffer<SampleType>                         QueueBufferType;
+    typedef NumericalArray2D<SampleType>                    BufferArray;
+    typedef QueueBufferBase<SampleType>                     QueueBufferType;
     typedef LockFreeQueue<QueueBufferType>                  BufferQueueType;
 
     

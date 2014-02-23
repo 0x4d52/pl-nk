@@ -217,7 +217,14 @@ int Dynamic::getNumChannels() const throw()
         case TypeCode::DoubleUnitQueue:
         case TypeCode::IntUnitQueue:
         case TypeCode::Int24UnitQueue:
-        case TypeCode::LongUnitQueue:       return 1;
+        case TypeCode::LongUnitQueue:
+            
+        case TypeCode::FloatBufferQueue:
+        case TypeCode::ShortBufferQueue:
+        case TypeCode::DoubleBufferQueue:
+        case TypeCode::IntBufferQueue:
+        case TypeCode::Int24BufferQueue:
+        case TypeCode::LongBufferQueue:   return 1;
             
         default:
             plonk_assertfalse;

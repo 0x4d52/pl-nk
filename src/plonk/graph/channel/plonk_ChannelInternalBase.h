@@ -65,7 +65,7 @@ public:
     typedef WavetableBase<SampleType>               WavetableType;
     typedef SignalBase<SampleType>                  SignalType;
     typedef LockFreeQueue<UnitType>                 QueueType;
-    typedef QueueBuffer<SampleType>                 QueueBufferType;
+    typedef QueueBufferBase<SampleType>             QueueBufferType;
     typedef LockFreeQueue<QueueBufferType>          BufferQueueType;
 
     ChannelInternalBase (Inputs const& inputDictionary, 
