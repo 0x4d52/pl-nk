@@ -136,12 +136,14 @@ inline bool TimeStamp::operator>= (TimeStamp const& other) const throw()
 
 inline double TimeStamp::getTicks() throw()
 {
-    return 1000000.0; // microseconds
+    static double v = 1000000.0; // microseconds
+    return v;
 }
 
 inline double TimeStamp::getReciprocalTicks() throw()
 {
-    return 1.0 / 1000000.0; // 1/microseconds
+    static double v = 1.0 / 1000000.0; // 1/microseconds
+    return v;
 }
 
 inline const TimeStamp& TimeStamp::getZero() throw()

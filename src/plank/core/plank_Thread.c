@@ -171,8 +171,10 @@ PlankThreadNativeReturn PLANK_THREADCALL pl_ThreadNativeFunction (PlankP argumen
     }
   
 exit:
-    pl_Thread_Reset (p);
-    return (result == PlankResult_OK) ? 0 : (PlankThreadNativeReturn)(-1);
+    if (result != PlankResult_ThreadWasDeleted)
+        pl_Thread_Reset (p);
+    
+    return ((result == PlankResult_OK) || (result == PlankResult_ThreadWasDeleted)) ? 0 : (PlankThreadNativeReturn)(-1);
 }
 
 PlankThreadRef pl_Thread_CreateAndInit()

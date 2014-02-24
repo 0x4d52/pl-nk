@@ -75,7 +75,7 @@ public:
     
     inline ValueType pop() throw()
     {
-        ValueType value;
+        ValueType value (getNullValue());
         ValueType* valuePtr = popInternal (&value);
         return (valuePtr == 0) ? getNullValue() : value;
     }
@@ -83,7 +83,7 @@ public:
     template<class OtherType>
     inline bool pop (OtherType& value)
     {
-        ValueType tmp;
+        ValueType tmp (getNullValue());
         ValueType* valuePtr = popInternal (&tmp);
  
         if (valuePtr != 0)

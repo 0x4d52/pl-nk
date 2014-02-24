@@ -38,28 +38,23 @@
  -------------------------------------------------------------------------------
  */
 
-@class PAEAudioHost;
-@class PAESource;
-@class PAEInput;
-@class PAEProcess;
-@class PAEConstant;
-@class PAEControl;
-@class PAEChannelStrip;
-@class PAETestTone;
-@class PAEMixer;
-@class PAEBuffer;
-@class PAEBufferView;
-@class PAEBufferCapture;
-struct PAERange;
+#import <Foundation/Foundation.h>
+#import "PAEFoward.h"
+#import "PAEProcess.h"
 
-/** The default fade time applied when repatching sources.
- Default 0.005s = 5ms. */
-extern const float PAERepatchFadeTime;
+/** @file */
 
-/** The default lag time applied to smoothing control signals.
- Default 0.02s = 20ms. */
-extern const float PAEControlLagTime;
+/** A delegate for the PAEBufferCapture class. */
+@protocol PAEBufferCaptureDelegate
+/** The buffer has been filled.
+ There may be some partially capture data still remaining to be written.
+ Return NO to discard this data, or YES to continue to fill this buffer from the 
+ start after this method returns. */
+-(BOOL)bufferReady:(PAEBufferCapture*)bufferCapture;
+@end
 
-/** A 64-bit integer type. */
-typedef long long PAEInt64;
-
+@interface PAEBufferCapture : PAEProcess
+@property (nonatomic, weak) id <PAEBufferCaptureDelegate> delegate;
+@property (nonatomic, strong) PAEBuffer* buffer;
++(PAEBufferCapture*)bufferCaptureWithNumInputs:(int)numInputs;
+@end

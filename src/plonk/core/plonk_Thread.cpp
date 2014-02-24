@@ -48,7 +48,7 @@ PlankResult Threading::run (PlankThreadRef plankThread) throw()
     Threading::Thread* thread = static_cast<Threading::Thread*> (pl_Thread_GetUserData (plankThread));
     
     ResultCode result = thread->run();
-    plonk_assert (result == PlankResult_OK);
+    plonk_assert ((result == PlankResult_OK) || (result == PlankResult_ThreadWasDeleted));
     
     return result;
 }

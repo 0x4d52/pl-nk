@@ -54,4 +54,6 @@
 
 @property (strong, nonatomic) UIColor* traceColor;
 
+@property (nonatomic) CGFloat traceWidth;
+
 @end

@@ -31,7 +31,7 @@
     CGContextFillRect (context, rect);
     CGContextStrokePath (context);
     
-    CGContextSetLineWidth (context, 1);
+    CGContextSetLineWidth (context, self.parent.traceWidth);
 
     [self.parent.borderColor setStroke];
     
@@ -98,6 +98,7 @@
 {
     self.borderColor = [UIColor blackColor];
     self.traceColor = [UIColor colorWithWhite:0.5 alpha:1.0];
+    self.traceWidth = 1.0;
 }
 
 -(id)initWithCoder:(NSCoder *)aDecoder
@@ -127,32 +128,42 @@
 
 -(void)setBuffer:(PAEBuffer *)buffer
 {
-    _buffer = nil;
-    
-    for (UIView* view in self.subviews)
+    if (buffer == _buffer)
     {
-        [view performSelector:@selector(removeFromSuperview)];
-    }
- 
-    NSMutableArray* subviews;
-    
-    if (buffer && buffer.numChannels > 0)
-    {
-        subviews = [[NSMutableArray alloc] initWithCapacity:buffer.numChannels];
-
-        for (int i = 0; i < buffer.numChannels; ++i)
+        for (PAEBufferChannelView* bufferChannelView in self.bufferChannelViews)
         {
-            PAEBufferChannelView* bufferChannelView = [[PAEBufferChannelView alloc] init];
-            bufferChannelView.parent = self;
-            bufferChannelView.buffer = buffer;
-            bufferChannelView.channel = i;
-            [self addSubview:bufferChannelView];
-            [subviews addObject:bufferChannelView];
+            [bufferChannelView performSelectorOnMainThread:@selector(setNeedsDisplay) withObject:nil waitUntilDone:NO];
         }
     }
-    
-    _buffer = buffer;
-    self.bufferChannelViews = [NSArray arrayWithArray:subviews];
+    else
+    {
+        _buffer = nil;
+        
+        for (UIView* view in self.subviews)
+        {
+            [view performSelector:@selector(removeFromSuperview)];
+        }
+     
+        NSMutableArray* subviews;
+        
+        if (buffer && buffer.numChannels > 0)
+        {
+            subviews = [[NSMutableArray alloc] initWithCapacity:buffer.numChannels];
+
+            for (int i = 0; i < buffer.numChannels; ++i)
+            {
+                PAEBufferChannelView* bufferChannelView = [[PAEBufferChannelView alloc] init];
+                bufferChannelView.parent = self;
+                bufferChannelView.buffer = buffer;
+                bufferChannelView.channel = i;
+                [self addSubview:bufferChannelView];
+                [subviews addObject:bufferChannelView];
+            }
+        }
+        
+        _buffer = buffer;
+        self.bufferChannelViews = [NSArray arrayWithArray:subviews];
+    }
 }
 
 -(NSArray*)bufferChannelViews

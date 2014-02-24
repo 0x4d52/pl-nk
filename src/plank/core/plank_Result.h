@@ -85,6 +85,7 @@ enum PlankResultIdentifiers
     PlankResult_ThreadShouldExitAlreadySet, ///< Signaling a thread to exit that has already set set to exit.
     PlankResult_ThreadSetPriorityFailed,    ///< Setting the thread's priority failed.
     PlankResult_ThreadSetAffinityFailed,    ///< Setting the thread's affinity failed.
+    PlankResult_ThreadWasDeleted,           ///< The thread deleted itself.
 
     PlankResult_FunctionsInvalid,           ///< One or more callback functions were null
     

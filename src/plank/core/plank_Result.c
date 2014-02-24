@@ -85,6 +85,7 @@ const char* pl_ResultString (PlankResult result)
         "A thread was signalled to exit that has already set set to exit",              //PlankResult_ThreadShouldExitAlreadySet
         "Setting the thread's priority failed",                                         //PlankResult_ThreadSetPriorityFailed
         "Setting the thread's affinity failed",                                         //PlankResult_ThreadSetAffinityFailed
+        "The thread deleted itself",                                                    //PlankResult_ThreadWasDeleted
         
         "One or more callback functions were null",                                     //PlankResult_FunctionsInvalid
         

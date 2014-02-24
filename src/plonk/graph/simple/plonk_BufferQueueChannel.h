@@ -85,6 +85,8 @@ public:
     {
     }
     
+    const int getNumFrames() const throw() { return this->getInternal()->buffers.atUnchecked (0).length(); }
+    const int getNumChannels() const throw() { return this->getInternal()->buffers.length(); }
     BufferArray& getBuffers() throw() { return this->getInternal()->buffers; }
     TimeStamp getTimeStamp() const throw() { return this->getInternal()->timestamp; }
     void setTimeStamp (TimeStamp const& timeStamp) throw() { this->getInternal()->timestamp = timeStamp; }

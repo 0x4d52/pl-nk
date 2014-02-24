@@ -75,7 +75,7 @@ public:
     
     inline ValueType pop() throw()
     {
-        ValueType value;
+        ValueType value (getNullValue());
         ValueType* valuePtr = popInternal (&value);
         return (valuePtr == 0) ? getNullValue() : value;
     }
@@ -226,6 +226,11 @@ public:
     ~LockFreeStackInternal()
     {
         pl_LockFreeStack_DeInit (&stack);
+    }
+    
+    static inline ValueType* getNullValue() throw()
+    {
+        return 0;
     }
     
     void push (ValueType* const value) throw()

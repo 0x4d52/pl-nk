@@ -244,22 +244,21 @@ public:
                     info.offsetTimeStamp (owner->getSampleRate().getSampleDurationInTicks() * blockSize);
                 }
                 
-                event.wait();
+                event.wait (1.0);
             }
             
             freeBuffers.clearAll();
             activeBuffers.clearAll();
             
-            return 0;
+            delete this;
+            
+            return PlankResult_ThreadWasDeleted;
         }
                 
         void end() throw()
         {
             setShouldExit();
             event.signal();
-    
-            while (isRunning())
-                Threading::sleep (0.0001); // will block!
         }
     
         inline bool pop (TaskBuffer& buffer) throw()
@@ -294,22 +293,22 @@ public:
     :   Internal (numChannelsInSource (inputs), 
                   inputs, data, blockSize, sampleRate,
                   channels),
-        task (this)
+        task (new InputTask (this))
     {
         UnitType& inputUnit (this->getInputAsUnit (IOKey::Generic));
-        inputUnit.addReceiverToChannels (&task);
+        inputUnit.addReceiverToChannels (task);
         
         if (data.resampleInput)
             inputUnit = ResampleType::ar (inputUnit, 1, blockSize, sampleRate);
         
-        task.start();
+        task->start();
     }
     
     ~InputTaskChannelInternal()
     {
-        task.end();
         UnitType& inputUnit (this->getInputAsUnit (IOKey::Generic));
-        inputUnit.removeReceiverFromChannels (&task);
+        inputUnit.removeReceiverFromChannels (task);
+        task->end();
     }
             
     Text getName() const throw()
@@ -334,7 +333,7 @@ public:
         
         TaskBuffer taskBuffer;
         
-        if (task.pop (taskBuffer)) 
+        if (task->pop (taskBuffer))
         {
             // could be smarter in here in case the buffer size changes
             
@@ -359,7 +358,7 @@ public:
             while (taskBuffer.getInternal()->messages.pop (taskMessage))
                 this->update (taskMessage.getMessage(), taskMessage.getPayload());
             
-            task.push (taskBuffer);
+            task->push (taskBuffer);
         }
         else
         {            
@@ -375,7 +374,7 @@ public:
     ProcessInfo& getProcessInfo() throw() { return info; }
     
 private:
-    InputTask task;
+    InputTask* const task;
     ProcessInfo info; // private info for this object as we're running out of sync with everything else
     
     static inline int numChannelsInSource (Inputs const& inputs) throw()
