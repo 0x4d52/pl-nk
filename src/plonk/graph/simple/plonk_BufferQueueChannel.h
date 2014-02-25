@@ -151,32 +151,13 @@ public:
     
         this->initProxyValue (channel, SampleType (0));
     }
-    
-    void getNextBuffer() throw()
-    {
-        BufferQueueType& bufferQueue (this->getInputAsBufferQueue (IOKey::BufferQueue));
-        currentBuffer = bufferQueue.pop();
-        
-//        if (currentBuffer != BufferQueueType::getNullValue())
-//        {
-//            UnitType& inputUnit (this->getInputAsUnit (IOKey::Generic));
-//            
-//            const int numUnitChannels = this->getNumChannels();
-//            const int numBufferChannels = currentBuffer.getBuffers().length();
-//        
-//            for (int i = 0; i < plonk::min (numUnitChannels, numBufferChannels); ++i)
-//            {
-//                currentBuffer.getBuffers().atUnchecked (i).setSize (inputUnit.getBlockSize (i).getValue(), false);
-//            }
-//        }
-    }
 
     void process (ProcessInfo& info, const int /*channel*/) throw()
     {
-        //const Data& data = this->getState();
-        
+        BufferQueueType& bufferQueue (this->getInputAsBufferQueue (IOKey::BufferQueue));
+
         if (currentBuffer == BufferQueueType::getNullValue())
-            getNextBuffer();
+            currentBuffer = bufferQueue.pop();
         
         const int numChannels = this->getNumChannels();
         int channel;
@@ -215,6 +196,8 @@ public:
         }
         else
         {
+            this->update (Text::getMessageBufferQueueUnderrun(), bufferQueue);
+
             for (channel = 0; channel < numChannels; ++channel)
             {
                 const Buffer& inputBuffer (inputUnit.process (info, channel));

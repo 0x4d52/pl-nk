@@ -171,6 +171,7 @@ public:
     static const Text& getMessageEvent() throw();
     static const Text& getMessageCuePoint() throw();
     static const Text& getMessageQueueBuffer() throw();
+    static const Text& getMessageBufferQueueUnderrun() throw();
 
     
     PLONK_OBJECTARROWOPERATOR(Text);

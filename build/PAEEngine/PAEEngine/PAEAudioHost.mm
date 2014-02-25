@@ -77,8 +77,8 @@ OSStatus preRenderCallbackFunction (void*                      refCon,
         
         _internal.numOutputs = _numOutputs;
         _internal.numInputs = _numInputs;
-//        _internal.preferredGraphBlockSize = 512;
-//        _internal.preferredHostBlockSize = 512;
+        _internal.preferredGraphBlockSize = 512;
+        _internal.preferredHostBlockSize = 512;
     }
     
     return self;

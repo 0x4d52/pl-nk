@@ -244,7 +244,14 @@ public:
                     info.offsetTimeStamp (owner->getSampleRate().getSampleDurationInTicks() * blockSize);
                 }
                 
-                event.wait (1.0);
+                if (numFreeBuffers == 1)
+                {
+                    event.wait (0.5);
+                }
+                else if (numFreeBuffers < 4)
+                {
+                    Threading::sleep (owner->getBlockDurationInTicks() * TimeStamp::getReciprocalTicks());
+                }
             }
             
             freeBuffers.clearAll();
@@ -257,9 +264,9 @@ public:
                 
         void end() throw()
         {
-            Lock e = event();
-            setShouldExit(); // this might delete this object before the next line
-            e.signal();      // or this will proceed past the wait
+            Lock e = this->event; // take a shared copy of the event
+            setShouldExit();      // this might delete this object before the next line
+            e.signal();           // or this will proceed past the wait, or be harmless if the thread died already
         }
     
         inline bool pop (TaskBuffer& buffer) throw()
@@ -277,7 +284,6 @@ public:
     private:
         InputTaskChannelInternal* owner;
         ProcessInfo& info;
-//        RNG rng;
         TaskBufferQueue activeBuffers;
         TaskBufferQueue freeBuffers;
         TaskBuffer currentTaskBuffer;

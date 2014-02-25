@@ -497,6 +497,13 @@ const Text& Text::getMessageQueueBuffer() throw()
 	return t;
 }
 
+const Text& Text::getMessageBufferQueueUnderrun() throw()
+{
+    static const Text t = "buffer.queue.underrun";
+	return t;
+}
+
+
 /* add a toBinary function?
  for (int i = 31; i >= 0; --i)
  {
