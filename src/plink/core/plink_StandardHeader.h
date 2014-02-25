@@ -75,7 +75,7 @@
 // from now on: odd build numbers are development versions, even are releases
 #define PLINK_MAJOR_VERSION      0
 #define PLINK_MINOR_VERSION      4
-#define PLINK_BUILDNUMBER        7
+#define PLINK_BUILDNUMBER        8
 
 
 
