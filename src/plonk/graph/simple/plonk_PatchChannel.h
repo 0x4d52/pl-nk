@@ -141,11 +141,11 @@ public:
             SampleType* const outputSamples = outputBuffer.getArray();
             const int outputBufferLength = outputBuffer.length();        
             
-            const Buffer fadeInSourceBuffer (currentSource.process (info, channel));
+            const Buffer& fadeInSourceBuffer (currentSource.process (info, channel));
             const SampleType* const fadeInSourceSamples = fadeInSourceBuffer.getArray();
             const int fadeInSourceBufferLength = fadeInSourceBuffer.length();
             
-            const Buffer fadeOutSourceBuffer (fadeSource.process (info, channel));
+            const Buffer& fadeOutSourceBuffer (fadeSource.process (info, channel));
             const SampleType* const fadeOutSourceSamples = fadeOutSourceBuffer.getArray();
             const int fadeOutSourceBufferLength = fadeOutSourceBuffer.length();
 
@@ -205,7 +205,7 @@ public:
             SampleType* const outputSamples = outputBuffer.getArray();
             const int outputBufferLength = outputBuffer.length();        
             
-            const Buffer sourceBuffer (currentSource.process (info, channel));
+            const Buffer& sourceBuffer (currentSource.process (info, channel));
             const SampleType* const sourceSamples = sourceBuffer.getArray();
             const int sourceBufferLength = sourceBuffer.length();
             

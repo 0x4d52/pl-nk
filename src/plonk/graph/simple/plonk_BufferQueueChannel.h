@@ -157,18 +157,18 @@ public:
         BufferQueueType& bufferQueue (this->getInputAsBufferQueue (IOKey::BufferQueue));
         currentBuffer = bufferQueue.pop();
         
-        if (currentBuffer != BufferQueueType::getNullValue())
-        {
-            UnitType& inputUnit (this->getInputAsUnit (IOKey::Generic));
-            
-            const int numUnitChannels = this->getNumChannels();
-            const int numBufferChannels = currentBuffer.getBuffers().length();
-        
-            for (int i = 0; i < plonk::min (numUnitChannels, numBufferChannels); ++i)
-            {
-                currentBuffer.getBuffers().atUnchecked (i).setSize (inputUnit.getBlockSize (i).getValue(), false);
-            }
-        }
+//        if (currentBuffer != BufferQueueType::getNullValue())
+//        {
+//            UnitType& inputUnit (this->getInputAsUnit (IOKey::Generic));
+//            
+//            const int numUnitChannels = this->getNumChannels();
+//            const int numBufferChannels = currentBuffer.getBuffers().length();
+//        
+//            for (int i = 0; i < plonk::min (numUnitChannels, numBufferChannels); ++i)
+//            {
+//                currentBuffer.getBuffers().atUnchecked (i).setSize (inputUnit.getBlockSize (i).getValue(), false);
+//            }
+//        }
     }
 
     void process (ProcessInfo& info, const int /*channel*/) throw()
@@ -193,7 +193,7 @@ public:
                 const Buffer& inputBuffer (inputUnit.process (info, channel));
                 const SampleType* const inputSamples = inputBuffer.getArray();
                 
-                Buffer outputBuffer = this->getOutputBuffer (channel);
+                Buffer& outputBuffer = this->getOutputBuffer (channel);
                 SampleType* const outputSamples = outputBuffer.getArray();
                 const int outputBufferLength = outputBuffer.length();
 
@@ -203,8 +203,9 @@ public:
 
                 if (channel < numBufferChannels)
                 {
-                    plonk_assert (outputBufferLength == currentBuffer.getBuffers().atUnchecked (channel).length());
-                    SampleType* const bufferSamples = currentBuffer.getBuffers().atUnchecked (channel).getArray();
+                    Buffer& recordBuffer = currentBuffer.getBuffers().atUnchecked (channel);
+                    recordBuffer.setSize (outputBufferLength, false);
+                    SampleType* const bufferSamples = recordBuffer.getArray();
                     Buffer::copyData (bufferSamples, outputSamples, outputBufferLength);
                 }
             }
@@ -219,7 +220,7 @@ public:
                 const Buffer& inputBuffer (inputUnit.process (info, channel));
                 const SampleType* const inputSamples = inputBuffer.getArray();
                 
-                Buffer outputBuffer = this->getOutputBuffer (channel);
+                Buffer& outputBuffer = this->getOutputBuffer (channel);
                 SampleType* const outputSamples = outputBuffer.getArray();
                 const int outputBufferLength = outputBuffer.length();
                 

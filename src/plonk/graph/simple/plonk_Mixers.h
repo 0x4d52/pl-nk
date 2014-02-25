@@ -251,7 +251,7 @@ public:
         // ..and process.
         for (channel = 0; channel < numChannels; ++channel)
         {
-            Buffer outputBuffer = this->getOutputBuffer (channel);
+            Buffer& outputBuffer = this->getOutputBuffer (channel);
             outputBuffer.zero();
             SampleType* const outputSamples = outputBuffer.getArray();
             const int outputBufferLength = outputBuffer.length();
@@ -264,7 +264,7 @@ public:
                 {
                     plonk_assert (inputUnit.getOverlap (channel) == Math<DoubleVariable>::get1());
                     
-                    const Buffer inputBuffer (inputUnit.process (info, channel));
+                    const Buffer& inputBuffer (inputUnit.process (info, channel));
                     const SampleType* const inputSamples = inputBuffer.getArray();
                     const int inputBufferLength = inputBuffer.length();
                     
@@ -673,7 +673,7 @@ public:
         // ..and process.
         for (channel = 0; channel < numChannels; ++channel)
         {
-            Buffer outputBuffer = this->getOutputBuffer (channel);
+            Buffer& outputBuffer = this->getOutputBuffer (channel);
             float* const outputSamples = outputBuffer.getArray();
             const int outputBufferLength = outputBuffer.length();
             pl_VectorClearF_N (outputSamples, outputBufferLength);
@@ -691,7 +691,7 @@ public:
                 {
                     plonk_assert (inputUnit.getOverlap (channel) == Math<DoubleVariable>::get1());
                     
-                    const Buffer inputBuffer (inputUnit.process (info, channel));
+                    const Buffer& inputBuffer (inputUnit.process (info, channel));
                     const float* const inputSamples = inputBuffer.getArray();
                     const int inputBufferLength = inputBuffer.length();
                     

@@ -210,10 +210,16 @@ int PortAudioAudioHostBase<SampleType>::callback (const SampleType **inputData, 
     int i;
     
     for (i = 0; i < numInputs; ++i)
-        inputs.atUnchecked (i) = inputData[i];
-
+    {
+        const SampleType* const inputChannel = inputData[i];
+        inputs.atUnchecked (i) = inputChannel;
+    }
+    
     for (i = 0; i < numOutputs; ++i)
-        outputs.atUnchecked (i) = outputData[i];
+    {
+        SampleType* const outputChannel = outputData[i];
+        outputs.atUnchecked (i) = outputChannel;
+    }
     
     this->process();
     

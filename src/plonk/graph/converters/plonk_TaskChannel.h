@@ -166,7 +166,7 @@ public:
     class InputTask :  public Threading::Thread, public Channel::Receiver
     {
     public:
-        typedef LockFreeQueue<TaskBuffer> BufferQueue;
+        typedef LockFreeQueue<TaskBuffer> TaskBufferQueue;
         
         InputTask (InputTaskChannelInternal* o) throw()
         :   Threading::Thread (Text ("InputTaskChannelInternal::Thread[" + Text (*(LongLong*)&o) + Text ("]"))),
@@ -257,8 +257,9 @@ public:
                 
         void end() throw()
         {
-            setShouldExit();
-            event.signal();
+            Lock e = event();
+            setShouldExit(); // this might delete this object before the next line
+            e.signal();      // or this will proceed past the wait
         }
     
         inline bool pop (TaskBuffer& buffer) throw()
@@ -276,9 +277,9 @@ public:
     private:
         InputTaskChannelInternal* owner;
         ProcessInfo& info;
-        RNG rng;
-        BufferQueue activeBuffers;
-        BufferQueue freeBuffers;
+//        RNG rng;
+        TaskBufferQueue activeBuffers;
+        TaskBufferQueue freeBuffers;
         TaskBuffer currentTaskBuffer;
         Lock event;
     };
