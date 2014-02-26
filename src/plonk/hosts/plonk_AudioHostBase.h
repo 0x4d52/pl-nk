@@ -168,66 +168,6 @@ protected:
      It should return the audio graph that is rendered to the host. */
     virtual UnitType constructGraph() = 0;
 
-//    /** @internal */
-//    inline void process() throw()
-//    {
-//        int i;
-//        
-//#ifdef PLONK_DEBUG
-//        Threading::ID currentThreadID = Threading::getCurrentThreadID();
-//        if (currentThreadID != Threading::getAudioThreadID())
-//            Threading::setAudioThreadID (Threading::getCurrentThreadID());
-//#endif
-//        const int numInputs = this->inputs.length();
-//        const int numOutputs = this->outputs.length();
-//        plonk_assert (this->busses.length() == numInputs);
-//        
-//        int blockRemain = preferredHostBlockSize;
-//        const int graphBlockSize = BlockSize::getDefault().getValue();
-//        
-//        // must do more checks in case the block sizes are not compatible on this run
-//        
-//        for (i = 0; i < numInputs; ++i)
-//        {
-//            this->busses.atUnchecked (i).write (this->info.getTimeStamp(),
-//                                                blockRemain,
-//                                                this->inputs.atUnchecked (i));
-//        }
-//        
-//        while (blockRemain > 0)
-//        {
-//            this->outputUnit.process (this->info);
-//            
-//            if (this->outputUnit.isNotNull())
-//            {
-//                for (i = 0; i < numOutputs; ++i)
-//                {
-//                    const SampleType* const unitOutput = this->outputUnit.getOutputSamples (i);
-//                    BufferType::copyData (this->outputs.atUnchecked (i), unitOutput, graphBlockSize);
-//                    this->outputs.atUnchecked (i) += graphBlockSize;
-//                }
-//            }
-//            else if (numOutputs > 0)
-//            {
-//                for (i = 0; i < numOutputs; ++i)
-//                {
-//                    BufferType::zeroData (this->outputs.atUnchecked (i), graphBlockSize);
-//                    this->outputs.atUnchecked (i) += graphBlockSize;
-//                }
-//            }
-//            
-//            this->info.offsetTimeStamp (SampleRate::getDefault().getSampleDurationInTicks() * graphBlockSize);
-//            
-//            blockRemain -= graphBlockSize;
-//        }
-//        
-//#if PLONK_DEBUG
-//        // null the pointers to cause crash if buffers are not updated each HW block
-//        this->inputs.zero();
-//        this->outputs.zero();
-//#endif
-//    }
-
     /** @internal */
     inline void process() throw()
     {
@@ -247,39 +187,40 @@ protected:
         
         // must do more checks in case the block sizes are not compatible on this run
         
-        while (blockRemain > 0)
+
+        // push all the input samples for this hardware frame onto the busses
+        for (i = 0; i < numInputs; ++i)
         {
-            for (i = 0; i < numInputs; ++i)
-            {
-                this->busses.atUnchecked (i).write (this->info.getTimeStamp(), 
-                                                    graphBlockSize, 
-                                                    this->inputs.atUnchecked (i)); 
-                this->inputs.atUnchecked (i) += graphBlockSize;
-            }
-            
-            this->outputUnit.process (this->info);
-            
-            if (this->outputUnit.isNotNull())
-            {
+            this->busses.atUnchecked (i).write (this->info.getTimeStamp(),
+                                                blockRemain,
+                                                this->inputs.atUnchecked (i));
+        }
+
+        // write the hardware frame in possible smaller blocks
+        if (this->outputUnit.isNotNull())
+        {
+            while (blockRemain > 0)
+            {            
+                this->outputUnit.process (this->info);
+                
                 for (i = 0; i < numOutputs; ++i)
                 {
                     const SampleType* const unitOutput = this->outputUnit.getOutputSamples (i);
                     BufferType::copyData (this->outputs.atUnchecked (i), unitOutput, graphBlockSize);   
                     this->outputs.atUnchecked (i) += graphBlockSize;
                 }
+                
+                this->info.offsetTimeStamp (SampleRate::getDefault().getSampleDurationInTicks() * graphBlockSize);
+                
+                blockRemain -= graphBlockSize;
             }
-            else if (numOutputs > 0)
-            {
-                for (i = 0; i < numOutputs; ++i)
-                {
-                    BufferType::zeroData (this->outputs.atUnchecked (i), graphBlockSize);   
-                    this->outputs.atUnchecked (i) += graphBlockSize;
-                }
-            }
-                        
-            this->info.offsetTimeStamp (SampleRate::getDefault().getSampleDurationInTicks() * graphBlockSize);
+        }
+        else if (numOutputs > 0)
+        {
+            for (i = 0; i < numOutputs; ++i)
+                BufferType::zeroData (this->outputs.atUnchecked (i), blockRemain);
             
-            blockRemain -= graphBlockSize;
+            this->info.offsetTimeStamp (SampleRate::getDefault().getSampleDurationInTicks() * blockRemain);
         }
         
 #if PLONK_DEBUG
