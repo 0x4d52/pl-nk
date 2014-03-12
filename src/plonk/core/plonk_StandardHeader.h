@@ -171,7 +171,7 @@
 // from now on: odd build numbers are development versions, even are releases
 #define PLONK_MAJOR_VERSION      0
 #define PLONK_MINOR_VERSION      4
-#define PLONK_BUILDNUMBER        8
+#define PLONK_BUILDNUMBER        9
 #define PLONK_VERSION           "v" PLANK_PRESTRING(PLONK_MAJOR_VERSION) "." PLANK_PRESTRING(PLONK_MINOR_VERSION) "." PLANK_PRESTRING(PLONK_BUILDNUMBER)
 
 
