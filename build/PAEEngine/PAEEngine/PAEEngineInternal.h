@@ -12,3 +12,6 @@
 #import "PAEBufferInternal.h"
 #include "plonk.h"
 
+// not yet public
+#import "PAEAudioInput.h"
+#import "PAEBufferCapture.h"

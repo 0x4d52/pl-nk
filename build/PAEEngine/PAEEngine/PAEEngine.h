@@ -49,7 +49,6 @@
 #import "PAEBuffer.h"
 
 // sources
-#import "PAEAudioInput.h"
 #import "PAEConstant.h"
 #import "PAEControl.h"
 #import "PAETestTone.h"
@@ -69,12 +68,11 @@
 #import "PAEMidSide.h"
 #import "PAEAmplitude.h"
 #import "PAESend.h"
-#import "PAEBufferCapture.h"
 
 // UI
 #import "PAEBufferView.h"
 
-#define PAEENGINE_VERSION "0.1.9"
+#define PAEENGINE_VERSION "0.2.0"
 
 /**
 @mainpage Documentation

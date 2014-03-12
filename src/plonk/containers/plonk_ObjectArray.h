@@ -660,6 +660,18 @@ public:
         this->getInternal()->add (other.length(), other.getArray()); 
 		return *this;
 	}
+    
+    ObjectArray<ObjectType>& insert (const int index, ObjectType const& item) throw()
+	{
+		this->getInternal()->insert (index, 1, &item);
+		return *this;
+	}
+    
+    ObjectArray<ObjectType>& insert (const int index, ObjectArray<ObjectType> const& other) throw()
+	{
+		this->getInternal()->insert (index, other.length(), other.getArray());
+		return *this;
+	}
 	
 	/** Removes an item at the given index in-place. 
 	 Indices out of range will be ignored.*/

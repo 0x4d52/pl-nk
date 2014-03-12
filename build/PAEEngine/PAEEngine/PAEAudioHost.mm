@@ -77,8 +77,7 @@ OSStatus preRenderCallbackFunction (void*                      refCon,
         
         _internal.numOutputs = _numOutputs;
         _internal.numInputs = _numInputs;
-        _internal.preferredGraphBlockSize = 512;
-        _internal.preferredHostBlockSize = 512;
+        _internal.preferredGraphBlockSize = 64;
     }
     
     return self;
@@ -87,6 +86,36 @@ OSStatus preRenderCallbackFunction (void*                      refCon,
 -(id)init
 {
     return [self initWithNumOutputs:2 andNumInputs:0];
+}
+
+-(int)numOutputs
+{
+    return _internal.numOutputs;
+}
+
+-(int)numInputs
+{
+    return _internal.numInputs;
+}
+
+-(int)hardwareBlockSize
+{
+    return _internal.preferredHostBlockSize;
+}
+
+-(int)processBlockSize
+{
+    return _internal.preferredGraphBlockSize;
+}
+
+-(double)sampleRate
+{
+    return _internal.preferredHostSampleRate;
+}
+
+-(double)cpuUsage
+{
+    return _internal.cpuUsage;
 }
 
 -(void)start

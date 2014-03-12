@@ -62,6 +62,24 @@
  as in the PAEGate) or placed in this array for separate rendering. */
 @property (strong, nonatomic) NSArray* additionalRenderSources;
 
+/** The number of audio output channels. */
+@property (nonatomic, readonly) int numOutputs;
+
+/** The number of audio input channels. */
+@property (nonatomic, readonly) int numInputs;
+
+/** Harware block size. */
+@property (nonatomic, readonly) int hardwareBlockSize;
+
+/** Process block size. */
+@property (nonatomic, readonly) int processBlockSize;
+
+/** Sample rate. */
+@property (nonatomic, readonly) double sampleRate;
+
+/** CPU Usage between 0.0 - 1.0. */
+@property (nonatomic, readonly) double cpuUsage;
+
 /** Create an audio host for output only. */
 +(PAEAudioHost*)audioHostWithNumOutputs:(int)numOutputs;
 
@@ -73,5 +91,7 @@
 
 /** Stop the audio host. */
 -(void)stop;
+
+
 
 @end

@@ -135,7 +135,7 @@
             [bufferChannelView performSelectorOnMainThread:@selector(setNeedsDisplay) withObject:nil waitUntilDone:NO];
         }
     }
-    else
+    else if (buffer.numChannels != _buffer.numChannels)
     {
         _buffer = nil;
         
@@ -163,6 +163,10 @@
         
         _buffer = buffer;
         self.bufferChannelViews = [NSArray arrayWithArray:subviews];
+    }
+    else
+    {
+        _buffer = buffer;
     }
 }
 

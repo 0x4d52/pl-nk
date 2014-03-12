@@ -80,7 +80,7 @@ public:
         for (i = 0; i < bufferLength; ++i)
             *tableSamples++ = bufferSamples[i];
     }
-    
+        
     /** Copy constructor.
 	 Note that a deep copy is not made, the copy will refer to exactly the same data. */
     WavetableBase (WavetableBase const& copy) throw()
@@ -102,8 +102,13 @@ public:
         return *this;
 	}
     
-//    using Buffer::containerCopy;
     using Buffer::getInternal;
+    
+    WavetableBase copy() throw()
+    {
+        Buffer buffer (this->length(), this->getArray(), false, false);
+        return WavetableBase (buffer);
+    }
         
     int length() const throw()
     {
@@ -232,22 +237,19 @@ public:
     
     static const WavetableBase& harmonicSaw() throw()
 	{
-		static const WavetableBase table (WavetableBase::harmonic8192 (Buffer::series (21, 1, 1)
-                                                                       .reciprocal()
-                                                                       .normalise()));
+		static const WavetableBase table (WavetableBase::harmonic8192 (Buffer::series (21, 1, 1).reciprocal()).normalise());
         return table;
 	}
 
     static WavetableBase harmonicSaw (const int size, const int numHarmonics = 21) throw()
 	{
 		return WavetableBase::harmonic (size, Buffer::series (numHarmonics, 1, 1)
-                                        .reciprocal().normalise());
+                                        .reciprocal()).normalise();
 	}
     
     static const WavetableBase& harmonicSquare() throw()
 	{
-		static const WavetableBase table (WavetableBase::harmonic8192 ((Buffer::series (21, 1, 1).reciprocal() * Buffer (SampleType (1), SampleType (0)))
-                                                                       .normalise()));
+		static const WavetableBase table (WavetableBase::harmonic8192 ((Buffer::series (21, 1, 1).reciprocal() * Buffer (SampleType (1), SampleType (0)))).normalise());
         return table;
 	}
     
@@ -261,8 +263,7 @@ public:
     static const WavetableBase& harmonicTri() throw()
 	{
 		static const WavetableBase table (WavetableBase::harmonic8192 ((Buffer::series (21, 1, 1).reciprocal() * Buffer (SampleType (1), SampleType (0), SampleType (-1), SampleType (0)))
-                                                                       .squared()
-                                                                       .normalise()));
+                                                                       .squared()).normalise());
         return table;
 	}
     
@@ -270,12 +271,40 @@ public:
 	{
         plonk_assert (numHarmonics >= 4);
 		return WavetableBase::harmonic (size, (Buffer::series (numHarmonics, 1, 1).reciprocal()  * Buffer (SampleType (1), SampleType (0), SampleType (-1), SampleType (0)))
-                                        .squared()
-                                        .normalise());
+                                        .squared())
+                                        .normalise();
 	}
 
     
     PLONK_OBJECTARROWOPERATOR(WavetableBase);
+    
+    void print (const char *prefix = 0, const bool oneLine = false) const throw()
+	{
+#if !PLONK_ANDROID
+        int i;
+        
+		if (oneLine)
+		{
+			if (prefix) std::cout << prefix << ": ";
+                
+                for (i = 0; i < this->length(); i++)
+			{
+				std::cout << this->at (i) << " ";
+			}
+                
+            std::cout << std::endl;
+        }
+        else
+        {
+            for (i = 0; i < this->length(); i++)
+            {
+                if (prefix) std::cout << prefix;
+                    
+                std::cout << "[" << i << "] = " << this->at (i) << std::endl;
+            }
+        }
+#endif
+    }
 
 };
 

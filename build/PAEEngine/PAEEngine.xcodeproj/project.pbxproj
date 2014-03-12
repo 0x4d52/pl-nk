@@ -267,6 +267,15 @@
 		A806E90918A1943500D7187B /* PAEAudioHost.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = A806E8FF18A1790400D7187B /* PAEAudioHost.h */; };
 		A806E90E18A2200C00D7187B /* PAEFoward.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = A806E90818A192C800D7187B /* PAEFoward.h */; };
 		A806E90F18A2201B00D7187B /* PAETestTone.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = A806E90518A18ABB00D7187B /* PAETestTone.h */; };
+		A808DA6518AC0C7800D62FAD /* PAEMidSide.mm in Sources */ = {isa = PBXBuildFile; fileRef = A808DA6418AC0C7800D62FAD /* PAEMidSide.mm */; };
+		A808DA6618AC0C7D00D62FAD /* PAEMidSide.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = A808DA6318AC0C7800D62FAD /* PAEMidSide.h */; };
+		A808DA6918AC11C300D62FAD /* PAEAmplitude.mm in Sources */ = {isa = PBXBuildFile; fileRef = A808DA6818AC11C300D62FAD /* PAEAmplitude.mm */; };
+		A808DA6A18AC11C900D62FAD /* PAEAmplitude.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = A808DA6718AC11C300D62FAD /* PAEAmplitude.h */; };
+		A808DA6D18AC14DD00D62FAD /* PAESend.mm in Sources */ = {isa = PBXBuildFile; fileRef = A808DA6C18AC14DC00D62FAD /* PAESend.mm */; };
+		A808DA6E18AC14E300D62FAD /* PAESend.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = A808DA6B18AC14DC00D62FAD /* PAESend.h */; };
+		A808DA7118AC182200D62FAD /* PAECompressor.mm in Sources */ = {isa = PBXBuildFile; fileRef = A808DA7018AC182200D62FAD /* PAECompressor.mm */; };
+		A808DA7218ACA8D700D62FAD /* PAECompressor.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = A808DA6F18AC182200D62FAD /* PAECompressor.h */; };
+		A84FD04318B90D3B0028D73E /* PAEAudioInput.mm in Sources */ = {isa = PBXBuildFile; fileRef = A84FD04218B90D3B0028D73E /* PAEAudioInput.mm */; };
 		A86D2E2218A2CFC500EC3FE1 /* PAEAudioFilePlayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = A86D2E2118A2CFC500EC3FE1 /* PAEAudioFilePlayer.mm */; };
 		A86D2E2318A2D18500EC3FE1 /* PAEAudioFilePlayer.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = A86D2E2018A2CFC500EC3FE1 /* PAEAudioFilePlayer.h */; };
 		A86D2E2A18A2DAB600EC3FE1 /* PAEProcess.mm in Sources */ = {isa = PBXBuildFile; fileRef = A86D2E2918A2DAB600EC3FE1 /* PAEProcess.mm */; };
@@ -276,6 +285,8 @@
 		A86D2E4018A36C1E00EC3FE1 /* PAEMixer.mm in Sources */ = {isa = PBXBuildFile; fileRef = A86D2E3F18A36C1E00EC3FE1 /* PAEMixer.mm */; };
 		A86D2E4118A372C200EC3FE1 /* PAEMixer.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = A86D2E3E18A36C1E00EC3FE1 /* PAEMixer.h */; };
 		A86D2E4518A3AA5D00EC3FE1 /* PAEFilter.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = A86D2E4318A3AA4D00EC3FE1 /* PAEFilter.h */; };
+		A86D518F18ADF6C9007EDB15 /* PAEDelay.mm in Sources */ = {isa = PBXBuildFile; fileRef = A86D518E18ADF6C9007EDB15 /* PAEDelay.mm */; };
+		A86D519018ADF6CF007EDB15 /* PAEDelay.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = A86D518D18ADF6C9007EDB15 /* PAEDelay.h */; };
 		A877688618A6630B00460E0F /* PAEConstant.mm in Sources */ = {isa = PBXBuildFile; fileRef = A877688518A6630B00460E0F /* PAEConstant.mm */; };
 		A877688718A6632200460E0F /* PAEConstant.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = A877688418A6630B00460E0F /* PAEConstant.h */; };
 		A877688B18A6824E00460E0F /* PAEGate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A877688A18A6824D00460E0F /* PAEGate.mm */; };
@@ -286,8 +297,17 @@
 		A8776A5E18A77F5600460E0F /* PAEPan.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = A8776A5B18A77F4200460E0F /* PAEPan.h */; };
 		A8825D1318A8080100DAC336 /* PAEOscillator.mm in Sources */ = {isa = PBXBuildFile; fileRef = A8825D1218A8080100DAC336 /* PAEOscillator.mm */; };
 		A8825D1418A8080A00DAC336 /* PAEOscillator.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = A8825D1118A8080100DAC336 /* PAEOscillator.h */; };
+		A8A5800E18BB416200AC9DD5 /* PAEBufferCapture.mm in Sources */ = {isa = PBXBuildFile; fileRef = A8A5800D18BB416200AC9DD5 /* PAEBufferCapture.mm */; };
 		A8B78ED918A7B1F60067EA9A /* PAEMap.mm in Sources */ = {isa = PBXBuildFile; fileRef = A8B78ED818A7B1F60067EA9A /* PAEMap.mm */; };
 		A8B78EDA18A7B1FA0067EA9A /* PAEMap.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = A8B78ED718A7B1F50067EA9A /* PAEMap.h */; };
+		A8CDB0CC18B022FB00AC091D /* PAEBuffer.mm in Sources */ = {isa = PBXBuildFile; fileRef = A8CDB0CB18B022FB00AC091D /* PAEBuffer.mm */; };
+		A8CDB0CD18B0230100AC091D /* PAEBuffer.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = A8CDB0CA18B022FB00AC091D /* PAEBuffer.h */; };
+		A8CDB0D118B029B500AC091D /* PAEBufferPlayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = A8CDB0D018B029B500AC091D /* PAEBufferPlayer.mm */; };
+		A8CDB0D218B029EC00AC091D /* PAEBufferPlayer.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = A8CDB0CF18B029B500AC091D /* PAEBufferPlayer.h */; };
+		A8CDB0D518B103CD00AC091D /* PAEBufferLookup.mm in Sources */ = {isa = PBXBuildFile; fileRef = A8CDB0D418B103CD00AC091D /* PAEBufferLookup.mm */; };
+		A8CDB0D618B106A200AC091D /* PAEBufferLookup.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = A8CDB0D318B103CD00AC091D /* PAEBufferLookup.h */; };
+		A8D8A02118B54A69007F7246 /* PAEBufferView.mm in Sources */ = {isa = PBXBuildFile; fileRef = A8D8A02018B54A69007F7246 /* PAEBufferView.mm */; };
+		A8D8A02218B54AD0007F7246 /* PAEBufferView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = A8D8A01F18B54A69007F7246 /* PAEBufferView.h */; };
 		A8F8848718A4290200B30768 /* PAEFilter.mm in Sources */ = {isa = PBXBuildFile; fileRef = A86D2E4418A3AA4E00EC3FE1 /* PAEFilter.mm */; };
 /* End PBXBuildFile section */
 
@@ -306,11 +326,20 @@
 				A86D2E3518A2FAE600EC3FE1 /* PAEControl.h in CopyFiles */,
 				A877689018A683D800460E0F /* PAEGate.h in CopyFiles */,
 				A8B78EDA18A7B1FA0067EA9A /* PAEMap.h in CopyFiles */,
+				A808DA7218ACA8D700D62FAD /* PAECompressor.h in CopyFiles */,
 				A8776A5E18A77F5600460E0F /* PAEPan.h in CopyFiles */,
 				A806E50418A0076400D7187B /* PAEEngine.h in CopyFiles */,
+				A8CDB0CD18B0230100AC091D /* PAEBuffer.h in CopyFiles */,
+				A8D8A02218B54AD0007F7246 /* PAEBufferView.h in CopyFiles */,
+				A808DA6618AC0C7D00D62FAD /* PAEMidSide.h in CopyFiles */,
 				A86D2E2B18A2DB2600EC3FE1 /* PAEProcess.h in CopyFiles */,
+				A808DA6E18AC14E300D62FAD /* PAESend.h in CopyFiles */,
+				A86D519018ADF6CF007EDB15 /* PAEDelay.h in CopyFiles */,
+				A8CDB0D618B106A200AC091D /* PAEBufferLookup.h in CopyFiles */,
+				A8CDB0D218B029EC00AC091D /* PAEBufferPlayer.h in CopyFiles */,
 				A877688F18A683D600460E0F /* PAEFollower.h in CopyFiles */,
 				A8825D1418A8080A00DAC336 /* PAEOscillator.h in CopyFiles */,
+				A808DA6A18AC11C900D62FAD /* PAEAmplitude.h in CopyFiles */,
 				A86D2E2318A2D18500EC3FE1 /* PAEAudioFilePlayer.h in CopyFiles */,
 				A806E90218A1791500D7187B /* PAEChannelStrip.h in CopyFiles */,
 				A806E90318A1791700D7187B /* PAESource.h in CopyFiles */,
@@ -945,6 +974,17 @@
 		A806E90618A18ABC00D7187B /* PAETestTone.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PAETestTone.mm; sourceTree = "<group>"; };
 		A806E90818A192C800D7187B /* PAEFoward.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PAEFoward.h; sourceTree = "<group>"; };
 		A806E90B18A21CA600D7187B /* PAESourceInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAESourceInternal.h; sourceTree = "<group>"; };
+		A808DA6318AC0C7800D62FAD /* PAEMidSide.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAEMidSide.h; sourceTree = "<group>"; };
+		A808DA6418AC0C7800D62FAD /* PAEMidSide.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PAEMidSide.mm; sourceTree = "<group>"; };
+		A808DA6718AC11C300D62FAD /* PAEAmplitude.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAEAmplitude.h; sourceTree = "<group>"; };
+		A808DA6818AC11C300D62FAD /* PAEAmplitude.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PAEAmplitude.mm; sourceTree = "<group>"; };
+		A808DA6B18AC14DC00D62FAD /* PAESend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAESend.h; sourceTree = "<group>"; };
+		A808DA6C18AC14DC00D62FAD /* PAESend.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PAESend.mm; sourceTree = "<group>"; };
+		A808DA6F18AC182200D62FAD /* PAECompressor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAECompressor.h; sourceTree = "<group>"; };
+		A808DA7018AC182200D62FAD /* PAECompressor.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PAECompressor.mm; sourceTree = "<group>"; };
+		A84FD04118B90D3A0028D73E /* PAEAudioInput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAEAudioInput.h; sourceTree = "<group>"; };
+		A84FD04218B90D3B0028D73E /* PAEAudioInput.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PAEAudioInput.mm; sourceTree = "<group>"; };
+		A8539F1918B9E8B4005F076B /* plonk_BufferQueueChannel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = plonk_BufferQueueChannel.h; sourceTree = "<group>"; };
 		A86D2E2018A2CFC500EC3FE1 /* PAEAudioFilePlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAEAudioFilePlayer.h; sourceTree = "<group>"; };
 		A86D2E2118A2CFC500EC3FE1 /* PAEAudioFilePlayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PAEAudioFilePlayer.mm; sourceTree = "<group>"; };
 		A86D2E2818A2DAAD00EC3FE1 /* PAEProcess.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PAEProcess.h; sourceTree = "<group>"; };
@@ -956,6 +996,8 @@
 		A86D2E3F18A36C1E00EC3FE1 /* PAEMixer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PAEMixer.mm; sourceTree = "<group>"; };
 		A86D2E4318A3AA4D00EC3FE1 /* PAEFilter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PAEFilter.h; sourceTree = "<group>"; };
 		A86D2E4418A3AA4E00EC3FE1 /* PAEFilter.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = PAEFilter.mm; sourceTree = "<group>"; };
+		A86D518D18ADF6C9007EDB15 /* PAEDelay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAEDelay.h; sourceTree = "<group>"; };
+		A86D518E18ADF6C9007EDB15 /* PAEDelay.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PAEDelay.mm; sourceTree = "<group>"; };
 		A877688418A6630B00460E0F /* PAEConstant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAEConstant.h; sourceTree = "<group>"; };
 		A877688518A6630B00460E0F /* PAEConstant.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PAEConstant.mm; sourceTree = "<group>"; };
 		A877688818A6693800460E0F /* PAEEngineInternal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PAEEngineInternal.h; sourceTree = "<group>"; };
@@ -969,8 +1011,19 @@
 		A8776A5C18A77F4300460E0F /* PAEPan.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PAEPan.mm; sourceTree = "<group>"; };
 		A8825D1118A8080100DAC336 /* PAEOscillator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAEOscillator.h; sourceTree = "<group>"; };
 		A8825D1218A8080100DAC336 /* PAEOscillator.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PAEOscillator.mm; sourceTree = "<group>"; };
+		A8A5800C18BB416200AC9DD5 /* PAEBufferCapture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAEBufferCapture.h; sourceTree = "<group>"; };
+		A8A5800D18BB416200AC9DD5 /* PAEBufferCapture.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PAEBufferCapture.mm; sourceTree = "<group>"; };
 		A8B78ED718A7B1F50067EA9A /* PAEMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAEMap.h; sourceTree = "<group>"; };
 		A8B78ED818A7B1F60067EA9A /* PAEMap.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PAEMap.mm; sourceTree = "<group>"; };
+		A8CDB0CA18B022FB00AC091D /* PAEBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAEBuffer.h; sourceTree = "<group>"; };
+		A8CDB0CB18B022FB00AC091D /* PAEBuffer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PAEBuffer.mm; sourceTree = "<group>"; };
+		A8CDB0CE18B028B000AC091D /* PAEBufferInternal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PAEBufferInternal.h; sourceTree = "<group>"; };
+		A8CDB0CF18B029B500AC091D /* PAEBufferPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAEBufferPlayer.h; sourceTree = "<group>"; };
+		A8CDB0D018B029B500AC091D /* PAEBufferPlayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PAEBufferPlayer.mm; sourceTree = "<group>"; };
+		A8CDB0D318B103CD00AC091D /* PAEBufferLookup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAEBufferLookup.h; sourceTree = "<group>"; };
+		A8CDB0D418B103CD00AC091D /* PAEBufferLookup.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PAEBufferLookup.mm; sourceTree = "<group>"; };
+		A8D8A01F18B54A69007F7246 /* PAEBufferView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAEBufferView.h; sourceTree = "<group>"; };
+		A8D8A02018B54A69007F7246 /* PAEBufferView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PAEBufferView.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1661,6 +1714,7 @@
 				A806E64C18A007BF00D7187B /* plonk_Mixers.h */,
 				A806E64D18A007BF00D7187B /* plonk_MulAddChannel.h */,
 				A806E64E18A007BF00D7187B /* plonk_PatchChannel.h */,
+				A8539F1918B9E8B4005F076B /* plonk_BufferQueueChannel.h */,
 				A806E64F18A007BF00D7187B /* plonk_QueueChannel.h */,
 				A806E65018A007BF00D7187B /* plonk_UnaryOpChannel.h */,
 				A806E65118A007BF00D7187B /* plonk_UnaryOpPlink.h */,
@@ -2201,6 +2255,17 @@
 		A806E91118A25E5E00D7187B /* public */ = {
 			isa = PBXGroup;
 			children = (
+				A8A5800C18BB416200AC9DD5 /* PAEBufferCapture.h */,
+				A84FD04118B90D3A0028D73E /* PAEAudioInput.h */,
+				A8D8A01F18B54A69007F7246 /* PAEBufferView.h */,
+				A8CDB0D318B103CD00AC091D /* PAEBufferLookup.h */,
+				A8CDB0CF18B029B500AC091D /* PAEBufferPlayer.h */,
+				A8CDB0CA18B022FB00AC091D /* PAEBuffer.h */,
+				A86D518D18ADF6C9007EDB15 /* PAEDelay.h */,
+				A808DA6F18AC182200D62FAD /* PAECompressor.h */,
+				A808DA6B18AC14DC00D62FAD /* PAESend.h */,
+				A808DA6718AC11C300D62FAD /* PAEAmplitude.h */,
+				A808DA6318AC0C7800D62FAD /* PAEMidSide.h */,
 				A8825D1118A8080100DAC336 /* PAEOscillator.h */,
 				A8B78ED718A7B1F50067EA9A /* PAEMap.h */,
 				A8776A5B18A77F4200460E0F /* PAEPan.h */,
@@ -2215,9 +2280,9 @@
 				A806E8F818A1771B00D7187B /* PAESource.h */,
 				A806E90518A18ABB00D7187B /* PAETestTone.h */,
 				A806E90818A192C800D7187B /* PAEFoward.h */,
-				A806E50318A0076400D7187B /* PAEEngine.h */,
 				A806E8FF18A1790400D7187B /* PAEAudioHost.h */,
 				A86D2E2018A2CFC500EC3FE1 /* PAEAudioFilePlayer.h */,
+				A806E50318A0076400D7187B /* PAEEngine.h */,
 			);
 			name = public;
 			sourceTree = "<group>";
@@ -2228,6 +2293,8 @@
 				A877688818A6693800460E0F /* PAEEngineInternal.h */,
 				A806E90B18A21CA600D7187B /* PAESourceInternal.h */,
 				A86D2E2C18A2E8A200EC3FE1 /* PAEProcessInternal.h */,
+				A8CDB0CE18B028B000AC091D /* PAEBufferInternal.h */,
+				A8CDB0CB18B022FB00AC091D /* PAEBuffer.mm */,
 				A806E90018A1790400D7187B /* PAEAudioHost.mm */,
 				A806E8F718A1771B00D7187B /* PAEChannelStrip.mm */,
 				A806E8F918A1771B00D7187B /* PAESource.mm */,
@@ -2243,6 +2310,16 @@
 				A8776A5C18A77F4300460E0F /* PAEPan.mm */,
 				A8B78ED818A7B1F60067EA9A /* PAEMap.mm */,
 				A8825D1218A8080100DAC336 /* PAEOscillator.mm */,
+				A808DA6418AC0C7800D62FAD /* PAEMidSide.mm */,
+				A808DA6818AC11C300D62FAD /* PAEAmplitude.mm */,
+				A808DA6C18AC14DC00D62FAD /* PAESend.mm */,
+				A808DA7018AC182200D62FAD /* PAECompressor.mm */,
+				A86D518E18ADF6C9007EDB15 /* PAEDelay.mm */,
+				A8CDB0D018B029B500AC091D /* PAEBufferPlayer.mm */,
+				A8CDB0D418B103CD00AC091D /* PAEBufferLookup.mm */,
+				A8D8A02018B54A69007F7246 /* PAEBufferView.mm */,
+				A84FD04218B90D3B0028D73E /* PAEAudioInput.mm */,
+				A8A5800D18BB416200AC9DD5 /* PAEBufferCapture.mm */,
 			);
 			name = private;
 			sourceTree = "<group>";
@@ -2560,6 +2637,17 @@
 				A8776A5D18A77F4500460E0F /* PAEPan.mm in Sources */,
 				A8B78ED918A7B1F60067EA9A /* PAEMap.mm in Sources */,
 				A8825D1318A8080100DAC336 /* PAEOscillator.mm in Sources */,
+				A808DA6518AC0C7800D62FAD /* PAEMidSide.mm in Sources */,
+				A808DA6918AC11C300D62FAD /* PAEAmplitude.mm in Sources */,
+				A808DA6D18AC14DD00D62FAD /* PAESend.mm in Sources */,
+				A808DA7118AC182200D62FAD /* PAECompressor.mm in Sources */,
+				A86D518F18ADF6C9007EDB15 /* PAEDelay.mm in Sources */,
+				A8CDB0CC18B022FB00AC091D /* PAEBuffer.mm in Sources */,
+				A8CDB0D118B029B500AC091D /* PAEBufferPlayer.mm in Sources */,
+				A8CDB0D518B103CD00AC091D /* PAEBufferLookup.mm in Sources */,
+				A8D8A02118B54A69007F7246 /* PAEBufferView.mm in Sources */,
+				A84FD04318B90D3B0028D73E /* PAEAudioInput.mm in Sources */,
+				A8A5800E18BB416200AC9DD5 /* PAEBufferCapture.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -20,14 +20,16 @@ class PAEBufferCapturePeer : public Channel::Receiver,
 public:
     
     PAEBufferCapturePeer (PAEBufferCapture* p) throw()
-    :   peer (p)
+    :   peer (p),
+        numBuffers (64),
+        sleep (0.0)
     {
-        int n = 8;
+        int n = numBuffers;
         
         while (n--)
         {
             freeQueue.push (QueueBuffer (peer.numChannels, BlockSize::getDefault().getValue()));
-        }
+        }        
     }
     
     ResultCode run() throw()
@@ -42,7 +44,10 @@ public:
                 freeQueue.push (queueBuffer);
             }
             
-            lock.wait (0.01);
+            if (liveQueue.length() == 0)
+                event.wait (0.5);
+            else
+                Threading::sleep ((BlockSize::getDefault().getValue() / SampleRate::getDefault().getValue()) * (numBuffers / 4));
         }
         
         delete this;
@@ -56,8 +61,16 @@ public:
         {
             QueueBuffer buffer = payload.as<QueueBuffer>();
             liveQueue.push (buffer);
-            lock.signal();
+            event.signal();
         }
+    }
+    
+    void end() throw()
+    {
+        peer = nil;
+        Lock e = event;
+        setShouldExit();
+        e.signal();
     }
     
     BufferQueue& getFreeQueue() throw() { return freeQueue; }
@@ -66,7 +79,9 @@ public:
 private:
     PAEBufferCapture* peer;
     BufferQueue freeQueue, liveQueue;
-    Lock lock;
+    Lock event;
+    const int numBuffers;
+    double sleep;
 };
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -100,7 +115,7 @@ private:
 -(void)dealloc
 {
     _record.removeReceiverFromChannels (_peer);
-    _peer->setShouldExit();
+    _peer->end();
 }
 
 -(void)write:(QueueBuffer)queueBuffer

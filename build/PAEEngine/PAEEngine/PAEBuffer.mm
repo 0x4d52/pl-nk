@@ -188,6 +188,13 @@
                                 sampleRate:sampleRate];
 }
 
++(PAEBuffer*)bufferWithDuration:(NSTimeInterval)duration channels:(int)numChannels sampleRate:(double)sampleRate
+{
+    return [[PAEBuffer alloc] initWithSize:int (duration * sampleRate + 0.5)
+                                  channels:numChannels
+                                sampleRate:sampleRate];
+}
+
 -(id)initWithSize:(int)numFrames channels:(int)numChannels sampleRate:(double)sampleRate
 {
     if (self = [super init])

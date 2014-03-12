@@ -77,6 +77,7 @@ public:
     bool setSize (const int newSize, const bool keepContents) throw();
     void add (ObjectType const& item) throw();
     void add (const int numItems, const ObjectType* items) throw();
+    void insert (const int index, const int numItems, const ObjectType* items) throw();
     void remove (const int index) throw();
     int indexOf (ObjectType const& itemToSearchFor, const int startIndex = 0) const throw();
 	void referTo (const int size, ObjectType *dataToUse, const bool needsNullTermination = false) throw();
@@ -248,6 +249,25 @@ void ObjectArrayInternalBase<ObjectType,BaseType>
     
     for (int i = originalLength; i < newSize; ++i)
         array[i] = *items++;
+}
+
+template<class ObjectType, class BaseType>
+void ObjectArrayInternalBase<ObjectType,BaseType>
+::insert (const int index, const int numItems, const ObjectType* items) throw()
+{
+    plonk_assert (ownsTheData);
+    plonk_assert (numItems > 0);
+
+    const int originalLength = this->length();
+    const int newSize = sizeUsed + numItems;
+    
+    setSizeIfNeeded (newSize, true);
+
+    for (int i = originalLength; --i >= index;)
+        array[i + numItems]  = array[i];
+        
+    for (int i = 0; i < numItems; ++i)
+        array[index + i] = *items++;
 }
 
 template<class ObjectType, class BaseType>

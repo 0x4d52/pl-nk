@@ -61,8 +61,11 @@
 /** Create a buffer from an audio file */
 +(PAEBuffer*)bufferNamed:(NSString*)name;
 
-/** Create an empty buffer. */
+/** Create an empty buffer with a certain number of sample frames. */
 +(PAEBuffer*)bufferWithSize:(int)numFrames channels:(int)numChannels sampleRate:(double)sampleRate;
+
+/** Create an empty buffer with a duration. */
++(PAEBuffer*)bufferWithDuration:(NSTimeInterval)duration channels:(int)numChannels sampleRate:(double)sampleRate;
 
 /** Get a sample at a specific index on a specific channel. */
 -(float)sampleAtIndex:(int)index channel:(int)channel;

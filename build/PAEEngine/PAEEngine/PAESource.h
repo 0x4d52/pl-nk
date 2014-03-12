@@ -84,9 +84,16 @@
 /** Create a source by mixing down the channels in the source. */
 -(PAESource*)sourceMixed;
 
+/** Add this source to another and get the result (mix). */
 -(PAESource*)addedTo:(PAESource*)source;
+
+/** Subtract this source from another and get the result (mix). */
 -(PAESource*)subtractedFrom:(PAESource*)source;
+
+/** Multiply this source by another and get the result (mix). */
 -(PAESource*)multipliedBy:(PAESource*)source;
+
+/** Divide this source by another and get the result (mix). */
 -(PAESource*)dividedBy:(PAESource*)source;
 
 @end
