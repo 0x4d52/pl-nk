@@ -257,8 +257,10 @@ void ObjectArrayInternalBase<ObjectType,BaseType>
 {
     plonk_assert (ownsTheData);
     plonk_assert (numItems > 0);
-
+    
     const int originalLength = this->length();
+    plonk_assert (index <= originalLength);
+    
     const int newSize = sizeUsed + numItems;
     
     setSizeIfNeeded (newSize, true);

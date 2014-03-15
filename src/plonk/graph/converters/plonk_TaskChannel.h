@@ -143,15 +143,14 @@ public:
 /** Defer a unit's processing to a separate task, thread, process or core. */
 template<class SampleType, Interp::TypeCode InterpTypeCode>
 class InputTaskChannelInternal
-//:   public ProxyOwnerChannelInternal<SampleType, PLONK_CHANNELDATA_NAME(InputTaskChannelInternal,SampleType)>
 :  public ProxyOwnerChannelInternal<SampleType, ChannelData< InputTaskChannelInternal<SampleType,InterpTypeCode> > >
 {
-public:
-//    typedef PLONK_CHANNELDATA_NAME(InputTaskChannelInternal,SampleType) Data;
-   
+public:   
     typedef InputTaskChannelInternal<SampleType,InterpTypeCode>         TaskInternal;
     typedef ChannelData<TaskInternal>                                   Data;
     typedef ChannelBase<SampleType>                                     ChannelType;
+    typedef ChannelInternalBase<SampleType>                             ChannelInternalType;
+    typedef typename ChannelType::Weak                                  WeakChannelType;
     typedef ObjectArray<ChannelType>                                    ChannelArrayType;
     typedef ProxyOwnerChannelInternal<SampleType,Data>                  Internal;
     typedef UnitBase<SampleType>                                        UnitType;
@@ -159,7 +158,6 @@ public:
     typedef NumericalArray<SampleType>                                  Buffer;
     typedef TaskBufferBase<SampleType>                                  TaskBuffer;
     typedef ResampleUnit<SampleType,InterpTypeCode>                     ResampleType;
-
     
     //--------------------------------------------------------------------------
     
@@ -170,8 +168,7 @@ public:
         
         InputTask (InputTaskChannelInternal* o) throw()
         :   Threading::Thread (Text ("InputTaskChannelInternal::Thread[" + Text (*(LongLong*)&o) + Text ("]"))),
-            owner (o),
-            info (owner->getProcessInfo()),
+            weakOwner (ChannelType (static_cast<ChannelInternalType*> (o))),
             event (Lock::MutexLock)
         {
         }
@@ -181,27 +178,46 @@ public:
             TaskMessage tm (message, payload);
             currentTaskBuffer.getInternal()->messages.push (tm);
         }
-                
-        ResultCode run() throw()
+        
+        void fillBuffers() throw()
         {
+            ChannelType ownerChannel (weakOwner.fromWeak());
+            
+            plonk_assert (ownerChannel.isNotNull());
+            
+            InputTaskChannelInternal* owner = static_cast<InputTaskChannelInternal*> (ownerChannel.getInternal());
+            
             Data& data = owner->getState();
             setPriority (data.priority);
             
-            const int numChannels = owner->getNumChannels();
-            const int numBuffers = owner->getState().numBuffers;;
-                
+            const int numBuffers = owner->getState().numBuffers;
+            
             plonk_assert (numBuffers > 0);
             plonk_assert (owner->getBlockSize().getValue() > 0);
             
-            const int bufferSize = numChannels * owner->getBlockSize().getValue();
+            const int bufferSize = owner->getNumChannels() * owner->getBlockSize().getValue();
             
             for (int i = 0; i < numBuffers; ++i)
                 activeBuffers.push (TaskBuffer (bufferSize));
+        }
+        
+        ResultCode run() throw()
+        {
+            fillBuffers();
             
             Threading::yield();
-            
+                
             while (!getShouldExit())
-            {                     
+            {
+                ChannelType ownerChannel (weakOwner.fromWeak());
+                
+                if (ownerChannel.isNull())
+                    break;
+                
+                InputTaskChannelInternal* owner = static_cast<InputTaskChannelInternal*> (ownerChannel.getInternal());
+                ProcessInfo& info (owner->getProcessInfo());
+
+                const int numChannels = owner->getNumChannels();
                 const int blockSize = owner->getBlockSize().getValue();
                 const int numFreeBuffers = freeBuffers.length();
                                 
@@ -221,9 +237,7 @@ public:
                         const Buffer& inputBuffer (inputUnit.process (info, channel));                    
                         const SampleType* inputSamples = inputBuffer.getArray();
                         const int inputBufferLength = inputBuffer.length();
-                        
-//                        plonk_assert (buffer.length() == (numChannels * inputBufferLength));
-                        
+                                                
                         if (buffer.length() == (numChannels * inputBufferLength))
                         {
                             NumericalArray<SampleType>::copyData (bufferSamples, inputSamples, inputBufferLength);
@@ -231,7 +245,7 @@ public:
                         }
                         else
                         {
-                            // probably got deleted..
+                            // probably got deleted..?
                             buffer.zero();
                             break;
                         }
@@ -282,8 +296,7 @@ public:
         }
     
     private:
-        InputTaskChannelInternal* owner;
-        ProcessInfo& info;
+        WeakChannelType weakOwner;
         TaskBufferQueue activeBuffers;
         TaskBufferQueue freeBuffers;
         TaskBuffer currentTaskBuffer;
@@ -315,7 +328,7 @@ public:
     {
         UnitType& inputUnit (this->getInputAsUnit (IOKey::Generic));
         inputUnit.removeReceiverFromChannels (task);
-        task->end();
+        task->end(); // will delete the task when its thread exits
     }
             
     Text getName() const throw()
