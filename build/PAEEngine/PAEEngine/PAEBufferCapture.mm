@@ -115,7 +115,7 @@ private:
 -(void)dealloc
 {
     _record.removeReceiverFromChannels (_peer);
-    _peer->end();
+    _peer->end(); // deletes itself when the thread exits
 }
 
 -(void)write:(QueueBuffer)queueBuffer
@@ -156,10 +156,10 @@ private:
         {
             _framePosition = 0;
             
-            if (self.delegate)
+            if (self.captureDelegate)
             {
                 self.buffer = buffer;
-                if (![self.delegate bufferReady:self])
+                if (![self.captureDelegate bufferReady:self])
                     break;
             }
         }

@@ -60,6 +60,15 @@
 /** A mapping to use for the control. */
 @property (strong, nonatomic) PAEMap* map;
 
+/** The lag time applied to the control value changes.
+ Control values are smoothed to avoid glitches during rapid value changes. This 
+ is the time for the value to reach within 60dB (or 0.001) of the target value.
+ This defaults to PAEControlLagTime (0.02s or 20ms) which is good for simply 
+ removing disontinuities. Lower values may be used (but this may introduce clicks
+ to audio signals). Larger values may be used to produce longer fade times for
+ example. */
+@property (nonatomic) float lagTime;
+
 /** Create a control with a initial value of zero. */
 +(PAEControl*)control;
 

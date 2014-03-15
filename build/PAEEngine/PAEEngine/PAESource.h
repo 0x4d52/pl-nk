@@ -63,6 +63,11 @@
  user applications. */
 @property (nonatomic, strong) NSString* label;
 
+/** A tag for the object.
+ This is not used for any purpose internally, but is provided to help identify objects in
+ user applications. */
+@property (nonatomic) NSInteger tag;
+
 /** Get the current output value of a source. */
 -(float)currentValueOnChannel:(int)channel;
 

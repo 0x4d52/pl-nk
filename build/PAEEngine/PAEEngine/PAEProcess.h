@@ -44,6 +44,10 @@
 
 /** @file */
 
+@protocol PAEProcessDelegate <NSObject>
+-(void)repatchDone:(PAEProcess*)process previousSource:(PAESource*)source;
+@end
+
 /** The base process class.
  This is used as the base class audio and control processing. It has a single
  source as its input but this may be multichannel. 
@@ -63,5 +67,7 @@
 
 /** The duration of the crossfade applied when input is repatched. */
 @property (nonatomic) float repatchFadeTime;
+
+@property (weak, nonatomic) id <PAEProcessDelegate> processDelegate;
 
 @end

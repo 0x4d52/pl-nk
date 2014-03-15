@@ -11,6 +11,7 @@
 @interface PAEControl ()
 {
     FloatVariable _value;
+    FloatVariable _lagTime;
 }
 @end
 
@@ -37,7 +38,8 @@
 {
     if (self = [super init])
     {
-        self.outputUnit = _value.ar().lag (PAEControlLagTime);
+        _lagTime = PAEControlLagTime;
+        self.outputUnit = _value.ar().lag (_lagTime);
         _value.setValue (value);
     }
     
@@ -73,5 +75,15 @@
     return _value.getValue();
 }
 
+-(float)lagTime
+{
+    return _lagTime.getValue();
+}
+
+-(void)setLagTime:(float)lagTime
+{
+    _lagTime.setValue (plonk::max(0.f, lagTime));
+}
 
 @end
+

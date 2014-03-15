@@ -22,7 +22,9 @@
 @implementation PAEBufferChannelView
 
 -(void)drawRect:(CGRect)rect
-{    
+{
+    self.opaque = self.parent.opaque;
+    
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextClearRect (context, rect);
     

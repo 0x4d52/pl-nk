@@ -54,7 +54,7 @@
 @end
 
 @interface PAEBufferCapture : PAEProcess
-@property (nonatomic, weak) id <PAEBufferCaptureDelegate> delegate;
+@property (nonatomic, weak) id <PAEBufferCaptureDelegate> captureDelegate;
 @property (nonatomic, strong) PAEBuffer* buffer;
 +(PAEBufferCapture*)bufferCaptureWithNumInputs:(int)numInputs;
 @end
