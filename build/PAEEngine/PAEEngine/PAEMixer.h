@@ -49,7 +49,7 @@
 
 /** The array of sources to mix. 
  Note that this is a read-only property. To change a mix you need to create
- a new instance and repatch it into the desitination PAEProcess or main mix in the PAEAudioHost. */
+ a new instance and repatch it into the destination PAEProcess or main mix in the PAEAudioHost. */
 @property (strong, nonatomic, readonly) NSArray* sources;
 
 /** Create a mixer with an array of sources. */

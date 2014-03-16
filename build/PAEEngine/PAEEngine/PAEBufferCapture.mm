@@ -18,7 +18,6 @@ class PAEBufferCapturePeer : public Channel::Receiver,
                              public Threading::Thread
 {
 public:
-    
     PAEBufferCapturePeer (PAEBufferCapture* p) throw()
     :   peer (p),
         numBuffers (64),
@@ -34,7 +33,7 @@ public:
     
     ResultCode run() throw()
     {        
-        while (!getShouldExit())
+        while (peer && !getShouldExit())
         {
             QueueBuffer queueBuffer = liveQueue.pop();
             
@@ -77,7 +76,7 @@ public:
     BufferQueue& getLiveQueue() throw() { return liveQueue; }
     
 private:
-    PAEBufferCapture* peer;
+    __weak PAEBufferCapture* peer;
     BufferQueue freeQueue, liveQueue;
     Lock event;
     const int numBuffers;

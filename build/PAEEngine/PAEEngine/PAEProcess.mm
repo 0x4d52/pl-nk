@@ -8,11 +8,13 @@
 
 #import "PAEEngineInternal.h"
 
-struct PAESourceHolder
+class PAESourceHolder
 {
-    PAESourceHolder() : source (nil) { }
-    PAESourceHolder (PAESource* s) : source (s) { }
-    PAESource* source;
+public:
+    PAESourceHolder() throw() : source (nil) { }
+    PAESourceHolder (PAESource* s) throw() : source (s) { }
+    ~PAESourceHolder() { source = nil; }
+    __strong PAESource* source;
 };
 
 typedef LockFreeQueue<PAESourceHolder> PAESourceHolderQueue;
@@ -42,7 +44,7 @@ public:
     }
     
 private:
-    PAEProcess* peer;
+    __weak PAEProcess* peer;
 };
 
 @implementation PAEProcess

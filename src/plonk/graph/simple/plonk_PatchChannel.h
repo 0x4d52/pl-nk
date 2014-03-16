@@ -104,8 +104,11 @@ public:
         {
             UnitVariableType& var = ChannelInternalCore::getInputAs<UnitVariableType> (IOKey::UnitVariable);
             
-            if (var.isValueNotNull())
+            if (var.getValue() != getDummy())
+            {
+                currentSource = getDummy();
                 var.swapValues (currentSource);
+            }
         }
         
         this->initProxyValue (channel, currentSource.getValue (channel)); 
@@ -246,14 +249,20 @@ private:
         return var.getValue().getNumChannels();
     }
     
+    static const UnitType& getDummy() throw()
+    {
+        static UnitType dummy (0); // zero but a unique object for the Patch unit
+        return dummy;
+    }
+    
     inline void updateSources (ProcessInfo& info) throw()
     {
         UnitVariableType& var = ChannelInternalCore::getInputAs<UnitVariableType> (IOKey::UnitVariable);
         
-        if (var.isValueNotNull())
+        if (var.getValue() != getDummy())
         {
             fadeSource = currentSource;
-            currentSource = UnitType::getNull();
+            currentSource = getDummy();
             var.swapValues (currentSource);
             
             this->update (Text::getMessagePatchStart(), currentSource);

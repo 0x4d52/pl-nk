@@ -45,7 +45,7 @@
 /** @file */
 
 /** A delegate for the PAEBufferCapture class. */
-@protocol PAEBufferCaptureDelegate
+@protocol PAEBufferCaptureDelegate <NSObject>
 /** The buffer has been filled.
  There may be some partially capture data still remaining to be written.
  Return NO to discard this data, or YES to continue to fill this buffer from the 

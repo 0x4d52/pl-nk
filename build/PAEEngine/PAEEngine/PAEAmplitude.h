@@ -53,6 +53,14 @@
  This may be repatched with any other PAESource object as desired. */
 @property (strong, nonatomic, readonly) PAEProcess* level;
 
+/** If YES this pauses the processing of the input source.
+ The default is NO so input sources will continue to process even if the output 
+ will be silent.*/
+@property (nonatomic, readonly) BOOL pauseInputOnZero;
+
 /** Create an amplitude process. */
 +(PAEAmplitude*)amplitudeWithNumInputs:(int)numInputs;
+
+/** Create an amplitude process that pauses input processing wqhen the level is zero. */
++(PAEAmplitude*)amplitudeWithNumInputs:(int)numInputs pauseInputOnZero:(BOOL)pauseOnZero;
 @end
