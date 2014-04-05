@@ -104,9 +104,9 @@ public:
     
     using Buffer::getInternal;
     
-    WavetableBase copy() throw()
+    WavetableBase copy() const throw()
     {
-        Buffer buffer (this->length(), this->getArray(), false, false);
+        const Buffer buffer = Buffer::withArray (this->length(), this->getArray());
         return WavetableBase (buffer);
     }
         

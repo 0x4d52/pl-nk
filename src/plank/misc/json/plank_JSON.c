@@ -506,7 +506,7 @@ PlankResult pl_JSON_IntArrayGet (PlankJSONRef p, PlankDynamicArrayRef array)
 {
     PlankResult result;
     PlankL size, i, sz;
-    PlankL* values;
+    PlankLL* values;
     
     result = PlankResult_OK;
     sz = sizeof (values[0]);
@@ -521,7 +521,7 @@ PlankResult pl_JSON_IntArrayGet (PlankJSONRef p, PlankDynamicArrayRef array)
         
         if (size)
         {
-            values = (PlankL*)pl_DynamicArray_GetArray (array);
+            values = (PlankLL*)pl_DynamicArray_GetArray (array);
             
             for (i = 0; i < size; ++i)
                 values[i] = pl_JSON_IntGet (pl_JSON_ArrayAt (p, i));

@@ -310,6 +310,11 @@ public:
         return internal.getPtr(); 
     }
     
+    inline operator ScopedPointerType* () throw()
+    {
+        return internal.getPtr();
+    }
+    
 	inline const ScopedPointerType* operator->() const throw() 
     { 
         plonk_assert(internal.getPtrUnchecked() != 0);

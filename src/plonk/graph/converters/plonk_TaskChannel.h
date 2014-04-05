@@ -169,7 +169,8 @@ public:
         InputTask (InputTaskChannelInternal* o) throw()
         :   Threading::Thread (Text ("InputTaskChannelInternal::Thread[" + Text (*(LongLong*)&o) + Text ("]"))),
             weakOwner (ChannelType (static_cast<ChannelInternalType*> (o))),
-            event (Lock::MutexLock)
+            event (Lock::MutexLock),
+            inputEnded (0)
         {
         }
         
@@ -217,15 +218,23 @@ public:
                 InputTaskChannelInternal* owner = static_cast<InputTaskChannelInternal*> (ownerChannel.getInternal());
                 ProcessInfo& info (owner->getProcessInfo());
 
+                UnitType& inputUnit (owner->getInputAsUnit (IOKey::Generic));
+                
+                if (inputUnit.shouldBeDeletedNow (info))
+                {
+                    inputEnded.setValue (1);
+                    Threading::sleep (0.01);
+                    continue;
+                }
+                
                 const int numChannels = owner->getNumChannels();
                 const int blockSize = owner->getBlockSize().getValue();
                 const int numFreeBuffers = freeBuffers.length();
-                                
+                
+                plonk_assert (inputUnit.channelsHaveSameBlockSize());
+
                 if (numFreeBuffers > 0)
-                {                    
-                    UnitType& inputUnit (owner->getInputAsUnit (IOKey::Generic));
-                    plonk_assert (inputUnit.channelsHaveSameBlockSize());
-                    
+                {                                        
                     currentTaskBuffer = freeBuffers.pop(); // nothing else pops so must be still available
                     Buffer& buffer = currentTaskBuffer.getInternal()->buffer;
                     buffer.setSize (blockSize * numChannels, false);
@@ -262,7 +271,7 @@ public:
                 {
                     event.wait (0.5);
                 }
-                else if (numFreeBuffers < 4)
+                else if (numFreeBuffers < (activeBuffers.length() * 2))
                 {
                     Threading::sleep (owner->getBlockDurationInTicks() * TimeStamp::getReciprocalTicks());
                 }
@@ -294,6 +303,11 @@ public:
             freeBuffers.push (buffer);
             event.signal();
         }
+        
+        inline bool inputHasEnded() const throw()
+        {
+            return inputEnded.getValueUnchecked() != 0;
+        }
     
     private:
         WeakChannelType weakOwner;
@@ -301,6 +315,7 @@ public:
         TaskBufferQueue freeBuffers;
         TaskBuffer currentTaskBuffer;
         Lock event;
+        AtomicInt inputEnded;
     };
     
     //--------------------------------------------------------------------------
@@ -326,9 +341,16 @@ public:
     
     ~InputTaskChannelInternal()
     {
+        if (task)
+            endTask();
+    }
+    
+    void endTask() throw()
+    {
         UnitType& inputUnit (this->getInputAsUnit (IOKey::Generic));
         inputUnit.removeReceiverFromChannels (task);
         task->end(); // will delete the task when its thread exits
+        task = 0;
     }
             
     Text getName() const throw()
@@ -353,7 +375,17 @@ public:
         
         TaskBuffer taskBuffer;
         
-        if (task->pop (taskBuffer))
+        if (!task)
+        {
+            zeroOutput (numChannels);
+        
+        }
+        else if (task->inputHasEnded())
+        {
+            endTask();
+            zeroOutput (numChannels);
+        }
+        else if (task->pop (taskBuffer))
         {
             // could be smarter in here in case the buffer size changes
             
@@ -383,18 +415,24 @@ public:
         else
         {            
             // buffer underrun or other error
-            for (int channel = 0; channel < numChannels; ++channel)
-            {
-                Buffer& outputBuffer = this->getOutputBuffer (channel);
-                outputBuffer.zero();
-            }
+            zeroOutput (numChannels);
         }        
+    }
+    
+    inline void zeroOutput (const int numChannels) throw()
+    {
+        for (int channel = 0; channel < numChannels; ++channel)
+        {
+            Buffer& outputBuffer = this->getOutputBuffer (channel);
+            outputBuffer.zero();
+        }
     }
     
     ProcessInfo& getProcessInfo() throw() { return info; }
     
 private:
-    InputTask* const task;
+    InputTask* task;
+
     ProcessInfo info; // private info for this object as we're running out of sync with everything else
     
     static inline int numChannelsInSource (Inputs const& inputs) throw()

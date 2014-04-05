@@ -416,7 +416,7 @@ public:
                             RateUnitType const& rate = Math<RateUnitType>::get1(),
                             IntVariable const& loopCount = 0,
                             const int blockSizeMultiplier = 0,
-                            const int numBuffers = 4)
+                            const int numBuffers = 16)
         {
             double fileSampleRate = file.getSampleRate();
             
@@ -429,7 +429,7 @@ public:
             
             UnitType play = FilePlayUnit::ar (file, loopCount,
                                               SampleType (1), SampleType (0),
-                                              false,
+                                              true,
                                               BlockSize::getMultipleOfDefault (multiplier));
             
             UnitType task = TaskType::ar (play, numBuffers);
@@ -449,7 +449,7 @@ public:
                                 RateUnitType const& rate = Math<RateUnitType>::get1(),
                                 IntVariable const& loopCount = 0,
                                 const int blockSizeMultiplier = 0,
-                                const int numBuffers = 4)
+                                const int numBuffers = 16)
             {
                 double fileSampleRate = file.getSampleRate();
                 
@@ -462,7 +462,7 @@ public:
                 
                 UnitType play = FilePlayUnit::ar (file, loopCount,
                                                   SampleType (1), SampleType (0),
-                                                  false,
+                                                  true,
                                                   BlockSize::getMultipleOfDefault (multiplier));
                 
                 UnitType task = TaskType::ar (play, numBuffers);

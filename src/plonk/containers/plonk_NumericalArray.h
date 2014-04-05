@@ -1293,7 +1293,7 @@ public:
 		plonk_assert (sourceArray != 0);
 		return Base (size, sourceArray, needsNullTermination);
 	}
-	
+    	
 	/** Construct an array with a single value. */
     template<class OtherType>
     NumericalArray (OtherType const& value) throw()

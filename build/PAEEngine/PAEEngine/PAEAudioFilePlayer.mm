@@ -33,12 +33,23 @@
 {
     if (self = [super init])
     {
+        NSFileManager* manager = [NSFileManager defaultManager];
+        
+        if (![manager fileExistsAtPath:path])
+        {
+            NSLog(@"PAEAudioFilePlayer path:%@ not found", path);
+            return nil;
+        }
+        
         _reader = AudioFileReader ([path UTF8String]);
         _loopCount.setValue (0);
         
         if (!_reader.isReady())
+        {
+            NSLog(@"PAEAudioFilePlayer path:%@ not valid audio file", path);
             return nil;
-                
+        }
+        
         self.rate       = [[PAEProcess alloc] initWithNumInputs:1];
         self.rate.input = [PAEConstant constantWithValue:1];
         self.outputUnit = FilePlay::Simple::ar (_reader, self.rate.patchUnit, _loopCount);
