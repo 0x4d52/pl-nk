@@ -1,4 +1,4 @@
-/*
+    /*
  -------------------------------------------------------------------------------
  This file is part of the Plink, Plonk, Plank libraries
   by Martin Robinson
@@ -164,17 +164,28 @@ public:
     
     inline void nextTargetPoint (const bool gate, const int samplesRemaining) throw()
     {
-        const Data& data = this->getState();
+        Data& data = this->getState();
         const BreakpointsType& breakpoints = this->getInputAsBreakpoints (IOKey::Breakpoints);
         
         const int next = (data.targetPointIndex < 0) ? 0 : breakpoints.atUnchecked (data.targetPointIndex).getNext (gate);
         
-        if (next == BreakpointType::This)
+        if ((next == BreakpointType::This) || (next == data.targetPointIndex))
+        {
             this->setTargetPoint (data.targetPointIndex, samplesRemaining);
-        else if (next == BreakpointType::Next)
-            this->setTargetPoint (data.targetPointIndex + 1, samplesRemaining);
-        else 
-            this->setTargetPoint (next, samplesRemaining);
+        }
+        else
+        {
+            if (next == BreakpointType::Next)
+                this->setTargetPoint (data.targetPointIndex + 1, samplesRemaining);
+            else 
+                this->setTargetPoint (next, samplesRemaining);
+                
+            if (data.shapeState.stepsToTarget <= 0)
+            {
+                data.shapeState.currentLevel = data.shapeState.targetLevel;
+                this->nextTargetPoint (gate, samplesRemaining);
+            }
+        }
     }
     
     void process (ProcessInfo& info, const int /*channel*/) throw()

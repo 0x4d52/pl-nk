@@ -144,8 +144,8 @@ public:
         
         bool shouldMix = false;
         
-        if (latestValidTime - TimeStamp::fromSamples (numWriteSamples,
-                                                      currentSampleRate) >= writeStartTime)
+        if ((latestValidTime - TimeStamp::fromSamples (numWriteSamples,
+                                                       currentSampleRate)) >= writeStartTime)
         {
             shouldMix = true;
             
@@ -185,6 +185,8 @@ public:
             const int bufferSamplesRemaining = currentBufferSize - bufferOffsetSamples;
             const int samplesThisTime = plonk::min (numSamplesRemaining,
                                                     bufferSamplesRemaining);
+            
+//            printf ("write-> %d samples from %d (to %d)\n", samplesThisTime, bufferOffsetSamples, bufferOffsetSamples + samplesThisTime);
             
             if (shouldMix)
             {
@@ -243,9 +245,11 @@ public:
                 bufferOffsetSamples += currentBufferSize - 1; // -1 due to being rounded in the wrong direction above when negative
             
             plonk_assert (bufferOffsetSamples < currentBufferSize);
-            
+                            
             SampleType* const bufferSamples = buffer.getArray();
             
+//            printf ("<--read %d samples from %d (to %d)\n", numReadSamples, bufferOffsetSamples, bufferOffsetSamples + numReadSamples);
+                
             int numSamplesRemaining = numReadSamples;
             
             while (numSamplesRemaining > 0)

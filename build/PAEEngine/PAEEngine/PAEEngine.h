@@ -56,6 +56,7 @@
 #import "PAEAudioFilePlayer.h"
 #import "PAEBufferPlayer.h"
 #import "PAEBufferLookup.h"
+#import "PAEAudioInput.h"
 
 // processes
 #import "PAEMixer.h"

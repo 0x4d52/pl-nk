@@ -93,9 +93,33 @@ OSStatus preRenderCallbackFunction (void*                      refCon,
     return _internal.numOutputs;
 }
 
+-(void)setNumOutputs:(int)numOutputs
+{
+    if (_internal.isRunning)
+    {
+        NSString* propname = @"numOutputs";
+        NSLog(@"PAEAudioHost readonly setter for property %@ when audio is running", propname);
+        return;
+    }
+    
+    _internal.numOutputs = numOutputs;
+}
+
 -(int)numInputs
 {
     return _internal.numInputs;
+}
+
+-(void)setNumInputs:(int)numInputs
+{
+    if (_internal.isRunning)
+    {
+        NSString* propname = @"numInputs";
+        NSLog(@"PAEAudioHost readonly setter for property %@ when audio is running", propname);
+        return;
+    }
+    
+    _internal.numInputs = numInputs;
 }
 
 -(int)hardwareBlockSize
@@ -103,14 +127,50 @@ OSStatus preRenderCallbackFunction (void*                      refCon,
     return _internal.preferredHostBlockSize;
 }
 
+-(void)setHardwareBlockSize:(int)hardwareBlockSize
+{
+    if (_internal.isRunning)
+    {
+        NSString* propname = @"hardwareBlockSize";
+        NSLog(@"PAEAudioHost readonly setter for property %@ when audio is running", propname);
+        return;
+    }
+    
+    _internal.preferredHostBlockSize = hardwareBlockSize;
+}
+
 -(int)processBlockSize
 {
     return _internal.preferredGraphBlockSize;
 }
 
+-(void)setProcessBlockSize:(int)processBlockSize
+{
+    if (_internal.isRunning)
+    {
+        NSString* propname = @"processBlockSize";
+        NSLog(@"PAEAudioHost readonly setter for property %@ when audio is running", propname);
+        return;
+    }
+    
+    _internal.preferredGraphBlockSize = processBlockSize;
+}
+
 -(double)sampleRate
 {
     return _internal.preferredHostSampleRate;
+}
+
+-(void)setSampleRate:(double)sampleRate
+{
+    if (_internal.isRunning)
+    {
+        NSString* propname = @"sampleRate";
+        NSLog(@"PAEAudioHost readonly setter for property %@ when audio is running", propname);
+        return;
+    }
+    
+    _internal.preferredHostSampleRate = sampleRate;
 }
 
 -(double)cpuUsage

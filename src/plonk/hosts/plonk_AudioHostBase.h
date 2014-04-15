@@ -191,9 +191,9 @@ protected:
         // push all the input samples for this hardware frame onto the busses
         for (i = 0; i < numInputs; ++i)
         {
-            this->busses.atUnchecked (i).write (this->info.getTimeStamp(),
-                                                blockRemain,
-                                                this->inputs.atUnchecked (i));
+            BusType& bus = this->busses.atUnchecked (i);
+            bus.getWriteBlockSize().setValue (blockRemain);
+            bus.write (this->info.getTimeStamp(), blockRemain, this->inputs.atUnchecked (i));
         }
 
         // write the hardware frame in possible smaller blocks
@@ -236,6 +236,14 @@ protected:
         initFormat();
         outputUnit = constructGraph();
         hostStarting();
+        
+//        const int numInputs = this->inputs.length();
+//        for (int i = 0; i < numInputs; ++i)
+//        {
+//            BusType& bus = this->busses.atUnchecked (i);
+//            bus.getWriteBlockSize().setValue (preferredHostBlockSize);
+//        }
+        
         setIsRunning (true);
     }
     

@@ -275,6 +275,10 @@ public:
                 {
                     Threading::sleep (owner->getBlockDurationInTicks() * TimeStamp::getReciprocalTicks());
                 }
+                else
+                {
+                    Threading::yield();
+                }
             }
             
             freeBuffers.clearAll();

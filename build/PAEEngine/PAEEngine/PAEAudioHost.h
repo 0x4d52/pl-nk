@@ -62,20 +62,25 @@
  as in the PAEGate) or placed in this array for separate rendering. */
 @property (strong, nonatomic) NSArray* additionalRenderSources;
 
-/** The number of audio output channels. */
-@property (nonatomic, readonly) int numOutputs;
+/** The number of audio output channels.
+ This is readonly once the host has started. */
+@property (nonatomic) int numOutputs;
 
-/** The number of audio input channels. */
-@property (nonatomic, readonly) int numInputs;
+/** The number of audio input channels.
+ This is readonly once the host has started.  */
+@property (nonatomic) int numInputs;
 
-/** Harware block size. */
-@property (nonatomic, readonly) int hardwareBlockSize;
+/** Harware block size.
+ This is readonly once the host has started.  */
+@property (nonatomic) int hardwareBlockSize;
 
-/** Process block size. */
-@property (nonatomic, readonly) int processBlockSize;
+/** Process block size.
+ This is readonly once the host has started.  */
+@property (nonatomic) int processBlockSize;
 
-/** Sample rate. */
-@property (nonatomic, readonly) double sampleRate;
+/** Sample rate.
+ This is readonly once the host has started.  */
+@property (nonatomic) double sampleRate;
 
 /** CPU Usage between 0.0 - 1.0. */
 @property (nonatomic, readonly) double cpuUsage;

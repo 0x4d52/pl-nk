@@ -295,6 +295,7 @@
 		A877689018A683D800460E0F /* PAEGate.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = A877688918A6824B00460E0F /* PAEGate.h */; };
 		A8776A5D18A77F4500460E0F /* PAEPan.mm in Sources */ = {isa = PBXBuildFile; fileRef = A8776A5C18A77F4300460E0F /* PAEPan.mm */; };
 		A8776A5E18A77F5600460E0F /* PAEPan.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = A8776A5B18A77F4200460E0F /* PAEPan.h */; };
+		A87BB63918F0BC630023A986 /* PAEAudioInput.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = A84FD04118B90D3A0028D73E /* PAEAudioInput.h */; };
 		A8825D1318A8080100DAC336 /* PAEOscillator.mm in Sources */ = {isa = PBXBuildFile; fileRef = A8825D1218A8080100DAC336 /* PAEOscillator.mm */; };
 		A8825D1418A8080A00DAC336 /* PAEOscillator.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = A8825D1118A8080100DAC336 /* PAEOscillator.h */; };
 		A8A5800E18BB416200AC9DD5 /* PAEBufferCapture.mm in Sources */ = {isa = PBXBuildFile; fileRef = A8A5800D18BB416200AC9DD5 /* PAEBufferCapture.mm */; };
@@ -338,6 +339,7 @@
 				A8CDB0D618B106A200AC091D /* PAEBufferLookup.h in CopyFiles */,
 				A8CDB0D218B029EC00AC091D /* PAEBufferPlayer.h in CopyFiles */,
 				A877688F18A683D600460E0F /* PAEFollower.h in CopyFiles */,
+				A87BB63918F0BC630023A986 /* PAEAudioInput.h in CopyFiles */,
 				A8825D1418A8080A00DAC336 /* PAEOscillator.h in CopyFiles */,
 				A808DA6A18AC11C900D62FAD /* PAEAmplitude.h in CopyFiles */,
 				A86D2E2318A2D18500EC3FE1 /* PAEAudioFilePlayer.h in CopyFiles */,

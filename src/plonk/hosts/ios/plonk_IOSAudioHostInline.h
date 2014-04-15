@@ -131,6 +131,7 @@ IOSAudioHostBase<SampleType>::IOSAudioHostBase() throw()
     customPreRender (NULL),
     customPostRender (NULL)
 {
+    convertBuffer.setSize (4096 * 2, false);
     this->setPreferredGraphBlockSize (256);
 }
 
@@ -348,6 +349,46 @@ int IOSAudioHostBase<SampleType>::setupRemoteIO() throw()
 	return 0;	
 }
 
+//template<class SampleType>
+//int IOSAudioHostBase<SampleType>::setupRemoteIO() throw()
+//{
+//	// Open the output unit
+//	AudioComponentDescription desc;
+//	desc.componentType = kAudioUnitType_Output;
+//	desc.componentSubType = kAudioUnitSubType_RemoteIO;
+//	desc.componentManufacturer = kAudioUnitManufacturer_Apple;
+//	desc.componentFlags = 0;
+//	desc.componentFlagsMask = 0;
+//	
+//	AudioComponent comp = AudioComponentFindNext (NULL, &desc);
+//	AudioComponentInstanceNew (comp, &rioUnit);
+//    
+//	OSStatus status;
+//	const UInt32 one = 1;
+//    
+//    if (this->getNumInputs() > 0)
+//        status = AudioUnitSetProperty (rioUnit, kAudioOutputUnitProperty_EnableIO, kAudioUnitScope_Input, 1, &one, sizeof (one));
+//        
+//    status = AudioUnitSetProperty (rioUnit, kAudioOutputUnitProperty_EnableIO, kAudioUnitScope_Output, 0, &one, sizeof (one));
+//    status = AudioUnitSetProperty (rioUnit, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Input, 0, &format, sizeof (format));
+//    status = AudioUnitSetProperty (rioUnit, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Output, 1, &format, sizeof (format));
+//    
+//    if (this->getNumInputs() > 0)
+//    {
+//        status = AudioUnitSetProperty (rioUnit, kAudioUnitProperty_SetRenderCallback, kAudioUnitScope_Global, 0, &inputProc, sizeof (inputProc));
+//    }
+//    else
+//    {
+//        status = AudioUnitSetProperty (rioUnit, kAudioUnitProperty_SetRenderCallback, kAudioUnitScope_Global, 0, &inputProc, sizeof (inputProc));
+//    }
+//    
+//	AudioUnitInitialize (rioUnit);
+//	
+////    NSLog(@"set   upRemoteIO complete");
+//    
+//	return 0;	
+//}
+
 template<class SampleType>
 void IOSAudioHostBase<SampleType>::killRemoteIO() throw()
 {
@@ -404,7 +445,7 @@ OSStatus IOSAudioHostBase<SampleType>::renderCallback (UInt32                   
 {
     OSStatus err = 0;
     int i;
-    
+        
 	double renderTime = CFAbsoluteTimeGetCurrent();
 	
 	if (inNumberFrames > bufferSize)
