@@ -2482,7 +2482,7 @@ exit:
 #pragma mark Useful Ogg Functions
 #endif
 
-static PlankResult pl_OggFile_FindNextPageOffset (PlankFileRef p, const PlankLL total, PlankLL left, PlankLL right, PlankLL* offset)
+static inline PlankResult pl_OggFile_FindNextPageOffset (PlankFileRef p, const PlankLL total, PlankLL left, PlankLL right, PlankLL* offset)
 {
     PlankResult result;
     PlankLL original;
@@ -2523,8 +2523,8 @@ exit:
     return result;
 }
 
-static PlankResult pl_OggFile_FindPrevPageOffset (PlankFileRef p, const PlankLL total, PlankLL left, PlankLL right, PlankLL* offset)
-{
+static inline PlankResult pl_OggFile_FindPrevPageOffset (PlankFileRef p, const PlankLL total, PlankLL left, PlankLL right, PlankLL* offset)
+{    
     PlankResult result;
     PlankLL original;
     char sync[4]; // could initialise here if not for C89!
@@ -3502,7 +3502,8 @@ PlankResult pl_AudioFileReader_Opus_ReadFrames (PlankAudioFileReaderRef p, const
     PlankOpusFileReaderRef opus;
     int numFramesRemaining, bufferFramesRemaining, bufferFramePosition;
     int bufferSizeInBytes, bytesPerFrame, bufferFrameEnd, link;
-    int framesThisTime, numChannels, framesRead, streamFrameEnd;
+    int framesThisTime, numChannels, framesRead;
+    PlankLL streamFrameEnd;
     float* buffer;
     float* dst;
     OggOpusFile* file;

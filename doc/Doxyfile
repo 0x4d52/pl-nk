@@ -31,13 +31,13 @@ PROJECT_NAME           = pl-nk
 # This could be handy for archiving the generated documentation or 
 # if some version control system is used.
 
-PROJECT_NUMBER         = 
+PROJECT_NUMBER         = v0.4.5
 
 # Using the PROJECT_BRIEF tag one can provide an optional one line description 
 # for a project that appears at the top of each page and should give viewer 
 # a quick idea about the purpose of the project. Keep the description short.
 
-PROJECT_BRIEF          = 
+PROJECT_BRIEF          = "Plonk|Plink|Plank are a set of cross-platform C/C++ frameworks for audio software development"
 
 # With the PROJECT_LOGO tag one can specify an logo or icon that is 
 # included in the documentation. The maximum height of the logo should not 
@@ -328,7 +328,7 @@ SYMBOL_CACHE_SIZE      = 0
 # Private class members and static file members will be hidden unless 
 # the EXTRACT_PRIVATE and EXTRACT_STATIC tags are set to YES
 
-EXTRACT_ALL            = YES
+EXTRACT_ALL            = NO
 
 # If the EXTRACT_PRIVATE tag is set to YES all private members of a class 
 # will be included in the documentation.
@@ -367,14 +367,14 @@ EXTRACT_ANON_NSPACES   = NO
 # various overviews, but no documentation section is generated. 
 # This option has no effect if EXTRACT_ALL is enabled.
 
-HIDE_UNDOC_MEMBERS     = NO
+HIDE_UNDOC_MEMBERS     = YES
 
 # If the HIDE_UNDOC_CLASSES tag is set to YES, Doxygen will hide all 
 # undocumented classes that are normally visible in the class hierarchy. 
 # If set to NO (the default) these classes will be included in the various 
 # overviews. This option has no effect if EXTRACT_ALL is enabled.
 
-HIDE_UNDOC_CLASSES     = NO
+HIDE_UNDOC_CLASSES     = YES
 
 # If the HIDE_FRIEND_COMPOUNDS tag is set to YES, Doxygen will hide all 
 # friend (class|struct|union) declarations. 
@@ -433,7 +433,7 @@ INLINE_INFO            = YES
 # alphabetically by member name. If set to NO the members will appear in 
 # declaration order.
 
-SORT_MEMBER_DOCS       = NO
+SORT_MEMBER_DOCS       = YES
 
 # If the SORT_BRIEF_DOCS tag is set to YES then doxygen will sort the 
 # brief documentation of file, namespace and class members alphabetically 
@@ -450,13 +450,13 @@ SORT_BRIEF_DOCS        = NO
 # This tag will be ignored for brief docs if SORT_BRIEF_DOCS is set to NO 
 # and ignored for detailed docs if SORT_MEMBER_DOCS is set to NO.
 
-SORT_MEMBERS_CTORS_1ST = NO
+SORT_MEMBERS_CTORS_1ST = YES
 
 # If the SORT_GROUP_NAMES tag is set to YES then doxygen will sort the 
 # hierarchy of group names into alphabetical order. If set to NO (the default) 
 # the group names will appear in their defined order.
 
-SORT_GROUP_NAMES       = NO
+SORT_GROUP_NAMES       = YES
 
 # If the SORT_BY_SCOPE_NAME tag is set to YES, the class list will be 
 # sorted by fully-qualified names, including namespaces. If set to 
@@ -956,31 +956,31 @@ HTML_DYNAMIC_SECTIONS  = NO
 # See http://developer.apple.com/tools/creatingdocsetswithdoxygen.html 
 # for more information.
 
-GENERATE_DOCSET        = NO
+GENERATE_DOCSET        = YES
 
 # When GENERATE_DOCSET tag is set to YES, this tag determines the name of the 
 # feed. A documentation feed provides an umbrella under which multiple 
 # documentation sets from a single provider (such as a company or product suite) 
 # can be grouped.
 
-DOCSET_FEEDNAME        = "Doxygen generated docs"
+DOCSET_FEEDNAME        = pl-nk
 
 # When GENERATE_DOCSET tag is set to YES, this tag specifies a string that 
 # should uniquely identify the documentation set bundle. This should be a 
 # reverse domain-name style string, e.g. com.mycompany.MyDocSet. Doxygen 
 # will append .docset to the name.
 
-DOCSET_BUNDLE_ID       = org.doxygen.Project
+DOCSET_BUNDLE_ID       = uk.ac.uwe.pl-nk
 
 # When GENERATE_PUBLISHER_ID tag specifies a string that should uniquely identify 
 # the documentation publisher. This should be a reverse domain-name style 
 # string, e.g. com.mycompany.MyDocSet.documentation.
 
-DOCSET_PUBLISHER_ID    = org.doxygen.Publisher
+DOCSET_PUBLISHER_ID    = uk.ac.uwe.pl-nk.documentation
 
 # The GENERATE_PUBLISHER_NAME tag identifies the documentation publisher.
 
-DOCSET_PUBLISHER_NAME  = Publisher
+DOCSET_PUBLISHER_NAME  = Brsitol
 
 # If the GENERATE_HTMLHELP tag is set to YES, additional index files 
 # will be generated that can be used as input for tools like the 
@@ -1043,7 +1043,7 @@ QCH_FILE               =
 # Qt Help Project output. For more information please see 
 # http://doc.trolltech.com/qthelpproject.html#namespace
 
-QHP_NAMESPACE          = org.doxygen.Project
+QHP_NAMESPACE          = uk.ac.uwe.pl-nk
 
 # The QHP_VIRTUAL_FOLDER tag specifies the namespace to use when generating 
 # Qt Help Project output. For more information please see 
@@ -1094,7 +1094,7 @@ GENERATE_ECLIPSEHELP   = NO
 # the directory name containing the HTML and XML files should also have 
 # this name.
 
-ECLIPSE_DOC_ID         = org.doxygen.Project
+ECLIPSE_DOC_ID         = uk.ac.uwe.pl-nk
 
 # The DISABLE_INDEX tag can be used to turn on/off the condensed index at 
 # top of each HTML page. The value NO (the default) enables the index and 
@@ -1498,7 +1498,7 @@ PREDEFINED             = DOXYGEN=1 \
 EXPAND_AS_DEFINED      = PLONK_BITSBASE_DECLARE \
                          PLONK_BINARYOP \
                          PLONK_BINARYOPS \
-                         PLONK_BINARYOPS_TEMPLATE\
+                         PLONK_BINARYOPS_TEMPLATE \
                          PLONK_UNARYOP \
                          PLONK_UNARYOPS \
                          PLONK_BINARYOPGLOBAL \
@@ -1521,15 +1521,15 @@ EXPAND_AS_DEFINED      = PLONK_BITSBASE_DECLARE \
                          PLONK_OBJECTARROWOPERATOR \
                          PLONK_ATOMIC_DEFINE \
                          PLONK_ATOMIC_DEFINE_SIMPLE \
-                         PLONK_NUMERICALARRAYBINARYOP_DEFINE\
-                         PLONK_NUMERICALARRAYUNARYOP_DEFINE\
-                         PLONK_NUMERICALARRAYBINARYOPS_DEFINE\
-                         PLONK_NUMERICALARRAYUNARYOPS_DEFINE\
-                         PLONK_FIXBINARYOPFUNCTION_DEFINE\
-                         PLONK_FIXUNARYOPFUNCTION_DEFINE\
-                         PLONK_OPFUNCTIONSHELPERS_DEFINE\
-                         PLONK_NUMERICALARRAYBINARYOP_DEFINE\
-                         PLONK_NUMERICALARRAYBINARYOPS_DEFINE\
+                         PLONK_NUMERICALARRAYBINARYOP_DEFINE \
+                         PLONK_NUMERICALARRAYUNARYOP_DEFINE \
+                         PLONK_NUMERICALARRAYBINARYOPS_DEFINE \
+                         PLONK_NUMERICALARRAYUNARYOPS_DEFINE \
+                         PLONK_FIXBINARYOPFUNCTION_DEFINE \
+                         PLONK_FIXUNARYOPFUNCTION_DEFINE \
+                         PLONK_OPFUNCTIONSHELPERS_DEFINE \
+                         PLONK_NUMERICALARRAYBINARYOP_DEFINE \
+                         PLONK_NUMERICALARRAYBINARYOPS_DEFINE \
                          END_PLONK_NAMESPACE \
                          BEGIN_PLONK_NAMESPACE \
                          PLANK_BEGIN_C_LINKAGE \
@@ -1573,7 +1573,6 @@ EXPAND_AS_DEFINED      = PLONK_BITSBASE_DECLARE \
                          PLANK_VECTOR_OPS_ALL \
                          PLINK_BINARYOPPROCESS_DECLARE \
                          PLINK_UNARYOPPROCESS_DECLARE
-                         
 
 # If the SKIP_FUNCTION_MACROS tag is set to YES (the default) then 
 # doxygen's preprocessor will remove all references to function-like macros 
@@ -1635,7 +1634,7 @@ PERL_PATH              = /usr/bin/perl
 # this option also works with HAVE_DOT disabled, but it is recommended to 
 # install and use dot, since it yields more powerful graphs.
 
-CLASS_DIAGRAMS         = YES
+CLASS_DIAGRAMS         = NO
 
 # You can define message sequence charts within doxygen comments using the \msc 
 # command. Doxygen will then run the mscgen tool (see 
