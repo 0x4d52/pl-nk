@@ -41,28 +41,28 @@
 
 #include "../random/plank_RNG.h"
 
-static inline PlankI pl_AlignI (const PlankI value, const PlankI alignment)
+static PLANK_INLINE_LOW PlankI pl_AlignI (const PlankI value, const PlankI alignment)
 {
     return value + (alignment - (value % alignment)) * !!(value % alignment);
 }
 
-static inline PlankUI pl_AlignUI (const PlankUI value, const PlankUI alignment)
+static PLANK_INLINE_LOW PlankUI pl_AlignUI (const PlankUI value, const PlankUI alignment)
 {
     return value + (alignment - (value % alignment)) * !!(value % alignment);
 }
 
-static inline PlankLL pl_AlignLL (const PlankLL value, const PlankLL alignment)
+static PLANK_INLINE_LOW PlankLL pl_AlignLL (const PlankLL value, const PlankLL alignment)
 {
     return value + (alignment - (value % alignment)) * !!(value % alignment);
 }
 
-static inline PlankULL pl_AlignULL (const PlankULL value, const PlankULL alignment)
+static PLANK_INLINE_LOW PlankULL pl_AlignULL (const PlankULL value, const PlankULL alignment)
 {
     return value + (alignment - (value % alignment)) * !!(value % alignment);
 }
 
 
-static inline void pl_SwapP (PlankP* a, PlankP* b)
+static PLANK_INLINE_LOW void pl_SwapP (PlankP* a, PlankP* b)
 {
     PlankP temp;
     temp = *a;
@@ -100,7 +100,7 @@ typedef struct PlankPascalString255
 
 /** Convert an unsigned 32-bit int into to an unsigned 24-bit int. 
  @ingroup PlankMiscFunctions */
-static inline PlankUI24 pl_ConvertUIToUI24 (const PlankUI i32)
+static PLANK_INLINE_LOW PlankUI24 pl_ConvertUIToUI24 (const PlankUI i32)
 {
 #if PLANK_LITTLEENDIAN
     PlankUI24 i24;
@@ -121,7 +121,7 @@ static inline PlankUI24 pl_ConvertUIToUI24 (const PlankUI i32)
 
 /** Convert an unsigned 24-bit int into to an unsigned 32-bit int. 
  @ingroup PlankMiscFunctions */
-static inline PlankUI pl_ConvertUI24ToUI (const PlankUI24 i24)
+static PLANK_INLINE_LOW PlankUI pl_ConvertUI24ToUI (const PlankUI24 i24)
 {
 #if PLANK_LITTLEENDIAN
     PlankUI i32;
@@ -138,7 +138,7 @@ static inline PlankUI pl_ConvertUI24ToUI (const PlankUI24 i24)
 
 /** Convert a 32-bit int into to a 24-bit int. 
  @ingroup PlankMiscFunctions */
-static inline PlankI24 pl_ConvertIToI24 (const PlankI i32)
+static PLANK_INLINE_LOW PlankI24 pl_ConvertIToI24 (const PlankI i32)
 {
 #if PLANK_LITTLEENDIAN
     PlankI24 i24;
@@ -158,7 +158,7 @@ static inline PlankI24 pl_ConvertIToI24 (const PlankI i32)
 
 /** Convert a 24-bit int into to a 32-bit int. 
  @ingroup PlankMiscFunctions */
-static inline PlankI pl_ConvertI24ToI (const PlankI24 i24)
+static PLANK_INLINE_LOW PlankI pl_ConvertI24ToI (const PlankI24 i24)
 {
 #if PLANK_LITTLEENDIAN
     PlankI i32;
@@ -216,7 +216,7 @@ typedef struct PlankVec4D
  @{
  */
 
-static inline PlankUC pl_CountOnesUC (PlankUC x)
+static PLANK_INLINE_LOW PlankUC pl_CountOnesUC (PlankUC x)
 {
     x -= ((x >> 1) & 0x55);
     x = (((x >> 2) & 0x33) + (x & 0x33));
@@ -224,7 +224,7 @@ static inline PlankUC pl_CountOnesUC (PlankUC x)
     return x;		
 }
 
-static inline PlankUC pl_CountLeadingZerosUC (PlankUC x)
+static PLANK_INLINE_LOW PlankUC pl_CountLeadingZerosUC (PlankUC x)
 {
     x |= (x >> 1);
     x |= (x >> 2);
@@ -232,42 +232,42 @@ static inline PlankUC pl_CountLeadingZerosUC (PlankUC x)
     return 8 - pl_CountOnesUC (x);
 }
 
-static inline PlankUC pl_CountTrailingZerosUC (PlankUC x) 
+static PLANK_INLINE_LOW PlankUC pl_CountTrailingZerosUC (PlankUC x) 
 {
     return 8 - pl_CountLeadingZerosUC (~x & (x - 1));
 }
 
-static inline PlankUC pl_CountLeadingOnesUC (PlankUC x) 
+static PLANK_INLINE_LOW PlankUC pl_CountLeadingOnesUC (PlankUC x) 
 {
     return pl_CountLeadingZerosUC (~x);
 }
 
-static inline PlankUC pl_CountTrailingOnesUC (PlankUC x) 
+static PLANK_INLINE_LOW PlankUC pl_CountTrailingOnesUC (PlankUC x) 
 {
     return 8 - pl_CountLeadingZerosUC (x & (~x - 1));
 }
 
-static inline PlankUC pl_NumBitsRequiredUC (PlankUC x) 
+static PLANK_INLINE_LOW PlankUC pl_NumBitsRequiredUC (PlankUC x) 
 {
     return 8 - pl_CountLeadingZerosUC (x);
 }
 
-static inline PlankUC pl_Log2CeilUC (PlankUC x) 
+static PLANK_INLINE_LOW PlankUC pl_Log2CeilUC (PlankUC x) 
 {
     return 8 - pl_CountLeadingZerosUC (x - 1);
 }
 
-static inline PlankUC pl_NextPowerOf2UC (PlankUC x) 
+static PLANK_INLINE_LOW PlankUC pl_NextPowerOf2UC (PlankUC x) 
 {
     return (PlankUC)1 << pl_Log2CeilUC (x);
 }
 
-static inline PlankB pl_IsPowerOf2UC (PlankUC x) 
+static PLANK_INLINE_LOW PlankB pl_IsPowerOf2UC (PlankUC x) 
 {
     return (x & (x - 1)) == 0;
 }
 
-static inline PlankUS pl_CountOnesUS (PlankUS x)
+static PLANK_INLINE_LOW PlankUS pl_CountOnesUS (PlankUS x)
 {
     x -= ((x >> 1) & 0x5555);
     x = (((x >> 2) & 0x3333) + (x & 0x3333));
@@ -276,7 +276,7 @@ static inline PlankUS pl_CountOnesUS (PlankUS x)
     return x & 0x001f;		
 }
 
-static inline PlankUS pl_CountLeadingZerosUS (PlankUS x)
+static PLANK_INLINE_LOW PlankUS pl_CountLeadingZerosUS (PlankUS x)
 {
     x |= (x >> 1);
     x |= (x >> 2);
@@ -285,42 +285,42 @@ static inline PlankUS pl_CountLeadingZerosUS (PlankUS x)
     return 16 - pl_CountOnesUS (x);
 }
 
-static inline PlankUS pl_CountTrailingZerosUS (PlankUS x) 
+static PLANK_INLINE_LOW PlankUS pl_CountTrailingZerosUS (PlankUS x) 
 {
     return 16 - pl_CountLeadingZerosUS (~x & (x - 1));
 }
 
-static inline PlankUS pl_CountLeadingOnesUS (PlankUS x) 
+static PLANK_INLINE_LOW PlankUS pl_CountLeadingOnesUS (PlankUS x) 
 {
     return pl_CountLeadingZerosUS (~x);
 }
 
-static inline PlankUS pl_CountTrailingOnesUS (PlankUS x) 
+static PLANK_INLINE_LOW PlankUS pl_CountTrailingOnesUS (PlankUS x) 
 {
     return 16 - pl_CountLeadingZerosUS (x & (~x - 1));
 }
 
-static inline PlankUS pl_NumBitsRequiredUS (PlankUS x) 
+static PLANK_INLINE_LOW PlankUS pl_NumBitsRequiredUS (PlankUS x) 
 {
     return 16 - pl_CountLeadingZerosUS (x);
 }
 
-static inline PlankUS pl_Log2CeilUS (PlankUS x) 
+static PLANK_INLINE_LOW PlankUS pl_Log2CeilUS (PlankUS x) 
 {
     return 16 - pl_CountLeadingZerosUS (x - 1);
 }
 
-static inline PlankUS pl_NextPowerOf2US (PlankUS x) 
+static PLANK_INLINE_LOW PlankUS pl_NextPowerOf2US (PlankUS x) 
 {
     return 1 << pl_Log2CeilUS (x);
 }
 
-static inline PlankB pl_IsPowerOf2US (PlankUS x) 
+static PLANK_INLINE_LOW PlankB pl_IsPowerOf2US (PlankUS x) 
 {
     return (x & (x - 1)) == (PlankUS)0;
 }
 
-static inline PlankUI pl_CountOnesUI (PlankUI x)
+static PLANK_INLINE_LOW PlankUI pl_CountOnesUI (PlankUI x)
 {
     x -= ((x >> 1) & 0x55555555);
     x = (((x >> 2) & 0x33333333) + (x & 0x33333333));
@@ -330,7 +330,7 @@ static inline PlankUI pl_CountOnesUI (PlankUI x)
     return x & 0x0000003f;		
 }
 
-static inline PlankUI pl_CountLeadingZerosUI (PlankUI x)
+static PLANK_INLINE_LOW PlankUI pl_CountLeadingZerosUI (PlankUI x)
 {
     x |= (x >> 1);
     x |= (x >> 2);
@@ -340,42 +340,42 @@ static inline PlankUI pl_CountLeadingZerosUI (PlankUI x)
     return 32 - pl_CountOnesUI (x);
 }
 
-static inline PlankUI pl_CountTrailingZerosUI (PlankUI x) 
+static PLANK_INLINE_LOW PlankUI pl_CountTrailingZerosUI (PlankUI x) 
 {
     return 32 - pl_CountLeadingZerosUI (~x & (x - 1));
 }
 
-static inline PlankUI pl_CountLeadingOnesUI (PlankUI x) 
+static PLANK_INLINE_LOW PlankUI pl_CountLeadingOnesUI (PlankUI x) 
 {
     return pl_CountLeadingZerosUI (~x);
 }
 
-static inline PlankUI pl_CountTrailingOnesUI (PlankUI x) 
+static PLANK_INLINE_LOW PlankUI pl_CountTrailingOnesUI (PlankUI x) 
 {
     return 32 - pl_CountLeadingZerosUI (x & (~x - 1));
 }
 
-static inline PlankUI pl_NumBitsRequiredUI (PlankUI x) 
+static PLANK_INLINE_LOW PlankUI pl_NumBitsRequiredUI (PlankUI x) 
 {
     return 32 - pl_CountLeadingZerosUI (x);
 }
 
-static inline PlankUI pl_Log2CeilUI (PlankUI x) 
+static PLANK_INLINE_LOW PlankUI pl_Log2CeilUI (PlankUI x) 
 {
     return 32 - pl_CountLeadingZerosUI (x - 1);
 }
 
-static inline PlankUI pl_NextPowerOf2UI (PlankUI x) 
+static PLANK_INLINE_LOW PlankUI pl_NextPowerOf2UI (PlankUI x) 
 {
     return 1 << pl_Log2CeilUI (x);
 }
 
-static inline PlankB pl_IsPowerOf2UI (PlankUI x) 
+static PLANK_INLINE_LOW PlankB pl_IsPowerOf2UI (PlankUI x) 
 {
     return (x & (x - 1)) == (PlankUI)0;
 }
 
-static inline PlankULL pl_CountOnesULL (PlankULL x)
+static PLANK_INLINE_LOW PlankULL pl_CountOnesULL (PlankULL x)
 {
     x -= ((x >> 1) & 0x5555555555555555ULL);
     x = (((x >> 2) & 0x3333333333333333ULL) + (x & 0x3333333333333333ULL));
@@ -386,7 +386,7 @@ static inline PlankULL pl_CountOnesULL (PlankULL x)
     return x & 0x000000000000007fULL;		
 }
 
-static inline PlankULL pl_CountLeadingZerosULL (PlankULL x)
+static PLANK_INLINE_LOW PlankULL pl_CountLeadingZerosULL (PlankULL x)
 {
     x |= (x >> 1);
     x |= (x >> 2);
@@ -397,37 +397,37 @@ static inline PlankULL pl_CountLeadingZerosULL (PlankULL x)
     return 64 - pl_CountOnesULL (x);
 }
 
-static inline PlankULL pl_CountTrailingZerosULL (PlankULL x) 
+static PLANK_INLINE_LOW PlankULL pl_CountTrailingZerosULL (PlankULL x) 
 {
     return 64 - pl_CountLeadingZerosULL (~x & (x - 1));
 }
 
-static inline PlankULL pl_CountLeadingOnesULL (PlankULL x) 
+static PLANK_INLINE_LOW PlankULL pl_CountLeadingOnesULL (PlankULL x) 
 {
     return pl_CountLeadingZerosULL (~x);
 }
 
-static inline PlankULL pl_CountTrailingOnesULL (PlankULL x) 
+static PLANK_INLINE_LOW PlankULL pl_CountTrailingOnesULL (PlankULL x) 
 {
     return 64 - pl_CountLeadingZerosULL (x & (~x - 1));
 }
 
-static inline PlankULL pl_NumBitsRequiredULL (PlankULL x) 
+static PLANK_INLINE_LOW PlankULL pl_NumBitsRequiredULL (PlankULL x) 
 {
     return 64 - pl_CountLeadingZerosULL (x);
 }
 
-static inline PlankULL pl_Log2CeilULL (PlankULL x) 
+static PLANK_INLINE_LOW PlankULL pl_Log2CeilULL (PlankULL x) 
 {
     return 64 - pl_CountLeadingZerosULL (x - 1);
 }
 
-static inline PlankULL pl_NextPowerOf2ULL (PlankULL x) 
+static PLANK_INLINE_LOW PlankULL pl_NextPowerOf2ULL (PlankULL x) 
 {
     return 1ULL << pl_Log2CeilULL (x);
 }
 
-static inline PlankB pl_IsPowerOf2ULL (PlankULL x) 
+static PLANK_INLINE_LOW PlankB pl_IsPowerOf2ULL (PlankULL x) 
 {
     return (x & (x - 1)) == (PlankULL)0;
 }
@@ -441,13 +441,13 @@ static inline PlankB pl_IsPowerOf2ULL (PlankULL x)
  */
 
 /** Swap the byte order of the unisgned short pointed to by @e bits. */
-static inline void pl_SwapEndianUS (unsigned short *bits)
+static PLANK_INLINE_LOW void pl_SwapEndianUS (unsigned short *bits)
 {
     *bits = (*bits >> 8) | (*bits << 8);
 }
 
 /** Swap the byte order of the 24-bit int pointed to by @e bits. */
-static inline void pl_SwapEndianUI24 (PlankUI24 *bits)
+static PLANK_INLINE_LOW void pl_SwapEndianUI24 (PlankUI24 *bits)
 {
     PlankUC temp = bits->data[0];
     bits->data[0] = bits->data[2];
@@ -455,13 +455,13 @@ static inline void pl_SwapEndianUI24 (PlankUI24 *bits)
 }
 
 /** Swap the byte order of the unisgned int pointed to by @e bits. */
-static inline void pl_SwapEndianUI (unsigned int *bits)
+static PLANK_INLINE_LOW void pl_SwapEndianUI (unsigned int *bits)
 {
     *bits = (*bits >> 24) | ((*bits << 8) & 0x00ff0000) | ((*bits >> 8) & 0x0000ff00) | (*bits << 24);
 }
 
 /** Swap the byte order of the unisgned long long pointed to by @e bits. */
-static inline void pl_SwapEndianULL (PlankULL *bits)
+static PLANK_INLINE_LOW void pl_SwapEndianULL (PlankULL *bits)
 {    
     *bits = (*bits >> 56) | 
             ((*bits << 40) & 0x00ff000000000000ULL) |
@@ -473,7 +473,7 @@ static inline void pl_SwapEndianULL (PlankULL *bits)
             (*bits << 56);
 }
 
-static inline void pl_SwapEndianF80 (PlankF80 *bits)
+static PLANK_INLINE_LOW void pl_SwapEndianF80 (PlankF80 *bits)
 {
     PlankF80 temp = *bits;
     
@@ -490,7 +490,7 @@ static inline void pl_SwapEndianF80 (PlankF80 *bits)
 }
 
 /** Swap the byte order of the unisgned long pointed to by @e data. */
-static inline void pl_SwapEndianUL (PlankUL *data)
+static PLANK_INLINE_LOW void pl_SwapEndianUL (PlankUL *data)
 {
 #if PLANK_32BIT
     pl_SwapEndianUI ((unsigned int*)data);
@@ -502,25 +502,25 @@ static inline void pl_SwapEndianUL (PlankUL *data)
 }
 
 /** Swap the byte order of the short pointed to by @e data. */
-static inline void pl_SwapEndianS (short *data)
+static PLANK_INLINE_LOW void pl_SwapEndianS (short *data)
 {
     pl_SwapEndianUS ((unsigned short*)data);
 }
 
 /** Swap the byte order of the int pointed to by @e data. */
-static inline void pl_SwapEndianI (int *data)
+static PLANK_INLINE_LOW void pl_SwapEndianI (int *data)
 {
     pl_SwapEndianUI ((unsigned int*)data);
 }
 
 /** Swap the byte order of the 24-bit int pointed to by @e data. */
-static inline void pl_SwapEndianI24 (PlankI24 *data)
+static PLANK_INLINE_LOW void pl_SwapEndianI24 (PlankI24 *data)
 {
     pl_SwapEndianUI24 ((PlankUI24*)data);
 }
 
 /** Swap the byte order of the long pointed to by @e data. */
-static inline void pl_SwapEndianL (long *data)
+static PLANK_INLINE_LOW void pl_SwapEndianL (long *data)
 {
 #if PLANK_32BIT
     pl_SwapEndianUI ((unsigned int*)data);
@@ -532,19 +532,19 @@ static inline void pl_SwapEndianL (long *data)
 }
 
 /** Swap the byte order of the long long pointed to by @e data. */
-static inline void pl_SwapEndianLL (PlankLL *data)
+static PLANK_INLINE_LOW void pl_SwapEndianLL (PlankLL *data)
 {
     pl_SwapEndianULL ((PlankULL*)data);
 }
 
 /** Swap the byte order of the float pointed to by @e data. */
-static inline void pl_SwapEndianF (float *data)
+static PLANK_INLINE_LOW void pl_SwapEndianF (float *data)
 {
     pl_SwapEndianUI ((unsigned int*)data);
 }
 
 /** Swap the byte order of the double pointed to by @e data. */
-static inline void pl_SwapEndianD (double *data)
+static PLANK_INLINE_LOW void pl_SwapEndianD (double *data)
 {
     pl_SwapEndianULL ((PlankULL*)data);
 }
@@ -554,7 +554,7 @@ static inline void pl_SwapEndianD (double *data)
 
 /** Convert four characters to a int as used by IFF file formats to identify data chunks. 
  @ingroup PlankMiscFunctions */
-static inline PlankFourCharCode pl_FourCharCode (const char* data)
+static PLANK_INLINE_LOW PlankFourCharCode pl_FourCharCode (const char* data)
 {
     PlankFourCharCode code;
     
@@ -568,7 +568,7 @@ static inline PlankFourCharCode pl_FourCharCode (const char* data)
 
 #define PLANKFOURCHARCODE(data) (*(const PlankFourCharCode*)data)
 
-static inline PlankFourCharCodeString pl_FourCharCode2String (const PlankFourCharCode code)
+static PLANK_INLINE_LOW PlankFourCharCodeString pl_FourCharCode2String (const PlankFourCharCode code)
 {   
     PlankFourCharCodeString string;
     *(PlankFourCharCode*)string.string = code;
@@ -583,7 +583,7 @@ static inline PlankFourCharCodeString pl_FourCharCode2String (const PlankFourCha
 }
 
 /** Convert a positive 80-bit extended float value to an unsigned integer. */
-static inline PlankUI pl_F802I (const PlankF80 extended)
+static PLANK_INLINE_LOW PlankUI pl_F802I (const PlankF80 extended)
 {
     PlankUI mantissa;
     PlankUI last = 0;
@@ -610,7 +610,7 @@ static inline PlankUI pl_F802I (const PlankF80 extended)
 }
 
 /** Convert an unsigned integer to an 80-bit extended float value. */
-static inline PlankF80 pl_I2F80 (const PlankUI value)
+static PLANK_INLINE_LOW PlankF80 pl_I2F80 (const PlankUI value)
 {
     PlankF80 extended;
     PlankI temp = value;
@@ -677,7 +677,7 @@ typedef struct PlankGUID
 } PlankGUID;
 
 
-static inline void pl_GUID_InitRandom (PlankGUIDRef p)
+static PLANK_INLINE_LOW void pl_GUID_InitRandom (PlankGUIDRef p)
 {
     PlankRNGRef rng;
     rng = pl_RNGGlobal();
@@ -689,7 +689,7 @@ static inline void pl_GUID_InitRandom (PlankGUIDRef p)
     p->data4[0] = ((PlankUC)(pl_RNG_NextInt (rng, 4) + 8) << 4) | (PlankUC)(pl_RNG_NextInt (rng, 0x0f));
 }
 
-static inline void pl_GUID_Init42244 (PlankGUIDRef p, const PlankUI data1, const PlankUS data2, const PlankUS data3, const PlankUI data4hi, const PlankUI data4lo)
+static PLANK_INLINE_LOW void pl_GUID_Init42244 (PlankGUIDRef p, const PlankUI data1, const PlankUS data2, const PlankUS data3, const PlankUI data4hi, const PlankUI data4lo)
 {
     p->data1 = data1;
     p->data2 = data2;
@@ -697,7 +697,7 @@ static inline void pl_GUID_Init42244 (PlankGUIDRef p, const PlankUI data1, const
     *(PlankULL*)&p->data4 = (((PlankULL)data4hi) << 32) | data4lo;
 }
 
-static inline void pl_GUID_Init4228 (PlankGUIDRef p, const PlankUI data1, const PlankUS data2, const PlankUS data3, const PlankULL data4)
+static PLANK_INLINE_LOW void pl_GUID_Init4228 (PlankGUIDRef p, const PlankUI data1, const PlankUS data2, const PlankUS data3, const PlankULL data4)
 {
     p->data1 = data1;
     p->data2 = data2;
@@ -705,7 +705,7 @@ static inline void pl_GUID_Init4228 (PlankGUIDRef p, const PlankUI data1, const 
     *(PlankULL*)&p->data4 = data4;
 }
 
-static inline void pl_GUID_Init4221x8 (PlankGUIDRef p, const PlankUI data1, const PlankUS data2, const PlankUS data3,
+static PLANK_INLINE_LOW void pl_GUID_Init4221x8 (PlankGUIDRef p, const PlankUI data1, const PlankUS data2, const PlankUS data3,
                                         const PlankUC data4_0,
                                         const PlankUC data4_1,
                                         const PlankUC data4_2,
@@ -728,7 +728,7 @@ static inline void pl_GUID_Init4221x8 (PlankGUIDRef p, const PlankUI data1, cons
     p->data4[7] = data4_7;
 }
 
-static inline void pl_GUID_Init422p (PlankGUIDRef p, const PlankUI data1, const PlankUS data2, const PlankUS data3, const PlankUC* data4)
+static PLANK_INLINE_LOW void pl_GUID_Init422p (PlankGUIDRef p, const PlankUI data1, const PlankUS data2, const PlankUS data3, const PlankUC* data4)
 {
     p->data1 = data1;
     p->data2 = data2;
@@ -736,7 +736,7 @@ static inline void pl_GUID_Init422p (PlankGUIDRef p, const PlankUI data1, const 
     pl_MemoryCopy (&p->data4, data4, 8);
 }
 
-static inline const char* pl_HexDigit2CharMap()
+static PLANK_INLINE_LOW const char* pl_HexDigit2CharMap()
 {
     static char map[16];
     static PlankB firstTime = PLANK_TRUE;
@@ -750,7 +750,7 @@ static inline const char* pl_HexDigit2CharMap()
     return map;
 }
 
-static inline const char* pl_Char2HexDigitMap()
+static PLANK_INLINE_LOW const char* pl_Char2HexDigitMap()
 {
     static char map[128];
     static PlankB firstTime = PLANK_TRUE;
@@ -792,7 +792,7 @@ static inline const char* pl_Char2HexDigitMap()
 }
 
 
-static inline PlankResult pl_GUID_InitHexString (PlankGUIDRef p, const char* string)
+static PLANK_INLINE_LOW PlankResult pl_GUID_InitHexString (PlankGUIDRef p, const char* string)
 {
     const char *map;
     PlankResult result;
@@ -866,7 +866,7 @@ exit:
     return result;
 }
 
-static inline PlankResult pl_GUID_InitChunkString (PlankGUIDRef p, const char* string)
+static PLANK_INLINE_LOW PlankResult pl_GUID_InitChunkString (PlankGUIDRef p, const char* string)
 {
     const char *map;
     char chunkID[5];
@@ -940,7 +940,7 @@ exit:
     return result;
 }
 
-static inline PlankResult pl_GUID_InitString (PlankGUIDRef p, const char* string)
+static PLANK_INLINE_LOW PlankResult pl_GUID_InitString (PlankGUIDRef p, const char* string)
 {
     PlankUL len;
     
@@ -954,7 +954,7 @@ static inline PlankResult pl_GUID_InitString (PlankGUIDRef p, const char* string
         return PlankResult_UnknownError;
 }
 
-static inline void pl_GUID_HexString (const PlankGUID* p, const PlankB withBraces, char* string)
+static PLANK_INLINE_LOW void pl_GUID_HexString (const PlankGUID* p, const PlankB withBraces, char* string)
 {
     const char *map;
     
@@ -1006,7 +1006,7 @@ static inline void pl_GUID_HexString (const PlankGUID* p, const PlankB withBrace
     *string++ = '\0';
 }
 
-static inline void pl_GUID_ChunkString (const PlankGUID* p, const PlankB withBraces, char* string)
+static PLANK_INLINE_LOW void pl_GUID_ChunkString (const PlankGUID* p, const PlankB withBraces, char* string)
 {
     const char *map;
     
@@ -1063,12 +1063,12 @@ static inline void pl_GUID_ChunkString (const PlankGUID* p, const PlankB withBra
 }
 
 
-static inline PlankB pl_GUID_Equal (const PlankGUID* p, const PlankGUID* other)
+static PLANK_INLINE_LOW PlankB pl_GUID_Equal (const PlankGUID* p, const PlankGUID* other)
 {
     return pl_MemoryCompare (p, other, sizeof (PlankGUID));
 }
 
-static inline PlankB pl_GUID_EqualWithString (const PlankGUID* p, const char* other)
+static PLANK_INLINE_LOW PlankB pl_GUID_EqualWithString (const PlankGUID* p, const char* other)
 {
     PlankGUID guid;
     
@@ -1079,7 +1079,7 @@ static inline PlankB pl_GUID_EqualWithString (const PlankGUID* p, const char* ot
 }
 
 
-static inline PlankB pl_GUID_IsNull (const PlankGUID* p)
+static PLANK_INLINE_LOW PlankB pl_GUID_IsNull (const PlankGUID* p)
 {
     return (p->data1 == 0) && (p->data2 == 0) && (p->data3 == 0) && ((*(PlankULL*)p->data4) == 0);
 }

@@ -53,12 +53,12 @@ typedef struct PlankMemory
 } PlankMemory; 
 #endif
 
-static inline PlankB pl_MemoryCompare (PlankConstantP ptr1, PlankConstantP ptr2, const PlankUL numBytes)
+static PLANK_INLINE_LOW PlankB pl_MemoryCompare (PlankConstantP ptr1, PlankConstantP ptr2, const PlankUL numBytes)
 {
     return memcmp (ptr1, ptr2, numBytes) == 0 ? PLANK_TRUE : PLANK_FALSE;
 }
 
-static inline PlankResult pl_MemoryZero (PlankP ptr, const PlankUL numBytes)
+static PLANK_INLINE_LOW PlankResult pl_MemoryZero (PlankP ptr, const PlankUL numBytes)
 {
     PlankUL i;
     PlankUC *dstp;
@@ -76,7 +76,7 @@ static inline PlankResult pl_MemoryZero (PlankP ptr, const PlankUL numBytes)
     return PlankResult_OK;
 }
 
-static inline PlankResult pl_MemoryCopy (PlankP dst, PlankConstantP src, const PlankUL numBytes)
+static PLANK_INLINE_LOW PlankResult pl_MemoryCopy (PlankP dst, PlankConstantP src, const PlankUL numBytes)
 {    
     PlankUL i;
     PlankUC *srcp, *dstp;
@@ -96,7 +96,7 @@ static inline PlankResult pl_MemoryCopy (PlankP dst, PlankConstantP src, const P
     return PlankResult_OK;    
 }
 
-static inline PlankP pl_Memory_AllocateBytes (PlankMemoryRef p, PlankUL numBytes)
+static PLANK_INLINE_LOW PlankP pl_Memory_AllocateBytes (PlankMemoryRef p, PlankUL numBytes)
 {
     PlankP ptr;
     
@@ -109,7 +109,7 @@ static inline PlankP pl_Memory_AllocateBytes (PlankMemoryRef p, PlankUL numBytes
     return ptr;
 }
 
-static inline PlankResult pl_Memory_Free (PlankMemoryRef p, PlankP ptr)
+static PLANK_INLINE_LOW PlankResult pl_Memory_Free (PlankMemoryRef p, PlankP ptr)
 {
 #if defined(PLANK_DEBUG) && PLANK_MEMORY_DEBUG
     printf ("pl_Memory_Free(%p) = %p\n", p, ptr);

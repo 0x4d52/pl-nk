@@ -249,7 +249,7 @@ exit:
     return result;
 }
 
-static inline void pl_DynamicArraySwapItems (PlankP itemA, PlankP itemB, PlankP temp, const PlankL itemSize)
+static PLANK_INLINE_LOW void pl_DynamicArraySwapItems (PlankP itemA, PlankP itemB, PlankP temp, const PlankL itemSize)
 {
     pl_MemoryCopy (temp,  itemA, itemSize);
     pl_MemoryCopy (itemA, itemB, itemSize);
@@ -321,7 +321,7 @@ exit:
     return result;
 }
 
-static inline PlankResult pl_DynamicArray_AddItemsInternal (PlankDynamicArrayRef p, PlankConstantP items, const PlankL numItems, const PlankB isText)
+static PLANK_INLINE_LOW PlankResult pl_DynamicArray_AddItemsInternal (PlankDynamicArrayRef p, PlankConstantP items, const PlankL numItems, const PlankB isText)
 {
     PlankResult result = PlankResult_OK;
     PlankL index;

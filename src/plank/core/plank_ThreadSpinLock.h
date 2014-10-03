@@ -118,7 +118,7 @@ typedef struct PlankThreadSpinLock
 } PlankThreadSpinLock;
 #endif
 
-static inline PlankB pl_ThreadSpinLock_TryLock (PlankThreadSpinLockRef p)
+static PLONK_INLINE_LOW PlankB pl_ThreadSpinLock_TryLock (PlankThreadSpinLockRef p)
 {
     PlankThreadID threadID = pl_ThreadCurrentID();
     

@@ -60,7 +60,7 @@
     #define PLANK_END_C_LINKAGE }
 #else
     #if (defined (_WIN32) || defined (_WIN64))
-        #define inline __inline
+        #define PLONK_INLINE_LOW __PLONK_INLINE_LOW
 		#define PLANK_UNUSED(a) (void)a
     #else
 		#define PLANK_UNUSED(a)
@@ -382,7 +382,11 @@ typedef struct PlankFourCharCodeString
     #define PLANK_BIGENDIAN     0
 #endif
 
-// 
+//inline
+
+#define PLANK_INLINE_HIGH inline // single line math for example
+#define PLANK_INLINE_MID  inline // other simple functions
+#define PLANK_INLINE_LOW  inline // other longer functions that speed up operation when inlined
 
 #include "plank_Memory.h"
 
@@ -406,7 +410,7 @@ typedef struct PlankFourCharCodeString
 #define PLANK_BUILDNUMBER        0
 #define PLANK_VERSION           "v" PLANK_PRESTRING(PLANK_MAJOR_VERSION) "." PLANK_PRESTRING(PLANK_MINOR_VERSION) "." PLANK_PRESTRING(PLANK_BUILDNUMBER)
 
-static inline double pl_TimeNow()
+static PLANK_INLINE_LOW double pl_TimeNow()
 {
 #if PLANK_APPLE || PLANK_LINUX || PLANK_ANDROID
     struct timeval now;
@@ -418,7 +422,7 @@ static inline double pl_TimeNow()
 }
 
 #if PLANK_APPLE || PLANK_LINUX || PLANK_ANDROID
-static inline void pl_TimeToTimeSpec (struct timespec* time, double seconds)
+static PLANK_INLINE_LOW void pl_TimeToTimeSpec (struct timespec* time, double seconds)
 {
     time->tv_sec = (long)seconds;
     time->tv_nsec = (long)((seconds - time->tv_sec) * 0.000000001);

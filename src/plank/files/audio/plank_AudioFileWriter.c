@@ -2466,8 +2466,8 @@ static PlankResult pl_AudioFileWriter_Opus_CommentAdd (PlankAudioFileWriterRef p
     pl_File_SetPosition (&opus->commentWriter, 8 + 4 + vendorLength);
     pl_File_ReadI (&opus->commentWriter, &numComments);
 
-    tagLength = tag ? strlen (tag) + 1 : 0;
-    valueLength = strlen (value);
+    tagLength = (int)(tag ? strlen (tag) + 1 : 0);
+    valueLength = (int)strlen (value);
     
     pl_File_SetPositionEnd (&opus->commentWriter);
     pl_File_WriteI (&opus->commentWriter, tagLength + valueLength);

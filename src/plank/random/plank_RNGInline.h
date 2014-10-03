@@ -53,19 +53,19 @@ typedef struct PlankRNG
 #define PLANK_RNG_DOUBLE_ONE        PLANK_DOUBLE_ONE
 #define PLANK_RNG_DOUBLE_ONEMASK    PLANK_DOUBLE_ONEMASK
 
-static inline int pl_RNG_Next (PlankRNGRef p)
+static PLANK_INLINE_LOW int pl_RNG_Next (PlankRNGRef p)
 {
     p->value = (unsigned int)PLANK_RNG_MAGIC1 * p->value + (unsigned int)PLANK_RNG_MAGIC2;
     return p->value;
 }
 
-static inline unsigned int pl_RNG_NextInt (PlankRNGRef p, unsigned int max)
+static PLANK_INLINE_LOW unsigned int pl_RNG_NextInt (PlankRNGRef p, unsigned int max)
 {
     unsigned int value = pl_RNG_Next (p);
     return value % max;
 }
 
-static inline float pl_RNG_NextFloat (PlankRNGRef p)
+static PLANK_INLINE_LOW float pl_RNG_NextFloat (PlankRNGRef p)
 {    
     unsigned int bits;
 	float value;
@@ -74,7 +74,7 @@ static inline float pl_RNG_NextFloat (PlankRNGRef p)
     return value - 1.f;
 }
 
-static inline double pl_RNG_NextDouble (PlankRNGRef p)
+static PLANK_INLINE_LOW double pl_RNG_NextDouble (PlankRNGRef p)
 {    
     unsigned int bits;
 	float value;

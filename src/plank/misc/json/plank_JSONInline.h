@@ -46,132 +46,132 @@ typedef struct PlankJSON
 } PlankJSON;
 
 
-static inline PlankJSONRef pl_JSON_Object()
+static PLONK_INLINE_LOW PlankJSONRef pl_JSON_Object()
 {
     return (PlankJSONRef)json_object();
 }
 
-static inline PlankJSONRef pl_JSON_Array()
+static PLONK_INLINE_LOW PlankJSONRef pl_JSON_Array()
 {
     return (PlankJSONRef)json_array();
 }
 
-static inline PlankJSONRef pl_JSON_String (const char* string)
+static PLONK_INLINE_LOW PlankJSONRef pl_JSON_String (const char* string)
 {
     return (PlankJSONRef)json_string (string);
 }
 
-static inline PlankJSONRef pl_JSON_Int (const PlankLL value)
+static PLONK_INLINE_LOW PlankJSONRef pl_JSON_Int (const PlankLL value)
 {
     return (PlankJSONRef)json_integer ((PlankL)value);
 }
 
-static inline PlankJSONRef pl_JSON_Float (const float value)
+static PLONK_INLINE_LOW PlankJSONRef pl_JSON_Float (const float value)
 {
     return (PlankJSONRef)json_real ((double)value);
 }
 
-static inline PlankJSONRef pl_JSON_Double (const double value)
+static PLONK_INLINE_LOW PlankJSONRef pl_JSON_Double (const double value)
 {
     return (PlankJSONRef)json_real (value);
 }
 
-static inline PlankJSONRef pl_JSON_Bool (const PlankB state)
+static PLONK_INLINE_LOW PlankJSONRef pl_JSON_Bool (const PlankB state)
 {
     return (PlankJSONRef)json_boolean (state);
 }
 
-static inline PlankJSONRef pl_JSON_Null()
+static PLONK_INLINE_LOW PlankJSONRef pl_JSON_Null()
 {
     return (PlankJSONRef)json_null();
 }
 
-static inline PlankB pl_JSON_IsObject (PlankJSONRef p)
+static PLONK_INLINE_LOW PlankB pl_JSON_IsObject (PlankJSONRef p)
 {
     return json_is_object ((json_t*)p);
 }
 
-static inline PlankB pl_JSON_IsArray (PlankJSONRef p)
+static PLONK_INLINE_LOW PlankB pl_JSON_IsArray (PlankJSONRef p)
 {
     return json_is_array ((json_t*)p);
 }
 
-static inline PlankB pl_JSON_IsString (PlankJSONRef p)
+static PLONK_INLINE_LOW PlankB pl_JSON_IsString (PlankJSONRef p)
 {
     return json_is_string ((json_t*)p);
 }
 
-static inline PlankB pl_JSON_IsInt (PlankJSONRef p)
+static PLONK_INLINE_LOW PlankB pl_JSON_IsInt (PlankJSONRef p)
 {
     return json_is_integer ((json_t*)p) ? PLANK_TRUE : pl_JSON_IsIntEncoded (p);
 }
 
-static inline PlankB pl_JSON_IsFloat (PlankJSONRef p)
+static PLONK_INLINE_LOW PlankB pl_JSON_IsFloat (PlankJSONRef p)
 {
     return json_is_real ((json_t*)p) ? PLANK_TRUE : pl_JSON_IsFloatEncoded (p);
 }
 
-static inline PlankB pl_JSON_IsDouble (PlankJSONRef p)
+static PLONK_INLINE_LOW PlankB pl_JSON_IsDouble (PlankJSONRef p)
 {
     return json_is_real ((json_t*)p) ? PLANK_TRUE : pl_JSON_IsDoubleEncoded (p);
 }
 
-static inline PlankB pl_JSON_IsBool (PlankJSONRef p)
+static PLONK_INLINE_LOW PlankB pl_JSON_IsBool (PlankJSONRef p)
 {
     return json_is_boolean ((json_t*)p);
 }
 
-static inline PlankB pl_JSON_IsNull (PlankJSONRef p)
+static PLONK_INLINE_LOW PlankB pl_JSON_IsNull (PlankJSONRef p)
 {
     return json_is_null ((json_t*)p);
 }
 
-static inline PlankJSONRef pl_JSON_IncrementRefCount (PlankJSONRef p)
+static PLONK_INLINE_LOW PlankJSONRef pl_JSON_IncrementRefCount (PlankJSONRef p)
 {
     return (PlankJSONRef)json_incref ((json_t*)p);
 }
 
-static inline void pl_JSON_DecrementRefCount (PlankJSONRef p)
+static PLONK_INLINE_LOW void pl_JSON_DecrementRefCount (PlankJSONRef p)
 {
     json_decref ((json_t*)p);
 }
 
-static inline PlankL pl_JSON_ObjectGetSize (PlankJSONRef p)
+static PLONK_INLINE_LOW PlankL pl_JSON_ObjectGetSize (PlankJSONRef p)
 {
     return (PlankL)json_object_size ((json_t*)p);
 }
 
-static inline PlankJSONRef pl_JSON_ObjectAtKey (PlankJSONRef p, const char* key)
+static PLONK_INLINE_LOW PlankJSONRef pl_JSON_ObjectAtKey (PlankJSONRef p, const char* key)
 {
     return (PlankJSONRef)json_object_get ((json_t*)p, key);
 }
 
-static inline void pl_JSON_ObjectPutKey (PlankJSONRef p, const char* key, const PlankJSONRef value)
+static PLONK_INLINE_LOW void pl_JSON_ObjectPutKey (PlankJSONRef p, const char* key, const PlankJSONRef value)
 {
     json_object_set_new ((json_t*)p, key, (json_t*)value);
 }
 
-static inline PlankL pl_JSON_ArrayGetSize (PlankJSONRef p)
+static PLONK_INLINE_LOW PlankL pl_JSON_ArrayGetSize (PlankJSONRef p)
 {
     return (PlankL)json_array_size ((json_t*)p);
 }
 
-static inline PlankJSONRef pl_JSON_ArrayAt (PlankJSONRef p, const PlankL index)
+static PLONK_INLINE_LOW PlankJSONRef pl_JSON_ArrayAt (PlankJSONRef p, const PlankL index)
 {
     return (PlankJSONRef)json_array_get ((json_t*)p, (size_t)index);
 }
 
-static inline void pl_JSON_ArrayPut (PlankJSONRef p, const PlankL index, const PlankJSONRef value)
+static PLONK_INLINE_LOW void pl_JSON_ArrayPut (PlankJSONRef p, const PlankL index, const PlankJSONRef value)
 {
     json_array_set_new ((json_t*)p, (size_t)index, (json_t*)value);
 }
 
-static inline void pl_JSON_ArrayAppend (PlankJSONRef p, const PlankJSONRef value)
+static PLONK_INLINE_LOW void pl_JSON_ArrayAppend (PlankJSONRef p, const PlankJSONRef value)
 {
     json_array_append_new ((json_t*)p, (json_t*)value);
 }
 
-static inline double pl_JSON_DoubleGet (PlankJSONRef p)
+static PLONK_INLINE_LOW double pl_JSON_DoubleGet (PlankJSONRef p)
 {
     double value = 0.0;
     
@@ -187,7 +187,7 @@ static inline double pl_JSON_DoubleGet (PlankJSONRef p)
     return value;
 }
 
-static inline float pl_JSON_FloatGet (PlankJSONRef p)
+static PLONK_INLINE_LOW float pl_JSON_FloatGet (PlankJSONRef p)
 {
     float value = 0.f;
     
@@ -203,7 +203,7 @@ static inline float pl_JSON_FloatGet (PlankJSONRef p)
     return value;
 }
 
-static inline PlankLL pl_JSON_IntGet (PlankJSONRef p)
+static PLONK_INLINE_LOW PlankLL pl_JSON_IntGet (PlankJSONRef p)
 {
     PlankLL value = 0;
     
@@ -219,7 +219,7 @@ static inline PlankLL pl_JSON_IntGet (PlankJSONRef p)
     return value;
 }
 
-static inline const char* pl_JSON_StringGet (PlankJSONRef p)
+static PLONK_INLINE_LOW const char* pl_JSON_StringGet (PlankJSONRef p)
 {
     return json_string_value ((json_t*)p);
 }

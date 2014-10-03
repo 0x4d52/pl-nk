@@ -2482,7 +2482,7 @@ exit:
 #pragma mark Useful Ogg Functions
 #endif
 
-static inline PlankResult pl_OggFile_FindNextPageOffset (PlankFileRef p, const PlankLL total, PlankLL left, PlankLL right, PlankLL* offset)
+static PLONK_INLINE_LOW PlankResult pl_OggFile_FindNextPageOffset (PlankFileRef p, const PlankLL total, PlankLL left, PlankLL right, PlankLL* offset)
 {
     PlankResult result;
     PlankLL original;
@@ -2523,7 +2523,7 @@ exit:
     return result;
 }
 
-static inline PlankResult pl_OggFile_FindPrevPageOffset (PlankFileRef p, const PlankLL total, PlankLL left, PlankLL right, PlankLL* offset)
+static PLONK_INLINE_LOW PlankResult pl_OggFile_FindPrevPageOffset (PlankFileRef p, const PlankLL total, PlankLL left, PlankLL right, PlankLL* offset)
 {    
     PlankResult result;
     PlankLL original;
@@ -3517,7 +3517,7 @@ PlankResult pl_AudioFileReader_Opus_ReadFrames (PlankAudioFileReaderRef p, const
     numFramesRemaining      = numFrames;
     bufferFramesRemaining   = opus->bufferFrames;         // starts at 0
     bufferFramePosition     = opus->bufferPosition;       // starts at 0
-    bufferSizeInBytes       = pl_DynamicArray_GetSize (&opus->buffer);
+    bufferSizeInBytes       = (int)pl_DynamicArray_GetSize (&opus->buffer);
     bytesPerFrame           = p->formatInfo.bytesPerFrame;
     numChannels             = (int)pl_AudioFileFormatInfo_GetNumChannels (&p->formatInfo);
     bufferFrameEnd          = bufferSizeInBytes / bytesPerFrame;
@@ -3682,7 +3682,7 @@ int pl_OpusFileReader_ReadCallback (PlankP datasource, unsigned char *ptr, int n
     result = pl_File_Read ((PlankFileRef)opus, ptr, numBytes, &bytesRead);
     ret = bytesRead > 0 ? bytesRead : -1;
         
-    return ret;
+    return (int)ret;
 }
 
 int pl_OpusFileReader_SeekCallback (PlankP datasource, PlankLL offset, int code)
