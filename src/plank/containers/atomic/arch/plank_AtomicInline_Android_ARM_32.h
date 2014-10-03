@@ -87,14 +87,14 @@ typedef struct PlankAtomicPX
 } PlankAtomicPX PLANK_ALIGN(8);
 #endif
 
-static PLONK_INLINE_LOW void pl_AtomicMemoryBarrier()
+static PLANK_INLINE_LOW void pl_AtomicMemoryBarrier()
 {
     __sync_synchronize();
 }
 
 //------------------------------------------------------------------------------
 
-static PLONK_INLINE_LOW PlankResult pl_AtomicI_Init (PlankAtomicIRef p)
+static PLANK_INLINE_LOW PlankResult pl_AtomicI_Init (PlankAtomicIRef p)
 {
     if (p == PLANK_NULL)
         return PlankResult_MemoryError;
@@ -104,24 +104,24 @@ static PLONK_INLINE_LOW PlankResult pl_AtomicI_Init (PlankAtomicIRef p)
     return PlankResult_OK;
 }
 
-static PLONK_INLINE_LOW PlankResult pl_AtomicI_DeInit (PlankAtomicIRef p)
+static PLANK_INLINE_LOW PlankResult pl_AtomicI_DeInit (PlankAtomicIRef p)
 {
     if (p == PLANK_NULL)
         return PlankResult_MemoryError;
     return PlankResult_OK;
 }
 
-static PLONK_INLINE_LOW PlankI pl_AtomicI_Get (PlankAtomicIRef p)
+static PLANK_INLINE_LOW PlankI pl_AtomicI_Get (PlankAtomicIRef p)
 {
     return p->value; // should be aligned anyway and volatile so OK // pl_AtomicI_Add (p, 0);
 }
 
-static PLONK_INLINE_LOW PlankI pl_AtomicI_GetUnchecked (PlankAtomicIRef p)
+static PLANK_INLINE_LOW PlankI pl_AtomicI_GetUnchecked (PlankAtomicIRef p)
 {
     return p->value;
 }
 
-static PLONK_INLINE_LOW PlankI pl_AtomicI_Swap (PlankAtomicIRef p, PlankI newValue)
+static PLANK_INLINE_LOW PlankI pl_AtomicI_Swap (PlankAtomicIRef p, PlankI newValue)
 {
     PlankI oldValue;
     PlankB success;
@@ -134,7 +134,7 @@ static PLONK_INLINE_LOW PlankI pl_AtomicI_Swap (PlankAtomicIRef p, PlankI newVal
     return oldValue;
 }
 
-static PLONK_INLINE_LOW void pl_AtomicI_SwapOther (PlankAtomicIRef p1, PlankAtomicIRef p2)
+static PLANK_INLINE_LOW void pl_AtomicI_SwapOther (PlankAtomicIRef p1, PlankAtomicIRef p2)
 {
     PlankI value1, value2;
     PlankB success;
@@ -148,41 +148,41 @@ static PLONK_INLINE_LOW void pl_AtomicI_SwapOther (PlankAtomicIRef p1, PlankAtom
     *(PlankI*)p2 = value1;
 }
 
-static PLONK_INLINE_LOW void pl_AtomicI_Set (PlankAtomicIRef p, PlankI newValue)
+static PLANK_INLINE_LOW void pl_AtomicI_Set (PlankAtomicIRef p, PlankI newValue)
 {
     pl_AtomicI_Swap (p, newValue);
 }
 
-static PLONK_INLINE_LOW PlankI pl_AtomicI_Add (PlankAtomicIRef p, PlankI operand)
+static PLANK_INLINE_LOW PlankI pl_AtomicI_Add (PlankAtomicIRef p, PlankI operand)
 {
     return __sync_add_and_fetch ((volatile PlankI*)p, operand);
 }
 
-static PLONK_INLINE_LOW PlankB  pl_AtomicI_CompareAndSwap (PlankAtomicIRef p, PlankI oldValue, PlankI newValue)
+static PLANK_INLINE_LOW PlankB  pl_AtomicI_CompareAndSwap (PlankAtomicIRef p, PlankI oldValue, PlankI newValue)
 {
     return __sync_bool_compare_and_swap ((volatile PlankI*)p,
                                          oldValue,
                                          newValue);
 }
 
-static PLONK_INLINE_LOW PlankI pl_AtomicI_Subtract (PlankAtomicIRef p, PlankI operand)
+static PLANK_INLINE_LOW PlankI pl_AtomicI_Subtract (PlankAtomicIRef p, PlankI operand)
 {
     return pl_AtomicI_Add (p, -operand);
 }
 
-static PLONK_INLINE_LOW PlankI pl_AtomicI_Increment (PlankAtomicIRef p)
+static PLANK_INLINE_LOW PlankI pl_AtomicI_Increment (PlankAtomicIRef p)
 {
     return pl_AtomicI_Add (p, 1);
 }
 
-static PLONK_INLINE_LOW PlankI pl_AtomicI_Decrement (PlankAtomicIRef p)
+static PLANK_INLINE_LOW PlankI pl_AtomicI_Decrement (PlankAtomicIRef p)
 {
     return pl_AtomicI_Add (p, -1);
 }
 
 //------------------------------------------------------------------------------
 
-static PLONK_INLINE_LOW PlankResult pl_AtomicL_Init (PlankAtomicLRef p)
+static PLANK_INLINE_LOW PlankResult pl_AtomicL_Init (PlankAtomicLRef p)
 {
     if (p == PLANK_NULL)
         return PlankResult_MemoryError;
@@ -192,24 +192,24 @@ static PLONK_INLINE_LOW PlankResult pl_AtomicL_Init (PlankAtomicLRef p)
     return PlankResult_OK;
 }
 
-static PLONK_INLINE_LOW PlankResult pl_AtomicL_DeInit (PlankAtomicLRef p)
+static PLANK_INLINE_LOW PlankResult pl_AtomicL_DeInit (PlankAtomicLRef p)
 {
     if (p == PLANK_NULL)
         return PlankResult_MemoryError;
     return PlankResult_OK;
 }
 
-static PLONK_INLINE_LOW PlankL pl_AtomicL_Get (PlankAtomicLRef p)
+static PLANK_INLINE_LOW PlankL pl_AtomicL_Get (PlankAtomicLRef p)
 {
     return p->value; // should be aligned anyway and volatile so OK // pl_AtomicL_Add (p, (PlankL)0);
 }
 
-static PLONK_INLINE_LOW PlankL pl_AtomicL_GetUnchecked (PlankAtomicLRef p)
+static PLANK_INLINE_LOW PlankL pl_AtomicL_GetUnchecked (PlankAtomicLRef p)
 {
     return p->value;
 }
 
-static PLONK_INLINE_LOW PlankL pl_AtomicL_Swap (PlankAtomicLRef p, PlankL newValue)
+static PLANK_INLINE_LOW PlankL pl_AtomicL_Swap (PlankAtomicLRef p, PlankL newValue)
 {
     PlankL oldValue;
     PlankB success;
@@ -222,7 +222,7 @@ static PLONK_INLINE_LOW PlankL pl_AtomicL_Swap (PlankAtomicLRef p, PlankL newVal
     return oldValue;
 }
 
-static PLONK_INLINE_LOW void pl_AtomicL_SwapOther (PlankAtomicLRef p1, PlankAtomicLRef p2)
+static PLANK_INLINE_LOW void pl_AtomicL_SwapOther (PlankAtomicLRef p1, PlankAtomicLRef p2)
 {
     PlankL value1, value2;
     PlankB success;
@@ -236,41 +236,41 @@ static PLONK_INLINE_LOW void pl_AtomicL_SwapOther (PlankAtomicLRef p1, PlankAtom
     *(PlankL*)p2 = value1;
 }
 
-static PLONK_INLINE_LOW void pl_AtomicL_Set (PlankAtomicLRef p, PlankL newValue)
+static PLANK_INLINE_LOW void pl_AtomicL_Set (PlankAtomicLRef p, PlankL newValue)
 {
     pl_AtomicL_Swap (p, newValue);
 }
 
-static PLONK_INLINE_LOW PlankL pl_AtomicL_Add (PlankAtomicLRef p, PlankL operand)
+static PLANK_INLINE_LOW PlankL pl_AtomicL_Add (PlankAtomicLRef p, PlankL operand)
 {
     return __sync_add_and_fetch ((volatile PlankL*)p, operand);
 }
 
-static PLONK_INLINE_LOW PlankB pl_AtomicL_CompareAndSwap (PlankAtomicLRef p, PlankL oldValue, PlankL newValue)
+static PLANK_INLINE_LOW PlankB pl_AtomicL_CompareAndSwap (PlankAtomicLRef p, PlankL oldValue, PlankL newValue)
 {
     return __sync_bool_compare_and_swap ((volatile PlankL*)p,
                                          oldValue,
                                          newValue);
 }
 
-static PLONK_INLINE_LOW PlankL pl_AtomicL_Subtract (PlankAtomicLRef p, PlankL operand)
+static PLANK_INLINE_LOW PlankL pl_AtomicL_Subtract (PlankAtomicLRef p, PlankL operand)
 {
     return pl_AtomicL_Add (p, -operand);
 }
 
-static PLONK_INLINE_LOW PlankL pl_AtomicL_Increment (PlankAtomicLRef p)
+static PLANK_INLINE_LOW PlankL pl_AtomicL_Increment (PlankAtomicLRef p)
 {
     return pl_AtomicL_Add (p, (PlankL)1);
 }
 
-static PLONK_INLINE_LOW PlankL pl_AtomicL_Decrement (PlankAtomicLRef p)
+static PLANK_INLINE_LOW PlankL pl_AtomicL_Decrement (PlankAtomicLRef p)
 {
     return pl_AtomicL_Add (p, (PlankL)(-1));
 }
 
 //------------------------------------------------------------------------------
 
-static PLONK_INLINE_LOW PlankResult pl_AtomicLL_Init (PlankAtomicLLRef p)
+static PLANK_INLINE_LOW PlankResult pl_AtomicLL_Init (PlankAtomicLLRef p)
 {
     PlankResult result = PlankResult_OK;
     
@@ -286,7 +286,7 @@ exit:
     return result;
 }
 
-static PLONK_INLINE_LOW PlankResult pl_AtomicLL_DeInit (PlankAtomicLLRef p)
+static PLANK_INLINE_LOW PlankResult pl_AtomicLL_DeInit (PlankAtomicLLRef p)
 {
     PlankResult result = PlankResult_OK;
     
@@ -300,17 +300,17 @@ exit:
     return result;
 }
 
-static PLONK_INLINE_LOW PlankLL pl_AtomicLL_Get (PlankAtomicLLRef p)
+static PLANK_INLINE_LOW PlankLL pl_AtomicLL_Get (PlankAtomicLLRef p)
 {
     return pl_AtomicLL_Add (p, (PlankLL)0);
 }
 
-static PLONK_INLINE_LOW PlankLL pl_AtomicLL_GetUnchecked (PlankAtomicLLRef p)
+static PLANK_INLINE_LOW PlankLL pl_AtomicLL_GetUnchecked (PlankAtomicLLRef p)
 {
     return p->value;
 }
 
-static PLONK_INLINE_LOW PlankLL pl_AtomicLL_Swap (PlankAtomicLLRef p, PlankLL newValue)
+static PLANK_INLINE_LOW PlankLL pl_AtomicLL_Swap (PlankAtomicLLRef p, PlankLL newValue)
 {
     PlankLL oldValue;
     PlankB success;
@@ -323,7 +323,7 @@ static PLONK_INLINE_LOW PlankLL pl_AtomicLL_Swap (PlankAtomicLLRef p, PlankLL ne
     return oldValue;
 }
 
-static PLONK_INLINE_LOW void pl_AtomicLL_SwapOther (PlankAtomicLLRef p1, PlankAtomicLLRef p2)
+static PLANK_INLINE_LOW void pl_AtomicLL_SwapOther (PlankAtomicLLRef p1, PlankAtomicLLRef p2)
 {
     PlankLL value1, value2;
     PlankB success;
@@ -337,41 +337,41 @@ static PLONK_INLINE_LOW void pl_AtomicLL_SwapOther (PlankAtomicLLRef p1, PlankAt
     *(PlankLL*)p2 = value1;
 }
 
-static PLONK_INLINE_LOW void pl_AtomicLL_Set (PlankAtomicLLRef p, PlankLL newValue)
+static PLANK_INLINE_LOW void pl_AtomicLL_Set (PlankAtomicLLRef p, PlankLL newValue)
 {
     pl_AtomicLL_Swap (p, newValue);
 }
 
-static PLONK_INLINE_LOW PlankLL pl_AtomicLL_Add (PlankAtomicLLRef p, PlankLL operand)
+static PLANK_INLINE_LOW PlankLL pl_AtomicLL_Add (PlankAtomicLLRef p, PlankLL operand)
 {
     return __sync_add_and_fetch ((volatile PlankLL*)p, operand);
 }
 
-static PLONK_INLINE_LOW PlankB pl_AtomicLL_CompareAndSwap (PlankAtomicLLRef p, PlankLL oldValue, PlankLL newValue)
+static PLANK_INLINE_LOW PlankB pl_AtomicLL_CompareAndSwap (PlankAtomicLLRef p, PlankLL oldValue, PlankLL newValue)
 {
     return __sync_bool_compare_and_swap ((volatile PlankLL*)p,
                                          oldValue,
                                          newValue);
 }
 
-static PLONK_INLINE_LOW PlankLL pl_AtomicLL_Subtract (PlankAtomicLLRef p, PlankLL operand)
+static PLANK_INLINE_LOW PlankLL pl_AtomicLL_Subtract (PlankAtomicLLRef p, PlankLL operand)
 {
     return pl_AtomicLL_Add (p, -operand);
 }
 
-static PLONK_INLINE_LOW PlankLL pl_AtomicLL_Increment (PlankAtomicLLRef p)
+static PLANK_INLINE_LOW PlankLL pl_AtomicLL_Increment (PlankAtomicLLRef p)
 {
     return pl_AtomicLL_Add (p, (PlankLL)1);
 }
 
-static PLONK_INLINE_LOW PlankLL pl_AtomicLL_Decrement (PlankAtomicLLRef p)
+static PLANK_INLINE_LOW PlankLL pl_AtomicLL_Decrement (PlankAtomicLLRef p)
 {
     return pl_AtomicLL_Add (p, (PlankLL)(-1));
 }
 
 //------------------------------------------------------------------------------
 
-static PLONK_INLINE_LOW PlankResult pl_AtomicF_Init (PlankAtomicFRef p)
+static PLANK_INLINE_LOW PlankResult pl_AtomicF_Init (PlankAtomicFRef p)
 {
     if (p == PLANK_NULL)
         return PlankResult_MemoryError;
@@ -381,24 +381,24 @@ static PLONK_INLINE_LOW PlankResult pl_AtomicF_Init (PlankAtomicFRef p)
     return PlankResult_OK;
 }
 
-static PLONK_INLINE_LOW PlankResult pl_AtomicF_DeInit (PlankAtomicFRef p)
+static PLANK_INLINE_LOW PlankResult pl_AtomicF_DeInit (PlankAtomicFRef p)
 {
     if (p == PLANK_NULL)
         return PlankResult_MemoryError;
     return PlankResult_OK;
 }
 
-static PLONK_INLINE_LOW PlankF pl_AtomicF_Get (PlankAtomicFRef p)
+static PLANK_INLINE_LOW PlankF pl_AtomicF_Get (PlankAtomicFRef p)
 {    
     return p->value; // should be aligned anyway and volatile so OK
 }
 
-static PLONK_INLINE_LOW PlankF pl_AtomicF_GetUnchecked (PlankAtomicFRef p)
+static PLANK_INLINE_LOW PlankF pl_AtomicF_GetUnchecked (PlankAtomicFRef p)
 {
     return  p->value;
 }
 
-static PLONK_INLINE_LOW PlankF pl_AtomicF_Swap (PlankAtomicFRef p, PlankF newValue)
+static PLANK_INLINE_LOW PlankF pl_AtomicF_Swap (PlankAtomicFRef p, PlankF newValue)
 {
     PlankF oldValue;
     PlankB success;
@@ -412,7 +412,7 @@ static PLONK_INLINE_LOW PlankF pl_AtomicF_Swap (PlankAtomicFRef p, PlankF newVal
     return oldValue;
 }
 
-static PLONK_INLINE_LOW void pl_AtomicF_SwapOther (PlankAtomicFRef p1, PlankAtomicFRef p2)
+static PLANK_INLINE_LOW void pl_AtomicF_SwapOther (PlankAtomicFRef p1, PlankAtomicFRef p2)
 {
     PlankF value1, value2;
     PlankB success;
@@ -426,12 +426,12 @@ static PLONK_INLINE_LOW void pl_AtomicF_SwapOther (PlankAtomicFRef p1, PlankAtom
     *(PlankF*)p2 = value1;
 }
 
-static PLONK_INLINE_LOW void pl_AtomicF_Set (PlankAtomicFRef p, PlankF newValue)
+static PLANK_INLINE_LOW void pl_AtomicF_Set (PlankAtomicFRef p, PlankF newValue)
 {
     pl_AtomicF_Swap (p, newValue);
 }
 
-static PLONK_INLINE_LOW PlankF pl_AtomicF_Add (PlankAtomicFRef p, PlankF operand)
+static PLANK_INLINE_LOW PlankF pl_AtomicF_Add (PlankAtomicFRef p, PlankF operand)
 {
     PlankF newValue, oldValue;
     PlankB success;
@@ -445,31 +445,31 @@ static PLONK_INLINE_LOW PlankF pl_AtomicF_Add (PlankAtomicFRef p, PlankF operand
     return newValue;
 }
 
-static PLONK_INLINE_LOW PlankB pl_AtomicF_CompareAndSwap (PlankAtomicFRef p, PlankF oldValue, PlankF newValue)
+static PLANK_INLINE_LOW PlankB pl_AtomicF_CompareAndSwap (PlankAtomicFRef p, PlankF oldValue, PlankF newValue)
 {
     return __sync_bool_compare_and_swap ((volatile PlankI*)p,
                                          *(PlankI*)&oldValue,
                                          *(PlankI*)&newValue);
 }
 
-static PLONK_INLINE_LOW PlankF pl_AtomicF_Subtract (PlankAtomicFRef p, PlankF operand)
+static PLANK_INLINE_LOW PlankF pl_AtomicF_Subtract (PlankAtomicFRef p, PlankF operand)
 {
     return pl_AtomicF_Add (p, -operand);
 }
 
-static PLONK_INLINE_LOW PlankF pl_AtomicF_Increment (PlankAtomicFRef p)
+static PLANK_INLINE_LOW PlankF pl_AtomicF_Increment (PlankAtomicFRef p)
 {
     return pl_AtomicF_Add (p, 1.f);
 }
 
-static PLONK_INLINE_LOW PlankF pl_AtomicF_Decrement (PlankAtomicFRef p)
+static PLANK_INLINE_LOW PlankF pl_AtomicF_Decrement (PlankAtomicFRef p)
 {
     return pl_AtomicF_Add (p, -1.f);
 }
 
 //------------------------------------------------------------------------------
 
-static PLONK_INLINE_LOW PlankResult pl_AtomicD_Init (PlankAtomicDRef p)
+static PLANK_INLINE_LOW PlankResult pl_AtomicD_Init (PlankAtomicDRef p)
 {
     PlankResult result = PlankResult_OK;
     
@@ -485,7 +485,7 @@ exit:
     return result;
 }
 
-static PLONK_INLINE_LOW PlankResult pl_AtomicD_DeInit (PlankAtomicDRef p)
+static PLANK_INLINE_LOW PlankResult pl_AtomicD_DeInit (PlankAtomicDRef p)
 {
     PlankResult result = PlankResult_OK;
     
@@ -499,18 +499,18 @@ exit:
     return result;
 }
 
-static PLONK_INLINE_LOW PlankD pl_AtomicD_Get (PlankAtomicDRef p)
+static PLANK_INLINE_LOW PlankD pl_AtomicD_Get (PlankAtomicDRef p)
 {
     PlankLL bits = pl_AtomicLL_Add ((PlankAtomicLLRef)p, (PlankLL)0); // use the LL version
     return *(PlankD*)&bits;
 }
 
-static PLONK_INLINE_LOW PlankD pl_AtomicD_GetUnchecked (PlankAtomicDRef p)
+static PLANK_INLINE_LOW PlankD pl_AtomicD_GetUnchecked (PlankAtomicDRef p)
 {
     return p->value;
 }
 
-static PLONK_INLINE_LOW PlankD pl_AtomicD_Swap (PlankAtomicDRef p, PlankD newValue)
+static PLANK_INLINE_LOW PlankD pl_AtomicD_Swap (PlankAtomicDRef p, PlankD newValue)
 {
     PlankD oldValue;
     PlankB success;
@@ -523,7 +523,7 @@ static PLONK_INLINE_LOW PlankD pl_AtomicD_Swap (PlankAtomicDRef p, PlankD newVal
     return oldValue;
 }
 
-static PLONK_INLINE_LOW void pl_AtomicD_SwapOther (PlankAtomicDRef p1, PlankAtomicDRef p2)
+static PLANK_INLINE_LOW void pl_AtomicD_SwapOther (PlankAtomicDRef p1, PlankAtomicDRef p2)
 {
     PlankD value1, value2;
     PlankB success;
@@ -537,12 +537,12 @@ static PLONK_INLINE_LOW void pl_AtomicD_SwapOther (PlankAtomicDRef p1, PlankAtom
     *(PlankD*)p2 = value1;
 }
 
-static PLONK_INLINE_LOW void pl_AtomicD_Set (PlankAtomicDRef p, PlankD newValue)
+static PLANK_INLINE_LOW void pl_AtomicD_Set (PlankAtomicDRef p, PlankD newValue)
 {
     pl_AtomicD_Swap (p, newValue);
 }
 
-static PLONK_INLINE_LOW PlankD pl_AtomicD_Add (PlankAtomicDRef p, PlankD operand)
+static PLANK_INLINE_LOW PlankD pl_AtomicD_Add (PlankAtomicDRef p, PlankD operand)
 {
     PlankD newValue, oldValue;
     PlankB success;
@@ -556,31 +556,31 @@ static PLONK_INLINE_LOW PlankD pl_AtomicD_Add (PlankAtomicDRef p, PlankD operand
     return newValue;
 }
 
-static PLONK_INLINE_LOW PlankB pl_AtomicD_CompareAndSwap (PlankAtomicDRef p, PlankD oldValue, PlankD newValue)
+static PLANK_INLINE_LOW PlankB pl_AtomicD_CompareAndSwap (PlankAtomicDRef p, PlankD oldValue, PlankD newValue)
 {
     return __sync_bool_compare_and_swap ((volatile PlankLL*)p,
                                          *(PlankLL*)&oldValue,
                                          *(PlankLL*)&newValue);
 }
 
-static PLONK_INLINE_LOW PlankD pl_AtomicD_Subtract (PlankAtomicDRef p, PlankD operand)
+static PLANK_INLINE_LOW PlankD pl_AtomicD_Subtract (PlankAtomicDRef p, PlankD operand)
 {
     return pl_AtomicD_Add (p, -operand);
 }
 
-static PLONK_INLINE_LOW PlankD pl_AtomicD_Increment (PlankAtomicDRef p)
+static PLANK_INLINE_LOW PlankD pl_AtomicD_Increment (PlankAtomicDRef p)
 {
     return pl_AtomicD_Add (p, 1.0);
 }
 
-static PLONK_INLINE_LOW PlankD pl_AtomicD_Decrement (PlankAtomicDRef p)
+static PLANK_INLINE_LOW PlankD pl_AtomicD_Decrement (PlankAtomicDRef p)
 {
     return pl_AtomicD_Add (p, -1.0);
 }
 
 //------------------------------------------------------------------------------
 
-static PLONK_INLINE_LOW PlankResult pl_AtomicP_Init (PlankAtomicPRef p)
+static PLANK_INLINE_LOW PlankResult pl_AtomicP_Init (PlankAtomicPRef p)
 {
     if (p == PLANK_NULL)
         return PlankResult_MemoryError;
@@ -590,24 +590,24 @@ static PLONK_INLINE_LOW PlankResult pl_AtomicP_Init (PlankAtomicPRef p)
     return PlankResult_OK;
 }
 
-static PLONK_INLINE_LOW PlankResult pl_AtomicP_DeInit (PlankAtomicPRef p)
+static PLANK_INLINE_LOW PlankResult pl_AtomicP_DeInit (PlankAtomicPRef p)
 {
     if (p == PLANK_NULL)
         return PlankResult_MemoryError;
     return PlankResult_OK;
 }
 
-static PLONK_INLINE_LOW PlankP pl_AtomicP_Get (PlankAtomicPRef p)
+static PLANK_INLINE_LOW PlankP pl_AtomicP_Get (PlankAtomicPRef p)
 {
     return p->ptr; // should be aligned anyway and volatile so OK // pl_AtomicP_Add (p, (PlankL)0);
 }
 
-static PLONK_INLINE_LOW PlankP pl_AtomicP_GetUnchecked (PlankAtomicPRef p)
+static PLANK_INLINE_LOW PlankP pl_AtomicP_GetUnchecked (PlankAtomicPRef p)
 {
     return p->ptr;
 }
 
-static PLONK_INLINE_LOW PlankP pl_AtomicP_Swap (PlankAtomicPRef p, PlankP newPtr)
+static PLANK_INLINE_LOW PlankP pl_AtomicP_Swap (PlankAtomicPRef p, PlankP newPtr)
 {
     PlankP oldPtr;
     PlankB success;
@@ -620,7 +620,7 @@ static PLONK_INLINE_LOW PlankP pl_AtomicP_Swap (PlankAtomicPRef p, PlankP newPtr
     return oldPtr;    
 }
 
-static PLONK_INLINE_LOW void pl_AtomicP_SwapOther (PlankAtomicPRef p1, PlankAtomicPRef p2)
+static PLANK_INLINE_LOW void pl_AtomicP_SwapOther (PlankAtomicPRef p1, PlankAtomicPRef p2)
 {
     PlankP value1, value2;
     PlankB success;
@@ -634,48 +634,48 @@ static PLONK_INLINE_LOW void pl_AtomicP_SwapOther (PlankAtomicPRef p1, PlankAtom
     *(PlankP*)p2 = value1;
 }
 
-static PLONK_INLINE_LOW void pl_AtomicP_Set (PlankAtomicPRef p, PlankP newPtr)
+static PLANK_INLINE_LOW void pl_AtomicP_Set (PlankAtomicPRef p, PlankP newPtr)
 {
     pl_AtomicP_Swap (p, newPtr);
 }
 
-static PLONK_INLINE_LOW PlankP pl_AtomicP_Add (PlankAtomicPRef p, PlankL operand)
+static PLANK_INLINE_LOW PlankP pl_AtomicP_Add (PlankAtomicPRef p, PlankL operand)
 {
     return (PlankP)__sync_add_and_fetch ((volatile PlankL*)p, operand);
 }
 
-static PLONK_INLINE_LOW PlankB pl_AtomicP_CompareAndSwap (PlankAtomicPRef p, PlankP oldValue, PlankP newValue)
+static PLANK_INLINE_LOW PlankB pl_AtomicP_CompareAndSwap (PlankAtomicPRef p, PlankP oldValue, PlankP newValue)
 {
     return __sync_bool_compare_and_swap ((volatile PlankL*)p,
                                          *(PlankL*)&oldValue,
                                          *(PlankL*)&newValue);
 }
 
-static PLONK_INLINE_LOW PlankP pl_AtomicP_Subtract (PlankAtomicPRef p, PlankL operand)
+static PLANK_INLINE_LOW PlankP pl_AtomicP_Subtract (PlankAtomicPRef p, PlankL operand)
 {
     return pl_AtomicP_Add (p, -operand);
 }
 
-static PLONK_INLINE_LOW PlankP pl_AtomicP_Increment (PlankAtomicPRef p)
+static PLANK_INLINE_LOW PlankP pl_AtomicP_Increment (PlankAtomicPRef p)
 {
     return pl_AtomicP_Add (p, (PlankL)1);
 }
 
-static PLONK_INLINE_LOW PlankP pl_AtomicP_Decrement (PlankAtomicPRef p)
+static PLANK_INLINE_LOW PlankP pl_AtomicP_Decrement (PlankAtomicPRef p)
 {
     return pl_AtomicP_Add (p, (PlankL)(-1));
 }
 
 //------------------------------------------------------------------------------
 
-static PLONK_INLINE_LOW PlankAtomicPXRef pl_AtomicPX_CreateAndInit()
+static PLANK_INLINE_LOW PlankAtomicPXRef pl_AtomicPX_CreateAndInit()
 {
     PlankAtomicPXRef p = pl_AtomicPX_Create();
     if (p != PLANK_NULL) pl_AtomicPX_Init (p);
     return p;
 }
 
-static PLONK_INLINE_LOW PlankAtomicPXRef pl_AtomicPX_Create()
+static PLANK_INLINE_LOW PlankAtomicPXRef pl_AtomicPX_Create()
 {
     PlankMemoryRef m;
     PlankAtomicPXRef p;
@@ -689,7 +689,7 @@ static PLONK_INLINE_LOW PlankAtomicPXRef pl_AtomicPX_Create()
     return p;
 }
 
-static PLONK_INLINE_LOW PlankResult pl_AtomicPX_Init (PlankAtomicPXRef p)
+static PLANK_INLINE_LOW PlankResult pl_AtomicPX_Init (PlankAtomicPXRef p)
 {
     PlankResult result = PlankResult_OK;
     
@@ -705,7 +705,7 @@ exit:
     return result;
 }
 
-static PLONK_INLINE_LOW PlankResult pl_AtomicPX_DeInit (PlankAtomicPXRef p)
+static PLANK_INLINE_LOW PlankResult pl_AtomicPX_DeInit (PlankAtomicPXRef p)
 {
     PlankResult result = PlankResult_OK;
     
@@ -719,7 +719,7 @@ exit:
     return result;
 }
 
-static PLONK_INLINE_LOW PlankResult pl_AtomicPX_Destroy (PlankAtomicPXRef p)
+static PLANK_INLINE_LOW PlankResult pl_AtomicPX_Destroy (PlankAtomicPXRef p)
 {
     PlankResult result;
     PlankMemoryRef m;
@@ -736,27 +736,27 @@ exit:
     return result;
 }
 
-static PLONK_INLINE_LOW PlankP pl_AtomicPX_Get (PlankAtomicPXRef p)
+static PLANK_INLINE_LOW PlankP pl_AtomicPX_Get (PlankAtomicPXRef p)
 {
     return p->ptr; // should be aligned anyway and volatile so OK // pl_AtomicP_Get ((PlankAtomicPRef)p);
 }
 
-static PLONK_INLINE_LOW PlankP pl_AtomicPX_GetUnchecked (PlankAtomicPXRef p)
+static PLANK_INLINE_LOW PlankP pl_AtomicPX_GetUnchecked (PlankAtomicPXRef p)
 {
     return p->ptr;
 }
 
-static PLONK_INLINE_LOW PlankUL pl_AtomicPX_GetExtra (PlankAtomicPXRef p)
+static PLANK_INLINE_LOW PlankUL pl_AtomicPX_GetExtra (PlankAtomicPXRef p)
 {
     return p->extra; // should be aligned anyway and volatile so OK // pl_AtomicL_Get ((PlankAtomicLRef)&(p->extra));
 }
 
-static PLONK_INLINE_LOW PlankUL pl_AtomicPX_GetExtraUnchecked (PlankAtomicPXRef p)
+static PLANK_INLINE_LOW PlankUL pl_AtomicPX_GetExtraUnchecked (PlankAtomicPXRef p)
 {
     return p->extra;
 }
 
-static PLONK_INLINE_LOW PlankP pl_AtomicPX_SwapAll (PlankAtomicPXRef p, PlankP newPtr, PlankUL newExtra, PlankUL* oldExtraPtr)
+static PLANK_INLINE_LOW PlankP pl_AtomicPX_SwapAll (PlankAtomicPXRef p, PlankP newPtr, PlankUL newExtra, PlankUL* oldExtraPtr)
 {
     PlankP oldPtr;
     PlankUL oldExtra;
@@ -774,7 +774,7 @@ static PLONK_INLINE_LOW PlankP pl_AtomicPX_SwapAll (PlankAtomicPXRef p, PlankP n
     return oldPtr;
 }
 
-static PLONK_INLINE_LOW PlankP pl_AtomicPX_Swap (PlankAtomicPXRef p, PlankP newPtr)
+static PLANK_INLINE_LOW PlankP pl_AtomicPX_Swap (PlankAtomicPXRef p, PlankP newPtr)
 {
     PlankP oldPtr;
     PlankUL oldExtra;
@@ -789,7 +789,7 @@ static PLONK_INLINE_LOW PlankP pl_AtomicPX_Swap (PlankAtomicPXRef p, PlankP newP
     return oldPtr;
 }
 
-static PLONK_INLINE_LOW void pl_AtomicPX_SwapOther (PlankAtomicPXRef p1, PlankAtomicPXRef p2)
+static PLANK_INLINE_LOW void pl_AtomicPX_SwapOther (PlankAtomicPXRef p1, PlankAtomicPXRef p2)
 {
     PlankAtomicPX tmp1, tmp2;
     PlankB success;
@@ -803,12 +803,12 @@ static PLONK_INLINE_LOW void pl_AtomicPX_SwapOther (PlankAtomicPXRef p1, PlankAt
     pl_AtomicPX_Set (p2, tmp1.ptr);
 }
 
-static PLONK_INLINE_LOW void pl_AtomicPX_SetAll (PlankAtomicPXRef p, PlankP newPtr, PlankUL newExtra)
+static PLANK_INLINE_LOW void pl_AtomicPX_SetAll (PlankAtomicPXRef p, PlankP newPtr, PlankUL newExtra)
 {
     pl_AtomicPX_SwapAll (p, newPtr, newExtra, (PlankUL*)PLANK_NULL);
 }
 
-static PLONK_INLINE_LOW void pl_AtomicPX_Set (PlankAtomicPXRef p, PlankP newPtr)
+static PLANK_INLINE_LOW void pl_AtomicPX_Set (PlankAtomicPXRef p, PlankP newPtr)
 {
     PlankP oldPtr;
     PlankUL oldExtra;
@@ -821,7 +821,7 @@ static PLONK_INLINE_LOW void pl_AtomicPX_Set (PlankAtomicPXRef p, PlankP newPtr)
     } while (!success);
 }
 
-static PLONK_INLINE_LOW PlankP pl_AtomicPX_Add (PlankAtomicPXRef p, PlankL operand)
+static PLANK_INLINE_LOW PlankP pl_AtomicPX_Add (PlankAtomicPXRef p, PlankL operand)
 {
     PlankP newPtr, oldPtr;
     PlankUL oldExtra;
@@ -837,22 +837,22 @@ static PLONK_INLINE_LOW PlankP pl_AtomicPX_Add (PlankAtomicPXRef p, PlankL opera
     return newPtr;
 }
 
-static PLONK_INLINE_LOW PlankP pl_AtomicPX_Subtract (PlankAtomicPXRef p, PlankL operand)
+static PLANK_INLINE_LOW PlankP pl_AtomicPX_Subtract (PlankAtomicPXRef p, PlankL operand)
 {
     return pl_AtomicPX_Add (p, -operand);
 }
 
-static PLONK_INLINE_LOW PlankP pl_AtomicPX_Increment (PlankAtomicPXRef p)
+static PLANK_INLINE_LOW PlankP pl_AtomicPX_Increment (PlankAtomicPXRef p)
 {
     return pl_AtomicPX_Add (p, (PlankL)1);
 }
 
-static PLONK_INLINE_LOW PlankP pl_AtomicPX_Decrement (PlankAtomicPXRef p)
+static PLANK_INLINE_LOW PlankP pl_AtomicPX_Decrement (PlankAtomicPXRef p)
 {
     return pl_AtomicPX_Add (p, (PlankL)(-1));
 }
 
-static PLONK_INLINE_LOW  PlankB pl_AtomicPX_CompareAndSwap (PlankAtomicPXRef p, PlankP oldPtr, PlankUL oldExtra, PlankP newPtr, PlankUL newExtra)
+static PLANK_INLINE_LOW  PlankB pl_AtomicPX_CompareAndSwap (PlankAtomicPXRef p, PlankP oldPtr, PlankUL oldExtra, PlankP newPtr, PlankUL newExtra)
 {
     PlankAtomicPX oldAll = { oldPtr, oldExtra };
     PlankAtomicPX newAll = { newPtr, newExtra };
@@ -862,12 +862,12 @@ static PLONK_INLINE_LOW  PlankB pl_AtomicPX_CompareAndSwap (PlankAtomicPXRef p, 
                                          *(PlankLL*)&newAll);
 }
 
-static PLONK_INLINE_LOW PlankB pl_AtomicPX_CompareAndSwapP (PlankAtomicPXRef p, PlankP oldPtr, PlankP newPtr)
+static PLANK_INLINE_LOW PlankB pl_AtomicPX_CompareAndSwapP (PlankAtomicPXRef p, PlankP oldPtr, PlankP newPtr)
 {
     return pl_AtomicP_CompareAndSwap ((PlankAtomicPRef)p, oldPtr, newPtr);
 }
 
-static PLONK_INLINE_LOW void pl_AtomicPX_SetAllUnchecked (PlankAtomicPXRef p, PlankP newPtr, PlankUL newExtra)
+static PLANK_INLINE_LOW void pl_AtomicPX_SetAllUnchecked (PlankAtomicPXRef p, PlankP newPtr, PlankUL newExtra)
 {
     p->ptr = newPtr;
     p->extra = newExtra;

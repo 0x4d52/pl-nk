@@ -384,7 +384,7 @@ public:
     }
     
     /** Create a control rate multiply-add unit. */
-    static inline UnitType kr (UnitType const& input, 
+    static PLONK_INLINE_LOW UnitType kr (UnitType const& input, 
                                UnitType const& mul,
                                UnitType const& add) throw()
     {

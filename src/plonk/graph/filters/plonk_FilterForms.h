@@ -113,7 +113,7 @@ public:
         NumCoeffs
     };
             
-    static inline SampleType process (SampleType const& input,
+    static PLONK_INLINE_LOW SampleType process (SampleType const& input,
                                       SampleType const& a0,     
                                       SampleType const& a1,
                                       SampleType const& b1,
@@ -125,14 +125,14 @@ public:
         return output;
     }
     
-    static inline SampleType process (SampleType const& input,
+    static PLONK_INLINE_LOW SampleType process (SampleType const& input,
                                       const SampleType* coeffs,     
                                       SampleType& y1) throw()
     {
         return process (input, coeffs[CoeffA0], coeffs[CoeffA1], coeffs[CoeffB1], y1);
     }
     
-    static inline SampleType process (SampleType const& input,
+    static PLONK_INLINE_LOW SampleType process (SampleType const& input,
                                       const SampleType* coeffs,     
                                       Data& data) throw()
     {
@@ -244,7 +244,7 @@ public:
         NumCoeffs
     };
     
-    static inline SampleType process (SampleType const& input,
+    static PLONK_INLINE_LOW SampleType process (SampleType const& input,
                                       SampleType const& b1,
                                       SampleType& y1) throw()
     {
@@ -253,7 +253,7 @@ public:
         return y1;
     }
     
-    static inline SampleType process (SampleType const& input,
+    static PLONK_INLINE_LOW SampleType process (SampleType const& input,
                                       const SampleType* coeffs,     
                                       Data& data) throw()
     {
@@ -343,7 +343,7 @@ public:
         NumCoeffs
     };
     
-    static inline SampleType process (SampleType const& input,
+    static PLONK_INLINE_LOW SampleType process (SampleType const& input,
                                       SampleType const& b1,
                                       SampleType& y1,
                                       SampleType& x1) throw()
@@ -354,7 +354,7 @@ public:
         return y1;
     }
     
-    static inline SampleType process (SampleType const& input,
+    static PLONK_INLINE_LOW SampleType process (SampleType const& input,
                                       const SampleType* coeffs,
                                       Data& data) throw()
     {
@@ -448,7 +448,7 @@ public:
         NumCoeffs
     };
     
-    static inline SampleType process (SampleType const& input,
+    static PLONK_INLINE_LOW SampleType process (SampleType const& input,
                                       SampleType const& b1u,
                                       SampleType const& b1d,
                                       SampleType& y1) throw()
@@ -463,7 +463,7 @@ public:
         return y1;
     }
     
-    static inline SampleType process (SampleType const& input,
+    static PLONK_INLINE_LOW SampleType process (SampleType const& input,
                                       const SampleType* coeffs,
                                       Data& data) throw()
     {
@@ -565,7 +565,7 @@ public:
         NumCoeffs
     };
             
-    static inline SampleType process (SampleType const& input,
+    static PLONK_INLINE_LOW SampleType process (SampleType const& input,
                                       SampleType const& a0,     
                                       SampleType const& a1,
                                       SampleType const& a2,
@@ -581,7 +581,7 @@ public:
         return output;
     }
     
-    static inline SampleType process (SampleType const& input,
+    static PLONK_INLINE_LOW SampleType process (SampleType const& input,
                                       const SampleType* coeffs,     
                                       SampleType& y1,
                                       SampleType& y2) throw()
@@ -592,7 +592,7 @@ public:
                         y1, y2);
     }
     
-    static inline SampleType process (SampleType const& input,
+    static PLONK_INLINE_LOW SampleType process (SampleType const& input,
                                       const SampleType* coeffs,     
                                       Data& data) throw()
     {
@@ -725,7 +725,7 @@ public:
         NumCoeffs
     };
         
-    static inline SampleType process (SampleType const& input,
+    static PLONK_INLINE_LOW SampleType process (SampleType const& input,
                                       SampleType const& a0,     
                                       SampleType const& a1,
                                       SampleType const& a2,
@@ -741,7 +741,7 @@ public:
         return output;
     }
     
-    static inline SampleType process (SampleType const& input,
+    static PLONK_INLINE_LOW SampleType process (SampleType const& input,
                                       const SampleType* coeffs,     
                                       SampleType& y1,
                                       SampleType& y2) throw()
@@ -752,7 +752,7 @@ public:
                         y1, y2);
     }
     
-    static inline SampleType process (SampleType const& input,
+    static PLONK_INLINE_LOW SampleType process (SampleType const& input,
                                       const SampleType* coeffs,     
                                       Data& data) throw()
     {

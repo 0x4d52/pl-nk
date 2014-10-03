@@ -163,7 +163,7 @@ public:
     typedef UnitBase<SampleType>                    UnitType;
     typedef InputDictionary                         Inputs;
     
-    static inline UnitInfos getInfo() throw()
+    static PLONK_INLINE_LOW UnitInfos getInfo() throw()
     {
         return UnitInfo ("ZMul", "Complex multiplication.",
                          
@@ -179,7 +179,7 @@ public:
     }    
     
     /** Complex multiplication of signals. */
-    static inline UnitType ar (UnitType const& leftOperand, UnitType const& rightOperand) throw()
+    static PLONK_INLINE_LOW UnitType ar (UnitType const& leftOperand, UnitType const& rightOperand) throw()
     {        
         Inputs inputs;
         inputs.put (IOKey::LeftOperand, leftOperand);

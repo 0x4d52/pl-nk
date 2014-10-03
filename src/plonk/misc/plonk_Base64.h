@@ -43,12 +43,12 @@
 class Base64Internal : public SmartPointer
 {
 public:
-    inline Base64Internal() throw()
+    PLONK_INLINE_LOW Base64Internal() throw()
     {
         pl_Base64_Init (&peer);
     }
     
-    inline ~Base64Internal()
+    PLONK_INLINE_LOW ~Base64Internal()
     {
         pl_Base64_DeInit (&peer);
     }
@@ -68,12 +68,12 @@ class Base64 : public SmartPointerContainer<Base64Internal>
 public:
     typedef SmartPointerContainer<Base64Internal> Base;
     
-    inline Base64() throw()
+    PLONK_INLINE_LOW Base64() throw()
     :   Base (new Base64Internal())
     {
     }
         
-    inline const char* encode (const void* binary, const Long binaryLength)
+    PLONK_INLINE_LOW const char* encode (const void* binary, const Long binaryLength)
     {
         return pl_Base64_Encode (&getInternal()->peer, binary, binaryLength);
     }
@@ -90,7 +90,7 @@ public:
         return encode (&data, sizeof (PODType));
     }
 
-    inline const void* decode (const char* text, Long* binaryLength)
+    PLONK_INLINE_LOW const void* decode (const char* text, Long* binaryLength)
     {
         return pl_Base64_Decode (&getInternal()->peer, text, binaryLength);
     }

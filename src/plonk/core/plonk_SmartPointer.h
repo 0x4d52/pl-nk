@@ -107,7 +107,7 @@ public:
 	/// @name Miscellaneous
 	/// @{
 	
-//    inline void update (Text const& message, Dynamic const& payload) throw() { (void)message; (void)payload; } // needed as a dummy in place of Sender::update?
+//    PLONK_INLINE_LOW void update (Text const& message, Dynamic const& payload) throw() { (void)message; (void)payload; } // needed as a dummy in place of Sender::update?
     void* getWeak() const throw();
     int getRefCount() const throw();
     

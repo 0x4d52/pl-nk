@@ -50,12 +50,12 @@ public:
     ProcessInfoInternal (const TimeStamp timeStamp,
                          const bool shouldDelete) throw();
     
-    inline const TimeStamp& getTimeStamp() const throw() { return timeStamp; }
-    void setTimeStamp (const TimeStamp newTimeStamp) throw();
-    void offsetTimeStamp (const double offset) throw();
-    void setShouldDelete() throw();
-    void resetShouldDelete() throw();
-    bool getShouldDelete() const throw() { return shouldDelete; }
+    PLONK_INLINE_HIGH const TimeStamp& getTimeStamp() const throw() { return timeStamp; }
+    PLONK_INLINE_HIGH void setTimeStamp (const TimeStamp newTimeStamp) throw() { timeStamp = newTimeStamp;}
+    PLONK_INLINE_HIGH void offsetTimeStamp (const double offset) throw() { timeStamp += offset;}
+    PLONK_INLINE_HIGH void setShouldDelete() throw() { shouldDelete = true; }
+    PLONK_INLINE_HIGH void resetShouldDelete() throw() { shouldDelete = false; }
+    PLONK_INLINE_HIGH bool getShouldDelete() const throw() { return shouldDelete; }
     
 private:
     TimeStamp timeStamp;
@@ -63,31 +63,6 @@ private:
     
     ProcessInfoInternal();
 };
-
-
-//------------------------------------------------------------------------------
-
-
-inline void ProcessInfoInternal::setTimeStamp (const TimeStamp time) throw()
-{
-    timeStamp = time;
-}
-
-inline void ProcessInfoInternal::offsetTimeStamp (const double offset) throw()
-{
-    timeStamp += offset;
-}
-
-inline void ProcessInfoInternal::setShouldDelete() throw()
-{
-    shouldDelete = true;
-}
-
-inline void ProcessInfoInternal::resetShouldDelete() throw()
-{
-    shouldDelete = false;
-}
-
 
 
 

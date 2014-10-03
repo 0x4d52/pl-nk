@@ -65,7 +65,7 @@ const char* pl_PlankAudioFileGetFormatName (int format)
 
 
 
-//static PLONK_INLINE_LOW PlankB pl_AudioFileFormatInfo_IsChannelMapClear (const PlankAudioFileFormatInfo* info)
+//static PLANK_INLINE_LOW PlankB pl_AudioFileFormatInfo_IsChannelMapClear (const PlankAudioFileFormatInfo* info)
 //{
 //    int i;
 //

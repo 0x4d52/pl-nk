@@ -43,48 +43,48 @@
 class JSON
 {
 public:
-    inline JSON() throw() : json (0) { }
-    inline JSON (const char value) throw() : json (pl_JSON_Int (LongLong (value))) { }
-    inline JSON (const int value) throw() : json (pl_JSON_Int (LongLong (value))) { }
-    inline JSON (const Long value) throw() : json (pl_JSON_Int (LongLong (value))) { }
-    inline JSON (const LongLong value) throw() : json (pl_JSON_Int (value)) { }
-    inline JSON (const float value) throw() : json (pl_JSON_Float (value)) { }
-    inline JSON (const double value) throw() : json (pl_JSON_Double (value)) { }
-    inline JSON (LongLongArray const& values) throw() : json (pl_JSON_IntArray (values.getArray(), values.length())) { }
-    inline JSON (FloatArray const& values) throw() : json (pl_JSON_FloatArray (values.getArray(), values.length())) { }
-    inline JSON (DoubleArray const& values) throw() : json (pl_JSON_DoubleArray (values.getArray(), values.length())) { }
-    inline JSON (Text const& text) throw() : json (pl_JSON_String (text.getArray())) { }
-    inline JSON (const char* text) throw() : json (pl_JSON_String (text)) { }
+    PLONK_INLINE_LOW JSON() throw() : json (0) { }
+    PLONK_INLINE_LOW JSON (const char value) throw() : json (pl_JSON_Int (LongLong (value))) { }
+    PLONK_INLINE_LOW JSON (const int value) throw() : json (pl_JSON_Int (LongLong (value))) { }
+    PLONK_INLINE_LOW JSON (const Long value) throw() : json (pl_JSON_Int (LongLong (value))) { }
+    PLONK_INLINE_LOW JSON (const LongLong value) throw() : json (pl_JSON_Int (value)) { }
+    PLONK_INLINE_LOW JSON (const float value) throw() : json (pl_JSON_Float (value)) { }
+    PLONK_INLINE_LOW JSON (const double value) throw() : json (pl_JSON_Double (value)) { }
+    PLONK_INLINE_LOW JSON (LongLongArray const& values) throw() : json (pl_JSON_IntArray (values.getArray(), values.length())) { }
+    PLONK_INLINE_LOW JSON (FloatArray const& values) throw() : json (pl_JSON_FloatArray (values.getArray(), values.length())) { }
+    PLONK_INLINE_LOW JSON (DoubleArray const& values) throw() : json (pl_JSON_DoubleArray (values.getArray(), values.length())) { }
+    PLONK_INLINE_LOW JSON (Text const& text) throw() : json (pl_JSON_String (text.getArray())) { }
+    PLONK_INLINE_LOW JSON (const char* text) throw() : json (pl_JSON_String (text)) { }
 
-    inline JSON (const Long value, const bool useBinary) throw()
+    PLONK_INLINE_LOW JSON (const Long value, const bool useBinary) throw()
     : json (useBinary ? pl_JSON_IntBinary (LongLong (value)) : pl_JSON_Int (LongLong (value)))
     { }
 
-    inline JSON (const LongLong value, const bool useBinary) throw()
+    PLONK_INLINE_LOW JSON (const LongLong value, const bool useBinary) throw()
     : json (useBinary ? pl_JSON_IntBinary (value) : pl_JSON_Int (value))
     { }
     
-    inline JSON (const float value, const bool useBinary) throw()
+    PLONK_INLINE_LOW JSON (const float value, const bool useBinary) throw()
     : json (useBinary ? pl_JSON_FloatBinary (value) : pl_JSON_Float (value))
     { }
     
-    inline JSON (const double value, const bool useBinary) throw()
+    PLONK_INLINE_LOW JSON (const double value, const bool useBinary) throw()
     : json (useBinary ? pl_JSON_DoubleBinary (value) : pl_JSON_Double (value))
     { }
     
-    inline JSON (LongLongArray const& values, const bool useBinary) throw()
+    PLONK_INLINE_LOW JSON (LongLongArray const& values, const bool useBinary) throw()
     : json (useBinary ? pl_JSON_IntArrayBinary (values.getArray(), values.length()) : pl_JSON_IntArray (values.getArray(), values.length()))
     { }
     
-    inline JSON (FloatArray const& values, const bool useBinary) throw()
+    PLONK_INLINE_LOW JSON (FloatArray const& values, const bool useBinary) throw()
     : json (useBinary ? pl_JSON_FloatArrayBinary (values.getArray(), values.length()) : pl_JSON_FloatArray (values.getArray(), values.length()))
     { }
     
-    inline JSON (DoubleArray const& values, const bool useBinary) throw()
+    PLONK_INLINE_LOW JSON (DoubleArray const& values, const bool useBinary) throw()
     : json (useBinary ? pl_JSON_DoubleArrayBinary (values.getArray(), values.length()) : pl_JSON_DoubleArray (values.getArray(), values.length()))
     { }
 
-    inline JSON (BinaryFile const& file) throw()
+    PLONK_INLINE_LOW JSON (BinaryFile const& file) throw()
     : json (0)
     {
         if (file.canRead())
@@ -97,12 +97,12 @@ public:
     static JSON object() throw() { return JSON (pl_JSON_Object()); }
     static JSON null() throw() { return JSON (pl_JSON_Null()); }
     
-    inline JSON (JSON const& other) throw()
+    PLONK_INLINE_LOW JSON (JSON const& other) throw()
     : json (pl_JSON_IncrementRefCount (other.json))
     {
     }
     
-    inline JSON& operator= (JSON const& other) throw()
+    PLONK_INLINE_LOW JSON& operator= (JSON const& other) throw()
     {
         if (this != &other)
         {
@@ -114,38 +114,38 @@ public:
         return *this;
     }
 
-    inline ~JSON()
+    PLONK_INLINE_LOW ~JSON()
     {
         pl_JSON_DecrementRefCount (json);
     }
     
-    inline ResultCode toFile (BinaryFile const& file) throw()
+    PLONK_INLINE_LOW ResultCode toFile (BinaryFile const& file) throw()
     {        
         return file.canWrite() ? pl_JSON_WriteToFile (json, file.getInternal()->getPeerRef(), PLANK_JSON_DEFAULTFLAGS) : PlankResult_FileWriteError;
     }
         
-    inline ResultCode toFile (BinaryFile const& file, const int flags) throw()
+    PLONK_INLINE_LOW ResultCode toFile (BinaryFile const& file, const int flags) throw()
     {
         return file.canWrite() ? pl_JSON_WriteToFile (json, file.getInternal()->getPeerRef(), flags) : PlankResult_FileWriteError;
     }
 
     
-    inline bool isEmpty() const throw() { return json == 0; }
-    inline bool isInt() const throw() { return pl_JSON_IsInt (json); }
-    inline bool isFloat() const throw() { return pl_JSON_IsFloat (json); }
-    inline bool isDouble() const throw() { return pl_JSON_IsDouble (json); }
-    inline bool isBool() const throw() { return pl_JSON_IsBool (json); }
-    inline bool isNull() const throw() { return pl_JSON_IsNull (json); }
-    inline bool isArray() const throw() { return pl_JSON_IsArray (json); }
-    inline bool isObject() const throw() { return pl_JSON_IsObject (json); }
-    inline bool isString() const throw() { return pl_JSON_IsString (json); }
-    inline bool isIntArrayEncoded() const throw() { return pl_JSON_IsIntArrayEncoded (json); }
-    inline bool isFloatArrayEncoded() const throw() { return pl_JSON_IsFloatArrayEncoded (json); }
-    inline bool isDoubleArrayEncoded() const throw() { return pl_JSON_IsDoubleArrayEncoded (json); }
-    inline bool isError() const throw() { return pl_JSON_IsError (json); }
+    PLONK_INLINE_LOW bool isEmpty() const throw() { return json == 0; }
+    PLONK_INLINE_LOW bool isInt() const throw() { return pl_JSON_IsInt (json); }
+    PLONK_INLINE_LOW bool isFloat() const throw() { return pl_JSON_IsFloat (json); }
+    PLONK_INLINE_LOW bool isDouble() const throw() { return pl_JSON_IsDouble (json); }
+    PLONK_INLINE_LOW bool isBool() const throw() { return pl_JSON_IsBool (json); }
+    PLONK_INLINE_LOW bool isNull() const throw() { return pl_JSON_IsNull (json); }
+    PLONK_INLINE_LOW bool isArray() const throw() { return pl_JSON_IsArray (json); }
+    PLONK_INLINE_LOW bool isObject() const throw() { return pl_JSON_IsObject (json); }
+    PLONK_INLINE_LOW bool isString() const throw() { return pl_JSON_IsString (json); }
+    PLONK_INLINE_LOW bool isIntArrayEncoded() const throw() { return pl_JSON_IsIntArrayEncoded (json); }
+    PLONK_INLINE_LOW bool isFloatArrayEncoded() const throw() { return pl_JSON_IsFloatArrayEncoded (json); }
+    PLONK_INLINE_LOW bool isDoubleArrayEncoded() const throw() { return pl_JSON_IsDoubleArrayEncoded (json); }
+    PLONK_INLINE_LOW bool isError() const throw() { return pl_JSON_IsError (json); }
 
-    inline bool operator== (JSON const& other) const throw() { return json == other.json; }
-    inline bool operator!= (JSON const& other) const throw() { return json != other.json; }
+    PLONK_INLINE_LOW bool operator== (JSON const& other) const throw() { return json == other.json; }
+    PLONK_INLINE_LOW bool operator!= (JSON const& other) const throw() { return json != other.json; }
 
     operator int () const throw() { return int (pl_JSON_IntGet (json)); }
     operator LongLong () const throw() { return pl_JSON_IntGet (json); }
@@ -214,22 +214,22 @@ public:
         return DoubleArray::getNull();
     }
 
-    inline JSON operator[] (const int index) const throw()
+    PLONK_INLINE_LOW JSON operator[] (const int index) const throw()
     {
         return JSON (pl_JSON_ArrayAt (json, index));
     }
 
-    inline JSON operator[] (const Long index) const throw()
+    PLONK_INLINE_LOW JSON operator[] (const Long index) const throw()
     {
         return JSON (pl_JSON_ArrayAt (json, index));
     }
 
-    inline JSON operator[] (const char* key) const throw()
+    PLONK_INLINE_LOW JSON operator[] (const char* key) const throw()
     {
         return JSON (pl_JSON_ObjectAtKey (json, key));
     }
 
-    inline JSON& put (const Long index, JSON const& item) throw()
+    PLONK_INLINE_LOW JSON& put (const Long index, JSON const& item) throw()
     {
         if (isArray())
             pl_JSON_ArrayPut (json, index, pl_JSON_IncrementRefCount (item.json));
@@ -237,7 +237,7 @@ public:
         return *this;
     }
         
-    inline JSON& add (JSON const& item) throw()
+    PLONK_INLINE_LOW JSON& add (JSON const& item) throw()
     {
         if (isArray())
             pl_JSON_ArrayAppend (json, pl_JSON_IncrementRefCount (item.json));
@@ -245,7 +245,7 @@ public:
         return *this;
     }
 
-    inline JSON& add (const char* key, JSON const& item) throw()
+    PLONK_INLINE_LOW JSON& add (const char* key, JSON const& item) throw()
     {
         if (isObject())
             pl_JSON_ObjectPutKey (json, key, pl_JSON_IncrementRefCount (item.json));
@@ -253,7 +253,7 @@ public:
         return *this;
     }
 
-    inline Long length() const throw()
+    PLONK_INLINE_LOW Long length() const throw()
     {
         if (isArray())
             return pl_JSON_ArrayGetSize (json);
@@ -311,7 +311,7 @@ public:
     const PlankJSONRef getInternal() const throw() { return json; }
         
 private:
-    inline JSON (PlankJSONRef other) throw()
+    PLONK_INLINE_LOW JSON (PlankJSONRef other) throw()
     : json (pl_JSON_IncrementRefCount (other))
     {
     }

@@ -79,27 +79,27 @@ public:
         typeCode = TypeUtility<ContainerType>::getTypeCode();
     }
     
-    inline const GenericContainer& getItem() const throw()
+    PLONK_INLINE_LOW const GenericContainer& getItem() const throw()
     {
         return item;
     }
     
-    inline GenericContainer& getItem() throw()
+    PLONK_INLINE_LOW GenericContainer& getItem() throw()
     {
         return item;
     }    
     
-    inline int getTypeCode() const throw()
+    PLONK_INLINE_LOW int getTypeCode() const throw()
     {
         return typeCode;
     }
     
-    inline bool isNull() const throw()
+    PLONK_INLINE_LOW bool isNull() const throw()
     {
         return (typeCode == 0) && (item.getInternal() == 0);
     }
     
-    inline bool isNotNull() const throw()
+    PLONK_INLINE_LOW bool isNotNull() const throw()
     {
         return ! this->isNull();
     }
@@ -138,19 +138,19 @@ public:
         this->getInternal()->setItem (other);
     }
     
-    //inline Dynamic containerCopy() const throw()            { return *this; }
-    inline const GenericContainer& getItem() const throw()  { return this->getInternal()->getItem(); }
-    inline GenericContainer& getItem() throw()              { return this->getInternal()->getItem(); }    
-    inline int getTypeCode() const throw()                  { return this->getInternal()->getTypeCode(); }
+    //PLONK_INLINE_LOW Dynamic containerCopy() const throw()            { return *this; }
+    PLONK_INLINE_LOW const GenericContainer& getItem() const throw()  { return this->getInternal()->getItem(); }
+    PLONK_INLINE_LOW GenericContainer& getItem() throw()              { return this->getInternal()->getItem(); }    
+    PLONK_INLINE_LOW int getTypeCode() const throw()                  { return this->getInternal()->getTypeCode(); }
 #if !PLANK_APPLE_LLVM
-    inline operator const Dynamic& () const throw()         { return *this; }        
-    inline operator Dynamic& () throw()                     { return *this; } 
+    PLONK_INLINE_LOW operator const Dynamic& () const throw()         { return *this; }        
+    PLONK_INLINE_LOW operator Dynamic& () throw()                     { return *this; } 
 #endif
-    inline bool isItemNull() const throw()                  { return this->getInternal()->isNull(); }
-    inline bool isItemNotNull() const throw()               { return this->getInternal()->isNotNull(); }
+    PLONK_INLINE_LOW bool isItemNull() const throw()                  { return this->getInternal()->isNull(); }
+    PLONK_INLINE_LOW bool isItemNotNull() const throw()               { return this->getInternal()->isNotNull(); }
         
     template<class ContainerType>
-    inline const ContainerType& asUnchecked() const throw()
+    PLONK_INLINE_LOW const ContainerType& asUnchecked() const throw()
     {              
         plonk_assert (this->isItemNotNull());
         plonk_assert (TypeUtility<ContainerType>::getTypeCode() == this->getTypeCode());
@@ -158,7 +158,7 @@ public:
     }
     
     template<class ContainerType>
-    inline ContainerType& asUnchecked() throw()
+    PLONK_INLINE_LOW ContainerType& asUnchecked() throw()
     {              
         plonk_assert (this->isItemNotNull());
         plonk_assert (TypeUtility<ContainerType>::getTypeCode() == this->getTypeCode());
@@ -166,7 +166,7 @@ public:
     }
         
     template<class ContainerType>
-    inline ContainerType as() const throw()
+    PLONK_INLINE_LOW ContainerType as() const throw()
     {              
         if ((this->isItemNull()) || (TypeUtility<ContainerType>::getTypeCode() != this->getTypeCode()))
             return ContainerType();
@@ -179,7 +179,7 @@ public:
     int getNumChannels() const throw();
     Dynamic getChannel (const int index) throw();
     
-    inline static const Dynamic& getNull() throw()
+    PLONK_INLINE_LOW static const Dynamic& getNull() throw()
 	{
 		static Dynamic null;
 		return null;
@@ -195,7 +195,7 @@ public:
     }
     
     template<class OtherType>
-    inline bool operator!= (OtherType const& other) const throw()
+    PLONK_INLINE_LOW bool operator!= (OtherType const& other) const throw()
     {
         return !this->operator== (other);
     }

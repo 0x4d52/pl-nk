@@ -179,7 +179,7 @@ public:
         return -1;
     }
     
-    inline LongLong size() throw()
+    PLONK_INLINE_LOW LongLong size() throw()
     {
         return pl_SimpleLinkedList_GetSize (&list);
     }
@@ -189,7 +189,7 @@ public:
 private:
     PlankSimpleLinkedList list;
     
-    inline PlankSimpleLinkedListElementRef createElement (ValueType const& value) throw()
+    PLONK_INLINE_LOW PlankSimpleLinkedListElementRef createElement (ValueType const& value) throw()
     {
         PlankSimpleLinkedListElementRef element = pl_SimpleLinkedListElement_CreateAndInit();
         plonk_assert (element != 0);
@@ -197,7 +197,7 @@ private:
         return element;
     }
     
-    inline ValueType getValueFromElement (PlankSimpleLinkedListElementRef element) throw()
+    PLONK_INLINE_LOW ValueType getValueFromElement (PlankSimpleLinkedListElementRef element) throw()
     {
         if (element == 0)
             return ValueType();
@@ -210,7 +210,7 @@ private:
             return ValueType();
     }
     
-    inline ValueType removeValueFromElement (PlankSimpleLinkedListElementRef element) throw()
+    PLONK_INLINE_LOW ValueType removeValueFromElement (PlankSimpleLinkedListElementRef element) throw()
     {
         if (element == 0)
             return ValueType();
@@ -368,7 +368,7 @@ public:
         return -1;
     }
     
-    inline LongLong size() throw()
+    PLONK_INLINE_LOW LongLong size() throw()
     {
         return pl_SimpleLinkedList_GetSize (&list);
     }
@@ -386,7 +386,7 @@ private:
         return element;
     }
     
-    inline ValueType* getValueFromElement (PlankSimpleLinkedListElementRef element) throw()
+    PLONK_INLINE_LOW ValueType* getValueFromElement (PlankSimpleLinkedListElementRef element) throw()
     {
         if (element == 0)
             return 0;
@@ -394,7 +394,7 @@ private:
         return static_cast<ValueType*> (pl_SimpleLinkedListElement_GetData (element));        
     }
     
-    inline ValueType removeValueFromElement (PlankSimpleLinkedListElementRef element) throw()
+    PLONK_INLINE_LOW ValueType removeValueFromElement (PlankSimpleLinkedListElementRef element) throw()
     {
         if (element == 0)
             return ValueType();
@@ -463,57 +463,57 @@ public:
         return *this;
 	}
     
-    inline void add (ValueType const& value) throw()
+    PLONK_INLINE_LOW void add (ValueType const& value) throw()
     {
         this->getInternal()->add (value);
     }
     
-    inline void insertAtIndex (const LongLong index, ValueType const& value) throw()
+    PLONK_INLINE_LOW void insertAtIndex (const LongLong index, ValueType const& value) throw()
     {
         this->getInternal()->insertAtIndex (index, value);
     }
 
-    inline ValueType atIndex (const LongLong index) throw()
+    PLONK_INLINE_LOW ValueType atIndex (const LongLong index) throw()
     {
         return this->getInternal()->atIndex (index);
     }
     
-    inline ValueType getFirst() throw()
+    PLONK_INLINE_LOW ValueType getFirst() throw()
     {
         return this->getInternal()->getFirst();
     }
     
-    inline ValueType getLast() throw()
+    PLONK_INLINE_LOW ValueType getLast() throw()
     {
         return this->getInternal()->getFirst();
     }
     
-    inline ValueType removeAtIndex (const LongLong index) throw()
+    PLONK_INLINE_LOW ValueType removeAtIndex (const LongLong index) throw()
     {
         return this->getInternal()->removeAtIndex (index);
     }
     
-    inline ValueType removeFirst() throw()
+    PLONK_INLINE_LOW ValueType removeFirst() throw()
     {
         return this->getInternal()->removeFirst();
     }
     
-    inline ValueType removeLast() throw()
+    PLONK_INLINE_LOW ValueType removeLast() throw()
     {
         return this->getInternal()->removeFirst();
     }
     
-    inline LongLong indexOf (ValueType const& value) throw()
+    PLONK_INLINE_LOW LongLong indexOf (ValueType const& value) throw()
     {
         return this->getInternal()->indexOf (value);
     }
     
-    inline bool contains (ValueType const& value) throw()
+    PLONK_INLINE_LOW bool contains (ValueType const& value) throw()
     {
         return this->getInternal()->indexOf (value) >= 0;
     }
     
-    inline LongLong size() throw()
+    PLONK_INLINE_LOW LongLong size() throw()
     {
         return this->getInternal()->size();
     }

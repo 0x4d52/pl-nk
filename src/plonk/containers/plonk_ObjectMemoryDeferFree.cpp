@@ -56,7 +56,7 @@ void ObjectMemoryDeferFree::staticFree (void* userData, void* ptr)
     om.free (ptr);
 }
 
-static inline void staticDoFree (void* userData, void* ptr) throw()
+static PLONK_INLINE_LOW void staticDoFree (void* userData, void* ptr) throw()
 {
 #if PLONK_OBJECTMEMORYDEFERFREE_DEBUG
     plonk_assert (!Threading::currentThreadIsAudioThread());

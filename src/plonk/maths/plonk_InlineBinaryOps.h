@@ -49,7 +49,7 @@
 
 #define PLONK_BINARYOP(CLASSNAME, OP) \
         /** Create a new CLASSNAME by applying the binary '##OP##' function to this one and the @e right argument. */\
-        inline CLASSNAME OP (CLASSNAME const& right) const throw() { return binary< BinaryOpFunctionsType::OP > (right); } 
+        PLONK_INLINE_HIGH CLASSNAME OP (CLASSNAME const& right) const throw() { return binary< BinaryOpFunctionsType::OP > (right); } 
 
 
 
@@ -81,55 +81,55 @@
         PLONK_BINARYOP(CLASSNAME, clip2)\
         PLONK_BINARYOP(CLASSNAME, decayFeedback)\
         /** Create a new CLASSNAME by applying the binary '+' operator to this and the @e right argument. **/\
-        inline CLASSNAME operator+   (CLASSNAME const& right) const throw() { return binary<BinaryOpFunctionsType::addop> (right); }\
+        PLONK_INLINE_HIGH CLASSNAME operator+   (CLASSNAME const& right) const throw() { return binary<BinaryOpFunctionsType::addop> (right); }\
         /** Create a new CLASSNAME by applying the binary '-' operator to this and the @e right argument. **/\
-        inline CLASSNAME operator-   (CLASSNAME const& right) const throw() { return binary<BinaryOpFunctionsType::subop> (right); }\
+        PLONK_INLINE_HIGH CLASSNAME operator-   (CLASSNAME const& right) const throw() { return binary<BinaryOpFunctionsType::subop> (right); }\
         /** Create a new CLASSNAME by applying the binary '*' operator to this and the @e right argument. **/\
-        inline CLASSNAME operator*   (CLASSNAME const& right) const throw() { return binary<BinaryOpFunctionsType::mulop> (right); }\
+        PLONK_INLINE_HIGH CLASSNAME operator*   (CLASSNAME const& right) const throw() { return binary<BinaryOpFunctionsType::mulop> (right); }\
         /** Create a new CLASSNAME by applying the binary '/' operator to this and the @e right argument. **/\
-        inline CLASSNAME operator/   (CLASSNAME const& right) const throw() { return binary<BinaryOpFunctionsType::divop> (right); }\
+        PLONK_INLINE_HIGH CLASSNAME operator/   (CLASSNAME const& right) const throw() { return binary<BinaryOpFunctionsType::divop> (right); }\
         /** Create a new CLASSNAME by applying the binary '%' operator to this and the @e right argument. **/\
-        inline CLASSNAME operator%   (CLASSNAME const& right) const throw() { return binary<BinaryOpFunctionsType::modop> (right); }\
+        PLONK_INLINE_HIGH CLASSNAME operator%   (CLASSNAME const& right) const throw() { return binary<BinaryOpFunctionsType::modop> (right); }\
         /** Create a new CLASSNAME by applying the binary '<' operator to this and the @e right argument. **/\
-        inline CLASSNAME operator<   (CLASSNAME const& right) const throw() { return binary<BinaryOpFunctionsType::isLessThan> (right); }\
+        PLONK_INLINE_HIGH CLASSNAME operator<   (CLASSNAME const& right) const throw() { return binary<BinaryOpFunctionsType::isLessThan> (right); }\
         /** Create a new CLASSNAME by applying the binary '<=' operator to this and the @e right argument. **/\
-        inline CLASSNAME operator<=  (CLASSNAME const& right) const throw() { return binary<BinaryOpFunctionsType::isLessThanOrEqualTo> (right); }\
+        PLONK_INLINE_HIGH CLASSNAME operator<=  (CLASSNAME const& right) const throw() { return binary<BinaryOpFunctionsType::isLessThanOrEqualTo> (right); }\
         /** Create a new CLASSNAME by applying the binary '>' operator to this and the @e right argument. **/\
-        inline CLASSNAME operator>   (CLASSNAME const& right) const throw() { return binary<BinaryOpFunctionsType::isGreaterThan> (right); }\
+        PLONK_INLINE_HIGH CLASSNAME operator>   (CLASSNAME const& right) const throw() { return binary<BinaryOpFunctionsType::isGreaterThan> (right); }\
         /** Create a new CLASSNAME by applying the binary '>=' operator to this and the @e right argument. **/\
-        inline CLASSNAME operator>=  (CLASSNAME const& right) const throw() { return binary<BinaryOpFunctionsType::isGreaterThanOrEqualTo> (right); }\
+        PLONK_INLINE_HIGH CLASSNAME operator>=  (CLASSNAME const& right) const throw() { return binary<BinaryOpFunctionsType::isGreaterThanOrEqualTo> (right); }\
         /** Create a new CLASSNAME by applying the binary '+' operator to this and the @e right argument. **/\
-        template<class RightType> inline CLASSNAME operator+   (RightType const& right) const throw() { return binary<BinaryOpFunctionsType::addop> (CLASSNAME (right)); }\
+        template<class RightType> PLONK_INLINE_HIGH CLASSNAME operator+   (RightType const& right) const throw() { return binary<BinaryOpFunctionsType::addop> (CLASSNAME (right)); }\
         /** Create a new CLASSNAME by applying the binary '-' operator to this and the @e right argument. **/\
-        template<class RightType> inline CLASSNAME operator-   (RightType const& right) const throw() { return binary<BinaryOpFunctionsType::subop> (CLASSNAME (right)); }\
+        template<class RightType> PLONK_INLINE_HIGH CLASSNAME operator-   (RightType const& right) const throw() { return binary<BinaryOpFunctionsType::subop> (CLASSNAME (right)); }\
         /** Create a new CLASSNAME by applying the binary '*' operator to this and the @e right argument. **/\
-        template<class RightType> inline CLASSNAME operator*   (RightType const& right) const throw() { return binary<BinaryOpFunctionsType::mulop> (CLASSNAME (right)); }\
+        template<class RightType> PLONK_INLINE_HIGH CLASSNAME operator*   (RightType const& right) const throw() { return binary<BinaryOpFunctionsType::mulop> (CLASSNAME (right)); }\
         /** Create a new CLASSNAME by applying the binary '/' operator to this and the @e right argument. **/\
-        template<class RightType> inline CLASSNAME operator/   (RightType const& right) const throw() { return binary<BinaryOpFunctionsType::divop> (CLASSNAME (right)); }\
+        template<class RightType> PLONK_INLINE_HIGH CLASSNAME operator/   (RightType const& right) const throw() { return binary<BinaryOpFunctionsType::divop> (CLASSNAME (right)); }\
         /** Create a new CLASSNAME by applying the binary '%' operator to this and the @e right argument. **/\
-        template<class RightType> inline CLASSNAME operator%   (RightType const& right) const throw() { return binary<BinaryOpFunctionsType::modop> (CLASSNAME (right)); }\
+        template<class RightType> PLONK_INLINE_HIGH CLASSNAME operator%   (RightType const& right) const throw() { return binary<BinaryOpFunctionsType::modop> (CLASSNAME (right)); }\
         /** Create a new CLASSNAME and assign it to this one by applying the binary '+' operator to this and the @e right argument. **/\
-        template<class RightType> inline CLASSNAME& operator+= (RightType const& right) throw() { return operator= (*this + right); }\
+        template<class RightType> PLONK_INLINE_HIGH CLASSNAME& operator+= (RightType const& right) throw() { return operator= (*this + right); }\
         /** Create a new CLASSNAME and assign it to this one by applying the binary '-' operator to this and the @e right argument. **/\
-        template<class RightType> inline CLASSNAME& operator-= (RightType const& right) throw() { return operator= (*this - right); }\
+        template<class RightType> PLONK_INLINE_HIGH CLASSNAME& operator-= (RightType const& right) throw() { return operator= (*this - right); }\
         /** Create a new CLASSNAME and assign it to this one by applying the binary '*' operator to this and the @e right argument. **/\
-        template<class RightType> inline CLASSNAME& operator*= (RightType const& right) throw() { return operator= (*this * right); }\
+        template<class RightType> PLONK_INLINE_HIGH CLASSNAME& operator*= (RightType const& right) throw() { return operator= (*this * right); }\
         /** Create a new CLASSNAME and assign it to this one by applying the binary '/' operator to this and the @e right argument. **/\
-        template<class RightType> inline CLASSNAME& operator/= (RightType const& right) throw() { return operator= (*this / right); }\
+        template<class RightType> PLONK_INLINE_HIGH CLASSNAME& operator/= (RightType const& right) throw() { return operator= (*this / right); }\
         /** Create a new CLASSNAME and assign it to this one by applying the binary '%' operator to this and the @e right argument. **/\
-        template<class RightType> inline CLASSNAME& operator%= (RightType const& right) throw() { return operator= (*this % right); }\
+        template<class RightType> PLONK_INLINE_HIGH CLASSNAME& operator%= (RightType const& right) throw() { return operator= (*this % right); }\
         /** Create a new CLASSNAME by applying the binary '<' operator to this and the @e right argument. **/\
-        template<class RightType> inline CLASSNAME operator<   (RightType const& right) const throw() { return binary<BinaryOpFunctionsType::isLessThan> (CLASSNAME (right)); }\
+        template<class RightType> PLONK_INLINE_HIGH CLASSNAME operator<   (RightType const& right) const throw() { return binary<BinaryOpFunctionsType::isLessThan> (CLASSNAME (right)); }\
         /** Create a new CLASSNAME by applying the binary '<=' operator to this and the @e right argument. **/\
-        template<class RightType> inline CLASSNAME operator<=  (RightType const& right) const throw() { return binary<BinaryOpFunctionsType::isLessThanOrEqualTo> (CLASSNAME (right)); }\
+        template<class RightType> PLONK_INLINE_HIGH CLASSNAME operator<=  (RightType const& right) const throw() { return binary<BinaryOpFunctionsType::isLessThanOrEqualTo> (CLASSNAME (right)); }\
         /** Create a new CLASSNAME by applying the binary '>' operator to this and the @e right argument. **/\
-        template<class RightType> inline CLASSNAME operator>   (RightType const& right) const throw() { return binary<BinaryOpFunctionsType::isGreaterThan> (CLASSNAME (right)); }\
+        template<class RightType> PLONK_INLINE_HIGH CLASSNAME operator>   (RightType const& right) const throw() { return binary<BinaryOpFunctionsType::isGreaterThan> (CLASSNAME (right)); }\
         /** Create a new CLASSNAME by applying the binary '>=' operator to this and the @e right argument. **/\
-        template<class RightType> inline CLASSNAME operator>=  (RightType const& right) const throw() { return binary<BinaryOpFunctionsType::isGreaterThanOrEqualTo> (CLASSNAME (right)); }
+        template<class RightType> PLONK_INLINE_HIGH CLASSNAME operator>=  (RightType const& right) const throw() { return binary<BinaryOpFunctionsType::isGreaterThanOrEqualTo> (CLASSNAME (right)); }
 
 #define PLONK_BINARYOPGLOBAL(CLASSNAME,T,OP)\
     /** Create a new CLASSNAME by applying the binary '##OP##' function to the @e left and @e right inputs. */\
-    inline CLASSNAME OP (CLASSNAME const& left, CLASSNAME const& right) throw() { return left.OP (right); }
+    PLONK_INLINE_HIGH CLASSNAME OP (CLASSNAME const& left, CLASSNAME const& right) throw() { return left.OP (right); }
 
 #define PLONK_BINARYOPGLOBAL_TEMPLATE(CLASSNAME,T,OP)\
     template<class T> PLONK_BINARYOPGLOBAL(CLASSNAME<T>,PLONK_EMPTYDEFINE,OP)
@@ -177,76 +177,76 @@
  */
 
 /** Convenient inline function for the '+' operator. */
-template<class Type> inline Type addop (Type const& a, Type const& b) throw() { return a + b; }
+template<class Type> PLONK_INLINE_HIGH Type addop (Type const& a, Type const& b) throw() { return a + b; }
 
 /** Convenient inline function for the '-' operator. */
-template<class Type> inline Type subop (Type const& a, Type const& b) throw() { return a - b; }
+template<class Type> PLONK_INLINE_HIGH Type subop (Type const& a, Type const& b) throw() { return a - b; }
 
 /** Convenient inline function for the '*' operator. */
-template<class Type> inline Type mulop (Type const& a, Type const& b) throw() { return a * b; }
+template<class Type> PLONK_INLINE_HIGH Type mulop (Type const& a, Type const& b) throw() { return a * b; }
 
 /** Convenient inline function for the '/' operator. */
-template<class Type> inline Type divop (Type const& a, Type const& b) throw() { return a / b; }
+template<class Type> PLONK_INLINE_HIGH Type divop (Type const& a, Type const& b) throw() { return a / b; }
 
 /** Convenient inline function for the '%' operator. */
-template<class Type> inline Type modop (Type const& a, Type const& b) throw() { return (Type)((LongLong)a % (LongLong)b); }
+template<class Type> PLONK_INLINE_HIGH Type modop (Type const& a, Type const& b) throw() { return (Type)((LongLong)a % (LongLong)b); }
 
 /** Convenient inline function for the '%' operator (float). */
-inline float modop (float const& a, float const& b) throw() { return pl_ModF (a, b); }
+PLONK_INLINE_HIGH float modop (float const& a, float const& b) throw() { return pl_ModF (a, b); }
 
 /** Convenient inline function for the '%' operator (double). */
-inline double modop (double const& a, double const& b) throw() { return pl_ModD (a, b); }
+PLONK_INLINE_HIGH double modop (double const& a, double const& b) throw() { return pl_ModD (a, b); }
 
 /** Returns 1 if the inputs are equal otherwise returns 0.  */
-template<class Type> inline Type isEqualTo              (Type const& a, Type const& b) throw()  { return (a == b) ? Math<Type>::get1() : Math<Type>::get0(); }
+template<class Type> PLONK_INLINE_HIGH Type isEqualTo              (Type const& a, Type const& b) throw()  { return (a == b) ? Math<Type>::get1() : Math<Type>::get0(); }
 
 /** Returns 1 if the inputs are not equal otherwise returns 0.  */
-template<class Type> inline Type isNotEqualTo           (Type const& a, Type const& b) throw()	{ return (a != b) ? Math<Type>::get1() : Math<Type>::get0(); }
+template<class Type> PLONK_INLINE_HIGH Type isNotEqualTo           (Type const& a, Type const& b) throw()	{ return (a != b) ? Math<Type>::get1() : Math<Type>::get0(); }
 
 /** Returns 1 if the @e a is greater than @e b otherwise returns 0.  */
-template<class Type> inline Type isGreaterThan          (Type const& a, Type const& b) throw()	{ return (a > b)  ? Math<Type>::get1() : Math<Type>::get0(); }
+template<class Type> PLONK_INLINE_HIGH Type isGreaterThan          (Type const& a, Type const& b) throw()	{ return (a > b)  ? Math<Type>::get1() : Math<Type>::get0(); }
 
 /** Returns 1 if the @e a is greater than or equal to @e b otherwise returns 0.  */
-template<class Type> inline Type isGreaterThanOrEqualTo (Type const& a, Type const& b) throw()	{ return (a >= b) ? Math<Type>::get1() : Math<Type>::get0(); }
+template<class Type> PLONK_INLINE_HIGH Type isGreaterThanOrEqualTo (Type const& a, Type const& b) throw()	{ return (a >= b) ? Math<Type>::get1() : Math<Type>::get0(); }
 
 /** Returns 1 if the @e a is less than @e b otherwise returns 0.  */
-template<class Type> inline Type isLessThan             (Type const& a, Type const& b) throw()	{ return (a < b)  ? Math<Type>::get1() : Math<Type>::get0(); }
+template<class Type> PLONK_INLINE_HIGH Type isLessThan             (Type const& a, Type const& b) throw()	{ return (a < b)  ? Math<Type>::get1() : Math<Type>::get0(); }
 
 /** Returns 1 if the @e a is less than or equal to @e b otherwise returns 0.  */
-template<class Type> inline Type isLessThanOrEqualTo    (Type const& a, Type const& b) throw()	{ return (a <= b) ? Math<Type>::get1() : Math<Type>::get0(); }
+template<class Type> PLONK_INLINE_HIGH Type isLessThanOrEqualTo    (Type const& a, Type const& b) throw()	{ return (a <= b) ? Math<Type>::get1() : Math<Type>::get0(); }
 
 /** Returns @f$ \sqrt{ a^2 + b^2 } @f$.  */
-template<class Type> inline Type hypot  (Type const& a, Type const& b) throw() { return static_cast<Type> (::hypot (double (a), double (b))); }
+template<class Type> PLONK_INLINE_HIGH Type hypot  (Type const& a, Type const& b) throw() { return static_cast<Type> (::hypot (double (a), double (b))); }
 
-inline float hypot  (float const& a, float const& b) throw() { return pl_HypotF (a, b); }
-inline double hypot  (double const& a, double const& b) throw() { return pl_HypotD (a, b); }
+PLONK_INLINE_HIGH float hypot  (float const& a, float const& b) throw() { return pl_HypotF (a, b); }
+PLONK_INLINE_HIGH double hypot  (double const& a, double const& b) throw() { return pl_HypotD (a, b); }
 
 /** Returns @f$ atan2(a,b) @f$.  */
-template<class Type> inline Type atan2  (Type const& a, Type const& b) throw() { return static_cast<Type> (::atan2 (double (a), double (b))); }
+template<class Type> PLONK_INLINE_HIGH Type atan2  (Type const& a, Type const& b) throw() { return static_cast<Type> (::atan2 (double (a), double (b))); }
 
-inline float atan2  (float const& a, float const& b) throw() { return pl_Atan2F (a, b); }
-inline double atan2  (double const& a, double const& b) throw() { return pl_Atan2D (a, b); }
+PLONK_INLINE_HIGH float atan2  (float const& a, float const& b) throw() { return pl_Atan2F (a, b); }
+PLONK_INLINE_HIGH double atan2  (double const& a, double const& b) throw() { return pl_Atan2D (a, b); }
 
 /** Returns @f$ a * a + b * b @f$.  */
-template<class Type> inline Type sumsqr (Type const& a, Type const& b) throw() { return squared (a) + squared (b); }
+template<class Type> PLONK_INLINE_HIGH Type sumsqr (Type const& a, Type const& b) throw() { return squared (a) + squared (b); }
 
 /** Returns @f$ a * a - b * b @f$.  */
-template<class Type> inline Type difsqr (Type const& a, Type const& b) throw() { return squared (a) - squared (b);  }
+template<class Type> PLONK_INLINE_HIGH Type difsqr (Type const& a, Type const& b) throw() { return squared (a) - squared (b);  }
 
 /** Returns @f$ (a + b) * (a + b) @f$.  */
-template<class Type> inline Type sqrsum (Type const& a, Type const& b) throw() { const Type c (a + b); return squared (c); }
+template<class Type> PLONK_INLINE_HIGH Type sqrsum (Type const& a, Type const& b) throw() { const Type c (a + b); return squared (c); }
 
 /** Returns @f$ (a - b) * (a - b) @f$.  */
-template<class Type> inline Type sqrdif (Type const& a, Type const& b) throw() { const Type c (a - b); return squared (c); }
+template<class Type> PLONK_INLINE_HIGH Type sqrdif (Type const& a, Type const& b) throw() { const Type c (a - b); return squared (c); }
 
 /** Returns the absolute difference between the input arguments.  */
-template<class Type> inline Type absdif (Type const& a, Type const& b) throw() { return abs (a - b); }
+template<class Type> PLONK_INLINE_HIGH Type absdif (Type const& a, Type const& b) throw() { return abs (a - b); }
 
 /** If @e a is less than @e b returns 0 otherwise return @e a. */
-template<class Type> inline Type thresh (Type const& a, Type const& b) throw() { return (a < b) ? Math<Type>::get0() : a; }
+template<class Type> PLONK_INLINE_HIGH Type thresh (Type const& a, Type const& b) throw() { return (a < b) ? Math<Type>::get0() : a; }
 
 template<class Type>
-inline Type round (Type const& a, Type const& b) throw()
+PLONK_INLINE_HIGH Type round (Type const& a, Type const& b) throw()
 {
 	const Type offset = a < Math<Type>::get0() ? Math<Type>::get_0_5() : Math<Type>::get0_5();
 	const int n = int (a / b + offset);
@@ -254,16 +254,16 @@ inline Type round (Type const& a, Type const& b) throw()
 }
 
 template<class Type>
-inline Type trunc (Type const& a, Type const& b) throw()
+PLONK_INLINE_HIGH Type trunc (Type const& a, Type const& b) throw()
 {
 	const int n = int (a / b);
 	return b * Type (n);
 }
 
-template<class Type> inline Type clip2 (Type const& value, Type const& range) throw()     { return clip<Type> (value, -range, range); }
-template<class Type> inline Type wrap (Type const& value, Type const& upper) throw()      { return wrap (value, Math<Type>::get0(), upper); }
+template<class Type> PLONK_INLINE_HIGH Type clip2 (Type const& value, Type const& range) throw()     { return clip<Type> (value, -range, range); }
+template<class Type> PLONK_INLINE_HIGH Type wrap (Type const& value, Type const& upper) throw()      { return wrap (value, Math<Type>::get0(), upper); }
 
-template<class Type> inline Type decayFeedback (Type const& delayTime, Type const& decayTime) throw()
+template<class Type> PLONK_INLINE_HIGH Type decayFeedback (Type const& delayTime, Type const& decayTime) throw()
 {
     const Type zero (Math<Type>::get0());
     const Type log001 (Math<Type>::getLog0_001());
@@ -277,7 +277,7 @@ template<class Type> inline Type decayFeedback (Type const& delayTime, Type cons
 /// @}
 
 #define PLONK_BINARYOPFUNCTION_DEFINE(OP)\
-    static inline OperandType OP (OperandType const& a, OperandType const& b) throw() { return plonk::OP (a, b); }
+    static PLONK_INLINE_HIGH OperandType OP (OperandType const& a, OperandType const& b) throw() { return plonk::OP (a, b); }
 
 template<class OperandType>
 class BinaryOpFunctions

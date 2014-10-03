@@ -79,7 +79,7 @@ PLANK_END_C_LINKAGE
 #include "plank_LockFreeLinkedListElementInline.h"
 #undef PLANK_INLINING_FUNCTIONS
 
-// make these PLONK_INLINE_LOW at some point..
+// make these PLANK_INLINE_LOW at some point..
 
 #define pl_LockFreeQueueElement_CreateAndInit  pl_LockFreeLinkedListElement_CreateAndInit
 #define pl_LockFreeQueueElement_Create  pl_LockFreeLinkedListElement_Create

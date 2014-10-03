@@ -87,7 +87,7 @@ public:
     { 
     }
     
-    inline ReturnType operator()() throw() 
+    PLONK_INLINE_LOW ReturnType operator()() throw() 
     { 
         return function (value1, value2, value3); 
     }
@@ -121,7 +121,7 @@ public:
     typedef ReturnType Return;
     
     FunctionContainer() throw()  { }    
-    inline ReturnType operator()() throw() { return function(); }
+    PLONK_INLINE_LOW ReturnType operator()() throw() { return function(); }
     virtual ReturnType function() = 0;
     
     static const int argumentCount;
@@ -151,7 +151,7 @@ public:
     { 
     }
     
-    inline ReturnType operator()() throw() 
+    PLONK_INLINE_LOW ReturnType operator()() throw() 
     { 
         return function (value1); 
     }
@@ -192,7 +192,7 @@ public:
     { 
     }
     
-    inline ReturnType operator()() throw() 
+    PLONK_INLINE_LOW ReturnType operator()() throw() 
     { 
         return function (value1, value2); 
     }
@@ -249,7 +249,7 @@ public:
     { 
     }
     
-    inline ReturnType operator()() throw() 
+    PLONK_INLINE_LOW ReturnType operator()() throw() 
     { 
         return function (value1, value2, value3); 
     }
@@ -284,7 +284,7 @@ public:
     { 
     }
     
-    inline ReturnType operator()() throw() { return function(); }
+    PLONK_INLINE_LOW ReturnType operator()() throw() { return function(); }
     
     static const int argumentCount;
     static const bool isProxy;
@@ -319,7 +319,7 @@ public:
     { 
     }
     
-    inline ReturnType operator()() throw() 
+    PLONK_INLINE_LOW ReturnType operator()() throw() 
     { 
         return function (value1); 
     }
@@ -362,7 +362,7 @@ public:
     { 
     }
     
-    inline ReturnType operator()() throw() 
+    PLONK_INLINE_LOW ReturnType operator()() throw() 
     { 
         return function (value1, value2); 
     }
@@ -406,7 +406,7 @@ public:
     {
     }
     
-    inline ReturnType call() throw()
+    PLONK_INLINE_LOW ReturnType call() throw()
     {
         return function();
     }
@@ -424,7 +424,7 @@ public:
     {
     }
     
-    inline ReturnType call() throw()
+    PLONK_INLINE_LOW ReturnType call() throw()
     {
         return function();
     }
@@ -445,7 +445,7 @@ public:
     {
     }
     
-    inline ReturnType call() throw()
+    PLONK_INLINE_LOW ReturnType call() throw()
     {
         return function();
     }
@@ -471,7 +471,7 @@ public:
     {
     }
     
-    inline ReturnType call() throw()
+    PLONK_INLINE_LOW ReturnType call() throw()
     {
         return function();
     }
@@ -506,7 +506,7 @@ public:
     {
     }
     
-    inline ReturnType call() throw()
+    PLONK_INLINE_LOW ReturnType call() throw()
     {
         return function();
     }
@@ -527,7 +527,7 @@ public:
     {
     }
     
-    inline ReturnType call() throw()
+    PLONK_INLINE_LOW ReturnType call() throw()
     {
         return function();
     }
@@ -550,7 +550,7 @@ public:
     {
     }
     
-    inline ReturnType call() throw()
+    PLONK_INLINE_LOW ReturnType call() throw()
     {
         return function();
     }
@@ -578,7 +578,7 @@ public:
     {
     }
     
-    inline ReturnType call() throw()
+    PLONK_INLINE_LOW ReturnType call() throw()
     {
         return function();
     }
@@ -621,7 +621,7 @@ public:
     {
     }
     
-    inline ReturnType operator()() throw()
+    PLONK_INLINE_LOW ReturnType operator()() throw()
     {
         return this->getInternal()->call();
     }    
@@ -641,7 +641,7 @@ public:
     {
     }
     
-    inline ReturnType operator()() throw()
+    PLONK_INLINE_LOW ReturnType operator()() throw()
     {
         return this->getInternal()->call();
     }    
@@ -665,7 +665,7 @@ public:
     {
     }
     
-    inline ReturnType operator()() throw()
+    PLONK_INLINE_LOW ReturnType operator()() throw()
     {
         return this->getInternal()->call();
     }    
@@ -696,7 +696,7 @@ public:
     {
     }
     
-    inline ReturnType operator()() throw()
+    PLONK_INLINE_LOW ReturnType operator()() throw()
     {
         return this->getInternal()->call();
     }    
@@ -738,7 +738,7 @@ public:
     {
     }
     
-    inline ReturnType operator()() throw()
+    PLONK_INLINE_LOW ReturnType operator()() throw()
     {
         return this->getInternal()->call();
     }    
@@ -759,7 +759,7 @@ public:
     {
     }
     
-    inline ReturnType operator()() throw()
+    PLONK_INLINE_LOW ReturnType operator()() throw()
     {
         return this->getInternal()->call();
     }    
@@ -785,7 +785,7 @@ public:
     {
     }
     
-    inline ReturnType operator()() throw()
+    PLONK_INLINE_LOW ReturnType operator()() throw()
     {
         return this->getInternal()->call();
     }    
@@ -818,7 +818,7 @@ public:
     {
     }
     
-    inline ReturnType operator()() throw()
+    PLONK_INLINE_LOW ReturnType operator()() throw()
     {
         return this->getInternal()->call();
     }    
@@ -1036,7 +1036,7 @@ class Function
 public:
 
     template<class ReturnType, class Arg1CallType>
-    static inline FunctionCaller<FunctionContainer<ReturnType>, 0, false> 
+    static PLONK_INLINE_LOW FunctionCaller<FunctionContainer<ReturnType>, 0, false> 
     create() throw()
     {        
         typedef FunctionCaller<FunctionContainer<ReturnType>, 1, false> FunctionCallerType;
@@ -1044,7 +1044,7 @@ public:
     }
     
     template<class ReturnType, class Arg1CallType>
-    static inline FunctionCaller<FunctionContainer<ReturnType, 
+    static PLONK_INLINE_LOW FunctionCaller<FunctionContainer<ReturnType, 
                                                    typename TypeUtility<Arg1CallType>::OriginalType>, 1, false> 
     create (Arg1CallType argument1) throw()
     {
@@ -1055,7 +1055,7 @@ public:
     }
     
     template<class ReturnType, class Arg1CallType, class Arg2CallType>
-    static inline FunctionCaller<FunctionContainer<ReturnType, 
+    static PLONK_INLINE_LOW FunctionCaller<FunctionContainer<ReturnType, 
                                                    typename TypeUtility<Arg1CallType>::OriginalType,
                                                    typename TypeUtility<Arg2CallType>::OriginalType>, 2, false> 
     create (Arg1CallType argument1, Arg2CallType argument2) throw()
@@ -1068,7 +1068,7 @@ public:
     }    
     
     template<class ReturnType, class Arg1CallType, class Arg2CallType, class Arg3CallType>
-    static inline FunctionCaller<FunctionContainer<ReturnType, 
+    static PLONK_INLINE_LOW FunctionCaller<FunctionContainer<ReturnType, 
                                                    typename TypeUtility<Arg1CallType>::OriginalType,
                                                    typename TypeUtility<Arg2CallType>::OriginalType,
                                                    typename TypeUtility<Arg3CallType>::OriginalType>, 3, false> 
@@ -1083,7 +1083,7 @@ public:
     }
     
     template<class ReturnType>
-    static inline FunctionCaller<FunctionContainerProxy<ReturnType>, 0, true> 
+    static PLONK_INLINE_LOW FunctionCaller<FunctionContainerProxy<ReturnType>, 0, true> 
     create (ReturnType (*proxyFunction) (void)) throw()
     {
         typedef FunctionCaller<FunctionContainerProxy<ReturnType>, 0, true> FunctionCallerType;
@@ -1091,7 +1091,7 @@ public:
     }
     
     template<class ReturnType, class Arg1CallType>
-    static inline FunctionCaller<FunctionContainerProxy<ReturnType, 
+    static PLONK_INLINE_LOW FunctionCaller<FunctionContainerProxy<ReturnType, 
                                                         typename TypeUtility<Arg1CallType>::OriginalType>, 1, true> 
     create (ReturnType (*proxyFunction) (typename TypeUtility<Arg1CallType>::PassType),
             Arg1CallType argument1) throw()
@@ -1102,7 +1102,7 @@ public:
     }
     
     template<class ReturnType, class Arg1CallType, class Arg2CallType>
-    static inline FunctionCaller<FunctionContainerProxy<ReturnType, 
+    static PLONK_INLINE_LOW FunctionCaller<FunctionContainerProxy<ReturnType, 
                                                         typename TypeUtility<Arg1CallType>::OriginalType,
                                                         typename TypeUtility<Arg2CallType>::OriginalType>, 2, true> 
     create (ReturnType (*proxyFunction) (typename TypeUtility<Arg1CallType>::PassType,
@@ -1117,7 +1117,7 @@ public:
     }
     
     template<class ReturnType, class Arg1CallType, class Arg2CallType, class Arg3CallType>
-    static inline FunctionCaller<FunctionContainerProxy<ReturnType, 
+    static PLONK_INLINE_LOW FunctionCaller<FunctionContainerProxy<ReturnType, 
                                                         typename TypeUtility<Arg1CallType>::OriginalType,
                                                         typename TypeUtility<Arg2CallType>::OriginalType,
                                                         typename TypeUtility<Arg3CallType>::OriginalType>, 3, true> 

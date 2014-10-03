@@ -113,7 +113,7 @@ public:
         return returnValue;
     }
     
-    inline LongLong length() throw()
+    PLONK_INLINE_LOW LongLong length() throw()
     {
         return pl_SimpleStack_GetSize (&stack);
     }
@@ -183,7 +183,7 @@ public:
         return returnValue;
     }
     
-    inline LongLong length() throw()
+    PLONK_INLINE_LOW LongLong length() throw()
     {
         return pl_SimpleStack_GetSize (&stack);
     }
@@ -256,7 +256,7 @@ public:
         return this->getInternal()->pop();
     }
     
-    inline LongLong length() throw()
+    PLONK_INLINE_LOW LongLong length() throw()
     {
         return this->getInternal()->length();
     }

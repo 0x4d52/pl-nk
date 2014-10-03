@@ -136,7 +136,7 @@ public:
     
     /** Default constructor.
      This creates a Unit with a single null Channel. */
-    inline UnitBase() throw()
+    PLONK_INLINE_LOW UnitBase() throw()
     :   Base (ChannelType())
     {
     }
@@ -181,7 +181,7 @@ public:
      This creates a Unit with a single constant Channel. Ideally you could/should cache frequently used
      constants (e.g., 1, pi, etc). */
     template<class ValueType>
-    inline UnitBase (ValueType const& valueInit) throw()
+    PLONK_INLINE_LOW UnitBase (ValueType const& valueInit) throw()
     :   UnitType (ChannelType (valueInit))
     {
         this->atUnchecked (0).initChannel (0);
@@ -191,14 +191,14 @@ public:
      This creates a Unit with a multiple constant Channel objects derived 
      from an array of numerical values. */
     template<class ValueType>
-    inline UnitBase (NumericalArray<ValueType> const& values) throw()
+    PLONK_INLINE_LOW UnitBase (NumericalArray<ValueType> const& values) throw()
     :   UnitType (UnitType::template collect<ChannelType> (values))
     {
         for (int i = 0; i < this->getNumChannels(); ++i)
             this->atUnchecked (i).initChannel (i);
     }    
     
-    inline UnitBase (VariableType const& variable) throw()
+    PLONK_INLINE_LOW UnitBase (VariableType const& variable) throw()
     :   UnitType (ParamUnit<SampleType>::kr (variable))
     {
     }
@@ -219,14 +219,14 @@ public:
     }
     
     /** Copy constructor from the base array type. */
-    inline UnitBase (UnitBase const& copy) throw()
+    PLONK_INLINE_LOW UnitBase (UnitBase const& copy) throw()
 	:	UnitType (static_cast<UnitType const&> (copy))
 	{
 	}                
     
     
     template<template <typename> class OtherUnitType, class OtherSampleType>
-    inline UnitBase (OtherUnitType<OtherSampleType> const& other)
+    PLONK_INLINE_LOW UnitBase (OtherUnitType<OtherSampleType> const& other)
     :   UnitType (TypeUnit<SampleType,OtherSampleType>::ar (other))
     {
     }
@@ -585,14 +585,14 @@ public:
 	}    
     
     /** Cast to a single channel. */
-    inline operator const ChannelType& () const throw()
+    PLONK_INLINE_LOW operator const ChannelType& () const throw()
     {
         plonk_assert (this->getNumChannels() == 1);
         return this->atUnchecked (0);
     }
     
     /** Cast to a single channel. */
-    inline operator ChannelType& () throw()
+    PLONK_INLINE_LOW operator ChannelType& () throw()
     {
         plonk_assert (this->getNumChannels() == 1);
         return this->atUnchecked (0);
@@ -601,7 +601,7 @@ public:
     /** Primary means of creating Unit objects.
      Used with most non-proxy-owning ChannelInternal classes. */
     template<class ChannelInternalClassType>
-    static inline UnitBase createFromInputs (Inputs const& inputs, 
+    static PLONK_INLINE_LOW UnitBase createFromInputs (Inputs const& inputs, 
                                              typename ChannelInternalClassType::Data const& data,
                                              BlockSize const& preferredBlockSize,
                                              SampleRate const& preferredSampleRate) throw()
@@ -635,7 +635,7 @@ public:
     /** Primary means of creating Unit objects with proxies.
      Used with most proxy-owning ChannelInternal classes. */
     template<class ProxyOwnerChannelInternalClassType>
-    static inline UnitBase proxiesFromInputs (Inputs const& inputs, 
+    static PLONK_INLINE_LOW UnitBase proxiesFromInputs (Inputs const& inputs, 
                                               typename ProxyOwnerChannelInternalClassType::Data const& data,
                                               BlockSize const& preferredBlockSize,
                                               SampleRate const& preferredSampleRate) throw()
@@ -666,7 +666,7 @@ public:
      will be ignored (not applied) if it is a single channel constant equal to
      0 (or null). On some platforms this might be implemented as a single
      multiply-and-add operation. */
-    static inline UnitBase applyMulAdd (UnitBase const& mainUnit, 
+    static PLONK_INLINE_LOW UnitBase applyMulAdd (UnitBase const& mainUnit, 
                                         UnitBase const& mul,
                                         UnitBase const& add) throw()
     {
@@ -710,7 +710,7 @@ public:
     
     /** Resamples this unit to a different sample rate and/or block size.
      By default the default sample rate and default block size are used. */
-    inline UnitBase ar() const throw()
+    PLONK_INLINE_LOW UnitBase ar() const throw()
     {
         return ResampleUnit<SampleType,Interp::Linear>::ar (*this);
     }
@@ -727,55 +727,55 @@ public:
     }
     
     /** Resamples this unit to the default control rate sample rate and block size. */
-    inline UnitBase kr() const throw()
+    PLONK_INLINE_LOW UnitBase kr() const throw()
     {
         return ResampleUnit<SampleType,Interp::Linear>::kr (*this);
     }
 
-    inline UnitBase reblock (BlockSize const& newBlockSize) const throw()
+    PLONK_INLINE_LOW UnitBase reblock (BlockSize const& newBlockSize) const throw()
     {
         return ReblockUnit<SampleType>::ar (*this, newBlockSize);
     }
     
-    inline UnitBase reblock() const throw()
+    PLONK_INLINE_LOW UnitBase reblock() const throw()
     {
         return ReblockUnit<SampleType>::ar (*this, BlockSize::getDefault());
     }
     
-    inline UnitBase lag (UnitBase const& duration) const throw()
+    PLONK_INLINE_LOW UnitBase lag (UnitBase const& duration) const throw()
     {
         return LagUnit<SampleType>::ar (*this, duration);
     }
 
-    inline UnitBase lag() const throw()
+    PLONK_INLINE_LOW UnitBase lag() const throw()
     {
         return LagUnit<SampleType>::ar (*this);
     }
     
-    inline UnitBase dc (UnitBase const& control) const throw()
+    PLONK_INLINE_LOW UnitBase dc (UnitBase const& control) const throw()
     {
         return DCUnit<SampleType>::ar (*this, control);
     }
     
-    inline UnitBase dc() const throw()
+    PLONK_INLINE_LOW UnitBase dc() const throw()
     {
         return DCUnit<SampleType>::ar (*this);
     }
 
     /** Mixes this unit down to a single channel. */
-    inline UnitBase mix() const throw()
+    PLONK_INLINE_LOW UnitBase mix() const throw()
     {
         return MixerUnit<SampleType>::ar (*this, true);
     }
     
     /** Mixes this unit down to a single channel with and auto-deletion prevention barrier. 
      This prevents things like envelopes from releasing the mixer that contains this unit. */
-    inline UnitBase mixBarrier() const throw()
+    PLONK_INLINE_LOW UnitBase mixBarrier() const throw()
     {
         return MixerUnit<SampleType>::ar (*this, false);
     }
     
-    inline UnitBase diff() const throw()
+    PLONK_INLINE_LOW UnitBase diff() const throw()
     {
         return DiffUnit<SampleType>::ar (*this);
     }
@@ -839,14 +839,14 @@ public:
     PLONK_UNARYOPS(UnitBase);
     
     /** Linear to linear mapping. */
-    inline UnitBase linlin (UnitBase const& inLow, UnitBase const& inHigh,
+    PLONK_INLINE_LOW UnitBase linlin (UnitBase const& inLow, UnitBase const& inHigh,
                             UnitBase const& outLow, UnitBase const& outHigh) const throw()
     {
         return plonk::linlin (*this, inLow, inHigh, outLow, outHigh);
     }
     
     /** Linear to linear mapping assuming the input is in the range -1...+1. */
-    inline UnitBase linlin (UnitBase const& outLow, UnitBase const& outHigh) const throw()
+    PLONK_INLINE_LOW UnitBase linlin (UnitBase const& outLow, UnitBase const& outHigh) const throw()
     {
         const SampleType peak (TypeUtility<SampleType>::getTypePeak());
         const SampleType peak2peak (peak * Math<SampleType>::get2());
@@ -857,7 +857,7 @@ public:
     
     /** Linear to exponential mapping. 
      Note that the output range must not cross or meet zero. */
-    inline UnitBase linexp (UnitBase const& inLow, UnitBase const& inHigh,
+    PLONK_INLINE_LOW UnitBase linexp (UnitBase const& inLow, UnitBase const& inHigh,
                             UnitBase const& outLow, UnitBase const& outHigh) const throw()
     {
         return plonk::linexp (*this, inLow, inHigh, outLow, outHigh);
@@ -865,7 +865,7 @@ public:
     
     /** Linear to exponential mapping assuming the input is in the range -1...+1. 
      Note that the output range must not cross or meet zero. */
-    inline UnitBase linexp (UnitBase const& outLow, UnitBase const& outHigh) const throw()
+    PLONK_INLINE_LOW UnitBase linexp (UnitBase const& outLow, UnitBase const& outHigh) const throw()
     {
         const SampleType peak (TypeUtility<SampleType>::getTypePeak());
         const SampleType peak2peak (peak * Math<SampleType>::get2());
@@ -876,28 +876,28 @@ public:
     }
     
     /** Linear to sinusoidal mapping. */
-    inline UnitBase linsin (UnitBase const& inLow, UnitBase const& inHigh, 
+    PLONK_INLINE_LOW UnitBase linsin (UnitBase const& inLow, UnitBase const& inHigh, 
                      UnitBase const& outLow, UnitBase const& outHigh) const throw()
     {
         return plonk::linsin (*this, inLow, inHigh, outLow, outHigh);
     }
     
     /** Linear to sinusoidal mapping assuming the input is in the range -1...+1. */
-    inline UnitBase linsin (UnitBase const& outLow, UnitBase const& outHigh) const throw()
+    PLONK_INLINE_LOW UnitBase linsin (UnitBase const& outLow, UnitBase const& outHigh) const throw()
     {
         const SampleType peak (TypeUtility<SampleType>::getTypePeak());
         return plonk::linsin2 (*this, UnitBase (-peak), UnitBase (peak), outLow, outHigh);
     }
     
     /** Linear to Welch curve mapping. */
-    inline UnitBase linwelch (UnitBase const& inLow, UnitBase const& inHigh, 
+    PLONK_INLINE_LOW UnitBase linwelch (UnitBase const& inLow, UnitBase const& inHigh, 
                        UnitBase const& outLow, UnitBase const& outHigh) const throw()
     {
         return plonk::linwelch (*this, inLow, inHigh, outLow, outHigh);
     }
     
     /** Linear to Welch curve mapping assuming the input is in the range -1...+1. */
-    inline UnitBase linwelch (UnitBase const& outLow, UnitBase const& outHigh) const throw()
+    PLONK_INLINE_LOW UnitBase linwelch (UnitBase const& outLow, UnitBase const& outHigh) const throw()
     {
         const SampleType peak (TypeUtility<SampleType>::getTypePeak());
         return plonk::linwelch (*this, UnitBase (-peak), UnitBase (peak), outLow, outHigh);
@@ -905,7 +905,7 @@ public:
     
     /** Exponential to linear mapping. 
      Note that the intput range must not cross or meet zero. */
-    inline UnitBase explin (UnitBase const& inLow, UnitBase const& inHigh, 
+    PLONK_INLINE_LOW UnitBase explin (UnitBase const& inLow, UnitBase const& inHigh, 
                      UnitBase const& outLow, UnitBase const& outHigh) const throw()
     {
         return plonk::explin (*this, inLow, inHigh, outLow, outHigh);
@@ -935,27 +935,27 @@ public:
     }
 
     /** Gets the number of channels in this unit. */
-    inline int getNumChannels() const throw() { return this->length(); }
+    PLONK_INLINE_LOW int getNumChannels() const throw() { return this->length(); }
     
     /** Returns a unit with the single channel specified.
      This wraps the index so that it is always in range. It is also recursive such that the returned
      channel has in turn stripped out the other multiple channels during the process. */
-    inline UnitBase getChannel (const int index) throw() { return this->wrapAt (index).getChannel (index); }
+    PLONK_INLINE_LOW UnitBase getChannel (const int index) throw() { return this->wrapAt (index).getChannel (index); }
     
     /** Returns a unit with the single channel specified.
      This wraps the index so that it is always in range. It is also recursive such that the returned
      channel has in turn stripped out the other multiple channels during the process. */    
-    inline UnitBase getChannel (const int index) const throw() { return this->copy().wrapAt (index).getChannel (index); }
+    PLONK_INLINE_LOW UnitBase getChannel (const int index) const throw() { return this->copy().wrapAt (index).getChannel (index); }
 
     /** Returns a single channel object.
      This wraps the index so that it is always in range. It is also recursive such that the returned
      channel has in turn stripped out the other multiple channels during the process. */
-    inline ChannelType getChannelObject (const int index) throw() { return this->wrapAt (index).getChannel (index); }
+    PLONK_INLINE_LOW ChannelType getChannelObject (const int index) throw() { return this->wrapAt (index).getChannel (index); }
     
     /** Returns a single channel object.
      This wraps the index so that it is always in range. It is also recursive such that the returned
      channel has in turn stripped out the other multiple channels during the process. */
-    inline ChannelType getChannelObject (const int index) const throw() { return this->copy().wrapAt (index).getChannel (index); }
+    PLONK_INLINE_LOW ChannelType getChannelObject (const int index) const throw() { return this->copy().wrapAt (index).getChannel (index); }
     
     /** Returns a unit with the single channel specified.
      This wraps the index so that it is always in range. It is also recursive such that the returned
@@ -1002,7 +1002,7 @@ public:
     BlockSize getMaxBlockSize() const throw();
         
     /** Get the block size of a specific channel in this unit. */
-    inline BlockSize getBlockSize (const int index) const throw()            { return this->wrapAt (index).getBlockSize(); }
+    PLONK_INLINE_LOW BlockSize getBlockSize (const int index) const throw()            { return this->wrapAt (index).getBlockSize(); }
 
     /** Set the block size of all channels in this unit. */
     void setBlockSize (BlockSize const& newBlockSize) throw()
@@ -1033,7 +1033,7 @@ public:
         
     /** Get the sample rate of a specific channel in this unit.  
      Indices out of range will be wrapped to the available channels. */
-    inline SampleRate getSampleRate (const int index) const throw()          { return this->wrapAt (index).getSampleRate(); }
+    PLONK_INLINE_LOW SampleRate getSampleRate (const int index) const throw()          { return this->wrapAt (index).getSampleRate(); }
     
     /** Set the sample rate of all channels in this unit. */
     void setSampleRate (SampleRate const& newSampleRate) throw()
@@ -1056,13 +1056,13 @@ public:
         return result;
     }
     
-    inline double getSampleDurationInTicks (const int index) const throw()         { return this->wrapAt (index)->getSampleDurationInTicks(); }
-    inline double getBlockDurationInTicks (const int index) const throw()          { return this->wrapAt (index)->getBlockDurationInTicks(); }
+    PLONK_INLINE_LOW double getSampleDurationInTicks (const int index) const throw()         { return this->wrapAt (index)->getSampleDurationInTicks(); }
+    PLONK_INLINE_LOW double getBlockDurationInTicks (const int index) const throw()          { return this->wrapAt (index)->getBlockDurationInTicks(); }
     
-    inline const DoubleVariable& getOverlap (const int index) const throw()        { return this->wrapAt (index).getOverlap(); }
-    inline DoubleVariable& getOverlap (const int index) throw()                    { return this->wrapAt (index).getOverlap(); }
+    PLONK_INLINE_LOW const DoubleVariable& getOverlap (const int index) const throw()        { return this->wrapAt (index).getOverlap(); }
+    PLONK_INLINE_LOW DoubleVariable& getOverlap (const int index) throw()                    { return this->wrapAt (index).getOverlap(); }
     
-    inline bool channelsHaveSameOverlap() const throw()
+    PLONK_INLINE_LOW bool channelsHaveSameOverlap() const throw()
     {
         const int numChannels = this->getNumChannels();
         plonk_assert (numChannels > 0);
@@ -1077,7 +1077,7 @@ public:
         return true;
     }
     
-    inline bool channelsHaveSameBlockSize() const throw()
+    PLONK_INLINE_LOW bool channelsHaveSameBlockSize() const throw()
     {
         const int numChannels = this->getNumChannels();
         plonk_assert (numChannels > 0);
@@ -1092,7 +1092,7 @@ public:
         return true;
     }
     
-    inline bool channelsHaveSameSampleRate() const throw()
+    PLONK_INLINE_LOW bool channelsHaveSameSampleRate() const throw()
     {
         const int numChannels = this->getNumChannels();
         plonk_assert (numChannels > 0);
@@ -1109,34 +1109,34 @@ public:
     
     /** Get the output buffer of a specific channel.  
      Indices out of range will be wrapped to the available channels. */
-    inline const Buffer& getOutputBuffer (const int index) const throw() 
+    PLONK_INLINE_LOW const Buffer& getOutputBuffer (const int index) const throw() 
     { 
         return this->wrapAt (index).getOutputBuffer();
     }
     
     /** Get the output buffer of a specific channel.  
      Indices out of range will be wrapped to the available channels. */
-    inline Buffer& getOutputBuffer (const int index) throw() 
+    PLONK_INLINE_LOW Buffer& getOutputBuffer (const int index) throw() 
     { 
         return this->wrapAt (index).getOutputBuffer();
     }
     
     /** Get a pointer to the raw samples of a specific channel.  
      Indices out of range will be wrapped to the available channels. */
-    inline const SampleType* getOutputSamples (const int index) const throw()
+    PLONK_INLINE_LOW const SampleType* getOutputSamples (const int index) const throw()
     { 
         return this->wrapAt (index)->getOutputSamples(); 
     }
     
     /** Get a pointer to the raw samples of a specific channel.  
      Indices out of range will be wrapped to the available channels. */
-    inline SampleType* getOutputSamples (const int index) throw()
+    PLONK_INLINE_LOW SampleType* getOutputSamples (const int index) throw()
     { 
         return this->wrapAt (index)->getOutputSamples(); 
     }
     
     /** Set the output buffer of a specific channel to use an external buffer. */
-    inline void setOutputBuffer (const int index, Buffer const& externalBuffer) throw()
+    PLONK_INLINE_LOW void setOutputBuffer (const int index, Buffer const& externalBuffer) throw()
     {
         this->atUnchecked (index).setOutputBuffer (externalBuffer);
     }
@@ -1153,12 +1153,12 @@ public:
     
     /** Get the current value of a specific channel in this unit.
      Indices out of range will be wrapped to the available channels. */
-    inline const SampleType& getValue (const int index) const throw()
+    PLONK_INLINE_LOW const SampleType& getValue (const int index) const throw()
     {
         return this->wrapAt (index).getValue();
     }
     
-    inline const Buffer getValues() const throw()
+    PLONK_INLINE_LOW const Buffer getValues() const throw()
     {
         const int numChannels = this->getNumChannels();
         Buffer result = Buffer::withSize (numChannels);
@@ -1170,33 +1170,33 @@ public:
         return result;
     }
     
-    inline const TimeStamp getNextTimeStamp(const int index) const throw()
+    PLONK_INLINE_LOW const TimeStamp getNextTimeStamp(const int index) const throw()
     {
         return this->wrapAt (index).getNextTimeStamp();
     }
     
-    inline UnitBase setNull() throw()
+    PLONK_INLINE_LOW UnitBase setNull() throw()
     {
         this->operator= (UnitBase::getNull());
         return *this;
     }
     
-    inline bool isNull (const int index) const throw()
+    PLONK_INLINE_LOW bool isNull (const int index) const throw()
     {
         return this->wrapAt (index).isNull();
     }
     
-    inline bool isNotNull (const int index) const throw()
+    PLONK_INLINE_LOW bool isNotNull (const int index) const throw()
     {
         return ! this->isNull (index);
     }
     
-    inline bool isConstant (const int index) const throw()
+    PLONK_INLINE_LOW bool isConstant (const int index) const throw()
     {
         return this->wrapAt (index).isConstant();
     }
     
-    inline bool isEachChannelConstant() const throw()
+    PLONK_INLINE_LOW bool isEachChannelConstant() const throw()
     {        
         for (int i = 0; i < this->getNumChannels(); ++i)
             if (!this->atUnchecked (i).isConstant())
@@ -1205,13 +1205,13 @@ public:
         return true;
     }
     
-    inline bool isNotConstant (const int index) const throw()
+    PLONK_INLINE_LOW bool isNotConstant (const int index) const throw()
     {
         return ! this->isConstant (index);
     }    
     
     /** Returns @c true if this unit contains only a single null channel. */
-    inline bool isNull() const throw()
+    PLONK_INLINE_LOW bool isNull() const throw()
     {
         if (this->getNumChannels() != 1)
             return false;
@@ -1222,13 +1222,13 @@ public:
     }
     
     /** Returns @c false if this unit contains only a single null channel. */
-    inline bool isNotNull() const throw()
+    PLONK_INLINE_LOW bool isNotNull() const throw()
     {
         return ! this->isNull();
     }
     
     /** Returns @c true if this unit contains only a single constant channel. */
-    inline bool isConstant() const throw()
+    PLONK_INLINE_LOW bool isConstant() const throw()
     {
         if (this->getNumChannels() != 1)
             return false;
@@ -1239,18 +1239,18 @@ public:
     }
     
     /** Returns @c false if this unit contains only a single constant channel. */
-    inline bool isNotConstant() const throw()
+    PLONK_INLINE_LOW bool isNotConstant() const throw()
     {
         return ! this->isConstant();
     }    
     
-    inline void setToNull() throw()
+    PLONK_INLINE_LOW void setToNull() throw()
     {
         this->setSize (1, true);
         this->put (0, ChannelType::getNull());
     }
     
-    inline TextArray getNames() throw()
+    PLONK_INLINE_LOW TextArray getNames() throw()
     {
         TextArray names;
         for (int i = 0; i < this->getNumChannels(); ++i)
@@ -1259,13 +1259,13 @@ public:
     }
     
     /** Returns @c true if this unit needs to process for the given timestamp. */
-    inline bool needsToProcess (ProcessInfo const& info, const int channel) const throw()
+    PLONK_INLINE_LOW bool needsToProcess (ProcessInfo const& info, const int channel) const throw()
     {        
         return this->wrapAt (channel).needsToProcess (info, channel);
     }
     
     /** Returns @c true if this unit (i.e., one of its channels) needs to be deleted becasue it has. */
-    inline bool shouldBeDeletedNow (ProcessInfo const& info) const throw()
+    PLONK_INLINE_LOW bool shouldBeDeletedNow (ProcessInfo const& info) const throw()
     {
         bool flag = false;
         
@@ -1298,7 +1298,7 @@ public:
      for each required block of data. This is generally used by ChannelInternal
      subclasses when obtaining input data.
      @return The buffer from the requested channel. */
-    inline const Buffer& process (ProcessInfo& info, const int channel) throw()
+    PLONK_INLINE_LOW const Buffer& process (ProcessInfo& info, const int channel) throw()
     {
         this->wrapAt (channel).process (info, channel);
         return this->getOutputBuffer (channel);
@@ -1382,7 +1382,7 @@ PLONK_BINARYOPGLOBALS_TEMPLATE(UnitBase,SampleType); // declares global function
 PLONK_UNARYOPGLOBALS_TEMPLATE(UnitBase,SampleType);  // declares global functions with the same name as the unary operators
 
 //template<class SampleType>
-//inline UnitBase<SampleType> explin (UnitBase<SampleType> const& input, 
+//PLONK_INLINE_LOW UnitBase<SampleType> explin (UnitBase<SampleType> const& input, 
 //                                    UnitBase<SampleType> const& inLow, UnitBase<SampleType> const& inHigh, 
 //                                    UnitBase<SampleType> const& outLow, UnitBase<SampleType> const& outHigh) throw()
 //{
@@ -1402,14 +1402,14 @@ UnitBase<SampleType> ar (UnitBase<SampleType> const& unit,
 
 /** Resamples a unit to the default control rate sample rate and block size. */
 template<class SampleType>
-inline UnitBase<SampleType> kr (UnitBase<SampleType> const& unit) throw()
+PLONK_INLINE_LOW UnitBase<SampleType> kr (UnitBase<SampleType> const& unit) throw()
 {
     return unit.kr();
 }
 
 /** Mixes a unit down to a single channel. */
 template<class SampleType>
-inline UnitBase<SampleType> mix (UnitBase<SampleType> const& unit) throw()
+PLONK_INLINE_LOW UnitBase<SampleType> mix (UnitBase<SampleType> const& unit) throw()
 {
     return unit.mix();
 }

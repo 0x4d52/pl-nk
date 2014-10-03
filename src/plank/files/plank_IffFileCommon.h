@@ -83,7 +83,7 @@ typedef struct PlankIffFile
     PlankIffFileHeaderInfo headerInfo;
 } PlankIffFile;
 
-static PLONK_INLINE_LOW PlankResult pl_IffFile_WriteChunkLength (PlankIffFileRef p, const PlankLL length)
+static PLANK_INLINE_LOW PlankResult pl_IffFile_WriteChunkLength (PlankIffFileRef p, const PlankLL length)
 {
     if (p->headerInfo.lengthSize == 4)
     {
@@ -104,7 +104,7 @@ static PLONK_INLINE_LOW PlankResult pl_IffFile_WriteChunkLength (PlankIffFileRef
     }
 }
 
-static PLONK_INLINE_LOW PlankResult pl_IffFile_ReadChunkLength (PlankIffFileRef p, PlankLL *length)
+static PLANK_INLINE_LOW PlankResult pl_IffFile_ReadChunkLength (PlankIffFileRef p, PlankLL *length)
 {
     PlankResult result;
     PlankUI length32;
@@ -140,7 +140,7 @@ exit:
     return result;
 }
 
-static PLONK_INLINE_LOW PlankResult pl_IffFile_InitID (PlankIffFileRef p, const char* string, PlankIffID* chunkID)
+static PLANK_INLINE_LOW PlankResult pl_IffFile_InitID (PlankIffFileRef p, const char* string, PlankIffID* chunkID)
 {
     int length;
     
@@ -164,7 +164,7 @@ static PLONK_INLINE_LOW PlankResult pl_IffFile_InitID (PlankIffFileRef p, const 
     }
 }
 
-static PLONK_INLINE_LOW PlankResult pl_IffFile_WriteChunkID (PlankIffFileRef p, const PlankIffID* chunkID)
+static PLANK_INLINE_LOW PlankResult pl_IffFile_WriteChunkID (PlankIffFileRef p, const PlankIffID* chunkID)
 {
     switch (p->headerInfo.idType)
     {
@@ -174,7 +174,7 @@ static PLONK_INLINE_LOW PlankResult pl_IffFile_WriteChunkID (PlankIffFileRef p, 
     }
 }
 
-static PLONK_INLINE_LOW PlankResult pl_IffFile_ReadChunkID (PlankIffFileRef p, PlankIffID* chunkID)
+static PLANK_INLINE_LOW PlankResult pl_IffFile_ReadChunkID (PlankIffFileRef p, PlankIffID* chunkID)
 {
     switch (p->headerInfo.idType)
     {
@@ -184,7 +184,7 @@ static PLONK_INLINE_LOW PlankResult pl_IffFile_ReadChunkID (PlankIffFileRef p, P
     }
 }
 
-static PLONK_INLINE_LOW PlankB pl_IffFile_EqualIDs (PlankIffFileRef p, const PlankIffID* id1,  const PlankIffID* id2)
+static PLANK_INLINE_LOW PlankB pl_IffFile_EqualIDs (PlankIffFileRef p, const PlankIffID* id1,  const PlankIffID* id2)
 {
     switch (p->headerInfo.idType)
     {
@@ -194,7 +194,7 @@ static PLONK_INLINE_LOW PlankB pl_IffFile_EqualIDs (PlankIffFileRef p, const Pla
     }
 }
 
-static PLONK_INLINE_LOW PlankB pl_IffFile_IsNullID (PlankIffFileRef p, const PlankIffID* chunkID)
+static PLANK_INLINE_LOW PlankB pl_IffFile_IsNullID (PlankIffFileRef p, const PlankIffID* chunkID)
 {
     switch (p->headerInfo.idType)
     {
@@ -204,7 +204,7 @@ static PLONK_INLINE_LOW PlankB pl_IffFile_IsNullID (PlankIffFileRef p, const Pla
     }
 }
 
-static PLONK_INLINE_LOW void pl_IffFile_ChunkIDString (PlankIffFileRef p, const PlankIffID* chunkID, char* string)
+static PLANK_INLINE_LOW void pl_IffFile_ChunkIDString (PlankIffFileRef p, const PlankIffID* chunkID, char* string)
 {
     PlankFourCharCodeString fccs;
 
@@ -219,7 +219,7 @@ static PLONK_INLINE_LOW void pl_IffFile_ChunkIDString (PlankIffFileRef p, const 
     }
 }
 
-static PLONK_INLINE_LOW int pl_IffFile_ChunkIDLength (PlankIffFileRef p)
+static PLANK_INLINE_LOW int pl_IffFile_ChunkIDLength (PlankIffFileRef p)
 {
     switch (p->headerInfo.idType)
     {
@@ -229,7 +229,7 @@ static PLONK_INLINE_LOW int pl_IffFile_ChunkIDLength (PlankIffFileRef p)
     }
 }
 
-static PLONK_INLINE_LOW const PlankIffID* pl_IffFileAnyID()
+static PLANK_INLINE_LOW const PlankIffID* pl_IffFileAnyID()
 {
     static PlankIffID any;
     static PlankB firstTime = PLANK_TRUE;

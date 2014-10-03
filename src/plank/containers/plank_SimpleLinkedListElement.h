@@ -74,7 +74,7 @@ PLANK_END_C_LINKAGE
 #include "plank_SimpleLinkedListElementInline.h"
 #undef PLANK_INLINING_FUNCTIONS
 
-// make these PLONK_INLINE_LOW at some point..
+// make these PLANK_INLINE_LOW at some point..
 
 #define pl_SimpleQueueElement_CreateAndInit             pl_SimpleLinkedListElement_CreateAndInit
 #define pl_SimpleQueueElement_CreateAndInitWithData     pl_SimpleLinkedListElement_CreateAndInitWithData

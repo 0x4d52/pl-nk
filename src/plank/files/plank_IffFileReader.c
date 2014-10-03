@@ -39,7 +39,7 @@
 #include "../core/plank_StandardHeader.h"
 #include "plank_IffFileReader.h"
 
-static PLONK_INLINE_LOW PlankResult pl_IffFileReader_ReadChunkLength (PlankIffFileReaderRef p, PlankLL* length)
+static PLANK_INLINE_LOW PlankResult pl_IffFileReader_ReadChunkLength (PlankIffFileReaderRef p, PlankLL* length)
 {
     PlankResult result = PlankResult_OK;
     PlankUI length32;

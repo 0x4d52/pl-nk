@@ -62,7 +62,7 @@ void ObjectMemoryPools::staticFree (void* userData, void* ptr)
     om.free (ptr);
 }
 
-static inline void* staticDoAlloc (void* userData, UnsignedLong requestedSize) throw()
+static PLONK_INLINE_LOW void* staticDoAlloc (void* userData, UnsignedLong requestedSize) throw()
 {    
     const UnsignedLong align = PLONK_WORDSIZE * 2;
     const UnsignedLong size = Bits::nextPowerOf2 (requestedSize + align);
@@ -72,7 +72,7 @@ static inline void* staticDoAlloc (void* userData, UnsignedLong requestedSize) t
     return raw + align;
 }
 
-static inline void staticDoFree (void* userData, void* ptr) throw()
+static PLONK_INLINE_LOW void staticDoFree (void* userData, void* ptr) throw()
 {
 #if PLONK_OBJECTMEMORYPOOLS_DEBUG
     plonk_assert (!Threading::currentThreadIsAudioThread());

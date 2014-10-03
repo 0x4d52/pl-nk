@@ -93,7 +93,7 @@ public:
     class Internal
     {
     public:
-        inline Internal (Base const& value) throw() 
+        PLONK_INLINE_LOW Internal (Base const& value) throw() 
         :   internal (value)
         {
         }
@@ -108,54 +108,54 @@ public:
     {
     }
     
-    inline Fix (const char value) throw()
+    PLONK_INLINE_LOW Fix (const char value) throw()
     :   internal (value * getOne().internal)
     {
     }
     
-    inline Fix (const short value) throw()
+    PLONK_INLINE_LOW Fix (const short value) throw()
     :   internal (value * getOne().internal)
     {
     }
     
-    inline Fix (const int value) throw()
+    PLONK_INLINE_LOW Fix (const int value) throw()
     :   internal (value * getOne().internal)
     {
     }
     
-    inline Fix (LongLong const& value) throw()
+    PLONK_INLINE_LOW Fix (LongLong const& value) throw()
     :   internal (value * getOne().internal)
     {
     }
     
-    inline Fix (const float value) throw()
+    PLONK_INLINE_LOW Fix (const float value) throw()
     :   internal (value * getOneFloat())
     {
     }
     
-    inline Fix (double const& value) throw()
+    PLONK_INLINE_LOW Fix (double const& value) throw()
     :   internal (value * getOneDouble())
     {
     }
     
-    inline explicit Fix (Internal const& value) throw()
+    PLONK_INLINE_LOW explicit Fix (Internal const& value) throw()
     :   internal (value.internal)
     {
     }
     
-    inline Fix (Fix const& copy) throw()
+    PLONK_INLINE_LOW Fix (Fix const& copy) throw()
     :   internal (copy.internal)
     {
     }
     
     template<class BaseOther, unsigned IBitsOther, unsigned FBitsOther>
-    inline Fix (Fix<BaseOther,IBitsOther,FBitsOther> const& other) throw()
+    PLONK_INLINE_LOW Fix (Fix<BaseOther,IBitsOther,FBitsOther> const& other) throw()
     :   internal (Base (convert (other) << (FBits - FBitsOther)))
     {
     }
           
 #if PLONK_DEBUG
-    inline ~Fix()
+    PLONK_INLINE_LOW ~Fix()
     {
         plonk_staticassert (IBits != 0);
         plonk_staticassert (FBits != 0);
@@ -163,231 +163,231 @@ public:
     }
 #endif
     
-    inline operator bool () const throw()
+    PLONK_INLINE_LOW operator bool () const throw()
     {
         return internal;
     }
     
-    inline operator int () const throw()
+    PLONK_INLINE_LOW operator int () const throw()
     {
         return internal >> FBits;
     }
     
-    inline int toInt() const throw()
+    PLONK_INLINE_LOW int toInt() const throw()
     {
         return internal >> FBits;
     }
 
-    inline operator LongLong () const throw()
+    PLONK_INLINE_LOW operator LongLong () const throw()
     {
         return internal >> FBits;
     }
     
-    inline int toLongLong() const throw()
+    PLONK_INLINE_LOW int toLongLong() const throw()
     {
         return internal >> FBits;
     }
     
-    inline operator float () const throw()
+    PLONK_INLINE_LOW operator float () const throw()
     {
         return float (internal) / getOneFloat();
     }
     
-    inline float toFloat() const throw()
+    PLONK_INLINE_LOW float toFloat() const throw()
     {
         return float (internal) / getOneFloat();
     }
 
-    inline operator double () const throw()
+    PLONK_INLINE_LOW operator double () const throw()
     {
         return double (internal) / getOneDouble();
     }
     
-    inline double toDouble() const throw()
+    PLONK_INLINE_LOW double toDouble() const throw()
     {
         return double (internal) / getOneDouble();
     }
         
     template<class BaseOther, unsigned IBitsOther, unsigned FBitsOther>
-    inline operator Fix<BaseOther,IBitsOther,FBitsOther> () const throw()
+    PLONK_INLINE_LOW operator Fix<BaseOther,IBitsOther,FBitsOther> () const throw()
     {
         return Fix<BaseOther,IBitsOther,FBitsOther> (*this);
     }
 
-    inline Fix operator-() const throw()    { return neg(); }
+    PLONK_INLINE_LOW Fix operator-() const throw()    { return neg(); }
     
-    inline Fix operator+ (Fix const& rightOperand) const throw()    { return addop (rightOperand); }
-    inline Fix operator- (Fix const& rightOperand) const throw()    { return subop (rightOperand); }
-    inline Fix operator* (Fix const& rightOperand) const throw()    { return mulop (rightOperand); }
-    inline Fix operator/ (Fix const& rightOperand) const throw()    { return divop (rightOperand); }
-    inline Fix operator% (Fix const& rightOperand) const throw()    { return modop (rightOperand); }
-    inline Fix operator+ (float const& rightOperand) const throw()  { return addop (Fix (rightOperand)); }
-    inline Fix operator- (float const& rightOperand) const throw()  { return subop (Fix (rightOperand)); }
-    inline Fix operator* (float const& rightOperand) const throw()  { return mulop (Fix (rightOperand)); }
-    inline Fix operator/ (float const& rightOperand) const throw()  { return divop (Fix (rightOperand)); }
-    inline Fix operator% (float const& rightOperand) const throw()  { return modop (Fix (rightOperand)); }
-    inline Fix operator+ (double const& rightOperand) const throw() { return addop (Fix (rightOperand)); }
-    inline Fix operator- (double const& rightOperand) const throw() { return subop (Fix (rightOperand)); }
-    inline Fix operator* (double const& rightOperand) const throw() { return mulop (Fix (rightOperand)); }
-    inline Fix operator/ (double const& rightOperand) const throw() { return divop (Fix (rightOperand)); }
-    inline Fix operator% (double const& rightOperand) const throw() { return modop ((rightOperand)); }
-    inline Fix operator+ (int const& rightOperand) const throw()    { return addop (Fix (rightOperand)); }
-    inline Fix operator- (int const& rightOperand) const throw()    { return subop (Fix (rightOperand)); }
-    inline Fix operator* (int const& rightOperand) const throw()    { return mulop (Fix (rightOperand)); }
-    inline Fix operator/ (int const& rightOperand) const throw()    { return divop (Fix (rightOperand)); }
-    inline Fix operator% (int const& rightOperand) const throw()    { return modop (Fix (rightOperand)); }
+    PLONK_INLINE_LOW Fix operator+ (Fix const& rightOperand) const throw()    { return addop (rightOperand); }
+    PLONK_INLINE_LOW Fix operator- (Fix const& rightOperand) const throw()    { return subop (rightOperand); }
+    PLONK_INLINE_LOW Fix operator* (Fix const& rightOperand) const throw()    { return mulop (rightOperand); }
+    PLONK_INLINE_LOW Fix operator/ (Fix const& rightOperand) const throw()    { return divop (rightOperand); }
+    PLONK_INLINE_LOW Fix operator% (Fix const& rightOperand) const throw()    { return modop (rightOperand); }
+    PLONK_INLINE_LOW Fix operator+ (float const& rightOperand) const throw()  { return addop (Fix (rightOperand)); }
+    PLONK_INLINE_LOW Fix operator- (float const& rightOperand) const throw()  { return subop (Fix (rightOperand)); }
+    PLONK_INLINE_LOW Fix operator* (float const& rightOperand) const throw()  { return mulop (Fix (rightOperand)); }
+    PLONK_INLINE_LOW Fix operator/ (float const& rightOperand) const throw()  { return divop (Fix (rightOperand)); }
+    PLONK_INLINE_LOW Fix operator% (float const& rightOperand) const throw()  { return modop (Fix (rightOperand)); }
+    PLONK_INLINE_LOW Fix operator+ (double const& rightOperand) const throw() { return addop (Fix (rightOperand)); }
+    PLONK_INLINE_LOW Fix operator- (double const& rightOperand) const throw() { return subop (Fix (rightOperand)); }
+    PLONK_INLINE_LOW Fix operator* (double const& rightOperand) const throw() { return mulop (Fix (rightOperand)); }
+    PLONK_INLINE_LOW Fix operator/ (double const& rightOperand) const throw() { return divop (Fix (rightOperand)); }
+    PLONK_INLINE_LOW Fix operator% (double const& rightOperand) const throw() { return modop ((rightOperand)); }
+    PLONK_INLINE_LOW Fix operator+ (int const& rightOperand) const throw()    { return addop (Fix (rightOperand)); }
+    PLONK_INLINE_LOW Fix operator- (int const& rightOperand) const throw()    { return subop (Fix (rightOperand)); }
+    PLONK_INLINE_LOW Fix operator* (int const& rightOperand) const throw()    { return mulop (Fix (rightOperand)); }
+    PLONK_INLINE_LOW Fix operator/ (int const& rightOperand) const throw()    { return divop (Fix (rightOperand)); }
+    PLONK_INLINE_LOW Fix operator% (int const& rightOperand) const throw()    { return modop (Fix (rightOperand)); }
 
-    friend inline Fix operator+ (float const& leftOperand, Fix const& rightOperand) throw()  { return Fix (leftOperand) + rightOperand; }
-    friend inline Fix operator- (float const& leftOperand, Fix const& rightOperand) throw()  { return Fix (leftOperand) + rightOperand; }
-    friend inline Fix operator* (float const& leftOperand, Fix const& rightOperand) throw()  { return Fix (leftOperand) + rightOperand; }
-    friend inline Fix operator/ (float const& leftOperand, Fix const& rightOperand) throw()  { return Fix (leftOperand) + rightOperand; }
-    friend inline Fix operator% (float const& leftOperand, Fix const& rightOperand) throw()  { return Fix (leftOperand) + rightOperand; }
-    friend inline Fix operator+ (double const& leftOperand, Fix const& rightOperand) throw() { return Fix (leftOperand) + rightOperand; }
-    friend inline Fix operator- (double const& leftOperand, Fix const& rightOperand) throw() { return Fix (leftOperand) + rightOperand; }
-    friend inline Fix operator* (double const& leftOperand, Fix const& rightOperand) throw() { return Fix (leftOperand) + rightOperand; }
-    friend inline Fix operator/ (double const& leftOperand, Fix const& rightOperand) throw() { return Fix (leftOperand) + rightOperand; }
-    friend inline Fix operator% (double const& leftOperand, Fix const& rightOperand) throw() { return Fix (leftOperand) + rightOperand; }
-    friend inline Fix operator+ (int const& leftOperand, Fix const& rightOperand) throw()    { return Fix (leftOperand) + rightOperand; }
-    friend inline Fix operator- (int const& leftOperand, Fix const& rightOperand) throw()    { return Fix (leftOperand) + rightOperand; }
-    friend inline Fix operator* (int const& leftOperand, Fix const& rightOperand) throw()    { return Fix (leftOperand) + rightOperand; }
-    friend inline Fix operator/ (int const& leftOperand, Fix const& rightOperand) throw()    { return Fix (leftOperand) + rightOperand; }
-    friend inline Fix operator% (int const& leftOperand, Fix const& rightOperand) throw()    { return Fix (leftOperand) + rightOperand; }
+    friend PLONK_INLINE_LOW Fix operator+ (float const& leftOperand, Fix const& rightOperand) throw()  { return Fix (leftOperand) + rightOperand; }
+    friend PLONK_INLINE_LOW Fix operator- (float const& leftOperand, Fix const& rightOperand) throw()  { return Fix (leftOperand) + rightOperand; }
+    friend PLONK_INLINE_LOW Fix operator* (float const& leftOperand, Fix const& rightOperand) throw()  { return Fix (leftOperand) + rightOperand; }
+    friend PLONK_INLINE_LOW Fix operator/ (float const& leftOperand, Fix const& rightOperand) throw()  { return Fix (leftOperand) + rightOperand; }
+    friend PLONK_INLINE_LOW Fix operator% (float const& leftOperand, Fix const& rightOperand) throw()  { return Fix (leftOperand) + rightOperand; }
+    friend PLONK_INLINE_LOW Fix operator+ (double const& leftOperand, Fix const& rightOperand) throw() { return Fix (leftOperand) + rightOperand; }
+    friend PLONK_INLINE_LOW Fix operator- (double const& leftOperand, Fix const& rightOperand) throw() { return Fix (leftOperand) + rightOperand; }
+    friend PLONK_INLINE_LOW Fix operator* (double const& leftOperand, Fix const& rightOperand) throw() { return Fix (leftOperand) + rightOperand; }
+    friend PLONK_INLINE_LOW Fix operator/ (double const& leftOperand, Fix const& rightOperand) throw() { return Fix (leftOperand) + rightOperand; }
+    friend PLONK_INLINE_LOW Fix operator% (double const& leftOperand, Fix const& rightOperand) throw() { return Fix (leftOperand) + rightOperand; }
+    friend PLONK_INLINE_LOW Fix operator+ (int const& leftOperand, Fix const& rightOperand) throw()    { return Fix (leftOperand) + rightOperand; }
+    friend PLONK_INLINE_LOW Fix operator- (int const& leftOperand, Fix const& rightOperand) throw()    { return Fix (leftOperand) + rightOperand; }
+    friend PLONK_INLINE_LOW Fix operator* (int const& leftOperand, Fix const& rightOperand) throw()    { return Fix (leftOperand) + rightOperand; }
+    friend PLONK_INLINE_LOW Fix operator/ (int const& leftOperand, Fix const& rightOperand) throw()    { return Fix (leftOperand) + rightOperand; }
+    friend PLONK_INLINE_LOW Fix operator% (int const& leftOperand, Fix const& rightOperand) throw()    { return Fix (leftOperand) + rightOperand; }
 
-    inline Fix operator<< (const int shift) const throw()           { return Fix (Internal (internal << shift)); }
-    inline Fix operator>> (const int shift) const throw()           { return Fix (Internal (internal >> shift)); }
+    PLONK_INLINE_LOW Fix operator<< (const int shift) const throw()           { return Fix (Internal (internal << shift)); }
+    PLONK_INLINE_LOW Fix operator>> (const int shift) const throw()           { return Fix (Internal (internal >> shift)); }
     
-    inline Fix& operator= (Fix const& other) throw()            { if (this != &other) internal = other.internal; return *this; }
-    inline Fix& operator= (float const& other) throw()          { internal = Fix (other).internal; return *this; }
-    inline Fix& operator= (double const& other) throw()         { internal = Fix (other).internal; return *this; }
-    inline Fix& operator= (int const& other) throw()            { internal = Fix (other).internal; return *this; }
-    inline Fix& operator= (Internal const& other) throw()       { internal = other.internal; return *this; }
+    PLONK_INLINE_LOW Fix& operator= (Fix const& other) throw()            { if (this != &other) internal = other.internal; return *this; }
+    PLONK_INLINE_LOW Fix& operator= (float const& other) throw()          { internal = Fix (other).internal; return *this; }
+    PLONK_INLINE_LOW Fix& operator= (double const& other) throw()         { internal = Fix (other).internal; return *this; }
+    PLONK_INLINE_LOW Fix& operator= (int const& other) throw()            { internal = Fix (other).internal; return *this; }
+    PLONK_INLINE_LOW Fix& operator= (Internal const& other) throw()       { internal = other.internal; return *this; }
     
     template<class BaseOther, unsigned IBitsOther, unsigned FBitsOther>
-    inline Fix& operator= (Fix<BaseOther,IBitsOther,FBitsOther> const& other) throw()
+    PLONK_INLINE_LOW Fix& operator= (Fix<BaseOther,IBitsOther,FBitsOther> const& other) throw()
     { 
         const Fix copy (other);
         return operator= (copy); 
     }
     
     // could optimise these better
-    inline Fix& operator+= (Fix const& rightOperand) throw()        { return operator=  ( (*this) + rightOperand); }
-    inline Fix& operator-= (Fix const& rightOperand) throw()        { return operator=  ( (*this) - rightOperand); }
-    inline Fix& operator*= (Fix const& rightOperand) throw()        { return operator=  ( (*this) * rightOperand); }
-    inline Fix& operator/= (Fix const& rightOperand) throw()        { return operator=  ( (*this) / rightOperand); }
-    inline Fix& operator%= (Fix const& rightOperand) throw()        { return operator=  ( (*this) % rightOperand); }
-    inline Fix& operator+= (float const& rightOperand) throw()      { return operator=  ( (*this) + Fix (rightOperand)); }
-    inline Fix& operator-= (float const& rightOperand) throw()      { return operator=  ( (*this) - Fix (rightOperand)); }
-    inline Fix& operator*= (float const& rightOperand) throw()      { return operator=  ( (*this) * Fix (rightOperand)); }
-    inline Fix& operator/= (float const& rightOperand) throw()      { return operator=  ( (*this) / Fix (rightOperand)); }
-    inline Fix& operator%= (float const& rightOperand) throw()      { return operator=  ( (*this) % Fix (rightOperand)); }
-    inline Fix& operator+= (double const& rightOperand) throw()     { return operator=  ( (*this) + Fix (rightOperand)); }
-    inline Fix& operator-= (double const& rightOperand) throw()     { return operator=  ( (*this) - Fix (rightOperand)); }
-    inline Fix& operator*= (double const& rightOperand) throw()     { return operator=  ( (*this) * Fix (rightOperand)); }
-    inline Fix& operator/= (double const& rightOperand) throw()     { return operator=  ( (*this) / Fix (rightOperand)); }
-    inline Fix& operator%= (double const& rightOperand) throw()     { return operator=  ( (*this) % Fix (rightOperand)); }
-    inline Fix& operator+= (int const& rightOperand) throw()        { return operator=  ( (*this) + Fix (rightOperand)); }
-    inline Fix& operator-= (int const& rightOperand) throw()        { return operator=  ( (*this) - Fix (rightOperand)); }
-    inline Fix& operator*= (int const& rightOperand) throw()        { return operator=  ( (*this) * Fix (rightOperand)); }
-    inline Fix& operator/= (int const& rightOperand) throw()        { return operator=  ( (*this) / Fix (rightOperand)); }
-    inline Fix& operator%= (int const& rightOperand) throw()        { return operator=  ( (*this) % Fix (rightOperand)); }
-    inline Fix& operator+= (Internal const& rightOperand) throw()   { return operator=  ( (*this) + Fix (rightOperand)); }
-    inline Fix& operator-= (Internal const& rightOperand) throw()   { return operator=  ( (*this) - Fix (rightOperand)); }
-    inline Fix& operator*= (Internal const& rightOperand) throw()   { return operator=  ( (*this) * Fix (rightOperand)); }
-    inline Fix& operator/= (Internal const& rightOperand) throw()   { return operator=  ( (*this) / Fix (rightOperand)); }
-    inline Fix& operator%= (Internal const& rightOperand) throw()   { return operator=  ( (*this) % Fix (rightOperand)); }
+    PLONK_INLINE_LOW Fix& operator+= (Fix const& rightOperand) throw()        { return operator=  ( (*this) + rightOperand); }
+    PLONK_INLINE_LOW Fix& operator-= (Fix const& rightOperand) throw()        { return operator=  ( (*this) - rightOperand); }
+    PLONK_INLINE_LOW Fix& operator*= (Fix const& rightOperand) throw()        { return operator=  ( (*this) * rightOperand); }
+    PLONK_INLINE_LOW Fix& operator/= (Fix const& rightOperand) throw()        { return operator=  ( (*this) / rightOperand); }
+    PLONK_INLINE_LOW Fix& operator%= (Fix const& rightOperand) throw()        { return operator=  ( (*this) % rightOperand); }
+    PLONK_INLINE_LOW Fix& operator+= (float const& rightOperand) throw()      { return operator=  ( (*this) + Fix (rightOperand)); }
+    PLONK_INLINE_LOW Fix& operator-= (float const& rightOperand) throw()      { return operator=  ( (*this) - Fix (rightOperand)); }
+    PLONK_INLINE_LOW Fix& operator*= (float const& rightOperand) throw()      { return operator=  ( (*this) * Fix (rightOperand)); }
+    PLONK_INLINE_LOW Fix& operator/= (float const& rightOperand) throw()      { return operator=  ( (*this) / Fix (rightOperand)); }
+    PLONK_INLINE_LOW Fix& operator%= (float const& rightOperand) throw()      { return operator=  ( (*this) % Fix (rightOperand)); }
+    PLONK_INLINE_LOW Fix& operator+= (double const& rightOperand) throw()     { return operator=  ( (*this) + Fix (rightOperand)); }
+    PLONK_INLINE_LOW Fix& operator-= (double const& rightOperand) throw()     { return operator=  ( (*this) - Fix (rightOperand)); }
+    PLONK_INLINE_LOW Fix& operator*= (double const& rightOperand) throw()     { return operator=  ( (*this) * Fix (rightOperand)); }
+    PLONK_INLINE_LOW Fix& operator/= (double const& rightOperand) throw()     { return operator=  ( (*this) / Fix (rightOperand)); }
+    PLONK_INLINE_LOW Fix& operator%= (double const& rightOperand) throw()     { return operator=  ( (*this) % Fix (rightOperand)); }
+    PLONK_INLINE_LOW Fix& operator+= (int const& rightOperand) throw()        { return operator=  ( (*this) + Fix (rightOperand)); }
+    PLONK_INLINE_LOW Fix& operator-= (int const& rightOperand) throw()        { return operator=  ( (*this) - Fix (rightOperand)); }
+    PLONK_INLINE_LOW Fix& operator*= (int const& rightOperand) throw()        { return operator=  ( (*this) * Fix (rightOperand)); }
+    PLONK_INLINE_LOW Fix& operator/= (int const& rightOperand) throw()        { return operator=  ( (*this) / Fix (rightOperand)); }
+    PLONK_INLINE_LOW Fix& operator%= (int const& rightOperand) throw()        { return operator=  ( (*this) % Fix (rightOperand)); }
+    PLONK_INLINE_LOW Fix& operator+= (Internal const& rightOperand) throw()   { return operator=  ( (*this) + Fix (rightOperand)); }
+    PLONK_INLINE_LOW Fix& operator-= (Internal const& rightOperand) throw()   { return operator=  ( (*this) - Fix (rightOperand)); }
+    PLONK_INLINE_LOW Fix& operator*= (Internal const& rightOperand) throw()   { return operator=  ( (*this) * Fix (rightOperand)); }
+    PLONK_INLINE_LOW Fix& operator/= (Internal const& rightOperand) throw()   { return operator=  ( (*this) / Fix (rightOperand)); }
+    PLONK_INLINE_LOW Fix& operator%= (Internal const& rightOperand) throw()   { return operator=  ( (*this) % Fix (rightOperand)); }
 
-    inline Fix& operator<<= (const int shift) throw()                { internal << shift; return *this; }
-    inline Fix& operator>>= (const int shift) throw()                { internal >> shift; return *this; }
+    PLONK_INLINE_LOW Fix& operator<<= (const int shift) throw()                { internal << shift; return *this; }
+    PLONK_INLINE_LOW Fix& operator>>= (const int shift) throw()                { internal >> shift; return *this; }
 
-    inline bool operator== (Fix const& rightOperand) const throw()      { return internal == rightOperand.internal; }
-    inline bool operator== (float const& rightOperand) const throw()    { return internal == Fix (rightOperand).internal; }
-    inline bool operator== (double const& rightOperand) const throw()   { return internal == Fix (rightOperand).internal; }
-    inline bool operator== (int const& rightOperand) const throw()      { return internal == Fix (rightOperand).internal; }
-    inline bool operator== (Internal const& rightOperand) const throw() { return internal == rightOperand; }
+    PLONK_INLINE_LOW bool operator== (Fix const& rightOperand) const throw()      { return internal == rightOperand.internal; }
+    PLONK_INLINE_LOW bool operator== (float const& rightOperand) const throw()    { return internal == Fix (rightOperand).internal; }
+    PLONK_INLINE_LOW bool operator== (double const& rightOperand) const throw()   { return internal == Fix (rightOperand).internal; }
+    PLONK_INLINE_LOW bool operator== (int const& rightOperand) const throw()      { return internal == Fix (rightOperand).internal; }
+    PLONK_INLINE_LOW bool operator== (Internal const& rightOperand) const throw() { return internal == rightOperand; }
 
-    inline bool operator!= (Fix const& rightOperand) const throw()      { return internal != rightOperand.internal; }
-    inline bool operator!= (float const& rightOperand) const throw()    { return internal != Fix (rightOperand).internal; }
-    inline bool operator!= (double const& rightOperand) const throw()   { return internal != Fix (rightOperand).internal; }
-    inline bool operator!= (int const& rightOperand) const throw()      { return internal != Fix (rightOperand).internal; }
-    inline bool operator!= (Internal const& rightOperand) const throw() { return internal != rightOperand; }
+    PLONK_INLINE_LOW bool operator!= (Fix const& rightOperand) const throw()      { return internal != rightOperand.internal; }
+    PLONK_INLINE_LOW bool operator!= (float const& rightOperand) const throw()    { return internal != Fix (rightOperand).internal; }
+    PLONK_INLINE_LOW bool operator!= (double const& rightOperand) const throw()   { return internal != Fix (rightOperand).internal; }
+    PLONK_INLINE_LOW bool operator!= (int const& rightOperand) const throw()      { return internal != Fix (rightOperand).internal; }
+    PLONK_INLINE_LOW bool operator!= (Internal const& rightOperand) const throw() { return internal != rightOperand; }
 
-    inline bool operator<  (Fix const& rightOperand) const throw()      { return internal <  rightOperand.internal; }
-    inline bool operator<  (float const& rightOperand) const throw()    { return internal <  Fix (rightOperand).internal; }
-    inline bool operator<  (double const& rightOperand) const throw()   { return internal <  Fix (rightOperand).internal; }
-    inline bool operator<  (int const& rightOperand) const throw()      { return internal <  Fix (rightOperand).internal; }
-    inline bool operator<  (Internal const& rightOperand) const throw() { return internal <  rightOperand; }
+    PLONK_INLINE_LOW bool operator<  (Fix const& rightOperand) const throw()      { return internal <  rightOperand.internal; }
+    PLONK_INLINE_LOW bool operator<  (float const& rightOperand) const throw()    { return internal <  Fix (rightOperand).internal; }
+    PLONK_INLINE_LOW bool operator<  (double const& rightOperand) const throw()   { return internal <  Fix (rightOperand).internal; }
+    PLONK_INLINE_LOW bool operator<  (int const& rightOperand) const throw()      { return internal <  Fix (rightOperand).internal; }
+    PLONK_INLINE_LOW bool operator<  (Internal const& rightOperand) const throw() { return internal <  rightOperand; }
 
-    inline bool operator<= (Fix const& rightOperand) const throw()      { return internal <= rightOperand.internal; }
-    inline bool operator<= (float const& rightOperand) const throw()    { return internal <= Fix (rightOperand).internal; }
-    inline bool operator<= (double const& rightOperand) const throw()   { return internal <= Fix (rightOperand).internal; }
-    inline bool operator<= (int const& rightOperand) const throw()      { return internal <= Fix (rightOperand).internal; }
-    inline bool operator<= (Internal const& rightOperand) const throw() { return internal <= rightOperand; }
+    PLONK_INLINE_LOW bool operator<= (Fix const& rightOperand) const throw()      { return internal <= rightOperand.internal; }
+    PLONK_INLINE_LOW bool operator<= (float const& rightOperand) const throw()    { return internal <= Fix (rightOperand).internal; }
+    PLONK_INLINE_LOW bool operator<= (double const& rightOperand) const throw()   { return internal <= Fix (rightOperand).internal; }
+    PLONK_INLINE_LOW bool operator<= (int const& rightOperand) const throw()      { return internal <= Fix (rightOperand).internal; }
+    PLONK_INLINE_LOW bool operator<= (Internal const& rightOperand) const throw() { return internal <= rightOperand; }
 
-    inline bool operator>  (Fix const& rightOperand) const throw()      { return internal >  rightOperand.internal; }
-    inline bool operator>  (float const& rightOperand) const throw()    { return internal >  Fix (rightOperand).internal; }
-    inline bool operator>  (double const& rightOperand) const throw()   { return internal >  Fix (rightOperand).internal; }
-    inline bool operator>  (int const& rightOperand) const throw()      { return internal >  Fix (rightOperand).internal; }
-    inline bool operator>  (Internal const& rightOperand) const throw() { return internal >  rightOperand; }
+    PLONK_INLINE_LOW bool operator>  (Fix const& rightOperand) const throw()      { return internal >  rightOperand.internal; }
+    PLONK_INLINE_LOW bool operator>  (float const& rightOperand) const throw()    { return internal >  Fix (rightOperand).internal; }
+    PLONK_INLINE_LOW bool operator>  (double const& rightOperand) const throw()   { return internal >  Fix (rightOperand).internal; }
+    PLONK_INLINE_LOW bool operator>  (int const& rightOperand) const throw()      { return internal >  Fix (rightOperand).internal; }
+    PLONK_INLINE_LOW bool operator>  (Internal const& rightOperand) const throw() { return internal >  rightOperand; }
 
-    inline bool operator>= (Fix const& rightOperand) const throw()      { return internal >= rightOperand.internal; }
-    inline bool operator>= (float const& rightOperand) const throw()    { return internal >= Fix (rightOperand).internal; }
-    inline bool operator>= (double const& rightOperand) const throw()   { return internal >= Fix (rightOperand).internal; }
-    inline bool operator>= (int const& rightOperand) const throw()      { return internal >= Fix (rightOperand).internal; }
-    inline bool operator>= (Internal const& rightOperand) const throw() { return internal >= rightOperand; }
+    PLONK_INLINE_LOW bool operator>= (Fix const& rightOperand) const throw()      { return internal >= rightOperand.internal; }
+    PLONK_INLINE_LOW bool operator>= (float const& rightOperand) const throw()    { return internal >= Fix (rightOperand).internal; }
+    PLONK_INLINE_LOW bool operator>= (double const& rightOperand) const throw()   { return internal >= Fix (rightOperand).internal; }
+    PLONK_INLINE_LOW bool operator>= (int const& rightOperand) const throw()      { return internal >= Fix (rightOperand).internal; }
+    PLONK_INLINE_LOW bool operator>= (Internal const& rightOperand) const throw() { return internal >= rightOperand; }
 
     // -- unary ops --------------------------------------------------------- //
     
-    friend inline Fix move (Fix const& a) throw()             
+    friend PLONK_INLINE_LOW Fix move (Fix const& a) throw()             
     { 
         return a; 
     }
     
-    inline Fix move() const throw()             
+    PLONK_INLINE_LOW Fix move() const throw()             
     { 
         return *this; 
     }
 
-    friend inline Fix neg (Fix const& a) throw()              
+    friend PLONK_INLINE_LOW Fix neg (Fix const& a) throw()              
     { 
         return a.neg();
     }
     
-    inline Fix neg() const throw()              
+    PLONK_INLINE_LOW Fix neg() const throw()              
     { 
         return Fix (Internal (-internal)); 
     }
     
-    friend inline Fix abs (Fix const& a) throw()            
+    friend PLONK_INLINE_LOW Fix abs (Fix const& a) throw()            
     { 
         return a.abs();
     }
     
-    inline Fix abs() const throw()            
+    PLONK_INLINE_LOW Fix abs() const throw()            
     { 
         return Fix (internal < 0 ? Internal (-internal) : Internal (internal)); 
     }
     
-    friend inline Fix reciprocal (Fix const& a) throw()            
+    friend PLONK_INLINE_LOW Fix reciprocal (Fix const& a) throw()            
     {         
         return a.reciprocal();
     }
 
-    inline Fix reciprocal() const throw()            
+    PLONK_INLINE_LOW Fix reciprocal() const throw()            
     {         
         return Fix::getOne() / *this; 
     }
     
-    friend inline Fix log2 (Fix const& a) throw()            
+    friend PLONK_INLINE_LOW Fix log2 (Fix const& a) throw()            
     { 
         return a.log2();
     }
     
-//    inline Fix log2 () const throw()            
+//    PLONK_INLINE_LOW Fix log2 () const throw()            
 //    { 
 //        return log() * Math<Fix>::get1_Log2();
 //    }
 
-    inline Fix log2() const throw()            
+    PLONK_INLINE_LOW Fix log2() const throw()            
     {
         // Note that a negative x gives a non-real result.
         // If x == 0, the limit of log2(x)  as x -> 0 = -infinity.
@@ -411,12 +411,12 @@ public:
         return log2Internal (*this);
     }
     
-    friend inline Fix sin (Fix const& a) throw()            
+    friend PLONK_INLINE_LOW Fix sin (Fix const& a) throw()            
     { 
         return a.sin();
     }
     
-    inline Fix sin() const throw()            
+    PLONK_INLINE_LOW Fix sin() const throw()            
     { 
         const Fix pi (Math<Fix>::getPi());        
         const Fix twoPi (Math<Fix>::get2Pi());
@@ -435,12 +435,12 @@ public:
         return (((-xx * f_7 + f_5) * xx - f_3) * xx + one) * x;
     }
 
-    friend inline Fix cos (Fix const& a) throw()            
+    friend PLONK_INLINE_LOW Fix cos (Fix const& a) throw()            
     { 
         return a.cos(); 
     }
     
-    inline Fix cos() const throw()            
+    PLONK_INLINE_LOW Fix cos() const throw()            
     { 
         const Fix pi (Math<Fix>::getPi());        
         const Fix twoPi (Math<Fix>::get2Pi());
@@ -459,22 +459,22 @@ public:
         return ((-xx * f_6 + f_4) * xx - f_2) * xx + one;
     }
     
-    friend inline Fix tan (Fix const& a) throw()            
+    friend PLONK_INLINE_LOW Fix tan (Fix const& a) throw()            
     { 
         return a.tan();
     }
     
-    inline Fix tan() const throw()            
+    PLONK_INLINE_LOW Fix tan() const throw()            
     { 
         return  sin().divsat (cos());
     }
 
-    friend inline Fix asin (Fix const& a) throw()            
+    friend PLONK_INLINE_LOW Fix asin (Fix const& a) throw()            
     { 
         return a.asin();
     }
     
-    inline Fix asin() const throw()            
+    PLONK_INLINE_LOW Fix asin() const throw()            
     { 
         const Fix one = Fix::getOne();
         
@@ -484,66 +484,66 @@ public:
         return divop ((one - squared()).sqrt()).atan();
     }
     
-    friend inline Fix acos (Fix const& a) throw()            
+    friend PLONK_INLINE_LOW Fix acos (Fix const& a) throw()            
     { 
         return a.acos(); 
     }
 
-    inline Fix acos() const throw()            
+    PLONK_INLINE_LOW Fix acos() const throw()            
     { 
         return Math<Fix>::getPi_2() - sin();
     }
 
-    friend inline Fix atan (Fix const& a) throw()            
+    friend PLONK_INLINE_LOW Fix atan (Fix const& a) throw()            
     { 
         return a.atan(); 
     }
     
-    inline Fix atan() const throw()            
+    PLONK_INLINE_LOW Fix atan() const throw()            
     { 
         return atan2 (Fix::getOne());
     }
     
-    friend inline Fix sinh (Fix const& a) throw()            
+    friend PLONK_INLINE_LOW Fix sinh (Fix const& a) throw()            
     { 
         return a.sinh();
     }
     
-    inline Fix sinh() const throw()            
+    PLONK_INLINE_LOW Fix sinh() const throw()            
     { 
         const Fix e = exp();
         return (e - e.reciprocal()) >> 1;
     }
     
-    friend inline Fix cosh (Fix const& a) throw()            
+    friend PLONK_INLINE_LOW Fix cosh (Fix const& a) throw()            
     { 
         return a.cosh();
     }
     
-    inline Fix cosh() const throw()            
+    PLONK_INLINE_LOW Fix cosh() const throw()            
     { 
         const Fix e = exp();
         return (e + e.reciprocal()) >> 1;
     }
     
-    friend inline Fix tanh (Fix const& a) throw()            
+    friend PLONK_INLINE_LOW Fix tanh (Fix const& a) throw()            
     { 
         return a.tanh();
     }
     
-    inline Fix tanh() const throw()            
+    PLONK_INLINE_LOW Fix tanh() const throw()            
     { 
         const Fix e = exp();
         const Fix ne = e.reciprocal();
         return (e - ne) / (e + ne);
     }
 
-    friend inline Fix sqrt (Fix const& a) throw()            
+    friend PLONK_INLINE_LOW Fix sqrt (Fix const& a) throw()            
     { 
         return a.sqrt();
     }
     
-    inline Fix sqrt() const throw()            
+    PLONK_INLINE_LOW Fix sqrt() const throw()            
     {                 
         if (internal < 0)
 			return Math<Fix>::get0();;
@@ -570,12 +570,12 @@ public:
 		return Fix (Internal (Base (res)));
     }
     
-    friend inline Fix log (Fix const& a) throw()            
+    friend PLONK_INLINE_LOW Fix log (Fix const& a) throw()            
     { 
         return a.log();
     }
     
-    inline Fix log() const throw()            
+    PLONK_INLINE_LOW Fix log() const throw()            
     { 
         if (internal <= 0)
             return Fix::getMinimum();
@@ -621,22 +621,22 @@ public:
         return guess + Fix (scaling);
     }
     
-    friend inline Fix log10 (Fix const& a) throw()            
+    friend PLONK_INLINE_LOW Fix log10 (Fix const& a) throw()            
     { 
         return a.log10();
     }
     
-    inline Fix log10() const throw()            
+    PLONK_INLINE_LOW Fix log10() const throw()            
     { 
         return log() * Math<Fix>::get1_Log10();
     }
     
-    friend inline Fix exp (Fix const& a) throw()            
+    friend PLONK_INLINE_LOW Fix exp (Fix const& a) throw()            
     {  
         return a.exp();
     }
     
-    inline Fix exp() const throw()            
+    PLONK_INLINE_LOW Fix exp() const throw()            
     {         
         const Base raw1 (Fix::getOne().getRaw());
         Base araw (internal);
@@ -673,42 +673,42 @@ public:
         return neg ? plonk::reciprocal (Fix (Internal (result))) : Fix (Internal (result));
     }
     
-    friend inline Fix squared (Fix const& a) throw()            
+    friend PLONK_INLINE_LOW Fix squared (Fix const& a) throw()            
     { 
         return a * a; 
     }
     
-    inline Fix squared() const throw()            
+    PLONK_INLINE_LOW Fix squared() const throw()            
     { 
         return (*this) * (*this); 
     }
     
-    friend inline Fix cubed (Fix const& a) throw()            
+    friend PLONK_INLINE_LOW Fix cubed (Fix const& a) throw()            
     { 
         return a * a * a; 
     }
     
-    inline Fix cubed() const throw()            
+    PLONK_INLINE_LOW Fix cubed() const throw()            
     { 
         return (*this) * (*this) * (*this); 
     }
     
-    friend inline Fix floor (Fix const& a) throw()            
+    friend PLONK_INLINE_LOW Fix floor (Fix const& a) throw()            
     { 
         return a.floor();
     }
     
-    inline Fix floor() const throw()            
+    PLONK_INLINE_LOW Fix floor() const throw()            
     { 
         return Fix (Internal (internal & Fix::getIMask().getRaw())); 
     }
     
-    friend inline Fix ceil (Fix const& a) throw()             
+    friend PLONK_INLINE_LOW Fix ceil (Fix const& a) throw()             
     {
         return a.ceil();
     }
     
-    inline Fix ceil() const throw()             
+    PLONK_INLINE_LOW Fix ceil() const throw()             
     { 
         const Base imask (Fix::getIMask().getRaw());
         const Base fmask (Fix::getFMask().getRaw());
@@ -716,160 +716,160 @@ public:
         return Fix (Internal ((internal & imask) + (internal & fmask ? one : 0))); 
     }
     
-    friend inline Fix frac (Fix const& a) throw()            
+    friend PLONK_INLINE_LOW Fix frac (Fix const& a) throw()            
     { 
         return a.frac();
     }
     
-    inline Fix frac() const throw()            
+    PLONK_INLINE_LOW Fix frac() const throw()            
     { 
         return Fix (Internal (internal & Fix::getFMask())); 
     }
     
-    friend inline Fix sign (Fix const& a) throw()            
+    friend PLONK_INLINE_LOW Fix sign (Fix const& a) throw()            
     { 
         const Base araw (a.getRaw());
         return araw == 0 ? Math<Fix>::get0() : araw < 0 ? Math<Fix>::get_1() : Math<Fix>::get1(); 
     }
     
-    inline Fix sign() const throw()            
+    PLONK_INLINE_LOW Fix sign() const throw()            
     { 
         return internal == 0 ? Math<Fix>::get0() : internal < 0 ? Math<Fix>::get_1() : Math<Fix>::get1(); 
     }
     
-    friend inline Fix m2f (Fix const& a) throw()            
+    friend PLONK_INLINE_LOW Fix m2f (Fix const& a) throw()            
     { 
         return a.m2f();
     }
     
-    inline Fix m2f() const throw()            
+    PLONK_INLINE_LOW Fix m2f() const throw()            
     { 
         return Math<Fix>::get440() * ((subop (69) / Math<Fix>::get12()) * Math<Fix>::getLog2()).exp();
     }
     
-    friend inline Fix f2m (Fix const& a) throw()            
+    friend PLONK_INLINE_LOW Fix f2m (Fix const& a) throw()            
     { 
         return a.f2m();
     }
     
-    inline Fix f2m() const throw()            
+    PLONK_INLINE_LOW Fix f2m() const throw()            
     { 
         return mulop (Math<Fix>::get1_440()).log2() * Math<Fix>::get12() + Math<Fix>::get69();
     }
     
-    friend inline Fix a2dB (Fix const& a) throw()            
+    friend PLONK_INLINE_LOW Fix a2dB (Fix const& a) throw()            
     { 
         return a.a2dB(); 
     }
     
-    inline Fix a2dB() const throw()            
+    PLONK_INLINE_LOW Fix a2dB() const throw()            
     { 
         plonk_assertfalse;
         return a2dB (float (*this)); 
     }
     
-    friend inline Fix dB2a (Fix const& a) throw()            
+    friend PLONK_INLINE_LOW Fix dB2a (Fix const& a) throw()            
     { 
         return a.dB2a();
     }
     
-    inline Fix dB2a() const throw()            
+    PLONK_INLINE_LOW Fix dB2a() const throw()            
     { 
         plonk_assertfalse;
         return dB2a (float (*this)); 
     }
     
-    friend inline Fix d2r (Fix const& a) throw()            
+    friend PLONK_INLINE_LOW Fix d2r (Fix const& a) throw()            
     { 
         return a.d2r(); 
     }
     
-    inline Fix d2r() const throw()            
+    PLONK_INLINE_LOW Fix d2r() const throw()            
     { 
         plonk_assertfalse;
         return d2r (float (*this)); 
     }
     
-    friend inline Fix r2d (Fix const& a) throw()            
+    friend PLONK_INLINE_LOW Fix r2d (Fix const& a) throw()            
     { 
         return a.r2d();
     }
     
-    inline Fix r2d() const throw()            
+    PLONK_INLINE_LOW Fix r2d() const throw()            
     { 
         plonk_assertfalse;
         return r2d (float (*this)); 
     }
     
-    friend inline Fix distort (Fix const& a) throw()            
+    friend PLONK_INLINE_LOW Fix distort (Fix const& a) throw()            
     { 
         return a.distort();
     }
     
-    inline Fix distort() const throw()            
+    PLONK_INLINE_LOW Fix distort() const throw()            
     { 
         return reciprocal (*this) + abs (*this); 
     }
     
-    friend inline Fix zap (Fix const& a) throw()            
+    friend PLONK_INLINE_LOW Fix zap (Fix const& a) throw()            
     { 
         return a; 
     }
     
-    inline Fix zap() const throw()            
+    PLONK_INLINE_LOW Fix zap() const throw()            
     { 
         return *this; 
     }
 
     // -- binary ops -------------------------------------------------------- //
             
-    friend inline Fix addop (Fix const& a, Fix const& b) throw()              
+    friend PLONK_INLINE_LOW Fix addop (Fix const& a, Fix const& b) throw()              
     { 
         return a.addop (b); 
     }
 
-    inline Fix addop (Fix const& b) const throw()              
+    PLONK_INLINE_LOW Fix addop (Fix const& b) const throw()              
     { 
         return FixType (Internal (internal + b.internal)); 
     }
     
-    friend inline Fix subop (Fix const& a, Fix const& b) throw()              
+    friend PLONK_INLINE_LOW Fix subop (Fix const& a, Fix const& b) throw()              
     { 
         return a.subop (b); 
     }
 
-    inline Fix subop (Fix const& b) const throw()              
+    PLONK_INLINE_LOW Fix subop (Fix const& b) const throw()              
     { 
         return FixType (Internal (internal - b.internal)); 
     }
     
-    friend inline Fix mulop (Fix const& a, Fix const& b) throw()              
+    friend PLONK_INLINE_LOW Fix mulop (Fix const& a, Fix const& b) throw()              
     { 
         return a.mulop (b); 
     }
 
-    inline Fix mulop (Fix const& b) const throw()              
+    PLONK_INLINE_LOW Fix mulop (Fix const& b) const throw()              
     { 
         const WideBase product = WideBase (internal) * WideBase (b.internal);
         return Fix (Internal (product >> FBits)); 
     }
     
-    friend inline Fix divop (Fix const& a, Fix const& b) throw()              
+    friend PLONK_INLINE_LOW Fix divop (Fix const& a, Fix const& b) throw()              
     { 
         return a.divop (b); 
     }
 
-    inline Fix divop (Fix const& b) const throw()              
+    PLONK_INLINE_LOW Fix divop (Fix const& b) const throw()              
     { 
         return FixType (Internal ((WideBase (internal) << FBits) / WideBase (b.internal))); 
     }
     
-    friend inline Fix addsat (Fix const& a, Fix const& b) throw()              
+    friend PLONK_INLINE_LOW Fix addsat (Fix const& a, Fix const& b) throw()              
     { 
         return a.addsat (b); 
     }
     
-    inline Fix addsat (Fix const& b) const throw()              
+    PLONK_INLINE_LOW Fix addsat (Fix const& b) const throw()              
     { 
         const Fix result = addop (b);
         
@@ -881,12 +881,12 @@ public:
         return result;
     }
     
-    friend inline Fix subsat (Fix const& a, Fix const& b) throw()              
+    friend PLONK_INLINE_LOW Fix subsat (Fix const& a, Fix const& b) throw()              
     { 
         return a.subsat (b); 
     }
     
-    inline Fix subsat (Fix const& b) const throw()              
+    PLONK_INLINE_LOW Fix subsat (Fix const& b) const throw()              
     { 
         const Fix result = subop (b);
         
@@ -898,12 +898,12 @@ public:
         return result;
     }
     
-    friend inline Fix mulsat (Fix const& a, Fix const& b) throw()              
+    friend PLONK_INLINE_LOW Fix mulsat (Fix const& a, Fix const& b) throw()              
     { 
         return a.mulsat (b); 
     }
     
-    inline Fix mulsat (Fix const& b) const throw()              
+    PLONK_INLINE_LOW Fix mulsat (Fix const& b) const throw()              
     { 
         const WideBase product = WideBase (internal) * WideBase (b.internal);
         const UnsignedBase upper = product >> ((FBits + IBits) * 2 - FBits - 1);
@@ -914,12 +914,12 @@ public:
         return Fix (Internal (product >> FBits)); 
     }
     
-    friend inline Fix divsat (Fix const& a, Fix const& b) throw()              
+    friend PLONK_INLINE_LOW Fix divsat (Fix const& a, Fix const& b) throw()              
     { 
         return a.divsat (b); 
     }
     
-    inline Fix divsat (Fix const& b) const throw()              
+    PLONK_INLINE_LOW Fix divsat (Fix const& b) const throw()              
     { 
         if (b.internal == 0)
             return Fix::getOverflow();
@@ -938,62 +938,62 @@ public:
         return FixType (Internal (calc)); 
     }
     
-    friend inline Fix modop (Fix const& a, Fix const& b) throw()              
+    friend PLONK_INLINE_LOW Fix modop (Fix const& a, Fix const& b) throw()              
     { 
         return a.modop (b); 
     }
 
-    inline Fix modop (Fix const& b) const throw()              
+    PLONK_INLINE_LOW Fix modop (Fix const& b) const throw()              
     { 
         return FixType (Internal (internal % b.internal)); 
     }
     
-    friend inline Fix min (Fix const& a, Fix const& b) throw()              
+    friend PLONK_INLINE_LOW Fix min (Fix const& a, Fix const& b) throw()              
     { 
         return a.min (b); 
     }
 
-    inline Fix min (Fix const& b) const throw()              
+    PLONK_INLINE_LOW Fix min (Fix const& b) const throw()              
     { 
         return (*this > b) ? b : *this; 
     }
     
-    friend inline Fix max (Fix const& a, Fix const& b) throw()              
+    friend PLONK_INLINE_LOW Fix max (Fix const& a, Fix const& b) throw()              
     { 
         return a.max (b); 
     }
 
-    inline Fix max (Fix const& b) const throw()              
+    PLONK_INLINE_LOW Fix max (Fix const& b) const throw()              
     { 
         return (*this < b) ? b : *this; 
     }
     
-    friend inline Fix pow (Fix const& a, Fix const& b) throw()              
+    friend PLONK_INLINE_LOW Fix pow (Fix const& a, Fix const& b) throw()              
     { 
         return a.pow (b); 
     }
 
-    inline Fix pow (Fix const& b) const throw()              
+    PLONK_INLINE_LOW Fix pow (Fix const& b) const throw()              
     { 
         return (b * log()).exp();
     }
     
-    friend inline Fix hypot (Fix const& a, Fix const& b) throw()              
+    friend PLONK_INLINE_LOW Fix hypot (Fix const& a, Fix const& b) throw()              
     { 
         return a.hypot (b); 
     }
 
-    inline Fix hypot (Fix const& b) const throw()              
+    PLONK_INLINE_LOW Fix hypot (Fix const& b) const throw()              
     { 
         return sumsqr (b).sqrt();
     }
     
-    friend inline Fix atan2 (Fix const& a, Fix const& b) throw()              
+    friend PLONK_INLINE_LOW Fix atan2 (Fix const& a, Fix const& b) throw()              
     { 
         return a.atan2 (b); 
     }
      
-    inline Fix atan2 (Fix const& b) const throw()              
+    PLONK_INLINE_LOW Fix atan2 (Fix const& b) const throw()              
     { 
         Fix angle;
         
@@ -1019,183 +1019,183 @@ public:
         return angle;
     }
     
-    friend inline Fix sumsqr (Fix const& a, Fix const& b) throw()              
+    friend PLONK_INLINE_LOW Fix sumsqr (Fix const& a, Fix const& b) throw()              
     { 
         return a.sumsqr (b); 
     }
 
-    inline Fix sumsqr (Fix const& b) const throw()              
+    PLONK_INLINE_LOW Fix sumsqr (Fix const& b) const throw()              
     { 
         return squared() + b.squared(); 
     }
     
-    friend inline Fix difsqr (Fix const& a, Fix const& b) throw()              
+    friend PLONK_INLINE_LOW Fix difsqr (Fix const& a, Fix const& b) throw()              
     { 
         return a.difsqr (b); 
     }
     
-    inline Fix difsqr (Fix const& b) const throw()              
+    PLONK_INLINE_LOW Fix difsqr (Fix const& b) const throw()              
     { 
         return squared() - b.squared(); 
     }
     
-    friend inline Fix sqrsum (Fix const& a, Fix const& b) throw()              
+    friend PLONK_INLINE_LOW Fix sqrsum (Fix const& a, Fix const& b) throw()              
     { 
         return a.sqrsum (b); 
     }
     
-    inline Fix sqrsum (Fix const& b) const throw()              
+    PLONK_INLINE_LOW Fix sqrsum (Fix const& b) const throw()              
     { 
         return addop (b).squared();
     }
     
-    friend inline Fix sqrdif (Fix const& a, Fix const& b) throw()              
+    friend PLONK_INLINE_LOW Fix sqrdif (Fix const& a, Fix const& b) throw()              
     { 
         return a.sqrdif (b); 
     }
     
-    inline Fix sqrdif (Fix const& b) const throw()              
+    PLONK_INLINE_LOW Fix sqrdif (Fix const& b) const throw()              
     { 
         return subop (b).squared();
     }
     
-    friend inline Fix absdif (Fix const& a, Fix const& b) throw()              
+    friend PLONK_INLINE_LOW Fix absdif (Fix const& a, Fix const& b) throw()              
     { 
         return a.absdif (b); 
     }
 
-    inline Fix absdif (Fix const& b) const throw()              
+    PLONK_INLINE_LOW Fix absdif (Fix const& b) const throw()              
     { 
         return subop (b).abs();
     }
     
-    friend inline Fix thresh (Fix const& a, Fix const& b) throw()              
+    friend PLONK_INLINE_LOW Fix thresh (Fix const& a, Fix const& b) throw()              
     { 
         return a.thresh (b); 
     }
 
-    inline Fix thresh (Fix const& b) const throw()              
+    PLONK_INLINE_LOW Fix thresh (Fix const& b) const throw()              
     { 
         return internal < b.internal ? 0 : *this;
     }
     
-    friend inline Fix isEqualTo (Fix const& a, Fix const& b) throw()              
+    friend PLONK_INLINE_LOW Fix isEqualTo (Fix const& a, Fix const& b) throw()              
     { 
         return a.isEqualTo (b); 
     }
 
-    inline Fix isEqualTo (Fix const& b) const throw()              
+    PLONK_INLINE_LOW Fix isEqualTo (Fix const& b) const throw()              
     { 
         return internal == b.internal;
     }
     
-    friend inline Fix isNotEqualTo (Fix const& a, Fix const& b) throw()              
+    friend PLONK_INLINE_LOW Fix isNotEqualTo (Fix const& a, Fix const& b) throw()              
     { 
         return a.isNotEqualTo (b); 
     }
 
-    inline Fix isNotEqualTo (Fix const& b) const throw()              
+    PLONK_INLINE_LOW Fix isNotEqualTo (Fix const& b) const throw()              
     { 
         return internal != b.internal;
     }
 
-    friend inline Fix isGreaterThan (Fix const& a, Fix const& b) throw()              
+    friend PLONK_INLINE_LOW Fix isGreaterThan (Fix const& a, Fix const& b) throw()              
     { 
         return a.isGreaterThan (b); 
     }
 
-    inline Fix isGreaterThan (Fix const& b) const throw()              
+    PLONK_INLINE_LOW Fix isGreaterThan (Fix const& b) const throw()              
     { 
         return internal > b.internal;
     }
     
-    friend inline Fix isGreaterThanOrEqualTo (Fix const& a, Fix const& b) throw()              
+    friend PLONK_INLINE_LOW Fix isGreaterThanOrEqualTo (Fix const& a, Fix const& b) throw()              
     { 
         return a.isGreaterThanOrEqualTo (b); 
     }
 
-    inline Fix isGreaterThanOrEqualTo (Fix const& b) const throw()              
+    PLONK_INLINE_LOW Fix isGreaterThanOrEqualTo (Fix const& b) const throw()              
     { 
         return internal >= b.internal;
     }
     
-    friend inline Fix isLessThan (Fix const& a, Fix const& b) throw()              
+    friend PLONK_INLINE_LOW Fix isLessThan (Fix const& a, Fix const& b) throw()              
     { 
         return a.isLessThan (b); 
     }
 
-    inline Fix isLessThan (Fix const& b) const throw()              
+    PLONK_INLINE_LOW Fix isLessThan (Fix const& b) const throw()              
     { 
         return internal < b.internal;
     }
     
-    friend inline Fix isLessThanOrEqualTo (Fix const& a, Fix const& b) throw()              
+    friend PLONK_INLINE_LOW Fix isLessThanOrEqualTo (Fix const& a, Fix const& b) throw()              
     { 
         return a.isLessThanOrEqualTo (b); 
     }
 
-    inline Fix isLessThanOrEqualTo (Fix const& b) const throw()              
+    PLONK_INLINE_LOW Fix isLessThanOrEqualTo (Fix const& b) const throw()              
     { 
         return internal <= b.internal;
     }
 
     // -- contants ---------------------------------------------------------- //
     
-    inline static const Fix& getOne() throw()
+    PLONK_INLINE_LOW static const Fix& getOne() throw()
     {
         static Fix v (Internal (Base (1) << FBits));
         return v;
     }
         
-    inline static const Fix& getMinimum() throw()
+    PLONK_INLINE_LOW static const Fix& getMinimum() throw()
     {
         static Fix v (Internal (Base (1) << (IBits + FBits - 1)));
         return v;
     }
     
-    inline static const Fix& getEpsilson() throw()
+    PLONK_INLINE_LOW static const Fix& getEpsilson() throw()
     {
         static Fix v (Internal (Base (1)));
         return v;
     }
 
-    inline static const Fix& getMaximum() throw()
+    PLONK_INLINE_LOW static const Fix& getMaximum() throw()
     {
         static Fix v (Internal (~(getMinimum().internal)));
         return v;
     }
 
-    inline static const Fix& getOverflow() throw()
+    PLONK_INLINE_LOW static const Fix& getOverflow() throw()
     {
         static Fix v (getMinimum());
         return v;
     }
     
-    inline static const Fix& getAtan2Magic1() throw()
+    PLONK_INLINE_LOW static const Fix& getAtan2Magic1() throw()
     {
         static Fix v (0.1963);
         return v;
     }
     
-    inline static const Fix& getAtan2Magic2() throw()
+    PLONK_INLINE_LOW static const Fix& getAtan2Magic2() throw()
     {
         static Fix v (0.9817);
         return v;
     }
         
-    inline static const Base& getIMask() throw()
+    PLONK_INLINE_LOW static const Base& getIMask() throw()
     {
         static Base v (getIMaskInternal()); // getIMaskInternal() is slow but only happens once at init
         return v;
     }
 
-    inline static const Base& getFMask() throw()
+    PLONK_INLINE_LOW static const Base& getFMask() throw()
     {
         static Base v (getFMaskInternal()); // getFMaskInternal() is slow but only happens once at init
         return v;
     }
     
-    inline const Base& getRaw() const throw() { return internal; }
+    PLONK_INLINE_LOW const Base& getRaw() const throw() { return internal; }
     
 #if !PLONK_ANDROID
     friend std::istream& operator>> (std::istream &inputStream, Fix& value)
@@ -1216,19 +1216,19 @@ public:
 private:
     Base internal;
     
-    inline static const float& getOneFloat() throw()
+    PLONK_INLINE_LOW static const float& getOneFloat() throw()
     {
         static float v (float (getOne().internal));
         return v;
     }
     
-    inline static const double& getOneDouble() throw()
+    PLONK_INLINE_LOW static const double& getOneDouble() throw()
     {
         static double v (double (getOne().internal));
         return v;
     }
     
-    inline static Base getIMaskInternal() throw()
+    PLONK_INLINE_LOW static Base getIMaskInternal() throw()
     {
         Base v = 0;
         
@@ -1238,7 +1238,7 @@ private:
         return v << FBits;
     }
         
-    inline static Base getFMaskInternal() throw()
+    PLONK_INLINE_LOW static Base getFMaskInternal() throw()
     {
         Base v = 0;
         
@@ -1281,7 +1281,7 @@ private:
     
     /** Converts to a wider/narrower word depending on the conversion. */
     template<class OtherFixType>
-    static inline typename FixBaseConvert<Base,typename OtherFixType::BaseType>::ConvertBase convert (OtherFixType const& other) throw()
+    static PLONK_INLINE_LOW typename FixBaseConvert<Base,typename OtherFixType::BaseType>::ConvertBase convert (OtherFixType const& other) throw()
     {
         typedef typename FixBaseConvert<Base,typename OtherFixType::BaseType>::ConvertBase ConvertBase;
         return ConvertBase (other.getRaw());
@@ -1292,7 +1292,7 @@ template<class Base, unsigned IBits, unsigned FBits> const unsigned Fix<Base,IBi
 template<class Base, unsigned IBits, unsigned FBits> const unsigned Fix<Base,IBits,FBits>::FBitsCount = FBits;
 
 #define PLONK_FIXBINARYOPFUNCTION_DEFINE(OP)\
-    static inline OperandType OP (OperandType const& a, OperandType const& b) throw() { return a.OP (b); }
+    static PLONK_INLINE_LOW OperandType OP (OperandType const& a, OperandType const& b) throw() { return a.OP (b); }
 
 template<class FixType>
 class FixBinaryOpFunctions
@@ -1328,7 +1328,7 @@ public:
 };
 
 #define PLONK_FIXUNARYOPFUNCTION_DEFINE(OP)\
-    static inline OperandType OP (OperandType const& a) throw() { return a.OP(); }
+    static PLONK_INLINE_LOW OperandType OP (OperandType const& a) throw() { return a.OP(); }
 
 template<class FixType>
 class FixUnaryOpFunctions
@@ -1444,19 +1444,19 @@ PLONK_OPFUNCTIONSHELPERS_DEFINE(int,31, 1)
 //class NumericalArrayBinaryOp< FixI8F8,plonk::mulop<FixI8F8> >
 //{
 //public:    
-//    static inline void calcNN (FixI8F8* dst, const FixI8F8* left, const FixI8F8* right, const UnsignedLong numItems) throw()
+//    static PLONK_INLINE_LOW void calcNN (FixI8F8* dst, const FixI8F8* left, const FixI8F8* right, const UnsignedLong numItems) throw()
 //    {
 //        for (UnsignedLong i = 0; i < numItems; ++i)
 //            dst[i] = plonk::mulop (left[i], right[i]);
 //    }
 //    
-//    static inline void calcN1 (FixI8F8* dst, const FixI8F8* left, const FixI8F8 right, const UnsignedLong numItems) throw()
+//    static PLONK_INLINE_LOW void calcN1 (FixI8F8* dst, const FixI8F8* left, const FixI8F8 right, const UnsignedLong numItems) throw()
 //    {
 //        for (UnsignedLong i = 0; i < numItems; ++i)
 //            dst[i] = plonk::mulop (left[i], right);
 //    }
 //    
-//    static inline void calc1N (FixI8F8* dst, const FixI8F8 left, const FixI8F8* right, const UnsignedLong numItems) throw()
+//    static PLONK_INLINE_LOW void calc1N (FixI8F8* dst, const FixI8F8 left, const FixI8F8* right, const UnsignedLong numItems) throw()
 //    {
 //        for (UnsignedLong i = 0; i < numItems; ++i)
 //            dst[i] = plonk::mulop (left, right[i]);

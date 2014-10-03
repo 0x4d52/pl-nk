@@ -69,14 +69,14 @@ public:
             pl_Memory_Destroy (internal);
     }
     
-    inline void* allocateBytes (const UnsignedLong numBytes) throw()
+    PLONK_INLINE_LOW void* allocateBytes (const UnsignedLong numBytes) throw()
     {
         void* const ptr = pl_Memory_AllocateBytes (internal, numBytes);
         plonk_assert (ptr != 0);
         return ptr;
     }
     
-    inline void free (void* ptr) throw()
+    PLONK_INLINE_LOW void free (void* ptr) throw()
     {
         const ResultCode result = pl_Memory_Free (internal, ptr);
         plonk_assert (result == PlankResult_OK);
@@ -101,7 +101,7 @@ public:
         userData = *static_cast<Type*> (pl_Memory_GetUserData (internal));
     }
     
-    inline void* getUserData() throw()
+    PLONK_INLINE_LOW void* getUserData() throw()
     {
         return pl_Memory_GetUserData (internal);
     }
@@ -125,7 +125,7 @@ public:
         setFunctions (0, 0);
     }
     
-    static inline void zero (void* const ptr, const UnsignedLong numBytes) throw()
+    static PLONK_INLINE_LOW void zero (void* const ptr, const UnsignedLong numBytes) throw()
     {
         const ResultCode result = pl_MemoryZero (ptr, numBytes);
         plonk_assert (result == PlankResult_OK);
@@ -135,12 +135,12 @@ public:
     }
     
     template<class Type>
-    static inline void zero (Type& object) throw()
+    static PLONK_INLINE_LOW void zero (Type& object) throw()
     {
         Memory::zero (&object, sizeof (Type));
     }
     
-    static inline void copy (void* const dst, const void* const src, const UnsignedLong numBytes) throw()
+    static PLONK_INLINE_LOW void copy (void* const dst, const void* const src, const UnsignedLong numBytes) throw()
     {
         const ResultCode result = pl_MemoryCopy (dst, src, numBytes);
         plonk_assert (result == PlankResult_OK);
@@ -177,7 +177,7 @@ public:
     /** Must implement, normally this starts a background thread. */
     virtual void init() = 0; 
 
-    inline Memory& getMemory() throw() { return memory; }
+    PLONK_INLINE_LOW Memory& getMemory() throw() { return memory; }
     
 private:
     Memory& memory;

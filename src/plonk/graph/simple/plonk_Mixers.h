@@ -347,7 +347,7 @@ public:
         return keys;
     }
     
-    static inline const UnitType& getDummy() throw()
+    static PLONK_INLINE_LOW const UnitType& getDummy() throw()
     {
         // dummy is a marker so we know we've done the whole queue up to the poiunt that we add this dummy marker
         static UnitType dummy (0); 
@@ -757,7 +757,7 @@ public:
     typedef InputDictionary                             Inputs;
     typedef LockFreeQueue<UnitType>                     QueueType;
 
-    static inline UnitInfos getInfo() throw()
+    static PLONK_INLINE_LOW UnitInfos getInfo() throw()
     {
         const double blockSize = (double)BlockSize::getDefault().getValue();
         const double sampleRate = SampleRate::getDefault().getValue();

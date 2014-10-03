@@ -130,8 +130,8 @@ public:
         }
     }    
     
-    inline BufferArray& getCircularBuffers() { return circularBuffers; }
-    inline DelayStateArray& getDelayStates() { return delayStates; }
+    PLONK_INLINE_LOW BufferArray& getCircularBuffers() { return circularBuffers; }
+    PLONK_INLINE_LOW DelayStateArray& getDelayStates() { return delayStates; }
     
 private:
     BufferArray circularBuffers;

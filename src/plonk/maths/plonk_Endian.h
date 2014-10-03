@@ -45,7 +45,7 @@ template<UnsignedLong length>
 class EndianUtility
 {
 public:
-    static inline void swap (void* bits) throw()
+    static PLONK_INLINE_MID void swap (void* bits) throw()
     {
         unsigned char* data = reinterpret_cast<unsigned char*> (bits);
         const unsigned int numSwap = length / 2;
@@ -59,7 +59,7 @@ public:
         }
     }    
     
-    static inline void swap (void* bits, 
+    static PLONK_INLINE_MID void swap (void* bits, 
                              const unsigned int itemSize, // hmm, isn't itemSize the same as the tparam length?
                              const unsigned long numItems) throw()
     {
@@ -74,12 +74,12 @@ template<>
 class EndianUtility<1>
 {
 public:
-    static inline void swap (void* bits) throw()
+    static PLONK_INLINE_MID void swap (void* bits) throw()
     {
         (void)bits;
     }
     
-    static inline void swap (void* bits, 
+    static PLONK_INLINE_MID void swap (void* bits, 
                              const unsigned int itemSize, 
                              const unsigned long numItems) throw()
     {
@@ -93,12 +93,12 @@ template<>
 class EndianUtility<2>
 {
 public:
-    static inline void swap (void* bits) throw()
+    static PLONK_INLINE_MID void swap (void* bits) throw()
     {
         pl_SwapEndianUS (reinterpret_cast<PlankUS*> (bits));
     }
     
-    static inline void swap (void* bits, 
+    static PLONK_INLINE_MID void swap (void* bits, 
                              const unsigned int itemSize, 
                              const unsigned long numItems) throw()
     {
@@ -111,12 +111,12 @@ template<>
 class EndianUtility<3>
 {
 public:
-    static inline void swap (void* bits) throw()
+    static PLONK_INLINE_MID void swap (void* bits) throw()
     {
         pl_SwapEndianUI24 (reinterpret_cast<PlankUI24*> (bits));
     }
     
-    static inline void swap (void* bits, 
+    static PLONK_INLINE_MID void swap (void* bits, 
                              const unsigned int itemSize, 
                              const unsigned long numItems) throw()
     {
@@ -129,12 +129,12 @@ template<>
 class EndianUtility<4>
 {
 public:
-    static inline void swap (void* bits) throw()
+    static PLONK_INLINE_MID void swap (void* bits) throw()
     {
         pl_SwapEndianUI (reinterpret_cast<PlankUI*> (bits));
     }
     
-    static inline void swap (void* bits, 
+    static PLONK_INLINE_MID void swap (void* bits, 
                              const unsigned int itemSize, 
                              const unsigned long numItems) throw()
     {
@@ -147,12 +147,12 @@ template<>
 class EndianUtility<8>
 {
 public:
-    static inline void swap (void* bits) throw()
+    static PLONK_INLINE_MID void swap (void* bits) throw()
     {
         pl_SwapEndianULL (reinterpret_cast<PlankULL*> (bits));
     }
     
-    static inline void swap (void* bits, 
+    static PLONK_INLINE_MID void swap (void* bits, 
                              const unsigned int itemSize, 
                              const unsigned long numItems) throw()
     {
@@ -168,7 +168,7 @@ class Endian
 {
 public:        
     template<class Type>
-    static inline void swap (Type& data) throw()
+    static PLONK_INLINE_MID void swap (Type& data) throw()
     {
         typedef EndianUtility<sizeof (Type)> EndianUtilityType;
         
@@ -176,7 +176,7 @@ public:
     }
     
     template<class Type>
-    static inline void swap (Type* data) throw()
+    static PLONK_INLINE_MID void swap (Type* data) throw()
     {
         typedef EndianUtility<sizeof (Type)> EndianUtilityType;
         
@@ -184,7 +184,7 @@ public:
     }
 
     template<class Type>
-    static inline void swap (Type* data, const int numItems) throw()
+    static PLONK_INLINE_MID void swap (Type* data, const int numItems) throw()
     {
         typedef EndianUtility<sizeof (Type)> EndianUtilityType;
         
@@ -212,17 +212,17 @@ class EndianIfBig : public Endian
 #if PLONK_LITTLEENDIAN
 public:
     template<class Type>
-    static inline void swap (Type& /*data*/) throw()
+    static PLONK_INLINE_MID void swap (Type& /*data*/) throw()
     {
     }
     
     template<class Type>
-    static inline void swap (Type* /*data*/) throw()
+    static PLONK_INLINE_MID void swap (Type* /*data*/) throw()
     {
     }
     
     template<class Type>
-    static inline void swap (Type* /*data*/, const int /*numItems*/) throw()
+    static PLONK_INLINE_MID void swap (Type* /*data*/, const int /*numItems*/) throw()
     {
     }
 
@@ -240,17 +240,17 @@ class EndianIfLittle : public Endian
 #if PLONK_BIGENDIAN
 public:
     template<class Type>
-    static inline void swap (Type& /*data*/) throw()
+    static PLONK_INLINE_MID void swap (Type& /*data*/) throw()
     {
     }
     
     template<class Type>
-    static inline void swap (Type* /*data*/) throw()
+    static PLONK_INLINE_MID void swap (Type* /*data*/) throw()
     {
     }
     
     template<class Type>
-    static inline void swap (Type* /*data*/, const int /*numItems*/) throw()
+    static PLONK_INLINE_MID void swap (Type* /*data*/, const int /*numItems*/) throw()
     {
     }
     

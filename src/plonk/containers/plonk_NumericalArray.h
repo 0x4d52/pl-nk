@@ -54,13 +54,13 @@ template<class NumericalType>
 class NumericalArrayFillerBase
 {
 public:
-    static inline void fill (NumericalType* const dst, const NumericalType value, const UnsignedLong numItems) throw()
+    static PLONK_INLINE_LOW void fill (NumericalType* const dst, const NumericalType value, const UnsignedLong numItems) throw()
     {
         for (UnsignedLong i = 0; i < numItems; ++i)
             dst[i] = value;
     }
     
-    static inline void line (NumericalType* const dst, const UnsignedLong size, const NumericalType start, const NumericalType end) throw()
+    static PLONK_INLINE_LOW void line (NumericalType* const dst, const UnsignedLong size, const NumericalType start, const NumericalType end) throw()
 	{
         if (size >= 2)
         {
@@ -76,7 +76,7 @@ public:
         else plonk_assertfalse;
 	}
 	
-	static inline void series (NumericalType* const dst,
+	static PLONK_INLINE_LOW void series (NumericalType* const dst,
                                const UnsignedLong size, 
                                const NumericalType start, 
                                const NumericalType grow) throw()
@@ -94,7 +94,7 @@ public:
         else plonk_assertfalse;
 	}
 	
-	static inline void geom (NumericalType* const dst,
+	static PLONK_INLINE_LOW void geom (NumericalType* const dst,
                              const UnsignedLong size, 
                              const NumericalType start, 
                              const NumericalType grow) throw()
@@ -112,7 +112,7 @@ public:
         else plonk_assertfalse;
 	}
 	
-	static inline void rand (NumericalType* const dst,
+	static PLONK_INLINE_LOW void rand (NumericalType* const dst,
                              const UnsignedLong size, 
                              const NumericalType lower, 
                              const NumericalType upper) throw()
@@ -125,21 +125,21 @@ public:
         else plonk_assertfalse;
     }
     
-    static inline void rand (NumericalType* const dst,
+    static PLONK_INLINE_LOW void rand (NumericalType* const dst,
                              const UnsignedLong size, 
                              const NumericalType upper) throw()
     {
         return rand (dst, size, NumericalType (0), upper);
     }
 	
-	static inline void rand2 (NumericalType* const dst,
+	static PLONK_INLINE_LOW void rand2 (NumericalType* const dst,
                               const UnsignedLong size, 
                               const NumericalType positive) throw()
 	{
 		return rand (dst, size, -positive, positive);
 	}
 	
-	static inline void exprand (NumericalType* const dst,
+	static PLONK_INLINE_LOW void exprand (NumericalType* const dst,
                                 const UnsignedLong size, 
                                 const NumericalType lower, 
                                 const NumericalType upper) throw()
@@ -162,12 +162,12 @@ template<>
 class NumericalArrayFiller<float> : public NumericalArrayFillerBase<float>
 {
 public:
-    static inline void fill (float* const dst, const float value, const UnsignedLong numItems) throw()
+    static PLONK_INLINE_LOW void fill (float* const dst, const float value, const UnsignedLong numItems) throw()
     {        
         pl_VectorFillF_N1 (dst, value, numItems);
     }
     
-    static inline void line (float* const dst, const UnsignedLong size, const float start, const float end) throw()
+    static PLONK_INLINE_LOW void line (float* const dst, const UnsignedLong size, const float start, const float end) throw()
 	{
         if (size >= 2)
         {
@@ -176,7 +176,7 @@ public:
         else plonk_assertfalse;
 	}
 	
-	static inline void series (float* const dst,
+	static PLONK_INLINE_LOW void series (float* const dst,
                                const UnsignedLong size, 
                                const float start, 
                                const float grow) throw()
@@ -193,12 +193,12 @@ template<>
 class NumericalArrayFiller<double> : public NumericalArrayFillerBase<double>
 {
 public:
-    static inline void fill (double* const dst, const double value, const UnsignedLong numItems) throw()
+    static PLONK_INLINE_LOW void fill (double* const dst, const double value, const UnsignedLong numItems) throw()
     {        
         pl_VectorFillD_N1 (dst, value, numItems);
     }
     
-    static inline void line (double* const dst, const UnsignedLong size, const double start, const double end) throw()
+    static PLONK_INLINE_LOW void line (double* const dst, const UnsignedLong size, const double start, const double end) throw()
 	{
         if (size >= 2)
         {
@@ -207,7 +207,7 @@ public:
         else plonk_assertfalse;
 	}
 	
-	static inline void series (double* const dst,
+	static PLONK_INLINE_LOW void series (double* const dst,
                                const UnsignedLong size, 
                                const double start, 
                                const double grow) throw()
@@ -225,13 +225,13 @@ template<class NumericalType, class OtherType>
 class NumericalArrayConverterBase
 {
 public:
-    static inline void convertDirect (NumericalType* const dst, const OtherType* const src, const UnsignedLong numItems) throw()
+    static PLONK_INLINE_LOW void convertDirect (NumericalType* const dst, const OtherType* const src, const UnsignedLong numItems) throw()
     {
         for (UnsignedLong i = 0; i < numItems; ++i)
             NumericalConverter::roundCopy (src[i], dst[i]);
     }
     
-    static inline void convertScaled (NumericalType* const dst, const OtherType* const src, const UnsignedLong numItems) throw()
+    static PLONK_INLINE_LOW void convertScaled (NumericalType* const dst, const OtherType* const src, const UnsignedLong numItems) throw()
     {
         typedef typename BinaryOpTypeUtility<NumericalType, OtherType>::CalcType CalcType;
         
@@ -253,12 +253,12 @@ template<class NumericalType>
 class NumericalArrayConverterCopy
 {
 public:
-    static inline void convertDirect (NumericalType* const dst, const NumericalType* const src, const UnsignedLong numItems) throw()
+    static PLONK_INLINE_LOW void convertDirect (NumericalType* const dst, const NumericalType* const src, const UnsignedLong numItems) throw()
     {
         NumericalArray<NumericalType>::copyData (dst, src, numItems);
     }
     
-    static inline void convertScaled (NumericalType* const dst, const NumericalType* const src, const UnsignedLong numItems) throw()
+    static PLONK_INLINE_LOW void convertScaled (NumericalType* const dst, const NumericalType* const src, const UnsignedLong numItems) throw()
     {
         NumericalArray<NumericalType>::copyData (dst, src, numItems);
     }        
@@ -268,12 +268,12 @@ template<>
 class NumericalArrayConverterBase<float, char>
 {
 public:
-    static inline void convertDirect (float* const dst, const char* const src, const UnsignedLong numItems) throw()
+    static PLONK_INLINE_LOW void convertDirect (float* const dst, const char* const src, const UnsignedLong numItems) throw()
     {
         pl_VectorConvertC2F_NN (dst, src, numItems);
     }
     
-    static inline void convertScaled (float* const dst, const char* const src, const UnsignedLong numItems) throw()
+    static PLONK_INLINE_LOW void convertScaled (float* const dst, const char* const src, const UnsignedLong numItems) throw()
     {
         convertDirect (dst, src, numItems);
         pl_VectorMulF_NN1 (dst, dst, 1.f / PLANK_CHARPEAK_F, numItems);
@@ -284,12 +284,12 @@ template<>
 class NumericalArrayConverterBase<float, short>
 {
 public:
-    static inline void convertDirect (float* const dst, const short* const src, const UnsignedLong numItems) throw()
+    static PLONK_INLINE_LOW void convertDirect (float* const dst, const short* const src, const UnsignedLong numItems) throw()
     {
         pl_VectorConvertS2F_NN (dst, src, numItems);
     }
     
-    static inline void convertScaled (float* const dst, const short* const src, const UnsignedLong numItems) throw()
+    static PLONK_INLINE_LOW void convertScaled (float* const dst, const short* const src, const UnsignedLong numItems) throw()
     {
         convertDirect (dst, src, numItems);
         pl_VectorMulF_NN1 (dst, dst, 1.f / PLANK_SHORTPEAK_F, numItems);
@@ -300,13 +300,13 @@ template<>
 class NumericalArrayConverterBase<float, Int24>
 {
 public:
-    static inline void convertDirect (float* const dst, const Int24* const src, const UnsignedLong numItems) throw()
+    static PLONK_INLINE_LOW void convertDirect (float* const dst, const Int24* const src, const UnsignedLong numItems) throw()
     {
         for (UnsignedLong i = 0; i < numItems; ++i)
             dst[i] = float (src[i]);
     }
     
-    static inline void convertScaled (float* const dst, const Int24* const src, const UnsignedLong numItems) throw()
+    static PLONK_INLINE_LOW void convertScaled (float* const dst, const Int24* const src, const UnsignedLong numItems) throw()
     {
         convertDirect (dst, src, numItems);
         pl_VectorMulF_NN1 (dst, dst, 1.f / PLANK_INT24PEAK_F, numItems);
@@ -317,12 +317,12 @@ template<>
 class NumericalArrayConverterBase<float, int>
 {
 public:
-    static inline void convertDirect (float* const dst, const int* const src, const UnsignedLong numItems) throw()
+    static PLONK_INLINE_LOW void convertDirect (float* const dst, const int* const src, const UnsignedLong numItems) throw()
     {
         pl_VectorConvertI2F_NN (dst, src, numItems);
     }
     
-    static inline void convertScaled (float* const dst, const int* const src, const UnsignedLong numItems) throw()
+    static PLONK_INLINE_LOW void convertScaled (float* const dst, const int* const src, const UnsignedLong numItems) throw()
     {
         convertDirect (dst, src, numItems);
         pl_VectorMulF_NN1 (dst, dst, 1.f / PLANK_INTPEAK_F, numItems);
@@ -333,13 +333,13 @@ template<>
 class NumericalArrayConverterBase<short, Int24>
 {
 public:
-    static inline void convertDirect (short* const dst, const Int24* const src, const UnsignedLong numItems) throw()
+    static PLONK_INLINE_LOW void convertDirect (short* const dst, const Int24* const src, const UnsignedLong numItems) throw()
     {
         for (UnsignedLong i = 0; i < numItems; ++i)
             dst[i] = short (src[i]);
     }
     
-    static inline void convertScaled (short* const dst, const Int24* const src, const UnsignedLong numItems) throw()
+    static PLONK_INLINE_LOW void convertScaled (short* const dst, const Int24* const src, const UnsignedLong numItems) throw()
     {
         for (UnsignedLong i = 0; i < numItems; ++i)
             dst[i] = short (int (src[i]) / 256);
@@ -350,13 +350,13 @@ template<>
 class NumericalArrayConverterBase<Int24, short>
 {
 public:
-    static inline void convertDirect (Int24* const dst, const short* const src, const UnsignedLong numItems) throw()
+    static PLONK_INLINE_LOW void convertDirect (Int24* const dst, const short* const src, const UnsignedLong numItems) throw()
     {
         for (UnsignedLong i = 0; i < numItems; ++i)
             dst[i] = Int24 (src[i]);
     }
     
-    static inline void convertScaled (Int24* const dst, const short* const src, const UnsignedLong numItems) throw()
+    static PLONK_INLINE_LOW void convertScaled (Int24* const dst, const short* const src, const UnsignedLong numItems) throw()
     {
         for (UnsignedLong i = 0; i < numItems; ++i)
             dst[i] = Int24 (int (src[i]) * 256);
@@ -367,13 +367,13 @@ template<>
 class NumericalArrayConverterBase<int, Int24>
 {
 public:
-    static inline void convertDirect (int* const dst, const Int24* const src, const UnsignedLong numItems) throw()
+    static PLONK_INLINE_LOW void convertDirect (int* const dst, const Int24* const src, const UnsignedLong numItems) throw()
     {
         for (UnsignedLong i = 0; i < numItems; ++i)
             dst[i] = int (src[i]);
     }
     
-    static inline void convertScaled (int* const dst, const Int24* const src, const UnsignedLong numItems) throw()
+    static PLONK_INLINE_LOW void convertScaled (int* const dst, const Int24* const src, const UnsignedLong numItems) throw()
     {
         for (UnsignedLong i = 0; i < numItems; ++i)
             dst[i] = int (src[i]) * 256;
@@ -384,13 +384,13 @@ template<>
 class NumericalArrayConverterBase<Int24, int>
 {
 public:
-    static inline void convertDirect (Int24* const dst, const int* const src, const UnsignedLong numItems) throw()
+    static PLONK_INLINE_LOW void convertDirect (Int24* const dst, const int* const src, const UnsignedLong numItems) throw()
     {
         for (UnsignedLong i = 0; i < numItems; ++i)
             dst[i] = Int24 (src[i]);
     }
     
-    static inline void convertScaled (Int24* const dst, const int* const src, const UnsignedLong numItems) throw()
+    static PLONK_INLINE_LOW void convertScaled (Int24* const dst, const int* const src, const UnsignedLong numItems) throw()
     {
         for (UnsignedLong i = 0; i < numItems; ++i)
             dst[i] = Int24 (int (src[i]) / 256);
@@ -407,7 +407,7 @@ class NumericalArrayConverterSIMD<float>
 {
 public:
     template<class DstType>
-    static inline void convertScaled (DstType* const dst, const float* const src, const UnsignedLong numItems) throw()
+    static PLONK_INLINE_LOW void convertScaled (DstType* const dst, const float* const src, const UnsignedLong numItems) throw()
     {
         PLANK_ALIGN (PLANK_SIMDF_SIZE) 
         float temp[PLANK_SIMDF_LENGTH];
@@ -443,7 +443,7 @@ class NumericalArrayConverterSIMD<double>
 {
 public:
     template<class DstType>
-    static inline void convertScaled (DstType* const dst, const double* const src, const UnsignedLong numItems) throw()
+    static PLONK_INLINE_LOW void convertScaled (DstType* const dst, const double* const src, const UnsignedLong numItems) throw()
     {
         PLANK_ALIGN (PLANK_SIMDD_SIZE) 
         double temp[PLANK_SIMDD_LENGTH];
@@ -479,12 +479,12 @@ template<>
 class NumericalArrayConverterBase<char, float>
 {
 public:
-    static inline void convertDirect (char* const dst, const float* const src, const UnsignedLong numItems) throw()
+    static PLONK_INLINE_LOW void convertDirect (char* const dst, const float* const src, const UnsignedLong numItems) throw()
     {
         pl_VectorConvertF2C_NN (dst, src, numItems);
     }
     
-    static inline void convertScaled (char* const dst, const float* const src, const UnsignedLong numItems) throw()
+    static PLONK_INLINE_LOW void convertScaled (char* const dst, const float* const src, const UnsignedLong numItems) throw()
     {
         NumericalArrayConverterSIMD<float>::convertScaled (dst, src, numItems);
     }    
@@ -494,12 +494,12 @@ template<>
 class NumericalArrayConverterBase<short, float>
 {
 public:
-    static inline void convertDirect (short* const dst, const float* const src, const UnsignedLong numItems) throw()
+    static PLONK_INLINE_LOW void convertDirect (short* const dst, const float* const src, const UnsignedLong numItems) throw()
     {
         pl_VectorConvertF2S_NN (dst, src, numItems);
     }
     
-    static inline void convertScaled (short* const dst, const float* const src, const UnsignedLong numItems) throw()
+    static PLONK_INLINE_LOW void convertScaled (short* const dst, const float* const src, const UnsignedLong numItems) throw()
     {
         NumericalArrayConverterSIMD<float>::convertScaled (dst, src, numItems);
     }    
@@ -509,13 +509,13 @@ template<>
 class NumericalArrayConverterBase<Int24, float>
 {
 public:
-    static inline void convertDirect (Int24* const dst, const float* const src, const UnsignedLong numItems) throw()
+    static PLONK_INLINE_LOW void convertDirect (Int24* const dst, const float* const src, const UnsignedLong numItems) throw()
     {
         for (UnsignedLong i = 0; i < numItems; ++i)
             dst[i] = Int24 (src[i]);
     }
     
-    static inline void convertScaled (Int24* const dst, const float* const src, const UnsignedLong numItems) throw()
+    static PLONK_INLINE_LOW void convertScaled (Int24* const dst, const float* const src, const UnsignedLong numItems) throw()
     {
         NumericalArrayConverterSIMD<float>::convertScaled (dst, src, numItems);
     }    
@@ -525,12 +525,12 @@ template<>
 class NumericalArrayConverterBase<int, float>
 {
 public:
-    static inline void convertDirect (int* const dst, const float* const src, const UnsignedLong numItems) throw()
+    static PLONK_INLINE_LOW void convertDirect (int* const dst, const float* const src, const UnsignedLong numItems) throw()
     {
         pl_VectorConvertF2I_NN (dst, src, numItems);
     }
     
-    static inline void convertScaled (int* const dst, const float* const src, const UnsignedLong numItems) throw()
+    static PLONK_INLINE_LOW void convertScaled (int* const dst, const float* const src, const UnsignedLong numItems) throw()
     {
         NumericalArrayConverterSIMD<float>::convertScaled (dst, src, numItems);
     }    
@@ -542,7 +542,7 @@ class NumericalArrayConverter : public NumericalArrayConverterBase<NumericalType
 public:
     typedef NumericalArrayConverterBase<NumericalType,OtherType> Base;
     
-    static inline void convert (NumericalType* const dst, 
+    static PLONK_INLINE_LOW void convert (NumericalType* const dst, 
                                 const OtherType* const src, 
                                 const UnsignedLong numItems,
                                 const bool applyScaling) throw()
@@ -567,19 +567,19 @@ template<class NumericalType, PLONK_BINARYOPFUNCTION(NumericalType, op)>
 class NumericalArrayBinaryOpBase
 {
 public:
-    static inline void calcNN (NumericalType* dst, const NumericalType* left, const NumericalType* right, const UnsignedLong numItems) throw()
+    static PLONK_INLINE_LOW void calcNN (NumericalType* dst, const NumericalType* left, const NumericalType* right, const UnsignedLong numItems) throw()
     {
         for (UnsignedLong i = 0; i < numItems; ++i)
             dst[i] = op (left[i], right[i]);
     }
     
-    static inline void calcN1 (NumericalType* dst, const NumericalType* left, const NumericalType right, const UnsignedLong numItems) throw()
+    static PLONK_INLINE_LOW void calcN1 (NumericalType* dst, const NumericalType* left, const NumericalType right, const UnsignedLong numItems) throw()
     {
         for (UnsignedLong i = 0; i < numItems; ++i)
             dst[i] = op (left[i], right);
     }
     
-    static inline void calc1N (NumericalType* dst, const NumericalType left, const NumericalType* right, const UnsignedLong numItems) throw()
+    static PLONK_INLINE_LOW void calc1N (NumericalType* dst, const NumericalType left, const NumericalType* right, const UnsignedLong numItems) throw()
     {
         for (UnsignedLong i = 0; i < numItems; ++i)
             dst[i] = op (left, right[i]);
@@ -598,15 +598,15 @@ class NumericalArrayBinaryOp : public NumericalArrayBinaryOpBase<NumericalType,o
     public NumericalArrayBinaryOpBase<Plank##TYPECODE, BinaryOpFunctionsHelper<Plank##TYPECODE>::BinaryOpFunctionsType::PLONKOP> \
     {\
     public:\
-        static inline void calcNN (Plank##TYPECODE* dst, const Plank##TYPECODE* left, const Plank##TYPECODE* right, const UnsignedLong numItems) throw() {\
+        static PLONK_INLINE_LOW void calcNN (Plank##TYPECODE* dst, const Plank##TYPECODE* left, const Plank##TYPECODE* right, const UnsignedLong numItems) throw() {\
             pl_Vector##PLANKOP##TYPECODE##_NNN (dst, left, right, numItems);\
         }\
         \
-        static inline void calcN1 (Plank##TYPECODE* dst, const Plank##TYPECODE* left, const Plank##TYPECODE right, const UnsignedLong numItems) throw() {\
+        static PLONK_INLINE_LOW void calcN1 (Plank##TYPECODE* dst, const Plank##TYPECODE* left, const Plank##TYPECODE right, const UnsignedLong numItems) throw() {\
             pl_Vector##PLANKOP##TYPECODE##_NN1 (dst, left, right, numItems);\
         }\
         \
-        static inline void calc1N (Plank##TYPECODE* dst, const Plank##TYPECODE left, const Plank##TYPECODE* right, const UnsignedLong numItems) throw() {\
+        static PLONK_INLINE_LOW void calc1N (Plank##TYPECODE* dst, const Plank##TYPECODE left, const Plank##TYPECODE* right, const UnsignedLong numItems) throw() {\
             pl_Vector##PLANKOP##TYPECODE##_N1N (dst, left, right, numItems);\
         }\
     }
@@ -647,7 +647,7 @@ template<class NumericalType, PLONK_UNARYOPFUNCTION(NumericalType, op)>
 class NumericalArrayUnaryOpBase
 {
 public:
-    static inline void calc (NumericalType* dst, const NumericalType* src, const UnsignedLong numItems) throw()
+    static PLONK_INLINE_LOW void calc (NumericalType* dst, const NumericalType* src, const UnsignedLong numItems) throw()
     {
         for (UnsignedLong i = 0; i < numItems; ++i)
             dst[i] = op (src[i]);
@@ -668,7 +668,7 @@ class NumericalArrayUnaryOp : public NumericalArrayUnaryOpBase<NumericalType,op>
     public NumericalArrayUnaryOpBase<Plank##TYPECODE, UnaryOpFunctionsHelper<Plank##TYPECODE>::UnaryOpFunctionsType::PLONKOP> \
     {\
     public:\
-        static inline void calc (Plank##TYPECODE* dst, const Plank##TYPECODE* src, const UnsignedLong numItems) throw() {\
+        static PLONK_INLINE_LOW void calc (Plank##TYPECODE* dst, const Plank##TYPECODE* src, const UnsignedLong numItems) throw() {\
             pl_Vector##PLANKOP##TYPECODE##_NN (dst, src, numItems);\
         }\
     }
@@ -717,7 +717,7 @@ template<class NumericalType>
 class NumericalArrayComplex
 {
 public:
-    inline static void zmul (NumericalType* dstReal,
+    PLONK_INLINE_LOW static void zmul (NumericalType* dstReal,
                              NumericalType* dstimag,
                              const NumericalType* leftReal,
                              const NumericalType* leftImag,
@@ -737,7 +737,7 @@ template<>
 class NumericalArrayComplex<float>
 {
 public:
-    inline static void zmul (float* dstReal,
+    PLONK_INLINE_LOW static void zmul (float* dstReal,
                              float* dstimag,
                              const float* leftReal,
                              const float* leftImag,
@@ -753,7 +753,7 @@ template<>
 class NumericalArrayComplex<double>
 {
 public:
-    inline static void zmul (double* dstReal,
+    PLONK_INLINE_LOW static void zmul (double* dstReal,
                              double* dstimag,
                              const double* leftReal,
                              const double* leftImag,
@@ -815,15 +815,15 @@ public:
 	class InitialNumber
 	{
 	public:
-		inline InitialNumber() throw() : value (0), valid (false) { }
-		inline InitialNumber (NumericalType initialValue) throw()
+		PLONK_INLINE_LOW InitialNumber() throw() : value (0), valid (false) { }
+		PLONK_INLINE_LOW InitialNumber (NumericalType initialValue) throw()
 		:	value (initialValue), 
             valid (true) 
 		{ 
 		}
 
 		template<class OtherType>
-		inline InitialNumber (OtherType initialValue) throw()
+		PLONK_INLINE_LOW InitialNumber (OtherType initialValue) throw()
 		:	value (static_cast<const NumericalType> (initialValue)), 
             valid (true) 
 		{ 
@@ -862,34 +862,34 @@ public:
 		return null;
 	}	        
     
-    static inline void copyData (NumericalType* const dst, const NumericalType* const src, const UnsignedLong numItems) throw()
+    static PLONK_INLINE_LOW void copyData (NumericalType* const dst, const NumericalType* const src, const UnsignedLong numItems) throw()
     {
         Memory::copy (dst, src, numItems * sizeof (NumericalType));
     }
         
-    static inline void convertDirect (NumericalType* const dst, const NumericalType* const src, const UnsignedLong numItems) throw()
+    static PLONK_INLINE_LOW void convertDirect (NumericalType* const dst, const NumericalType* const src, const UnsignedLong numItems) throw()
     {
         copyData (dst, src, numItems);
     }
     
-    static inline void convertScaled (NumericalType* const dst, const NumericalType* const src, const UnsignedLong numItems) throw()
+    static PLONK_INLINE_LOW void convertScaled (NumericalType* const dst, const NumericalType* const src, const UnsignedLong numItems) throw()
     {
         copyData (dst, src, numItems);
     }
 
     template<class OtherType>
-    static inline void convertDirect (NumericalType* const dst, const OtherType* const src, const UnsignedLong numItems) throw()
+    static PLONK_INLINE_LOW void convertDirect (NumericalType* const dst, const OtherType* const src, const UnsignedLong numItems) throw()
     {
         NumericalArrayConverter<NumericalType,OtherType>::convertDirect (dst, src, numItems);        
     }
     
     template<class OtherType>
-    static inline void convertScaled (NumericalType* const dst, const OtherType* const src, const UnsignedLong numItems) throw()
+    static PLONK_INLINE_LOW void convertScaled (NumericalType* const dst, const OtherType* const src, const UnsignedLong numItems) throw()
     {
         NumericalArrayConverter<NumericalType,OtherType>::convertScaled (dst, src, numItems);        
     }
     
-    static inline void convert (NumericalType* const dst, 
+    static PLONK_INLINE_LOW void convert (NumericalType* const dst, 
                                 const NumericalType* const src, 
                                 const UnsignedLong numItems,
                                 const bool applyScaling) throw()
@@ -899,7 +899,7 @@ public:
     }    
     
     template<class OtherType>
-    static inline void convert (NumericalType* const dst, 
+    static PLONK_INLINE_LOW void convert (NumericalType* const dst, 
                                 const OtherType* const src, 
                                 const UnsignedLong numItems,
                                 const bool applyScaling) throw()
@@ -907,17 +907,17 @@ public:
         NumericalArrayConverter<NumericalType,OtherType>::convert (dst, src, numItems, applyScaling);        
     }
     
-    static inline void zeroData (NumericalType* const dst, const UnsignedLong numItems) throw()
+    static PLONK_INLINE_LOW void zeroData (NumericalType* const dst, const UnsignedLong numItems) throw()
     {
         Memory::zero (dst, numItems * sizeof (NumericalType));
     }
     
-    static inline void fill (NumericalType* const dst, const NumericalType value, const UnsignedLong numItems) throw()
+    static PLONK_INLINE_LOW void fill (NumericalType* const dst, const NumericalType value, const UnsignedLong numItems) throw()
     {
         NumericalArrayFiller<NumericalType>::fill (dst, value, numItems);
     }
     
-    inline void fill (const NumericalType value) throw()
+    PLONK_INLINE_LOW void fill (const NumericalType value) throw()
     {
         const int length = this->length();
         
@@ -928,13 +928,13 @@ public:
         }
     }
     
-    inline NumericalArray (NumericalArray const& copy) throw()
+    PLONK_INLINE_LOW NumericalArray (NumericalArray const& copy) throw()
 	:	Base (static_cast<Base const&> (copy))
 	{
 	}    
     
     /** Assignment operator. */
-    inline NumericalArray& operator= (NumericalArray const& other) throw()
+    PLONK_INLINE_LOW NumericalArray& operator= (NumericalArray const& other) throw()
 	{
 		if (this != &other)
             this->setInternal (other.getInternal());
@@ -942,7 +942,7 @@ public:
         return *this;
 	}
 
-    inline NumericalArray (ObjectArray<NumericalType> const& copy) throw()
+    PLONK_INLINE_LOW NumericalArray (ObjectArray<NumericalType> const& copy) throw()
 	:	Base (static_cast<Base const&> (copy))
 	{
 	}    
@@ -1620,7 +1620,7 @@ public:
     PLONK_BINARYOPS(NumericalArray);
     PLONK_UNARYOPS(NumericalArray);
 	
-	inline void zero() throw()
+	PLONK_INLINE_LOW void zero() throw()
 	{
 		NumericalType *array = this->getArray();
 		

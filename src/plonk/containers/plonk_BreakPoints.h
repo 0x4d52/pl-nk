@@ -109,7 +109,7 @@ public:
 	void setCurve (const float newCurve) throw()	{ type = Numerical; curve = newCurve; }
 
     template<class ValueType>
-    static inline void sustain (ShapeState<ValueType>& shapeState)
+    static PLONK_INLINE_LOW void sustain (ShapeState<ValueType>& shapeState)
     {
         shapeState.stepsToTarget = TypeUtility<LongLong>::getTypePeak();
         shapeState.currentLevel = shapeState.targetLevel;
@@ -119,7 +119,7 @@ public:
     }
     
     template<class ValueType>
-    static inline void initShape (ShapeState<ValueType>& shapeState)
+    static PLONK_INLINE_LOW void initShape (ShapeState<ValueType>& shapeState)
     {
         if (shapeState.shapeType == Shape::Linear)
             initLinear (shapeState);
@@ -132,7 +132,7 @@ public:
     }
     
     template<class ValueType>
-    static inline ValueType next (ShapeState<ValueType>& shapeState)
+    static PLONK_INLINE_LOW ValueType next (ShapeState<ValueType>& shapeState)
     {
         if (shapeState.stepsToTarget == 1)
         {
@@ -156,7 +156,7 @@ public:
     }
     
     template<class ValueType>
-    static inline void processShape (ShapeState<ValueType>& shapeState, ValueType* outputSamples, const int numSamples)
+    static PLONK_INLINE_LOW void processShape (ShapeState<ValueType>& shapeState, ValueType* outputSamples, const int numSamples)
     {
         plonk_assert (outputSamples != &shapeState.currentLevel);
         
@@ -190,14 +190,14 @@ public:
     
 private:
     template<class ValueType>
-    static inline void initLinear (ShapeState<ValueType>& shapeState) throw()
+    static PLONK_INLINE_LOW void initLinear (ShapeState<ValueType>& shapeState) throw()
     {
         const ValueType diff = shapeState.targetLevel - shapeState.currentLevel;
         shapeState.grow.u.norm = diff / ValueType (shapeState.stepsToTarget);
     }
     
     template<class ValueType>
-    static inline void initNumerical (ShapeState<ValueType>& shapeState) throw()
+    static PLONK_INLINE_LOW void initNumerical (ShapeState<ValueType>& shapeState) throw()
     {
         const ValueType& zero = Math<ValueType>::get0();
         const ValueType diff = shapeState.targetLevel - shapeState.currentLevel;
@@ -219,7 +219,7 @@ private:
     }
     
     template<class ValueType>
-    static inline void initSine (ShapeState<ValueType>& shapeState) throw()
+    static PLONK_INLINE_LOW void initSine (ShapeState<ValueType>& shapeState) throw()
     {
         const double pi = Math<double>::getPi();
         const double piOverTwo = Math<double>::getPi_2();
@@ -237,7 +237,7 @@ private:
     }
     
     template<class ValueType>
-    static inline ValueType nextLinear (ShapeState<ValueType>& shapeState) throw()
+    static PLONK_INLINE_LOW ValueType nextLinear (ShapeState<ValueType>& shapeState) throw()
     {
         const ValueType result = shapeState.currentLevel;
         shapeState.currentLevel += shapeState.grow.u.norm;
@@ -245,7 +245,7 @@ private:
     }
     
     template<class ValueType>
-    static inline ValueType nextNumerical (ShapeState<ValueType>& shapeState) throw()
+    static PLONK_INLINE_LOW ValueType nextNumerical (ShapeState<ValueType>& shapeState) throw()
     {
         const ValueType result = shapeState.currentLevel;
         shapeState.b1.u.norm *= shapeState.grow.u.norm;
@@ -254,7 +254,7 @@ private:
     }
     
     template<class ValueType>
-    static inline ValueType nextSine (ShapeState<ValueType>& shapeState) throw()
+    static PLONK_INLINE_LOW ValueType nextSine (ShapeState<ValueType>& shapeState) throw()
     {
         const ValueType result = shapeState.currentLevel;
         const double y0 = shapeState.b1.u.dbl * shapeState.y1.u.dbl - shapeState.y2.u.dbl;
@@ -265,7 +265,7 @@ private:
     }
     
     template<class ValueType>
-    static inline void processLinear (ShapeState<ValueType>& shapeState, ValueType* const outputSamples, const int numSamples) throw()
+    static PLONK_INLINE_LOW void processLinear (ShapeState<ValueType>& shapeState, ValueType* const outputSamples, const int numSamples) throw()
     {
         const ValueType& zero = Math<ValueType>::get0();
         
@@ -293,7 +293,7 @@ private:
     }
     
     template<class ValueType>
-    static inline void processNumerical (ShapeState<ValueType>& shapeState, ValueType* const outputSamples, const int numSamples) throw()
+    static PLONK_INLINE_LOW void processNumerical (ShapeState<ValueType>& shapeState, ValueType* const outputSamples, const int numSamples) throw()
     {        
         if (numSamples == shapeState.stepsToTarget)
         {
@@ -314,7 +314,7 @@ private:
     }
     
     template<class ValueType>
-    static inline void processSine (ShapeState<ValueType>& shapeState, ValueType* const outputSamples, const int numSamples) throw()
+    static PLONK_INLINE_LOW void processSine (ShapeState<ValueType>& shapeState, ValueType* const outputSamples, const int numSamples) throw()
     {
 //        const ValueType& zero = Math<ValueType>::get0();
         
@@ -446,14 +446,14 @@ public:
 		return null;
 	}	                            
     
-    inline SampleType getTargetLevel() const throw()   { return this->getInternal()->getTargetLevel(); }
-    inline double getTargetTime() const throw()        { return this->getInternal()->getTargetTime(); }
-    inline const Shape& getShape() const throw()       { return this->getInternal()->getShape(); }
-    inline bool isSustainPoint() const throw()         { return this->getInternal()->getNextGateOn() == BreakpointBase::This; }
-    inline int getNextGateOn() const throw()           { return this->getInternal()->getNextGateOn(); }
-    inline int getNextGateOff() const throw()          { return this->getInternal()->getNextGateOff(); }
+    PLONK_INLINE_LOW SampleType getTargetLevel() const throw()   { return this->getInternal()->getTargetLevel(); }
+    PLONK_INLINE_LOW double getTargetTime() const throw()        { return this->getInternal()->getTargetTime(); }
+    PLONK_INLINE_LOW const Shape& getShape() const throw()       { return this->getInternal()->getShape(); }
+    PLONK_INLINE_LOW bool isSustainPoint() const throw()         { return this->getInternal()->getNextGateOn() == BreakpointBase::This; }
+    PLONK_INLINE_LOW int getNextGateOn() const throw()           { return this->getInternal()->getNextGateOn(); }
+    PLONK_INLINE_LOW int getNextGateOff() const throw()          { return this->getInternal()->getNextGateOff(); }
    
-    inline int getNext (const bool gate) const throw()
+    PLONK_INLINE_LOW int getNext (const bool gate) const throw()
     {
         return gate ? this->getNextGateOn() : this->getNextGateOff();
     }
@@ -526,22 +526,22 @@ public:
 	{
 	}
     
-    inline int getNumBreakpoints() const throw()
+    PLONK_INLINE_LOW int getNumBreakpoints() const throw()
     {
         return breakpoints.length();
     }
     
-    inline SampleType getStartLevel() const throw()
+    PLONK_INLINE_LOW SampleType getStartLevel() const throw()
     {
         return startLevel;
     }
     
-    inline const BreakpointArrayType& getBreakpoints() const throw()
+    PLONK_INLINE_LOW const BreakpointArrayType& getBreakpoints() const throw()
     {
         return breakpoints; 
     }
     
-    inline const Container levelScale (const SampleType amount) const throw()
+    PLONK_INLINE_LOW const Container levelScale (const SampleType amount) const throw()
     {
         BreakpointsInternal* internal = new BreakpointsInternal();
         
@@ -560,7 +560,7 @@ public:
         return Container (internal);
     }
     
-    inline const Container timeScale (const SampleType amount) const throw()
+    PLONK_INLINE_LOW const Container timeScale (const SampleType amount) const throw()
     {
         BreakpointsInternal* internal = new BreakpointsInternal();
         
@@ -764,27 +764,27 @@ public:
                                 NextArray (lastPoint, BreakpointType::End));
     }
     
-    inline int getNumBreakpoints() const throw()
+    PLONK_INLINE_LOW int getNumBreakpoints() const throw()
     {
         return this->getInternal()->getNumBreakpoints();
     }
     
-    inline SampleType getStartLevel() const throw()
+    PLONK_INLINE_LOW SampleType getStartLevel() const throw()
     {
         return this->getInternal()->getStartLevel();
     }
     
-    inline const BreakpointType& atUnchecked (const int index) const throw()
+    PLONK_INLINE_LOW const BreakpointType& atUnchecked (const int index) const throw()
     {
         return this->getInternal()->getBreakpoints().atUnchecked (index);
     }
     
-    inline const BreakpointsBase levelScale (const SampleType amount) const throw()
+    PLONK_INLINE_LOW const BreakpointsBase levelScale (const SampleType amount) const throw()
     {
         return this->getInternal()->levelScale (amount);
     }
     
-    inline const BreakpointsBase timeScale (const SampleType amount) const throw()
+    PLONK_INLINE_LOW const BreakpointsBase timeScale (const SampleType amount) const throw()
     {
         return this->getInternal()->timeScale (amount);
     }

@@ -187,7 +187,7 @@ public:
 	    
 	/** Copy constructor.
 	 Note that a deep copy is not made, the copy will refer to exactly the same data. */
-    inline ObjectArray (ObjectArray const& copy) throw()
+    PLONK_INLINE_LOW ObjectArray (ObjectArray const& copy) throw()
     :   Base (static_cast<Base const&> (copy))
     {
     }
@@ -591,50 +591,50 @@ public:
      additionally allocated space is cleared. Otherwise the data is left
      unitialised.
      @return True the buffer was resized. */
-    inline bool setSize (const int newSize, const bool keepContents) throw() 
+    PLONK_INLINE_LOW bool setSize (const int newSize, const bool keepContents) throw() 
     { 
         return this->getInternal()->setSize (newSize, keepContents);
     }
 
     /** Sets the length of the array to zero. */
-    inline void clear() throw()
+    PLONK_INLINE_LOW void clear() throw()
 	{
 		this->getInternal()->setSize (isNullTerminated() ? 1 : 0, false);
 	}
             
 	/** Size is the actual number of elements of storage needed for the array.
 	 If this is a null terminated array the null value is inlcuded in the size. */
-	inline int size() const throw() { return this->getInternal()->size(); }
+	PLONK_INLINE_LOW int size() const throw() { return this->getInternal()->size(); }
     
     /** This is the memory allocated to the array.
      It includes memory reserved for future expansion. */
-    inline int sizeAllocated() const throw() { return this->getInternal()->sizeAllocated(); }
+    PLONK_INLINE_LOW int sizeAllocated() const throw() { return this->getInternal()->sizeAllocated(); }
 	
 	/** Length is the number of real elements of storage available.
 	 For arrays that are NOT null terminated this is synonymous with size().
 	 If this is a null terminated array the length is one less than the size. */
-	inline int length() const throw() { return this->getInternal()->length(); }
+	PLONK_INLINE_LOW int length() const throw() { return this->getInternal()->length(); }
 	
 	/** Actual memory requirements of the array elements and the null terminator (if needed).
 	 Equivalent to size() * sizeof(ObjectType). */
-	inline int memorySize() const throw() { return this->getInternal()->size() * sizeof(ObjectType); }
+	PLONK_INLINE_LOW int memorySize() const throw() { return this->getInternal()->size() * sizeof(ObjectType); }
 	
 	/** Returns a pointer to the raw array. */
-	inline ObjectType* getArray() throw() { return this->getInternal()->getArray(); }
+	PLONK_INLINE_LOW ObjectType* getArray() throw() { return this->getInternal()->getArray(); }
 	
 	/** Returns a pointer to the raw array for read-only ops. */
-	inline const ObjectType* getArray() const throw() { return this->getInternal()->getArray(); }
+	PLONK_INLINE_LOW const ObjectType* getArray() const throw() { return this->getInternal()->getArray(); }
 	
 	/** Returns a pointer to the raw array for read-only ops. */
-	inline operator const ObjectType*() const throw() { return this->getArray(); }
+	PLONK_INLINE_LOW operator const ObjectType*() const throw() { return this->getArray(); }
 	/** Returns a pointer to the raw array. */
-	inline operator ObjectType*() throw() { return this->getArray(); }
+	PLONK_INLINE_LOW operator ObjectType*() throw() { return this->getArray(); }
 	
 	/** Returns whether this is a null terminated array or not. */
-	inline bool isNullTerminated() const throw() { return this->getInternal()->isNullTerminated(); }
+	PLONK_INLINE_LOW bool isNullTerminated() const throw() { return this->getInternal()->isNullTerminated(); }
 	
 	/** Changes this array's null terminator flag. */
-	inline void setNullTerminated (const bool state) throw() { this->getInternal()->setNullTerminated(state); }
+	PLONK_INLINE_LOW void setNullTerminated (const bool state) throw() { this->getInternal()->setNullTerminated(state); }
 	
 	ObjectArrayConcatOperatorsDefine(ObjectArray, ObjectType);
     
@@ -789,7 +789,7 @@ public:
 	
 	/** Returns a reference to an itemn at the specified index. 
 	 You must make sure that the array index is in range when using this version. */		
-	inline ObjectType& atUnchecked (const int index) throw()
+	PLONK_INLINE_LOW ObjectType& atUnchecked (const int index) throw()
 	{
 		plonk_assert ((index >= 0) && (index < this->getInternal()->size()));
 		return this->getInternal()->getArray()[index];
@@ -797,7 +797,7 @@ public:
 
 	/** Returns a refernce to an itemn at the specified index. 
 	 You must make sure that the array index is in range when using this version. */		
-	inline const ObjectType& atUnchecked (const int index) const throw()
+	PLONK_INLINE_LOW const ObjectType& atUnchecked (const int index) const throw()
 	{
 		plonk_assert ((index >= 0) && (index < this->getInternal()->size()));
 		return this->getInternal()->getArray()[index];

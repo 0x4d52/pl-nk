@@ -43,12 +43,12 @@
 class ZipInternal : public SmartPointer
 {
 public:
-    inline ZipInternal() throw()
+    PLONK_INLINE_LOW ZipInternal() throw()
     {
         pl_Zip_Init (&peer);
     }
     
-    inline ~ZipInternal()
+    PLONK_INLINE_LOW ~ZipInternal()
     {
         pl_Zip_DeInit (&peer);
     }
@@ -65,12 +65,12 @@ class Zip : public SmartPointerContainer<ZipInternal>
 public:
     typedef SmartPointerContainer<ZipInternal> Base;
     
-    inline Zip() throw()
+    PLONK_INLINE_LOW Zip() throw()
     :   Base (new ZipInternal())
     {
     }
         
-    inline const void* deflate (const int amount, const void* dataInput, const Long dataInputLength, Long* dataOutputLength)
+    PLONK_INLINE_LOW const void* deflate (const int amount, const void* dataInput, const Long dataInputLength, Long* dataOutputLength)
     {
         plonk_assert (dataOutputLength != 0);
         return pl_Zip_DeflateData (&getInternal()->peer, amount, dataInput, dataInputLength, dataOutputLength);
@@ -84,7 +84,7 @@ public:
         return ByteArray::withArray ((int)dataOutputLength, static_cast<const UnsignedChar*> (data), false);
     }
 
-    inline const void* inflate (const void* dataInput, const Long dataInputLength, Long* dataOutputLength)
+    PLONK_INLINE_LOW const void* inflate (const void* dataInput, const Long dataInputLength, Long* dataOutputLength)
     {
         return pl_Zip_InflateData (&getInternal()->peer, dataInput, dataInputLength, dataOutputLength);
     }

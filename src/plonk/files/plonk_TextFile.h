@@ -89,8 +89,8 @@ public:
     void disownPeer (PlankFileRef otherFile) throw();
 
 private:
-    inline PlankFileRef getPeerRef() { return static_cast<PlankFileRef> (&peer); }
-    inline const PlankFileRef getPeerRef() const { return const_cast<const PlankFileRef> (&peer); }
+    PLONK_INLINE_LOW PlankFileRef getPeerRef() { return static_cast<PlankFileRef> (&peer); }
+    PLONK_INLINE_LOW const PlankFileRef getPeerRef() const { return const_cast<const PlankFileRef> (&peer); }
     
     PlankFile peer;
 };

@@ -91,32 +91,32 @@ public:
 //------------------------------------------------------------------------------
 
 
-//inline const TimeStamp& ProcessInfo::getTimeStamp() const throw()             
+//PLONK_INLINE_LOW const TimeStamp& ProcessInfo::getTimeStamp() const throw()             
 //{ 
 //    return this->getInternal()->getTimeStamp(); 
 //}
 //
-//inline void ProcessInfo::setTimeStamp (const TimeStamp timeStamp) throw()
+//PLONK_INLINE_LOW void ProcessInfo::setTimeStamp (const TimeStamp timeStamp) throw()
 //{
 //    this->getInternal()->setTimeStamp (timeStamp);
 //}
 //
-//inline void ProcessInfo::offsetTimeStamp (const double offset) throw()
+//PLONK_INLINE_LOW void ProcessInfo::offsetTimeStamp (const double offset) throw()
 //{
 //    this->getInternal()->offsetTimeStamp (offset);
 //}
 //
-//inline void ProcessInfo::setShouldDelete() throw()
+//PLONK_INLINE_LOW void ProcessInfo::setShouldDelete() throw()
 //{
 //    this->getInternal()->setShouldDelete();
 //}
 //
-//inline void ProcessInfo::resetShouldDelete() throw()
+//PLONK_INLINE_LOW void ProcessInfo::resetShouldDelete() throw()
 //{
 //    this->getInternal()->resetShouldDelete();
 //}
 //
-//inline bool ProcessInfo::getShouldDelete() const throw()
+//PLONK_INLINE_LOW bool ProcessInfo::getShouldDelete() const throw()
 //{
 //    return this->getInternal()->getShouldDelete();
 //}

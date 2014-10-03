@@ -243,7 +243,7 @@ private:
     UnitType currentSource;
     UnitType fadeSource;
     
-    static inline int numChannelsInSource (Inputs const& inputs) throw()
+    static PLONK_INLINE_LOW int numChannelsInSource (Inputs const& inputs) throw()
     {
         const UnitVariableType& var = inputs[IOKey::UnitVariable].asUnchecked<UnitVariableType>();
         return var.getValue().getNumChannels();
@@ -255,7 +255,7 @@ private:
         return dummy;
     }
     
-    inline void updateSources (ProcessInfo& info) throw()
+    PLONK_INLINE_LOW void updateSources (ProcessInfo& info) throw()
     {
         UnitVariableType& var = ChannelInternalCore::getInputAs<UnitVariableType> (IOKey::UnitVariable);
         
@@ -322,7 +322,7 @@ public:
     typedef typename PatchChannelInternalType::DurationUnitType     DurationUnitType;
     typedef typename PatchChannelInternalType::DurationBufferType   DurationBufferType;
 
-    static inline UnitInfos getInfo() throw()
+    static PLONK_INLINE_LOW UnitInfos getInfo() throw()
     {
         const double blockSize = (double)BlockSize::getDefault().getValue();
         const double sampleRate = SampleRate::getDefault().getValue();

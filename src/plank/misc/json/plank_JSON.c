@@ -171,7 +171,7 @@ exit:
 
 //
 
-static PLONK_INLINE_LOW PlankJSONRef pl_JSON_Binary (const char* key, const void* data, const PlankL length)
+static PLANK_INLINE_LOW PlankJSONRef pl_JSON_Binary (const char* key, const void* data, const PlankL length)
 {
     PlankJSONRef j;
     PlankBase64 b64;
@@ -216,7 +216,7 @@ PlankJSONRef pl_JSON_DoubleArrayBinary (const double* values, const PlankL count
     return pl_JSON_Binary (PLANK_JSON_DOUBLEARRAYBINARY, values, sizeof (values[0]) * count);
 }
 
-static PLONK_INLINE_LOW PlankJSONRef pl_JSON_Compressed (const char* key, const void* data, const PlankL length)
+static PLANK_INLINE_LOW PlankJSONRef pl_JSON_Compressed (const char* key, const void* data, const PlankL length)
 {
     PlankJSONRef j;
     PlankBase64 b64;
@@ -292,7 +292,7 @@ PlankJSONRef pl_JSON_DoubleArray (const double* values, const PlankL count)
     return j;
 }
 
-static PLONK_INLINE_LOW const void* pl_JSON_EncodedGet (PlankJSONRef p, const char* keyType, const PlankL expectedLength)
+static PLANK_INLINE_LOW const void* pl_JSON_EncodedGet (PlankJSONRef p, const char* keyType, const PlankL expectedLength)
 {
     PlankBase64 b64;
     PlankL binaryLength;
@@ -629,7 +629,7 @@ PlankJSONRef pl_JSON_StringSplit (const char* string, const PlankL count)
     return j;
 }
 
-static PLONK_INLINE_LOW PlankB pl_JSON_IsEncoded (PlankJSONRef p, const char* binaryKey, const char* compressedKey)
+static PLANK_INLINE_LOW PlankB pl_JSON_IsEncoded (PlankJSONRef p, const char* binaryKey, const char* compressedKey)
 {
     const char* key;
     key = json_object_iter_key (json_object_iter ((json_t*)p));

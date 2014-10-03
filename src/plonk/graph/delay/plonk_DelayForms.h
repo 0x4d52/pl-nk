@@ -80,12 +80,12 @@ template<class SampleType, signed Form, signed NumInParams, signed NumOutParams>
 class DelayFormBase
 {
 public:    
-    static inline Text getName() throw()
+    static PLONK_INLINE_LOW Text getName() throw()
     {
         return DelayFormType::getName (Form);
     }        
     
-    static inline int getNumCircularBuffers() throw()
+    static PLONK_INLINE_LOW int getNumCircularBuffers() throw()
     {
         return 1;
     }

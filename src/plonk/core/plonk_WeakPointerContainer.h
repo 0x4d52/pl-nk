@@ -133,13 +133,13 @@ public:
     }
     
 private:
-    inline static void incrementWeakCount (WeakPointer* const weakPointer) throw()
+    PLONK_INLINE_LOW static void incrementWeakCount (WeakPointer* const weakPointer) throw()
     {
         if (weakPointer != 0)
             weakPointer->incrementWeakCount();
     }
     
-    inline static void decrementWeakCount (WeakPointer* const weakPointer) throw()
+    PLONK_INLINE_LOW static void decrementWeakCount (WeakPointer* const weakPointer) throw()
     {
         if (weakPointer != 0)
             weakPointer->decrementWeakCount();

@@ -93,9 +93,9 @@ public:
     static SampleRate& getDefaultBlockRate() throw();
     static const SampleRate getFractionOfDefault(IntVariable const& divisor) throw();
     static const SampleRate getMultipleOfDefault(IntVariable const& factor) throw();
-    inline static const SampleRate getMultipleOfDefault(const int factor) throw() { return getMultipleOfDefault (IntVariable (factor)); }
+    PLONK_INLINE_LOW static const SampleRate getMultipleOfDefault(const int factor) throw() { return getMultipleOfDefault (IntVariable (factor)); }
     static const SampleRate getMultipleOfDefault(DoubleVariable const& factor) throw();
-    inline static const SampleRate getMultipleOfDefault(const double factor) throw() { return getMultipleOfDefault (DoubleVariable (factor)); }
+    PLONK_INLINE_LOW static const SampleRate getMultipleOfDefault(const double factor) throw() { return getMultipleOfDefault (DoubleVariable (factor)); }
     
 
     static const SampleRate& noPreference() throw();

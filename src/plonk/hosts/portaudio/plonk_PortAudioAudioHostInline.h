@@ -39,7 +39,7 @@
 #if PLANK_INLINING_FUNCTIONS
 
 template<class SampleType>
-static inline int paCallback (const void *input, void *output,
+static PLONK_INLINE_LOW int paCallback (const void *input, void *output,
                               unsigned long frameCount,
                               const PaStreamCallbackTimeInfo* timeInfo,
                               PaStreamCallbackFlags statusFlags,
@@ -50,7 +50,7 @@ static inline int paCallback (const void *input, void *output,
                            frameCount, timeInfo, statusFlags);
 }
 
-static inline bool paCheckError (PaError err)
+static PLONK_INLINE_LOW bool paCheckError (PaError err)
 {
     if (err != paNoError)
     {
@@ -61,7 +61,7 @@ static inline bool paCheckError (PaError err)
     return false; 
 }
 
-//static inline void paGetInfo()
+//static PLONK_INLINE_LOW void paGetInfo()
 //{
 //    const PaDeviceIndex inputDeviceId = Pa_GetDefaultInputDevice();
 //    const PaDeviceIndex outputDeviceId = Pa_GetDefaultOutputDevice();

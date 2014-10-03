@@ -255,4 +255,92 @@ const TimeStamp& TimeStamp::getMaximum() throw()
     return *timeMax;
 }
 
+//
+
+/*PLONK_INLINE_LOW*/ bool TimeStamp::isFinite() const throw()
+{
+    return ! isInfinite();
+}
+
+/*PLONK_INLINE_LOW*/ bool TimeStamp::isInfinite() const throw()
+{
+    return pl_IsInfD (fraction) != 0;
+}
+
+/*PLONK_INLINE_LOW*/ bool TimeStamp::operator>= (TimeStamp const& other) const throw()
+{
+    plonk_assert (fractionIsValid (this->fraction));
+    plonk_assert (fractionIsValid (other.fraction));
+    
+    if (this->isInfinite())
+    {
+        if (other.isInfinite())
+            return false;
+        else
+            return true;
+    }
+    else return ((time > other.time) || ((time == other.time) && (fraction >= other.fraction)));
+}
+
+/*PLONK_INLINE_LOW*/ double TimeStamp::getTicks() throw()
+{
+    static double v = 1000000.0; // microseconds
+    return v;
+}
+
+/*PLONK_INLINE_LOW*/ double TimeStamp::getReciprocalTicks() throw()
+{
+    static double v = 1.0 / 1000000.0; // 1/microseconds
+    return v;
+}
+
+/*PLONK_INLINE_LOW*/ const TimeStamp& TimeStamp::getZero() throw()
+{
+    static const TimeStamp* timeZero = new TimeStamp (0, 0.0);
+    return *timeZero;
+}
+
+/*PLONK_INLINE_LOW*/ const TimeStamp& TimeStamp::getSentinel() throw()
+{
+    static const TimeStamp* sentinel = new TimeStamp (-1, 0.0);
+    return *sentinel;
+}
+
+/*PLONK_INLINE_LOW*/ TimeStamp& TimeStamp::operator= (TimeStamp const& other) throw()
+{
+    if (&other != this)
+    {
+        this->time = other.time;
+        this->fraction = other.fraction;
+    }
+    
+    return *this;
+}
+
+/*PLONK_INLINE_LOW*/ TimeStamp& TimeStamp::operator+= (const double offset) throw()
+{
+    if (pl_IsInfD (offset))
+    {
+        this->time = 0;
+        this->fraction = offset;
+    }
+    else
+    {
+        const double correctedOffset = offset + this->fraction;
+        const LongLong timeOffset = LongLong (correctedOffset);
+        this->time += timeOffset;
+        this->fraction = correctedOffset - timeOffset; // carry the fraction
+        
+        if (this->fraction < 0.0)
+        {
+            this->time--;
+            this->fraction += 1.0;
+        }
+        
+        plonk_assert (fractionIsValid (this->fraction));
+    }
+    
+    return *this;
+}
+
 END_PLONK_NAMESPACE

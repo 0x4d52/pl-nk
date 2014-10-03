@@ -106,13 +106,13 @@ public:
         }
     }
     
-    inline void growBufferSize() throw()                            { bufferSize.setValue (bufferSize.getValue() * 2); }
-    inline BlockSize getBufferSize() const throw()                  { return bufferSize; }
-    inline BlockSize getWriteBlockSize() const throw()              { return writeBlockSize; }
-    inline SampleRate getSampleRate() const throw()                 { return sampleRate; }
-    inline double getDuration() const throw()                       { return (bufferEndTime - bufferStartTime).getValue(); }
-    inline const TimeStamp& getLatestValidTime() const throw()      { return latestValidTime; }
-    inline const TimeStamp getEarliestValidTime() const throw()     { return latestValidTime - this->getDuration(); }
+    PLONK_INLINE_LOW void growBufferSize() throw()                            { bufferSize.setValue (bufferSize.getValue() * 2); }
+    PLONK_INLINE_LOW BlockSize getBufferSize() const throw()                  { return bufferSize; }
+    PLONK_INLINE_LOW BlockSize getWriteBlockSize() const throw()              { return writeBlockSize; }
+    PLONK_INLINE_LOW SampleRate getSampleRate() const throw()                 { return sampleRate; }
+    PLONK_INLINE_LOW double getDuration() const throw()                       { return (bufferEndTime - bufferStartTime).getValue(); }
+    PLONK_INLINE_LOW const TimeStamp& getLatestValidTime() const throw()      { return latestValidTime; }
+    PLONK_INLINE_LOW const TimeStamp getEarliestValidTime() const throw()     { return latestValidTime - this->getDuration(); }
     Text getLabel() const throw()                                   { return identifier; }
     void setLabel (Text const& newId) throw()                       { identifier = newId; }
 
@@ -357,42 +357,42 @@ public:
 		return null;
 	}	                    
     
-    inline void growBufferSize() throw()                            { this->getInternal()->growBufferSize(); }
-    inline const BlockSize getBufferSize() const throw()            { return this->getInternal()->getBufferSize(); }
-    inline BlockSize getBufferSize() throw()                        { return this->getInternal()->getBufferSize(); }
-    inline const BlockSize getWriteBlockSize() const throw()        { return this->getInternal()->getWriteBlockSize(); }
-    inline BlockSize getWriteBlockSize() throw()                    { return this->getInternal()->getWriteBlockSize(); }
-    inline const SampleRate getSampleRate() const throw()           { return this->getInternal()->getSampleRate(); }
-    inline SampleRate getSampleRate() throw()                       { return this->getInternal()->getSampleRate(); }
-    inline double getDuration() throw()                             { return this->getInternal()->getDuration(); }
-    inline const TimeStamp& getLatestValidTime() const throw()      { return this->getInternal()->getLatestValidTime(); }
-    inline const TimeStamp  getEarliestValidTime() const throw()    { return this->getInternal()->getEarliestValidTime(); }
-    inline Text getLabel() const throw()                            { return this->getInternal()->getLabel(); }
-    inline void setLabel(Text const& newId) throw()                 { this->getInternal()->setLabel (newId); }
+    PLONK_INLINE_LOW void growBufferSize() throw()                            { this->getInternal()->growBufferSize(); }
+    PLONK_INLINE_LOW const BlockSize getBufferSize() const throw()            { return this->getInternal()->getBufferSize(); }
+    PLONK_INLINE_LOW BlockSize getBufferSize() throw()                        { return this->getInternal()->getBufferSize(); }
+    PLONK_INLINE_LOW const BlockSize getWriteBlockSize() const throw()        { return this->getInternal()->getWriteBlockSize(); }
+    PLONK_INLINE_LOW BlockSize getWriteBlockSize() throw()                    { return this->getInternal()->getWriteBlockSize(); }
+    PLONK_INLINE_LOW const SampleRate getSampleRate() const throw()           { return this->getInternal()->getSampleRate(); }
+    PLONK_INLINE_LOW SampleRate getSampleRate() throw()                       { return this->getInternal()->getSampleRate(); }
+    PLONK_INLINE_LOW double getDuration() throw()                             { return this->getInternal()->getDuration(); }
+    PLONK_INLINE_LOW const TimeStamp& getLatestValidTime() const throw()      { return this->getInternal()->getLatestValidTime(); }
+    PLONK_INLINE_LOW const TimeStamp  getEarliestValidTime() const throw()    { return this->getInternal()->getEarliestValidTime(); }
+    PLONK_INLINE_LOW Text getLabel() const throw()                            { return this->getInternal()->getLabel(); }
+    PLONK_INLINE_LOW void setLabel(Text const& newId) throw()                 { this->getInternal()->setLabel (newId); }
 
     /** Write data with a given time stampe start to the bus. */
-    inline void write (TimeStamp const& timeStamp, const int numSamples, const SampleType* sourceData) throw()
+    PLONK_INLINE_LOW void write (TimeStamp const& timeStamp, const int numSamples, const SampleType* sourceData) throw()
     {
         this->getInternal()->write (timeStamp, numSamples, sourceData);
     }
     
     /** Read data from the bus with a given time stamp. */
-    inline void read (TimeStamp& timeStamp, const int numSamples, SampleType* destData) throw()
+    PLONK_INLINE_LOW void read (TimeStamp& timeStamp, const int numSamples, SampleType* destData) throw()
     {
         this->getInternal()->read (timeStamp, numSamples, destData);
     }
     
-    inline SampleType getPeak() const throw()
+    PLONK_INLINE_LOW SampleType getPeak() const throw()
     {
         return this->getInternal()->getPeak();
     }
     
-    inline SampleType getMean() const throw()
+    PLONK_INLINE_LOW SampleType getMean() const throw()
     {
         return this->getInternal()->getMean();
     }
     
-    inline SampleType getRMS() const throw()
+    PLONK_INLINE_LOW SampleType getRMS() const throw()
     {
         return this->getInternal()->getRMS();
     }

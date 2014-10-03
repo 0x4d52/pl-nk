@@ -69,18 +69,18 @@ public:
     
     
     void set (LongLong newTime, double newFraction = 0.0) throw();
-    inline LongLong getTime() const throw() { return time; }
-    inline double getFraction() const throw() { return fraction; }
-    inline int getFractionInTicks() const throw() { return int (fraction * getTicks()); }
+    PLONK_INLINE_LOW LongLong getTime() const throw() { return time; }
+    PLONK_INLINE_LOW double getFraction() const throw() { return fraction; }
+    PLONK_INLINE_LOW int getFractionInTicks() const throw() { return int (fraction * getTicks()); }
     
-    inline double getValue() const throw() 
+    PLONK_INLINE_LOW double getValue() const throw() 
     { 
         plonk_assert (((double (time) + 1.0) - (double (time))) == 1.0); // lost precision
         return double (time) + fraction; 
     }
     
-    inline operator double () const throw() { return this->getValue(); }
-    inline double toSeconds() const throw() { return this->getValue() * getReciprocalTicks(); }
+    PLONK_INLINE_LOW operator double () const throw() { return this->getValue(); }
+    PLONK_INLINE_LOW double toSeconds() const throw() { return this->getValue() * getReciprocalTicks(); }
     double toSamples (const double sampleRate) const throw();
     
     bool operator== (TimeStamp const& other) const throw();
@@ -107,93 +107,6 @@ private:
     static bool fractionIsValid (const double f) throw();
 };
 
-//------------------------------------------------------------------------------
-
-inline bool TimeStamp::isFinite() const throw()
-{
-    return ! isInfinite();
-}
-
-inline bool TimeStamp::isInfinite() const throw()
-{
-    return pl_IsInfD (fraction) != 0;
-}
-
-inline bool TimeStamp::operator>= (TimeStamp const& other) const throw()
-{
-    plonk_assert (fractionIsValid (this->fraction));
-    plonk_assert (fractionIsValid (other.fraction));
-    
-    if (this->isInfinite())
-    {
-        if (other.isInfinite())
-            return false;
-        else
-            return true;
-    }
-    else return ((time > other.time) || ((time == other.time) && (fraction >= other.fraction)));
-}
-
-inline double TimeStamp::getTicks() throw()
-{
-    static double v = 1000000.0; // microseconds
-    return v;
-}
-
-inline double TimeStamp::getReciprocalTicks() throw()
-{
-    static double v = 1.0 / 1000000.0; // 1/microseconds
-    return v;
-}
-
-inline const TimeStamp& TimeStamp::getZero() throw()
-{
-    static const TimeStamp* timeZero = new TimeStamp (0, 0.0);
-    return *timeZero;
-}
-
-inline const TimeStamp& TimeStamp::getSentinel() throw()
-{
-    static const TimeStamp* sentinel = new TimeStamp (-1, 0.0);
-    return *sentinel;
-}
-
-inline TimeStamp& TimeStamp::operator= (TimeStamp const& other) throw()
-{
-    if (&other != this)
-    {
-        this->time = other.time;
-        this->fraction = other.fraction;
-    }
-    
-    return *this;
-}
-
-inline TimeStamp& TimeStamp::operator+= (const double offset) throw()
-{
-    if (pl_IsInfD (offset))
-    {
-        this->time = 0;
-        this->fraction = offset;
-    }
-    else
-    {
-        const double correctedOffset = offset + this->fraction;
-        const LongLong timeOffset = LongLong (correctedOffset);
-        this->time += timeOffset;
-        this->fraction = correctedOffset - timeOffset; // carry the fraction
-        
-        if (this->fraction < 0.0)
-        {
-            this->time--;
-            this->fraction += 1.0;
-        }
-        
-        plonk_assert (fractionIsValid (this->fraction));
-    }
-    
-    return *this;
-}
 
 
 #endif // PLONK_TIMESTAMP_H

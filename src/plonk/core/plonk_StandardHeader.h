@@ -140,6 +140,11 @@
     #endif
 #endif
 
+#define PLONK_INLINE_LOW  PLANK_INLINE_LOW
+#define PLONK_INLINE_MID  PLANK_INLINE_MID
+#define PLONK_INLINE_HIGH PLANK_INLINE_HIGH
+
+
 /* If you get a compiler error here you need to make sure you're using a C++
  compiler. If you're using Objective C then use Objective C++ by using .mm files
  instead of .m as an extension. */
@@ -191,7 +196,7 @@
  an Obj-C++ file use .mm as the file extension. */
 BEGIN_PLONK_NAMESPACE
 template <bool x> struct PlonkStaticAssertUtility;
-template <> struct PlonkStaticAssertUtility<true> { static inline void plonkStaticAssertionFailure() {} };
+template <> struct PlonkStaticAssertUtility<true> { static PLONK_INLINE_LOW void plonkStaticAssertionFailure() {} };
 
 #ifdef PLONK_DEBUG
     #define plonk_staticassert(x) plonk::PlonkStaticAssertUtility<x>::plonkStaticAssertionFailure();
@@ -384,7 +389,7 @@ public:
 
 #define PLONK_INFINITY PLANK_INFINITY
 
-//inline int quantiseUp(const int a, const int q) 
+//PLONK_INLINE_LOW int quantiseUp(const int a, const int q) 
 //{ 
 //	if(a % q)
 //		return a / q * q + q;
@@ -392,7 +397,7 @@ public:
 //		return a / q * q;
 //}
 //
-//inline int quantiseDown(const int a, const int q) 
+//PLONK_INLINE_LOW int quantiseDown(const int a, const int q) 
 //{ 
 //	return a / q * q; 
 //}

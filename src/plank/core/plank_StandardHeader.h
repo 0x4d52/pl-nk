@@ -60,7 +60,7 @@
     #define PLANK_END_C_LINKAGE }
 #else
     #if (defined (_WIN32) || defined (_WIN64))
-        #define PLONK_INLINE_LOW __PLONK_INLINE_LOW
+        #define PLANK_INLINE_LOW __PLANK_INLINE_LOW
 		#define PLANK_UNUSED(a) (void)a
     #else
 		#define PLANK_UNUSED(a)

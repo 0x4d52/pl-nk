@@ -98,7 +98,7 @@ public:
     int toShort() const throw();
     float toFloat() const throw();
     double toDouble() const throw();
-    inline const Internal& getRaw() const throw() { return data; }
+    PLONK_INLINE_LOW const Internal& getRaw() const throw() { return data; }
     
     Int24 operator~() const throw();
     Int24 operator-() const throw();
@@ -230,22 +230,22 @@ public:
     typedef typename BinaryOpTypeUtility<OtherType,Int24>::CalcType CalcType;
     typedef CalcType ReturnType;
 
-    static inline ReturnType addop (OtherType const& leftOperand, Int24 const& rightOperand) throw()
+    static PLONK_INLINE_LOW ReturnType addop (OtherType const& leftOperand, Int24 const& rightOperand) throw()
     {
         return CalcType (leftOperand) + CalcType (rightOperand);
     }
     
-    static inline ReturnType subop (OtherType const& leftOperand, Int24 const& rightOperand) throw()
+    static PLONK_INLINE_LOW ReturnType subop (OtherType const& leftOperand, Int24 const& rightOperand) throw()
     {
         return CalcType (leftOperand) - CalcType (rightOperand);
     }
 
-    static inline ReturnType mulop (OtherType const& leftOperand, Int24 const& rightOperand) throw()
+    static PLONK_INLINE_LOW ReturnType mulop (OtherType const& leftOperand, Int24 const& rightOperand) throw()
     {
         return CalcType (leftOperand) * CalcType (rightOperand);
     }
 
-    static inline ReturnType divop (OtherType const& leftOperand, Int24 const& rightOperand) throw()
+    static PLONK_INLINE_LOW ReturnType divop (OtherType const& leftOperand, Int24 const& rightOperand) throw()
     {
         return CalcType (leftOperand) / CalcType (rightOperand);
     }

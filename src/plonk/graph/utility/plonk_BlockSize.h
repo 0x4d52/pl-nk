@@ -114,10 +114,10 @@ public:
     /** Create a block size that is a multiple of the default block size.
      This will automatically update when/if the default block size is changed. */
     static const BlockSize getMultipleOfDefault (IntVariable const& factor) throw();    
-    inline static const BlockSize getMultipleOfDefault (const int factor) throw() { return getMultipleOfDefault (IntVariable (factor)); }
+    PLONK_INLINE_LOW static const BlockSize getMultipleOfDefault (const int factor) throw() { return getMultipleOfDefault (IntVariable (factor)); }
    
     static const BlockSize getMultipleOfDefault (DoubleVariable const& factor) throw();    
-    inline static const BlockSize getMultipleOfDefault (const double factor) throw() { return getMultipleOfDefault (DoubleVariable (factor)); }
+    PLONK_INLINE_LOW static const BlockSize getMultipleOfDefault (const double factor) throw() { return getMultipleOfDefault (DoubleVariable (factor)); }
 
     
     /** A dummy block size used to indicate no preference.
@@ -150,7 +150,7 @@ typedef NumericalArray<BlockSize> BlockSizes;
 class BlockSizeDefault : public BlockSize
 {
 public:
-    inline BlockSizeDefault() : BlockSize (BlockSize::getDefault()) { }
+    PLONK_INLINE_LOW BlockSizeDefault() : BlockSize (BlockSize::getDefault()) { }
 };
 
 //------------------------------------------------------------------------------
@@ -158,7 +158,7 @@ public:
 class BlockSizeNoPreference : public BlockSize
 {
 public:
-    inline BlockSizeNoPreference() : BlockSize (BlockSize::getDefault()) { }
+    PLONK_INLINE_LOW BlockSizeNoPreference() : BlockSize (BlockSize::getDefault()) { }
 };
 
 

@@ -164,7 +164,7 @@ public:
     typedef BusBuffer<SampleType>                       Bus;
     typedef PLONK_BUSARRAYBASETYPE<Bus>                 Busses;
     
-    static inline UnitInfos getInfo() throw()
+    static PLONK_INLINE_LOW UnitInfos getInfo() throw()
     {
         const double blockSize = (double)BlockSize::getDefault().getValue();
 

@@ -172,7 +172,7 @@
 //    typedef InputDictionary                         Inputs;
 //    typedef NumericalArray<SampleType>              Buffer;
 //    
-//    static inline UnitInfos getInfo() throw()
+//    static PLONK_INLINE_LOW UnitInfos getInfo() throw()
 //    {
 //        return UnitInfo ("IFFT", "Transforms  frequency domain data to a time domain signal.",
 //                         
@@ -187,7 +187,7 @@
 //    }    
 //    
 //    /** IFFTs a signal. */
-//    static inline UnitType ar (UnitType const& input) throw()
+//    static PLONK_INLINE_LOW UnitType ar (UnitType const& input) throw()
 //    {        
 //        // re: full templating - could say that FFT/IFTT are only supported with float (and eventually double)?
 //
@@ -338,7 +338,7 @@ public:
     typedef InputDictionary                         Inputs;
     typedef NumericalArray<SampleType>              Buffer;
     
-    static inline UnitInfos getInfo() throw()
+    static PLONK_INLINE_LOW UnitInfos getInfo() throw()
     {
         return UnitInfo ("IFFT", "Transforms  frequency domain data to a time domain signal.",
                          
@@ -352,7 +352,7 @@ public:
                          IOKey::End);
     }
         
-    static inline UnitType ar (UnitType const& input) throw()
+    static PLONK_INLINE_LOW UnitType ar (UnitType const& input) throw()
     {
         // re: full templating - could say that FFT/IFFT are only supported with float (and eventually double)?
         

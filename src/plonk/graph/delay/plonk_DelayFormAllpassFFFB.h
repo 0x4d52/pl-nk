@@ -94,28 +94,28 @@ public:
     typedef void (*Param1Function) (Data&, DelayState&, Param1Type const&);
     typedef void (*Param2Function) (Data&, DelayState&, Param2Type const&);
     
-    static inline IntArray getInputKeys() throw()
+    static PLONK_INLINE_LOW IntArray getInputKeys() throw()
     {
         const IntArray keys (IOKey::Generic, IOKey::Duration, IOKey::Coeffs);
         return keys;
     }    
     
-    static inline void inputIgnore (Data&, DelayState&) throw() { plonk_assertfalse; }
-    static inline void inputRead (Data&, DelayState& state) throw()
+    static PLONK_INLINE_LOW void inputIgnore (Data&, DelayState&) throw() { plonk_assertfalse; }
+    static PLONK_INLINE_LOW void inputRead (Data&, DelayState& state) throw()
     {
         state.inputValue = *state.inputSamples++;
     }
     
-    static inline void readIgnore (Data&, DelayState&) throw() { }
-    static inline void readRead (Data&, DelayState& state) throw()
+    static PLONK_INLINE_LOW void readIgnore (Data&, DelayState&) throw() { }
+    static PLONK_INLINE_LOW void readRead (Data&, DelayState& state) throw()
     {
         const DurationType readPosition = DurationType (state.writePosition) - state.paramsOut[DurationInSamplesOut] + state.bufferLengthIndex;
 //        plonk_assert (readPosition >= 0 && readPosition <= state.bufferLengthIndex);
         state.readValue = InterpType::lookup (state.bufferSamples, readPosition);
     }
     
-    static inline void writeIgnore (Data&, DelayState&) throw() { }
-    static inline void writeWrite (Data&, DelayState& state) throw()
+    static PLONK_INLINE_LOW void writeIgnore (Data&, DelayState&) throw() { }
+    static PLONK_INLINE_LOW void writeWrite (Data&, DelayState& state) throw()
     {
         plonk_assert (state.writePosition >= 0 && state.writePosition < state.bufferLength);
         state.writeValue = state.inputValue + state.paramsOut[CoeffOut] * state.readValue;
@@ -125,16 +125,16 @@ public:
 
     }
     
-    static inline void outputIgnore (Data&, DelayState&) throw() { }
-    static inline void outputWrite (Data&, DelayState& state) throw()
+    static PLONK_INLINE_LOW void outputIgnore (Data&, DelayState&) throw() { }
+    static PLONK_INLINE_LOW void outputWrite (Data&, DelayState& state) throw()
     {
         state.outputValue = state.readValue - state.paramsOut[CoeffOut] * state.writeValue;
         *state.outputSamples++ = state.outputValue;
         state.writePosition++;
     }
     
-    static inline void param1Ignore (Data&, DelayState&, DurationType const&) throw() { }
-    static inline void param1Process (Data& data, DelayState& state, DurationType const& duration) throw()
+    static PLONK_INLINE_LOW void param1Ignore (Data&, DelayState&, DurationType const&) throw() { }
+    static PLONK_INLINE_LOW void param1Process (Data& data, DelayState& state, DurationType const& duration) throw()
     {
         state.paramsIn[DurationIn] = duration;
         state.paramsOut[DurationInSamplesOut] = plonk::max (DurationType (1), DurationType (duration * data.base.sampleRate));
@@ -142,8 +142,8 @@ public:
                       state.paramsOut[DurationInSamplesOut] <= state.bufferLengthIndex);
     }
     
-    static inline void param2Ignore (Data&, DelayState&, CoeffType const&) throw() { }
-    static inline void param2Process (Data&, DelayState& state, CoeffType const& decay) throw()
+    static PLONK_INLINE_LOW void param2Ignore (Data&, DelayState&, CoeffType const&) throw() { }
+    static PLONK_INLINE_LOW void param2Process (Data&, DelayState& state, CoeffType const& decay) throw()
     {                                
         state.paramsOut[CoeffIn] = state.paramsOut[CoeffOut] = decay; // probably faster not to check...
     }
@@ -152,7 +152,7 @@ public:
              ReadFunction readFunction,
              WriteFunction writeFunction,
              OutputFunction outputFunction>
-    static inline void tick (Data& data, DelayState& state) throw()
+    static PLONK_INLINE_LOW void tick (Data& data, DelayState& state) throw()
     {
         inputFunction (data, state);
         readFunction (data, state);
@@ -160,7 +160,7 @@ public:
         outputFunction (data, state);
     }
     
-    static inline UnitType ar (UnitType const& input,
+    static PLONK_INLINE_LOW UnitType ar (UnitType const& input,
                                DurationUnitType const& duration,
                                CoeffUnitType const& coeff,
                                const DurationType maximumDuration,
@@ -235,7 +235,7 @@ public:
     typedef AllpassFFFBUnit<SampleType, Interp::Lagrange3>      HQ;
     typedef AllpassFFFBUnit<SampleType, Interp::None>           N;
     
-    static inline UnitInfos getInfo() throw()
+    static PLONK_INLINE_LOW UnitInfos getInfo() throw()
     {
         const double blockSize = (double)BlockSize::getDefault().getValue();
         const double sampleRate = SampleRate::getDefault().getValue();

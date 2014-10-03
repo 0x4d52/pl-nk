@@ -294,10 +294,10 @@ public:
     {
     }
     
-    inline AudioFileRegion& getRegion() throw() { return region; }
-    inline AudioFileReader& getOriginal() throw() { return original; }
-    inline const AudioFileRegion& getRegion() const throw() { return region; }
-    inline const AudioFileReader& getOriginal() const throw() { return original; }
+    PLONK_INLINE_LOW AudioFileRegion& getRegion() throw() { return region; }
+    PLONK_INLINE_LOW AudioFileReader& getOriginal() throw() { return original; }
+    PLONK_INLINE_LOW const AudioFileRegion& getRegion() const throw() { return region; }
+    PLONK_INLINE_LOW const AudioFileReader& getOriginal() const throw() { return original; }
 
 private:
     AudioFileReader original;

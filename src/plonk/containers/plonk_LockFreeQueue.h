@@ -63,7 +63,7 @@ public:
         deInitQueue (deadQueue);
     }
     
-    inline void push (ValueType const& value) throw()
+    PLONK_INLINE_LOW void push (ValueType const& value) throw()
     {
         PlankLockFreeQueueElementRef element = createElement (value);
         ResultCode result = pl_LockFreeQueue_Push (&liveQueue, element);
@@ -73,7 +73,7 @@ public:
 #endif
     }
     
-    inline ValueType pop() throw()
+    PLONK_INLINE_LOW ValueType pop() throw()
     {
         ValueType value (getNullValue());
         ValueType* valuePtr = popInternal (&value);
@@ -81,7 +81,7 @@ public:
     }
     
     template<class OtherType>
-    inline bool pop (OtherType& value)
+    PLONK_INLINE_LOW bool pop (OtherType& value)
     {
         ValueType tmp (getNullValue());
         ValueType* valuePtr = popInternal (&tmp);
@@ -124,7 +124,7 @@ public:
 #endif
     }
     
-    inline int length() throw()
+    PLONK_INLINE_LOW int length() throw()
     {
         return pl_LockFreeQueue_GetSize (&liveQueue);
     }
@@ -156,7 +156,7 @@ private:
 #endif
     }
     
-    inline PlankLockFreeQueueElementRef createElement (ValueType const& value) throw()
+    PLONK_INLINE_LOW PlankLockFreeQueueElementRef createElement (ValueType const& value) throw()
     {
         PlankLockFreeQueueElementRef element;
         ResultCode result = pl_LockFreeQueue_Pop (&deadQueue, &element);
@@ -188,7 +188,7 @@ private:
         return PlankResult_OK;
     }
     
-    static inline ValueType getNullValue() throw()
+    static PLONK_INLINE_LOW ValueType getNullValue() throw()
     {
         static ValueType null = ValueType();
         return null;
@@ -243,7 +243,7 @@ public:
         pl_LockFreeQueue_DeInit (&queue);
     }
     
-    static inline ValueType* getNullValue() throw()
+    static PLONK_INLINE_LOW ValueType* getNullValue() throw()
     {
         return 0;
     }
@@ -283,7 +283,7 @@ public:
     }
     
     template<class OtherType>
-    inline bool pop (OtherType& value)
+    PLONK_INLINE_LOW bool pop (OtherType& value)
     {
         return value = pop() ? true : false;
     }
@@ -332,12 +332,12 @@ public:
     typedef WeakPointerContainer<LockFreeQueue> Weak;
     typedef ValueType                           Value;
 
-    inline LockFreeQueue()
+    PLONK_INLINE_LOW LockFreeQueue()
     :   Base (new Internal())
     {
     }
     
-    inline explicit LockFreeQueue (Internal* internalToUse) throw() 
+    PLONK_INLINE_LOW explicit LockFreeQueue (Internal* internalToUse) throw() 
 	:	Base (internalToUse)
 	{
 	}
@@ -351,18 +351,18 @@ public:
     }    
     
     /** Copy constructor. */
-    inline LockFreeQueue (LockFreeQueue const& copy) throw()
+    PLONK_INLINE_LOW LockFreeQueue (LockFreeQueue const& copy) throw()
     :   Base (static_cast<Base const&> (copy))
     {
     }
     
-    inline LockFreeQueue (Dynamic const& other) throw()
+    PLONK_INLINE_LOW LockFreeQueue (Dynamic const& other) throw()
     :   Base (other.as<LockFreeQueue>().getInternal())
     {
     }    
     
     /** Assignment operator. */
-    inline LockFreeQueue& operator= (LockFreeQueue const& other) throw()
+    PLONK_INLINE_LOW LockFreeQueue& operator= (LockFreeQueue const& other) throw()
 	{
 		if (this != &other)
             this->setInternal (other.getInternal());
@@ -375,33 +375,33 @@ public:
         return Internal::getNullValue();
     }
     
-    inline void push (ValueType const& value) throw()
+    PLONK_INLINE_LOW void push (ValueType const& value) throw()
     {
         this->getInternal()->push (value);
     }
     
-    inline ValueType pop() throw()
+    PLONK_INLINE_LOW ValueType pop() throw()
     {
         return this->getInternal()->pop();
     }
     
     template<class OtherType>
-    inline bool pop (OtherType& value)
+    PLONK_INLINE_LOW bool pop (OtherType& value)
     {
         return this->getInternal()->pop (value);
     }
     
-    inline void clear() throw()
+    PLONK_INLINE_LOW void clear() throw()
     {
         return this->getInternal()->clear();
     }
     
-    inline void clearCache() throw()
+    PLONK_INLINE_LOW void clearCache() throw()
     {
         return this->getInternal()->clearCache();
     }
     
-    inline void clearAll() throw()
+    PLONK_INLINE_LOW void clearAll() throw()
     {
         return this->getInternal()->clearAll();
     }
@@ -418,7 +418,7 @@ public:
         clear(); // moves items to the dead queue
     }
     
-    inline int length() throw()
+    PLONK_INLINE_LOW int length() throw()
     {
         return this->getInternal()->length();
     }

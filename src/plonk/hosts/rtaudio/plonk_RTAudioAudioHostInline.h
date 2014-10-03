@@ -39,7 +39,7 @@
 #if PLANK_INLINING_FUNCTIONS
 
 template<class SampleType>
-static inline int rtAudioCallback(void *outputBuffer, void *inputBuffer,
+static PLONK_INLINE_LOW int rtAudioCallback(void *outputBuffer, void *inputBuffer,
                                   unsigned int nBufferFrames,
                                   double streamTime,
                                   RtAudioStreamStatus status,

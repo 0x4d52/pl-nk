@@ -73,7 +73,7 @@ public:
     typedef ResampleUnit<SampleType,InterpTypeCode>         ResampleType;
     typedef LPFP1Unit<SampleType,Interp::Lagrange3>         HQ;
     
-    static inline UnitInfos getInfo() throw()
+    static PLONK_INLINE_LOW UnitInfos getInfo() throw()
     {
         const double sampleRate = SampleRate::getDefault().getValue();
         
@@ -169,7 +169,7 @@ public:
     typedef ResampleUnit<SampleType,InterpTypeCode>         ResampleType;
     typedef LagUnit<SampleType,Interp::Lagrange3>           HQ;
     
-    static inline UnitInfos getInfo() throw()
+    static PLONK_INLINE_LOW UnitInfos getInfo() throw()
     {
         const double sampleRate = SampleRate::getDefault().getValue();
         
@@ -266,7 +266,7 @@ public:
     typedef ResampleUnit<SampleType,InterpTypeCode>         ResampleType;
     typedef LagAsymUnit<SampleType,Interp::Lagrange3>       HQ;
     
-    static inline UnitInfos getInfo() throw()
+    static PLONK_INLINE_LOW UnitInfos getInfo() throw()
     {
         const double sampleRate = SampleRate::getDefault().getValue();
         
@@ -366,7 +366,7 @@ public:
     typedef ResampleUnit<SampleType,InterpTypeCode>         ResampleType;
     typedef HPFP1Unit<SampleType,Interp::Lagrange3>         HQ;
     
-    static inline UnitInfos getInfo() throw()
+    static PLONK_INLINE_LOW UnitInfos getInfo() throw()
     {
         const double sampleRate = SampleRate::getDefault().getValue();
         
@@ -462,7 +462,7 @@ public:
     typedef ResampleUnit<SampleType,InterpTypeCode>         ResampleType;
     typedef DecayUnit<SampleType,Interp::Lagrange3>         HQ;
     
-    static inline UnitInfos getInfo() throw()
+    static PLONK_INLINE_LOW UnitInfos getInfo() throw()
     {
         const double sampleRate = SampleRate::getDefault().getValue();
         
@@ -557,7 +557,7 @@ public:
     typedef ResampleUnit<SampleType,InterpTypeCode>                             ResampleType;
     typedef DCUnit<SampleType,Interp::Lagrange3>                                HQ;
     
-    static inline UnitInfos getInfo() throw()
+    static PLONK_INLINE_LOW UnitInfos getInfo() throw()
     {
         const double sampleRate = SampleRate::getDefault().getValue();
         
@@ -644,7 +644,7 @@ public:
     typedef ResampleUnit<SampleType,InterpTypeCode>         ResampleType;
     typedef RLPFUnit<SampleType,Interp::Lagrange3>          HQ;
 
-    static inline UnitInfos getInfo() throw()
+    static PLONK_INLINE_LOW UnitInfos getInfo() throw()
     {
         const double sampleRate = SampleRate::getDefault().getValue();
                         
@@ -745,7 +745,7 @@ public:
     typedef ResampleUnit<SampleType,InterpTypeCode>         ResampleType;
     typedef RHPFUnit<SampleType,Interp::Lagrange3>          HQ;
     
-    static inline UnitInfos getInfo() throw()
+    static PLONK_INLINE_LOW UnitInfos getInfo() throw()
     {
         const double sampleRate = SampleRate::getDefault().getValue();
         
@@ -847,7 +847,7 @@ public:
     typedef ResampleUnit<SampleType,InterpTypeCode>         ResampleType;
     typedef LowShelfUnit<SampleType,Interp::Lagrange3>      HQ;
     
-    static inline UnitInfos getInfo() throw()
+    static PLONK_INLINE_LOW UnitInfos getInfo() throw()
     {
         const double sampleRate = SampleRate::getDefault().getValue();
         
@@ -956,7 +956,7 @@ public:
     typedef ResampleUnit<SampleType,InterpTypeCode>         ResampleType;
     typedef HighShelfUnit<SampleType,Interp::Lagrange3>     HQ;
     
-    static inline UnitInfos getInfo() throw()
+    static PLONK_INLINE_LOW UnitInfos getInfo() throw()
     {
         const double sampleRate = SampleRate::getDefault().getValue();
         
@@ -1065,7 +1065,7 @@ public:
     typedef ResampleUnit<SampleType,InterpTypeCode>         ResampleType;
     typedef NotchUnit<SampleType,Interp::Lagrange3>         HQ;
     
-    static inline UnitInfos getInfo() throw()
+    static PLONK_INLINE_LOW UnitInfos getInfo() throw()
     {
         const double sampleRate = SampleRate::getDefault().getValue();
         
@@ -1173,7 +1173,7 @@ public:
     typedef ResampleUnit<SampleType,InterpTypeCode>         ResampleType;
     typedef BPFUnit<SampleType,Interp::Lagrange3>           HQ;
     
-    static inline UnitInfos getInfo() throw()
+    static PLONK_INLINE_LOW UnitInfos getInfo() throw()
     {
         const double sampleRate = SampleRate::getDefault().getValue();
         
@@ -1274,7 +1274,7 @@ public:
     typedef ResampleUnit<SampleType,InterpTypeCode>         ResampleType;
     typedef BRFUnit<SampleType,Interp::Lagrange3>           HQ;
     
-    static inline UnitInfos getInfo() throw()
+    static PLONK_INLINE_LOW UnitInfos getInfo() throw()
     {
         const double sampleRate = SampleRate::getDefault().getValue();
         
@@ -1380,7 +1380,7 @@ public:
     typedef ResampleUnit<SampleType,InterpTypeCode>         ResampleType;
     typedef LPFUnit<SampleType,Interp::Lagrange3>           HQ;
     
-    static inline UnitInfos getInfo() throw()
+    static PLONK_INLINE_LOW UnitInfos getInfo() throw()
     {
         const double sampleRate = SampleRate::getDefault().getValue();
                 
@@ -1476,7 +1476,7 @@ public:
     typedef ResampleUnit<SampleType,InterpTypeCode>         ResampleType;
     typedef HPFUnit<SampleType,Interp::Lagrange3>           HQ;
     
-    static inline UnitInfos getInfo() throw()
+    static PLONK_INLINE_LOW UnitInfos getInfo() throw()
     {
         const double sampleRate = SampleRate::getDefault().getValue();
         

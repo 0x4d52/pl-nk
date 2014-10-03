@@ -207,7 +207,7 @@ public:
     
     typedef TypeChannelInternal<OutputSampleType,InputSampleType> TypeInternal;
     
-    static inline UnitInfos getInfo() throw()
+    static PLONK_INLINE_LOW UnitInfos getInfo() throw()
     {
         const double blockSize = (double)BlockSize::noPreference().getValue();
         const double sampleRate = SampleRate::noPreference().getValue();
@@ -242,7 +242,7 @@ public:
                                                                         sampleRate);
     }
     
-    static inline OutputUnitType kr (InputUnitType const& input) throw()
+    static PLONK_INLINE_LOW OutputUnitType kr (InputUnitType const& input) throw()
     {
         return ar (input, 
                    BlockSize::getControlRateBlockSize(), 
@@ -265,15 +265,15 @@ class TypeUnit : public TypeUnitBase<OutputSampleType,InputSampleType>
     public:\
         typedef UnitBase<SampleType> UnitType;\
         \
-        static inline UnitType ar (UnitType const& input) throw() {\
+        static PLONK_INLINE_LOW UnitType ar (UnitType const& input) throw() {\
             return input;\
         }\
         \
-        static inline UnitType ar (UnitType const& input, BlockSize const& blockSize) throw() {\
+        static PLONK_INLINE_LOW UnitType ar (UnitType const& input, BlockSize const& blockSize) throw() {\
             return TypeUnitBase<SampleType,SampleType>::ar (input, blockSize, SampleRate::noPreference());\
         }\
         \
-        static inline UnitType ar (UnitType const& input, BlockSize const& blockSize, SampleRate const& sampleRate) throw() {\
+        static PLONK_INLINE_LOW UnitType ar (UnitType const& input, BlockSize const& blockSize, SampleRate const& sampleRate) throw() {\
             return TypeUnitBase<SampleType,SampleType>::ar (input, blockSize, sampleRate);\
         }\
     }

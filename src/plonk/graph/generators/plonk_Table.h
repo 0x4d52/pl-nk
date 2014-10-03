@@ -337,7 +337,7 @@ public:
     typedef typename TableInternal::FrequencyUnitType     FrequencyUnitType;
     typedef typename TableInternal::FrequencyBufferType   FrequencyBufferType;
     
-    static inline UnitInfos getInfo() throw()
+    static PLONK_INLINE_LOW UnitInfos getInfo() throw()
     {
         const double blockSize = (double)BlockSize::getDefault().getValue();
         const double sampleRate = SampleRate::getDefault().getValue();
@@ -432,7 +432,7 @@ public:
     typedef typename TableInternal::FrequencyUnitType     FrequencyUnitType;
     typedef typename TableInternal::FrequencyBufferType   FrequencyBufferType;
 
-    static inline UnitInfos getInfo() throw()
+    static PLONK_INLINE_LOW UnitInfos getInfo() throw()
     {
         const double blockSize = (double)BlockSize::getDefault().getValue();
         const double sampleRate = SampleRate::getDefault().getValue();
@@ -508,7 +508,7 @@ public:
     typedef typename TableInternal::FrequencyUnitType     FrequencyUnitType;
     typedef typename TableInternal::FrequencyBufferType   FrequencyBufferType;
 
-    static inline UnitInfos getInfo() throw()
+    static PLONK_INLINE_LOW UnitInfos getInfo() throw()
     {
         const double blockSize = (double)BlockSize::getDefault().getValue();
         const double sampleRate = SampleRate::getDefault().getValue();
@@ -590,7 +590,7 @@ public:
     typedef typename TableInternal::FrequencyUnitType     FrequencyUnitType;
     typedef typename TableInternal::FrequencyBufferType   FrequencyBufferType;
 
-    static inline UnitInfos getInfo() throw()
+    static PLONK_INLINE_LOW UnitInfos getInfo() throw()
     {
         const double blockSize = (double)BlockSize::getDefault().getValue();
         const double sampleRate = SampleRate::getDefault().getValue();
@@ -671,7 +671,7 @@ public:
     typedef typename TableInternal::FrequencyUnitType     FrequencyUnitType;
     typedef typename TableInternal::FrequencyBufferType   FrequencyBufferType;
     
-    static inline UnitInfos getInfo() throw()
+    static PLONK_INLINE_LOW UnitInfos getInfo() throw()
     {
         const double blockSize = (double)BlockSize::getDefault().getValue();
         const double sampleRate = SampleRate::getDefault().getValue();

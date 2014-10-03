@@ -200,7 +200,7 @@ public:
     typedef typename LookupInternal::PositionUnitType     PositionUnitType;
     typedef typename LookupInternal::PositionBufferType   PositionBufferType;
     
-    static inline UnitInfos getInfo() throw()
+    static PLONK_INLINE_LOW UnitInfos getInfo() throw()
     {
         const double blockSize = (double)BlockSize::getDefault().getValue();
         const double sampleRate = SampleRate::getDefault().getValue();

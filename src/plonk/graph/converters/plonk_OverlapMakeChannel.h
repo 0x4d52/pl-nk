@@ -115,7 +115,7 @@ public:
         this->initProxyValue (channel, sourceValue);        
     }    
     
-    inline void process (ProcessInfo& info, const int /*channel*/) throw()
+    PLONK_INLINE_LOW void process (ProcessInfo& info, const int /*channel*/) throw()
     {                
         /* Be careful optimising this with the new NumericalArray vector stuff */
         const Data& data = this->getState();
@@ -274,7 +274,7 @@ public:
     typedef UnitBase<SampleType>                        UnitType;
     typedef InputDictionary                             Inputs;    
     
-    static inline UnitInfos getInfo() throw()
+    static PLONK_INLINE_LOW UnitInfos getInfo() throw()
     {        
         const double minOverlap = TypeUtility<double>::getTypeEpsilon();
 

@@ -64,24 +64,24 @@ public:
         this->fft = 0;
     }
     
-    inline void forward (float* output, const float* input) throw()
+    PLONK_INLINE_LOW void forward (float* output, const float* input) throw()
     {
         plonk_assert (output != input);
         pl_FFTF_Forward (this->fft, output, input);
     }
         
-    inline void inverse (float* output, const float* input) throw()
+    PLONK_INLINE_LOW void inverse (float* output, const float* input) throw()
     {
         plonk_assert (output != input);
         pl_FFTF_Inverse (this->fft, output, input);
     }
     
-    inline long length() const
+    PLONK_INLINE_LOW long length() const
     {
         return pl_FFTF_Length (this->fft);
     }
     
-    inline long halfLength() const
+    PLONK_INLINE_LOW long halfLength() const
     {
         return pl_FFTF_HalfLength (this->fft);
     }

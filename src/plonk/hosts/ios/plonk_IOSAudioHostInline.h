@@ -87,13 +87,13 @@ static void InterruptionListener (void *inClientData,
 
 
 template<class SrcType>
-static inline void audioTypeToShort (const SrcType * const src, short* const dst, const unsigned int length) throw()
+static PLONK_INLINE_LOW void audioTypeToShort (const SrcType * const src, short* const dst, const unsigned int length) throw()
 {
     NumericalArrayConverter<short,SrcType>::convertScaled (dst, src, length);    
 }
 
 template<class SrcType>
-static inline void audioTypeToShortChannels (SrcType * const src[], AudioBufferList* const dst, const unsigned int length, const unsigned int numChannels) throw()
+static PLONK_INLINE_LOW void audioTypeToShortChannels (SrcType * const src[], AudioBufferList* const dst, const unsigned int length, const unsigned int numChannels) throw()
 {
 	for (UInt32 channel = 0; channel < numChannels; ++channel)
 	{
@@ -104,13 +104,13 @@ static inline void audioTypeToShortChannels (SrcType * const src[], AudioBufferL
 }
 
 template<class DstType>
-static inline void audioShortToType (const short * const src, DstType* const dst, const unsigned int length) throw()
+static PLONK_INLINE_LOW void audioShortToType (const short * const src, DstType* const dst, const unsigned int length) throw()
 {
     NumericalArrayConverter<DstType,short>::convertScaled (dst, src, length);
 }
 
 template<class DstType>
-static inline void audioShortToTypeChannels (AudioBufferList* src, DstType* const dst[], const unsigned int length, const unsigned int numChannels) throw()
+static PLONK_INLINE_LOW void audioShortToTypeChannels (AudioBufferList* src, DstType* const dst[], const unsigned int length, const unsigned int numChannels) throw()
 {
 	for (UInt32 channel = 0; channel < numChannels; ++channel)
 	{

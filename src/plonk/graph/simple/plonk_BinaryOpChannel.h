@@ -81,12 +81,12 @@ private:
     }
     
 public:
-    inline Text getName (Function function) const throw()
+    PLONK_INLINE_LOW Text getName (Function function) const throw()
     {
         return names[function];
     }
     
-    inline void add (Function function, Text const& name) throw()
+    PLONK_INLINE_LOW void add (Function function, Text const& name) throw()
     {
         names.put (function, name);
     }    

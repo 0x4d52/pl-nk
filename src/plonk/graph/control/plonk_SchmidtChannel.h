@@ -240,7 +240,7 @@ public:
     typedef UnitBase<SampleType>                    UnitType;
     typedef InputDictionary                         Inputs;    
     
-    static inline UnitInfos getInfo() throw()
+    static PLONK_INLINE_LOW UnitInfos getInfo() throw()
     {
         const double blockSize = (double)BlockSize::getDefault().getValue();
         const double sampleRate = SampleRate::getDefault().getValue();
@@ -280,7 +280,7 @@ public:
                                                                      preferredSampleRate);
     }
     
-    static inline UnitType kr (UnitType const& input,
+    static PLONK_INLINE_LOW UnitType kr (UnitType const& input,
                                UnitType const& minimum,
                                UnitType const& maximum) throw()
     {

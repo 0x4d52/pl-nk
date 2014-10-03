@@ -117,7 +117,7 @@ typedef struct PlankSpinLock
 } PlankSpinLock;
 #endif
 
-static PLONK_INLINE_LOW PlankB pl_SpinLock_TryLock (PlankSpinLockRef p)
+static PLANK_INLINE_LOW PlankB pl_SpinLock_TryLock (PlankSpinLockRef p)
 {
     return pl_AtomicI_CompareAndSwap (&p->flag, PLANK_SPINLOCK_UNLOCKED, PLANK_SPINLOCK_LOCKED);
 }

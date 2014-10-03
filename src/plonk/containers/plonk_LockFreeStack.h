@@ -63,7 +63,7 @@ public:
         deInitStack (deadStack);
     }
     
-    inline void push (ValueType const& value) throw()
+    PLONK_INLINE_LOW void push (ValueType const& value) throw()
     {
         PlankLockFreeStackElementRef element = createElement (value);
         ResultCode result = pl_LockFreeStack_Push (&liveStack, element);
@@ -73,7 +73,7 @@ public:
 #endif
     }
     
-    inline ValueType pop() throw()
+    PLONK_INLINE_LOW ValueType pop() throw()
     {
         ValueType value (getNullValue());
         ValueType* valuePtr = popInternal (&value);
@@ -110,7 +110,7 @@ public:
 #endif
     }
     
-    inline LongLong length() throw()
+    PLONK_INLINE_LOW LongLong length() throw()
     {
         return pl_LockFreeStack_GetSize (&liveStack);
     }
@@ -142,7 +142,7 @@ private:
 #endif
     }
     
-    inline PlankLockFreeStackElementRef createElement (ValueType const& value) throw()
+    PLONK_INLINE_LOW PlankLockFreeStackElementRef createElement (ValueType const& value) throw()
     {
         PlankLockFreeStackElementRef element;
         ResultCode result = pl_LockFreeStack_Pop (&deadStack, &element);
@@ -174,7 +174,7 @@ private:
         return PlankResult_OK;
     }
     
-    static inline ValueType getNullValue() throw()
+    static PLONK_INLINE_LOW ValueType getNullValue() throw()
     {
         static ValueType null = ValueType();
         return null;
@@ -228,7 +228,7 @@ public:
         pl_LockFreeStack_DeInit (&stack);
     }
     
-    static inline ValueType* getNullValue() throw()
+    static PLONK_INLINE_LOW ValueType* getNullValue() throw()
     {
         return 0;
     }
@@ -310,12 +310,12 @@ public:
     typedef SmartPointerContainer<Internal>     Base;
     typedef WeakPointerContainer<LockFreeStack> Weak;    
 
-    inline LockFreeStack()
+    PLONK_INLINE_LOW LockFreeStack()
     :   Base (new Internal())
     {
     }
     
-    inline explicit LockFreeStack (Internal* internalToUse) throw() 
+    PLONK_INLINE_LOW explicit LockFreeStack (Internal* internalToUse) throw() 
 	:	Base (internalToUse)
 	{
 	}
@@ -329,18 +329,18 @@ public:
     }    
     
     /** Copy constructor. */
-    inline LockFreeStack (LockFreeStack const& copy) throw()
+    PLONK_INLINE_LOW LockFreeStack (LockFreeStack const& copy) throw()
     :   Base (static_cast<Base const&> (copy))
     {
     }
     
-    inline LockFreeStack (Dynamic const& other) throw()
+    PLONK_INLINE_LOW LockFreeStack (Dynamic const& other) throw()
     :   Base (other.as<LockFreeStack>().getInternal())
     {
     }    
     
     /** Assignment operator. */
-    inline LockFreeStack& operator= (LockFreeStack const& other) throw()
+    PLONK_INLINE_LOW LockFreeStack& operator= (LockFreeStack const& other) throw()
 	{
 		if (this != &other)
             this->setInternal (other.getInternal());
@@ -348,32 +348,32 @@ public:
         return *this;
 	}
     
-    inline void push (ValueType const& value) throw()
+    PLONK_INLINE_LOW void push (ValueType const& value) throw()
     {
         this->getInternal()->push (value);
     }
     
-    inline ValueType pop() throw()
+    PLONK_INLINE_LOW ValueType pop() throw()
     {
         return this->getInternal()->pop();
     }
     
-    inline void clear() throw()
+    PLONK_INLINE_LOW void clear() throw()
     {
         return this->getInternal()->clear();
     }
     
-    inline void clearCache() throw()
+    PLONK_INLINE_LOW void clearCache() throw()
     {
         return this->getInternal()->clearCache();
     }
     
-    inline void clearAll() throw()
+    PLONK_INLINE_LOW void clearAll() throw()
     {
         return this->getInternal()->clearAll();
     }
 
-    inline LongLong length() throw()
+    PLONK_INLINE_LOW LongLong length() throw()
     {
         return this->getInternal()->length();
     }

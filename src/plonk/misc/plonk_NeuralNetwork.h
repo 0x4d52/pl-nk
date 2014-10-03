@@ -128,13 +128,13 @@ public:
     }
    
 private:
-    inline int getNumInputs() const throw() { return pl_NeuralNetworkF_GetNumInputs (const_cast<PlankNeuralNetworkF*> (&network)); }
-    inline int getNumOutputs() const throw() { return pl_NeuralNetworkF_GetNumOutputs (const_cast<PlankNeuralNetworkF*> (&network)); }
-    inline int getNumLayers() const throw() { return pl_NeuralNetworkF_GetNumLayers (const_cast<PlankNeuralNetworkF*> (&network)); }
+    PLONK_INLINE_LOW int getNumInputs() const throw() { return pl_NeuralNetworkF_GetNumInputs (const_cast<PlankNeuralNetworkF*> (&network)); }
+    PLONK_INLINE_LOW int getNumOutputs() const throw() { return pl_NeuralNetworkF_GetNumOutputs (const_cast<PlankNeuralNetworkF*> (&network)); }
+    PLONK_INLINE_LOW int getNumLayers() const throw() { return pl_NeuralNetworkF_GetNumLayers (const_cast<PlankNeuralNetworkF*> (&network)); }
 
-    inline const VectorType& getOutput() const throw() { return networkOutputs; }
+    PLONK_INLINE_LOW const VectorType& getOutput() const throw() { return networkOutputs; }
     
-    inline const VectorType& propogate (VectorType const& inputs) throw()
+    PLONK_INLINE_LOW const VectorType& propogate (VectorType const& inputs) throw()
     {
         plonk_assert (inputs.length() == this->getNumInputs());
         ResultCode result = pl_NeuralNetworkF_Propogate (&network, inputs.getArray());
@@ -147,7 +147,7 @@ private:
         return networkOutputs;
     }
     
-    inline void propogate (VectorType& outputs, VectorType const& inputs) throw()
+    PLONK_INLINE_LOW void propogate (VectorType& outputs, VectorType const& inputs) throw()
     {
         ResultCode result;
         
@@ -165,7 +165,7 @@ private:
 #endif
     }
 
-    inline void backProp (VectorType const& inputs, VectorType const& targets) throw()
+    PLONK_INLINE_LOW void backProp (VectorType const& inputs, VectorType const& targets) throw()
     {
         plonk_assert (inputs.length() == this->getNumInputs());
         plonk_assert (targets.length() == this->getNumOutputs());
@@ -178,7 +178,7 @@ private:
 #endif
     }
     
-    inline void setActFunc (ActFunc const& function) throw()
+    PLONK_INLINE_LOW void setActFunc (ActFunc const& function) throw()
     {
         ResultCode result = pl_NeuralNetworkF_SetActFunc (&network, function);
         plonk_assert (result == PlankResult_OK);
@@ -188,7 +188,7 @@ private:
 #endif
     }
     
-    inline void toJSON (PlankJSONRef json, const bool useBinary) throw()
+    PLONK_INLINE_LOW void toJSON (PlankJSONRef json, const bool useBinary) throw()
     {
         ResultCode result = pl_NeuralNetworkF_ToJSON (&network, json, useBinary);
         plonk_assert (result == PlankResult_OK);
@@ -332,22 +332,22 @@ public:
         return *this;
 	}
     
-    inline const VectorType& propogate (VectorType const& inputs) throw()
+    PLONK_INLINE_LOW const VectorType& propogate (VectorType const& inputs) throw()
     {
         return this->getInternal()->propogate (inputs);
     }
     
-    inline void propogate (VectorType& outputs, VectorType const& inputs) throw()
+    PLONK_INLINE_LOW void propogate (VectorType& outputs, VectorType const& inputs) throw()
     {
         return this->getInternal()->propogate (outputs, inputs);
     }
 
-    inline void backProp (VectorType const& inputs, VectorType const& targets) throw()
+    PLONK_INLINE_LOW void backProp (VectorType const& inputs, VectorType const& targets) throw()
     {
         return this->getInternal()->backProp (inputs, targets);
     }
     
-    inline void train (Patterns const& patterns, const int numEpochs) throw()
+    PLONK_INLINE_LOW void train (Patterns const& patterns, const int numEpochs) throw()
     {
         const int numPatterns = patterns.length();
         const Pattern* patternArray = patterns.getArray();
@@ -369,7 +369,7 @@ public:
         pl_NeuralNetworkF_Randomise (&this->getInternal()->network, amount);
     }
     
-    inline void setActFunc (ActFunc const& function) throw()
+    PLONK_INLINE_LOW void setActFunc (ActFunc const& function) throw()
     {
         return this->getInternal()->setActFunc (function);
     }

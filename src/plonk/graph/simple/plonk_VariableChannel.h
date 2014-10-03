@@ -132,7 +132,7 @@ public:
     typedef NumericalArray<SampleType>                  Buffer;
     typedef Variable<SampleType>                        VariableType;
     
-    static inline UnitInfos getInfo() throw()
+    static PLONK_INLINE_LOW UnitInfos getInfo() throw()
     {
         const double blockSize = (double)BlockSize::getDefault().getValue();
 

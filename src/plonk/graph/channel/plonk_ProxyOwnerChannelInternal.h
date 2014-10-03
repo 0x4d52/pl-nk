@@ -122,22 +122,22 @@ public:
         return this;
     }
         
-    inline const SampleType* getOutputSamples (const int index) const throw() 
+    PLONK_INLINE_LOW const SampleType* getOutputSamples (const int index) const throw() 
     {         
         return channelBuffers.atUnchecked (index).getArray();
     }
     
-    inline SampleType* getOutputSamples (const int index) throw() 
+    PLONK_INLINE_LOW SampleType* getOutputSamples (const int index) throw() 
     {        
         return channelBuffers.atUnchecked (index).getArray();
     }
     
-    inline const Buffer& getOutputBuffer (const int index) const throw() 
+    PLONK_INLINE_LOW const Buffer& getOutputBuffer (const int index) const throw() 
     {         
         return channelBuffers.atUnchecked (index);
     }
     
-    inline Buffer& getOutputBuffer (const int index) throw() 
+    PLONK_INLINE_LOW Buffer& getOutputBuffer (const int index) throw() 
     {                 
         return channelBuffers.atUnchecked (index);
     }    

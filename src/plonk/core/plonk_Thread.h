@@ -144,7 +144,7 @@ public:
         static ResultCode yield() throw();
         
     private:
-        inline PlankThreadRef getPeerRef() { return &thread; }
+        PLONK_INLINE_LOW PlankThreadRef getPeerRef() { return &thread; }
         
         PLONK_ALIGN(16) 
         PlankThread thread;

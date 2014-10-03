@@ -82,7 +82,7 @@ public:
     typedef NumericalArray<Variable>        PatternType;
     
     /** Default constructor. */
-    inline Variable() throw()
+    PLONK_INLINE_LOW Variable() throw()
     :   Base (new VariableInternalType (Type()))
     {
     }
@@ -95,7 +95,7 @@ public:
     
     /** Copy constructor.
 	 Note that a deep copy is not made, the copy will refer to exactly the same data. */
-    inline Variable (Variable const& copy) throw()
+    PLONK_INLINE_LOW Variable (Variable const& copy) throw()
     :   Base (static_cast<Base const&> (copy))
     {
     }
@@ -129,7 +129,7 @@ public:
 	}	                
     
     /** Initialised with a specific value. */
-    inline Variable (Type const& initValue) throw()
+    PLONK_INLINE_LOW Variable (Type const& initValue) throw()
     :   Base (new VariableInternalType (initValue))
     {
     }
@@ -150,7 +150,7 @@ public:
     
     /** Create a Variable that converts from one type to another. */
     template<class OtherType>
-    inline Variable (OtherType const& other) throw()
+    PLONK_INLINE_LOW Variable (OtherType const& other) throw()
     :   Base (new TypeVariableInternal<Type,OtherType> (other))
     {
     }
@@ -164,19 +164,19 @@ public:
     }
     
     /** Returns the current value. */
-    inline const Type getValue() const throw()
+    PLONK_INLINE_LOW const Type getValue() const throw()
     {
         return this->getInternal()->getValue();
     }
     
     /** Returns the current value. */
-    inline Type* getValuePtr() throw()
+    PLONK_INLINE_LOW Type* getValuePtr() throw()
     {
         return this->getInternal()->getValuePtr();
     }
     
     /** Returns the current value. */
-    inline operator Type () const throw()
+    PLONK_INLINE_LOW operator Type () const throw()
     {
         return this->getInternal()->getValue();
     }
@@ -184,18 +184,18 @@ public:
     /** Returns the next value. 
      By default this returns the current value. More complex Variable subclasses
      might generate sequences or random numbers (for example).*/
-    inline const Type nextValue() throw()
+    PLONK_INLINE_LOW const Type nextValue() throw()
     {
         return this->getInternal()->nextValue();
     }
     
     /** Sets the current value. */
-    inline void setValue (Type const& newValue) throw()
+    PLONK_INLINE_LOW void setValue (Type const& newValue) throw()
     {
         this->getInternal()->setValue (newValue);
     }    
     
-    inline void swapValues (Type& other) throw()
+    PLONK_INLINE_LOW void swapValues (Type& other) throw()
     {
         this->getInternal()->swapValues (other);
     }
@@ -289,22 +289,22 @@ public:
         return TypeUtility<Type>::getTypeCode();
     }        
     
-    inline UnitType ar() const throw()
+    PLONK_INLINE_LOW UnitType ar() const throw()
     {
         return UnitType (*this).ar();
     }
     
-    inline UnitType kr() const throw()
+    PLONK_INLINE_LOW UnitType kr() const throw()
     {
         return UnitType (*this).kr();
     }
     
-    inline UnitType ar (const Interp::TypeCode interpType) const throw()
+    PLONK_INLINE_LOW UnitType ar (const Interp::TypeCode interpType) const throw()
     {
         return UnitType (*this).ar (interpType);
     }
     
-    inline UnitType kr (const Interp::TypeCode interpType) const throw()
+    PLONK_INLINE_LOW UnitType kr (const Interp::TypeCode interpType) const throw()
     {
         return UnitType (*this).kr (interpType);
     }
@@ -314,13 +314,13 @@ PLONK_BINARYOPGLOBALS_TEMPLATE(Variable,Type); // declares global functions with
 PLONK_UNARYOPGLOBALS_TEMPLATE(Variable,Type);  // declares global functions with the same name as the unary operators
 
 template<class Type>
-inline UnitBase<Type> ar (Variable<Type> v) throw()
+PLONK_INLINE_LOW UnitBase<Type> ar (Variable<Type> v) throw()
 {
     return UnitBase<Type> (v).ar();
 }
 
 template<class Type>
-inline UnitBase<Type> kr (Variable<Type> v) throw()
+PLONK_INLINE_LOW UnitBase<Type> kr (Variable<Type> v) throw()
 {
     return UnitBase<Type> (v).kr();
 }
@@ -382,63 +382,63 @@ public:
     }    
             
     template<class ValueType>
-    inline Variable& operator= (ValueType const& newValue) throw()
+    PLONK_INLINE_LOW Variable& operator= (ValueType const& newValue) throw()
     {
         Type temp (newValue);
         this->swapValues (temp);
         return *this;
     }    
     
-    inline Variable& operator= (Variable const& other) throw()
+    PLONK_INLINE_LOW Variable& operator= (Variable const& other) throw()
     {
         Variable temp (other.getValue());
         this->swapValues (temp);
         return *this;
     }    
 
-    inline Type& getValue() throw()
+    PLONK_INLINE_LOW Type& getValue() throw()
     {
         return this->getInternal()->getValue();
     }
     
-    inline const Type& getValue() const throw()
+    PLONK_INLINE_LOW const Type& getValue() const throw()
     {
         return this->getInternal()->getValue();
     }
     
-    inline operator Type& () throw()
+    PLONK_INLINE_LOW operator Type& () throw()
     {
         return this->getInternal()->getValue();
     }
     
     template<class ValueType>
-    inline operator ValueType() throw()
+    PLONK_INLINE_LOW operator ValueType() throw()
     {
         return ValueType (this->getInternal()->getValue());
     }
     
     template<class ValueType>
-    inline void setValue (ValueType const& newValue) throw()
+    PLONK_INLINE_LOW void setValue (ValueType const& newValue) throw()
     {
         this->getInternal()->setValue (newValue);
     }    
     
-    inline void swapValues (Type& other) throw()
+    PLONK_INLINE_LOW void swapValues (Type& other) throw()
     {
         this->getInternal()->swapValues (other);
     }
     
-    inline void swapValues (Variable& other) throw()
+    PLONK_INLINE_LOW void swapValues (Variable& other) throw()
     {
         this->getInternal()->swapValues (other.getValue());
     }
     
-    inline bool isValueNull() const throw()
+    PLONK_INLINE_LOW bool isValueNull() const throw()
     {
         return this->getInternal()->getValue().isNull();
     }
 
-    inline bool isValueNotNull() const throw()
+    PLONK_INLINE_LOW bool isValueNotNull() const throw()
     {
         return this->getInternal()->getValue().isNotNull();
     }

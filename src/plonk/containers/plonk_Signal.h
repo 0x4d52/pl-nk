@@ -61,7 +61,7 @@ public:
     typedef Variable<SampleType>            SampleVariable;
     typedef NumericalArray<SampleVariable>  SampleVariableArray;
     
-    inline SignalInternal() throw()
+    PLONK_INLINE_LOW SignalInternal() throw()
     :   numInterleavedChannels (1),
         channel (-1),
         offset (0),
@@ -70,7 +70,7 @@ public:
         init();
     }
    
-    inline SignalInternal (Buffers const& buffersToUse, 
+    PLONK_INLINE_LOW SignalInternal (Buffers const& buffersToUse, 
                            SampleRate const& sampleRateToUse) throw()
     :   buffers (buffersToUse),
         sampleRate (sampleRateToUse),
@@ -83,7 +83,7 @@ public:
         init();
     }
     
-    inline SignalInternal (Buffer const& buffer, 
+    PLONK_INLINE_LOW SignalInternal (Buffer const& buffer, 
                            SampleRate const& sampleRateToUse,
                            const int interleavedChannelsInBuffer) throw()
     :   buffers (buffer),
@@ -97,7 +97,7 @@ public:
         init();
     }
     
-    inline SignalInternal (Buffers const& buffersToUse,
+    PLONK_INLINE_LOW SignalInternal (Buffers const& buffersToUse,
                            SampleRate const& sampleRateToUse,
                            const int interleavedChannelsInBuffer,
                            const int channelToUse,
@@ -114,14 +114,14 @@ public:
         init();
     }
     
-    inline int getNumFrames() const throw()
+    PLONK_INLINE_LOW int getNumFrames() const throw()
     {   
         const int numFramesPerBuffer = buffers.numColumns();
         const int bufferFrames = (numFramesPerBuffer / numInterleavedChannels) - offset;
         return numFrames < 0 ? bufferFrames : plonk::min (numFrames, bufferFrames);
     }
     
-    inline int getNumChannels() const throw()
+    PLONK_INLINE_LOW int getNumChannels() const throw()
     {
         if (channel >= 0)
         {
@@ -138,12 +138,12 @@ public:
         }
     }
     
-//    inline int getFrameStride() const throw()
+//    PLONK_INLINE_LOW int getFrameStride() const throw()
 //    {
 //        return isInterleaved() ? getNumChannels() : 1;
 //    }
 
-    inline int getFrameStride() const throw()
+    PLONK_INLINE_LOW int getFrameStride() const throw()
     {
         return isInterleaved() ? numInterleavedChannels : 1;
     }
@@ -164,19 +164,19 @@ public:
                                  buffers.atUnchecked (wrappedChannel).getArray() + offset;
     }
 
-    inline bool isInterleaved() const throw()
+    PLONK_INLINE_LOW bool isInterleaved() const throw()
     {
         plonk_assert(buffers.length() > 0);
         return (numInterleavedChannels > 1) || (buffers.numRows() == 1);
     }
     
-//    inline Buffer getInterleaved() const throw()
+//    PLONK_INLINE_LOW Buffer getInterleaved() const throw()
 //    {
 //        plonk_assert(buffers.length() > 0);
 //        return (isInterleaved()) ? buffers.atUnchecked (0) : buffers.interleave();
 //    }
 //    
-//    inline Buffers getDeinterleaved() const throw()
+//    PLONK_INLINE_LOW Buffers getDeinterleaved() const throw()
 //    {        
 //        plonk_assert(buffers.length() > 0);
 //        if (isInterleaved()) 
@@ -303,42 +303,42 @@ public:
         return SignalBase (internal);
     }
     
-//    inline const Buffers& getBuffers() const throw()
+//    PLONK_INLINE_LOW const Buffers& getBuffers() const throw()
 //    {
 //        return this->getInternal()->buffers;
 //    }
 //
-//    inline Buffers& getBuffers() throw()
+//    PLONK_INLINE_LOW Buffers& getBuffers() throw()
 //    {
 //        return this->getInternal()->buffers;
 //    }
 
-    inline const SampleRate& getSampleRate() const throw()
+    PLONK_INLINE_LOW const SampleRate& getSampleRate() const throw()
     {
         return this->getInternal()->sampleRate;
     }
     
-    inline SampleRate& getSampleRate() throw()
+    PLONK_INLINE_LOW SampleRate& getSampleRate() throw()
     {
         return this->getInternal()->sampleRate;
     }
     
-    inline int getNumFrames() const throw()
+    PLONK_INLINE_LOW int getNumFrames() const throw()
     {
         return this->getInternal()->getNumFrames();
     }
     
-    inline double getDuration() const throw()
+    PLONK_INLINE_LOW double getDuration() const throw()
     {
         return this->getInternal()->getNumFrames() / this->getInternal()->sampleRate.getValue();
     }
     
-    inline int getNumChannels() const throw()
+    PLONK_INLINE_LOW int getNumChannels() const throw()
     {
         return this->getInternal()->getNumChannels();
     }
     
-    inline int getFrameStride() const throw()
+    PLONK_INLINE_LOW int getFrameStride() const throw()
     {
         return this->getInternal()->getFrameStride();
     }
@@ -353,37 +353,37 @@ public:
         return this->getInternal()->getSamples (channel);
     }
     
-    inline bool isInterleaved() const throw()
+    PLONK_INLINE_LOW bool isInterleaved() const throw()
     {
         return this->getInternal()->isInterleaved();
     }
 
-//    inline Buffer getInterleaved() const throw()
+//    PLONK_INLINE_LOW Buffer getInterleaved() const throw()
 //    {
 //        return this->getInternal()->getInterleaved();
 //    }
 //    
-//    inline Buffers getDeinterleaved() const throw()
+//    PLONK_INLINE_LOW Buffers getDeinterleaved() const throw()
 //    {
 //        return this->getInternal()->getDeinterleaved();
 //    }
     
-    inline SampleVariableArray& getSampleVariables() throw()
+    PLONK_INLINE_LOW SampleVariableArray& getSampleVariables() throw()
     {
         return this->getInternal()->sampleVariables;
     }
 
-    inline const SampleVariableArray& getSampleVariables() const throw()
+    PLONK_INLINE_LOW const SampleVariableArray& getSampleVariables() const throw()
     {
         return this->getInternal()->sampleVariables;
     }
 
-    inline IntVariableArray& getIntVariables() throw()
+    PLONK_INLINE_LOW IntVariableArray& getIntVariables() throw()
     {
         return this->getInternal()->intVariables;
     }
     
-    inline const IntVariableArray& getIntVariables() const throw()
+    PLONK_INLINE_LOW const IntVariableArray& getIntVariables() const throw()
     {
         return this->getInternal()->intVariables;
     }

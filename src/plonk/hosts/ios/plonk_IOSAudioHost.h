@@ -96,7 +96,7 @@ public:
     void resumeHost() throw();
     
     virtual void hostInterruption (const bool flag) throw() { }
-    inline bool wasInterrupted() throw() { return interrupted.getValue() != 0; }
+    PLONK_INLINE_LOW bool wasInterrupted() throw() { return interrupted.getValue() != 0; }
     
     OSStatus renderCallback (UInt32                     inNumberFrames,
                              AudioUnitRenderActionFlags *ioActionFlags, 

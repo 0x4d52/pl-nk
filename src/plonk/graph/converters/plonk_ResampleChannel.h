@@ -138,7 +138,7 @@ public:
         this->initProxyValue (channel, sourceValue);
     }
     
-    inline void resizeTempBuffer (const int inputBufferLength) throw()
+    PLONK_INLINE_LOW void resizeTempBuffer (const int inputBufferLength) throw()
     {
         if (inputBufferLength != tempBuffers.atUnchecked (0).length())
         {
@@ -153,7 +153,7 @@ public:
         }
     }
     
-    inline void getNextInputBuffer (ProcessInfo& info) throw()
+    PLONK_INLINE_LOW void getNextInputBuffer (ProcessInfo& info) throw()
     {
         const int extension = InterpType::getExtension();
         const int numChannels = this->getNumChannels();
@@ -429,7 +429,7 @@ private:
 //        tempBuffer.put (tempBufferPos, sourceValue);
 //    }
 //    
-//    inline void resizeTempBuffer (const int inputBufferLength) throw()
+//    PLONK_INLINE_LOW void resizeTempBuffer (const int inputBufferLength) throw()
 //    {
 //        if (inputBufferLength != tempBuffer.length())
 //        {
@@ -439,7 +439,7 @@ private:
 //        }
 //    }
 //    
-//    inline void getNextInputBuffer (ProcessInfo& info, const int channel, SampleType* &tempBufferSamples, int& tempBufferLength) throw()
+//    PLONK_INLINE_LOW void getNextInputBuffer (ProcessInfo& info, const int channel, SampleType* &tempBufferSamples, int& tempBufferLength) throw()
 //    {
 //        const int extension = InterpType::getExtension();
 //        
@@ -613,7 +613,7 @@ public:
     typedef typename ResampleInternal::RateUnitType     RateUnitType;
     typedef typename ResampleInternal::RateBufferType   RateBufferType;
     
-    static inline UnitInfos getInfo() throw()
+    static PLONK_INLINE_LOW UnitInfos getInfo() throw()
     {
         const double blockSize = (double)BlockSize::getDefault().getValue();
         const double sampleRate = SampleRate::getDefault().getValue();
@@ -695,7 +695,7 @@ public:
                                                                        preferredSampleRate);
     }
     
-    static inline UnitType kr (UnitType const& input, RateUnitType const& rate) throw()
+    static PLONK_INLINE_LOW UnitType kr (UnitType const& input, RateUnitType const& rate) throw()
     {
         return ar (input,
                    rate,
@@ -703,7 +703,7 @@ public:
                    SampleRate::getControlRate());
     }
     
-    static inline UnitType kr (UnitType const& input) throw()
+    static PLONK_INLINE_LOW UnitType kr (UnitType const& input) throw()
     {
         return ar (input,
                    Math<RateUnitType>::get1(),
@@ -800,7 +800,7 @@ public:
 //        buffers[channel].tempBuffer.put (tempBufferPos, sourceValue);
 //    }
 //    
-//    inline void resizeTempBuffer (const int channel, const int inputBufferLength) throw()
+//    PLONK_INLINE_LOW void resizeTempBuffer (const int channel, const int inputBufferLength) throw()
 //    {
 //        if (inputBufferLength != tempBuffer.length())
 //        {
@@ -812,7 +812,7 @@ public:
 //        }
 //    }
 //    
-//    inline void getNextInputBuffer (ProcessInfo& info, const int channel, SampleType* &tempBufferSamples, int& tempBufferLength) throw()
+//    PLONK_INLINE_LOW void getNextInputBuffer (ProcessInfo& info, const int channel, SampleType* &tempBufferSamples, int& tempBufferLength) throw()
 //    {
 //        const int extension = InterpType::getExtension();
 //        
@@ -978,7 +978,7 @@ public:
 //    typedef typename ResampleInternal::RateUnitType     RateUnitType;
 //    typedef typename ResampleInternal::RateBufferType   RateBufferType;
 //    
-//    static inline UnitInfos getInfo() throw()
+//    static PLONK_INLINE_LOW UnitInfos getInfo() throw()
 //    {
 //        const double blockSize = (double)BlockSize::getDefault().getValue();
 //        const double sampleRate = SampleRate::getDefault().getValue();
@@ -1017,7 +1017,7 @@ public:
 //                                                                      preferredSampleRate);
 //    }
 //    
-//    static inline UnitType kr (UnitType const& input,
+//    static PLONK_INLINE_LOW UnitType kr (UnitType const& input,
 //                               RateUnitType const& rate = Math<RateUnitType>::get1()) throw()
 //    {
 //        return ar (input,

@@ -44,8 +44,8 @@
 
 
 #define PLONK_OBJECTARROWOPERATOR(Type) \
-    inline Type* operator->() throw() { return this; } \
-	inline const Type* operator->() const throw() { return this; }
+    PLONK_INLINE_LOW Type* operator->() throw() { return this; } \
+	PLONK_INLINE_LOW const Type* operator->() const throw() { return this; }
 
 
 /** This manages a SmartPointer pointer. 
@@ -64,17 +64,17 @@ class SmartPointerContainerBase : public PlonkBase
 public: 
     typedef AtomicValue<SmartPointerType*> AtomicPointer;
     
-    inline static SmartPointerType* getNullSmartPointer() throw() 
+    PLONK_INLINE_LOW static SmartPointerType* getNullSmartPointer() throw() 
     { 
         return static_cast<SmartPointerType*> (0); 
     }
     
-	inline SmartPointerContainerBase() throw() 
+	PLONK_INLINE_LOW SmartPointerContainerBase() throw() 
 	:	internal (getNullSmartPointer())
 	{
 	}
     
-    inline SmartPointerContainerBase (SmartPointerType* internalToUse) throw() 
+    PLONK_INLINE_LOW SmartPointerContainerBase (SmartPointerType* internalToUse) throw() 
 	:	internal (getNullSmartPointer())
 	{
         if (internalToUse != getNullSmartPointer())
@@ -85,7 +85,7 @@ public:
         }
 	}
     
-    inline ~SmartPointerContainerBase()
+    PLONK_INLINE_LOW ~SmartPointerContainerBase()
 	{        
         AtomicPointer temp (getNullSmartPointer());
         internal.swapWith (temp);
@@ -96,44 +96,44 @@ public:
 			tempPtr->decrementRefCount(); 
 	}
     
-	inline SmartPointerType* getInternal() const throw() 
+	PLONK_INLINE_LOW SmartPointerType* getInternal() const throw() 
 	{
 		return internal.getPtr();
 	}
     
-    inline SmartPointerType* operator->() throw() 
+    PLONK_INLINE_LOW SmartPointerType* operator->() throw() 
 	{
 		return internal.getPtr();
 	}
     
-	inline const SmartPointerType* operator->() const throw() 
+	PLONK_INLINE_LOW const SmartPointerType* operator->() const throw() 
 	{
 		return internal.getPtr();
 	}
         
-	inline bool isNull() const throw()
+	PLONK_INLINE_LOW bool isNull() const throw()
 	{
 		return internal.getPtr() == getNullSmartPointer();
 	}
 	
-	inline bool isNotNull() const throw()
+	PLONK_INLINE_LOW bool isNotNull() const throw()
 	{
 		return internal.getPtr() != getNullSmartPointer();
 	}
 	
-	inline void setInternal (SmartPointerType* newInternal) throw()
+	PLONK_INLINE_LOW void setInternal (SmartPointerType* newInternal) throw()
 	{
         SmartPointerContainerBase temp (newInternal);
         internal.swapWith (temp.internal);        
 	}
     
-    inline void swapWith (SmartPointerContainerBase& other) throw()
+    PLONK_INLINE_LOW void swapWith (SmartPointerContainerBase& other) throw()
     {
         // is this a problem is other.internal is contended?
         internal.swapWith (other.internal);
     }
     	
-	inline SmartPointerContainerBase (SmartPointerContainerBase const& copy) throw()
+	PLONK_INLINE_LOW SmartPointerContainerBase (SmartPointerContainerBase const& copy) throw()
     :   internal (getNullSmartPointer())
 	{
         SmartPointerType* copyPtr = copy.internal.getPtr();
@@ -146,7 +146,7 @@ public:
         }        
 	}
         
-	inline SmartPointerContainerBase& operator= (SmartPointerContainerBase const& other) throw()
+	PLONK_INLINE_LOW SmartPointerContainerBase& operator= (SmartPointerContainerBase const& other) throw()
 	{
 		if (this != &other)
             this->setInternal (other.getInternal());
@@ -154,12 +154,12 @@ public:
 		return *this;		
 	}    
     
-	inline bool operator== (SmartPointerContainerBase const& other) const throw()
+	PLONK_INLINE_LOW bool operator== (SmartPointerContainerBase const& other) const throw()
 	{
 		return internal == other.internal;
 	}
 	
-	inline bool operator!= (SmartPointerContainerBase const& other) const throw()
+	PLONK_INLINE_LOW bool operator!= (SmartPointerContainerBase const& other) const throw()
 	{
 		return internal != other.internal;
 	}
@@ -174,17 +174,17 @@ template<class SmartPointerType, bool enableWeak>
 class SmartPointerContainer : public SmartPointerContainerBase<SmartPointerType>
 {
 public:
-    inline SmartPointerContainer (SmartPointerType* internalToUse = 0) throw() 
+    PLONK_INLINE_LOW SmartPointerContainer (SmartPointerType* internalToUse = 0) throw() 
 	:	SmartPointerContainerBase<SmartPointerType> (internalToUse)
 	{
 	}
     
-    inline SmartPointerContainer (SmartPointerContainer const& copy) throw()
+    PLONK_INLINE_LOW SmartPointerContainer (SmartPointerContainer const& copy) throw()
 	:	SmartPointerContainerBase<SmartPointerType> (copy)
 	{
 	}
     
-    inline SmartPointerContainer& operator= (SmartPointerContainer const& other) throw()
+    PLONK_INLINE_LOW SmartPointerContainer& operator= (SmartPointerContainer const& other) throw()
 	{
 		if (this != &other)
             this->setInternal (other.getInternal());
@@ -200,17 +200,17 @@ class SmartPointerContainer<SmartPointerType, true> : public SmartPointerContain
 public:    
     typedef SmartPointerContainerBase<SmartPointerType> Base;
     
-    inline SmartPointerContainer (SmartPointerType* internalToUse = 0) throw() 
+    PLONK_INLINE_LOW SmartPointerContainer (SmartPointerType* internalToUse = 0) throw() 
 	:	SmartPointerContainerBase<SmartPointerType> (internalToUse)
 	{
 	}
     
-    inline SmartPointerContainer (SmartPointerContainer const& copy) throw()
+    PLONK_INLINE_LOW SmartPointerContainer (SmartPointerContainer const& copy) throw()
 	:	SmartPointerContainerBase<SmartPointerType> (static_cast<Base const&> (copy))
 	{
 	}    
     
-    inline SmartPointerContainer& operator= (SmartPointerContainer const& other) throw()
+    PLONK_INLINE_LOW SmartPointerContainer& operator= (SmartPointerContainer const& other) throw()
 	{
 		if (this != &other)
             this->setInternal (other.getInternal());
@@ -262,20 +262,20 @@ public:
         destroy (*this);
     }
     
-    inline ScopedPointerContainer (ScopedPointerContainer& copy) throw()
+    PLONK_INLINE_LOW ScopedPointerContainer (ScopedPointerContainer& copy) throw()
     :   internal (0)
 	{
         this->swapWith (copy);        
 	}
 
-    inline ScopedPointerContainer& operator= (ScopedPointerType* const raw) throw()
+    PLONK_INLINE_LOW ScopedPointerContainer& operator= (ScopedPointerType* const raw) throw()
 	{
 		ScopedPointerContainer tmp (raw);
         this->swapWith (tmp);                
 		return *this;		
 	}    
     
-	inline ScopedPointerContainer& operator= (ScopedPointerContainer& other) throw()
+	PLONK_INLINE_LOW ScopedPointerContainer& operator= (ScopedPointerContainer& other) throw()
 	{
 		if (this != &other)
         {
@@ -286,49 +286,49 @@ public:
 		return *this;		
 	}    
     
-    inline static void destroy (ScopedPointerContainer& container) throw()
+    PLONK_INLINE_LOW static void destroy (ScopedPointerContainer& container) throw()
     {
         AtomicPointer tmp (0);
         container.internal.swapWith (tmp);
         delete tmp.getPtrUnchecked(); // unchecked is fine here
     }
     
-    inline void swapWith (ScopedPointerContainer& other) throw()
+    PLONK_INLINE_LOW void swapWith (ScopedPointerContainer& other) throw()
     {
         // other might be contended
         internal.swapWith (other.internal);
     }
     
-    inline ScopedPointerType* getInternal() throw() 
+    PLONK_INLINE_LOW ScopedPointerType* getInternal() throw() 
     {
         return internal.getPtr(); 
     }
     
-    inline ScopedPointerType* operator->() throw() 
+    PLONK_INLINE_LOW ScopedPointerType* operator->() throw() 
     { 
         plonk_assert(internal.getPtrUnchecked() != 0);
         return internal.getPtr(); 
     }
     
-    inline operator ScopedPointerType* () throw()
+    PLONK_INLINE_LOW operator ScopedPointerType* () throw()
     {
         return internal.getPtr();
     }
     
-	inline const ScopedPointerType* operator->() const throw() 
+	PLONK_INLINE_LOW const ScopedPointerType* operator->() const throw() 
     { 
         plonk_assert(internal.getPtrUnchecked() != 0);
         return internal.getPtr(); 
     }
     
     template<class OtherType>
-    inline bool operator== (OtherType const& other) const throw()
+    PLONK_INLINE_LOW bool operator== (OtherType const& other) const throw()
 	{
 		return internal.getPtrUnchecked() == other;
 	}
 	
     template<class OtherType>
-	inline bool operator!= (OtherType const& other) const throw()
+	PLONK_INLINE_LOW bool operator!= (OtherType const& other) const throw()
 	{
 		return internal.getPtrUnchecked() != other;
 	}
@@ -340,7 +340,7 @@ private:
 //------------------------------------------------------------------------------
 
 #define PLONKSMARTPOINTERCONTAINER_DEEPCOPY(CONTAINERTYPE,SMARTPOINTERTYPE)\
-    inline CONTAINERTYPE deepCopy() const throw()\
+    PLONK_INLINE_LOW CONTAINERTYPE deepCopy() const throw()\
     {\
         SMARTPOINTERTYPE* const theCopy = static_cast<SMARTPOINTERTYPE*> (this->getInternal()->deepCopy());\
         plonk_assert (theCopy != 0);\
@@ -360,12 +360,12 @@ public:
     typedef AtomicValue<Internal>           AtomicPointer;
     typedef PlankWeakPtrContainer<Internal> Weak;
 
-    inline static Internal getNullSharedPtr() throw()
+    PLONK_INLINE_LOW static Internal getNullSharedPtr() throw()
     {
         return static_cast<Internal> (0);
     }
     
-    inline static PlankSharedPtrContainer getNull() throw()
+    PLONK_INLINE_LOW static PlankSharedPtrContainer getNull() throw()
     {
         static PlankSharedPtrContainer null (getNullSharedPtr());
         return null;
@@ -381,7 +381,7 @@ public:
     {
     }
     
-    inline PlankSharedPtrContainer (PlankSharedPtrContainer const& copy) throw()
+    PLONK_INLINE_LOW PlankSharedPtrContainer (PlankSharedPtrContainer const& copy) throw()
     :   internal (getNullSharedPtr())
 	{
         Internal const copyPtr = copy.internal.getPtr();
@@ -404,7 +404,7 @@ public:
 			pl_SharedPtr_DecrementRefCount (reinterpret_cast<PlankSharedPtrRef> (tempPtr));
     }
 
-    inline PlankSharedPtrContainer& operator= (PlankSharedPtrContainer const& other) throw()
+    PLONK_INLINE_LOW PlankSharedPtrContainer& operator= (PlankSharedPtrContainer const& other) throw()
     {
         if (this != &other)
             this->setInternal (other.getInternal());
@@ -412,43 +412,43 @@ public:
         return *this;
     }
     
-    inline void setInternal (Internal newInternal) throw()
+    PLONK_INLINE_LOW void setInternal (Internal newInternal) throw()
 	{
         PlankSharedPtrContainer temp (newInternal);
         internal.swapWith (temp.internal);
 	}
     
-    inline void swapWith (PlankSharedPtrContainer& other) throw()
+    PLONK_INLINE_LOW void swapWith (PlankSharedPtrContainer& other) throw()
     {
         internal.swapWith (other.internal);
     }
 
-    inline Internal getInternal() throw()
+    PLONK_INLINE_LOW Internal getInternal() throw()
     {
         return internal.getPtr();
     }
 
-    inline Internal getInternal() const throw()
+    PLONK_INLINE_LOW Internal getInternal() const throw()
     {
         return internal.getPtr();
     }
 
-    inline Internal operator->() throw()
+    PLONK_INLINE_LOW Internal operator->() throw()
 	{
 		return internal.getPtr();
 	}
     
-	inline const Internal operator->() const throw()
+	PLONK_INLINE_LOW const Internal operator->() const throw()
 	{
 		return internal.getPtr();
 	}
     
-	inline bool isNull() const throw()
+	PLONK_INLINE_LOW bool isNull() const throw()
 	{
 		return internal.getPtr() == getNullSharedPtr();
 	}
 	
-	inline bool isNotNull() const throw()
+	PLONK_INLINE_LOW bool isNotNull() const throw()
 	{
 		return internal.getPtr() != getNullSharedPtr();
 	}
@@ -461,7 +461,7 @@ public:
 protected:
     /** To use this you must be sure that the container object cannot be contended e.g., in a derived class constructor. */
     template<typename InitFunction>
-    inline void initInternalWithFunction (InitFunction initFunction) throw()
+    PLONK_INLINE_LOW void initInternalWithFunction (InitFunction initFunction) throw()
 	{
         plonk_assert (internal.getPtrUnchecked() == PlankSharedPtrContainer::getNullSharedPtr());
         Internal newInternal;
@@ -470,7 +470,7 @@ protected:
 	}
     
     template<typename InitFunction, typename ArgType>
-    inline void initInternalWithFunction (InitFunction initFunction, ArgType arg) throw()
+    PLONK_INLINE_LOW void initInternalWithFunction (InitFunction initFunction, ArgType arg) throw()
 	{
         plonk_assert (internal.getPtrUnchecked() == PlankSharedPtrContainer::getNullSharedPtr());
         Internal newInternal;
@@ -594,19 +594,19 @@ public:
         return internal ? pl_SharedPtrArray_GetLength (internal) : 0;
     }
 
-    inline ElementType operator[] (const Long index) const throw()
+    PLONK_INLINE_LOW ElementType operator[] (const Long index) const throw()
     {
         Internal const internal = this->getInternal();
         plonk_assert (internal != Base::getNullSharedPtr());
         return internal ? ElementType (reinterpret_cast<ElementInternalType> (pl_SharedPtrArray_GetSharedPtr (internal, index))) : ElementType::getNull();
     }
 
-    inline ElementType at (const Long index) const throw()
+    PLONK_INLINE_LOW ElementType at (const Long index) const throw()
     {
         return at (index);
     }
     
-    inline ElementType wrapAt (const Long index) const throw()
+    PLONK_INLINE_LOW ElementType wrapAt (const Long index) const throw()
     {
         Internal const internal = this->getInternal();
 

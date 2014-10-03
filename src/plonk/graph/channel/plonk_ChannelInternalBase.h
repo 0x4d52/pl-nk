@@ -86,49 +86,49 @@ public:
         this->getBlockSize().removeReceiver (this);
     }
             
-    inline const UnitType& getInputAsUnit (const int key) const throw()                     { return this->template getInputAs<UnitType> (key); }
-    inline const UnitsType& getInputAsUnits (const int key) const throw()                   { return this->template getInputAs<UnitsType> (key); }
-    inline const BusType& getInputAsBus (const int key) const throw()                       { return this->template getInputAs<BusType> (key); }
-    inline const BussesType& getInputAsBusses (const int key) const throw()                 { return this->template getInputAs<BussesType> (key); }
-    inline const Buffer& getInputAsBuffer (const int key) const throw()                     { return this->template getInputAs<Buffer> (key); }
-    inline const VariableType& getInputAsVariable (const int key) const throw()             { return this->template getInputAs<VariableType> (key); }
-    inline const BreakpointsType& getInputAsBreakpoints (const int key) const throw()       { return this->template getInputAs<BreakpointsType> (key); }
-    inline const WavetableType& getInputAsWavetable (const int key) const throw()           { return this->template getInputAs<WavetableType> (key); }
-    inline const SignalType& getInputAsSignal (const int key) const throw()                 { return this->template getInputAs<SignalType> (key); }
-    inline const SampleRate& getInputAsSampleRate (const int key) const throw()             { return this->template getInputAs<SampleRate> (key); }
-    inline const BlockSize& getInputAsBlockSize (const int key) const throw()               { return this->template getInputAs<BlockSize> (key); }
-    inline const AudioFileReader& getInputAsAudioFileReader (const int key) const throw()   { return this->template getInputAs<AudioFileReader> (key); }
-    inline const QueueType& getInputAsUnitQueue (const int key) const throw()               { return this->template getInputAs<QueueType> (key); }
-    inline const BufferQueueType& getInputAsBufferQueue (const int key) const throw()       { return this->template getInputAs<BufferQueueType> (key); }
+    PLONK_INLINE_LOW const UnitType& getInputAsUnit (const int key) const throw()                     { return this->template getInputAs<UnitType> (key); }
+    PLONK_INLINE_LOW const UnitsType& getInputAsUnits (const int key) const throw()                   { return this->template getInputAs<UnitsType> (key); }
+    PLONK_INLINE_LOW const BusType& getInputAsBus (const int key) const throw()                       { return this->template getInputAs<BusType> (key); }
+    PLONK_INLINE_LOW const BussesType& getInputAsBusses (const int key) const throw()                 { return this->template getInputAs<BussesType> (key); }
+    PLONK_INLINE_LOW const Buffer& getInputAsBuffer (const int key) const throw()                     { return this->template getInputAs<Buffer> (key); }
+    PLONK_INLINE_LOW const VariableType& getInputAsVariable (const int key) const throw()             { return this->template getInputAs<VariableType> (key); }
+    PLONK_INLINE_LOW const BreakpointsType& getInputAsBreakpoints (const int key) const throw()       { return this->template getInputAs<BreakpointsType> (key); }
+    PLONK_INLINE_LOW const WavetableType& getInputAsWavetable (const int key) const throw()           { return this->template getInputAs<WavetableType> (key); }
+    PLONK_INLINE_LOW const SignalType& getInputAsSignal (const int key) const throw()                 { return this->template getInputAs<SignalType> (key); }
+    PLONK_INLINE_LOW const SampleRate& getInputAsSampleRate (const int key) const throw()             { return this->template getInputAs<SampleRate> (key); }
+    PLONK_INLINE_LOW const BlockSize& getInputAsBlockSize (const int key) const throw()               { return this->template getInputAs<BlockSize> (key); }
+    PLONK_INLINE_LOW const AudioFileReader& getInputAsAudioFileReader (const int key) const throw()   { return this->template getInputAs<AudioFileReader> (key); }
+    PLONK_INLINE_LOW const QueueType& getInputAsUnitQueue (const int key) const throw()               { return this->template getInputAs<QueueType> (key); }
+    PLONK_INLINE_LOW const BufferQueueType& getInputAsBufferQueue (const int key) const throw()       { return this->template getInputAs<BufferQueueType> (key); }
 
-    inline UnitType& getInputAsUnit (const int key) throw()                                 { return this->template getInputAs<UnitType> (key); }
-    inline UnitsType& getInputAsUnits (const int key) throw()                               { return this->template getInputAs<UnitsType> (key); }
-    inline BusType& getInputAsBus (const int key) throw()                                   { return this->template getInputAs<BusType> (key); }
-    inline BussesType& getInputAsBusses (const int key) throw()                             { return this->template getInputAs<BussesType> (key); }
-    inline Buffer& getInputAsBuffer (const int key) throw()                                 { return this->template getInputAs<Buffer> (key); }
-    inline VariableType& getInputAsVariable (const int key) throw()                         { return this->template getInputAs<VariableType> (key); }
-    inline BreakpointsType& getInputAsBreakpoints (const int key) throw()                   { return this->template getInputAs<BreakpointsType> (key); }
-    inline WavetableType& getInputAsWavetable (const int key) throw()                       { return this->template getInputAs<WavetableType> (key); }
-    inline SignalType& getInputAsSignal (const int key) throw()                             { return this->template getInputAs<SignalType> (key); }
-    inline SampleRate& getInputAsSampleRate (const int key) throw()                         { return this->template getInputAs<SampleRate> (key); }
-    inline BlockSize& getInputAsBlockSize (const int key) throw()                           { return this->template getInputAs<BlockSize> (key); }
-    inline AudioFileReader& getInputAsAudioFileReader (const int key) throw()               { return this->template getInputAs<AudioFileReader> (key); }
-    inline QueueType& getInputAsUnitQueue (const int key) throw()                           { return this->template getInputAs<QueueType> (key); }
-    inline BufferQueueType& getInputAsBufferQueue (const int key) throw()                   { return this->template getInputAs<BufferQueueType> (key); }
+    PLONK_INLINE_LOW UnitType& getInputAsUnit (const int key) throw()                                 { return this->template getInputAs<UnitType> (key); }
+    PLONK_INLINE_LOW UnitsType& getInputAsUnits (const int key) throw()                               { return this->template getInputAs<UnitsType> (key); }
+    PLONK_INLINE_LOW BusType& getInputAsBus (const int key) throw()                                   { return this->template getInputAs<BusType> (key); }
+    PLONK_INLINE_LOW BussesType& getInputAsBusses (const int key) throw()                             { return this->template getInputAs<BussesType> (key); }
+    PLONK_INLINE_LOW Buffer& getInputAsBuffer (const int key) throw()                                 { return this->template getInputAs<Buffer> (key); }
+    PLONK_INLINE_LOW VariableType& getInputAsVariable (const int key) throw()                         { return this->template getInputAs<VariableType> (key); }
+    PLONK_INLINE_LOW BreakpointsType& getInputAsBreakpoints (const int key) throw()                   { return this->template getInputAs<BreakpointsType> (key); }
+    PLONK_INLINE_LOW WavetableType& getInputAsWavetable (const int key) throw()                       { return this->template getInputAs<WavetableType> (key); }
+    PLONK_INLINE_LOW SignalType& getInputAsSignal (const int key) throw()                             { return this->template getInputAs<SignalType> (key); }
+    PLONK_INLINE_LOW SampleRate& getInputAsSampleRate (const int key) throw()                         { return this->template getInputAs<SampleRate> (key); }
+    PLONK_INLINE_LOW BlockSize& getInputAsBlockSize (const int key) throw()                           { return this->template getInputAs<BlockSize> (key); }
+    PLONK_INLINE_LOW AudioFileReader& getInputAsAudioFileReader (const int key) throw()               { return this->template getInputAs<AudioFileReader> (key); }
+    PLONK_INLINE_LOW QueueType& getInputAsUnitQueue (const int key) throw()                           { return this->template getInputAs<QueueType> (key); }
+    PLONK_INLINE_LOW BufferQueueType& getInputAsBufferQueue (const int key) throw()                   { return this->template getInputAs<BufferQueueType> (key); }
 
-    inline const Buffer& getOutputBuffer() const throw()                                    { return outputBuffer; }
-    inline Buffer& getOutputBuffer() throw()                                                { return outputBuffer; }
-    inline const SampleType* getOutputSamples() const throw()                               { return outputBuffer.getArray(); }
-    inline SampleType* getOutputSamples() throw()                                           { return outputBuffer.getArray(); }
+    PLONK_INLINE_LOW const Buffer& getOutputBuffer() const throw()                                    { return outputBuffer; }
+    PLONK_INLINE_LOW Buffer& getOutputBuffer() throw()                                                { return outputBuffer; }
+    PLONK_INLINE_LOW const SampleType* getOutputSamples() const throw()                               { return outputBuffer.getArray(); }
+    PLONK_INLINE_LOW SampleType* getOutputSamples() throw()                                           { return outputBuffer.getArray(); }
     
-    inline const SampleType& getValue() const throw() 
+    PLONK_INLINE_LOW const SampleType& getValue() const throw() 
     { 
         // the underlying Channel or Unit may not have called initValue()
         plonk_assert (this->isNull() || hasInitialisedValue == true); 
         return outputBuffer.last();
     }
     
-    inline void setOutputBuffer (Buffer const& externalBuffer) throw()
+    PLONK_INLINE_LOW void setOutputBuffer (Buffer const& externalBuffer) throw()
     {
         plonk_assert (this->canUseExternalBuffer());
         plonk_assert (externalBuffer.length() == this->getBlockSize().getValue());
@@ -136,9 +136,9 @@ public:
         outputBuffer = externalBuffer;
     }
     
-    inline bool isUsingExternalBuffer() const throw() { return usingExternalBuffer; }
+    PLONK_INLINE_LOW bool isUsingExternalBuffer() const throw() { return usingExternalBuffer; }
     
-    inline void removeExternalBuffer() throw()
+    PLONK_INLINE_LOW void removeExternalBuffer() throw()
     {
         plonk_assert (usingExternalBuffer == true);
         usingExternalBuffer = false;
@@ -172,9 +172,9 @@ public:
         outputBuffer.last() = value;
     }
     
-    inline const Text getOutputTypeName() const throw()         { return TypeUtility<SampleType>::getTypeName(); }
+    PLONK_INLINE_LOW const Text getOutputTypeName() const throw()         { return TypeUtility<SampleType>::getTypeName(); }
     virtual const Text getInputTypeName() const throw()         { return TypeUtility<SampleType>::getTypeName(); }
-    inline int getOutputTypeCode() const throw()                { return TypeUtility<SampleType>::getTypeCode(); }
+    PLONK_INLINE_LOW int getOutputTypeCode() const throw()                { return TypeUtility<SampleType>::getTypeCode(); }
     virtual int getInputTypeCode() const throw()                { return TypeUtility<SampleType>::getTypeCode(); }
     
     void changed (IntVariable::Sender const& source, Text const& message, Dynamic const& payload) throw()
@@ -191,7 +191,7 @@ public:
         }
     }
     
-    inline void updateBlockSize() throw()
+    PLONK_INLINE_LOW void updateBlockSize() throw()
     {
         if (usingExternalBuffer == false)
         {

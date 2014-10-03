@@ -129,8 +129,8 @@ public:
     friend class JSON;
     
     //private:
-    inline PlankFileRef getPeerRef() { return static_cast<PlankFileRef> (&peer); }
-    inline const PlankFileRef getPeerRef() const { return const_cast<const PlankFileRef> (&peer); }
+    PLONK_INLINE_LOW PlankFileRef getPeerRef() { return static_cast<PlankFileRef> (&peer); }
+    PLONK_INLINE_LOW const PlankFileRef getPeerRef() const { return const_cast<const PlankFileRef> (&peer); }
     
 private:
     PlankFile peer;
@@ -329,36 +329,36 @@ public:
     }    
     	
     /** Gets the position of the file stream. */
-    inline LongLong getPosition() throw()
+    PLONK_INLINE_LOW LongLong getPosition() throw()
     {
         return getInternal()->getPosition();
     }
     
     /** Sets the position of the file stream. 
      0 is the start of the stream. */
-    inline void setPosition (const LongLong position) throw()
+    PLONK_INLINE_LOW void setPosition (const LongLong position) throw()
     {
         getInternal()->setPosition (position);
     }
 
     /** Sets the position of the file stream to the end of the file. */
-    inline void setEof() throw()
+    PLONK_INLINE_LOW void setEof() throw()
     {
         getInternal()->setEof();
     }    
     
     /** Determines if the file stream is positioned at its end. */
-	inline bool isEof() const throw()
+	PLONK_INLINE_LOW bool isEof() const throw()
 	{
 		return getInternal()->isEof();
 	}
     
-    inline bool canRead() const throw()
+    PLONK_INLINE_LOW bool canRead() const throw()
     {
         return getInternal()->canRead();
     }
 
-    inline bool canWrite() const throw()
+    PLONK_INLINE_LOW bool canWrite() const throw()
     {
         return getInternal()->canWrite();
     }
@@ -368,7 +368,7 @@ public:
      (and their unsigned versions). This is read in the endian format
      specified in the constructor. */    
     template<class ValueType>
-    inline ValueType read() throw()
+    PLONK_INLINE_LOW ValueType read() throw()
     {
         ValueType value;
         getInternal()->read (value);
@@ -420,7 +420,7 @@ public:
     /** Creates a chunk name identifier.
      A convenience function for creating an interger to write to a file
      for chunk IDs in many IFF-type files. */
-    static inline int chunkID (const char* const fourCharCode) throw()
+    static PLONK_INLINE_LOW int chunkID (const char* const fourCharCode) throw()
     {
         plonk_assert (Text (fourCharCode).length() == 4);
         return pl_FourCharCode (fourCharCode);

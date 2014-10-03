@@ -88,13 +88,13 @@ public:
     typedef void (*Param1Function) (Data&, DelayState&, Param1Type const&);
     typedef void (*Param2Function) (Data&, DelayState&, Param2Type const&);
     
-    static inline IntArray getInputKeys() throw()
+    static PLONK_INLINE_LOW IntArray getInputKeys() throw()
     {
         const IntArray keys (IOKey::Generic, IOKey::Duration, IOKey::Decay);
         return keys;
     }    
             
-    static inline void param1Process (Data& data, DelayState& state, DurationType const& duration) throw()
+    static PLONK_INLINE_LOW void param1Process (Data& data, DelayState& state, DurationType const& duration) throw()
     {
         if (state.paramsIn[DurationIn] != duration)
         {
@@ -106,8 +106,8 @@ public:
         }
     }
     
-    static inline void param2Ignore (Data&, DelayState&, DecayType const&) throw() { }
-    static inline void param2Process (Data&, DelayState& state, DecayType const& decay) throw()
+    static PLONK_INLINE_LOW void param2Ignore (Data&, DelayState&, DecayType const&) throw() { }
+    static PLONK_INLINE_LOW void param2Process (Data&, DelayState& state, DecayType const& decay) throw()
     {          
         if (state.paramsIn[DecayIn] != decay)
         {
@@ -116,7 +116,7 @@ public:
         }
     }
         
-    static inline UnitType ar (UnitType const& input,
+    static PLONK_INLINE_LOW UnitType ar (UnitType const& input,
                                DurationUnitType const& duration,
                                DecayUnitType const& decay,
                                const DurationType maximumDuration,
@@ -193,7 +193,7 @@ public:
     typedef AllpassDecayUnit<SampleType, Interp::None>          N;
     
     
-    static inline UnitInfos getInfo() throw()
+    static PLONK_INLINE_LOW UnitInfos getInfo() throw()
     {
         const double blockSize = (double)BlockSize::getDefault().getValue();
         const double sampleRate = SampleRate::getDefault().getValue();

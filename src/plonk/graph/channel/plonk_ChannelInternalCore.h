@@ -82,13 +82,12 @@ public:
     void setLastTimeStamp (TimeStamp const& newTimeStamp) throw();
     void setExpiryTimeStamp (TimeStamp const& newTimeStamp) throw();
     bool shouldBeDeletedNow (TimeStamp const& time) const throw();
-//    void resetIfExpired() throw();
     
-    inline const Inputs& getInputs() const throw()                                      { return this->inputs; }
-    inline Inputs& getInputs() throw()                                                  { return this->inputs; }
+    PLONK_INLINE_HIGH const Inputs& getInputs() const throw()                                      { return this->inputs; }
+    PLONK_INLINE_HIGH Inputs& getInputs() throw()                                                  { return this->inputs; }
     
-    template<class Type> inline const Type& getInputAs (const int key) const throw()    { return this->inputs[key].asUnchecked<Type>(); }
-    template<class Type> inline Type& getInputAs (const int key) throw()                { return this->inputs[key].asUnchecked<Type>(); }
+    template<class Type> PLONK_INLINE_MID const Type& getInputAs (const int key) const throw()    { return this->inputs[key].asUnchecked<Type>(); }
+    template<class Type> PLONK_INLINE_MID Type& getInputAs (const int key) throw()                { return this->inputs[key].asUnchecked<Type>(); }
     
     const BlockSize& getBlockSize() const throw()    { return blockSize; }
     const SampleRate& getSampleRate() const throw()  { return sampleRate; }    
@@ -153,34 +152,29 @@ private:
 
 //------------------------------------------------------------------------------
 
-inline void ChannelInternalCore::setNextTimeStamp (TimeStamp const& time) throw()
+PLONK_INLINE_HIGH void ChannelInternalCore::setNextTimeStamp (TimeStamp const& time) throw()
 {
     plonk_assert ((nextTimeStamp.isInfinite() && time.isInfinite()) || (time > nextTimeStamp)); // gone backwards or wraparound
     nextTimeStamp = time;
 }
 
-inline void ChannelInternalCore::setLastTimeStamp (TimeStamp const& time) throw()
+PLONK_INLINE_HIGH void ChannelInternalCore::setLastTimeStamp (TimeStamp const& time) throw()
 {
     plonk_assert (time.isFinite());
     lastTimeStamp = time;
 }
 
-inline void ChannelInternalCore::setExpiryTimeStamp (TimeStamp const& time) throw()
+PLONK_INLINE_HIGH void ChannelInternalCore::setExpiryTimeStamp (TimeStamp const& time) throw()
 {
     expiryTimeStamp = time;
 }
 
-inline bool ChannelInternalCore::shouldBeDeletedNow (TimeStamp const& time) const throw()
+PLONK_INLINE_HIGH bool ChannelInternalCore::shouldBeDeletedNow (TimeStamp const& time) const throw()
 {
     return time >= expiryTimeStamp;
 }
 
-//inline void ChannelInternalCore::resetIfExpired() throw()
-//{
-//    expiryTimeStamp = TimeStamp::getMaximum();
-//}
-
-inline double ChannelInternalCore::getBlockDurationInTicks() const throw()                          
+PLONK_INLINE_MID double ChannelInternalCore::getBlockDurationInTicks() const throw()
 { 
     return this->getSampleDurationInTicks() * double (this->getBlockSize().getValue()) * overlap.getValue();
 }

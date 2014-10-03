@@ -99,7 +99,7 @@ public:
     void readFrames (NumericalArray<SampleType>& data, const bool applyScaling, const bool deinterleave, IntVariable& numLoops) throw();
     
     template<class SampleType>
-    inline void initSignal (SignalBase<SampleType>& signal, const int numFrames) const throw()
+    PLONK_INLINE_LOW void initSignal (SignalBase<SampleType>& signal, const int numFrames) const throw()
     {
         const int numChannels = getNumChannels();
         const int length = (numFrames > 0) ? numFrames * numChannels : (int)getNumFrames() * numChannels;
@@ -108,7 +108,7 @@ public:
     }
     
     template<class SampleType>
-    inline void readSignal (SignalBase<SampleType>& signal, const bool applyScaling) throw()
+    PLONK_INLINE_LOW void readSignal (SignalBase<SampleType>& signal, const bool applyScaling) throw()
     {
         // would need to decide in here to deinterleave..
         
@@ -136,15 +136,15 @@ public:
 //    int getNumCuePoints() const throw();
 //    bool getCuePointAtIndex (const int index, UnsignedInt& cueID, Text& label, LongLong& position) const throw();
     
-    inline PlankAudioFileReaderRef getPeerRef() { return static_cast<PlankAudioFileReaderRef> (&peer); }
-    inline const PlankAudioFileReaderRef getPeerRef() const { return const_cast<const PlankAudioFileReaderRef> (&peer); }
+    PLONK_INLINE_LOW PlankAudioFileReaderRef getPeerRef() { return static_cast<PlankAudioFileReaderRef> (&peer); }
+    PLONK_INLINE_LOW const PlankAudioFileReaderRef getPeerRef() const { return const_cast<const PlankAudioFileReaderRef> (&peer); }
 
 private:
     ResultCode init (const char* path, AudioFileMetaDataIOFlags const& metaDataIOFlags) throw();
     ResultCode init (ByteArray const& bytes, AudioFileMetaDataIOFlags const& metaDataIOFlags) throw();
 
     template<class Type>
-    static inline void swapEndianIfNotNative (Type* data, const int numItems, const bool dataIsBigEndian) throw()
+    static PLONK_INLINE_LOW void swapEndianIfNotNative (Type* data, const int numItems, const bool dataIsBigEndian) throw()
     {
 #if PLONK_BIGENDIAN
         if (! dataIsBigEndian) Endian::swap (data, numItems);
@@ -563,7 +563,7 @@ public:
     /** Get the format of the audio file. 
      i.e., WAV, AIFF etc 
      See AudioFile::Format the available types. */
-    inline AudioFile::Format getFormat() const throw()
+    PLONK_INLINE_LOW AudioFile::Format getFormat() const throw()
     {
         return getInternal()->getFormat();
     }
@@ -571,7 +571,7 @@ public:
     /** Get the encoding of the audio file. 
      i.e., PCM (integer), floating point, whether big or little endian 
      See AudioFile::Encoding the available types. */
-    inline AudioFile::Encoding getEncoding() const throw()
+    PLONK_INLINE_LOW AudioFile::Encoding getEncoding() const throw()
     {
         return getInternal()->getEncoding();
     }
@@ -579,31 +579,31 @@ public:
     /** Get the sample type of the audio file. 
      i.e., Char (8-bit), Short (16-bit) etc 
      See AudioFile::SampleType the available types. */
-    inline AudioFile::SampleType getSampleType() const throw()
+    PLONK_INLINE_LOW AudioFile::SampleType getSampleType() const throw()
     {
         return getInternal()->getSampleType();   
     }
     
     /** Get the number of bits used per sample in the file. */
-    inline int getBitsPerSample() const throw()
+    PLONK_INLINE_LOW int getBitsPerSample() const throw()
     {
         return getInternal()->getBitsPerSample();
     }
     
     /** Get the number of bytes in each frame of the file. */
-    inline int getBytesPerFrame() const throw()
+    PLONK_INLINE_LOW int getBytesPerFrame() const throw()
     {
         return getInternal()->getBytesPerFrame();
     }
     
     /** Get the number of bytes in each sample of the file. */
-    inline int getBytesPerSample() const throw()
+    PLONK_INLINE_LOW int getBytesPerSample() const throw()
     {
         return getInternal()->getBytesPerSample();
     }
     
     /** Get the number of channels in the file. */
-    inline int getNumChannels() const throw()
+    PLONK_INLINE_LOW int getNumChannels() const throw()
     {
         return getInternal()->getNumChannels();
     }
@@ -611,46 +611,46 @@ public:
     /** Set the default number of channels in the file. 
      This can be used to suggest a maximum number of channels especially where this file
      is a multi-audiofile. */
-    inline void setDefaultNumChannels (const int numChannels) throw()
+    PLONK_INLINE_LOW void setDefaultNumChannels (const int numChannels) throw()
     {
         getInternal()->setDefaultNumChannels (numChannels);
     }
 
     /** Get the default number of channels in the file. */
-    inline int getDefaultNumChannels() const throw()
+    PLONK_INLINE_LOW int getDefaultNumChannels() const throw()
     {
         return getInternal()->getDefaultNumChannels();
     }
     
-    inline void setDefaultSampleRate (const double sampleRate) throw()
+    PLONK_INLINE_LOW void setDefaultSampleRate (const double sampleRate) throw()
     {
         getInternal()->setDefaultSampleRate (sampleRate);
     }
 
-    inline double getDefaultSampleRate() const throw()
+    PLONK_INLINE_LOW double getDefaultSampleRate() const throw()
     {
         return getInternal()->getDefaultSampleRate();
     }
 
     /** Get the sample rate of the file. */
-    inline double getSampleRate() const throw()
+    PLONK_INLINE_LOW double getSampleRate() const throw()
     {
         return getInternal()->getSampleRate();
     }
     
     /** Get the total number of frames in the file. */
-    inline LongLong getNumFrames() const throw()
+    PLONK_INLINE_LOW LongLong getNumFrames() const throw()
     {
         return getInternal()->getNumFrames();
     }
     
-    inline bool isPositionable() const throw()
+    PLONK_INLINE_LOW bool isPositionable() const throw()
     {
         return getInternal()->isPositionable();
     }
     
     /** Get the current frame position. */
-    inline LongLong getFramePosition() const throw()
+    PLONK_INLINE_LOW LongLong getFramePosition() const throw()
     {
         return getInternal()->getFramePosition();
     }
@@ -658,40 +658,40 @@ public:
     /** Set the frame position to a particular frame. 
      This is not thread safe, use setFramePositionOnNextRead() to call this from another
      thread (e.g., a GUI) while playing a file (e.g., in real time). */
-    inline void setFramePosition (const LongLong position) throw()
+    PLONK_INLINE_LOW void setFramePosition (const LongLong position) throw()
     {
         getInternal()->setFramePosition (position);
     }
     
     /** Set the frame position to a particular frame just before the next read operation.
      This is thread safe. */
-    inline void setFramePositionOnNextRead (const LongLong position) throw()
+    PLONK_INLINE_LOW void setFramePositionOnNextRead (const LongLong position) throw()
     {
         getInternal()->setFramePositionOnNextRead (position);
     }
     
     /** Resets the frame position back to the start of the frames. */
-    inline void resetFramePosition() throw()
+    PLONK_INLINE_LOW void resetFramePosition() throw()
     {
         getInternal()->resetFramePosition();
     }
     
-    inline double getDuration() const throw()
+    PLONK_INLINE_LOW double getDuration() const throw()
     {
         return getInternal()->getNumFrames() / getInternal()->getSampleRate();
     }
         
-    inline double getTime() const throw()
+    PLONK_INLINE_LOW double getTime() const throw()
     {
         return getInternal()->getFramePosition() / getInternal()->getSampleRate();
     }
     
-    inline void setTime (const double time) throw()
+    PLONK_INLINE_LOW void setTime (const double time) throw()
     {
         getInternal()->setFramePosition (LongLong (time * getInternal()->getSampleRate()));
     }
     
-    inline void setTimeOnNextRead (const double time) throw()
+    PLONK_INLINE_LOW void setTimeOnNextRead (const double time) throw()
     {
         getInternal()->setFramePositionOnNextRead (LongLong (time * getInternal()->getSampleRate()));
     }
@@ -702,13 +702,13 @@ public:
      @param data    The NumericalArray object to read interleaved frames into. 
      @param numLoops    How many loops to read, 0 means infinite loops. */
     template<class SampleType>
-    inline void readFrames (NumericalArray<SampleType>& data, IntVariable& numLoops) throw()
+    PLONK_INLINE_LOW void readFrames (NumericalArray<SampleType>& data, IntVariable& numLoops) throw()
     {
         getInternal()->readFrames (data, true, false, numLoops);
     }
     
     template<class SampleType>
-    inline void readFrames (NumericalArray<SampleType>& data) throw()
+    PLONK_INLINE_LOW void readFrames (NumericalArray<SampleType>& data) throw()
     {
         IntVariable numLoops (1);
         getInternal()->readFrames (data, true, false, numLoops);
@@ -719,13 +719,13 @@ public:
      @param numLoops    How many loops to read, 0 means infinite loops.
      @return @c true if the array was resized as fewer samples were available, otherwise @c false. */
     template<class SampleType>
-    inline void readFramesDirect (NumericalArray<SampleType>& data, IntVariable& numLoops) throw()
+    PLONK_INLINE_LOW void readFramesDirect (NumericalArray<SampleType>& data, IntVariable& numLoops) throw()
     {
         getInternal()->readFrames (data, false, false, numLoops);
     }
     
     template<class SampleType>
-    inline void readFramesDirect (NumericalArray<SampleType>& data) throw()
+    PLONK_INLINE_LOW void readFramesDirect (NumericalArray<SampleType>& data) throw()
     {
         IntVariable numLoops (1);
         getInternal()->readFrames (data, false, false, numLoops);
@@ -746,7 +746,7 @@ public:
      data type of the Signal. 
      @param signal    The Signal object to read frames into. */
     template<class SampleType>
-    inline void readSignal (SignalBase<SampleType>& signal) throw()
+    PLONK_INLINE_LOW void readSignal (SignalBase<SampleType>& signal) throw()
     {
         plonk_assert (signal.isInterleaved());
         getInternal()->readSignal (signal, true);
@@ -756,7 +756,7 @@ public:
      The Signal object MUST be an interleaved type. 
      @param signal    The Signal object to read frames into. */
     template<class SampleType>
-    inline void readSignalDirect (SignalBase<SampleType>& signal) throw()
+    PLONK_INLINE_LOW void readSignalDirect (SignalBase<SampleType>& signal) throw()
     {
         plonk_assert (signal.isInterleaved());
         getInternal()->readSignal (signal, false);
@@ -768,7 +768,7 @@ public:
      @param applyScaling 
      @return A NumericalArray containing the interleaved sample frames. */
     template<class SampleType>
-    inline NumericalArray<SampleType> readAllFrames (const bool applyScaling) throw()
+    PLONK_INLINE_LOW NumericalArray<SampleType> readAllFrames (const bool applyScaling) throw()
     {
         typedef NumericalArray<SampleType> SampleArray;
         SampleArray data = SampleArray::withSize ((int)getNumFrames() * getNumChannels());
@@ -781,7 +781,7 @@ public:
     /** Reads all the frames in the file and returns them in an interleaved array. 
      @return A NumericalArray containing the interleaved sample frames.*/
     template<class SampleType>
-    inline operator NumericalArray<SampleType> () throw()
+    PLONK_INLINE_LOW operator NumericalArray<SampleType> () throw()
     {
         return readAllFrames<SampleType> (true);
     }
@@ -789,7 +789,7 @@ public:
     /** Reads all the frames in the file and returns them in Signal object 
      @return A Signal containing sample frames. */
     template<class SampleType>
-    inline operator SignalBase<SampleType> () throw()
+    PLONK_INLINE_LOW operator SignalBase<SampleType> () throw()
     {
         NumericalArray<SampleType> data = readAllFrames<SampleType> (true);
         return SignalBase<SampleType> (data, getSampleRate(), getNumChannels());
@@ -798,7 +798,7 @@ public:
     /** Reads all the frames in the file and returns them in Signal object 
      @return A Signal containing sample frames. */
     template<class SampleType>
-    inline SignalBase<SampleType> getOtherSignal() throw()
+    PLONK_INLINE_LOW SignalBase<SampleType> getOtherSignal() throw()
     {
         NumericalArray<SampleType> data = readAllFrames<SampleType> (true);
         return SignalBase<SampleType> (data, getSampleRate(), getNumChannels());
@@ -806,7 +806,7 @@ public:
     
     /** Reads all the frames in the file and returns them in Signal object 
      @return A Signal containing sample frames. */
-    inline SignalBase<PLONK_TYPE_DEFAULT> getSignal() throw()
+    PLONK_INLINE_LOW SignalBase<PLONK_TYPE_DEFAULT> getSignal() throw()
     {
         return getOtherSignal<PLONK_TYPE_DEFAULT>();
     }    
@@ -875,12 +875,12 @@ public:
         return this->getInternal()->getMetaData();
     }
     
-    inline ChannelLayout getChannelLayout() const throw()
+    PLONK_INLINE_LOW ChannelLayout getChannelLayout() const throw()
     {
         return this->getInternal()->getChannelLayout();
     }
     
-    inline ChannelIdentifier getChannelIdentifier (const int channel) const throw()
+    PLONK_INLINE_LOW ChannelIdentifier getChannelIdentifier (const int channel) const throw()
     {
         return this->getInternal()->getChannelIdentifier (channel);
     }

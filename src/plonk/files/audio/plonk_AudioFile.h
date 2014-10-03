@@ -397,12 +397,12 @@ public:
     {
     }
     
-    inline operator const UnsignedInt& () const throw()
+    PLONK_INLINE_LOW operator const UnsignedInt& () const throw()
     {
         return static_cast<const UnsignedInt&> (peer);
     }
     
-    inline const UnsignedInt& getValue() const throw()
+    PLONK_INLINE_LOW const UnsignedInt& getValue() const throw()
     {
         return static_cast<const UnsignedInt&> (peer);
     }
@@ -431,12 +431,12 @@ public:
     {
     }
     
-    inline operator const UnsignedInt& () const throw()
+    PLONK_INLINE_LOW operator const UnsignedInt& () const throw()
     {
         return static_cast<const UnsignedInt&> (peer);
     }
     
-    inline const UnsignedInt& getValue() const throw()
+    PLONK_INLINE_LOW const UnsignedInt& getValue() const throw()
     {
         return static_cast<const UnsignedInt&> (peer);
     }
@@ -465,12 +465,12 @@ public:
     {
     }
 
-    inline operator const UnsignedInt& () const throw()
+    PLONK_INLINE_LOW operator const UnsignedInt& () const throw()
     {
         return static_cast<const UnsignedInt&> (peer);
     }
     
-    inline const UnsignedInt& getValue() const throw()
+    PLONK_INLINE_LOW const UnsignedInt& getValue() const throw()
     {
         return static_cast<const UnsignedInt&> (peer);
     }

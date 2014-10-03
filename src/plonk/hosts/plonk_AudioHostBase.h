@@ -74,40 +74,40 @@ public:
     }
         
     /** Determine whether the audio device is running. */
-    inline bool getIsRunning() const throw() { return isRunning.getValue(); }
+    PLONK_INLINE_LOW bool getIsRunning() const throw() { return isRunning.getValue(); }
     
     /** Determine whether the audio device is paused. */
-    inline bool getIsPaused() const throw() { return isPaused.getValue(); }
+    PLONK_INLINE_LOW bool getIsPaused() const throw() { return isPaused.getValue(); }
 
     /** Get a reference to the output unit. */
-    inline const UnitType& getOutputUnit() const throw() { return outputUnit; }
+    PLONK_INLINE_LOW const UnitType& getOutputUnit() const throw() { return outputUnit; }
     
     /** Get the number of audio inputs. */
-    inline int getNumInputs() const throw()  { return this->inputs.length(); }
+    PLONK_INLINE_LOW int getNumInputs() const throw()  { return this->inputs.length(); }
     
     /** Get the number of audio outputs. */
-    inline int getNumOutputs() const throw() { return this->outputs.length(); }
+    PLONK_INLINE_LOW int getNumOutputs() const throw() { return this->outputs.length(); }
     
     /** Get the current preferred sample rate for the host. */
-    inline double getPreferredHostSampleRate() const throw() { return preferredHostSampleRate; }
+    PLONK_INLINE_LOW double getPreferredHostSampleRate() const throw() { return preferredHostSampleRate; }
     
     /** Get the current preferred block size for the host. */
-    inline int getPreferredHostBlockSize() const throw() { return preferredHostBlockSize; }
+    PLONK_INLINE_LOW int getPreferredHostBlockSize() const throw() { return preferredHostBlockSize; }
     
     /** Set the host's preferred sample rate.
      This must be called before startHost() to have any effect. */
-    inline void setPreferredHostSampleRate (const double newRate) throw() { preferredHostSampleRate = newRate; }
+    PLONK_INLINE_LOW void setPreferredHostSampleRate (const double newRate) throw() { preferredHostSampleRate = newRate; }
     
     /** Set the host's preferred block size.
      This must be called before startHost() to have any effect. */
-    inline void setPreferredHostBlockSize (const int newSize) throw() {  preferredHostBlockSize = newSize; }
+    PLONK_INLINE_LOW void setPreferredHostBlockSize (const int newSize) throw() {  preferredHostBlockSize = newSize; }
     
     /** Get the current preferred block size for the graph. */
-    inline int getPreferredGraphBlockSize() const throw() { return preferredGraphBlockSize; }
+    PLONK_INLINE_LOW int getPreferredGraphBlockSize() const throw() { return preferredGraphBlockSize; }
         
     /** Set the graph's preferred block size.
      This must be called before startHost() to have any effect. */
-    inline void setPreferredGraphBlockSize (const int newSize) throw() {  preferredGraphBlockSize = newSize; }
+    PLONK_INLINE_LOW void setPreferredGraphBlockSize (const int newSize) throw() {  preferredGraphBlockSize = newSize; }
     
     /** Set the number of audio inputs required.
      This must be called before startHost() to have any effect. */
@@ -127,16 +127,16 @@ public:
 
 protected:
     /** Get the input buffers. @internal */
-    inline const ConstBufferArray& getInputs() const throw()    { return this->inputs; }
+    PLONK_INLINE_LOW const ConstBufferArray& getInputs() const throw()    { return this->inputs; }
     
     /** Get the input buffers. @internal */
-    inline ConstBufferArray& getInputs() throw()                { return this->inputs; }
+    PLONK_INLINE_LOW ConstBufferArray& getInputs() throw()                { return this->inputs; }
 
     /** Get the output buffers. @internal */
-    inline const BufferArray& getOutputs() const throw()        { return this->outputs; }
+    PLONK_INLINE_LOW const BufferArray& getOutputs() const throw()        { return this->outputs; }
     
     /** Get the output buffers. @internal */
-    inline BufferArray& getOutputs() throw()                    { return this->outputs; }
+    PLONK_INLINE_LOW BufferArray& getOutputs() throw()                    { return this->outputs; }
 
     /** Get the name of the audio host. */
     virtual Text getHostName() const = 0;
@@ -169,7 +169,7 @@ protected:
     virtual UnitType constructGraph() = 0;
 
     /** @internal */
-    inline void process() throw()
+    PLONK_INLINE_LOW void process() throw()
     {
         int i;
 
@@ -251,9 +251,9 @@ protected:
     /** Set a flag to indicate the audio host is running.
      NB This does not start or stop the host use startHost() and stopHost() 
      respectively. */
-    inline void setIsRunning (const bool state) throw() { isRunning = state; }
+    PLONK_INLINE_LOW void setIsRunning (const bool state) throw() { isRunning = state; }
 
-    inline void setIsPaused (const bool state) throw() { isPaused = state; }
+    PLONK_INLINE_LOW void setIsPaused (const bool state) throw() { isPaused = state; }
     
 private:
     double preferredHostSampleRate;
@@ -269,7 +269,7 @@ private:
     ConstBufferArray inputs;
     BufferArray outputs;    
     
-    inline void initFormat() throw()
+    PLONK_INLINE_LOW void initFormat() throw()
     {
         SampleRate::getDefault().setValue (preferredHostSampleRate);
         

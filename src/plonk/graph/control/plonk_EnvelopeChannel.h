@@ -162,7 +162,7 @@ public:
         }        
     }
     
-    inline void nextTargetPoint (const bool gate, const int samplesRemaining) throw()
+    PLONK_INLINE_LOW void nextTargetPoint (const bool gate, const int samplesRemaining) throw()
     {
         Data& data = this->getState();
         const BreakpointsType& breakpoints = this->getInputAsBreakpoints (IOKey::Breakpoints);
@@ -309,7 +309,7 @@ public:
     typedef InputDictionary                         Inputs;
     typedef BreakpointsBase<SampleType>             BreakpointsType;
 
-    static inline UnitInfos getInfo() throw()
+    static PLONK_INLINE_LOW UnitInfos getInfo() throw()
     {
         const double blockSize = (double)BlockSize::getDefault().getValue();
         const double sampleRate = SampleRate::getDefault().getValue();
@@ -357,7 +357,7 @@ public:
     }
     
     /** Create a control rate envelope generator. */
-    static inline UnitType kr (BreakpointsType const& breakpoints,
+    static PLONK_INLINE_LOW UnitType kr (BreakpointsType const& breakpoints,
                                UnitType const& gate = SampleType (1),
                                const bool deleteWhenDone = true) throw()
     {

@@ -86,7 +86,7 @@ public:
     void signal() throw();
 
 private:
-    inline PlankLockRef getPeerRef() { return &l; }
+    PLONK_INLINE_LOW PlankLockRef getPeerRef() { return &l; }
     PlankLock l;    
 };
 
@@ -103,7 +103,7 @@ public:
     void signal() throw();
     
 private:
-    inline PlankSpinLockRef getPeerRef() { return &l; }
+    PLONK_INLINE_LOW PlankSpinLockRef getPeerRef() { return &l; }
     PlankSpinLock l;    
 };
 
@@ -120,7 +120,7 @@ public:
     void signal() throw();
     
 private:
-    inline PlankThreadSpinLockRef getPeerRef() { return &l; }
+    PLONK_INLINE_LOW PlankThreadSpinLockRef getPeerRef() { return &l; }
     PlankThreadSpinLock l;    
 };
 
@@ -150,12 +150,12 @@ public:
     Lock (Lock const& copy) throw();
     Lock& operator= (Lock const& other) throw();
     
-    inline void lock() throw()                      { getInternal()->lock(); }
-    inline void unlock() throw()                    { getInternal()->unlock(); }
-    inline bool tryLock() throw()                   { return getInternal()->tryLock(); }
-    inline void wait() throw()                      { getInternal()->wait (0.0); }
-    inline void wait (const double time) throw()    { getInternal()->wait (time); }
-    inline void signal() throw()                    { getInternal()->signal(); }
+    PLONK_INLINE_LOW void lock() throw()                      { getInternal()->lock(); }
+    PLONK_INLINE_LOW void unlock() throw()                    { getInternal()->unlock(); }
+    PLONK_INLINE_LOW bool tryLock() throw()                   { return getInternal()->tryLock(); }
+    PLONK_INLINE_LOW void wait() throw()                      { getInternal()->wait (0.0); }
+    PLONK_INLINE_LOW void wait (const double time) throw()    { getInternal()->wait (time); }
+    PLONK_INLINE_LOW void signal() throw()                    { getInternal()->signal(); }
     
     PLONK_OBJECTARROWOPERATOR(Lock);
     
@@ -254,7 +254,7 @@ public:
         return tmp;
     }
     
-    inline Lock& getLock() throw() { return lock; }
+    PLONK_INLINE_LOW Lock& getLock() throw() { return lock; }
     
 private:
     ValueType value;
@@ -293,28 +293,28 @@ public:
         return *this;
     }
     
-    inline LockedValue& operator= (Type const& other) throw()
+    PLONK_INLINE_LOW LockedValue& operator= (Type const& other) throw()
     {
         this->setValue (other);
         return *this;
     }
     
-    inline void setValue (Type const& newValue) throw()
+    PLONK_INLINE_LOW void setValue (Type const& newValue) throw()
     {
         this->getInternal()->setValue (newValue);
     }
     
-    inline bool trySetValue (Type const& newValue) throw()
+    PLONK_INLINE_LOW bool trySetValue (Type const& newValue) throw()
     {
         return this->getInternal()->trySetValue (newValue);
     }
     
-    inline Type getValue() const throw()
+    PLONK_INLINE_LOW Type getValue() const throw()
     {
         return this->getInternal()->getValue();
     }
         
-    inline operator Type() const throw()
+    PLONK_INLINE_LOW operator Type() const throw()
     {
         return this->getInternal()->getValue();
     }
@@ -322,7 +322,7 @@ public:
     PLONK_OBJECTARROWOPERATOR(LockedValue);
     
     template<typename Function>
-    inline void operator() (VoidReturn::Type ret, Function function)
+    PLONK_INLINE_LOW void operator() (VoidReturn::Type ret, Function function)
     {
         (void)ret;
         Type value = this->getValue();
@@ -331,7 +331,7 @@ public:
     }
 
     template<typename Function, class Arg1Type>
-    inline void operator() (VoidReturn::Type ret, Function function, Arg1Type arg1)
+    PLONK_INLINE_LOW void operator() (VoidReturn::Type ret, Function function, Arg1Type arg1)
     {
         (void)ret;
         Type value = this->getValue();
@@ -340,7 +340,7 @@ public:
     }
     
     template<typename Function, class Arg1Type, class Arg2Type>
-    inline void operator() (VoidReturn::Type ret, Function function, Arg1Type arg1, Arg2Type arg2)
+    PLONK_INLINE_LOW void operator() (VoidReturn::Type ret, Function function, Arg1Type arg1, Arg2Type arg2)
     {
         (void)ret;
         Type value = this->getValue();
@@ -349,7 +349,7 @@ public:
     }
 
     template<class ReturnType, typename Function, class Arg1Type, class Arg2Type, class Arg3Type>
-    inline void operator() (VoidReturn::Type ret, Function function, Arg1Type arg1, Arg2Type arg2, Arg3Type arg3)
+    PLONK_INLINE_LOW void operator() (VoidReturn::Type ret, Function function, Arg1Type arg1, Arg2Type arg2, Arg3Type arg3)
     {
         (void)ret;
         Type value = this->getValue();
@@ -358,7 +358,7 @@ public:
     }
     
     template<class ReturnType, typename Function>
-    inline void operator() (ReturnType* ret, Function function)
+    PLONK_INLINE_LOW void operator() (ReturnType* ret, Function function)
     {
         Type value = this->getValue();
         
@@ -374,7 +374,7 @@ public:
     }
 
     template<class ReturnType, typename Function, class Arg1Type>
-    inline void operator() (ReturnType* ret, Function function, Arg1Type arg1)
+    PLONK_INLINE_LOW void operator() (ReturnType* ret, Function function, Arg1Type arg1)
     {
         Type value = this->getValue();
 
@@ -390,7 +390,7 @@ public:
     }
     
     template<class ReturnType, typename Function, class Arg1Type, class Arg2Type>
-    inline void operator() (ReturnType* ret, Function function, Arg1Type arg1, Arg2Type arg2)
+    PLONK_INLINE_LOW void operator() (ReturnType* ret, Function function, Arg1Type arg1, Arg2Type arg2)
     {
         Type value = this->getValue();
 
@@ -406,7 +406,7 @@ public:
     }
     
     template<class ReturnType, typename Function, class Arg1Type, class Arg2Type, class Arg3Type>
-    inline void operator() (ReturnType* ret, Function function, Arg1Type arg1, Arg2Type arg2, Arg3Type arg3)
+    PLONK_INLINE_LOW void operator() (ReturnType* ret, Function function, Arg1Type arg1, Arg2Type arg2, Arg3Type arg3)
     {
         Type value = this->getValue();
 
@@ -421,11 +421,11 @@ public:
         }   
     }
     
-    inline Lock& getLock() throw() { return this->getInternal()->getLock(); }
+    PLONK_INLINE_LOW Lock& getLock() throw() { return this->getInternal()->getLock(); }
     
-    inline void lock() throw() { this->getLock().lock(); } 
-    inline void unlock() throw() { this->getLock().unlock(); } 
-    inline bool tryLock() throw() { return this->getLock().tryLock(); } 
+    PLONK_INLINE_LOW void lock() throw() { this->getLock().lock(); } 
+    PLONK_INLINE_LOW void unlock() throw() { this->getLock().unlock(); } 
+    PLONK_INLINE_LOW bool tryLock() throw() { return this->getLock().tryLock(); } 
 
 };
 

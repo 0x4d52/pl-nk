@@ -162,7 +162,7 @@ public:
 private:
     IntArray inputKeys;
     
-    static inline int getNumChannelsFromInputs (Inputs const& inputs) throw()
+    static PLONK_INLINE_LOW int getNumChannelsFromInputs (Inputs const& inputs) throw()
     {
         const int p1 = inputs[FormType::getInputKeys().atUnchecked (1)].template asUnchecked<Param1UnitType>().getNumChannels();
         const int p2 = inputs[FormType::getInputKeys().atUnchecked (2)].template asUnchecked<Param2UnitType>().getNumChannels();

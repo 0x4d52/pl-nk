@@ -237,7 +237,7 @@ public:
     typedef UnitBase<SampleType>                        UnitType;
     typedef InputDictionary                             Inputs;    
     
-    static inline UnitInfos getInfo() throw()
+    static PLONK_INLINE_LOW UnitInfos getInfo() throw()
     {        
         const double minOverlap = TypeUtility<double>::getTypeEpsilon();
         

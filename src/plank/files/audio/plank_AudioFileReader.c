@@ -2482,7 +2482,7 @@ exit:
 #pragma mark Useful Ogg Functions
 #endif
 
-static PLONK_INLINE_LOW PlankResult pl_OggFile_FindNextPageOffset (PlankFileRef p, const PlankLL total, PlankLL left, PlankLL right, PlankLL* offset)
+static PLANK_INLINE_LOW PlankResult pl_OggFile_FindNextPageOffset (PlankFileRef p, const PlankLL total, PlankLL left, PlankLL right, PlankLL* offset)
 {
     PlankResult result;
     PlankLL original;
@@ -2523,7 +2523,7 @@ exit:
     return result;
 }
 
-static PLONK_INLINE_LOW PlankResult pl_OggFile_FindPrevPageOffset (PlankFileRef p, const PlankLL total, PlankLL left, PlankLL right, PlankLL* offset)
+static PLANK_INLINE_LOW PlankResult pl_OggFile_FindPrevPageOffset (PlankFileRef p, const PlankLL total, PlankLL left, PlankLL right, PlankLL* offset)
 {    
     PlankResult result;
     PlankLL original;

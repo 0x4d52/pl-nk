@@ -64,12 +64,12 @@ class VariableInternal : public VariableInternalBase<Type>
 public:    
     typedef Variable<Type> Container; 
     
-    inline VariableInternal() throw()
+    PLONK_INLINE_LOW VariableInternal() throw()
     :   value (0)
     {
     }
     
-    inline ~VariableInternal()
+    PLONK_INLINE_LOW ~VariableInternal()
     {
     }
     
@@ -79,7 +79,7 @@ public:
 //    {
 //    }
 
-    inline VariableInternal (Type const& initValue) throw()
+    PLONK_INLINE_LOW VariableInternal (Type const& initValue) throw()
     :   value (initValue)
     {
     }
@@ -108,7 +108,7 @@ public:
         }
     }
     
-    inline void swapValues (Type& other) throw()
+    PLONK_INLINE_LOW void swapValues (Type& other) throw()
     {
         Type temp = other;
         other = value;

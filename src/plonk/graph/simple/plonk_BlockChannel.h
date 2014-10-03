@@ -95,7 +95,7 @@ public:
         this->copyBlock();        
     }    
     
-    inline void copyBlock() throw()
+    PLONK_INLINE_LOW void copyBlock() throw()
     {
         SampleType* const outputSamples = this->getOutputSamples();
         const int outputBufferLength = this->getOutputBuffer().length();
@@ -150,7 +150,7 @@ public:
     typedef NumericalArray<SampleType>              Buffer;
     typedef NumericalArray2D<SampleType>            BufferArray;
     
-    static inline UnitInfos getInfo() throw()
+    static PLONK_INLINE_LOW UnitInfos getInfo() throw()
     {
         const double blockSize = (double)BlockSize::getDefault().getValue();
         const double sampleRate = SampleRate::getDefault().getValue();
@@ -171,7 +171,7 @@ public:
     }    
     
     /** Create an audio rate block generator. */
-    static inline UnitType ar (Buffer const& buffer,
+    static PLONK_INLINE_LOW UnitType ar (Buffer const& buffer,
                                DoubleVariable const& overlap = Math<DoubleVariable>::get1(),
                                BlockSize const& preferredBlockSize = BlockSize::noPreference(),
                                SampleRate const& preferredSampleRate = SampleRate::getDefault()) throw()
@@ -189,7 +189,7 @@ public:
     }
     
     /** Create an audio rate block generator. */
-    static inline UnitType ar (BufferArray const& buffers,
+    static PLONK_INLINE_LOW UnitType ar (BufferArray const& buffers,
                                DoubleVariable const& overlap = Math<DoubleVariable>::get1(),
                                BlockSize const& preferredBlockSize = BlockSize::noPreference(),
                                SampleRate const& preferredSampleRate = SampleRate::getDefault()) throw()
@@ -213,7 +213,7 @@ public:
         return result;
     }
     
-    static inline UnitType kr (Buffer const& buffer,                                
+    static PLONK_INLINE_LOW UnitType kr (Buffer const& buffer,                                
                                DoubleVariable const& overlap = Math<DoubleVariable>::get1()) throw()
     {
         return ar (buffer, 

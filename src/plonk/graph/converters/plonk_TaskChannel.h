@@ -98,8 +98,8 @@ public:
     {
     }
     
-    inline const Text& getMessage() const throw()    { return this->getInternal()->message; }
-    inline const Dynamic& getPayload() const throw() { return this->getInternal()->payload; }
+    PLONK_INLINE_LOW const Text& getMessage() const throw()    { return this->getInternal()->message; }
+    PLONK_INLINE_LOW const Dynamic& getPayload() const throw() { return this->getInternal()->payload; }
 };
 
 template<class SampleType>
@@ -296,19 +296,19 @@ public:
             e.signal();           // or this will proceed past the wait, or be harmless if the thread died already
         }
     
-        inline bool pop (TaskBuffer& buffer) throw()
+        PLONK_INLINE_LOW bool pop (TaskBuffer& buffer) throw()
         {
             return activeBuffers.pop (buffer);
         }
     
-        inline void push (TaskBuffer const& buffer) throw()
+        PLONK_INLINE_LOW void push (TaskBuffer const& buffer) throw()
         {
             buffer.getInternal()->messages.clear();
             freeBuffers.push (buffer);
             event.signal();
         }
         
-        inline bool inputHasEnded() const throw()
+        PLONK_INLINE_LOW bool inputHasEnded() const throw()
         {
             return inputEnded.getValueUnchecked() != 0;
         }
@@ -423,7 +423,7 @@ public:
         }        
     }
     
-    inline void zeroOutput (const int numChannels) throw()
+    PLONK_INLINE_LOW void zeroOutput (const int numChannels) throw()
     {
         for (int channel = 0; channel < numChannels; ++channel)
         {
@@ -439,7 +439,7 @@ private:
 
     ProcessInfo info; // private info for this object as we're running out of sync with everything else
     
-    static inline int numChannelsInSource (Inputs const& inputs) throw()
+    static PLONK_INLINE_LOW int numChannelsInSource (Inputs const& inputs) throw()
     {
         return inputs[IOKey::Generic].asUnchecked<UnitType>().getNumChannels();
     }
@@ -481,7 +481,7 @@ public:
     typedef ResampleUnit<SampleType,InterpTypeCode>                 ResampleType;
     typedef InputTaskUnit<SampleType,Interp::Lagrange3>             HQ;
     
-    static inline UnitInfos getInfo() throw()
+    static PLONK_INLINE_LOW UnitInfos getInfo() throw()
     {
         const double blockSize = (double)BlockSize::getDefault().getValue();
         const double sampleRate = SampleRate::getDefault().getValue();

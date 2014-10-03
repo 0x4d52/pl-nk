@@ -187,7 +187,7 @@ public:
     typedef LockFreeQueue<UnitType>                 QueueType;
 
     
-//    static inline UnitInfos getInfo() throw()
+//    static PLONK_INLINE_LOW UnitInfos getInfo() throw()
 //    {
 //        const double blockSize = (double)BlockSize::getDefault().getValue();
 //        const double sampleRate = SampleRate::getDefault().getValue();
@@ -208,7 +208,7 @@ public:
 //    }    
     
     /** Create an audio rate block generator. */
-    static inline UnitType ar (QueueType const& queue,
+    static PLONK_INLINE_LOW UnitType ar (QueueType const& queue,
                                const int preferredNumChannels = 0,
                                BlockSize const& preferredBlockSize = BlockSize::getDefault(),
                                SampleRate const& preferredSampleRate = SampleRate::getDefault()) throw()
@@ -224,7 +224,7 @@ public:
                                                                     preferredSampleRate);
     }
     
-    static inline UnitType kr (QueueType const& queue,                                
+    static PLONK_INLINE_LOW UnitType kr (QueueType const& queue,                                
                                const int preferredNumChannels = 0) throw()
     {
         return ar (queue, 

@@ -44,12 +44,12 @@
 class FilePathInternal : public SmartPointer
 {
 public:
-    inline FilePathInternal() throw()
+    PLONK_INLINE_LOW FilePathInternal() throw()
     {
         pl_Path_Init (&peer);
     }
     
-    inline FilePathInternal (const char* path) throw()
+    PLONK_INLINE_LOW FilePathInternal (const char* path) throw()
     {
         if ((path[0] == '~') && (strlen (path) > 1))
             pl_Path_InitSystem (&peer, PLANKPATH_SYSTEMUSERHOME, (path[1] == '/') ? path + 2 : path + 1);
@@ -57,7 +57,7 @@ public:
             pl_Path_InitPath (&peer, path);
     }
 
-    inline ~FilePathInternal()
+    PLONK_INLINE_LOW ~FilePathInternal()
     {
         pl_Path_DeInit (&peer);
     }
@@ -94,106 +94,106 @@ public:
         Temp            = PLANKPATH_SYSTEMTEMP
     };
     
-    inline FilePath() throw()
+    PLONK_INLINE_LOW FilePath() throw()
     :   Base (new FilePathInternal (""))
     {
     }
 
-    inline FilePath (const char* path) throw()
+    PLONK_INLINE_LOW FilePath (const char* path) throw()
     :   Base (new FilePathInternal (path))
     {
     }
     
-    inline FilePath (Text const& path) throw()
+    PLONK_INLINE_LOW FilePath (Text const& path) throw()
     :   Base (new FilePathInternal (path.getArray()))
     {
     }
     
-    inline static FilePath system (const System type) throw()
+    PLONK_INLINE_LOW static FilePath system (const System type) throw()
     {
         FilePath file (new FilePathInternal());
         pl_Path_InitSystem (&file.getInternal()->peer, type, 0);
         return file;
     }
         
-    inline static FilePath temp() throw()
+    PLONK_INLINE_LOW static FilePath temp() throw()
     {
         FilePath file (new FilePathInternal());
         pl_Path_InitTemp (&file.getInternal()->peer, 0, 0);
         return file;
     }
     
-    inline static FilePath temp (Text const& prefix) throw()
+    PLONK_INLINE_LOW static FilePath temp (Text const& prefix) throw()
     {
         FilePath file (new FilePathInternal());
         pl_Path_InitTemp (&file.getInternal()->peer, prefix.getArray(), 0);
         return file;
     }
     
-    inline static FilePath temp (Text const& prefix, Text const& extension) throw()
+    PLONK_INLINE_LOW static FilePath temp (Text const& prefix, Text const& extension) throw()
     {
         FilePath file (new FilePathInternal());
         pl_Path_InitTemp (&file.getInternal()->peer, prefix.getArray(), extension.getArray());
         return file;
     }
     
-    inline FilePath parent() const throw()
+    PLONK_INLINE_LOW FilePath parent() const throw()
     {
         return parent (true);
     }
     
-    inline FilePath child (FilePath const& relative) const throw()
+    PLONK_INLINE_LOW FilePath child (FilePath const& relative) const throw()
     {
         return child (relative.fullpath(), true);
     }
 
-    inline FilePath sibling (FilePath const& relative) const throw()
+    PLONK_INLINE_LOW FilePath sibling (FilePath const& relative) const throw()
     {
         return sibling (relative.fullpath(), true);
     }
 
-    inline FilePath parent (const bool shouldResolve) const throw()
+    PLONK_INLINE_LOW FilePath parent (const bool shouldResolve) const throw()
     {
         FilePath file (new FilePathInternal());
         pl_Path_InitParent (&file.getInternal()->peer, &this->getInternal()->peer);
         return shouldResolve ? file.resolve() : file;
     }
     
-    inline FilePath child (FilePath const& relative, const bool shouldResolve) const throw()
+    PLONK_INLINE_LOW FilePath child (FilePath const& relative, const bool shouldResolve) const throw()
     {
         FilePath file (new FilePathInternal());
         pl_Path_InitChild (&file.getInternal()->peer, &this->getInternal()->peer, relative.fullpath());
         return shouldResolve ? file.resolve() : file;
     }
     
-    inline FilePath sibling (FilePath const& relative, const bool shouldResolve) const throw()
+    PLONK_INLINE_LOW FilePath sibling (FilePath const& relative, const bool shouldResolve) const throw()
     {
         FilePath file (new FilePathInternal());
         pl_Path_InitSibling (&file.getInternal()->peer, &this->getInternal()->peer, relative.fullpath());
         return shouldResolve ? file.resolve() : file;
     }
     
-    inline Text fullpath() const throw()
+    PLONK_INLINE_LOW Text fullpath() const throw()
     {
         return pl_Path_GetFullPath (&this->getInternal()->peer);
     }
     
-    inline Text root() const throw()
+    PLONK_INLINE_LOW Text root() const throw()
     {
         return pl_Path_GetRoot (&this->getInternal()->peer);
     }
 
-    inline Text filename() const throw()
+    PLONK_INLINE_LOW Text filename() const throw()
     {
         return pl_Path_GetFilename (&this->getInternal()->peer);
     }
 
-    inline Text extension() const throw()
+    PLONK_INLINE_LOW Text extension() const throw()
     {
         return pl_Path_GetFileExtension (&this->getInternal()->peer);
     }
 
-    inline Text filenameWithoutExtension() const throw()
+    PLONK_INLINE_LOW Text filenameWithoutExtension() const throw()
     {
         Text filename = pl_Path_GetFilename (&this->getInternal()->peer);
         
@@ -209,27 +209,27 @@ public:
         return filename;
     }
     
-    inline FilePath withExtension (Text const& ext) const throw()
+    PLONK_INLINE_LOW FilePath withExtension (Text const& ext) const throw()
     {
         return (ext.first() == '.') ? FilePath (fullpath() + ext) : FilePath (fullpath() + Text (".") + ext);
     }
 
-    inline bool isFile() const throw()
+    PLONK_INLINE_LOW bool isFile() const throw()
     {
         return pl_Path_IsFile (&this->getInternal()->peer);
     }
     
-    inline bool isDirectory() const throw()
+    PLONK_INLINE_LOW bool isDirectory() const throw()
     {
         return pl_Path_IsDirectory (&this->getInternal()->peer);
     }
     
-    inline operator Text () const throw()
+    PLONK_INLINE_LOW operator Text () const throw()
     {
         return fullpath();
     }
     
-    inline Text native() const throw()
+    PLONK_INLINE_LOW Text native() const throw()
     {
 #if PLONK_WIN
         return fullpath().replaceIgnoreCase ("/", "\\");
@@ -238,18 +238,18 @@ public:
 #endif
     }
     
-    inline FilePath& resolve() throw()
+    PLONK_INLINE_LOW FilePath& resolve() throw()
     {
         pl_Path_Resolve (&this->getInternal()->peer);
         return *this;
     }
     
-    inline bool exists() const throw()
+    PLONK_INLINE_LOW bool exists() const throw()
     {
         return pl_FileExists (fullpath(), isDirectory());
     }
 
-    inline bool create() const throw()
+    PLONK_INLINE_LOW bool create() const throw()
     {
         if (isDirectory())
         {
@@ -280,12 +280,12 @@ public:
         return false;
     }
     
-    inline bool createParent() const throw()
+    PLONK_INLINE_LOW bool createParent() const throw()
     {
         return parent().create();
     }
     
-    inline bool erase() const throw()
+    PLONK_INLINE_LOW bool erase() const throw()
     {
         return pl_FileErase (fullpath()) == PlankResult_OK;
     }

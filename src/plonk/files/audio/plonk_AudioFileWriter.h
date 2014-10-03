@@ -671,32 +671,32 @@ public:
     }
 
     /** Get the number of channels in the file. */
-    inline int getNumChannels() const throw()
+    PLONK_INLINE_LOW int getNumChannels() const throw()
     {
         return pl_AudioFileWriter_GetNumChannels (&this->getInternal()->peer);
     }
     
-    inline ChannelLayout getChannelLayout() const throw()
+    PLONK_INLINE_LOW ChannelLayout getChannelLayout() const throw()
     {
         PlankChannelLayout layout;
         pl_AudioFileWriter_GetChannelLayout (&this->getInternal()->peer, &layout);
         return layout;
     }
     
-    inline ChannelIdentifier getChannelIdentifier (const int channel) const throw()
+    PLONK_INLINE_LOW ChannelIdentifier getChannelIdentifier (const int channel) const throw()
     {
         PlankChannelIdentifier identifier;
         pl_AudioFileWriter_GetChannelItentifier (&this->getInternal()->peer, channel, &identifier);
         return identifier;
     }
     
-    inline void setChannelIdentifier (const int channel, ChannelIdentifier const& identifier) const throw()
+    PLONK_INLINE_LOW void setChannelIdentifier (const int channel, ChannelIdentifier const& identifier) const throw()
     {
         pl_AudioFileWriter_SetChannelItentifier (&this->getInternal()->peer, channel, identifier);
     }
     
     /** Get the sample rate of the file. */
-    inline double getSampleRate() const throw()
+    PLONK_INLINE_LOW double getSampleRate() const throw()
     {
         return this->getInternal()->peer.formatInfo.sampleRate;
     }

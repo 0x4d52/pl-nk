@@ -139,7 +139,7 @@ public:
 private:
     IntArray inputKeys;
     
-    static inline int getNumChannelsFromInputs (Inputs const& inputs) throw()
+    static PLONK_INLINE_LOW int getNumChannelsFromInputs (Inputs const& inputs) throw()
     {
         return inputs[FormType::getInputKeys().atUnchecked (1)].template asUnchecked<Param1UnitType>().getNumChannels();
     }

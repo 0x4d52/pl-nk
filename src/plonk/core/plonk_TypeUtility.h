@@ -126,7 +126,7 @@ public:
     };    
     
     /** Returns a type code as a text string. */
-    static inline plonk::Text getName (const int code) throw()
+    static PLONK_INLINE_LOW plonk::Text getName (const int code) throw()
     {
         static const char* names[] = {
             "Unknown", "Dynamic",
@@ -198,7 +198,7 @@ public:
     
     /** Used for sample types to determine the minimum / maximum peaks.
      Most types return 0 to indicate that this is not useful information. */
-    static inline plonk::LongLong getPeak (const int code) throw()
+    static PLONK_INLINE_LOW plonk::LongLong getPeak (const int code) throw()
     {
         static const plonk::LongLong peaks[] = {
             0, 0, // invalid
@@ -215,7 +215,7 @@ public:
     
     /** Used for sample types to determine the smallest non-zero value.
      For integers this is always 1 so is most useful for floating point types. */
-    static inline double getEpsilon (const int code) throw()
+    static PLONK_INLINE_LOW double getEpsilon (const int code) throw()
     {
         static const double epsilons[] = {
             0, 0, // invalid
@@ -231,62 +231,62 @@ public:
     }
     
 
-    static inline bool isUnknown (const int code) throw()           { return (code == TypeCode::Unknown); }
-    static inline bool isDynamic (const int code) throw()           { return (code == TypeCode::Dynamic); }
+    static PLONK_INLINE_LOW bool isUnknown (const int code) throw()           { return (code == TypeCode::Unknown); }
+    static PLONK_INLINE_LOW bool isDynamic (const int code) throw()           { return (code == TypeCode::Dynamic); }
     
-    static inline bool isBuiltIn (const int code) throw()           { return (code >= TypeCode::Float) && (code <= TypeCode::Bool) && code != TypeCode::Int24; }
-    static inline bool isFixed (const int code) throw()             { return (code >= TypeCode::FixI8F8) && (code <= TypeCode::FixI16F16); }
-    static inline bool isAtomic (const int code) throw()            { return (code >= TypeCode::AtomicFloat) && (code <= TypeCode::AtomicDynamicPointer); }
-    static inline bool isVariable (const int code) throw()          { return (code >= TypeCode::FloatVariable) && (code <= TypeCode::BoolVariable); }
-    static inline bool isAtomicVariable (const int code) throw()    { return (code >= TypeCode::AtomicFloatVariable) && (code <= TypeCode::AtomicDynamicPointerVariable); } 
-    static inline bool isObjectVariable (const int code) throw()    { return (code >= TypeCode::FloatArrayVariable) && (code <= TypeCode::LongSignalVariable); } 
-    static inline bool isArray (const int code) throw()             { return (code >= TypeCode::FloatArray) && (code <= TypeCode::TextArray); }
-    static inline bool isChannel (const int code) throw()           { return (code >= TypeCode::FloatChannel) && (code <= TypeCode::LongChannel); }
-    static inline bool isUnit (const int code) throw()              { return (code >= TypeCode::FloatUnit) && (code <= TypeCode::LongUnit); }
-    static inline bool isBus (const int code) throw()               { return (code >= TypeCode::FloatBus) && (code <= TypeCode::LongBus); }
-    static inline bool isUnits (const int code) throw()             { return (code >= TypeCode::FloatUnits) && (code <= TypeCode::LongUnits); }
-    static inline bool isBusses (const int code) throw()            { return (code >= TypeCode::FloatBusses) && (code <= TypeCode::LongBusses); }
-    static inline bool isBreakpoints (const int code) throw()       { return (code >= TypeCode::FloatBreakpoints) && (code <= TypeCode::LongBreakpoints); }
-    static inline bool isWavetable (const int code) throw()         { return (code >= TypeCode::FloatWavetable) && (code <= TypeCode::LongWavetable); }
-    static inline bool isSignal (const int code) throw()            { return (code >= TypeCode::FloatSignal) && (code <= TypeCode::LongSignal); }
-    static inline bool isAudioFileReader (const int code) throw()   { return (code == TypeCode::AudioFileReader); }
-    static inline bool isUnitQueue (const int code) throw()         { return (code >= TypeCode::FloatUnitQueue) && (code <= TypeCode::LongUnitQueue); }
-    static inline bool isBufferQueue (const int code) throw()       { return (code >= TypeCode::FloatBufferQueue) && (code <= TypeCode::LongBufferQueue); }
+    static PLONK_INLINE_LOW bool isBuiltIn (const int code) throw()           { return (code >= TypeCode::Float) && (code <= TypeCode::Bool) && code != TypeCode::Int24; }
+    static PLONK_INLINE_LOW bool isFixed (const int code) throw()             { return (code >= TypeCode::FixI8F8) && (code <= TypeCode::FixI16F16); }
+    static PLONK_INLINE_LOW bool isAtomic (const int code) throw()            { return (code >= TypeCode::AtomicFloat) && (code <= TypeCode::AtomicDynamicPointer); }
+    static PLONK_INLINE_LOW bool isVariable (const int code) throw()          { return (code >= TypeCode::FloatVariable) && (code <= TypeCode::BoolVariable); }
+    static PLONK_INLINE_LOW bool isAtomicVariable (const int code) throw()    { return (code >= TypeCode::AtomicFloatVariable) && (code <= TypeCode::AtomicDynamicPointerVariable); } 
+    static PLONK_INLINE_LOW bool isObjectVariable (const int code) throw()    { return (code >= TypeCode::FloatArrayVariable) && (code <= TypeCode::LongSignalVariable); } 
+    static PLONK_INLINE_LOW bool isArray (const int code) throw()             { return (code >= TypeCode::FloatArray) && (code <= TypeCode::TextArray); }
+    static PLONK_INLINE_LOW bool isChannel (const int code) throw()           { return (code >= TypeCode::FloatChannel) && (code <= TypeCode::LongChannel); }
+    static PLONK_INLINE_LOW bool isUnit (const int code) throw()              { return (code >= TypeCode::FloatUnit) && (code <= TypeCode::LongUnit); }
+    static PLONK_INLINE_LOW bool isBus (const int code) throw()               { return (code >= TypeCode::FloatBus) && (code <= TypeCode::LongBus); }
+    static PLONK_INLINE_LOW bool isUnits (const int code) throw()             { return (code >= TypeCode::FloatUnits) && (code <= TypeCode::LongUnits); }
+    static PLONK_INLINE_LOW bool isBusses (const int code) throw()            { return (code >= TypeCode::FloatBusses) && (code <= TypeCode::LongBusses); }
+    static PLONK_INLINE_LOW bool isBreakpoints (const int code) throw()       { return (code >= TypeCode::FloatBreakpoints) && (code <= TypeCode::LongBreakpoints); }
+    static PLONK_INLINE_LOW bool isWavetable (const int code) throw()         { return (code >= TypeCode::FloatWavetable) && (code <= TypeCode::LongWavetable); }
+    static PLONK_INLINE_LOW bool isSignal (const int code) throw()            { return (code >= TypeCode::FloatSignal) && (code <= TypeCode::LongSignal); }
+    static PLONK_INLINE_LOW bool isAudioFileReader (const int code) throw()   { return (code == TypeCode::AudioFileReader); }
+    static PLONK_INLINE_LOW bool isUnitQueue (const int code) throw()         { return (code >= TypeCode::FloatUnitQueue) && (code <= TypeCode::LongUnitQueue); }
+    static PLONK_INLINE_LOW bool isBufferQueue (const int code) throw()       { return (code >= TypeCode::FloatBufferQueue) && (code <= TypeCode::LongBufferQueue); }
 
     // could replace these later by designing the enum to be bit-mask based
     
-    static inline bool isFloatType (const int code) throw()         
+    static PLONK_INLINE_LOW bool isFloatType (const int code) throw()         
     { 
         return (TypeCode::getName (code).indexOf ("Float") == 0) || (TypeCode::getName (code).indexOf ("AtomicFloat") == 0); 
     }
     
-    static inline bool isDoubleType (const int code) throw()        
+    static PLONK_INLINE_LOW bool isDoubleType (const int code) throw()        
     { 
         return (TypeCode::getName (code).indexOf ("Double") == 0) || (TypeCode::getName (code).indexOf ("AtomicDouble") == 0); 
     }
     
-    static inline bool isIntType (const int code) throw()           
+    static PLONK_INLINE_LOW bool isIntType (const int code) throw()           
     { 
         return ((TypeCode::getName (code).indexOf ("Int") == 0) && (TypeCode::getName (code).indexOf ("Int24") != 0))
                 || (TypeCode::getName (code).indexOf ("AtomicInt") == 0); 
     }
     
-    static inline bool isShortType (const int code) throw()         { return TypeCode::getName (code).indexOf ("Short") == 0; }
-    static inline bool isInt24Type (const int code) throw()         { return TypeCode::getName (code).indexOf ("Int24") == 0; }
+    static PLONK_INLINE_LOW bool isShortType (const int code) throw()         { return TypeCode::getName (code).indexOf ("Short") == 0; }
+    static PLONK_INLINE_LOW bool isInt24Type (const int code) throw()         { return TypeCode::getName (code).indexOf ("Int24") == 0; }
     
-    static inline bool isLongType (const int code) throw()          
+    static PLONK_INLINE_LOW bool isLongType (const int code) throw()          
     { 
         return ((TypeCode::getName (code).indexOf ("Long") == 0) && (code != TypeCode::LongLong))
                 || (TypeCode::getName (code).indexOf ("AtomicLong") == 0); 
     }
     
-    static inline bool isLongLongType (const int code) throw()      { return TypeCode::getName (code).indexOf ("LongLong") == 0; }
-    static inline bool isCharType (const int code) throw()          { return TypeCode::getName (code).indexOf ("Char") == 0; }
-    static inline bool isBoolType (const int code) throw()          { return TypeCode::getName (code).indexOf ("Bool") == 0; }
+    static PLONK_INLINE_LOW bool isLongLongType (const int code) throw()      { return TypeCode::getName (code).indexOf ("LongLong") == 0; }
+    static PLONK_INLINE_LOW bool isCharType (const int code) throw()          { return TypeCode::getName (code).indexOf ("Char") == 0; }
+    static PLONK_INLINE_LOW bool isBoolType (const int code) throw()          { return TypeCode::getName (code).indexOf ("Bool") == 0; }
     
-    static inline bool isFloatOrDoubleType (const int code) throw() { return TypeCode::isFloatType (code) || TypeCode::isDoubleType (code); }
+    static PLONK_INLINE_LOW bool isFloatOrDoubleType (const int code) throw() { return TypeCode::isFloatType (code) || TypeCode::isDoubleType (code); }
     
-    static inline bool isIntegralType (const int code) throw()
+    static PLONK_INLINE_LOW bool isIntegralType (const int code) throw()
     {
         return  TypeCode::isIntType (code)   ||
                 TypeCode::isShortType (code) ||
@@ -311,8 +311,8 @@ public:
     typedef Type            OriginalType;
     typedef Type const&     PassType;
     typedef float           IndexType;
-    static inline int getTypeCode()     { return TypeCode::Unknown; }
-    static inline const OriginalType& getNull() { static OriginalType null; return null; }
+    static PLONK_INLINE_LOW int getTypeCode()     { return TypeCode::Unknown; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { static OriginalType null; return null; }
 };
 
 template<class Type>
@@ -325,8 +325,8 @@ public:
     typedef Type            OriginalType;
     typedef Type const&     PassType;
     typedef float           IndexType;
-    static inline int getTypeCode()     { return TypeCode::Unknown; }
-    static inline const OriginalType& getNull() { static OriginalType null; return null; }
+    static PLONK_INLINE_LOW int getTypeCode()     { return TypeCode::Unknown; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { static OriginalType null; return null; }
 };
 
 template<class Type>
@@ -339,8 +339,8 @@ public:
     typedef Type            OriginalType;
     typedef Type const&     PassType;
     typedef float           IndexType;
-    static inline int getTypeCode()     { return TypeCode::Unknown; }
-    static inline const OriginalType& getNull() { static OriginalType null; return null; }
+    static PLONK_INLINE_LOW int getTypeCode()     { return TypeCode::Unknown; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { static OriginalType null; return null; }
 };
 
 
@@ -355,8 +355,8 @@ public:
     typedef Dynamic         OriginalType;
     typedef Dynamic const&  PassType;
     typedef float           IndexType;
-    static inline int  getTypeCode() { return TypeCode::Dynamic; }
-    static inline const OriginalType& getNull() { static OriginalType null; return null; }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::Dynamic; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { static OriginalType null; return null; }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -369,8 +369,8 @@ public:
     typedef Dynamic         OriginalType;
     typedef Dynamic const&  PassType;
     typedef float           IndexType;
-    static inline int  getTypeCode() { return TypeCode::Dynamic; }
-    static inline const OriginalType& getNull() { static OriginalType null; return null; }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::Dynamic; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { static OriginalType null; return null; }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -385,8 +385,8 @@ public:
     typedef float           OriginalType;
     typedef float           PassType;
     typedef float           IndexType;
-    static inline int getTypeCode() { return TypeCode::Float; }
-    static inline const OriginalType& getNull() { static OriginalType null (0); return null; }
+    static PLONK_INLINE_LOW int getTypeCode() { return TypeCode::Float; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { static OriginalType null (0); return null; }
 };
 
 template<>
@@ -399,8 +399,8 @@ public:
     typedef double           OriginalType;
     typedef double           PassType;
     typedef double           IndexType;
-    static inline int getTypeCode() { return TypeCode::Double; }
-    static inline const OriginalType& getNull() { static OriginalType null (0); return null; }
+    static PLONK_INLINE_LOW int getTypeCode() { return TypeCode::Double; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { static OriginalType null (0); return null; }
 };
 
 template<>
@@ -413,8 +413,8 @@ public:
     typedef int             OriginalType;
     typedef int             PassType;
     typedef float           IndexType;
-    static inline int  getTypeCode() { return TypeCode::Int; }
-    static inline const OriginalType& getNull() { static OriginalType null (0); return null; }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::Int; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { static OriginalType null (0); return null; }
     typedef unsigned int UnsignedType;
     typedef LongLong WideType;
     typedef UnsignedLongLong UnsignedWideType;
@@ -431,8 +431,8 @@ public:
     typedef short           OriginalType;
     typedef short           PassType;
     typedef float           IndexType;
-    static inline int  getTypeCode() { return TypeCode::Short; }
-    static inline const OriginalType& getNull() { static OriginalType null (0); return null; }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::Short; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { static OriginalType null (0); return null; }
     typedef unsigned short UnsignedType;
     typedef int WideType;
     typedef unsigned int UnsignedWideType;
@@ -448,8 +448,8 @@ public:
     typedef Int24           OriginalType;
     typedef Int24           PassType;
     typedef float           IndexType;
-    static inline int  getTypeCode() { return TypeCode::Int24; }
-    static inline const OriginalType& getNull() { static OriginalType null (0); return null; }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::Int24; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { static OriginalType null (0); return null; }
 };
 
 /*
@@ -476,8 +476,8 @@ public:
     typedef LongLong        OriginalType;
     typedef LongLong        PassType;
     typedef float           IndexType;
-    static inline int  getTypeCode() { return TypeCode::LongLong; }
-    static inline const OriginalType& getNull() { static OriginalType null (0); return null; }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::LongLong; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { static OriginalType null (0); return null; }
     typedef UnsignedLongLong UnsignedType;
     typedef struct { LongLong a; LongLong b; } WideType;
     typedef struct { UnsignedLongLong a; UnsignedLongLong b; } UnsignedWideType;
@@ -493,8 +493,8 @@ public:
     typedef char            OriginalType;
     typedef char            PassType;
     typedef float           IndexType;
-    static inline int  getTypeCode() { return TypeCode::Char; }
-    static inline const OriginalType& getNull() { static OriginalType null (0); return null; }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::Char; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { static OriginalType null (0); return null; }
     typedef unsigned char UnsignedType;
     typedef short WideType;
     typedef unsigned short UnsignedWideType;
@@ -510,8 +510,8 @@ public:
     typedef bool            OriginalType;
     typedef bool            PassType;
     typedef float           IndexType;
-    static inline int  getTypeCode() { return TypeCode::Bool; }
-    static inline const OriginalType& getNull() { static OriginalType null (0); return null; }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::Bool; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { static OriginalType null (0); return null; }
 };
 
 template<>
@@ -524,8 +524,8 @@ public:
     typedef FixI8F8           OriginalType;
     typedef FixI8F8           PassType;
     typedef FixI8F8           IndexType;
-    static inline int getTypeCode() { return TypeCode::FixI8F8; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int getTypeCode() { return TypeCode::FixI8F8; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -538,8 +538,8 @@ public:
     typedef FixI8F24           OriginalType;
     typedef FixI8F24           PassType;
     typedef FixI8F24           IndexType;
-    static inline int getTypeCode() { return TypeCode::FixI8F24; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int getTypeCode() { return TypeCode::FixI8F24; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -552,8 +552,8 @@ public:
     typedef FixI16F16           OriginalType;
     typedef FixI16F16           PassType;
     typedef FixI16F16           IndexType;
-    static inline int getTypeCode() { return TypeCode::FixI8F24; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int getTypeCode() { return TypeCode::FixI8F24; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -564,8 +564,8 @@ public:
     typedef AtomicFloat         OriginalType;
     typedef AtomicFloat const&  PassType;
     typedef float               IndexType;
-    static inline int  getTypeCode() { return TypeCode::AtomicFloat; }
-    static inline const OriginalType& getNull() { static OriginalType null; return null; }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::AtomicFloat; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { static OriginalType null; return null; }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -578,8 +578,8 @@ public:
     typedef AtomicFloat            OriginalType;
     typedef AtomicFloat const&     PassType;
     typedef float IndexType;
-    static inline int  getTypeCode() { return TypeCode::AtomicFloat; }
-    static inline const OriginalType& getNull() { static OriginalType null; return null; }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::AtomicFloat; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { static OriginalType null; return null; }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -592,8 +592,8 @@ public:
     typedef AtomicDouble            OriginalType;
     typedef AtomicDouble const&     PassType;
     typedef double                  IndexType;
-    static inline int  getTypeCode() { return TypeCode::AtomicDouble; }
-    static inline const OriginalType& getNull() { static OriginalType null; return null; }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::AtomicDouble; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { static OriginalType null; return null; }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -606,8 +606,8 @@ public:
     typedef AtomicDouble        OriginalType;
     typedef AtomicDouble const& PassType;
     typedef double              IndexType;
-    static inline int  getTypeCode() { return TypeCode::AtomicDouble; }
-    static inline const OriginalType& getNull() { static OriginalType null; return null; }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::AtomicDouble; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { static OriginalType null; return null; }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -620,8 +620,8 @@ public:
     typedef AtomicInt           OriginalType;
     typedef AtomicInt const&    PassType;
     typedef float               IndexType;
-    static inline int  getTypeCode() { return TypeCode::AtomicInt; }
-    static inline const OriginalType& getNull() { static OriginalType null; return null; }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::AtomicInt; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { static OriginalType null; return null; }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -634,8 +634,8 @@ public:
     typedef AtomicInt           OriginalType;
     typedef AtomicInt const&    PassType;
     typedef float               IndexType;
-    static inline int  getTypeCode() { return TypeCode::AtomicInt; }
-    static inline const OriginalType& getNull() { static OriginalType null; return null; }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::AtomicInt; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { static OriginalType null; return null; }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -674,8 +674,8 @@ public:
     typedef AtomicLongLong          OriginalType;
     typedef AtomicLongLong const&   PassType;
     typedef float                   IndexType;
-    static inline int  getTypeCode() { return TypeCode::AtomicLongLong; }
-    static inline const OriginalType& getNull() { static OriginalType null; return null; }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::AtomicLongLong; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { static OriginalType null; return null; }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -688,8 +688,8 @@ public:
     typedef AtomicLongLong          OriginalType;
     typedef AtomicLongLong const&   PassType;
     typedef float                   IndexType;
-    static inline int  getTypeCode() { return TypeCode::AtomicLongLong; }
-    static inline const OriginalType& getNull() { static OriginalType null; return null; }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::AtomicLongLong; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { static OriginalType null; return null; }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -702,8 +702,8 @@ public:
     typedef AtomicPointer          OriginalType;
     typedef AtomicPointer const&   PassType;
     typedef int                    IndexType;
-    static inline int  getTypeCode() { return TypeCode::AtomicPointer; }
-    static inline const OriginalType& getNull() { static OriginalType null; return null; }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::AtomicPointer; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { static OriginalType null; return null; }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -716,8 +716,8 @@ public:
     typedef AtomicPointer          OriginalType;
     typedef AtomicPointer const&   PassType;
     typedef int                    IndexType;
-    static inline int  getTypeCode() { return TypeCode::AtomicPointer; }
-    static inline const OriginalType& getNull() { static OriginalType null; return null; }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::AtomicPointer; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { static OriginalType null; return null; }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -730,8 +730,8 @@ public:
     typedef AtomicExtendedPointer          OriginalType;
     typedef AtomicExtendedPointer const&   PassType;
     typedef int                            IndexType;
-    static inline int  getTypeCode() { return TypeCode::AtomicExtendedPointer; }
-    static inline const OriginalType& getNull() { static OriginalType null; return null; }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::AtomicExtendedPointer; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { static OriginalType null; return null; }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -744,8 +744,8 @@ public:
     typedef AtomicExtendedPointer          OriginalType;
     typedef AtomicExtendedPointer const&   PassType;
     typedef int                            IndexType;
-    static inline int  getTypeCode() { return TypeCode::AtomicExtendedPointer; }
-    static inline const OriginalType& getNull() { static OriginalType null; return null; }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::AtomicExtendedPointer; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { static OriginalType null; return null; }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -758,8 +758,8 @@ public:
     typedef AtomicDynamicPointer          OriginalType;
     typedef AtomicDynamicPointer const&   PassType;
     typedef int                           IndexType;
-    static inline int  getTypeCode() { return TypeCode::AtomicDynamicPointer; }
-    static inline const OriginalType& getNull() { static OriginalType null; return null; }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::AtomicDynamicPointer; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { static OriginalType null; return null; }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -772,8 +772,8 @@ public:
     typedef AtomicDynamicPointer          OriginalType;
     typedef AtomicDynamicPointer const&   PassType;
     typedef int                           IndexType;
-    static inline int  getTypeCode() { return TypeCode::AtomicDynamicPointer; }
-    static inline const OriginalType& getNull() { static OriginalType null; return null; }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::AtomicDynamicPointer; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { static OriginalType null; return null; }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -786,8 +786,8 @@ public:
     typedef FloatVariable           OriginalType;
     typedef FloatVariable const&    PassType;
     typedef float                   IndexType;
-    static inline int  getTypeCode() { return TypeCode::FloatVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::FloatVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -800,8 +800,8 @@ public:
     typedef FloatVariable           OriginalType;
     typedef FloatVariable const&    PassType;
     typedef float                   IndexType;
-    static inline int  getTypeCode() { return TypeCode::FloatVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::FloatVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -814,8 +814,8 @@ public:
     typedef DoubleVariable          OriginalType;
     typedef DoubleVariable const&   PassType;
     typedef double                  IndexType;
-    static inline int  getTypeCode() { return TypeCode::DoubleVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::DoubleVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -828,8 +828,8 @@ public:
     typedef DoubleVariable          OriginalType;
     typedef DoubleVariable const&   PassType;
     typedef double                  IndexType;
-    static inline int  getTypeCode() { return TypeCode::DoubleVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::DoubleVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -842,8 +842,8 @@ public:
     typedef IntVariable         OriginalType;
     typedef IntVariable const&  PassType;
     typedef float               IndexType;
-    static inline int  getTypeCode() { return TypeCode::IntVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::IntVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -856,8 +856,8 @@ public:
     typedef IntVariable         OriginalType;
     typedef IntVariable const&  PassType;
     typedef float               IndexType;
-    static inline int  getTypeCode() { return TypeCode::IntVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::IntVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -870,8 +870,8 @@ public:
     typedef ShortVariable           OriginalType;
     typedef ShortVariable const&    PassType;
     typedef float                   IndexType;
-    static inline int  getTypeCode() { return TypeCode::ShortVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::ShortVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -884,8 +884,8 @@ public:
     typedef ShortVariable           OriginalType;
     typedef ShortVariable const&    PassType;
     typedef float                   IndexType;
-    static inline int  getTypeCode() { return TypeCode::ShortVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::ShortVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -898,8 +898,8 @@ public:
     typedef Int24Variable           OriginalType;
     typedef Int24Variable const&    PassType;
     typedef float                   IndexType;
-    static inline int  getTypeCode() { return TypeCode::Int24Variable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::Int24Variable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -912,8 +912,8 @@ public:
     typedef Int24Variable           OriginalType;
     typedef Int24Variable const&    PassType;
     typedef float                   IndexType;
-    static inline int  getTypeCode() { return TypeCode::Int24Variable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::Int24Variable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -926,8 +926,8 @@ public:
     typedef LongVariable            OriginalType;
     typedef LongVariable const&     PassType;
     typedef float                   IndexType;
-    static inline int  getTypeCode() { return TypeCode::LongVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::LongVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -940,8 +940,8 @@ public:
     typedef LongVariable            OriginalType;
     typedef LongVariable const&     PassType;
     typedef float                   IndexType;
-    static inline int  getTypeCode() { return TypeCode::LongVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::LongVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -954,8 +954,8 @@ public:
     typedef CharVariable            OriginalType;
     typedef CharVariable const&     PassType;
     typedef float                   IndexType;
-    static inline int  getTypeCode() { return TypeCode::CharVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::CharVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -968,8 +968,8 @@ public:
     typedef CharVariable            OriginalType;
     typedef CharVariable const&     PassType;
     typedef float                   IndexType;
-    static inline int  getTypeCode() { return TypeCode::CharVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::CharVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -982,8 +982,8 @@ public:
     typedef BoolVariable            OriginalType;
     typedef BoolVariable const&     PassType;
     typedef float                   IndexType;
-    static inline int  getTypeCode() { return TypeCode::BoolVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::BoolVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -996,8 +996,8 @@ public:
     typedef BoolVariable            OriginalType;
     typedef BoolVariable const&     PassType;
     typedef float                   IndexType;
-    static inline int  getTypeCode() { return TypeCode::BoolVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::BoolVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -1010,8 +1010,8 @@ public:
     typedef AtomicFloatVariable             OriginalType;
     typedef AtomicFloatVariable const&      PassType;
     typedef float                           IndexType;
-    static inline int  getTypeCode() { return TypeCode::AtomicFloatVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::AtomicFloatVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -1024,8 +1024,8 @@ public:
     typedef AtomicFloatVariable             OriginalType;
     typedef AtomicFloatVariable const&      PassType;
     typedef float                           IndexType;
-    static inline int  getTypeCode() { return TypeCode::AtomicFloatVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::AtomicFloatVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -1038,8 +1038,8 @@ public:
     typedef AtomicDoubleVariable            OriginalType;
     typedef AtomicDoubleVariable const&     PassType;
     typedef double                          IndexType;
-    static inline int  getTypeCode() { return TypeCode::AtomicDoubleVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::AtomicDoubleVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -1052,8 +1052,8 @@ public:
     typedef AtomicDoubleVariable            OriginalType;
     typedef AtomicDoubleVariable const&     PassType;
     typedef double                          IndexType;
-    static inline int  getTypeCode() { return TypeCode::AtomicDoubleVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::AtomicDoubleVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -1066,8 +1066,8 @@ public:
     typedef AtomicIntVariable               OriginalType;
     typedef AtomicIntVariable const&        PassType;
     typedef float                           IndexType;
-    static inline int  getTypeCode() { return TypeCode::AtomicIntVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::AtomicIntVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -1080,8 +1080,8 @@ public:
     typedef AtomicIntVariable               OriginalType;
     typedef AtomicIntVariable const&        PassType;
     typedef float                           IndexType;
-    static inline int  getTypeCode() { return TypeCode::AtomicIntVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::AtomicIntVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -1094,8 +1094,8 @@ public:
     typedef AtomicLongVariable              OriginalType;
     typedef AtomicLongVariable const&       PassType;
     typedef float                           IndexType;
-    static inline int  getTypeCode() { return TypeCode::AtomicLongVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::AtomicLongVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -1108,8 +1108,8 @@ public:
     typedef AtomicLongVariable              OriginalType;
     typedef AtomicLongVariable const&       PassType;
     typedef float IndexType;
-    static inline int  getTypeCode() { return TypeCode::AtomicLongVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::AtomicLongVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -1122,8 +1122,8 @@ public:
     typedef AtomicPointerVariable              OriginalType;
     typedef AtomicPointerVariable const&       PassType;
     typedef int                                IndexType;
-    static inline int  getTypeCode() { return TypeCode::AtomicPointerVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::AtomicPointerVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -1136,8 +1136,8 @@ public:
     typedef AtomicPointerVariable              OriginalType;
     typedef AtomicPointerVariable const&       PassType;
     typedef int                                IndexType;
-    static inline int  getTypeCode() { return TypeCode::AtomicPointerVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::AtomicPointerVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -1150,8 +1150,8 @@ public:
     typedef AtomicExtendedPointerVariable              OriginalType;
     typedef AtomicExtendedPointerVariable const&       PassType;
     typedef int                                        IndexType;
-    static inline int  getTypeCode() { return TypeCode::AtomicExtendedPointerVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::AtomicExtendedPointerVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -1164,8 +1164,8 @@ public:
     typedef AtomicExtendedPointerVariable              OriginalType;
     typedef AtomicExtendedPointerVariable const&       PassType;
     typedef int                                        IndexType;
-    static inline int  getTypeCode() { return TypeCode::AtomicExtendedPointerVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::AtomicExtendedPointerVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -1178,8 +1178,8 @@ public:
     typedef AtomicDynamicPointerVariable              OriginalType;
     typedef AtomicDynamicPointerVariable const&       PassType;
     typedef int                                       IndexType;
-    static inline int  getTypeCode() { return TypeCode::AtomicDynamicPointerVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::AtomicDynamicPointerVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -1192,8 +1192,8 @@ public:
     typedef AtomicDynamicPointerVariable              OriginalType;
     typedef AtomicDynamicPointerVariable const&       PassType;
     typedef int                                       IndexType;
-    static inline int  getTypeCode() { return TypeCode::AtomicDynamicPointerVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::AtomicDynamicPointerVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -1208,8 +1208,8 @@ public:
     typedef FloatArray              OriginalType;
     typedef FloatArray const&       PassType;
     typedef float                   IndexType;
-    static inline int  getTypeCode() { return TypeCode::FloatArray; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::FloatArray; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -1222,8 +1222,8 @@ public:
     typedef FloatArray              OriginalType;
     typedef FloatArray const&       PassType;
     typedef float                   IndexType;
-    static inline int  getTypeCode() { return TypeCode::FloatArray; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::FloatArray; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -1236,8 +1236,8 @@ public:
     typedef DoubleArray             OriginalType;
     typedef DoubleArray const&      PassType;
     typedef double                  IndexType;
-    static inline int  getTypeCode() { return TypeCode::DoubleArray; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::DoubleArray; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -1250,8 +1250,8 @@ public:
     typedef DoubleArray             OriginalType;
     typedef DoubleArray const&      PassType;
     typedef double                  IndexType;
-    static inline int  getTypeCode() { return TypeCode::DoubleArray; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::DoubleArray; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -1264,8 +1264,8 @@ public:
     typedef IntArray            OriginalType;
     typedef IntArray const&     PassType;
     typedef float               IndexType;
-    static inline int  getTypeCode() { return TypeCode::IntArray; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::IntArray; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -1278,8 +1278,8 @@ public:
     typedef IntArray            OriginalType;
     typedef IntArray const&     PassType;
     typedef float               IndexType;
-    static inline int  getTypeCode() { return TypeCode::IntArray; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::IntArray; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -1292,8 +1292,8 @@ public:
     typedef ShortArray          OriginalType;
     typedef ShortArray const&   PassType;
     typedef float               IndexType;
-    static inline int  getTypeCode() { return TypeCode::ShortArray; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::ShortArray; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -1306,8 +1306,8 @@ public:
     typedef ShortArray          OriginalType;
     typedef ShortArray const&   PassType;
     typedef float               IndexType;
-    static inline int  getTypeCode() { return TypeCode::ShortArray; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::ShortArray; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -1320,8 +1320,8 @@ public:
     typedef Int24Array          OriginalType;
     typedef Int24Array const&   PassType;
     typedef float               IndexType;
-    static inline int  getTypeCode() { return TypeCode::Int24Array; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::Int24Array; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -1334,8 +1334,8 @@ public:
     typedef Int24Array          OriginalType;
     typedef Int24Array const&   PassType;
     typedef float               IndexType;
-    static inline int  getTypeCode() { return TypeCode::Int24Array; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::Int24Array; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -1348,8 +1348,8 @@ public:
     typedef LongArray           OriginalType;
     typedef LongArray const&    PassType;
     typedef float               IndexType;
-    static inline int  getTypeCode() { return TypeCode::LongArray; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::LongArray; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -1362,8 +1362,8 @@ public:
     typedef LongArray           OriginalType;
     typedef LongArray const&    PassType;
     typedef float               IndexType;
-    static inline int  getTypeCode() { return TypeCode::LongArray; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::LongArray; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -1376,8 +1376,8 @@ public:
     typedef CharArray           OriginalType;
     typedef CharArray const&    PassType;
     typedef float               IndexType;
-    static inline int  getTypeCode() { return TypeCode::CharArray; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::CharArray; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -1390,8 +1390,8 @@ public:
     typedef CharArray           OriginalType;
     typedef CharArray const&    PassType;
     typedef float               IndexType;
-    static inline int  getTypeCode() { return TypeCode::CharArray; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::CharArray; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -1404,8 +1404,8 @@ public:
     typedef BoolArray           OriginalType;
     typedef BoolArray const&    PassType;
     typedef float               IndexType;
-    static inline int  getTypeCode() { return TypeCode::BoolArray; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::BoolArray; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -1418,8 +1418,8 @@ public:
     typedef BoolArray           OriginalType;
     typedef BoolArray const&    PassType;
     typedef float               IndexType;
-    static inline int  getTypeCode() { return TypeCode::BoolArray; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::BoolArray; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -1432,8 +1432,8 @@ public:
     typedef DynamicArray           OriginalType;
     typedef DynamicArray const&    PassType;
     typedef float                  IndexType;
-    static inline int  getTypeCode() { return TypeCode::DynamicArray; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::DynamicArray; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -1446,8 +1446,8 @@ public:
     typedef DynamicArray           OriginalType;
     typedef DynamicArray const&    PassType;
     typedef float                  IndexType;
-    static inline int  getTypeCode() { return TypeCode::DynamicArray; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::DynamicArray; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -1460,8 +1460,8 @@ public:
     typedef plonk::Text         OriginalType;
     typedef plonk::Text const&  PassType;
     typedef int                 IndexType;
-    static inline int  getTypeCode() { return TypeCode::Text; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::Text; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -1474,8 +1474,8 @@ public:
     typedef plonk::Text         OriginalType;
     typedef plonk::Text const&  PassType;
     typedef int                 IndexType;
-    static inline int  getTypeCode() { return TypeCode::Text; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::Text; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -1488,8 +1488,8 @@ public:
     typedef TextArray           OriginalType;
     typedef TextArray const&    PassType;
     typedef int                 IndexType;
-    static inline int  getTypeCode() { return TypeCode::TextArray; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::TextArray; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -1502,8 +1502,8 @@ public:
     typedef TextArray           OriginalType;
     typedef TextArray const&    PassType;
     typedef int                 IndexType;
-    static inline int  getTypeCode() { return TypeCode::TextArray; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::TextArray; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -1516,8 +1516,8 @@ public:
     typedef FloatChannel        OriginalType;
     typedef FloatChannel const& PassType;
     typedef float               IndexType;
-    static inline int  getTypeCode() { return TypeCode::FloatChannel; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::FloatChannel; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -1530,8 +1530,8 @@ public:
     typedef FloatChannel        OriginalType;
     typedef FloatChannel const& PassType;
     typedef float               IndexType;
-    static inline int  getTypeCode() { return TypeCode::FloatChannel; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::FloatChannel; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -1544,8 +1544,8 @@ public:
     typedef DoubleChannel           OriginalType;
     typedef DoubleChannel const&    PassType;
     typedef double                  IndexType;
-    static inline int  getTypeCode() { return TypeCode::DoubleChannel; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::DoubleChannel; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -1558,8 +1558,8 @@ public:
     typedef DoubleChannel           OriginalType;
     typedef DoubleChannel const&    PassType;
     typedef double                  IndexType;
-    static inline int  getTypeCode() { return TypeCode::DoubleChannel; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::DoubleChannel; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -1572,8 +1572,8 @@ public:
     typedef IntChannel              OriginalType;
     typedef IntChannel const&       PassType;
     typedef float                   IndexType;
-    static inline int  getTypeCode() { return TypeCode::IntChannel; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::IntChannel; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -1586,8 +1586,8 @@ public:
     typedef IntChannel              OriginalType;
     typedef IntChannel const&       PassType;
     typedef float                   IndexType;
-    static inline int  getTypeCode() { return TypeCode::IntChannel; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::IntChannel; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -1600,8 +1600,8 @@ public:
     typedef ShortChannel            OriginalType;
     typedef ShortChannel const&     PassType;
     typedef float                   IndexType;
-    static inline int  getTypeCode() { return TypeCode::ShortChannel; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::ShortChannel; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -1614,8 +1614,8 @@ public:
     typedef ShortChannel            OriginalType;
     typedef ShortChannel const&     PassType;
     typedef float                   IndexType;
-    static inline int  getTypeCode() { return TypeCode::ShortChannel; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::ShortChannel; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -1628,8 +1628,8 @@ public:
     typedef Int24Channel            OriginalType;
     typedef Int24Channel const&     PassType;
     typedef float                   IndexType;
-    static inline int  getTypeCode() { return TypeCode::Int24Channel; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::Int24Channel; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -1642,8 +1642,8 @@ public:
     typedef Int24Channel            OriginalType;
     typedef Int24Channel const&     PassType;
     typedef float                   IndexType;
-    static inline int  getTypeCode() { return TypeCode::Int24Channel; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::Int24Channel; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -1656,8 +1656,8 @@ public:
     typedef LongChannel             OriginalType;
     typedef LongChannel const&      PassType;
     typedef float                   IndexType;
-    static inline int  getTypeCode() { return TypeCode::LongChannel; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::LongChannel; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -1670,8 +1670,8 @@ public:
     typedef LongChannel             OriginalType;
     typedef LongChannel const&      PassType;
     typedef float                   IndexType;
-    static inline int  getTypeCode() { return TypeCode::LongChannel; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::LongChannel; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -1684,8 +1684,8 @@ public:
     typedef FloatUnit               OriginalType;
     typedef FloatUnit const&        PassType;
     typedef float                   IndexType;
-    static inline int  getTypeCode() { return TypeCode::FloatUnit; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::FloatUnit; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -1698,8 +1698,8 @@ public:
     typedef FloatUnit               OriginalType;
     typedef FloatUnit const&        PassType;
     typedef float                   IndexType;
-    static inline int  getTypeCode() { return TypeCode::FloatUnit; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::FloatUnit; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -1712,8 +1712,8 @@ public:
     typedef DoubleUnit              OriginalType;
     typedef DoubleUnit const&       PassType;
     typedef double                  IndexType;
-    static inline int  getTypeCode() { return TypeCode::DoubleUnit; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::DoubleUnit; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -1726,8 +1726,8 @@ public:
     typedef DoubleUnit              OriginalType;
     typedef DoubleUnit const&       PassType;
     typedef double                  IndexType;
-    static inline int  getTypeCode() { return TypeCode::DoubleUnit; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::DoubleUnit; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -1740,8 +1740,8 @@ public:
     typedef IntUnit             OriginalType;
     typedef IntUnit const&      PassType;
     typedef float               IndexType;
-    static inline int  getTypeCode() { return TypeCode::IntUnit; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::IntUnit; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -1754,8 +1754,8 @@ public:
     typedef IntUnit             OriginalType;
     typedef IntUnit const&      PassType;
     typedef float               IndexType;
-    static inline int  getTypeCode() { return TypeCode::IntUnit; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::IntUnit; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -1768,8 +1768,8 @@ public:
     typedef ShortUnit           OriginalType;
     typedef ShortUnit const&    PassType;
     typedef float               IndexType;
-    static inline int  getTypeCode() { return TypeCode::ShortUnit; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::ShortUnit; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -1782,8 +1782,8 @@ public:
     typedef ShortUnit           OriginalType;
     typedef ShortUnit const&    PassType;
     typedef float               IndexType;
-    static inline int  getTypeCode() { return TypeCode::ShortUnit; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::ShortUnit; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -1796,8 +1796,8 @@ public:
     typedef Int24Unit           OriginalType;
     typedef Int24Unit const&    PassType;
     typedef float               IndexType;
-    static inline int  getTypeCode() { return TypeCode::Int24Unit; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::Int24Unit; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -1810,8 +1810,8 @@ public:
     typedef Int24Unit           OriginalType;
     typedef Int24Unit const&    PassType;
     typedef float               IndexType;
-    static inline int  getTypeCode() { return TypeCode::Int24Unit; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::Int24Unit; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -1824,8 +1824,8 @@ public:
     typedef LongUnit            OriginalType;
     typedef LongUnit const&     PassType;
     typedef float               IndexType;
-    static inline int  getTypeCode() { return TypeCode::LongUnit; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::LongUnit; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -1838,8 +1838,8 @@ public:
     typedef LongUnit            OriginalType;
     typedef LongUnit const&     PassType;
     typedef float               IndexType;
-    static inline int  getTypeCode() { return TypeCode::LongUnit; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::LongUnit; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -1852,8 +1852,8 @@ public:
     typedef FloatBus            OriginalType;
     typedef FloatBus const&     PassType;
     typedef float               IndexType;
-    static inline int  getTypeCode() { return TypeCode::FloatBus; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::FloatBus; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -1866,8 +1866,8 @@ public:
     typedef FloatBus            OriginalType;
     typedef FloatBus const&     PassType;
     typedef float               IndexType;
-    static inline int  getTypeCode() { return TypeCode::FloatBus; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::FloatBus; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -1880,8 +1880,8 @@ public:
     typedef DoubleBus           OriginalType;
     typedef DoubleBus const&    PassType;
     typedef double              IndexType;
-    static inline int  getTypeCode() { return TypeCode::DoubleBus; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::DoubleBus; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -1894,8 +1894,8 @@ public:
     typedef DoubleBus           OriginalType;
     typedef DoubleBus const&    PassType;
     typedef double              IndexType;
-    static inline int  getTypeCode() { return TypeCode::DoubleBus; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::DoubleBus; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -1908,8 +1908,8 @@ public:
     typedef IntBus              OriginalType;
     typedef IntBus const&       PassType;
     typedef float               IndexType;
-    static inline int  getTypeCode() { return TypeCode::IntBus; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::IntBus; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -1922,8 +1922,8 @@ public:
     typedef IntBus              OriginalType;
     typedef IntBus const&       PassType;
     typedef float               IndexType;
-    static inline int  getTypeCode() { return TypeCode::IntBus; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::IntBus; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -1936,8 +1936,8 @@ public:
     typedef ShortBus            OriginalType;
     typedef ShortBus const&     PassType;
     typedef float               IndexType;
-    static inline int  getTypeCode() { return TypeCode::ShortBus; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::ShortBus; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -1950,8 +1950,8 @@ public:
     typedef ShortBus            OriginalType;
     typedef ShortBus const&     PassType;
     typedef float               IndexType;
-    static inline int  getTypeCode() { return TypeCode::ShortBus; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::ShortBus; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -1964,8 +1964,8 @@ public:
     typedef Int24Bus            OriginalType;
     typedef Int24Bus const&     PassType;
     typedef float               IndexType;
-    static inline int  getTypeCode() { return TypeCode::Int24Bus; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::Int24Bus; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -1978,8 +1978,8 @@ public:
     typedef Int24Bus            OriginalType;
     typedef Int24Bus const&     PassType;
     typedef float               IndexType;
-    static inline int  getTypeCode() { return TypeCode::Int24Bus; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::Int24Bus; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -1992,8 +1992,8 @@ public:
     typedef LongBus             OriginalType;
     typedef LongBus const&      PassType;
     typedef float               IndexType;
-    static inline int  getTypeCode() { return TypeCode::LongBus; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::LongBus; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -2006,8 +2006,8 @@ public:
     typedef LongBus             OriginalType;
     typedef LongBus const&      PassType;
     typedef float               IndexType;
-    static inline int  getTypeCode() { return TypeCode::LongBus; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::LongBus; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -2020,8 +2020,8 @@ public:
     typedef FloatUnits          OriginalType;
     typedef FloatUnits const&   PassType;
     typedef float               IndexType;
-    static inline int  getTypeCode() { return TypeCode::FloatUnits; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::FloatUnits; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -2034,8 +2034,8 @@ public:
     typedef FloatUnits          OriginalType;
     typedef FloatUnits const&   PassType;
     typedef float               IndexType;
-    static inline int  getTypeCode() { return TypeCode::FloatUnits; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::FloatUnits; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -2048,8 +2048,8 @@ public:
     typedef DoubleUnits             OriginalType;
     typedef DoubleUnits const&      PassType;
     typedef double                  IndexType;
-    static inline int  getTypeCode() { return TypeCode::DoubleUnits; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::DoubleUnits; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -2062,8 +2062,8 @@ public:
     typedef DoubleUnits             OriginalType;
     typedef DoubleUnits const&      PassType;
     typedef double                  IndexType;
-    static inline int  getTypeCode() { return TypeCode::DoubleUnits; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::DoubleUnits; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -2076,8 +2076,8 @@ public:
     typedef IntUnits            OriginalType;
     typedef IntUnits const&     PassType;
     typedef float               IndexType;
-    static inline int  getTypeCode() { return TypeCode::IntUnits; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::IntUnits; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -2090,8 +2090,8 @@ public:
     typedef IntUnits            OriginalType;
     typedef IntUnits const&     PassType;
     typedef float               IndexType;
-    static inline int  getTypeCode() { return TypeCode::IntUnits; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::IntUnits; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -2104,8 +2104,8 @@ public:
     typedef ShortUnits          OriginalType;
     typedef ShortUnits const&   PassType;
     typedef float               IndexType;
-    static inline int  getTypeCode() { return TypeCode::ShortUnits; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::ShortUnits; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -2118,8 +2118,8 @@ public:
     typedef ShortUnits          OriginalType;
     typedef ShortUnits const&   PassType;
     typedef float               IndexType;
-    static inline int  getTypeCode() { return TypeCode::ShortUnits; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::ShortUnits; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -2132,8 +2132,8 @@ public:
     typedef Int24Units          OriginalType;
     typedef Int24Units const&   PassType;
     typedef float               IndexType;
-    static inline int  getTypeCode() { return TypeCode::Int24Units; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::Int24Units; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -2146,8 +2146,8 @@ public:
     typedef Int24Units          OriginalType;
     typedef Int24Units const&   PassType;
     typedef float               IndexType;
-    static inline int  getTypeCode() { return TypeCode::Int24Units; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::Int24Units; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -2160,8 +2160,8 @@ public:
     typedef LongUnits           OriginalType;
     typedef LongUnits const&    PassType;
     typedef float               IndexType;
-    static inline int  getTypeCode() { return TypeCode::LongUnits; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::LongUnits; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -2174,8 +2174,8 @@ public:
     typedef LongUnits           OriginalType;
     typedef LongUnits const&    PassType;
     typedef float               IndexType;
-    static inline int  getTypeCode() { return TypeCode::LongUnits; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::LongUnits; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -2188,8 +2188,8 @@ public:
     typedef FloatBusses         OriginalType;
     typedef FloatBusses const&  PassType;
     typedef float               IndexType;
-    static inline int  getTypeCode() { return TypeCode::FloatBusses; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::FloatBusses; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -2202,8 +2202,8 @@ public:
     typedef FloatBusses         OriginalType;
     typedef FloatBusses const&  PassType;
     typedef float               IndexType;
-    static inline int  getTypeCode() { return TypeCode::FloatBusses; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::FloatBusses; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -2216,8 +2216,8 @@ public:
     typedef DoubleBusses            OriginalType;
     typedef DoubleBusses const&     PassType;
     typedef double IndexType;
-    static inline int  getTypeCode() { return TypeCode::DoubleBusses; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::DoubleBusses; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -2230,8 +2230,8 @@ public:
     typedef DoubleBusses            OriginalType;
     typedef DoubleBusses const&     PassType;
     typedef double                  IndexType;
-    static inline int  getTypeCode() { return TypeCode::DoubleBusses; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::DoubleBusses; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -2244,8 +2244,8 @@ public:
     typedef IntBusses           OriginalType;
     typedef IntBusses const&    PassType;
     typedef float               IndexType;
-    static inline int  getTypeCode() { return TypeCode::IntBusses; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::IntBusses; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -2258,8 +2258,8 @@ public:
     typedef IntBusses           OriginalType;
     typedef IntBusses const&    PassType;
     typedef float               IndexType;
-    static inline int  getTypeCode() { return TypeCode::IntBusses; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::IntBusses; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -2272,8 +2272,8 @@ public:
     typedef ShortBusses         OriginalType;
     typedef ShortBusses const&  PassType;
     typedef float               IndexType;
-    static inline int  getTypeCode() { return TypeCode::ShortBusses; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::ShortBusses; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -2286,8 +2286,8 @@ public:
     typedef ShortBusses         OriginalType;
     typedef ShortBusses const&  PassType;
     typedef float               IndexType;
-    static inline int  getTypeCode() { return TypeCode::ShortBusses; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::ShortBusses; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -2300,8 +2300,8 @@ public:
     typedef Int24Busses         OriginalType;
     typedef Int24Busses const&  PassType;
     typedef float               IndexType;
-    static inline int  getTypeCode() { return TypeCode::Int24Busses; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::Int24Busses; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -2314,8 +2314,8 @@ public:
     typedef Int24Busses         OriginalType;
     typedef Int24Busses const&  PassType;
     typedef float               IndexType;
-    static inline int  getTypeCode() { return TypeCode::Int24Busses; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::Int24Busses; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -2328,8 +2328,8 @@ public:
     typedef LongBusses          OriginalType;
     typedef LongBusses const&   PassType;
     typedef float               IndexType;
-    static inline int  getTypeCode() { return TypeCode::LongBusses; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::LongBusses; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -2342,8 +2342,8 @@ public:
     typedef LongBusses          OriginalType;
     typedef LongBusses const&   PassType;
     typedef float               IndexType;
-    static inline int  getTypeCode() { return TypeCode::LongBusses; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::LongBusses; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -2356,8 +2356,8 @@ public:
     typedef FloatBreakpoints            OriginalType;
     typedef FloatBreakpoints const&     PassType;
     typedef float                       IndexType;
-    static inline int  getTypeCode() { return TypeCode::FloatBreakpoints; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::FloatBreakpoints; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -2370,8 +2370,8 @@ public:
     typedef FloatBreakpoints            OriginalType;
     typedef FloatBreakpoints const&     PassType;
     typedef float                       IndexType;
-    static inline int  getTypeCode() { return TypeCode::FloatBreakpoints; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::FloatBreakpoints; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -2384,8 +2384,8 @@ public:
     typedef DoubleBreakpoints           OriginalType;
     typedef DoubleBreakpoints const&    PassType;
     typedef double                      IndexType;
-    static inline int  getTypeCode() { return TypeCode::DoubleBreakpoints; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::DoubleBreakpoints; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -2398,8 +2398,8 @@ public:
     typedef DoubleBreakpoints           OriginalType;
     typedef DoubleBreakpoints const&    PassType;
     typedef double                      IndexType;
-    static inline int  getTypeCode() { return TypeCode::DoubleBreakpoints; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::DoubleBreakpoints; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -2412,8 +2412,8 @@ public:
     typedef IntBreakpoints              OriginalType;
     typedef IntBreakpoints const&       PassType;
     typedef float                       IndexType;
-    static inline int  getTypeCode() { return TypeCode::IntBreakpoints; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::IntBreakpoints; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -2426,8 +2426,8 @@ public:
     typedef IntBreakpoints              OriginalType;
     typedef IntBreakpoints const&       PassType;
     typedef float                       IndexType;
-    static inline int  getTypeCode() { return TypeCode::IntBreakpoints; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::IntBreakpoints; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -2440,8 +2440,8 @@ public:
     typedef ShortBreakpoints            OriginalType;
     typedef ShortBreakpoints const&     PassType;
     typedef float                       IndexType;
-    static inline int  getTypeCode() { return TypeCode::ShortBreakpoints; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::ShortBreakpoints; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -2454,8 +2454,8 @@ public:
     typedef ShortBreakpoints            OriginalType;
     typedef ShortBreakpoints const&     PassType;
     typedef float                       IndexType;
-    static inline int  getTypeCode() { return TypeCode::ShortBreakpoints; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::ShortBreakpoints; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -2468,8 +2468,8 @@ public:
     typedef Int24Breakpoints            OriginalType;
     typedef Int24Breakpoints const&     PassType;
     typedef float                       IndexType;
-    static inline int  getTypeCode() { return TypeCode::Int24Breakpoints; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::Int24Breakpoints; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -2482,8 +2482,8 @@ public:
     typedef Int24Breakpoints            OriginalType;
     typedef Int24Breakpoints const&     PassType;
     typedef float                       IndexType;
-    static inline int  getTypeCode() { return TypeCode::Int24Breakpoints; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::Int24Breakpoints; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -2496,8 +2496,8 @@ public:
     typedef LongBreakpoints             OriginalType;
     typedef LongBreakpoints const&      PassType;
     typedef float                       IndexType;
-    static inline int  getTypeCode() { return TypeCode::LongBreakpoints; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::LongBreakpoints; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -2510,8 +2510,8 @@ public:
     typedef LongBreakpoints             OriginalType;
     typedef LongBreakpoints const&      PassType;
     typedef float                       IndexType;
-    static inline int  getTypeCode() { return TypeCode::LongBreakpoints; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::LongBreakpoints; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -2524,8 +2524,8 @@ public:
     typedef FloatWavetable              OriginalType;
     typedef FloatWavetable const&       PassType;
     typedef float                       IndexType;
-    static inline int  getTypeCode() { return TypeCode::FloatWavetable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::FloatWavetable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -2538,8 +2538,8 @@ public:
     typedef FloatWavetable              OriginalType;
     typedef FloatWavetable const&       PassType;
     typedef float                       IndexType;
-    static inline int  getTypeCode() { return TypeCode::FloatWavetable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::FloatWavetable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -2552,8 +2552,8 @@ public:
     typedef DoubleWavetable             OriginalType;
     typedef DoubleWavetable const&      PassType;
     typedef double                      IndexType;
-    static inline int  getTypeCode() { return TypeCode::DoubleWavetable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::DoubleWavetable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -2566,8 +2566,8 @@ public:
     typedef DoubleWavetable             OriginalType;
     typedef DoubleWavetable const&      PassType;
     typedef double                      IndexType;
-    static inline int  getTypeCode() { return TypeCode::DoubleWavetable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::DoubleWavetable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -2580,8 +2580,8 @@ public:
     typedef IntWavetable            OriginalType;
     typedef IntWavetable const&     PassType;
     typedef float                   IndexType;
-    static inline int  getTypeCode() { return TypeCode::IntWavetable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::IntWavetable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -2594,8 +2594,8 @@ public:
     typedef IntWavetable            OriginalType;
     typedef IntWavetable const&     PassType;
     typedef float                   IndexType;
-    static inline int  getTypeCode() { return TypeCode::IntWavetable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::IntWavetable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -2608,8 +2608,8 @@ public:
     typedef ShortWavetable              OriginalType;
     typedef ShortWavetable const&       PassType;
     typedef float                       IndexType;
-    static inline int  getTypeCode() { return TypeCode::ShortWavetable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::ShortWavetable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -2622,8 +2622,8 @@ public:
     typedef ShortWavetable              OriginalType;
     typedef ShortWavetable const&       PassType;
     typedef float                       IndexType;
-    static inline int  getTypeCode() { return TypeCode::ShortWavetable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::ShortWavetable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -2636,8 +2636,8 @@ public:
     typedef Int24Wavetable              OriginalType;
     typedef Int24Wavetable const&       PassType;
     typedef float                       IndexType;
-    static inline int  getTypeCode() { return TypeCode::Int24Wavetable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::Int24Wavetable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -2650,8 +2650,8 @@ public:
     typedef Int24Wavetable              OriginalType;
     typedef Int24Wavetable const&       PassType;
     typedef float                       IndexType;
-    static inline int  getTypeCode() { return TypeCode::Int24Wavetable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::Int24Wavetable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -2664,8 +2664,8 @@ public:
     typedef LongWavetable               OriginalType;
     typedef LongWavetable const&        PassType;
     typedef float                       IndexType;
-    static inline int  getTypeCode() { return TypeCode::LongWavetable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::LongWavetable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -2678,8 +2678,8 @@ public:
     typedef LongWavetable               OriginalType;
     typedef LongWavetable const&        PassType;
     typedef float                       IndexType;
-    static inline int  getTypeCode() { return TypeCode::LongWavetable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::LongWavetable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -2692,8 +2692,8 @@ public:
     typedef FloatSignal              OriginalType;
     typedef FloatSignal const&       PassType;
     typedef float                    IndexType;
-    static inline int  getTypeCode() { return TypeCode::FloatSignal; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::FloatSignal; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -2706,8 +2706,8 @@ public:
     typedef FloatSignal              OriginalType;
     typedef FloatSignal const&       PassType;
     typedef float                    IndexType;
-    static inline int  getTypeCode() { return TypeCode::FloatSignal; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::FloatSignal; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -2720,8 +2720,8 @@ public:
     typedef DoubleSignal             OriginalType;
     typedef DoubleSignal const&      PassType;
     typedef double                   IndexType;
-    static inline int  getTypeCode() { return TypeCode::DoubleSignal; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::DoubleSignal; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -2734,8 +2734,8 @@ public:
     typedef DoubleSignal             OriginalType;
     typedef DoubleSignal const&      PassType;
     typedef double                   IndexType;
-    static inline int  getTypeCode() { return TypeCode::DoubleSignal; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::DoubleSignal; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -2748,8 +2748,8 @@ public:
     typedef IntSignal            OriginalType;
     typedef IntSignal const&     PassType;
     typedef float                IndexType;
-    static inline int  getTypeCode() { return TypeCode::IntSignal; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::IntSignal; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -2762,8 +2762,8 @@ public:
     typedef IntSignal            OriginalType;
     typedef IntSignal const&     PassType;
     typedef float                IndexType;
-    static inline int  getTypeCode() { return TypeCode::IntSignal; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::IntSignal; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -2776,8 +2776,8 @@ public:
     typedef ShortSignal              OriginalType;
     typedef ShortSignal const&       PassType;
     typedef float                    IndexType;
-    static inline int  getTypeCode() { return TypeCode::ShortSignal; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::ShortSignal; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -2790,8 +2790,8 @@ public:
     typedef ShortSignal              OriginalType;
     typedef ShortSignal const&       PassType;
     typedef float                    IndexType;
-    static inline int  getTypeCode() { return TypeCode::ShortSignal; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::ShortSignal; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -2804,8 +2804,8 @@ public:
     typedef Int24Signal              OriginalType;
     typedef Int24Signal const&       PassType;
     typedef float                    IndexType;
-    static inline int  getTypeCode() { return TypeCode::Int24Signal; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::Int24Signal; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -2818,8 +2818,8 @@ public:
     typedef Int24Signal              OriginalType;
     typedef Int24Signal const&       PassType;
     typedef float                    IndexType;
-    static inline int  getTypeCode() { return TypeCode::Int24Signal; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::Int24Signal; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -2832,8 +2832,8 @@ public:
     typedef LongSignal               OriginalType;
     typedef LongSignal const&        PassType;
     typedef float                    IndexType;
-    static inline int  getTypeCode() { return TypeCode::LongSignal; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::LongSignal; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -2846,8 +2846,8 @@ public:
     typedef LongSignal               OriginalType;
     typedef LongSignal const&        PassType;
     typedef float                    IndexType;
-    static inline int  getTypeCode() { return TypeCode::LongSignal; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::LongSignal; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -2863,8 +2863,8 @@ public:
     typedef FloatArrayVariable              OriginalType;
     typedef FloatArrayVariable const&       PassType;
     typedef float                   IndexType;
-    static inline int  getTypeCode() { return TypeCode::FloatArrayVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::FloatArrayVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -2877,8 +2877,8 @@ public:
     typedef FloatArrayVariable              OriginalType;
     typedef FloatArrayVariable const&       PassType;
     typedef float                           IndexType;
-    static inline int  getTypeCode() { return TypeCode::FloatArrayVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::FloatArrayVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -2892,8 +2892,8 @@ public:
     typedef DoubleArrayVariable             OriginalType;
     typedef DoubleArrayVariable const&      PassType;
     typedef double                  IndexType;
-    static inline int  getTypeCode() { return TypeCode::DoubleArrayVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::DoubleArrayVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -2906,8 +2906,8 @@ public:
     typedef DoubleArrayVariable             OriginalType;
     typedef DoubleArrayVariable const&      PassType;
     typedef double                          IndexType;
-    static inline int  getTypeCode() { return TypeCode::DoubleArrayVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::DoubleArrayVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -2920,8 +2920,8 @@ public:
     typedef IntArrayVariable            OriginalType;
     typedef IntArrayVariable const&     PassType;
     typedef float                       IndexType;
-    static inline int  getTypeCode() { return TypeCode::IntArrayVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::IntArrayVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -2934,8 +2934,8 @@ public:
     typedef IntArrayVariable            OriginalType;
     typedef IntArrayVariable const&     PassType;
     typedef float                       IndexType;
-    static inline int  getTypeCode() { return TypeCode::IntArrayVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::IntArrayVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -2948,8 +2948,8 @@ public:
     typedef ShortArrayVariable          OriginalType;
     typedef ShortArrayVariable const&   PassType;
     typedef float                       IndexType;
-    static inline int  getTypeCode() { return TypeCode::ShortArrayVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::ShortArrayVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -2962,8 +2962,8 @@ public:
     typedef ShortArrayVariable          OriginalType;
     typedef ShortArrayVariable const&   PassType;
     typedef float                       IndexType;
-    static inline int  getTypeCode() { return TypeCode::ShortArrayVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::ShortArrayVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -2976,8 +2976,8 @@ public:
     typedef Int24ArrayVariable          OriginalType;
     typedef Int24ArrayVariable const&   PassType;
     typedef float                       IndexType;
-    static inline int  getTypeCode() { return TypeCode::Int24ArrayVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::Int24ArrayVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -2990,8 +2990,8 @@ public:
     typedef Int24ArrayVariable          OriginalType;
     typedef Int24ArrayVariable const&   PassType;
     typedef float                       IndexType;
-    static inline int  getTypeCode() { return TypeCode::Int24ArrayVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::Int24ArrayVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -3004,8 +3004,8 @@ public:
     typedef LongArrayVariable           OriginalType;
     typedef LongArrayVariable const&    PassType;
     typedef float                       IndexType;
-    static inline int  getTypeCode() { return TypeCode::LongArrayVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::LongArrayVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -3018,8 +3018,8 @@ public:
     typedef LongArrayVariable           OriginalType;
     typedef LongArrayVariable const&    PassType;
     typedef float                       IndexType;
-    static inline int  getTypeCode() { return TypeCode::LongArrayVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::LongArrayVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -3032,8 +3032,8 @@ public:
     typedef CharArrayVariable           OriginalType;
     typedef CharArrayVariable const&    PassType;
     typedef float                       IndexType;
-    static inline int  getTypeCode() { return TypeCode::CharArrayVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::CharArrayVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -3046,8 +3046,8 @@ public:
     typedef CharArrayVariable           OriginalType;
     typedef CharArrayVariable const&    PassType;
     typedef float                       IndexType;
-    static inline int  getTypeCode() { return TypeCode::CharArrayVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::CharArrayVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -3060,8 +3060,8 @@ public:
     typedef BoolArrayVariable           OriginalType;
     typedef BoolArrayVariable const&    PassType;
     typedef float                       IndexType;
-    static inline int  getTypeCode() { return TypeCode::BoolArrayVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::BoolArrayVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -3074,8 +3074,8 @@ public:
     typedef BoolArrayVariable           OriginalType;
     typedef BoolArrayVariable const&    PassType;
     typedef float                       IndexType;
-    static inline int  getTypeCode() { return TypeCode::BoolArrayVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::BoolArrayVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -3088,8 +3088,8 @@ public:
     typedef TextVariable         OriginalType;
     typedef TextVariable const&  PassType;
     typedef int                  IndexType;
-    static inline int  getTypeCode() { return TypeCode::TextVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::TextVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -3102,8 +3102,8 @@ public:
     typedef TextVariable         OriginalType;
     typedef TextVariable const&  PassType;
     typedef int                  IndexType;
-    static inline int  getTypeCode() { return TypeCode::TextVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::TextVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -3116,8 +3116,8 @@ public:
     typedef TextArrayVariable           OriginalType;
     typedef TextArrayVariable const&    PassType;
     typedef int                         IndexType;
-    static inline int  getTypeCode() { return TypeCode::TextArrayVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::TextArrayVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -3130,8 +3130,8 @@ public:
     typedef TextArrayVariable           OriginalType;
     typedef TextArrayVariable const&    PassType;
     typedef int                         IndexType;
-    static inline int  getTypeCode() { return TypeCode::TextArrayVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::TextArrayVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -3144,8 +3144,8 @@ public:
     typedef FloatChannelVariable        OriginalType;
     typedef FloatChannelVariable const& PassType;
     typedef float                       IndexType;
-    static inline int  getTypeCode() { return TypeCode::FloatChannelVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::FloatChannelVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -3158,8 +3158,8 @@ public:
     typedef FloatChannelVariable        OriginalType;
     typedef FloatChannelVariable const& PassType;
     typedef float                       IndexType;
-    static inline int  getTypeCode() { return TypeCode::FloatChannelVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::FloatChannelVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -3172,8 +3172,8 @@ public:
     typedef DoubleChannelVariable           OriginalType;
     typedef DoubleChannelVariable const&    PassType;
     typedef double                          IndexType;
-    static inline int  getTypeCode() { return TypeCode::DoubleChannelVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::DoubleChannelVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -3186,8 +3186,8 @@ public:
     typedef DoubleChannelVariable           OriginalType;
     typedef DoubleChannelVariable const&    PassType;
     typedef double                          IndexType;
-    static inline int  getTypeCode() { return TypeCode::DoubleChannelVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::DoubleChannelVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -3200,8 +3200,8 @@ public:
     typedef IntChannelVariable              OriginalType;
     typedef IntChannelVariable const&       PassType;
     typedef float                           IndexType;
-    static inline int  getTypeCode() { return TypeCode::IntChannelVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::IntChannelVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -3214,8 +3214,8 @@ public:
     typedef IntChannelVariable              OriginalType;
     typedef IntChannelVariable const&       PassType;
     typedef float                           IndexType;
-    static inline int  getTypeCode() { return TypeCode::IntChannelVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::IntChannelVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -3228,8 +3228,8 @@ public:
     typedef ShortChannelVariable            OriginalType;
     typedef ShortChannelVariable const&     PassType;
     typedef float                           IndexType;
-    static inline int  getTypeCode() { return TypeCode::ShortChannelVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::ShortChannelVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -3242,8 +3242,8 @@ public:
     typedef ShortChannelVariable            OriginalType;
     typedef ShortChannelVariable const&     PassType;
     typedef float                           IndexType;
-    static inline int  getTypeCode() { return TypeCode::ShortChannelVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::ShortChannelVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -3256,8 +3256,8 @@ public:
     typedef Int24ChannelVariable            OriginalType;
     typedef Int24ChannelVariable const&     PassType;
     typedef float                           IndexType;
-    static inline int  getTypeCode() { return TypeCode::Int24ChannelVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::Int24ChannelVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -3270,8 +3270,8 @@ public:
     typedef Int24ChannelVariable            OriginalType;
     typedef Int24ChannelVariable const&     PassType;
     typedef float                           IndexType;
-    static inline int  getTypeCode() { return TypeCode::Int24ChannelVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::Int24ChannelVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -3284,8 +3284,8 @@ public:
     typedef LongChannelVariable             OriginalType;
     typedef LongChannelVariable const&      PassType;
     typedef float                           IndexType;
-    static inline int  getTypeCode() { return TypeCode::LongChannelVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::LongChannelVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -3298,8 +3298,8 @@ public:
     typedef LongChannelVariable             OriginalType;
     typedef LongChannelVariable const&      PassType;
     typedef float                           IndexType;
-    static inline int  getTypeCode() { return TypeCode::LongChannelVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::LongChannelVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -3312,8 +3312,8 @@ public:
     typedef FloatUnitVariable               OriginalType;
     typedef FloatUnitVariable const&        PassType;
     typedef float                           IndexType;
-    static inline int  getTypeCode() { return TypeCode::FloatUnitVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::FloatUnitVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -3326,8 +3326,8 @@ public:
     typedef FloatUnitVariable               OriginalType;
     typedef FloatUnitVariable const&        PassType;
     typedef float                           IndexType;
-    static inline int  getTypeCode() { return TypeCode::FloatUnitVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::FloatUnitVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -3340,8 +3340,8 @@ public:
     typedef DoubleUnitVariable              OriginalType;
     typedef DoubleUnitVariable const&       PassType;
     typedef double                          IndexType;
-    static inline int  getTypeCode() { return TypeCode::DoubleUnitVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::DoubleUnitVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -3354,8 +3354,8 @@ public:
     typedef DoubleUnitVariable              OriginalType;
     typedef DoubleUnitVariable const&       PassType;
     typedef double                          IndexType;
-    static inline int  getTypeCode() { return TypeCode::DoubleUnitVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::DoubleUnitVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -3368,8 +3368,8 @@ public:
     typedef IntUnitVariable             OriginalType;
     typedef IntUnitVariable const&      PassType;
     typedef float                       IndexType;
-    static inline int  getTypeCode() { return TypeCode::IntUnitVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::IntUnitVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -3382,8 +3382,8 @@ public:
     typedef IntUnitVariable             OriginalType;
     typedef IntUnitVariable const&      PassType;
     typedef float                       IndexType;
-    static inline int  getTypeCode() { return TypeCode::IntUnitVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::IntUnitVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -3396,8 +3396,8 @@ public:
     typedef ShortUnitVariable           OriginalType;
     typedef ShortUnitVariable const&    PassType;
     typedef float                       IndexType;
-    static inline int  getTypeCode() { return TypeCode::ShortUnitVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::ShortUnitVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -3410,8 +3410,8 @@ public:
     typedef ShortUnitVariable           OriginalType;
     typedef ShortUnitVariable const&    PassType;
     typedef float                       IndexType;
-    static inline int  getTypeCode() { return TypeCode::ShortUnitVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::ShortUnitVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -3424,8 +3424,8 @@ public:
     typedef Int24UnitVariable           OriginalType;
     typedef Int24UnitVariable const&    PassType;
     typedef float                       IndexType;
-    static inline int  getTypeCode() { return TypeCode::Int24UnitVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::Int24UnitVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -3438,8 +3438,8 @@ public:
     typedef Int24UnitVariable           OriginalType;
     typedef Int24UnitVariable const&    PassType;
     typedef float                       IndexType;
-    static inline int  getTypeCode() { return TypeCode::Int24UnitVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::Int24UnitVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -3452,8 +3452,8 @@ public:
     typedef LongUnitVariable            OriginalType;
     typedef LongUnitVariable const&     PassType;
     typedef float                       IndexType;
-    static inline int  getTypeCode() { return TypeCode::LongUnitVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::LongUnitVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -3466,8 +3466,8 @@ public:
     typedef LongUnitVariable            OriginalType;
     typedef LongUnitVariable const&     PassType;
     typedef float               IndexType;
-    static inline int  getTypeCode() { return TypeCode::LongUnitVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::LongUnitVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -3480,8 +3480,8 @@ public:
     typedef FloatBusVariable            OriginalType;
     typedef FloatBusVariable const&     PassType;
     typedef float                       IndexType;
-    static inline int  getTypeCode() { return TypeCode::FloatBusVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::FloatBusVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -3494,8 +3494,8 @@ public:
     typedef FloatBusVariable            OriginalType;
     typedef FloatBusVariable const&     PassType;
     typedef float                       IndexType;
-    static inline int  getTypeCode() { return TypeCode::FloatBusVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::FloatBusVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -3508,8 +3508,8 @@ public:
     typedef DoubleBusVariable           OriginalType;
     typedef DoubleBusVariable const&    PassType;
     typedef double                      IndexType;
-    static inline int  getTypeCode() { return TypeCode::DoubleBusVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::DoubleBusVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -3522,8 +3522,8 @@ public:
     typedef DoubleBusVariable           OriginalType;
     typedef DoubleBusVariable const&    PassType;
     typedef double                      IndexType;
-    static inline int  getTypeCode() { return TypeCode::DoubleBusVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::DoubleBusVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -3536,8 +3536,8 @@ public:
     typedef IntBusVariable              OriginalType;
     typedef IntBusVariable const&       PassType;
     typedef float                       IndexType;
-    static inline int  getTypeCode() { return TypeCode::IntBusVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::IntBusVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -3550,8 +3550,8 @@ public:
     typedef IntBusVariable              OriginalType;
     typedef IntBusVariable const&       PassType;
     typedef float                       IndexType;
-    static inline int  getTypeCode() { return TypeCode::IntBusVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::IntBusVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -3564,8 +3564,8 @@ public:
     typedef ShortBusVariable            OriginalType;
     typedef ShortBusVariable const&     PassType;
     typedef float                       IndexType;
-    static inline int  getTypeCode() { return TypeCode::ShortBusVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::ShortBusVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -3578,8 +3578,8 @@ public:
     typedef ShortBusVariable            OriginalType;
     typedef ShortBusVariable const&     PassType;
     typedef float                       IndexType;
-    static inline int  getTypeCode() { return TypeCode::ShortBusVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::ShortBusVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -3592,8 +3592,8 @@ public:
     typedef Int24BusVariable            OriginalType;
     typedef Int24BusVariable const&     PassType;
     typedef float                       IndexType;
-    static inline int  getTypeCode() { return TypeCode::Int24BusVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::Int24BusVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -3606,8 +3606,8 @@ public:
     typedef Int24BusVariable            OriginalType;
     typedef Int24BusVariable const&     PassType;
     typedef float                       IndexType;
-    static inline int  getTypeCode() { return TypeCode::Int24BusVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::Int24BusVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -3620,8 +3620,8 @@ public:
     typedef LongBusVariable             OriginalType;
     typedef LongBusVariable const&      PassType;
     typedef float                       IndexType;
-    static inline int  getTypeCode() { return TypeCode::LongBusVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::LongBusVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -3634,8 +3634,8 @@ public:
     typedef LongBusVariable             OriginalType;
     typedef LongBusVariable const&      PassType;
     typedef float                       IndexType;
-    static inline int  getTypeCode() { return TypeCode::LongBusVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::LongBusVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -3648,8 +3648,8 @@ public:
     typedef FloatUnitsVariable          OriginalType;
     typedef FloatUnitsVariable const&   PassType;
     typedef float                       IndexType;
-    static inline int  getTypeCode() { return TypeCode::FloatUnitsVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::FloatUnitsVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -3662,8 +3662,8 @@ public:
     typedef FloatUnitsVariable          OriginalType;
     typedef FloatUnitsVariable const&   PassType;
     typedef float                       IndexType;
-    static inline int  getTypeCode() { return TypeCode::FloatUnitsVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::FloatUnitsVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -3676,8 +3676,8 @@ public:
     typedef DoubleUnitsVariable             OriginalType;
     typedef DoubleUnitsVariable const&      PassType;
     typedef double                          IndexType;
-    static inline int  getTypeCode() { return TypeCode::DoubleUnitsVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::DoubleUnitsVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -3690,8 +3690,8 @@ public:
     typedef DoubleUnitsVariable             OriginalType;
     typedef DoubleUnitsVariable const&      PassType;
     typedef double                          IndexType;
-    static inline int  getTypeCode() { return TypeCode::DoubleUnitsVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::DoubleUnitsVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -3704,8 +3704,8 @@ public:
     typedef IntUnitsVariable            OriginalType;
     typedef IntUnitsVariable const&     PassType;
     typedef float                       IndexType;
-    static inline int  getTypeCode() { return TypeCode::IntUnitsVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::IntUnitsVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -3718,8 +3718,8 @@ public:
     typedef IntUnitsVariable            OriginalType;
     typedef IntUnitsVariable const&     PassType;
     typedef float                       IndexType;
-    static inline int  getTypeCode() { return TypeCode::IntUnitsVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::IntUnitsVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -3732,8 +3732,8 @@ public:
     typedef ShortUnitsVariable          OriginalType;
     typedef ShortUnitsVariable const&   PassType;
     typedef float                       IndexType;
-    static inline int  getTypeCode() { return TypeCode::ShortUnitsVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::ShortUnitsVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -3746,8 +3746,8 @@ public:
     typedef ShortUnitsVariable          OriginalType;
     typedef ShortUnitsVariable const&   PassType;
     typedef float                       IndexType;
-    static inline int  getTypeCode() { return TypeCode::ShortUnitsVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::ShortUnitsVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -3760,8 +3760,8 @@ public:
     typedef Int24UnitsVariable          OriginalType;
     typedef Int24UnitsVariable const&   PassType;
     typedef float                       IndexType;
-    static inline int  getTypeCode() { return TypeCode::Int24UnitsVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::Int24UnitsVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -3774,8 +3774,8 @@ public:
     typedef Int24UnitsVariable          OriginalType;
     typedef Int24UnitsVariable const&   PassType;
     typedef float                       IndexType;
-    static inline int  getTypeCode() { return TypeCode::Int24UnitsVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::Int24UnitsVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -3788,8 +3788,8 @@ public:
     typedef LongUnitsVariable           OriginalType;
     typedef LongUnitsVariable const&    PassType;
     typedef float                       IndexType;
-    static inline int  getTypeCode() { return TypeCode::LongUnitsVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::LongUnitsVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -3802,8 +3802,8 @@ public:
     typedef LongUnitsVariable           OriginalType;
     typedef LongUnitsVariable const&    PassType;
     typedef float               IndexType;
-    static inline int  getTypeCode() { return TypeCode::LongUnitsVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::LongUnitsVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -3816,8 +3816,8 @@ public:
     typedef FloatBussesVariable         OriginalType;
     typedef FloatBussesVariable const&  PassType;
     typedef float                       IndexType;
-    static inline int  getTypeCode() { return TypeCode::FloatBussesVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::FloatBussesVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -3830,8 +3830,8 @@ public:
     typedef FloatBussesVariable         OriginalType;
     typedef FloatBussesVariable const&  PassType;
     typedef float                       IndexType;
-    static inline int  getTypeCode() { return TypeCode::FloatBussesVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::FloatBussesVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -3844,8 +3844,8 @@ public:
     typedef DoubleBussesVariable            OriginalType;
     typedef DoubleBussesVariable const&     PassType;
     typedef double                          IndexType;
-    static inline int  getTypeCode() { return TypeCode::DoubleBussesVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::DoubleBussesVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -3858,8 +3858,8 @@ public:
     typedef DoubleBussesVariable            OriginalType;
     typedef DoubleBussesVariable const&     PassType;
     typedef double                          IndexType;
-    static inline int  getTypeCode() { return TypeCode::DoubleBussesVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::DoubleBussesVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -3872,8 +3872,8 @@ public:
     typedef IntBussesVariable           OriginalType;
     typedef IntBussesVariable const&    PassType;
     typedef float                       IndexType;
-    static inline int  getTypeCode() { return TypeCode::IntBussesVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::IntBussesVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -3886,8 +3886,8 @@ public:
     typedef IntBussesVariable           OriginalType;
     typedef IntBussesVariable const&    PassType;
     typedef float                       IndexType;
-    static inline int  getTypeCode() { return TypeCode::IntBussesVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::IntBussesVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -3900,8 +3900,8 @@ public:
     typedef ShortBussesVariable         OriginalType;
     typedef ShortBussesVariable const&  PassType;
     typedef float                       IndexType;
-    static inline int  getTypeCode() { return TypeCode::ShortBussesVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::ShortBussesVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -3914,8 +3914,8 @@ public:
     typedef ShortBussesVariable         OriginalType;
     typedef ShortBussesVariable const&  PassType;
     typedef float                       IndexType;
-    static inline int  getTypeCode() { return TypeCode::ShortBussesVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::ShortBussesVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -3928,8 +3928,8 @@ public:
     typedef Int24BussesVariable         OriginalType;
     typedef Int24BussesVariable const&  PassType;
     typedef float                       IndexType;
-    static inline int  getTypeCode() { return TypeCode::Int24BussesVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::Int24BussesVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -3942,8 +3942,8 @@ public:
     typedef Int24BussesVariable         OriginalType;
     typedef Int24BussesVariable const&  PassType;
     typedef float                       IndexType;
-    static inline int  getTypeCode() { return TypeCode::Int24BussesVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::Int24BussesVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -3956,8 +3956,8 @@ public:
     typedef LongBussesVariable          OriginalType;
     typedef LongBussesVariable const&   PassType;
     typedef float                       IndexType;
-    static inline int  getTypeCode() { return TypeCode::LongBussesVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::LongBussesVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -3970,8 +3970,8 @@ public:
     typedef LongBussesVariable          OriginalType;
     typedef LongBussesVariable const&   PassType;
     typedef float                       IndexType;
-    static inline int  getTypeCode() { return TypeCode::LongBussesVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::LongBussesVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -3984,8 +3984,8 @@ public:
     typedef FloatBreakpointsVariable            OriginalType;
     typedef FloatBreakpointsVariable const&     PassType;
     typedef float                               IndexType;
-    static inline int  getTypeCode() { return TypeCode::FloatBreakpointsVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::FloatBreakpointsVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -3998,8 +3998,8 @@ public:
     typedef FloatBreakpointsVariable            OriginalType;
     typedef FloatBreakpointsVariable const&     PassType;
     typedef float                               IndexType;
-    static inline int  getTypeCode() { return TypeCode::FloatBreakpointsVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::FloatBreakpointsVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -4012,8 +4012,8 @@ public:
     typedef DoubleBreakpointsVariable           OriginalType;
     typedef DoubleBreakpointsVariable const&    PassType;
     typedef double                              IndexType;
-    static inline int  getTypeCode() { return TypeCode::DoubleBreakpointsVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::DoubleBreakpointsVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -4026,8 +4026,8 @@ public:
     typedef DoubleBreakpointsVariable           OriginalType;
     typedef DoubleBreakpointsVariable const&    PassType;
     typedef double                              IndexType;
-    static inline int  getTypeCode() { return TypeCode::DoubleBreakpointsVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::DoubleBreakpointsVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -4040,8 +4040,8 @@ public:
     typedef IntBreakpointsVariable              OriginalType;
     typedef IntBreakpointsVariable const&       PassType;
     typedef float                               IndexType;
-    static inline int  getTypeCode() { return TypeCode::IntBreakpointsVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::IntBreakpointsVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -4054,8 +4054,8 @@ public:
     typedef IntBreakpointsVariable              OriginalType;
     typedef IntBreakpointsVariable const&       PassType;
     typedef float                               IndexType;
-    static inline int  getTypeCode() { return TypeCode::IntBreakpointsVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::IntBreakpointsVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -4068,8 +4068,8 @@ public:
     typedef ShortBreakpointsVariable            OriginalType;
     typedef ShortBreakpointsVariable const&     PassType;
     typedef float                               IndexType;
-    static inline int  getTypeCode() { return TypeCode::ShortBreakpointsVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::ShortBreakpointsVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -4082,8 +4082,8 @@ public:
     typedef ShortBreakpointsVariable            OriginalType;
     typedef ShortBreakpointsVariable const&     PassType;
     typedef float                               IndexType;
-    static inline int  getTypeCode() { return TypeCode::ShortBreakpointsVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::ShortBreakpointsVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -4096,8 +4096,8 @@ public:
     typedef Int24BreakpointsVariable            OriginalType;
     typedef Int24BreakpointsVariable const&     PassType;
     typedef float                               IndexType;
-    static inline int  getTypeCode() { return TypeCode::Int24BreakpointsVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::Int24BreakpointsVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -4110,8 +4110,8 @@ public:
     typedef Int24BreakpointsVariable            OriginalType;
     typedef Int24BreakpointsVariable const&     PassType;
     typedef float                               IndexType;
-    static inline int  getTypeCode() { return TypeCode::Int24BreakpointsVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::Int24BreakpointsVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -4124,8 +4124,8 @@ public:
     typedef LongBreakpointsVariable             OriginalType;
     typedef LongBreakpointsVariable const&      PassType;
     typedef float                               IndexType;
-    static inline int  getTypeCode() { return TypeCode::LongBreakpointsVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::LongBreakpointsVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -4138,8 +4138,8 @@ public:
     typedef LongBreakpointsVariable             OriginalType;
     typedef LongBreakpointsVariable const&      PassType;
     typedef float                               IndexType;
-    static inline int  getTypeCode() { return TypeCode::LongBreakpointsVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::LongBreakpointsVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -4152,8 +4152,8 @@ public:
     typedef FloatWavetableVariable              OriginalType;
     typedef FloatWavetableVariable const&       PassType;
     typedef float                               IndexType;
-    static inline int  getTypeCode() { return TypeCode::FloatWavetableVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::FloatWavetableVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -4166,8 +4166,8 @@ public:
     typedef FloatWavetableVariable              OriginalType;
     typedef FloatWavetableVariable const&       PassType;
     typedef float                               IndexType;
-    static inline int  getTypeCode() { return TypeCode::FloatWavetableVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::FloatWavetableVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -4180,8 +4180,8 @@ public:
     typedef DoubleWavetableVariable             OriginalType;
     typedef DoubleWavetableVariable const&      PassType;
     typedef double                              IndexType;
-    static inline int  getTypeCode() { return TypeCode::DoubleWavetableVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::DoubleWavetableVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -4194,8 +4194,8 @@ public:
     typedef DoubleWavetableVariable             OriginalType;
     typedef DoubleWavetableVariable const&      PassType;
     typedef double                              IndexType;
-    static inline int  getTypeCode() { return TypeCode::DoubleWavetableVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::DoubleWavetableVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -4208,8 +4208,8 @@ public:
     typedef IntWavetableVariable            OriginalType;
     typedef IntWavetableVariable const&     PassType;
     typedef float                           IndexType;
-    static inline int  getTypeCode() { return TypeCode::IntWavetableVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::IntWavetableVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -4222,8 +4222,8 @@ public:
     typedef IntWavetableVariable            OriginalType;
     typedef IntWavetableVariable const&     PassType;
     typedef float                           IndexType;
-    static inline int  getTypeCode() { return TypeCode::IntWavetableVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::IntWavetableVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -4236,8 +4236,8 @@ public:
     typedef ShortWavetableVariable              OriginalType;
     typedef ShortWavetableVariable const&       PassType;
     typedef float                               IndexType;
-    static inline int  getTypeCode() { return TypeCode::ShortWavetableVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::ShortWavetableVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -4250,8 +4250,8 @@ public:
     typedef ShortWavetableVariable              OriginalType;
     typedef ShortWavetableVariable const&       PassType;
     typedef float                               IndexType;
-    static inline int  getTypeCode() { return TypeCode::ShortWavetableVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::ShortWavetableVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -4264,8 +4264,8 @@ public:
     typedef Int24WavetableVariable              OriginalType;
     typedef Int24WavetableVariable const&       PassType;
     typedef float                               IndexType;
-    static inline int  getTypeCode() { return TypeCode::Int24WavetableVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::Int24WavetableVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -4278,8 +4278,8 @@ public:
     typedef Int24WavetableVariable              OriginalType;
     typedef Int24WavetableVariable const&       PassType;
     typedef float                               IndexType;
-    static inline int  getTypeCode() { return TypeCode::Int24WavetableVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::Int24WavetableVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -4292,8 +4292,8 @@ public:
     typedef LongWavetableVariable               OriginalType;
     typedef LongWavetableVariable const&        PassType;
     typedef float                               IndexType;
-    static inline int  getTypeCode() { return TypeCode::LongWavetableVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::LongWavetableVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -4306,8 +4306,8 @@ public:
     typedef LongWavetableVariable               OriginalType;
     typedef LongWavetableVariable const&        PassType;
     typedef float                               IndexType;
-    static inline int  getTypeCode() { return TypeCode::LongWavetableVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::LongWavetableVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -4320,8 +4320,8 @@ public:
     typedef FloatSignalVariable              OriginalType;
     typedef FloatSignalVariable const&       PassType;
     typedef float                            IndexType;
-    static inline int  getTypeCode() { return TypeCode::FloatSignalVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::FloatSignalVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -4334,8 +4334,8 @@ public:
     typedef FloatSignalVariable              OriginalType;
     typedef FloatSignalVariable const&       PassType;
     typedef float                            IndexType;
-    static inline int  getTypeCode() { return TypeCode::FloatSignalVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::FloatSignalVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -4348,8 +4348,8 @@ public:
     typedef DoubleSignalVariable             OriginalType;
     typedef DoubleSignalVariable const&      PassType;
     typedef double                           IndexType;
-    static inline int  getTypeCode() { return TypeCode::DoubleSignalVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::DoubleSignalVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -4362,8 +4362,8 @@ public:
     typedef DoubleSignalVariable             OriginalType;
     typedef DoubleSignalVariable const&      PassType;
     typedef double                           IndexType;
-    static inline int  getTypeCode() { return TypeCode::DoubleSignalVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::DoubleSignalVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -4376,8 +4376,8 @@ public:
     typedef IntSignalVariable            OriginalType;
     typedef IntSignalVariable const&     PassType;
     typedef float                        IndexType;
-    static inline int  getTypeCode() { return TypeCode::IntSignalVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::IntSignalVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -4390,8 +4390,8 @@ public:
     typedef IntSignalVariable            OriginalType;
     typedef IntSignalVariable const&     PassType;
     typedef float                        IndexType;
-    static inline int  getTypeCode() { return TypeCode::IntSignalVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::IntSignalVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -4404,8 +4404,8 @@ public:
     typedef ShortSignalVariable              OriginalType;
     typedef ShortSignalVariable const&       PassType;
     typedef float                            IndexType;
-    static inline int  getTypeCode() { return TypeCode::ShortSignalVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::ShortSignalVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -4418,8 +4418,8 @@ public:
     typedef ShortSignalVariable              OriginalType;
     typedef ShortSignalVariable const&       PassType;
     typedef float                            IndexType;
-    static inline int  getTypeCode() { return TypeCode::ShortSignalVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::ShortSignalVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -4432,8 +4432,8 @@ public:
     typedef Int24SignalVariable              OriginalType;
     typedef Int24SignalVariable const&       PassType;
     typedef float                            IndexType;
-    static inline int  getTypeCode() { return TypeCode::Int24SignalVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::Int24SignalVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -4446,8 +4446,8 @@ public:
     typedef Int24SignalVariable              OriginalType;
     typedef Int24SignalVariable const&       PassType;
     typedef float                            IndexType;
-    static inline int  getTypeCode() { return TypeCode::Int24SignalVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::Int24SignalVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -4460,8 +4460,8 @@ public:
     typedef LongSignalVariable               OriginalType;
     typedef LongSignalVariable const&        PassType;
     typedef float                            IndexType;
-    static inline int  getTypeCode() { return TypeCode::LongSignalVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::LongSignalVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -4474,8 +4474,8 @@ public:
     typedef LongSignalVariable               OriginalType;
     typedef LongSignalVariable const&        PassType;
     typedef float                            IndexType;
-    static inline int  getTypeCode() { return TypeCode::LongSignalVariable; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::LongSignalVariable; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -4488,8 +4488,8 @@ public:
     typedef AudioFileReader               OriginalType;
     typedef AudioFileReader const&        PassType;
     typedef void                          IndexType;
-    static inline int  getTypeCode() { return TypeCode::AudioFileReader; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::AudioFileReader; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -4502,8 +4502,8 @@ public:
     typedef AudioFileReader               OriginalType;
     typedef AudioFileReader const&        PassType;
     typedef void                          IndexType;
-    static inline int  getTypeCode() { return TypeCode::AudioFileReader; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::AudioFileReader; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -4516,8 +4516,8 @@ public:
     typedef FloatUnitQueue               OriginalType;
     typedef FloatUnitQueue const&        PassType;
     typedef float                        IndexType;
-    static inline int  getTypeCode() { return TypeCode::FloatUnitQueue; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::FloatUnitQueue; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -4530,8 +4530,8 @@ public:
     typedef FloatUnitQueue               OriginalType;
     typedef FloatUnitQueue const&        PassType;
     typedef float                        IndexType;
-    static inline int  getTypeCode() { return TypeCode::FloatUnitQueue; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::FloatUnitQueue; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -4544,8 +4544,8 @@ public:
     typedef DoubleUnitQueue              OriginalType;
     typedef DoubleUnitQueue const&       PassType;
     typedef double                  IndexType;
-    static inline int  getTypeCode() { return TypeCode::DoubleUnitQueue; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::DoubleUnitQueue; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -4558,8 +4558,8 @@ public:
     typedef DoubleUnitQueue              OriginalType;
     typedef DoubleUnitQueue const&       PassType;
     typedef double                  IndexType;
-    static inline int  getTypeCode() { return TypeCode::DoubleUnitQueue; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::DoubleUnitQueue; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -4572,8 +4572,8 @@ public:
     typedef IntUnitQueue             OriginalType;
     typedef IntUnitQueue const&      PassType;
     typedef float               IndexType;
-    static inline int  getTypeCode() { return TypeCode::IntUnitQueue; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::IntUnitQueue; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -4586,8 +4586,8 @@ public:
     typedef IntUnitQueue             OriginalType;
     typedef IntUnitQueue const&      PassType;
     typedef float               IndexType;
-    static inline int  getTypeCode() { return TypeCode::IntUnitQueue; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::IntUnitQueue; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -4600,8 +4600,8 @@ public:
     typedef ShortUnitQueue           OriginalType;
     typedef ShortUnitQueue const&    PassType;
     typedef float               IndexType;
-    static inline int  getTypeCode() { return TypeCode::ShortUnitQueue; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::ShortUnitQueue; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -4614,8 +4614,8 @@ public:
     typedef ShortUnitQueue           OriginalType;
     typedef ShortUnitQueue const&    PassType;
     typedef float               IndexType;
-    static inline int  getTypeCode() { return TypeCode::ShortUnitQueue; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::ShortUnitQueue; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -4628,8 +4628,8 @@ public:
     typedef Int24UnitQueue           OriginalType;
     typedef Int24UnitQueue const&    PassType;
     typedef float               IndexType;
-    static inline int  getTypeCode() { return TypeCode::Int24UnitQueue; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::Int24UnitQueue; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -4642,8 +4642,8 @@ public:
     typedef Int24UnitQueue           OriginalType;
     typedef Int24UnitQueue const&    PassType;
     typedef float               IndexType;
-    static inline int  getTypeCode() { return TypeCode::Int24UnitQueue; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::Int24UnitQueue; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -4656,8 +4656,8 @@ public:
     typedef LongUnitQueue            OriginalType;
     typedef LongUnitQueue const&     PassType;
     typedef float               IndexType;
-    static inline int  getTypeCode() { return TypeCode::LongUnitQueue; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::LongUnitQueue; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -4670,8 +4670,8 @@ public:
     typedef LongUnitQueue            OriginalType;
     typedef LongUnitQueue const&     PassType;
     typedef float               IndexType;
-    static inline int  getTypeCode() { return TypeCode::LongUnitQueue; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::LongUnitQueue; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -4684,8 +4684,8 @@ public:
     typedef FloatBufferQueue               OriginalType;
     typedef FloatBufferQueue const&        PassType;
     typedef float                        IndexType;
-    static inline int  getTypeCode() { return TypeCode::FloatBufferQueue; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::FloatBufferQueue; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -4698,8 +4698,8 @@ public:
     typedef FloatBufferQueue               OriginalType;
     typedef FloatBufferQueue const&        PassType;
     typedef float                        IndexType;
-    static inline int  getTypeCode() { return TypeCode::FloatBufferQueue; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::FloatBufferQueue; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -4712,8 +4712,8 @@ public:
     typedef DoubleBufferQueue              OriginalType;
     typedef DoubleBufferQueue const&       PassType;
     typedef double                  IndexType;
-    static inline int  getTypeCode() { return TypeCode::DoubleBufferQueue; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::DoubleBufferQueue; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -4726,8 +4726,8 @@ public:
     typedef DoubleBufferQueue              OriginalType;
     typedef DoubleBufferQueue const&       PassType;
     typedef double                  IndexType;
-    static inline int  getTypeCode() { return TypeCode::DoubleBufferQueue; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::DoubleBufferQueue; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -4740,8 +4740,8 @@ public:
     typedef IntBufferQueue             OriginalType;
     typedef IntBufferQueue const&      PassType;
     typedef float               IndexType;
-    static inline int  getTypeCode() { return TypeCode::IntBufferQueue; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::IntBufferQueue; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -4754,8 +4754,8 @@ public:
     typedef IntBufferQueue             OriginalType;
     typedef IntBufferQueue const&      PassType;
     typedef float               IndexType;
-    static inline int  getTypeCode() { return TypeCode::IntBufferQueue; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::IntBufferQueue; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -4768,8 +4768,8 @@ public:
     typedef ShortBufferQueue           OriginalType;
     typedef ShortBufferQueue const&    PassType;
     typedef float               IndexType;
-    static inline int  getTypeCode() { return TypeCode::ShortBufferQueue; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::ShortBufferQueue; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -4782,8 +4782,8 @@ public:
     typedef ShortBufferQueue           OriginalType;
     typedef ShortBufferQueue const&    PassType;
     typedef float               IndexType;
-    static inline int  getTypeCode() { return TypeCode::ShortBufferQueue; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::ShortBufferQueue; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -4796,8 +4796,8 @@ public:
     typedef Int24BufferQueue           OriginalType;
     typedef Int24BufferQueue const&    PassType;
     typedef float               IndexType;
-    static inline int  getTypeCode() { return TypeCode::Int24BufferQueue; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::Int24BufferQueue; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -4810,8 +4810,8 @@ public:
     typedef Int24BufferQueue           OriginalType;
     typedef Int24BufferQueue const&    PassType;
     typedef float               IndexType;
-    static inline int  getTypeCode() { return TypeCode::Int24BufferQueue; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::Int24BufferQueue; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -4824,8 +4824,8 @@ public:
     typedef LongBufferQueue            OriginalType;
     typedef LongBufferQueue const&     PassType;
     typedef float               IndexType;
-    static inline int  getTypeCode() { return TypeCode::LongBufferQueue; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::LongBufferQueue; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -4838,8 +4838,8 @@ public:
     typedef LongBufferQueue            OriginalType;
     typedef LongBufferQueue const&     PassType;
     typedef float               IndexType;
-    static inline int  getTypeCode() { return TypeCode::LongBufferQueue; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::LongBufferQueue; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
@@ -4861,40 +4861,40 @@ public:
     typedef typename TypeUtilityBase<Type>::PassType        PassType;
     typedef typename TypeUtilityBase<Type>::IndexType       IndexType;
     
-    static inline Text getTypeName()                 { return TypeCode::getName (TypeUtility<Type>::getTypeCode()); }
-    static inline const PeakType& getTypePeak()      { static PeakType v = (PeakType)TypeCode::getPeak (TypeUtility<Type>::getTypeCode()); return v; }
-    static inline const ScaleType& getTypeScale()    { static ScaleType v = Math<ScaleType>::get1() / ScaleType (getTypePeak()); return v; }
-    static inline double getTypeEpsilon()            { return TypeCode::getEpsilon (TypeUtility<Type>::getTypeCode()); }
-    static inline Text getIndexTypeName()            { return TypeCode::getName (TypeUtility<IndexType>::getTypeCode()); }
+    static PLONK_INLINE_LOW Text getTypeName()                 { return TypeCode::getName (TypeUtility<Type>::getTypeCode()); }
+    static PLONK_INLINE_LOW const PeakType& getTypePeak()      { static PeakType v = (PeakType)TypeCode::getPeak (TypeUtility<Type>::getTypeCode()); return v; }
+    static PLONK_INLINE_LOW const ScaleType& getTypeScale()    { static ScaleType v = Math<ScaleType>::get1() / ScaleType (getTypePeak()); return v; }
+    static PLONK_INLINE_LOW double getTypeEpsilon()            { return TypeCode::getEpsilon (TypeUtility<Type>::getTypeCode()); }
+    static PLONK_INLINE_LOW Text getIndexTypeName()            { return TypeCode::getName (TypeUtility<IndexType>::getTypeCode()); }
 
-    static inline bool isUnknown() throw()           { return TypeCode::isUnknown (TypeUtility<Type>::getTypeCode()); }
-    static inline bool isDynamic() throw()           { return TypeCode::isDynamic (TypeUtility<Type>::getTypeCode()); }    
-    static inline bool isBuiltIn() throw()           { return TypeCode::isBuiltIn (TypeUtility<Type>::getTypeCode()); }
-    static inline bool isVariable() throw()          { return TypeCode::isVariable (TypeUtility<Type>::getTypeCode()); }
-    static inline bool isAtomicVariable() throw()    { return TypeCode::isAtomicVariable (TypeUtility<Type>::getTypeCode()); }
-    static inline bool isArray() throw()             { return TypeCode::isArray (TypeUtility<Type>::getTypeCode()); }
-    static inline bool isChannel() throw()           { return TypeCode::isChannel (TypeUtility<Type>::getTypeCode()); }
-    static inline bool isUnit() throw()              { return TypeCode::isUnit (TypeUtility<Type>::getTypeCode()); }
-    static inline bool isBus() throw()               { return TypeCode::isBus (TypeUtility<Type>::getTypeCode()); }
-    static inline bool isUnits() throw()             { return TypeCode::isUnits (TypeUtility<Type>::getTypeCode()); }
-    static inline bool isBusses() throw()            { return TypeCode::isBusses (TypeUtility<Type>::getTypeCode()); }
-    static inline bool isWavetable() throw()         { return TypeCode::isWavetable (TypeUtility<Type>::getTypeCode()); }
-    static inline bool isSignal() throw()            { return TypeCode::isSignal (TypeUtility<Type>::getTypeCode()); }
-    static inline bool isAudioFileReader() throw()   { return TypeCode::isAudioFileReader (TypeUtility<Type>::getTypeCode()); }
-    static inline bool isUnitQueue() throw()         { return TypeCode::isUnitQueue (TypeUtility<Type>::getTypeCode()); }
-    static inline bool isBufferQueue() throw()       { return TypeCode::isBufferQueue (TypeUtility<Type>::getTypeCode()); }
+    static PLONK_INLINE_LOW bool isUnknown() throw()           { return TypeCode::isUnknown (TypeUtility<Type>::getTypeCode()); }
+    static PLONK_INLINE_LOW bool isDynamic() throw()           { return TypeCode::isDynamic (TypeUtility<Type>::getTypeCode()); }    
+    static PLONK_INLINE_LOW bool isBuiltIn() throw()           { return TypeCode::isBuiltIn (TypeUtility<Type>::getTypeCode()); }
+    static PLONK_INLINE_LOW bool isVariable() throw()          { return TypeCode::isVariable (TypeUtility<Type>::getTypeCode()); }
+    static PLONK_INLINE_LOW bool isAtomicVariable() throw()    { return TypeCode::isAtomicVariable (TypeUtility<Type>::getTypeCode()); }
+    static PLONK_INLINE_LOW bool isArray() throw()             { return TypeCode::isArray (TypeUtility<Type>::getTypeCode()); }
+    static PLONK_INLINE_LOW bool isChannel() throw()           { return TypeCode::isChannel (TypeUtility<Type>::getTypeCode()); }
+    static PLONK_INLINE_LOW bool isUnit() throw()              { return TypeCode::isUnit (TypeUtility<Type>::getTypeCode()); }
+    static PLONK_INLINE_LOW bool isBus() throw()               { return TypeCode::isBus (TypeUtility<Type>::getTypeCode()); }
+    static PLONK_INLINE_LOW bool isUnits() throw()             { return TypeCode::isUnits (TypeUtility<Type>::getTypeCode()); }
+    static PLONK_INLINE_LOW bool isBusses() throw()            { return TypeCode::isBusses (TypeUtility<Type>::getTypeCode()); }
+    static PLONK_INLINE_LOW bool isWavetable() throw()         { return TypeCode::isWavetable (TypeUtility<Type>::getTypeCode()); }
+    static PLONK_INLINE_LOW bool isSignal() throw()            { return TypeCode::isSignal (TypeUtility<Type>::getTypeCode()); }
+    static PLONK_INLINE_LOW bool isAudioFileReader() throw()   { return TypeCode::isAudioFileReader (TypeUtility<Type>::getTypeCode()); }
+    static PLONK_INLINE_LOW bool isUnitQueue() throw()         { return TypeCode::isUnitQueue (TypeUtility<Type>::getTypeCode()); }
+    static PLONK_INLINE_LOW bool isBufferQueue() throw()       { return TypeCode::isBufferQueue (TypeUtility<Type>::getTypeCode()); }
     
-    static inline bool isFloatType() throw()         { return TypeCode::isFloatType (TypeUtility<Type>::getTypeCode()); }
-    static inline bool isDoubleType() throw()        { return TypeCode::isDoubleType (TypeUtility<Type>::getTypeCode()); }
-    static inline bool isIntType() throw()           { return TypeCode::isIntType (TypeUtility<Type>::getTypeCode()); }
-    static inline bool isInt24Type() throw()         { return TypeCode::isInt24Type (TypeUtility<Type>::getTypeCode()); }
-    static inline bool isLongType() throw()          { return TypeCode::isLongType (TypeUtility<Type>::getTypeCode()); }
-    static inline bool isShortType() throw()         { return TypeCode::isShortType (TypeUtility<Type>::getTypeCode()); }
-    static inline bool isCharType() throw()          { return TypeCode::isCharType (TypeUtility<Type>::getTypeCode()); }
-    static inline bool isBoolType() throw()          { return TypeCode::isBoolType (TypeUtility<Type>::getTypeCode()); }
+    static PLONK_INLINE_LOW bool isFloatType() throw()         { return TypeCode::isFloatType (TypeUtility<Type>::getTypeCode()); }
+    static PLONK_INLINE_LOW bool isDoubleType() throw()        { return TypeCode::isDoubleType (TypeUtility<Type>::getTypeCode()); }
+    static PLONK_INLINE_LOW bool isIntType() throw()           { return TypeCode::isIntType (TypeUtility<Type>::getTypeCode()); }
+    static PLONK_INLINE_LOW bool isInt24Type() throw()         { return TypeCode::isInt24Type (TypeUtility<Type>::getTypeCode()); }
+    static PLONK_INLINE_LOW bool isLongType() throw()          { return TypeCode::isLongType (TypeUtility<Type>::getTypeCode()); }
+    static PLONK_INLINE_LOW bool isShortType() throw()         { return TypeCode::isShortType (TypeUtility<Type>::getTypeCode()); }
+    static PLONK_INLINE_LOW bool isCharType() throw()          { return TypeCode::isCharType (TypeUtility<Type>::getTypeCode()); }
+    static PLONK_INLINE_LOW bool isBoolType() throw()          { return TypeCode::isBoolType (TypeUtility<Type>::getTypeCode()); }
     
-    static inline bool isFloatOrDoubleType() throw() { return TypeCode::isFloatOrDoubleType (TypeUtility<Type>::getTypeCode()); }
-    static inline bool isIntegralType() throw()      { return TypeCode::isIntegralType (TypeUtility<Type>::getTypeCode()); }
+    static PLONK_INLINE_LOW bool isFloatOrDoubleType() throw() { return TypeCode::isFloatOrDoubleType (TypeUtility<Type>::getTypeCode()); }
+    static PLONK_INLINE_LOW bool isIntegralType() throw()      { return TypeCode::isIntegralType (TypeUtility<Type>::getTypeCode()); }
 };
 
 

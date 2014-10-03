@@ -159,7 +159,7 @@
 //    typedef UnitBase<SampleType>                    UnitType;
 //    typedef InputDictionary                         Inputs;
 //    
-//    static inline UnitInfos getInfo() throw()
+//    static PLONK_INLINE_LOW UnitInfos getInfo() throw()
 //    {
 //        return UnitInfo ("FFT", "Transforms time domain to frequency domain data.",
 //                         
@@ -175,7 +175,7 @@
 //    }    
 //    
 //    /** FFTs a signal. */
-//    static inline UnitType ar (UnitType const& input) throw()
+//    static PLONK_INLINE_LOW UnitType ar (UnitType const& input) throw()
 //    {                     
 //        // re: full templating - could say that FFT/IFTT are only supported with float (and eventually double)?
 //
@@ -306,7 +306,7 @@ public:
     typedef UnitBase<SampleType>                    UnitType;
     typedef InputDictionary                         Inputs;
     
-    static inline UnitInfos getInfo() throw()
+    static PLONK_INLINE_LOW UnitInfos getInfo() throw()
     {
         return UnitInfo ("FFT", "Transforms time domain to frequency domain data.",
                          
@@ -321,7 +321,7 @@ public:
     }
     
     /** FFTs a signal. */
-    static inline UnitType ar (UnitType const& input) throw()
+    static PLONK_INLINE_LOW UnitType ar (UnitType const& input) throw()
     {
         // re: full templating - could say that FFT/IFFT are only supported with float (and eventually double)?
                 

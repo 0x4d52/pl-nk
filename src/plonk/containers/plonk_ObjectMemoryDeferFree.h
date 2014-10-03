@@ -56,7 +56,7 @@ public:
     ObjectMemoryDeferFree (Memory& memory) throw();
     ~ObjectMemoryDeferFree();
     
-    inline void init() throw() { start(); }
+    PLONK_INLINE_LOW void init() throw() { start(); }
     ResultCode run() throw();
     
     static void* staticAlloc (void* userData, PlankUL size);

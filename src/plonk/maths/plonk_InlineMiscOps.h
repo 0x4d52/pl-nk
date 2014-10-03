@@ -51,9 +51,9 @@
  @{
  */
 
-template<class Type> inline Type clip (Type const& value, Type const& lower, Type const& upper) throw() { return min (max (lower, value), upper); }
+template<class Type> PLONK_INLINE_HIGH Type clip (Type const& value, Type const& lower, Type const& upper) throw() { return min (max (lower, value), upper); }
 
-inline int wrap (int value, int lower, int upper) throw()
+PLONK_INLINE_HIGH int wrap (int value, int lower, int upper) throw()
 {
 	int range;
     
@@ -85,7 +85,7 @@ inline int wrap (int value, int lower, int upper) throw()
 }
 
 template<class Type>
-inline Type wrap (Type const& v, Type const& lower, Type const& upper) throw()
+PLONK_INLINE_HIGH Type wrap (Type const& v, Type const& lower, Type const& upper) throw()
 {
 	Type range;
     Type value = v;
@@ -120,7 +120,7 @@ inline Type wrap (Type const& v, Type const& lower, Type const& upper) throw()
 
 
 template<class Type>
-inline Type linlin (Type const& input, 
+PLONK_INLINE_HIGH Type linlin (Type const& input, 
                     Type const& inLow, Type const& inHigh,
                     Type const& outLow, Type const& outHigh) throw()
 {
@@ -130,7 +130,7 @@ inline Type linlin (Type const& input,
 }
 
 template<class Type>
-inline Type linlin2 (Type const& input, 
+PLONK_INLINE_HIGH Type linlin2 (Type const& input, 
                      Type const& inLow, Type const& inRange,
                      Type const& outLow, Type const& outRange) throw()
 {
@@ -138,7 +138,7 @@ inline Type linlin2 (Type const& input,
 }
 
 template<class Type>
-inline Type linsin (Type const& input, 
+PLONK_INLINE_HIGH Type linsin (Type const& input, 
                     Type const& inLow, Type const& inHigh,
                     Type const& outLow, Type const& outHigh) throw()
 {
@@ -152,7 +152,7 @@ inline Type linsin (Type const& input,
 }
 
 template<class Type>
-inline Type linsin2 (Type const& input, 
+PLONK_INLINE_HIGH Type linsin2 (Type const& input, 
                      Type const& inLow, Type const& inRange,
                      Type const& outLow, Type const& outRange) throw()
 {	
@@ -162,7 +162,7 @@ inline Type linsin2 (Type const& input,
 }
 
 template<class Type>
-inline Type linexp (Type const& input, 
+PLONK_INLINE_HIGH Type linexp (Type const& input, 
                     Type const& inLow, Type const& inHigh,
                     Type const& outLow, Type const& outHigh) throw()
 {
@@ -173,7 +173,7 @@ inline Type linexp (Type const& input,
 }
 
 template<class Type>
-inline Type linexp2 (Type const& input, 
+PLONK_INLINE_HIGH Type linexp2 (Type const& input, 
                      Type const& reciprocalInRange, Type const& inLowOverInRange,
                      Type const& outLow, Type const& outRatio) throw()
 {
@@ -181,7 +181,7 @@ inline Type linexp2 (Type const& input,
 }
 
 template<class Type>
-inline Type linwelch (Type const& input, 
+PLONK_INLINE_HIGH Type linwelch (Type const& input, 
                       Type const& inLow, Type const& inHigh,
                       Type const& outLow, Type const& outHigh) throw()
 {
@@ -196,7 +196,7 @@ inline Type linwelch (Type const& input,
 }
 
 //template<class Type>
-//inline Type explin (Type const& input, 
+//PLONK_INLINE_HIGH Type explin (Type const& input, 
 //                    Type const& inLow, Type const& inHigh, 
 //                    Type const& outLow, Type const& outHigh)
 //{
@@ -210,7 +210,7 @@ inline Type linwelch (Type const& input,
 //}
 
 template<class Type>
-inline Type explin (Type const& input, 
+PLONK_INLINE_HIGH Type explin (Type const& input, 
                     Type const& inLow, Type const& inHigh, 
                     Type const& outLow, Type const& outHigh)
 {    
@@ -273,17 +273,17 @@ public:
         ValueType buffer[Extension];
     };
 
-    static inline int getExtension() throw() { return Extension; }
-    static inline int getOffset() throw() { return Offset; }
-    static inline const IndexType& getExtensionAsIndex() throw() { static const IndexType v (Extension); return v; }
-    static inline const IndexType& getOffsetAsIndex() throw() { static const IndexType v (Offset); return v; }    
+    static PLONK_INLINE_HIGH int getExtension() throw() { return Extension; }
+    static PLONK_INLINE_HIGH int getOffset() throw() { return Offset; }
+    static PLONK_INLINE_HIGH const IndexType& getExtensionAsIndex() throw() { static const IndexType v (Extension); return v; }
+    static PLONK_INLINE_HIGH const IndexType& getOffsetAsIndex() throw() { static const IndexType v (Offset); return v; }    
 };
 
 template<class ValueType, class IndexType>
 class InterpNone : public InterpBase<ValueType,IndexType,0,0>
 {
 public:    
-    static inline ValueType lookup (const ValueType* table, IndexType const& index) throw()
+    static PLONK_INLINE_HIGH ValueType lookup (const ValueType* table, IndexType const& index) throw()
     {
         return table[int (index)];
     }
@@ -293,12 +293,12 @@ template<class ValueType, class IndexType>
 class InterpLinear : public InterpBase<ValueType,IndexType,1,0>
 {
 public:    
-    static inline ValueType interp (ValueType const& value0, ValueType const& value1, IndexType const& frac) throw()
+    static PLONK_INLINE_HIGH ValueType interp (ValueType const& value0, ValueType const& value1, IndexType const& frac) throw()
     {
         return value0 + ValueType ((value1 - value0) * frac);
     }
     
-    static inline ValueType lookup (const ValueType* table, IndexType const& index) throw()
+    static PLONK_INLINE_HIGH ValueType lookup (const ValueType* table, IndexType const& index) throw()
     {
         const int index0 = int (index);
         const int index1 = index0 + 1;
@@ -313,14 +313,14 @@ class InterpLinear<ValueType,int> : public InterpBase<ValueType,int,1,0>
 public:
     typedef int IndexType;
     
-    static inline ValueType interp (ValueType const& value0, ValueType const& value1, IndexType const& frac) throw()
+    static PLONK_INLINE_HIGH ValueType interp (ValueType const& value0, ValueType const& value1, IndexType const& frac) throw()
     {
         (void)value1;
         (void)frac;
         return value0;
     }
     
-    static inline ValueType lookup (const ValueType* table, IndexType const& index) throw()
+    static PLONK_INLINE_HIGH ValueType lookup (const ValueType* table, IndexType const& index) throw()
     {
         return table[index];
     }
@@ -330,7 +330,7 @@ template<class ValueType, class IndexType>
 class InterpLagrange3 : public InterpBase<ValueType,IndexType,4,1>
 {
 public:
-    static inline ValueType interp (ValueType const& value_1,
+    static PLONK_INLINE_HIGH ValueType interp (ValueType const& value_1,
                                     ValueType const& value0,
                                     ValueType const& value1,
                                     ValueType const& value2,
@@ -346,7 +346,7 @@ public:
         return ((c3 * frac + c2) * frac + c1) * frac + c0;
     }
     
-    static inline ValueType lookup (const ValueType* table, IndexType const& index) throw()
+    static PLONK_INLINE_HIGH ValueType lookup (const ValueType* table, IndexType const& index) throw()
     {
         const int index0 = int (index);
         const int index1 = index0 + 1;
@@ -363,7 +363,7 @@ class InterpLagrange3<ValueType,int> : public InterpBase<ValueType,int,4,1>
 public:
     typedef int IndexType;
 
-    static inline ValueType interp (ValueType const& value_1,
+    static PLONK_INLINE_HIGH ValueType interp (ValueType const& value_1,
                                     ValueType const& value0,
                                     ValueType const& value1,
                                     ValueType const& value2,
@@ -376,7 +376,7 @@ public:
         return value0;
     }
     
-    static inline ValueType lookup (const ValueType* table, IndexType const& index) throw()
+    static PLONK_INLINE_HIGH ValueType lookup (const ValueType* table, IndexType const& index) throw()
     {
         return table[index];
     }
@@ -397,14 +397,14 @@ public:
     public:\
         typedef PlankU##TypeCode InternalType;\
         \
-        static inline Type countOnes             (Type const& value) throw() { return (Type)pl_CountOnesU##TypeCode ((InternalType)value);          }\
-        static inline Type countLeadingZeros     (Type const& value) throw() { return (Type)pl_CountLeadingZerosU##TypeCode ((InternalType)value);  }\
-        static inline Type countTrailingZeroes   (Type const& value) throw() { return (Type)pl_CountTrailingZerosU##TypeCode ((InternalType)value); }\
-        static inline Type countLeadingOnes      (Type const& value) throw() { return (Type)pl_CountLeadingOnesU##TypeCode ((InternalType)value);   }\
-        static inline Type countTrailingOnes     (Type const& value) throw() { return (Type)pl_CountTrailingOnesU##TypeCode ((InternalType)value);  }\
-        static inline Type numBitsRequired       (Type const& value) throw() { return (Type)pl_NumBitsRequiredU##TypeCode ((InternalType)value);    }\
-        static inline Type nextPowerOf2          (Type const& value) throw() { return (Type)pl_NextPowerOf2U##TypeCode ((InternalType)value);       }\
-        static inline bool isPowerOf2            (Type const& value) throw() { return (Type)pl_IsPowerOf2U##TypeCode ((InternalType)value);         }\
+        static PLONK_INLINE_HIGH Type countOnes             (Type const& value) throw() { return (Type)pl_CountOnesU##TypeCode ((InternalType)value);          }\
+        static PLONK_INLINE_HIGH Type countLeadingZeros     (Type const& value) throw() { return (Type)pl_CountLeadingZerosU##TypeCode ((InternalType)value);  }\
+        static PLONK_INLINE_HIGH Type countTrailingZeroes   (Type const& value) throw() { return (Type)pl_CountTrailingZerosU##TypeCode ((InternalType)value); }\
+        static PLONK_INLINE_HIGH Type countLeadingOnes      (Type const& value) throw() { return (Type)pl_CountLeadingOnesU##TypeCode ((InternalType)value);   }\
+        static PLONK_INLINE_HIGH Type countTrailingOnes     (Type const& value) throw() { return (Type)pl_CountTrailingOnesU##TypeCode ((InternalType)value);  }\
+        static PLONK_INLINE_HIGH Type numBitsRequired       (Type const& value) throw() { return (Type)pl_NumBitsRequiredU##TypeCode ((InternalType)value);    }\
+        static PLONK_INLINE_HIGH Type nextPowerOf2          (Type const& value) throw() { return (Type)pl_NextPowerOf2U##TypeCode ((InternalType)value);       }\
+        static PLONK_INLINE_HIGH bool isPowerOf2            (Type const& value) throw() { return (Type)pl_IsPowerOf2U##TypeCode ((InternalType)value);         }\
     }
 
 PLONK_BITSBASE_DECLARE(C,1);
@@ -417,14 +417,14 @@ PLONK_BITSBASE_DECLARE(LL,8);
 class Bits
 {
 public:
-    template<class Type> static inline Type countOnes             (Type const& value) throw() { return BitsBase<Type,sizeof(Type)>::countOnes (value);              }
-    template<class Type> static inline Type countLeadingZeros     (Type const& value) throw() { return BitsBase<Type,sizeof(Type)>::countLeadingZeros (value);      }
-    template<class Type> static inline Type countTrailingZeroes   (Type const& value) throw() { return BitsBase<Type,sizeof(Type)>::countTrailingZeroes (value);    }
-    template<class Type> static inline Type countLeadingOnes      (Type const& value) throw() { return BitsBase<Type,sizeof(Type)>::countLeadingOnes (value);       }
-    template<class Type> static inline Type countTrailingOnes     (Type const& value) throw() { return BitsBase<Type,sizeof(Type)>::countTrailingOnes (value);      }
-    template<class Type> static inline Type numBitsRequired       (Type const& value) throw() { return BitsBase<Type,sizeof(Type)>::numBitsRequired (value);        }
-    template<class Type> static inline Type nextPowerOf2          (Type const& value) throw() { return BitsBase<Type,sizeof(Type)>::nextPowerOf2 (value);           }
-    template<class Type> static inline bool isPowerOf2            (Type const& value) throw() { return BitsBase<Type,sizeof(Type)>::isPowerOf2 (value);             }
+    template<class Type> static PLONK_INLINE_HIGH Type countOnes             (Type const& value) throw() { return BitsBase<Type,sizeof(Type)>::countOnes (value);              }
+    template<class Type> static PLONK_INLINE_HIGH Type countLeadingZeros     (Type const& value) throw() { return BitsBase<Type,sizeof(Type)>::countLeadingZeros (value);      }
+    template<class Type> static PLONK_INLINE_HIGH Type countTrailingZeroes   (Type const& value) throw() { return BitsBase<Type,sizeof(Type)>::countTrailingZeroes (value);    }
+    template<class Type> static PLONK_INLINE_HIGH Type countLeadingOnes      (Type const& value) throw() { return BitsBase<Type,sizeof(Type)>::countLeadingOnes (value);       }
+    template<class Type> static PLONK_INLINE_HIGH Type countTrailingOnes     (Type const& value) throw() { return BitsBase<Type,sizeof(Type)>::countTrailingOnes (value);      }
+    template<class Type> static PLONK_INLINE_HIGH Type numBitsRequired       (Type const& value) throw() { return BitsBase<Type,sizeof(Type)>::numBitsRequired (value);        }
+    template<class Type> static PLONK_INLINE_HIGH Type nextPowerOf2          (Type const& value) throw() { return BitsBase<Type,sizeof(Type)>::nextPowerOf2 (value);           }
+    template<class Type> static PLONK_INLINE_HIGH bool isPowerOf2            (Type const& value) throw() { return BitsBase<Type,sizeof(Type)>::isPowerOf2 (value);             }
 };
 
 
@@ -433,19 +433,19 @@ class NumericalConverter
 {
 public:
     template<class InType, class OutType>
-    static inline void roundCopy (const InType inValue, OutType& outValue) throw()     { outValue = OutType (inValue); }	
+    static PLONK_INLINE_HIGH void roundCopy (const InType inValue, OutType& outValue) throw()     { outValue = OutType (inValue); }	
     
-    static inline void roundCopy (const double inValue, char& outValue) throw()        { outValue = char (inValue + 0.5); }
-	static inline void roundCopy (const double inValue, short& outValue) throw()       { outValue = short (inValue + 0.5); }
-	static inline void roundCopy (const double inValue, int& outValue) throw()         { outValue = int (inValue + 0.5); }
-	static inline void roundCopy (const double inValue, Int24& outValue) throw()       { outValue = Int24 (inValue + 0.5); }
-    static inline void roundCopy (const double inValue, LongLong& outValue) throw()    { outValue = LongLong (inValue + 0.5); }    
+    static PLONK_INLINE_HIGH void roundCopy (const double inValue, char& outValue) throw()        { outValue = char (inValue + 0.5); }
+	static PLONK_INLINE_HIGH void roundCopy (const double inValue, short& outValue) throw()       { outValue = short (inValue + 0.5); }
+	static PLONK_INLINE_HIGH void roundCopy (const double inValue, int& outValue) throw()         { outValue = int (inValue + 0.5); }
+	static PLONK_INLINE_HIGH void roundCopy (const double inValue, Int24& outValue) throw()       { outValue = Int24 (inValue + 0.5); }
+    static PLONK_INLINE_HIGH void roundCopy (const double inValue, LongLong& outValue) throw()    { outValue = LongLong (inValue + 0.5); }    
     
-    static inline void roundCopy (const float inValue, char& outValue) throw()         { outValue = char (inValue + 0.5f); }
-	static inline void roundCopy (const float inValue, short& outValue) throw()        { outValue = short (inValue + 0.5f); }
-	static inline void roundCopy (const float inValue, int& outValue) throw()          { outValue = int (inValue + 0.5f); }
-    static inline void roundCopy (const float inValue, Int24& outValue) throw()        { outValue = Int24 (inValue + 0.5f); }
-    static inline void roundCopy (const float inValue, LongLong& outValue) throw()     { outValue = LongLong (inValue + 0.5f); }
+    static PLONK_INLINE_HIGH void roundCopy (const float inValue, char& outValue) throw()         { outValue = char (inValue + 0.5f); }
+	static PLONK_INLINE_HIGH void roundCopy (const float inValue, short& outValue) throw()        { outValue = short (inValue + 0.5f); }
+	static PLONK_INLINE_HIGH void roundCopy (const float inValue, int& outValue) throw()          { outValue = int (inValue + 0.5f); }
+    static PLONK_INLINE_HIGH void roundCopy (const float inValue, Int24& outValue) throw()        { outValue = Int24 (inValue + 0.5f); }
+    static PLONK_INLINE_HIGH void roundCopy (const float inValue, LongLong& outValue) throw()     { outValue = LongLong (inValue + 0.5f); }
 };
 
 

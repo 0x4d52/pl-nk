@@ -59,9 +59,9 @@ public:
 	ObjectArrayInternalBase (const int size, ObjectType *dataToUse, const bool isNullTerminated, const bool shouldTakeOwnership) throw();
 	~ObjectArrayInternalBase();
 	
-	inline int size() const throw() { return sizeUsed; }
-    inline int sizeAllocated() const throw() { return allocatedSize; }
-	inline int length() const throw() 
+	PLONK_INLINE_LOW int size() const throw() { return sizeUsed; }
+    PLONK_INLINE_LOW int sizeAllocated() const throw() { return allocatedSize; }
+	PLONK_INLINE_LOW int length() const throw() 
 	{ 
 		if (sizeUsed == 0) 
 			return 0;
@@ -69,10 +69,10 @@ public:
 			return arrayIsNullTerminated ? sizeUsed - 1 : sizeUsed; 
 	}
 	
-	inline ObjectType* getArray() throw() { return array; }
-	inline const ObjectType* getArray() const throw() { return array; }
-	inline bool isNullTerminated() const throw() { return arrayIsNullTerminated; }
-	inline void setNullTerminated (const bool state) throw() { arrayIsNullTerminated = state; } 
+	PLONK_INLINE_LOW ObjectType* getArray() throw() { return array; }
+	PLONK_INLINE_LOW const ObjectType* getArray() const throw() { return array; }
+	PLONK_INLINE_LOW bool isNullTerminated() const throw() { return arrayIsNullTerminated; }
+	PLONK_INLINE_LOW void setNullTerminated (const bool state) throw() { arrayIsNullTerminated = state; } 
 	
     bool setSize (const int newSize, const bool keepContents) throw();
     void add (ObjectType const& item) throw();

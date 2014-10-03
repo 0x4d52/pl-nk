@@ -86,14 +86,14 @@ public:
     
     /** Apply the FFT to the input and place the result in output.
      This can't be performed in-place (i.e., input and output must not point to the same data or overlap). */
-    inline void forward (float* output, const float* input) throw()
+    PLONK_INLINE_LOW void forward (float* output, const float* input) throw()
     {
         this->getInternal()->forward (output, input);
     }
     
     /** Apply the FFT to the input and place the result in output.
      This can't be performed in-place (i.e., input and output must not point to the same data or overlap). */
-    inline void forward (Buffer& output, Buffer const& input) throw()
+    PLONK_INLINE_LOW void forward (Buffer& output, Buffer const& input) throw()
     {
         plonk_assert (output.length() >= this->length());
         plonk_assert (input.length() >= this->length());
@@ -102,14 +102,14 @@ public:
     
     /** Apply the inverse-FFT to the input and place the result in output.
      This can't be performed in-place (i.e., input and output must not point to the same data or overlap). */
-    inline void inverse (float* output, const float* input) throw()
+    PLONK_INLINE_LOW void inverse (float* output, const float* input) throw()
     {
         this->getInternal()->inverse (output, input);
     }
     
     /** Apply the inverse-FFT to the input and place the result in output.
      This can't be performed in-place (i.e., input and output must not point to the same data or overlap). */
-    inline void inverse (Buffer& output, Buffer const& input) throw()
+    PLONK_INLINE_LOW void inverse (Buffer& output, Buffer const& input) throw()
     {
         plonk_assert (output.length() >= this->length());
         plonk_assert (input.length() >= this->length());
@@ -117,14 +117,14 @@ public:
     }        
     
     /** Get the FFT size. */
-    inline long length() const
+    PLONK_INLINE_LOW long length() const
     {
         return this->getInternal()->length();
     }
     
     /** Get half FFT size. 
      This is just as a convenience as it is already cached for efficiency. */
-    inline long halfLength() const
+    PLONK_INLINE_LOW long halfLength() const
     {
         return this->getInternal()->halfLength();
     }

@@ -55,7 +55,7 @@ public:
     friend class RNG;
     
 private:
-    inline PlankRNGRef getRNGRef() { return &rng; }
+    PLONK_INLINE_HIGH PlankRNGRef getRNGRef() { return &rng; }
 
     PlankRNG rng;
 };
@@ -126,78 +126,78 @@ public:
 
 //------------------------------------------------------------------------------
 
-inline double rand (const double scale) throw()
+PLONK_INLINE_HIGH double rand (const double scale) throw()
 {
 	return RNG::global().uniform (scale);
 }
 
-inline double rand (const double min, const double max) throw()
+PLONK_INLINE_HIGH double rand (const double min, const double max) throw()
 {
 	return RNG::global().uniform (min, max);
 }
 
-inline double rand2 (const double scale) throw()
+PLONK_INLINE_HIGH double rand2 (const double scale) throw()
 {
 	return RNG::global().uniform (scale);
 }
 
-inline double exprand (const double min, const double max) throw()
+PLONK_INLINE_HIGH double exprand (const double min, const double max) throw()
 {
 	return RNG::global().exponential (min, max);
 }
 
-inline float rand (const float scale) throw()
+PLONK_INLINE_HIGH float rand (const float scale) throw()
 {
 	return RNG::global().uniform (scale);
 }
 
-inline float rand (const float min, const float max) throw()
+PLONK_INLINE_HIGH float rand (const float min, const float max) throw()
 {
 	return RNG::global().uniform (min, max);
 }
 
-inline float rand2 (const float scale) throw()
+PLONK_INLINE_HIGH float rand2 (const float scale) throw()
 {
 	return RNG::global().uniform (-scale, scale);
 }
 
-inline float exprand (const float min, const float max) throw()
+PLONK_INLINE_HIGH float exprand (const float min, const float max) throw()
 {
 	return RNG::global().exponential (min, max);
 }
 
-inline int rand (const int scale) throw()
+PLONK_INLINE_HIGH int rand (const int scale) throw()
 {
 	return RNG::global().uniform (scale);
 }
 
-inline int rand (const int min, const int max) throw()
+PLONK_INLINE_HIGH int rand (const int min, const int max) throw()
 {
 	return RNG::global().uniform (min, max);
 }
 
-inline int rand2 (const int scale) throw()
+PLONK_INLINE_HIGH int rand2 (const int scale) throw()
 {
 	return RNG::global().uniform (-scale, scale);
 }
 
-inline Int24 rand (const Int24 scale) throw()
+PLONK_INLINE_HIGH Int24 rand (const Int24 scale) throw()
 {
 	return RNG::global().uniform (int (scale));
 }
 
-inline Int24 rand (const Int24 min, const Int24 max) throw()
+PLONK_INLINE_HIGH Int24 rand (const Int24 min, const Int24 max) throw()
 {
 	return RNG::global().uniform (int (min), int (max));
 }
 
-inline Int24 rand2 (const Int24 scale) throw()
+PLONK_INLINE_HIGH Int24 rand2 (const Int24 scale) throw()
 {
     const int intScale (scale);
 	return RNG::global().uniform (-intScale, intScale);
 }
 
-inline double exprand (const int min, const int max) throw()
+PLONK_INLINE_HIGH double exprand (const int min, const int max) throw()
 {
 	return RNG::global().exponential (double (min), double (max));
 }

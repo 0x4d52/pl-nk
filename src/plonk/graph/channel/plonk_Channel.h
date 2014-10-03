@@ -148,59 +148,59 @@ public:
     {
     }
         
-    inline bool isNull() const throw()                                      { return this->getInternal()->isNull(); }
-    inline bool isNotNull() const throw()                                   { return ! this->getInternal()->isNull(); }  
-    inline bool isConstant() const throw()                                  { return this->getInternal()->isConstant(); }
-    inline bool isNotConstant() const throw()                               { return ! this->getInternal()->isConstant(); }    
-    inline bool isTypeConverter() const throw()                             { return this->getInternal()->isTypeConverter(); }
+    PLONK_INLINE_LOW bool isNull() const throw()                                      { return this->getInternal()->isNull(); }
+    PLONK_INLINE_LOW bool isNotNull() const throw()                                   { return ! this->getInternal()->isNull(); }  
+    PLONK_INLINE_LOW bool isConstant() const throw()                                  { return this->getInternal()->isConstant(); }
+    PLONK_INLINE_LOW bool isNotConstant() const throw()                               { return ! this->getInternal()->isConstant(); }    
+    PLONK_INLINE_LOW bool isTypeConverter() const throw()                             { return this->getInternal()->isTypeConverter(); }
 
-    inline const Text getName() const throw()                               { return this->getInternal()->getName(); }
-    inline const Text getLabel() const throw()                              { return this->getInternal()->getLabel(); }
-    inline void setLabel(Text const& newId) throw()                         { this->getInternal()->setLabel(newId); }   
-    inline const Text getOutputTypeName() const throw()                     { return this->getInternal()->getOutputTypeName(); }
-    inline const Text getInputTypeName() const throw()                      { return this->getInternal()->getInputTypeName(); }
-    inline int getOutputTypeCode() const throw()                            { return this->getInternal()->getOutputTypeCode(); }
-    inline int getInputTypeCode() const throw()                             { return this->getInternal()->getInputTypeCode(); }
+    PLONK_INLINE_LOW const Text getName() const throw()                               { return this->getInternal()->getName(); }
+    PLONK_INLINE_LOW const Text getLabel() const throw()                              { return this->getInternal()->getLabel(); }
+    PLONK_INLINE_LOW void setLabel(Text const& newId) throw()                         { this->getInternal()->setLabel(newId); }   
+    PLONK_INLINE_LOW const Text getOutputTypeName() const throw()                     { return this->getInternal()->getOutputTypeName(); }
+    PLONK_INLINE_LOW const Text getInputTypeName() const throw()                      { return this->getInternal()->getInputTypeName(); }
+    PLONK_INLINE_LOW int getOutputTypeCode() const throw()                            { return this->getInternal()->getOutputTypeCode(); }
+    PLONK_INLINE_LOW int getInputTypeCode() const throw()                             { return this->getInternal()->getInputTypeCode(); }
 
-    inline const BlockSize& getBlockSize() const throw()                    { return this->getInternal()->getBlockSize(); }
-    inline BlockSize& getBlockSize() throw()                                { return this->getInternal()->getBlockSize(); }
-    inline void setBlockSize (BlockSize const& newBlockSize) throw()        { this->getInternal()->setBlockSize (newBlockSize); }
+    PLONK_INLINE_LOW const BlockSize& getBlockSize() const throw()                    { return this->getInternal()->getBlockSize(); }
+    PLONK_INLINE_LOW BlockSize& getBlockSize() throw()                                { return this->getInternal()->getBlockSize(); }
+    PLONK_INLINE_LOW void setBlockSize (BlockSize const& newBlockSize) throw()        { this->getInternal()->setBlockSize (newBlockSize); }
 
-    inline const SampleRate& getSampleRate() const throw()                  { return this->getInternal()->getSampleRate(); }
-    inline SampleRate& getSampleRate() throw()                              { return this->getInternal()->getSampleRate(); }
-    inline void setSampleRate (SampleRate const& newSampleRate) throw()     { this->getInternal()->setSampleRate (newSampleRate); }
-    inline double getSampleDurationInTicks() const throw()                  { return this->getInternal()->getSampleDurationInTicks(); }
-    inline double getBlockDurationInTicks() const throw()                   { return this->getInternal()->getBlockDurationInTicks(); }
+    PLONK_INLINE_LOW const SampleRate& getSampleRate() const throw()                  { return this->getInternal()->getSampleRate(); }
+    PLONK_INLINE_LOW SampleRate& getSampleRate() throw()                              { return this->getInternal()->getSampleRate(); }
+    PLONK_INLINE_LOW void setSampleRate (SampleRate const& newSampleRate) throw()     { this->getInternal()->setSampleRate (newSampleRate); }
+    PLONK_INLINE_LOW double getSampleDurationInTicks() const throw()                  { return this->getInternal()->getSampleDurationInTicks(); }
+    PLONK_INLINE_LOW double getBlockDurationInTicks() const throw()                   { return this->getInternal()->getBlockDurationInTicks(); }
     
-    inline const DoubleVariable& getOverlap() const throw()                 { return this->getInternal()->getOverlap(); }
-    inline DoubleVariable& getOverlap() throw()                             { return this->getInternal()->getOverlap(); }
-    inline void setOverlap (DoubleVariable const& newOverlap) throw()       { this->getInternal()->setOverlap (newOverlap); }
+    PLONK_INLINE_LOW const DoubleVariable& getOverlap() const throw()                 { return this->getInternal()->getOverlap(); }
+    PLONK_INLINE_LOW DoubleVariable& getOverlap() throw()                             { return this->getInternal()->getOverlap(); }
+    PLONK_INLINE_LOW void setOverlap (DoubleVariable const& newOverlap) throw()       { this->getInternal()->setOverlap (newOverlap); }
     
-    inline const Inputs& getInputs() const throw()                          { return this->getInternal()->getInputs(); }
-    inline Inputs getInputs() throw()                                       { return this->getInternal()->getInputs(); }
+    PLONK_INLINE_LOW const Inputs& getInputs() const throw()                          { return this->getInternal()->getInputs(); }
+    PLONK_INLINE_LOW Inputs getInputs() throw()                                       { return this->getInternal()->getInputs(); }
     
-    inline const Buffer& getOutputBuffer() const throw()                    { return this->getInternal()->getOutputBuffer(); }
-    inline Buffer& getOutputBuffer() throw()                                { return this->getInternal()->getOutputBuffer(); }
-    inline const SampleType* getOutputSamples() const throw()               { return this->getInternal()->getOutputSamples(); }
-    inline SampleType* getOutputSamples() throw()                           { return this->getInternal()->getOutputSamples(); }
-    inline void setOutputBuffer (Buffer const& externalBuffer) throw()      { this->getInternal()->setOutputBuffer (externalBuffer); }
+    PLONK_INLINE_LOW const Buffer& getOutputBuffer() const throw()                    { return this->getInternal()->getOutputBuffer(); }
+    PLONK_INLINE_LOW Buffer& getOutputBuffer() throw()                                { return this->getInternal()->getOutputBuffer(); }
+    PLONK_INLINE_LOW const SampleType* getOutputSamples() const throw()               { return this->getInternal()->getOutputSamples(); }
+    PLONK_INLINE_LOW SampleType* getOutputSamples() throw()                           { return this->getInternal()->getOutputSamples(); }
+    PLONK_INLINE_LOW void setOutputBuffer (Buffer const& externalBuffer) throw()      { this->getInternal()->setOutputBuffer (externalBuffer); }
     
-    inline int getNumChannels() const throw()                               { return this->getInternal()->getNumChannels(); }
+    PLONK_INLINE_LOW int getNumChannels() const throw()                               { return this->getInternal()->getNumChannels(); }
     
-    inline void initValue (SampleType const& value) throw()                 { return this->getInternal()->initValue (value); }
-    inline void initChannel (const int index) throw()                       { this->getInternal()->initChannel (index); }
-    inline const SampleType& getValue() const throw()                       { return this->getInternal()->getValue(); }
+    PLONK_INLINE_LOW void initValue (SampleType const& value) throw()                 { return this->getInternal()->initValue (value); }
+    PLONK_INLINE_LOW void initChannel (const int index) throw()                       { this->getInternal()->initChannel (index); }
+    PLONK_INLINE_LOW const SampleType& getValue() const throw()                       { return this->getInternal()->getValue(); }
     
-    inline ChannelBase getChannel (const int index) throw()                 { return ChannelBase (this->getInternal()->getChannel (index)); }
-    inline ChannelBase operator[] (const int index) throw()                 { return ChannelBase (this->getInternal()->getChannel (index)); }
+    PLONK_INLINE_LOW ChannelBase getChannel (const int index) throw()                 { return ChannelBase (this->getInternal()->getChannel (index)); }
+    PLONK_INLINE_LOW ChannelBase operator[] (const int index) throw()                 { return ChannelBase (this->getInternal()->getChannel (index)); }
 
-    inline const TimeStamp& getNextTimeStamp() const throw()                { return this->getInternal()->getNextTimeStamp(); }
-    inline bool shouldBeDeletedNow (TimeStamp const& time) const throw()    { return this->getInternal()->shouldBeDeletedNow (time); }
+    PLONK_INLINE_LOW const TimeStamp& getNextTimeStamp() const throw()                { return this->getInternal()->getNextTimeStamp(); }
+    PLONK_INLINE_LOW bool shouldBeDeletedNow (TimeStamp const& time) const throw()    { return this->getInternal()->shouldBeDeletedNow (time); }
     
-    inline void resetIfExpired() throw()                                    { this->getInternal()->setExpiryTimeStamp (TimeStamp::getMaximum()); }
+    PLONK_INLINE_LOW void resetIfExpired() throw()                                    { this->getInternal()->setExpiryTimeStamp (TimeStamp::getMaximum()); }
     
 //    /** Returns @c true if this unit needs to process for the given timestamp. */
-//    inline bool needsToProcess (ProcessInfo const& info, const int channel) const throw()
+//    PLONK_INLINE_LOW bool needsToProcess (ProcessInfo const& info, const int channel) const throw()
 //    {
 //		(void)channel;
 //
@@ -211,7 +211,7 @@ public:
 //    }
 
     /** Returns @c true if this unit needs to process for the given timestamp. */
-    inline bool needsToProcess (ProcessInfo const& info) const throw()
+    PLONK_INLINE_LOW bool needsToProcess (ProcessInfo const& info) const throw()
     {
         const TimeStamp& nextTimeStamp = this->getInternal()->getNextTimeStamp();
         const TimeStamp& infoTimeStamp = info.getTimeStamp();
@@ -219,7 +219,7 @@ public:
         return (infoTimeStamp >= nextTimeStamp);
     }
 
-    inline void process (ProcessInfo& info, const int channel) throw()
+    PLONK_INLINE_LOW void process (ProcessInfo& info, const int channel) throw()
     {        
         if (this->needsToProcess (info))
         {
