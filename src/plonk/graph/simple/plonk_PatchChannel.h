@@ -133,7 +133,7 @@ public:
         const SampleType fadeIncrement = data.fadeIncrement;
         const SampleType fadeMax = TypeUtility<SampleType>::getTypePeak();
         const SampleType fadeMin = Math<SampleType>::get0();
-        SampleType fadeOutLevel, fadeInLevel;
+        SampleType fadeOutLevel (0), fadeInLevel;
 
         for (int channel = 0; channel < numChannels; ++channel)
         {

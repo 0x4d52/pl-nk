@@ -73,7 +73,7 @@
 // UI
 #import "PAEBufferView.h"
 
-#define PAEENGINE_VERSION "0.2.7"
+#define PAEENGINE_VERSION "0.3.0"
 
 /**
 @mainpage Documentation
