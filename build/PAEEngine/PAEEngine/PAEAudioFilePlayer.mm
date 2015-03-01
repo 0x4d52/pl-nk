@@ -52,8 +52,8 @@
         
         self.rate       = [[PAEProcess alloc] initWithNumInputs:1];
         self.rate.input = [PAEConstant constantWithValue:1];
-        self.outputUnit = FilePlay::Simple::ar (_reader, self.rate.patchUnit, _loopCount);
-//        self.outputUnit = ResampleLinear::ar (FilePlay::ar (_reader, _loopCount), self.rate.patchUnit);
+//        self.outputUnit = FilePlay::Simple::ar (_reader, self.rate.patchUnit, _loopCount);
+        self.outputUnit = ResampleLinear::ar (FilePlay::ar (_reader, _loopCount), self.rate.patchUnit);
     }
     
     return self;

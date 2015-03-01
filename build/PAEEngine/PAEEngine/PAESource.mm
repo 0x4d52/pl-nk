@@ -84,7 +84,7 @@
 -(PAESource*)sourceWithAppendedChannels:(PAESource*)source
 {
     PAESource* proxy = [[PAESource alloc] init];
-    proxy.outputUnit = Unit (self.outputUnit, source.outputUnit);
+    proxy.outputUnit = Unit (_outputUnitVariable.getValue(), source->_outputUnitVariable.getValue());
     return proxy;
 }
 
@@ -96,11 +96,11 @@
     {
         if (unit.isNull())
         {
-            unit = source.outputUnit;
+            unit = source->_outputUnitVariable.getValue();
         }
         else
         {
-            unit = Unit (unit, source.outputUnit);
+            unit = Unit (unit, source->_outputUnitVariable.getValue());
         }
     }
     
@@ -126,28 +126,56 @@
 -(PAESource*)addedTo:(PAESource*)source
 {
     PAESource* proxy = [[PAESource alloc] init];
-    proxy.outputUnit = self.outputUnit + source.outputUnit;
+    proxy.outputUnit = _outputUnitVariable.getValue() + source->_outputUnitVariable.getValue();
     return proxy;
 }
 
 -(PAESource*)subtractedFrom:(PAESource*)source
 {
     PAESource* proxy = [[PAESource alloc] init];
-    proxy.outputUnit = source.outputUnit - self.outputUnit;
+    proxy.outputUnit = source->_outputUnitVariable.getValue() - _outputUnitVariable.getValue();
+    return proxy;
+}
+
+-(PAESource*)subtractFrom:(PAESource*)source
+{
+    PAESource* proxy = [[PAESource alloc] init];
+    proxy.outputUnit = _outputUnitVariable.getValue() - source->_outputUnitVariable.getValue();
     return proxy;
 }
 
 -(PAESource*)multipliedBy:(PAESource*)source
 {
     PAESource* proxy = [[PAESource alloc] init];
-    proxy.outputUnit = self.outputUnit * source.outputUnit;
+    proxy.outputUnit = _outputUnitVariable.getValue() * source->_outputUnitVariable.getValue();
     return proxy;
 }
 
 -(PAESource*)dividedBy:(PAESource*)source
 {
     PAESource* proxy = [[PAESource alloc] init];
-    proxy.outputUnit = self.outputUnit / source.outputUnit;
+    proxy.outputUnit = _outputUnitVariable.getValue() / source->_outputUnitVariable.getValue();
+    return proxy;
+}
+
+-(PAESource*)divideBy:(PAESource*)source
+{
+    PAESource* proxy = [[PAESource alloc] init];
+    proxy.outputUnit = source->_outputUnitVariable.getValue() / _outputUnitVariable.getValue();
+    return proxy;
+}
+
+-(PAESource*)maximumComparedTo:(PAESource*)source
+{
+    PAESource* proxy = [[PAESource alloc] init];
+    proxy.outputUnit = _outputUnitVariable.getValue().max (source->_outputUnitVariable.getValue());
+    return proxy;
+}
+
+-(PAESource*)minimumComparedTo:(PAESource*)source
+{
+    PAESource* proxy = [[PAESource alloc] init];
+    proxy.outputUnit = _outputUnitVariable.getValue().min (source->_outputUnitVariable.getValue());
     return proxy;
 }
 

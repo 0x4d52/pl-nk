@@ -58,6 +58,12 @@
 /** The sample rate of the buffer. */
 @property (nonatomic, readonly) double sampleRate;
 
+/** The raw sample data. */
+@property (nonatomic, readonly) float* rawSamples;
+
+/** The frame stride if you are iterating the raw samples manually. */
+@property (nonatomic, readonly) int frameStride;
+
 /** Create a buffer from an audio file */
 +(PAEBuffer*)bufferNamed:(NSString*)name;
 

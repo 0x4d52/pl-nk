@@ -38,6 +38,10 @@
  -------------------------------------------------------------------------------
  */
 
+#import "PAEBuild.h"
+
+#define PAEENGINE_VERSION "0.5.9"
+
 @class PAEAudioHost;
 @class PAESource;
 @class PAEInput;

@@ -18,35 +18,41 @@ class PAEBufferCapturePeer : public Channel::Receiver,
                              public Threading::Thread
 {
 public:
-    PAEBufferCapturePeer (PAEBufferCapture* p) throw()
+    PAEBufferCapturePeer (PAEBufferCapture* p, const int bufferSize_, const int numBuffers_) throw()
     :   peer (p),
-        numBuffers (64),
+        bufferSize (bufferSize_),
+        numBuffers (numBuffers_),
         sleep (0.0)
     {
         int n = numBuffers;
         
         while (n--)
         {
-            freeQueue.push (QueueBuffer (peer.numChannels, BlockSize::getDefault().getValue()));
+            freeQueue.push (QueueBuffer (peer.numChannels, bufferSize));
         }        
     }
     
     ResultCode run() throw()
-    {        
+    {
+        const QueueBuffer null = BufferQueue::getNullValue();
+        
         while (peer && !getShouldExit())
         {
-            QueueBuffer queueBuffer = liveQueue.pop();
+            if (liveQueue.length() > 0)
+            {
+                QueueBuffer queueBuffer = liveQueue.pop();
             
-            if (queueBuffer != BufferQueue::getNullValue())
-            {                
-                [peer write:queueBuffer];
-                freeQueue.push (queueBuffer);
+                if (queueBuffer != null)
+                {
+                    [peer write:queueBuffer];
+                    freeQueue.push (queueBuffer);
+                }
             }
             
             if (liveQueue.length() == 0)
                 event.wait (0.5);
             else
-                Threading::sleep ((BlockSize::getDefault().getValue() / SampleRate::getDefault().getValue()) * (numBuffers / 4));
+                Threading::sleep ((SampleRate::getDefault().getValue() / bufferSize) * (numBuffers / 2));
         }
         
         delete this;
@@ -79,6 +85,7 @@ private:
     __weak PAEBufferCapture* peer;
     BufferQueue freeQueue, liveQueue;
     Lock event;
+    const int bufferSize;
     const int numBuffers;
     double sleep;
 };
@@ -94,14 +101,23 @@ private:
 
 +(PAEBufferCapture*)bufferCaptureWithNumInputs:(int)numInputs
 {
-    return [[PAEBufferCapture alloc] initWithNumInputs:numInputs];
+    return [[PAEBufferCapture alloc] initWithNumInputs:numInputs
+                                            bufferSize:512
+                                            numBuffers:64];
 }
 
--(id)initWithNumInputs:(int)numInputs
++(PAEBufferCapture*)bufferCaptureWithNumInputs:(int)numInputs bufferSize:(int)bufferSize numBuffers:(int)numBuffers
+{
+    return [[PAEBufferCapture alloc] initWithNumInputs:numInputs
+                                            bufferSize:bufferSize
+                                            numBuffers:numBuffers];
+}
+
+-(id)initWithNumInputs:(int)numInputs bufferSize:(int)bufferSize numBuffers:(int)numBuffers
 {
     if (self = [super initWithNumInputs:numInputs])
     {
-        _peer = new PAEBufferCapturePeer (self);
+        _peer = new PAEBufferCapturePeer (self, bufferSize, numBuffers);
         _peer->start();
         _record = BufferQueueRecord::ar (self.patchUnit, _peer->getFreeQueue());
         _record.addReceiverToChannels (_peer);
@@ -129,7 +145,7 @@ private:
     
     while (queueBufferPosition < queueBuffer.getNumFrames())
     {
-        int queueBufferFramesThisTime;
+        int queueBufferFramesThisTime = 0;
         
         for (unsigned int channel = 0; channel < bufferChannels; ++channel)
         {

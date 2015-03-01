@@ -92,13 +92,26 @@
 /** Add this source to another and get the result (mix). */
 -(PAESource*)addedTo:(PAESource*)source;
 
-/** Subtract this source from another and get the result (mix). */
+/** Subtract this source from another and get the result. */
 -(PAESource*)subtractedFrom:(PAESource*)source;
 
-/** Multiply this source by another and get the result (mix). */
+/** Subtract another source from this source and get the result. */
+-(PAESource*)subtractFrom:(PAESource*)source;
+
+/** Multiply this source by another and get the result. */
 -(PAESource*)multipliedBy:(PAESource*)source;
 
-/** Divide this source by another and get the result (mix). */
+/** Divide this source by another and get the result. */
 -(PAESource*)dividedBy:(PAESource*)source;
+
+/** Divide this another source by this source and get the result. */
+-(PAESource*)divideBy:(PAESource*)source;
+
+/** The maximum of this and another source. */
+-(PAESource*)maximumComparedTo:(PAESource*)source;
+
+/** The minimum of this and another source. */
+-(PAESource*)minimumComparedTo:(PAESource*)source;
+
 
 @end

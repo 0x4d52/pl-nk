@@ -57,4 +57,6 @@
 @property (nonatomic, weak) id <PAEBufferCaptureDelegate> captureDelegate;
 @property (nonatomic, strong) PAEBuffer* buffer;
 +(PAEBufferCapture*)bufferCaptureWithNumInputs:(int)numInputs;
++(PAEBufferCapture*)bufferCaptureWithNumInputs:(int)numInputs bufferSize:(int)bufferSize numBuffers:(int)numBuffers;
+
 @end

@@ -40,6 +40,8 @@
 
 #import <Foundation/Foundation.h>
 
+#import "PAEFoward.h"
+
 // core
 #import "PAEAudioHost.h"
 #import "PAESource.h"
@@ -69,11 +71,11 @@
 #import "PAEMidSide.h"
 #import "PAEAmplitude.h"
 #import "PAESend.h"
+#import "PAEBufferCapture.h"
+#import "PAEAudioFileRecorder.h"
 
 // UI
 #import "PAEBufferView.h"
-
-#define PAEENGINE_VERSION "0.3.0"
 
 /**
 @mainpage Documentation

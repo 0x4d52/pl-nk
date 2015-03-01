@@ -237,6 +237,11 @@
     return self.internal.frameStride;
 }
 
+-(float*)rawSamples
+{
+    return [self.internal samples:0];
+}
+
 -(float*)samples:(int)channel
 {
     return [self.internal samples:channel];

@@ -12,6 +12,7 @@
 #include "plonk.h"
 #include "plonk_IOSAudioHost.h"
 
+static BOOL initialised = NO;
 const float PAERepatchFadeTime = 0.005f;
 const float PAEControlLagTime = 0.02f;
 
@@ -67,6 +68,12 @@ OSStatus preRenderCallbackFunction (void*                      refCon,
 
 -(id)initWithNumOutputs:(int)numOutputs andNumInputs:(int)numInputs
 {
+    if (!initialised)
+    {
+        initialised = YES;
+        NSLog (@"PAEEngine v%s.%08x", PAEENGINE_VERSION, PAEENGINE_BUILD);
+    }
+    
     if (self = [super init])
     {
         _internal = [[PAEAudioHostInternal alloc] init];
