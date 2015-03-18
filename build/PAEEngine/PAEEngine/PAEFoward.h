@@ -54,7 +54,9 @@
 @class PAEBuffer;
 @class PAEBufferView;
 @class PAEBufferCapture;
+@class PAEProcessCallback;
 struct PAERange;
+struct PAEProcessCallbackData;
 
 /** The default fade time applied when repatching sources.
  Default 0.005s = 5ms. */

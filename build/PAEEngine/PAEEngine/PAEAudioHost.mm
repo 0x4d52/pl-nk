@@ -187,6 +187,19 @@ OSStatus preRenderCallbackFunction (void*                      refCon,
 
 -(void)start
 {
+    if (_internal.numInputs > 0)
+    {
+        UInt32 propertySize = sizeof (UInt32);
+        UInt32 category;
+        AudioSessionGetProperty (kAudioSessionProperty_AudioCategory, &propertySize, &category);
+        
+        if ((category != kAudioSessionCategory_PlayAndRecord) ||
+            (category != kAudioSessionCategory_RecordAudio))
+        {
+            NSLog(@"WARNING: PAEAudioHost has audio inputs but the AudioSession category is set incorrectly");
+        }
+    }
+    
     [_internal startHost];
 }
 

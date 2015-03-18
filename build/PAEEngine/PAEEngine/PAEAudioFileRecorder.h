@@ -44,15 +44,66 @@
 
 /** @file */
 
-@interface PAEAudioFileRecorderWAV : PAEBufferCapture <PAEBufferCaptureDelegate>
+////////////////////////////////////////////////////////////////////////////////
 
+/** A WAV audio file recorder.
+ This records audio into a new WAV file until stopped or deallocated. */
+@interface PAEAudioFileRecorder : PAEBufferCapture <PAEBufferCaptureDelegate>
+
+/** The path of the file. 
+ Especially useful if nil is used as the inPath: field to the creation methods
+ where a randomly generated temporary path will be used. */
 @property (strong, nonatomic, readonly) NSString* path;
 
+/** Pauses or unpauses the recording process. */
 @property (nonatomic) BOOL paused;
 
-+(PAEAudioFileRecorderWAV*)audioFileRecorderWAVWithNumChannels:(int)numChannels numBits:(int)numBits sampleRate:(double)sampleRate inPath:(NSString*)path;
-+(PAEAudioFileRecorderWAV*)audioFileRecorderWAVWithNumChannels:(int)numChannels numBits:(int)numBits sampleRate:(double)sampleRate inPath:(NSString*)path bufferSize:(int)bufferSize numBuffers:(int)numBuffers;
+/** Create an audio file recorder with default buffer sizes. 
+ Here the number of channels and the bit depth (16, 24 or 32) may be selected.
+ The sample rate must match the sample rate of the audio host.
+ The path may be nil (where a randomly generated path in the temporary directory
+ will be used). Otherwise the path must be in a location that the app has 
+ permission to write files. */
++(PAEAudioFileRecorder*)audioFileRecorderWAVWithNumChannels:(int)numChannels numBits:(int)numBits sampleRate:(double)sampleRate inPath:(NSString*)path;
 
+/** Create an Ogg Vorbis recorder with default buffer sizes.
+ Here the number of channels and the quality (0.0-10.0) may be selected.
+ The sample rate must match the sample rate of the audio host.
+ The path may be nil (where a randomly generated path in the temporary directory
+ will be used). Otherwise the path must be in a location that the app has
+ permission to write files. */
++(PAEAudioFileRecorder*)audioFileRecorderOggVorbisWithNumChannels:(int)numChannels quality:(float)quality sampleRate:(double)sampleRate inPath:(NSString*)path;
+
+/** Stops recording.
+ After calling this the recording cannot be restarted. */
 -(void)stop;
+
+/** Determines if the recording is stopped. */
+-(BOOL)isStopped;
+@end
+
+////////////////////////////////////////////////////////////////////////////////
+
+@interface PAEAudioFileRecorder (Advanced)
+
+/** Create an audio file recorder with specifc buffer sizes.
+ Here the number of channels and the bit depth (16, 24 or 32) may be selected.
+ The sample rate must match the sample rate of the audio host.
+ The path may be nil (where a randomly generated path in the temporary directory
+ will be used). Otherwise the path must be in a location that the app has
+ permission to write files. The bufferSize governs the number of sample
+ frames buffered for each write operation. The numBuffers argument is how many
+ of these buffers are used. */
++(PAEAudioFileRecorder*)audioFileRecorderWAVWithNumChannels:(int)numChannels numBits:(int)numBits sampleRate:(double)sampleRate inPath:(NSString*)path bufferSize:(int)bufferSize numBuffers:(int)numBuffers;
+
+/** Create an Ogg Vorbis recorder with specifc buffer sizes.
+ Here the number of channels and the quality (0.0-10.0) may be selected.
+ The sample rate must match the sample rate of the audio host.
+ The path may be nil (where a randomly generated path in the temporary directory
+ will be used). Otherwise the path must be in a location that the app has
+ permission to write files. The bufferSize governs the number of sample
+ frames buffered for each write operation. The numBuffers argument is how many
+ of these buffers are used. */
++(PAEAudioFileRecorder*)audioFileRecorderOggVorbisWithNumChannels:(int)numChannels quality:(float)quality sampleRate:(double)sampleRate inPath:(NSString*)path bufferSize:(int)bufferSize numBuffers:(int)numBuffers;
 
 @end

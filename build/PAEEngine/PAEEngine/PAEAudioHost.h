@@ -88,7 +88,11 @@
 /** Create an audio host for output only. */
 +(PAEAudioHost*)audioHostWithNumOutputs:(int)numOutputs;
 
-/** Create an audio host for input and output. */
+/** Create an audio host for input and output. 
+ You must make sure that you set your audio session category suitably for
+ input to work. On iOS 7 and later the user will need to give permission to
+ use the microphone. 
+ */
 +(PAEAudioHost*)audioHostWithNumOutputs:(int)numOutputs andNumInputs:(int)numInputs;
 
 /** Start the audio host. */

@@ -9,10 +9,25 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>PAEEngineBuild.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>A806E4FA18A0076400D7187B</key>
+		<key>A86F615B19E1A361002B228E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A86F616619E1A361002B228E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A89748E319E2678A002143E3</key>
 		<dict>
 			<key>primary</key>
 			<true/>

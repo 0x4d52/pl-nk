@@ -21,8 +21,7 @@ public:
     PAEBufferCapturePeer (PAEBufferCapture* p, const int bufferSize_, const int numBuffers_) throw()
     :   peer (p),
         bufferSize (bufferSize_),
-        numBuffers (numBuffers_),
-        sleep (0.0)
+        numBuffers (numBuffers_)
     {
         int n = numBuffers;
         
@@ -35,7 +34,7 @@ public:
     ResultCode run() throw()
     {
         const QueueBuffer null = BufferQueue::getNullValue();
-        
+                
         while (peer && !getShouldExit())
         {
             if (liveQueue.length() > 0)
@@ -50,9 +49,14 @@ public:
             }
             
             if (liveQueue.length() == 0)
-                event.wait (0.5);
+            {
+                event.wait (0.0);
+            }
             else
-                Threading::sleep ((SampleRate::getDefault().getValue() / bufferSize) * (numBuffers / 2));
+            {
+                Threading::yield();
+            }
+            
         }
         
         delete this;
@@ -64,8 +68,7 @@ public:
     {
         if (message == Text::getMessageQueueBuffer())
         {
-            QueueBuffer buffer = payload.as<QueueBuffer>();
-            liveQueue.push (buffer);
+            liveQueue.push (payload.as<QueueBuffer>());
             event.signal();
         }
     }
@@ -87,7 +90,6 @@ private:
     Lock event;
     const int bufferSize;
     const int numBuffers;
-    double sleep;
 };
 
 ////////////////////////////////////////////////////////////////////////////////

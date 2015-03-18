@@ -418,7 +418,9 @@ typedef struct PlankFourCharCodeString
 static PLANK_INLINE_LOW double pl_TimeNow()
 {
 #if PLANK_APPLE || PLANK_LINUX || PLANK_ANDROID
+    PLANK_ALIGN(16)
     struct timeval now;
+    
     gettimeofday (&now, 0);
     return (double)now.tv_sec + now.tv_usec * 0.000001;
 #else

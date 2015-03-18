@@ -169,23 +169,55 @@ void pl_Lock_Wait (PlankLockRef p)
 }
 
 
+//void pl_Lock_WaitTimeout (PlankLockRef p, double time)
+//{
+//    struct timespec timeout;
+//    pthread_mutex_lock (&p->mutex);
+//    
+//    pl_TimeToTimeSpec (&timeout, pl_TimeNow() + time);
+//    pthread_cond_timedwait (&p->condition, &p->mutex, &timeout);
+//    p->flag = PLANK_FALSE;
+//
+//    pthread_mutex_unlock (&p->mutex);
+//}
+
 void pl_Lock_WaitTimeout (PlankLockRef p, double time)
 {
-    struct timespec timeout;
-    pthread_mutex_lock (&p->mutex);
-    
-    pl_TimeToTimeSpec (&timeout, pl_TimeNow() + time);
-    pthread_cond_timedwait (&p->condition, &p->mutex, &timeout);
-    p->flag = PLANK_FALSE;
+    if (time < 0.0)
+    {
+        pl_Lock_Wait (p);
+    }
+    else
+    {
+        struct timespec timeout;
+        pthread_mutex_lock (&p->mutex);
+        pl_TimeToTimeSpec (&timeout, pl_TimeNow() + time);
+        
+        do
+        {
+            if (pthread_cond_timedwait (&p->condition, &p->mutex, &timeout) == ETIMEDOUT)
+            {
+                pthread_mutex_unlock (&p->mutex);
+                return;
+            }
+        } while (!p->flag);
 
-    pthread_mutex_unlock (&p->mutex);
+        p->flag = PLANK_FALSE;
+        
+        pthread_mutex_unlock (&p->mutex);
+    }
 }
 
 void pl_Lock_Signal (PlankLockRef p)
 {
     pthread_mutex_lock (&p->mutex);
-    pthread_cond_signal (&p->condition);
-    p->flag = PLANK_TRUE;
+    
+    if (!p->flag)
+    {
+        p->flag = PLANK_TRUE;
+        pthread_cond_signal (&p->condition);
+    }
+    
     pthread_mutex_unlock (&p->mutex);
 }
 

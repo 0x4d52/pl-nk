@@ -73,6 +73,7 @@
 #import "PAESend.h"
 #import "PAEBufferCapture.h"
 #import "PAEAudioFileRecorder.h"
+#import "PAEProcessCallback.h"
 
 // UI
 #import "PAEBufferView.h"

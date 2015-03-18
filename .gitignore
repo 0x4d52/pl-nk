@@ -1,3 +1,7 @@
+*.DS_Store
 sandbox
 doc/ignored
 ignored
+build/macplnk/macplnk.xcodeproj/xcuserdata
+build/macplnk/macplnk.xcodeproj/project.xcworkspace
+build/PAEEngine/DerivedData

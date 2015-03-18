@@ -111,8 +111,12 @@ PLANK_END_C_LINKAGE
 #if PLANK_APPLE || PLANK_LINUX
 typedef struct PlankLock
 {
+    PLANK_ALIGN(16)
     pthread_mutex_t mutex;
+    
+    PLANK_ALIGN(16)
     pthread_cond_t condition;
+    
     PlankB flag;
 } PlankLock;
 #endif
@@ -120,8 +124,12 @@ typedef struct PlankLock
 #if PLANK_ANDROID
 typedef struct PlankLock
 {
+    PLANK_ALIGN(16)
     pthread_mutex_t mutex;
+    
+    PLANK_ALIGN(16)
     pthread_cond_t condition;
+    
     PlankB flag;
 } PlankLock;
 #endif

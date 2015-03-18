@@ -11,7 +11,7 @@
 			isa = PBXAggregateTarget;
 			buildConfigurationList = A89748E619E2678B002143E3 /* Build configuration list for PBXAggregateTarget "PAEEngineBuild" */;
 			buildPhases = (
-				A89748E719E26859002143E3 /* ShellScript */,
+				A89748E719E26859002143E3 /* Combine Universal for Device & Simulator */,
 			);
 			dependencies = (
 			);
@@ -21,6 +21,8 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		A85CF00F1A9C7B8A0081F791 /* PAEAudioFileRecorder.mm in Sources */ = {isa = PBXBuildFile; fileRef = A85CF00E1A9C7B8A0081F791 /* PAEAudioFileRecorder.mm */; };
+		A85CF0111A9C7BAD0081F791 /* PAEAudioFileRecorder.h in Headers */ = {isa = PBXBuildFile; fileRef = A85CF0101A9C7BAD0081F791 /* PAEAudioFileRecorder.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A86F656219E1A56B002B228E /* bitwise.c in Sources */ = {isa = PBXBuildFile; fileRef = A86F643619E1A56A002B228E /* bitwise.c */; };
 		A86F656319E1A56B002B228E /* config_types.h in Headers */ = {isa = PBXBuildFile; fileRef = A86F643719E1A56A002B228E /* config_types.h */; };
 		A86F656419E1A56B002B228E /* framing.c in Sources */ = {isa = PBXBuildFile; fileRef = A86F643819E1A56A002B228E /* framing.c */; };
@@ -31,7 +33,6 @@
 		A86F656919E1A56B002B228E /* analysis.h in Headers */ = {isa = PBXBuildFile; fileRef = A86F643E19E1A56A002B228E /* analysis.h */; };
 		A86F656A19E1A56B002B228E /* _kiss_fft_guts.h in Headers */ = {isa = PBXBuildFile; fileRef = A86F644019E1A56A002B228E /* _kiss_fft_guts.h */; };
 		A86F656B19E1A56B002B228E /* arch.h in Headers */ = {isa = PBXBuildFile; fileRef = A86F644119E1A56A002B228E /* arch.h */; };
-		A86F656C19E1A56B002B228E /* arm.zip in Resources */ = {isa = PBXBuildFile; fileRef = A86F644219E1A56A002B228E /* arm.zip */; };
 		A86F656D19E1A56B002B228E /* bands.c in Sources */ = {isa = PBXBuildFile; fileRef = A86F644319E1A56A002B228E /* bands.c */; };
 		A86F656E19E1A56B002B228E /* bands.h in Headers */ = {isa = PBXBuildFile; fileRef = A86F644419E1A56A002B228E /* bands.h */; };
 		A86F656F19E1A56B002B228E /* celt.c in Sources */ = {isa = PBXBuildFile; fileRef = A86F644519E1A56A002B228E /* celt.c */; };
@@ -632,10 +633,10 @@
 		A86F693A19E1A58D002B228E /* plonk.h in Headers */ = {isa = PBXBuildFile; fileRef = A86F67F419E1A58D002B228E /* plonk.h */; };
 		A86F693B19E1A58D002B228E /* plonk_RNG.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A86F67F619E1A58D002B228E /* plonk_RNG.cpp */; };
 		A86F693C19E1A58D002B228E /* plonk_RNG.h in Headers */ = {isa = PBXBuildFile; fileRef = A86F67F719E1A58D002B228E /* plonk_RNG.h */; };
-		A86F695B19E1A5A3002B228E /* PAEEngineInternal.h in Headers */ = {isa = PBXBuildFile; fileRef = A86F693D19E1A5A3002B228E /* PAEEngineInternal.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		A86F695C19E1A5A3002B228E /* PAESourceInternal.h in Headers */ = {isa = PBXBuildFile; fileRef = A86F693E19E1A5A3002B228E /* PAESourceInternal.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		A86F695D19E1A5A3002B228E /* PAEProcessInternal.h in Headers */ = {isa = PBXBuildFile; fileRef = A86F693F19E1A5A3002B228E /* PAEProcessInternal.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		A86F695E19E1A5A3002B228E /* PAEBufferInternal.h in Headers */ = {isa = PBXBuildFile; fileRef = A86F694019E1A5A3002B228E /* PAEBufferInternal.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		A86F695B19E1A5A3002B228E /* PAEEngineInternal.h in Headers */ = {isa = PBXBuildFile; fileRef = A86F693D19E1A5A3002B228E /* PAEEngineInternal.h */; };
+		A86F695C19E1A5A3002B228E /* PAESourceInternal.h in Headers */ = {isa = PBXBuildFile; fileRef = A86F693E19E1A5A3002B228E /* PAESourceInternal.h */; };
+		A86F695D19E1A5A3002B228E /* PAEProcessInternal.h in Headers */ = {isa = PBXBuildFile; fileRef = A86F693F19E1A5A3002B228E /* PAEProcessInternal.h */; };
+		A86F695E19E1A5A3002B228E /* PAEBufferInternal.h in Headers */ = {isa = PBXBuildFile; fileRef = A86F694019E1A5A3002B228E /* PAEBufferInternal.h */; };
 		A86F695F19E1A5A3002B228E /* PAEBuffer.mm in Sources */ = {isa = PBXBuildFile; fileRef = A86F694119E1A5A3002B228E /* PAEBuffer.mm */; };
 		A86F696019E1A5A3002B228E /* PAEAudioHost.mm in Sources */ = {isa = PBXBuildFile; fileRef = A86F694219E1A5A3002B228E /* PAEAudioHost.mm */; };
 		A86F696119E1A5A3002B228E /* PAEChannelStrip.mm in Sources */ = {isa = PBXBuildFile; fileRef = A86F694319E1A5A3002B228E /* PAEChannelStrip.mm */; };
@@ -694,9 +695,16 @@
 		A86F69BB19E1A62A002B228E /* PAEEngine-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = A86F69BA19E1A62A002B228E /* PAEEngine-Prefix.pch */; };
 		A86F69BC19E1A757002B228E /* PAEBufferCapture.h in Headers */ = {isa = PBXBuildFile; fileRef = A86F697919E1A5B0002B228E /* PAEBufferCapture.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A86F69BE19E1A8F8002B228E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A86F69BD19E1A8F7002B228E /* UIKit.framework */; };
+		A89939D11AB6B0CD00B730E7 /* PAEProcessCallback.h in Headers */ = {isa = PBXBuildFile; fileRef = A89939CF1AB6B0CD00B730E7 /* PAEProcessCallback.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A89939D21AB6B0CD00B730E7 /* PAEProcessCallback.mm in Sources */ = {isa = PBXBuildFile; fileRef = A89939D01AB6B0CD00B730E7 /* PAEProcessCallback.mm */; };
+		A89947CD1A8DF6640097869C /* PAEBuild.h in Headers */ = {isa = PBXBuildFile; fileRef = A89947CC1A8DF6130097869C /* PAEBuild.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A8ABA3311AA26EBE00248ED1 /* PAEBufferCaptureInternal.h in Headers */ = {isa = PBXBuildFile; fileRef = A8ABA3301AA26EBE00248ED1 /* PAEBufferCaptureInternal.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A84E090A1A9F23EC00D0D8E2 /* PAEBuildNumber.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PAEBuildNumber.txt; sourceTree = "<group>"; };
+		A85CF00E1A9C7B8A0081F791 /* PAEAudioFileRecorder.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PAEAudioFileRecorder.mm; sourceTree = "<group>"; };
+		A85CF0101A9C7BAD0081F791 /* PAEAudioFileRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAEAudioFileRecorder.h; sourceTree = "<group>"; };
 		A86F615C19E1A361002B228E /* PAEEngine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PAEEngine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A86F616019E1A361002B228E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A86F643619E1A56A002B228E /* bitwise.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = bitwise.c; sourceTree = "<group>"; };
@@ -1373,6 +1381,11 @@
 		A86F69B319E1A5EC002B228E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A86F69BA19E1A62A002B228E /* PAEEngine-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PAEEngine-Prefix.pch"; sourceTree = "<group>"; };
 		A86F69BD19E1A8F7002B228E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		A881FBC41A8E439C0080BD7C /* PAEBuildNumber.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PAEBuildNumber.txt; sourceTree = "<group>"; };
+		A89939CF1AB6B0CD00B730E7 /* PAEProcessCallback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAEProcessCallback.h; sourceTree = "<group>"; };
+		A89939D01AB6B0CD00B730E7 /* PAEProcessCallback.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PAEProcessCallback.mm; sourceTree = "<group>"; };
+		A89947CC1A8DF6130097869C /* PAEBuild.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PAEBuild.h; sourceTree = "<group>"; };
+		A8ABA3301AA26EBE00248ED1 /* PAEBufferCaptureInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAEBufferCaptureInternal.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1409,6 +1422,7 @@
 		A86F615E19E1A361002B228E /* PAEEngine */ = {
 			isa = PBXGroup;
 			children = (
+				A84E090A1A9F23EC00D0D8E2 /* PAEBuildNumber.txt */,
 				A86F617519E1A4CD002B228E /* src */,
 				A86F617819E1A4EA002B228E /* pl-nk */,
 				A86F615F19E1A361002B228E /* Supporting Files */,
@@ -1421,6 +1435,7 @@
 			children = (
 				A86F69BA19E1A62A002B228E /* PAEEngine-Prefix.pch */,
 				A86F616019E1A361002B228E /* Info.plist */,
+				A881FBC41A8E439C0080BD7C /* PAEBuildNumber.txt */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -1440,6 +1455,7 @@
 				A86F693D19E1A5A3002B228E /* PAEEngineInternal.h */,
 				A86F693E19E1A5A3002B228E /* PAESourceInternal.h */,
 				A86F693F19E1A5A3002B228E /* PAEProcessInternal.h */,
+				A8ABA3301AA26EBE00248ED1 /* PAEBufferCaptureInternal.h */,
 				A86F694019E1A5A3002B228E /* PAEBufferInternal.h */,
 				A86F694119E1A5A3002B228E /* PAEBuffer.mm */,
 				A86F694219E1A5A3002B228E /* PAEAudioHost.mm */,
@@ -1447,6 +1463,7 @@
 				A86F694419E1A5A3002B228E /* PAESource.mm */,
 				A86F694519E1A5A3002B228E /* PAETestTone.mm */,
 				A86F694619E1A5A3002B228E /* PAEAudioFilePlayer.mm */,
+				A85CF00E1A9C7B8A0081F791 /* PAEAudioFileRecorder.mm */,
 				A86F694719E1A5A3002B228E /* PAEProcess.mm */,
 				A86F694819E1A5A3002B228E /* PAEControl.mm */,
 				A86F694919E1A5A3002B228E /* PAEMixer.mm */,
@@ -1467,6 +1484,7 @@
 				A86F695819E1A5A3002B228E /* PAEBufferView.mm */,
 				A86F695919E1A5A3002B228E /* PAEAudioInput.mm */,
 				A86F695A19E1A5A3002B228E /* PAEBufferCapture.mm */,
+				A89939D01AB6B0CD00B730E7 /* PAEProcessCallback.mm */,
 			);
 			name = private;
 			sourceTree = "<group>";
@@ -1501,7 +1519,10 @@
 				A86F699119E1A5B0002B228E /* PAEFoward.h */,
 				A86F699219E1A5B0002B228E /* PAEAudioHost.h */,
 				A86F699319E1A5B0002B228E /* PAEAudioFilePlayer.h */,
+				A85CF0101A9C7BAD0081F791 /* PAEAudioFileRecorder.h */,
 				A86F699419E1A5B0002B228E /* PAEEngine.h */,
+				A89947CC1A8DF6130097869C /* PAEBuild.h */,
+				A89939CF1AB6B0CD00B730E7 /* PAEProcessCallback.h */,
 			);
 			name = public;
 			sourceTree = "<group>";
@@ -1523,6 +1544,7 @@
 				A86F651719E1A56B002B228E /* vorbis */,
 			);
 			name = ext;
+			path = ../../../plnk/ext;
 			sourceTree = "<group>";
 		};
 		A86F643519E1A56A002B228E /* ogg */ = {
@@ -1535,8 +1557,7 @@
 				A86F643A19E1A56A002B228E /* os_types.h */,
 				A86F643B19E1A56A002B228E /* README.h */,
 			);
-			name = ogg;
-			path = ../../../ext/ogg;
+			path = ogg;
 			sourceTree = "<group>";
 		};
 		A86F643C19E1A56A002B228E /* opus */ = {
@@ -1568,8 +1589,7 @@
 				A86F648D19E1A56A002B228E /* silk */,
 				A86F651619E1A56B002B228E /* tansig_table.h */,
 			);
-			name = opus;
-			path = ../../../ext/opus;
+			path = opus;
 			sourceTree = "<group>";
 		};
 		A86F643F19E1A56A002B228E /* celt */ = {
@@ -1856,8 +1876,7 @@
 				A86F656019E1A56B002B228E /* window.c */,
 				A86F656119E1A56B002B228E /* window.h */,
 			);
-			name = vorbis;
-			path = ../../../ext/vorbis;
+			path = vorbis;
 			sourceTree = "<group>";
 		};
 		A86F651D19E1A56B002B228E /* books */ = {
@@ -1940,7 +1959,7 @@
 				A86F671519E1A58C002B228E /* plonk */,
 			);
 			name = src;
-			path = ../../../src;
+			path = ../../../plnk;
 			sourceTree = "<group>";
 		};
 		A86F668219E1A58C002B228E /* plank */ = {
@@ -2709,7 +2728,10 @@
 				A86F69AD19E1A5B0002B228E /* PAEFoward.h in Headers */,
 				A86F69AE19E1A5B0002B228E /* PAEAudioHost.h in Headers */,
 				A86F69AF19E1A5B0002B228E /* PAEAudioFilePlayer.h in Headers */,
+				A85CF0111A9C7BAD0081F791 /* PAEAudioFileRecorder.h in Headers */,
+				A89939D11AB6B0CD00B730E7 /* PAEProcessCallback.h in Headers */,
 				A86F69B019E1A5B0002B228E /* PAEEngine.h in Headers */,
+				A89947CD1A8DF6640097869C /* PAEBuild.h in Headers */,
 				A86F695B19E1A5A3002B228E /* PAEEngineInternal.h in Headers */,
 				A86F695C19E1A5A3002B228E /* PAESourceInternal.h in Headers */,
 				A86F695D19E1A5A3002B228E /* PAEProcessInternal.h in Headers */,
@@ -2945,6 +2967,7 @@
 				A86F68A219E1A58D002B228E /* plonk_Lock.h in Headers */,
 				A86F68F219E1A58D002B228E /* plonk_FilePlay.h in Headers */,
 				A86F689C19E1A58D002B228E /* plonk_VariableInternal.h in Headers */,
+				A8ABA3311AA26EBE00248ED1 /* PAEBufferCaptureInternal.h in Headers */,
 				A86F684819E1A58D002B228E /* plank_IffFileCommon.h in Headers */,
 				A86F67FD19E1A58D002B228E /* plank_AtomicInline_iOS_ARM_32.h in Headers */,
 				A86F68CC19E1A58D002B228E /* plonk_TriggerChannel.h in Headers */,
@@ -3142,25 +3165,25 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A86F656C19E1A56B002B228E /* arm.zip in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		A89748E719E26859002143E3 /* ShellScript */ = {
+		A89748E719E26859002143E3 /* Combine Universal for Device & Simulator */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "Combine Universal for Device & Simulator";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "xcodebuild -project \"${PROJECT_NAME}.xcodeproj\" -configuration Release -target PAEEngine -sdk iphoneos8.0 RUN_CLANG_STATIC_ANALYZER=NO BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\" SYMROOT=\"${SYMROOT}\"\n\nxcodebuild -project \"${PROJECT_NAME}.xcodeproj\" -configuration Release -target PAEEngine -sdk iphonesimulator8.0 RUN_CLANG_STATIC_ANALYZER=NO BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\" SYMROOT=\"${SYMROOT}\"\n\ncp -R \"${BUILD_DIR}/Release-iphoneos\" \"${BUILD_DIR}/Release-Universal\"\nrm \"${BUILD_DIR}/Release-Universal/PAEEngine.framework/PAEEngine\"\nlipo -create \"${BUILD_DIR}/Release-iphoneos/PAEEngine.framework/PAEEngine\" \"${BUILD_DIR}/Release-iphonesimulator/PAEEngine.framework/PAEEngine\" -output \"${BUILD_DIR}/Release-Universal/PAEEngine.framework/PAEEngine\"";
+			shellScript = "IOSVERSION = \"8.1\"\n\n# build iOS\nxcodebuild -project \"${PROJECT_NAME}.xcodeproj\" -configuration $CONFIGURATION -target PAEEngine -sdk \"iphoneos${IOSVERSION}\" RUN_CLANG_STATIC_ANALYZER=NO BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\" SYMROOT=\"${SYMROOT}\"\n\n# build Simulator\nxcodebuild -project \"${PROJECT_NAME}.xcodeproj\" -configuration $CONFIGURATION -target PAEEngine -sdk \"iphonesimulator${IOSVERSION}\" RUN_CLANG_STATIC_ANALYZER=NO BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\" SYMROOT=\"${SYMROOT}\"\n\n# remove the old universal\nif [ -e \"${BUILD_DIR}/${CONFIGURATION}-Universal\" ]; then\n    rm -r \"${BUILD_DIR}/${CONFIGURATION}-Universal\"\nfi\n\nmkdir -p \"${BUILD_DIR}/${CONFIGURATION}-Universal\"\n\n# copy the iOS framework\ncp -R \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/PAEEngine.framework\" \"${BUILD_DIR}/${CONFIGURATION}-Universal/PAEEngine.framework\"\n\n# remove the binary\nrm \"${BUILD_DIR}/${CONFIGURATION}-Universal/PAEEngine.framework/PAEEngine\"\n\n# combine iOS and Simulator binaries into a FAT binary\nlipo -create \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/PAEEngine.framework/PAEEngine\" \"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/PAEEngine.framework/PAEEngine\" -output \"${BUILD_DIR}/${CONFIGURATION}-Universal/PAEEngine.framework/PAEEngine\"\n\n# update the build number for next build\ntypeset -i PAEENGINE_BUILDNO=$(cat \"${PROJECT_DIR}/PAEEngine/PAEBuildNumber.txt\")\n(( PAEENGINE_BUILDNO++ ))\n\nrm \"${PROJECT_DIR}/PAEEngine/PAEBuild.h\"\necho \"#define PAEENGINE_BUILD ${PAEENGINE_BUILDNO}\" >> \"${PROJECT_DIR}/PAEEngine/PAEBuild.h\"\n\nrm \"${PROJECT_DIR}/PAEEngine/PAEBuildNumber.txt\"\necho \"${PAEENGINE_BUILDNO}\" >> \"${PROJECT_DIR}/PAEEngine/PAEBuildNumber.txt\"\n\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -3207,6 +3230,7 @@
 				A86F681519E1A58D002B228E /* plank_LockFreeStack.c in Sources */,
 				A86F685519E1A58D002B228E /* plank_Base64.c in Sources */,
 				A86F65CE19E1A56B002B228E /* decode_pulses.c in Sources */,
+				A89939D21AB6B0CD00B730E7 /* PAEProcessCallback.mm in Sources */,
 				A86F663119E1A56B002B228E /* tables_LTP.c in Sources */,
 				A86F65F519E1A56B002B228E /* warped_autocorrelation_FLP.c in Sources */,
 				A86F660D19E1A56B002B228E /* NLSF_VQ.c in Sources */,
@@ -3416,6 +3440,7 @@
 				A86F68B719E1A58D002B228E /* plonk_AudioFileReader.cpp in Sources */,
 				A86F688719E1A58D002B228E /* plonk_ObjectMemoryDeferFree.cpp in Sources */,
 				A86F696519E1A5A3002B228E /* PAEProcess.mm in Sources */,
+				A85CF00F1A9C7B8A0081F791 /* PAEAudioFileRecorder.mm in Sources */,
 				A86F65D919E1A56B002B228E /* corrMatrix_FLP.c in Sources */,
 				A86F660219E1A56B002B228E /* LPC_inv_pred_gain.c in Sources */,
 				A86F658E19E1A56B002B228E /* pitch.c in Sources */,
@@ -3468,6 +3493,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
+				DEPLOYMENT_POSTPROCESSING = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -3485,8 +3511,9 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
+				STRIP_INSTALLED_PRODUCT = NO;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -3514,6 +3541,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEPLOYMENT_POSTPROCESSING = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -3526,7 +3554,9 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
+				STRIP_INSTALLED_PRODUCT = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -3537,7 +3567,11 @@
 		A86F617019E1A361002B228E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COPY_PHASE_STRIP = NO;
 				DEFINES_MODULE = YES;
+				DEPLOYMENT_POSTPROCESSING = YES;
+				DWARF_DSYM_FILE_NAME = "$(EXECUTABLE_NAME).dSYM";
+				DWARF_DSYM_FOLDER_PATH = "DWARF_DSYM_FOLDER_PATH to $(CONFIGURATION_BUILD_DIR)/$(EXECUTABLE_FOLDER_PATH) ";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -3546,8 +3580,12 @@
 				INFOPLIST_FILE = PAEEngine/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				STRIP_INSTALLED_PRODUCT = NO;
+				STRIP_STYLE = debugging;
 			};
 			name = Debug;
 		};
@@ -3555,22 +3593,30 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DEFINES_MODULE = YES;
+				DEPLOYMENT_POSTPROCESSING = YES;
+				DWARF_DSYM_FILE_NAME = "$(EXECUTABLE_NAME).dSYM";
+				DWARF_DSYM_FOLDER_PATH = "DWARF_DSYM_FOLDER_PATH to $(CONFIGURATION_BUILD_DIR)/$(EXECUTABLE_FOLDER_PATH) ";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PAEEngine/PAEEngine-Prefix.pch";
 				INFOPLIST_FILE = PAEEngine/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				STRIP_STYLE = debugging;
 			};
 			name = Release;
 		};
 		A89748E419E2678B002143E3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -3578,6 +3624,7 @@
 		A89748E519E2678B002143E3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -3610,6 +3657,7 @@
 				A89748E519E2678B002143E3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

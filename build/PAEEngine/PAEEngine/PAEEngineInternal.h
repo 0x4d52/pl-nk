@@ -11,6 +11,3 @@
 #import "PAEProcessInternal.h"
 #import "PAEBufferInternal.h"
 #include "plonk.h"
-
-// not yet public
-#import "PAEBufferCapture.h"

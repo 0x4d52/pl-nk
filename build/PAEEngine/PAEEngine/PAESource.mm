@@ -88,7 +88,7 @@
     return proxy;
 }
 
--(PAESource*)sourceByFlatteningArray:(NSArray*)sources
++(PAESource*)sourceByFlatteningArray:(NSArray*)sources
 {
     Unit unit;
     

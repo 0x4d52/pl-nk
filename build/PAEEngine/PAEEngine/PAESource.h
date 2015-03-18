@@ -71,6 +71,9 @@
 /** Get the current output value of a source. */
 -(float)currentValueOnChannel:(int)channel;
 
+/** Create a source by appending channels from an array of sources. */
++(PAESource*)sourceByFlatteningArray:(NSArray*)sources;
+
 /** Get one of the channels as a new source. */
 -(PAESource*)sourceWithChannel:(int)channel;
 
@@ -79,9 +82,6 @@
 
 /** Create a source by appending channels from two sources. */
 -(PAESource*)sourceWithAppendedChannels:(PAESource*)source;
-
-/** Create a source by appending channels from an array of sources. */
--(PAESource*)sourceByFlatteningArray:(NSArray*)sources;
 
 /** Create a source by clipping another source to a set range. */
 -(PAESource*)sourceClippedToMinimum:(float)minimum maximimum:(float)maximum;
