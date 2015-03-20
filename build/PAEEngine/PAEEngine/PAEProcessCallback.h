@@ -7,7 +7,7 @@
  
  http://code.google.com/p/pl-nk/
  
- Copyright University of the West of England, Bristol 2011-14
+ Copyright University of the West of England, Bristol 2011-15
  All rights reserved.
  
  Redistribution and use in source and binary forms, with or without
@@ -86,17 +86,23 @@ typedef struct PAEProcessCallbackData
  This allows you to write your own low level plugins for the PAEEngine. */
 @interface PAEProcessCallback : PAEProcess
 
+/** The callback function. */
+@property (nonatomic) PAEProcessCallbackFunction callback;
+
+/** The user data. */
+@property (nonatomic) void* userData;
+
 /** Create custom process callback.
  You must specify the number of inputs and outputs your callback will process and 
  provide your callback function. The userData of the PAEProcessCallbackData structure 
  will be zero in your callback. */
-+(PAEProcessCallback*)processCallbackWithNumOutputs:(int)numOutputs andNumInputs:(int)numInputs function:(PAEProcessCallbackFunction)function;
++(PAEProcessCallback*)processCallbackWithNumOutputs:(int)numOutputs andNumInputs:(int)numInputs callback:(PAEProcessCallbackFunction)callback;
 
 /** Create custom process callback.
  You must specify the number of inputs and outputs your callback will process and
  provide your callback function. Provide a pointer to some useful data in the userData: 
  argument so you can keep track of the state of your prcoessing in your callback. */
-+(PAEProcessCallback*)processCallbackWithNumOutputs:(int)numOutputs andNumInputs:(int)numInputs function:(PAEProcessCallbackFunction)function userData:(void*)userData;
++(PAEProcessCallback*)processCallbackWithNumOutputs:(int)numOutputs andNumInputs:(int)numInputs callback:(PAEProcessCallbackFunction)callback userData:(void*)userData;
 
 /** Initialise a custom process callback.
  You must specify the number of inputs and outputs your callback will process and
@@ -116,7 +122,7 @@ typedef struct PAEProcessCallbackData
     return self;
  }
  @endcode */
--(id)initWithNumOutputs:(int)numOutputs andNumInputs:(int)numInputs function:(PAEProcessCallbackFunction)function userData:(void*)userData;
+-(id)initWithNumOutputs:(int)numOutputs andNumInputs:(int)numInputs callback:(PAEProcessCallbackFunction)callback userData:(void*)userData;
 
 @end
 

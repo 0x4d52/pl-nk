@@ -5,7 +5,7 @@
  
  http://code.google.com/p/pl-nk/
  
- Copyright University of the West of England, Bristol 2011-14
+ Copyright University of the West of England, Bristol 2011-15
  All rights reserved.
  
  Redistribution and use in source and binary forms, with or without
@@ -225,7 +225,9 @@ using namespace plonk;
 
 - (void)setCustomRenderCallbacksWithRef:(void*)refCon pre:(RenderCallbackFunction)preFunc post:(RenderCallbackFunction)postFunc;
 
-- (void)process:(Dynamic)unit;
+//- (void)process:(Dynamic)unit;
+
+- (void*)peer;
 
 @end
 

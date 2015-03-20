@@ -5,7 +5,7 @@
  
  http://code.google.com/p/pl-nk/
  
- Copyright University of the West of England, Bristol 2011-14
+ Copyright University of the West of England, Bristol 2011-15
  All rights reserved.
  
  Redistribution and use in source and binary forms, with or without
@@ -207,7 +207,7 @@ using namespace plonk;
 {
     if (self = [super init])
     {
-        peer = nil;
+        peer = NULL;
         type = TypeCode::Unknown;
     }
     
@@ -225,7 +225,7 @@ using namespace plonk;
 
 - (NSString*)hostName
 {    
-    if (peer == nil) return @"";
+    if (peer == NULL) return @"";
     
     switch ((const int)type) 
     {
@@ -248,7 +248,7 @@ using namespace plonk;
 
 - (NSString*)nativeHostName
 {
-    if (peer == nil) return @"";
+    if (peer == NULL) return @"";
     
     switch ((const int)type) 
     {
@@ -271,7 +271,7 @@ using namespace plonk;
 
 - (NSString*)inputName
 {
-    if (peer == nil) return @"";
+    if (peer == NULL) return @"";
     
     switch ((const int)type) 
     {
@@ -294,7 +294,7 @@ using namespace plonk;
 
 - (NSString*)outputName
 {
-    if (peer == nil) return @""; 
+    if (peer == NULL) return @"";
     
     switch ((const int)type) 
     {
@@ -317,7 +317,7 @@ using namespace plonk;
 
 - (double)cpuUsage
 {
-    if (peer == nil) return 0.0;
+    if (peer == NULL) return 0.0;
     
     switch ((const int)type) 
     {
@@ -331,7 +331,7 @@ using namespace plonk;
 
 - (BOOL)isRunning
 {    
-    if (peer == nil) return NO;
+    if (peer == NULL) return NO;
     
     switch ((const int)type) 
     {
@@ -345,7 +345,7 @@ using namespace plonk;
 
 - (BOOL)isPaused
 {
-    if (peer == nil) return NO;
+    if (peer == NULL) return NO;
     
     switch ((const int)type)
     {
@@ -359,7 +359,7 @@ using namespace plonk;
 
 - (BOOL)wasInterrupted
 {
-    if (peer == nil) return NO;
+    if (peer == NULL) return NO;
     
     switch ((const int)type)
     {
@@ -375,7 +375,7 @@ using namespace plonk;
 {
     Dynamic dyn;
     
-    if (peer != nil)
+    if (peer != NULL)
     {
         switch ((const int)type) 
         {
@@ -392,7 +392,7 @@ using namespace plonk;
 
 - (int)numInputs
 {    
-    if (peer == nil) return 0;
+    if (peer == NULL) return 0;
     
     switch ((const int)type) 
     {
@@ -406,7 +406,7 @@ using namespace plonk;
 
 - (void)setNumInputs:(int)numInputs
 {    
-    if (peer == nil) return;
+    if (peer == NULL) return;
     
     switch ((const int)type) 
     {
@@ -420,7 +420,7 @@ using namespace plonk;
 
 - (int)numOutputs
 {
-    if (peer == nil) return 0;
+    if (peer == NULL) return 0;
     
     switch ((const int)type) 
     {
@@ -434,7 +434,7 @@ using namespace plonk;
 
 - (void)setNumOutputs:(int)numOutputs
 {    
-    if (peer == nil) return;
+    if (peer == NULL) return;
     
     switch ((const int)type) 
     {
@@ -448,7 +448,7 @@ using namespace plonk;
 
 - (int)preferredHostBlockSize
 {
-    if (peer == nil) return 0;
+    if (peer == NULL) return 0;
     
     switch ((const int)type) 
     {
@@ -462,7 +462,7 @@ using namespace plonk;
 
 - (void)setPreferredHostBlockSize:(int)preferredHostBlockSize
 {    
-    if (peer == nil) return;
+    if (peer == NULL) return;
     
     switch ((const int)type) 
     {
@@ -476,7 +476,7 @@ using namespace plonk;
 
 - (int)preferredGraphBlockSize
 {
-    if (peer == nil) return 0;
+    if (peer == NULL) return 0;
     
     switch ((const int)type) 
     {
@@ -490,7 +490,7 @@ using namespace plonk;
 
 - (void)setPreferredGraphBlockSize:(int)preferredGraphBlockSize
 {    
-    if (peer == nil) return;
+    if (peer == NULL) return;
     
     switch ((const int)type) 
     {
@@ -504,7 +504,7 @@ using namespace plonk;
 
 - (double)preferredHostSampleRate
 {    
-    if (peer == nil) return 0.0;
+    if (peer == NULL) return 0.0;
     
     switch ((const int)type) 
     {
@@ -518,7 +518,7 @@ using namespace plonk;
 
 - (void)setPreferredHostSampleRate:(double)preferredHostSampleRate
 {    
-    if (peer == nil) return;
+    if (peer == NULL) return;
     
     switch ((const int)type) 
     {
@@ -532,7 +532,7 @@ using namespace plonk;
 
 - (void)startHost
 {    
-    if (peer == nil) return;
+    if (peer == NULL) return;
     
     switch ((const int)type) 
     {
@@ -546,7 +546,7 @@ using namespace plonk;
 
 - (void)stopHost
 {    
-    if (peer == nil) return;
+    if (peer == NULL) return;
     
     switch ((const int)type) 
     {
@@ -560,7 +560,7 @@ using namespace plonk;
 
 - (void)pauseHost
 {
-    if (peer == nil) return;
+    if (peer == NULL) return;
     
     switch ((const int)type)
     {
@@ -574,7 +574,7 @@ using namespace plonk;
 
 - (void)resumeHost
 {
-    if (peer == nil) return;
+    if (peer == NULL) return;
     
     switch ((const int)type)
     {
@@ -588,7 +588,7 @@ using namespace plonk;
 
 - (void)setCustomRenderCallbacksWithRef:(void*)refCon pre:(RenderCallbackFunction)preFunc post:(RenderCallbackFunction)postFunc
 {
-    if (peer == nil) return;
+    if (peer == NULL) return;
     
     switch ((const int)type)
     {
@@ -600,24 +600,28 @@ using namespace plonk;
     }
 }
 
-- (void)process:(Dynamic)unit
-{
-    if (peer == nil) return;
-    
-    switch ((const int)type)
-    {
-        case TypeCode::Float:   static_cast< IOSAudioHostPeer<float>* > (peer)->process (unit.asUnchecked<FloatUnit>()); break;
-        case TypeCode::Short:   static_cast< IOSAudioHostPeer<short>* > (peer)->process (unit.asUnchecked<ShortUnit>()); break;
-        case TypeCode::Int:     static_cast< IOSAudioHostPeer<int>* > (peer)->process (unit.asUnchecked<IntUnit>()); break;
-        case TypeCode::Double:  static_cast< IOSAudioHostPeer<double>* > (peer)->process (unit.asUnchecked<DoubleUnit>()); break;
-        default: { }
-    }
-}
-
+//- (void)process:(Dynamic)unit
+//{
+//    if (peer == NULL) return;
+//    
+//    switch ((const int)type)
+//    {
+//        case TypeCode::Float:   static_cast< IOSAudioHostPeer<float>* > (peer)->process (unit.asUnchecked<FloatUnit>()); break;
+//        case TypeCode::Short:   static_cast< IOSAudioHostPeer<short>* > (peer)->process (unit.asUnchecked<ShortUnit>()); break;
+//        case TypeCode::Int:     static_cast< IOSAudioHostPeer<int>* > (peer)->process (unit.asUnchecked<IntUnit>()); break;
+//        case TypeCode::Double:  static_cast< IOSAudioHostPeer<double>* > (peer)->process (unit.asUnchecked<DoubleUnit>()); break;
+//        default: { }
+//    }
+//}
 
 - (id)delegate
 {
     return delegate;
+}
+
+- (void*)peer
+{
+    return peer;
 }
 
 - (void)deletePeer
@@ -631,7 +635,7 @@ using namespace plonk;
         default: { }
     }
     
-    peer = nil;
+    peer = NULL;
     type = TypeCode::Unknown;
 }
 
@@ -665,7 +669,7 @@ using namespace plonk;
                 case TypeCode::Double:  peer = new IOSAudioHostPeer<double> (self);  break;
                 
                 default: 
-                    peer = nil; 
+                    peer = NULL;
                     type = 0;
             }
         }

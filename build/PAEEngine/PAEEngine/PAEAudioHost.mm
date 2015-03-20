@@ -12,6 +12,21 @@
 #include "plonk.h"
 #include "plonk_IOSAudioHost.h"
 
+NSString* fourCharNSStringForFourCharCode (UInt32 aCode)
+{
+    const char fourChar[5] = {
+        (const char)((aCode >> 24) & 0xFF),
+        (const char)((aCode >> 16) & 0xFF),
+        (const char)((aCode >> 8) & 0xFF),
+        (const char)(aCode & 0xFF),
+        0
+    };
+    NSString *fourCharString = [NSString stringWithCString:fourChar encoding:NSUTF8StringEncoding];
+    return fourCharString;
+}
+
+
+
 static BOOL initialised = NO;
 const float PAERepatchFadeTime = 0.005f;
 const float PAEControlLagTime = 0.02f;
@@ -25,15 +40,37 @@ const float PAEControlLagTime = 0.02f;
 @implementation PAEAudioHostInternal
 @end
 
+struct PAEAudioHostData
+{
+    void* peer;
+    Units additionalRenderSources;
+};
+
 @interface PAEAudioHost ()
 {
     PAEAudioHostInternal* _internal;
     UnitVariable _mainOutputVariable;
     int _numOutputs;
     int _numInputs;
+    PAEAudioHostData _data;
 }
--(void)process:(Unit)unit;
 @end
+
+//OSStatus preRenderCallbackFunction (void*                      refCon,
+//                                    UInt32                     inNumberFrames,
+//                                    AudioUnitRenderActionFlags *ioActionFlags,
+//                                    const AudioTimeStamp 	   *inTimeStamp,
+//                                    AudioBufferList            *ioData)
+//{
+//    PAEAudioHost* SELF = (__bridge PAEAudioHost*)refCon;
+//    
+//    for (PAESource* source in SELF.additionalRenderSources)
+//    {
+//        [SELF process:source.outputUnit];
+//    }
+//    
+//    return noErr;
+//}
 
 OSStatus preRenderCallbackFunction (void*                      refCon,
                                     UInt32                     inNumberFrames,
@@ -41,11 +78,17 @@ OSStatus preRenderCallbackFunction (void*                      refCon,
                                     const AudioTimeStamp 	   *inTimeStamp,
                                     AudioBufferList            *ioData)
 {
-    PAEAudioHost* SELF = (__bridge PAEAudioHost*)refCon;
+    PAEAudioHostData* data = (PAEAudioHostData*)refCon;
+    Units& additionalRenderSources = data->additionalRenderSources;
+    AudioHostBase<float>* hostBase = static_cast<AudioHostBase<float>*> (data->peer);
     
-    for (PAESource* source in SELF.additionalRenderSources)
+    if (hostBase != NULL)
     {
-        [SELF process:source.outputUnit];
+        for (int i = 0; i < additionalRenderSources.size(); ++i)
+        {
+            Unit& source = additionalRenderSources.atUnchecked (i);
+            hostBase->process (source);
+        }
     }
     
     return noErr;
@@ -54,7 +97,6 @@ OSStatus preRenderCallbackFunction (void*                      refCon,
 @implementation PAEAudioHost
 
 @synthesize mainMix = _mainMix;
-@synthesize additionalRenderSources = _additionalRenderSources;
 
 +(PAEAudioHost*)audioHostWithNumOutputs:(int)numOutputs
 {
@@ -78,6 +120,7 @@ OSStatus preRenderCallbackFunction (void*                      refCon,
     {
         _internal = [[PAEAudioHostInternal alloc] init];
         _internal.delegate = self;
+        _data.peer = _internal.peer; // after setDelegate:
 
         _numOutputs = plonk::max (numOutputs, 1);
         _numInputs = plonk::max (numInputs, 0);
@@ -193,10 +236,9 @@ OSStatus preRenderCallbackFunction (void*                      refCon,
         UInt32 category;
         AudioSessionGetProperty (kAudioSessionProperty_AudioCategory, &propertySize, &category);
         
-        if ((category != kAudioSessionCategory_PlayAndRecord) ||
-            (category != kAudioSessionCategory_RecordAudio))
+        if (! ((category == kAudioSessionCategory_PlayAndRecord) || (category == kAudioSessionCategory_RecordAudio)))
         {
-            NSLog(@"WARNING: PAEAudioHost has audio inputs but the AudioSession category is set incorrectly");
+            NSLog(@"WARNING: PAEAudioHost has audio inputs but the AudioSession category is set incorrectly to %@", fourCharNSStringForFourCharCode (category));
         }
     }
     
@@ -224,26 +266,38 @@ OSStatus preRenderCallbackFunction (void*                      refCon,
     _mainMix = mainMix;
 }
 
--(void)process:(Unit)unit
-{
-    [_internal process:unit];
-}
-
 -(NSArray*)additionalRenderSources
 {
-    return _additionalRenderSources;
+    Units renderSources = _data.additionalRenderSources; // cache
+    
+    NSMutableArray* additionalRenderSources = [[NSMutableArray alloc] initWithCapacity:renderSources.size()];
+    
+    for (int i = 0; i < renderSources.size(); ++i)
+    {
+        PAESource* proxy = [[PAESource alloc] init];
+        proxy.outputUnit = renderSources.atUnchecked (i);
+        [additionalRenderSources addObject:proxy];
+    }
+    
+    return [NSArray arrayWithArray:additionalRenderSources];
 }
 
 -(void)setAdditionalRenderSources:(NSArray *)additionalRenderSources
 {
     RenderCallbackFunction callback = NULL;
-    
+    Units renderSources;
+
     if (additionalRenderSources)
+    {
         callback = preRenderCallbackFunction;
     
-    _additionalRenderSources = additionalRenderSources;
+        for (PAESource* source in additionalRenderSources)
+            renderSources.add (source.outputUnit);
+    }
     
-    [_internal setCustomRenderCallbacksWithRef:(__bridge void*)self
+    _data.additionalRenderSources = renderSources;
+    
+    [_internal setCustomRenderCallbacksWithRef:&_data
                                            pre:callback
                                           post:NULL];
 

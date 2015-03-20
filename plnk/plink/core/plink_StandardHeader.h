@@ -5,7 +5,7 @@
  
  http://code.google.com/p/pl-nk/
  
- Copyright University of the West of England, Bristol 2011-14
+ Copyright University of the West of England, Bristol 2011-15
  All rights reserved.
  
  Redistribution and use in source and binary forms, with or without
@@ -41,8 +41,8 @@
 
 // from now on: odd build numbers are development versions, even are releases
 #define PLINK_MAJOR_VERSION      0
-#define PLINK_MINOR_VERSION      5
-#define PLINK_BUILDNUMBER        9
+#define PLINK_MINOR_VERSION      6
+#define PLINK_BUILDNUMBER        0
 
 
 #include "../../plank/plank.h"

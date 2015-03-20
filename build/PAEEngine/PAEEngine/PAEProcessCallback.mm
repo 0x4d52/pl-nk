@@ -12,8 +12,13 @@
 struct PAEProcessCallbackPeerData
 {
     ChannelInternalCore::Data base;
+    __weak PAEProcessCallback* peer;
     PAEProcessCallbackData functionData;
 };
+
+@interface PAEProcessCallback ()
+@property (nonatomic) PAEProcessCallbackData* data;
+@end
 
 class PAEProcessCallbackPeerInternal : public ProxyOwnerChannelInternal<float, PAEProcessCallbackPeerData>
 {
@@ -33,6 +38,7 @@ public:
                                     ChannelArrayType& channels) throw()
     :   Internal (data.functionData.numOutputs, inputs, data, blockSize, sampleRate, channels)
     {
+        data.peer.data = &this->getState().functionData;
     }
     
     ~PAEProcessCallbackPeerInternal()
@@ -49,7 +55,7 @@ public:
     
     IntArray getInputKeys() const throw()
     {
-        const IntArray keys (IntArray::newClear (IOKey::Generic));
+        const IntArray keys (IOKey::Generic);
         return keys;
     }
     
@@ -113,14 +119,15 @@ public:
     typedef InputDictionary                     Inputs;
     
     static UnitType ar (UnitType const& input,
-                        PAEProcessCallbackFunction function,
+                        __weak PAEProcessCallback* peer,
+                        PAEProcessCallbackFunction callback,
                         void* userData,
                         const int numOutputChannels,
                         BlockSize const& preferredBlockSize = BlockSize::noPreference(),
                         SampleRate const& preferredSampleRate = SampleRate::noPreference()) throw()
     {
         const int numInputChannels = input.getNumChannels();
-        Data data = { { -1.0, -1.0 }, { function, -1, numOutputChannels, 0, numInputChannels, 0, 0, userData }};
+        Data data = { { -1.0, -1.0 }, peer, { callback, -1, numOutputChannels, 0, numInputChannels, 0, 0, userData }};
         
         Inputs inputs;
         inputs.put (IOKey::Generic, input);
@@ -134,27 +141,49 @@ public:
 
 @implementation PAEProcessCallback
 
+@synthesize data = _data;
+
 +(PAEProcessCallback*)processCallbackWithNumOutputs:(int)numOutputs andNumInputs:(int)numInputs
-                                           function:(PAEProcessCallbackFunction)function;
+                                           callback:(PAEProcessCallbackFunction)callback;
 {
-    return [[PAEProcessCallback alloc] initWithNumOutputs:numOutputs andNumInputs:numInputs function:function userData:NULL];
+    return [[PAEProcessCallback alloc] initWithNumOutputs:numOutputs andNumInputs:numInputs callback:callback userData:NULL];
 }
 
 +(PAEProcessCallback*)processCallbackWithNumOutputs:(int)numOutputs andNumInputs:(int)numInputs
-                                           function:(PAEProcessCallbackFunction)function userData:(void*)userData
+                                           callback:(PAEProcessCallbackFunction)callback userData:(void*)userData
 {
-    return [[PAEProcessCallback alloc] initWithNumOutputs:numOutputs andNumInputs:numInputs function:function userData:userData];
+    return [[PAEProcessCallback alloc] initWithNumOutputs:numOutputs andNumInputs:numInputs callback:callback userData:userData];
 }
 
 -(id)initWithNumOutputs:(int)numOutputs andNumInputs:(int)numInputs
-               function:(PAEProcessCallbackFunction)function userData:(void*)userData
+               callback:(PAEProcessCallbackFunction)callback userData:(void*)userData
 {
     if (self = [super initWithNumInputs:numInputs])
     {
-        self.outputUnit = PAEProcessCallbackPeer::ar (self.patchUnit, function, userData, numOutputs);
+        self.outputUnit = PAEProcessCallbackPeer::ar (self.patchUnit, self, callback, userData, numOutputs);
     }
     
     return self;
+}
+
+-(PAEProcessCallbackFunction)callback
+{
+    return _data->callback;
+}
+
+-(void)setCallback:(PAEProcessCallbackFunction)callback
+{
+    _data->callback = callback;
+}
+
+-(void*)userData
+{
+    return _data->userData;
+}
+
+-(void)setUserData:(void *)userData
+{
+    _data->userData = userData;
 }
 
 @end
