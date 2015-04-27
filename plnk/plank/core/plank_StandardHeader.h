@@ -110,6 +110,7 @@
 #include <math.h>
 #include <time.h>
 #include <limits.h>
+#include <errno.h>
 
 #if (defined (_WIN32) || defined (_WIN64) || defined (WIN64))
     #include <windows.h>

@@ -1017,7 +1017,7 @@ static PLANK_INLINE_LOW  PlankB pl_AtomicPX_CompareAndSwap (PlankAtomicPXRef p, 
     PlankAtomicPX oldAll = { oldPtr, oldExtra };
     PlankAtomicPX newAll = { newPtr, newExtra };
     
-    return __sync_bool_compare_and_swap ((volatile (__int128_t*)p,
+    return __sync_bool_compare_and_swap ((volatile __int128_t*)p,
                                          *(__int128_t*)&oldAll,
                                          *(__int128_t*)&newAll);
 }
