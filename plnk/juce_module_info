@@ -1,14 +1,14 @@
 {
   "id":             "plnk",
   "name":           "PLNK Audio Library",
-  "version":        "0.5.0",
+  "version":        "0.6.0",
   "description":    "Audio library and utilities.",
   "website":        "http://0x4d52.net",
   "license":        "BSD2",
 
-  "dependencies":   [ { "id": "juce_audio_basics",   "version": "3.1.1" } ],
+  "dependencies":   [ { "id": "juce_audio_formats",   "version": "3.2.0" } ],
 
-  "include":        "plnk.h",
+  "include":        "juce_plnk.h",
 
   "compile":        [   { "file": "plank/containers/atomic/plank_Atomic.c" },
                         { "file": "plank/containers/plank_DynamicArray.c" },
