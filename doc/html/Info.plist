@@ -6,12 +6,18 @@
      <key>CFBundleName</key>
      <string>pl-nk</string>
      <key>CFBundleIdentifier</key>
-     <string>uk.ac.uwe.pl-nk.docset</string>
+     <string>uk.ac.uwe.pl-nk</string>
+     <key>CFBundleVersion</key>
+     <string>v0.6.0</string>
      <key>DocSetFeedName</key>
      <string>pl-nk</string>
      <key>DocSetPublisherIdentifier</key>
      <string>uk.ac.uwe.pl-nk.documentation</string>
      <key>DocSetPublisherName</key>
      <string>Brsitol</string>
+     <key>DashDocSetFamily</key>
+     <string>doxy</string>
+     <key>DocSetPlatformFamily</key>
+     <string>doxygen</string>
 </dict>
 </plist>

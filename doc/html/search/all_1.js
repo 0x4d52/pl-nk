@@ -1,0 +1,25 @@
+var searchData=
+[
+  ['bartlettwindow',['bartlettWindow',['../class_numerical_array.html#a9df36fe372f06cf5b404a397f2046b46',1,'NumericalArray']]],
+  ['base64',['Base64',['../class_base64.html',1,'']]],
+  ['binary',['binary',['../class_variable.html#a6f0b057793e46b0d507d3289759d3fdd',1,'Variable::binary()'],['../class_unit_base.html#a0042238356ece3ad7e1be72ef27113f2',1,'UnitBase::binary()']]],
+  ['binaryfile',['BinaryFile',['../class_binary_file.html',1,'BinaryFile'],['../class_binary_file.html#a3d0f10cc9ccdc8bb5d6cb648096fc5a7',1,'BinaryFile::BinaryFile()'],['../class_binary_file.html#ac4e67ed5965986db1c77111f1b2c5bf8',1,'BinaryFile::BinaryFile(Text const &amp;path, const bool bigEndian=PLANK_BIGENDIAN)'],['../class_binary_file.html#ad7465018287eaaf34b05ce15141ea4f6',1,'BinaryFile::BinaryFile(Text const &amp;path, const bool writable, const bool clearContents, const bool bigEndian=PLANK_BIGENDIAN)'],['../class_binary_file.html#a8e61b1ff78693bd03ebbc87653ebc017',1,'BinaryFile::BinaryFile(const char *path, const bool bigEndian=PLANK_BIGENDIAN)'],['../class_binary_file.html#a204a9c30fc73cd3ff69c5883f75fa581',1,'BinaryFile::BinaryFile(const char *path, const bool writable, const bool clearContents, const bool bigEndian=PLANK_BIGENDIAN)'],['../class_binary_file.html#aa899e81a61130cc67514c0ff03788f2b',1,'BinaryFile::BinaryFile(ByteArray const &amp;bytes, const bool writable=false)'],['../class_binary_file.html#a95a7e2c729b3080cfa03a8ae94a7c53e',1,'BinaryFile::BinaryFile(FilePathArray const &amp;fileArray, const int multiMode, const bool bigEndian=PLANK_BIGENDIAN)'],['../class_binary_file.html#ae44cc94b641221314da2c157c4293c61',1,'BinaryFile::BinaryFile(BinaryFile const &amp;copy)']]],
+  ['binaryopchannelinternal',['BinaryOpChannelInternal',['../class_binary_op_channel_internal.html',1,'']]],
+  ['bits',['Bits',['../class_bits.html',1,'']]],
+  ['blackmanwindow',['blackmanWindow',['../class_numerical_array.html#a86956d5e17e4f1f98aab634ee4b4a8e5',1,'NumericalArray']]],
+  ['blockchannelinternal',['BlockChannelInternal',['../class_block_channel_internal.html',1,'']]],
+  ['blocksize',['BlockSize',['../class_block_size.html',1,'BlockSize'],['../class_block_size.html#a3267344c93ac784230c999d152425200',1,'BlockSize::BlockSize(SampleRate const &amp;sampleRate)'],['../class_block_size.html#a2c7c7a4a9f8585b2cc414a392126dbf8',1,'BlockSize::BlockSize(const int initValue)'],['../class_block_size.html#aeadcdd13e4f698280b8578823abcda5a',1,'BlockSize::BlockSize(IntVariable const &amp;initValue)'],['../class_block_size.html#a422cfa94141bf1c527ab73e48dad8a08',1,'BlockSize::BlockSize(BlockSize const &amp;copy)'],['../class_block_size.html#a796cbc111d7f3ca22ef67096da2dc4e3',1,'BlockSize::BlockSize(OtherType const &amp;initValue)']]],
+  ['blockunit',['BlockUnit',['../class_block_unit.html',1,'']]],
+  ['bpfunit',['BPFUnit',['../class_b_p_f_unit.html',1,'']]],
+  ['brfunit',['BRFUnit',['../class_b_r_f_unit.html',1,'']]],
+  ['bufferqueuerecordchannelinternal',['BufferQueueRecordChannelInternal',['../class_buffer_queue_record_channel_internal.html',1,'']]],
+  ['bufferqueuerecordunit',['BufferQueueRecordUnit',['../class_buffer_queue_record_unit.html',1,'']]],
+  ['bundle',['Bundle',['../class_i_o_s_utilities.html#a8b9bd72133c0b4d4d2748b605ce79b45ab557f0412ff59686461da57d88798efe',1,'IOSUtilities']]],
+  ['busbuffer',['BusBuffer',['../class_bus_buffer.html',1,'']]],
+  ['busreadchannelinternal',['BusReadChannelInternal',['../class_bus_read_channel_internal.html',1,'']]],
+  ['busreadunit',['BusReadUnit',['../class_bus_read_unit.html',1,'']]],
+  ['buswritechannelinternal',['BusWriteChannelInternal',['../class_bus_write_channel_internal.html',1,'']]],
+  ['buswriteunit',['BusWriteUnit',['../class_bus_write_unit.html',1,'']]],
+  ['bw2q',['bw2Q',['../group___plonk_unary_op_functions.html#ga01061bd4999d6f6cb7a1697ce1edaf6f',1,'plonk_InlineUnaryOps.h']]],
+  ['binary_20arithmetic_20operator_20functions',['Binary arithmetic operator functions',['../group___plonk_binary_op_functions.html',1,'']]]
+];

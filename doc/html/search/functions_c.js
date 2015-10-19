@@ -1,0 +1,9 @@
+var searchData=
+[
+  ['needstoprocess',['needsToProcess',['../class_channel_base.html#afa38cf8d0f4363a695056c9770dcb02e',1,'ChannelBase::needsToProcess()'],['../class_unit_base.html#a162b0450f9e1a29a2c39c9a53e36f0ad',1,'UnitBase::needsToProcess()']]],
+  ['neg',['neg',['../class_numerical_array.html#aa57acae179c9bca876150700ba12f960',1,'NumericalArray::neg()'],['../class_variable.html#ac9e340dc450ac5da2d63dcae019189e4',1,'Variable::neg()'],['../class_unit_base.html#a8f9a48b3cd169ca8e8ad17f4c2234f6a',1,'UnitBase::neg()'],['../group___plonk_unary_op_functions.html#ga8e09496da8795a111ab16ec3869d7610',1,'neg():&#160;plonk_InlineUnaryOps.h']]],
+  ['newclear',['newClear',['../class_numerical_array.html#a35333c3e01ef69f3a2915165c2d3ab83',1,'NumericalArray']]],
+  ['nextvalue',['nextValue',['../class_variable.html#a972257a7d4905e8a6ba879934b17a5fd',1,'Variable']]],
+  ['nopreference',['noPreference',['../class_block_size.html#aa6ada18e533ad70d58aae4e0549fab84',1,'BlockSize']]],
+  ['numericalarray',['NumericalArray',['../class_numerical_array.html#aacb62580c08a9529ae7bdfd4776c4739',1,'NumericalArray::NumericalArray(NumericalArray&lt; CopyType &gt; const &amp;copy)'],['../class_numerical_array.html#a459feb8e3dd1be19321cf668e6e77cfa',1,'NumericalArray::NumericalArray(ObjectArray&lt; CopyType &gt; const &amp;copy)'],['../class_numerical_array.html#a0a725c439fea0bf8682236cc41072dfd',1,'NumericalArray::NumericalArray(NumericalArray const &amp;array0, NumericalArray const &amp;array1)'],['../class_numerical_array.html#a6526ef4710bf9cb3828653bd09a2323a',1,'NumericalArray::NumericalArray(NumericalArraySpec const &amp;spec, const bool needsNullTermination)'],['../class_numerical_array.html#a27ecf9517575656716efd64c2421f5d5',1,'NumericalArray::NumericalArray(const NumericalType *nullTerminatedSourceArray)'],['../class_numerical_array.html#a9a8b714189c179bba002e0db4552950d',1,'NumericalArray::NumericalArray(OtherType const &amp;value)']]]
+];
