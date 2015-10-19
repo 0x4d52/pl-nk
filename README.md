@@ -14,8 +14,9 @@ A C++ API for writing object oriented audio applications. This includes audio pr
 Doxygen-generated API documentation available [here](http://0x4d52.github.io/pl-nk/doc/html/).
 
 Since pl-nk may be used as a JUCE (http://juce.com) module, the easiest way to get started with pl-nk is to use it with JUCE and add the `plnk` directory as a JUCE module. The only caveats are that: 
-1. You must disable JUCE_USE_OGGVORBIS in the Introjucer within the juce_audio_formats module (since Plank already includes Ogg Vorbis support)
-2. You must add a preprocessor definition to the Introjucer project PLONK_AUDIOHOST_JUCE=1 to use the JUCE audio host.
+
+1.  You must disable JUCE_USE_OGGVORBIS in the Introjucer within the juce_audio_formats module (since Plank already includes Ogg Vorbis support).
+2.  You must add a preprocessor definition to the Introjucer project PLONK_AUDIOHOST_JUCE=1 to use the JUCE audio host.
 
 You can, of course, also us pl-nk independently of JUCE, which might be more appropriate for you licensing needs.
 
