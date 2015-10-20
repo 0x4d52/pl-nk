@@ -131,67 +131,67 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment"> */</span></div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;</div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;</div>
-<div class="line"><a name="l00777"></a><span class="lineno">  777</span>&#160;<span class="comment">/* Creating a new iOS Project</span></div>
-<div class="line"><a name="l00778"></a><span class="lineno">  778</span>&#160;<span class="comment"> </span></div>
-<div class="line"><a name="l00779"></a><span class="lineno">  779</span>&#160;<span class="comment"> - In Xcode -&gt; Preferences -&gt; Source trees add a PL_NK_SOURCE tree to point to the pl-nk /src folder</span></div>
-<div class="line"><a name="l00780"></a><span class="lineno">  780</span>&#160;<span class="comment"> - Create a project using any of the iOS templates in Xcode.</span></div>
-<div class="line"><a name="l00781"></a><span class="lineno">  781</span>&#160;<span class="comment"> - change all .m files to .mm (Objective-C++)</span></div>
-<div class="line"><a name="l00782"></a><span class="lineno">  782</span>&#160;<span class="comment"> - add the /src folder to the project/target (selecting don&#39;t copy files)</span></div>
-<div class="line"><a name="l00783"></a><span class="lineno">  783</span>&#160;<span class="comment"> - change this to be &quot;relative to PL_NK_SOURCE&quot; in the right hand side-bar</span></div>
-<div class="line"><a name="l00784"></a><span class="lineno">  784</span>&#160;<span class="comment"> - add $(PL_NK_SOURCE) to the header search paths in the project</span></div>
-<div class="line"><a name="l00785"></a><span class="lineno">  785</span>&#160;<span class="comment"> - add PLONK_AUDIOHOST_IOS=1 to the preprocessor macros (in all configurations, debug, release etc)</span></div>
-<div class="line"><a name="l00786"></a><span class="lineno">  786</span>&#160;<span class="comment"> </span></div>
-<div class="line"><a name="l00787"></a><span class="lineno">  787</span>&#160;<span class="comment"> Then you need an AudioHost class e.g.,:</span></div>
-<div class="line"><a name="l00788"></a><span class="lineno">  788</span>&#160;<span class="comment"> </span></div>
-<div class="line"><a name="l00789"></a><span class="lineno">  789</span>&#160;<span class="comment"> @interface AudioHost : PLAudioHost&lt;PLAudioHostDelegate&gt;</span></div>
-<div class="line"><a name="l00790"></a><span class="lineno">  790</span>&#160;<span class="comment"> @end</span></div>
+<div class="line"><a name="l00782"></a><span class="lineno">  782</span>&#160;<span class="comment">/* Creating a new iOS Project</span></div>
+<div class="line"><a name="l00783"></a><span class="lineno">  783</span>&#160;<span class="comment"> </span></div>
+<div class="line"><a name="l00784"></a><span class="lineno">  784</span>&#160;<span class="comment"> - In Xcode -&gt; Preferences -&gt; Source trees add a PL_NK_SOURCE tree to point to the pl-nk /src folder</span></div>
+<div class="line"><a name="l00785"></a><span class="lineno">  785</span>&#160;<span class="comment"> - Create a project using any of the iOS templates in Xcode.</span></div>
+<div class="line"><a name="l00786"></a><span class="lineno">  786</span>&#160;<span class="comment"> - change all .m files to .mm (Objective-C++)</span></div>
+<div class="line"><a name="l00787"></a><span class="lineno">  787</span>&#160;<span class="comment"> - add the /src folder to the project/target (selecting don&#39;t copy files)</span></div>
+<div class="line"><a name="l00788"></a><span class="lineno">  788</span>&#160;<span class="comment"> - change this to be &quot;relative to PL_NK_SOURCE&quot; in the right hand side-bar</span></div>
+<div class="line"><a name="l00789"></a><span class="lineno">  789</span>&#160;<span class="comment"> - add $(PL_NK_SOURCE) to the header search paths in the project</span></div>
+<div class="line"><a name="l00790"></a><span class="lineno">  790</span>&#160;<span class="comment"> - add PLONK_AUDIOHOST_IOS=1 to the preprocessor macros (in all configurations, debug, release etc)</span></div>
 <div class="line"><a name="l00791"></a><span class="lineno">  791</span>&#160;<span class="comment"> </span></div>
-<div class="line"><a name="l00792"></a><span class="lineno">  792</span>&#160;<span class="comment"> @implementation AudioHost</span></div>
+<div class="line"><a name="l00792"></a><span class="lineno">  792</span>&#160;<span class="comment"> Then you need an AudioHost class e.g.,:</span></div>
 <div class="line"><a name="l00793"></a><span class="lineno">  793</span>&#160;<span class="comment"> </span></div>
-<div class="line"><a name="l00794"></a><span class="lineno">  794</span>&#160;<span class="comment"> - (id)init</span></div>
-<div class="line"><a name="l00795"></a><span class="lineno">  795</span>&#160;<span class="comment"> {</span></div>
-<div class="line"><a name="l00796"></a><span class="lineno">  796</span>&#160;<span class="comment"> if (self = [super init])</span></div>
-<div class="line"><a name="l00797"></a><span class="lineno">  797</span>&#160;<span class="comment"> {</span></div>
-<div class="line"><a name="l00798"></a><span class="lineno">  798</span>&#160;<span class="comment"> self.delegate = self; // set which class contains the constructGraph method</span></div>
-<div class="line"><a name="l00799"></a><span class="lineno">  799</span>&#160;<span class="comment"> }</span></div>
-<div class="line"><a name="l00800"></a><span class="lineno">  800</span>&#160;<span class="comment"> </span></div>
-<div class="line"><a name="l00801"></a><span class="lineno">  801</span>&#160;<span class="comment"> return self;</span></div>
-<div class="line"><a name="l00802"></a><span class="lineno">  802</span>&#160;<span class="comment"> }</span></div>
-<div class="line"><a name="l00803"></a><span class="lineno">  803</span>&#160;<span class="comment"> </span></div>
-<div class="line"><a name="l00804"></a><span class="lineno">  804</span>&#160;<span class="comment"> - (Unit)constructGraphFloat:(PLAudioHost*)host</span></div>
-<div class="line"><a name="l00805"></a><span class="lineno">  805</span>&#160;<span class="comment"> {</span></div>
-<div class="line"><a name="l00806"></a><span class="lineno">  806</span>&#160;<span class="comment"> return Sine::ar (1000, 0.1);</span></div>
+<div class="line"><a name="l00794"></a><span class="lineno">  794</span>&#160;<span class="comment"> @interface AudioHost : PLAudioHost&lt;PLAudioHostDelegate&gt;</span></div>
+<div class="line"><a name="l00795"></a><span class="lineno">  795</span>&#160;<span class="comment"> @end</span></div>
+<div class="line"><a name="l00796"></a><span class="lineno">  796</span>&#160;<span class="comment"> </span></div>
+<div class="line"><a name="l00797"></a><span class="lineno">  797</span>&#160;<span class="comment"> @implementation AudioHost</span></div>
+<div class="line"><a name="l00798"></a><span class="lineno">  798</span>&#160;<span class="comment"> </span></div>
+<div class="line"><a name="l00799"></a><span class="lineno">  799</span>&#160;<span class="comment"> - (id)init</span></div>
+<div class="line"><a name="l00800"></a><span class="lineno">  800</span>&#160;<span class="comment"> {</span></div>
+<div class="line"><a name="l00801"></a><span class="lineno">  801</span>&#160;<span class="comment"> if (self = [super init])</span></div>
+<div class="line"><a name="l00802"></a><span class="lineno">  802</span>&#160;<span class="comment"> {</span></div>
+<div class="line"><a name="l00803"></a><span class="lineno">  803</span>&#160;<span class="comment"> self.delegate = self; // set which class contains the constructGraph method</span></div>
+<div class="line"><a name="l00804"></a><span class="lineno">  804</span>&#160;<span class="comment"> }</span></div>
+<div class="line"><a name="l00805"></a><span class="lineno">  805</span>&#160;<span class="comment"> </span></div>
+<div class="line"><a name="l00806"></a><span class="lineno">  806</span>&#160;<span class="comment"> return self;</span></div>
 <div class="line"><a name="l00807"></a><span class="lineno">  807</span>&#160;<span class="comment"> }</span></div>
 <div class="line"><a name="l00808"></a><span class="lineno">  808</span>&#160;<span class="comment"> </span></div>
-<div class="line"><a name="l00809"></a><span class="lineno">  809</span>&#160;<span class="comment"> @end</span></div>
-<div class="line"><a name="l00810"></a><span class="lineno">  810</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00811"></a><span class="lineno">  811</span>&#160;<span class="comment"> Finally you need to make one of these in the AppDelegate (or the main ViewController for single view apps would be OK):</span></div>
-<div class="line"><a name="l00812"></a><span class="lineno">  812</span>&#160;<span class="comment"> </span></div>
-<div class="line"><a name="l00813"></a><span class="lineno">  813</span>&#160;<span class="comment"> e.g.,:</span></div>
-<div class="line"><a name="l00814"></a><span class="lineno">  814</span>&#160;<span class="comment"> </span></div>
-<div class="line"><a name="l00815"></a><span class="lineno">  815</span>&#160;<span class="comment"> @interface AppDelegate : UIResponder &lt;UIApplicationDelegate&gt;</span></div>
-<div class="line"><a name="l00816"></a><span class="lineno">  816</span>&#160;<span class="comment"> </span></div>
-<div class="line"><a name="l00817"></a><span class="lineno">  817</span>&#160;<span class="comment"> @property (strong, nonatomic) UIWindow *window;</span></div>
-<div class="line"><a name="l00818"></a><span class="lineno">  818</span>&#160;<span class="comment"> @property (strong, nonatomic) AudioHost *host;</span></div>
+<div class="line"><a name="l00809"></a><span class="lineno">  809</span>&#160;<span class="comment"> - (Unit)constructGraphFloat:(PLAudioHost*)host</span></div>
+<div class="line"><a name="l00810"></a><span class="lineno">  810</span>&#160;<span class="comment"> {</span></div>
+<div class="line"><a name="l00811"></a><span class="lineno">  811</span>&#160;<span class="comment"> return Sine::ar (1000, 0.1);</span></div>
+<div class="line"><a name="l00812"></a><span class="lineno">  812</span>&#160;<span class="comment"> }</span></div>
+<div class="line"><a name="l00813"></a><span class="lineno">  813</span>&#160;<span class="comment"> </span></div>
+<div class="line"><a name="l00814"></a><span class="lineno">  814</span>&#160;<span class="comment"> @end</span></div>
+<div class="line"><a name="l00815"></a><span class="lineno">  815</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00816"></a><span class="lineno">  816</span>&#160;<span class="comment"> Finally you need to make one of these in the AppDelegate (or the main ViewController for single view apps would be OK):</span></div>
+<div class="line"><a name="l00817"></a><span class="lineno">  817</span>&#160;<span class="comment"> </span></div>
+<div class="line"><a name="l00818"></a><span class="lineno">  818</span>&#160;<span class="comment"> e.g.,:</span></div>
 <div class="line"><a name="l00819"></a><span class="lineno">  819</span>&#160;<span class="comment"> </span></div>
-<div class="line"><a name="l00820"></a><span class="lineno">  820</span>&#160;<span class="comment"> @end</span></div>
-<div class="line"><a name="l00821"></a><span class="lineno">  821</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00822"></a><span class="lineno">  822</span>&#160;<span class="comment"> - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions</span></div>
-<div class="line"><a name="l00823"></a><span class="lineno">  823</span>&#160;<span class="comment"> {</span></div>
-<div class="line"><a name="l00824"></a><span class="lineno">  824</span>&#160;<span class="comment"> _host = [[AudioHost alloc] init];</span></div>
-<div class="line"><a name="l00825"></a><span class="lineno">  825</span>&#160;<span class="comment"> [_host startHost];</span></div>
-<div class="line"><a name="l00826"></a><span class="lineno">  826</span>&#160;<span class="comment"> </span></div>
-<div class="line"><a name="l00827"></a><span class="lineno">  827</span>&#160;<span class="comment"> return YES;</span></div>
-<div class="line"><a name="l00828"></a><span class="lineno">  828</span>&#160;<span class="comment"> }</span></div>
-<div class="line"><a name="l00829"></a><span class="lineno">  829</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00830"></a><span class="lineno">  830</span>&#160;<span class="comment"> </span></div>
-<div class="line"><a name="l00831"></a><span class="lineno">  831</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00832"></a><span class="lineno">  832</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00833"></a><span class="lineno">  833</span>&#160;</div>
+<div class="line"><a name="l00820"></a><span class="lineno">  820</span>&#160;<span class="comment"> @interface AppDelegate : UIResponder &lt;UIApplicationDelegate&gt;</span></div>
+<div class="line"><a name="l00821"></a><span class="lineno">  821</span>&#160;<span class="comment"> </span></div>
+<div class="line"><a name="l00822"></a><span class="lineno">  822</span>&#160;<span class="comment"> @property (strong, nonatomic) UIWindow *window;</span></div>
+<div class="line"><a name="l00823"></a><span class="lineno">  823</span>&#160;<span class="comment"> @property (strong, nonatomic) AudioHost *host;</span></div>
+<div class="line"><a name="l00824"></a><span class="lineno">  824</span>&#160;<span class="comment"> </span></div>
+<div class="line"><a name="l00825"></a><span class="lineno">  825</span>&#160;<span class="comment"> @end</span></div>
+<div class="line"><a name="l00826"></a><span class="lineno">  826</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00827"></a><span class="lineno">  827</span>&#160;<span class="comment"> - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions</span></div>
+<div class="line"><a name="l00828"></a><span class="lineno">  828</span>&#160;<span class="comment"> {</span></div>
+<div class="line"><a name="l00829"></a><span class="lineno">  829</span>&#160;<span class="comment"> _host = [[AudioHost alloc] init];</span></div>
+<div class="line"><a name="l00830"></a><span class="lineno">  830</span>&#160;<span class="comment"> [_host startHost];</span></div>
+<div class="line"><a name="l00831"></a><span class="lineno">  831</span>&#160;<span class="comment"> </span></div>
+<div class="line"><a name="l00832"></a><span class="lineno">  832</span>&#160;<span class="comment"> return YES;</span></div>
+<div class="line"><a name="l00833"></a><span class="lineno">  833</span>&#160;<span class="comment"> }</span></div>
+<div class="line"><a name="l00834"></a><span class="lineno">  834</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00835"></a><span class="lineno">  835</span>&#160;<span class="comment"> </span></div>
+<div class="line"><a name="l00836"></a><span class="lineno">  836</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00837"></a><span class="lineno">  837</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00838"></a><span class="lineno">  838</span>&#160;</div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Oct 19 2015 07:22:48 for pl-nk by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Oct 19 2015 08:52:09 for pl-nk by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>
