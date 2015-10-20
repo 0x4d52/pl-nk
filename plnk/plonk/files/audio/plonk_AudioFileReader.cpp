@@ -72,7 +72,11 @@ ResultCode AudioFileReaderInternal::init (const char* path, AudioFileMetaDataIOF
     pl_AudioFileReader_Init (getPeerRef());
     ResultCode result = pl_AudioFileReader_OpenInternal (getPeerRef(), path, metaDataIOFlags.getValue());
     
-    if (result == PlankResult_OK)
+    const int bytesPerFrame = getBytesPerFrame();
+    
+    if (bytesPerFrame == 0)
+        result = PlankResult_AudioFileInavlidType;
+    else if (result == PlankResult_OK)
         numFramesPerBuffer = readBuffer.length() / getBytesPerFrame();
         
     if (this->hasMetaData())
@@ -653,7 +657,7 @@ bool AudioFileReaderInternal::isOwned() const throw()
 
 bool AudioFileReaderInternal::isReady() const throw()
 {
-    return true; //numFramesPerBuffer != 0;
+    return numFramesPerBuffer != 0;
 }
 
 void AudioFileReaderInternal::disownPeer (PlankAudioFileReaderRef otherReader) throw()

@@ -247,7 +247,12 @@
  passing units to other units during construction. There are channel objects 
  (the ChannelBase<SampleType> class) although you rarely deal with these directly
  in user code. Most user code will create and manipulate unit objects 
- (via the UnitBase<SampleType> class). By default Plonk is setup to deal with 32-bit 
+ (via the UnitBase<SampleType> class). 
+ 
+ @note All of the unit classes are shared objects too, you should just allocated them 
+       as objects on the stack rather than using new/delete (i.e., the heap).
+ 
+ By default Plonk is setup to deal with 32-bit 
  floating point data throughout its graphs. This is achieved by the macro
  PLONK_TYPE_DEFAULT which is set to 'float'. This macro is used to set the default
  type for the UnitBase class and the unit factory classes. A NumericalArray<PLONK_TYPE_DEFAULT>
@@ -255,8 +260,8 @@
  object). Another convention is for the base types (ChannelBase, UnitBase) to become simply 
  'Channel' and 'Unit' for the default sample type. For factory classes, these are 
  generally names like SomethingUnit, which becomes simply 'Something' for the default 
- sample type.
- 
+ sample type. 
+  
  For example, the SineUnit factory class is used to create wavetable-based sine
  wave oscillators. To create one using the default sample type you would do this:
  

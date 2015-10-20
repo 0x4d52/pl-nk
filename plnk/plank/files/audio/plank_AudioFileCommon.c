@@ -59,7 +59,7 @@ const char* pl_PlankAudioFileGetFormatName (int format)
         case PLANKAUDIOFILE_FORMAT_QUEUE:       return "Queue";
         case PLANKAUDIOFILE_FORMAT_CUSTOM:      return "Custom";
 
-        default: return "invalid";
+        default: return "Invalid";
     }
 }
 

@@ -137,7 +137,7 @@ PlankResult pl_IffFileReader_SeekChunk (PlankIffFileReaderRef p, const PlankLL s
 
 /**
  @param p The <i>Plank IffFileReader</i> object.
- @param chunkIDstr The chunk ID as astring can be returned here. This should point to a string capable of holding at least 37 characters. Use 0 to ignore.
+ @param chunkIDstr The chunk ID as a string can be returned here. This should point to a string capable of holding at least 37 characters. Use 0 to ignore.
  @param chunkID The chunk ID can be returned here. Use 0 to ignore.
  @param chunkLength The chunk length is returned here. Use 0 to ignore.
  @param chunkEnd The chunk end is returned here. Use 0 to ignore.

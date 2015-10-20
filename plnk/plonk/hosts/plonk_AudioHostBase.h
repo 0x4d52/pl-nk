@@ -237,13 +237,6 @@ protected:
         outputUnit = constructGraph();
         hostStarting();
         
-//        const int numInputs = this->inputs.length();
-//        for (int i = 0; i < numInputs; ++i)
-//        {
-//            BusType& bus = this->busses.atUnchecked (i);
-//            bus.getWriteBlockSize().setValue (preferredHostBlockSize);
-//        }
-        
         setIsRunning (true);
     }
     
