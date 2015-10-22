@@ -227,10 +227,14 @@ PlankResult pl_FileDefaultSetPositionCallback (PlankFileRef p, PlankLL offset, i
 
 PlankResult pl_FileDefaultGetPositionCallback (PlankFileRef p, PlankLL* position)
 {
+#if PLANK_WIN
+	__int64 result;
+	result = _ftelli64 ((FILE*)p->stream);
+#else
     off_t result;
-    
     result = ftello ((FILE*)p->stream);
-    
+#endif
+
     if (result < 0)
         return PlankResult_FileReadError;
     
