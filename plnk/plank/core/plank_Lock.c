@@ -3,7 +3,7 @@
  This file is part of the Plink, Plonk, Plank libraries
   by Martin Robinson
  
- http://code.google.com/p/pl-nk/
+ https://github.com/0x4d52/pl-nk/
  
  Copyright University of the West of England, Bristol 2011-15
  All rights reserved.
