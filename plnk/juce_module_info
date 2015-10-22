@@ -111,8 +111,9 @@
                         { "file": "ext/vorbis/synthesis.c" },
                         { "file": "ext/vorbis/vorbisenc.c" },
                         { "file": "ext/vorbis/vorbisfile.c" },
-                        { "file": "ext/vorbis/window.c" },
-                        { "file": "ext/opus/analysis.c" },
+                        { "file": "ext/vorbis/window.c" } ],
+
+    "other" :       [   { "file": "ext/opus/analysis.c" },
                         { "file": "ext/opus/celt/bands.c" },
                         { "file": "ext/opus/celt/celt.c" },
                         { "file": "ext/opus/celt/celt_decoder.c" },
