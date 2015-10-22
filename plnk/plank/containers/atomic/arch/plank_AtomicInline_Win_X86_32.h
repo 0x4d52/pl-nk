@@ -880,7 +880,7 @@ static PLANK_INLINE_LOW PlankP pl_AtomicPX_Decrement (PlankAtomicPXRef p)
     return pl_AtomicPX_Add (p, (PlankL)(-1));
 }
 
-static PLANK_INLINE_LOW PlankB pl_AtomicPX_CompareAndSwap (PlankAtomicPXRef p, PlankP oldPtr, PlankUL oldExtra, PlankP newPtr, PlankL newExtra)
+static PLANK_INLINE_LOW PlankB pl_AtomicPX_CompareAndSwap (PlankAtomicPXRef p, PlankP oldPtr, PlankUL oldExtra, PlankP newPtr, PlankUL newExtra)
 {
     // can't use static init as MSVC C is C89
     PlankAtomicPX oldAll;

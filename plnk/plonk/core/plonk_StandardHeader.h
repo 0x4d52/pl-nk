@@ -249,7 +249,7 @@ struct VoidReturn { enum Type { Pass = 1 }; };
 	#pragma warning(disable : 4996) // security of snprintf etc
 	#pragma warning(disable : 4800) // bool performance warning
 	#pragma warning(disable : 4290) // exceptions re: std::bad_alloc
-	#define _CRT_SECURE_NO_WARNINGS
+	//#define _CRT_SECURE_NO_WARNINGS
 #endif
 
 

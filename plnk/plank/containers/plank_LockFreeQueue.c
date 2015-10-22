@@ -216,7 +216,7 @@ PlankLockFreeQueueFreeElementDataFunction pl_LockFreeQueue_GetFreeElementDataFun
 PlankResult pl_LockFreeQueue_Push (PlankLockFreeQueueRef p, const PlankLockFreeQueueElementRef element)
 {
     PlankResult result;
-    PlankL tailExtra;
+    PlankUL tailExtra;
     PlankLockFreeQueueElementRef tailElement;
     PlankAtomicPXRef tailElementNextAtom;
     PlankB success;
@@ -386,7 +386,7 @@ PlankResult pl_LockFreeQueue_Push (PlankLockFreeQueueRef p, const PlankLockFreeQ
 PlankResult pl_LockFreeQueue_Pop (PlankLockFreeQueueRef p, PlankLockFreeQueueElementRef* element)
 {
     PlankResult result;
-    PlankL headExtra, tailExtra;
+    PlankUL headExtra, tailExtra;
 	PlankLockFreeQueueElementRef headElement, nextElement;
     PlankB success;
     

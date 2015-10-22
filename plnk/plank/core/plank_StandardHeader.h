@@ -48,8 +48,9 @@
 #define PLANK_BUILDNUMBER        0
 #define PLANK_VERSION           "v" PLANK_PRESTRING(PLANK_MAJOR_VERSION) "." PLANK_PRESTRING(PLANK_MINOR_VERSION) "." PLANK_PRESTRING(PLANK_BUILDNUMBER)
 
-
+#ifndef _CRT_SECURE_NO_WARNINGS
 #define _CRT_SECURE_NO_WARNINGS
+#endif
 
 /*
  config - define these in preprocessor macros to enable special options
@@ -70,7 +71,7 @@
     #define PLANK_END_C_LINKAGE }
 #else
     #if (defined (_WIN32) || defined (_WIN64))
-        #define PLANK_INLINE_LOW __PLANK_INLINE_LOW
+        #define inline __inline
 		#define PLANK_UNUSED(a) (void)a
     #else
 		#define PLANK_UNUSED(a)
@@ -131,6 +132,9 @@
 	#pragma warning(disable : 4127) // conditional expression is constant (e.g., while(1){...} idiom)
 	#pragma warning(disable : 4706) // assignment within conditional expression
 	#pragma warning(disable : 4206) // empty compilation unit
+	#pragma warning(disable : 4458) // local var hiding member
+	#pragma warning(disable : 4457) // local var hiding function param (argument)
+	#pragma warning(disable : 4456) // local var hiding another local
 
     #define PLANK_WIN 1
     #define PLANK_X86 1
