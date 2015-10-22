@@ -18,7 +18,7 @@ Since pl-nk may be used as a JUCE (http://juce.com) module, the easiest way to g
 1.  You must disable `JUCE_USE_OGGVORBIS` in the Introjucer within the `juce_audio_formats` module (since Plank already includes Ogg Vorbis support).
 2.  You must add a preprocessor definition to the Introjucer project `PLONK_AUDIOHOST_JUCE=1` to use the JUCE audio host.
 
-You can, of course, also us pl-nk independently of JUCE, which might be more appropriate for you licensing needs.
+You can, of course, also us pl-nk independently of JUCE, which might be more appropriate for your licensing needs.
 
 There are two example projects: macplnk (an Xcode project for Mac OS X using PortAudio as the audio host; and, *iosplnk* (an Xcode project for iOS devices). A Windows project will be added at some point but it should be trivial to convert the *macplnk* project for this purpose as the main task is to subclass `PortAudioAudioHost`, implement the `constructGraph()` function, and create and instance of this class. Then call its `startHost()` function to start audio running.
 
