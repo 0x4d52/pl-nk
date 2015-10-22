@@ -62,18 +62,18 @@ PlankAtomicL* pl_SharedPtrGlobalCount()
 
 //////////////////////////////// Helpers ///////////////////////////////////////
 
-typedef struct PlankSharedPtrCounter
+typedef struct PLANK_ALIGN(PLANK_WIDESIZE) PlankSharedPtrCounter
 {
     PLANK_ALIGN(PLANK_WIDESIZE) PlankAtomicPX atom;
-} PlankSharedPtrCounter PLANK_ALIGN(PLANK_WIDESIZE);
+} PlankSharedPtrCounter;
 
 ///////////////////////////////// Weak /////////////////////////////////////////
 
-typedef struct PlankWeakPtr
+typedef struct PLANK_ALIGN(PLANK_WIDESIZE) PlankWeakPtr
 {
     PlankSharedPtr sharedPtr;
     PlankSharedPtrCounterRef sharedCounter;
-} PlankWeakPtr PLANK_ALIGN(PLANK_WIDESIZE);
+} PlankWeakPtr;
 
 /////////////////////////////// Functions //////////////////////////////////////
 

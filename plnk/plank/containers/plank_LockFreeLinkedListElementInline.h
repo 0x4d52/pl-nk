@@ -39,11 +39,11 @@
 #if PLANK_INLINING_FUNCTIONS
 
 #if !DOXYGEN
-typedef struct PlankLockFreeLinkedListElement
+typedef struct PLANK_ALIGN(PLANK_WIDESIZE) PlankLockFreeLinkedListElement
 {
     PLANK_ALIGN(PLANK_WIDESIZE) PlankAtomicPX next;
 	PLANK_ALIGN(PLANK_WIDESIZE) PlankAtomicPX data;
-} PlankLockFreeLinkedListElement PLANK_ALIGN(PLANK_WIDESIZE);
+} PlankLockFreeLinkedListElement;
 
 typedef PlankLockFreeLinkedListElement PlankLockFreeQueueElement;
 typedef PlankLockFreeLinkedListElement PlankLockFreeStackElement;

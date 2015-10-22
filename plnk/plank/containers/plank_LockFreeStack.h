@@ -70,12 +70,12 @@ PlankLL pl_LockFreeStack_GetSize (PlankLockFreeStackRef p);
 PLANK_END_C_LINKAGE
 
 #if !DOXYGEN
-typedef struct PlankLockFreeStack
+typedef struct PLANK_ALIGN(PLANK_WIDESIZE) PlankLockFreeStack
 {
 	PLANK_ALIGN(PLANK_WIDESIZE) PlankAtomicPX	atom;
     PLANK_ALIGN(PLANK_WIDESIZE) PlankAtomicLL   count;
     PlankLockFreeStackFreeElementDataFunction freeFunction;
-} PlankLockFreeStack PLANK_ALIGN(PLANK_WIDESIZE);
+} PlankLockFreeStack;
 #endif
 
 #endif // PLANK_LOCKFREESTACK_H

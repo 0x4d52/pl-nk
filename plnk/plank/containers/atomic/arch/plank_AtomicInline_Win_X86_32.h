@@ -50,41 +50,41 @@
 #define PLANK_ATOMIC_PMASK          0xFFFFFFFFUL
 
 #if !DOXYGEN
-typedef struct PlankAtomicI
+typedef struct PLANK_ALIGN(4) PlankAtomicI
 {
     volatile PlankI value;
-} PlankAtomicI PLANK_ALIGN(4);
+} PlankAtomicI;
 
-typedef struct PlankAtomicL
+typedef struct PLANK_ALIGN(4) PlankAtomicL
 {
     volatile PlankL value;
-} PlankAtomicL PLANK_ALIGN(4);
+} PlankAtomicL;
 
-typedef struct PlankAtomicLL
+typedef struct PLANK_ALIGN(8) PlankAtomicLL
 {
     volatile PlankLL value;
-} PlankAtomicLL PLANK_ALIGN(8);
+} PlankAtomicLL;
 
-typedef struct PlankAtomicF
+typedef struct PLANK_ALIGN(4) PlankAtomicF
 {
     volatile PlankF value;
-} PlankAtomicF PLANK_ALIGN(4);
+} PlankAtomicF;
 
-typedef struct PlankAtomicD
+typedef struct PLANK_ALIGN(8) PlankAtomicD
 {
     volatile PlankD value;
-} PlankAtomicD PLANK_ALIGN(8);
+} PlankAtomicD;
 
-typedef struct PlankAtomicP
+typedef struct PLANK_ALIGN(4) PlankAtomicP
 {
     volatile PlankP ptr;
-} PlankAtomicP PLANK_ALIGN(4);
+} PlankAtomicP;
 
-typedef struct PlankAtomicPX
+typedef struct PLANK_ALIGN(8) PlankAtomicPX
 {
     volatile PlankP ptr;
     volatile PlankUL extra;
-} PlankAtomicPX PLANK_ALIGN(8);
+} PlankAtomicPX;
 #endif
 
 static PLANK_INLINE_LOW void pl_AtomicMemoryBarrier()

@@ -50,55 +50,55 @@
 #define PLANK_ATOMIC_PMASK          0xFFFFFFFFFFFFFFFFULL
 
 #if !DOXYGEN
-typedef struct PlankAtomicI
+typedef struct PLANK_ALIGN(4) PlankAtomicI
 {
     volatile PlankI value;
-} PlankAtomicI PLANK_ALIGN(4);
+} PlankAtomicI;
 
-typedef struct PlankAtomicL
+typedef struct PLANK_ALIGN(8) PlankAtomicL
 {
     volatile PlankL value;
-} PlankAtomicL PLANK_ALIGN(8);
+} PlankAtomicL;
 
-typedef struct PlankAtomicLL
+typedef struct PLANK_ALIGN(8) PlankAtomicLL
 {
     volatile PlankLL value;
-} PlankAtomicLL PLANK_ALIGN(8);
+} PlankAtomicLL;
 
-typedef struct PlankAtomicF
+typedef struct PLANK_ALIGN(4) PlankAtomicF
 {
     volatile PlankF value;
-} PlankAtomicF PLANK_ALIGN(4);
+} PlankAtomicF;
 
-typedef struct PlankAtomicD
+typedef struct PLANK_ALIGN(8) PlankAtomicD
 {
     volatile PlankD value;
-} PlankAtomicD PLANK_ALIGN(8);
+} PlankAtomicD ;
 
-typedef struct PlankAtomicP
+typedef struct PLANK_ALIGN(8) PlankAtomicP
 {
     volatile PlankP ptr;
-} PlankAtomicP PLANK_ALIGN(8);
+} PlankAtomicP;
 
 #include "../../../core/plank_ThreadSpinLock.h"
 
 typedef PlankB (*PlankAtomicPX_CompareAndSwapFunction) (PlankAtomicPXRef, PlankP, PlankL, PlankP, PlankL);
 
-typedef struct PlankAtomicPX
+typedef struct PLANK_ALIGN(16) PlankAtomicPX
 {
     volatile PlankP ptr;
     volatile PlankUL extra;
     PlankAtomicPX_CompareAndSwapFunction cas;
     PlankThreadSpinLock lock; // only needed if 128-bit CAS not possible
-} PlankAtomicPX PLANK_ALIGN(16);
+} PlankAtomicPX;
 
-typedef struct PlankAtomicLX
+typedef struct PLANK_ALIGN(16) PlankAtomicLX
 {
     volatile PlankL value;
     volatile PlankUL extra;
     PlankAtomicPX_CompareAndSwapFunction cas;
     PlankThreadSpinLock lock; // only needed if 128-bit CAS not possible
-} PlankAtomicLX PLANK_ALIGN(16);
+} PlankAtomicLX;
 #endif
 
 static PLANK_INLINE_LOW void pl_AtomicMemoryBarrier()

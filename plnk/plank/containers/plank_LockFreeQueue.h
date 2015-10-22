@@ -73,7 +73,7 @@ PlankI pl_LockFreeQueue_GetSize (PlankLockFreeQueueRef p);
 PLANK_END_C_LINKAGE
 
 #if !DOXYGEN
-typedef struct PlankLockFreeQueue
+typedef struct PLANK_ALIGN(PLANK_WIDESIZE) PlankLockFreeQueue
 {
 	PLANK_ALIGN(PLANK_WIDESIZE) PlankAtomicPX               head;
     PLANK_ALIGN(PLANK_WIDESIZE) PlankAtomicPX               tail;
@@ -81,7 +81,7 @@ typedef struct PlankLockFreeQueue
     PlankLockFreeQueueFreeElementDataFunction               freeFunction;
     PLANK_ALIGN(PLANK_WIDESIZE) PlankLockFreeQueueElement   dummyElement;
 
-} PlankLockFreeQueue PLANK_ALIGN(PLANK_WIDESIZE);
+} PlankLockFreeQueue;
 #endif
 
 #endif // PLANK_LOCKFREEQUEUE_H
