@@ -257,7 +257,9 @@ public:
             PlankRNG rng;
             pl_RNG_Init (&rng);
             pl_RNG_Seed (&rng, RNG::global().uniformInt());
-            Data data = { { -1.0, -1.0 }, -peak, peak, rng };
+            Data data = { { -1.0, -1.0 }, 0, 0, rng };
+            data.minValue = -peak;
+            data.maxValue =  peak;
             ChannelInternalType* internal = new WhiteNoiseInternal (inputs, 
                                                                     data, 
                                                                     preferredBlockSize, 
