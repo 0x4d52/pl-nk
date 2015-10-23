@@ -308,7 +308,9 @@ public:
         
         const LongLong peak = SampleType (TypeUtility<SampleType>::getTypePeak());
         
-        Data data = { { -1.0, -1.0 }, 0, peak, peak * 2 };
+        Data data = { { -1.0, -1.0 }, 0, 0, 0 };
+        data.peak = peak;
+        data.peak2peak = peak * 2;
         
         return UnitType::template createFromInputs<ImpulseInternal> (inputs,
                                                                      data,
