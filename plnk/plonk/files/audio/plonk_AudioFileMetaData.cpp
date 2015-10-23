@@ -72,7 +72,7 @@ AudioFileCuePoint& AudioFileCuePoint::setCopy (AudioFileCuePoint source) throw()
     if ((internal != Base::getNullSharedPtr()) &&
         (sourceInternal != Base::getNullSharedPtr()))
     {
-        pl_AudioFileCuePoint_SetCopy(internal, sourceInternal);
+        pl_AudioFileCuePoint_SetCopy (internal, sourceInternal);
     }
     else plonk_assertfalse;
     

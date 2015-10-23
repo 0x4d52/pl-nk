@@ -2575,7 +2575,7 @@ static const char* pl_OggTagCompare (const char *source, const char *tag)
     
     while (c < n)
     {
-        if (toupper(source[c]) != toupper(tag[c]))
+        if (toupper (source[c]) != toupper (tag[c]))
             return 0;
         
         c++;
