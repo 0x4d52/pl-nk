@@ -234,7 +234,8 @@ protected:
     void startHostInternal() throw()
     {
         initFormat();
-        outputUnit = constructGraph();
+        Unit graphUnit = constructGraph();
+        outputUnit = graphUnit.getBlockSize (0).getValue() == 1 ? graphUnit.ar() : graphUnit;
         hostStarting();
         
         setIsRunning (true);
