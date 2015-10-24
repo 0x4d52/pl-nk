@@ -1929,8 +1929,9 @@ public:
 
 };
 
-PLONK_BINARYOPGLOBALS_TEMPLATE(NumericalArray,NumericalType); // declares global functions with the same name as the binary operators
-PLONK_UNARYOPGLOBALS_TEMPLATE(NumericalArray,NumericalType);  // declares global functions with the same name as the unary operators
+PLONK_BINARYOPGLOBALS_TEMPLATE(NumericalArray,NumericalType);       // declares global functions with the same name as the binary operators
+PLONK_BINARYOPGLOBALS_LITERAL_TEMPLATE(NumericalArray,SampleType);  // declares global functions with the same name as the binary operators for left operators that are literals
+PLONK_UNARYOPGLOBALS_TEMPLATE(NumericalArray,NumericalType);        // declares global functions with the same name as the unary operators
 
 
 

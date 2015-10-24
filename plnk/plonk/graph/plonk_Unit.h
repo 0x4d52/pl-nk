@@ -1378,8 +1378,9 @@ private:
     }        
 };
 
-PLONK_BINARYOPGLOBALS_TEMPLATE(UnitBase,SampleType); // declares global functions with the same name as the binary operators
-PLONK_UNARYOPGLOBALS_TEMPLATE(UnitBase,SampleType);  // declares global functions with the same name as the unary operators
+PLONK_BINARYOPGLOBALS_TEMPLATE(UnitBase,SampleType);         // declares global functions with the same name as the binary operators
+PLONK_BINARYOPGLOBALS_LITERAL_TEMPLATE(UnitBase,SampleType); // declares global functions with the same name as the binary operators for left operators that are literals
+PLONK_UNARYOPGLOBALS_TEMPLATE(UnitBase,SampleType);          // declares global functions with the same name as the unary operators
 
 //template<class SampleType>
 //PLONK_INLINE_LOW UnitBase<SampleType> explin (UnitBase<SampleType> const& input, 
