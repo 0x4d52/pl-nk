@@ -126,6 +126,11 @@ public:
         SmartPointerContainerBase temp (internal.getPtr()); // make sure it doesn't get deleted by another thread while we check..
         return temp.isNull() ? 0 : temp->getRefCount() - 1; // -1 to exclude the ref we're holding in this function...
     }
+    
+    PLONK_INLINE_LOW int isLastRemainingRef() const throw()
+    {
+        return getRefCount() == 1;
+    }
 	
 	PLONK_INLINE_LOW void setInternal (SmartPointerType* newInternal) throw()
 	{
