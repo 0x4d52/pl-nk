@@ -305,7 +305,14 @@
                         "plonk/hosts/rtaudio/*",
                         "plonk/maths/*",
                         "plonk/misc/*",
-                        "plonk/random/*" ],
+                        "plonk/random/*",
+                        "ext/fftreal/ffft/*",
+                        "ext/jansson/*",
+                        "ext/minizip/*",
+                        "ext/ogg/*",
+                        "ext/opus/*",
+                        "ext/vorbis/*",
+                        "ext/zlib/*" ],
                       
   "OSXFrameworks":  "CoreAudio Accelerate AudioToolbox",
   "iOSFrameworks":  "CoreAudio Accelerate AudioToolbox"
