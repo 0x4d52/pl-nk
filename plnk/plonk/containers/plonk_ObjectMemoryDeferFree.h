@@ -46,10 +46,30 @@
  This runs a background thread and maintains a queue of pointers that have been
  requested to be deallocated. When the thread runs periodically it empties the queue.
  
- Memory is allocated as usual. When memory is freed it doesn't get freed by the 
+ Memory is allocated as usual. When memory is freed it doesn't get freed by the
  operating system immediately but goes onto this objects queue for deletion later.
  
  This means that allocation is not thread safe but deallocation is.
+ 
+ To use this allocate one in your application set up code making sure that this happens
+ before any other Plonk/Plank objects:
+ 
+ In your class members or a global variable:
+ @code
+ ScopedPointerContainer<ObjectMemoryBase> memoryManager;
+ @endcode
+ 
+ In the set-up code:
+ @code
+ memoryManager = new ObjectMemoryDeferFree (Memory::global());
+ @endcode
+ 
+ Then after all objects have been deleted (in your application tear down):
+ @code
+ memoryManager = nullptr;
+ @endcode
+ 
+ @warning Only use one ObjectMemoryBase subclass for the entire lifetime of your application!
  */
 class ObjectMemoryDeferFree :   public ObjectMemoryBase,
                                 public Threading::Thread

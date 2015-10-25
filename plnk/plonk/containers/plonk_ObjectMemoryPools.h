@@ -41,15 +41,15 @@
 
 /** Pooled memory for objects and raw arrays.
  This replaces memory allocation functions for objects in the library
- and raw arrays of simple types. 
+ and raw arrays of simple types.
  
  This maintains a series of queues that contain memory blocks that are 2**N.
  This means that objects will be rounded up to the nearest power of 2. (A more
- efficient algorithm would use smaller blcoks above a certain size and round to 
+ efficient algorithm would use smaller blcoks above a certain size and round to
  something like 4K.)
  
  When memory is allocated it is first requested from the appropriate queue. If a
- free memory block is available in the queue then that is used for the requested 
+ free memory block is available in the queue then that is used for the requested
  memory and returned to the caller. When memory is freed, the memory block is simply
  placed back onto the appropriate queue.
  
@@ -57,7 +57,27 @@
  and deallocation are thread safe.
  
  @note This algorithm NEVER actaully deallocates the memory from the operating system
-       until this object is destroyed (usually as you app is closed down).
+ until this object is destroyed (usually as you app is closed down).
+ 
+ To use this allocate one in your application set up code making sure that this happens
+ before any other Plonk/Plank objects:
+ 
+ In your class members or a global variable:
+ @code
+ ScopedPointerContainer<ObjectMemoryBase> memoryManager;
+ @endcode
+ 
+ In the set-up code:
+ @code
+ memoryManager = new ObjectMemoryPools (Memory::global());
+ @endcode
+ 
+ Then after all objects have been deleted (in your application tear down):
+ @code
+ memoryManager = nullptr;
+ @endcode
+ 
+ @warning Only use one ObjectMemoryBase subclass for the entire lifetime of your application!
  */
 class ObjectMemoryPools :   public ObjectMemoryBase,
                             public Threading::Thread
