@@ -39,6 +39,26 @@
 #ifndef PLONK_OBJECTMEMORYPOOLS_H
 #define PLONK_OBJECTMEMORYPOOLS_H
 
+/** Pooled memory for objects and raw arrays.
+ This replaces memory allocation functions for objects in the library
+ and raw arrays of simple types. 
+ 
+ This maintains a series of queues that contain memory blocks that are 2**N.
+ This means that objects will be rounded up to the nearest power of 2. (A more
+ efficient algorithm would use smaller blcoks above a certain size and round to 
+ something like 4K.)
+ 
+ When memory is allocated it is first requested from the appropriate queue. If a
+ free memory block is available in the queue then that is used for the requested 
+ memory and returned to the caller. When memory is freed, the memory block is simply
+ placed back onto the appropriate queue.
+ 
+ This means that if you preallocate pools that are large enough then both allocation
+ and deallocation are thread safe.
+ 
+ @note This algorithm NEVER actaully deallocates the memory from the operating system
+       until this object is destroyed (usually as you app is closed down).
+ */
 class ObjectMemoryPools :   public ObjectMemoryBase,
                             public Threading::Thread
 {

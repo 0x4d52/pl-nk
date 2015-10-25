@@ -66,8 +66,10 @@ static PLONK_INLINE_LOW void staticDoFree (void* userData, void* ptr) throw()
 
 ObjectMemoryDeferFree::ObjectMemoryDeferFree (Memory& m) throw()
 :   ObjectMemoryBase (m),
-    Threading::Thread ("plonk::ObjectMemoryDeferFree::Threading::Thread")
-{    
+    Threading::Thread ("Memory Deferred Free Thread")
+{
+    setPriority (0);
+    
     getMemory().resetUserData();
     getMemory().resetFunctions();
     

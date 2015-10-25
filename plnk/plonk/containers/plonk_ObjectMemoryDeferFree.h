@@ -39,6 +39,18 @@
 #ifndef PLONK_ObjectMemoryDeferFree_H
 #define PLONK_ObjectMemoryDeferFree_H
 
+/** Deferred memory deallocation for objects and raw arrays.
+ This replaces memory allocation functions for objects in the library
+ and raw arrays of simple types.
+ 
+ This runs a background thread and maintains a queue of pointers that have been
+ requested to be deallocated. When the thread runs periodically it empties the queue.
+ 
+ Memory is allocated as usual. When memory is freed it doesn't get freed by the 
+ operating system immediately but goes onto this objects queue for deletion later.
+ 
+ This means that allocation is not thread safe but deallocation is.
+ */
 class ObjectMemoryDeferFree :   public ObjectMemoryBase,
                                 public Threading::Thread
 {

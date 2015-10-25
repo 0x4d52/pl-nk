@@ -88,8 +88,10 @@ static PLONK_INLINE_LOW void staticDoFree (void* userData, void* ptr) throw()
 
 ObjectMemoryPools::ObjectMemoryPools (Memory& m) throw()
 :   ObjectMemoryBase (m),
-    Threading::Thread ("plonk::ObjectMemoryPools::Threading::Thread")
+    Threading::Thread ("Memory Pool Thread")
 {
+    setPriority (0);
+
     getMemory().resetUserData();
     getMemory().setFunctions (staticDoAlloc, staticDoFree); 
     
@@ -154,22 +156,27 @@ void ObjectMemoryPools::free (void* ptr)
 ResultCode ObjectMemoryPools::run() throw()
 {
     int i;
-//    const double minDuration = 0.000001;
-    const double maxDuration = 0.1;
-    double duration = maxDuration;//minDuration;
+    const double duration = 0.5;
     
     while (!getShouldExit())
     {
         for (i = 0; i < NumQueues; ++i)
         {
             plonk_assert (getMemory().getUserData() == this);
-            // could delete some here gradually
+
+            for (i = 0; i < NumQueues; ++i)
+                queues[i].clearCache();
+                
             Threading::sleep (duration);
         }
     }
     
+    setPriority (100);
+    
+    // reset functions
     getMemory().setFunctions (staticDoAlloc, staticDoFree); 
     
+    // clear - deallocate all of the memory
     for (i = 0; i < NumQueues; ++i)
         queues[i].clearAll();
     
