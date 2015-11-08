@@ -176,13 +176,9 @@ static PLANK_INLINE_LOW double pl_JSON_DoubleGet (PlankJSONRef p)
     double value = 0.0;
     
     if (json_is_real ((json_t*)p))
-    {
         value = json_real_value ((json_t*)p);
-    }
     else if (pl_JSON_ObjectGetSize (p) == 1)
-    {
         value = pl_JSON_DoubleEncodedGet (p);
-    }
     
     return value;
 }
@@ -192,13 +188,9 @@ static PLANK_INLINE_LOW float pl_JSON_FloatGet (PlankJSONRef p)
     float value = 0.f;
     
     if (json_is_real ((json_t*)p))
-    {
         value = (float)json_real_value ((json_t*)p);
-    }
     else if (pl_JSON_ObjectGetSize (p) == 1)
-    {
         value = pl_JSON_FloatEncodedGet (p);
-    }
     
     return value;
 }
@@ -208,13 +200,9 @@ static PLANK_INLINE_LOW PlankLL pl_JSON_IntGet (PlankJSONRef p)
     PlankLL value = 0;
     
     if (json_is_integer ((json_t*)p))
-    {
         value = (PlankLL)json_integer_value ((json_t*)p);
-    }
     else if (pl_JSON_ObjectGetSize (p) == 1)
-    {
         value = pl_JSON_IntEncodedGet (p);
-    }
     
     return value;
 }

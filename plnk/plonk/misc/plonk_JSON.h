@@ -304,7 +304,7 @@ public:
         
     Text dump() const throw()
     {
-        return json_dumps ((json_t*)json, 0);
+        return json_dumps ((json_t*)json, PLANK_JSON_DEFAULTFLAGS);
     }
         
     PlankJSONRef getInternal() throw() { return json; }

@@ -111,10 +111,10 @@ PlankJSONRef pl_JSON_FromFile (PlankFileRef f)
         j = pl_JSON_Object();
         e = pl_JSON_Object();
         
-        pl_JSON_ObjectPutKey (e, "text", pl_JSON_String (jerror.text));
-        pl_JSON_ObjectPutKey (e, "source", pl_JSON_String (jerror.source));
-        pl_JSON_ObjectPutKey (e, "line", pl_JSON_Int (jerror.line));
-        pl_JSON_ObjectPutKey (e, "column", pl_JSON_Int (jerror.column));
+        pl_JSON_ObjectPutKey (e, "text",     pl_JSON_String (jerror.text));
+        pl_JSON_ObjectPutKey (e, "source",   pl_JSON_String (jerror.source));
+        pl_JSON_ObjectPutKey (e, "line",     pl_JSON_Int (jerror.line));
+        pl_JSON_ObjectPutKey (e, "column",   pl_JSON_Int (jerror.column));
         pl_JSON_ObjectPutKey (e, "position", pl_JSON_Int (jerror.position));
         pl_JSON_ObjectPutKey (j, "error", e);
     }
@@ -292,9 +292,8 @@ PlankJSONRef pl_JSON_DoubleArray (const double* values, const PlankL count)
     return j;
 }
 
-static PLANK_INLINE_LOW const void* pl_JSON_EncodedGet (PlankJSONRef p, const char* keyType, const PlankL expectedLength)
+static PLANK_INLINE_LOW const void* pl_JSON_EncodedGet (PlankJSONRef p, const char* keyType, const PlankL expectedLength, PlankBase64Ref b64)
 {
-    PlankBase64 b64;
     PlankL binaryLength;
     const char* key;
     const void* data = 0;
@@ -307,14 +306,10 @@ static PLANK_INLINE_LOW const void* pl_JSON_EncodedGet (PlankJSONRef p, const ch
         
         if (pl_JSON_IsString (p))
         {
-            pl_Base64_Init (&b64);
-            
-            data = pl_Base64_Decode (&b64, pl_JSON_StringGet (p), &binaryLength);
+            data = pl_Base64_Decode (b64, pl_JSON_StringGet (p), &binaryLength);
             
             if (binaryLength != expectedLength)
                 data = 0;
-            
-            pl_Base64_DeInit (&b64);
         }
     }
     
@@ -325,22 +320,43 @@ static PLANK_INLINE_LOW const void* pl_JSON_EncodedGet (PlankJSONRef p, const ch
 PlankLL pl_JSON_IntEncodedGet (PlankJSONRef p)
 {
     const PlankLL* data;
-    data = (const PlankLL*)pl_JSON_EncodedGet (p, PLANK_JSON_INTBINARY, sizeof (data[0]));
-    return data ? *data : 0;
+    PlankLL value;
+    PlankBase64 b64;
+    
+    pl_Base64_Init (&b64);
+    data = (const PlankLL*)pl_JSON_EncodedGet (p, PLANK_JSON_INTBINARY, sizeof (data[0]), &b64);
+    value = data ? *data : 0;
+    pl_Base64_DeInit (&b64);
+
+    return value;
 }
 
 float pl_JSON_FloatEncodedGet (PlankJSONRef p)
 {
     const float* data;
-    data = (const float*)pl_JSON_EncodedGet (p, PLANK_JSON_FLOATBINARY, sizeof (data[0]));
-    return data ? *data : 0;
+    float value;
+    PlankBase64 b64;
+
+    pl_Base64_Init (&b64);
+    data = (const float*)pl_JSON_EncodedGet (p, PLANK_JSON_FLOATBINARY, sizeof (data[0]), &b64);
+    value = data ? *data : 0;
+    pl_Base64_DeInit (&b64);
+
+    return value;
 }
 
 double pl_JSON_DoubleEncodedGet (PlankJSONRef p)
 {
     const double* data;
-    data = (const double*)pl_JSON_EncodedGet (p, PLANK_JSON_DOUBLEBINARY, sizeof (data[0]));
-    return data ? *data : 0;
+    double value;
+    PlankBase64 b64;
+
+    pl_Base64_Init (&b64);
+    data = (const double*)pl_JSON_EncodedGet (p, PLANK_JSON_DOUBLEBINARY, sizeof (data[0]), &b64);
+    value = data ? *data : 0;
+    pl_Base64_DeInit (&b64);
+
+    return value;
 }
 
 static PlankResult pl_JSON_EncodedArrayGet (PlankJSONRef p, PlankDynamicArrayRef array, const char* binaryKey, const char* compressedKey, const PlankUL sz)
@@ -372,10 +388,8 @@ static PlankResult pl_JSON_EncodedArrayGet (PlankJSONRef p, PlankDynamicArrayRef
     itemSize = pl_DynamicArray_GetItemSize (array);
     
     if (itemSize == 0)
-    {
         if ((result = pl_DynamicArray_InitWithItemSize (array, sz)) != PlankResult_OK)
             goto exit;
-    }
     
     if (key)
     {
