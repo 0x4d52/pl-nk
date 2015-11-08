@@ -48,8 +48,9 @@ PLONK_CHANNELDATA_DECLARE(WhiteNoiseChannelInternal,SampleType)
 {    
     ChannelInternalCore::Data base;
     
-    SampleType minValue;
-    SampleType maxValue;
+    typedef SampleType LimitType;
+    LimitType minValue;
+    LimitType maxValue;
     PlankRNG rng;
 };              
 
@@ -57,8 +58,9 @@ PLONK_CHANNELDATA_SPECIAL(WhiteNoiseChannelInternal,short)
 {    
     ChannelInternalCore::Data base;
     
-    int minValue;
-    int maxValue;
+    typedef int LimitType;
+    LimitType minValue;
+    LimitType maxValue;
     PlankRNG rng;
 };      
 
@@ -217,6 +219,7 @@ public:
     typedef ChannelInternal<SampleType,Data>        Internal;
     typedef ChannelInternalBase<SampleType>         ChannelInternalType;
     typedef UnitBase<SampleType>                    UnitType;
+    typedef typename Data::LimitType                LimitType;
     
     static PLONK_INLINE_LOW UnitInfos getInfo() throw()
     {
@@ -257,9 +260,7 @@ public:
             PlankRNG rng;
             pl_RNG_Init (&rng);
             pl_RNG_Seed (&rng, RNG::global().uniformInt());
-            Data data = { { -1.0, -1.0 }, 0, 0, rng };
-            data.minValue = -peak;
-            data.maxValue =  peak;
+            Data data = { { -1.0, -1.0 }, (LimitType)-peak, (LimitType)peak, rng };
             ChannelInternalType* internal = new WhiteNoiseInternal (inputs, 
                                                                     data, 
                                                                     preferredBlockSize, 
@@ -283,6 +284,12 @@ public:
 
 typedef WhiteNoiseUnit<PLONK_TYPE_DEFAULT> WhiteNoise;
 
+#if PLONK_INSTANTIATE_TEMPLATES
+template class WhiteNoiseUnit<Float>;
+template class WhiteNoiseUnit<Double>;
+template class WhiteNoiseUnit<Short>;
+template class WhiteNoiseUnit<Int>;
+#endif
 
 #endif // PLONK_WHITENOISE_H
 
