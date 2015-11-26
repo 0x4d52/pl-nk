@@ -46,7 +46,17 @@
 #endif
 
 #define PLANK_VEC_CUSTOM
+
+typedef struct PLANK_VEC_VDSP_Point
+{
+    int evil;
+} PLANK_VEC_VDSP_Point;
+
+#define Point PLANK_VEC_VDSP_Point
+#define Component PLANK_VEC_VDSP_Component
 #include <Accelerate/Accelerate.h>
+#undef Point
+#undef Component
 
 #define PLANK_SIMDF_LENGTH  4   // vector 4 floats
 #define PLANK_SIMDF_SIZE   16
@@ -1206,7 +1216,6 @@ PLANK_VECTORLOOKUP_DEFINE(I)
 
 // longlong
 PLANK_VECTOR_OPS_COMMON(LL)
-
 
 
 #endif // !DOXYGEN

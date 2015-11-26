@@ -382,7 +382,7 @@ public:
                         BlockSize const& preferredBlockSize = BlockSize::getDefault(),
                         SampleRate const& preferredSampleRate = SampleRate::noPreference()) throw()
     {             
-        if (file.isReady() && !file.isOwned())
+        if (file.isReady() && ! file.isOwned())
         {            
             Inputs inputs;
             inputs.put (IOKey::AudioFileReader, file);

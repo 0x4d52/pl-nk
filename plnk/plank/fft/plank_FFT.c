@@ -41,7 +41,17 @@
 #include "../maths/vectors/plank_Vectors.h"
 
 #ifdef PLANK_FFT_VDSP
+
+    typedef struct PLANK_FFT_VDSP_Point
+    {
+        int evil;
+    } PLANK_FFT_VDSP_Point;
+
+    #define Point PLANK_FFT_VDSP_Point
+    #define Component PLANK_FFT_VDSP_Component
     #include <Accelerate/Accelerate.h>
+    #undef Point
+    #undef Component
 #else
     #include "fftreal/plank_FFTRealInternal.h"
 #endif

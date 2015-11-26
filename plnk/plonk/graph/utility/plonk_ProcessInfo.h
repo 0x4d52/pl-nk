@@ -88,38 +88,6 @@ public:
 };
 
 
-//------------------------------------------------------------------------------
-
-
-//PLONK_INLINE_LOW const TimeStamp& ProcessInfo::getTimeStamp() const throw()             
-//{ 
-//    return this->getInternal()->getTimeStamp(); 
-//}
-//
-//PLONK_INLINE_LOW void ProcessInfo::setTimeStamp (const TimeStamp timeStamp) throw()
-//{
-//    this->getInternal()->setTimeStamp (timeStamp);
-//}
-//
-//PLONK_INLINE_LOW void ProcessInfo::offsetTimeStamp (const double offset) throw()
-//{
-//    this->getInternal()->offsetTimeStamp (offset);
-//}
-//
-//PLONK_INLINE_LOW void ProcessInfo::setShouldDelete() throw()
-//{
-//    this->getInternal()->setShouldDelete();
-//}
-//
-//PLONK_INLINE_LOW void ProcessInfo::resetShouldDelete() throw()
-//{
-//    this->getInternal()->resetShouldDelete();
-//}
-//
-//PLONK_INLINE_LOW bool ProcessInfo::getShouldDelete() const throw()
-//{
-//    return this->getInternal()->getShouldDelete();
-//}
 
 
 #endif // PLONK_PROCESSINFO_H

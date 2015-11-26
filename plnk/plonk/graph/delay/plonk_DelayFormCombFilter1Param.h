@@ -176,9 +176,9 @@ public:
     {   
         if (state.paramsIn[FrequencyIn] != frequency)
         {
-            state.paramsIn[FrequencyIn] = 
-            state.paramsOut[FrequencyOut] = 
-            state.filterShapeData.params[FilterShape::Frequency] = frequency;
+            state.paramsIn[FrequencyIn] = state.paramsOut[FrequencyOut]
+                                        = state.filterShapeData.params[FilterShape::Frequency]
+                                        = frequency;
             state.filterShapeData.filterSampleRate = data.base.sampleRate;
             state.filterShapeData.filterSampleDuration = data.base.sampleDuration;
             FilterShape::calculate (state.filterShapeData);
