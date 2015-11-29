@@ -246,7 +246,7 @@ private:
  @par Inputs:
  - input: (unit, multi) the unit to de-overlap
  - overlap: (doublevariable) the source overlap hop multiplier (1= is no overlap, 0.5= blocks overlap by half their length, 0.25= block overlap by 3/4 of their length)
- - discardNext: (bool) if false newer buffers will have priority in the overlap regions, if true then older buffers will have priority
+ - discardNext: (bool) if false newer buffers will have priority in the overlap regions, if true then older buffers will have priority (NB if the latter part of input buffers are zero-padded then using true here might result in silence out!).
  
  @ingroup ConverterUnits */
 template<class SampleType>

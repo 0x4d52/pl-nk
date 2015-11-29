@@ -133,7 +133,6 @@ public:
                 SampleType* const tempBufferSamples = this->tempBuffers.atUnchecked (channel).getArray();
 
                 // copy remaining overlap from last time to the output
-//                for (i = 0; i < ovarlapRemain; ++i)
                 for (i = 0; i < outputBufferLength; ++i)
                     outputSamples[i] = tempBufferSamples[channelBufferPos++];
                     
