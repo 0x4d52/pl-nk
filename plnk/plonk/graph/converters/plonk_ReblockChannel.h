@@ -192,7 +192,7 @@ public:
         Busses busses (Busses::emptyWithAllocatedSize (numChannels));
         
         BlockSize inputBlockSize = input.getBlockSize (0);
-        BlockSize bufferSize = preferredBlockSize.max (inputBlockSize) * 2;
+        BlockSize bufferSize = (preferredBlockSize.max (inputBlockSize) * 2).getValue();
         SampleRate sampleRate = input.getSampleRate (0);
         
         for (int i = 0; i < numChannels; ++i)

@@ -116,7 +116,7 @@ public:
         if (outputBufferLength != this->fft.length())
             this->fft = FFTEngineType (outputBufferLength);
             
-        this->fft.inverse (outputSamples, inputSamples); // in-place
+        this->fft.inverse (outputSamples, inputSamples);
     }
     
 private:

@@ -182,7 +182,7 @@ public:
         const double blockSize = (double)BlockSize::getDefault().getValue();
         const double sampleRate = SampleRate::getDefault().getValue();
 
-        return UnitInfo ("Trigger", "Trigger detects signal transitions from zero or less to greater than zero.",
+        return UnitInfo ("Diff", "Diff outputs the difference between successive samples.",
                          
                          // output
                          ChannelCount::VariableChannelCount, 

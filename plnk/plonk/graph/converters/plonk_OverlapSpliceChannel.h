@@ -36,47 +36,56 @@
  -------------------------------------------------------------------------------
  */
 
-#ifndef PLONK_OVERLAPMIXCHANNEL_H
-#define PLONK_OVERLAPMIXCHANNEL_H
+#ifndef PLONK_OVERLAPSPLICECHANNEL_H
+#define PLONK_OVERLAPSPLICECHANNEL_H
 
 #include "../channel/plonk_ChannelInternalCore.h"
 #include "../plonk_GraphForwardDeclarations.h"
 
 
+template<class SampleType> class OverlapSpliceChannelInternal;
+
+PLONK_CHANNELDATA_DECLARE(OverlapSpliceChannelInternal,SampleType)
+{
+    ChannelInternalCore::Data base;
+    
+    bool discardNext;
+};
+
 /** Output overlapped block. */
 template<class SampleType>
-class OverlapMixChannelInternal 
-:   public ProxyOwnerChannelInternal<SampleType, ChannelInternalCore::Data>
+class OverlapSpliceChannelInternal
+:   public ProxyOwnerChannelInternal<SampleType, PLONK_CHANNELDATA_NAME(OverlapSpliceChannelInternal,SampleType)>
 {
 public:
-    typedef ChannelInternalCore::Data                               Data;
-    typedef ChannelBase<SampleType>                                 ChannelType;
-    typedef ObjectArray<ChannelType>                                ChannelArrayType;
-    typedef OverlapMixChannelInternal<SampleType>                   OverlapMixInternal;
-    typedef ProxyOwnerChannelInternal<SampleType,Data>              Internal;
-    typedef ChannelInternalBase<SampleType>                         InternalBase;
-    typedef UnitBase<SampleType>                                    UnitType;
-    typedef InputDictionary                                         Inputs;
-    typedef NumericalArray<SampleType>                              Buffer;
-    typedef ObjectArray<Buffer>                                     BufferArray;
+    typedef PLONK_CHANNELDATA_NAME(OverlapSpliceChannelInternal,SampleType)     Data;
+    typedef ChannelBase<SampleType>                                             ChannelType;
+    typedef ObjectArray<ChannelType>                                            ChannelArrayType;
+    typedef OverlapSpliceChannelInternal<SampleType>                            OverlapSpliceInternal;
+    typedef ProxyOwnerChannelInternal<SampleType,Data>                          Internal;
+    typedef ChannelInternalBase<SampleType>                                     InternalBase;
+    typedef UnitBase<SampleType>                                                UnitType;
+    typedef InputDictionary                                                     Inputs;
+    typedef NumericalArray<SampleType>                                          Buffer;
+    typedef ObjectArray<Buffer>                                                 BufferArray;
 
-    OverlapMixChannelInternal (Inputs const& inputs,
-                               Data const& data, 
-                               BlockSize const& blockSize,
-                               SampleRate const& sampleRate,
-                               ChannelArrayType& channels) throw()
+    OverlapSpliceChannelInternal (Inputs const& inputs,
+                                  Data const& data,
+                                  BlockSize const& blockSize,
+                                  SampleRate const& sampleRate,
+                                  ChannelArrayType& channels) throw()
     :   Internal (inputs.getMaxNumChannels(), inputs, data, blockSize, sampleRate, channels),
-        overlapMix (ChannelInternalCore::getInputAs<DoubleVariable> (IOKey::OverlapMix)),
+        overlapSplice (ChannelInternalCore::getInputAs<DoubleVariable> (IOKey::OverlapMix)),
         tempBuffers (BufferArray::withSize (inputs.getMaxNumChannels())),
         tempBufferPos (0),
-        tempBufferStartOffset (0),
+        tempBufferFill (0),
         nextInputTimeStamp (TimeStamp::getZero())
     {
     }
     
     Text getName() const throw()
     {
-        return "Overlap Mix";
+        return "Overlap Splice";
     }        
     
     IntArray getInputKeys() const throw()
@@ -101,7 +110,7 @@ public:
                 tempBuffers.atUnchecked (i).setSize (this->getBlockSize().getValue() * 2, false);
                 tempBuffers.atUnchecked (i).zero();
                 tempBufferPos = 0;
-                tempBufferStartOffset = 0;
+                tempBufferFill = 0;
             }
         }
                 
@@ -112,11 +121,12 @@ public:
     {                
         /* Be careful optimising this with the new NumericalArray vector stuff */
 
+        const Data& data = this->getState();
         UnitType& inputUnit (this->getInputAsUnit (IOKey::Generic));
         
         const int numChannels = this->getNumChannels();
         const int outputBufferLength = this->getOutputBuffer (0).length();
-        const int overlapHop = int (this->overlapMix.getValue() * outputBufferLength + 0.5);
+        const int overlapHop = int (this->overlapSplice.getValue() * outputBufferLength + 0.5);
         const int overlapLength = outputBufferLength - overlapHop;
 //        const int ovarlapRemain = plonk::max (overlapHop, overlapLength);
         int i, channel, channelBufferPos;
@@ -124,29 +134,9 @@ public:
         if (overlapLength < outputBufferLength)
         {
             const TimeStamp infoTimeStamp = info.getTimeStamp();
-            
-            for (channel = 0; channel < numChannels; ++channel)
+                                   
+            while (tempBufferFill < outputBufferLength)
             {
-                channelBufferPos = tempBufferPos;
-                
-                SampleType* const outputSamples = this->getOutputSamples (channel);
-                SampleType* const tempBufferSamples = this->tempBuffers.atUnchecked (channel).getArray();
-
-                // copy remaining overlap from last time to the output
-//                for (i = 0; i < ovarlapRemain; ++i)
-                for (i = 0; i < outputBufferLength; ++i)
-                    outputSamples[i] = tempBufferSamples[channelBufferPos++];
-                    
-                tempBuffers.atUnchecked (channel).zero();
-            }
-                        
-            // build the overlapping material in the temp buffer 
-            tempBufferPos = tempBufferStartOffset;
-
-            while (tempBufferPos < outputBufferLength)
-            {
-                const int tempBufferStartPos = tempBufferPos;
-                
                 info.setTimeStamp (nextInputTimeStamp);
                 
                 for (channel = 0; channel < numChannels; ++channel)
@@ -154,27 +144,30 @@ public:
                     channelBufferPos = tempBufferPos;
                     
                     SampleType* const tempBufferSamples = this->tempBuffers.atUnchecked (channel).getArray();
-
+                    
                     const Buffer& inputBuffer (inputUnit.process (info, channel));
                     const SampleType* const inputSamples = inputBuffer.getArray();
                     const int inputBufferLength = inputBuffer.length();
-
+                    
                     plonk_assert (inputBufferLength == outputBufferLength);
-                                    
-                    for (i = 0; i < inputBufferLength; ++i)
-                        tempBufferSamples[channelBufferPos++] += inputSamples[i];
-                
-                    channelBufferPos = tempBufferStartPos + overlapHop;
+                    
+                    if (data.discardNext)
+                    {
+                        for (i = overlapLength; i < inputBufferLength; ++i)
+                            tempBufferSamples[channelBufferPos++] = inputSamples[i];
+                    }
+                    else
+                    {
+                        for (i = 0; i < overlapHop; ++i)
+                            tempBufferSamples[channelBufferPos++] = inputSamples[i];
+                    }
                 }
                 
                 tempBufferPos = channelBufferPos;
+                tempBufferFill = tempBufferPos;
                 nextInputTimeStamp = inputUnit.getNextTimeStamp (0);
             }
             
-            tempBufferStartOffset = tempBufferPos - outputBufferLength;
-            
-            // accumulate the first part of the temp buffer to the output
-            // leaving the rest there for next time
             tempBufferPos = 0;
             
             for (channel = 0; channel < numChannels; ++channel)
@@ -185,10 +178,37 @@ public:
                 SampleType* const tempBufferSamples = this->tempBuffers.atUnchecked (channel).getArray();
 
                 for (i = 0; i < outputBufferLength; ++i)
-                    outputSamples[i] += tempBufferSamples[channelBufferPos++];
+                    outputSamples[i] = tempBufferSamples[channelBufferPos++];
             }
             
             tempBufferPos = channelBufferPos;
+            
+            plonk_assert (tempBufferFill >= tempBufferPos);
+            
+            // if we have some remaining samples in the buffer
+            // move these to the start of the buffer
+            if (tempBufferFill > tempBufferPos)
+            {
+                int channelBufferFill;
+                
+                for (channel = 0; channel < numChannels; ++channel)
+                {
+                    channelBufferFill = 0;
+                    
+                    SampleType* const tempBufferSamples = this->tempBuffers.atUnchecked (channel).getArray();
+                    
+                    for (i = tempBufferPos; i < tempBufferFill; ++i)
+                        tempBufferSamples[channelBufferFill++] = tempBufferSamples[i];
+                }
+                
+                tempBufferFill -= tempBufferPos;
+                tempBufferPos = tempBufferFill;
+            }
+            else
+            {
+                tempBufferFill = 0;
+                tempBufferPos = 0;
+            }
             
             info.setTimeStamp (infoTimeStamp); // reset for the parent graph
         }
@@ -208,32 +228,33 @@ public:
     }
     
 private:
-    DoubleVariable overlapMix;
+    DoubleVariable overlapSplice;
     BufferArray tempBuffers;
     int tempBufferPos;
-    int tempBufferStartOffset;
+    int tempBufferFill;
     TimeStamp nextInputTimeStamp;
 };
 
 //------------------------------------------------------------------------------
 
-/** Mix down an overlapped processing stream to a continuous one. 
+/** Combines incoming overlapped blocks into a continuous signal.
+ This is done by selecting one of the blocks in the overlapping region rather than mixing (@see OverlapMix).
  
  @par Factory functions:
- - ar (input, overlap=0.5)
+ - ar (input, overlap=0.5, discardNext=false)
  
  @par Inputs:
  - input: (unit, multi) the unit to de-overlap
  - overlap: (doublevariable) the source overlap hop multiplier (1= is no overlap, 0.5= blocks overlap by half their length, 0.25= block overlap by 3/4 of their length)
-
+ - discardNext: (bool) if false newer buffers will have priority in the overlap regions, if true then older buffers will have priority
  
  @ingroup ConverterUnits */
 template<class SampleType>
-class OverlapMixUnit
+class OverlapSpliceUnit
 {
 public:    
-    typedef OverlapMixChannelInternal<SampleType>       OverlapMixInternal;
-    typedef typename OverlapMixInternal::Data           Data;
+    typedef OverlapSpliceChannelInternal<SampleType>    OverlapSpliceInternal;
+    typedef typename OverlapSpliceInternal::Data        Data;
     typedef ChannelBase<SampleType>                     ChannelType;
     typedef ChannelInternal<SampleType,Data>            Internal;
     typedef UnitBase<SampleType>                        UnitType;
@@ -243,7 +264,7 @@ public:
     {        
         const double minOverlap = TypeUtility<double>::getTypeEpsilon();
         
-        return UnitInfo ("OverlapMix", "Mixes down incoming overlapped blocks into a continuous signal.",
+        return UnitInfo ("OverlapSplice", "Combines incoming overlapped blocks into a continuous signal by selecting one of the blocks in the overlapping region.",
                          
                          // output
                          ChannelCount::VariableChannelCount, 
@@ -257,7 +278,8 @@ public:
     
     /**  */
     static UnitType ar (UnitType const& input, 
-                        DoubleVariable const& overlap = Math<DoubleVariable>::get0_5()) throw()
+                        DoubleVariable const& overlap = Math<DoubleVariable>::get0_5(),
+                        const bool discardNext = false) throw()
     {                        
         plonk_assert (overlap.getValue() >= TypeUtility<double>::getTypeEpsilon());
         plonk_assert (overlap.getValue() <= 1.0);
@@ -266,18 +288,18 @@ public:
         inputs.put (IOKey::Generic, input);
         inputs.put (IOKey::OverlapMix, overlap);
         
-        Data data = { -1.0, -1.0 };
+        Data data = { { -1.0, -1.0 }, discardNext };
         
-        return UnitType::template proxiesFromInputs<OverlapMixInternal> (inputs,
-                                                                         data,
-                                                                         BlockSize::noPreference(),
-                                                                         SampleRate::noPreference());
+        return UnitType::template proxiesFromInputs<OverlapSpliceInternal> (inputs,
+                                                                            data,
+                                                                            BlockSize::noPreference(),
+                                                                            SampleRate::noPreference());
     }
     
     
 };
 
-typedef OverlapMixUnit<PLONK_TYPE_DEFAULT> OverlapMix;
+typedef OverlapSpliceUnit<PLONK_TYPE_DEFAULT> OverlapSplice;
 
 
-#endif // PLONK_OVERLAPMIXCHANNEL_H
+#endif // PLONK_OVERLAPSPLICECHANNEL_H

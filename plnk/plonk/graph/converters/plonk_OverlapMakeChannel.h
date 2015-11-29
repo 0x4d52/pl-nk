@@ -162,7 +162,7 @@ public:
             }
             
             // output one buffer
-            if (data.zeroPad == false)
+            if (! data.zeroPad)
             {
                 // filled with overlapping data
                 
@@ -228,6 +228,8 @@ public:
         }
         else
         {
+            // overlapHop is >= outputBufferLength so there's no overlap
+            // just copy the data...
             for (channel = 0; channel < numChannels; ++channel)
             {
                 SampleType* const outputSamples = this->getOutputSamples (channel);
@@ -258,7 +260,7 @@ private:
  
  @par Inputs:
  - input: (unit, multi) the unit to overlap
- - overlap: (doublevariable) the desired overlap (1= is no overlap, 0.5= blocks overlap by half their length)
+ - overlap: (doublevariable) the desired overlap hop multiplier (1= is no overlap, 0.5= blocks overlap by half their length, 0.25= block overlap by 3/4 of their length)
  - zeroPad: (bool) whether the overlapping (latter) part of the buffer is zero filled
 
  

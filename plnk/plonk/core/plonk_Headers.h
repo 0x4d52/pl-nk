@@ -135,6 +135,7 @@
 #include "../graph/converters/plonk_ResampleChannel.h"
 #include "../graph/converters/plonk_OverlapMakeChannel.h"
 #include "../graph/converters/plonk_OverlapMixChannel.h"
+#include "../graph/converters/plonk_OverlapSpliceChannel.h"
 #include "../graph/converters/plonk_TaskChannel.h"
 #include "../graph/converters/plonk_ReblockChannel.h"
 

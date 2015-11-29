@@ -93,12 +93,12 @@ public:
         this->setSampleRate (leftOperand.getSampleRate (channel));
         this->setOverlap (leftOperand.getOverlap (channel));
 
-#ifdef PLONK_DEBUG
-        const UnitType& rightOperand = this->getInputAsUnit (IOKey::RightOperand);
-        plonk_assert (leftOperand.getBlockSize (channel) == rightOperand.getBlockSize (channel));
-        plonk_assert (leftOperand.getSampleRate (channel) == rightOperand.getSampleRate (channel));
-        plonk_assert (leftOperand.getOverlap (channel) == rightOperand.getOverlap (channel));
-#endif
+//#ifdef PLONK_DEBUG
+//        const UnitType& rightOperand = this->getInputAsUnit (IOKey::RightOperand);
+//        plonk_assert (leftOperand.getBlockSize (channel).getValue() == rightOperand.getBlockSize (channel).getValue());
+//        plonk_assert (leftOperand.getSampleRate (channel).getValue() == rightOperand.getSampleRate (channel).getValue());
+//        plonk_assert (leftOperand.getOverlap (channel).getValue() == rightOperand.getOverlap (channel).getValue());
+//#endif
         
         this->initValue (SampleType (0)); // todo: should really calculate this...
     }

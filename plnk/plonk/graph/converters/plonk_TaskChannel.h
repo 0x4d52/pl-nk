@@ -208,7 +208,7 @@ public:
             
             Threading::yield();
                 
-            while (!getShouldExit())
+            while (! getShouldExit())
             {
                 ChannelType ownerChannel (weakOwner.fromWeak());
                 
@@ -379,7 +379,7 @@ public:
         
         TaskBuffer taskBuffer;
         
-        if (!task)
+        if (! task)
         {
             zeroOutput (numChannels);
         
@@ -516,7 +516,6 @@ public:
         // could avoid the resample if we added the function the check if all bs/sr are the same in each channel
         
         Inputs inputs;
-//        inputs.put (IOKey::Generic, ResampleType::ar (input, 1, blockSize, sampleRate));
         inputs.put (IOKey::Generic, input);
         
         Data data = { { -1.0, -1.0 }, 0, numBuffers, priority, true };

@@ -134,7 +134,7 @@ public:
             }
         }
         
-        if (!done)
+        if (! done)
         {
             UnitType& inputUnit (this->getInputAsUnit (IOKey::Generic));
             const Buffer& inputBuffer (inputUnit.process (info, channel));
