@@ -575,7 +575,7 @@ static PLANK_INLINE_LOW void pl_VectorMulAddF_NN11 (float *result, const float* 
 }
 
 static PLANK_INLINE_LOW void pl_VectorMulAddF_NN1N (float *result, const float* input, float a, const float* b, PlankUL N) 
-{ 
+{
     vDSP_vsma (input, 1, &a, b, 1, result, 1, N);
 }
 
