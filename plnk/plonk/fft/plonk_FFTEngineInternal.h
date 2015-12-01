@@ -86,6 +86,10 @@ public:
         return pl_FFTF_HalfLength (this->fft);
     }
     
+    PLONK_INLINE_LOW long lengthLog2() const
+    {
+        return pl_FFTF_LengthLog2 (this->fft);
+    }
     
 private:
     PlankFFTFRef fft;

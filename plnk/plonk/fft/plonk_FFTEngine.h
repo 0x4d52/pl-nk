@@ -128,7 +128,12 @@ public:
     {
         return this->getInternal()->halfLength();
     }
-    
+
+    PLONK_INLINE_LOW long lengthLog2() const
+    {
+        return this->getInternal()->lengthLog2();
+    }
+
 private:
 };
 

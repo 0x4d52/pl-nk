@@ -288,6 +288,11 @@ PlankL pl_FFTF_HalfLength (PlankFFTFRef p)
     return p->halfLength;
 }
 
+PlankL pl_FFTF_LengthLog2 (PlankFFTFRef p)
+{
+    return p->lengthLog2;
+}
+
 float* pl_FFTF_Temp (PlankFFTFRef p)
 {
     return p->buffer;

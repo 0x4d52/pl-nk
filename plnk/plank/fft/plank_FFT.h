@@ -152,6 +152,8 @@ PlankL pl_FFTF_Length (PlankFFTFRef p);
  @return The half FFT size. */
 PlankL pl_FFTF_HalfLength (PlankFFTFRef p);
 
+PlankL pl_FFTF_LengthLog2 (PlankFFTFRef p);
+
 /** Get a pointer to the internal temporary buffer.
  This is an array of floats the size of the FFT. This could 
  be useful as a scratch space to save allocating more memory. Of
