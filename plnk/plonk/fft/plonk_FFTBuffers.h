@@ -127,11 +127,16 @@ public:
         }
     }
     
-    const SampleType* getDivision (const int channel, const int division) const throw()
+    PLONK_INLINE_LOW const SampleType* getBuffer (const int channel) const throw()
     {
         plonk_assert (channel >= 0);
+        return fftBuffers.atUnchecked ((unsigned) channel % (unsigned) fftBuffers.length()).getArray();
+    }
+    
+    PLONK_INLINE_LOW const SampleType* getDivision (const int channel, const int division) const throw()
+    {
         plonk_assert (division >= 0 && division < numDivisions);
-        return fftBuffers.atUnchecked (channel % fftBuffers.length()).getArray() + division * fftEngine.length();
+        return getBuffer (channel) + division * fftEngine.length();
     }
     
     friend class FFTBuffersBase<SampleType>;
@@ -215,6 +220,11 @@ public:
 	}	                            
     
     PLONK_OBJECTARROWOPERATOR(FFTBuffersBase);
+
+    const SampleType* getBuffer (const int channel) const throw()
+    {
+        return this->getInternal()->getBuffer (channel);
+    }
     
     const SampleType* getDivision (const int channel, const int division) const throw()
     {
