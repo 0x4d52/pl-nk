@@ -184,6 +184,21 @@ public:
         NumericalArrayBinaryOp<SampleType,plonk::addop>::calcNN (output, output, temp, length);
     }
     
+    static inline void move (SampleType* dst, const SampleType* src, const UnsignedLong numItems) throw()
+    {
+        NumericalArrayUnaryOp<SampleType, plonk::move>::calc (dst, src, numItems);
+    }
+    
+    static inline void accum (SampleType* dst, const SampleType* src, const UnsignedLong numItems) throw()
+    {
+        NumericalArrayBinaryOp<SampleType, plonk::addop>::calcNN (dst, dst, src, numItems);
+    }
+    
+    static inline void zero (SampleType* dst, const UnsignedLong numItems) throw()
+    {
+        NumericalArray<SampleType>::zeroData (dst, numItems);
+    }
+    
     void process (ProcessInfo& info, const int channel) throw()
     {
         FFTBuffers& irBuffers (this->getInputAsFFTBuffers (IOKey::FFTBuffers));
@@ -232,9 +247,9 @@ public:
             
             if (hop > 0)
             {
-                NumericalArrayUnaryOp<SampleType, plonk::move>::calc (fftAltBuffer0 + position0, inputSamples, hop);
-                NumericalArrayUnaryOp<SampleType, plonk::move>::calc (fftAltBuffer1 + position1, inputSamples, hop);
-                NumericalArrayUnaryOp<SampleType, plonk::move>::calc (outputSamples, fftOverlapBuffer + position0, hop);
+                move (fftAltBuffer0 + position0, inputSamples, hop);
+                move (fftAltBuffer1 + position1, inputSamples, hop);
+                move (outputSamples, fftOverlapBuffer + position0, hop);
 
                 inputSamples  += hop;
                 outputSamples += hop;
@@ -293,9 +308,9 @@ public:
                 SampleType* overlap1 = fftOverlapBuffer + (hop * (1 - fftAltSelect));
                 SampleType* overlap2 = fftOverlapBuffer + (hop * fftAltSelect);
                     
-                NumericalArrayUnaryOp<SampleType, plonk::move>::calc (overlap1, fftTransformBuffer, fftSize);
-                NumericalArrayBinaryOp<SampleType, plonk::addop>::calcNN (overlap2, overlap2, fftTransformBuffer + hop, fftSize);
-                                    
+                move (overlap1, fftTransformBuffer, fftSize);
+                accum (overlap2, fftTransformBuffer + hop, fftSize);
+                
                 if (fftAltSelect != 0)
                 {
                     position0    = 0;
@@ -313,7 +328,7 @@ public:
                 divisionsWritten    = 0;
                 countDown           = hop;
                 
-                NumericalArray<SampleType>::zeroData (fftTempBuffer, fftSize);
+                zero (fftTempBuffer, fftSize);
             }
         }
     }
