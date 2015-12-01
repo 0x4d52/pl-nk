@@ -129,9 +129,9 @@ public:
     
     const SampleType* getDivision (const int channel, const int division) const throw()
     {
-        plonk_assert (channel >= 0 && channel < fftBuffers.length());
+        plonk_assert (channel >= 0);
         plonk_assert (division >= 0 && division < numDivisions);
-        return fftBuffers.atUnchecked (channel).getArray() + division * fftEngine.length();
+        return fftBuffers.atUnchecked (channel % fftBuffers.length()).getArray() + division * fftEngine.length();
     }
     
     friend class FFTBuffersBase<SampleType>;
@@ -240,7 +240,12 @@ public:
     {
         return this->getInternal()->originalLength;
     }
-
+    
+    const int getNumDivisions() const throw()
+    {
+        return this->getInternal()->numDivisions;
+    }
+    
     FFTBuffersBase getChannel (const int channel) const throw()
     {
         return FFTBuffersBase (this->getInternal()->getChannel (channel));
