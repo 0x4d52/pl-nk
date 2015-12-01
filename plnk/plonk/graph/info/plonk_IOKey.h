@@ -71,6 +71,7 @@ public:
         TypeAudioFileReader,
         TypeUnitQueue,
         TypeBufferQueue,
+        TypeFFTBuffers,
         TypeBlockSize,
         TypeSampleRate,
 //        TypeBlockSizes,
@@ -146,6 +147,7 @@ public:
         AudioFileReader,        ///< An AudioFileReader
         UnitQueue,              ///< A unit queue
         BufferQueue,            ///< A buffer queue
+        FFTBuffers,             ///< Some FFT Buffers
 
         AutoDeleteFlag,         ///< To control the auto deletion
         PurgeExpiredUnitsFlag,

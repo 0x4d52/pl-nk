@@ -82,6 +82,7 @@ template<class SampleType>                                                  clas
 template<class SampleType>                                                  class BreakpointsBase;
 template<class SampleType>                                                  class WavetableBase;
 template<class SampleType>                                                  class SignalBase;
+template<class SampleType>                                                  class FFTBuffersBase;
 
 template<class ReturnType,
          class ArgType1 = void, 
@@ -238,6 +239,14 @@ typedef AtomicValue<char*>              AtomicPointer;
 typedef AtomicExtended<char*>           AtomicExtendedPointer;
 typedef AtomicExtended<Dynamic*>        AtomicDynamicPointer;
 
+typedef FFTBuffersBase<Float>                 FloatFFTBuffers;
+typedef FFTBuffersBase<Double>                DoubleFFTBuffers;
+typedef FFTBuffersBase<Short>                 ShortFFTBuffers;
+typedef FFTBuffersBase<Int>                   IntFFTBuffers;
+typedef FFTBuffersBase<Int24>                 Int24FFTBuffers;
+typedef FFTBuffersBase<Long>                  LongFFTBuffers;
+typedef FFTBuffersBase<PLONK_TYPE_DEFAULT>    FFTBuffers;
+
 // fixed types
 typedef Fix<Char,6,2> FixI6F2;
 typedef Fix<Short,8,8> FixI8F8;
@@ -250,6 +259,8 @@ typedef NumericalArray<FixI8F8>     FixI8F8Array;
 typedef NumericalArray<FixI4F12>    FixI4F12Array;
 typedef NumericalArray<FixI16F16>   FixI16F16Array;
 typedef NumericalArray<FixI8F24>    FixI8F24Array;
+
+
 
 
 #endif // PLONK_CONTAINERFORWARDDECLARATIONS_H

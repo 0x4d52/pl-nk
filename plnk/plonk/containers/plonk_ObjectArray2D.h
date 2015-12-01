@@ -462,16 +462,22 @@ public:
 	bool isMatrix() const throw()
 	{
 		const int numRows = this->length();
-		if (numRows < 2) return false;
+		
+        if (numRows < 2)
+            return false;
 		
 		int numColumns = this->atUnchecked (0).length();
-		if (numColumns < 2) return false;
+		
+        if (numColumns < 2)
+            return false;
 		
 		int prevNumColumns = numColumns;
-		for (int row = 1; row < numRows; ++row)
+		
+        for (int row = 1; row < numRows; ++row)
 		{
 			numColumns = this->atUnchecked (row).length();
-			if (numColumns != prevNumColumns)
+			
+            if (numColumns != prevNumColumns)
 				return false;
 			
 			prevNumColumns = numColumns;

@@ -108,6 +108,7 @@
 
 #include "../fft/plonk_FFTEngine.h"
 #include "../fft/plonk_FFTEngineInternal.h"
+#include "../fft/plonk_FFTBuffers.h"
 
 #include "../graph/plonk_GraphForwardDeclarations.h"
 
@@ -201,6 +202,7 @@
 #include "../graph/fft/plonk_FFTChannel.h"
 #include "../graph/fft/plonk_IFFTChannel.h"
 #include "../graph/fft/plonk_ZMulChannel.h"
+#include "../graph/fft/plonk_ConvolveChannel.h"
 
 #include "../hosts/plonk_AudioHostBase.h"
 

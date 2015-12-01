@@ -103,6 +103,7 @@ IOKey::Name IOKey::fromInt (const int value) throw()
         IOKey::AudioFileReader,
         IOKey::UnitQueue,
         IOKey::BufferQueue,
+        IOKey::FFTBuffers,
         IOKey::AutoDeleteFlag,
         IOKey::PurgeExpiredUnitsFlag,
         IOKey::HarmonicCount,
@@ -197,6 +198,7 @@ Text IOKey::getName (const int keyIndex) throw()
         "AudioFileReader",
         "UnitQueue",
         "BufferQueue",
+        "FFTBuffers",
         
         "Auto Delete Flag",
         "Purge Expired Units Flag",
@@ -277,6 +279,7 @@ IOKey::IOType IOKey::getType (const int keyIndex) throw()
         IOKey::TypeAudioFileReader,
         IOKey::TypeUnitQueue,
         IOKey::TypeBufferQueue,
+        IOKey::TypeFFTBuffers,
         
         IOKey::TypeBool,            //"Auto Delete Flag"
         IOKey::TypeBool,            //"Purge Expired Units Flag"
@@ -358,6 +361,7 @@ Text IOKey::getTypeName (const int keyIndex) throw()
         "AudioFileReader",
         "UnitQueue",
         "BufferQueue",
+        "FFTBuffers",
         
         "Bool",             //"Auto Delete Flag"
         "Bool",             //"Purge Expired Units Flag"

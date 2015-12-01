@@ -119,7 +119,7 @@ public:
         
         FloatUnitQueue, DoubleUnitQueue, ShortUnitQueue, CharUnitQueue, IntUnitQueue, Int24UnitQueue, LongUnitQueue,
         FloatBufferQueue, DoubleBufferQueue, ShortBufferQueue, CharBufferQueue, IntBufferQueue, Int24BufferQueue, LongBufferQueue,
-
+        FloatFFTBuffers, //DoubleFFTBuffers, ShortFFTBuffers, CharFFTBuffers, IntFFTBuffers, Int24FFTBuffers, LongFFTBuffers,
         
     // count (??)
         NumTypeCodes
@@ -187,7 +187,8 @@ public:
             "AudioFileReader",
             
             "FloatUnitQueue", "DoubleUnitQueue", "ShortUnitQueue", "CharUnitQueue", "IntUnitQueue", "Int24UnitQueue", "LongUnitQueue",
-            "FloatBufferQueue", "DoublBufferQueue", "ShortBufferQueue", "CharBufferQueue", "IntBufferQueue", "Int24BufferQueue", "LongBufferQueue"
+            "FloatBufferQueue", "DoublBufferQueue", "ShortBufferQueue", "CharBufferQueue", "IntBufferQueue", "Int24BufferQueue", "LongBufferQueue",
+            "FloatFFTBuffers", //"DoubleFFTBuffers", "ShortFFTBuffers", "CharFFTBuffers", "IntFFTBuffers", "Int24FFTBuffers", "LongFFTBuffers"
         };
         
         if ((code >= 0) && (code < TypeCode::NumTypeCodes))
@@ -252,6 +253,8 @@ public:
     static PLONK_INLINE_LOW bool isAudioFileReader (const int code) throw()   { return (code == TypeCode::AudioFileReader); }
     static PLONK_INLINE_LOW bool isUnitQueue (const int code) throw()         { return (code >= TypeCode::FloatUnitQueue) && (code <= TypeCode::LongUnitQueue); }
     static PLONK_INLINE_LOW bool isBufferQueue (const int code) throw()       { return (code >= TypeCode::FloatBufferQueue) && (code <= TypeCode::LongBufferQueue); }
+//    static PLONK_INLINE_LOW bool isFFTBuffers (const int code) throw()        { return (code >= TypeCode::FloatFFTBuffers) && (code <= TypeCode::LongFFTBuffers); }
+    static PLONK_INLINE_LOW bool isFFTBuffers (const int code) throw()        { return (code == TypeCode::FloatFFTBuffers); }
 
     // could replace these later by designing the enum to be bit-mask based
     
@@ -4809,7 +4812,7 @@ public:
     typedef const Int24BufferQueue     TypeName;
     typedef Int24BufferQueue           OriginalType;
     typedef Int24BufferQueue const&    PassType;
-    typedef float               IndexType;
+    typedef float                      IndexType;
     static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::Int24BufferQueue; }
     static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
@@ -4823,7 +4826,7 @@ public:
     typedef LongBufferQueue            TypeName;
     typedef LongBufferQueue            OriginalType;
     typedef LongBufferQueue const&     PassType;
-    typedef float               IndexType;
+    typedef float                      IndexType;
     static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::LongBufferQueue; }
     static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
@@ -4837,14 +4840,180 @@ public:
     typedef const LongBufferQueue      TypeName;
     typedef LongBufferQueue            OriginalType;
     typedef LongBufferQueue const&     PassType;
-    typedef float               IndexType;
+    typedef float                      IndexType;
     static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::LongBufferQueue; }
     static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
 };
 
+template<>
+class TypeUtilityBase<FloatFFTBuffers>
+{
+public:
+    typedef FloatFFTBuffers               TypeName;
+    typedef FloatFFTBuffers               OriginalType;
+    typedef FloatFFTBuffers const&        PassType;
+    typedef float                         IndexType;
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::FloatFFTBuffers; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef int PeakType;
+    typedef double ScaleType;
+};
 
+template<>
+class TypeUtilityBase<const FloatFFTBuffers>
+{
+public:
+    typedef const FloatFFTBuffers         TypeName;
+    typedef FloatFFTBuffers               OriginalType;
+    typedef FloatFFTBuffers const&        PassType;
+    typedef float                         IndexType;
+    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::FloatFFTBuffers; }
+    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef int PeakType;
+    typedef double ScaleType;
+};
+
+//template<>
+//class TypeUtilityBase<DoubleFFTBuffers>
+//{
+//public:
+//    typedef DoubleFFTBuffers              TypeName;
+//    typedef DoubleFFTBuffers              OriginalType;
+//    typedef DoubleFFTBuffers const&       PassType;
+//    typedef double                        IndexType;
+//    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::DoubleFFTBuffers; }
+//    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+//    typedef int PeakType;
+//    typedef double ScaleType;
+//};
+//
+//template<>
+//class TypeUtilityBase<const DoubleFFTBuffers>
+//{
+//public:
+//    typedef const DoubleFFTBuffers        TypeName;
+//    typedef DoubleFFTBuffers              OriginalType;
+//    typedef DoubleFFTBuffers const&       PassType;
+//    typedef double                        IndexType;
+//    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::DoubleFFTBuffers; }
+//    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+//    typedef int PeakType;
+//    typedef double ScaleType;
+//};
+//
+//template<>
+//class TypeUtilityBase<IntFFTBuffers>
+//{
+//public:
+//    typedef IntFFTBuffers             TypeName;
+//    typedef IntFFTBuffers             OriginalType;
+//    typedef IntFFTBuffers const&      PassType;
+//    typedef float                     IndexType;
+//    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::IntFFTBuffers; }
+//    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+//    typedef int PeakType;
+//    typedef double ScaleType;
+//};
+//
+//template<>
+//class TypeUtilityBase<const IntFFTBuffers>
+//{
+//public:
+//    typedef const IntFFTBuffers       TypeName;
+//    typedef IntFFTBuffers             OriginalType;
+//    typedef IntFFTBuffers const&      PassType;
+//    typedef float                     IndexType;
+//    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::IntFFTBuffers; }
+//    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+//    typedef int PeakType;
+//    typedef double ScaleType;
+//};
+//
+//template<>
+//class TypeUtilityBase<ShortFFTBuffers>
+//{
+//public:
+//    typedef ShortFFTBuffers           TypeName;
+//    typedef ShortFFTBuffers           OriginalType;
+//    typedef ShortFFTBuffers const&    PassType;
+//    typedef float                     IndexType;
+//    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::ShortFFTBuffers; }
+//    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+//    typedef int PeakType;
+//    typedef double ScaleType;
+//};
+//
+//template<>
+//class TypeUtilityBase<const ShortFFTBuffers>
+//{
+//public:
+//    typedef const ShortFFTBuffers     TypeName;
+//    typedef ShortFFTBuffers           OriginalType;
+//    typedef ShortFFTBuffers const&    PassType;
+//    typedef float                     IndexType;
+//    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::ShortFFTBuffers; }
+//    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+//    typedef int PeakType;
+//    typedef double ScaleType;
+//};
+//
+//template<>
+//class TypeUtilityBase<Int24FFTBuffers>
+//{
+//public:
+//    typedef Int24FFTBuffers           TypeName;
+//    typedef Int24FFTBuffers           OriginalType;
+//    typedef Int24FFTBuffers const&    PassType;
+//    typedef float                     IndexType;
+//    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::Int24FFTBuffers; }
+//    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+//    typedef int PeakType;
+//    typedef double ScaleType;
+//};
+//
+//template<>
+//class TypeUtilityBase<const Int24FFTBuffers>
+//{
+//public:
+//    typedef const Int24FFTBuffers     TypeName;
+//    typedef Int24FFTBuffers           OriginalType;
+//    typedef Int24FFTBuffers const&    PassType;
+//    typedef float                     IndexType;
+//    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::Int24FFTBuffers; }
+//    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+//    typedef int PeakType;
+//    typedef double ScaleType;
+//};
+//
+//template<>
+//class TypeUtilityBase<LongFFTBuffers>
+//{
+//public:
+//    typedef LongFFTBuffers            TypeName;
+//    typedef LongFFTBuffers            OriginalType;
+//    typedef LongFFTBuffers const&     PassType;
+//    typedef float                     IndexType;
+//    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::LongFFTBuffers; }
+//    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+//    typedef int PeakType;
+//    typedef double ScaleType;
+//};
+//
+//template<>
+//class TypeUtilityBase<const LongFFTBuffers>
+//{
+//public:
+//    typedef const LongFFTBuffers      TypeName;
+//    typedef LongFFTBuffers            OriginalType;
+//    typedef LongFFTBuffers const&     PassType;
+//    typedef float                     IndexType;
+//    static PLONK_INLINE_LOW int  getTypeCode() { return TypeCode::LongFFTBuffers; }
+//    static PLONK_INLINE_LOW const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+//    typedef int PeakType;
+//    typedef double ScaleType;
+//};
 
 //------------------------------------------------------------------------------
 
@@ -4883,6 +5052,7 @@ public:
     static PLONK_INLINE_LOW bool isAudioFileReader() throw()   { return TypeCode::isAudioFileReader (TypeUtility<Type>::getTypeCode()); }
     static PLONK_INLINE_LOW bool isUnitQueue() throw()         { return TypeCode::isUnitQueue (TypeUtility<Type>::getTypeCode()); }
     static PLONK_INLINE_LOW bool isBufferQueue() throw()       { return TypeCode::isBufferQueue (TypeUtility<Type>::getTypeCode()); }
+    static PLONK_INLINE_LOW bool isFFTBuffers() throw()        { return TypeCode::isFFTBuffers (TypeUtility<Type>::getTypeCode()); }
     
     static PLONK_INLINE_LOW bool isFloatType() throw()         { return TypeCode::isFloatType (TypeUtility<Type>::getTypeCode()); }
     static PLONK_INLINE_LOW bool isDoubleType() throw()        { return TypeCode::isDoubleType (TypeUtility<Type>::getTypeCode()); }

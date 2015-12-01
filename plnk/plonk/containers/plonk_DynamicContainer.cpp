@@ -123,31 +123,34 @@ int Dynamic::getNumChannels() const throw()
         case TypeCode::FloatSignal:         return reinterpret_cast<const FloatSignal&>         (this->getItem()).getNumChannels();
         case TypeCode::FloatUnitVariable:   return reinterpret_cast<const FloatUnitVariable&>   (this->getItem()).getValue().getNumChannels();
             
-        case TypeCode::ShortUnit:       return reinterpret_cast<const ShortUnit&>    (this->getItem()).getNumChannels();
-        case TypeCode::ShortUnits:      return reinterpret_cast<const ShortUnits&>   (this->getItem()).numColumns();
-        case TypeCode::ShortBusses:     return reinterpret_cast<const ShortBusses&>  (this->getItem()).length();  
-        case TypeCode::ShortSignal:     return reinterpret_cast<const ShortSignal&>  (this->getItem()).getNumChannels();  
+        case TypeCode::ShortUnit:       return reinterpret_cast<const ShortUnit&>       (this->getItem()).getNumChannels();
+        case TypeCode::ShortUnits:      return reinterpret_cast<const ShortUnits&>      (this->getItem()).numColumns();
+        case TypeCode::ShortBusses:     return reinterpret_cast<const ShortBusses&>     (this->getItem()).length();
+        case TypeCode::ShortSignal:     return reinterpret_cast<const ShortSignal&>     (this->getItem()).getNumChannels();
 
-        case TypeCode::DoubleUnit:      return reinterpret_cast<const DoubleUnit&>   (this->getItem()).getNumChannels();
-        case TypeCode::DoubleUnits:     return reinterpret_cast<const DoubleUnits&>  (this->getItem()).numColumns();
-        case TypeCode::DoubleBusses:    return reinterpret_cast<const DoubleBusses&> (this->getItem()).length();  
-        case TypeCode::DoubleSignal:    return reinterpret_cast<const DoubleSignal&> (this->getItem()).getNumChannels();  
+        case TypeCode::DoubleUnit:      return reinterpret_cast<const DoubleUnit&>      (this->getItem()).getNumChannels();
+        case TypeCode::DoubleUnits:     return reinterpret_cast<const DoubleUnits&>     (this->getItem()).numColumns();
+        case TypeCode::DoubleBusses:    return reinterpret_cast<const DoubleBusses&>    (this->getItem()).length();
+        case TypeCode::DoubleSignal:    return reinterpret_cast<const DoubleSignal&>    (this->getItem()).getNumChannels();
 
-        case TypeCode::IntUnit:         return reinterpret_cast<const IntUnit&>      (this->getItem()).getNumChannels();
-        case TypeCode::IntUnits:        return reinterpret_cast<const IntUnits&>     (this->getItem()).numColumns();
-        case TypeCode::IntBusses:       return reinterpret_cast<const IntBusses&>    (this->getItem()).length();  
-        case TypeCode::IntSignal:       return reinterpret_cast<const IntSignal&>    (this->getItem()).getNumChannels();  
+        case TypeCode::IntUnit:         return reinterpret_cast<const IntUnit&>         (this->getItem()).getNumChannels();
+        case TypeCode::IntUnits:        return reinterpret_cast<const IntUnits&>        (this->getItem()).numColumns();
+        case TypeCode::IntBusses:       return reinterpret_cast<const IntBusses&>       (this->getItem()).length();
+        case TypeCode::IntSignal:       return reinterpret_cast<const IntSignal&>       (this->getItem()).getNumChannels();
 
-        case TypeCode::Int24Unit:       return reinterpret_cast<const Int24Unit&>    (this->getItem()).getNumChannels();
-        case TypeCode::Int24Units:      return reinterpret_cast<const Int24Units&>   (this->getItem()).numColumns();
-        case TypeCode::Int24Busses:     return reinterpret_cast<const Int24Busses&>  (this->getItem()).length();              
-        case TypeCode::Int24Signal:     return reinterpret_cast<const Int24Signal&>  (this->getItem()).getNumChannels();  
+        case TypeCode::Int24Unit:       return reinterpret_cast<const Int24Unit&>       (this->getItem()).getNumChannels();
+        case TypeCode::Int24Units:      return reinterpret_cast<const Int24Units&>      (this->getItem()).numColumns();
+        case TypeCode::Int24Busses:     return reinterpret_cast<const Int24Busses&>     (this->getItem()).length();
+        case TypeCode::Int24Signal:     return reinterpret_cast<const Int24Signal&>     (this->getItem()).getNumChannels();
 
-        case TypeCode::LongUnit:        return reinterpret_cast<const LongUnit&>     (this->getItem()).getNumChannels();
-        case TypeCode::LongUnits:       return reinterpret_cast<const LongUnits&>    (this->getItem()).numColumns();
-        case TypeCode::LongBusses:      return reinterpret_cast<const LongBusses&>   (this->getItem()).length();  
-        case TypeCode::LongSignal:      return reinterpret_cast<const LongSignal&>   (this->getItem()).getNumChannels();  
-
+        case TypeCode::LongUnit:        return reinterpret_cast<const LongUnit&>        (this->getItem()).getNumChannels();
+        case TypeCode::LongUnits:       return reinterpret_cast<const LongUnits&>       (this->getItem()).numColumns();
+        case TypeCode::LongBusses:      return reinterpret_cast<const LongBusses&>      (this->getItem()).length();
+        case TypeCode::LongSignal:      return reinterpret_cast<const LongSignal&>      (this->getItem()).getNumChannels();
+            
+        case TypeCode::FloatFFTBuffers: return reinterpret_cast<const FloatFFTBuffers&> (this->getItem()).getNumChannels();
+            
+            
         // all singular...
         case TypeCode::Float:
         case TypeCode::Double:
@@ -264,6 +267,8 @@ Dynamic Dynamic::getChannel (const int index) throw()
         case TypeCode::LongUnits:       return LongUnits (reinterpret_cast<LongUnits&> (this->getItem()).columnWrapAt (index));
         case TypeCode::LongBusses:      return LongBusses (reinterpret_cast<LongBusses&> (this->getItem()).wrapAt (index));
 
+        case TypeCode::FloatFFTBuffers: return FloatFFTBuffers (reinterpret_cast<FloatFFTBuffers&> (this->getItem()).getChannel (index));
+            
         default:
             plonk_assertfalse;
             return Dynamic();

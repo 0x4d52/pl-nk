@@ -67,6 +67,7 @@ public:
     typedef LockFreeQueue<UnitType>                 QueueType;
     typedef QueueBufferBase<SampleType>             QueueBufferType;
     typedef LockFreeQueue<QueueBufferType>          BufferQueueType;
+    typedef FFTBuffersBase<SampleType>              FFTBuffersType;
 
     ChannelInternalBase (Inputs const& inputDictionary, 
                          BlockSize const& blockSize, 
@@ -100,6 +101,7 @@ public:
     PLONK_INLINE_LOW const AudioFileReader& getInputAsAudioFileReader (const int key) const throw()   { return this->template getInputAs<AudioFileReader> (key); }
     PLONK_INLINE_LOW const QueueType& getInputAsUnitQueue (const int key) const throw()               { return this->template getInputAs<QueueType> (key); }
     PLONK_INLINE_LOW const BufferQueueType& getInputAsBufferQueue (const int key) const throw()       { return this->template getInputAs<BufferQueueType> (key); }
+    PLONK_INLINE_LOW const FFTBuffersType& getInputAsFFTBuffers (const int key) const throw()         { return this->template getInputAs<FFTBuffersType> (key); }
 
     PLONK_INLINE_LOW UnitType& getInputAsUnit (const int key) throw()                                 { return this->template getInputAs<UnitType> (key); }
     PLONK_INLINE_LOW UnitsType& getInputAsUnits (const int key) throw()                               { return this->template getInputAs<UnitsType> (key); }
@@ -115,6 +117,7 @@ public:
     PLONK_INLINE_LOW AudioFileReader& getInputAsAudioFileReader (const int key) throw()               { return this->template getInputAs<AudioFileReader> (key); }
     PLONK_INLINE_LOW QueueType& getInputAsUnitQueue (const int key) throw()                           { return this->template getInputAs<QueueType> (key); }
     PLONK_INLINE_LOW BufferQueueType& getInputAsBufferQueue (const int key) throw()                   { return this->template getInputAs<BufferQueueType> (key); }
+    PLONK_INLINE_LOW FFTBuffersType& getInputAsFFTBuffers (const int key) throw()                     { return this->template getInputAs<FFTBuffersType> (key); }
 
     PLONK_INLINE_LOW const Buffer& getOutputBuffer() const throw()                                    { return outputBuffer; }
     PLONK_INLINE_LOW Buffer& getOutputBuffer() throw()                                                { return outputBuffer; }
@@ -173,9 +176,9 @@ public:
     }
     
     PLONK_INLINE_LOW const Text getOutputTypeName() const throw()         { return TypeUtility<SampleType>::getTypeName(); }
-    virtual const Text getInputTypeName() const throw()         { return TypeUtility<SampleType>::getTypeName(); }
+    virtual const Text getInputTypeName() const throw()                   { return TypeUtility<SampleType>::getTypeName(); }
     PLONK_INLINE_LOW int getOutputTypeCode() const throw()                { return TypeUtility<SampleType>::getTypeCode(); }
-    virtual int getInputTypeCode() const throw()                { return TypeUtility<SampleType>::getTypeCode(); }
+    virtual int getInputTypeCode() const throw()                          { return TypeUtility<SampleType>::getTypeCode(); }
     
     void changed (IntVariable::Sender const& source, Text const& message, Dynamic const& payload) throw()
     {
