@@ -639,6 +639,53 @@ PLONK_NUMERICALARRAYBINARYOPS_DEFINE(F);
 PLONK_NUMERICALARRAYBINARYOPS_DEFINE(D);
 
 
+template<class NumericalType>
+class NumericalArrayMulAddBase
+{
+public:
+    static PLONK_INLINE_LOW void calcNNN (NumericalType* dst, const NumericalType* input, const NumericalType* mul, const NumericalType* add, const UnsignedLong numItems) throw()
+    {
+        for (UnsignedLong i = 0; i < numItems; ++i)
+            dst[i] = input[i] * mul[i] + add[i];
+    }
+
+    static PLONK_INLINE_LOW void calcNN1 (NumericalType* dst, const NumericalType* input, const NumericalType* mul, const NumericalType add, const UnsignedLong numItems) throw()
+    {
+        for (UnsignedLong i = 0; i < numItems; ++i)
+            dst[i] = input[i] * mul[i] + add;
+    }
+    
+    static PLONK_INLINE_LOW void calcN1N (NumericalType* dst, const NumericalType* input, const NumericalType mul, const NumericalType* add, const UnsignedLong numItems) throw()
+    {
+        for (UnsignedLong i = 0; i < numItems; ++i)
+            dst[i] = input[i] * mul + add[i];
+    }
+};
+
+template<class NumericalType>
+class NumericalArrayMulAdd : public NumericalArrayMulAddBase<NumericalType>
+{
+};
+
+template<>
+class NumericalArrayMulAdd<float>
+{
+public:
+    static PLONK_INLINE_LOW void calcNNN (float* dst, const float* input, const float* mul, const float* add, const UnsignedLong numItems) throw()
+    {
+        pl_VectorMulAddF_NNNN (dst, input, mul, add, numItems);
+    }
+    
+    static PLONK_INLINE_LOW void calcNN1 (float* dst, const float* input, const float* mul, const float add, const UnsignedLong numItems) throw()
+    {
+        pl_VectorMulAddF_NNN1 (dst, input, mul, add, numItems);
+    }
+    
+    static PLONK_INLINE_LOW void calcN1N (float* dst, const float* input, const float mul, const float* add, const UnsignedLong numItems) throw()
+    {
+        pl_VectorMulAddF_NN1N (dst, input, mul, add, numItems);
+    }
+};
 
 
 //------------------------------------------------------------------------------
