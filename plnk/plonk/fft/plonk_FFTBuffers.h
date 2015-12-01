@@ -61,7 +61,7 @@ public:
     typedef FFTEngineBase<SampleType>       FFTEngineType;
         
     FFTBuffersInternal (FFTEngineType const& fftEngineToUse, BuffersType const& sourceBuffers) throw()
-    :   fftSize ((int) fftEngineToUse.length()),
+    :   fftEngine (fftEngineToUse),
         originalLength (0),
         numDivisions (0)
     {
@@ -70,10 +70,9 @@ public:
         if (numChannels < 1)
             return;
         
-        FFTEngineType fftEngine (fftEngineToUse);
-        
         plonk_assert (numChannels == 1 || sourceBuffers.isMatrix());
         
+        const int fftSize = (int) fftEngine.length();
         const int fftSizeHalved = (int) fftEngine.halfLength();
         
         originalLength = sourceBuffers.atUnchecked (0).length();
@@ -117,35 +116,33 @@ public:
         
         if (numChannels == 0)
         {
-            return new FFTBuffersInternal (FFTEngineType(), Buffers());
+            return new FFTBuffersInternal (fftEngine, Buffers());
         }
         else
         {
             return new FFTBuffersInternal (fftBuffers.atUnchecked (channel % numChannels),
-                                           fftSize,
+                                           fftEngine,
                                            originalLength,
                                            numDivisions);
         }
     }
-
     
     const SampleType* getDivision (const int channel, const int division) const throw()
     {
         plonk_assert (channel >= 0 && channel < fftBuffers.length());
         plonk_assert (division >= 0 && division < numDivisions);
-        return fftBuffers.atUnchecked (channel).getArray() + division * fftSize;
+        return fftBuffers.atUnchecked (channel).getArray() + division * fftEngine.length();
     }
     
-    const int fftLength() const throw()             { return fftSize; }
-    const int getNumChannels() const throw()        { return fftBuffers.length(); }
-
+    friend class FFTBuffersBase<SampleType>;
+    
 private:
     FFTBuffersInternal (BufferType const& singleFFTBuffer,
-                        const int fftSizeToUse,
+                        FFTEngineType const& fftEngineToUse,
                         const int originalLengthToUse,
                         const int numDivisionsToUse) throw()
     :   fftBuffers (singleFFTBuffer),
-        fftSize (fftSizeToUse),
+        fftEngine (fftEngineToUse),
         originalLength (originalLengthToUse),
         numDivisions (numDivisionsToUse)
     {
@@ -153,7 +150,7 @@ private:
 
     
     BuffersType fftBuffers;
-    int fftSize;
+    FFTEngineType fftEngine;
     int originalLength;
     int numDivisions;
 };
@@ -224,14 +221,24 @@ public:
         return this->getInternal()->getDivision (channel, division);
     }
     
-    const int fftLength() const throw()
+    const FFTEngineType& getFFTEngine() const throw()
     {
-        return this->getInternal()->fftLength();
+        return this->getInternal()->fftEngine;
+    }
+
+    FFTEngineType& getFFTEngine() throw()
+    {
+        return this->getInternal()->fftEngine;
     }
     
     const int getNumChannels() const throw()
     {
-        return this->getInternal()->getNumChannels();
+        return this->getInternal()->fftBuffers.length();
+    }
+    
+    const int getOriginalLength() const throw()
+    {
+        return this->getInternal()->originalLength;
     }
 
     FFTBuffersBase getChannel (const int channel) const throw()

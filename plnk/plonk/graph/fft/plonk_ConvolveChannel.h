@@ -59,13 +59,30 @@ public:
     typedef InputDictionary                                     Inputs;
     typedef NumericalArray<SampleType>                          Buffer;
     typedef FFTEngineBase<SampleType>                           FFTEngineType;
-        
+    
+    enum InternalBuffers
+    {
+        FFTBuffer0,
+        FFTBuffer1,
+        FFTBuffer2,
+        FFTBuffer3,
+        InputBuffer
+    };
+    
     ConvolveChannelInternal (Inputs const& inputs,
                              Data const& data,
                              BlockSize const& blockSize,
                              SampleRate const& sampleRate) throw()
     :   Internal (inputs, data, blockSize, sampleRate)
     {
+        const FFTBuffers& irBuffers (this->getInputAsFFTBuffers (IOKey::FFTBuffers));
+        const FFTEngineType& fftEngine (irBuffers.getFFTEngine());
+        const int fftSize = fftEngine.length();
+        
+        for (int i = 0; i < 4; ++i)
+            buffers.add (Buffer::withSize (fftSize));
+        
+        buffers.add (Buffer::withSize (irBuffers.getOriginalLength()));
     }
     
     Text getName() const throw()
@@ -114,6 +131,7 @@ public:
     }
     
 private:
+    ObjectArray<Buffer> buffers;
 };
 
 
