@@ -157,9 +157,9 @@ public:
         buffers.atUnchecked (FFTTempBuffer).zero();
     }
     
-    static inline void complexMultiplyAccumulate (const SampleType* left, const SampleType* right,
-                                                  SampleType* output, SampleType* temp,
-                                                  const int length, const int halfLength) throw()
+    static inline void complexMultiplyAccumulate (const SampleType* const left, const SampleType* const right,
+                                                  SampleType* const output, SampleType* const temp,
+                                                  const UnsignedLong length, const UnsignedLong halfLength) throw()
     {
         const SampleType* const leftRealSamples   = left;
         const SampleType* const rightRealSamples  = right;
@@ -184,17 +184,17 @@ public:
         NumericalArrayBinaryOp<SampleType,plonk::addop>::calcNN (output, output, temp, length);
     }
     
-    static inline void move (SampleType* dst, const SampleType* src, const UnsignedLong numItems) throw()
+    static inline void move (SampleType* const dst, const SampleType* const src, const UnsignedLong numItems) throw()
     {
         NumericalArrayUnaryOp<SampleType, plonk::move>::calc (dst, src, numItems);
     }
     
-    static inline void accum (SampleType* dst, const SampleType* src, const UnsignedLong numItems) throw()
+    static inline void accumulate (SampleType* const dst, const SampleType* const src, const UnsignedLong numItems) throw()
     {
         NumericalArrayBinaryOp<SampleType, plonk::addop>::calcNN (dst, dst, src, numItems);
     }
     
-    static inline void zero (SampleType* dst, const UnsignedLong numItems) throw()
+    static inline void zero (SampleType* const dst, const UnsignedLong numItems) throw()
     {
         NumericalArray<SampleType>::zeroData (dst, numItems);
     }
@@ -204,15 +204,15 @@ public:
         FFTBuffers& irBuffers (this->getInputAsFFTBuffers (IOKey::FFTBuffers));
         FFTEngineType& fftEngine (irBuffers.getFFTEngine());
         
-        const int fftSize = fftEngine.length();
-        const int fftSizeHalved = fftEngine.halfLength();
+        const UnsignedLong fftSize = (UnsignedLong) fftEngine.length();
+        const UnsignedLong fftSizeHalved = (UnsignedLong) fftEngine.halfLength();
         
         UnitType& inputUnit (this->getInputAsUnit (IOKey::Generic));
         const Buffer& inputBuffer (inputUnit.process (info, channel));
         const SampleType* inputSamples = inputBuffer.getArray();
         
         SampleType* outputSamples = this->getOutputSamples();
-        const int outputBufferLength = this->getOutputBuffer().length();
+        const UnsignedLong outputBufferLength = (UnsignedLong) this->getOutputBuffer().length();
         
         plonk_assert (outputBufferLength == inputBuffer.length());
 
@@ -309,7 +309,7 @@ public:
                 SampleType* overlap2 = fftOverlapBuffer + (hop * fftAltSelect);
                     
                 move (overlap1, fftTransformBuffer, fftSize);
-                accum (overlap2, fftTransformBuffer + hop, fftSize);
+                accumulate (overlap2, fftTransformBuffer + hop, fftSize);
                 
                 if (fftAltSelect != 0)
                 {
@@ -351,6 +351,14 @@ private:
 
 /** Convolve Unit.
  
+ @par Factory functions:
+ - ar (input, fftBuffers)
+ 
+ @par Inputs:
+ - input: (unit, multi) the unit to convolve
+ - fftBuffers: (fft-buffers) the impulse response
+
+ 
  @ingroup FFTUnits */
 template<class SampleType>
 class ConvolveUnit
@@ -361,19 +369,20 @@ public:
     typedef UnitBase<SampleType>                    UnitType;
     typedef InputDictionary                         Inputs;
     
-//    static PLONK_INLINE_LOW UnitInfos getInfo() throw()
-//    {
-//        return UnitInfo ("Convolve", "Convolve with an impulse response.",
-//                         
-//                         // output
-//                         ChannelCount::VariableChannelCount,
-//                         IOKey::FFTPacked,          Measure::FFTPacked,          IOInfo::NoDefault,  IOLimit::None,
-//                         IOKey::End,
-//
-//                         // inputs
-//                         IOKey::Generic,            Measure::None,
-//                         IOKey::End);
-//    }
+    static PLONK_INLINE_LOW UnitInfos getInfo() throw()
+    {
+        return UnitInfo ("Convolve", "Convolve with an impulse response.",
+                         
+                         // output
+                         ChannelCount::VariableChannelCount,
+                         IOKey::Generic,            Measure::None,      0.0,            IOLimit::None,
+                         IOKey::End,
+
+                         // inputs
+                         IOKey::Generic,            Measure::None,
+                         IOKey::FFTBuffers,         Measure::FFTPacked,
+                         IOKey::End);
+    }
     
     static PLONK_INLINE_LOW UnitType ar (UnitType const& input, FFTBuffers const& fftBuffers) throw()
     {

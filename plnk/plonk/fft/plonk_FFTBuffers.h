@@ -59,6 +59,7 @@ public:
     typedef NumericalArray<SampleType>      BufferType;
     typedef NumericalArray2D<SampleType>    BuffersType;
     typedef FFTEngineBase<SampleType>       FFTEngineType;
+    typedef SignalBase<SampleType>          SignalType;
         
     FFTBuffersInternal (FFTEngineType const& fftEngineToUse, BuffersType const& sourceBuffers) throw()
     :   fftEngine (fftEngineToUse),
@@ -109,6 +110,79 @@ public:
             fftBuffers.add (fftBuffer);
         }
     }
+    
+    FFTBuffersInternal (FFTEngineType const& fftEngineToUse, SignalType const& sourceSignal) throw()
+    :   fftEngine (fftEngineToUse),
+        originalLength (0),
+        numDivisions (0)
+    {
+        const int numChannels = sourceSignal.getNumChannels();
+        
+        if (numChannels < 1)
+            return;
+        
+        const int fftSize = (int) fftEngine.length();
+        const int fftSizeHalved = (int) fftEngine.halfLength();
+        
+        originalLength = sourceSignal.getNumFrames();
+        numDivisions = originalLength / fftSizeHalved;
+        
+        if (originalLength % fftSizeHalved != 0)
+            ++numDivisions;
+        
+        BufferType tempBuffer = Buffer::withSize (fftSize);
+        SampleType* const tempSamples = tempBuffer.getArray();
+        
+        for (int channel = 0; channel < numChannels; ++channel)
+        {
+            BufferType fftBuffer = BufferType::withSize (numDivisions * fftSize);
+            SampleType* fftSamples = fftBuffer.getArray();
+            const SampleType* sourceBuffer = sourceSignal.getSamples (channel);
+            const int frameStride = sourceSignal.getFrameStride();
+            int sourceRemaining = originalLength;
+            
+            if (frameStride == 1)
+            {
+                for (int division = 0; division < numDivisions; ++division)
+                {
+                    const int dataLength = plonk::min (sourceRemaining, fftSizeHalved);
+                    const int zeroLength = fftSize - dataLength;
+                    
+                    BufferType::copyData (tempSamples, sourceBuffer, dataLength);    // copy
+                    BufferType::zeroData (tempSamples + dataLength, zeroLength);     // zero pad
+                    
+                    fftEngine.forward (fftSamples, tempSamples);
+                    
+                    fftSamples      += fftSize;
+                    sourceBuffer    += fftSizeHalved;
+                    sourceRemaining -= fftSizeHalved;
+                }
+            }
+            else // signal is interleaved
+            {
+                for (int division = 0; division < numDivisions; ++division)
+                {
+                    const int dataLength = plonk::min (sourceRemaining, fftSizeHalved);
+                    const int zeroLength = fftSize - dataLength;
+                    
+                    for (int sample = 0; sample < dataLength; ++sample)
+                    {
+                        tempSamples[sample] = *sourceBuffer;
+                        sourceBuffer += frameStride;
+                    }
+                    
+                    BufferType::zeroData (tempSamples + dataLength, zeroLength);
+                    fftEngine.forward (fftSamples, tempSamples);
+
+                    fftSamples      += fftSize;
+                    sourceRemaining -= fftSizeHalved;
+                }
+            }
+            
+            fftBuffers.add (fftBuffer);
+        }
+    }
+
     
     FFTBuffersInternal* getChannel (const int channel) const throw()
     {
@@ -162,7 +236,10 @@ private:
 
 //------------------------------------------------------------------------------
 
-/** @ingroup PlonkContainerClasses */
+/** Convert buffers or signals into the frequency domain.
+ The original time-domain samples are divided into segments and transformed
+ into a series of separate FFTs using an FFTEgine with a specific FFT size.
+ @ingroup PlonkContainerClasses */
 template<class SampleType>
 class FFTBuffersBase : public SmartPointerContainer< FFTBuffersInternal<SampleType> >
 {
@@ -174,12 +251,27 @@ public:
     typedef NumericalArray<SampleType>              BufferType;
     typedef NumericalArray2D<SampleType>            BuffersType;
     typedef FFTEngineBase<SampleType>               FFTEngineType;
+    typedef SignalBase<SampleType>                  SignalType;
 
+    FFTBuffersBase() throw()
+    :	Base (new Internal (FFTEngine(), BuffersType()))
+    {
+    }
     
-    FFTBuffersBase (FFTEngineType const& fftEngine = FFTEngineType(), BuffersType const& sourceBuffers = BuffersType()) throw()
+    FFTBuffersBase (FFTEngineType const& fftEngine, BufferType const& sourceBuffer) throw()
+    :	Base (new Internal (fftEngine, BuffersType (sourceBuffer)))
+    {
+    }
+    
+    FFTBuffersBase (FFTEngineType const& fftEngine, BuffersType const& sourceBuffers) throw()
 	:	Base (new Internal (fftEngine, sourceBuffers))
 	{
 	}
+    
+    FFTBuffersBase (FFTEngineType const& fftEngine, SignalType const& sourceSignal) throw()
+    :	Base (new Internal (fftEngine, sourceSignal))
+    {
+    }
 	
     explicit FFTBuffersBase (Internal* internalToUse) throw()
 	:	Base (internalToUse)
