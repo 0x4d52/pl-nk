@@ -48,7 +48,6 @@ static RNG& getConvolveRNG()
     return rgn;
 }
 
-
 /** Convolve channel. */
 template<class SampleType>
 class ConvolveChannelInternal
@@ -68,12 +67,7 @@ public:
     
     enum InternalBuffers
     {
-        FFTAltBuffer0,
-        FFTAltBuffer1,
-        FFTTransformBuffer,
-        FFTOverlapBuffer,
-        FFTTempBuffer,
-        FFTCalcBuffer,
+        ProcessBuffers,
         InputBuffer
     };
     
@@ -96,14 +90,18 @@ public:
         const FFTEngineType& fftEngine (irBuffers.getFFTEngine());
         const int fftSize = fftEngine.length();
         const int fftSize2 = fftSize * 2;
-        
-        buffers.add (Buffer::withSize (fftSize2));
-        buffers.add (Buffer::withSize (fftSize2));
-        buffers.add (Buffer::withSize (fftSize2));
-        buffers.add (Buffer::withSize (fftSize2));
-        buffers.add (Buffer::withSize (fftSize2));
-        buffers.add (Buffer::withSize (fftSize2));
 
+        Buffer processBuffers = Buffer::withSize (fftSize2 * 6);
+        SampleType* const processBuffersBase = processBuffers.getArray();
+        
+        fftAltBuffer0      = processBuffersBase + fftSize2 * 0;
+        fftAltBuffer1      = processBuffersBase + fftSize2 * 1;
+        fftTransformBuffer = processBuffersBase + fftSize2 * 2;
+        fftOverlapBuffer   = processBuffersBase + fftSize2 * 3;
+        fftTempBuffer      = processBuffersBase + fftSize2 * 4;
+        fftCalcBuffer      = processBuffersBase + fftSize2 * 5;
+    
+        buffers.add (processBuffers);
         buffers.add (Buffer::withSize (irBuffers.getOriginalLength() * 2));
     }
     
@@ -150,11 +148,13 @@ public:
         divisionsPrevious   = 0;
         divisionsRead       = 1;
 
-        buffers.atUnchecked (FFTAltBuffer0).zero();
-        buffers.atUnchecked (FFTAltBuffer1).zero();
-        buffers.atUnchecked (FFTTransformBuffer).zero();
-        buffers.atUnchecked (FFTOverlapBuffer).zero();
-        buffers.atUnchecked (FFTTempBuffer).zero();
+        const UnsignedLong fftSize = (UnsignedLong) fftEngine.length();
+
+        zero (fftAltBuffer0, fftSize);
+        zero (fftAltBuffer1, fftSize);
+        zero (fftTransformBuffer, fftSize);
+        zero (fftOverlapBuffer, fftSize);
+        zero (fftTempBuffer, fftSize);
     }
     
     static inline void complexMultiplyAccumulate (const SampleType* const left, const SampleType* const right,
@@ -217,12 +217,6 @@ public:
         plonk_assert (outputBufferLength == inputBuffer.length());
 
         SampleType* const inputBufferBase    = buffers.atUnchecked (InputBuffer).getArray();
-        SampleType* const fftTransformBuffer = buffers.atUnchecked (FFTTransformBuffer).getArray();
-        SampleType* const fftOverlapBuffer   = buffers.atUnchecked (FFTOverlapBuffer).getArray();
-        SampleType* const fftTempBuffer      = buffers.atUnchecked (FFTTempBuffer).getArray();
-        SampleType* const fftCalcBuffer      = buffers.atUnchecked (FFTCalcBuffer).getArray();
-        SampleType* const fftAltBuffer0      = buffers.atUnchecked (FFTAltBuffer0).getArray();
-        SampleType* const fftAltBuffer1      = buffers.atUnchecked (FFTAltBuffer1).getArray();
         SampleType* const fftAltBuffers[]    = { fftAltBuffer0, fftAltBuffer1 };
         
         int samplesRemaining = outputBufferLength;
@@ -335,6 +329,14 @@ public:
     
 private:
     ObjectArray<Buffer> buffers;
+    
+    SampleType* fftAltBuffer0;
+    SampleType* fftAltBuffer1;
+    SampleType* fftTransformBuffer;
+    SampleType* fftOverlapBuffer;
+    SampleType* fftTempBuffer;
+    SampleType* fftCalcBuffer;
+    
     int divisionsCurrent;
     int divisionsWritten;
     int divisionsCounter;
