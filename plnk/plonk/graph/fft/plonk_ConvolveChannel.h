@@ -102,7 +102,7 @@ public:
         fftCalcBuffer      = processBuffersBase + fftSize2 * 5;
     
         buffers.add (processBuffers);
-        buffers.add (Buffer::withSize (irBuffers.getOriginalLength() * 2));
+        buffers.add (Buffer::newClear (irBuffers.getOriginalLength() * 2));
     }
     
     Text getName() const throw()
@@ -138,7 +138,7 @@ public:
         const FFTBuffers& irBuffers (this->getInputAsFFTBuffers (IOKey::FFTBuffers));
         const FFTEngineType& fftEngine (irBuffers.getFFTEngine());
         
-        countDown           = getConvolveRNG().uniform ((int) (fftEngine.length() / 8)) * 4;
+        countDown           = 0; // getConvolveRNG().uniform ((int) (fftEngine.length() / 8)) * 4;
         position0           = fftEngine.halfLength() - countDown;
         position1           = position0 + countDown;
         fftAltSelect        = 0;
@@ -148,13 +148,13 @@ public:
         divisionsPrevious   = 0;
         divisionsRead       = 1;
 
-        const UnsignedLong fftSize = (UnsignedLong) fftEngine.length();
+        const UnsignedLong fftSize2 = (UnsignedLong) fftEngine.length() * 2;
 
-        zero (fftAltBuffer0, fftSize);
-        zero (fftAltBuffer1, fftSize);
-        zero (fftTransformBuffer, fftSize);
-        zero (fftOverlapBuffer, fftSize);
-        zero (fftTempBuffer, fftSize);
+        zero (fftAltBuffer0,      fftSize2);
+        zero (fftAltBuffer1,      fftSize2);
+        zero (fftTransformBuffer, fftSize2);
+        zero (fftOverlapBuffer,   fftSize2);
+        zero (fftTempBuffer,      fftSize2);
     }
     
     static inline void complexMultiplyAccumulate (const SampleType* const left, const SampleType* const right,
@@ -213,11 +213,12 @@ public:
         
         SampleType* outputSamples = this->getOutputSamples();
         const UnsignedLong outputBufferLength = (UnsignedLong) this->getOutputBuffer().length();
+        const int divisionRatio1 = (fftSizeHalved / outputBufferLength) - 1;
         
         plonk_assert (outputBufferLength == inputBuffer.length());
 
-        SampleType* const inputBufferBase    = buffers.atUnchecked (InputBuffer).getArray();
-        SampleType* const fftAltBuffers[]    = { fftAltBuffer0, fftAltBuffer1 };
+        SampleType* const inputBufferBase = buffers.atUnchecked (InputBuffer).getArray();
+        SampleType* const fftAltBuffers[] = { fftAltBuffer0, fftAltBuffer1 };
         
         int samplesRemaining = outputBufferLength;
         const int numDivisions = irBuffers.getNumDivisions();
@@ -256,9 +257,9 @@ public:
             
             while (hop != 0)
             {
-                int divisionsRemaining = (int) ((SampleType) ((divisionsCounter * (divisionsRead - 1)) / (SampleType) ((fftSizeHalved / outputBufferLength) - 1)) - divisionsWritten);
+                int divisionsRemaining = (int) ((SampleType) ((divisionsCounter * (divisionsRead - 1)) / (SampleType) (divisionRatio1)) - divisionsWritten);
                 
-                if (divisionsCounter >= (fftSizeHalved / outputBufferLength) - 1)
+                if (divisionsCounter >= divisionRatio1)
                     divisionsRemaining = (divisionsRead - divisionsWritten) - 1;
                     
                 const int nextDivision = divisionsPrevious >= numDivisions ? 0 : divisionsPrevious;
@@ -299,8 +300,8 @@ public:
                 fftEngine.inverse (fftTransformBuffer, fftTempBuffer);
                 
                 hop = fftSizeHalved;
-                SampleType* overlap1 = fftOverlapBuffer + (hop * (1 - fftAltSelect));
-                SampleType* overlap2 = fftOverlapBuffer + (hop * fftAltSelect);
+                SampleType* const overlap1 = fftOverlapBuffer + (hop * (1 - fftAltSelect));
+                SampleType* const overlap2 = fftOverlapBuffer + (hop * fftAltSelect);
                     
                 move (overlap1, fftTransformBuffer, fftSize);
                 accumulate (overlap2, fftTransformBuffer + hop, fftSize);
