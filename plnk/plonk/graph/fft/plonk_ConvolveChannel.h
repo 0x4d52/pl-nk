@@ -257,11 +257,10 @@ public:
             
             while (hop != 0)
             {
-                int divisionsRemaining = (int) ((SampleType) ((divisionsCounter * (divisionsRead - 1)) / (SampleType) (divisionRatio1)) - divisionsWritten);
+                int divisionsRemaining = divisionsCounter >= divisionRatio1
+                                       ? (divisionsRead - divisionsWritten) - 1
+                                       : (int) ((SampleType) ((divisionsCounter * (divisionsRead - 1)) / (SampleType) (divisionRatio1)) - divisionsWritten);
                 
-                if (divisionsCounter >= divisionRatio1)
-                    divisionsRemaining = (divisionsRead - divisionsWritten) - 1;
-                    
                 const int nextDivision = divisionsPrevious >= numDivisions ? 0 : divisionsPrevious;
                 divisionsPrevious = nextDivision + divisionsRemaining;
                 
@@ -282,7 +281,7 @@ public:
                 {
                     complexMultiplyAccumulate (inputBufferSamples, irSamples, fftTempBuffer, fftCalcBuffer, fftSize, fftSizeHalved);
                     inputBufferSamples += fftSize;
-                    irSamples += fftSize;
+                    irSamples          += fftSize;
                 }
 
                 divisionsWritten += divisionsRemaining;
