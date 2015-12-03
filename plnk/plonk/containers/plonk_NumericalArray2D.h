@@ -56,6 +56,9 @@ public:
     typedef ObjectArray<ObjectArrayType>                ObjectArray2DType;
     typedef typename Base::InitialObject                InitialObject;
     
+    typedef typename BinaryOpFunctionsHelper<NumericalType>::BinaryOpFunctionsType  BinaryOpFunctionsType;
+    typedef typename UnaryOpFunctionsHelper<NumericalType>::UnaryOpFunctionsType    UnaryOpFunctionsType;
+
 	NumericalArray2D (const int rows = 0) throw()
 	:	Base (rows < 0 ? 0 : rows, false) 
 	{
@@ -229,6 +232,47 @@ public:
 	}
 	
     PLONK_OBJECTARROWOPERATOR(NumericalArray2D);
+                
+                //        NumericalType *array = this->getArray();
+                //
+                //        if ((array != 0) && (this->size() > 0))
+                //        {
+                //            const NumericalType maximum = this->findMaximumAbs();
+                //
+                //            if (maximum > NumericalType (0))
+                //            {
+                //                const NumericalType factor = UnaryOpFunctionsType::reciprocal (maximum);
+                //                const int size = this->size();
+                //                
+                //                for (int i = 0; i < size; ++i)
+                //                    array[i] *= factor;
+                //            }
+                //        }		
+
+    void normalise() throw()
+    {
+        const NumericalType maximum (0);
+        
+        for (int row = 0; row < this->size(); ++row)
+        {
+            const NumericalArray<NumericalType>& rowArray = this->at (row);
+            maximum = plonk::max (maximum, rowArray->findMaximumAbs());
+        }
+        
+        if (maximum > NumericalType (0))
+        {
+            const NumericalType factor = UnaryOpFunctionsType::reciprocal (maximum);
+            
+            for (int row = 0; row < this->size(); ++row)
+            {
+                NumericalArray<NumericalType>& rowArray = this->at (row);
+                NumericalType* rowValues = rowArray.getArray();
+                
+                for (int column = 0; column < rowArray.size(); column++)
+                    rowValues[column] *= factor;
+            }
+        }
+    }
 
 };
 

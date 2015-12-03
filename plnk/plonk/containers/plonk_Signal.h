@@ -169,6 +169,13 @@ public:
         plonk_assert(buffers.length() > 0);
         return (numInterleavedChannels > 1) || (buffers.numRows() == 1);
     }
+        
+    void normalise() throw()
+    {
+        buffers.normalise();
+    }
+        
+
     
 //    PLONK_INLINE_LOW Buffer getInterleaved() const throw()
 //    {
