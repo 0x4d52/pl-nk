@@ -233,22 +233,6 @@ public:
 	
     PLONK_OBJECTARROWOPERATOR(NumericalArray2D);
                 
-                //        NumericalType *array = this->getArray();
-                //
-                //        if ((array != 0) && (this->size() > 0))
-                //        {
-                //            const NumericalType maximum = this->findMaximumAbs();
-                //
-                //            if (maximum > NumericalType (0))
-                //            {
-                //                const NumericalType factor = UnaryOpFunctionsType::reciprocal (maximum);
-                //                const int size = this->size();
-                //                
-                //                for (int i = 0; i < size; ++i)
-                //                    array[i] *= factor;
-                //            }
-                //        }		
-
     void normalise() throw()
     {
         const NumericalType maximum (0);
