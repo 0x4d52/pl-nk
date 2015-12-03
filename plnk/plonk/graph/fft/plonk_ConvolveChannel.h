@@ -150,11 +150,11 @@ public:
 
         const UnsignedLong fftSize2 = (UnsignedLong) fftEngine.length() * 2;
 
-        zero (fftAltBuffer0,      fftSize2);
-        zero (fftAltBuffer1,      fftSize2);
-        zero (fftTransformBuffer, fftSize2);
-        zero (fftOverlapBuffer,   fftSize2);
-        zero (fftTempBuffer,      fftSize2);
+        zeroSamples (fftAltBuffer0,      fftSize2);
+        zeroSamples (fftAltBuffer1,      fftSize2);
+        zeroSamples (fftTransformBuffer, fftSize2);
+        zeroSamples (fftOverlapBuffer,   fftSize2);
+        zeroSamples (fftTempBuffer,      fftSize2);
     }
     
     static inline void complexMultiplyAccumulate (const SampleType* const left, const SampleType* const right,
@@ -184,17 +184,17 @@ public:
         NumericalArrayBinaryOp<SampleType,plonk::addop>::calcNN (output, output, temp, length);
     }
     
-    static inline void move (SampleType* const dst, const SampleType* const src, const UnsignedLong numItems) throw()
+    static inline void moveSamples (SampleType* const dst, const SampleType* const src, const UnsignedLong numItems) throw()
     {
         NumericalArrayUnaryOp<SampleType, plonk::move>::calc (dst, src, numItems);
     }
     
-    static inline void accumulate (SampleType* const dst, const SampleType* const src, const UnsignedLong numItems) throw()
+    static inline void accumulateSamples (SampleType* const dst, const SampleType* const src, const UnsignedLong numItems) throw()
     {
         NumericalArrayBinaryOp<SampleType, plonk::addop>::calcNN (dst, dst, src, numItems);
     }
     
-    static inline void zero (SampleType* const dst, const UnsignedLong numItems) throw()
+    static inline void zeroSamples (SampleType* const dst, const UnsignedLong numItems) throw()
     {
         NumericalArray<SampleType>::zeroData (dst, numItems);
     }
@@ -242,9 +242,9 @@ public:
             
             if (hop > 0)
             {
-                move (fftAltBuffer0 + position0, inputSamples, hop);
-                move (fftAltBuffer1 + position1, inputSamples, hop);
-                move (outputSamples, fftOverlapBuffer + position0, hop);
+                moveSamples (fftAltBuffer0 + position0, inputSamples, hop);
+                moveSamples (fftAltBuffer1 + position1, inputSamples, hop);
+                moveSamples (outputSamples, fftOverlapBuffer + position0, hop);
 
                 inputSamples  += hop;
                 outputSamples += hop;
@@ -302,8 +302,8 @@ public:
                 SampleType* const overlap1 = fftOverlapBuffer + (hop * (1 - fftAltSelect));
                 SampleType* const overlap2 = fftOverlapBuffer + (hop * fftAltSelect);
                     
-                move (overlap1, fftTransformBuffer, fftSize);
-                accumulate (overlap2, fftTransformBuffer + hop, fftSize);
+                moveSamples (overlap1, fftTransformBuffer, fftSize);
+                accumulateSamples (overlap2, fftTransformBuffer + hop, fftSize);
                 
                 if (fftAltSelect != 0)
                 {
@@ -322,7 +322,7 @@ public:
                 divisionsWritten    = 0;
                 countDown           = hop;
                 
-                zero (fftTempBuffer, fftSize);
+                zeroSamples (fftTempBuffer, fftSize);
             }
         }
     }
