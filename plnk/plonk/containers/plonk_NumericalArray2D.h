@@ -235,7 +235,7 @@ public:
                 
     void normalise() throw()
     {
-        const NumericalType maximum (0);
+        NumericalType maximum (0);
         
         for (int row = 0; row < this->size(); ++row)
         {

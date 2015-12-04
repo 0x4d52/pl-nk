@@ -364,6 +364,13 @@ public:
     {
         return this->getInternal()->isInterleaved();
     }
+    
+    SignalBase normalise() throw()
+    {
+        this->getInternal()->normalise();
+        return *this;
+    }
+
 
 //    PLONK_INLINE_LOW Buffer getInterleaved() const throw()
 //    {
