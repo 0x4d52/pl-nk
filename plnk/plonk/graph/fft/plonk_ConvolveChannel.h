@@ -156,40 +156,13 @@ public:
         zeroSamples (fftOverlapBuffer,   fftSize2);
         zeroSamples (fftTempBuffer,      fftSize2);
     }
-    
-//    static inline void complexMultiplyAccumulate (const SampleType* const left, const SampleType* const right,
-//                                                  SampleType* const output, SampleType* const temp,
-//                                                  const UnsignedLong length, const UnsignedLong halfLength) throw()
-//    {
-//        const SampleType* const leftRealSamples   = left;
-//        const SampleType* const rightRealSamples  = right;
-//        const SampleType* const leftImagSamples   = leftRealSamples + halfLength;
-//        const SampleType* const rightImagSamples  = rightRealSamples + halfLength;
-//        SampleType* const realTempSamples         = temp;
-//        SampleType* const imagTempSamples         = realTempSamples + halfLength;
-//
-//        const SampleType leftDC = leftRealSamples[0];
-//        const SampleType rightDC = rightRealSamples[0];
-//        const SampleType leftNyquist = leftImagSamples[0];
-//        const SampleType rightNyquist = rightImagSamples[0];
-//        
-//        NumericalArrayComplex<SampleType>::zmul (realTempSamples, imagTempSamples,
-//                                                 leftRealSamples, leftImagSamples,
-//                                                 rightRealSamples, rightImagSamples,
-//                                                 halfLength);
-//        
-//        realTempSamples[0] = leftDC * rightDC;
-//        imagTempSamples[0] = leftNyquist * rightNyquist;
-//        
-//        NumericalArrayBinaryOp<SampleType,plonk::addop>::calcNN (output, output, temp, length);
-//    }
 
-    static inline void complexMultiplyAccumulate (const SampleType* const left, const SampleType* const right,
-                                                  SampleType* const output, SampleType* const temp,
-                                                  const UnsignedLong length, const UnsignedLong halfLength) throw()
+    static inline void complexMultiplyAccumulate (SampleType* const output,
+                                                  const SampleType* const left, const SampleType* const right,
+                                                  SampleType* const temp,
+                                                  const UnsignedLong halfLength) throw()
     {
-        NumericalArrayComplex<SampleType>::zmulPacked (temp, left, right, halfLength);
-        NumericalArrayBinaryOp<SampleType,plonk::addop>::calcNN (output, output, temp, length);
+        NumericalArrayComplex<SampleType>::zmulAccumPacked (output, left, right, temp, halfLength);
     }
 
     static inline void moveSamples (SampleType* const dst, const SampleType* const src, const UnsignedLong numItems) throw()
@@ -287,7 +260,8 @@ public:
                 
                 for (int i = 0; i < divisionsRemaining; i++)
                 {
-                    complexMultiplyAccumulate (inputBufferSamples, irSamples, fftTempBuffer, fftCalcBuffer, fftSize, fftSizeHalved);
+                    complexMultiplyAccumulate (fftTempBuffer, inputBufferSamples, irSamples, fftCalcBuffer, fftSizeHalved);
+
                     inputBufferSamples += fftSize;
                     irSamples          += fftSize;
                 }
@@ -299,11 +273,12 @@ public:
             {
                 divisionsRead = plonk::min (divisionsRead + 1, numDivisions);
                 
-                const SampleType* const irSamples = irBuffers.getBuffer (channel);
+                const SampleType* const irSamples = irBuffers.getDivision (channel, 0);
                 SampleType* const inputBufferSamples = inputBufferBase + divisionsCurrent * fftSize;
 
                 fftEngine.forward (inputBufferSamples, fftAltBuffers[fftAltSelect]);
-                complexMultiplyAccumulate (inputBufferSamples, irSamples, fftTempBuffer, fftCalcBuffer, fftSize, fftSizeHalved);
+                complexMultiplyAccumulate (fftTempBuffer, inputBufferSamples, irSamples, fftCalcBuffer, fftSizeHalved);
+
                 fftEngine.inverse (fftTransformBuffer, fftTempBuffer);
                 
                 hop = fftSizeHalved;
