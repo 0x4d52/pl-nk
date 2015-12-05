@@ -761,16 +761,50 @@ PLONK_NUMERICALARRAYUNARYOPS_DEFINE(D);
 //------------------------------------------------------------------------------
 
 template<class NumericalType>
-class NumericalArrayComplex
+class NumericalArrayComplex;
+
+template<class NumericalType>
+class NumericalArrayComplexBase
+{
+public:
+    PLONK_INLINE_LOW static void zmulPacked (NumericalType* dst,
+                                             const NumericalType* left,
+                                             const NumericalType* right,
+                                             const UnsignedLong fftSizeHalved)
+    {
+        const NumericalType* const leftRealSamples   = left;
+        const NumericalType* const rightRealSamples  = right;
+        const NumericalType* const leftImagSamples   = leftRealSamples + fftSizeHalved;
+        const NumericalType* const rightImagSamples  = rightRealSamples + fftSizeHalved;
+        NumericalType* const dstRealSamples          = dst;
+        NumericalType* const dstImagSamples          = dstRealSamples + fftSizeHalved;
+        
+        const NumericalType leftDC = leftRealSamples[0];
+        const NumericalType rightDC = rightRealSamples[0];
+        const NumericalType leftNyquist = leftImagSamples[0];
+        const NumericalType rightNyquist = rightImagSamples[0];
+        
+        NumericalArrayComplex<NumericalType>::zmul (dstRealSamples, dstImagSamples,
+                                                    leftRealSamples, leftImagSamples,
+                                                    rightRealSamples, rightImagSamples,
+                                                    fftSizeHalved);
+        
+        dstRealSamples[0] = leftDC * rightDC;
+        dstImagSamples[0] = leftNyquist * rightNyquist;
+    }
+};
+
+template<class NumericalType>
+class NumericalArrayComplex : public NumericalArrayComplexBase<NumericalType>
 {
 public:
     PLONK_INLINE_LOW static void zmul (NumericalType* dstReal,
-                             NumericalType* dstimag,
-                             const NumericalType* leftReal,
-                             const NumericalType* leftImag,
-                             const NumericalType* rightReal,
-                             const NumericalType* rightImag,
-                             const UnsignedLong numItems) throw()
+                                       NumericalType* dstimag,
+                                       const NumericalType* leftReal,
+                                       const NumericalType* leftImag,
+                                       const NumericalType* rightReal,
+                                       const NumericalType* rightImag,
+                                       const UnsignedLong numItems) throw()
     {
         for (UnsignedLong i = 0; i < numItems; ++i)
         {
@@ -781,32 +815,32 @@ public:
 };
 
 template<>
-class NumericalArrayComplex<float>
+class NumericalArrayComplex<float> : public NumericalArrayComplexBase<float>
 {
 public:
     PLONK_INLINE_LOW static void zmul (float* dstReal,
-                             float* dstimag,
-                             const float* leftReal,
-                             const float* leftImag,
-                             const float* rightReal,
-                             const float* rightImag,
-                             const UnsignedLong numItems) throw()
+                                       float* dstimag,
+                                       const float* leftReal,
+                                       const float* leftImag,
+                                       const float* rightReal,
+                                       const float* rightImag,
+                                       const UnsignedLong numItems) throw()
     {
         pl_VectorZMulF_ZNNNNN (dstReal, dstimag, leftReal, leftImag, rightReal, rightImag, numItems);
     }
 };
 
 template<>
-class NumericalArrayComplex<double>
+class NumericalArrayComplex<double> : public NumericalArrayComplexBase<double>
 {
 public:
     PLONK_INLINE_LOW static void zmul (double* dstReal,
-                             double* dstimag,
-                             const double* leftReal,
-                             const double* leftImag,
-                             const double* rightReal,
-                             const double* rightImag,
-                             const UnsignedLong numItems) throw()
+                                       double* dstimag,
+                                       const double* leftReal,
+                                       const double* leftImag,
+                                       const double* rightReal,
+                                       const double* rightImag,
+                                       const UnsignedLong numItems) throw()
     {
         pl_VectorZMulD_ZNNNNN (dstReal, dstimag, leftReal, leftImag, rightReal, rightImag, numItems);
     }
