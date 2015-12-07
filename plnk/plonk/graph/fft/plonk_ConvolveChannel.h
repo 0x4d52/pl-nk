@@ -44,8 +44,8 @@
 
 static RNG& getConvolveRNG()
 {
-    static RNG rgn;
-    return rgn;
+    static RNG rng;
+    return rng;
 }
 
 /** Convolve channel. */
@@ -269,14 +269,13 @@ public:
                 
                 const SampleType* irSamples = irBuffers.getDivision (channel, divisionsWritten + 1);
                 const SampleType* inputBufferSamples = inputBufferBase + nextDivision * fftSize;
-//                const SampleType* inputBufferSamples = inputBufferBase + nextDivision * fftSizeHalved;
                 
                 for (int i = 0; i < divisionsRemaining; i++)
                 {
                     complexMultiplyAccumulate (fftTempBuffer, inputBufferSamples, irSamples, fftCalcBuffer, fftSizeHalved);
 
-                    inputBufferSamples += fftSizeHalved; // fftSize;
-                    irSamples          += fftSizeHalved; // fftSize;
+                    inputBufferSamples += fftSize;
+                    irSamples          += fftSize;
                 }
 
                 divisionsWritten += divisionsRemaining;
@@ -288,11 +287,10 @@ public:
                 
                 const SampleType* const irSamples = irBuffers.getDivision (channel, 0);
                 SampleType* const inputBufferSamples = inputBufferBase + divisionsCurrent * fftSize;
-//                SampleType* const inputBufferSamples = inputBufferBase + divisionsCurrent * fftSizeHalved;
 
                 fftEngine.forward (inputBufferSamples, fftAltBuffers[fftAltSelect]);
                 complexMultiplyAccumulate (fftTempBuffer, inputBufferSamples, irSamples, fftCalcBuffer, fftSizeHalved);
-
+                
                 fftEngine.inverse (fftTransformBuffer, fftTempBuffer);
                 
                 hop = fftSizeHalved;
@@ -313,8 +311,8 @@ public:
                     fftAltSelect = 1;
                 }
                                 
-                divisionsCurrent    = plonk::wrap (divisionsCurrent, 0, numDivisions);
-                divisionsPrevious   = divisionsCurrent + 1;
+                divisionsPrevious   = divisionsCurrent;
+                divisionsCurrent    = plonk::wrap (divisionsCurrent - 1, 0, numDivisions);
                 divisionsCounter    = 0;
                 divisionsWritten    = 0;
                 countDown           = hop;
