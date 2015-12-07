@@ -155,6 +155,7 @@ Text IOKey::getName (const int keyIndex) throw()
         "Bandwidth",
         "Time",
         "Duration",
+        "Time Scale",
         "Attack",
         "Decay",
         "Release",
@@ -237,6 +238,7 @@ IOKey::IOType IOKey::getType (const int keyIndex) throw()
         IOKey::TypeUnit,            //"Bandwidth",
         IOKey::TypeUnit,            //"Time"
         IOKey::TypeUnit,            //"Duration"
+        IOKey::TypeUnit,            //"TimeScale"
         IOKey::TypeUnit,            //"Attack"
         IOKey::TypeUnit,            //"Decay"
         IOKey::TypeUnit,            //"Release"
@@ -318,6 +320,7 @@ Text IOKey::getTypeName (const int keyIndex) throw()
         "Unit",             //"Bandwidth",
         "Unit",             //"Time",
         "Unit",             //"Duration",
+        "Unit",             //"TimeScale",
         "Unit",             //"Attack",
         "Unit",             //"Decay",
         "Unit",             //"Release",

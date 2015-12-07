@@ -105,6 +105,7 @@ public:
         Bandwidth,      ///< Bandwidth (could be in Semitones, Octaves or Hertz).
         Time,           ///< Time position in seconds.
         Duration,       ///< Duration in seconds.
+        TimeScale,      ///< Time scaling factor.
         Attack,         ///< Attack time in seconds
         Decay,          ///< Decay time in seconds
         Release,        ///< Release time in seconds

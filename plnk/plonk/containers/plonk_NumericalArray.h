@@ -1860,11 +1860,18 @@ public:
         const int length = this->length();
         
         if ((array != 0) && (length > 0))
-        {            
-            for (int i = 0; i < length; ++i)
-                result += array[i];
-                
-            result /= NumericalType (length);
+        {
+            if (length == 1)
+            {
+                result = array[0];
+            }
+            else
+            {
+                for (int i = 0; i < length; ++i)
+                    result += array[i];
+
+                result /= NumericalType (length);
+            }
         }
         
         return result;
@@ -1878,11 +1885,18 @@ public:
         const int length = this->length();
         
         if ((array != 0) && (length > 0))
-        {                            
-            for (int i = 0; i < length; ++i)
-                result += UnaryOpFunctionsType::abs (array[i]);
-                    
-            result /= NumericalType (length);
+        {
+            if (length == 1)
+            {
+                result = UnaryOpFunctionsType::abs (array[0]);
+            }
+            else
+            {
+                for (int i = 0; i < length; ++i)
+                    result += UnaryOpFunctionsType::abs (array[i]);
+                        
+                result /= NumericalType (length);
+            }
         }
         
         return result;
@@ -1897,10 +1911,17 @@ public:
 
         if ((array != 0) && (length > 0))
         {
-            for (int i = 0; i < length; ++i)
-                result += UnaryOpFunctionsType::squared (array[i]);
-                    
-            result = UnaryOpFunctionsType::sqrt (result) / NumericalType (length);
+            if (length == 1)
+            {
+                result = UnaryOpFunctionsType::squared (array[0]);
+            }
+            else
+            {
+                for (int i = 0; i < length; ++i)
+                    result += UnaryOpFunctionsType::squared (array[i]);
+                        
+                result = UnaryOpFunctionsType::sqrt (result) / NumericalType (length);
+            }
         }
         
         return result;        
@@ -2020,6 +2041,22 @@ public:
 		}		
         
         return index;
+    }
+    
+    NumericalType sum() throw()
+    {
+        NumericalType *array = this->getArray();
+        NumericalType value (0);
+        
+        if ((array != 0) && (this->size() > 0))
+        {
+            const int length = this->length();
+
+            for (int i = 0; i < length; ++i)
+                value += array[i];
+        }
+        
+        return value;
     }
     
     NumericalArray& normalise() throw()

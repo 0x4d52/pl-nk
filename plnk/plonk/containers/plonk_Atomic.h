@@ -849,6 +849,11 @@ public:
         return element.separate.extra;
     }
     
+    PLONK_INLINE_LOW LongLong getAllUnchecked() const throw()
+    {
+        return atom.getValueUnchecked();
+    }
+    
     template<class OtherType> bool operator== (OtherType const& other) const throw() { return this->getValueUnchecked() == static_cast<Int> (other); }
     template<class OtherType> bool operator!= (OtherType const& other) const throw() { return this->getValueUnchecked() != static_cast<Int> (other); }
     template<class OtherType> bool operator<  (OtherType const& other) const throw() { return this->getValueUnchecked() <  static_cast<Int> (other); }
@@ -1062,6 +1067,11 @@ public:
         Element element;
         element.whole = atom.getValueUnchecked();
         return element.separate.extra;
+    }
+    
+    PLONK_INLINE_LOW Int getAllUnchecked() const throw()
+    {
+        return atom.getValueUnchecked();
     }
     
     template<class OtherType> bool operator== (OtherType const& other) const throw() { return this->getValueUnchecked() == static_cast<Short> (other); }

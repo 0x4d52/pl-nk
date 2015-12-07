@@ -60,7 +60,13 @@ public:
     typedef NumericalArray2D<SampleType>    BuffersType;
     typedef FFTEngineBase<SampleType>       FFTEngineType;
     typedef SignalBase<SampleType>          SignalType;
-        
+    
+    struct Selection
+    {
+        UnsignedShort offset;
+        UnsignedShort length;
+    };
+    
     FFTBuffersInternal (FFTEngineType const& fftEngineToUse, BuffersType const& sourceBuffers) throw()
     :   fftEngine (fftEngineToUse),
         originalLength (0),
@@ -82,6 +88,8 @@ public:
         if (originalLength % fftSizeHalved != 0)
             ++numDivisions;
         
+        selection.setAll (0, numDivisions);
+
         BufferType tempBuffer = Buffer::withSize (fftSize);
         SampleType* const tempSamples = tempBuffer.getArray();
         
@@ -129,6 +137,8 @@ public:
         
         if (originalLength % fftSizeHalved != 0)
             ++numDivisions;
+        
+        selection.setAll (0, numDivisions);
         
         BufferType tempBuffer = Buffer::withSize (fftSize);
         SampleType* const tempSamples = tempBuffer.getArray();
@@ -182,7 +192,6 @@ public:
             fftBuffers.add (fftBuffer);
         }
     }
-
     
     FFTBuffersInternal* getChannel (const int channel) const throw()
     {
@@ -201,11 +210,26 @@ public:
         }
     }
     
-    PLONK_INLINE_LOW const SampleType* getBuffer (const int channel) const throw()
+    void setSelection (int offset, int length) throw()
     {
-        plonk_assert (channel >= 0);
-        return fftBuffers.atUnchecked ((unsigned) channel % (unsigned) fftBuffers.length()).getArray();
+        plonk_assert (offset >= 0 && offset < 65536);
+        plonk_assert (length >= 0 && length < 65536);
+        
+        if (numDivisions > 2)
+        {
+            Selection newSelection;
+            
+            newSelection.offset = plonk::clip (offset, 0, numDivisions - 2);
+            newSelection.length = plonk::clip (length, 1, numDivisions - offset);
+            
+            selection.setAll (newSelection.offset, newSelection.length);
+        }
     }
+    
+//    PLONK_INLINE_LOW Selection getSelection() throw()
+//    {
+//        return selection
+//    }
     
     PLONK_INLINE_LOW const SampleType* getDivision (const int channel, const int division) const throw()
     {
@@ -216,6 +240,13 @@ public:
     friend class FFTBuffersBase<SampleType>;
     
 private:
+    
+    PLONK_INLINE_LOW const SampleType* getBuffer (const int channel) const throw()
+    {
+        plonk_assert (channel >= 0);
+        return fftBuffers.atUnchecked ((unsigned) channel % (unsigned) fftBuffers.length()).getArray();
+    }
+
     FFTBuffersInternal (BufferType const& singleFFTBuffer,
                         FFTEngineType const& fftEngineToUse,
                         const int originalLengthToUse,
@@ -226,12 +257,14 @@ private:
         numDivisions (numDivisionsToUse)
     {
     }
-
     
     BuffersType fftBuffers;
     FFTEngineType fftEngine;
     int originalLength;
     int numDivisions;
+    
+    AtomicExtended<Short> selection;
+    
 };
 
 //------------------------------------------------------------------------------
@@ -313,10 +346,10 @@ public:
     
     PLONK_OBJECTARROWOPERATOR(FFTBuffersBase);
 
-    const SampleType* getBuffer (const int channel) const throw()
-    {
-        return this->getInternal()->getBuffer (channel);
-    }
+//    const SampleType* getBuffer (const int channel) const throw()
+//    {
+//        return this->getInternal()->getBuffer (channel);
+//    }
     
     const SampleType* getDivision (const int channel, const int division) const throw()
     {
@@ -356,6 +389,11 @@ public:
     FFTBuffersBase operator[] (const int channel) const throw()
     {
         return getChannel (channel);
+    }
+    
+    void setSelection (int offset, int length) throw()
+    {
+        return this->getInternal()->setSelection (offset, length);
     }
 };
 

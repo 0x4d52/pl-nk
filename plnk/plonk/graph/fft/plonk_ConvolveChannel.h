@@ -102,7 +102,19 @@ public:
         fftCalcBuffer      = processBuffersBase + fftSize2 * 5;
     
         buffers.add (processBuffers);
-        buffers.add (Buffer::newClear (irBuffers.getOriginalLength() * 2));
+        
+        Buffer inputBuffer = Buffer::newClear (irBuffers.getOriginalLength() * 2);
+        buffers.add (inputBuffer);
+        
+#if PLONK_DEBUG
+        printf ("fftAltBuffer0      = %p (%d)\n", fftAltBuffer0, fftSize2);
+        printf ("fftAltBuffer1      = %p (%d)\n", fftAltBuffer1, fftSize2);
+        printf ("fftTransformBuffer = %p (%d)\n", fftTransformBuffer, fftSize2);
+        printf ("fftOverlapBuffer   = %p (%d)\n", fftOverlapBuffer, fftSize2);
+        printf ("fftTempBuffer      = %p (%d)\n", fftTempBuffer, fftSize2);
+        printf ("fftCalcBuffer      = %p (%d)\n", fftCalcBuffer, fftSize2);
+        printf ("inputBuffer        = %p (%d)\n", inputBuffer.getArray(), inputBuffer.length());
+#endif
     }
     
     Text getName() const throw()
@@ -257,13 +269,14 @@ public:
                 
                 const SampleType* irSamples = irBuffers.getDivision (channel, divisionsWritten + 1);
                 const SampleType* inputBufferSamples = inputBufferBase + nextDivision * fftSize;
+//                const SampleType* inputBufferSamples = inputBufferBase + nextDivision * fftSizeHalved;
                 
                 for (int i = 0; i < divisionsRemaining; i++)
                 {
                     complexMultiplyAccumulate (fftTempBuffer, inputBufferSamples, irSamples, fftCalcBuffer, fftSizeHalved);
 
-                    inputBufferSamples += fftSize;
-                    irSamples          += fftSize;
+                    inputBufferSamples += fftSizeHalved; // fftSize;
+                    irSamples          += fftSizeHalved; // fftSize;
                 }
 
                 divisionsWritten += divisionsRemaining;
@@ -275,6 +288,7 @@ public:
                 
                 const SampleType* const irSamples = irBuffers.getDivision (channel, 0);
                 SampleType* const inputBufferSamples = inputBufferBase + divisionsCurrent * fftSize;
+//                SampleType* const inputBufferSamples = inputBufferBase + divisionsCurrent * fftSizeHalved;
 
                 fftEngine.forward (inputBufferSamples, fftAltBuffers[fftAltSelect]);
                 complexMultiplyAccumulate (fftTempBuffer, inputBufferSamples, irSamples, fftCalcBuffer, fftSizeHalved);
