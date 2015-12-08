@@ -174,7 +174,7 @@ public:
                                                   SampleType* const temp,
                                                   const UnsignedLong halfLength) throw()
     {
-        NumericalArrayComplex<SampleType>::zpmulaccum (output, left, right, temp, halfLength);
+        NumericalArrayComplex<SampleType>::zpmulaccum (output, left, right, halfLength);
     }
 
     static inline void moveSamples (SampleType* const dst, const SampleType* const src, const UnsignedLong numItems) throw()

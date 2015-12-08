@@ -962,10 +962,10 @@ static PLANK_INLINE_LOW void pl_VectorMulAddD_NN1N (double *result, const double
     vDSP_vsmaD (input, 1, &a, b, 1, result, 1, N);
 }
 
-static PLANK_INLINE_LOW void pl_VectorZMulD_ZNNNNN (double *resultReal, double *resultImag,
-                                          const double* leftReal, const double* leftImag,
-                                          const double* rightReal, const double* rightImag,
-                                          PlankUL N)
+static PLANK_INLINE_LOW void pl_VectorZMulD_ZNNNNNN (double *resultReal, double *resultImag,
+                                                     const double* leftReal, const double* leftImag,
+                                                     const double* rightReal, const double* rightImag,
+                                                     PlankUL N)
 {
     DSPDoubleSplitComplex result, left, right;
     result.realp = resultReal;
@@ -975,6 +975,24 @@ static PLANK_INLINE_LOW void pl_VectorZMulD_ZNNNNN (double *resultReal, double *
     right.realp = (double*)rightReal;
     right.imagp = (double*)rightImag;
     vDSP_zvmulD (&left, 1, &right, 1, &result, 1, N, 1);
+}
+
+static PLANK_INLINE_LOW void pl_VectorZMulAddD_ZNNNNNNNN (double *resultReal, double *resultImag,
+                                                          const double* inputReal, const double* inputImag,
+                                                          const double* mulReal, const double* mulImag,
+                                                          const double* addReal, const double* addImag,
+                                                          PlankUL N)
+{
+    DSPDoubleSplitComplex result, input, mul, add;
+    result.realp = resultReal;
+    result.imagp = resultImag;
+    input.realp = (double*)inputReal;
+    input.imagp = (double*)inputImag;
+    mul.realp = (double*)mulReal;
+    mul.imagp = (double*)mulImag;
+    add.realp = (double*)addReal;
+    add.imagp = (double*)addImag;
+    vDSP_zvmaD (&input, 1, &mul, 1, &add, 1, &result, 1, N);
 }
 
 // works as documented but seems useless as it interpolates thr "wrong" two samples

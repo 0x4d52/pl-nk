@@ -767,101 +767,6 @@ template<class NumericalType>
 class NumericalArrayComplexBase
 {
 public:
-    PLONK_INLINE_LOW static void zpmul (NumericalType* dst,
-                                        const NumericalType* left,
-                                        const NumericalType* right,
-                                        const UnsignedLong fftSizeHalved)
-    {
-        const NumericalType* const leftRealSamples   = left;
-        const NumericalType* const rightRealSamples  = right;
-        const NumericalType* const leftImagSamples   = leftRealSamples + fftSizeHalved;
-        const NumericalType* const rightImagSamples  = rightRealSamples + fftSizeHalved;
-        NumericalType* const dstRealSamples          = dst;
-        NumericalType* const dstImagSamples          = dstRealSamples + fftSizeHalved;
-        
-        const NumericalType leftDC = leftRealSamples[0];
-        const NumericalType rightDC = rightRealSamples[0];
-        const NumericalType leftNyquist = leftImagSamples[0];
-        const NumericalType rightNyquist = rightImagSamples[0];
-        
-        NumericalArrayComplex<NumericalType>::zmul (dstRealSamples, dstImagSamples,
-                                                    leftRealSamples, leftImagSamples,
-                                                    rightRealSamples, rightImagSamples,
-                                                    fftSizeHalved);
-        
-        dstRealSamples[0] = leftDC * rightDC;
-        dstImagSamples[0] = leftNyquist * rightNyquist;
-    }
-    
-    PLONK_INLINE_LOW static void zpmulaccum (NumericalType* dst,
-                                             const NumericalType* left,
-                                             const NumericalType* right,
-                                             NumericalType* temp,
-                                             const UnsignedLong fftSizeHalved)
-    {
-        NumericalArrayComplex<NumericalType>::zpmul (temp, left, right, fftSizeHalved);
-        NumericalArrayComplex<NumericalType>::zpadd (dst, dst, temp, fftSizeHalved);
-    }
-
-//    PLONK_INLINE_LOW static void zpmulaccum (NumericalType* dst,
-//                                             const NumericalType* input,
-//                                             const NumericalType* mul,
-//                                             const UnsignedLong fftSizeHalved)
-//    {
-//        const NumericalType* const leftRealSamples   = left;
-//        const NumericalType* const rightRealSamples  = right;
-//        const NumericalType* const leftImagSamples   = leftRealSamples + fftSizeHalved;
-//        const NumericalType* const rightImagSamples  = rightRealSamples + fftSizeHalved;
-//        NumericalType* const dstRealSamples          = dst;
-//        NumericalType* const dstImagSamples          = dstRealSamples + fftSizeHalved;
-//        
-//        const NumericalType dstDC = dstRealSamples[0];
-//        const NumericalType leftDC = leftRealSamples[0];
-//        const NumericalType rightDC = rightRealSamples[0];
-//        const NumericalType dstNyquist = dstImagSamples[0];
-//        const NumericalType leftNyquist = leftImagSamples[0];
-//        const NumericalType rightNyquist = rightImagSamples[0];
-//        
-//        NumericalArrayComplex<NumericalType>::zmuladd
-//        
-//        (dstRealSamples, dstImagSamples,
-//                                                    leftRealSamples, leftImagSamples,
-//                                                    rightRealSamples, rightImagSamples,
-//                                                    fftSizeHalved);
-//        
-//        dstRealSamples[0] = dstDC + leftDC * rightDC;
-//        dstImagSamples[0] = dstNyquist + leftNyquist * rightNyquist;
-//    }
-//
-    
-    PLONK_INLINE_LOW static void zpadd (NumericalType* dst,
-                                        const NumericalType* left,
-                                        const NumericalType* right,
-                                        const UnsignedLong fftSizeHalved)
-    {
-        const UnsignedLong numItems = fftSizeHalved << 1;
-        
-        for (UnsignedLong i = 0; i < numItems; ++i)
-            dst[i] = left[i] + right[i];
-    }
-    
-    PLONK_INLINE_LOW static void zpsub (NumericalType* dst,
-                                        const NumericalType* left,
-                                        const NumericalType* right,
-                                        const UnsignedLong fftSizeHalved)
-    {
-        const UnsignedLong numItems = fftSizeHalved << 1;
-        
-        for (UnsignedLong i = 0; i < numItems; ++i)
-            dst[i] = left[i] - right[i];
-    }
-
-};
-
-template<class NumericalType>
-class NumericalArrayComplex : public NumericalArrayComplexBase<NumericalType>
-{
-public:
     PLONK_INLINE_LOW static void zmul (NumericalType* dstReal,
                                        NumericalType* dstImag,
                                        const NumericalType* leftReal,
@@ -921,7 +826,118 @@ public:
             dstImag[i] += leftReal[i] * rightImag[i] + leftImag[i] * rightReal[i];
         }
     }
+    
+    PLONK_INLINE_LOW static void zmuladd (NumericalType* dstReal,
+                                          NumericalType* dstImag,
+                                          const NumericalType* inputReal,
+                                          const NumericalType* inputImag,
+                                          const NumericalType* mulReal,
+                                          const NumericalType* mulImag,
+                                          const NumericalType* addReal,
+                                          const NumericalType* addImag,
+                                          const UnsignedLong numItems) throw()
+    {
+        for (UnsignedLong i = 0; i < numItems; ++i)
+        {
+            dstReal[i] = inputReal[i] * mulReal[i] - inputImag[i] * mulImag[i] + addReal[i];
+            dstImag[i] = inputReal[i] * mulImag[i] + inputImag[i] * mulReal[i] + addImag[i];
+        }
+    }
 
+    PLONK_INLINE_LOW static void zpmul (NumericalType* dst,
+                                        const NumericalType* left,
+                                        const NumericalType* right,
+                                        const UnsignedLong fftSizeHalved)
+    {
+        const NumericalType* const leftRealSamples   = left;
+        const NumericalType* const rightRealSamples  = right;
+        const NumericalType* const leftImagSamples   = leftRealSamples + fftSizeHalved;
+        const NumericalType* const rightImagSamples  = rightRealSamples + fftSizeHalved;
+        NumericalType* const dstRealSamples          = dst;
+        NumericalType* const dstImagSamples          = dstRealSamples + fftSizeHalved;
+        
+        const NumericalType leftDC = leftRealSamples[0];
+        const NumericalType rightDC = rightRealSamples[0];
+        const NumericalType leftNyquist = leftImagSamples[0];
+        const NumericalType rightNyquist = rightImagSamples[0];
+        
+        NumericalArrayComplex<NumericalType>::zmul (dstRealSamples, dstImagSamples,
+                                                    leftRealSamples, leftImagSamples,
+                                                    rightRealSamples, rightImagSamples,
+                                                    fftSizeHalved);
+        
+        dstRealSamples[0] = leftDC * rightDC;
+        dstImagSamples[0] = leftNyquist * rightNyquist;
+    }
+    
+    PLONK_INLINE_LOW static void zpmuladd (NumericalType* dst,
+                                           const NumericalType* input,
+                                           const NumericalType* mul,
+                                           const NumericalType* add,
+                                           const UnsignedLong fftSizeHalved)
+    {
+        plonk_assert (dst != add);
+        NumericalArrayComplex<NumericalType>::zpmul (dst, input, mul, fftSizeHalved);
+        NumericalArrayComplex<NumericalType>::zpadd (dst, dst, add, fftSizeHalved);
+    }
+
+    PLONK_INLINE_LOW static void zpmulaccum (NumericalType* dst,
+                                             const NumericalType* left,
+                                             const NumericalType* right,
+                                             const UnsignedLong fftSizeHalved)
+    {
+        const NumericalType* const leftRealSamples   = left;
+        const NumericalType* const rightRealSamples  = right;
+        const NumericalType* const leftImagSamples   = leftRealSamples + fftSizeHalved;
+        const NumericalType* const rightImagSamples  = rightRealSamples + fftSizeHalved;
+        NumericalType* const dstRealSamples          = dst;
+        NumericalType* const dstImagSamples          = dstRealSamples + fftSizeHalved;
+        
+        const NumericalType dstDC = dstRealSamples[0];
+        const NumericalType leftDC = leftRealSamples[0];
+        const NumericalType rightDC = rightRealSamples[0];
+        const NumericalType dstNyquist = dstImagSamples[0];
+        const NumericalType leftNyquist = leftImagSamples[0];
+        const NumericalType rightNyquist = rightImagSamples[0];
+        
+        NumericalArrayComplex<NumericalType>::zmulaccum (dstRealSamples, dstImagSamples,
+                                                         leftRealSamples, leftImagSamples,
+                                                         rightRealSamples, rightImagSamples,
+                                                         fftSizeHalved);
+        
+        dstRealSamples[0] = dstDC + leftDC * rightDC;
+        dstImagSamples[0] = dstNyquist + leftNyquist * rightNyquist;
+    }
+
+    
+    PLONK_INLINE_LOW static void zpadd (NumericalType* dst,
+                                        const NumericalType* left,
+                                        const NumericalType* right,
+                                        const UnsignedLong fftSizeHalved)
+    {
+        const UnsignedLong numItems = fftSizeHalved << 1;
+        
+        for (UnsignedLong i = 0; i < numItems; ++i)
+            dst[i] = left[i] + right[i];
+    }
+    
+    PLONK_INLINE_LOW static void zpsub (NumericalType* dst,
+                                        const NumericalType* left,
+                                        const NumericalType* right,
+                                        const UnsignedLong fftSizeHalved)
+    {
+        const UnsignedLong numItems = fftSizeHalved << 1;
+        
+        for (UnsignedLong i = 0; i < numItems; ++i)
+            dst[i] = left[i] - right[i];
+    }
+
+};
+
+template<class NumericalType>
+class NumericalArrayComplex : public NumericalArrayComplexBase<NumericalType>
+{
+public:
 };
 
 template<>
@@ -978,6 +994,30 @@ public:
     {
         pl_VectorSubF_NNN (dst, left, right, fftSizeHalved << 1);
     }
+    
+    PLONK_INLINE_LOW static void zmulaccum (float* dstReal,
+                                            float* dstImag,
+                                            const float* leftReal,
+                                            const float* leftImag,
+                                            const float* rightReal,
+                                            const float* rightImag,
+                                            const UnsignedLong numItems) throw()
+    {
+        pl_VectorZMulAddF_ZNNNNNNNN (dstReal, dstImag, leftReal, leftImag, rightReal, rightImag, dstReal, dstImag, numItems);
+    }
+
+    PLONK_INLINE_LOW static void zmuladd (float* dstReal,
+                                          float* dstImag,
+                                          const float* inputReal,
+                                          const float* inputImag,
+                                          const float* mulReal,
+                                          const float* mulImag,
+                                          const float* addReal,
+                                          const float* addImag,
+                                          const UnsignedLong numItems) throw()
+    {
+        pl_VectorZMulAddF_ZNNNNNNNN (dstReal, dstImag, inputReal, inputImag, mulReal, mulImag, addReal, addImag, numItems);
+    }
 };
 
 template<>
@@ -992,7 +1032,7 @@ public:
                                        const double* rightImag,
                                        const UnsignedLong numItems) throw()
     {
-        pl_VectorZMulD_ZNNNNN (dstReal, dstImag, leftReal, leftImag, rightReal, rightImag, numItems);
+        pl_VectorZMulD_ZNNNNNN (dstReal, dstImag, leftReal, leftImag, rightReal, rightImag, numItems);
     }
     
     PLONK_INLINE_LOW static void zadd (double* dstReal,
@@ -1033,6 +1073,30 @@ public:
                                         const UnsignedLong fftSizeHalved)
     {
         pl_VectorSubD_NNN (dst, left, right, fftSizeHalved << 1);
+    }
+    
+    PLONK_INLINE_LOW static void zmulaccum (double* dstReal,
+                                            double* dstImag,
+                                            const double* leftReal,
+                                            const double* leftImag,
+                                            const double* rightReal,
+                                            const double* rightImag,
+                                            const UnsignedLong numItems) throw()
+    {
+        pl_VectorZMulAddD_ZNNNNNNNN (dstReal, dstImag, leftReal, leftImag, rightReal, rightImag, dstReal, dstImag, numItems);
+    }
+    
+    PLONK_INLINE_LOW static void zmuladd (double* dstReal,
+                                          double* dstImag,
+                                          const double* inputReal,
+                                          const double* inputImag,
+                                          const double* mulReal,
+                                          const double* mulImag,
+                                          const double* addReal,
+                                          const double* addImag,
+                                          const UnsignedLong numItems) throw()
+    {
+        pl_VectorZMulAddD_ZNNNNNNNN (dstReal, dstImag, inputReal, inputImag, mulReal, mulImag, addReal, addImag, numItems);
     }
 };
 
