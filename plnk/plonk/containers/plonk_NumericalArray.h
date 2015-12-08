@@ -793,15 +793,46 @@ public:
         dstImagSamples[0] = leftNyquist * rightNyquist;
     }
     
-    PLONK_INLINE_LOW static void zpmuladd (NumericalType* dst,
-                                           const NumericalType* left,
-                                           const NumericalType* right,
-                                           NumericalType* temp,
-                                           const UnsignedLong fftSizeHalved)
+    PLONK_INLINE_LOW static void zpmulaccum (NumericalType* dst,
+                                             const NumericalType* left,
+                                             const NumericalType* right,
+                                             NumericalType* temp,
+                                             const UnsignedLong fftSizeHalved)
     {
         NumericalArrayComplex<NumericalType>::zpmul (temp, left, right, fftSizeHalved);
         NumericalArrayComplex<NumericalType>::zpadd (dst, dst, temp, fftSizeHalved);
     }
+
+//    PLONK_INLINE_LOW static void zpmulaccum (NumericalType* dst,
+//                                             const NumericalType* input,
+//                                             const NumericalType* mul,
+//                                             const UnsignedLong fftSizeHalved)
+//    {
+//        const NumericalType* const leftRealSamples   = left;
+//        const NumericalType* const rightRealSamples  = right;
+//        const NumericalType* const leftImagSamples   = leftRealSamples + fftSizeHalved;
+//        const NumericalType* const rightImagSamples  = rightRealSamples + fftSizeHalved;
+//        NumericalType* const dstRealSamples          = dst;
+//        NumericalType* const dstImagSamples          = dstRealSamples + fftSizeHalved;
+//        
+//        const NumericalType dstDC = dstRealSamples[0];
+//        const NumericalType leftDC = leftRealSamples[0];
+//        const NumericalType rightDC = rightRealSamples[0];
+//        const NumericalType dstNyquist = dstImagSamples[0];
+//        const NumericalType leftNyquist = leftImagSamples[0];
+//        const NumericalType rightNyquist = rightImagSamples[0];
+//        
+//        NumericalArrayComplex<NumericalType>::zmuladd
+//        
+//        (dstRealSamples, dstImagSamples,
+//                                                    leftRealSamples, leftImagSamples,
+//                                                    rightRealSamples, rightImagSamples,
+//                                                    fftSizeHalved);
+//        
+//        dstRealSamples[0] = dstDC + leftDC * rightDC;
+//        dstImagSamples[0] = dstNyquist + leftNyquist * rightNyquist;
+//    }
+//
     
     PLONK_INLINE_LOW static void zpadd (NumericalType* dst,
                                         const NumericalType* left,
@@ -876,13 +907,13 @@ public:
         }
     }
     
-    PLONK_INLINE_LOW static void zmuladd (NumericalType* dstReal,
-                                          NumericalType* dstImag,
-                                          const NumericalType* leftReal,
-                                          const NumericalType* leftImag,
-                                          const NumericalType* rightReal,
-                                          const NumericalType* rightImag,
-                                          const UnsignedLong numItems) throw()
+    PLONK_INLINE_LOW static void zmulaccum (NumericalType* dstReal,
+                                            NumericalType* dstImag,
+                                            const NumericalType* leftReal,
+                                            const NumericalType* leftImag,
+                                            const NumericalType* rightReal,
+                                            const NumericalType* rightImag,
+                                            const UnsignedLong numItems) throw()
     {
         for (UnsignedLong i = 0; i < numItems; ++i)
         {
