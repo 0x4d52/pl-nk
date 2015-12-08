@@ -60,69 +60,42 @@ public:
     typedef NumericalArray2D<SampleType>    BuffersType;
     typedef FFTEngineBase<SampleType>       FFTEngineType;
     typedef SignalBase<SampleType>          SignalType;
-    
-    struct Selection
-    {
-        UnsignedShort offset;
-        UnsignedShort length;
-    };
+
     
     FFTBuffersInternal (FFTEngineType const& fftEngineToUse, BuffersType const& sourceBuffers) throw()
     :   fftEngine (fftEngineToUse),
         originalLength (0),
         numDivisions (0)
     {
-        const int numChannels = sourceBuffers.length();
-        
-        if (numChannels < 1)
-            return;
-        
-        plonk_assert (numChannels == 1 || sourceBuffers.isMatrix());
-        
-        const int fftSize = (int) fftEngine.length();
-        const int fftSizeHalved = (int) fftEngine.halfLength();
-        
-        originalLength = sourceBuffers.atUnchecked (0).length();
-        numDivisions = originalLength / fftSizeHalved;
-        
-        if (originalLength % fftSizeHalved != 0)
-            ++numDivisions;
-        
-        selection.setAll (0, numDivisions);
-
-        BufferType tempBuffer = Buffer::withSize (fftSize);
-        SampleType* const tempSamples = tempBuffer.getArray();
-        
-        for (int channel = 0; channel < numChannels; ++channel)
-        {
-            BufferType fftBuffer = BufferType::withSize (numDivisions * fftSize);
-            SampleType* fftSamples = fftBuffer.getArray();
-            const SampleType* sourceBuffer = sourceBuffers.atUnchecked (channel).getArray();
-            int sourceRemaining = originalLength;
-            
-            for (int division = 0; division < numDivisions; ++division)
-            {
-                const int dataLength = plonk::min (sourceRemaining, fftSizeHalved);
-                const int zeroLength = fftSize - dataLength;
-                
-                BufferType::copyData (tempSamples, sourceBuffer, dataLength);    // copy
-                BufferType::zeroData (tempSamples + dataLength, zeroLength);     // zero pad
-                
-                fftEngine.forward (fftSamples, tempSamples);
-                
-                fftSamples      += fftSize;
-                sourceBuffer    += fftSizeHalved;
-                sourceRemaining -= fftSizeHalved;
-            }
-            
-            fftBuffers.add (fftBuffer);
-        }
+        setBuffersInternal (sourceBuffers);
     }
     
     FFTBuffersInternal (FFTEngineType const& fftEngineToUse, SignalType const& sourceSignal) throw()
     :   fftEngine (fftEngineToUse),
         originalLength (0),
         numDivisions (0)
+    {
+        setSignalInternal (sourceSignal);
+    }
+    
+    FFTBuffersInternal* getChannel (const int channel) const throw()
+    {
+        const int numChannels = fftBuffers.length();
+        
+        if (numChannels == 0)
+        {
+            return new FFTBuffersInternal (fftEngine, Buffers());
+        }
+        else
+        {
+            return new FFTBuffersInternal (fftBuffers.atUnchecked (channel % numChannels),
+                                           fftEngine,
+                                           originalLength,
+                                           numDivisions);
+        }
+    }
+    
+    void setSignalInternal (SignalType const& sourceSignal) throw()
     {
         const int numChannels = sourceSignal.getNumChannels();
         
@@ -137,8 +110,6 @@ public:
         
         if (originalLength % fftSizeHalved != 0)
             ++numDivisions;
-        
-        selection.setAll (0, numDivisions);
         
         BufferType tempBuffer = Buffer::withSize (fftSize);
         SampleType* const tempSamples = tempBuffer.getArray();
@@ -183,7 +154,7 @@ public:
                     
                     BufferType::zeroData (tempSamples + dataLength, zeroLength);
                     fftEngine.forward (fftSamples, tempSamples);
-
+                    
                     fftSamples      += fftSize;
                     sourceRemaining -= fftSizeHalved;
                 }
@@ -193,43 +164,52 @@ public:
         }
     }
     
-    FFTBuffersInternal* getChannel (const int channel) const throw()
+    void setBuffersInternal (BuffersType const& sourceBuffers) throw()
     {
-        const int numChannels = fftBuffers.length();
+        const int numChannels = sourceBuffers.length();
         
-        if (numChannels == 0)
+        if (numChannels < 1)
+            return;
+        
+        plonk_assert (numChannels == 1 || sourceBuffers.isMatrix());
+        
+        const int fftSize = (int) fftEngine.length();
+        const int fftSizeHalved = (int) fftEngine.halfLength();
+        
+        originalLength = sourceBuffers.atUnchecked (0).length();
+        numDivisions = originalLength / fftSizeHalved;
+        
+        if (originalLength % fftSizeHalved != 0)
+            ++numDivisions;
+        
+        BufferType tempBuffer = Buffer::withSize (fftSize);
+        SampleType* const tempSamples = tempBuffer.getArray();
+        
+        for (int channel = 0; channel < numChannels; ++channel)
         {
-            return new FFTBuffersInternal (fftEngine, Buffers());
-        }
-        else
-        {
-            return new FFTBuffersInternal (fftBuffers.atUnchecked (channel % numChannels),
-                                           fftEngine,
-                                           originalLength,
-                                           numDivisions);
+            BufferType fftBuffer = BufferType::withSize (numDivisions * fftSize);
+            SampleType* fftSamples = fftBuffer.getArray();
+            const SampleType* sourceBuffer = sourceBuffers.atUnchecked (channel).getArray();
+            int sourceRemaining = originalLength;
+            
+            for (int division = 0; division < numDivisions; ++division)
+            {
+                const int dataLength = plonk::min (sourceRemaining, fftSizeHalved);
+                const int zeroLength = fftSize - dataLength;
+                
+                BufferType::copyData (tempSamples, sourceBuffer, dataLength);    // copy
+                BufferType::zeroData (tempSamples + dataLength, zeroLength);     // zero pad
+                
+                fftEngine.forward (fftSamples, tempSamples);
+                
+                fftSamples      += fftSize;
+                sourceBuffer    += fftSizeHalved;
+                sourceRemaining -= fftSizeHalved;
+            }
+            
+            fftBuffers.add (fftBuffer);
         }
     }
-    
-    void setSelection (int offset, int length) throw()
-    {
-        plonk_assert (offset >= 0 && offset < 65536);
-        plonk_assert (length >= 0 && length < 65536);
-        
-        if (numDivisions > 2)
-        {
-            Selection newSelection;
-            
-            newSelection.offset = plonk::clip (offset, 0, numDivisions - 2);
-            newSelection.length = plonk::clip (length, 1, numDivisions - offset);
-            
-            selection.setAll (newSelection.offset, newSelection.length);
-        }
-    }
-    
-//    PLONK_INLINE_LOW Selection getSelection() throw()
-//    {
-//        return selection
-//    }
     
     PLONK_INLINE_LOW const SampleType* getDivision (const int channel, const int division) const throw()
     {
@@ -262,9 +242,6 @@ private:
     FFTEngineType fftEngine;
     int originalLength;
     int numDivisions;
-    
-    AtomicExtended<Short> selection;
-    
 };
 
 //------------------------------------------------------------------------------
@@ -389,11 +366,6 @@ public:
     FFTBuffersBase operator[] (const int channel) const throw()
     {
         return getChannel (channel);
-    }
-    
-    void setSelection (int offset, int length) throw()
-    {
-        return this->getInternal()->setSelection (offset, length);
     }
 };
 
