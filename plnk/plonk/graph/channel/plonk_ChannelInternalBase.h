@@ -75,10 +75,10 @@ public:
     :   ChannelInternalCore (inputDictionary, blockSize, sampleRate),
         outputBuffer (Buffer::newClear (blockSize.getValue())),
         usingExternalBuffer (false)
-    {
 #ifdef PLONK_DEBUG
-        hasInitialisedValue = false;
-#endif        
+    ,   hasInitialisedValue (false)
+#endif
+    {
         this->getBlockSize().addReceiver (this);
     }
     
