@@ -49,21 +49,24 @@ static RNG& getConvolveRNG()
 }
 
 /** Convolve channel. */
-template<class SampleType>
+template<class SampleType, typename FFTBuffersAccess>
 class ConvolveChannelInternal
 :   public ChannelInternal<SampleType, ChannelInternalCore::Data>
 {
 public:
-    typedef ChannelInternalCore::Data                           Data;
-    typedef ChannelBase<SampleType>                             ChannelType;
-    typedef ObjectArray<ChannelType>                            ChannelArrayType;
-    typedef ConvolveChannelInternal<SampleType>                 ConvolveInternal;
-    typedef ChannelInternal<SampleType,Data>                    Internal;
-    typedef ChannelInternalBase<SampleType>                     InternalBase;
-    typedef UnitBase<SampleType>                                UnitType;
-    typedef InputDictionary                                     Inputs;
-    typedef NumericalArray<SampleType>                          Buffer;
-    typedef FFTEngineBase<SampleType>                           FFTEngineType;
+    typedef FFTBuffersAccess                                        FFTBuffersAccessType;
+
+    typedef ChannelInternalCore::Data                               Data;
+    typedef ChannelBase<SampleType>                                 ChannelType;
+    typedef ObjectArray<ChannelType>                                ChannelArrayType;
+    typedef ConvolveChannelInternal<SampleType,FFTBuffersAccess>    ConvolveInternal;
+    typedef ChannelInternal<SampleType,Data>                        Internal;
+    typedef ChannelInternalBase<SampleType>                         InternalBase;
+    typedef UnitBase<SampleType>                                    UnitType;
+    typedef InputDictionary                                         Inputs;
+    typedef NumericalArray<SampleType>                              Buffer;
+    typedef FFTEngineBase<SampleType>                               FFTEngineType;
+    typedef FFTBuffersBase<SampleType>                              FFTBuffersType;
     
     enum InternalBuffers
     {
@@ -145,7 +148,7 @@ public:
         
         this->initValue (SampleType (0)); // not really applicable
         
-        const FFTBuffers& irBuffers (this->getInputAsFFTBuffers (IOKey::FFTBuffers));
+        const FFTBuffersAccessType irBuffers (this->getInputAsFFTBuffers (IOKey::FFTBuffers));
         const FFTEngineType& fftEngine (irBuffers.getFFTEngine());
         
         countDown           = getConvolveRNG().uniform ((int) (fftEngine.length() / 16)) * 4;
@@ -191,7 +194,7 @@ public:
     
     void process (ProcessInfo& info, const int channel) throw()
     {
-        FFTBuffers& irBuffers (this->getInputAsFFTBuffers (IOKey::FFTBuffers));
+        FFTBuffersAccessType irBuffers (this->getInputAsFFTBuffers (IOKey::FFTBuffers));
         FFTEngineType& fftEngine (irBuffers.getFFTEngine());
         
         const UnsignedLong fftSize = (UnsignedLong) fftEngine.length();
@@ -353,14 +356,17 @@ private:
 
  
  @ingroup FFTUnits */
-template<class SampleType>
+template<class SampleType, typename FFTBuffersAccess = FFTBuffersBase<SampleType>&>
 class ConvolveUnit
 {
 public:
-    typedef ConvolveChannelInternal<SampleType>     ConvolveInternal;
-    typedef typename ConvolveInternal::Data         Data;
-    typedef UnitBase<SampleType>                    UnitType;
-    typedef InputDictionary                         Inputs;
+    typedef ConvolveChannelInternal<SampleType,FFTBuffersAccess>    ConvolveInternal;
+    typedef typename ConvolveInternal::Data                         Data;
+    typedef UnitBase<SampleType>                                    UnitType;
+    typedef InputDictionary                                         Inputs;
+    typedef FFTBuffersBase<SampleType>                              FFTBuffersType;
+
+    typedef ConvolveUnit<SampleType,FFTBuffersType>                 Dyn;
     
     static PLONK_INLINE_LOW UnitInfos getInfo() throw()
     {
@@ -377,7 +383,7 @@ public:
                          IOKey::End);
     }
     
-    static PLONK_INLINE_LOW UnitType ar (UnitType const& input, FFTBuffers const& fftBuffers) throw()
+    static PLONK_INLINE_LOW UnitType ar (UnitType const& input, FFTBuffersType const& fftBuffers) throw()
     {
         Inputs inputs;
         inputs.put (IOKey::Generic, input);
