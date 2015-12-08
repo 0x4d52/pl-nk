@@ -55,8 +55,10 @@ typedef struct PLANK_VEC_VDSP_Point
 #define Point PLANK_VEC_VDSP_Point
 #define Component PLANK_VEC_VDSP_Component
 #include <Accelerate/Accelerate.h>
+#include <CoreFoundation/CoreFoundation.h>
 #undef Point
 #undef Component
+
 
 #define PLANK_SIMDF_LENGTH  4   // vector 4 floats
 #define PLANK_SIMDF_SIZE   16
@@ -618,17 +620,16 @@ static PLANK_INLINE_LOW void pl_VectorZMulAddF_ZNNNNNNNN (float *resultReal, flo
 }
 
 
-// works as documented but seems useless as it interpolates thr "wrong" two samples
-// fixed in 10.7.2 but is that seems to be the runtime lib so would still 
-// be dangerous to use without some runtime checking
-//static PLANK_INLINE_LOW void pl_VectorLookupF_NnN (float *result, const float* table, PlankUL n, const float* index, PlankUL N) 
-//{ 
-//    float mul = 1.f;
-//    float add = 0.f;
-//    vDSP_vtabi ((float*)index, 1, &mul, &add, (float*)table, n, result, 1, N);
-//}
-PLANK_VECTORLOOKUP_DEFINE(F)
-
+#if defined (MAC_OS_X_VERSION_10_8) && MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_8
+static PLANK_INLINE_LOW void pl_VectorLookupF_NnN (float *result, const float* table, PlankUL n, const float* index, PlankUL N)
+{
+    float mul = 1.f;
+    float add = 0.f;
+    vDSP_vtabi ((float*)index, 1, &mul, &add, (float*)table, n, result, 1, N);
+}
+#else
+PLANK_VECTORLOOKUP_DEFINE(F) // vDSP_vtabi uses wrong indices < 10.7.2
+#endif
 
 //------------------------------- double ---------------------------------------
 
@@ -977,6 +978,8 @@ static PLANK_INLINE_LOW void pl_VectorZMulD_ZNNNNNN (double *resultReal, double 
     vDSP_zvmulD (&left, 1, &right, 1, &result, 1, N, 1);
 }
 
+
+#if defined (MAC_OS_X_VERSION_10_10) && MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_10
 static PLANK_INLINE_LOW void pl_VectorZMulAddD_ZNNNNNNNN (double *resultReal, double *resultImag,
                                                           const double* inputReal, const double* inputImag,
                                                           const double* mulReal, const double* mulImag,
@@ -994,18 +997,20 @@ static PLANK_INLINE_LOW void pl_VectorZMulAddD_ZNNNNNNNN (double *resultReal, do
     add.imagp = (double*)addImag;
     vDSP_zvmaD (&input, 1, &mul, 1, &add, 1, &result, 1, N);
 }
+#else
+PLANK_VECTORZMULADD_DEFINE(D) // vDSP_zvmaD not available < 10.10
+#endif
 
-// works as documented but seems useless as it interpolates thr "wrong" two samples
-// fixed in 10.7.2 but is that seems to be the runtime lib so would still 
-// be dangerous to use without some runtime checking
-//static PLANK_INLINE_LOW void pl_VectorLookupD_NnN (double *result, const double* table, PlankUL n, const double* index, PlankUL N) 
-//{ 
-//    double mul = 1.0;
-//    double add = 0.0;
-//    vDSP_vtabiD ((double*)index, 1, &mul, &add, (double*)table, n, result, 1, N);
-//}
-PLANK_VECTORLOOKUP_DEFINE(D)
-
+#if defined (MAC_OS_X_VERSION_10_8) && MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_8
+static PLANK_INLINE_LOW void pl_VectorLookupD_NnN (double *result, const double* table, PlankUL n, const double* index, PlankUL N)
+{
+    double mul = 1.0;
+    double add = 0.0;
+    vDSP_vtabiD ((double*)index, 1, &mul, &add, (double*)table, n, result, 1, N);
+}
+#else
+PLANK_VECTORLOOKUP_DEFINE(D) // vDSP_vtabiD uses wrong indices < 10.7.2
+#endif
 
 
 #undef I
