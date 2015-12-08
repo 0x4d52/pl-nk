@@ -174,7 +174,7 @@ public:
     UnitBase (ChannelType const& channel) throw()
     :   UnitType (channel)
     {
-        this->atUnchecked (0).initChannel (0);
+//        this->atUnchecked (0).initChannel (0);
     }
     
     /** Constant Unit constructor.
