@@ -87,7 +87,8 @@ public:
         countDown (0),
         position0 (0),
         position1 (0),
-        fftAltSelect (0)
+        fftAltSelect (0),
+        previousIRBuffers (this->getInputAsFFTBuffers (IOKey::FFTBuffers))
     {
         const FFTBuffers& irBuffers (this->getInputAsFFTBuffers (IOKey::FFTBuffers));
         const FFTEngineType& fftEngine (irBuffers.getFFTEngine());
@@ -192,9 +193,8 @@ public:
         NumericalArray<SampleType>::zeroData (dst, numItems);
     }
     
-    void process (ProcessInfo& info, const int channel) throw()
+    void processContinue (ProcessInfo& info, const int channel, FFTBuffersType& irBuffers) throw()
     {
-        FFTBuffersAccessType irBuffers (this->getInputAsFFTBuffers (IOKey::FFTBuffers));
         FFTEngineType& fftEngine (irBuffers.getFFTEngine());
         
         const UnsignedLong fftSize = (UnsignedLong) fftEngine.length();
@@ -209,13 +209,13 @@ public:
         const int divisionRatio1 = (fftSizeHalved / outputBufferLength) - 1;
         
         plonk_assert (outputBufferLength == inputBuffer.length());
-
+        
         SampleType* const inputBufferBase = buffers.atUnchecked (InputBuffer).getArray();
         SampleType* const fftAltBuffers[] = { fftAltBuffer0, fftAltBuffer1 };
         
         int samplesRemaining = outputBufferLength;
         const int numDivisions = irBuffers.getNumDivisions();
-
+        
         while (samplesRemaining > 0)
         {
             int hop;
@@ -238,7 +238,7 @@ public:
                 moveSamples (fftAltBuffer0 + position0, inputSamples, hop);
                 moveSamples (fftAltBuffer1 + position1, inputSamples, hop);
                 moveSamples (outputSamples, fftOverlapBuffer + position0, hop);
-
+                
                 inputSamples  += hop;
                 outputSamples += hop;
                 position0     += hop;
@@ -251,8 +251,8 @@ public:
             while (hop != 0)
             {
                 int divisionsRemaining = divisionsCounter >= divisionRatio1
-                                       ? (divisionsRead - divisionsWritten) - 1
-                                       : (int) ((SampleType) ((divisionsCounter * (divisionsRead - 1)) / (SampleType) (divisionRatio1)) - divisionsWritten);
+                ? (divisionsRead - divisionsWritten) - 1
+                : (int) ((SampleType) ((divisionsCounter * (divisionsRead - 1)) / (SampleType) (divisionRatio1)) - divisionsWritten);
                 
                 const int nextDivision = divisionsPrevious >= numDivisions ? 0 : divisionsPrevious;
                 divisionsPrevious = nextDivision + divisionsRemaining;
@@ -273,11 +273,11 @@ public:
                 for (int i = 0; i < divisionsRemaining; i++)
                 {
                     complexMultiplyAccumulate (fftTempBuffer, inputBufferSamples, irSamples, fftSizeHalved);
-
+                    
                     inputBufferSamples += fftSize;
                     irSamples          += fftSize;
                 }
-
+                
                 divisionsWritten += divisionsRemaining;
             }
             
@@ -287,7 +287,7 @@ public:
                 
                 const SampleType* const irSamples = irBuffers.getDivision (channel, 0);
                 SampleType* const inputBufferSamples = inputBufferBase + divisionsCurrent * fftSize;
-
+                
                 fftEngine.forward (inputBufferSamples, fftAltBuffers[fftAltSelect]);
                 complexMultiplyAccumulate (fftTempBuffer, inputBufferSamples, irSamples, fftSizeHalved);
                 
@@ -296,7 +296,7 @@ public:
                 hop = fftSizeHalved;
                 SampleType* const overlap1 = fftOverlapBuffer + (hop * (1 - fftAltSelect));
                 SampleType* const overlap2 = fftOverlapBuffer + (hop * fftAltSelect);
-                    
+                
                 moveSamples (overlap1, fftTransformBuffer, fftSize);
                 accumulateSamples (overlap2, fftTransformBuffer + hop, fftSize);
                 
@@ -310,7 +310,7 @@ public:
                     position1    = 0;
                     fftAltSelect = 1;
                 }
-                                
+                
                 divisionsPrevious   = divisionsCurrent;
                 divisionsCurrent    = plonk::wrap (divisionsCurrent - 1, 0, numDivisions);
                 divisionsCounter    = 0;
@@ -320,6 +320,22 @@ public:
                 zeroSamples (fftTempBuffer, fftSize);
             }
         }
+    }
+    
+    void processChanged (ProcessInfo& info, const int channel, FFTBuffersType& irBuffers) throw()
+    {
+        previousIRBuffers = irBuffers;
+        processContinue (info, channel, irBuffers);
+    }
+    
+    void process (ProcessInfo& info, const int channel) throw()
+    {
+        FFTBuffersAccessType irBuffers (this->getInputAsFFTBuffers (IOKey::FFTBuffers));
+        
+        if (previousIRBuffers == irBuffers)
+            processContinue (info, channel, irBuffers);
+        else
+            processChanged (info, channel, irBuffers);
     }
     
 private:
@@ -339,6 +355,8 @@ private:
     int countDown;
     int position0, position1;
     int fftAltSelect;
+    
+    FFTBuffersAccessType previousIRBuffers;
 };
 
 
