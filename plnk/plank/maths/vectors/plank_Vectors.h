@@ -183,15 +183,16 @@
 
 
 
-#define PLANK_VECTORZMUL_NAME(TYPECODE) PLANK_VECTOR_NAMEINTERNAL(ZMul,TYPECODE,_ZNNNNN)
+#define PLANK_VECTORZMUL_NAME(TYPECODE) PLANK_VECTOR_NAMEINTERNAL(ZMul,TYPECODE,_ZNNNNNN)
+#define PLANK_VECTORZMULADD_NAME(TYPECODE) PLANK_VECTOR_NAMEINTERNAL(ZMulAdd,TYPECODE,_ZNNNNNNNN)
 
 #define PLANK_VECTORZMUL_DEFINE(TYPECODE) \
     /** Complex multiply.
      @param resultReal The real output vector.
      @param resultImag The imag output vector.
      @param leftReal The real left input vector.
-     @param leftImag The imag right input vector.
-     @param rightReal The real left input vector.
+     @param leftImag The imag left input vector.
+     @param rightReal The real right input vector.
      @param rightImag The imag right input vector.
      @param N The number of items in the vectors. */\
     static PLANK_INLINE_LOW void PLANK_VECTORZMUL_NAME(TYPECODE) (Plank##TYPECODE *resultReal, Plank##TYPECODE *resultImag,\
@@ -204,6 +205,30 @@
             resultImag[i] = leftReal[i] * rightImag[i] + leftImag[i] * rightReal[i];\
         }\
     }
+
+#define PLANK_VECTORZMULADD_DEFINE(TYPECODE) \
+    /** Complex multiply-add.
+     @param resultReal The real output vector.
+     @param resultImag The imag output vector.
+     @param inputReal The real input vector.
+     @param inputImag The imag input vector.
+     @param mulReal The real mul vector.
+     @param mulImag The imag mul vector.
+     @param addReal The real add vector.
+     @param addImag The imag add vector.
+     @param N The number of items in the vectors. */\
+    static PLANK_INLINE_LOW void PLANK_VECTORZMULADD_NAME(TYPECODE) (Plank##TYPECODE *resultReal, Plank##TYPECODE *resultImag,\
+                                                                     const Plank##TYPECODE* inputReal, const Plank##TYPECODE* inputImag,\
+                                                                     const Plank##TYPECODE* mulReal, const Plank##TYPECODE* mulImag,\
+                                                                     const Plank##TYPECODE* addReal, const Plank##TYPECODE* addImag,\
+                                                                     PlankUL N) {\
+    PlankUL i;\
+    for (i = 0; i < N; PLANK_INC(i)) {\
+        resultReal[i] = inputReal[i] * mulReal[i] - inputImag[i] * mulImag[i] + addReal[i];\
+        resultImag[i] = inputReal[i] * mulImag[i] + inputImag[i] * mulReal[i] + addImag[i];\
+    }\
+}
+
 
 #define PLANK_VECTORFILL_NAME(TYPECODE) PLANK_VECTOR_NAMEINTERNAL(Fill,TYPECODE,_N1)
 

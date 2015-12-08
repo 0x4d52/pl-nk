@@ -767,10 +767,10 @@ template<class NumericalType>
 class NumericalArrayComplexBase
 {
 public:
-    PLONK_INLINE_LOW static void zmulPacked (NumericalType* dst,
-                                             const NumericalType* left,
-                                             const NumericalType* right,
-                                             const UnsignedLong fftSizeHalved)
+    PLONK_INLINE_LOW static void zpmul (NumericalType* dst,
+                                        const NumericalType* left,
+                                        const NumericalType* right,
+                                        const UnsignedLong fftSizeHalved)
     {
         const NumericalType* const leftRealSamples   = left;
         const NumericalType* const rightRealSamples  = right;
@@ -793,20 +793,20 @@ public:
         dstImagSamples[0] = leftNyquist * rightNyquist;
     }
     
-    PLONK_INLINE_LOW static void zmulAccumPacked (NumericalType* dst,
-                                                  const NumericalType* left,
-                                                  const NumericalType* right,
-                                                  NumericalType* temp,
-                                                  const UnsignedLong fftSizeHalved)
+    PLONK_INLINE_LOW static void zpmuladd (NumericalType* dst,
+                                           const NumericalType* left,
+                                           const NumericalType* right,
+                                           NumericalType* temp,
+                                           const UnsignedLong fftSizeHalved)
     {
-        NumericalArrayComplex<NumericalType>::zmulPacked (temp, left, right, fftSizeHalved);
-        NumericalArrayComplex<NumericalType>::zaddPacked (dst, dst, temp, fftSizeHalved);
+        NumericalArrayComplex<NumericalType>::zpmul (temp, left, right, fftSizeHalved);
+        NumericalArrayComplex<NumericalType>::zpadd (dst, dst, temp, fftSizeHalved);
     }
     
-    PLONK_INLINE_LOW static void zaddPacked (NumericalType* dst,
-                                             const NumericalType* left,
-                                             const NumericalType* right,
-                                             const UnsignedLong fftSizeHalved)
+    PLONK_INLINE_LOW static void zpadd (NumericalType* dst,
+                                        const NumericalType* left,
+                                        const NumericalType* right,
+                                        const UnsignedLong fftSizeHalved)
     {
         const UnsignedLong numItems = fftSizeHalved << 1;
         
@@ -814,10 +814,10 @@ public:
             dst[i] = left[i] + right[i];
     }
     
-    PLONK_INLINE_LOW static void zsubPacked (NumericalType* dst,
-                                             const NumericalType* left,
-                                             const NumericalType* right,
-                                             const UnsignedLong fftSizeHalved)
+    PLONK_INLINE_LOW static void zpsub (NumericalType* dst,
+                                        const NumericalType* left,
+                                        const NumericalType* right,
+                                        const UnsignedLong fftSizeHalved)
     {
         const UnsignedLong numItems = fftSizeHalved << 1;
         
@@ -875,6 +875,22 @@ public:
             dstImag[i] = leftReal[i] - rightImag[i];
         }
     }
+    
+    PLONK_INLINE_LOW static void zmuladd (NumericalType* dstReal,
+                                          NumericalType* dstImag,
+                                          const NumericalType* leftReal,
+                                          const NumericalType* leftImag,
+                                          const NumericalType* rightReal,
+                                          const NumericalType* rightImag,
+                                          const UnsignedLong numItems) throw()
+    {
+        for (UnsignedLong i = 0; i < numItems; ++i)
+        {
+            dstReal[i] += leftReal[i] * rightReal[i] - leftImag[i] * rightImag[i];
+            dstImag[i] += leftReal[i] * rightImag[i] + leftImag[i] * rightReal[i];
+        }
+    }
+
 };
 
 template<>
@@ -889,7 +905,7 @@ public:
                                        const float* rightImag,
                                        const UnsignedLong numItems) throw()
     {
-        pl_VectorZMulF_ZNNNNN (dstReal, dstImag, leftReal, leftImag, rightReal, rightImag, numItems);
+        pl_VectorZMulF_ZNNNNNN (dstReal, dstImag, leftReal, leftImag, rightReal, rightImag, numItems);
     }
     
     PLONK_INLINE_LOW static void zadd (float* dstReal,
@@ -916,18 +932,18 @@ public:
         pl_VectorSubF_NNN (dstImag, leftImag, rightImag, numItems);
     }
     
-    PLONK_INLINE_LOW static void zaddPacked (float* dst,
-                                             const float* left,
-                                             const float* right,
-                                             const UnsignedLong fftSizeHalved)
+    PLONK_INLINE_LOW static void zpadd (float* dst,
+                                        const float* left,
+                                        const float* right,
+                                        const UnsignedLong fftSizeHalved)
     {
         pl_VectorAddF_NNN (dst, left, right, fftSizeHalved << 1);
     }
     
-    PLONK_INLINE_LOW static void zsubPacked (float* dst,
-                                             const float* left,
-                                             const float* right,
-                                             const UnsignedLong fftSizeHalved)
+    PLONK_INLINE_LOW static void zpsub (float* dst,
+                                        const float* left,
+                                        const float* right,
+                                        const UnsignedLong fftSizeHalved)
     {
         pl_VectorSubF_NNN (dst, left, right, fftSizeHalved << 1);
     }
@@ -972,18 +988,18 @@ public:
         pl_VectorSubD_NNN (dstImag, leftImag, rightImag, numItems);
     }
     
-    PLONK_INLINE_LOW static void zaddPacked (double* dst,
-                                             const double* left,
-                                             const double* right,
-                                             const UnsignedLong fftSizeHalved)
+    PLONK_INLINE_LOW static void zpadd (double* dst,
+                                        const double* left,
+                                        const double* right,
+                                        const UnsignedLong fftSizeHalved)
     {
         pl_VectorAddD_NNN (dst, left, right, fftSizeHalved << 1);
     }
     
-    PLONK_INLINE_LOW static void zsubPacked (double* dst,
-                                             const double* left,
-                                             const double* right,
-                                             const UnsignedLong fftSizeHalved)
+    PLONK_INLINE_LOW static void zpsub (double* dst,
+                                        const double* left,
+                                        const double* right,
+                                        const UnsignedLong fftSizeHalved)
     {
         pl_VectorSubD_NNN (dst, left, right, fftSizeHalved << 1);
     }

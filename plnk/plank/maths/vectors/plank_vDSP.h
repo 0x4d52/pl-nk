@@ -584,10 +584,10 @@ static PLANK_INLINE_LOW void pl_VectorAddMulF_1NN (float *result, const float* a
     vDSP_dotpr (a, 1, b, 1, result, N);
 }
 
-static PLANK_INLINE_LOW void pl_VectorZMulF_ZNNNNN (float *resultReal, float *resultImag,
-                                          const float* leftReal, const float* leftImag,
-                                          const float* rightReal, const float* rightImag,
-                                          PlankUL N)
+static PLANK_INLINE_LOW void pl_VectorZMulF_ZNNNNNN (float *resultReal, float *resultImag,
+                                                     const float* leftReal, const float* leftImag,
+                                                     const float* rightReal, const float* rightImag,
+                                                     PlankUL N)
 {
     DSPSplitComplex result, left, right;
     result.realp = resultReal;
@@ -597,6 +597,24 @@ static PLANK_INLINE_LOW void pl_VectorZMulF_ZNNNNN (float *resultReal, float *re
     right.realp = (float*)rightReal;
     right.imagp = (float*)rightImag;
     vDSP_zvmul (&left, 1, &right, 1, &result, 1, N, 1);
+}
+
+static PLANK_INLINE_LOW void pl_VectorZMulAddF_ZNNNNNNNN (float *resultReal, float *resultImag,
+                                                          const float* inputReal, const float* inputImag,
+                                                          const float* mulReal, const float* mulImag,
+                                                          const float* addReal, const float* addImag,
+                                                          PlankUL N)
+{
+    DSPSplitComplex result, input, mul, add;
+    result.realp = resultReal;
+    result.imagp = resultImag;
+    input.realp = (float*)inputReal;
+    input.imagp = (float*)inputImag;
+    mul.realp = (float*)mulReal;
+    mul.imagp = (float*)mulImag;
+    add.realp = (float*)addReal;
+    add.imagp = (float*)addImag;
+    vDSP_zvma (&input, 1, &mul, 1, &add, 1, &result, 1, N);
 }
 
 

@@ -103,10 +103,10 @@ public:
     
         buffers.add (processBuffers);
         
-        Buffer inputBuffer = Buffer::newClear (irBuffers.getOriginalLength() * 2);
+        Buffer inputBuffer = Buffer::newClear (irBuffers.getOriginalLength() * 4);
         buffers.add (inputBuffer);
         
-#if PLONK_DEBUG
+#if 0 // PLONK_DEBUG
         printf ("fftAltBuffer0      = %p (%d)\n", fftAltBuffer0, fftSize2);
         printf ("fftAltBuffer1      = %p (%d)\n", fftAltBuffer1, fftSize2);
         printf ("fftTransformBuffer = %p (%d)\n", fftTransformBuffer, fftSize2);
@@ -150,7 +150,7 @@ public:
         const FFTBuffers& irBuffers (this->getInputAsFFTBuffers (IOKey::FFTBuffers));
         const FFTEngineType& fftEngine (irBuffers.getFFTEngine());
         
-        countDown           = 0; // getConvolveRNG().uniform ((int) (fftEngine.length() / 8)) * 4;
+        countDown           = getConvolveRNG().uniform ((int) (fftEngine.length() / 16)) * 4;
         position0           = fftEngine.halfLength() - countDown;
         position1           = position0 + countDown;
         fftAltSelect        = 0;
@@ -174,7 +174,7 @@ public:
                                                   SampleType* const temp,
                                                   const UnsignedLong halfLength) throw()
     {
-        NumericalArrayComplex<SampleType>::zmulAccumPacked (output, left, right, temp, halfLength);
+        NumericalArrayComplex<SampleType>::zpmuladd (output, left, right, temp, halfLength);
     }
 
     static inline void moveSamples (SampleType* const dst, const SampleType* const src, const UnsignedLong numItems) throw()
