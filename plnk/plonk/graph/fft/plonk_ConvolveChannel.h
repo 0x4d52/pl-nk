@@ -153,8 +153,13 @@ public:
         const FFTBuffersAccessType irBuffers (this->getInputAsFFTBuffers (IOKey::FFTBuffers).getValue());
         const FFTEngineType& fftEngine (irBuffers.getFFTEngine());
         
-        countDown           = getConvolveRNG().uniform ((int) (fftEngine.length() / 16)) * 4;
-        position0           = fftEngine.halfLength() - countDown;
+        reset (fftEngine.length());
+    }
+    
+    void reset (const UnsignedLong fftLength) throw()
+    {
+        countDown           = getConvolveRNG().uniform ((int) (fftLength / 16)) * 4;
+        position0           = fftLength / 2 - countDown;
         position1           = position0 + countDown;
         fftAltSelect        = 0;
         divisionsCurrent    = 0;
@@ -162,9 +167,9 @@ public:
         divisionsWritten    = 0;
         divisionsPrevious   = 0;
         divisionsRead       = 1;
-
-        const UnsignedLong fftSize2 = (UnsignedLong) fftEngine.length() * 2;
-
+        
+        const UnsignedLong fftSize2 = (UnsignedLong) fftLength * 2;
+        
         zeroSamples (fftAltBuffer0,      fftSize2);
         zeroSamples (fftAltBuffer1,      fftSize2);
         zeroSamples (fftTransformBuffer, fftSize2);
@@ -196,24 +201,32 @@ public:
     
     void processContinue (ProcessInfo& info, const int channel, FFTBuffersType& irBuffers, FFTEngineType& fftEngine) throw()
     {
-        const UnsignedLong fftSize = (UnsignedLong) fftEngine.length();
-        const UnsignedLong fftSizeHalved = (UnsignedLong) fftEngine.halfLength();
-        
         UnitType& inputUnit (this->getInputAsUnit (IOKey::Generic));
         const Buffer& inputBuffer (inputUnit.process (info, channel));
         const SampleType* inputSamples = inputBuffer.getArray();
         
         SampleType* outputSamples = this->getOutputSamples();
         const UnsignedLong outputBufferLength = (UnsignedLong) this->getOutputBuffer().length();
-        const int divisionRatio1 = (fftSizeHalved / outputBufferLength) - 1;
         
         plonk_assert (outputBufferLength == inputBuffer.length());
         
+        int samplesRemaining = outputBufferLength;
+        const int numDivisions = irBuffers.getNumDivisions();
+        
+        if (numDivisions == 0)
+        {
+            plonk_assertfalse;
+            zeroSamples (outputSamples, outputBufferLength);
+            return;
+        }
+            
+        const UnsignedLong fftSize = (UnsignedLong) fftEngine.length();
+        const UnsignedLong fftSizeHalved = (UnsignedLong) fftEngine.halfLength();
+
+        const int divisionRatio1 = (fftSizeHalved / outputBufferLength) - 1;
         SampleType* const inputBufferBase = buffers.atUnchecked (InputBuffer).getArray();
         SampleType* const fftAltBuffers[] = { fftAltBuffer0, fftAltBuffer1 };
         
-        int samplesRemaining = outputBufferLength;
-        const int numDivisions = irBuffers.getNumDivisions();
         
         while (samplesRemaining > 0)
         {
@@ -323,6 +336,7 @@ public:
     
     void processChanged (ProcessInfo& info, const int channel, FFTBuffersType& irBuffers, FFTEngineType& fftEngine) throw()
     {
+        reset (fftEngine.length());
         processContinue (info, channel, irBuffers, fftEngine);
     }
     

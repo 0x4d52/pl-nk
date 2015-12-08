@@ -141,6 +141,7 @@ typedef NumericalArray< Variable<char> >            CharVariables;
 typedef NumericalArray< Variable<bool> >            BoolVariables;
 
 typedef Variable< FloatFFTBuffers& >                FloatFFTBuffersVariable;
+typedef Variable< FFTBuffers& >                     FFTBuffersVariable;
 
 
 #endif // PLONK_VARIABLEFORWARDDECLARATIONS_H
