@@ -67,7 +67,8 @@ public:
     typedef NumericalArray<SampleType>                              Buffer;
     typedef FFTEngineBase<SampleType>                               FFTEngineType;
     typedef FFTBuffersBase<SampleType>                              FFTBuffersType;
-    
+    typedef Variable<FFTBuffersType&>                               FFTBuffersVariableType;
+
     enum InternalBuffers
     {
         ProcessBuffers,
@@ -88,9 +89,9 @@ public:
         position0 (0),
         position1 (0),
         fftAltSelect (0),
-        previousIRBuffers (this->getInputAsFFTBuffers (IOKey::FFTBuffers))
+        previousIRBuffers (this->getInputAsFFTBuffers (IOKey::FFTBuffers).getValue())
     {
-        const FFTBuffers& irBuffers (this->getInputAsFFTBuffers (IOKey::FFTBuffers));
+        const FFTBuffers& irBuffers (previousIRBuffers);
         const FFTEngineType& fftEngine (irBuffers.getFFTEngine());
         const int fftSize = fftEngine.length();
         const int fftSize2 = fftSize * 2;
@@ -149,7 +150,7 @@ public:
         
         this->initValue (SampleType (0)); // not really applicable
         
-        const FFTBuffersAccessType irBuffers (this->getInputAsFFTBuffers (IOKey::FFTBuffers));
+        const FFTBuffersAccessType irBuffers (this->getInputAsFFTBuffers (IOKey::FFTBuffers).getValue());
         const FFTEngineType& fftEngine (irBuffers.getFFTEngine());
         
         countDown           = getConvolveRNG().uniform ((int) (fftEngine.length() / 16)) * 4;
@@ -193,10 +194,8 @@ public:
         NumericalArray<SampleType>::zeroData (dst, numItems);
     }
     
-    void processContinue (ProcessInfo& info, const int channel, FFTBuffersType& irBuffers) throw()
+    void processContinue (ProcessInfo& info, const int channel, FFTBuffersType& irBuffers, FFTEngineType& fftEngine) throw()
     {
-        FFTEngineType& fftEngine (irBuffers.getFFTEngine());
-        
         const UnsignedLong fftSize = (UnsignedLong) fftEngine.length();
         const UnsignedLong fftSizeHalved = (UnsignedLong) fftEngine.halfLength();
         
@@ -322,20 +321,30 @@ public:
         }
     }
     
-    void processChanged (ProcessInfo& info, const int channel, FFTBuffersType& irBuffers) throw()
+    void processChanged (ProcessInfo& info, const int channel, FFTBuffersType& irBuffers, FFTEngineType& fftEngine) throw()
     {
-        previousIRBuffers = irBuffers;
-        processContinue (info, channel, irBuffers);
+        processContinue (info, channel, irBuffers, fftEngine);
     }
     
     void process (ProcessInfo& info, const int channel) throw()
     {
-        FFTBuffersAccessType irBuffers (this->getInputAsFFTBuffers (IOKey::FFTBuffers));
-        
+        FFTBuffersAccessType irBuffers (this->getInputAsFFTBuffers (IOKey::FFTBuffers).getValue());
+        FFTEngineType& fftEngine (irBuffers.getFFTEngine());
+
         if (previousIRBuffers == irBuffers)
-            processContinue (info, channel, irBuffers);
+        {
+            processContinue (info, channel, irBuffers, fftEngine);
+        }
+        else if (fftEngine.length() != previousIRBuffers.getFFTEngine().length())
+        {
+            plonk_assertfalse;
+            processContinue (info, channel, previousIRBuffers, previousIRBuffers.getFFTEngine());
+        }
         else
-            processChanged (info, channel, irBuffers);
+        {
+            processChanged (info, channel, irBuffers, fftEngine);
+            previousIRBuffers = irBuffers;
+        }
     }
     
 private:
@@ -383,6 +392,7 @@ public:
     typedef UnitBase<SampleType>                                    UnitType;
     typedef InputDictionary                                         Inputs;
     typedef FFTBuffersBase<SampleType>                              FFTBuffersType;
+    typedef Variable<FFTBuffersType&>                               FFTBuffersVariableType;
 
     typedef ConvolveUnit<SampleType,FFTBuffersType>                 Dyn;
     
@@ -401,7 +411,7 @@ public:
                          IOKey::End);
     }
     
-    static PLONK_INLINE_LOW UnitType ar (UnitType const& input, FFTBuffersType const& fftBuffers) throw()
+    static PLONK_INLINE_LOW UnitType ar (UnitType const& input, FFTBuffersVariableType const& fftBuffers) throw()
     {
         Inputs inputs;
         inputs.put (IOKey::Generic, input);
