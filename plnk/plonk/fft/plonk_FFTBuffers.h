@@ -68,6 +68,7 @@ public:
         numDivisions (0)
     {
         setBuffersInternal (sourceBuffers);
+        initProcessBuffers();
     }
     
     FFTBuffersInternal (FFTEngineType const& fftEngineToUse, SignalType const& sourceSignal) throw()
@@ -76,6 +77,16 @@ public:
         numDivisions (0)
     {
         setSignalInternal (sourceSignal);
+        initProcessBuffers();
+    }
+    
+    void initProcessBuffers() throw()
+    {
+        if (originalLength > 0)
+        {
+            for (int i = 0; i < fftBuffers.length(); ++i)
+                processBuffers.add (BufferType::newClear (originalLength * 2));
+        }
     }
     
     FFTBuffersInternal* getChannel (const int channel) const throw()
@@ -211,9 +222,17 @@ public:
         }
     }
     
+    PLONK_INLINE_LOW SampleType* getProcessBuffer (const int channel, const int division) throw()
+    {
+        plonk_assert (division >= 0 && division < numDivisions);
+        plonk_assert (processBuffers.length() > 0);
+        return getProcessBuffer (channel) + division * fftEngine.length();
+    }
+    
     PLONK_INLINE_LOW const SampleType* getDivision (const int channel, const int division) const throw()
     {
         plonk_assert (division >= 0 && division < numDivisions);
+        plonk_assert (fftBuffers.length() > 0);
         return getBuffer (channel) + division * fftEngine.length();
     }
     
@@ -226,6 +245,13 @@ private:
         plonk_assert (channel >= 0);
         return fftBuffers.atUnchecked ((unsigned) channel % (unsigned) fftBuffers.length()).getArray();
     }
+    
+    PLONK_INLINE_LOW SampleType* getProcessBuffer (const int channel) throw()
+    {
+        plonk_assert (channel >= 0 && channel < processBuffers.length());
+        return processBuffers.atUnchecked (channel).getArray();
+    }
+
 
     FFTBuffersInternal (BufferType const& singleFFTBuffer,
                         FFTEngineType const& fftEngineToUse,
@@ -240,6 +266,7 @@ private:
     
     BuffersType fftBuffers;
     FFTEngineType fftEngine;
+    BuffersType processBuffers;
     int originalLength;
     int numDivisions;
 };
@@ -327,6 +354,11 @@ public:
 //    {
 //        return this->getInternal()->getBuffer (channel);
 //    }
+    
+    SampleType* getProcessBuffer (const int channel, const int division) throw()
+    {
+        return this->getInternal()->getProcessBuffer (channel, division);
+    }
     
     const SampleType* getDivision (const int channel, const int division) const throw()
     {

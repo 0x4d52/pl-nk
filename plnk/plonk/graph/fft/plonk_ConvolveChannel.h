@@ -42,6 +42,8 @@
 #include "../channel/plonk_ChannelInternalCore.h"
 #include "../plonk_GraphForwardDeclarations.h"
 
+#define PLONK_DEBUG_CONVOLVE 0
+
 static RNG& getConvolveRNG()
 {
     static RNG rng;
@@ -68,12 +70,6 @@ public:
     typedef FFTEngineBase<SampleType>                               FFTEngineType;
     typedef FFTBuffersBase<SampleType>                              FFTBuffersType;
     typedef Variable<FFTBuffersType&>                               FFTBuffersVariableType;
-
-    enum InternalBuffers
-    {
-        ProcessBuffers,
-        InputBuffer
-    };
     
     ConvolveChannelInternal (Inputs const& inputs,
                              Data const& data,
@@ -89,14 +85,16 @@ public:
         position0 (0),
         position1 (0),
         fftAltSelect (0),
-        previousIRBuffers (this->getInputAsFFTBuffers (IOKey::FFTBuffers).getValue())
+        dummyIRBuffers(),
+        previousIRBuffers (dummyIRBuffers),
+        currentIRBuffers (this->getInputAsFFTBuffers (IOKey::FFTBuffers).getValue())
     {
-        const FFTBuffers& irBuffers (previousIRBuffers);
+        const FFTBuffers& irBuffers (currentIRBuffers);
         const FFTEngineType& fftEngine (irBuffers.getFFTEngine());
         const int fftSize = fftEngine.length();
         const int fftSize2 = fftSize * 2;
 
-        Buffer processBuffers = Buffer::withSize (fftSize2 * 5);
+        processBuffers = Buffer::withSize (fftSize2 * 6);
         SampleType* const processBuffersBase = processBuffers.getArray();
         
         fftAltBuffer0      = processBuffersBase + fftSize2 * 0;
@@ -104,11 +102,7 @@ public:
         fftTransformBuffer = processBuffersBase + fftSize2 * 2;
         fftOverlapBuffer   = processBuffersBase + fftSize2 * 3;
         fftTempBuffer      = processBuffersBase + fftSize2 * 4;
-    
-        buffers.add (processBuffers);
-        
-        Buffer inputBuffer = Buffer::newClear (irBuffers.getOriginalLength() * 4);
-        buffers.add (inputBuffer);
+        fftCalcBuffer      = processBuffersBase + fftSize2 * 5;
         
 #if 0 // PLONK_DEBUG
         printf ("fftAltBuffer0      = %p (%d)\n", fftAltBuffer0, fftSize2);
@@ -116,6 +110,7 @@ public:
         printf ("fftTransformBuffer = %p (%d)\n", fftTransformBuffer, fftSize2);
         printf ("fftOverlapBuffer   = %p (%d)\n", fftOverlapBuffer, fftSize2);
         printf ("fftTempBuffer      = %p (%d)\n", fftTempBuffer, fftSize2);
+        printf ("fftCalcBuffer      = %p (%d)\n", fftCalcBuffer, fftSize2);
         printf ("inputBuffer        = %p (%d)\n", inputBuffer.getArray(), inputBuffer.length());
 #endif
     }
@@ -158,7 +153,7 @@ public:
     
     void reset (const UnsignedLong fftLength) throw()
     {
-        countDown           = getConvolveRNG().uniform ((int) (fftLength / 16)) * 4;
+        countDown           = 0;//getConvolveRNG().uniform ((int) (fftLength / 16)) * 4;
         position0           = fftLength / 2 - countDown;
         position1           = position0 + countDown;
         fftAltSelect        = 0;
@@ -205,12 +200,11 @@ public:
         const Buffer& inputBuffer (inputUnit.process (info, channel));
         const SampleType* inputSamples = inputBuffer.getArray();
         
-        SampleType* outputSamples = this->getOutputSamples();
+        SampleType* outputSamples             = this->getOutputSamples();
         const UnsignedLong outputBufferLength = (UnsignedLong) this->getOutputBuffer().length();
         
         plonk_assert (outputBufferLength == inputBuffer.length());
         
-        int samplesRemaining = outputBufferLength;
         const int numDivisions = irBuffers.getNumDivisions();
         
         if (numDivisions == 0)
@@ -219,18 +213,24 @@ public:
             zeroSamples (outputSamples, outputBufferLength);
             return;
         }
-            
-        const UnsignedLong fftSize = (UnsignedLong) fftEngine.length();
-        const UnsignedLong fftSizeHalved = (UnsignedLong) fftEngine.halfLength();
+        
+        const UnsignedLong fftSize           = (UnsignedLong) fftEngine.length();
+        const UnsignedLong fftSizeHalved     = (UnsignedLong) fftEngine.halfLength();
+        const int divisionRatio1             = (fftSizeHalved / outputBufferLength) - 1;
+        SampleType* const fftAltBuffers[]    = { fftAltBuffer0, fftAltBuffer1 };
+        int samplesRemaining                 = outputBufferLength;
 
-        const int divisionRatio1 = (fftSizeHalved / outputBufferLength) - 1;
-        SampleType* const inputBufferBase = buffers.atUnchecked (InputBuffer).getArray();
-        SampleType* const fftAltBuffers[] = { fftAltBuffer0, fftAltBuffer1 };
-        
-        
+#if PLONK_DEBUG_CONVOLVE
+        printf ("convolve: %p(%d) start numDivisions=%d\n", this, callbackCount, numDivisions);
+#endif
+
         while (samplesRemaining > 0)
         {
             int hop;
+            
+#if PLONK_DEBUG_CONVOLVE
+            printf ("convolve: %p(%d) while (samplesRemaining) samplesRemaining=%d\n", this, callbackCount, samplesRemaining);
+#endif
             
             if ((samplesRemaining - countDown) > 0)
             {
@@ -245,8 +245,15 @@ public:
                 samplesRemaining = 0;
             }
             
+#if PLONK_DEBUG_CONVOLVE
+            printf ("convolve: %p(%d) countDown=%d hop=%d position0=%d position1=%d\n", this, callbackCount, countDown, hop, position0, position1);
+#endif
+            
             if (hop > 0)
             {
+#if PLONK_DEBUG_CONVOLVE
+                printf ("convolve: %p(%d) ### INPUT SAMPLES ###\n", this, callbackCount);
+#endif
                 moveSamples (fftAltBuffer0 + position0, inputSamples, hop);
                 moveSamples (fftAltBuffer1 + position1, inputSamples, hop);
                 moveSamples (outputSamples, fftOverlapBuffer + position0, hop);
@@ -260,11 +267,16 @@ public:
             hop = (divisionsWritten >= divisionsRead - 1) ? 0 : 1;
             ++divisionsCounter;
             
+#if PLONK_DEBUG_CONVOLVE
+            printf ("convolve: %p(%d) hop=%d divisionsCounter=%d position0=%d position1=%d\n", this, callbackCount, hop, divisionsCounter, position0, position1);
+#endif
+
+            
             while (hop != 0)
             {
                 int divisionsRemaining = divisionsCounter >= divisionRatio1
-                ? (divisionsRead - divisionsWritten) - 1
-                : (int) ((SampleType) ((divisionsCounter * (divisionsRead - 1)) / (SampleType) (divisionRatio1)) - divisionsWritten);
+                                       ? (divisionsRead - divisionsWritten) - 1
+                                       : (int) ((SampleType) ((divisionsCounter * (divisionsRead - 1)) / (SampleType) (divisionRatio1)) - divisionsWritten);
                 
                 const int nextDivision = divisionsPrevious >= numDivisions ? 0 : divisionsPrevious;
                 divisionsPrevious = nextDivision + divisionsRemaining;
@@ -279,26 +291,41 @@ public:
                     hop = 0;
                 }
                 
-                const SampleType* irSamples = irBuffers.getDivision (channel, divisionsWritten + 1);
-                const SampleType* inputBufferSamples = inputBufferBase + nextDivision * fftSize;
+#if PLONK_DEBUG_CONVOLVE
+                printf ("convolve: %p(%d) divisionsRemaining=%d nextDivision=%d divisionsPrevious=%d divisionsWritten=%d\n", this, callbackCount, divisionsRemaining, nextDivision, divisionsPrevious, divisionsWritten);
+#endif
                 
-                for (int i = 0; i < divisionsRemaining; i++)
+                if (divisionsRemaining > 0)
                 {
-                    complexMultiplyAccumulate (fftTempBuffer, inputBufferSamples, irSamples, fftSizeHalved);
+                    const SampleType* irSamples          = irBuffers.getDivision (channel, divisionsWritten + 1);
+                    const SampleType* inputBufferSamples = irBuffers.getProcessBuffer (channel, nextDivision);
                     
-                    inputBufferSamples += fftSize;
-                    irSamples          += fftSize;
+                    for (int i = 0; i < divisionsRemaining; i++)
+                    {
+                        complexMultiplyAccumulate (fftTempBuffer, inputBufferSamples, irSamples, fftSizeHalved);
+                        
+                        inputBufferSamples += fftSize;
+                        irSamples          += fftSize;
+                    }
+                    
+                    divisionsWritten += divisionsRemaining;
                 }
-                
-                divisionsWritten += divisionsRemaining;
             }
             
             if (countDown == 0)
             {
+#if PLONK_DEBUG_CONVOLVE
+                printf ("convolve: %p(%d) ### OVERLAP SAVE ###\n", this, callbackCount);
+#endif
+
                 divisionsRead = plonk::min (divisionsRead + 1, numDivisions);
                 
-                const SampleType* const irSamples = irBuffers.getDivision (channel, 0);
-                SampleType* const inputBufferSamples = inputBufferBase + divisionsCurrent * fftSize;
+#if PLONK_DEBUG_CONVOLVE
+                printf ("convolve: %p(%d) countDown=0 divisionsRead=%d divisionsCurrent=%d\n", this, callbackCount, divisionsRead, divisionsCurrent);
+#endif
+                
+                const SampleType* const irSamples    = irBuffers.getDivision (channel, 0);
+                SampleType* const inputBufferSamples = irBuffers.getProcessBuffer (channel, divisionsCurrent);
                 
                 fftEngine.forward (inputBufferSamples, fftAltBuffers[fftAltSelect]);
                 complexMultiplyAccumulate (fftTempBuffer, inputBufferSamples, irSamples, fftSizeHalved);
@@ -329,27 +356,41 @@ public:
                 divisionsWritten    = 0;
                 countDown           = hop;
                 
+#if PLONK_DEBUG_CONVOLVE
+                printf ("convolve: %p(%d) divisionsPrevious=%d divisionsCurrent=%d countDown=%d fftAltSelect=%d\n", this, callbackCount, divisionsPrevious, divisionsCurrent, countDown, fftAltSelect);
+#endif
+                
                 zeroSamples (fftTempBuffer, fftSize);
             }
         }
+        
+#if PLONK_DEBUG_CONVOLVE
+        printf ("convolve: %p(%d) end \n", this, callbackCount);
+#endif
+
     }
     
     void processChanged (ProcessInfo& info, const int channel, FFTBuffersType& irBuffers, FFTEngineType& fftEngine) throw()
     {
-        reset (fftEngine.length());
-        processContinue (info, channel, irBuffers, fftEngine);
+        if (previousIRBuffers == dummyIRBuffers)
+        {
+            previousIRBuffers = currentIRBuffers;
+            currentIRBuffers = irBuffers;
+        }
+        
+        // use both buffers to cross fade... but how!!!???
     }
     
     void process (ProcessInfo& info, const int channel) throw()
     {
         FFTBuffersAccessType irBuffers (this->getInputAsFFTBuffers (IOKey::FFTBuffers).getValue());
         FFTEngineType& fftEngine (irBuffers.getFFTEngine());
-
-        if (previousIRBuffers == irBuffers)
+        
+        if (previousIRBuffers == dummyIRBuffers && irBuffers == currentIRBuffers)
         {
             processContinue (info, channel, irBuffers, fftEngine);
         }
-        else if (fftEngine.length() != previousIRBuffers.getFFTEngine().length())
+        else if (fftEngine.length() != currentIRBuffers.getFFTEngine().length())
         {
             plonk_assertfalse;
             processContinue (info, channel, previousIRBuffers, previousIRBuffers.getFFTEngine());
@@ -357,18 +398,22 @@ public:
         else
         {
             processChanged (info, channel, irBuffers, fftEngine);
-            previousIRBuffers = irBuffers;
         }
+        
+#if PLONK_DEBUG_CONVOLVE
+        ++callbackCount;
+#endif
     }
-    
+
 private:
-    ObjectArray<Buffer> buffers;
+    Buffer processBuffers;
     
     SampleType* fftAltBuffer0;
     SampleType* fftAltBuffer1;
     SampleType* fftTransformBuffer;
     SampleType* fftOverlapBuffer;
     SampleType* fftTempBuffer;
+    SampleType* fftCalcBuffer;
     
     int divisionsCurrent;
     int divisionsWritten;
@@ -379,7 +424,14 @@ private:
     int position0, position1;
     int fftAltSelect;
     
+    FFTBuffers dummyIRBuffers;
     FFTBuffersAccessType previousIRBuffers;
+    FFTBuffersAccessType currentIRBuffers;
+    
+#if PLONK_DEBUG_CONVOLVE
+    int callbackCount = { 0 };
+#endif
+
 };
 
 
