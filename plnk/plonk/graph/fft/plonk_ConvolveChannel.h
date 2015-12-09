@@ -44,12 +44,6 @@
 
 #define PLONK_DEBUG_CONVOLVE 0
 
-static RNG& getConvolveRNG()
-{
-    static RNG rng;
-    return rng;
-}
-
 /** Convolve channel. */
 template<class SampleType, typename FFTBuffersAccess>
 class ConvolveChannelInternal
@@ -143,18 +137,18 @@ public:
         this->setSampleRate (input.getSampleRate (channel));
         this->setOverlap (input.getOverlap (channel));
         
-        this->initValue (SampleType (0)); // not really applicable
+        this->initValue (SampleType (0));
         
         const FFTBuffersAccessType irBuffers (this->getInputAsFFTBuffers (IOKey::FFTBuffers).getValue());
         const FFTEngineType& fftEngine (irBuffers.getFFTEngine());
         
-        reset (fftEngine.length());
+        reset (irBuffers, fftEngine, channel);
     }
     
-    void reset (const UnsignedLong fftLength) throw()
+    void reset (FFTBuffersType const& irBuffers, FFTEngineType const& fftEngine, const int channel) throw()
     {
-        countDown           = 0;//getConvolveRNG().uniform ((int) (fftLength / 16)) * 4;
-        position0           = fftLength / 2 - countDown;
+        countDown           = irBuffers.getCountDownStart (channel);
+        position0           = fftEngine.halfLength() - countDown;
         position1           = position0 + countDown;
         fftAltSelect        = 0;
         divisionsCurrent    = 0;
@@ -163,7 +157,7 @@ public:
         divisionsPrevious   = 0;
         divisionsRead       = 1;
         
-        const UnsignedLong fftSize2 = (UnsignedLong) fftLength * 2;
+        const UnsignedLong fftSize2 = (UnsignedLong) fftEngine.length() * 2;
         
         zeroSamples (fftAltBuffer0,      fftSize2);
         zeroSamples (fftAltBuffer1,      fftSize2);
@@ -218,7 +212,11 @@ public:
         const UnsignedLong fftSizeHalved     = (UnsignedLong) fftEngine.halfLength();
         const int divisionRatio1             = (fftSizeHalved / outputBufferLength) - 1;
         SampleType* const fftAltBuffers[]    = { fftAltBuffer0, fftAltBuffer1 };
+        SampleType* const inputBufferBase    = irBuffers.getProcessBuffer (channel, 0);
+        const SampleType* const irBufferBase = irBuffers.getDivision (channel, 0);
+
         int samplesRemaining                 = outputBufferLength;
+        
 
 #if PLONK_DEBUG_CONVOLVE
         printf ("convolve: %p(%d) start numDivisions=%d\n", this, callbackCount, numDivisions);
@@ -297,8 +295,8 @@ public:
                 
                 if (divisionsRemaining > 0)
                 {
-                    const SampleType* irSamples          = irBuffers.getDivision (channel, divisionsWritten + 1);
-                    const SampleType* inputBufferSamples = irBuffers.getProcessBuffer (channel, nextDivision);
+                    const SampleType* irSamples          = irBufferBase + (divisionsWritten + 1) * fftSize; //irBuffers.getDivision (channel, divisionsWritten + 1);
+                    const SampleType* inputBufferSamples = inputBufferBase + nextDivision * fftSize;        //irBuffers.getProcessBuffer (channel, nextDivision);
                     
                     for (int i = 0; i < divisionsRemaining; i++)
                     {
@@ -324,8 +322,8 @@ public:
                 printf ("convolve: %p(%d) countDown=0 divisionsRead=%d divisionsCurrent=%d\n", this, callbackCount, divisionsRead, divisionsCurrent);
 #endif
                 
-                const SampleType* const irSamples    = irBuffers.getDivision (channel, 0);
-                SampleType* const inputBufferSamples = irBuffers.getProcessBuffer (channel, divisionsCurrent);
+                const SampleType* const irSamples    = irBufferBase; // irBuffers.getDivision (channel, 0);
+                SampleType* const inputBufferSamples = inputBufferBase + divisionsCurrent * fftSize; // irBuffers.getProcessBuffer (channel, divisionsCurrent);
                 
                 fftEngine.forward (inputBufferSamples, fftAltBuffers[fftAltSelect]);
                 complexMultiplyAccumulate (fftTempBuffer, inputBufferSamples, irSamples, fftSizeHalved);

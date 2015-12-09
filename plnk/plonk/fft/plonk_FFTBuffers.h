@@ -48,6 +48,11 @@
 #include "plonk_ObjectArray.h"
 #include "plonk_SimpleArray.h"
 
+static RNG& getConvolveRNG()
+{
+    static RNG rng;
+    return rng;
+}
 
 template<class SampleType> class FFTBuffersBase;
 
@@ -69,6 +74,7 @@ public:
     {
         setBuffersInternal (sourceBuffers);
         initProcessBuffers();
+        initCountDownStart();
     }
     
     FFTBuffersInternal (FFTEngineType const& fftEngineToUse, SignalType const& sourceSignal) throw()
@@ -78,6 +84,7 @@ public:
     {
         setSignalInternal (sourceSignal);
         initProcessBuffers();
+        initCountDownStart();
     }
     
     void initProcessBuffers() throw()
@@ -87,6 +94,12 @@ public:
             for (int i = 0; i < fftBuffers.length(); ++i)
                 processBuffers.add (BufferType::newClear (originalLength * 2));
         }
+    }
+    
+    void initCountDownStart() throw()
+    {
+        for (int i = 0; i < fftBuffers.length(); ++i)
+            countDownStart.add (getConvolveRNG().uniform ((int) (fftEngine.length() / 16)) * 4);
     }
     
     FFTBuffersInternal* getChannel (const int channel) const throw()
@@ -236,19 +249,22 @@ public:
         return getBuffer (channel) + division * fftEngine.length();
     }
     
+    PLONK_INLINE_LOW int getCountDownStart (const int channel) const throw()
+    {
+        return countDownStart.atUnchecked (channel);
+    }
+    
     friend class FFTBuffersBase<SampleType>;
     
 private:
     
     PLONK_INLINE_LOW const SampleType* getBuffer (const int channel) const throw()
     {
-        plonk_assert (channel >= 0);
         return fftBuffers.atUnchecked ((unsigned) channel % (unsigned) fftBuffers.length()).getArray();
     }
     
     PLONK_INLINE_LOW SampleType* getProcessBuffer (const int channel) throw()
     {
-        plonk_assert (channel >= 0 && channel < processBuffers.length());
         return processBuffers.atUnchecked (channel).getArray();
     }
 
@@ -267,6 +283,7 @@ private:
     BuffersType fftBuffers;
     FFTEngineType fftEngine;
     BuffersType processBuffers;
+    IntArray countDownStart;
     int originalLength;
     int numDivisions;
 };
@@ -398,6 +415,11 @@ public:
     FFTBuffersBase operator[] (const int channel) const throw()
     {
         return getChannel (channel);
+    }
+    
+    int getCountDownStart (const int channel) const throw()
+    {
+        return this->getInternal()->getCountDownStart (channel);
     }
 };
 
