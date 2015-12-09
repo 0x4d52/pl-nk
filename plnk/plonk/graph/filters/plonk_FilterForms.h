@@ -726,13 +726,13 @@ public:
     };
         
     static PLONK_INLINE_LOW SampleType process (SampleType const& input,
-                                      SampleType const& a0,     
-                                      SampleType const& a1,
-                                      SampleType const& a2,
-                                      SampleType const& b1,
-                                      SampleType const& b2,
-                                      SampleType& y1,
-                                      SampleType& y2) throw()
+                                                SampleType const& a0,
+                                                SampleType const& a1,
+                                                SampleType const& a2,
+                                                SampleType const& b1,
+                                                SampleType const& b2,
+                                                SampleType& y1,
+                                                SampleType& y2) throw()
     {
         const SampleType y0 = input + b1 * y1 + b2 * y2; 
         const SampleType output = a0 * (y0 + a1 * y1 + a2 * y2);
@@ -742,9 +742,9 @@ public:
     }
     
     static PLONK_INLINE_LOW SampleType process (SampleType const& input,
-                                      const SampleType* coeffs,     
-                                      SampleType& y1,
-                                      SampleType& y2) throw()
+                                                const SampleType* coeffs,
+                                                SampleType& y1,
+                                                SampleType& y2) throw()
     {
         return process (input, 
                         coeffs[CoeffA0], coeffs[CoeffA1], coeffs[CoeffA2], 
@@ -753,8 +753,8 @@ public:
     }
     
     static PLONK_INLINE_LOW SampleType process (SampleType const& input,
-                                      const SampleType* coeffs,     
-                                      Data& data) throw()
+                                                const SampleType* coeffs,     
+                                                Data& data) throw()
     {
         return process (input, coeffs, data.y1, data.y2);
     }
