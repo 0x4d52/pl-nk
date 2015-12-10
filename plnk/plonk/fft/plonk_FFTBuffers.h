@@ -90,10 +90,8 @@ public:
     void initProcessBuffers() throw()
     {
         if (originalLength > 0)
-        {
             for (int i = 0; i < fftBuffers.length(); ++i)
                 processBuffers.add (BufferType::newClear (originalLength * 2));
-        }
     }
     
     void initCountDownStart() throw()
@@ -102,21 +100,23 @@ public:
             countDownStart.add (getConvolveRNG().uniform ((int) (fftEngine.length() / 16)) * 4);
     }
     
+    void initDivisionFlags() throw()
+    {
+        for (int i = 0; i < fftBuffers.length(); ++i)
+            divisionFlags.add (UnsignedInts::newClear (numDivisions));
+    }
+    
     FFTBuffersInternal* getChannel (const int channel) const throw()
     {
         const int numChannels = fftBuffers.length();
         
         if (numChannels == 0)
-        {
             return new FFTBuffersInternal (fftEngine, Buffers());
-        }
         else
-        {
             return new FFTBuffersInternal (fftBuffers.atUnchecked (channel % numChannels),
                                            fftEngine,
                                            originalLength,
                                            numDivisions);
-        }
     }
     
     void setSignalInternal (SignalType const& sourceSignal) throw()
@@ -253,6 +253,11 @@ public:
     {
         return countDownStart.atUnchecked (channel);
     }
+
+    PLONK_INLINE_LOW UnsignedInts& getDivisionFlags (const int channel) throw()
+    {
+        return divisionFlags.atUnchecked (channel);
+    }
     
     friend class FFTBuffersBase<SampleType>;
     
@@ -283,7 +288,8 @@ private:
     BuffersType fftBuffers;
     FFTEngineType fftEngine;
     BuffersType processBuffers;
-    IntArray countDownStart;
+    Ints countDownStart;
+    UnsignedInt2D divisionFlags;
     int originalLength;
     int numDivisions;
 };
@@ -366,60 +372,74 @@ public:
 	}	                            
     
     PLONK_OBJECTARROWOPERATOR(FFTBuffersBase);
-
-//    const SampleType* getBuffer (const int channel) const throw()
-//    {
-//        return this->getInternal()->getBuffer (channel);
-//    }
     
+    /** Get a pointer to the process "scratch" buffer for this set of buffers. */
     SampleType* getProcessBuffer (const int channel, const int division) throw()
     {
         return this->getInternal()->getProcessBuffer (channel, division);
     }
     
+    /** Get a point to the samples in the FFT buffer for a particular channel and division. */
     const SampleType* getDivision (const int channel, const int division) const throw()
     {
         return this->getInternal()->getDivision (channel, division);
     }
     
+    /** Get the FFTEngine used by this buffer. */
     const FFTEngineType& getFFTEngine() const throw()
     {
         return this->getInternal()->fftEngine;
     }
 
+    /** Get the FFTEngine used by this buffer. */
     FFTEngineType& getFFTEngine() throw()
     {
         return this->getInternal()->fftEngine;
     }
     
+    /** Get the number of channels in the buffers. */
     const int getNumChannels() const throw()
     {
         return this->getInternal()->fftBuffers.length();
     }
     
+    /** Get the original length of the input signal in sample frames. */
     const int getOriginalLength() const throw()
     {
         return this->getInternal()->originalLength;
     }
     
+    /** Get the number of FFT divisions in the buffer.*/
     const int getNumDivisions() const throw()
     {
         return this->getInternal()->numDivisions;
     }
     
+    /** Gets a FFTBuffersBase representing only a single channel. */
     FFTBuffersBase getChannel (const int channel) const throw()
     {
         return FFTBuffersBase (this->getInternal()->getChannel (channel));
     }
     
+    /** Gets a FFTBuffersBase representing only a single channel. */
     FFTBuffersBase operator[] (const int channel) const throw()
     {
         return getChannel (channel);
     }
     
+    /** Get the randomly generated start time for a specific channel.
+     This helps amortise the processing load by avoiding heavy processing happening
+     in the same i/o block across many convolver instances. */
     int getCountDownStart (const int channel) const throw()
     {
         return this->getInternal()->getCountDownStart (channel);
+    }
+    
+    /** This is used internally to help switch FFTBuffers in a convolver while processing is running.
+     @internal */
+    UnsignedInts& getDivisionFlags (const int channel) throw()
+    {
+        return this->getInternal()->getDivisionFlags (channel);
     }
 };
 
