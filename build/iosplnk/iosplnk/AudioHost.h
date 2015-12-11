@@ -46,8 +46,8 @@
 #ifndef AUDIOHOST_H
 #define AUDIOHOST_H
 
-#include "../../../src/plonk/plonk.h"
-#include "../../../src/plonk/hosts/ios/plonk_IOSAudioHost.h"
+#include "../../../plnk/plonk/plonk.h"
+#include "../../../plnk/plonk/hosts/ios/plonk_IOSAudioHost.h"
 
 @interface AudioHost : PLAudioHost<PLAudioHostDelegate>
 {
