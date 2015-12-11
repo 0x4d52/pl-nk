@@ -6,7 +6,7 @@ Plonk is the main C++ framework comprising building blocks for audio processing 
 A C API to underlying supporting libraries (e.g., for file access, threads, atomic operations, lock-free data structures, FFT processing, SIMD libraries and so on). This can be used as a standalone framework, or with Plink and/or Plonk.
 
 ### Plink ###
-A C API for audio processing unit generators for 32-bit floating point audio (although this may be expanded to add 64-bit floating point support in the future). This is dependent on Plank. This will be a lightweight API collecting together useful DSP processes. Currently only a small number of processes are implemented but this can grow particularly as optimisations are sought for Plonk. Plink leverages Plank to optimise certain operations using SIMD support if available (and enables) for the runtime platform and architecture.
+A C API for audio processing unit generators for 32-bit floating point audio (although this may be expanded to add 64-bit floating point support in the future). This is dependent on Plank. This will be a lightweight API collecting together useful DSP processes. Currently only a small number of processes are implemented but this can grow particularly as optimisations are sought for Plonk. Plink leverages Plank to optimise certain operations using SIMD support if available (and enabled) for the runtime platform and architecture.
 
 ### Plonk ###
 A C++ API for writing object oriented audio applications. This includes audio processing graph management and so on. Dependent on Plank (and provides object oriented interfaces to this underlying C API). May optionally use Plink (to use the SIMD optimised version of floating point processing code for example).
@@ -20,7 +20,9 @@ Since pl-nk may be used as a JUCE (http://juce.com) module, the easiest way to g
 
 You can, of course, also us pl-nk independently of JUCE, which might be more appropriate for your licensing needs.
 
-There are two example projects: macplnk (an Xcode project for Mac OS X using PortAudio as the audio host; and, *iosplnk* (an Xcode project for iOS devices). A Windows project will be added at some point but it should be trivial to convert the *macplnk* project for this purpose as the main task is to subclass `PortAudioAudioHost`, implement the `constructGraph()` function, and create and instance of this class. Then call its `startHost()` function to start audio running.
+There are two example projects: macplnk (an Xcode project for Mac OS X using PortAudio as the audio host; and, *iosplnk* (an Xcode project for iOS devices). A Windows project will be added at some point but it should be trivial to convert the *macplnk* project for this purpose as the main task is to subclass `PortAudioAudioHost`, implement the `constructGraph()` function, and create and instance of this class. Then call its `startHost()` function to start audio running. 
+
+Using the `JuceAudioHost` is similar: one of your classes must inherit from `JuceAudioHost` (this could be your MainComponent in really simple projects) and imlement its `constructGraph()` function, create and instance of this class, and call its `startHost()` function.
 
 Use github to raise issues.
 
