@@ -71,10 +71,10 @@ public:
                              SampleRate const& sampleRate) throw()
     :   Internal (inputs, data, blockSize, sampleRate),
         currentProcessBuffersDivision (0),
-        divisionsWritten (0),
-        divisionsCounter (0),
+        writtenIRDivisions (0),
+        countIRDivisions (0),
         previousProcessBufferDivision (0),
-        divisionsRead (0),
+        readIRDivisions (0),
         countDown (0),
         position0 (0),
         position1 (0),
@@ -147,15 +147,15 @@ public:
     
     void reset (FFTBuffersType const& irBuffers, FFTEngineType const& fftEngine, const int channel) throw()
     {
-        countDown           = irBuffers.getCountDownStart (channel);
-        position0           = fftEngine.halfLength() - countDown;
-        position1           = position0 + countDown;
-        fftAltSelect        = 0;
-        currentProcessBuffersDivision    = 0;
-        divisionsCounter    = 0;
-        divisionsWritten    = 0;
+        countDown                       = irBuffers.getCountDownStart (channel);
+        position0                       = fftEngine.halfLength() - countDown;
+        position1                       = position0 + countDown;
+        fftAltSelect                    = 0;
+        currentProcessBuffersDivision   = 0;
+        countIRDivisions                = 0;
+        writtenIRDivisions              = 0;
         previousProcessBufferDivision   = 0;
-        divisionsRead       = 1;
+        readIRDivisions                 = 1;
         
         const UnsignedLong fftSize2 = (UnsignedLong) fftEngine.length() * 2;
         
@@ -212,7 +212,7 @@ public:
         const UnsignedLong fftSizeHalved     = (UnsignedLong) fftEngine.halfLength();
         const int divisionRatio1             = (fftSizeHalved / outputBufferLength) - 1;
         SampleType* const fftAltBuffers[]    = { fftAltBuffer0, fftAltBuffer1 };
-        SampleType* const inputBufferBase    = irBuffers.getProcessDivision (channel, 0);
+        SampleType* const processBufferBase  = irBuffers.getProcessDivision (channel, 0);
         const SampleType* const irBufferBase = irBuffers.getIRDivision (channel, 0);
 
         int samplesRemaining                 = outputBufferLength;
@@ -262,8 +262,8 @@ public:
                 position1     += hop;
             }
             
-            hop = (divisionsWritten >= divisionsRead - 1) ? 0 : 1;
-            ++divisionsCounter;
+            hop = (writtenIRDivisions >= readIRDivisions - 1) ? 0 : 1;
+            ++countIRDivisions;
             
 #if PLONK_DEBUG_CONVOLVE
             printf ("convolve: %p(%d) hop=%d divisionsCounter=%d position0=%d position1=%d\n", this, callbackCount, hop, divisionsCounter, position0, position1);
@@ -272,9 +272,9 @@ public:
             
             while (hop != 0)
             {
-                int divisionsRemaining = divisionsCounter >= divisionRatio1
-                                       ? (divisionsRead - divisionsWritten) - 1
-                                       : (int) ((SampleType) ((divisionsCounter * (divisionsRead - 1)) / (SampleType) (divisionRatio1)) - divisionsWritten);
+                int divisionsRemaining = countIRDivisions >= divisionRatio1
+                                       ? (readIRDivisions - writtenIRDivisions) - 1
+                                       : (int) ((SampleType) ((countIRDivisions * (readIRDivisions - 1)) / (SampleType) (divisionRatio1)) - writtenIRDivisions);
                 
                 /*nextDivision*/const int nextProcessBufferDivision = previousProcessBufferDivision >= numIRDivisions ? 0 : previousProcessBufferDivision;
                 previousProcessBufferDivision = nextProcessBufferDivision + divisionsRemaining;
@@ -290,23 +290,23 @@ public:
                 }
                 
 #if PLONK_DEBUG_CONVOLVE
-                printf ("convolve: %p(%d) divisionsRemaining=%d nextDivision=%d divisionsPrevious=%d divisionsWritten=%d\n", this, callbackCount, divisionsRemaining, nextProcessBufferDivision, previousProcessBufferDivision, divisionsWritten);
+                printf ("convolve: %p(%d) divisionsRemaining=%d nextProcessBufferDivision=%d previousProcessBufferDivision=%d divisionsWritten=%d\n", this, callbackCount, divisionsRemaining, nextProcessBufferDivision, previousProcessBufferDivision, divisionsWritten);
 #endif
                 
                 if (divisionsRemaining > 0)
                 {
-                    const SampleType* irSamples          = irBufferBase + (divisionsWritten + 1) * fftSize;
-                    const SampleType* inputBufferSamples = inputBufferBase + nextProcessBufferDivision * fftSize;
+                    const SampleType* irSamples            = irBufferBase + (writtenIRDivisions + 1) * fftSize;
+                    const SampleType* processBufferSamples = processBufferBase + nextProcessBufferDivision * fftSize;
                     
                     for (int i = 0; i < divisionsRemaining; i++)
                     {
-                        complexMultiplyAccumulate (fftTempBuffer, inputBufferSamples, irSamples, fftSizeHalved);
+                        complexMultiplyAccumulate (fftTempBuffer, processBufferSamples, irSamples, fftSizeHalved);
                         
-                        inputBufferSamples += fftSize;
+                        processBufferSamples += fftSize;
                         irSamples          += fftSize;
                     }
                     
-                    divisionsWritten += divisionsRemaining;
+                    writtenIRDivisions += divisionsRemaining;
                 }
             }
             
@@ -316,17 +316,17 @@ public:
                 printf ("convolve: %p(%d) ### OVERLAP SAVE ###\n", this, callbackCount);
 #endif
 
-                divisionsRead = plonk::min (divisionsRead + 1, numIRDivisions);
+                readIRDivisions = plonk::min (readIRDivisions + 1, numIRDivisions);
                 
 #if PLONK_DEBUG_CONVOLVE
-                printf ("convolve: %p(%d) countDown=0 divisionsRead=%d divisionsCurrent=%d\n", this, callbackCount, divisionsRead, currentProcessBuffersDivision);
+                printf ("convolve: %p(%d) countDown=0 divisionsRead=%d currentProcessBuffersDivision=%d\n", this, callbackCount, divisionsRead, currentProcessBuffersDivision);
 #endif
                 
-                const SampleType* const irSamples    = irBufferBase;
-                SampleType* const inputBufferSamples = inputBufferBase + currentProcessBuffersDivision * fftSize;
+                const SampleType* const irSamples      = irBufferBase;
+                SampleType* const processBufferSamples = processBufferBase + currentProcessBuffersDivision * fftSize;
                 
-                fftEngine.forward (inputBufferSamples, fftAltBuffers[fftAltSelect]);
-                complexMultiplyAccumulate (fftTempBuffer, inputBufferSamples, irSamples, fftSizeHalved);
+                fftEngine.forward (processBufferSamples, fftAltBuffers[fftAltSelect]);
+                complexMultiplyAccumulate (fftTempBuffer, processBufferSamples, irSamples, fftSizeHalved);
                 
                 fftEngine.inverse (fftTransformBuffer, fftTempBuffer);
                 
@@ -348,14 +348,14 @@ public:
                     fftAltSelect = 1;
                 }
                 
-                previousProcessBufferDivision   = currentProcessBuffersDivision;
-                currentProcessBuffersDivision    = plonk::wrap (currentProcessBuffersDivision - 1, 0, numIRDivisions);
-                divisionsCounter    = 0;
-                divisionsWritten    = 0;
+                previousProcessBufferDivision = currentProcessBuffersDivision;
+                currentProcessBuffersDivision = plonk::wrap (currentProcessBuffersDivision - 1, 0, numIRDivisions);
+                countIRDivisions    = 0;
+                writtenIRDivisions  = 0;
                 countDown           = hop;
                 
 #if PLONK_DEBUG_CONVOLVE
-                printf ("convolve: %p(%d) divisionsPrevious=%d divisionsCurrent=%d countDown=%d fftAltSelect=%d\n", this, callbackCount, previousProcessBufferDivision, currentProcessBuffersDivision, countDown, fftAltSelect);
+                printf ("convolve: %p(%d) previousProcessBufferDivision=%d currentProcessBuffersDivision=%d countDown=%d fftAltSelect=%d\n", this, callbackCount, previousProcessBufferDivision, currentProcessBuffersDivision, countDown, fftAltSelect);
 #endif
                 
                 zeroSamples (fftTempBuffer, fftSize);
@@ -560,11 +560,11 @@ private:
     SampleType* fftTempBuffer;
     SampleType* fftCalcBuffer;
     
-    int currentProcessBuffersDivision; // divisionsCurrent
-    int divisionsWritten;
-    int divisionsCounter;
-    int previousProcessBufferDivision; // divisionsPrevious
-    int divisionsRead;
+    int currentProcessBuffersDivision;  // divisionsCurrent
+    int writtenIRDivisions;             // divisionsWritten
+    int countIRDivisions;               // divisionsCounter
+    int previousProcessBufferDivision;  // divisionsPrevious
+    int readIRDivisions;                // divisionsRead
     int countDown;
     int position0, position1;
     int fftAltSelect;
