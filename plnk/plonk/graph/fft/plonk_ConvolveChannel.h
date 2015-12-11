@@ -199,7 +199,8 @@ public:
         
         plonk_assert (outputBufferLength == inputBuffer.length());
         
-        const int numIRDivisions = irBuffers.getNumIRDivisions();
+        const int numIRDivisions      = irBuffers.getNumIRDivisions();
+        const int numProcessDivisions = irBuffers.getNumProcessDivisions (channel);
         
         if (numIRDivisions == 0)
         {
@@ -219,7 +220,7 @@ public:
         
 
 #if PLONK_DEBUG_CONVOLVE
-        printf ("convolve: %p(%d) start numDivisions=%d\n", this, callbackCount, numIRDivisions);
+        printf ("convolve: %p(%d) start numDivisions=%d numProcessDivisions=%d\n", this, callbackCount, numIRDivisions, numProcessDivisions);
 #endif
 
         while (samplesRemaining > 0)
@@ -276,12 +277,12 @@ public:
                                        ? (readIRDivisions - writtenIRDivisions) - 1
                                        : (int) ((SampleType) ((countIRDivisions * (readIRDivisions - 1)) / (SampleType) (divisionRatio1)) - writtenIRDivisions);
                 
-                /*nextDivision*/const int nextProcessBufferDivision = previousProcessBufferDivision >= numIRDivisions ? 0 : previousProcessBufferDivision;
+                /*nextDivision*/const int nextProcessBufferDivision = previousProcessBufferDivision >= numProcessDivisions ? 0 : previousProcessBufferDivision;
                 previousProcessBufferDivision = nextProcessBufferDivision + divisionsRemaining;
                 
-                if (previousProcessBufferDivision > numIRDivisions)
+                if (previousProcessBufferDivision > numProcessDivisions)
                 {
-                    previousProcessBufferDivision = numIRDivisions;
+                    previousProcessBufferDivision = numProcessDivisions;
                     divisionsRemaining = previousProcessBufferDivision - nextProcessBufferDivision;
                 }
                 else
@@ -349,7 +350,7 @@ public:
                 }
                 
                 previousProcessBufferDivision = currentProcessBuffersDivision;
-                currentProcessBuffersDivision = plonk::wrap (currentProcessBuffersDivision - 1, 0, numIRDivisions);
+                currentProcessBuffersDivision = plonk::wrap (currentProcessBuffersDivision - 1, 0, numProcessDivisions);
                 countIRDivisions    = 0;
                 writtenIRDivisions  = 0;
                 countDown           = hop;

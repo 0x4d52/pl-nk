@@ -92,9 +92,9 @@ public:
     
     void initProcessBuffers() throw()
     {
-        if (originalLength > 0)
+        if (numIRDivisions > 0)
             for (int i = 0; i < fftBuffers.length(); ++i)
-                processBuffers.add (BufferType::newClear (originalLength * 2));
+                processBuffers.add (BufferType::newClear (numIRDivisions * fftEngine.length()));
     }
     
     void initCountDownStart() throw()
@@ -441,6 +441,16 @@ public:
     FFTBuffersBase operator[] (const int channel) const throw()
     {
         return getChannel (channel);
+    }
+    
+    BufferType& getProcessBuffer (const int channel) throw()
+    {
+        return this->getInternal()->processBuffers.atUnchecked (channel);
+    }
+    
+    const BufferType& getProcessBuffer (const int channel) const throw()
+    {
+        return this->getInternal()->processBuffers.atUnchecked (channel);
     }
 
     friend class ConvolveChannelInternal<SampleType,FFTBuffersBase >;
