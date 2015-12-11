@@ -265,7 +265,7 @@ public:
                         
                         const SampleType* const tempBufferSamples = tempBuffers.atUnchecked (channel).getArray();
                         SampleType* const outputSamples = this->getOutputSamples (channel);
-                        const SampleType* const rateSamples = rateBuffer.getArray();
+                        const RateType* const rateSamples = rateBuffer.getArray();
                         
                         for (channelSamplePosition = outputSamplePosition;
                              (channelSamplePosition < outputBufferLength) && (channelBufferPos < tempBufferPosMax);
@@ -301,7 +301,7 @@ public:
                         
                         const SampleType* const tempBufferSamples = tempBuffers.atUnchecked (channel).getArray();
                         SampleType* const outputSamples = this->getOutputSamples (channel);
-                        const SampleType* const rateSamples = rateBuffer.getArray();
+                        const RateType* const rateSamples = rateBuffer.getArray();
                         
                         const double rateIncrement = double (rateBufferLength) / double (outputBufferLength);
                         
