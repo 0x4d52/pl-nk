@@ -82,6 +82,8 @@ template<class SampleType, PLONK_BINARYOPFUNCTION(SampleType, op)>      class Bi
 template<class SampleType, PLONK_UNARYOPFUNCTION(SampleType, op)>       class UnaryOpChannelInternal;
 template<class SampleType>                                              class MulAddChannelInternal;
 
+template<class SampleType, typename FFTBuffersAccess>                   class ConvolveChannelInternal;
+
 // common units
 template<class SampleType>                                              class MulAddUnit;
 template<class SampleType>                                              class ReblockUnit;
