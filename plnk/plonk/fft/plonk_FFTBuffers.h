@@ -245,7 +245,7 @@ public:
     
     PLONK_INLINE_LOW SampleType* getProcessDivision (const int channel, const int division) throw()
     {
-        plonk_assert (division >= 0 && division < numIRDivisions);
+        plonk_assert (division >= 0 && division < getNumProcessDivisions (channel));
         plonk_assert (processBuffers.length() > 0);
         return getProcessBuffer (channel) + division * fftEngine.length();
     }
