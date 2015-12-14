@@ -85,18 +85,17 @@ public:
         const FFTBuffers& irBuffers (currentIRBuffers);
         const FFTEngineType& fftEngine (irBuffers.getFFTEngine());
         const int fftSize = fftEngine.length();
-        const int fftSize2 = fftSize;// * 2;
 
-        processBuffers = Buffer::withSize (fftSize2 * 7);
+        processBuffers = Buffer::withSize (fftSize * 7);
         SampleType* const processBuffersBase = processBuffers.getArray();
         
-        fftAltBuffer0      = processBuffersBase + fftSize2 * 0;
-        fftAltBuffer1      = processBuffersBase + fftSize2 * 1;
-        fftTransformBuffer = processBuffersBase + fftSize2 * 2;
-        fftOverlapBuffer   = processBuffersBase + fftSize2 * 3;
-        fftBufferCurrent   = processBuffersBase + fftSize2 * 4;
-        fftBufferPrevious  = processBuffersBase + fftSize2 * 5;
-        fftCalcBuffer      = processBuffersBase + fftSize2 * 6;
+        fftAltBuffer0      = processBuffersBase + fftSize * 0;
+        fftAltBuffer1      = processBuffersBase + fftSize * 1;
+        fftTransformBuffer = processBuffersBase + fftSize * 2;
+        fftOverlapBuffer   = processBuffersBase + fftSize * 3;
+        fftBufferCurrent   = processBuffersBase + fftSize * 4;
+        fftBufferPrevious  = processBuffersBase + fftSize * 5;
+        fftCalcBuffer      = processBuffersBase + fftSize * 6;
         
 #if 0 // PLONK_DEBUG
         printf ("fftAltBuffer0      = %p (%d)\n", fftAltBuffer0, fftSize2);
@@ -162,7 +161,7 @@ public:
         zeroSamples (fftAltBuffer1,      fftSize2);
         zeroSamples (fftTransformBuffer, fftSize2);
         zeroSamples (fftOverlapBuffer,   fftSize2);
-        zeroSamples (fftBufferCurrent,      fftSize2);
+        zeroSamples (fftBufferCurrent,   fftSize2);
     }
 
     static inline void complexMultiplyAccumulate (SampleType* const output,
@@ -217,18 +216,9 @@ public:
 
         int samplesRemaining                 = outputBufferLength;
         
-
-#if PLONK_DEBUG_CONVOLVE
-        printf ("convolve: %p(%d) start numDivisions=%d numProcessDivisions=%d\n", this, callbackCount, numIRDivisions, numProcessDivisions);
-#endif
-
         while (samplesRemaining > 0)
         {
             int hop;
-            
-#if PLONK_DEBUG_CONVOLVE
-            printf ("convolve: %p(%d) while (samplesRemaining) samplesRemaining=%d\n", this, callbackCount, samplesRemaining);
-#endif
             
             if ((samplesRemaining - countDown) > 0)
             {
@@ -243,15 +233,8 @@ public:
                 samplesRemaining = 0;
             }
             
-#if PLONK_DEBUG_CONVOLVE
-            printf ("convolve: %p(%d) countDown=%d hop=%d position0=%d position1=%d\n", this, callbackCount, countDown, hop, position0, position1);
-#endif
-            
             if (hop > 0)
             {
-#if PLONK_DEBUG_CONVOLVE
-                printf ("convolve: %p(%d) ### INPUT SAMPLES ###\n", this, callbackCount);
-#endif
                 moveSamples (fftAltBuffer0 + position0, inputSamples, hop);
                 moveSamples (fftAltBuffer1 + position1, inputSamples, hop);
                 moveSamples (outputSamples, fftOverlapBuffer + position0, hop);
@@ -264,11 +247,6 @@ public:
             
             hop = (irCountersCurrent.written >= irCountersCurrent.read - 1) ? 0 : 1;
             ++irCountersCurrent.count;
-            
-#if PLONK_DEBUG_CONVOLVE
-            printf ("convolve: %p(%d) hop=%d countIRDivisions=%d position0=%d position1=%d\n", this, callbackCount, hop, irCountersCurrent.count, position0, position1);
-#endif
-
             
             while (hop != 0)
             {
@@ -289,10 +267,6 @@ public:
                     hop = 0;
                 }
                 
-#if PLONK_DEBUG_CONVOLVE
-                printf ("convolve: %p(%d) divisionsRemaining=%d nextProcessBufferDivision=%d previousProcessBufferDivision=%d writtenIRDivisions=%d\n", this, callbackCount, divisionsRemaining, nextProcessBufferDivision, processCountersCurrent.previousDivision, irCountersCurrent.written);
-#endif
-                
                 if (divisionsRemaining > 0)
                 {
                     const SampleType* irSamples            = irBufferBase + (irCountersCurrent.written + 1) * fftSize;
@@ -312,15 +286,7 @@ public:
             
             if (countDown == 0)
             {
-#if PLONK_DEBUG_CONVOLVE
-                printf ("convolve: %p(%d) ### OVERLAP SAVE ###\n", this, callbackCount);
-#endif
-
                 irCountersCurrent.read = plonk::min (irCountersCurrent.read + 1, numIRDivisions);
-                
-#if PLONK_DEBUG_CONVOLVE
-                printf ("convolve: %p(%d) countDown=0 divisionsRead=%d currentProcessBuffersDivision=%d\n", this, callbackCount, irCountersCurrent.read, processCountersCurrent.currentDivision);
-#endif
                 
                 const SampleType* const irSamples      = irBufferBase;
                 SampleType* const processBufferSamples = processBufferBase + processCountersCurrent.currentDivision * fftSize;
@@ -354,19 +320,10 @@ public:
                 irCountersCurrent.written               = 0;
                 countDown                               = hop;
                 
-#if PLONK_DEBUG_CONVOLVE
-                printf ("convolve: %p(%d) previousProcessBufferDivision=%d currentProcessBuffersDivision=%d countDown=%d fftAltSelect=%d\n",
-                        this, callbackCount, processCountersCurrent.previousDivision, processCountersCurrent.currentDivision, countDown, fftAltSelect);
-#endif
-                
                 zeroSamples (fftBufferCurrent, fftSize);
             }
         }
         
-#if PLONK_DEBUG_CONVOLVE
-        printf ("convolve: %p(%d) end \n", this, callbackCount);
-#endif
-
     }
     
 //    void processChanged (ProcessInfo& info, const int channel, FFTBuffersType& irBuffers, FFTEngineType& fftEngine) throw()
@@ -375,243 +332,37 @@ public:
 //        {
 //            previousIRBuffers = currentIRBuffers;
 //            currentIRBuffers = irBuffers;
-//            
+//
 //            // when we have completed the switch we can set previousIRBuffers back to dummyIRBuffers
-//            
+//
 //            const int numProcessDivisionsCurrent  = currentIRBuffers.getNumProcessDivisions (channel);
 //            const int numProcessDivisionsPrevious = previousIRBuffers.getNumProcessDivisions (channel);
 //
 //            if (numProcessDivisionsCurrent > numProcessDivisionsPrevious)
 //            {
-//#if PLONK_DEBUG_CONVOLVE
-//                printf ("convolve: %p(%d) processChanged - new IR is longer\n", this, callbackCount);
-//#endif
 //                Buffer& currentProcessBuffer (currentIRBuffers.getProcessBuffer (channel));
 //                Buffer& previousProcessBuffer (previousIRBuffers.getProcessBuffer (channel));
-//                
+//
 //                // copy data (should amortise this) from the previous process buffer...
 //                moveSamples (currentProcessBuffer.getArray(),
 //                             previousProcessBuffer.getArray(),
 //                             previousProcessBuffer.length());
-//                
+//
 //                // ...and zero the rest
 //                zeroSamples (currentProcessBuffer.getArray() + previousProcessBuffer.length(),
 //                             currentProcessBuffer.length() - previousProcessBuffer.length());
 //            }
 //            else
 //            {
-//#if PLONK_DEBUG_CONVOLVE
-//                printf ("convolve: %p(%d) processChanged - new IR is same length or shorter\n", this, callbackCount);
-//#endif
 //
 //                // just keep the old process buffer
 //                currentIRBuffers.getProcessBuffer (channel) = previousIRBuffers.getProcessBuffer (channel);
 //            }
-//            
+//
 //            irCountersPrevious = irCountersCurrent;
 //            irCountersCurrent.reset();
 //            
 //            processCountersPrevious = processCountersCurrent;
-////            processCountersCurrent.zero();
-//        }
-//        
-//        // use both buffers to cross fade... but how!!!???
-//        
-//        /*
-//         
-//         - copy the input buffer input into the larger of the two process buffers
-//         - some how mark the divisionFlags for each buffer with info that helps use know when the switch is complete.
-//         
-//         */
-//        
-//        UnitType& inputUnit (this->getInputAsUnit (IOKey::Generic));
-//        const Buffer& inputBuffer (inputUnit.process (info, channel));
-//        const SampleType* inputSamples = inputBuffer.getArray();
-//        
-//        SampleType* outputSamples             = this->getOutputSamples();
-//        const UnsignedLong outputBufferLength = (UnsignedLong) this->getOutputBuffer().length();
-//        
-//        plonk_assert (outputBufferLength == inputBuffer.length());
-//        
-//        const int numCurrentIRDivisions  = currentIRBuffers.getNumIRDivisions();
-//        const int numPreviousIRDivisions = previousIRBuffers.getNumIRDivisions();
-//        const int numProcessDivisions    = currentIRBuffers.getNumProcessDivisions (channel);
-//        
-//        if (numCurrentIRDivisions == 0 || numPreviousIRDivisions == 0)
-//        {
-//            plonk_assertfalse;
-//            zeroSamples (outputSamples, outputBufferLength);
-//            return;
-//        }
-//        
-//        const UnsignedLong fftSize                   = (UnsignedLong) fftEngine.length();
-//        const UnsignedLong fftSizeHalved             = (UnsignedLong) fftEngine.halfLength();
-//        const int divisionRatio1                     = (fftSizeHalved / outputBufferLength) - 1;
-//        SampleType* const fftAltBuffers[]            = { fftAltBuffer0, fftAltBuffer1 };
-//        SampleType* const processBufferBase          = currentIRBuffers.getProcessDivision (channel, 0);
-//        const SampleType* const irCurrentBufferBase  = currentIRBuffers.getIRDivision (channel, 0);
-//        const SampleType* const irPreviousBufferBase = previousIRBuffers.getIRDivision (channel, 0);
-//        int samplesRemaining                         = outputBufferLength;
-//        
-//        while (samplesRemaining > 0)
-//        {
-//            int hop;
-//            
-//            if ((samplesRemaining - countDown) > 0)
-//            {
-//                hop = countDown;
-//                samplesRemaining -= countDown;
-//                countDown = 0;
-//            }
-//            else
-//            {
-//                hop = samplesRemaining;
-//                countDown -= samplesRemaining;
-//                samplesRemaining = 0;
-//            }
-//            
-//            if (hop > 0)
-//            {
-//                moveSamples (fftAltBuffer0 + position0, inputSamples, hop);
-//                moveSamples (fftAltBuffer1 + position1, inputSamples, hop);
-//                moveSamples (outputSamples, fftOverlapBuffer + position0, hop);
-//                
-//                inputSamples  += hop;
-//                outputSamples += hop;
-//                position0     += hop;
-//                position1     += hop;
-//            }
-//            
-//            hop = (irCountersPrevious.written >= irCountersPrevious.read - 1) ? 0 : 1;
-//            ++irCountersPrevious.count;
-//            
-//            while (hop != 0)
-//            {
-//                int previousDivisionsRemaining = irCountersPrevious.count >= divisionRatio1
-//                                               ? (irCountersPrevious.read - irCountersPrevious.written) - 1
-//                                               : (int) ((SampleType) ((irCountersPrevious.count * (irCountersPrevious.read - 1)) / (SampleType) (divisionRatio1)) - irCountersPrevious.written);
-//                
-//                const int nextProcessBufferDivision = processCountersPrevious.previousDivision >= numProcessDivisions ? 0 : processCountersPrevious.previousDivision;
-//                processCountersPrevious.previousDivision = nextProcessBufferDivision + previousDivisionsRemaining;
-//                
-//                if (processCountersPrevious.previousDivision > numProcessDivisions)
-//                {
-//                    processCountersPrevious.previousDivision = numProcessDivisions;
-//                    previousDivisionsRemaining = processCountersPrevious.previousDivision - nextProcessBufferDivision;
-//                }
-//                else
-//                {
-//                    hop = 0;
-//                }
-//                
-//                if (previousDivisionsRemaining > 0)
-//                {
-//                    const SampleType* irSamples            = irPreviousBufferBase + (irCountersPrevious.written + 1) * fftSize;
-//                    const SampleType* processBufferSamples = processBufferBase + nextProcessBufferDivision * fftSize;
-//                    
-//                    for (int i = 0; i < previousDivisionsRemaining; i++)
-//                    {
-//                        complexMultiplyAccumulate (fftBufferPrevious, processBufferSamples, irSamples, fftSizeHalved);
-//                        
-//                        processBufferSamples += fftSize;
-//                        irSamples          += fftSize;
-//                    }
-//                    
-//                    irCountersPrevious.written += previousDivisionsRemaining;
-//                }
-//            }
-//            
-//            hop = (irCountersCurrent.written >= irCountersCurrent.read - 1) ? 0 : 1;
-//            ++irCountersCurrent.count;
-//            
-//            while (hop != 0)
-//            {
-//                int currentDivisionsRemaining = irCountersCurrent.count >= divisionRatio1
-//                                              ? (irCountersCurrent.read - irCountersCurrent.written) - 1
-//                                              : (int) ((SampleType) ((irCountersCurrent.count * (irCountersCurrent.read - 1)) / (SampleType) (divisionRatio1)) - irCountersCurrent.written);
-//                
-//                const int nextProcessBufferDivision = processCountersCurrent.previousDivision >= numProcessDivisions ? 0 : processCountersCurrent.previousDivision;
-//                processCountersCurrent.previousDivision = nextProcessBufferDivision + currentDivisionsRemaining;
-//                
-//                if (processCountersCurrent.previousDivision > numProcessDivisions)
-//                {
-//                    processCountersCurrent.previousDivision = numProcessDivisions;
-//                    currentDivisionsRemaining = processCountersCurrent.previousDivision - nextProcessBufferDivision;
-//                }
-//                else
-//                {
-//                    hop = 0;
-//                }
-//                
-//                if (currentDivisionsRemaining > 0)
-//                {
-//                    const SampleType* irSamples            = irCurrentBufferBase + (irCountersCurrent.written + 1) * fftSize;
-//                    const SampleType* processBufferSamples = processBufferBase + nextProcessBufferDivision * fftSize;
-//                    
-//                    for (int i = 0; i < currentDivisionsRemaining; i++)
-//                    {
-//                        complexMultiplyAccumulate (fftBufferCurrent, processBufferSamples, irSamples, fftSizeHalved);
-//                        
-//                        processBufferSamples += fftSize;
-//                        irSamples            += fftSize;
-//                    }
-//                    
-//                    irCountersCurrent.written += currentDivisionsRemaining;
-//                }
-//            }
-//            
-////            if (countDown == 0)
-////            {
-////                irCountersCurrent.read = plonk::min (irCountersCurrent.read + 1, numCurrentIRDivisions);
-////                irCountersPrevious.read = plonk::min (irCountersPrevious.read + 1, numPreviousIRDivisions);
-////                
-////                const SampleType* const irCurrentSamples    = irCurrentBufferBase;
-////                const SampleType* const irPreviousSamples   = irPreviousBufferBase;
-////
-////                SampleType* const processBufferSamplesCurrrent = processBufferBase + processCountersCurrent.currentDivision * fftSize;
-////                SampleType* const processBufferSamplesPrevious = processBufferBase + processCountersPrevious.currentDivision * fftSize;
-////                
-////                fftEngine.forward (processBufferSamplesCurrrent, fftAltBuffers[fftAltSelect]);
-////                complexMultiplyAccumulate (fftBufferCurrent, processBufferSamplesCurrrent, irCurrentSamples, fftSizeHalved);
-////                fftEngine.inverse (fftTransformBuffer, fftBufferCurrent);
-////                
-////                fftEngine.forward (processBufferSamplesPrevious, fftAltBuffers[fftAltSelect]);
-////                complexMultiplyAccumulate (fftBufferCurrent, processBufferSamplesPrevious, irPreviousSamples, fftSizeHalved);
-////                fftEngine.inverse (fftTransformBuffer, fftBufferPrevious);
-////
-////                
-////                hop = fftSizeHalved;
-////                SampleType* const overlap1 = fftOverlapBuffer + (hop * (1 - fftAltSelect));
-////                SampleType* const overlap2 = fftOverlapBuffer + (hop * fftAltSelect);
-////                
-////                moveSamples (overlap1, fftTransformBuffer, fftSize);
-////                accumulateSamples (overlap2, fftTransformBuffer + hop, fftSize);
-////                
-////                if (fftAltSelect != 0)
-////                {
-////                    position0    = 0;
-////                    fftAltSelect = 0;
-////                }
-////                else
-////                {
-////                    position1    = 0;
-////                    fftAltSelect = 1;
-////                }
-////                
-////                processCountersCurrent.previousDivision = processCountersCurrent.currentDivision;
-////                processCountersCurrent.currentDivision = plonk::wrap (processCountersCurrent.currentDivision - 1, 0, numProcessDivisions);
-////                
-////                processCountersPrevious.previousDivision = processCountersPrevious.currentDivision;
-////                processCountersPrevious.currentDivision = plonk::wrap (processCountersPrevious.currentDivision - 1, 0, numProcessDivisions);
-////
-////                irCountersCurrent.count     = 0;
-////                irCountersCurrent.written   = 0;
-////                irCountersPrevious.count    = 0;
-////                irCountersPrevious.written  = 0;
-////
-////                countDown                   = hop;
-////                zeroSamples (fftBufferCurrent, fftSize);
-////            }
 //        }
 //    }
     
