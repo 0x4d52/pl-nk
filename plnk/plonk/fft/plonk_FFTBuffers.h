@@ -91,25 +91,33 @@ public:
     
     void initProcessBuffers() throw()
     {
-        for (int i = 0; i < irBuffers.length(); ++i)
-            processBuffers.add (BufferType::newClear (irBuffers.atUnchecked (i).length() * fftEngine.length()));
+        for (int channel = 0; channel < irBuffers.length(); ++channel)
+        {
+            BuffersType processChannelBuffers;
+            const BuffersType& irChannelBuffers (irBuffers.atUnchecked (channel));
+
+            for (int division = 0; division < irChannelBuffers.length(); ++division)
+                processChannelBuffers.add (BufferType::newClear (fftEngine.length()));
+                
+            processBuffers.add (processChannelBuffers);
+        }
     }
     
     void initCountDownStart() throw()
     {
-        for (int i = 0; i < irBuffers.length(); ++i)
+        for (int channel = 0; channel < irBuffers.length(); ++channel)
             countDownStart.add (getConvolveRNG().uniform ((int) (fftEngine.length() / 16)) * 4);
     }
     
     FFTBuffersInternal* getChannel (const int channel) const throw()
-    {
-        const int numChannels = irBuffers.length();
-        
-        if (numChannels == 0)
+    {        
+        if (irBuffers.length() == 0)
             return new FFTBuffersInternal (fftEngine, Buffers());
         else
-            return new FFTBuffersInternal (irBuffers.atUnchecked (channel % numChannels),
-                                           fftEngine,
+            return new FFTBuffersInternal (fftEngine,
+                                           irBuffers.atUnchecked (channel % irBuffers.length()),
+                                           processBuffers.atUnchecked (channel % processBuffers.length()),
+                                           countDownStart.atUnchecked (channel % countDownStart.length()),
                                            originalLength);
     }
     
@@ -234,24 +242,26 @@ public:
         }
     }
 
-    
-    PLONK_INLINE_LOW int getNumProcessDivisions (const int channel) const throw()
-    {
-        return processBuffers.atUnchecked (channel).length() / fftEngine.length();
-    }
-    
     PLONK_INLINE_LOW SampleType* getProcessDivision (const int channel, const int division) throw()
     {
-        plonk_assert (division >= 0 && division < getNumProcessDivisions (channel));
-        plonk_assert (processBuffers.length() > 0);
-        return getProcessBuffer (channel) + division * fftEngine.length();
+        return processBuffers.atUnchecked (channel).atUnchecked (division).getArray();
     }
     
     PLONK_INLINE_LOW const SampleType* getIRDivision (const int channel, const int division) const throw()
     {
         return irBuffers.atUnchecked (channel).atUnchecked (division).getArray();
     }
+    
+    PLONK_INLINE_LOW const int getNumIRDivisions (const int channel) const throw()
+    {
+        return originalLength == 0 ? 0 : irBuffers.atUnchecked (channel).length();
+    }
 
+    PLONK_INLINE_LOW const int getNumProcessDivisions (const int channel) const throw()
+    {
+        return originalLength == 0 ? 0 : processBuffers.atUnchecked (channel).length();
+    }
+    
     PLONK_INLINE_LOW int getCountDownStart (const int channel) const throw()
     {
         return countDownStart.atUnchecked (channel);
@@ -262,25 +272,22 @@ public:
     friend class ConvolveChannelInternal<SampleType,FFTBuffersBase<SampleType>&>;
 
 private:
-    
-    PLONK_INLINE_LOW SampleType* getProcessBuffer (const int channel) throw()
-    {
-        return processBuffers.atUnchecked (channel).getArray();
-    }
-
-
-    FFTBuffersInternal (BuffersType const& singleFFTBuffer,
-                        FFTEngineType const& fftEngineToUse,
-                        const int originalLengthToUse) throw()
+    FFTBuffersInternal (FFTEngineType const& fftEngineToUse,
+                        BuffersType const& singleFFTBuffer,
+                        BuffersType const& singleProcessBuffer,
+                        const int originalLengthToUse,
+                        const int countDownStartToUse) throw()
     :   fftEngine (fftEngineToUse),
-        irBuffers (DivisionsType (singleFFTBuffer)),
+        irBuffers (singleFFTBuffer),
+        processBuffers (singleProcessBuffer),
+        countDownStart (countDownStartToUse),
         originalLength (originalLengthToUse)
     {
     }
     
     FFTEngineType fftEngine;
     DivisionsType irBuffers;
-    BuffersType processBuffers;
+    DivisionsType processBuffers;
     Ints countDownStart;
     int originalLength;
 };
@@ -403,7 +410,7 @@ public:
     /** Get the number of FFT divisions in the buffer.*/
     const int getNumIRDivisions (const int channel) const throw()
     {
-        return this->getInternal()->irBuffers.atUnchecked (channel).length();
+        return this->getInternal()->getNumIRDivisions (channel);
     }
     
     /** Get the number of process divisions in the buffer.*/
@@ -424,16 +431,6 @@ public:
         return getChannel (channel);
     }
     
-    BufferType& getProcessBuffer (const int channel) throw()
-    {
-        return this->getInternal()->processBuffers.atUnchecked (channel);
-    }
-    
-    const BufferType& getProcessBuffer (const int channel) const throw()
-    {
-        return this->getInternal()->processBuffers.atUnchecked (channel);
-    }
-
     friend class ConvolveChannelInternal<SampleType,FFTBuffersBase >;
     friend class ConvolveChannelInternal<SampleType,FFTBuffersBase&>;
 
