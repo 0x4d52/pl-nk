@@ -64,9 +64,8 @@ public:
     typedef FFTBuffersBase<SampleType>                              FFTBuffersType;
     typedef Variable<FFTBuffersType&>                               FFTBuffersVariableType;
 
-    ConvolveHelper (FFTBuffersType const& initIRBuffers) throw()
-    :   irBuffers (initIRBuffers),
-        processBuffers (Buffer::withSize (irBuffers.getFFTEngine().length() * 6)),
+    ConvolveHelper (const int fftSize) throw()
+    :   processBuffers (Buffer::withSize (fftSize * 6)),
         currentProcessBuffersDivision (0),
         writtenIRDivisions (0),
         countIRDivisions (0),
@@ -75,9 +74,10 @@ public:
         countDown (0),
         position0 (0),
         position1 (0),
-        fftAltSelect (0)
+        fftAltSelect (0),
+        pullsInput (true),
+        replacesOutput (true)
     {
-        const int fftSize = irBuffers.getFFTEngine().length();
         SampleType* const processBuffersBase = processBuffers.getArray();
         
         fftAltBuffer0      = processBuffersBase + fftSize * 0;
@@ -109,10 +109,9 @@ public:
         zeroSamples (fftTempBuffer,      fftSize);
     }
     
-    void setIRBuffers (FFTBuffersType const& newIRBuffers, const int channel) throw()
+    void setIRBuffers (FFTBuffersType const& newIRBuffers) throw()
     {
         irBuffers = newIRBuffers;
-        reset (channel);
     }
     
     void process (ConvolveInternal* owner, ProcessInfo& info, const int channel) throw()
@@ -163,9 +162,16 @@ public:
             
             if (hop > 0)
             {
-                moveSamples (fftAltBuffer0 + position0, inputSamples, hop);
-                moveSamples (fftAltBuffer1 + position1, inputSamples, hop);
-                moveSamples (outputSamples, fftOverlapBuffer + position0, hop);
+                if (pullsInput)
+                {
+                    moveSamples (fftAltBuffer0 + position0, inputSamples, hop);
+                    moveSamples (fftAltBuffer1 + position1, inputSamples, hop);
+                }
+                
+                if (replacesOutput)
+                    moveSamples (outputSamples, fftOverlapBuffer + position0, hop);
+                else
+                    accumulateSamples (outputSamples, fftOverlapBuffer + position0, hop);
                 
                 inputSamples  += hop;
                 outputSamples += hop;
@@ -179,8 +185,8 @@ public:
             while (hop != 0)
             {
                 int divisionsRemaining = countIRDivisions >= divisionRatio1
-                ? (readIRDivisions - writtenIRDivisions) - 1
-                : (int) ((SampleType) ((countIRDivisions * (readIRDivisions - 1)) / (SampleType) (divisionRatio1)) - writtenIRDivisions);
+                                       ? (readIRDivisions - writtenIRDivisions) - 1
+                                       : (int) ((SampleType) ((countIRDivisions * (readIRDivisions - 1)) / (SampleType) (divisionRatio1)) - writtenIRDivisions);
                 
                 const int nextProcessBufferDivision = previousProcessBufferDivision >= numProcessDivisions ? 0 : previousProcessBufferDivision;
                 previousProcessBufferDivision = nextProcessBufferDivision + divisionsRemaining;
@@ -207,7 +213,9 @@ public:
                 const SampleType* const irSamples      = irBuffers.getIRDivision (channel, 0);;
                 SampleType* const processBufferSamples = irBuffers.getProcessDivision (channel, currentProcessBuffersDivision);;
                 
-                fftEngine.forward (processBufferSamples, fftAltBuffers[fftAltSelect]);
+                if (pullsInput)
+                    fftEngine.forward (processBufferSamples, fftAltBuffers[fftAltSelect]);
+                
                 complexMultiplyAccumulate (fftTempBuffer, processBufferSamples, irSamples, fftSizeHalved);
                 
                 fftEngine.inverse (fftTransformBuffer, fftTempBuffer);
@@ -282,6 +290,8 @@ private:
     int countDown;
     int position0, position1;
     int fftAltSelect;
+    bool pullsInput;
+    bool replacesOutput;
 };
 
 
@@ -316,7 +326,7 @@ public:
         previousIRBuffers (dummyIRBuffers),
         currentIRBuffers (this->getInputAsFFTBuffers (IOKey::FFTBuffers).getValue())
     {
-        currentConvolver = new ConvolveHelperType (currentIRBuffers);
+        currentConvolver = new ConvolveHelperType (currentIRBuffers.getFFTEngine().length());
     }
     
     Text getName() const throw()
@@ -349,7 +359,9 @@ public:
         
         this->initValue (SampleType (0));
                 
-        reset (channel);
+        FFTBuffersAccessType irBuffers (this->getInputAsFFTBuffers (IOKey::FFTBuffers).getValue());
+        currentConvolver->setIRBuffers (irBuffers);
+        currentConvolver->reset (channel);
     }
     
     void reset (const int channel) throw()
