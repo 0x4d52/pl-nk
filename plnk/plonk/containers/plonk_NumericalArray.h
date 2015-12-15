@@ -767,7 +767,7 @@ template<class NumericalType>
 class NumericalArrayComplexBase
 {
 public:
-    PLONK_INLINE_LOW static void zmul (NumericalType* dstReal,
+     static PLONK_INLINE_MID void zmul (NumericalType* dstReal,
                                        NumericalType* dstImag,
                                        const NumericalType* leftReal,
                                        const NumericalType* leftImag,
@@ -782,7 +782,7 @@ public:
         }
     }
     
-    PLONK_INLINE_LOW static void zadd (NumericalType* dstReal,
+    static PLONK_INLINE_MID void zadd (NumericalType* dstReal,
                                        NumericalType* dstImag,
                                        const NumericalType* leftReal,
                                        const NumericalType* leftImag,
@@ -797,7 +797,7 @@ public:
         }
     }
     
-    PLONK_INLINE_LOW static void zsub (NumericalType* dstReal,
+    static PLONK_INLINE_MID void zsub (NumericalType* dstReal,
                                        NumericalType* dstImag,
                                        const NumericalType* leftReal,
                                        const NumericalType* leftImag,
@@ -812,7 +812,7 @@ public:
         }
     }
     
-    PLONK_INLINE_LOW static void zmulaccum (NumericalType* dstReal,
+    static PLONK_INLINE_MID void zmulaccum (NumericalType* dstReal,
                                             NumericalType* dstImag,
                                             const NumericalType* leftReal,
                                             const NumericalType* leftImag,
@@ -827,7 +827,7 @@ public:
         }
     }
     
-    PLONK_INLINE_LOW static void zmuladd (NumericalType* dstReal,
+    static PLONK_INLINE_MID void zmuladd (NumericalType* dstReal,
                                           NumericalType* dstImag,
                                           const NumericalType* inputReal,
                                           const NumericalType* inputImag,
@@ -844,7 +844,7 @@ public:
         }
     }
 
-    PLONK_INLINE_LOW static void zpmul (NumericalType* dst,
+    static PLONK_INLINE_MID void zpmul (NumericalType* dst,
                                         const NumericalType* left,
                                         const NumericalType* right,
                                         const UnsignedLong fftSizeHalved)
@@ -870,7 +870,7 @@ public:
         dstImagSamples[0] = leftNyquist * rightNyquist;
     }
     
-    PLONK_INLINE_LOW static void zpmuladd (NumericalType* dst,
+    static PLONK_INLINE_MID void zpmuladd (NumericalType* dst,
                                            const NumericalType* input,
                                            const NumericalType* mul,
                                            const NumericalType* add,
@@ -881,7 +881,7 @@ public:
         NumericalArrayComplex<NumericalType>::zpadd (dst, dst, add, fftSizeHalved);
     }
 
-    PLONK_INLINE_LOW static void zpmulaccum (NumericalType* dst,
+    static PLONK_INLINE_MID void zpmulaccum (NumericalType* dst,
                                              const NumericalType* left,
                                              const NumericalType* right,
                                              const UnsignedLong fftSizeHalved)
@@ -910,7 +910,7 @@ public:
     }
 
     
-    PLONK_INLINE_LOW static void zpadd (NumericalType* dst,
+    static PLONK_INLINE_MID void zpadd (NumericalType* dst,
                                         const NumericalType* left,
                                         const NumericalType* right,
                                         const UnsignedLong fftSizeHalved)
@@ -921,7 +921,7 @@ public:
             dst[i] = left[i] + right[i];
     }
     
-    PLONK_INLINE_LOW static void zpsub (NumericalType* dst,
+    static PLONK_INLINE_MID void zpsub (NumericalType* dst,
                                         const NumericalType* left,
                                         const NumericalType* right,
                                         const UnsignedLong fftSizeHalved)
@@ -944,7 +944,7 @@ template<>
 class NumericalArrayComplex<float> : public NumericalArrayComplexBase<float>
 {
 public:
-    PLONK_INLINE_LOW static void zmul (float* dstReal,
+    static PLONK_INLINE_MID void zmul (float* dstReal,
                                        float* dstImag,
                                        const float* leftReal,
                                        const float* leftImag,
@@ -955,7 +955,7 @@ public:
         pl_VectorZMulF_ZNNNNNN (dstReal, dstImag, leftReal, leftImag, rightReal, rightImag, numItems);
     }
     
-    PLONK_INLINE_LOW static void zadd (float* dstReal,
+    static PLONK_INLINE_MID void zadd (float* dstReal,
                                        float* dstImag,
                                        const float* leftReal,
                                        const float* leftImag,
@@ -967,7 +967,7 @@ public:
         pl_VectorAddF_NNN (dstImag, leftImag, rightImag, numItems);
     }
     
-    PLONK_INLINE_LOW static void zsub (float* dstReal,
+    static PLONK_INLINE_MID void zsub (float* dstReal,
                                        float* dstImag,
                                        const float* leftReal,
                                        const float* leftImag,
@@ -979,7 +979,7 @@ public:
         pl_VectorSubF_NNN (dstImag, leftImag, rightImag, numItems);
     }
     
-    PLONK_INLINE_LOW static void zpadd (float* dst,
+    static PLONK_INLINE_MID void zpadd (float* dst,
                                         const float* left,
                                         const float* right,
                                         const UnsignedLong fftSizeHalved)
@@ -987,7 +987,7 @@ public:
         pl_VectorAddF_NNN (dst, left, right, fftSizeHalved << 1);
     }
     
-    PLONK_INLINE_LOW static void zpsub (float* dst,
+    static PLONK_INLINE_MID void zpsub (float* dst,
                                         const float* left,
                                         const float* right,
                                         const UnsignedLong fftSizeHalved)
@@ -995,7 +995,7 @@ public:
         pl_VectorSubF_NNN (dst, left, right, fftSizeHalved << 1);
     }
     
-    PLONK_INLINE_LOW static void zmulaccum (float* dstReal,
+    static PLONK_INLINE_MID void zmulaccum (float* dstReal,
                                             float* dstImag,
                                             const float* leftReal,
                                             const float* leftImag,
@@ -1006,7 +1006,7 @@ public:
         pl_VectorZMulAddF_ZNNNNNNNN (dstReal, dstImag, leftReal, leftImag, rightReal, rightImag, dstReal, dstImag, numItems);
     }
 
-    PLONK_INLINE_LOW static void zmuladd (float* dstReal,
+    static PLONK_INLINE_MID void zmuladd (float* dstReal,
                                           float* dstImag,
                                           const float* inputReal,
                                           const float* inputImag,
@@ -1024,7 +1024,7 @@ template<>
 class NumericalArrayComplex<double> : public NumericalArrayComplexBase<double>
 {
 public:
-    PLONK_INLINE_LOW static void zmul (double* dstReal,
+    static PLONK_INLINE_MID void zmul (double* dstReal,
                                        double* dstImag,
                                        const double* leftReal,
                                        const double* leftImag,
@@ -1035,7 +1035,7 @@ public:
         pl_VectorZMulD_ZNNNNNN (dstReal, dstImag, leftReal, leftImag, rightReal, rightImag, numItems);
     }
     
-    PLONK_INLINE_LOW static void zadd (double* dstReal,
+    static PLONK_INLINE_MID void zadd (double* dstReal,
                                        double* dstImag,
                                        const double* leftReal,
                                        const double* leftImag,
@@ -1047,7 +1047,7 @@ public:
         pl_VectorAddD_NNN (dstImag, leftImag, rightImag, numItems);
     }
     
-    PLONK_INLINE_LOW static void zsub (double* dstReal,
+    static PLONK_INLINE_MID void zsub (double* dstReal,
                                        double* dstImag,
                                        const double* leftReal,
                                        const double* leftImag,
@@ -1059,7 +1059,7 @@ public:
         pl_VectorSubD_NNN (dstImag, leftImag, rightImag, numItems);
     }
     
-    PLONK_INLINE_LOW static void zpadd (double* dst,
+    static PLONK_INLINE_MID void zpadd (double* dst,
                                         const double* left,
                                         const double* right,
                                         const UnsignedLong fftSizeHalved)
@@ -1067,7 +1067,7 @@ public:
         pl_VectorAddD_NNN (dst, left, right, fftSizeHalved << 1);
     }
     
-    PLONK_INLINE_LOW static void zpsub (double* dst,
+    static PLONK_INLINE_MID void zpsub (double* dst,
                                         const double* left,
                                         const double* right,
                                         const UnsignedLong fftSizeHalved)
@@ -1075,7 +1075,7 @@ public:
         pl_VectorSubD_NNN (dst, left, right, fftSizeHalved << 1);
     }
     
-    PLONK_INLINE_LOW static void zmulaccum (double* dstReal,
+    static PLONK_INLINE_MID void zmulaccum (double* dstReal,
                                             double* dstImag,
                                             const double* leftReal,
                                             const double* leftImag,
@@ -1086,7 +1086,7 @@ public:
         pl_VectorZMulAddD_ZNNNNNNNN (dstReal, dstImag, leftReal, leftImag, rightReal, rightImag, dstReal, dstImag, numItems);
     }
     
-    PLONK_INLINE_LOW static void zmuladd (double* dstReal,
+    static PLONK_INLINE_MID void zmuladd (double* dstReal,
                                           double* dstImag,
                                           const double* inputReal,
                                           const double* inputImag,
@@ -1197,34 +1197,34 @@ public:
 		return null;
 	}	        
     
-    static PLONK_INLINE_LOW void copyData (NumericalType* const dst, const NumericalType* const src, const UnsignedLong numItems) throw()
+    static PLONK_INLINE_MID void copyData (NumericalType* const dst, const NumericalType* const src, const UnsignedLong numItems) throw()
     {
         Memory::copy (dst, src, numItems * sizeof (NumericalType));
     }
         
-    static PLONK_INLINE_LOW void convertDirect (NumericalType* const dst, const NumericalType* const src, const UnsignedLong numItems) throw()
+    static PLONK_INLINE_MID void convertDirect (NumericalType* const dst, const NumericalType* const src, const UnsignedLong numItems) throw()
     {
         copyData (dst, src, numItems);
     }
     
-    static PLONK_INLINE_LOW void convertScaled (NumericalType* const dst, const NumericalType* const src, const UnsignedLong numItems) throw()
+    static PLONK_INLINE_MID void convertScaled (NumericalType* const dst, const NumericalType* const src, const UnsignedLong numItems) throw()
     {
         copyData (dst, src, numItems);
     }
 
     template<class OtherType>
-    static PLONK_INLINE_LOW void convertDirect (NumericalType* const dst, const OtherType* const src, const UnsignedLong numItems) throw()
+    static PLONK_INLINE_MID void convertDirect (NumericalType* const dst, const OtherType* const src, const UnsignedLong numItems) throw()
     {
         NumericalArrayConverter<NumericalType,OtherType>::convertDirect (dst, src, numItems);        
     }
     
     template<class OtherType>
-    static PLONK_INLINE_LOW void convertScaled (NumericalType* const dst, const OtherType* const src, const UnsignedLong numItems) throw()
+    static PLONK_INLINE_MID void convertScaled (NumericalType* const dst, const OtherType* const src, const UnsignedLong numItems) throw()
     {
         NumericalArrayConverter<NumericalType,OtherType>::convertScaled (dst, src, numItems);        
     }
     
-    static PLONK_INLINE_LOW void convert (NumericalType* const dst, 
+    static PLONK_INLINE_MID void convert (NumericalType* const dst,
                                 const NumericalType* const src, 
                                 const UnsignedLong numItems,
                                 const bool applyScaling) throw()
@@ -1234,7 +1234,7 @@ public:
     }    
     
     template<class OtherType>
-    static PLONK_INLINE_LOW void convert (NumericalType* const dst, 
+    static PLONK_INLINE_MID void convert (NumericalType* const dst,
                                 const OtherType* const src, 
                                 const UnsignedLong numItems,
                                 const bool applyScaling) throw()
@@ -1242,12 +1242,12 @@ public:
         NumericalArrayConverter<NumericalType,OtherType>::convert (dst, src, numItems, applyScaling);        
     }
     
-    static PLONK_INLINE_LOW void zeroData (NumericalType* const dst, const UnsignedLong numItems) throw()
+    static PLONK_INLINE_MID void zeroData (NumericalType* const dst, const UnsignedLong numItems) throw()
     {
         Memory::zero (dst, numItems * sizeof (NumericalType));
     }
     
-    static PLONK_INLINE_LOW void fill (NumericalType* const dst, const NumericalType value, const UnsignedLong numItems) throw()
+    static PLONK_INLINE_MID void fill (NumericalType* const dst, const NumericalType value, const UnsignedLong numItems) throw()
     {
         NumericalArrayFiller<NumericalType>::fill (dst, value, numItems);
     }

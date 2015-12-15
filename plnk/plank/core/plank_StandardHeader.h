@@ -403,9 +403,15 @@ typedef struct PlankFourCharCodeString
 
 //inline
 
-#define PLANK_INLINE_HIGH inline // single line math for example
-#define PLANK_INLINE_MID  inline // other simple functions
-#define PLANK_INLINE_LOW  inline // other longer functions that speed up operation when inlined
+#if PLONK_WIN
+    #define PLANK_INLINE_FORCE       __forceinline
+#else
+    #define PLANK_INLINE_FORCE       inline __attribute__((always_inline))
+#endif
+
+#define PLANK_INLINE_HIGH PLANK_INLINE_FORCE // single line math for example
+#define PLANK_INLINE_MID  PLANK_INLINE_FORCE // other simple functions
+#define PLANK_INLINE_LOW  inline             // other longer functions that speed up operation when inlined
 
 #include "plank_Memory.h"
 
