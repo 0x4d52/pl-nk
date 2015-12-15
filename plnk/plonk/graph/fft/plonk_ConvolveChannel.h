@@ -44,14 +44,13 @@
 
 #define PLONK_DEBUG_CONVOLVE 0//1
 
-/** Convolve channel. */
+
 template<class SampleType, typename FFTBuffersAccess>
-class ConvolveChannelInternal
-:   public ChannelInternal<SampleType, ChannelInternalCore::Data>
+class ConvolveHelper
 {
 public:
     typedef FFTBuffersAccess                                        FFTBuffersAccessType;
-
+    
     typedef ChannelInternalCore::Data                               Data;
     typedef ChannelBase<SampleType>                                 ChannelType;
     typedef ObjectArray<ChannelType>                                ChannelArrayType;
@@ -64,12 +63,10 @@ public:
     typedef FFTEngineBase<SampleType>                               FFTEngineType;
     typedef FFTBuffersBase<SampleType>                              FFTBuffersType;
     typedef Variable<FFTBuffersType&>                               FFTBuffersVariableType;
-    
-    ConvolveChannelInternal (Inputs const& inputs,
-                             Data const& data,
-                             BlockSize const& blockSize,
-                             SampleRate const& sampleRate) throw()
-    :   Internal (inputs, data, blockSize, sampleRate),
+
+    ConvolveHelper (FFTBuffersType const& initIRBuffers) throw()
+    :   irBuffers (initIRBuffers),
+        processBuffers (Buffer::withSize (irBuffers.getFFTEngine().length() * 6)),
         currentProcessBuffersDivision (0),
         writtenIRDivisions (0),
         countIRDivisions (0),
@@ -78,77 +75,23 @@ public:
         countDown (0),
         position0 (0),
         position1 (0),
-        fftAltSelect (0),
-        dummyIRBuffers(),
-        previousIRBuffers (dummyIRBuffers),
-        currentIRBuffers (this->getInputAsFFTBuffers (IOKey::FFTBuffers).getValue())
+        fftAltSelect (0)
     {
-        const FFTBuffers& irBuffers (currentIRBuffers);
-        const FFTEngineType& fftEngine (irBuffers.getFFTEngine());
-        const int fftSize = fftEngine.length();
-        const int fftSize2 = fftSize * 2;
-
-        processBuffers = Buffer::withSize (fftSize2 * 6);
+        const int fftSize = irBuffers.getFFTEngine().length();
         SampleType* const processBuffersBase = processBuffers.getArray();
         
-        fftAltBuffer0      = processBuffersBase + fftSize2 * 0;
-        fftAltBuffer1      = processBuffersBase + fftSize2 * 1;
-        fftTransformBuffer = processBuffersBase + fftSize2 * 2;
-        fftOverlapBuffer   = processBuffersBase + fftSize2 * 3;
-        fftTempBuffer      = processBuffersBase + fftSize2 * 4;
-        fftCalcBuffer      = processBuffersBase + fftSize2 * 5;
-        
-#if 0 // PLONK_DEBUG
-        printf ("fftAltBuffer0      = %p (%d)\n", fftAltBuffer0, fftSize2);
-        printf ("fftAltBuffer1      = %p (%d)\n", fftAltBuffer1, fftSize2);
-        printf ("fftTransformBuffer = %p (%d)\n", fftTransformBuffer, fftSize2);
-        printf ("fftOverlapBuffer   = %p (%d)\n", fftOverlapBuffer, fftSize2);
-        printf ("fftTempBuffer      = %p (%d)\n", fftTempBuffer, fftSize2);
-        printf ("fftCalcBuffer      = %p (%d)\n", fftCalcBuffer, fftSize2);
-        printf ("inputBuffer        = %p (%d)\n", inputBuffer.getArray(), inputBuffer.length());
-#endif
+        fftAltBuffer0      = processBuffersBase + fftSize * 0;
+        fftAltBuffer1      = processBuffersBase + fftSize * 1;
+        fftTransformBuffer = processBuffersBase + fftSize * 2;
+        fftOverlapBuffer   = processBuffersBase + fftSize * 3;
+        fftTempBuffer      = processBuffersBase + fftSize * 4;
+        fftCalcBuffer      = processBuffersBase + fftSize * 5;
     }
     
-    Text getName() const throw()
-    {
-        return "Convolve";
-    }
-    
-    IntArray getInputKeys() const throw()
-    {
-        const IntArray keys (IOKey::Generic, IOKey::FFTBuffers);
-        return keys;
-    }
-    
-    InternalBase* getChannel (const int index) throw()
-    {
-        const Inputs channelInputs = this->getInputs().getChannel (index);
-        return new ConvolveInternal (channelInputs,
-                                     this->getState(),
-                                     this->getBlockSize(),
-                                     this->getSampleRate());
-    }
-    
-    void initChannel (const int channel) throw()
-    {
-        const UnitType& input = this->getInputAsUnit (IOKey::Generic);
-        
-        this->setBlockSize (input.getBlockSize (channel));
-        this->setSampleRate (input.getSampleRate (channel));
-        this->setOverlap (input.getOverlap (channel));
-        
-        this->initValue (SampleType (0));
-        
-        const FFTBuffersAccessType irBuffers (this->getInputAsFFTBuffers (IOKey::FFTBuffers).getValue());
-        const FFTEngineType& fftEngine (irBuffers.getFFTEngine());
-        
-        reset (irBuffers, fftEngine, channel);
-    }
-    
-    void reset (FFTBuffersType const& irBuffers, FFTEngineType const& fftEngine, const int channel) throw()
+    void reset (const int channel) throw()
     {
         countDown                       = irBuffers.getCountDownStart (channel);
-        position0                       = fftEngine.halfLength() - countDown;
+        position0                       = irBuffers.getFFTEngine().halfLength() - countDown;
         position1                       = position0 + countDown;
         fftAltSelect                    = 0;
         currentProcessBuffersDivision   = 0;
@@ -157,45 +100,31 @@ public:
         previousProcessBufferDivision   = 0;
         readIRDivisions                 = 1;
         
-        const UnsignedLong fftSize2 = (UnsignedLong) fftEngine.length() * 2;
+        const UnsignedLong fftSize = (UnsignedLong) irBuffers.getFFTEngine().length();
         
-        zeroSamples (fftAltBuffer0,      fftSize2);
-        zeroSamples (fftAltBuffer1,      fftSize2);
-        zeroSamples (fftTransformBuffer, fftSize2);
-        zeroSamples (fftOverlapBuffer,   fftSize2);
-        zeroSamples (fftTempBuffer,      fftSize2);
-    }
-
-    static inline void complexMultiplyAccumulate (SampleType* const output,
-                                                  const SampleType* const left, const SampleType* const right,
-                                                  const UnsignedLong halfLength) throw()
-    {
-        NumericalArrayComplex<SampleType>::zpmulaccum (output, left, right, halfLength);
-    }
-
-    static inline void moveSamples (SampleType* const dst, const SampleType* const src, const UnsignedLong numItems) throw()
-    {
-        NumericalArrayUnaryOp<SampleType, plonk::move>::calc (dst, src, numItems);
+        zeroSamples (fftAltBuffer0,      fftSize);
+        zeroSamples (fftAltBuffer1,      fftSize);
+        zeroSamples (fftTransformBuffer, fftSize);
+        zeroSamples (fftOverlapBuffer,   fftSize);
+        zeroSamples (fftTempBuffer,      fftSize);
     }
     
-    static inline void accumulateSamples (SampleType* const dst, const SampleType* const src, const UnsignedLong numItems) throw()
+    void setIRBuffers (FFTBuffersType const& newIRBuffers, const int channel) throw()
     {
-        NumericalArrayBinaryOp<SampleType, plonk::addop>::calcNN (dst, dst, src, numItems);
+        irBuffers = newIRBuffers;
+        reset (channel);
     }
     
-    static inline void zeroSamples (SampleType* const dst, const UnsignedLong numItems) throw()
+    void process (ConvolveInternal* owner, ProcessInfo& info, const int channel) throw()
     {
-        NumericalArray<SampleType>::zeroData (dst, numItems);
-    }
-    
-    void processContinue (ProcessInfo& info, const int channel, FFTBuffersType& irBuffers, FFTEngineType& fftEngine) throw()
-    {
-        UnitType& inputUnit (this->getInputAsUnit (IOKey::Generic));
+        FFTEngineType& fftEngine (irBuffers.getFFTEngine());
+        
+        UnitType& inputUnit (owner->getInputAsUnit (IOKey::Generic));
         const Buffer& inputBuffer (inputUnit.process (info, channel));
         const SampleType* inputSamples = inputBuffer.getArray();
         
-        SampleType* outputSamples             = this->getOutputSamples();
-        const UnsignedLong outputBufferLength = (UnsignedLong) this->getOutputBuffer().length();
+        SampleType* outputSamples             = owner->getOutputSamples();
+        const UnsignedLong outputBufferLength = (UnsignedLong) owner->getOutputBuffer().length();
         
         plonk_assert (outputBufferLength == inputBuffer.length());
         
@@ -250,10 +179,10 @@ public:
             while (hop != 0)
             {
                 int divisionsRemaining = countIRDivisions >= divisionRatio1
-                                       ? (readIRDivisions - writtenIRDivisions) - 1
-                                       : (int) ((SampleType) ((countIRDivisions * (readIRDivisions - 1)) / (SampleType) (divisionRatio1)) - writtenIRDivisions);
+                ? (readIRDivisions - writtenIRDivisions) - 1
+                : (int) ((SampleType) ((countIRDivisions * (readIRDivisions - 1)) / (SampleType) (divisionRatio1)) - writtenIRDivisions);
                 
-                /*nextDivision*/const int nextProcessBufferDivision = previousProcessBufferDivision >= numProcessDivisions ? 0 : previousProcessBufferDivision;
+                const int nextProcessBufferDivision = previousProcessBufferDivision >= numProcessDivisions ? 0 : previousProcessBufferDivision;
                 previousProcessBufferDivision = nextProcessBufferDivision + divisionsRemaining;
                 
                 if (previousProcessBufferDivision > numProcessDivisions)
@@ -266,13 +195,7 @@ public:
                     hop = 0;
                 }
                 
-                for (int i = 0; i < divisionsRemaining; i++)
-                {
-                    complexMultiplyAccumulate (fftTempBuffer,
-                                               irBuffers.getProcessDivision (channel, nextProcessBufferDivision + i),
-                                               irBuffers.getIRDivision (channel, writtenIRDivisions + 1 + i),
-                                               fftSizeHalved);
-                }
+                irBuffers.complexMultiplyAccumulate (fftTempBuffer, nextProcessBufferDivision, writtenIRDivisions + 1, channel, divisionsRemaining);
                 
                 writtenIRDivisions += divisionsRemaining;
             }
@@ -293,8 +216,8 @@ public:
                 SampleType* const overlap1 = fftOverlapBuffer + (hop * (1 - fftAltSelect));
                 SampleType* const overlap2 = fftOverlapBuffer + (hop * fftAltSelect);
                 
-                moveSamples (overlap1, fftTransformBuffer, fftSize);
-                accumulateSamples (overlap2, fftTransformBuffer + hop, fftSize);
+                moveSamples (overlap1, fftTransformBuffer, fftSizeHalved);
+                accumulateSamples (overlap2, fftTransformBuffer + hop, fftSizeHalved);
                 
                 if (fftAltSelect != 0)
                 {
@@ -318,28 +241,30 @@ public:
         }
     }
     
-    void process (ProcessInfo& info, const int channel) throw()
+    static PLONK_INLINE_MID void complexMultiplyAccumulate (SampleType* const output,
+                                                            const SampleType* const left, const SampleType* const right,
+                                                            const UnsignedLong halfLength) throw()
     {
-        FFTBuffersAccessType irBuffers (this->getInputAsFFTBuffers (IOKey::FFTBuffers).getValue());
-        FFTEngineType& fftEngine (irBuffers.getFFTEngine());
-        
-        if (previousIRBuffers == dummyIRBuffers && irBuffers == currentIRBuffers)
-        {
-            processContinue (info, channel, irBuffers, fftEngine);
-        }
-        else if (fftEngine.length() != currentIRBuffers.getFFTEngine().length())
-        {
-            plonk_assertfalse; // new FFT buffers need to use the same FFT size as the old one
-            processContinue (info, channel, currentIRBuffers, currentIRBuffers.getFFTEngine());
-        }
-        else
-        {
-//            processChanged (info, channel, irBuffers, fftEngine);
-            processContinue (info, channel, irBuffers, fftEngine);
-        }
+        NumericalArrayComplex<SampleType>::zpmulaccum (output, left, right, halfLength);
     }
-
+    
+    static PLONK_INLINE_MID void moveSamples (SampleType* const dst, const SampleType* const src, const UnsignedLong numItems) throw()
+    {
+        NumericalArrayUnaryOp<SampleType, plonk::move>::calc (dst, src, numItems);
+    }
+    
+    static PLONK_INLINE_MID void accumulateSamples (SampleType* const dst, const SampleType* const src, const UnsignedLong numItems) throw()
+    {
+        NumericalArrayBinaryOp<SampleType, plonk::addop>::calcNN (dst, dst, src, numItems);
+    }
+    
+    static PLONK_INLINE_MID void zeroSamples (SampleType* const dst, const UnsignedLong numItems) throw()
+    {
+        NumericalArray<SampleType>::zeroData (dst, numItems);
+    }
+    
 private:
+    FFTBuffersType irBuffers;
     Buffer processBuffers;
     
     SampleType* fftAltBuffer0;
@@ -357,6 +282,109 @@ private:
     int countDown;
     int position0, position1;
     int fftAltSelect;
+};
+
+
+/** Convolve channel. */
+template<class SampleType, typename FFTBuffersAccess>
+class ConvolveChannelInternal
+:   public ChannelInternal<SampleType, ChannelInternalCore::Data>
+{
+public:
+    typedef FFTBuffersAccess                                        FFTBuffersAccessType;
+
+    typedef ChannelInternalCore::Data                               Data;
+    typedef ChannelBase<SampleType>                                 ChannelType;
+    typedef ObjectArray<ChannelType>                                ChannelArrayType;
+    typedef ConvolveChannelInternal<SampleType,FFTBuffersAccess>    ConvolveInternal;
+    typedef ChannelInternal<SampleType,Data>                        Internal;
+    typedef ChannelInternalBase<SampleType>                         InternalBase;
+    typedef UnitBase<SampleType>                                    UnitType;
+    typedef InputDictionary                                         Inputs;
+    typedef NumericalArray<SampleType>                              Buffer;
+    typedef FFTEngineBase<SampleType>                               FFTEngineType;
+    typedef FFTBuffersBase<SampleType>                              FFTBuffersType;
+    typedef Variable<FFTBuffersType&>                               FFTBuffersVariableType;
+    typedef ConvolveHelper<SampleType, FFTBuffersAccess>            ConvolveHelperType;
+    
+    ConvolveChannelInternal (Inputs const& inputs,
+                             Data const& data,
+                             BlockSize const& blockSize,
+                             SampleRate const& sampleRate) throw()
+    :   Internal (inputs, data, blockSize, sampleRate),
+        dummyIRBuffers(),
+        previousIRBuffers (dummyIRBuffers),
+        currentIRBuffers (this->getInputAsFFTBuffers (IOKey::FFTBuffers).getValue())
+    {
+        currentConvolver = new ConvolveHelperType (currentIRBuffers);
+    }
+    
+    Text getName() const throw()
+    {
+        return "Convolve";
+    }
+    
+    IntArray getInputKeys() const throw()
+    {
+        const IntArray keys (IOKey::Generic, IOKey::FFTBuffers);
+        return keys;
+    }
+    
+    InternalBase* getChannel (const int index) throw()
+    {
+        const Inputs channelInputs = this->getInputs().getChannel (index);
+        return new ConvolveInternal (channelInputs,
+                                     this->getState(),
+                                     this->getBlockSize(),
+                                     this->getSampleRate());
+    }
+    
+    void initChannel (const int channel) throw()
+    {
+        const UnitType& input = this->getInputAsUnit (IOKey::Generic);
+        
+        this->setBlockSize (input.getBlockSize (channel));
+        this->setSampleRate (input.getSampleRate (channel));
+        this->setOverlap (input.getOverlap (channel));
+        
+        this->initValue (SampleType (0));
+                
+        reset (channel);
+    }
+    
+    void reset (const int channel) throw()
+    {
+        currentConvolver->reset (channel);
+    }
+    
+    void processContinue (ProcessInfo& info, const int channel) throw()
+    {
+        currentConvolver->process (this, info, channel);
+    }
+    
+    void process (ProcessInfo& info, const int channel) throw()
+    {
+        FFTBuffersAccessType irBuffers (this->getInputAsFFTBuffers (IOKey::FFTBuffers).getValue());
+        FFTEngineType& fftEngine (irBuffers.getFFTEngine());
+        
+        if (previousIRBuffers == dummyIRBuffers && irBuffers == currentIRBuffers)
+        {
+            processContinue (info, channel);
+        }
+        else if (fftEngine.length() != currentIRBuffers.getFFTEngine().length())
+        {
+            plonk_assertfalse; // new FFT buffers need to use the same FFT size as the old one
+            processContinue (info, channel);
+        }
+        else
+        {
+//            processChanged (info, channel, irBuffers, fftEngine);
+            processContinue (info, channel);
+        }
+    }
+
+private:
+    ScopedPointerContainer<ConvolveHelperType> currentConvolver;
     
     FFTBuffers dummyIRBuffers;
     FFTBuffersAccessType previousIRBuffers;

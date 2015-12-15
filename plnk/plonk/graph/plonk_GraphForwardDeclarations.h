@@ -83,6 +83,7 @@ template<class SampleType, PLONK_UNARYOPFUNCTION(SampleType, op)>       class Un
 template<class SampleType>                                              class MulAddChannelInternal;
 
 template<class SampleType, typename FFTBuffersAccess>                   class ConvolveChannelInternal;
+template<class SampleType, typename FFTBuffersAccess>                   class ConvolveHelper;
 
 // common units
 template<class SampleType>                                              class MulAddUnit;

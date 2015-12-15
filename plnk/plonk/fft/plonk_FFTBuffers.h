@@ -267,6 +267,11 @@ public:
         return countDownStart.atUnchecked (channel);
     }
     
+//    PLONK_INLINE_LOW void complexMultiplyAccumulate (SampleType* fftBuffer, int processDivision, int irDvision, int channel, int numDivisions) throw()
+//    {
+//    }
+//
+    
     friend class FFTBuffersBase<SampleType>;
     friend class ConvolveChannelInternal<SampleType,FFTBuffersBase<SampleType> >;
     friend class ConvolveChannelInternal<SampleType,FFTBuffersBase<SampleType>&>;
@@ -431,8 +436,24 @@ public:
         return getChannel (channel);
     }
     
+    PLONK_INLINE_MID void complexMultiplyAccumulate (SampleType* fftBuffer, int processDivision, int irDvision, int channel, int numDivisions) throw()
+    {
+        Internal* internal = this->getInternal();
+        const int fftSizeHalved (internal->fftEngine.halfLength());
+        
+        for (int i = 0; i < numDivisions; ++i)
+        {
+            NumericalArrayComplex<SampleType>::zpmulaccum (fftBuffer,
+                                                           internal->getProcessDivision (channel, processDivision++),
+                                                           internal->getIRDivision (channel, irDvision++),
+                                                           fftSizeHalved);
+        }
+    }
+    
     friend class ConvolveChannelInternal<SampleType,FFTBuffersBase >;
     friend class ConvolveChannelInternal<SampleType,FFTBuffersBase&>;
+    friend class ConvolveHelper<SampleType,FFTBuffersBase >;
+    friend class ConvolveHelper<SampleType,FFTBuffersBase&>;
 
 
 private:
