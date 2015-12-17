@@ -228,20 +228,20 @@ void pl_FFTF_Forward (PlankFFTFRef p, float* output, const float* input)
     vDSP_ctoz ((COMPLEX*)buffer, 2, &outputComplex, 1, N2);
     vDSP_fft_zrip (fftvDSP, &outputComplex, 1, Nlog2, FFT_FORWARD);
         
-    #ifdef PLANK_FFT_VDSP_FLIPIMAG
+   #ifdef PLANK_FFT_VDSP_FLIPIMAG
     float* flip = output + N2;
     float nyquist = flip[0];
 
     pl_VectorNegF_NN (flip, flip, N2);    
     
     flip[0] = nyquist;
-    #endif
+   #endif
     
 #else
     pl_FFTRealF_Forward (p->peer, output, input);
     
     if (scale != 1.f)
-        pl_VectorMulF_NN1(output, output, scale, N);
+        pl_VectorMulF_NN1 (output, output, scale, N);
 #endif
 }
 
@@ -259,14 +259,14 @@ void pl_FFTF_Inverse (PlankFFTFRef p, float* output, const float* input)
     const PlankL N2 = p->halfLength;
     const PlankL Nlog2 = p->lengthLog2;
 
-    #ifdef PLANK_FFT_VDSP_FLIPIMAG
+   #ifdef PLANK_FFT_VDSP_FLIPIMAG
     float* flip = buffer + N2;
     float nyquist = flip[0];
     
     pl_VectorNegF_NN (flip, flip, N2);    
     
     flip[0] = nyquist;
-    #endif    
+   #endif
     
     vDSP_fft_zrip (fftvDSP, bufferComplex, 1, Nlog2, FFT_INVERSE);
     vDSP_ztoc (bufferComplex, 1, (COMPLEX*)output, 2, N2);
@@ -275,7 +275,7 @@ void pl_FFTF_Inverse (PlankFFTFRef p, float* output, const float* input)
 #endif
     
     if (scale != 1.f)
-        pl_VectorMulF_NN1(output, output, scale, N);
+        pl_VectorMulF_NN1 (output, output, scale, N);
 }
 
 PlankL pl_FFTF_Length (PlankFFTFRef p)

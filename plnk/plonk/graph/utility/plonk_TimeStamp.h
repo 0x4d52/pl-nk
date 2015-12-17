@@ -78,8 +78,7 @@ public:
         plonk_assert (((double (time) + 1.0) - (double (time))) == 1.0); // lost precision
         return double (time) + fraction; 
     }
-
-    PLONK_INLINE_LOW operator LongLong () const throw() { return LongLong (time + fraction + 0.5); }
+    
     PLONK_INLINE_LOW operator double () const throw() { return this->getValue(); }
     PLONK_INLINE_LOW double toSeconds() const throw() { return this->getValue() * getReciprocalTicks(); }
     double toSamples (const double sampleRate) const throw();
