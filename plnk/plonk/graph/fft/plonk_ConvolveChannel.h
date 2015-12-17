@@ -74,9 +74,7 @@ public:
         countDown (0),
         position0 (0),
         position1 (0),
-        fftAltSelect (0),
-        pullsInput (true),
-        replacesOutput (true)
+        fftAltSelect (0)
     {
         SampleType* const processBuffersBase = processBuffers.getArray();
         
@@ -91,7 +89,7 @@ public:
     void reset (const int channel) throw()
     {
         countDown                       = irBuffers.getCountDownStart (channel);
-        position0                       = irBuffers.getFFTEngine().halfLength() - countDown;
+        position0                       = (int) irBuffers.getFFTEngine().halfLength() - countDown;
         position1                       = position0 + countDown;
         fftAltSelect                    = 0;
         currentProcessBuffersDivision   = 0;
@@ -114,19 +112,12 @@ public:
         irBuffers = newIRBuffers;
     }
     
-    void process (ConvolveInternal* owner, ProcessInfo& info, const int channel) throw()
+    void process (ProcessInfo& info, const int channel,
+                  SampleType* outputSamples, const SampleType* inputSamples, const UnsignedLong outputBufferLength,
+                  bool pullsInput, bool replacesOutput) throw()
     {
         FFTEngineType& fftEngine (irBuffers.getFFTEngine());
-        
-        UnitType& inputUnit (owner->getInputAsUnit (IOKey::Generic));
-        const Buffer& inputBuffer (inputUnit.process (info, channel));
-        const SampleType* inputSamples = inputBuffer.getArray();
-        
-        SampleType* outputSamples             = owner->getOutputSamples();
-        const UnsignedLong outputBufferLength = (UnsignedLong) owner->getOutputBuffer().length();
-        
-        plonk_assert (outputBufferLength == inputBuffer.length());
-        
+                
         const int numIRDivisions      = irBuffers.getNumIRDivisions (channel);
         const int numProcessDivisions = irBuffers.getNumProcessDivisions (channel);
         
@@ -139,13 +130,13 @@ public:
         
         const UnsignedLong fftSize           = (UnsignedLong) fftEngine.length();
         const UnsignedLong fftSizeHalved     = (UnsignedLong) fftEngine.halfLength();
-        const int divisionRatio1             = (fftSizeHalved / outputBufferLength) - 1;
+        const int divisionRatio1             = ((int) fftSizeHalved / outputBufferLength) - 1;
         SampleType* const fftAltBuffers[]    = { fftAltBuffer0, fftAltBuffer1 };
-        int samplesRemaining                 = outputBufferLength;
+        UnsignedLong samplesRemaining        = outputBufferLength;
         
         while (samplesRemaining > 0)
         {
-            int hop;
+            UnsignedLong hop;
             
             if ((samplesRemaining - countDown) > 0)
             {
@@ -242,7 +233,7 @@ public:
                 currentProcessBuffersDivision = plonk::wrap (currentProcessBuffersDivision - 1, 0, numProcessDivisions);
                 countIRDivisions    = 0;
                 writtenIRDivisions  = 0;
-                countDown           = hop;
+                countDown           = (int) hop;
                 
                 zeroSamples (fftTempBuffer, fftSize);
             }
@@ -290,8 +281,6 @@ private:
     int countDown;
     int position0, position1;
     int fftAltSelect;
-    bool pullsInput;
-    bool replacesOutput;
 };
 
 
@@ -326,7 +315,7 @@ public:
         previousIRBuffers (dummyIRBuffers),
         currentIRBuffers (this->getInputAsFFTBuffers (IOKey::FFTBuffers).getValue())
     {
-        currentConvolver = new ConvolveHelperType (currentIRBuffers.getFFTEngine().length());
+        currentConvolver = new ConvolveHelperType ((int) currentIRBuffers.getFFTEngine().length());
     }
     
     Text getName() const throw()
@@ -369,29 +358,32 @@ public:
         currentConvolver->reset (channel);
     }
     
-    void processContinue (ProcessInfo& info, const int channel) throw()
-    {
-        currentConvolver->process (this, info, channel);
-    }
-    
     void process (ProcessInfo& info, const int channel) throw()
     {
         FFTBuffersAccessType irBuffers (this->getInputAsFFTBuffers (IOKey::FFTBuffers).getValue());
         FFTEngineType& fftEngine (irBuffers.getFFTEngine());
         
+        UnitType& inputUnit (this->getInputAsUnit (IOKey::Generic));
+        const Buffer& inputBuffer (inputUnit.process (info, channel));
+        const SampleType* inputSamples = inputBuffer.getArray();
+
+        SampleType* outputSamples             = this->getOutputSamples();
+        const UnsignedLong outputBufferLength = (UnsignedLong) this->getOutputBuffer().length();
+
+        plonk_assert (outputBufferLength == inputBuffer.length());
+
         if (previousIRBuffers == dummyIRBuffers && irBuffers == currentIRBuffers)
         {
-            processContinue (info, channel);
+            currentConvolver->process (info, channel, outputSamples, inputSamples, outputBufferLength, true ,true);
         }
         else if (fftEngine.length() != currentIRBuffers.getFFTEngine().length())
         {
             plonk_assertfalse; // new FFT buffers need to use the same FFT size as the old one
-            processContinue (info, channel);
+            currentConvolver->process (info, channel, outputSamples, inputSamples, outputBufferLength, true ,true);
         }
         else
         {
-//            processChanged (info, channel, irBuffers, fftEngine);
-            processContinue (info, channel);
+            currentConvolver->process (info, channel, outputSamples, inputSamples, outputBufferLength, true ,true);
         }
     }
 

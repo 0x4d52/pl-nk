@@ -40,16 +40,16 @@
 #define PLONK_FFTBUFFERS_H
 
 #include "../core/plonk_CoreForwardDeclarations.h"
-#include "plonk_ContainerForwardDeclarations.h"
-#include "plonk_DynamicContainer.h"
+#include "../containers/plonk_ContainerForwardDeclarations.h"
+#include "../containers/plonk_DynamicContainer.h"
 
 #include "../graph/plonk_GraphForwardDeclarations.h"
 
 
 #include "../core/plonk_SmartPointer.h"
 #include "../core/plonk_WeakPointer.h"
-#include "plonk_ObjectArray.h"
-#include "plonk_SimpleArray.h"
+#include "../containers/plonk_ObjectArray.h"
+#include "../containers/plonk_SimpleArray.h"
 
 static RNG& getConvolveRNG()
 {
@@ -97,7 +97,7 @@ public:
             const BuffersType& irChannelBuffers (irBuffers.atUnchecked (channel));
 
             for (int division = 0; division < irChannelBuffers.length(); ++division)
-                processChannelBuffers.add (BufferType::newClear (fftEngine.length()));
+                processChannelBuffers.add (BufferType::newClear ((int) fftEngine.length()));
                 
             processBuffers.add (processChannelBuffers);
         }
@@ -439,7 +439,7 @@ public:
     PLONK_INLINE_MID void complexMultiplyAccumulate (SampleType* fftBuffer, int processDivision, int irDvision, int channel, int numDivisions) throw()
     {
         Internal* internal = this->getInternal();
-        const int fftSizeHalved (internal->fftEngine.halfLength());
+        const int fftSizeHalved ((int) internal->fftEngine.halfLength());
         
         for (int i = 0; i < numDivisions; ++i)
         {
