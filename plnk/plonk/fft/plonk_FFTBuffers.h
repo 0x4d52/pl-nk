@@ -246,7 +246,12 @@ public:
     {
         return processBuffers.atUnchecked (channel).atUnchecked (division).getArray();
     }
-    
+
+    PLONK_INLINE_LOW const SampleType* getProcessDivision (const int channel, const int division) const throw()
+    {
+        return processBuffers.atUnchecked (channel).atUnchecked (division).getArray();
+    }
+
     PLONK_INLINE_LOW const SampleType* getIRDivision (const int channel, const int division) const throw()
     {
         return irBuffers.atUnchecked (channel).atUnchecked (division).getArray();
@@ -266,11 +271,6 @@ public:
     {
         return countDownStart.atUnchecked (channel);
     }
-    
-//    PLONK_INLINE_LOW void complexMultiplyAccumulate (SampleType* fftBuffer, int processDivision, int irDvision, int channel, int numDivisions) throw()
-//    {
-//    }
-//
     
     friend class FFTBuffersBase<SampleType>;
     friend class ConvolveChannelInternal<SampleType,FFTBuffersBase<SampleType> >;
@@ -381,6 +381,12 @@ public:
     {
         return this->getInternal()->getProcessDivision (channel, division);
     }
+
+    /** Get a pointer to the process "scratch" buffer for this set of buffers. */
+    const SampleType* getProcessDivision (const int channel, const int division) const throw()
+    {
+        return this->getInternal()->getProcessDivision (channel, division);
+    }
     
     /** Get a point to the samples in the FFT buffer for a particular channel and division. */
     const SampleType* getIRDivision (const int channel, const int division) const throw()
@@ -438,7 +444,7 @@ public:
     
     PLONK_INLINE_MID void complexMultiplyAccumulate (SampleType* fftBuffer, int processDivision, int irDvision, int channel, int numDivisions) throw()
     {
-        Internal* internal = this->getInternal();
+        const Internal* const internal = this->getInternal();
         const int fftSizeHalved (internal->fftEngine.halfLength());
         
         for (int i = 0; i < numDivisions; ++i)

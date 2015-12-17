@@ -74,9 +74,7 @@ public:
         countDown (0),
         position0 (0),
         position1 (0),
-        fftAltSelect (0),
-        pullsInput (true),
-        replacesOutput (true)
+        fftAltSelect (0)
     {
         SampleType* const processBuffersBase = processBuffers.getArray();
         
@@ -114,18 +112,11 @@ public:
         irBuffers = newIRBuffers;
     }
     
-    void process (ConvolveInternal* owner, ProcessInfo& info, const int channel, SampleType* outputSamples, const SampleType* inputSamples, const UnsignedLong outputBufferLength) throw()
+    void process (ConvolveInternal* owner, ProcessInfo& info, const int channel,
+                  SampleType* outputSamples, const SampleType* inputSamples, const UnsignedLong outputBufferLength,
+                  const bool pullsInput, const bool replacesOutput) throw()
     {
         FFTEngineType& fftEngine (irBuffers.getFFTEngine());
-        
-//        UnitType& inputUnit (owner->getInputAsUnit (IOKey::Generic));
-//        const Buffer& inputBuffer (inputUnit.process (info, channel));
-//        const SampleType* inputSamples = inputBuffer.getArray();
-//        
-//        SampleType* outputSamples             = owner->getOutputSamples();
-//        const UnsignedLong outputBufferLength = (UnsignedLong) owner->getOutputBuffer().length();
-//
-//        plonk_assert (outputBufferLength == inputBuffer.length());
         
         const int numIRDivisions      = irBuffers.getNumIRDivisions (channel);
         const int numProcessDivisions = irBuffers.getNumProcessDivisions (channel);
@@ -290,8 +281,6 @@ private:
     int countDown;
     int position0, position1;
     int fftAltSelect;
-    bool pullsInput;
-    bool replacesOutput;
 };
 
 
@@ -368,11 +357,7 @@ public:
     {
         currentConvolver->reset (channel);
     }
-    
-    void processContinue (ProcessInfo& info, const int channel) throw()
-    {
-    }
-    
+        
     void process (ProcessInfo& info, const int channel) throw()
     {
         FFTBuffersAccessType irBuffers (this->getInputAsFFTBuffers (IOKey::FFTBuffers).getValue());
@@ -389,16 +374,16 @@ public:
 
         if (previousIRBuffers == dummyIRBuffers && irBuffers == currentIRBuffers)
         {
-            currentConvolver->process (this, info, channel, outputSamples, inputSamples, outputBufferLength);
+            currentConvolver->process (this, info, channel, outputSamples, inputSamples, outputBufferLength, true, true);
         }
         else if (fftEngine.length() != currentIRBuffers.getFFTEngine().length())
         {
             plonk_assertfalse; // new FFT buffers need to use the same FFT size as the old one
-            currentConvolver->process (this, info, channel, outputSamples, inputSamples, outputBufferLength);
+            currentConvolver->process (this, info, channel, outputSamples, inputSamples, outputBufferLength, true, true);
         }
         else
         {
-            currentConvolver->process (this, info, channel, outputSamples, inputSamples, outputBufferLength);
+            currentConvolver->process (this, info, channel, outputSamples, inputSamples, outputBufferLength, true, true);
         }
     }
 
