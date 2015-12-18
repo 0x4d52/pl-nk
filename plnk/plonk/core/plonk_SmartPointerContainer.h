@@ -180,7 +180,6 @@ private:
     AtomicPointer internal;
 };
 
-
 template<class SmartPointerType, bool enableWeak>
 class SmartPointerContainer : public SmartPointerContainerBase<SmartPointerType>
 {

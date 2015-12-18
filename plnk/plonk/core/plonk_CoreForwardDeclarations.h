@@ -60,4 +60,6 @@ template<class OperandType>                         class BinaryOpFunctionsHelpe
 template<class OperandType>                         class UnaryOpFunctions;
 template<class OperandType>                         class UnaryOpFunctionsHelper;
 
+typedef SmartPointerContainerBase<SmartPointer> GenericSmartPointerContainer;
+
 #endif // PLONK_COREFORWARDDECLARATIONS_H

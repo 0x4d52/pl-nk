@@ -43,9 +43,6 @@
 #include "plonk_ContainerForwardDeclarations.h"
 #include "plonk_DynamicContainer.h"
 
-#include "../graph/plonk_GraphForwardDeclarations.h"
-
-
 #include "../core/plonk_SmartPointer.h"
 #include "../core/plonk_WeakPointer.h"
 #include "plonk_ObjectArray.h"
@@ -66,14 +63,14 @@ public:
     typedef FFTBuffersBase<SampleType>      Container;
     typedef NumericalArray<SampleType>      BufferType;
     typedef NumericalArray2D<SampleType>    BuffersType;
-    typedef ObjectArray<BuffersType>        DivisionsType;
     typedef FFTEngineBase<SampleType>       FFTEngineType;
     typedef SignalBase<SampleType>          SignalType;
 
     
     FFTBuffersInternal (FFTEngineType const& fftEngineToUse, BuffersType const& sourceBuffers) throw()
     :   fftEngine (fftEngineToUse),
-        originalLength (0)
+        originalLength (0),
+        numDivisions (0)
     {
         setBuffersInternal (sourceBuffers);
         initProcessBuffers();
@@ -82,7 +79,8 @@ public:
     
     FFTBuffersInternal (FFTEngineType const& fftEngineToUse, SignalType const& sourceSignal) throw()
     :   fftEngine (fftEngineToUse),
-        originalLength (0)
+        originalLength (0),
+        numDivisions (0)
     {
         setSignalInternal (sourceSignal);
         initProcessBuffers();
@@ -91,34 +89,28 @@ public:
     
     void initProcessBuffers() throw()
     {
-        for (int channel = 0; channel < irBuffers.length(); ++channel)
-        {
-            BuffersType processChannelBuffers;
-            const BuffersType& irChannelBuffers (irBuffers.atUnchecked (channel));
-
-            for (int division = 0; division < irChannelBuffers.length(); ++division)
-                processChannelBuffers.add (BufferType::newClear (fftEngine.length()));
-                
-            processBuffers.add (processChannelBuffers);
-        }
+        if (originalLength > 0)
+            for (int i = 0; i < fftBuffers.length(); ++i)
+                processBuffers.add (BufferType::newClear (numDivisions * fftEngine.length()));
     }
     
     void initCountDownStart() throw()
     {
-        for (int channel = 0; channel < irBuffers.length(); ++channel)
+        for (int i = 0; i < fftBuffers.length(); ++i)
             countDownStart.add (getConvolveRNG().uniform ((int) (fftEngine.length() / 16)) * 4);
     }
     
     FFTBuffersInternal* getChannel (const int channel) const throw()
-    {        
-        if (irBuffers.length() == 0)
+    {
+        const int numChannels = fftBuffers.length();
+        
+        if (numChannels == 0)
             return new FFTBuffersInternal (fftEngine, Buffers());
         else
-            return new FFTBuffersInternal (fftEngine,
-                                           irBuffers.atUnchecked (channel % irBuffers.length()),
-                                           processBuffers.atUnchecked (channel % processBuffers.length()),
-                                           countDownStart.atUnchecked (channel % countDownStart.length()),
-                                           originalLength);
+            return new FFTBuffersInternal (fftBuffers.atUnchecked (channel % numChannels),
+                                           fftEngine,
+                                           originalLength,
+                                           numDivisions);
     }
     
     void setSignalInternal (SignalType const& sourceSignal) throw()
@@ -132,24 +124,25 @@ public:
         const int fftSizeHalved = (int) fftEngine.halfLength();
         
         originalLength = sourceSignal.getNumFrames();
-        const int numIRDivisions = originalLength % fftSizeHalved == 0
-                                 ? originalLength / fftSizeHalved
-                                 : originalLength / fftSizeHalved + 1;
+        numDivisions = originalLength / fftSizeHalved;
+        
+        if (originalLength % fftSizeHalved != 0)
+            ++numDivisions;
         
         BufferType tempBuffer = Buffer::withSize (fftSize);
         SampleType* const tempSamples = tempBuffer.getArray();
         
         for (int channel = 0; channel < numChannels; ++channel)
         {
-            BuffersType irChannelBuffers;
-
+            BufferType fftBuffer = BufferType::withSize (numDivisions * fftSize);
+            SampleType* fftSamples = fftBuffer.getArray();
             const SampleType* sourceBuffer = sourceSignal.getSamples (channel);
             const int frameStride = sourceSignal.getFrameStride();
             int sourceRemaining = originalLength;
             
             if (frameStride == 1)
             {
-                for (int division = 0; division < numIRDivisions; ++division)
+                for (int division = 0; division < numDivisions; ++division)
                 {
                     const int dataLength = plonk::min (sourceRemaining, fftSizeHalved);
                     const int zeroLength = fftSize - dataLength;
@@ -157,18 +150,16 @@ public:
                     BufferType::copyData (tempSamples, sourceBuffer, dataLength);    // copy
                     BufferType::zeroData (tempSamples + dataLength, zeroLength);     // zero pad
                     
-                    BufferType fftBuffer = BufferType::withSize (fftSize);
-                    fftEngine.forward (fftBuffer.getArray(), tempSamples);
+                    fftEngine.forward (fftSamples, tempSamples);
                     
+                    fftSamples      += fftSize;
                     sourceBuffer    += fftSizeHalved;
                     sourceRemaining -= fftSizeHalved;
-                    
-                    irChannelBuffers.add (fftBuffer);
                 }
             }
             else // signal is interleaved
             {
-                for (int division = 0; division < numIRDivisions; ++division)
+                for (int division = 0; division < numDivisions; ++division)
                 {
                     const int dataLength = plonk::min (sourceRemaining, fftSizeHalved);
                     const int zeroLength = fftSize - dataLength;
@@ -180,19 +171,16 @@ public:
                     }
                     
                     BufferType::zeroData (tempSamples + dataLength, zeroLength);
-                    BufferType fftBuffer = BufferType::withSize (fftSize);
-                    fftEngine.forward (fftBuffer.getArray(), tempSamples);
+                    fftEngine.forward (fftSamples, tempSamples);
                     
+                    fftSamples      += fftSize;
                     sourceRemaining -= fftSizeHalved;
-                    
-                    irChannelBuffers.add (fftBuffer);
                 }
             }
             
-            irBuffers.add (irChannelBuffers);
+            fftBuffers.add (fftBuffer);
         }
     }
-
     
     void setBuffersInternal (BuffersType const& sourceBuffers) throw()
     {
@@ -207,21 +195,22 @@ public:
         const int fftSizeHalved = (int) fftEngine.halfLength();
         
         originalLength = sourceBuffers.atUnchecked (0).length();
-        const int numIRDivisions = originalLength % fftSizeHalved == 0
-                                 ? originalLength / fftSizeHalved
-                                 : originalLength / fftSizeHalved + 1;
+        numDivisions = originalLength / fftSizeHalved;
+        
+        if (originalLength % fftSizeHalved != 0)
+            ++numDivisions;
         
         BufferType tempBuffer = Buffer::withSize (fftSize);
         SampleType* const tempSamples = tempBuffer.getArray();
         
         for (int channel = 0; channel < numChannels; ++channel)
         {
-            BuffersType irChannelBuffers;
-            
+            BufferType fftBuffer = BufferType::withSize (numDivisions * fftSize);
+            SampleType* fftSamples = fftBuffer.getArray();
             const SampleType* sourceBuffer = sourceBuffers.atUnchecked (channel).getArray();
             int sourceRemaining = originalLength;
             
-            for (int division = 0; division < numIRDivisions; ++division)
+            for (int division = 0; division < numDivisions; ++division)
             {
                 const int dataLength = plonk::min (sourceRemaining, fftSizeHalved);
                 const int zeroLength = fftSize - dataLength;
@@ -229,42 +218,29 @@ public:
                 BufferType::copyData (tempSamples, sourceBuffer, dataLength);    // copy
                 BufferType::zeroData (tempSamples + dataLength, zeroLength);     // zero pad
                 
-                BufferType fftBuffer = BufferType::withSize (fftSize);
-                fftEngine.forward (fftBuffer.getArray(), tempSamples);
+                fftEngine.forward (fftSamples, tempSamples);
                 
+                fftSamples      += fftSize;
                 sourceBuffer    += fftSizeHalved;
                 sourceRemaining -= fftSizeHalved;
-
-                irChannelBuffers.add (fftBuffer);
             }
             
-            irBuffers.add (irChannelBuffers);
+            fftBuffers.add (fftBuffer);
         }
     }
-
-    PLONK_INLINE_LOW SampleType* getProcessDivision (const int channel, const int division) throw()
+    
+    PLONK_INLINE_LOW SampleType* getProcessBuffer (const int channel, const int division) throw()
     {
-        return processBuffers.atUnchecked (channel).atUnchecked (division).getArray();
-    }
-
-    PLONK_INLINE_LOW const SampleType* getProcessDivision (const int channel, const int division) const throw()
-    {
-        return processBuffers.atUnchecked (channel).atUnchecked (division).getArray();
-    }
-
-    PLONK_INLINE_LOW const SampleType* getIRDivision (const int channel, const int division) const throw()
-    {
-        return irBuffers.atUnchecked (channel).atUnchecked (division).getArray();
+        plonk_assert (division >= 0 && division < numDivisions);
+        plonk_assert (processBuffers.length() > 0);
+        return getProcessBuffer (channel) + division * fftEngine.length();
     }
     
-    PLONK_INLINE_LOW const int getNumIRDivisions (const int channel) const throw()
+    PLONK_INLINE_LOW const SampleType* getDivision (const int channel, const int division) const throw()
     {
-        return originalLength == 0 ? 0 : irBuffers.atUnchecked (channel).length();
-    }
-
-    PLONK_INLINE_LOW const int getNumProcessDivisions (const int channel) const throw()
-    {
-        return originalLength == 0 ? 0 : processBuffers.atUnchecked (channel).length();
+        plonk_assert (division >= 0 && division < numDivisions);
+        plonk_assert (fftBuffers.length() > 0);
+        return getBuffer (channel) + division * fftEngine.length();
     }
     
     PLONK_INLINE_LOW int getCountDownStart (const int channel) const throw()
@@ -272,63 +248,38 @@ public:
         return countDownStart.atUnchecked (channel);
     }
     
-    void swapProcessBuffers (DivisionsType& other, const bool swapSectionIfOtherIsShorter) throw()
-    {
-        if (processBuffers.length() == other.length())
-        {
-            const int numChannels = processBuffers.length();
-            
-            for (int channel = 0; channel < numChannels; ++channel)
-            {
-                BuffersType& processChannelBuffers = processBuffers.atUnchecked (channel);
-                BuffersType& otherProcessChannelBuffers = other.atUnchecked (channel);
-                
-                const int numChannelDivisions = processChannelBuffers.length();
-                const int numOtherChannelDivisions = otherProcessChannelBuffers.length();
-
-                if ((numOtherChannelDivisions < numChannelDivisions) && swapSectionIfOtherIsShorter)
-                {
-                    for (int division = 0; division < numOtherChannelDivisions; ++division)
-                        processChannelBuffers.atUnchecked (division).swapWith (otherProcessChannelBuffers.atUnchecked (division));
-                    
-                    for (int division = numOtherChannelDivisions; division < numChannelDivisions; ++division)
-                        processChannelBuffers.atUnchecked (division).zero();
-                }
-                else
-                {
-                    processChannelBuffers.swapWith (otherProcessChannelBuffers);
-                }
-            }
-        }
-        else
-        {
-            plonk_assertfalse;
-        }
-    }
-    
     friend class FFTBuffersBase<SampleType>;
-    friend class ConvolveChannelInternal<SampleType,FFTBuffersBase<SampleType> >;
-    friend class ConvolveChannelInternal<SampleType,FFTBuffersBase<SampleType>&>;
-
+    
 private:
-    FFTBuffersInternal (FFTEngineType const& fftEngineToUse,
-                        BuffersType const& singleFFTBuffer,
-                        BuffersType const& singleProcessBuffer,
+    
+    PLONK_INLINE_LOW const SampleType* getBuffer (const int channel) const throw()
+    {
+        return fftBuffers.atUnchecked ((unsigned) channel % (unsigned) fftBuffers.length()).getArray();
+    }
+    
+    PLONK_INLINE_LOW SampleType* getProcessBuffer (const int channel) throw()
+    {
+        return processBuffers.atUnchecked (channel).getArray();
+    }
+
+
+    FFTBuffersInternal (BufferType const& singleFFTBuffer,
+                        FFTEngineType const& fftEngineToUse,
                         const int originalLengthToUse,
-                        const int countDownStartToUse) throw()
-    :   fftEngine (fftEngineToUse),
-        irBuffers (singleFFTBuffer),
-        processBuffers (singleProcessBuffer),
-        countDownStart (countDownStartToUse),
-        originalLength (originalLengthToUse)
+                        const int numDivisionsToUse) throw()
+    :   fftBuffers (singleFFTBuffer),
+        fftEngine (fftEngineToUse),
+        originalLength (originalLengthToUse),
+        numDivisions (numDivisionsToUse)
     {
     }
     
+    BuffersType fftBuffers;
     FFTEngineType fftEngine;
-    DivisionsType irBuffers;
-    DivisionsType processBuffers;
+    BuffersType processBuffers;
     Ints countDownStart;
     int originalLength;
+    int numDivisions;
 };
 
 //------------------------------------------------------------------------------
@@ -349,8 +300,6 @@ public:
     typedef NumericalArray2D<SampleType>            BuffersType;
     typedef FFTEngineBase<SampleType>               FFTEngineType;
     typedef SignalBase<SampleType>                  SignalType;
-    typedef ObjectArray<BuffersType>                DivisionsType;
-
 
     FFTBuffersBase() throw()
     :	Base (new Internal (FFTEngine(), BuffersType()))
@@ -410,24 +359,32 @@ public:
 		return null;
 	}	                            
     
+    static FFTBuffersBase getUnity (FFTEngineType const& fftEngine, const int numChannels) throw()
+    {
+        plonk_assert (numChannels > 0);
+        
+        BufferType bufferChannel (BufferType::newClear (fftEngine.halfLength()));
+        bufferChannel.atUnchecked (0) = TypeUtility<SampleType>::getTypePeak();
+        BuffersType buffers;
+        
+        for (int i = 0; i < numChannels; ++i)
+            buffers.add (bufferChannel);
+            
+        return FFTBuffersBase (fftEngine, buffers);
+    }
+    
     PLONK_OBJECTARROWOPERATOR(FFTBuffersBase);
     
     /** Get a pointer to the process "scratch" buffer for this set of buffers. */
-    SampleType* getProcessDivision (const int channel, const int division) throw()
+    SampleType* getProcessBuffer (const int channel, const int division) throw()
     {
-        return this->getInternal()->getProcessDivision (channel, division);
-    }
-
-    /** Get a pointer to the process "scratch" buffer for this set of buffers. */
-    const SampleType* getProcessDivision (const int channel, const int division) const throw()
-    {
-        return this->getInternal()->getProcessDivision (channel, division);
+        return this->getInternal()->getProcessBuffer (channel, division);
     }
     
     /** Get a point to the samples in the FFT buffer for a particular channel and division. */
-    const SampleType* getIRDivision (const int channel, const int division) const throw()
+    const SampleType* getDivision (const int channel, const int division) const throw()
     {
-        return this->getInternal()->getIRDivision (channel, division);
+        return this->getInternal()->getDivision (channel, division);
     }
     
     /** Get the FFTEngine used by this buffer. */
@@ -445,7 +402,7 @@ public:
     /** Get the number of channels in the buffers. */
     const int getNumChannels() const throw()
     {
-        return this->getInternal()->irBuffers.length();
+        return this->getInternal()->fftBuffers.length();
     }
     
     /** Get the original length of the input signal in sample frames. */
@@ -455,15 +412,9 @@ public:
     }
     
     /** Get the number of FFT divisions in the buffer.*/
-    const int getNumIRDivisions (const int channel) const throw()
+    const int getNumDivisions() const throw()
     {
-        return this->getInternal()->getNumIRDivisions (channel);
-    }
-    
-    /** Get the number of process divisions in the buffer.*/
-    const int getNumProcessDivisions (const int channel) const throw()
-    {
-        return this->getInternal()->getNumProcessDivisions (channel);
+        return this->getInternal()->numDivisions;
     }
     
     /** Gets a FFTBuffersBase representing only a single channel. */
@@ -478,47 +429,6 @@ public:
         return getChannel (channel);
     }
     
-    /** Swaps the process buffers from another FFTBuffers object.
-     This allows the existing, pre-calculated buffers, to be retained for future processing 
-     with a diffferent FFTBuffers object (i.e., a different IR). 
-     @warning The FFT size and the number of channels must be the same.
-     
-     @param other                        The other FFTBuffers object.
-     @param swapSectionIfOtherIsShorter  If the new FFTBuffers object has a longer set of process buffers
-                                         then the whole set is swapped per channel. If this is @c true
-                                         and the new FFTBuffers object has a shorter set of process buffers
-                                         then only the shorter section is swapped. */
-    void swapProcessBuffers (FFTBuffersBase& other, const bool swapSectionIfOtherIsShorter) throw()
-    {
-        return this->getInternal()->swapProcessBuffers (other.getInternal()->processBuffers, swapSectionIfOtherIsShorter);
-    }
-    
-    void swapProcessBuffers (DivisionsType& other, const bool swapSectionIfOtherIsShorter) throw()
-    {
-        return this->getInternal()->swapProcessBuffers (other, swapSectionIfOtherIsShorter);
-    }
-    
-    PLONK_INLINE_MID void complexMultiplyAccumulate (SampleType* fftBuffer, int processDivision, int irDvision, int channel, int numDivisions) throw()
-    {
-        const Internal* const internal = this->getInternal();
-        const int fftSizeHalved (internal->fftEngine.halfLength());
-        
-        for (int i = 0; i < numDivisions; ++i)
-        {
-            NumericalArrayComplex<SampleType>::zpmulaccum (fftBuffer,
-                                                           internal->getProcessDivision (channel, processDivision++),
-                                                           internal->getIRDivision (channel, irDvision++),
-                                                           fftSizeHalved);
-        }
-    }
-    
-    friend class ConvolveChannelInternal<SampleType,FFTBuffersBase >;
-    friend class ConvolveChannelInternal<SampleType,FFTBuffersBase&>;
-    friend class ConvolveHelper<SampleType,FFTBuffersBase >;
-    friend class ConvolveHelper<SampleType,FFTBuffersBase&>;
-
-
-private:
     /** Get the randomly generated start time for a specific channel.
      This helps amortise the processing load by avoiding heavy processing happening
      in the same i/o block across many convolver instances. */
@@ -526,6 +436,7 @@ private:
     {
         return this->getInternal()->getCountDownStart (channel);
     }
+    
 };
 
 //#if PLONK_INSTANTIATE_TEMPLATES
