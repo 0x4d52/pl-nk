@@ -262,6 +262,19 @@ public:
         NumericalArray<SampleType>::zeroData (dst, numItems);
     }
     
+    void copyState (ConvolveHelper* other) throw()
+    {
+        this->currentProcessBuffersDivision = other->currentProcessBuffersDivision;
+//        this->writtenIRDivisions            = other->writtenIRDivisions;
+//        this->countIRDivisions              = other->countIRDivisions;
+//        this->previousProcessBufferDivision = other->previousProcessBufferDivision;
+//        this->readIRDivisions               = other->readIRDivisions;
+//        this->countDown                     = other->countDown;
+//        this->position0                     = other->position0;
+//        this->position1                     = other->position1;
+//        this->fftAltSelect                  = other->fftAltSelect;
+    }
+    
 private:
     FFTBuffersType irBuffers;
     Buffer processBuffers;
@@ -305,6 +318,8 @@ public:
     typedef FFTBuffersBase<SampleType>                              FFTBuffersType;
     typedef Variable<FFTBuffersType&>                               FFTBuffersVariableType;
     typedef ConvolveHelper<SampleType, FFTBuffersAccess>            ConvolveHelperType;
+    typedef typename FFTBuffersType::DivisionsType                  DivisionsType;
+    typedef typename TypeUtility<SampleType>::ScaleType             ScaleType;
     
     ConvolveChannelInternal (Inputs const& inputs,
                              Data const& data,
@@ -315,7 +330,9 @@ public:
         previousIRBuffers (dummyIRBuffers),
         currentIRBuffers (this->getInputAsFFTBuffers (IOKey::FFTBuffers).getValue())
     {
-        currentConvolver = new ConvolveHelperType (currentIRBuffers.getFFTEngine().length());
+        swapBuffers.setSize (currentIRBuffers.getNumChannels(), true); // so we can swap buffers about when switching IRs
+        currentConvolver  = new ConvolveHelperType (currentIRBuffers.getFFTEngine().length());
+        previousConvolver = new ConvolveHelperType (currentIRBuffers.getFFTEngine().length());
     }
     
     Text getName() const throw()
@@ -383,14 +400,38 @@ public:
         }
         else
         {
-            currentConvolver->process (this, info, channel, outputSamples, inputSamples, outputBufferLength, true, true);
+            previousIRBuffers = currentIRBuffers;
+            currentIRBuffers = irBuffers;
+            
+            currentConvolver.swapWith (previousConvolver);
+            previousConvolver->process (this, info, channel, outputSamples, inputSamples, outputBufferLength, true, true);
+            
+            ScaleType level (TypeUtility<SampleType>::getTypePeak());
+            const ScaleType slope (level / outputBufferLength);
+            
+            for (int i = 0; i < outputBufferLength; ++i)
+            {
+                outputSamples[i] *= level;
+                level -= slope;
+            }
+            
+            currentConvolver->setIRBuffers (currentIRBuffers);
+            currentConvolver->reset (channel);
+//            currentConvolver->copyState (previousConvolver);
+            
+//            currentIRBuffers.swapProcessBuffers (previousIRBuffers, true);
+            currentConvolver->process (this, info, channel, outputSamples, 0, outputBufferLength, false, false);
+            
+            previousIRBuffers = dummyIRBuffers;
         }
     }
 
 private:
     ScopedPointerContainer<ConvolveHelperType> currentConvolver;
+    ScopedPointerContainer<ConvolveHelperType> previousConvolver;
     
-    FFTBuffers dummyIRBuffers;
+    DivisionsType swapBuffers;
+    FFTBuffersType dummyIRBuffers;
     FFTBuffersAccessType previousIRBuffers;
     FFTBuffersAccessType currentIRBuffers;
 };

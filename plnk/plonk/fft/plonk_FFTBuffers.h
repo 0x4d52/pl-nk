@@ -272,6 +272,40 @@ public:
         return countDownStart.atUnchecked (channel);
     }
     
+    void swapProcessBuffers (DivisionsType& other, const bool swapSectionIfOtherIsShorter) throw()
+    {
+        if (processBuffers.length() == other.length())
+        {
+            const int numChannels = processBuffers.length();
+            
+            for (int channel = 0; channel < numChannels; ++channel)
+            {
+                BuffersType& processChannelBuffers = processBuffers.atUnchecked (channel);
+                BuffersType& otherProcessChannelBuffers = other.atUnchecked (channel);
+                
+                const int numChannelDivisions = processChannelBuffers.length();
+                const int numOtherChannelDivisions = otherProcessChannelBuffers.length();
+
+                if ((numOtherChannelDivisions < numChannelDivisions) && swapSectionIfOtherIsShorter)
+                {
+                    for (int division = 0; division < numOtherChannelDivisions; ++division)
+                        processChannelBuffers.atUnchecked (division).swapWith (otherProcessChannelBuffers.atUnchecked (division));
+                    
+                    for (int division = numOtherChannelDivisions; division < numChannelDivisions; ++division)
+                        processChannelBuffers.atUnchecked (division).zero();
+                }
+                else
+                {
+                    processChannelBuffers.swapWith (otherProcessChannelBuffers);
+                }
+            }
+        }
+        else
+        {
+            plonk_assertfalse;
+        }
+    }
+    
     friend class FFTBuffersBase<SampleType>;
     friend class ConvolveChannelInternal<SampleType,FFTBuffersBase<SampleType> >;
     friend class ConvolveChannelInternal<SampleType,FFTBuffersBase<SampleType>&>;
@@ -315,6 +349,8 @@ public:
     typedef NumericalArray2D<SampleType>            BuffersType;
     typedef FFTEngineBase<SampleType>               FFTEngineType;
     typedef SignalBase<SampleType>                  SignalType;
+    typedef ObjectArray<BuffersType>                DivisionsType;
+
 
     FFTBuffersBase() throw()
     :	Base (new Internal (FFTEngine(), BuffersType()))
@@ -440,6 +476,26 @@ public:
     FFTBuffersBase operator[] (const int channel) const throw()
     {
         return getChannel (channel);
+    }
+    
+    /** Swaps the process buffers from another FFTBuffers object.
+     This allows the existing, pre-calculated buffers, to be retained for future processing 
+     with a diffferent FFTBuffers object (i.e., a different IR). 
+     @warning The FFT size and the number of channels must be the same.
+     
+     @param other                        The other FFTBuffers object.
+     @param swapSectionIfOtherIsShorter  If the new FFTBuffers object has a longer set of process buffers
+                                         then the whole set is swapped per channel. If this is @c true
+                                         and the new FFTBuffers object has a shorter set of process buffers
+                                         then only the shorter section is swapped. */
+    void swapProcessBuffers (FFTBuffersBase& other, const bool swapSectionIfOtherIsShorter) throw()
+    {
+        return this->getInternal()->swapProcessBuffers (other.getInternal()->processBuffers, swapSectionIfOtherIsShorter);
+    }
+    
+    void swapProcessBuffers (DivisionsType& other, const bool swapSectionIfOtherIsShorter) throw()
+    {
+        return this->getInternal()->swapProcessBuffers (other, swapSectionIfOtherIsShorter);
     }
     
     PLONK_INLINE_MID void complexMultiplyAccumulate (SampleType* fftBuffer, int processDivision, int irDvision, int channel, int numDivisions) throw()
