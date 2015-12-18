@@ -150,6 +150,8 @@ public:
             zeroSamples (processBuffersBase, fftSize); // only zero what we need
             processBuffersBase += maxFFTSize;          // ensure we offset this by maxFFTSize though
         }
+        
+        zmulFunction = complexMultiply;
     }
     
     void process (SampleType* outputSamples, const SampleType* inputSamples, const int outputBufferLength, const int channel, OutputFunction outputFunction) throw()
@@ -228,10 +230,14 @@ public:
                     const SampleType* irSamples            = irBufferBase + (divisionsWritten + 1) * fftSize;
                     const SampleType* processBufferSamples = processBufferBase + nextDivision * fftSize;
                     
-                    for (int i = 0; i < divisionsRemaining; i++)
+                    zmulFunction (fftTempBuffer, processBufferSamples, irSamples, fftSizeHalved);
+                    processBufferSamples += fftSize;
+                    irSamples            += fftSize;
+                    zmulFunction = complexMultiplyAccumulate;
+
+                    for (int i = 1; i < divisionsRemaining; i++)
                     {
                         complexMultiplyAccumulate (fftTempBuffer, processBufferSamples, irSamples, fftSizeHalved);
-                        
                         processBufferSamples += fftSize;
                         irSamples            += fftSize;
                     }
@@ -248,7 +254,7 @@ public:
                 SampleType* const processBufferSamples = processBufferBase + divisionsCurrent * fftSize;
                 
                 fftEngine.forward (processBufferSamples, fftAltBuffers[fftAltSelect]);
-                complexMultiplyAccumulate (fftTempBuffer, processBufferSamples, irSamples, fftSizeHalved);
+                zmulFunction (fftTempBuffer, processBufferSamples, irSamples, fftSizeHalved);
                 
                 fftEngine.inverse (fftTransformBuffer, fftTempBuffer);
                 
@@ -276,7 +282,9 @@ public:
                 divisionsWritten    = 0;
                 countDown           = hop;
                 
-                zeroSamples (fftTempBuffer, fftSize);
+//                zeroSamples (fftTempBuffer, fftSize);
+                zmulFunction = complexMultiply;
+
             }
         }
     }
@@ -300,6 +308,7 @@ private:
     int countDown;
     int position0, position1;
     int fftAltSelect;
+    ZMulFunction zmulFunction;
     
     FFTBuffersType irBuffers;
 };
