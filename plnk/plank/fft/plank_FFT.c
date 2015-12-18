@@ -144,14 +144,12 @@ PlankResult pl_FFTF_InitWithLength (PlankFFTFRef p, const PlankL length)
     p->peer = vDSP_create_fftsetup (p->lengthLog2, 0);
     p->bufferComplex.realp = p->buffer;
     p->bufferComplex.imagp = p->buffer + p->halfLength;
-//    p->fftScale = 1.f / p->length;
-//    p->ifftScale = 0.5f;
     p->ifftScale = 1.f / p->length;
     p->fftScale = 0.5f;
 #else
     p->peer = pl_FFTRealF_CreateAndInitWithLength (p->length);
-    p->fftScale = 2.f / (int)p->length;
-    p->ifftScale = 0.5f;
+    p->ifftScale = 1.0f / (int)p->length;
+    p->fftScale = 1.0f;
 #endif
     
     if (p->peer == PLANK_NULL)
@@ -240,10 +238,10 @@ void pl_FFTF_Forward (PlankFFTFRef p, float* output, const float* input)
    #endif
     
 #else
-    pl_FFTRealF_Forward (p->peer, output, input);
-    
     if (scale != 1.f)
         pl_VectorMulF_NN1 (output, output, scale, N);
+
+    pl_FFTRealF_Forward (p->peer, output, input);    
 #endif
 }
 
