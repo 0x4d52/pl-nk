@@ -47,7 +47,7 @@
 //------------------------------------------------------------------------------
 
 template<class SampleType>
-static inline void complexMultiplyAccumulate (SampleType* const output,
+static PLONK_INLINE_MID void complexMultiplyAccumulate (SampleType* const output,
                                               const SampleType* const left, const SampleType* const right,
                                               const UnsignedLong halfLength) throw()
 {
@@ -55,7 +55,7 @@ static inline void complexMultiplyAccumulate (SampleType* const output,
 }
 
 template<class SampleType>
-static inline void complexMultiply (SampleType* const output,
+static PLONK_INLINE_MID void complexMultiply (SampleType* const output,
                                     const SampleType* const left, const SampleType* const right,
                                     const UnsignedLong halfLength) throw()
 {
@@ -63,19 +63,19 @@ static inline void complexMultiply (SampleType* const output,
 }
 
 template<class SampleType>
-static inline void moveSamples (SampleType* const dst, const SampleType* const src, const UnsignedLong numItems) throw()
+static PLONK_INLINE_MID void moveSamples (SampleType* const dst, const SampleType* const src, const UnsignedLong numItems) throw()
 {
     NumericalArrayUnaryOp<SampleType, plonk::move>::calc (dst, src, numItems);
 }
 
 template<class SampleType>
-static inline void accumulateSamples (SampleType* const dst, const SampleType* const src, const UnsignedLong numItems) throw()
+static PLONK_INLINE_MID void accumulateSamples (SampleType* const dst, const SampleType* const src, const UnsignedLong numItems) throw()
 {
     NumericalArrayBinaryOp<SampleType, plonk::addop>::calcNN (dst, dst, src, numItems);
 }
 
 template<class SampleType>
-static inline void zeroSamples (SampleType* const dst, const UnsignedLong numItems) throw()
+static PLONK_INLINE_MID void zeroSamples (SampleType* const dst, const UnsignedLong numItems) throw()
 {
     NumericalArray<SampleType>::zeroData (dst, numItems);
 }
@@ -282,9 +282,7 @@ public:
                 divisionsWritten    = 0;
                 countDown           = hop;
                 
-//                zeroSamples (fftTempBuffer, fftSize);
                 zmulFunction = complexMultiply;
-
             }
         }
     }
@@ -451,6 +449,8 @@ private:
 //------------------------------------------------------------------------------
 
 /** Convolve Unit.
+ 
+ Latency is half the FFT size.
  
  @par Factory functions:
  - ar (input, fftBuffers)

@@ -59,7 +59,7 @@
     @param result The output vector is placed here.
     @param a The input vector.
     @param N The number of items in the input/output vectors. */\
-    static PLANK_INLINE_LOW void PLANK_VECTORUNARYOP_NAME(OP,TYPECODE) (Plank##TYPECODE *result, const Plank##TYPECODE* a, PlankUL N) {\
+    static PLANK_INLINE_MID void PLANK_VECTORUNARYOP_NAME(OP,TYPECODE) (Plank##TYPECODE *result, const Plank##TYPECODE* a, PlankUL N) {\
 		PlankUL i; for (i = 0; i < N; PLANK_INC(i)) { result[i] = pl_##OP##TYPECODE (a[i]); }\
     }
 
@@ -75,7 +75,7 @@
     @param a Input vector @e a.
     @param b Input vector @e b.
     @param N The number of items in the input/output vectors. */\
-    static PLANK_INLINE_LOW void PLANK_VECTORBINARYOPVECTOR_NAME(OP,TYPECODE) (Plank##TYPECODE *result, const Plank##TYPECODE* a, const Plank##TYPECODE* b, PlankUL N) {\
+    static PLANK_INLINE_MID void PLANK_VECTORBINARYOPVECTOR_NAME(OP,TYPECODE) (Plank##TYPECODE *result, const Plank##TYPECODE* a, const Plank##TYPECODE* b, PlankUL N) {\
 		PlankUL i; for (i = 0; i < N; PLANK_INC(i)) { result[i] = pl_##OP##TYPECODE (a[i], b[i]); }\
     }
     
@@ -87,7 +87,7 @@
     @param a Input vector @e a and the source of the left operand of the operation.
     @param b A scalar value and the right operand of the operation.
     @param N The number of items in the input/output vectors. */\
-    static PLANK_INLINE_LOW void PLANK_VECTORBINARYOPSCALAR_NAME(OP,TYPECODE) (Plank##TYPECODE *result, const Plank##TYPECODE* a, Plank##TYPECODE b, PlankUL N) {\
+    static PLANK_INLINE_MID void PLANK_VECTORBINARYOPSCALAR_NAME(OP,TYPECODE) (Plank##TYPECODE *result, const Plank##TYPECODE* a, Plank##TYPECODE b, PlankUL N) {\
 		PlankUL i; for (i = 0; i < N; PLANK_INC(i)) { result[i] = pl_##OP##TYPECODE (a[i], b); }\
     }
 
@@ -99,7 +99,7 @@
     @param a A scalar value and the left operand of the operation.
     @param b Input vector @e b and the source of the right operand of the operation.
     @param N The number of items in the input/output vectors. */\
-    static PLANK_INLINE_LOW void PLANK_SCALARBINARYOPVECTOR_NAME(OP,TYPECODE) (Plank##TYPECODE *result, Plank##TYPECODE a, const Plank##TYPECODE* b, PlankUL N) {\
+    static PLANK_INLINE_MID void PLANK_SCALARBINARYOPVECTOR_NAME(OP,TYPECODE) (Plank##TYPECODE *result, Plank##TYPECODE a, const Plank##TYPECODE* b, PlankUL N) {\
 		PlankUL i; for (i = 0; i < N; PLANK_INC(i)) { result[i] = pl_##OP##TYPECODE (a, b[i]); }\
     }
 
@@ -125,7 +125,7 @@
     @param mul A vector containing the value to multiply the input by.
     @param add A vector containing the value to add after the multiply.
     @param N The number of items in the vectors. */\
-    static PLANK_INLINE_LOW void PLANK_VECTORMULADD_NAME(TYPECODE) (Plank##TYPECODE *result, const Plank##TYPECODE* input, const Plank##TYPECODE* mul, const Plank##TYPECODE* add, PlankUL N) {\
+    static PLANK_INLINE_MID void PLANK_VECTORMULADD_NAME(TYPECODE) (Plank##TYPECODE *result, const Plank##TYPECODE* input, const Plank##TYPECODE* mul, const Plank##TYPECODE* add, PlankUL N) {\
         PlankUL i; for (i = 0; i < N; PLANK_INC(i)) { result[i] = pl_Add##TYPECODE (pl_Mul##TYPECODE (input[i], mul[i]), add[i]); }\
     }
 
@@ -137,7 +137,7 @@
     @param mul A vector containing the value to multiply the input by.
     @param add A vector containing the value to add after the multiply.
     @param N The number of items in the vectors. */\
-    static PLANK_INLINE_LOW void PLANK_VECTORMULADDINPLACE_NAME(TYPECODE) (Plank##TYPECODE *io, const Plank##TYPECODE* mul, const Plank##TYPECODE* add, PlankUL N) {\
+    static PLANK_INLINE_MID void PLANK_VECTORMULADDINPLACE_NAME(TYPECODE) (Plank##TYPECODE *io, const Plank##TYPECODE* mul, const Plank##TYPECODE* add, PlankUL N) {\
 		PlankUL i; for (i = 0; i < N; PLANK_INC(i)) { io[i] = pl_Add##TYPECODE (pl_Mul##TYPECODE (io[i], mul[i]), add[i]); }\
     }
 
@@ -148,7 +148,7 @@
     @param mul A vector containing the value to multiply the input by.
     @param add A scalar to add after the multiply.
     @param N The number of items in the vectors. */\
-    static PLANK_INLINE_LOW void PLANK_VECTORMULSCALARADD_NAME(TYPECODE) (Plank##TYPECODE *result, const Plank##TYPECODE* input, const Plank##TYPECODE* mul, Plank##TYPECODE add, PlankUL N) {\
+    static PLANK_INLINE_MID void PLANK_VECTORMULSCALARADD_NAME(TYPECODE) (Plank##TYPECODE *result, const Plank##TYPECODE* input, const Plank##TYPECODE* mul, Plank##TYPECODE add, PlankUL N) {\
         PlankUL i; for (i = 0; i < N; PLANK_INC(i)) { result[i] = pl_Add##TYPECODE (pl_Mul##TYPECODE (input[i], mul[i]), add); }\
     }
 
@@ -159,7 +159,7 @@
     @param mul A scalar to multiply the input by.
     @param add A scalar to add after the multiply.
     @param N The number of items in the vectors. */\
-    static PLANK_INLINE_LOW void PLANK_VECTORSCALARMULSCALARADD_NAME(TYPECODE) (Plank##TYPECODE *result, const Plank##TYPECODE* input, Plank##TYPECODE mul, Plank##TYPECODE add, PlankUL N) {\
+    static PLANK_INLINE_MID void PLANK_VECTORSCALARMULSCALARADD_NAME(TYPECODE) (Plank##TYPECODE *result, const Plank##TYPECODE* input, Plank##TYPECODE mul, Plank##TYPECODE add, PlankUL N) {\
         PlankUL i; for (i = 0; i < N; PLANK_INC(i)) { result[i] = pl_Add##TYPECODE (pl_Mul##TYPECODE (input[i], mul), add); }\
     }
 
@@ -170,12 +170,12 @@
     @param mul A scalar to multiply the input by.
     @param add A vector containing the value to add after the multiply.
     @param N The number of items in the vectors. */\
-    static PLANK_INLINE_LOW void PLANK_VECTORSCALARMULADD_NAME(TYPECODE) (Plank##TYPECODE *result, const Plank##TYPECODE* input, Plank##TYPECODE mul, const Plank##TYPECODE* add, PlankUL N) {\
+    static PLANK_INLINE_MID void PLANK_VECTORSCALARMULADD_NAME(TYPECODE) (Plank##TYPECODE *result, const Plank##TYPECODE* input, Plank##TYPECODE mul, const Plank##TYPECODE* add, PlankUL N) {\
         PlankUL i; for (i = 0; i < N; PLANK_INC(i)) { result[i] = pl_Add##TYPECODE (pl_Mul##TYPECODE (input[i], mul), add[i]); }\
     }
 
 #define PLANK_VECTORADDVECTORMUL_DEFINE(TYPECODE)\
-    static PLANK_INLINE_LOW void PLANK_VECTORADDVECTORMUL_NAME(TYPECODE) (Plank##TYPECODE *result, const Plank##TYPECODE* a, const Plank##TYPECODE* b, PlankUL N) {\
+    static PLANK_INLINE_MID void PLANK_VECTORADDVECTORMUL_NAME(TYPECODE) (Plank##TYPECODE *result, const Plank##TYPECODE* a, const Plank##TYPECODE* b, PlankUL N) {\
         PlankUL i;\
         *result = (Plank##TYPECODE)0;\
         for (i = 0; i < N; PLANK_INC(i)) { *result = pl_Add##TYPECODE (pl_Mul##TYPECODE (a[i], b[i]), *result); }\
@@ -195,7 +195,7 @@
      @param rightReal The real right input vector.
      @param rightImag The imag right input vector.
      @param N The number of items in the vectors. */\
-    static PLANK_INLINE_LOW void PLANK_VECTORZMUL_NAME(TYPECODE) (Plank##TYPECODE *resultReal, Plank##TYPECODE *resultImag,\
+    static PLANK_INLINE_MID void PLANK_VECTORZMUL_NAME(TYPECODE) (Plank##TYPECODE *resultReal, Plank##TYPECODE *resultImag,\
                                                         const Plank##TYPECODE* leftReal, const Plank##TYPECODE* leftImag,\
                                                         const Plank##TYPECODE* rightReal, const Plank##TYPECODE* rightImag,\
                                                         PlankUL N) {\
@@ -217,7 +217,7 @@
      @param addReal The real add vector.
      @param addImag The imag add vector.
      @param N The number of items in the vectors. */\
-    static PLANK_INLINE_LOW void PLANK_VECTORZMULADD_NAME(TYPECODE) (Plank##TYPECODE *resultReal, Plank##TYPECODE *resultImag,\
+    static PLANK_INLINE_MID void PLANK_VECTORZMULADD_NAME(TYPECODE) (Plank##TYPECODE *resultReal, Plank##TYPECODE *resultImag,\
                                                                      const Plank##TYPECODE* inputReal, const Plank##TYPECODE* inputImag,\
                                                                      const Plank##TYPECODE* mulReal, const Plank##TYPECODE* mulImag,\
                                                                      const Plank##TYPECODE* addReal, const Plank##TYPECODE* addImag,\
@@ -234,7 +234,7 @@
 
 #define PLANK_VECTORFILL_DEFINE(TYPECODE) \
     /** Fills a vector with a constant. */\
-    static PLANK_INLINE_LOW void PLANK_VECTORFILL_NAME(TYPECODE) (Plank##TYPECODE *result, Plank##TYPECODE value, PlankUL N) {\
+    static PLANK_INLINE_MID void PLANK_VECTORFILL_NAME(TYPECODE) (Plank##TYPECODE *result, Plank##TYPECODE value, PlankUL N) {\
 		PlankUL i; for (i = 0; i < N; PLANK_INC(i)) { result[i] = value; }\
     }
 
@@ -242,7 +242,7 @@
 
 #define PLANK_VECTORCLEAR_DEFINE(TYPECODE) \
     /** Fills a vector with zeros. */\
-    static PLANK_INLINE_LOW void PLANK_VECTORCLEAR_NAME(TYPECODE) (Plank##TYPECODE *result, PlankUL N) {\
+    static PLANK_INLINE_MID void PLANK_VECTORCLEAR_NAME(TYPECODE) (Plank##TYPECODE *result, PlankUL N) {\
 		PlankUL i; for (i = 0; i < N; PLANK_INC(i)) { result[i] = (Plank##TYPECODE)0; }\
     }
 
@@ -251,7 +251,7 @@
 #define PLANK_VECTORRAMP_DEFINE(TYPECODE) \
     /** Fills a vector with a ramp.
     The vector will start at value @e a and increment by @e b for each item in the vector. */\
-    static PLANK_INLINE_LOW void PLANK_VECTORRAMP_NAME(TYPECODE) (Plank##TYPECODE *result, Plank##TYPECODE a, Plank##TYPECODE b, PlankUL N) {\
+    static PLANK_INLINE_MID void PLANK_VECTORRAMP_NAME(TYPECODE) (Plank##TYPECODE *result, Plank##TYPECODE a, Plank##TYPECODE b, PlankUL N) {\
         PlankUL i; for (i = 0; i < N; PLANK_INC(i)) { result[i] = a; a = a + b; }\
     }
 
@@ -260,7 +260,7 @@
 #define PLANK_VECTORLINE_DEFINE(TYPECODE) \
     /** Fills a vector with a line.
     The vector will start at value @e a and end at @e b. */\
-    static PLANK_INLINE_LOW void PLANK_VECTORLINE_NAME(TYPECODE) (Plank##TYPECODE *result, Plank##TYPECODE a, Plank##TYPECODE b, PlankUL N) {\
+    static PLANK_INLINE_MID void PLANK_VECTORLINE_NAME(TYPECODE) (Plank##TYPECODE *result, Plank##TYPECODE a, Plank##TYPECODE b, PlankUL N) {\
         PLANK_VECTORRAMP_NAME(TYPECODE) (result, a, (b - a) / (Plank##TYPECODE)(N - 1), N);\
     }
 
@@ -274,7 +274,7 @@
     @param n The size of the lookup table.
     @param index A vector containing the indices.
     @param N The size of the output and index vectors. */\
-    static PLANK_INLINE_LOW void PLANK_VECTORLOOKUP_NAME(TYPECODE) (Plank##TYPECODE *result, Plank##TYPECODE *table, PlankUL n, Plank##TYPECODE *index, PlankUL N) {\
+    static PLANK_INLINE_MID void PLANK_VECTORLOOKUP_NAME(TYPECODE) (Plank##TYPECODE *result, Plank##TYPECODE *table, PlankUL n, Plank##TYPECODE *index, PlankUL N) {\
         PlankUL i; PLANK_UNUSED(n); for (i = 0; i < N; PLANK_INC(i)) { result[i] = pl_Lookup##TYPECODE (table, index[i]); }\
     }
 
@@ -288,19 +288,19 @@
 
 #define PLANK_VECTORCONVERT_DEFINE(DSTTYPECODE,SRCTYPECODE) \
     /** Convert a vector of one data type to another. */\
-    static PLANK_INLINE_LOW void PLANK_VECTORCONVERT_NAME(DSTTYPECODE,SRCTYPECODE) (Plank##DSTTYPECODE *result, const Plank##SRCTYPECODE* a, PlankUL N) {\
+    static PLANK_INLINE_MID void PLANK_VECTORCONVERT_NAME(DSTTYPECODE,SRCTYPECODE) (Plank##DSTTYPECODE *result, const Plank##SRCTYPECODE* a, PlankUL N) {\
         PlankUL i; for (i = 0; i < N; PLANK_INC(i)) { result[i] = (Plank##DSTTYPECODE)a[i]; }\
     }
 
 #define PLANK_VECTORCONVERTROUNDF_DEFINE(SRCTYPECODE) \
     /** Convert a vector of one data type to a float. */\
-    static PLANK_INLINE_LOW void PLANK_VECTORCONVERTROUND_NAME(F,SRCTYPECODE) (PlankF *result, const Plank##SRCTYPECODE* a, PlankUL N) {\
+    static PLANK_INLINE_MID void PLANK_VECTORCONVERTROUND_NAME(F,SRCTYPECODE) (PlankF *result, const Plank##SRCTYPECODE* a, PlankUL N) {\
         PlankUL i; for (i = 0; i < N; PLANK_INC(i)) { result[i] = (PlankF)a[i] + 0.5f; }\
     }
 
 #define PLANK_VECTORCONVERTROUNDD_DEFINE(SRCTYPECODE) \
     /** Convert a vector of one data type to a float. */\
-    static PLANK_INLINE_LOW void PLANK_VECTORCONVERTROUND_NAME(D,SRCTYPECODE) (PlankD *result, const Plank##SRCTYPECODE* a, PlankUL N) {\
+    static PLANK_INLINE_MID void PLANK_VECTORCONVERTROUND_NAME(D,SRCTYPECODE) (PlankD *result, const Plank##SRCTYPECODE* a, PlankUL N) {\
         PlankUL i; for (i = 0; i < N; PLANK_INC(i)) { result[i] = (PlankD)a[i] + 0.5; }\
     }
 
@@ -510,7 +510,7 @@ typedef PlankLL PlankVLL;
 
 /** Swap the endianness of a vector of unsigned short elements.
  @ingroup PlankEndianFunctions */
-static PLANK_INLINE_LOW void pl_VectorSwapEndianUS (PlankUS* data, PlankUL N)
+static PLANK_INLINE_MID void pl_VectorSwapEndianUS (PlankUS* data, PlankUL N)
 {
     PlankUL i;
     
@@ -520,14 +520,14 @@ static PLANK_INLINE_LOW void pl_VectorSwapEndianUS (PlankUS* data, PlankUL N)
 
 /** Swap the endianness of a vector of short elements.
  @ingroup PlankEndianFunctions */
-static PLANK_INLINE_LOW void pl_VectorSwapEndianS (PlankS* data, PlankUL N)
+static PLANK_INLINE_MID void pl_VectorSwapEndianS (PlankS* data, PlankUL N)
 {
     pl_VectorSwapEndianUS ((PlankUS*)data, N);
 }
 
 /** Swap the endianness of a vector of unsigned 24-bit int elements.
  @ingroup PlankEndianFunctions */
-static PLANK_INLINE_LOW void pl_VectorSwapEndianUI24 (PlankUI24* data, PlankUL N)
+static PLANK_INLINE_MID void pl_VectorSwapEndianUI24 (PlankUI24* data, PlankUL N)
 {
     PlankUL i;
     
@@ -537,14 +537,14 @@ static PLANK_INLINE_LOW void pl_VectorSwapEndianUI24 (PlankUI24* data, PlankUL N
 
 /** Swap the endianness of a vector of 24-bit int elements.
  @ingroup PlankEndianFunctions */
-static PLANK_INLINE_LOW void pl_VectorSwapEndianI24 (PlankI24* data, PlankUL N)
+static PLANK_INLINE_MID void pl_VectorSwapEndianI24 (PlankI24* data, PlankUL N)
 {
     pl_VectorSwapEndianUI24 ((PlankUI24*)data, N);
 }
 
 /** Swap the endianness of a vector of unsigned int elements.
  @ingroup PlankEndianFunctions */
-static PLANK_INLINE_LOW void pl_VectorSwapEndianUI (PlankUI* data, PlankUL N)
+static PLANK_INLINE_MID void pl_VectorSwapEndianUI (PlankUI* data, PlankUL N)
 {
     PlankUL i;
     
@@ -554,14 +554,14 @@ static PLANK_INLINE_LOW void pl_VectorSwapEndianUI (PlankUI* data, PlankUL N)
 
 /** Swap the endianness of a vector of int elements.
  @ingroup PlankEndianFunctions */
-static PLANK_INLINE_LOW void pl_VectorSwapEndianI (PlankI* data, PlankUL N)
+static PLANK_INLINE_MID void pl_VectorSwapEndianI (PlankI* data, PlankUL N)
 {
     pl_VectorSwapEndianUI ((PlankUI*)data, N);
 }
 
 /** Swap the endianness of a vector of unsigned long elements.
  @ingroup PlankEndianFunctions */
-static PLANK_INLINE_LOW void pl_VectorSwapEndianUL (PlankUL* data, PlankUL N)
+static PLANK_INLINE_MID void pl_VectorSwapEndianUL (PlankUL* data, PlankUL N)
 {
     PlankUL i;
     
@@ -571,14 +571,14 @@ static PLANK_INLINE_LOW void pl_VectorSwapEndianUL (PlankUL* data, PlankUL N)
 
 /** Swap the endianness of a vector of long elements.
  @ingroup PlankEndianFunctions */
-static PLANK_INLINE_LOW void pl_VectorSwapEndianL (PlankL* data, PlankUL N)
+static PLANK_INLINE_MID void pl_VectorSwapEndianL (PlankL* data, PlankUL N)
 {
     pl_VectorSwapEndianUL ((PlankUL*)data, N);
 }
 
 /** Swap the endianness of a vector of unsigned long long (64-bit) elements.
  @ingroup PlankEndianFunctions */
-static PLANK_INLINE_LOW void pl_VectorSwapEndianULL (PlankULL* data, PlankUL N)
+static PLANK_INLINE_MID void pl_VectorSwapEndianULL (PlankULL* data, PlankUL N)
 {
     PlankUL i;
     
@@ -588,7 +588,7 @@ static PLANK_INLINE_LOW void pl_VectorSwapEndianULL (PlankULL* data, PlankUL N)
 
 /** Swap the endianness of a vector of long long (64-bit) elements.
  @ingroup PlankEndianFunctions */
-static PLANK_INLINE_LOW void pl_VectorSwapEndianLL (PlankLL* data, PlankUL N)
+static PLANK_INLINE_MID void pl_VectorSwapEndianLL (PlankLL* data, PlankUL N)
 {
     pl_VectorSwapEndianULL ((PlankULL*)data, N);
 }
