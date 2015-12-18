@@ -144,9 +144,11 @@ PlankResult pl_FFTF_InitWithLength (PlankFFTFRef p, const PlankL length)
     p->peer = vDSP_create_fftsetup (p->lengthLog2, 0);
     p->bufferComplex.realp = p->buffer;
     p->bufferComplex.imagp = p->buffer + p->halfLength;
-    p->fftScale = 1.f / p->length;
-    p->ifftScale = 0.5f;
-#else   
+//    p->fftScale = 1.f / p->length;
+//    p->ifftScale = 0.5f;
+    p->ifftScale = 1.f / p->length;
+    p->fftScale = 0.5f;
+#else
     p->peer = pl_FFTRealF_CreateAndInitWithLength (p->length);
     p->fftScale = 2.f / (int)p->length;
     p->ifftScale = 0.5f;
