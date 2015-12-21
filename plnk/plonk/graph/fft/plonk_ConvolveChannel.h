@@ -320,6 +320,8 @@ struct ConvolveChannelData
 {
     ChannelInternalCore::Data base;
     int maxFFTSize;
+    int fadeSamples;
+    bool keepPreviousTail;
 };
 
 //------------------------------------------------------------------------------
@@ -352,8 +354,9 @@ public:
                              SampleRate const& sampleRate) throw()
     :   Internal (inputs, data, blockSize, sampleRate),
         currentIRBuffers (this->getInputAsFFTBuffers (IOKey::FFTBuffers).getValue()),
-        switchSamplesRemaining (0),
-        holdSamplesRemaining (0)
+        fadePreviousInputSamplesRemaining (0),
+        fadePreviousOutputSamplesRemaining (0),
+        holdPreviousOutputSamplesRemaining (0)
     {
     }
     
@@ -397,10 +400,14 @@ public:
         
         previousConvolver = new ConvolveHelperType (fftSize);
         previousConvolver->reset (irBuffers, channel);
+        
+        if (data.fadeSamples > 0)
+            fadeBuffer = Buffer::withSize (data.fadeSamples);
     }
     
     void process (ProcessInfo& info, const int channel) throw()
     {
+        const Data& data = this->getState();
         FFTBuffersAccessType newIRBuffers (this->getInputAsFFTBuffers (IOKey::FFTBuffers).getValue());
         
         UnitType& inputUnit (this->getInputAsUnit (IOKey::Generic));
@@ -417,24 +424,56 @@ public:
         {
             int numSamplesThisTime = 0;
             
-            if (holdSamplesRemaining > 0)
+            if (fadePreviousInputSamplesRemaining > 0)
             {
-                numSamplesThisTime = plonk::min (holdSamplesRemaining, numSamplesRemaining);
+                SampleType* const fadeBufferSamples = fadeBuffer.getArray();
                 
-                previousConvolver->process (outputSamples, inputSamples, numSamplesThisTime, channel, moveSamples, moveSamples);
+                numSamplesThisTime = plonk::min (fadePreviousInputSamplesRemaining, numSamplesRemaining);
+
+                // copy input samples for fade length into the fade buffer
+                moveSamples (fadeBufferSamples, inputSamples, numSamplesThisTime);
+                fadeSamples (fadeBufferSamples, level, slope, numSamplesThisTime);
+                
+                // process faded input through previous
+                previousConvolver->process (outputSamples, fadeBufferSamples, numSamplesThisTime, channel, moveSamples, moveSamples);
+
+                // accumulate current as normal
                 currentConvolver->process (outputSamples, inputSamples, numSamplesThisTime, channel, accumulateSamples, moveSamples);
                 
-                holdSamplesRemaining -= numSamplesThisTime;
+                fadePreviousInputSamplesRemaining -= numSamplesThisTime;
             }
-            else if (switchSamplesRemaining > 0)
+            else if (holdPreviousOutputSamplesRemaining > 0)
             {
-                numSamplesThisTime = plonk::min (switchSamplesRemaining, numSamplesRemaining);
+                numSamplesThisTime = plonk::min (holdPreviousOutputSamplesRemaining, numSamplesRemaining);
                 
-                previousConvolver->process (outputSamples, inputSamples, numSamplesThisTime, channel, moveSamples, moveSamples);
-                fadeSamples (outputSamples, level, slope, numSamplesThisTime);
+                // process silence through previous
+                previousConvolver->process (outputSamples, 0, numSamplesThisTime, channel, moveSamples, moveZeroSamples);
+                
+                // accumulate current as normal
                 currentConvolver->process (outputSamples, inputSamples, numSamplesThisTime, channel, accumulateSamples, moveSamples);
                 
-                switchSamplesRemaining -= numSamplesThisTime;
+                holdPreviousOutputSamplesRemaining -= numSamplesThisTime;
+                
+                if (holdPreviousOutputSamplesRemaining == 0)
+                {
+                    level = SampleType (1);
+                    slope = level / fadePreviousOutputSamplesRemaining;
+                }
+            }
+            else if (fadePreviousOutputSamplesRemaining > 0)
+            {
+                numSamplesThisTime = plonk::min (fadePreviousOutputSamplesRemaining, numSamplesRemaining);
+                
+                // process silence through previous
+                previousConvolver->process (outputSamples, 0, numSamplesThisTime, channel, moveSamples, moveZeroSamples);
+                
+                // fade previous out
+                fadeSamples (outputSamples, level, slope, numSamplesThisTime);
+                
+                // accumulate current as normal
+                currentConvolver->process (outputSamples, inputSamples, numSamplesThisTime, channel, accumulateSamples, moveSamples);
+                
+                fadePreviousOutputSamplesRemaining -= numSamplesThisTime;
             }
             else if (currentIRBuffers == newIRBuffers)
             {
@@ -445,12 +484,17 @@ public:
             {
                 currentConvolver.swapWith (previousConvolver);
                 
-                const int fftSizeHalved = (int) newIRBuffers.getFFTEngine().halfLength();
+                fadePreviousInputSamplesRemaining  = data.fadeSamples;
+                holdPreviousOutputSamplesRemaining = data.keepPreviousTail
+                                                   ? currentIRBuffers.getNumDivisions() * currentIRBuffers.getFFTEngine().halfLength()
+                                                   : newIRBuffers.getFFTEngine().halfLength();
+                fadePreviousOutputSamplesRemaining = data.fadeSamples;
                 
-                holdSamplesRemaining = fftSizeHalved;
-                switchSamplesRemaining = fftSizeHalved;
-                level = SampleType (1);
-                slope = level / switchSamplesRemaining;
+                if (fadePreviousInputSamplesRemaining > 0)
+                {
+                    level = SampleType (1);
+                    slope = level / fadePreviousInputSamplesRemaining;
+                }
                 
                 currentIRBuffers = newIRBuffers;
                 currentConvolver->reset (newIRBuffers, channel);
@@ -465,12 +509,13 @@ public:
     }
 
 private:
-    Buffer processBuffers;
+    Buffer fadeBuffer;
     
     FFTBuffersAccessType currentIRBuffers;
     
-    int switchSamplesRemaining;
-    int holdSamplesRemaining;
+    int fadePreviousInputSamplesRemaining;
+    int fadePreviousOutputSamplesRemaining;
+    int holdPreviousOutputSamplesRemaining;
     SampleType level;
     SampleType slope;
     
@@ -523,14 +568,19 @@ public:
                          IOKey::End);
     }
     
-    static PLONK_INLINE_LOW UnitType ar (UnitType const& input, FFTBuffersVariableType const& fftBuffers, const int maxFFTSize = 0) throw()
+    static PLONK_INLINE_LOW UnitType ar (UnitType const& input,
+                                         FFTBuffersVariableType const& fftBuffers,
+                                         const bool keepPreviousTail = false,
+                                         const int maxFFTSize = 0,
+                                         const int fadeSamples = 512) throw()
     {
+        plonk_assert ((fadeSamples % 4) == 0);
+        
         Inputs inputs;
         inputs.put (IOKey::Generic, input);
         inputs.put (IOKey::FFTBuffers, fftBuffers);
-//        inputs.put (IOKey::Gate, IntVariable (0));
         
-        Data data = { { -1.0, -1.0 }, maxFFTSize };
+        Data data = { { -1.0, -1.0 }, maxFFTSize, fadeSamples, keepPreviousTail };
         
         return UnitType::template createFromInputs<ConvolveInternal> (inputs,
                                                                       data,
