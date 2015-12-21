@@ -316,8 +316,6 @@ private:
     template<class ValueType>
     static PLONK_INLINE_LOW void processSine (ShapeState<ValueType>& shapeState, ValueType* const outputSamples, const int numSamples) throw()
     {
-//        const ValueType& zero = Math<ValueType>::get0();
-        
         if (numSamples == shapeState.stepsToTarget)
         {
             const int lastIndex = numSamples - 1;
@@ -605,6 +603,8 @@ public:
     typedef ObjectArray<Shape>                      ShapeArray;
     typedef NumericalArray<int>                     NextArray;
 
+    typedef NumericalArray<SampleType>              Buffer;
+    
     typedef SignalBase<SampleType>                  SignalType;
     typedef BreakpointBase<SampleType>              BreakpointType;
     typedef TypeUtility<SampleType>                 SampleTypeUtility;
@@ -788,6 +788,17 @@ public:
     {
         return this->getInternal()->timeScale (amount);
     }
+    
+    PLONK_INLINE_LOW double duration() const throw()
+    {
+        double duration = 0.0;
+        
+        for (int i = 0; i < getNumBreakpoints(); ++i)
+            duration += atUnchecked (i).getTargetTime();
+        
+        return duration;
+    }
+
     
     SampleType lookup (const double time) const throw()
     {

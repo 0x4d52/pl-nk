@@ -1149,7 +1149,18 @@ public:
         
         for (int i = 0; i < numBufferChannels; ++i) 
             setOutputBuffer (i, bufferChannels[i]);
-    }    
+    }
+    
+    BufferArrayType getOutputBuffers() const throw()
+    {
+        BufferArrayType buffers;
+        const int numChannels = this->getNumChannels();
+
+        for (int i = 0; i < numChannels; ++i)
+            buffers.add (this->atUnchecked (i).getOutputBuffer());
+        
+        return buffers;
+    }
     
     /** Get the current value of a specific channel in this unit.
      Indices out of range will be wrapped to the available channels. */
@@ -1170,7 +1181,7 @@ public:
         return result;
     }
     
-    PLONK_INLINE_LOW const TimeStamp getNextTimeStamp(const int index) const throw()
+    PLONK_INLINE_LOW const TimeStamp getNextTimeStamp (const int index) const throw()
     {
         return this->wrapAt (index).getNextTimeStamp();
     }

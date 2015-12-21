@@ -69,6 +69,12 @@ static PLONK_INLINE_MID void moveSamples (SampleType* const dst, const SampleTyp
 }
 
 template<class SampleType>
+static PLONK_INLINE_MID void moveZeroSamples (SampleType* const dst, const SampleType* const /*src*/, const UnsignedLong numItems) throw()
+{
+    NumericalArray<SampleType>::zeroData (dst, numItems);
+}
+
+template<class SampleType>
 static PLONK_INLINE_MID void accumulateSamples (SampleType* const dst, const SampleType* const src, const UnsignedLong numItems) throw()
 {
     NumericalArrayBinaryOp<SampleType, plonk::addop>::calcNN (dst, dst, src, numItems);
@@ -81,16 +87,12 @@ static PLONK_INLINE_MID void zeroSamples (SampleType* const dst, const UnsignedL
 }
 
 template<class SampleType>
-static inline void fadeSamples (SampleType* const dst, const UnsignedLong numItems) throw()
+static inline void fadeSamples (SampleType* const dst, SampleType& level, const SampleType slope, const UnsignedLong numItems) throw()
 {
-    typedef typename TypeUtility<SampleType>::ScaleType ScaleType;
-    ScaleType level (TypeUtility<SampleType>::getTypePeak());
-    const ScaleType ramp (level / numItems);
-    
     for (UnsignedLong i = 0; i < numItems; ++i)
     {
         dst[i] *= level;
-        level  -= ramp;
+        level  -= slope;
     }
 }
 
@@ -107,6 +109,7 @@ public:
 
     typedef void (*OutputFunction)(SampleType* const, const SampleType* const, const UnsignedLong);
     typedef void (*ZMulFunction)(SampleType* const, const SampleType* const, const SampleType* const, const UnsignedLong);
+    typedef void (*InputFunction)(SampleType* const, const SampleType* const, const UnsignedLong);
 
     enum Constants
     {
@@ -154,7 +157,7 @@ public:
         zmulFunction = complexMultiply;
     }
     
-    void process (SampleType* outputSamples, const SampleType* inputSamples, const int outputBufferLength, const int channel, OutputFunction outputFunction) throw()
+    void process (SampleType* outputSamples, const SampleType* inputSamples, const int outputBufferLength, const int channel, OutputFunction outputFunction, InputFunction inputFunction) throw()
     {
         FFTEngineType& fftEngine (irBuffers.getFFTEngine());
         const int numDivisions = irBuffers.getNumDivisions();
@@ -193,8 +196,8 @@ public:
             
             if (hop > 0)
             {
-                moveSamples (fftAltBuffer0 + position0, inputSamples, hop);
-                moveSamples (fftAltBuffer1 + position1, inputSamples, hop);
+                inputFunction (fftAltBuffer0 + position0, inputSamples, hop);
+                inputFunction (fftAltBuffer1 + position1, inputSamples, hop);
                 outputFunction (outputSamples, fftOverlapBuffer + position0, hop);
                 
                 inputSamples  += hop;
@@ -349,8 +352,8 @@ public:
                              SampleRate const& sampleRate) throw()
     :   Internal (inputs, data, blockSize, sampleRate),
         currentIRBuffers (this->getInputAsFFTBuffers (IOKey::FFTBuffers).getValue()),
-        previousIRBuffers (currentIRBuffers),
-        isSwitching (false)
+        switchSamplesRemaining (0),
+        holdSamplesRemaining (0)
     {
     }
     
@@ -410,25 +413,48 @@ public:
 
         plonk_assert (outputBufferLength == inputBuffer.length());
         
-        if (currentIRBuffers == newIRBuffers)
+        if (holdSamplesRemaining > 0)
         {
-            currentConvolver->process (outputSamples, inputSamples, outputBufferLength, channel, moveSamples);
+            previousConvolver->process (outputSamples, inputSamples, outputBufferLength, channel, moveSamples, moveSamples);
+            currentConvolver->process (outputSamples, inputSamples, outputBufferLength, channel, accumulateSamples, moveSamples);
+            holdSamplesRemaining -= outputBufferLength;
         }
-        else if (! isSwitching)
+        else if (switchSamplesRemaining > 0)
         {
-            currentConvolver.swapWith (previousConvolver);
+            const int switchSamplesThisTime = plonk::min (switchSamplesRemaining, (int) outputBufferLength);
             
-            previousConvolver->process (outputSamples, inputSamples, outputBufferLength, channel, moveSamples);
-            fadeSamples (outputSamples, outputBufferLength);
+            previousConvolver->process (outputSamples, inputSamples, switchSamplesThisTime, channel, moveSamples, moveSamples);
+            fadeSamples (outputSamples, level, slope, switchSamplesThisTime);
+            
+            if (switchSamplesThisTime < outputBufferLength)
+                zeroSamples (outputSamples + switchSamplesThisTime, outputBufferLength - switchSamplesThisTime);
 
-            currentConvolver->reset (newIRBuffers, channel);
-            currentConvolver->process (outputSamples, inputSamples, outputBufferLength, channel, accumulateSamples);
-            
-            currentIRBuffers = newIRBuffers;
+            currentConvolver->process (outputSamples, inputSamples, outputBufferLength, channel, accumulateSamples, moveSamples);
+            switchSamplesRemaining -= switchSamplesThisTime;
+        }
+        else if (currentIRBuffers == newIRBuffers)
+        {
+            currentConvolver->process (outputSamples, inputSamples, outputBufferLength, channel, moveSamples, moveSamples);
         }
         else
         {
-            plonk_assertfalse; // for now!!.... this where the magic will happen....
+            currentConvolver.swapWith (previousConvolver);
+            
+            const int fftSizeHalved = (int) newIRBuffers.getFFTEngine().halfLength();
+            
+            holdSamplesRemaining = fftSizeHalved;
+            switchSamplesRemaining = fftSizeHalved;
+            level = SampleType (1);
+            slope = level / switchSamplesRemaining;
+            
+            previousConvolver->process (outputSamples, inputSamples, outputBufferLength, channel, moveSamples, moveSamples);
+            fadeSamples (outputSamples, level, slope, outputBufferLength);
+
+            currentConvolver->reset (newIRBuffers, channel);
+            currentConvolver->process (outputSamples, inputSamples, outputBufferLength, channel, accumulateSamples, moveSamples);
+            switchSamplesRemaining -= outputBufferLength;
+            
+            currentIRBuffers = newIRBuffers;
         }
     }
 
@@ -436,9 +462,11 @@ private:
     Buffer processBuffers;
     
     FFTBuffersAccessType currentIRBuffers;
-    FFTBuffersAccessType previousIRBuffers;
     
-    bool isSwitching;
+    int switchSamplesRemaining;
+    int holdSamplesRemaining;
+    SampleType level;
+    SampleType slope;
     
     ScopedPointerContainer<ConvolveHelperType> currentConvolver;
     ScopedPointerContainer<ConvolveHelperType> previousConvolver;
