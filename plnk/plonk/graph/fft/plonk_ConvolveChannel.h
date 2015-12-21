@@ -388,10 +388,9 @@ public:
         this->initValue (SampleType (0));
         
         const FFTBuffersAccessType irBuffers (this->getInputAsFFTBuffers (IOKey::FFTBuffers).getValue());
-        const FFTEngineType& fftEngine (irBuffers.getFFTEngine());
 
         const Data& data = this->getState();
-        const int fftSize = data.maxFFTSize <= 0 ? (int) fftEngine.length() : data.maxFFTSize;
+        const int fftSize = data.maxFFTSize <= 0 ? (int) irBuffers.getFFTEngine().length() : data.maxFFTSize;
 
         currentConvolver = new ConvolveHelperType (fftSize);
         currentConvolver->reset (irBuffers, channel);
@@ -406,55 +405,62 @@ public:
         
         UnitType& inputUnit (this->getInputAsUnit (IOKey::Generic));
         const Buffer& inputBuffer (inputUnit.process (info, channel));
-        const SampleType* const inputSamples = inputBuffer.getArray();
-        
-        SampleType* const outputSamples       = this->getOutputSamples();
+        const SampleType* inputSamples        = inputBuffer.getArray();
+        SampleType* outputSamples             = this->getOutputSamples();
         const UnsignedLong outputBufferLength = (UnsignedLong) this->getOutputBuffer().length();
 
         plonk_assert (outputBufferLength == inputBuffer.length());
         
-        if (holdSamplesRemaining > 0)
+        int numSamplesRemaining = outputBufferLength;
+        
+        while (numSamplesRemaining > 0)
         {
-            previousConvolver->process (outputSamples, inputSamples, outputBufferLength, channel, moveSamples, moveSamples);
-            currentConvolver->process (outputSamples, inputSamples, outputBufferLength, channel, accumulateSamples, moveSamples);
-            holdSamplesRemaining -= outputBufferLength;
-        }
-        else if (switchSamplesRemaining > 0)
-        {
-            const int switchSamplesThisTime = plonk::min (switchSamplesRemaining, (int) outputBufferLength);
+            int numSamplesThisTime = 0;
             
-            previousConvolver->process (outputSamples, inputSamples, switchSamplesThisTime, channel, moveSamples, moveSamples);
-            fadeSamples (outputSamples, level, slope, switchSamplesThisTime);
+            if (holdSamplesRemaining > 0)
+            {
+                numSamplesThisTime = plonk::min (holdSamplesRemaining, numSamplesRemaining);
+                
+                previousConvolver->process (outputSamples, inputSamples, numSamplesThisTime, channel, moveSamples, moveSamples);
+                currentConvolver->process (outputSamples, inputSamples, numSamplesThisTime, channel, accumulateSamples, moveSamples);
+                
+                holdSamplesRemaining -= numSamplesThisTime;
+            }
+            else if (switchSamplesRemaining > 0)
+            {
+                numSamplesThisTime = plonk::min (switchSamplesRemaining, numSamplesRemaining);
+                
+                previousConvolver->process (outputSamples, inputSamples, numSamplesThisTime, channel, moveSamples, moveSamples);
+                fadeSamples (outputSamples, level, slope, numSamplesThisTime);
+                currentConvolver->process (outputSamples, inputSamples, numSamplesThisTime, channel, accumulateSamples, moveSamples);
+                
+                switchSamplesRemaining -= numSamplesThisTime;
+            }
+            else if (currentIRBuffers == newIRBuffers)
+            {
+                numSamplesThisTime = numSamplesRemaining;
+                currentConvolver->process (outputSamples, inputSamples, numSamplesThisTime, channel, moveSamples, moveSamples);
+            }
+            else
+            {
+                currentConvolver.swapWith (previousConvolver);
+                
+                const int fftSizeHalved = (int) newIRBuffers.getFFTEngine().halfLength();
+                
+                holdSamplesRemaining = fftSizeHalved;
+                switchSamplesRemaining = fftSizeHalved;
+                level = SampleType (1);
+                slope = level / switchSamplesRemaining;
+                
+                currentIRBuffers = newIRBuffers;
+                currentConvolver->reset (newIRBuffers, channel);
+                
+                //... and back round again...
+            }
             
-            if (switchSamplesThisTime < outputBufferLength)
-                zeroSamples (outputSamples + switchSamplesThisTime, outputBufferLength - switchSamplesThisTime);
-
-            currentConvolver->process (outputSamples, inputSamples, outputBufferLength, channel, accumulateSamples, moveSamples);
-            switchSamplesRemaining -= switchSamplesThisTime;
-        }
-        else if (currentIRBuffers == newIRBuffers)
-        {
-            currentConvolver->process (outputSamples, inputSamples, outputBufferLength, channel, moveSamples, moveSamples);
-        }
-        else
-        {
-            currentConvolver.swapWith (previousConvolver);
-            
-            const int fftSizeHalved = (int) newIRBuffers.getFFTEngine().halfLength();
-            
-            holdSamplesRemaining = fftSizeHalved;
-            switchSamplesRemaining = fftSizeHalved;
-            level = SampleType (1);
-            slope = level / switchSamplesRemaining;
-            
-            previousConvolver->process (outputSamples, inputSamples, outputBufferLength, channel, moveSamples, moveSamples);
-            fadeSamples (outputSamples, level, slope, outputBufferLength);
-
-            currentConvolver->reset (newIRBuffers, channel);
-            currentConvolver->process (outputSamples, inputSamples, outputBufferLength, channel, accumulateSamples, moveSamples);
-            switchSamplesRemaining -= outputBufferLength;
-            
-            currentIRBuffers = newIRBuffers;
+            numSamplesRemaining -= numSamplesThisTime;
+            outputSamples       += numSamplesThisTime;
+            inputSamples        += numSamplesThisTime;
         }
     }
 
@@ -522,6 +528,7 @@ public:
         Inputs inputs;
         inputs.put (IOKey::Generic, input);
         inputs.put (IOKey::FFTBuffers, fftBuffers);
+//        inputs.put (IOKey::Gate, IntVariable (0));
         
         Data data = { { -1.0, -1.0 }, maxFFTSize };
         
