@@ -48,16 +48,16 @@
 
 template<class SampleType>
 static PLONK_INLINE_MID void complexMultiplyAccumulate (SampleType* const output,
-                                              const SampleType* const left, const SampleType* const right,
-                                              const UnsignedLong halfLength) throw()
+                                                        const SampleType* const left, const SampleType* const right,
+                                                        const UnsignedLong halfLength) throw()
 {
     NumericalArrayComplex<SampleType>::zpmulaccum (output, left, right, halfLength);
 }
 
 template<class SampleType>
 static PLONK_INLINE_MID void complexMultiply (SampleType* const output,
-                                    const SampleType* const left, const SampleType* const right,
-                                    const UnsignedLong halfLength) throw()
+                                              const SampleType* const left, const SampleType* const right,
+                                              const UnsignedLong halfLength) throw()
 {
     NumericalArrayComplex<SampleType>::zpmul (output, left, right, halfLength);
 }
@@ -65,7 +65,7 @@ static PLONK_INLINE_MID void complexMultiply (SampleType* const output,
 template<class SampleType>
 static PLONK_INLINE_MID void moveSamples (SampleType* const dst, const SampleType* const src, const UnsignedLong numItems) throw()
 {
-    NumericalArrayUnaryOp<SampleType, plonk::move>::calc (dst, src, numItems);
+    memcpy (dst, src, numItems * sizeof (SampleType));
 }
 
 template<class SampleType>
@@ -78,6 +78,16 @@ template<class SampleType>
 static PLONK_INLINE_MID void accumulateSamples (SampleType* const dst, const SampleType* const src, const UnsignedLong numItems) throw()
 {
     NumericalArrayBinaryOp<SampleType, plonk::addop>::calcNN (dst, dst, src, numItems);
+}
+
+static PLONK_INLINE_MID void accumulateSamples (float* const dst, const float* const src, const UnsignedLong numItems) throw()
+{
+    pl_VectorAddF_NNN (dst, dst, src, numItems);
+}
+
+static PLONK_INLINE_MID void accumulateSamples (double* const dst, const double* const src, const UnsignedLong numItems) throw()
+{
+    pl_VectorAddD_NNN (dst, dst, src, numItems);
 }
 
 template<class SampleType>
@@ -157,7 +167,7 @@ public:
         zmulFunction = complexMultiply;
     }
     
-    void process (SampleType* outputSamples, const SampleType* inputSamples, const int outputBufferLength, const int channel, OutputFunction outputFunction, InputFunction inputFunction) throw()
+    void process (SampleType* outputSamples, const SampleType* inputSamples, const UnsignedLong outputBufferLength, const int channel, OutputFunction outputFunction, InputFunction inputFunction) throw()
     {
         FFTEngineType& fftEngine (irBuffers.getFFTEngine());
         const int numDivisions = irBuffers.getNumDivisions();
@@ -175,7 +185,7 @@ public:
         SampleType* const fftAltBuffers[]    = { fftAltBuffer0, fftAltBuffer1 };
         SampleType* const processBufferBase  = irBuffers.getProcessBuffer (channel, 0);
         const SampleType* const irBufferBase = irBuffers.getDivision (channel, 0);
-        int samplesRemaining                 = outputBufferLength;
+        UnsignedLong samplesRemaining        = outputBufferLength;
         
         while (samplesRemaining > 0)
         {
@@ -236,7 +246,7 @@ public:
                     zmulFunction (fftTempBuffer, processBufferSamples, irSamples, fftSizeHalved);
                     processBufferSamples += fftSize;
                     irSamples            += fftSize;
-                    zmulFunction = complexMultiplyAccumulate;
+                    zmulFunction = complexMultiplyAccumulate; // next operaton until reset is accumulate
 
                     for (int i = 1; i < divisionsRemaining; i++)
                     {
@@ -285,7 +295,7 @@ public:
                 divisionsWritten    = 0;
                 countDown           = hop;
                 
-                zmulFunction = complexMultiply;
+                zmulFunction = complexMultiply; // first operations just multiply
             }
         }
     }

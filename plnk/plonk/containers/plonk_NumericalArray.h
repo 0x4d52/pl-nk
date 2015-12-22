@@ -77,9 +77,9 @@ public:
 	}
 	
 	static PLONK_INLINE_LOW void series (NumericalType* const dst,
-                               const UnsignedLong size, 
-                               const NumericalType start, 
-                               const NumericalType grow) throw()
+                                         const UnsignedLong size,
+                                         const NumericalType start,
+                                         const NumericalType grow) throw()
 	{
         if (size >= 2)
         {                        
@@ -95,9 +95,9 @@ public:
 	}
 	
 	static PLONK_INLINE_LOW void geom (NumericalType* const dst,
-                             const UnsignedLong size, 
-                             const NumericalType start, 
-                             const NumericalType grow) throw()
+                                       const UnsignedLong size,
+                                       const NumericalType start,
+                                       const NumericalType grow) throw()
 	{
         if (size >= 2)
         {                        
@@ -113,9 +113,9 @@ public:
 	}
 	
 	static PLONK_INLINE_LOW void rand (NumericalType* const dst,
-                             const UnsignedLong size, 
-                             const NumericalType lower, 
-                             const NumericalType upper) throw()
+                                       const UnsignedLong size,
+                                       const NumericalType lower,
+                                       const NumericalType upper) throw()
 	{
         if (size >= 1)
         {                                    
@@ -140,9 +140,9 @@ public:
 	}
 	
 	static PLONK_INLINE_LOW void exprand (NumericalType* const dst,
-                                const UnsignedLong size, 
-                                const NumericalType lower, 
-                                const NumericalType upper) throw()
+                                          const UnsignedLong size,
+                                          const NumericalType lower,
+                                          const NumericalType upper) throw()
 	{
         if (size >= 1)
         {                                    
@@ -177,9 +177,9 @@ public:
 	}
 	
 	static PLONK_INLINE_LOW void series (float* const dst,
-                               const UnsignedLong size, 
-                               const float start, 
-                               const float grow) throw()
+                                         const UnsignedLong size,
+                                         const float start,
+                                         const float grow) throw()
 	{
         if (size >= 2)
         {                        
@@ -208,9 +208,9 @@ public:
 	}
 	
 	static PLONK_INLINE_LOW void series (double* const dst,
-                               const UnsignedLong size, 
-                               const double start, 
-                               const double grow) throw()
+                                         const UnsignedLong size,
+                                         const double start,
+                                         const double grow) throw()
 	{
         if (size >= 2)
         {                        
@@ -768,12 +768,12 @@ class NumericalArrayComplexBase
 {
 public:
      static PLONK_INLINE_MID void zmul (NumericalType* dstReal,
-                                       NumericalType* dstImag,
-                                       const NumericalType* leftReal,
-                                       const NumericalType* leftImag,
-                                       const NumericalType* rightReal,
-                                       const NumericalType* rightImag,
-                                       const UnsignedLong numItems) throw()
+                                        NumericalType* dstImag,
+                                        const NumericalType* leftReal,
+                                        const NumericalType* leftImag,
+                                        const NumericalType* rightReal,
+                                        const NumericalType* rightImag,
+                                            const UnsignedLong numItems) throw()
     {
         for (UnsignedLong i = 0; i < numItems; ++i)
         {

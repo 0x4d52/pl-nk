@@ -1326,6 +1326,38 @@ public:
         for (int i = 0; i < numChannels; ++i)
             channels[i].process (info, i);
     }
+    
+    void process (BufferArrayType& destBuffer) throw()
+    {
+        const int numDestChannels = destBuffer.length();
+
+        ProcessInfo info;
+        
+        IntArray countDown (IntArray::withSize (numDestChannels));
+        IntArray countUp (IntArray::newClear (numDestChannels));
+        
+        for (int i = 0; i < numDestChannels; ++i)
+            countDown.put (i, destBuffer.atUnchecked (i).length());
+        
+        while (countDown.sum() > 0)
+        {
+            for (int i = 0; i < numDestChannels; ++i)
+            {
+                const Buffer& channelBuffer (this->process (info, i));
+                const SampleType* const channelBufferSamples (channelBuffer.getArray());
+                SampleType* const destBufferSamples (destBuffer.atUnchecked (i).getArray());
+                
+                const int numSamplesThisTime = plonk::min (channelBuffer.length(), countDown.atUnchecked (i));
+                
+                if (numSamplesThisTime > 0)
+                {
+                    memcpy (destBufferSamples + countUp.atUnchecked (i), channelBufferSamples, numSamplesThisTime * sizeof (SampleType));
+                    countDown.atUnchecked (i) -= numSamplesThisTime;
+                    countUp.atUnchecked (i)   += numSamplesThisTime;
+                }
+            }
+        }
+    }
 
     
     int getTypeCode() const throw()
