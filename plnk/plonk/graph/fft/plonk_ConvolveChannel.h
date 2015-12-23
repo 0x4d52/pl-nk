@@ -125,7 +125,7 @@ static PLONK_INLINE_HIGH void fadeSamples (SampleType* const dst, SampleType& le
 //------------------------------------------------------------------------------
 
 template<class SampleType>
-class ConvolveHelper
+class ConvolveHelper //: public PlonkBase
 {
 public:
     typedef UnitBase<SampleType>                                    UnitType;
@@ -345,6 +345,7 @@ private:
 struct ConvolveChannelData
 {
     ChannelInternalCore::Data base;
+    int numChannels;
     int maxFFTSize;
     int fadeSamples;
     bool keepPreviousTail;
@@ -354,14 +355,14 @@ struct ConvolveChannelData
 
 /** Convolve channel. */
 template<class SampleType>
-class ConvolveChannelInternal : public ChannelInternal<SampleType, ConvolveChannelData>
+class ConvolveChannelInternal : public ProxyOwnerChannelInternal<SampleType, ConvolveChannelData>
 {
 public:
     typedef ConvolveChannelData                                     Data;
     typedef ChannelBase<SampleType>                                 ChannelType;
     typedef ObjectArray<ChannelType>                                ChannelArrayType;
     typedef ConvolveChannelInternal<SampleType>                     ConvolveInternal;
-    typedef ChannelInternal<SampleType,Data>                        Internal;
+    typedef ProxyOwnerChannelInternal<SampleType,Data>              Internal;
     typedef ChannelInternalBase<SampleType>                         InternalBase;
     typedef UnitBase<SampleType>                                    UnitType;
     typedef InputDictionary                                         Inputs;
@@ -374,14 +375,21 @@ public:
     ConvolveChannelInternal (Inputs const& inputs,
                              Data const& data,
                              BlockSize const& blockSize,
-                             SampleRate const& sampleRate) throw()
-    :   Internal (inputs, data, blockSize, sampleRate),
+                             SampleRate const& sampleRate,
+                             ChannelArrayType& channels) throw()
+    :   Internal (decideNumChannels (inputs, data), inputs, data, blockSize, sampleRate, channels),
         currentIRBuffers (this->getInputAsFFTBuffers (IOKey::FFTBuffers).getValue()),
         thisSync (0),
         fadePreviousInputSamplesRemaining (0),
         fadePreviousOutputSamplesRemaining (0),
         holdPreviousOutputSamplesRemaining (0)
     {
+    }
+    
+    ~ConvolveChannelInternal()
+    {
+        for (int i = 0; i < convolveHelpers.length(); ++i)
+            delete convolveHelpers.atUnchecked (i);
     }
     
     Text getName() const throw()
@@ -391,60 +399,59 @@ public:
     
     IntArray getInputKeys() const throw()
     {
-        const IntArray keys (IOKey::Generic, IOKey::FFTBuffers);
+        const IntArray keys (IOKey::Generic, IOKey::FFTBuffers, IOKey::Sync);
         return keys;
-    }
-    
-    InternalBase* getChannel (const int index) throw()
-    {
-        const Inputs channelInputs = this->getInputs().getChannel (index);
-        return new ConvolveInternal (channelInputs,
-                                     this->getState(),
-                                     this->getBlockSize(),
-                                     this->getSampleRate());
     }
     
     void initChannel (const int channel) throw()
     {
-        const UnitType& input = this->getInputAsUnit (IOKey::Generic);
-        
-        this->setBlockSize (input.getBlockSize (channel));
-        this->setSampleRate (input.getSampleRate (channel));
-        this->setOverlap (input.getOverlap (channel));
-        
-        this->initValue (SampleType (0));
-        
-        const FFTBuffersType& irBuffers (this->getInputAsFFTBuffers (IOKey::FFTBuffers).getValue());
+        const int numChannels = this->getNumChannels();
 
-        const Data& data = this->getState();
-        const int fftSize = data.maxFFTSize <= 0 ? (int) irBuffers.getFFTEngine().length() : data.maxFFTSize;
-
-        currentConvolver = new ConvolveHelperType (fftSize);
-        currentConvolver->reset (irBuffers, channel);
-        previousConvolver = new ConvolveHelperType (fftSize);
-        
-        if (data.fadeSamples > 0)
-            fadeBuffer = Buffer::withSize (data.fadeSamples);
+        if ((channel % numChannels) == 0)
+        {
+            const UnitType& input = this->getInputAsUnit (IOKey::Generic);
             
-        IntVariable& sync = ChannelInternalCore::getInputAs<IntVariable> (IOKey::Sync);
-        thisSync = sync.getValue();
+            this->setBlockSize (input.getBlockSize (channel));
+            this->setSampleRate (input.getSampleRate (channel));
+            this->setOverlap (input.getOverlap (channel));
+            
+            
+            const FFTBuffersType& irBuffers (this->getInputAsFFTBuffers (IOKey::FFTBuffers).getValue());
+
+            const Data& data = this->getState();
+            const int fftSize = data.maxFFTSize <= 0 ? (int) irBuffers.getFFTEngine().length() : data.maxFFTSize;
+            
+            for (int i = 0; i < numChannels; ++i)
+            {
+                ConvolverPair* convolvePair = new ConvolverPair (fftSize);
+                convolvePair->currentConvolver->reset (irBuffers, channel);
+                convolveHelpers.add (convolvePair);
+            }
+            
+            if (data.fadeSamples > 0)
+                fadeBuffer = Buffer::withSize (data.fadeSamples);
+                
+            IntVariable& sync = ChannelInternalCore::getInputAs<IntVariable> (IOKey::Sync);
+            thisSync = sync.getValue();
+        }
+        
+        this->initProxyValue (channel, SampleType (0));
     }
     
-    void process (ProcessInfo& info, const int channel) throw()
+    void process (ProcessInfo& info, const int /*channel*/) throw()
     {
+        const int numChannels = this->getNumChannels();
         const Data& data = this->getState();
         FFTBuffersType newIRBuffers (this->getInputAsFFTBuffers (IOKey::FFTBuffers).getValue());
-        
         UnitType& inputUnit (this->getInputAsUnit (IOKey::Generic));
-        const Buffer& inputBuffer (inputUnit.process (info, channel));
-        const SampleType* inputSamples        = inputBuffer.getArray();
-        SampleType* outputSamples             = this->getOutputSamples();
-        const int outputBufferLength          = this->getOutputBuffer().length();
-
-        plonk_assert (outputBufferLength == inputBuffer.length());
+        const int outputBufferLength = this->getOutputBuffer (0).length();
         
         int numSamplesRemaining = outputBufferLength;
+        int pos = 0;
         
+        SampleType channelLevel (0);
+        SampleType channelSlope (0);
+
         while (numSamplesRemaining > 0)
         {
             int numSamplesThisTime = 0;
@@ -454,16 +461,32 @@ public:
                 SampleType* const fadeBufferSamples = fadeBuffer.getArray();
                 
                 numSamplesThisTime = plonk::min (fadePreviousInputSamplesRemaining, numSamplesRemaining);
-
-                // copy input samples for fade length into the fade buffer
-                moveSamples (fadeBufferSamples, inputSamples, numSamplesThisTime);
-                fadeSamples (fadeBufferSamples, level, slope, numSamplesThisTime);
                 
-                // process faded input through previous
-                previousConvolver->process (outputSamples, fadeBufferSamples, numSamplesThisTime, channel, moveSamples, moveSamples);
+                for (int channel = 0; channel < numChannels; ++channel)
+                {
+                    const Buffer& inputBuffer (inputUnit.process (info, channel));
+                    const SampleType* const inputSamples = inputBuffer.getArray() + pos;
+                    SampleType* const outputSamples = this->getOutputSamples (channel) + pos;
+                    plonk_assert (outputBufferLength == inputBuffer.length());
 
-                // accumulate current as normal
-                currentConvolver->process (outputSamples, inputSamples, numSamplesThisTime, channel, accumulateSamples, moveSamples);
+                    channelLevel = level;
+                    channelSlope = slope;
+                    
+                    // copy input samples for fade length into the fade buffer
+                    moveSamples (fadeBufferSamples, inputSamples, numSamplesThisTime);
+                    fadeSamples (fadeBufferSamples, channelLevel, channelSlope, numSamplesThisTime);
+                    
+                    ConvolverPair& convolvePair = *convolveHelpers.atUnchecked (channel);
+                    
+                    // process faded input through previous
+                    convolvePair.previousConvolver->process (outputSamples, fadeBufferSamples, numSamplesThisTime, channel, moveSamples, moveSamples);
+
+                    // accumulate current as normal
+                    convolvePair.currentConvolver->process (outputSamples, inputSamples, numSamplesThisTime, channel, accumulateSamples, moveSamples);
+                }
+                
+                level = channelLevel;
+                slope = channelSlope;
                 
                 fadePreviousInputSamplesRemaining -= numSamplesThisTime;
             }
@@ -471,11 +494,21 @@ public:
             {
                 numSamplesThisTime = plonk::min (holdPreviousOutputSamplesRemaining, numSamplesRemaining);
                 
-                // process silence through previous
-                previousConvolver->process (outputSamples, 0, numSamplesThisTime, channel, moveSamples, moveZeroSamples);
-                
-                // accumulate current as normal
-                currentConvolver->process (outputSamples, inputSamples, numSamplesThisTime, channel, accumulateSamples, moveSamples);
+                for (int channel = 0; channel < numChannels; ++channel)
+                {
+                    const Buffer& inputBuffer (inputUnit.process (info, channel));
+                    const SampleType* const inputSamples = inputBuffer.getArray() + pos;
+                    SampleType* const outputSamples = this->getOutputSamples (channel) + pos;
+                    plonk_assert (outputBufferLength == inputBuffer.length());
+
+                    ConvolverPair& convolvePair = *convolveHelpers.atUnchecked (channel);
+
+                    // process silence through previous
+                    convolvePair.previousConvolver->process (outputSamples, 0, numSamplesThisTime, channel, moveSamples, moveZeroSamples);
+                    
+                    // accumulate current as normal
+                    convolvePair.currentConvolver->process (outputSamples, inputSamples, numSamplesThisTime, channel, accumulateSamples, moveSamples);
+                }
                 
                 holdPreviousOutputSamplesRemaining -= numSamplesThisTime;
                 
@@ -489,25 +522,55 @@ public:
             {
                 numSamplesThisTime = plonk::min (fadePreviousOutputSamplesRemaining, numSamplesRemaining);
                 
-                // process silence through previous
-                previousConvolver->process (outputSamples, 0, numSamplesThisTime, channel, moveSamples, moveZeroSamples);
+                for (int channel = 0; channel < numChannels; ++channel)
+                {
+                    const Buffer& inputBuffer (inputUnit.process (info, channel));
+                    const SampleType* const inputSamples = inputBuffer.getArray() + pos;
+                    SampleType* const outputSamples = this->getOutputSamples (channel) + pos;
+                    plonk_assert (outputBufferLength == inputBuffer.length());
+                    
+                    ConvolverPair& convolvePair = *convolveHelpers.atUnchecked (channel);
+
+                    // process silence through previous
+                    convolvePair.previousConvolver->process (outputSamples, 0, numSamplesThisTime, channel, moveSamples, moveZeroSamples);
+                    
+                    channelLevel = level;
+                    channelSlope = slope;
+
+                    // fade previous out
+                    fadeSamples (outputSamples, channelLevel, channelSlope, numSamplesThisTime);
+                    
+                    // accumulate current as normal
+                    convolvePair.currentConvolver->process (outputSamples, inputSamples, numSamplesThisTime, channel, accumulateSamples, moveSamples);
+                }
                 
-                // fade previous out
-                fadeSamples (outputSamples, level, slope, numSamplesThisTime);
-                
-                // accumulate current as normal
-                currentConvolver->process (outputSamples, inputSamples, numSamplesThisTime, channel, accumulateSamples, moveSamples);
-                
+                level = channelLevel;
+                slope = channelSlope;
+
                 fadePreviousOutputSamplesRemaining -= numSamplesThisTime;
             }
             else if (currentIRBuffers == newIRBuffers)
             {
                 numSamplesThisTime = numSamplesRemaining;
-                currentConvolver->process (outputSamples, inputSamples, numSamplesThisTime, channel, moveSamples, moveSamples);
+                
+                for (int channel = 0; channel < numChannels; ++channel)
+                {
+                    const Buffer& inputBuffer (inputUnit.process (info, channel));
+                    const SampleType* const inputSamples = inputBuffer.getArray() + pos;
+                    SampleType* const outputSamples = this->getOutputSamples (channel) + pos;
+                    plonk_assert (outputBufferLength == inputBuffer.length());
+                    
+                    ConvolverPair& convolvePair = *convolveHelpers.atUnchecked (channel);
+                    convolvePair.currentConvolver->process (outputSamples, inputSamples, numSamplesThisTime, channel, moveSamples, moveSamples);
+                }
             }
             else
             {
-                currentConvolver.swapWith (previousConvolver);
+                for (int channel = 0; channel < numChannels; ++channel)
+                {
+                    ConvolverPair& convolvePair = *convolveHelpers.atUnchecked (channel);
+                    convolvePair.currentConvolver.swapWith (convolvePair.previousConvolver);
+                }
                 
                 fadePreviousInputSamplesRemaining  = data.fadeSamples;
                 holdPreviousOutputSamplesRemaining = data.keepPreviousTail
@@ -522,18 +585,31 @@ public:
                 }
                 
                 currentIRBuffers = newIRBuffers;
-                currentConvolver->reset (newIRBuffers, channel);
+                
+                for (int channel = 0; channel < numChannels; ++channel)
+                {
+                    ConvolverPair& convolvePair = *convolveHelpers.atUnchecked (channel);
+                    convolvePair.currentConvolver->reset (newIRBuffers, channel);
+                }
                 
                 //... and back round again...
             }
             
             numSamplesRemaining -= numSamplesThisTime;
-            outputSamples       += numSamplesThisTime;
-            inputSamples        += numSamplesThisTime;
+            pos                 += numSamplesThisTime;
         }
     }
 
 private:
+    PLONK_INLINE_HIGH static int decideNumChannels (Inputs const& inputs, Data const& data) throw()
+    {
+        return data.numChannels > 0
+             ? data.numChannels
+             : inputs[IOKey::FFTBuffers].asUnchecked<FFTBuffersVariableType>().getValue().getNumChannels();
+    }
+
+    //--------------------------------------------------------------------------
+    
     Buffer fadeBuffer;
     FFTBuffersType currentIRBuffers;
     int thisSync;
@@ -544,8 +620,19 @@ private:
     SampleType level;
     SampleType slope;
     
-    ScopedPointerContainer<ConvolveHelperType> currentConvolver;
-    ScopedPointerContainer<ConvolveHelperType> previousConvolver;
+    struct ConvolverPair
+    {
+        ConvolverPair (const int maxFFTSize) throw()
+        :   currentConvolver (new ConvolveHelperType (maxFFTSize)),
+            previousConvolver (new ConvolveHelperType (maxFFTSize))
+        {
+        }
+        
+        ScopedPointerContainer<ConvolveHelperType> currentConvolver;
+        ScopedPointerContainer<ConvolveHelperType> previousConvolver;
+    };
+    
+    ObjectArray<ConvolverPair*> convolveHelpers;
 };
 
 
@@ -594,6 +681,7 @@ public:
     static PLONK_INLINE_LOW UnitType ar (UnitType const& input,
                                          FFTBuffersVariableType const& fftBuffers,
                                          const bool keepPreviousTail = false,
+                                         const int numChannels = 0,
                                          const int maxFFTSize = 0,
                                          const int fadeSamples = 512,
                                          IntVariable const& sync = IntVariable()) throw()
@@ -605,12 +693,12 @@ public:
         inputs.put (IOKey::FFTBuffers, fftBuffers);
         inputs.put (IOKey::Sync, sync);
         
-        Data data = { { -1.0, -1.0 }, maxFFTSize, fadeSamples, keepPreviousTail };
+        Data data = { { -1.0, -1.0 }, numChannels, maxFFTSize, fadeSamples, keepPreviousTail };
         
-        return UnitType::template createFromInputs<ConvolveInternal> (inputs,
-                                                                      data,
-                                                                      BlockSize::noPreference(),
-                                                                      SampleRate::noPreference());
+        return UnitType::template proxiesFromInputs<ConvolveInternal> (inputs,
+                                                                       data,
+                                                                       BlockSize::noPreference(),
+                                                                       SampleRate::noPreference());
     }
 };
 
