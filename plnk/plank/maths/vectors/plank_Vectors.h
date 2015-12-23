@@ -255,6 +255,15 @@
         PlankUL i; for (i = 0; i < N; PLANK_INC(i)) { result[i] = a; a = a + b; }\
     }
 
+#define PLANK_VECTORRAMPMUL_NAME(TYPECODE) PLANK_VECTOR_NAMEINTERNAL(RampMul,TYPECODE,_N11)
+
+#define PLANK_VECTORRAMPMUL_DEFINE(TYPECODE) \
+    /** Multiplies a vector with a ramp.
+     The vector will start at value @e a and increment by @e b for each item in the vector. */\
+    static PLANK_INLINE_MID void PLANK_VECTORRAMPMUL_NAME(TYPECODE) (Plank##TYPECODE *result, Plank##TYPECODE a, Plank##TYPECODE b, PlankUL N) {\
+        PlankUL i; for (i = 0; i < N; PLANK_INC(i)) { result[i] *= a; a = a + b; }\
+    }
+
 #define PLANK_VECTORLINE_NAME(TYPECODE) PLANK_VECTOR_NAMEINTERNAL(Line,TYPECODE,_N11)
 
 #define PLANK_VECTORLINE_DEFINE(TYPECODE) \
@@ -351,6 +360,7 @@
     PLANK_VECTORFILL_DEFINE(TYPECODE)\
     PLANK_VECTORCLEAR_DEFINE(TYPECODE)\
     PLANK_VECTORRAMP_DEFINE(TYPECODE)\
+    PLANK_VECTORRAMPMUL_DEFINE(TYPECODE)\
     PLANK_VECTORLINE_DEFINE(TYPECODE)\
     \
     PLANK_VECTORUNARYOP_DEFINE(Move,TYPECODE)\

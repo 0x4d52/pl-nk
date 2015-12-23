@@ -325,6 +325,10 @@ public:
     PLONK_BINARYOPFUNCTION_DEFINE(trunc)
     PLONK_BINARYOPFUNCTION_DEFINE(clip2)
     PLONK_BINARYOPFUNCTION_DEFINE(decayFeedback)
+    
+    // these are just for template resolution rather than calling
+    static OperandType ramp    (OperandType const& /*a*/, OperandType const& /*b*/) throw() { return 0; }
+    static OperandType rampmul (OperandType const& /*a*/, OperandType const& /*b*/) throw() { return 0; }
 };
 
 template<class OperandType>

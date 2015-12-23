@@ -127,6 +127,7 @@ public:
         OverlapMake,
         OverlapMix,
         LoopCount,
+        Sync,
         
         Units,          ///< An array of units.
         Bus,            ///< A bus.

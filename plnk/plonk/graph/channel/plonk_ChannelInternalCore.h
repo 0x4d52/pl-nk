@@ -154,7 +154,7 @@ private:
 
 PLONK_INLINE_HIGH void ChannelInternalCore::setNextTimeStamp (TimeStamp const& time) throw()
 {
-    plonk_assert ((nextTimeStamp.isInfinite() && time.isInfinite()) || (time > nextTimeStamp)); // gone backwards or wraparound
+//    plonk_assert ((nextTimeStamp.isInfinite() && time.isInfinite()) || (time > nextTimeStamp)); // gone backwards or wraparound
     nextTimeStamp = time;
 }
 

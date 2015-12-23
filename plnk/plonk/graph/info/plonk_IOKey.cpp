@@ -85,6 +85,7 @@ IOKey::Name IOKey::fromInt (const int value) throw()
         IOKey::OverlapMake,
         IOKey::OverlapMix,
         IOKey::LoopCount,
+        IOKey::Sync,
         IOKey::Units,
         IOKey::Bus,
         IOKey::Busses,
@@ -178,6 +179,7 @@ Text IOKey::getName (const int keyIndex) throw()
         "Overlap Make",
         "Overlap Mix",
         "Loop Count",
+        "Sync",
         
         "Units",
         "Bus",
@@ -260,6 +262,7 @@ IOKey::IOType IOKey::getType (const int keyIndex) throw()
         IOKey::TypeVariable,        //"Overlap Make"
         IOKey::TypeVariable,        //"Overlap Mix"
         IOKey::TypeVariable,        //"Loop Count"
+        IOKey::TypeVariable,        //"Sync"
 
         IOKey::TypeUnits,           //"Units",
         IOKey::TypeBus,             //"Bus",
@@ -343,6 +346,7 @@ Text IOKey::getTypeName (const int keyIndex) throw()
         "DoubleVariable",   //"Overlap Make"
         "DoubleVariable",   //"Overlap Mix"
         "IntVariable",      //"Loop Count"
+        "IntVariable",      //"Sync"
         
         "Units",            //"Units",
         "Bus",              //"Bus",

@@ -198,7 +198,13 @@ public:
     PLONK_INLINE_LOW bool shouldBeDeletedNow (TimeStamp const& time) const throw()    { return this->getInternal()->shouldBeDeletedNow (time); }
     
     PLONK_INLINE_LOW void resetIfExpired() throw()                                    { this->getInternal()->setExpiryTimeStamp (TimeStamp::getMaximum()); }
-    
+    PLONK_INLINE_LOW void resetTimeStamps() throw()
+    {
+        this->getInternal()->setNextTimeStamp (TimeStamp::getZero());
+        this->getInternal()->setLastTimeStamp (-1);
+        this->getInternal()->setExpiryTimeStamp (TimeStamp::getMaximum());
+    }
+
 //    /** Returns @c true if this unit needs to process for the given timestamp. */
 //    PLONK_INLINE_LOW bool needsToProcess (ProcessInfo const& info, const int channel) const throw()
 //    {

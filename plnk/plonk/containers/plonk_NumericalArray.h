@@ -638,6 +638,55 @@ class NumericalArrayBinaryOp : public NumericalArrayBinaryOpBase<NumericalType,o
 PLONK_NUMERICALARRAYBINARYOPS_DEFINE(F);
 PLONK_NUMERICALARRAYBINARYOPS_DEFINE(D);
 
+template<>
+class  NumericalArrayBinaryOp    <float, BinaryOpFunctionsHelper<float>::BinaryOpFunctionsType::ramp>
+:
+public NumericalArrayBinaryOpBase<float, BinaryOpFunctionsHelper<float>::BinaryOpFunctionsType::ramp>
+{
+public:
+    static PLONK_INLINE_LOW void calc11 (float* dst, const float left, const float right, const UnsignedLong numItems) throw()
+    {
+        pl_VectorRampF_N11 (dst, left, right, numItems);
+    }
+};
+
+template<>
+class  NumericalArrayBinaryOp    <float, BinaryOpFunctionsHelper<float>::BinaryOpFunctionsType::rampmul>
+:
+public NumericalArrayBinaryOpBase<float, BinaryOpFunctionsHelper<float>::BinaryOpFunctionsType::rampmul>
+{
+public:
+    static PLONK_INLINE_LOW void calc11 (float* dst, const float left, const float right, const UnsignedLong numItems) throw()
+    {
+        pl_VectorRampMulF_N11 (dst, left, right, numItems);
+    }
+};
+
+template<>
+class  NumericalArrayBinaryOp    <double, BinaryOpFunctionsHelper<double>::BinaryOpFunctionsType::ramp>
+:
+public NumericalArrayBinaryOpBase<double, BinaryOpFunctionsHelper<double>::BinaryOpFunctionsType::ramp>
+{
+public:
+    static PLONK_INLINE_LOW void calc11 (double* dst, const double left, const double right, const UnsignedLong numItems) throw()
+    {
+        pl_VectorRampD_N11 (dst, left, right, numItems);
+    }
+};
+
+template<>
+class  NumericalArrayBinaryOp    <double, BinaryOpFunctionsHelper<double>::BinaryOpFunctionsType::rampmul>
+:
+public NumericalArrayBinaryOpBase<double, BinaryOpFunctionsHelper<double>::BinaryOpFunctionsType::rampmul>
+{
+public:
+    static PLONK_INLINE_LOW void calc11 (double* dst, const double left, const double right, const UnsignedLong numItems) throw()
+    {
+        pl_VectorRampMulD_N11 (dst, left, right, numItems);
+    }
+};
+
+
 
 template<class NumericalType>
 class NumericalArrayMulAddBase
@@ -659,6 +708,12 @@ public:
     {
         for (UnsignedLong i = 0; i < numItems; ++i)
             dst[i] = input[i] * mul + add[i];
+    }
+    
+    static PLONK_INLINE_LOW void calcN11 (NumericalType* dst, const NumericalType* input, const NumericalType mul, const NumericalType add, const UnsignedLong numItems) throw()
+    {
+        for (UnsignedLong i = 0; i < numItems; ++i)
+            dst[i] = input[i] * mul + add;
     }
 };
 
@@ -684,6 +739,11 @@ public:
     static PLONK_INLINE_LOW void calcN1N (float* dst, const float* input, const float mul, const float* add, const UnsignedLong numItems) throw()
     {
         pl_VectorMulAddF_NN1N (dst, input, mul, add, numItems);
+    }
+    
+    static PLONK_INLINE_LOW void calcN11 (float* dst, const float* input, const float mul, const float add, const UnsignedLong numItems) throw()
+    {
+        pl_VectorMulAddF_NN11 (dst, input, mul, add, numItems);
     }
 };
 
@@ -756,6 +816,8 @@ class NumericalArrayUnaryOp : public NumericalArrayUnaryOpBase<NumericalType,op>
 
 PLONK_NUMERICALARRAYUNARYOPS_DEFINE(F);
 PLONK_NUMERICALARRAYUNARYOPS_DEFINE(D);
+
+
 
 
 //------------------------------------------------------------------------------

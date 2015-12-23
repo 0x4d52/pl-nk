@@ -47,7 +47,7 @@
 //------------------------------------------------------------------------------
 
 template<class SampleType>
-static PLONK_INLINE_MID void complexMultiplyAccumulate (SampleType* const output,
+static PLONK_INLINE_HIGH void complexMultiplyAccumulate (SampleType* const output,
                                                         const SampleType* const left, const SampleType* const right,
                                                         const UnsignedLong halfLength) throw()
 {
@@ -55,7 +55,7 @@ static PLONK_INLINE_MID void complexMultiplyAccumulate (SampleType* const output
 }
 
 template<class SampleType>
-static PLONK_INLINE_MID void complexMultiply (SampleType* const output,
+static PLONK_INLINE_HIGH void complexMultiply (SampleType* const output,
                                               const SampleType* const left, const SampleType* const right,
                                               const UnsignedLong halfLength) throw()
 {
@@ -63,48 +63,64 @@ static PLONK_INLINE_MID void complexMultiply (SampleType* const output,
 }
 
 template<class SampleType>
-static PLONK_INLINE_MID void moveSamples (SampleType* const dst, const SampleType* const src, const UnsignedLong numItems) throw()
+static PLONK_INLINE_HIGH void moveSamples (SampleType* const dst, const SampleType* const src, const UnsignedLong numItems) throw()
 {
+//    NumericalArrayUnaryOp<SampleType, UnaryOpFunctions<SampleType>::move>::calc (dst, src, numItems);
     memcpy (dst, src, numItems * sizeof (SampleType));
 }
 
 template<class SampleType>
-static PLONK_INLINE_MID void moveZeroSamples (SampleType* const dst, const SampleType* const /*src*/, const UnsignedLong numItems) throw()
+static PLONK_INLINE_HIGH void moveZeroSamples (SampleType* const dst, const SampleType* const /*src*/, const UnsignedLong numItems) throw()
 {
     NumericalArray<SampleType>::zeroData (dst, numItems);
 }
 
 template<class SampleType>
-static PLONK_INLINE_MID void accumulateSamples (SampleType* const dst, const SampleType* const src, const UnsignedLong numItems) throw()
+static PLONK_INLINE_HIGH void accumulateSamples (SampleType* const dst, const SampleType* const src, const UnsignedLong numItems) throw()
 {
-    NumericalArrayBinaryOp<SampleType, plonk::addop>::calcNN (dst, dst, src, numItems);
-}
-
-static PLONK_INLINE_MID void accumulateSamples (float* const dst, const float* const src, const UnsignedLong numItems) throw()
-{
-    pl_VectorAddF_NNN (dst, dst, src, numItems);
-}
-
-static PLONK_INLINE_MID void accumulateSamples (double* const dst, const double* const src, const UnsignedLong numItems) throw()
-{
-    pl_VectorAddD_NNN (dst, dst, src, numItems);
+    NumericalArrayBinaryOp<SampleType, BinaryOpFunctions<SampleType>::addop>::calcNN (dst, dst, src, numItems);
 }
 
 template<class SampleType>
-static PLONK_INLINE_MID void zeroSamples (SampleType* const dst, const UnsignedLong numItems) throw()
+static PLONK_INLINE_HIGH void zeroSamples (SampleType* const dst, const UnsignedLong numItems) throw()
 {
     NumericalArray<SampleType>::zeroData (dst, numItems);
 }
 
 template<class SampleType>
-static inline void fadeSamples (SampleType* const dst, SampleType& level, const SampleType slope, const UnsignedLong numItems) throw()
+static PLONK_INLINE_HIGH void fadeSamples (SampleType* const dst, SampleType& level, const SampleType slope, const UnsignedLong numItems) throw()
 {
-    for (UnsignedLong i = 0; i < numItems; ++i)
-    {
-        dst[i] *= level;
-        level  -= slope;
-    }
+    NumericalArrayBinaryOp<SampleType, BinaryOpFunctions<SampleType>::rampmul>::calc11 (dst, level, -slope, numItems);
+    level -= slope * numItems;
 }
+
+
+//template<class SampleType>
+//static PLONK_INLINE_HIGH void fadeSamples (SampleType* const dst, SampleType& level, const SampleType slope, const UnsignedLong numItems) throw()
+//{
+//    for (UnsignedLong i = 0; i < numItems; ++i)
+//    {
+//        dst[i] *= level;
+//        level  -= slope;
+//    }
+//}
+//
+//template<class SampleType>
+//static PLONK_INLINE_HIGH void rampSamples (SampleType* const dst, SampleType& level, const SampleType slope, const UnsignedLong numItems) throw()
+//{
+//    for (UnsignedLong i = 0; i < numItems; ++i)
+//    {
+//        dst[i] = level;
+//        level  -= slope;
+//    }
+//}
+//
+//static PLONK_INLINE_HIGH void rampSamples (float* const dst, float& level, const float slope, const UnsignedLong numItems) throw()
+//{
+//    pl_VectorRampF_N11 (dst, level, -slope, numItems);
+//    level -= slope * numItems;
+//}
+
 
 //------------------------------------------------------------------------------
 
@@ -143,9 +159,9 @@ public:
     void reset (FFTBuffersType const& newIRBuffers, const int channel) throw()
     {
         irBuffers = newIRBuffers;
-        FFTEngineType& fftEngine (irBuffers.getFFTEngine());
+        const FFTEngineType& fftEngine (irBuffers.getFFTEngine());
 
-        countDown           = 0; // irBuffers.getCountDownStart (channel);
+        countDown           = 0;//irBuffers.getCountDownStart (channel);
         position0           = fftEngine.halfLength() - countDown;
         position1           = position0 + countDown;
         fftAltSelect        = 0;
@@ -167,7 +183,7 @@ public:
         zmulFunction = complexMultiply;
     }
     
-    void process (SampleType* outputSamples, const SampleType* inputSamples, const UnsignedLong outputBufferLength, const int channel, OutputFunction outputFunction, InputFunction inputFunction) throw()
+    void process (SampleType* outputSamples, const SampleType* inputSamples, const int outputBufferLength, const int channel, OutputFunction outputFunction, InputFunction inputFunction) throw()
     {
         FFTEngineType& fftEngine (irBuffers.getFFTEngine());
         const int numDivisions = irBuffers.getNumDivisions();
@@ -179,13 +195,13 @@ public:
             return;
         }
         
-        const UnsignedLong fftSize           = (UnsignedLong) fftEngine.length();
-        const UnsignedLong fftSizeHalved     = (UnsignedLong) fftEngine.halfLength();
+        const int fftSize                    = (int) fftEngine.length();
+        const int fftSizeHalved              = (int) fftEngine.halfLength();
         const int divisionRatio1             = (fftSizeHalved / outputBufferLength) - 1;
         SampleType* const fftAltBuffers[]    = { fftAltBuffer0, fftAltBuffer1 };
         SampleType* const processBufferBase  = irBuffers.getProcessBuffer (channel, 0);
         const SampleType* const irBufferBase = irBuffers.getDivision (channel, 0);
-        UnsignedLong samplesRemaining        = outputBufferLength;
+        int samplesRemaining                 = outputBufferLength;
         
         while (samplesRemaining > 0)
         {
@@ -337,17 +353,14 @@ struct ConvolveChannelData
 //------------------------------------------------------------------------------
 
 /** Convolve channel. */
-template<class SampleType, typename FFTBuffersAccess>
-class ConvolveChannelInternal
-:   public ChannelInternal<SampleType, ConvolveChannelData>
+template<class SampleType>
+class ConvolveChannelInternal : public ChannelInternal<SampleType, ConvolveChannelData>
 {
 public:
-    typedef FFTBuffersAccess                                        FFTBuffersAccessType;
-
     typedef ConvolveChannelData                                     Data;
     typedef ChannelBase<SampleType>                                 ChannelType;
     typedef ObjectArray<ChannelType>                                ChannelArrayType;
-    typedef ConvolveChannelInternal<SampleType,FFTBuffersAccess>    ConvolveInternal;
+    typedef ConvolveChannelInternal<SampleType>                     ConvolveInternal;
     typedef ChannelInternal<SampleType,Data>                        Internal;
     typedef ChannelInternalBase<SampleType>                         InternalBase;
     typedef UnitBase<SampleType>                                    UnitType;
@@ -364,6 +377,7 @@ public:
                              SampleRate const& sampleRate) throw()
     :   Internal (inputs, data, blockSize, sampleRate),
         currentIRBuffers (this->getInputAsFFTBuffers (IOKey::FFTBuffers).getValue()),
+        thisSync (0),
         fadePreviousInputSamplesRemaining (0),
         fadePreviousOutputSamplesRemaining (0),
         holdPreviousOutputSamplesRemaining (0)
@@ -400,31 +414,32 @@ public:
         
         this->initValue (SampleType (0));
         
-        const FFTBuffersAccessType irBuffers (this->getInputAsFFTBuffers (IOKey::FFTBuffers).getValue());
+        const FFTBuffersType& irBuffers (this->getInputAsFFTBuffers (IOKey::FFTBuffers).getValue());
 
         const Data& data = this->getState();
         const int fftSize = data.maxFFTSize <= 0 ? (int) irBuffers.getFFTEngine().length() : data.maxFFTSize;
 
         currentConvolver = new ConvolveHelperType (fftSize);
         currentConvolver->reset (irBuffers, channel);
-        
         previousConvolver = new ConvolveHelperType (fftSize);
-        previousConvolver->reset (irBuffers, channel);
         
         if (data.fadeSamples > 0)
             fadeBuffer = Buffer::withSize (data.fadeSamples);
+            
+        IntVariable& sync = ChannelInternalCore::getInputAs<IntVariable> (IOKey::Sync);
+        thisSync = sync.getValue();
     }
     
     void process (ProcessInfo& info, const int channel) throw()
     {
         const Data& data = this->getState();
-        FFTBuffersAccessType newIRBuffers (this->getInputAsFFTBuffers (IOKey::FFTBuffers).getValue());
+        FFTBuffersType newIRBuffers (this->getInputAsFFTBuffers (IOKey::FFTBuffers).getValue());
         
         UnitType& inputUnit (this->getInputAsUnit (IOKey::Generic));
         const Buffer& inputBuffer (inputUnit.process (info, channel));
         const SampleType* inputSamples        = inputBuffer.getArray();
         SampleType* outputSamples             = this->getOutputSamples();
-        const UnsignedLong outputBufferLength = (UnsignedLong) this->getOutputBuffer().length();
+        const int outputBufferLength          = this->getOutputBuffer().length();
 
         plonk_assert (outputBufferLength == inputBuffer.length());
         
@@ -520,8 +535,8 @@ public:
 
 private:
     Buffer fadeBuffer;
-    
-    FFTBuffersAccessType currentIRBuffers;
+    FFTBuffersType currentIRBuffers;
+    int thisSync;
     
     int fadePreviousInputSamplesRemaining;
     int fadePreviousOutputSamplesRemaining;
@@ -550,18 +565,16 @@ private:
 
  
  @ingroup FFTUnits */
-template<class SampleType, typename FFTBuffersAccess = FFTBuffersBase<SampleType>&>
+template<class SampleType>
 class ConvolveUnit
 {
 public:
-    typedef ConvolveChannelInternal<SampleType,FFTBuffersAccess>    ConvolveInternal;
+    typedef ConvolveChannelInternal<SampleType>                     ConvolveInternal;
     typedef typename ConvolveInternal::Data                         Data;
     typedef UnitBase<SampleType>                                    UnitType;
     typedef InputDictionary                                         Inputs;
     typedef FFTBuffersBase<SampleType>                              FFTBuffersType;
     typedef Variable<FFTBuffersType&>                               FFTBuffersVariableType;
-
-    typedef ConvolveUnit<SampleType,FFTBuffersType>                 Dyn;
     
     static PLONK_INLINE_LOW UnitInfos getInfo() throw()
     {
@@ -582,13 +595,15 @@ public:
                                          FFTBuffersVariableType const& fftBuffers,
                                          const bool keepPreviousTail = false,
                                          const int maxFFTSize = 0,
-                                         const int fadeSamples = 512) throw()
+                                         const int fadeSamples = 512,
+                                         IntVariable const& sync = IntVariable()) throw()
     {
         plonk_assert ((fadeSamples % 4) == 0);
         
         Inputs inputs;
         inputs.put (IOKey::Generic, input);
         inputs.put (IOKey::FFTBuffers, fftBuffers);
+        inputs.put (IOKey::Sync, sync);
         
         Data data = { { -1.0, -1.0 }, maxFFTSize, fadeSamples, keepPreviousTail };
         

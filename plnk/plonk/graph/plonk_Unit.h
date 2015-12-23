@@ -1304,6 +1304,15 @@ public:
             channels[i].resetIfExpired();
     }
     
+    void resetTimeStamps() throw()
+    {
+        const int numChannels = this->getNumChannels();
+        ChannelType* channels = this->getArray();
+        
+        for (int i = 0; i < numChannels; ++i)
+            channels[i].resetTimeStamps();
+    }
+    
     /** Process a specific channel in this unit.
      The host should prepare a ProcessInfo which is passed to this function
      for each required block of data. This is generally used by ChannelInternal
@@ -1329,9 +1338,10 @@ public:
     
     void process (BufferArrayType& destBuffer) throw()
     {
+        resetTimeStamps();
         const int numDestChannels = destBuffer.length();
 
-        ProcessInfo info;
+        ObjectArray<ProcessInfo> infos (ObjectArray<ProcessInfo>::withSize (numDestChannels));
         
         IntArray countDown (IntArray::withSize (numDestChannels));
         IntArray countUp (IntArray::newClear (numDestChannels));
@@ -1341,13 +1351,15 @@ public:
         
         while (countDown.sum() > 0)
         {
+            int numSamplesThisTime = 0;
+            
             for (int i = 0; i < numDestChannels; ++i)
             {
-                const Buffer& channelBuffer (this->process (info, i));
+                const Buffer& channelBuffer (this->process (infos.atUnchecked (i), i));
                 const SampleType* const channelBufferSamples (channelBuffer.getArray());
                 SampleType* const destBufferSamples (destBuffer.atUnchecked (i).getArray());
                 
-                const int numSamplesThisTime = plonk::min (channelBuffer.length(), countDown.atUnchecked (i));
+                numSamplesThisTime = plonk::min (channelBuffer.length(), countDown.atUnchecked (i));
                 
                 if (numSamplesThisTime > 0)
                 {
@@ -1355,6 +1367,8 @@ public:
                     countDown.atUnchecked (i) -= numSamplesThisTime;
                     countUp.atUnchecked (i)   += numSamplesThisTime;
                 }
+                
+                infos.atUnchecked (i).offsetTimeStamp (this->getSampleRate (i).getSampleDurationInTicks() * numSamplesThisTime);
             }
         }
     }

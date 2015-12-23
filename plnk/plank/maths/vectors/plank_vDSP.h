@@ -117,6 +117,11 @@ static PLANK_INLINE_MID void pl_VectorRampF_N11 (float *result, float a, float b
     vDSP_vramp (&a, &b, result, 1, N); 
 }
 
+static PLANK_INLINE_MID void pl_VectorRampMulF_N11 (float *result, float a, float b, PlankUL N)
+{
+    vDSP_vrampmul (result, 1, &a, &b, result, 1, N);
+}
+
 static PLANK_INLINE_MID void pl_VectorLineF_N11 (float *result, float a, float b, PlankUL N)
 { 
     vDSP_vgen (&a, &b, result, 1, N); 
@@ -651,6 +656,11 @@ static PLANK_INLINE_MID void pl_VectorRampD_N11 (double *result, double a, doubl
     vDSP_vrampD (&a, &b, result, 1, N); 
 }
 
+static PLANK_INLINE_MID void pl_VectorRampMulD_N11 (double *result, double a, double b, PlankUL N)
+{
+    vDSP_vrampmulD (result, 1, &a, &b, result, 1, N);
+}
+
 static PLANK_INLINE_MID void pl_VectorLineD_N11 (double *result, double a, double b, PlankUL N) 
 { 
     vDSP_vgenD (&a, &b, result, 1, N); 
@@ -1124,6 +1134,7 @@ PLANK_VECTOR_OPS_COMMON(S)
 PLANK_VECTORFILL_DEFINE(I)
 PLANK_VECTORCLEAR_DEFINE(I)
 PLANK_VECTORRAMP_DEFINE(I)
+PLANK_VECTORRAMPMUL_DEFINE(I)
 PLANK_VECTORLINE_DEFINE(I)
 
 PLANK_VECTORUNARYOP_DEFINE(Move,I)
