@@ -48,16 +48,16 @@
 
 template<class SampleType>
 static PLONK_INLINE_HIGH void complexMultiplyAccumulate (SampleType* const output,
-                                                        const SampleType* const left, const SampleType* const right,
-                                                        const UnsignedLong halfLength) throw()
+                                                         const SampleType* const left, const SampleType* const right,
+                                                         const UnsignedLong halfLength) throw()
 {
     NumericalArrayComplex<SampleType>::zpmulaccum (output, left, right, halfLength);
 }
 
 template<class SampleType>
 static PLONK_INLINE_HIGH void complexMultiply (SampleType* const output,
-                                              const SampleType* const left, const SampleType* const right,
-                                              const UnsignedLong halfLength) throw()
+                                               const SampleType* const left, const SampleType* const right,
+                                               const UnsignedLong halfLength) throw()
 {
     NumericalArrayComplex<SampleType>::zpmul (output, left, right, halfLength);
 }
@@ -180,17 +180,18 @@ public:
             processBuffersBase += maxFFTSize;          // ensure we offset this by maxFFTSize though
         }
         
-        zmulFunction = complexMultiply;
+        zmulFunction = complexMultiply; // first op is direct complex multiply
     }
     
     void process (SampleType* outputSamples, const SampleType* inputSamples, const int outputBufferLength, const int channel, OutputFunction outputFunction, InputFunction inputFunction) throw()
     {
         FFTEngineType& fftEngine (irBuffers.getFFTEngine());
         const int numDivisions = irBuffers.getNumDivisions();
+        const int numChannels = irBuffers.getNumChannels();
         
-        if (numDivisions == 0)
+        // if we have no IR or teh channel requested is out of range then just zero the output
+        if (numDivisions == 0 || channel >= numChannels)
         {
-            plonk_assertfalse;
             zeroSamples (outputSamples, outputBufferLength);
             return;
         }
@@ -415,7 +416,6 @@ public:
             this->setSampleRate (input.getSampleRate (channel));
             this->setOverlap (input.getOverlap (channel));
             
-            
             const FFTBuffersType& irBuffers (this->getInputAsFFTBuffers (IOKey::FFTBuffers).getValue());
 
             const Data& data = this->getState();
@@ -440,11 +440,12 @@ public:
     
     void process (ProcessInfo& info, const int /*channel*/) throw()
     {
-        const int numChannels = this->getNumChannels();
         const Data& data = this->getState();
         FFTBuffersType newIRBuffers (this->getInputAsFFTBuffers (IOKey::FFTBuffers).getValue());
         UnitType& inputUnit (this->getInputAsUnit (IOKey::Generic));
         const int outputBufferLength = this->getOutputBuffer (0).length();
+        
+        const int numChannels = this->getNumChannels();
         
         int numSamplesRemaining = outputBufferLength;
         int pos = 0;
@@ -575,7 +576,7 @@ public:
                 fadePreviousInputSamplesRemaining  = data.fadeSamples;
                 holdPreviousOutputSamplesRemaining = data.keepPreviousTail
                                                    ? currentIRBuffers.getNumDivisions() * currentIRBuffers.getFFTEngine().halfLength()
-                                                   : newIRBuffers.getFFTEngine().halfLength();
+                                                   : newIRBuffers.getFFTEngine().halfLength(); // minimum to avoid a gap due to latency
                 fadePreviousOutputSamplesRemaining = data.fadeSamples;
                 
                 if (fadePreviousInputSamplesRemaining > 0)
@@ -683,10 +684,11 @@ public:
                                          const bool keepPreviousTail = false,
                                          const int numChannels = 0,
                                          const int maxFFTSize = 0,
-                                         const int fadeSamples = 512,
+                                         const int fadeSamples = 64,
                                          IntVariable const& sync = IntVariable()) throw()
     {
         plonk_assert ((fadeSamples % 4) == 0);
+        plonk_assert ((maxFFTSize % 4) == 0);
         
         Inputs inputs;
         inputs.put (IOKey::Generic, input);
