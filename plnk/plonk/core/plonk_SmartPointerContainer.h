@@ -272,20 +272,20 @@ public:
         destroy (*this);
     }
     
-    PLONK_INLINE_LOW ScopedPointerContainer (ScopedPointerContainer& copy) throw()
+    PLONK_INLINE_MID ScopedPointerContainer (ScopedPointerContainer& copy) throw()
     :   internal (0)
 	{
         this->swapWith (copy);        
 	}
 
-    PLONK_INLINE_LOW ScopedPointerContainer& operator= (ScopedPointerType* const raw) throw()
+    PLONK_INLINE_MID ScopedPointerContainer& operator= (ScopedPointerType* const raw) throw()
 	{
 		ScopedPointerContainer tmp (raw);
         this->swapWith (tmp);                
 		return *this;		
 	}    
     
-	PLONK_INLINE_LOW ScopedPointerContainer& operator= (ScopedPointerContainer& other) throw()
+	PLONK_INLINE_MID ScopedPointerContainer& operator= (ScopedPointerContainer& other) throw()
 	{
 		if (this != &other)
         {
@@ -296,49 +296,49 @@ public:
 		return *this;		
 	}    
     
-    PLONK_INLINE_LOW static void destroy (ScopedPointerContainer& container) throw()
+    PLONK_INLINE_MID static void destroy (ScopedPointerContainer& container) throw()
     {
         AtomicPointer tmp (0);
         container.internal.swapWith (tmp);
         delete tmp.getPtrUnchecked(); // unchecked is fine here
     }
     
-    PLONK_INLINE_LOW void swapWith (ScopedPointerContainer& other) throw()
+    PLONK_INLINE_MID void swapWith (ScopedPointerContainer& other) throw()
     {
         // other might be contended
         internal.swapWith (other.internal);
     }
     
-    PLONK_INLINE_LOW ScopedPointerType* getInternal() throw() 
+    PLONK_INLINE_MID ScopedPointerType* getInternal() throw()
     {
         return internal.getPtr(); 
     }
     
-    PLONK_INLINE_LOW ScopedPointerType* operator->() throw() 
+    PLONK_INLINE_MID ScopedPointerType* operator->() throw()
     { 
         plonk_assert(internal.getPtrUnchecked() != 0);
         return internal.getPtr(); 
     }
     
-    PLONK_INLINE_LOW operator ScopedPointerType* () throw()
+    PLONK_INLINE_MID operator ScopedPointerType* () throw()
     {
         return internal.getPtr();
     }
     
-	PLONK_INLINE_LOW const ScopedPointerType* operator->() const throw() 
+	PLONK_INLINE_MID const ScopedPointerType* operator->() const throw()
     { 
         plonk_assert(internal.getPtrUnchecked() != 0);
         return internal.getPtr(); 
     }
     
     template<class OtherType>
-    PLONK_INLINE_LOW bool operator== (OtherType const& other) const throw()
+    PLONK_INLINE_MID bool operator== (OtherType const& other) const throw()
 	{
 		return internal.getPtrUnchecked() == other;
 	}
 	
     template<class OtherType>
-	PLONK_INLINE_LOW bool operator!= (OtherType const& other) const throw()
+	PLONK_INLINE_MID bool operator!= (OtherType const& other) const throw()
 	{
 		return internal.getPtrUnchecked() != other;
 	}

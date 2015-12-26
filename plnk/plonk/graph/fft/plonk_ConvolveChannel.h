@@ -94,34 +94,6 @@ static PLONK_INLINE_HIGH void fadeSamples (SampleType* const dst, SampleType& le
     level -= slope * numItems;
 }
 
-
-//template<class SampleType>
-//static PLONK_INLINE_HIGH void fadeSamples (SampleType* const dst, SampleType& level, const SampleType slope, const UnsignedLong numItems) throw()
-//{
-//    for (UnsignedLong i = 0; i < numItems; ++i)
-//    {
-//        dst[i] *= level;
-//        level  -= slope;
-//    }
-//}
-//
-//template<class SampleType>
-//static PLONK_INLINE_HIGH void rampSamples (SampleType* const dst, SampleType& level, const SampleType slope, const UnsignedLong numItems) throw()
-//{
-//    for (UnsignedLong i = 0; i < numItems; ++i)
-//    {
-//        dst[i] = level;
-//        level  -= slope;
-//    }
-//}
-//
-//static PLONK_INLINE_HIGH void rampSamples (float* const dst, float& level, const float slope, const UnsignedLong numItems) throw()
-//{
-//    pl_VectorRampF_N11 (dst, level, -slope, numItems);
-//    level -= slope * numItems;
-//}
-
-
 //------------------------------------------------------------------------------
 
 template<class SampleType>
@@ -179,8 +151,6 @@ public:
             zeroSamples (processBuffersBase, fftSize); // only zero what we need
             processBuffersBase += maxFFTSize;          // ensure we offset this by maxFFTSize though
         }
-        
-        zmulFunction = complexMultiply; // first op is direct complex multiply
     }
     
     void process (SampleType* outputSamples, const SampleType* inputSamples, const int outputBufferLength, const int channel, OutputFunction outputFunction, InputFunction inputFunction) throw()
@@ -260,12 +230,7 @@ public:
                     const SampleType* irSamples            = irBufferBase + (divisionsWritten + 1) * fftSize;
                     const SampleType* processBufferSamples = processBufferBase + nextDivision * fftSize;
                     
-                    zmulFunction (fftTempBuffer, processBufferSamples, irSamples, fftSizeHalved);
-                    processBufferSamples += fftSize;
-                    irSamples            += fftSize;
-                    zmulFunction = complexMultiplyAccumulate; // next operaton until reset is accumulate
-
-                    for (int i = 1; i < divisionsRemaining; i++)
+                    for (int i = 0; i < divisionsRemaining; i++)
                     {
                         complexMultiplyAccumulate (fftTempBuffer, processBufferSamples, irSamples, fftSizeHalved);
                         processBufferSamples += fftSize;
@@ -284,7 +249,7 @@ public:
                 SampleType* const processBufferSamples = processBufferBase + divisionsCurrent * fftSize;
                 
                 fftEngine.forward (processBufferSamples, fftAltBuffers[fftAltSelect]);
-                zmulFunction (fftTempBuffer, processBufferSamples, irSamples, fftSizeHalved);
+                complexMultiplyAccumulate (fftTempBuffer, processBufferSamples, irSamples, fftSizeHalved);
                 
                 fftEngine.inverse (fftTransformBuffer, fftTempBuffer);
                 
@@ -312,7 +277,7 @@ public:
                 divisionsWritten    = 0;
                 countDown           = hop;
                 
-                zmulFunction = complexMultiply; // first operations just multiply
+                zeroSamples (fftTempBuffer, fftSize);
             }
         }
     }
@@ -336,7 +301,6 @@ private:
     int countDown;
     int position0, position1;
     int fftAltSelect;
-    ZMulFunction zmulFunction;
     
     FFTBuffersType irBuffers;
 };
@@ -457,98 +421,101 @@ public:
         {
             int numSamplesThisTime = 0;
             
-            if (fadePreviousInputSamplesRemaining > 0)
+            if (fadePreviousInputSamplesRemaining | holdPreviousOutputSamplesRemaining | fadePreviousOutputSamplesRemaining)
             {
-                SampleType* const fadeBufferSamples = fadeBuffer.getArray();
-                
-                numSamplesThisTime = plonk::min (fadePreviousInputSamplesRemaining, numSamplesRemaining);
-                
-                for (int channel = 0; channel < numChannels; ++channel)
+                if (fadePreviousInputSamplesRemaining != 0)
                 {
-                    const Buffer& inputBuffer (inputUnit.process (info, channel));
-                    const SampleType* const inputSamples = inputBuffer.getArray() + pos;
-                    SampleType* const outputSamples = this->getOutputSamples (channel) + pos;
-                    plonk_assert (outputBufferLength == inputBuffer.length());
+                    SampleType* const fadeBufferSamples = fadeBuffer.getArray();
+                    
+                    numSamplesThisTime = plonk::min (fadePreviousInputSamplesRemaining, numSamplesRemaining);
+                    
+                    for (int channel = 0; channel < numChannels; ++channel)
+                    {
+                        const Buffer& inputBuffer (inputUnit.process (info, channel));
+                        const SampleType* const inputSamples = inputBuffer.getArray() + pos;
+                        SampleType* const outputSamples = this->getOutputSamples (channel) + pos;
+                        plonk_assert (outputBufferLength == inputBuffer.length());
 
-                    channelLevel = level;
-                    channelSlope = slope;
-                    
-                    // copy input samples for fade length into the fade buffer
-                    moveSamples (fadeBufferSamples, inputSamples, numSamplesThisTime);
-                    fadeSamples (fadeBufferSamples, channelLevel, channelSlope, numSamplesThisTime);
-                    
-                    ConvolverPair& convolvePair = *convolveHelpers.atUnchecked (channel);
-                    
-                    // process faded input through previous
-                    convolvePair.previousConvolver->process (outputSamples, fadeBufferSamples, numSamplesThisTime, channel, moveSamples, moveSamples);
+                        channelLevel = level;
+                        channelSlope = slope;
+                        
+                        // copy input samples for fade length into the fade buffer
+                        moveSamples (fadeBufferSamples, inputSamples, numSamplesThisTime);
+                        fadeSamples (fadeBufferSamples, channelLevel, channelSlope, numSamplesThisTime);
+                        
+                        ConvolverPair& convolvePair = *convolveHelpers.atUnchecked (channel);
+                        
+                        // process faded input through previous
+                        convolvePair.previousConvolver->process (outputSamples, fadeBufferSamples, numSamplesThisTime, channel, moveSamples, moveSamples);
 
-                    // accumulate current as normal
-                    convolvePair.currentConvolver->process (outputSamples, inputSamples, numSamplesThisTime, channel, accumulateSamples, moveSamples);
+                        // accumulate current as normal
+                        convolvePair.currentConvolver->process (outputSamples, inputSamples, numSamplesThisTime, channel, accumulateSamples, moveSamples);
+                    }
+                    
+                    level = channelLevel;
+                    slope = channelSlope;
+                    
+                    fadePreviousInputSamplesRemaining -= numSamplesThisTime;
                 }
-                
-                level = channelLevel;
-                slope = channelSlope;
-                
-                fadePreviousInputSamplesRemaining -= numSamplesThisTime;
-            }
-            else if (holdPreviousOutputSamplesRemaining > 0)
-            {
-                numSamplesThisTime = plonk::min (holdPreviousOutputSamplesRemaining, numSamplesRemaining);
-                
-                for (int channel = 0; channel < numChannels; ++channel)
+                else if (holdPreviousOutputSamplesRemaining != 0)
                 {
-                    const Buffer& inputBuffer (inputUnit.process (info, channel));
-                    const SampleType* const inputSamples = inputBuffer.getArray() + pos;
-                    SampleType* const outputSamples = this->getOutputSamples (channel) + pos;
-                    plonk_assert (outputBufferLength == inputBuffer.length());
-
-                    ConvolverPair& convolvePair = *convolveHelpers.atUnchecked (channel);
-
-                    // process silence through previous
-                    convolvePair.previousConvolver->process (outputSamples, 0, numSamplesThisTime, channel, moveSamples, moveZeroSamples);
+                    numSamplesThisTime = plonk::min (holdPreviousOutputSamplesRemaining, numSamplesRemaining);
                     
-                    // accumulate current as normal
-                    convolvePair.currentConvolver->process (outputSamples, inputSamples, numSamplesThisTime, channel, accumulateSamples, moveSamples);
+                    for (int channel = 0; channel < numChannels; ++channel)
+                    {
+                        const Buffer& inputBuffer (inputUnit.process (info, channel));
+                        const SampleType* const inputSamples = inputBuffer.getArray() + pos;
+                        SampleType* const outputSamples = this->getOutputSamples (channel) + pos;
+                        plonk_assert (outputBufferLength == inputBuffer.length());
+
+                        ConvolverPair& convolvePair = *convolveHelpers.atUnchecked (channel);
+
+                        // process silence through previous
+                        convolvePair.previousConvolver->process (outputSamples, 0, numSamplesThisTime, channel, moveSamples, moveZeroSamples);
+                        
+                        // accumulate current as normal
+                        convolvePair.currentConvolver->process (outputSamples, inputSamples, numSamplesThisTime, channel, accumulateSamples, moveSamples);
+                    }
+                    
+                    holdPreviousOutputSamplesRemaining -= numSamplesThisTime;
+                    
+                    if (holdPreviousOutputSamplesRemaining == 0)
+                    {
+                        level = SampleType (1);
+                        slope = level / fadePreviousOutputSamplesRemaining;
+                    }
                 }
-                
-                holdPreviousOutputSamplesRemaining -= numSamplesThisTime;
-                
-                if (holdPreviousOutputSamplesRemaining == 0)
+                else if (fadePreviousOutputSamplesRemaining != 0)
                 {
-                    level = SampleType (1);
-                    slope = level / fadePreviousOutputSamplesRemaining;
+                    numSamplesThisTime = plonk::min (fadePreviousOutputSamplesRemaining, numSamplesRemaining);
+                    
+                    for (int channel = 0; channel < numChannels; ++channel)
+                    {
+                        const Buffer& inputBuffer (inputUnit.process (info, channel));
+                        const SampleType* const inputSamples = inputBuffer.getArray() + pos;
+                        SampleType* const outputSamples = this->getOutputSamples (channel) + pos;
+                        plonk_assert (outputBufferLength == inputBuffer.length());
+                        
+                        ConvolverPair& convolvePair = *convolveHelpers.atUnchecked (channel);
+
+                        // process silence through previous
+                        convolvePair.previousConvolver->process (outputSamples, 0, numSamplesThisTime, channel, moveSamples, moveZeroSamples);
+                        
+                        channelLevel = level;
+                        channelSlope = slope;
+
+                        // fade previous out
+                        fadeSamples (outputSamples, channelLevel, channelSlope, numSamplesThisTime);
+                        
+                        // accumulate current as normal
+                        convolvePair.currentConvolver->process (outputSamples, inputSamples, numSamplesThisTime, channel, accumulateSamples, moveSamples);
+                    }
+                    
+                    level = channelLevel;
+                    slope = channelSlope;
+
+                    fadePreviousOutputSamplesRemaining -= numSamplesThisTime;
                 }
-            }
-            else if (fadePreviousOutputSamplesRemaining > 0)
-            {
-                numSamplesThisTime = plonk::min (fadePreviousOutputSamplesRemaining, numSamplesRemaining);
-                
-                for (int channel = 0; channel < numChannels; ++channel)
-                {
-                    const Buffer& inputBuffer (inputUnit.process (info, channel));
-                    const SampleType* const inputSamples = inputBuffer.getArray() + pos;
-                    SampleType* const outputSamples = this->getOutputSamples (channel) + pos;
-                    plonk_assert (outputBufferLength == inputBuffer.length());
-                    
-                    ConvolverPair& convolvePair = *convolveHelpers.atUnchecked (channel);
-
-                    // process silence through previous
-                    convolvePair.previousConvolver->process (outputSamples, 0, numSamplesThisTime, channel, moveSamples, moveZeroSamples);
-                    
-                    channelLevel = level;
-                    channelSlope = slope;
-
-                    // fade previous out
-                    fadeSamples (outputSamples, channelLevel, channelSlope, numSamplesThisTime);
-                    
-                    // accumulate current as normal
-                    convolvePair.currentConvolver->process (outputSamples, inputSamples, numSamplesThisTime, channel, accumulateSamples, moveSamples);
-                }
-                
-                level = channelLevel;
-                slope = channelSlope;
-
-                fadePreviousOutputSamplesRemaining -= numSamplesThisTime;
             }
             else if (currentIRBuffers == newIRBuffers)
             {
