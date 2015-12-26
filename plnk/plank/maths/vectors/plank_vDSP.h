@@ -625,7 +625,7 @@ static PLANK_INLINE_MID void pl_VectorZMulAddF_ZNNNNNNNN (float *resultReal, flo
 }
 
 
-#if defined (MAC_OS_X_VERSION_10_8) && MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_8
+#if (defined (MAC_OS_X_VERSION_10_8) && MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_8) || (0) // need IOS equiv
 static PLANK_INLINE_MID void pl_VectorLookupF_NnN (float *result, const float* table, PlankUL n, const float* index, PlankUL N)
 {
     float mul = 1.f;
@@ -656,10 +656,14 @@ static PLANK_INLINE_MID void pl_VectorRampD_N11 (double *result, double a, doubl
     vDSP_vrampD (&a, &b, result, 1, N); 
 }
 
+#if (defined (MAC_OS_X_VERSION_10_10) && MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_10) || (0) // need IOS equiv
 static PLANK_INLINE_MID void pl_VectorRampMulD_N11 (double *result, double a, double b, PlankUL N)
 {
     vDSP_vrampmulD (result, 1, &a, &b, result, 1, N);
 }
+#else
+PLANK_VECTORRAMPMUL_DEFINE(D)
+#endif
 
 static PLANK_INLINE_MID void pl_VectorLineD_N11 (double *result, double a, double b, PlankUL N) 
 { 
@@ -989,7 +993,7 @@ static PLANK_INLINE_MID void pl_VectorZMulD_ZNNNNNN (double *resultReal, double 
 }
 
 
-#if defined (MAC_OS_X_VERSION_10_10) && MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_10
+#if (defined (MAC_OS_X_VERSION_10_10) && MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_10) || (0) // need IOS equiv
 static PLANK_INLINE_MID void pl_VectorZMulAddD_ZNNNNNNNN (double *resultReal, double *resultImag,
                                                           const double* inputReal, const double* inputImag,
                                                           const double* mulReal, const double* mulImag,
@@ -1011,7 +1015,7 @@ static PLANK_INLINE_MID void pl_VectorZMulAddD_ZNNNNNNNN (double *resultReal, do
 PLANK_VECTORZMULADD_DEFINE(D) // vDSP_zvmaD not available < 10.10
 #endif
 
-#if defined (MAC_OS_X_VERSION_10_8) && MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_8
+#if (defined (MAC_OS_X_VERSION_10_8) && MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_8) || (0) // need IOS equiv
 static PLANK_INLINE_MID void pl_VectorLookupD_NnN (double *result, const double* table, PlankUL n, const double* index, PlankUL N)
 {
     double mul = 1.0;
