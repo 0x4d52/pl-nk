@@ -87,6 +87,8 @@ static PLONK_INLINE_HIGH void zeroSamples (SampleType* const dst, const Unsigned
     NumericalArray<SampleType>::zeroData (dst, numItems);
 }
 
+
+
 template<class SampleType>
 static PLONK_INLINE_HIGH void fadeSamples (SampleType* const dst, SampleType& level, const SampleType slope, const UnsignedLong numItems) throw()
 {
@@ -153,7 +155,8 @@ public:
         }
     }
     
-    void process (SampleType* outputSamples, const SampleType* inputSamples, const int outputBufferLength, const int channel, OutputFunction outputFunction, InputFunction inputFunction) throw()
+    template<class OutputFunctionType, class InputFunctionType>
+    void process (SampleType* outputSamples, const SampleType* inputSamples, const int outputBufferLength, const int channel) throw()
     {
         FFTEngineType& fftEngine (irBuffers.getFFTEngine());
         const int numDivisions = irBuffers.getNumDivisions();
@@ -193,9 +196,9 @@ public:
             
             if (hop > 0)
             {
-                inputFunction (fftAltBuffer0 + position0, inputSamples, hop);
-                inputFunction (fftAltBuffer1 + position1, inputSamples, hop);
-                outputFunction (outputSamples, fftOverlapBuffer + position0, hop);
+                InputFunctionType::calc (fftAltBuffer0 + position0, inputSamples, hop);
+                InputFunctionType::calc (fftAltBuffer1 + position1, inputSamples, hop);
+                OutputFunctionType::calc (outputSamples, fftOverlapBuffer + position0, hop);
                 
                 inputSamples  += hop;
                 outputSamples += hop;
@@ -446,10 +449,10 @@ public:
                         ConvolverPair& convolvePair = *convolveHelpers.atUnchecked (channel);
                         
                         // process faded input through previous
-                        convolvePair.previousConvolver->process (outputSamples, fadeBufferSamples, numSamplesThisTime, channel, moveSamples, moveSamples);
+                        convolvePair.previousConvolver->template process<MoveSamples, MoveSamples> (outputSamples, fadeBufferSamples, numSamplesThisTime, channel);
 
                         // accumulate current as normal
-                        convolvePair.currentConvolver->process (outputSamples, inputSamples, numSamplesThisTime, channel, accumulateSamples, moveSamples);
+                        convolvePair.currentConvolver->template process<AccumulateSamples, MoveSamples> (outputSamples, inputSamples, numSamplesThisTime, channel);
                     }
                     
                     level = channelLevel;
@@ -471,10 +474,10 @@ public:
                         ConvolverPair& convolvePair = *convolveHelpers.atUnchecked (channel);
 
                         // process silence through previous
-                        convolvePair.previousConvolver->process (outputSamples, 0, numSamplesThisTime, channel, moveSamples, moveZeroSamples);
+                        convolvePair.previousConvolver->template process<MoveSamples, MoveZeroSamples> (outputSamples, 0, numSamplesThisTime, channel);
                         
                         // accumulate current as normal
-                        convolvePair.currentConvolver->process (outputSamples, inputSamples, numSamplesThisTime, channel, accumulateSamples, moveSamples);
+                        convolvePair.currentConvolver->template process<AccumulateSamples, MoveSamples> (outputSamples, inputSamples, numSamplesThisTime, channel);
                     }
                     
                     holdPreviousOutputSamplesRemaining -= numSamplesThisTime;
@@ -499,7 +502,7 @@ public:
                         ConvolverPair& convolvePair = *convolveHelpers.atUnchecked (channel);
 
                         // process silence through previous
-                        convolvePair.previousConvolver->process (outputSamples, 0, numSamplesThisTime, channel, moveSamples, moveZeroSamples);
+                        convolvePair.previousConvolver->template process<MoveSamples, MoveZeroSamples> (outputSamples, 0, numSamplesThisTime, channel);
                         
                         channelLevel = level;
                         channelSlope = slope;
@@ -508,7 +511,7 @@ public:
                         fadeSamples (outputSamples, channelLevel, channelSlope, numSamplesThisTime);
                         
                         // accumulate current as normal
-                        convolvePair.currentConvolver->process (outputSamples, inputSamples, numSamplesThisTime, channel, accumulateSamples, moveSamples);
+                        convolvePair.currentConvolver->template process<AccumulateSamples, MoveSamples> (outputSamples, inputSamples, numSamplesThisTime, channel);
                     }
                     
                     level = channelLevel;
@@ -529,7 +532,7 @@ public:
                     plonk_assert (outputBufferLength == inputBuffer.length());
                     
                     ConvolverPair& convolvePair = *convolveHelpers.atUnchecked (channel);
-                    convolvePair.currentConvolver->process (outputSamples, inputSamples, numSamplesThisTime, channel, moveSamples, moveSamples);
+                    convolvePair.currentConvolver->template process<MoveSamples, MoveSamples> (outputSamples, inputSamples, numSamplesThisTime, channel);
                 }
             }
             else
@@ -575,6 +578,30 @@ private:
              ? data.numChannels
              : inputs[IOKey::FFTBuffers].asUnchecked<FFTBuffersVariableType>().getValue().getNumChannels();
     }
+    
+    struct AccumulateSamples
+    {
+        static PLONK_INLINE_HIGH void calc (SampleType* const dst, const SampleType* const src, const UnsignedLong numItems) throw()
+        {
+            accumulateSamples (dst, src, numItems);
+        }
+    };
+    
+    struct MoveSamples
+    {
+        static PLONK_INLINE_HIGH void calc (SampleType* const dst, const SampleType* const src, const UnsignedLong numItems) throw()
+        {
+            moveSamples (dst, src, numItems);
+        }
+    };
+    
+    struct MoveZeroSamples
+    {
+        static PLONK_INLINE_HIGH void calc (SampleType* const dst, const SampleType* const src, const UnsignedLong numItems) throw()
+        {
+            moveZeroSamples (dst, src, numItems);
+        }
+    };
 
     //--------------------------------------------------------------------------
     
