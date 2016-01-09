@@ -5,7 +5,7 @@
  
  https://github.com/0x4d52/pl-nk/
  
- Copyright University of the West of England, Bristol 2011-15
+ Copyright University of the West of England, Bristol 2011-16
  All rights reserved.
  
  Redistribution and use in source and binary forms, with or without
@@ -170,11 +170,12 @@ void JuceAudioHost::startHost() throw()
 		return;
 	}
     
+    audioDeviceManager.getAudioDeviceSetup (setup);
+    
     setNumInputs (setup.inputChannels.countNumberOfSetBits());
     setNumOutputs (setup.outputChannels.countNumberOfSetBits());
     
 	audioDeviceManager.addAudioCallback (this);	    
-    
 }
 
 void JuceAudioHost::audioDeviceIOCallback (const float** inputData, int numInputs, 
