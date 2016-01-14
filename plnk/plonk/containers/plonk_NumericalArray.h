@@ -1287,9 +1287,9 @@ public:
     }
     
     static PLONK_INLINE_MID void convert (NumericalType* const dst,
-                                const NumericalType* const src, 
-                                const UnsignedLong numItems,
-                                const bool applyScaling) throw()
+                                          const NumericalType* const src,
+                                          const UnsignedLong numItems,
+                                          const bool applyScaling) throw()
     {
         (void)applyScaling;
         copyData (dst, src, numItems);
@@ -1297,9 +1297,9 @@ public:
     
     template<class OtherType>
     static PLONK_INLINE_MID void convert (NumericalType* const dst,
-                                const OtherType* const src, 
-                                const UnsignedLong numItems,
-                                const bool applyScaling) throw()
+                                          const OtherType* const src,
+                                          const UnsignedLong numItems,
+                                          const bool applyScaling) throw()
     {
         NumericalArrayConverter<NumericalType,OtherType>::convert (dst, src, numItems, applyScaling);        
     }

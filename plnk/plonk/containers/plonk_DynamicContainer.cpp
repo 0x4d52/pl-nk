@@ -84,8 +84,8 @@ Dynamic Dynamic::getMaxBlockSize() const throw()
         case TypeCode::Int24Unit:   return reinterpret_cast<const Int24Unit&>  (this->getItem()).getMaxBlockSize();
         case TypeCode::LongUnit:    return reinterpret_cast<const LongUnit&>   (this->getItem()).getMaxBlockSize();
         default:
-            plonk_assertfalse;
-            return Math<BlockSize>::get0();//return BlockSize::getZero();//0;
+//            plonk_assertfalse;
+            return Math<BlockSize>::get0(); // return BlockSize::getZero();//0;
     }    
 }
 
@@ -104,8 +104,8 @@ Dynamic Dynamic::getMaxSampleRate() const throw()
         case TypeCode::Int24Unit:   return reinterpret_cast<const Int24Unit&>  (this->getItem()).getMaxSampleRate();
         case TypeCode::LongUnit:    return reinterpret_cast<const LongUnit&>   (this->getItem()).getMaxSampleRate();
         default:
-            plonk_assertfalse;
-            return Math<SampleRate>::get0();//return SampleRate::getZero();//0;
+//            plonk_assertfalse;
+            return Math<SampleRate>::get0(); // return SampleRate::getZero();//0;
     }    
 }
 
@@ -230,7 +230,7 @@ int Dynamic::getNumChannels() const throw()
         case TypeCode::LongBufferQueue:   return 1;
             
         default:
-            plonk_assertfalse;
+//            plonk_assertfalse; // this is fine now so that we can have custom items in the inputs
             return 0;
     }    
 }
@@ -270,7 +270,7 @@ Dynamic Dynamic::getChannel (const int index) throw()
         case TypeCode::FloatFFTBuffersVariable: return FloatFFTBuffers (reinterpret_cast<FloatFFTBuffersVariable&> (this->getItem()).getValue().getChannel (index));
             
         default:
-            plonk_assertfalse;
+//            plonk_assertfalse;
             return Dynamic();
     }    
 }
