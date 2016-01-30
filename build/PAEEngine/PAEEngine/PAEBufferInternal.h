@@ -3,7 +3,7 @@
 //  PAEEngine
 //
 //  Created by Martin Robinson on 03/02/2014.
-//  Copyright (c) 2014 UWE. All rights reserved.
+//  Copyright (c) 2016 UWE. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -17,8 +17,13 @@
 @property (nonatomic, readonly) double sampleRate;
 @property (nonatomic) Signal signal;
 @property (nonatomic, readonly) int frameStride;
+
 -(id)initFromPath:(NSString*)path;
 -(id)initWithSize:(int)numFrames channels:(int)numChannels sampleRate:(double)sampleRate;
+-(id)initWithSignal:(Signal)signal offset:(int)offset numFrames:(int)numFrames;
+-(id)initWithSignal:(Signal)signal channel:(int)channel;
+-(id)initWithSignal:(Signal)signal;
+
 -(float)sampleAtIndex:(int)index channel:(int)channel;
 -(float)sampleAtTime:(NSTimeInterval)time channel:(int)channel;
 -(PAERange)limitsBetween:(int)startIndex end:(int)endIndex channel:(int)channel;
@@ -30,6 +35,7 @@
 @property (strong, nonatomic) PAEBufferInternal* internal;
 @property (nonatomic, readonly) Signal signal;
 -(float*)samples:(int)channel;
+-(id)initWithSignal:(Signal)signal;
 @end
 
 

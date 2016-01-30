@@ -3,7 +3,7 @@
 //  PAEEngineInternal
 //
 //  Created by Martin Robinson on 03/02/2014.
-//  Copyright (c) 2014 UWE. All rights reserved.
+//  Copyright (c) 2016 UWE. All rights reserved.
 //
 
 #import "PAEEngine.h"

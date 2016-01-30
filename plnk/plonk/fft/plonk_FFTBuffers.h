@@ -91,7 +91,7 @@ public:
     {
         if (originalLength > 0)
             for (int i = 0; i < fftBuffers.length(); ++i)
-                processBuffers.add (BufferType::newClear (numDivisions * fftEngine.length()));
+                processBuffers.add (BufferType::newClear (numDivisions * (int) fftEngine.length()));
     }
     
     void initCountDownStart() throw()
@@ -359,11 +359,17 @@ public:
 		return null;
 	}	                            
     
+    /** To be deprecated, wrong name!! */
     static FFTBuffersBase getUnity (FFTEngineType const& fftEngine, const int numChannels) throw()
+    {
+        return getIdentity (fftEngine, numChannels);
+    }
+    
+    static FFTBuffersBase getIdentity (FFTEngineType const& fftEngine, const int numChannels) throw()
     {
         plonk_assert (numChannels > 0);
         
-        BufferType bufferChannel (BufferType::newClear (fftEngine.halfLength()));
+        BufferType bufferChannel (BufferType::newClear ((int) fftEngine.halfLength()));
         bufferChannel.atUnchecked (0) = TypeUtility<SampleType>::getTypePeak();
         BuffersType buffers;
         

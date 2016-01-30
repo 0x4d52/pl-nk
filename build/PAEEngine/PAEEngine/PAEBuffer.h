@@ -7,7 +7,7 @@
  
  http://code.google.com/p/pl-nk/
  
- Copyright University of the West of England, Bristol 2011-15
+ Copyright University of the West of England, Bristol 2011-16
  All rights reserved.
  
  Redistribution and use in source and binary forms, with or without
@@ -87,6 +87,27 @@
 
 /** Get a sample interpolated at a specific time on channel 0. */
 -(float)sampleAtTime:(NSTimeInterval)time;
+
+/** Get the RMS level of the whole buffer. */
+-(float)rms;
+
+/** Get the RMS level of one of the channels in the buffer. */
+-(float)rms:(int)channel;
+
+/** Get the RMS level of a region of one of the channels in the buffer. */
+-(float)rms:(int)start end:(int)end channel:(int)channel;
+
+/** Get the sum of the absolute levels of the whole buffer returnin the maximum value returned from each channel. */
+-(float)maxAbsSum;
+
+/** Get the sum of the absolute levels of the whole buffer. */
+-(float)absSum;
+
+/** Get the sum of the absolute levels of one of the channels in the buffer. */
+-(float)absSum:(int)channel;
+
+/** Get the sum of the absolute levels in a region of one of the channels in the buffer. */
+-(float)absSum:(int)start end:(int)end channel:(int)channel;
 
 /** Get a sample interpolated at a specific phase (time mapped to 0 to 1) on channel 0. */
 -(float)sampleAtPhase:(double)phase;

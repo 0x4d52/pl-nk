@@ -5,6 +5,7 @@
 #define PLANK_OGGVORBIS 1
 #define PLANK_OPUS 1
 #define PLANK_VEC_VDSP 1
+#define PLANK_FFT_VDSP 1
 #define PLONK_AUDIOHOST_IOS 1
 
 #ifdef __OBJC__

@@ -3,7 +3,7 @@
 //  PAEEngine
 //
 //  Created by Martin Robinson on 03/02/2014.
-//  Copyright (c) 2014 UWE. All rights reserved.
+//  Copyright (c) 2016 UWE. All rights reserved.
 //
 
 #import "PAEEngineInternal.h"
@@ -69,6 +69,16 @@
     if (self = [super init])
     {
         _signal = signal.getChannel(channel);
+    }
+    
+    return self;
+}
+
+-(id)initWithSignal:(Signal)signal
+{
+    if (self = [super init])
+    {
+        _signal = signal;
     }
     
     return self;
@@ -169,6 +179,16 @@
 {
     FilePath path (FilePath::system (FilePath::App).child (name.UTF8String).fullpath());
     return [[PAEBuffer alloc] initFromPath:[NSString stringWithUTF8String:path.fullpath()]];
+}
+
+-(id)initWithSignal:(Signal)signal
+{
+    if (self = [super init])
+    {
+        self.internal = [[PAEBufferInternal alloc] initWithSignal:signal];
+    }
+    
+    return self;
 }
 
 -(id)initFromPath:(NSString*)path
@@ -349,6 +369,77 @@
     
     return buffer;
 }
+
+-(float)rms
+{
+    float value = 0.0f;
+    
+    for (int i = 0; i < self.numChannels; ++i)
+        value += plonk::squared ([self rms:0 end:self.numFrames channel:i]);
+    
+    return value > 0.0f ? plonk::sqrt (value / self.numChannels) : 0.0f;
+}
+
+-(float)rms:(int)channel
+{
+    return [self rms:0 end:self.numFrames channel:channel];
+}
+
+-(float)rms:(int)start end:(int)end channel:(int)channel
+{
+    if (self.numFrames <= 0 || channel < 0 || channel >= self.numChannels || start >= end)
+        return 0.0f;
+    
+    float* samples = [self samples:channel] + start * self.frameStride;
+    const int numSamples = end - start;
+    float value = 0.0f;
+    
+    for (int i = 0; i < numSamples; ++i, samples += self.frameStride)
+        value += plonk::squared (*samples);
+    
+    return plonk::sqrt (value / numSamples);
+}
+
+-(float)maxAbsSum
+{
+    float value = 0.0f;
+    
+    for (int i = 0; i < self.numChannels; ++i)
+        value = plonk::max (value, [self absSum:0 end:self.numFrames channel:i]);
+    
+    return value;
+}
+
+-(float)absSum
+{
+    float value = 0.0f;
+    
+    for (int i = 0; i < self.numChannels; ++i)
+        value += [self absSum:0 end:self.numFrames channel:i];
+    
+    return value;
+}
+
+-(float)absSum:(int)channel
+{
+    return [self absSum:0 end:self.numFrames channel:channel];
+}
+
+-(float)absSum:(int)start end:(int)end channel:(int)channel
+{
+    if (self.numFrames <= 0 || channel < 0 || channel >= self.numChannels || start >= end)
+        return 0.0f;
+
+    float* samples = [self samples:channel] + start * self.frameStride;
+    const int numSamples = end - start;
+    float value = 0.0f;
+    
+    for (int i = 0; i < numSamples; ++i, samples += self.frameStride)
+        value += plonk::abs (*samples);
+    
+    return value;
+}
+
 
 @end
 

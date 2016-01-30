@@ -3,7 +3,7 @@
 //  PAEEngine
 //
 //  Created by Martin Robinson on 28/02/2015.
-//  Copyright (c) 2014 UWE. All rights reserved.
+//  Copyright (c) 2016 UWE. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

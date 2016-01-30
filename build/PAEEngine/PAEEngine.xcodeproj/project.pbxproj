@@ -695,6 +695,8 @@
 		A86F69BB19E1A62A002B228E /* PAEEngine-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = A86F69BA19E1A62A002B228E /* PAEEngine-Prefix.pch */; };
 		A86F69BC19E1A757002B228E /* PAEBufferCapture.h in Headers */ = {isa = PBXBuildFile; fileRef = A86F697919E1A5B0002B228E /* PAEBufferCapture.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A86F69BE19E1A8F8002B228E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A86F69BD19E1A8F7002B228E /* UIKit.framework */; };
+		A8850AFA1C5B914E00AB2EEA /* PAEConvolve.mm in Sources */ = {isa = PBXBuildFile; fileRef = A8850AF91C5B914E00AB2EEA /* PAEConvolve.mm */; };
+		A8850AFC1C5B915D00AB2EEA /* PAEConvolve.h in Headers */ = {isa = PBXBuildFile; fileRef = A8850AFB1C5B915D00AB2EEA /* PAEConvolve.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A89939D11AB6B0CD00B730E7 /* PAEProcessCallback.h in Headers */ = {isa = PBXBuildFile; fileRef = A89939CF1AB6B0CD00B730E7 /* PAEProcessCallback.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A89939D21AB6B0CD00B730E7 /* PAEProcessCallback.mm in Sources */ = {isa = PBXBuildFile; fileRef = A89939D01AB6B0CD00B730E7 /* PAEProcessCallback.mm */; };
 		A89947CD1A8DF6640097869C /* PAEBuild.h in Headers */ = {isa = PBXBuildFile; fileRef = A89947CC1A8DF6130097869C /* PAEBuild.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1382,6 +1384,8 @@
 		A86F69BA19E1A62A002B228E /* PAEEngine-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PAEEngine-Prefix.pch"; sourceTree = "<group>"; };
 		A86F69BD19E1A8F7002B228E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A881FBC41A8E439C0080BD7C /* PAEBuildNumber.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PAEBuildNumber.txt; sourceTree = "<group>"; };
+		A8850AF91C5B914E00AB2EEA /* PAEConvolve.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PAEConvolve.mm; sourceTree = "<group>"; };
+		A8850AFB1C5B915D00AB2EEA /* PAEConvolve.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAEConvolve.h; sourceTree = "<group>"; };
 		A89939CF1AB6B0CD00B730E7 /* PAEProcessCallback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAEProcessCallback.h; sourceTree = "<group>"; };
 		A89939D01AB6B0CD00B730E7 /* PAEProcessCallback.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PAEProcessCallback.mm; sourceTree = "<group>"; };
 		A89947CC1A8DF6130097869C /* PAEBuild.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PAEBuild.h; sourceTree = "<group>"; };
@@ -1484,6 +1488,7 @@
 				A86F695819E1A5A3002B228E /* PAEBufferView.mm */,
 				A86F695919E1A5A3002B228E /* PAEAudioInput.mm */,
 				A86F695A19E1A5A3002B228E /* PAEBufferCapture.mm */,
+				A8850AF91C5B914E00AB2EEA /* PAEConvolve.mm */,
 				A89939D01AB6B0CD00B730E7 /* PAEProcessCallback.mm */,
 			);
 			name = private;
@@ -1522,6 +1527,7 @@
 				A85CF0101A9C7BAD0081F791 /* PAEAudioFileRecorder.h */,
 				A86F699419E1A5B0002B228E /* PAEEngine.h */,
 				A89947CC1A8DF6130097869C /* PAEBuild.h */,
+				A8850AFB1C5B915D00AB2EEA /* PAEConvolve.h */,
 				A89939CF1AB6B0CD00B730E7 /* PAEProcessCallback.h */,
 			);
 			name = public;
@@ -2730,6 +2736,7 @@
 				A86F69AF19E1A5B0002B228E /* PAEAudioFilePlayer.h in Headers */,
 				A85CF0111A9C7BAD0081F791 /* PAEAudioFileRecorder.h in Headers */,
 				A89939D11AB6B0CD00B730E7 /* PAEProcessCallback.h in Headers */,
+				A8850AFC1C5B915D00AB2EEA /* PAEConvolve.h in Headers */,
 				A86F69B019E1A5B0002B228E /* PAEEngine.h in Headers */,
 				A89947CD1A8DF6640097869C /* PAEBuild.h in Headers */,
 				A86F695B19E1A5A3002B228E /* PAEEngineInternal.h in Headers */,
@@ -3344,6 +3351,7 @@
 				A86F664E19E1A56B002B228E /* lookup.c in Sources */,
 				A86F662319E1A56B002B228E /* sigm_Q15.c in Sources */,
 				A86F696119E1A5A3002B228E /* PAEChannelStrip.mm in Sources */,
+				A8850AFA1C5B914E00AB2EEA /* PAEConvolve.mm in Sources */,
 				A86F687419E1A58D002B228E /* plink_UnaryOpProcess.c in Sources */,
 				A86F687219E1A58D002B228E /* plink_MulAddProcess.c in Sources */,
 				A86F658619E1A56B002B228E /* mathops.c in Sources */,

@@ -7,7 +7,7 @@
  
  http://code.google.com/p/pl-nk/
  
- Copyright University of the West of England, Bristol 2011-15
+ Copyright University of the West of England, Bristol 2011-16
  All rights reserved.
  
  Redistribution and use in source and binary forms, with or without
@@ -40,7 +40,7 @@
 
 #import "PAEBuild.h"
 
-#define PAEENGINE_VERSION "0.6.0"
+#define PAEENGINE_VERSION "0.7.0"
 
 @class PAEAudioHost;
 @class PAESource;
@@ -49,6 +49,7 @@
 @class PAEConstant;
 @class PAEControl;
 @class PAEChannelStrip;
+@class PAEAmplitude;
 @class PAETestTone;
 @class PAEMixer;
 @class PAEBuffer;

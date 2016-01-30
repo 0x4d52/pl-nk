@@ -7,7 +7,7 @@
  
  http://code.google.com/p/pl-nk/
  
- Copyright University of the West of England, Bristol 2011-15
+ Copyright University of the West of England, Bristol 2011-16
  All rights reserved.
  
  Redistribution and use in source and binary forms, with or without
@@ -63,6 +63,7 @@
 // processes
 #import "PAEMixer.h"
 #import "PAEFilter.h"
+#import "PAEConvolve.h"
 #import "PAEDelay.h"
 #import "PAEFollower.h"
 #import "PAEGate.h"

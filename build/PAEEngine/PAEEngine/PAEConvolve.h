@@ -44,14 +44,26 @@
 
 /** @file */
 
-/** Convert mid-side to left-right or vice versa.
- This converts pairs of channels in the source to mid-side or left-right. If the
- input pairs are mid-side then the output will be left-right pairs. If the input pairs
- are left-right then the output will be mid-side pairs. This is becasue the conversion
- in either direction is the same. */
-@interface PAEMidSide : PAEProcess
+/** Convolve realtime input with an impulse response. */
+@interface PAEConvolve : PAEProcess
 
-/** Create a new mid-side converter.
- If numInputs is odd it will be rounded up to the net even number. */
-+(PAEMidSide*)midSideWithNumInputs:(int)numInputs;
+/** Create a convolve process. 
+ The default impulse repsonse is a single sample at time zero in each channel.
+ This has the effect of passing the signal through unchanged. */
++(PAEConvolve*)convolveWithNumInputs:(int)numInputs;
+
+/** The buffer to use as an impulse resonse.
+ This can be changed dynamically at run time. */
+@property (strong, nonatomic) PAEBuffer* ir;
+
+/** The FFT size to use (defaults to 512). */
+@property (nonatomic) int fftSize;
+
+/** For most impulse responses you will need to use a gain < 1.0 to avoid clipping. 
+ Defaults to 1 */
+@property (nonatomic) float gain;
+
+/** If YES automatically sets the gain based on the content of the IR to produce the same output level as the input. */
+@property (nonatomic, getter=isUsingAutoGain) BOOL usingAutoGain;
+
 @end

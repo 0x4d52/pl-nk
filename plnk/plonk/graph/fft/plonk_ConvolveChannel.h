@@ -136,7 +136,7 @@ public:
         const FFTEngineType& fftEngine (irBuffers.getFFTEngine());
 
         countDown           = 0;//irBuffers.getCountDownStart (channel);
-        position0           = fftEngine.halfLength() - countDown;
+        position0           = (int) fftEngine.halfLength() - countDown;
         position1           = position0 + countDown;
         fftAltSelect        = 0;
         divisionsCurrent    = 0;
@@ -545,8 +545,8 @@ public:
                 
                 fadePreviousInputSamplesRemaining  = data.fadeSamples;
                 holdPreviousOutputSamplesRemaining = data.keepPreviousTail
-                                                   ? currentIRBuffers.getNumDivisions() * currentIRBuffers.getFFTEngine().halfLength()
-                                                   : newIRBuffers.getFFTEngine().halfLength(); // minimum to avoid a gap due to latency
+                                                   ? (int) currentIRBuffers.getNumDivisions() * (int) currentIRBuffers.getFFTEngine().halfLength()
+                                                   : (int) newIRBuffers.getFFTEngine().halfLength(); // minimum to avoid a gap due to latency
                 fadePreviousOutputSamplesRemaining = data.fadeSamples;
                 
                 if (fadePreviousInputSamplesRemaining > 0)

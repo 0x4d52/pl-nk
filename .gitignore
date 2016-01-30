@@ -5,3 +5,8 @@ ignored
 build/macplnk/macplnk.xcodeproj/xcuserdata
 build/macplnk/macplnk.xcodeproj/project.xcworkspace
 build/PAEEngine/DerivedData
+plnk/plonk/graph/fft/store
+build/iosplnk/DerivedData
+build/iosplnk/iosplnk.xcodeproj
+plonk_ConvolveChannelOLD.h
+plonk_ConvolveChannel.h-OverlapAdd.zip
