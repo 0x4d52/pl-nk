@@ -403,7 +403,7 @@ typedef struct PlankFourCharCodeString
 
 //inline
 
-#if PLONK_WIN
+#if PLANK_WIN
     #define PLANK_INLINE_FORCE       __forceinline
 #else
     #define PLANK_INLINE_FORCE       inline __attribute__((always_inline))

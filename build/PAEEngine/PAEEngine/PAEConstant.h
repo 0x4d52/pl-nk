@@ -45,8 +45,7 @@
 /** @file */
 
 /** A constant value source.
- These are usually used to set a property of PAEProcess subclass to a constant 
- value for the entire runtime of the application. */
+ These are usually used to set a property of PAEProcess subclass to a constant value. */
 @interface PAEConstant : PAESource
 
 /** Create a constant value source with a particular value. */

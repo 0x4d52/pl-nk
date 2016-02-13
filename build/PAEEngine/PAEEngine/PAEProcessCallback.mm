@@ -159,9 +159,7 @@ public:
                callback:(PAEProcessCallbackFunction)callback userData:(void*)userData
 {
     if (self = [super initWithNumInputs:numInputs])
-    {
         self.outputUnit = PAEProcessCallbackPeer::ar (self.patchUnit, self, callback, userData, numOutputs);
-    }
     
     return self;
 }

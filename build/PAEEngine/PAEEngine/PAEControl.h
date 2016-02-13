@@ -57,7 +57,8 @@
  This will have had the map applied or be the same as value if the map is nil. */
 @property (nonatomic, readonly) float mappedValue;
 
-/** A mapping to use for the control. */
+/** A mapping to use for the control. 
+ Defaults to nil (which therfore uses no mapping). */
 @property (strong, nonatomic) PAEMap* map;
 
 /** The lag time applied to the control value changes.

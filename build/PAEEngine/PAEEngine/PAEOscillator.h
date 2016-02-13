@@ -68,7 +68,7 @@
 /** Create a sine oscillator at a particular freuqency with fixed amplitude 1. */
 +(PAESine*)sineWithFrequency:(float)frequency;
 
-/** Create a sine oscillator at a particular freuqency and amplitude. */
+/** Create a sine oscillator at a particular initial freuqency and amplitude. */
 +(PAESine*)sineWithFrequency:(float)frequency amplitude:(float)amplitude;
 
 /** Create a sine oscillator at a particular freuqency and amplitude with an offset. */

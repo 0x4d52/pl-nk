@@ -8,6 +8,16 @@
 
 #import "PAEEngineInternal.h"
 
+
+// removed .h content
+//@protocol PAEProcessDelegate <NSObject>
+//-(void)repatchDone:(PAEProcess*)process previousSource:(PAESource*)source;
+//@end
+//@property (weak, nonatomic) id <PAEProcessDelegate> processDelegate;
+
+
+
+
 //class PAESourceHolder
 //{
 //public:

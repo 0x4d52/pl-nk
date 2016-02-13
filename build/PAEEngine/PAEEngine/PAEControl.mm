@@ -82,7 +82,7 @@
 
 -(void)setLagTime:(float)lagTime
 {
-    _lagTime.setValue (plonk::max(0.f, lagTime));
+    _lagTime.setValue (plonk::max (0.f, lagTime));
 }
 
 @end

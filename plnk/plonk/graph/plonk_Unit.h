@@ -174,7 +174,7 @@ public:
     UnitBase (ChannelType const& channel) throw()
     :   UnitType (channel)
     {
-//        this->atUnchecked (0).initChannel (0);
+        this->atUnchecked (0).initChannel (0);
     }
     
     /** Constant Unit constructor.
@@ -624,8 +624,8 @@ public:
             
             plonk_assert ((internal->isProxyOwner() == false) || (internal->getNumChannels() == 1));
 
-            internal->initChannel (i);
-                        
+//            internal->initChannel (i);
+            
             result.put (i, ChannelType (internal));
         }
         

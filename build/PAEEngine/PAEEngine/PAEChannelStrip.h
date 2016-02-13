@@ -48,8 +48,7 @@
  This helps manage a typical channel strip in a mixer-type situation. The 
  channel strip would have a source patched to its input and the channel strip
  Inserts can be added to apply EQ (using filter
- processes), level, and pan (for example using PAEPan2).
- Aux sends are not yet implemented. */
+ processes), level, and pan (for example using PAEPan2). */
 @interface PAEChannelStrip : PAEProcess
 
 /** An array of inserts to apply between the input and the level control. 

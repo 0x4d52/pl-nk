@@ -73,13 +73,13 @@ typedef void (*PAEProcessCallbackFunction)(struct PAEProcessCallbackData*);
 typedef struct PAEProcessCallbackData
 {
     PAEProcessCallbackFunction callback;    ///< The callback function.
-    double sampleRate;                      ///< The sample rate of the process (readonly).
-    int numOutputs;                         ///< The number of output channels and the size of the outputData array (readonly).
-    float** outputData;                     ///< An array of pointers to the output data buffers.
-    int numInputs;                          ///< The number of input channels and the size of the inputData array (readonly).
+    double        sampleRate;               ///< The sample rate of the process (readonly).
+    int           numOutputs;               ///< The number of output channels and the size of the outputData array (readonly).
+    float**       outputData;               ///< An array of pointers to the output data buffers.
+    int           numInputs;                ///< The number of input channels and the size of the inputData array (readonly).
     const float** inputData;                ///< An array of pointers to the input data buffers (readonly).
-    int numFrames;                          ///< The number of samples in each buffer in the inputData and outputData buffers (readonly).
-    void* userData;                         ///< This will be the pointer you passed when creating the PAEProcessCallback.
+    int           numFrames;                ///< The number of samples in each buffer in the inputData and outputData buffers (readonly).
+    void*         userData;                 ///< This will be the pointer you passed when creating the PAEProcessCallback.
 } PAEProcessCallbackData;
 
 /** A process with a user defined callback for processing.

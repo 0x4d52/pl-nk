@@ -53,8 +53,7 @@ static const int numFadeSamples = 256;
 
 -(void)updateIR
 {
-    if (! _ir)
-        return;
+    if (! _ir) return;
 
     _fftBuffers = FFTBuffers (self.fftSize, _ir.signal);
 }
@@ -104,9 +103,7 @@ static const int numFadeSamples = 256;
 -(void)updateGain
 {
     if (_usingAutoGain && self.ir.numFrames > 0)
-    {
         self.gain = 1.0f / self.ir.maxAbsSum;
-    }
 }
 
 -(BOOL)isUsingAutoGain

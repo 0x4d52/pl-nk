@@ -64,7 +64,7 @@
 @property (strong, nonatomic, readonly) PAEProcess* rate;
 
 /** Whether the file will loop playback. 
- The default is YES. */
+ The defaults is YES. */
 @property (nonatomic) BOOL loop;
 
 /** The file's current playback position in seconds. */
