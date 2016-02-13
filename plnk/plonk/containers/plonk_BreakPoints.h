@@ -692,14 +692,27 @@ public:
     
     static BreakpointsBase linen (const double attackTime, 
                                   const double sustainTime,
-                                  const double releaseTime,
+                                  const double decayTime,
                                   Shape const& shape = Shape::Linear) throw()
     {
         const SampleType peak = SampleTypeUtility::getTypePeak();
         return BreakpointsBase (LevelsArray (SampleType (0), peak, peak, SampleType (0)),
-                                TimesArray (attackTime, sustainTime, releaseTime),
+                                TimesArray (attackTime, sustainTime, decayTime),
                                 ShapeArray (shape));
     }
+    
+//    static BreakpointsBase linenh (const double attackTime,
+//                                   const double hold1Time,
+//                                   const double sustainLevel,
+//                                   const double hold2Time,
+//                                   const double decayTime,
+//                                   Shape const& shape = Shape::Linear) throw()
+//    {
+//        const SampleType peak = SampleTypeUtility::getTypePeak();
+//        return BreakpointsBase (LevelsArray (SampleType (0), peak, sustainLevel, sustainLevel, SampleType (0)),
+//                                TimesArray (attackTime, hold1Time, hold2Time, decayTime),
+//                                ShapeArray (shape));
+//    }
     
     static BreakpointsBase ahdsr (const double attackTime,
                                   const double holdTime,

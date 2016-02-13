@@ -401,6 +401,34 @@ public:
     {
         return this->getInternal()->intVariables;
     }
+    
+    SampleType getMaxAbsSum() const
+    {
+        Internal* const internal = this->getInternal();
+        SampleType maxSum (Math<SampleType>::get0());
+
+        for (int i = 0; i < internal->getNumChannels(); ++i)
+            maxSum = plonk::max (maxSum, this->getAbsSum (i));
+        
+        return maxSum;
+    }
+    
+    SampleType getAbsSum (const int channel) const
+    {
+        Internal* const internal  = this->getInternal();
+        const SampleType* samples = internal->getSamples (channel);
+        const int frameStride     = internal->getFrameStride();
+        
+        SampleType sum (Math<SampleType>::get0());
+        
+        for (int i = 0; i < internal->getNumFrames(); ++i)
+        {
+            sum     += plonk::abs (*samples);
+            samples += frameStride;
+        }
+        
+        return sum;
+    }
 
 
     PLONK_OBJECTARROWOPERATOR(SignalBase);

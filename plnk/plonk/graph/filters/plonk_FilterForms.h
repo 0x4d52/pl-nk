@@ -113,11 +113,11 @@ public:
         NumCoeffs
     };
             
-    static PLONK_INLINE_LOW SampleType process (SampleType const& input,
-                                      SampleType const& a0,     
-                                      SampleType const& a1,
-                                      SampleType const& b1,
-                                      SampleType& y1) throw()
+    static PLONK_INLINE_HIGH SampleType process (SampleType const& input,
+                                                 SampleType const& a0,
+                                                 SampleType const& a1,
+                                                 SampleType const& b1,
+                                                 SampleType& y1) throw()
     {
         const SampleType y0 = input + b1 * y1; 
         const SampleType output = a0 * y0 + a1 * y1;
@@ -125,16 +125,16 @@ public:
         return output;
     }
     
-    static PLONK_INLINE_LOW SampleType process (SampleType const& input,
-                                      const SampleType* coeffs,     
-                                      SampleType& y1) throw()
+    static PLONK_INLINE_HIGH SampleType process (SampleType const& input,
+                                                 const SampleType* coeffs,
+                                                 SampleType& y1) throw()
     {
         return process (input, coeffs[CoeffA0], coeffs[CoeffA1], coeffs[CoeffB1], y1);
     }
     
-    static PLONK_INLINE_LOW SampleType process (SampleType const& input,
-                                      const SampleType* coeffs,     
-                                      Data& data) throw()
+    static PLONK_INLINE_HIGH SampleType process (SampleType const& input,
+                                                 const SampleType* coeffs,
+                                                 Data& data) throw()
     {
         return process (input, coeffs, data.y1);
     }
@@ -244,18 +244,18 @@ public:
         NumCoeffs
     };
     
-    static PLONK_INLINE_LOW SampleType process (SampleType const& input,
-                                      SampleType const& b1,
-                                      SampleType& y1) throw()
+    static PLONK_INLINE_HIGH SampleType process (SampleType const& input,
+                                                 SampleType const& b1,
+                                                 SampleType& y1) throw()
     {
         const SampleType y0 = input;
         y1 = y0 + b1 * (y1 - y0);
         return y1;
     }
     
-    static PLONK_INLINE_LOW SampleType process (SampleType const& input,
-                                      const SampleType* coeffs,     
-                                      Data& data) throw()
+    static PLONK_INLINE_HIGH SampleType process (SampleType const& input,
+                                                 const SampleType* coeffs,
+                                                 Data& data) throw()
     {
         return process (input, coeffs[CoeffB1], data.y1);
     }
@@ -343,10 +343,10 @@ public:
         NumCoeffs
     };
     
-    static PLONK_INLINE_LOW SampleType process (SampleType const& input,
-                                      SampleType const& b1,
-                                      SampleType& y1,
-                                      SampleType& x1) throw()
+    static PLONK_INLINE_HIGH SampleType process (SampleType const& input,
+                                                 SampleType const& b1,
+                                                 SampleType& y1,
+                                                 SampleType& x1) throw()
     {
         const SampleType x0 = input;
         y1 = x0 - x1 + b1 * y1;
@@ -354,9 +354,9 @@ public:
         return y1;
     }
     
-    static PLONK_INLINE_LOW SampleType process (SampleType const& input,
-                                      const SampleType* coeffs,
-                                      Data& data) throw()
+    static PLONK_INLINE_HIGH SampleType process (SampleType const& input,
+                                                 const SampleType* coeffs,
+                                                 Data& data) throw()
     {
         return process (input, coeffs[CoeffB1], data.y1, data.x1);
     }
@@ -448,10 +448,10 @@ public:
         NumCoeffs
     };
     
-    static PLONK_INLINE_LOW SampleType process (SampleType const& input,
-                                      SampleType const& b1u,
-                                      SampleType const& b1d,
-                                      SampleType& y1) throw()
+    static PLONK_INLINE_HIGH SampleType process (SampleType const& input,
+                                                 SampleType const& b1u,
+                                                 SampleType const& b1d,
+                                                 SampleType& y1) throw()
     {
         const SampleType y0 = input;
         
@@ -463,9 +463,9 @@ public:
         return y1;
     }
     
-    static PLONK_INLINE_LOW SampleType process (SampleType const& input,
-                                      const SampleType* coeffs,
-                                      Data& data) throw()
+    static PLONK_INLINE_HIGH SampleType process (SampleType const& input,
+                                                 const SampleType* coeffs,
+                                                 Data& data) throw()
     {
         return process (input, coeffs[CoeffB1u], coeffs[CoeffB1d], data.y1);
     }
@@ -565,14 +565,14 @@ public:
         NumCoeffs
     };
             
-    static PLONK_INLINE_LOW SampleType process (SampleType const& input,
-                                      SampleType const& a0,     
-                                      SampleType const& a1,
-                                      SampleType const& a2,
-                                      SampleType const& b1,
-                                      SampleType const& b2,
-                                      SampleType& y1,
-                                      SampleType& y2) throw()
+    static PLONK_INLINE_HIGH SampleType process (SampleType const& input,
+                                                 SampleType const& a0,
+                                                 SampleType const& a1,
+                                                 SampleType const& a2,
+                                                 SampleType const& b1,
+                                                 SampleType const& b2,
+                                                 SampleType& y1,
+                                                 SampleType& y2) throw()
     {
         const SampleType y0 = input + b1 * y1 + b2 * y2; 
         const SampleType output = a0 * y0 + a1 * y1 + a2 * y2;
@@ -581,10 +581,10 @@ public:
         return output;
     }
     
-    static PLONK_INLINE_LOW SampleType process (SampleType const& input,
-                                      const SampleType* coeffs,     
-                                      SampleType& y1,
-                                      SampleType& y2) throw()
+    static PLONK_INLINE_HIGH SampleType process (SampleType const& input,
+                                                 const SampleType* coeffs,
+                                                 SampleType& y1,
+                                                 SampleType& y2) throw()
     {
         return process (input, 
                         coeffs[CoeffA0], coeffs[CoeffA1], coeffs[CoeffA2], 
@@ -592,9 +592,9 @@ public:
                         y1, y2);
     }
     
-    static PLONK_INLINE_LOW SampleType process (SampleType const& input,
-                                      const SampleType* coeffs,     
-                                      Data& data) throw()
+    static PLONK_INLINE_HIGH SampleType process (SampleType const& input,
+                                                 const SampleType* coeffs,
+                                                 Data& data) throw()
     {
         return process (input, coeffs, data.y1, data.y2);
     }
@@ -724,15 +724,15 @@ public:
         CoeffB2, 
         NumCoeffs
     };
-        
-    static PLONK_INLINE_LOW SampleType process (SampleType const& input,
-                                                SampleType const& a0,
-                                                SampleType const& a1,
-                                                SampleType const& a2,
-                                                SampleType const& b1,
-                                                SampleType const& b2,
-                                                SampleType& y1,
-                                                SampleType& y2) throw()
+    
+    static PLONK_INLINE_HIGH SampleType process (SampleType const& input,
+                                                 SampleType const& a0,
+                                                 SampleType const& a1,
+                                                 SampleType const& a2,
+                                                 SampleType const& b1,
+                                                 SampleType const& b2,
+                                                 SampleType& y1,
+                                                 SampleType& y2) throw()
     {
         const SampleType y0 = input + b1 * y1 + b2 * y2; 
         const SampleType output = a0 * (y0 + a1 * y1 + a2 * y2);
@@ -741,10 +741,10 @@ public:
         return output;
     }
     
-    static PLONK_INLINE_LOW SampleType process (SampleType const& input,
-                                                const SampleType* coeffs,
-                                                SampleType& y1,
-                                                SampleType& y2) throw()
+    static PLONK_INLINE_HIGH SampleType process (SampleType const& input,
+                                                 const SampleType* coeffs,
+                                                 SampleType& y1,
+                                                 SampleType& y2) throw()
     {
         return process (input, 
                         coeffs[CoeffA0], coeffs[CoeffA1], coeffs[CoeffA2], 
@@ -752,9 +752,9 @@ public:
                         y1, y2);
     }
     
-    static PLONK_INLINE_LOW SampleType process (SampleType const& input,
-                                                const SampleType* coeffs,     
-                                                Data& data) throw()
+    static PLONK_INLINE_HIGH SampleType process (SampleType const& input,
+                                                    const SampleType* coeffs,     
+                                                 Data& data) throw()
     {
         return process (input, coeffs, data.y1, data.y2);
     }
@@ -787,9 +787,9 @@ public:
         const int a0Length = a0Buffer.length();
         
         plonk_assert ((a0Length == a1Buffer.length()) &&
-                     (a0Length == a2Buffer.length()) &&
-                     (a0Length == b1Buffer.length()) &&
-                     (a0Length == b2Buffer.length()));;  // coeff buffers need to be the same length
+                      (a0Length == a2Buffer.length()) &&
+                      (a0Length == b1Buffer.length()) &&
+                      (a0Length == b2Buffer.length()));;  // coeff buffers need to be the same length
         
         SampleType y1 = data.y1;
         SampleType y2 = data.y2;

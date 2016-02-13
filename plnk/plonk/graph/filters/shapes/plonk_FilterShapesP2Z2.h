@@ -82,7 +82,7 @@ public:
 //        return CalcTypes::withArray (FormType::NumCoeffs, data.coeffs);
 //    }
 
-    static PLONK_INLINE_LOW void calculate (Data& data) throw()
+    static PLONK_INLINE_HIGH void calculate (Data& data) throw()
     {
         const CalcType one (Math<CalcType>::get1());
         const CalcType half (Math<CalcType>::get0_5());
@@ -145,7 +145,7 @@ public:
 //        return CalcTypes::withArray (FormType::NumCoeffs, data.coeffs);
 //    }
     
-    static PLONK_INLINE_LOW void calculate (Data& data) throw()
+    static PLONK_INLINE_HIGH void calculate (Data& data) throw()
     {        
         const CalcType one (Math<CalcType>::get1());
         const CalcType half (Math<CalcType>::get0_5());
@@ -198,12 +198,12 @@ public:
         return keys;
     }
     
-    static PLONK_INLINE_LOW SampleType process (SampleType const& input, Data const& data, FormData& form) throw()
+    static PLONK_INLINE_HIGH SampleType process (SampleType const& input, Data const& data, FormData& form) throw()
     {
         return FormType::process (input, data.coeffs, form);
     }
     
-    static PLONK_INLINE_LOW void calculate (Data& data) throw()
+    static PLONK_INLINE_HIGH void calculate (Data& data) throw()
     {
         const CalcType one (Math<CalcType>::get1());
         const CalcType half (Math<CalcType>::get0_5());
@@ -263,12 +263,12 @@ public:
         return keys;
     }
     
-    static PLONK_INLINE_LOW SampleType process (SampleType const& input, Data const& data, FormData& form) throw()
+    static PLONK_INLINE_HIGH SampleType process (SampleType const& input, Data const& data, FormData& form) throw()
     {
         return FormType::process (input, data.coeffs, form);
     }
 
-    static PLONK_INLINE_LOW void calculate (Data& data) throw()
+    static PLONK_INLINE_HIGH void calculate (Data& data) throw()
     {        
         const CalcType one (Math<CalcType>::get1());
         const CalcType half (Math<CalcType>::get0_5());
@@ -327,12 +327,12 @@ public:
         return keys;
     }
         
-    static PLONK_INLINE_LOW SampleType process (SampleType const& input, Data const& data, FormData& form) throw()
+    static PLONK_INLINE_HIGH SampleType process (SampleType const& input, Data const& data, FormData& form) throw()
     {
         return FormType::process (input, data.coeffs, form);
     }
 
-    static PLONK_INLINE_LOW void calculate (Data& data) throw()
+    static PLONK_INLINE_HIGH void calculate (Data& data) throw()
     {
         const CalcType one (Math<CalcType>::get1());
         const CalcType half (Math<CalcType>::get0_5());
@@ -385,12 +385,12 @@ public:
         return keys;
     }
     
-    static PLONK_INLINE_LOW SampleType process (SampleType const& input, Data const& data, FormData& form) throw()
+    static PLONK_INLINE_HIGH SampleType process (SampleType const& input, Data const& data, FormData& form) throw()
     {
         return FormType::process (input, data.coeffs, form);
     }
     
-    static PLONK_INLINE_LOW void calculate (Data& data) throw()
+    static PLONK_INLINE_HIGH void calculate (Data& data) throw()
     {   
         const CalcType zero (Math<CalcType>::get0());
         const CalcType one (Math<CalcType>::get1());
@@ -439,12 +439,12 @@ public:
         return keys;
     }
     
-    static PLONK_INLINE_LOW SampleType process (SampleType const& input, Data const& data, FormData& form) throw()
+    static PLONK_INLINE_HIGH SampleType process (SampleType const& input, Data const& data, FormData& form) throw()
     {
         return FormType::process (input, data.coeffs, form);
     }
     
-    static PLONK_INLINE_LOW void calculate (Data& data) throw()
+    static PLONK_INLINE_HIGH void calculate (Data& data) throw()
     {   
         const CalcType one (Math<CalcType>::get1());
         const CalcType two (Math<CalcType>::get2());

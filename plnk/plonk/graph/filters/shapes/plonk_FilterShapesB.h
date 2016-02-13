@@ -69,12 +69,12 @@ public:
         return keys;
     }
     
-    static PLONK_INLINE_LOW SampleType process (SampleType const& input, Data const& data, FormData& form) throw()
+    static PLONK_INLINE_HIGH SampleType process (SampleType const& input, Data const& data, FormData& form) throw()
     {
         return FormType::process (input, data.coeffs, form);
     }
                 
-    static PLONK_INLINE_LOW void calculate (Data& data) throw()
+    static PLONK_INLINE_HIGH void calculate (Data& data) throw()
     {        
         const CalcType one (Math<CalcType>::get1());
         const CalcType two (Math<CalcType>::get2());
@@ -122,12 +122,12 @@ public:
         return keys;
     }
     
-    static PLONK_INLINE_LOW SampleType process (SampleType const& input, Data const& data, FormData& form) throw()
+    static PLONK_INLINE_HIGH SampleType process (SampleType const& input, Data const& data, FormData& form) throw()
     {
         return FormType::process (input, data.coeffs, form);
     }
         
-    static PLONK_INLINE_LOW void calculate (Data& data) throw()
+    static PLONK_INLINE_HIGH void calculate (Data& data) throw()
     {
         const CalcType one (Math<CalcType>::get1());
         const CalcType two (Math<CalcType>::get2());
