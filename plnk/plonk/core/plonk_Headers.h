@@ -151,6 +151,7 @@
 #include "../graph/simple/plonk_Mixers.h"
 #include "../graph/simple/plonk_BlockChannel.h"
 #include "../graph/simple/plonk_VariableChannel.h"
+#include "../graph/simple/plonk_RampChannel.h"
 #include "../graph/simple/plonk_AtomicVariableChannel.h"
 #include "../graph/simple/plonk_PatchChannel.h"
 #include "../graph/simple/plonk_QueueChannel.h"

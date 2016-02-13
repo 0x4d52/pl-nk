@@ -93,6 +93,7 @@ template<class SampleType>                                              class Mi
 template<class SampleType>                                              class OverlapMakeUnit;
 template<class SampleType>                                              class OverlapMixUnit;
 template<class SampleType>                                              class ParamUnit;
+template<class SampleType>                                              class RampUnit;
 template<class SampleType>                                              class AtomicVariableUnit;
 template<class SampleType,
          Interp::TypeCode InterpTypeCode = Interp::Linear>              class InputTaskUnit;

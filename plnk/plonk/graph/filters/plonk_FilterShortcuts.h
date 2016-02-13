@@ -70,7 +70,7 @@ public:
     typedef FilterCoeffs1ParamUnit<Shape>                   FilterCoeffsType;
     typedef typename FilterCoeffsType::FormType             FormType;
     typedef FilterUnit<FormType>                            FilterType;
-    typedef ResampleUnit<SampleType,InterpTypeCode>         ResampleType;
+    typedef RampUnit<SampleType>                            RampType;
     typedef LPFP1Unit<SampleType,Interp::Lagrange3>         HQ;
     
     static PLONK_INLINE_LOW UnitInfos getInfo() throw()
@@ -113,7 +113,7 @@ public:
         
         if (frequency.isConstant() == false)
             for (int i = 0; i < coeffs.getNumChannels(); ++i)
-                coeffs.put (i, ResampleType::ar (coeffs[i]));
+                coeffs.put (i, RampType::ar (coeffs[i]));
         
         return FilterType::ar (input, coeffs, mul, add, preferredBlockSize, preferredSampleRate);
     }
@@ -132,7 +132,7 @@ public:
         
         if (frequency.isConstant() == false)
             for (int i = 0; i < coeffs.getNumChannels(); ++i)
-                coeffs.put (i, ResampleType::kr (coeffs[i]));
+                coeffs.put (i, RampType::kr (coeffs[i]));
         
         return FilterType::ar (input, coeffs, mul, add, 
                                BlockSize::getControlRateBlockSize(), 
@@ -166,7 +166,7 @@ public:
     typedef FilterCoeffs1ParamUnit<Shape>                   FilterCoeffsType;
     typedef typename FilterCoeffsType::FormType             FormType;
     typedef FilterUnit<FormType>                            FilterType;
-    typedef ResampleUnit<SampleType,InterpTypeCode>         ResampleType;
+    typedef RampUnit<SampleType>                            RampType;
     typedef LagUnit<SampleType,Interp::Lagrange3>           HQ;
     
     static PLONK_INLINE_LOW UnitInfos getInfo() throw()
@@ -209,7 +209,7 @@ public:
 
         if (duration.isConstant() == false)
             for (int i = 0; i < coeffs.getNumChannels(); ++i)
-                coeffs.put (i, ResampleType::ar (coeffs[i]));
+                coeffs.put (i, RampType::ar (coeffs[i]));
         
         return FilterType::ar (input, coeffs, mul, add, preferredBlockSize, preferredSampleRate);
     }
@@ -228,7 +228,7 @@ public:
         
         if (duration.isConstant() == false)
             for (int i = 0; i < coeffs.getNumChannels(); ++i)
-                coeffs.put (i, ResampleType::kr (coeffs[i]));
+                coeffs.put (i, RampType::kr (coeffs[i]));
         
         return FilterType::ar (input.kr(), coeffs, mul, add, 
                                BlockSize::getControlRateBlockSize(), 
@@ -263,7 +263,7 @@ public:
     typedef FilterCoeffs2ParamUnit<Shape>                   FilterCoeffsType;
     typedef typename FilterCoeffsType::FormType             FormType;
     typedef FilterUnit<FormType>                            FilterType;
-    typedef ResampleUnit<SampleType,InterpTypeCode>         ResampleType;
+    typedef RampUnit<SampleType>                            RampType;
     typedef LagAsymUnit<SampleType,Interp::Lagrange3>       HQ;
     
     static PLONK_INLINE_LOW UnitInfos getInfo() throw()
@@ -309,7 +309,7 @@ public:
         
         if (!attack.isConstant() || !release.isConstant())
             for (int i = 0; i < coeffs.getNumChannels(); ++i)
-                coeffs.put (i, ResampleType::ar (coeffs[i]));
+                coeffs.put (i, RampType::ar (coeffs[i]));
                 
         return FilterType::ar (input, coeffs, mul, add, preferredBlockSize, preferredSampleRate);
     }
@@ -330,7 +330,7 @@ public:
         
         if (!attack.isConstant() || !release.isConstant())
             for (int i = 0; i < coeffs.getNumChannels(); ++i)
-                coeffs.put (i, ResampleType::ar (coeffs[i]));
+                coeffs.put (i, RampType::ar (coeffs[i]));
                 
         return FilterType::ar (input.kr(), coeffs, mul, add,
                                BlockSize::getControlRateBlockSize(),
@@ -363,7 +363,7 @@ public:
     typedef FilterCoeffs1ParamUnit<Shape>                   FilterCoeffsType;
     typedef typename FilterCoeffsType::FormType             FormType;
     typedef FilterUnit<FormType>                            FilterType;
-    typedef ResampleUnit<SampleType,InterpTypeCode>         ResampleType;
+    typedef RampUnit<SampleType>                            RampType;
     typedef HPFP1Unit<SampleType,Interp::Lagrange3>         HQ;
     
     static PLONK_INLINE_LOW UnitInfos getInfo() throw()
@@ -406,7 +406,7 @@ public:
 
         if (frequency.isConstant() == false)
             for (int i = 0; i < coeffs.getNumChannels(); ++i)
-                coeffs.put (i, ResampleType::ar (coeffs[i]));
+                coeffs.put (i, RampType::ar (coeffs[i]));
         
         return FilterType::ar (input, coeffs, mul, add, preferredBlockSize, preferredSampleRate);
     }
@@ -425,7 +425,7 @@ public:
         
         if (frequency.isConstant() == false)
             for (int i = 0; i < coeffs.getNumChannels(); ++i)
-                coeffs.put (i, ResampleType::kr (coeffs[i]));
+                coeffs.put (i, RampType::kr (coeffs[i]));
         
         return FilterType::ar (input, coeffs, mul, add, 
                                BlockSize::getControlRateBlockSize(), 
@@ -459,7 +459,7 @@ public:
     typedef FilterCoeffs1ParamUnit<Shape>                   FilterCoeffsType;
     typedef typename FilterCoeffsType::FormType             FormType;
     typedef FilterUnit<FormType>                            FilterType;
-    typedef ResampleUnit<SampleType,InterpTypeCode>         ResampleType;
+    typedef RampUnit<SampleType>                            RampType;
     typedef DecayUnit<SampleType,Interp::Lagrange3>         HQ;
     
     static PLONK_INLINE_LOW UnitInfos getInfo() throw()
@@ -502,7 +502,7 @@ public:
 
         if (duration.isConstant() == false)
             for (int i = 0; i < coeffs.getNumChannels(); ++i)
-                coeffs.put (i, ResampleType::ar (coeffs[i]));
+                coeffs.put (i, RampType::ar (coeffs[i]));
         
         return FilterType::ar (input, coeffs, mul, add, preferredBlockSize, preferredSampleRate);
     }
@@ -521,7 +521,7 @@ public:
         
         if (duration.isConstant() == false)
             for (int i = 0; i < coeffs.getNumChannels(); ++i)
-                coeffs.put (i, ResampleType::kr (coeffs[i]));
+                coeffs.put (i, RampType::kr (coeffs[i]));
         
         return FilterType::ar (input, coeffs, mul, add, 
                                BlockSize::getControlRateBlockSize(), 
@@ -554,7 +554,7 @@ public:
     typedef FilterShape<SampleType, FilterFormType::P1b, FilterShapeType::DC>   Shape;
     typedef FilterForm<SampleType, FilterFormType::P1b>                         FormType;
     typedef FilterUnit<FormType>                                                FilterType;
-    typedef ResampleUnit<SampleType,InterpTypeCode>                             ResampleType;
+    typedef RampUnit<SampleType>                                                RampType;
     typedef DCUnit<SampleType,Interp::Lagrange3>                                HQ;
     
     static PLONK_INLINE_LOW UnitInfos getInfo() throw()
@@ -641,7 +641,7 @@ public:
     typedef FilterCoeffs2ParamUnit<Shape>                   FilterCoeffsType;
     typedef typename FilterCoeffsType::FormType             FormType;
     typedef FilterUnit<FormType>                            FilterType;
-    typedef ResampleUnit<SampleType,InterpTypeCode>         ResampleType;
+    typedef RampUnit<SampleType>                            RampType;
     typedef RLPFUnit<SampleType,Interp::Lagrange3>          HQ;
 
     static PLONK_INLINE_LOW UnitInfos getInfo() throw()
@@ -687,7 +687,7 @@ public:
 
         if ((frequency.isConstant() == false) || (q.isConstant() == false))
             for (int i = 0; i < coeffs.getNumChannels(); ++i)
-                coeffs.put (i, ResampleType::ar (coeffs[i]));
+                coeffs.put (i, RampType::ar (coeffs[i]));
         
         return FilterType::ar (input, coeffs, mul, add, preferredBlockSize, preferredSampleRate);
     }
@@ -708,7 +708,7 @@ public:
         
         if (frequency.isConstant() == false)
             for (int i = 0; i < coeffs.getNumChannels(); ++i)
-                coeffs.put (i, ResampleType::kr (coeffs[i]));
+                coeffs.put (i, RampType::kr (coeffs[i]));
         
         return FilterType::ar (input, coeffs, mul, add, 
                                BlockSize::getControlRateBlockSize(), 
@@ -742,7 +742,7 @@ public:
     typedef FilterCoeffs2ParamUnit<Shape>                   FilterCoeffsType;
     typedef typename FilterCoeffsType::FormType             FormType;
     typedef FilterUnit<FormType>                            FilterType;
-    typedef ResampleUnit<SampleType,InterpTypeCode>         ResampleType;
+    typedef RampUnit<SampleType>                            RampType;
     typedef RHPFUnit<SampleType,Interp::Lagrange3>          HQ;
     
     static PLONK_INLINE_LOW UnitInfos getInfo() throw()
@@ -788,7 +788,7 @@ public:
         
         if ((frequency.isConstant() == false) || (q.isConstant() == false))
             for (int i = 0; i < coeffs.getNumChannels(); ++i)
-                coeffs.put (i, ResampleType::ar (coeffs[i]));
+                coeffs.put (i, RampType::ar (coeffs[i]));
         
         return FilterType::ar (input, coeffs, mul, add, preferredBlockSize, preferredSampleRate);
     }
@@ -809,7 +809,7 @@ public:
         
         if (frequency.isConstant() == false)
             for (int i = 0; i < coeffs.getNumChannels(); ++i)
-                coeffs.put (i, ResampleType::kr (coeffs[i]));
+                coeffs.put (i, RampType::kr (coeffs[i]));
         
         return FilterType::ar (input, coeffs, mul, add, 
                                BlockSize::getControlRateBlockSize(), 
@@ -844,7 +844,7 @@ public:
     typedef FilterCoeffs3ParamUnit<Shape>                   FilterCoeffsType;
     typedef typename FilterCoeffsType::FormType             FormType;
     typedef FilterUnit<FormType>                            FilterType;
-    typedef ResampleUnit<SampleType,InterpTypeCode>         ResampleType;
+    typedef RampUnit<SampleType>                            RampType;
     typedef LowShelfUnit<SampleType,Interp::Lagrange3>      HQ;
     
     static PLONK_INLINE_LOW UnitInfos getInfo() throw()
@@ -895,7 +895,7 @@ public:
             (s.isConstant() == false) ||
             (gain.isConstant() == false))
             for (int i = 0; i < coeffs.getNumChannels(); ++i)
-                coeffs.put (i, ResampleType::ar (coeffs[i]));
+                coeffs.put (i, RampType::ar (coeffs[i]));
         
         return FilterType::ar (input, coeffs, mul, add, preferredBlockSize, preferredSampleRate);
     }
@@ -918,7 +918,7 @@ public:
         
         if (frequency.isConstant() == false)
             for (int i = 0; i < coeffs.getNumChannels(); ++i)
-                coeffs.put (i, ResampleType::kr (coeffs[i]));
+                coeffs.put (i, RampType::kr (coeffs[i]));
         
         return FilterType::ar (input, coeffs, mul, add, 
                                BlockSize::getControlRateBlockSize(), 
@@ -953,7 +953,7 @@ public:
     typedef FilterCoeffs3ParamUnit<Shape>                   FilterCoeffsType;
     typedef typename FilterCoeffsType::FormType             FormType;
     typedef FilterUnit<FormType>                            FilterType;
-    typedef ResampleUnit<SampleType,InterpTypeCode>         ResampleType;
+    typedef RampUnit<SampleType>                            RampType;
     typedef HighShelfUnit<SampleType,Interp::Lagrange3>     HQ;
     
     static PLONK_INLINE_LOW UnitInfos getInfo() throw()
@@ -1004,7 +1004,7 @@ public:
             (s.isConstant() == false) ||
             (gain.isConstant() == false))
             for (int i = 0; i < coeffs.getNumChannels(); ++i)
-                coeffs.put (i, ResampleType::ar (coeffs[i]));
+                coeffs.put (i, RampType::ar (coeffs[i]));
         
         return FilterType::ar (input, coeffs, mul, add, preferredBlockSize, preferredSampleRate);
     }
@@ -1027,7 +1027,7 @@ public:
         
         if (frequency.isConstant() == false)
             for (int i = 0; i < coeffs.getNumChannels(); ++i)
-                coeffs.put (i, ResampleType::kr (coeffs[i]));
+                coeffs.put (i, RampType::kr (coeffs[i]));
         
         return FilterType::ar (input, coeffs, mul, add, 
                                BlockSize::getControlRateBlockSize(), 
@@ -1062,7 +1062,7 @@ public:
     typedef FilterCoeffs3ParamUnit<Shape>                   FilterCoeffsType;
     typedef typename FilterCoeffsType::FormType             FormType;
     typedef FilterUnit<FormType>                            FilterType;
-    typedef ResampleUnit<SampleType,InterpTypeCode>         ResampleType;
+    typedef RampUnit<SampleType>                            RampType;
     typedef NotchUnit<SampleType,Interp::Lagrange3>         HQ;
     
     static PLONK_INLINE_LOW UnitInfos getInfo() throw()
@@ -1113,7 +1113,7 @@ public:
             (q.isConstant() == false) ||
             (gain.isConstant() == false))
             for (int i = 0; i < coeffs.getNumChannels(); ++i)
-                coeffs.put (i, ResampleType::ar (coeffs[i]));
+                coeffs.put (i, RampType::ar (coeffs[i]));
         
         return FilterType::ar (input, coeffs, mul, add, preferredBlockSize, preferredSampleRate);
     }
@@ -1136,7 +1136,7 @@ public:
         
         if (frequency.isConstant() == false)
             for (int i = 0; i < coeffs.getNumChannels(); ++i)
-                coeffs.put (i, ResampleType::kr (coeffs[i]));
+                coeffs.put (i, RampType::kr (coeffs[i]));
         
         return FilterType::ar (input, coeffs, mul, add, 
                                BlockSize::getControlRateBlockSize(), 
@@ -1170,7 +1170,7 @@ public:
     typedef FilterCoeffs2ParamUnit<Shape>                   FilterCoeffsType;
     typedef typename FilterCoeffsType::FormType             FormType;
     typedef FilterUnit<FormType>                            FilterType;
-    typedef ResampleUnit<SampleType,InterpTypeCode>         ResampleType;
+    typedef RampUnit<SampleType>                            RampType;
     typedef BPFUnit<SampleType,Interp::Lagrange3>           HQ;
     
     static PLONK_INLINE_LOW UnitInfos getInfo() throw()
@@ -1216,7 +1216,7 @@ public:
         
         if (frequency.isConstant() == false)
             for (int i = 0; i < coeffs.getNumChannels(); ++i)
-                coeffs.put (i, ResampleType::ar (coeffs[i]));
+                coeffs.put (i, RampType::ar (coeffs[i]));
         
         return FilterType::ar (input, coeffs, mul, add, preferredBlockSize, preferredSampleRate);
     }
@@ -1237,7 +1237,7 @@ public:
         
         if (frequency.isConstant() == false)
             for (int i = 0; i < coeffs.getNumChannels(); ++i)
-                coeffs.put (i, ResampleType::kr (coeffs[i]));
+                coeffs.put (i, RampType::kr (coeffs[i]));
         
         return FilterType::ar (input, coeffs, mul, add, 
                                BlockSize::getControlRateBlockSize(), 
@@ -1271,7 +1271,7 @@ public:
     typedef FilterCoeffs2ParamUnit<Shape>                   FilterCoeffsType;
     typedef typename FilterCoeffsType::FormType             FormType;
     typedef FilterUnit<FormType>                            FilterType;
-    typedef ResampleUnit<SampleType,InterpTypeCode>         ResampleType;
+    typedef RampUnit<SampleType>                            RampType;
     typedef BRFUnit<SampleType,Interp::Lagrange3>           HQ;
     
     static PLONK_INLINE_LOW UnitInfos getInfo() throw()
@@ -1317,7 +1317,7 @@ public:
         
         if (frequency.isConstant() == false)
             for (int i = 0; i < coeffs.getNumChannels(); ++i)
-                coeffs.put (i, ResampleType::ar (coeffs[i]));
+                coeffs.put (i, RampType::ar (coeffs[i]));
         
         return FilterType::ar (input, coeffs, mul, add, preferredBlockSize, preferredSampleRate);
     }
@@ -1338,7 +1338,7 @@ public:
         
         if (frequency.isConstant() == false)
             for (int i = 0; i < coeffs.getNumChannels(); ++i)
-                coeffs.put (i, ResampleType::kr (coeffs[i]));
+                coeffs.put (i, RampType::kr (coeffs[i]));
         
         return FilterType::ar (input, coeffs, mul, add, 
                                BlockSize::getControlRateBlockSize(), 
@@ -1376,8 +1376,7 @@ public:
     typedef typename FilterCoeffsType::FormType             FormType;
     typedef FilterUnit<FormType>                            FilterType;
     typedef typename FormType::Data                         FormData;
-//    typedef typename Shape::Data                            FilterShapeData;
-    typedef ResampleUnit<SampleType,InterpTypeCode>         ResampleType;
+    typedef RampUnit<SampleType>                            RampType;
     typedef LPFUnit<SampleType,Interp::Lagrange3>           HQ;
     
     static PLONK_INLINE_LOW UnitInfos getInfo() throw()
@@ -1420,7 +1419,7 @@ public:
 
         if (frequency.isConstant() == false)
             for (int i = 0; i < coeffs.getNumChannels(); ++i)
-                coeffs.put (i, ResampleType::ar (coeffs[i]));
+                coeffs.put (i, RampType::ar (coeffs[i]));
         
         return FilterType::ar (input, coeffs, mul, add, preferredBlockSize, preferredSampleRate);
     }
@@ -1439,7 +1438,7 @@ public:
         
         if (frequency.isConstant() == false)
             for (int i = 0; i < coeffs.getNumChannels(); ++i)
-                coeffs.put (i, ResampleType::kr (coeffs[i]));
+                coeffs.put (i, RampType::kr (coeffs[i]));
         
         return FilterType::ar (input, coeffs, mul, add, 
                                BlockSize::getControlRateBlockSize(), 
@@ -1473,7 +1472,7 @@ public:
     typedef FilterCoeffs1ParamUnit<Shape>                   FilterCoeffsType;
     typedef typename FilterCoeffsType::FormType             FormType;
     typedef FilterUnit<FormType>                            FilterType;
-    typedef ResampleUnit<SampleType,InterpTypeCode>         ResampleType;
+    typedef RampUnit<SampleType>                            RampType;
     typedef HPFUnit<SampleType,Interp::Lagrange3>           HQ;
     
     static PLONK_INLINE_LOW UnitInfos getInfo() throw()
@@ -1516,7 +1515,7 @@ public:
         
         if (frequency.isConstant() == false)
             for (int i = 0; i < coeffs.getNumChannels(); ++i)
-                coeffs.put (i, ResampleType::ar (coeffs[i]));
+                coeffs.put (i, RampType::ar (coeffs[i]));
         
         return FilterType::ar (input, coeffs, mul, add, preferredBlockSize, preferredSampleRate);
     }
@@ -1535,7 +1534,7 @@ public:
         
         if (frequency.isConstant() == false)
             for (int i = 0; i < coeffs.getNumChannels(); ++i)
-                coeffs.put (i, ResampleType::kr (coeffs[i]));
+                coeffs.put (i, RampType::kr (coeffs[i]));
         
         return FilterType::ar (input, coeffs, mul, add, 
                                BlockSize::getControlRateBlockSize(), 
