@@ -42,21 +42,33 @@
 #include "../channel/plonk_ChannelInternalCore.h"
 #include "../plonk_GraphForwardDeclarations.h"
 
+template<class SampleType> class ParamChannelInternal;
+
+PLONK_CHANNELDATA_DECLARE(ParamChannelInternal,SampleType)
+{
+    ChannelInternalCore::Data base;
+    int numSmoothSamples;
+    int numSmoothSamplesRemaining;
+    bool getValueEverySample;
+    SampleType currValue;
+    SampleType inc;
+};
+
 /** Variable channel. */
 template<class SampleType>
 class ParamChannelInternal 
-:   public ChannelInternal<SampleType, ChannelInternalCore::Data>
+:   public ChannelInternal<SampleType, PLONK_CHANNELDATA_NAME(ParamChannelInternal,SampleType)>
 {
 public:
-    typedef ChannelInternalCore::Data                           Data;
-    typedef ChannelBase<SampleType>                             ChannelType;
-    typedef ParamChannelInternal<SampleType>                    ParamChannelInternalType;
-    typedef ChannelInternal<SampleType,Data>                    Internal;
-    typedef ChannelInternalBase<SampleType>                     InternalBase;
-    typedef UnitBase<SampleType>                                UnitType;
-    typedef InputDictionary                                     Inputs;
-    typedef NumericalArray<SampleType>                          Buffer;
-    typedef Variable<SampleType>                                VariableType;
+    typedef PLONK_CHANNELDATA_NAME(ParamChannelInternal,SampleType) Data;
+    typedef ChannelBase<SampleType>                                 ChannelType;
+    typedef ParamChannelInternal<SampleType>                        ParamChannelInternalType;
+    typedef ChannelInternal<SampleType,Data>                        Internal;
+    typedef ChannelInternalBase<SampleType>                         InternalBase;
+    typedef UnitBase<SampleType>                                    UnitType;
+    typedef InputDictionary                                         Inputs;
+    typedef NumericalArray<SampleType>                              Buffer;
+    typedef Variable<SampleType>                                    VariableType;
     
     ParamChannelInternal (Inputs const& inputs, 
                           Data const& data,
@@ -86,19 +98,70 @@ public:
     {
         const VariableType& variable = this->getInputAsVariable (IOKey::Variable);
         this->initValue (variable.getValue());
-    }    
+    }
     
     void process (ProcessInfo& /*info*/, const int /*channel*/) throw()
-    {                
+    {
+        Data& data = this->getState();
         VariableType& variable = this->getInputAsVariable (IOKey::Variable);
-
-        SampleType* const outputSamples = this->getOutputSamples();
-        const int outputBufferLength = this->getOutputBuffer().length();        
+        SampleType value;
         
-        for (int i = 0; i < outputBufferLength; ++i)
+        if (data.getValueEverySample || data.numSmoothSamples == 0)
         {
-            const SampleType value = variable.nextValue();
-            outputSamples[i] = value;
+            SampleType* const outputSamples = this->getOutputSamples();
+            const int outputBufferLength = this->getOutputBuffer().length();
+            
+            for (int i = 0; i < outputBufferLength; ++i)
+            {
+                value = variable.nextValue();
+                outputSamples[i] = value;
+            }
+            
+            data.currValue = value;
+        }
+        else
+        {
+            plonk_assert (! this->isUsingExternalBuffer()); // need to think how this should work...
+            
+            value = variable.nextValue();
+
+            if (value != data.currValue)
+            {
+                this->getOutputBuffer().setSize (this->getBlockSize().getValue(), false);
+             
+                data.numSmoothSamplesRemaining = data.numSmoothSamples;
+                data.inc = (value - data.currValue) / data.numSmoothSamples;
+            }
+            
+            if (data.numSmoothSamplesRemaining > 0)
+            {
+                SampleType* outputSamples = this->getOutputSamples();
+                int outputBufferRemaining = this->getOutputBuffer().length();
+
+                const int numSamplesThisTime = plonk::min (data.numSmoothSamplesRemaining, outputBufferRemaining);
+                
+                for (int i = 0; i < numSamplesThisTime; ++i)
+                {
+                    *outputSamples++ = data.currValue;
+                    data.currValue += data.inc;
+                }
+                
+                outputBufferRemaining          -= numSamplesThisTime;
+                data.numSmoothSamplesRemaining -= numSamplesThisTime;
+                
+                if (data.numSmoothSamplesRemaining == 0)
+                {
+                    data.currValue = value;
+                    
+                    while (outputBufferRemaining--)
+                        *outputSamples++ = value;
+                }
+            }
+            else
+            {
+                this->getOutputBuffer().setSize (1, false);
+                *this->getOutputSamples() = data.currValue = value;
+            }
         }
     }
 };
@@ -150,13 +213,17 @@ public:
     }    
     
     /** Create audio rate parameter. */
-    static UnitType ar (VariableType const& variable = SampleType (0),
+    static UnitType ar (VariableType const& variable,
+                        const int numSmoothSamples = 64,
+                        const bool getValueEverySample = false,
                         BlockSize const& preferredBlockSize = BlockSize::getDefault()) throw()
-    {        
+    {
+        plonk_assert (numSmoothSamples > 0);
+        
         Inputs inputs;
         inputs.put (IOKey::Variable, variable);
         
-        Data data = { -1.0, -1.0 };
+        Data data = { { -1.0, -1.0 }, numSmoothSamples, 0, getValueEverySample, SampleType (0), SampleType (0) };
         
         const SampleRate preferredSampleRate = (preferredBlockSize == BlockSize::getDefault()) ?
                                                 SampleRate::getDefault() :
@@ -169,13 +236,14 @@ public:
     }   
 
     /** Create control rate parameter. */
-    static UnitType kr (VariableType const& variable = SampleType (0)) throw()
+    static UnitType kr (VariableType const& variable,
+                        const bool getValueEverySample = false) throw()
     {
         Inputs inputs;
         inputs.put (IOKey::Variable, variable);
         
-        Data data = { -1.0, -1.0 };
-                
+        Data data = { { -1.0, -1.0 }, 0, 0, getValueEverySample, SampleType (0), SampleType (0) };
+        
         return UnitType::template createFromInputs<ParamChannelInternalType> (inputs, 
                                                                               data, 
                                                                               BlockSize::getControlRateBlockSize(), 

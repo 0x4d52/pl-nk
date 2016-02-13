@@ -291,12 +291,12 @@ public:
     
     PLONK_INLINE_LOW UnitType ar() const throw()
     {
-        return UnitType (*this).ar();
+        return ParamUnit<Type>::ar (*this);
     }
     
     PLONK_INLINE_LOW UnitType kr() const throw()
     {
-        return UnitType (*this).kr();
+        return ParamUnit<Type>  ::kr (*this);
     }
     
     PLONK_INLINE_LOW UnitType ar (const Interp::TypeCode interpType) const throw()
