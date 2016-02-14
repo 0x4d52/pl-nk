@@ -123,7 +123,7 @@ public:
     }
     
 private:
-    PLONK_INLINE_LOW bool checkPosition (ProcessInfo& info, Data& data, const int numSignalFrames, const bool loop) throw()
+    PLONK_INLINE_LOW bool checkPosition (ProcessInfo&, Data& data, const int numSignalFrames, const bool loop) throw()
     {        
         if (data.currentPosition >= numSignalFrames)
         {

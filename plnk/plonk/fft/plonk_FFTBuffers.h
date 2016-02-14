@@ -40,13 +40,13 @@
 #define PLONK_FFTBUFFERS_H
 
 #include "../core/plonk_CoreForwardDeclarations.h"
-#include "plonk_ContainerForwardDeclarations.h"
-#include "plonk_DynamicContainer.h"
+#include "../containers/plonk_ContainerForwardDeclarations.h"
+#include "../containers/plonk_DynamicContainer.h"
 
 #include "../core/plonk_SmartPointer.h"
 #include "../core/plonk_WeakPointer.h"
-#include "plonk_ObjectArray.h"
-#include "plonk_SimpleArray.h"
+#include "../containers/plonk_ObjectArray.h"
+#include "../containers/plonk_SimpleArray.h"
 
 static RNG& getConvolveRNG()
 {

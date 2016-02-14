@@ -130,7 +130,7 @@ public:
         fftCalcBuffer      = processBuffersBase + maxFFTSize * 5;
     }
     
-    void reset (FFTBuffersType const& newIRBuffers, const int channel) throw()
+    void reset (FFTBuffersType const& newIRBuffers, const int /*channel*/) throw()
     {
         irBuffers = newIRBuffers;
         const FFTEngineType& fftEngine (irBuffers.getFFTEngine());

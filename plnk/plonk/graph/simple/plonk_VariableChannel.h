@@ -104,7 +104,7 @@ public:
     {
         Data& data = this->getState();
         VariableType& variable = this->getInputAsVariable (IOKey::Variable);
-        SampleType value;
+        SampleType value (0);
         
         if (data.getValueEverySample || data.numSmoothSamples == 0)
         {
