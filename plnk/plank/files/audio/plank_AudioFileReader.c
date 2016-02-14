@@ -1067,6 +1067,11 @@ exit:
 
 static PlankResult pl_AudioFileReader_WAV_ParseChunk_smpl (PlankAudioFileReaderRef p, const PlankLL chunkLength, const PlankLL chunkEnd)
 {
+#if ! PLANK_DEBUG
+	(void)chunkLength;
+	(void)chunkEnd;
+#endif
+
     PlankResult result = PlankResult_OK;
     PlankUI manufacturer, product, samplePeriod, baseNote, detune, smpteFormat, smpteOffset, numSampleLoops, samplerData, i;
     PlankI gain, lowNote, highNote, lowVelocity, highVelocity;

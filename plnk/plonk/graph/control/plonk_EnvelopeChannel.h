@@ -101,6 +101,10 @@ public:
     
     void initChannel (const int channel) throw()
     {
+#if ! PLONK_DEBUG
+		(void)channel;
+#endif
+
         Data& data = this->getState();
         const BreakpointsType& breakpoints = this->getInputAsBreakpoints (IOKey::Breakpoints);
         
