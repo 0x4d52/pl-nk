@@ -50,8 +50,8 @@ PLONK_CHANNELDATA_DECLARE(FilePlayChannelInternal,SampleType)
     int numChannels;
     int cueIndex;
     
-    bool done:1;
-    bool deleteWhenDone:1;
+    bool done;//:1;
+    bool deleteWhenDone;//:1;
 };
 
 //------------------------------------------------------------------------------

@@ -47,7 +47,7 @@ template<class SampleType> class ChannelMixerChannelInternal;
 PLONK_CHANNELDATA_DECLARE(ChannelMixerChannelInternal,SampleType)
 {    
     ChannelInternalCore::Data base;
-    bool allowAutoDelete:1;
+    bool allowAutoDelete;//:1;
 };      
 
 
@@ -165,8 +165,8 @@ PLONK_CHANNELDATA_DECLARE(UnitMixerChannelInternal,SampleType)
 {    
     ChannelInternalCore::Data base;
     int preferredNumChannels;
-    bool allowAutoDelete:1;
-    bool purgeExpiredUnits:1;
+    bool allowAutoDelete;//:1;
+    bool purgeExpiredUnits;//:1;
 };      
 
 
@@ -304,8 +304,8 @@ PLONK_CHANNELDATA_DECLARE(QueueMixerChannelInternal,SampleType)
 {
     ChannelInternalCore::Data base;
     int preferredNumChannels;
-    bool allowAutoDelete:1;
-    bool purgeExpiredUnits:1;
+    bool allowAutoDelete;//:1;
+    bool purgeExpiredUnits;//:1;
 };
 
 

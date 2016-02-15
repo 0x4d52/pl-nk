@@ -52,9 +52,9 @@ PLONK_CHANNELDATA_DECLARE(EnvelopeChannelInternal,SampleType)
     ShapeState<SampleType> shapeState;
     int targetPointIndex;
 
-    bool prevGate:1;
-    bool done:1;
-    bool deleteWhenDone:1;
+    bool prevGate;//:1;
+    bool done;//:1;
+    bool deleteWhenDone;//:1;
 };      
 
 

@@ -51,8 +51,8 @@ PLONK_CHANNELDATA_DECLARE(SignalPlayChannelInternal,SampleType)
     ChannelInternalCore::Data base;
     RateType currentPosition;
     
-    bool done:1;
-    bool deleteWhenDone:1;
+    bool done;//:1;
+    bool deleteWhenDone;//:1;
 };
 
 //------------------------------------------------------------------------------

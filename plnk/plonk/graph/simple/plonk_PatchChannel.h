@@ -51,7 +51,7 @@ PLONK_CHANNELDATA_DECLARE(PatchChannelInternal,SampleType)
     int preferredNumChannels;
     SampleType fadeIncrement;
     SampleType fadeLevel;
-    bool allowAutoDelete:1;
+    bool allowAutoDelete;//:1;
 };      
 
 
