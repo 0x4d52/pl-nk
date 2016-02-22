@@ -515,7 +515,7 @@ public:
                                                  this->getSampleRate()));      
         
         const int numChannels = input.getNumChannels();
-        float value = 0.f;
+        float value = 0.0f;
         
         for (int i = 0; i < numChannels; ++i)
             value += input.getValue (i);
@@ -645,7 +645,7 @@ public:
         const Units& units = this->getInputAsUnits (IOKey::Units);
         
         const int numUnits = units.length();
-        float value (0.f);
+        float value (0.0f);
         
         for (int i = 0; i < numUnits; ++i)
             value += units.atUnchecked (i).getValue (channel);

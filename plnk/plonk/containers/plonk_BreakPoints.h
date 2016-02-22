@@ -87,7 +87,7 @@ public:
     
     Shape() throw()
     :   type (Linear),
-        curve (0.f)
+        curve (0.0f)
     {
     }
     
@@ -99,7 +99,7 @@ public:
     
     Shape (ShapeType const& typeToUse) throw()
     :   type (typeToUse),
-        curve (0.f)
+        curve (0.0f)
     {
     }
 
@@ -114,7 +114,7 @@ public:
         shapeState.stepsToTarget = TypeUtility<LongLong>::getTypePeak();
         shapeState.currentLevel = shapeState.targetLevel;
         shapeState.shapeType = Shape::Linear;
-        shapeState.curve = 0.f;
+        shapeState.curve = 0.0f;
         shapeState.grow.u.norm = Math<ValueType>::get0();
     }
     
@@ -205,7 +205,7 @@ private:
         if ((plonk::abs (shapeState.curve) < 0.001f) || (diff == zero))
         {
             shapeState.shapeType = Shape::Linear;
-            shapeState.curve = 0.f;
+            shapeState.curve = 0.0f;
             initLinear (shapeState);
         }
         else

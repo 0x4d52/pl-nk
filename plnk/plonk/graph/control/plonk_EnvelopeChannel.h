@@ -136,7 +136,7 @@ public:
                 // start
                 data.targetPointIndex = -1;
                 data.shapeState.shapeType = Shape::Linear;
-                data.shapeState.curve = 0.f;
+                data.shapeState.curve = 0.0f;
                 data.shapeState.grow.u.norm = SampleType (0);
                 data.shapeState.stepsToTarget = samplesRemaining;
             }
@@ -350,7 +350,7 @@ public:
         Data data = { { -1.0, -1.0 },
             { 0, 0, 0, 0,
               0, 0, 0, 0, // coeffs
-              Shape::Linear, 0.f },
+              Shape::Linear, 0.0f },
             -1,
             false, false, deleteWhenDone };
         

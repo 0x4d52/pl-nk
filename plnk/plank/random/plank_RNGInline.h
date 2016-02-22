@@ -71,7 +71,7 @@ static PLANK_INLINE_LOW float pl_RNG_NextFloat (PlankRNGRef p)
 	float value;
 	bits = PLANK_RNG_FLOAT_ONE | (PLANK_RNG_FLOAT_ONEMASK & pl_RNG_Next (p));
     value = *(float*)(&bits);
-    return value - 1.f;
+    return value - 1.0f;
 }
 
 static PLANK_INLINE_LOW double pl_RNG_NextDouble (PlankRNGRef p)

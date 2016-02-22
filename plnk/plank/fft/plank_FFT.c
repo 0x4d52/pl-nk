@@ -144,7 +144,7 @@ PlankResult pl_FFTF_InitWithLength (PlankFFTFRef p, const PlankL length)
     p->peer = vDSP_create_fftsetup (p->lengthLog2, 0);
     p->bufferComplex.realp = p->buffer;
     p->bufferComplex.imagp = p->buffer + p->halfLength;
-    p->ifftScale = 1.f / p->length;
+    p->ifftScale = 1.0f / p->length;
     p->fftScale = 0.5f;
 #elif defined(PLANK_FFT_CUSTOM)
     p->peer = pl_FFTCusomF_CreateAndInitWithLength (p->length, &p->fftScale, &p->ifftScale);
@@ -226,7 +226,7 @@ void pl_FFTF_Forward (PlankFFTFRef p, float* output, const float* input)
     outputComplex.realp = output;
     outputComplex.imagp = output + N2;
     
-    if (scale != 1.f)
+    if (scale != 1.0f)
         pl_VectorMulF_NN1 (buffer, input, scale, N);
     
     vDSP_ctoz ((COMPLEX*)buffer, 2, &outputComplex, 1, N2);
@@ -241,12 +241,12 @@ void pl_FFTF_Forward (PlankFFTFRef p, float* output, const float* input)
     flip[0] = nyquist;
    #endif
 #elif defined(PLANK_FFT_CUSTOM)
-    if (scale != 1.f)
+    if (scale != 1.0f)
         pl_VectorMulF_NN1 (output, output, scale, N);
 
     pl_FFTCustomF_Forward (p->peer, output, input);
 #else
-    if (scale != 1.f)
+    if (scale != 1.0f)
         pl_VectorMulF_NN1 (output, output, scale, N);
 
     pl_FFTRealF_Forward (p->peer, output, input);    
@@ -284,7 +284,7 @@ void pl_FFTF_Inverse (PlankFFTFRef p, float* output, const float* input)
     pl_FFTRealF_Inverse (p->peer, output, buffer);
 #endif
     
-    if (scale != 1.f)
+    if (scale != 1.0f)
         pl_VectorMulF_NN1 (output, output, scale, N);
 }
 

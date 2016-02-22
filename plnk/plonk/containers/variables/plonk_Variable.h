@@ -248,7 +248,7 @@ public:
     /** Create a shape variable that can transition in different ways to new values. */
     Variable shape (StepsVariable const& numSteps) const throw()
     {
-        Internal* internal = new ShapeVariableInternalType (*this, numSteps, Shape::Linear, 0.f);
+        Internal* internal = new ShapeVariableInternalType (*this, numSteps, Shape::Linear, 0.0f);
         return Variable (internal);
     }
     
@@ -256,7 +256,7 @@ public:
     Variable shape (StepsVariable const& numSteps,
                     ShapeTypeVariable const& shapeType) const throw()
     {
-        Internal* internal = new ShapeVariableInternalType (*this, numSteps, shapeType, 0.f);
+        Internal* internal = new ShapeVariableInternalType (*this, numSteps, shapeType, 0.0f);
         return Variable (internal);
     }
     

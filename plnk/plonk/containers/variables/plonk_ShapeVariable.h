@@ -87,7 +87,7 @@ public:
         {
             shapeState.targetLevel = nextValue;
             shapeState.shapeType = shape.nextValue();
-            shapeState.curve = (shapeState.shapeType == Shape::Numerical) ? curve.nextValue() : 0.f;
+            shapeState.curve = (shapeState.shapeType == Shape::Numerical) ? curve.nextValue() : 0.0f;
             shapeState.stepsToTarget = plonk::max (1, numSteps.nextValue());
             Shape::initShape (shapeState);
         }

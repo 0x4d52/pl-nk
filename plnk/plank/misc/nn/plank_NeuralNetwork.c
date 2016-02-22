@@ -47,7 +47,7 @@ static const float NeuralFE1 = 2.7182818284590452354f;
 
 static PlankF pl_NeuralNetworkFDefaultActFunction (PlankF value)
 {
-    return 1.f / (1.f + pl_PowF (NeuralFE1, -value));
+    return 1.0f / (1.0f + pl_PowF (NeuralFE1, -value));
 }
 
 PlankResult pl_NeuralNetworkF_InitWithLayersAndRange (PlankNeuralNetworkFRef p, const int* layers, const int numLayers, const float range)
@@ -173,7 +173,7 @@ float pl_NeuralNetworkF_GetActFuncOffset (PlankNeuralNetworkFRef p)
 
 PlankResult pl_NeuralNetworkF_SetLearnRate (PlankNeuralNetworkFRef p, const float amount)
 {
-    if (amount <= 0.f) return PlankResult_UnknownError;
+    if (amount <= 0.0f) return PlankResult_UnknownError;
     
     p->learnRate = amount;
     
@@ -516,8 +516,8 @@ PlankResult pl_NeuralNetworkF_InitFromJSON (PlankNeuralNetworkFRef p, PlankJSONR
     p->learnRate = pl_JSON_FloatGet (pl_JSON_ObjectAtKey (j, PLANK_NEURALNETWORKF_JSON_LEARNRATE));    
     p->actFuncOffset = pl_JSON_FloatGet (pl_JSON_ObjectAtKey (j, PLANK_NEURALNETWORKF_JSON_ACTFUNCOFFSET));
     
-    p->learnRate = p->learnRate > 0.f ? p->learnRate : 0.25f;
-    p->actFuncOffset = p->actFuncOffset > 0.f ? p->actFuncOffset : 0.01f;
+    p->learnRate = p->learnRate > 0.0f ? p->learnRate : 0.25f;
+    p->actFuncOffset = p->actFuncOffset > 0.0f ? p->actFuncOffset : 0.01f;
 
 exit:
     return result;

@@ -51,25 +51,25 @@
 #define PLANK_SQRT2_D 1.41421356237309514547462185873883
 #define PLANK_SQRT2_F 1.41421356237309514547f
 #define PLANK_BILLION_D 1000000000.0
-#define PLANK_BILLION_F 1000000000.f
+#define PLANK_BILLION_F 1000000000.0f
 #define PLANK_MILLION_D 1000000.0
-#define PLANK_MILLION_F 1000000.f
+#define PLANK_MILLION_F 1000000.0f
 #define PLANK_440_D   440.0
-#define PLANK_440_F   440.f
+#define PLANK_440_F   440.0f
 #define PLANK_360_D   360.0
-#define PLANK_360_F   360.f
+#define PLANK_360_F   360.0f
 #define PLANK_69_D    69.0
-#define PLANK_69_F    69.f
+#define PLANK_69_F    69.0f
 #define PLANK_20_D    20.0
-#define PLANK_20_F    20.f
+#define PLANK_20_F    20.0f
 #define PLANK_12_D    12.0
-#define PLANK_12_F    12.f
+#define PLANK_12_F    12.0f
 #define PLANK_2_D     2.0
-#define PLANK_2_F     2.f
+#define PLANK_2_F     2.0f
 #define PLANK_1_D     1.0
-#define PLANK_1_F     1.f
+#define PLANK_1_F     1.0f
 #define PLANK_0_D     0.0
-#define PLANK_0_F     0.f
+#define PLANK_0_F     0.0f
 
 #define PLANK_CHARPEAK_I CHAR_MAX
 #define PLANK_CHARPEAK_F ((float)PLANK_CHARPEAK_I)
@@ -127,10 +127,10 @@ static inline float pl_MoveF (float a)              { return a; }
  This is just added as a convenience for the vector-based functions. */
 static inline double pl_MoveD (double a)            { return a; } 
 
-static inline float pl_IncF (float a)               { return a + 1.f; }
+static inline float pl_IncF (float a)               { return a + 1.0f; }
 static inline double pl_IncD (double a)             { return a + 1.0; } 
 
-static inline float pl_DecF (float a)               { return a - 1.f; }
+static inline float pl_DecF (float a)               { return a - 1.0f; }
 static inline double pl_DecD (double a)             { return a - 1.0; } 
 
 
@@ -148,7 +148,7 @@ static inline double pl_AbsD (double a)             { return fabs (a); }
 
 
 #if PLANK_WIN || PLANK_ANDROID
-static inline float pl_Log2F (float a)              { return logf (a) / logf (2.f); }
+static inline float pl_Log2F (float a)              { return logf (a) / logf (2.0f); }
 static inline double pl_Log2D (double a)            { return log (a) / log (2.0); }
 #else
 /** Returns the logarithm base 2 of the input argument. */
@@ -158,7 +158,7 @@ static inline double pl_Log2D (double a)            { return log2 (a); }
 #endif
 
 /** Returns the reciprocal of the input argument (i.e, @f$ \frac{1}{a} @f$). */
-static inline float pl_ReciprocalF (float a)        { return 1.f / a; }
+static inline float pl_ReciprocalF (float a)        { return 1.0f / a; }
 /** Returns the reciprocal of the input argument (i.e, @f$ \frac{1}{a} @f$). */
 static inline double pl_ReciprocalD (double a)      { return 1.0 / a; }
 
@@ -253,42 +253,42 @@ static inline float pl_FracF (float a)              { return a - floorf (a); }
 static inline double pl_FracD (double a)            { return a - floor (a); }
 
 /** Returns 0 if the input is 0, -1 if the input is negative or 1 if the input argument is positive. */
-static inline float pl_SignF (float a)              { return (a == 0.f) ? 0.f : (a < 0.f) ? -1.f : 1.f; }
+static inline float pl_SignF (float a)              { return (a == 0.0f) ? 0.0f : (a < 0.0f) ? -1.0f : 1.0f; }
 /** Returns 0 if the input is 0, -1 if the input is negative or 1 if the input argument is positive. */
 static inline double pl_SignD (double a)            { return (a == 0.0) ? 0.0 : (a < 0.0) ? -1.0 : 1.0; }
 
 /** Returns the input argument converted from MIDI note numbers to frequency (in Hz). */
-static inline float pl_M2FF (float a)               { return 440.f * powf(2.f, (a - 69.f) * (1.f / 12.f)); }
+static inline float pl_M2FF (float a)               { return 440.0f * powf(2.0f, (a - 69.f) * (1.0f / 12.0f)); }
 /** Returns the input argument converted from MIDI note numbers to frequency (in Hz). */
 static inline double pl_M2FD (double a)             { return 440.0 * pow (2.0, (a - 69.0) * (1.0 / 12.0)); }
 
 /** Returns the input argument converted from frequency (in Hz) to MIDI note numbers. */
-static inline float pl_F2MF (float a)               { return pl_Log2F (a * (1.f / 440.f)) * 12.f + 69.f; }
+static inline float pl_F2MF (float a)               { return pl_Log2F (a * (1.0f / 440.0f)) * 12.0f + 69.f; }
 /** Returns the input argument converted from frequency (in Hz) to MIDI note numbers. */
 static inline double pl_F2MD (double a)             { return pl_Log2D (a * (1.0 / 440.0)) * 12.0 + 69.0; }
 
 /** Returns the input argument converted from linear amplitude to decibels where 0dB is an amplitude of 1. */
-static inline float pl_A2dBF (float a)              { return log10f(a) * 20.f; }
+static inline float pl_A2dBF (float a)              { return log10f(a) * 20.0f; }
 /** Returns the input argument converted from linear amplitude to decibels where 0dB is an amplitude of 1. */
 static inline double pl_A2dBD (double a)            { return log10 (a) * 20.0; }
 
 /** Returns the input argument converted from decibels to linear amplitude where 0dB is an amplitude of 1. */
-static inline float pl_dB2AF (float a)              { return powf(10.f, a * (1.f / 20.f)); }
+static inline float pl_dB2AF (float a)              { return powf(10.0f, a * (1.0f / 20.0f)); }
 /** Returns the input argument converted from decibels to linear amplitude where 0dB is an amplitude of 1. */
 static inline double pl_dB2AD (double a)            { return pow (10.0, a * (1.0 / 20.0)); }
 
 /** Returns the input argument converted from degrees to radians. */
-static inline float pl_D2RF (float a)               { return a * (1.f / 360.f) * PLANK_PI_F; }
+static inline float pl_D2RF (float a)               { return a * (1.0f / 360.0f) * PLANK_PI_F; }
 /** Returns the input argument converted from degrees to radians. */
 static inline double pl_D2RD (double a)             { return a * (1.0 / 360.0) * PLANK_PI_D; }
 
 /** Returns the input argument converted from radians to degrees. */
-static inline float pl_R2DF (float a)               { return a * (1.f / PLANK_PI_F) * 360.f; }
+static inline float pl_R2DF (float a)               { return a * (1.0f / PLANK_PI_F) * 360.0f; }
 /** Returns the input argument converted from radians to degrees. */
 static inline double pl_R2DD (double a)             { return a * (1.0 / PLANK_PI_D) * 360.0; }
 
 /** Returns the input argument distorted. */
-static inline float pl_DistortF (float a)           { return a / (1.f + fabsf(a)); }
+static inline float pl_DistortF (float a)           { return a / (1.0f + fabsf(a)); }
 /** Returns the input argument distorted. */
 static inline double pl_DistortD (double a)         { return a / (1.0 + fabs (a)); }
 
@@ -297,7 +297,7 @@ static inline double pl_DistortD (double a)         { return a / (1.0 + fabs (a)
 static inline float pl_ZapF (float x)           
 { 
     float absx = pl_AbsF (x);
-    return (absx > (float)1e-15 && absx < (float)1e15) ? x : 0.f;
+    return (absx > (float)1e-15 && absx < (float)1e15) ? x : 0.0f;
 }
 
 /** Returns the input argument with infinities, NaNs and denormallised numbers removed. */
@@ -354,32 +354,32 @@ static inline float pl_PowF (float a, float b)                          { return
 static inline double pl_PowD (double a, double b)                       { return pow (a, b); }
 
 /** Returns 1 if the inputs are equal otherwise returns 0.  */
-static inline float pl_IsEqualToF (float a, float b)                    { return (a == b) ? 1.f : 0.f; }
+static inline float pl_IsEqualToF (float a, float b)                    { return (a == b) ? 1.0f : 0.0f; }
 /** Returns 1 if the inputs are equal otherwise returns 0.  */
 static inline double pl_IsEqualToD (double a, double b)                 { return (a == b) ? 1.0 : 0.0; }
 
 /** Returns 1 if the inputs are not equal otherwise returns 0.  */
-static inline float pl_IsNotEqualToF (float a, float b)                 { return (a != b) ? 1.f : 0.f; }
+static inline float pl_IsNotEqualToF (float a, float b)                 { return (a != b) ? 1.0f : 0.0f; }
 /** Returns 1 if the inputs are not equal otherwise returns 0.  */
 static inline double pl_IsNotEqualToD (double a, double b)              { return (a != b) ? 1.0 : 0.0; }
 
 /** Returns 1 if the @e a is greater than @e b otherwise returns 0.  */
-static inline float pl_IsGreaterThanF (float a, float b)                { return (a > b) ? 1.f : 0.f; }
+static inline float pl_IsGreaterThanF (float a, float b)                { return (a > b) ? 1.0f : 0.0f; }
 /** Returns 1 if the @e a is greater than @e b otherwise returns 0.  */
 static inline double pl_IsGreaterThanD (double a, double b)             { return (a > b) ? 1.0 : 0.0; }
 
 /** Returns 1 if the @e a is greater than or equal to @e b otherwise returns 0.  */
-static inline float pl_IsGreaterThanOrEqualToF (float a, float b)       { return (a >= b) ? 1.f : 0.f; }
+static inline float pl_IsGreaterThanOrEqualToF (float a, float b)       { return (a >= b) ? 1.0f : 0.0f; }
 /** Returns 1 if the @e a is greater than or equal to @e b otherwise returns 0.  */
 static inline double pl_IsGreaterThanOrEqualToD (double a, double b)    { return (a >= b) ? 1.0 : 0.0; }
 
 /** Returns 1 if the @e a is less than @e b otherwise returns 0.  */
-static inline float pl_IsLessThanF (float a, float b)                   { return (a < b) ? 1.f : 0.f; }
+static inline float pl_IsLessThanF (float a, float b)                   { return (a < b) ? 1.0f : 0.0f; }
 /** Returns 1 if the @e a is less than @e b otherwise returns 0.  */
 static inline double pl_IsLessThanD (double a, double b)                { return (a < b) ? 1.0 : 0.0; }
 
 /** Returns 1 if the @e a is less than or equal to @e b otherwise returns 0.  */
-static inline float pl_IsLessThanOrEqualToF (float a, float b)          { return (a <= b) ? 1.f : 0.f; }
+static inline float pl_IsLessThanOrEqualToF (float a, float b)          { return (a <= b) ? 1.0f : 0.0f; }
 /** Returns 1 if the @e a is less than or equal to @e b otherwise returns 0.  */
 static inline double pl_IsLessThanOrEqualToD (double a, double b)       { return (a <= b) ? 1.0 : 0.0; }
 
@@ -419,7 +419,7 @@ static inline float pl_AbsDifF (float a, float b)                       { return
 static inline double pl_AbsDifD (double a, double b)                    { return fabs (a - b); }
 
 /** If @e a is less than @e b returns 0 otherwise return @e a. */
-static inline float pl_ThreshF (float a, float b)                       { return (a < b) ? 0.f : a; }
+static inline float pl_ThreshF (float a, float b)                       { return (a < b) ? 0.0f : a; }
 /** If @e a is less than @e b returns 0 otherwise return @e a. */
 static inline double pl_ThreshD (double a, double b)                    { return (a < b) ? 0.0 : a; }
 
@@ -629,7 +629,7 @@ static inline float pl_LinExpF (float input,
 {
     float outRatio, reciprocalInRange, inLowOverInRange;
 	outRatio = outHigh / outLow;
-    reciprocalInRange = 1.f / (inHigh - inLow);
+    reciprocalInRange = 1.0f / (inHigh - inLow);
     inLowOverInRange = reciprocalInRange * inLow;
     return outLow * powf (outRatio, input * reciprocalInRange - inLowOverInRange);	
 }
@@ -712,9 +712,9 @@ static inline PlankLL pl_LookupLL (const PlankLL* table, PlankLL index) { return
 static inline float pl_Lag3InterpF (float value_1, float value0, float value1, float value2, float frac)
 {    
     float c0 = value0;
-    float c1 = value1 - (1.f/3.f) * value_1 - 0.5f * value0 - (1.f/3.f) * value2;
+    float c1 = value1 - (1.0f/3.f) * value_1 - 0.5f * value0 - (1.0f/3.f) * value2;
     float c2 = 0.5f * (value_1 + value1) - value0;
-    float c3 = (1.f/6.f) * (value2 - value_1) + 0.5f * (value0 - value1);
+    float c3 = (1.0f/6.f) * (value2 - value_1) + 0.5f * (value0 - value1);
     return ((c3 * frac + c2) * frac + c1) * frac + c0;
 }
 

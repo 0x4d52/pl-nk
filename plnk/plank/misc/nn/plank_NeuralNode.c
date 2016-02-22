@@ -214,7 +214,7 @@ PlankResult pl_NeuralNodeF_Reset (PlankNeuralNodeFRef p, const float amount)
     size = (int)pl_DynamicArray_GetSize (&p->weightVector);
     r = pl_RNGGlobal();
     
-    amount2 = amount * 2.f;
+    amount2 = amount * 2.0f;
     
 	for (i = 0; i < size; ++i)
 		weightVectorPtr[i] = pl_RNG_NextFloat (r) * amount2 - amount;
@@ -235,7 +235,7 @@ PlankResult pl_NeuralNodeF_Randomise (PlankNeuralNodeFRef p, const float amount)
     size = (int)pl_DynamicArray_GetSize (&p->weightVector);
     r = pl_RNGGlobal();
     
-    amount2 = amount * 2.f;
+    amount2 = amount * 2.0f;
     
 	for (i = 0; i < size; ++i)
 		weightVectorPtr[i] += pl_RNG_NextFloat (r) * amount2 - amount;
@@ -252,7 +252,7 @@ PlankResult pl_NeuralNodeF_BackPropVector (PlankNeuralNodeFRef p, const float* i
     int size;
     
     output = p->output;
-    adjust = error * (actFuncOffset + (output * (1.f - output)));
+    adjust = error * (actFuncOffset + (output * (1.0f - output)));
     learn = adjust * learnRate;
 
 	weightVectorPtr = (float*)pl_DynamicArray_GetArray (&p->weightVector);
@@ -273,7 +273,7 @@ float pl_NeuralNodeF_PropogateVector (PlankNeuralNodeFRef p, const float* inputV
     const float* weightVectorPtr;
     int size;
     
-    input = 0.f;
+    input = 0.0f;
     weightVectorPtr = (const float*)pl_DynamicArray_GetArray (&p->weightVector);
     size = (int)pl_DynamicArray_GetSize (&p->weightVector);
     
@@ -290,7 +290,7 @@ PlankResult pl_NeuralNodeF_BackPropScalar (PlankNeuralNodeFRef p, const float* i
     int size, i;
     
     output = p->output;
-    adjust = error * (actFuncOffset + (output * (1.f - output)));
+    adjust = error * (actFuncOffset + (output * (1.0f - output)));
     learn = adjust * learnRate;
     
 	weightVectorPtr = (float*)pl_DynamicArray_GetArray (&p->weightVector);
@@ -313,7 +313,7 @@ float pl_NeuralNodeF_PropogateScalar (PlankNeuralNodeFRef p, const float* inputV
     const float* weightVectorPtr;
     int size, i;
     
-    input = 0.f;
+    input = 0.0f;
     weightVectorPtr = (const float*)pl_DynamicArray_GetArray (&p->weightVector);
     size = (int)pl_DynamicArray_GetSize (&p->weightVector);
     

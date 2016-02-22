@@ -176,7 +176,7 @@ public:
     
     void initChannel (const int channel) throw()
     {        
-        this->initValue (0.f);
+        this->initValue (0.0f);
     }        
     
     void process (ProcessInfo& info, const int channel) throw()

@@ -134,7 +134,7 @@ float RNG::uniform (const float max) throw()
 float RNG::uniform (const float min, const float max) throw()
 {
     return plonk::linlin (pl_RNG_NextFloat (this->getInternal()->getRNGRef()), 
-                          0.f, 1.f, 
+                          0.0f, 1.0f, 
                           min, max);
 }
 
@@ -158,7 +158,7 @@ double RNG::uniform (const double min, const double max) throw()
 float RNG::exponential (const float min, const float max) throw()
 {
     return plonk::linexp (pl_RNG_NextFloat (this->getInternal()->getRNGRef()), 
-                          0.f, 1.f, 
+                          0.0f, 1.0f, 
                           min, max);
 }
 

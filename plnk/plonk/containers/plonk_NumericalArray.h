@@ -276,7 +276,7 @@ public:
     static PLONK_INLINE_MID void convertScaled (float* const dst, const char* const src, const UnsignedLong numItems) throw()
     {
         convertDirect (dst, src, numItems);
-        pl_VectorMulF_NN1 (dst, dst, 1.f / PLANK_CHARPEAK_F, numItems);
+        pl_VectorMulF_NN1 (dst, dst, 1.0f / PLANK_CHARPEAK_F, numItems);
     }    
 };
 
@@ -292,7 +292,7 @@ public:
     static PLONK_INLINE_MID void convertScaled (float* const dst, const short* const src, const UnsignedLong numItems) throw()
     {
         convertDirect (dst, src, numItems);
-        pl_VectorMulF_NN1 (dst, dst, 1.f / PLANK_SHORTPEAK_F, numItems);
+        pl_VectorMulF_NN1 (dst, dst, 1.0f / PLANK_SHORTPEAK_F, numItems);
     }    
 };
 
@@ -309,7 +309,7 @@ public:
     static PLONK_INLINE_MID void convertScaled (float* const dst, const Int24* const src, const UnsignedLong numItems) throw()
     {
         convertDirect (dst, src, numItems);
-        pl_VectorMulF_NN1 (dst, dst, 1.f / PLANK_INT24PEAK_F, numItems);
+        pl_VectorMulF_NN1 (dst, dst, 1.0f / PLANK_INT24PEAK_F, numItems);
     }    
 };
 
@@ -325,7 +325,7 @@ public:
     static PLONK_INLINE_MID void convertScaled (float* const dst, const int* const src, const UnsignedLong numItems) throw()
     {
         convertDirect (dst, src, numItems);
-        pl_VectorMulF_NN1 (dst, dst, 1.f / PLANK_INTPEAK_F, numItems);
+        pl_VectorMulF_NN1 (dst, dst, 1.0f / PLANK_INTPEAK_F, numItems);
     }    
 };
 
@@ -1573,7 +1573,7 @@ public:
 												    const double repeats = 1.0, 
 												    const NumericalType peak = TypeUtility<NumericalType>::getTypePeak()) throw()
 	{
-		plonk_assert (repeats > 0.f);
+		plonk_assert (repeats > 0.0f);
 		return NumericalArray<double>::line (size, 0.0, Math<double>::get2Pi() * repeats).sin() * peak;
 	}
 	
@@ -1598,7 +1598,7 @@ public:
 													  const double repeats = 1.0, 
 													  const NumericalType peak = NumericalType(0)) throw()
 	{
-		plonk_assert (repeats > 0.f);
+		plonk_assert (repeats > 0.0f);
         NumericalType actualPeak = peak == NumericalType(0) ? TypeUtility<NumericalType>::getTypePeak() : peak;
 		return NumericalArray<double>::line (size, 0.0, Math<double>::get2Pi() * repeats).cos() * actualPeak;
 	}
@@ -1608,7 +1608,7 @@ public:
 													   const double repeats = 1.0, 
 													   const NumericalType peak = TypeUtility<NumericalType>::getTypePeak()) throw()
 	{
-		plonk_assert (repeats > 0.f);
+		plonk_assert (repeats > 0.0f);
 		return NumericalArray<double>::line (size, 0.0, Math<double>::getPi() * repeats).sin() * peak;
 	}
 	

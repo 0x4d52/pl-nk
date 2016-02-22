@@ -185,7 +185,7 @@ static PLANK_INLINE_LOW double pl_JSON_DoubleGet (PlankJSONRef p)
 
 static PLANK_INLINE_LOW float pl_JSON_FloatGet (PlankJSONRef p)
 {
-    float value = 0.f;
+    float value = 0.0f;
     
     if (json_is_real ((json_t*)p))
         value = (float)json_real_value ((json_t*)p);

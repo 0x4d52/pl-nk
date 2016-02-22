@@ -458,12 +458,12 @@ static PLANK_INLINE_LOW PlankF pl_AtomicF_Subtract (PlankAtomicFRef p, PlankF op
 
 static PLANK_INLINE_LOW PlankF pl_AtomicF_Increment (PlankAtomicFRef p)
 {
-    return pl_AtomicF_Add (p, 1.f);
+    return pl_AtomicF_Add (p, 1.0f);
 }
 
 static PLANK_INLINE_LOW PlankF pl_AtomicF_Decrement (PlankAtomicFRef p)
 {
-    return pl_AtomicF_Add (p, -1.f);
+    return pl_AtomicF_Add (p, -1.0f);
 }
 
 //------------------------------------------------------------------------------

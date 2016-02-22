@@ -546,8 +546,8 @@ PlankResult pl_AudioFileWriter_SetFormatOggVorbis (PlankAudioFileWriterRef p, co
     p->formatInfo.nominalBitRate    = 0;
     p->formatInfo.minimumBitRate    = 0;
     p->formatInfo.maximumBitRate    = 0;
-    p->formatInfo.frameDuration     = 0.f;
-    p->formatInfo.quality           = pl_ClipF (quality, 0., 10.f);
+    p->formatInfo.frameDuration     = 0.0f;
+    p->formatInfo.quality           = pl_ClipF (quality, 0., 10.0f);
     p->dataOffset                   = 0;
     
     return PlankResult_OK;
@@ -583,8 +583,8 @@ PlankResult pl_AudioFileWriter_SetFormatOggVorbisManaged (PlankAudioFileWriterRe
     p->formatInfo.nominalBitRate    = ((nominal < min) || (nominal > max)) ? (min + max) / 2 : nominal;
     p->formatInfo.minimumBitRate    = min;
     p->formatInfo.maximumBitRate    = max;
-    p->formatInfo.frameDuration     = 0.f;
-    p->formatInfo.quality           = 0.f;
+    p->formatInfo.frameDuration     = 0.0f;
+    p->formatInfo.quality           = 0.0f;
     p->dataOffset                   = 0;
     
     return PlankResult_OK;
@@ -619,7 +619,7 @@ PlankResult pl_AudioFileWriter_SetFormatOpus (PlankAudioFileWriterRef p, const f
     p->formatInfo.minimumBitRate    = 0;
     p->formatInfo.maximumBitRate    = 0;
     p->formatInfo.frameDuration     = frameDuration;
-    p->formatInfo.quality           = pl_ClipF (quality, 0., 10.f);
+    p->formatInfo.quality           = pl_ClipF (quality, 0., 10.0f);
     p->dataOffset                   = 0;
 
     return PlankResult_OK;
@@ -654,7 +654,7 @@ PlankResult pl_AudioFileWriter_SetFormatOpusManaged (PlankAudioFileWriterRef p, 
     p->formatInfo.minimumBitRate    = nominalBitRate;
     p->formatInfo.maximumBitRate    = nominalBitRate;
     p->formatInfo.frameDuration     = frameDuration;
-    p->formatInfo.quality           = 0.f;
+    p->formatInfo.quality           = 0.0f;
     p->dataOffset                   = 0;
     
     return PlankResult_OK;
@@ -2255,7 +2255,7 @@ PlankResult pl_AudioFileWriter_OggVorbis_OpenInternal (PlankAudioFileWriterRef p
         err = vorbis_encode_init_vbr (&ogg->vi,
                                       numChannels,
                                       (int)p->formatInfo.sampleRate,
-                                      pl_ClipF (p->formatInfo.quality * 0.1f, -0.1f, 1.f));
+                                      pl_ClipF (p->formatInfo.quality * 0.1f, -0.1f, 1.0f));
     }
     
     if (! err)
@@ -2577,8 +2577,8 @@ static PlankResult pl_AudioFileWriter_Opus_OpenInternal (PlankAudioFileWriterRef
         pl_MemoryZero (file, sizeof (PlankFile));
     }
     
-    p->formatInfo.frameDuration = p->formatInfo.frameDuration == 0.f ? 0.02 : p->formatInfo.frameDuration;
-    opus->frameSize48kHz        = (int)(p->formatInfo.frameDuration * 48000.f);
+    p->formatInfo.frameDuration = p->formatInfo.frameDuration == 0.0f ? 0.02 : p->formatInfo.frameDuration;
+    opus->frameSize48kHz        = (int)(p->formatInfo.frameDuration * 48000.0f);
     
     switch (opus->frameSize48kHz) {
         case 120: case 240: case 480: case 960: case 1920: case 2880:

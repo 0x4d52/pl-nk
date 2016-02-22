@@ -274,8 +274,8 @@ PlankResult pl_AudioFileReader_Init (PlankAudioFileReaderRef p)
     p->formatInfo.maximumBitRate   = 0;
     p->formatInfo.nominalBitRate   = 0;
     p->formatInfo.sampleRate       = 0.0;
-    p->formatInfo.frameDuration    = 0.f;
-    p->formatInfo.quality          = 0.f;    
+    p->formatInfo.frameDuration    = 0.0f;
+    p->formatInfo.quality          = 0.0f;    
     
     p->numFrames                   = 0;
     p->dataPosition                = -1;
@@ -2810,7 +2810,7 @@ PlankResult pl_AudioFileReader_OggVorbis_Open  (PlankAudioFileReaderRef p, const
     p->formatInfo.minimumBitRate    = (int)info->bitrate_lower;
     p->formatInfo.maximumBitRate    = (int)info->bitrate_upper;
     p->formatInfo.frameDuration     = 0.0;
-    p->formatInfo.quality           = 0.f;
+    p->formatInfo.quality           = 0.0f;
     
     numFrames = ov_pcm_total (&ogg->oggVorbisFile, -1);
     
@@ -2921,7 +2921,7 @@ PlankResult pl_AudioFileReader_OggVorbis_OpenWithFile  (PlankAudioFileReaderRef 
     p->formatInfo.minimumBitRate    = (int)info->bitrate_lower;
     p->formatInfo.maximumBitRate    = (int)info->bitrate_upper;
     p->formatInfo.frameDuration     = 0.0;
-    p->formatInfo.quality           = 0.f;
+    p->formatInfo.quality           = 0.0f;
 
     numFrames = ov_pcm_total (&ogg->oggVorbisFile, -1);
     
@@ -3080,7 +3080,7 @@ PlankResult pl_AudioFileReader_OggVorbis_ReadFrames (PlankAudioFileReaderRef p, 
                 pcmTemp = pcm[i];
                 
                 for (j = 0; j < framesThisTime; ++j, bufferTemp += numChannels)
-                    *bufferTemp = pl_ClipF (pcmTemp[j], -1.f, 1.f);
+                    *bufferTemp = pl_ClipF (pcmTemp[j], -1.0f, 1.0f);
             }
         }
     }
@@ -3332,7 +3332,7 @@ PlankResult pl_AudioFileReader_Opus_Open  (PlankAudioFileReaderRef p, const char
     p->formatInfo.minimumBitRate    = p->formatInfo.nominalBitRate;
     p->formatInfo.maximumBitRate    = p->formatInfo.nominalBitRate;
     p->formatInfo.frameDuration     = 0.0;
-    p->formatInfo.quality           = 0.f;
+    p->formatInfo.quality           = 0.0f;
 
     numFrames = op_pcm_total (opus->oggOpusFile, -1);
     bufferSize = PLANKAUDIOFILE_OPUS_MAXFRAMESIZE * p->formatInfo.bytesPerFrame;
@@ -3450,7 +3450,7 @@ PlankResult pl_AudioFileReader_Opus_OpenWithFile  (PlankAudioFileReaderRef p, Pl
     p->formatInfo.minimumBitRate    = p->formatInfo.nominalBitRate;
     p->formatInfo.maximumBitRate    = p->formatInfo.nominalBitRate;
     p->formatInfo.frameDuration     = 0.0;
-    p->formatInfo.quality           = 0.f;
+    p->formatInfo.quality           = 0.0f;
 
     numFrames = op_pcm_total (opus->oggOpusFile, -1);
     bufferSize = PLANKAUDIOFILE_OPUS_MAXFRAMESIZE * p->formatInfo.bytesPerFrame;

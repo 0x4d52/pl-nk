@@ -51,7 +51,7 @@ void plink_SawProcessF_NN (void* ppv, SawProcessStateF* state)
     
     sampleDuration = (float)state->base.sampleDuration;    
     currentValue = state->currentValue;
-    factor = 2.f * sampleDuration;
+    factor = 2.0f * sampleDuration;
     
     N = pp->buffers[0].bufferSize;
     output = pp->buffers[0].buffer;
@@ -62,10 +62,10 @@ void plink_SawProcessF_NN (void* ppv, SawProcessStateF* state)
         output[i] = currentValue;
         currentValue += freq[i] * factor;
         
-        if (currentValue >= 1.f)
-            currentValue -= 2.f;
-        else if (currentValue < -1.f)
-            currentValue += 2.f;
+        if (currentValue >= 1.0f)
+            currentValue -= 2.0f;
+        else if (currentValue < -1.0f)
+            currentValue += 2.0f;
     }    
     
     state->currentValue = currentValue;
@@ -85,17 +85,17 @@ void plink_SawProcessF_N1 (void* ppv, SawProcessStateF* state)
     
     N = pp->buffers[0].bufferSize;
     output = pp->buffers[0].buffer;
-    valueIncrement = pp->buffers[1].buffer[0] * 2.f * sampleDuration;
+    valueIncrement = pp->buffers[1].buffer[0] * 2.0f * sampleDuration;
     
-    if (valueIncrement > 0.f)
+    if (valueIncrement > 0.0f)
     {
         for (i = 0; i < N; ++i) 
         {
             output[i] = currentValue;
             currentValue += valueIncrement;
             
-            if (currentValue >= 1.f)
-                currentValue -= 2.f;
+            if (currentValue >= 1.0f)
+                currentValue -= 2.0f;
         }  
     }
     else 
@@ -105,8 +105,8 @@ void plink_SawProcessF_N1 (void* ppv, SawProcessStateF* state)
             output[i] = currentValue;
             currentValue += valueIncrement;
             
-            if (currentValue < -1.f)
-                currentValue += 2.f;
+            if (currentValue < -1.0f)
+                currentValue += 2.0f;
         }  
 
     }
@@ -127,7 +127,7 @@ void plink_SawProcessF_Nn (void* ppv, SawProcessStateF* state)
     
     sampleDuration = (float)state->base.sampleDuration;    
     currentValue = state->currentValue;
-    factor = 2.f * sampleDuration;
+    factor = 2.0f * sampleDuration;
     
     N = pp->buffers[0].bufferSize;
     output = pp->buffers[0].buffer;
@@ -141,10 +141,10 @@ void plink_SawProcessF_Nn (void* ppv, SawProcessStateF* state)
         output[i] = currentValue;
         currentValue += freq[(int)freqPos] * factor;
         
-        if (currentValue >= 1.f)
-            currentValue -= 2.f;
-        else if (currentValue < -1.f)
-            currentValue += 2.f;
+        if (currentValue >= 1.0f)
+            currentValue -= 2.0f;
+        else if (currentValue < -1.0f)
+            currentValue += 2.0f;
         
         freqPos += freqInc;
     }    

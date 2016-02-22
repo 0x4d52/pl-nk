@@ -504,9 +504,9 @@ static PlankF pl_AtomicF_Decrement (PlankAtomicFRef p);
  are no other threads contending to write the value the operation should succeed without
  blocking. 
  
- NB A bit-level comparison is performed. e.g., -0.f and 0.f would not be considered equal but
+ NB A bit-level comparison is performed. e.g., -0.0f and 0.0f would not be considered equal but
  two identical NaNs would be. In both of these cases this is different behaviour than comparing
- the two floating point values (i.e., -0.f and 0.f are considered equal and NaNs are never
+ the two floating point values (i.e., -0.0f and 0.0f are considered equal and NaNs are never
  equal to anything else even if there's another identical NaN with which you are comparing).
  
  @param p The <i>Plank %AtomicF</i> object. 
