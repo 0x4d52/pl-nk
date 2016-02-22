@@ -208,7 +208,7 @@ static PlankResult pl_IffFileReader_ParseMain (PlankIffFileReaderRef p)
         if (result != PlankResult_OK)
             goto exit;
         
-        if (!pl_GUID_EqualWithString (&p->common.headerInfo.mainID.guid, PLANKIFFFILE_W64_RIFF_ID))
+        if (! pl_GUID_EqualWithString (&p->common.headerInfo.mainID.guid, PLANKIFFFILE_W64_RIFF_ID))
         {
             result = PlankResult_AudioFileInavlidType;
             goto exit;
@@ -269,7 +269,7 @@ PlankResult pl_IffFileReader_OpenWithFile (PlankIffFileReaderRef p, PlankFileRef
     
     if ((result = pl_File_GetMode (file, &mode)) != PlankResult_OK) goto exit;
     
-    if (!(mode & PLANKFILE_READ))
+    if (! (mode & PLANKFILE_READ))
     {
         result = PlankResult_FileReadError;
         goto exit;

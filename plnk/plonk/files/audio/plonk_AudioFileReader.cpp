@@ -316,7 +316,7 @@ static PlankResult AudioFileReaderInternal_Region_NextFunction (PlankP ref, Plan
     PlankResult result = PlankResult_OK;
     AudioFileReaderRegion& readerRegion = *static_cast<AudioFileReaderRegion*> (ref);
     
-    if (!currentFile)
+    if (! currentFile)
     {
         PlankAudioFileReaderRef file = pl_AudioFileReader_CreateAndInit();
         result = pl_AudioFileReader_OpenWithRegion (file, readerRegion.getOriginal().getInternal()->getPeerRef(), readerRegion.getRegion().getInternal());

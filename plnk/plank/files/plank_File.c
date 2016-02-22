@@ -73,7 +73,7 @@ PlankResult pl_FileDefaultOpenCallback (PlankFileRef p)
     else
         return PlankResult_FileModeInvalid;
     
-    if (!p->stream)
+    if (! p->stream)
     {
         int error = errno;
         printf("error:%d\n", error);
@@ -100,7 +100,7 @@ PlankResult pl_FileDefaultClearCallback (PlankFileRef p)
     int err;
     PlankResult result;
     
-    if (!(p->mode & PLANKFILE_WRITE))
+    if (! (p->mode & PLANKFILE_WRITE))
         return PlankResult_FileWriteError;
     
     err = fclose ((FILE*)p->stream);
@@ -724,7 +724,7 @@ PlankResult pl_FileMakeDirectory (const char* filepath)
         {
             currentLevel = (const char*)pl_DynamicArray_GetArray (&pathBuild);
             
-            if (!pl_FileExists (currentLevel, PLANK_TRUE))
+            if (! pl_FileExists (currentLevel, PLANK_TRUE))
             {
                 if (pl_mkdir (currentLevel) != 0)
                 {
@@ -1198,7 +1198,7 @@ PlankResult pl_File_SetPosition (PlankFileRef p, const PlankLL position)
     
     (p->statusFunction) (p, PLANKFILE_STATUS_ISPOSITIONABLE, &isPositionable);
     
-    if (!isPositionable)
+    if (! isPositionable)
         return PlankResult_FileSeekFailed;
     
     return (p->setPositionFunction) (p, position, SEEK_SET);
@@ -1213,7 +1213,7 @@ PlankResult pl_File_OffsetPosition (PlankFileRef p, const PlankLL offset)
     
     (p->statusFunction) (p, PLANKFILE_STATUS_ISPOSITIONABLE, &isPositionable);
     
-    if (!isPositionable)
+    if (! isPositionable)
         return PlankResult_FileSeekFailed;
     
     return (p->setPositionFunction) (p, offset, SEEK_CUR);
@@ -1233,7 +1233,7 @@ PlankResult pl_File_SetPositionEnd (PlankFileRef p)
     
     (p->statusFunction) (p, PLANKFILE_STATUS_ISPOSITIONABLE, &isPositionable);
     
-    if (!isPositionable)
+    if (! isPositionable)
         return PlankResult_FileSeekFailed;
     
     return (p->setPositionFunction) (p, 0, SEEK_END);
@@ -1266,7 +1266,7 @@ PlankResult pl_File_SetEOF (PlankFileRef p)
     
     (p->statusFunction) (p, PLANKFILE_STATUS_ISPOSITIONABLE, &isPositionable);
     
-    if (!isPositionable)
+    if (! isPositionable)
         return PlankResult_FileSeekFailed;
     
     return (p->setPositionFunction) (p, 0L, SEEK_END);  

@@ -163,7 +163,7 @@ void pl_AudioFileFormatInfo_CAF_ChannelMaskToFormat (PlankAudioFileFormatInfoRef
     PlankChannelIdentifier  channelIdentfier;
     int channel, numChannels;
     
-    if (!channelMask)
+    if (! channelMask)
     {
         pl_AudioFileFormatInfo_SetSimpleLayout (formatInfo);
     }
@@ -210,7 +210,7 @@ void pl_AudioFileFormatInfo_WAV_ChannelMaskToFormat (PlankAudioFileFormatInfoRef
     PlankChannelIdentifier  channelIdentfier;
     int channel, numChannels;
     
-    if (!channelMask)
+    if (! channelMask)
     {
         pl_AudioFileFormatInfo_SetSimpleLayout (formatInfo);
     }
@@ -1097,7 +1097,7 @@ PlankB pl_AudioFileFormatInfo_ChannelIdentifiersAreDiscrete (PlankAudioFileForma
         
     numChannels = (PlankUI)pl_AudioFileFormatInfo_GetNumChannels (formatInfo);
     
-    if (!numChannels)
+    if (! numChannels)
         return PLANK_FALSE;
 
     channelIdentifiers = pl_AudioFileFormatInfo_GetChannelIdentifiers (formatInfo);
@@ -1118,7 +1118,7 @@ PlankB pl_AudioFileFormatInfo_ChannelIdentifiersAreStereoPairs (PlankAudioFileFo
     
     numChannels = (PlankUI)pl_AudioFileFormatInfo_GetNumChannels (formatInfo);
     
-    if (!numChannels)
+    if (! numChannels)
         return PLANK_FALSE;
     
     channelIdentifiers = pl_AudioFileFormatInfo_GetChannelIdentifiers (formatInfo);

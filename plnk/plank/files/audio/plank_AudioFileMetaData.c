@@ -868,7 +868,7 @@ PlankResult pl_AudioFileMetaData_SortCuePointsByID (PlankAudioFileMetaDataRef p)
 //            }
 //        }
 //        
-//        if (!swapped)
+//        if (! swapped)
 //            goto exit;
 //    }
 //    

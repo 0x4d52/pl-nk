@@ -266,7 +266,7 @@ PlankResult pl_SharedPtr_CreateAndInitWithSizeAndFunctions (PlankSharedPtrRef* p
     PlankSharedPtrCounterRef sharedCounter;
     PlankResult result;
     
-    if (!pp) return PlankResult_NullPointerError;
+    if (! pp) return PlankResult_NullPointerError;
 
     p = PLANK_NULL;
     result = PlankResult_OK;
@@ -681,7 +681,7 @@ PlankResult pl_SharedPtrArray_Sort (PlankSharedPtrArrayRef p, PlankSharedPtrArra
             }
         }
         
-        if (!swapped)
+        if (! swapped)
             goto exit;
     }
     

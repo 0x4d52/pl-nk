@@ -1210,7 +1210,7 @@ public:
     PLONK_INLINE_LOW bool isEachChannelConstant() const throw()
     {        
         for (int i = 0; i < this->getNumChannels(); ++i)
-            if (!this->atUnchecked (i).isConstant())
+            if (! this->atUnchecked (i).isConstant())
                 return false;
         
         return true;

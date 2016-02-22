@@ -261,7 +261,7 @@ public:
             return pl_JSON_ObjectGetSize (json);
         else if (isString())
             return strlen (pl_JSON_StringGet (json));
-        else if (!json || isNull())
+        else if (! json || isNull())
             return 0;
         else
             return 1;

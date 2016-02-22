@@ -408,7 +408,7 @@ void IOSAudioHostBase<SampleType>::restart() throw()
     this->setPreferredHostSampleRate (hwSampleRate);
     this->setPreferredHostBlockSize (bufferSize);
         
-    if (!rioUnit)
+    if (! rioUnit)
     {
         setFormat();
         setupRemoteIO();

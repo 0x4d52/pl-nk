@@ -259,11 +259,11 @@ public:
         {
             Text parentPath = parent().fullpath();
             
-            if (!pl_FileExists (parentPath.getArray(), true))
+            if (! pl_FileExists (parentPath.getArray(), true))
             {
                 bool success = pl_FileMakeDirectory (parentPath);
                 
-                if (!success)
+                if (! success)
                     return false;
             }
             

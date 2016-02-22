@@ -348,7 +348,7 @@ bool BinaryFileInternal::setupMulti (PlankFileRef p, FilePathArray const& fileAr
 
 static PlankResult plonk_BinaryFileInternal_BinaryFileQueue_NextFuntion (PlankMulitFileReaderRef p)
 {
-    if (!p->currentFile)
+    if (! p->currentFile)
         p->currentFile = pl_File_CreateAndInit();
     
     BinaryFileQueue& queue = *static_cast<BinaryFileQueue*> (p->source);
@@ -407,7 +407,7 @@ BinaryFileInternal::BinaryFileInternal (FilePathArray const& fileArray, const in
 
 static PlankResult plonk_BinaryFileInternal_FilePathQueue_NextFuntion (PlankMulitFileReaderRef p)
 {
-    if (!p->currentFile)
+    if (! p->currentFile)
         p->currentFile = pl_File_CreateAndInit();
     
     FilePathQueue& queue = *static_cast<FilePathQueue*> (p->source);

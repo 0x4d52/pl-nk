@@ -307,7 +307,7 @@ public:
     {
         UnitType coeffs = FilterCoeffsType::ar (attack, release, input.getSampleRates());
         
-        if (!attack.isConstant() || !release.isConstant())
+        if (! attack.isConstant() || !release.isConstant())
             for (int i = 0; i < coeffs.getNumChannels(); ++i)
                 coeffs.put (i, RampType::ar (coeffs[i]));
                 
@@ -328,7 +328,7 @@ public:
     {
         UnitType coeffs = FilterCoeffsType::ar (attack, release, input.getSampleRates());
         
-        if (!attack.isConstant() || !release.isConstant())
+        if (! attack.isConstant() || !release.isConstant())
             for (int i = 0; i < coeffs.getNumChannels(); ++i)
                 coeffs.put (i, RampType::ar (coeffs[i]));
                 

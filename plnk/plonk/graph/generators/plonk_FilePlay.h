@@ -254,7 +254,7 @@ public:
                     if (loopCount.getValue() > 1)
                         loopCount.setValue (loopCount.getValue() - 1);
                 }
-                else if (!data.done)
+                else if (! data.done)
                 {
                     data.done = true;
                     this->update (Text::getMessageDone(), Dynamic::getNull());

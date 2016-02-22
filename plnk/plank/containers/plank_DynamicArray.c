@@ -84,7 +84,7 @@ PlankResult pl_DynamicArray_InitCopy (PlankDynamicArrayRef p, PlankDynamicArrayR
     
     m = pl_MemoryGlobal();
     
-    if (!p->data || !p->itemSize || !p->allocatedItems)
+    if (! p->data || ! p->itemSize || ! p->allocatedItems)
     {
         p->data = PLANK_NULL;
         return PlankResult_OK;
@@ -92,7 +92,7 @@ PlankResult pl_DynamicArray_InitCopy (PlankDynamicArrayRef p, PlankDynamicArrayR
     
     p->data = pl_Memory_AllocateBytes (m, p->itemSize * p->allocatedItems);
     
-    if (!p->data)
+    if (! p->data)
     {
         pl_MemoryZero (p, sizeof (PlankDynamicArray));
         return PlankResult_MemoryError;
@@ -313,7 +313,7 @@ PlankResult pl_DynamicArray_Sort (PlankDynamicArrayRef p, PlankDynamicArrayCompa
             }
         }
         
-        if (!swapped)
+        if (! swapped)
             goto exit;
     }
     
@@ -391,7 +391,7 @@ PlankResult pl_DynamicArray_SetAsText (PlankDynamicArrayRef p, const char* text)
     PlankResult result = PlankResult_OK;
     PlankL length;
     
-    if (!text)
+    if (! text)
         return pl_DynamicArray_SetAsClearText (p, 0);
     
     if (text[0] == '\0')
@@ -421,7 +421,7 @@ PlankResult pl_DynamicArray_AppendText (PlankDynamicArrayRef p, const char* text
     PlankResult result = PlankResult_OK;
     PlankL length;
     
-    if (!text)
+    if (! text)
         goto exit;
     
     if (text[0] == '\0')

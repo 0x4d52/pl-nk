@@ -207,9 +207,9 @@ void AudioFileReaderInternal::readFrames (NumericalArray<SampleType>& data,
     const int numFailsAllowed = 3;
     int numFails = 0;
     
-    if (!numFramesPerBuffer)
+    if (! numFramesPerBuffer)
     {
-        if (!getBytesPerFrame())
+        if (! getBytesPerFrame())
             goto exit;
         
         numFramesPerBuffer = readBuffer.length() / getBytesPerFrame();
@@ -306,7 +306,7 @@ void AudioFileReaderInternal::readFrames (NumericalArray<SampleType>& data,
                 Buffer::deinterleave (deinterleaveBuffer, dataArray, samplesRead, channels);
                 Buffer::copyData (dataArray, deinterleaveBuffer, samplesRead);
             }
-            else if (!deinterleave && !isInterleaved)
+            else if (! deinterleave && !isInterleaved)
             {
                 plonk_assertfalse; // haven't tested this yet...
                 SampleType* const interleaveBuffer = static_cast<SampleType*> (readBufferArray); 
@@ -358,7 +358,7 @@ void AudioFileReaderInternal::readFrames (NumericalArray<SampleType>& data,
             isBigEndian = encoding & AudioFile::EncodingFlagBigEndian;
             isInterleaved = !(encoding & AudioFile::EncodingFlagNonIntervleaved);
             
-            if (!getBytesPerFrame())
+            if (! getBytesPerFrame())
                 goto exit;
             
             numFramesPerBuffer = readBuffer.length() / getBytesPerFrame();

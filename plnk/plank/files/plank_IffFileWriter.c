@@ -253,19 +253,19 @@ PlankResult pl_IffFileWriter_OpenWithFile (PlankIffFileWriterRef p,
     
     if ((result = pl_File_GetMode (file, &mode)) != PlankResult_OK) goto exit;
     
-    if (!(mode & PLANKFILE_BINARY))
+    if (! (mode & PLANKFILE_BINARY))
     {
         result = PlankResult_AudioFileInavlidType;
         goto exit;
     }
     
-    if (!(mode & PLANKFILE_READ))
+    if (! (mode & PLANKFILE_READ))
     {
         result = PlankResult_AudioFileInavlidType;
         goto exit;
     }
     
-    if (!(mode & PLANKFILE_WRITE))
+    if (! (mode & PLANKFILE_WRITE))
     {
         result = PlankResult_AudioFileInavlidType;
         goto exit;
@@ -426,7 +426,7 @@ PlankResult pl_IffFileWriter_WriteChunk (PlankIffFileWriterRef p, const PlankLL 
         
     if (newChunkInfo.chunkLength > originalChunkLength)
     {
-        if (!isLastChunk)
+        if (! isLastChunk)
         {
             if (isNewChunk)
             {
@@ -446,7 +446,7 @@ PlankResult pl_IffFileWriter_WriteChunk (PlankIffFileWriterRef p, const PlankLL 
     }
     else if (newChunkInfo.chunkLength < originalChunkLength)
     {
-        if (!isNewChunk && (mode == PLANKIFFFILEWRITER_MODEREPLACESHRINK))
+        if (! isNewChunk && (mode == PLANKIFFFILEWRITER_MODEREPLACESHRINK))
         {
             if ((result = pl_IffFileWriter_RewriteFileUpdatingChunkInfo (p, &newChunkInfo)) != PlankResult_OK) goto exit;
         }
@@ -547,7 +547,7 @@ PlankResult pl_IffFileWriter_RenameChunk (PlankIffFileWriterRef p, const PlankLL
     
     if ((result = pl_IffFileWriter_SeekChunk (p, startPosition, oldChunkID, &origChunkInfo, 0)) != PlankResult_OK) goto exit;
 
-    if (!origChunkInfo)
+    if (! origChunkInfo)
     {
         result = PlankResult_IffFileReaderChunkNotFound;
         goto exit;
@@ -585,7 +585,7 @@ PlankResult pl_IffFileWriter_ResizeChunk (PlankIffFileWriterRef p, const PlankLL
     
     if ((result = pl_IffFileWriter_SeekChunk (p, startPosition, chunkID, &thisChunkInfo, &thisChunkIsLast)) != PlankResult_OK) goto exit;
     
-    if (!thisChunkInfo)
+    if (! thisChunkInfo)
     {
         result = PlankResult_IffFileReaderChunkNotFound;
         goto exit;
@@ -665,7 +665,7 @@ PlankResult pl_IffFileWriter_ResizeChunk (PlankIffFileWriterRef p, const PlankLL
         pl_IffFile_ChunkIDString ((PlankIffFileRef)p, &nextChunkID, chunkIDStr);
         if ((result = pl_IffFileWriter_SeekChunk (p, position, chunkIDStr, &nextChunkInfo, &nextChunkIsLast)) != PlankResult_OK) goto exit;
         
-        if (!nextChunkInfo)
+        if (! nextChunkInfo)
         {
             // something really unexpected happened, we already checked there was another chunk following...
             result = PlankResult_UnknownError;
@@ -840,7 +840,7 @@ PlankResult pl_IffFileWriter_PrepareChunk (PlankIffFileWriterRef p, const PlankL
     pl_IffFile_ChunkIDString ((PlankIffFileRef)p, &p->common.headerInfo.junkID, JUNK);
     if ((result = pl_IffFileWriter_SeekChunk (p, startPosition, JUNK, &chunkInfo, 0)) != PlankResult_OK) goto exit;
 
-    if (!data)
+    if (! data)
     {        
         if (chunkInfo)
         {
@@ -920,7 +920,7 @@ PlankResult pl_IffFileWriter_RewriteFileUpdatingChunkInfo (PlankIffFileWriterRef
     eraseOriginalFile = PLANK_FALSE;
     
     if ((result = pl_File_GetMode ((PlankFileRef)p, &mode)) != PlankResult_OK)              return result;
-    if (!(mode & PLANKFILE_READ))                                                           return PlankResult_FileReadError;
+    if (! (mode & PLANKFILE_READ))                                                           return PlankResult_FileReadError;
     if ((result = pl_Path_InitTemp (&tempPath, "IffWriter-", "tmp")) != PlankResult_OK)     return result;
     if ((result = pl_IffFileWriter_Init (&tempWriter)) != PlankResult_OK)                   goto earlyExit;
     
@@ -944,7 +944,7 @@ PlankResult pl_IffFileWriter_RewriteFileUpdatingChunkInfo (PlankIffFileWriterRef
         if (pl_IffFile_IsNullID ((PlankIffFileRef)p, &chunkInfos[i].chunkID))
             continue; // this was a deleted chunk
             
-        if (!pl_IffFile_EqualIDs ((PlankIffFileRef)p, &chunkInfos[i].chunkID, &updatedChunkInfo->chunkID))
+        if (! pl_IffFile_EqualIDs ((PlankIffFileRef)p, &chunkInfos[i].chunkID, &updatedChunkInfo->chunkID))
         {            
             if ((result = pl_File_SetPosition ((PlankFileRef)p, chunkInfos[i].chunkPos)) != PlankResult_OK) goto exit;
             

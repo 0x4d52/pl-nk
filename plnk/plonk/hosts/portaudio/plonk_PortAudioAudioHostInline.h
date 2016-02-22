@@ -133,7 +133,7 @@ Text PortAudioAudioHostBase<SampleType>::getOutputName() const throw()
 template<class SampleType>
 double PortAudioAudioHostBase<SampleType>::getCpuUsage() const throw()
 {
-    if (!stream) return 0.0;
+    if (! stream) return 0.0;
     return Pa_GetStreamCpuLoad (stream);
 }
 

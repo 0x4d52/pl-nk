@@ -157,7 +157,7 @@ void pl_Lock_Wait (PlankLockRef p)
 {
     pthread_mutex_lock (&p->mutex);
 
-    if (!p->flag)
+    if (! p->flag)
     {
         do
         {
@@ -213,7 +213,7 @@ void pl_Lock_Signal (PlankLockRef p)
 {
     pthread_mutex_lock (&p->mutex);
     
-    if (!p->flag)
+    if (! p->flag)
     {
         p->flag = PLANK_TRUE;
         pthread_cond_signal (&p->condition);
@@ -287,7 +287,7 @@ void pl_Lock_Wait (PlankLockRef p)
 {
     pthread_mutex_lock (&p->mutex);
     
-    if (!p->flag)
+    if (! p->flag)
     {
         do
         {
@@ -341,7 +341,7 @@ PlankResult pl_Lock_Init (PlankLockRef p)
                                 PLANK_FALSE, // non-signaled initially
                                 NULL);       // unnamed
     
-    if (!p->condition)
+    if (! p->condition)
     {
         result = PlankResult_MemoryError;
         goto exit;

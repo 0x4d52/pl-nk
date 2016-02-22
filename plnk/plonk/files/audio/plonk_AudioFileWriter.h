@@ -119,13 +119,13 @@ public:
             format = AudioFile::FormatW64;
         }
             
-        if (!internal->initPCM (format, channelLayout, sampleRate, bufferSize))
+        if (! internal->initPCM (format, channelLayout, sampleRate, bufferSize))
         {
             pl_AudioFileWriter_Init (&internal->peer);
             goto exit;
         }
         
-        if (!internal->openPath (path))
+        if (! internal->openPath (path))
         {
             pl_AudioFileWriter_Close (&internal->peer);
             pl_AudioFileWriter_Init (&internal->peer);
@@ -143,19 +143,19 @@ public:
         AudioFileWriterInternal* internal = new AudioFileWriterInternal ((channelLayout & 0x0000FFFF) * bufferSize);
         PlankFile file;
         
-        if (!internal->initBytes (&file, bytes))
+        if (! internal->initBytes (&file, bytes))
         {
             pl_AudioFileWriter_Init (&internal->peer);
             goto exit;
         }
         
-        if (!internal->initPCM (format, channelLayout, sampleRate, bufferSize))
+        if (! internal->initPCM (format, channelLayout, sampleRate, bufferSize))
         {
             pl_AudioFileWriter_Init (&internal->peer);
             goto exit;
         }
         
-        if (!internal->openFile (&file))
+        if (! internal->openFile (&file))
         {
             pl_AudioFileWriter_Close (&internal->peer);
             pl_AudioFileWriter_Init (&internal->peer);
@@ -196,13 +196,13 @@ public:
         }
 #endif
         
-        if (!internal->initCompressedVBR (format, channelLayout, sampleRate, quality, frameDuration, bufferSize))
+        if (! internal->initCompressedVBR (format, channelLayout, sampleRate, quality, frameDuration, bufferSize))
         {
             pl_AudioFileWriter_Init (&internal->peer);
             goto exit;
         }
         
-        if (!internal->openPath (path))
+        if (! internal->openPath (path))
         {
             pl_AudioFileWriter_Close (&internal->peer);
             pl_AudioFileWriter_Init (&internal->peer);
@@ -221,19 +221,19 @@ public:
         AudioFileWriterInternal* internal = new AudioFileWriterInternal ((channelLayout.getValue() & 0x0000FFFF) * bufferSize);
         PlankFile file;
         
-        if (!internal->initBytes (&file, bytes))
+        if (! internal->initBytes (&file, bytes))
         {
             pl_AudioFileWriter_Init (&internal->peer);
             goto exit;
         }
         
-        if (!internal->initCompressedVBR (format, channelLayout, sampleRate, quality, frameDuration, bufferSize))
+        if (! internal->initCompressedVBR (format, channelLayout, sampleRate, quality, frameDuration, bufferSize))
         {
             pl_AudioFileWriter_Init (&internal->peer);
             goto exit;
         }
         
-        if (!internal->openFile (&file))
+        if (! internal->openFile (&file))
         {
             pl_AudioFileWriter_Close (&internal->peer);
             pl_AudioFileWriter_Init (&internal->peer);
@@ -275,13 +275,13 @@ public:
         }
 #endif
 
-        if (!internal->initCompressedManaged (format, channelLayout, sampleRate, minBitRate, nominalBitRate, maxBitRate, frameDuration, bufferSize))
+        if (! internal->initCompressedManaged (format, channelLayout, sampleRate, minBitRate, nominalBitRate, maxBitRate, frameDuration, bufferSize))
         {
             pl_AudioFileWriter_Init (&internal->peer);
             goto exit;
         }
         
-        if (!internal->openPath (path))
+        if (! internal->openPath (path))
         {
             pl_AudioFileWriter_Close (&internal->peer);
             pl_AudioFileWriter_Init (&internal->peer);
@@ -301,19 +301,19 @@ public:
         AudioFileWriterInternal* internal = new AudioFileWriterInternal ((channelLayout.getValue() & 0x0000FFFF) * bufferSize);
         PlankFile file;
         
-        if (!internal->initBytes (&file, bytes))
+        if (! internal->initBytes (&file, bytes))
         {
             pl_AudioFileWriter_Init (&internal->peer);
             goto exit;
         }
         
-        if (!internal->initCompressedManaged (format, channelLayout, sampleRate, minBitRate, nominalBitRate, maxBitRate, frameDuration, bufferSize))
+        if (! internal->initCompressedManaged (format, channelLayout, sampleRate, minBitRate, nominalBitRate, maxBitRate, frameDuration, bufferSize))
         {
             pl_AudioFileWriter_Init (&internal->peer);
             goto exit;
         }
         
-        if (!internal->openFile (&file))
+        if (! internal->openFile (&file))
         {
             pl_AudioFileWriter_Close (&internal->peer);
             pl_AudioFileWriter_Init (&internal->peer);
@@ -481,7 +481,7 @@ public:
             NumericalArrayConverter<SampleType, OtherType>::convertScaled (nativeSamples, sourceSamples, numSamplesThisTime);
             success = pl_AudioFileWriter_WriteFrames (&peer, true, numSamplesThisTime / numChannels, nativeSamples) == PlankResult_OK;
             
-            if (!success) break;
+            if (! success) break;
             
             numSamplesRemainaing -= numSamplesThisTime;
             sourceSamples += numSamplesThisTime;

@@ -238,7 +238,7 @@ PlankResult pl_LockFreeQueue_Push (PlankLockFreeQueueRef p, const PlankLockFreeQ
         success = pl_AtomicPX_CompareAndSwapP (tailElementNextAtom,
                                                (PlankLockFreeQueueElementRef)p, element);
 
-        if (!success)
+        if (! success)
         {
             pl_AtomicPX_CompareAndSwap ((PlankAtomicPXRef)&(p->tail),
                                         tailElement, tailExtra,
@@ -282,7 +282,7 @@ PlankResult pl_LockFreeQueue_Push (PlankLockFreeQueueRef p, const PlankLockFreeQ
 //                                                          (PlankLockFreeQueueElementRef)p, nextAtomExtra,
 //                                                          element, nextAtomExtra);
 //        
-//        if (!success)
+//        if (! success)
 //        {
 //            pl_AtomicPX_CompareAndSwap ((PlankAtomicPXRef)&(p->tail),
 //                                        tailElement, tailExtra,
@@ -324,7 +324,7 @@ PlankResult pl_LockFreeQueue_Push (PlankLockFreeQueueRef p, const PlankLockFreeQ
 //        success = pl_AtomicP_CompareAndSwap ((PlankAtomicPRef)tailElementNextAtom, 
 //                                             (PlankLockFreeQueueElementRef)p, element);
 //        
-//        if (!success)
+//        if (! success)
 //        {
 //            pl_AtomicPX_CompareAndSwap ((PlankAtomicPXRef)&(p->tail), 
 //                                        tailElement, tailExtra, 
@@ -366,7 +366,7 @@ PlankResult pl_LockFreeQueue_Push (PlankLockFreeQueueRef p, const PlankLockFreeQ
 //        success = pl_AtomicP_CompareAndSwap ((PlankAtomicPRef)tailElementNextAtom,
 //                                             pl_AtomicPX_GetUnchecked ((PlankAtomicPXRef)&(p->head)), element);
 //        
-//        if (!success)
+//        if (! success)
 //        {
 //            pl_AtomicPX_CompareAndSwap ((PlankAtomicPXRef)&(p->tail),
 //                                        tailElement, tailExtra,

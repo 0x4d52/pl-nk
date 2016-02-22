@@ -96,13 +96,13 @@ PlankResult pl_Zip_DeflateStream (PlankZipRef p, const int amount,  PlankFileRef
     if ((result = pl_File_GetMode (inputFile, &inputMode)) != PlankResult_OK) goto earlyExit;
     if ((result = pl_File_GetMode (outputZipFile, &outputMode)) != PlankResult_OK) goto earlyExit;
     
-    if (!((outputMode & PLANKFILE_WRITE) && (outputMode & PLANKFILE_BINARY)))
+    if (! ((outputMode & PLANKFILE_WRITE) && (outputMode & PLANKFILE_BINARY)))
     {
         result = PlankResult_FileWriteError;
         goto earlyExit;
     }
     
-    if (!(inputMode & PLANKFILE_READ))
+    if (! (inputMode & PLANKFILE_READ))
     {
         result = PlankResult_FileReadError;
         goto earlyExit;
@@ -181,13 +181,13 @@ PlankResult pl_Zip_InflateStream (PlankZipRef p, PlankFileRef outputFile, PlankF
     if ((result = pl_File_GetMode (inputZipFile, &inputMode)) != PlankResult_OK) goto earlyExit;
     if ((result = pl_File_GetMode (outputFile, &outputMode)) != PlankResult_OK) goto earlyExit;
     
-    if (!(outputMode & PLANKFILE_WRITE))
+    if (! (outputMode & PLANKFILE_WRITE))
     {
         result = PlankResult_FileWriteError;
         goto earlyExit;
     }
     
-    if (!((inputMode & PLANKFILE_READ) && (inputMode & PLANKFILE_BINARY)))
+    if (! ((inputMode & PLANKFILE_READ) && (inputMode & PLANKFILE_BINARY)))
     {
         result = PlankResult_FileReadError;
         goto earlyExit;

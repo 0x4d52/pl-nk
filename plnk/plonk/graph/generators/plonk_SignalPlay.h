@@ -164,7 +164,7 @@ public:
         const int outputBufferLength = this->getOutputBuffer().length();
         int numSamplesRemaining = outputBufferLength;
 
-        if (!data.done)
+        if (! data.done)
         {
             RateUnitType& rateUnit = ChannelInternalCore::getInputAs<RateUnitType> (IOKey::Rate);
             const RateBufferType& rateBuffer (rateUnit.process (info, channel));

@@ -577,7 +577,7 @@ PlankResult pl_MultiFileReader_Open (PlankMulitFileReaderRef p)
 {
     PlankResult result = PlankResult_OK;
 
-    if (!p->currentFile)
+    if (! p->currentFile)
     {
         if ((result = (p->nextFunction) (p)) != PlankResult_OK)
             goto exit;
@@ -607,7 +607,7 @@ PlankResult pl_MultiFileReader_Read (PlankMulitFileReaderRef p, PlankP pv, int m
     
     while (maximumBytes > 0)
     {
-        if (!p->currentFile)
+        if (! p->currentFile)
         {
             
 //            bytesThisTime = maximumBytes;

@@ -138,7 +138,7 @@ TextFileInternal::TextFileInternal (FilePathArray const& fileArray, const int mu
 
 static PlankResult plonk_TextFileInternal_TextFileQueue_NextFuntion (PlankMulitFileReaderRef p)
 {
-    if (!p->currentFile)
+    if (! p->currentFile)
         p->currentFile = pl_File_CreateAndInit();
     
     TextFileQueue& queue = *static_cast<TextFileQueue*> (p->source);

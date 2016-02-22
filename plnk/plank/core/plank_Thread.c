@@ -448,7 +448,7 @@ PlankResult pl_Thread_SetPriority (PlankThreadRef p, int priority)
 
     p->priority = priority;
 
-    if (!pl_Thread_IsRunning (p))
+    if (! pl_Thread_IsRunning (p))
         return PlankResult_OK;
         
     priority = pl_ClipI (priority, 0, 100);
@@ -500,7 +500,7 @@ PlankResult pl_Thread_SetPriorityAudio (PlankThreadRef p, int blockSize, double 
 
 PlankResult pl_Thread_SetAffinity (PlankThreadRef p, int affinity)
 {
-    if (!pl_Thread_IsRunning (p))
+    if (! pl_Thread_IsRunning (p))
     {
         p->affinity = affinity;
         return PlankResult_OK;

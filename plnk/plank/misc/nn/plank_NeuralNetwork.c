@@ -468,7 +468,7 @@ PlankResult pl_NeuralNetworkF_InitFromJSON (PlankNeuralNetworkFRef p, PlankJSONR
     pl_MemoryZero (p, sizeof (PlankNeuralNetworkF));
     pl_NeuralNetworkF_SetActFunc (p, PLANK_NULL);
     
-    if (!pl_JSON_IsObjectType (j, PLANK_NEURALNETWORKF_JSON_TYPE))
+    if (! pl_JSON_IsObjectType (j, PLANK_NEURALNETWORKF_JSON_TYPE))
     {
         result = PlankResult_JSONError;
         goto exit;
@@ -486,7 +486,7 @@ PlankResult pl_NeuralNetworkF_InitFromJSON (PlankNeuralNetworkFRef p, PlankJSONR
         goto exit;
     }
     
-    if (!pl_JSON_IsArray (jlayers))
+    if (! pl_JSON_IsArray (jlayers))
     {
         result = PlankResult_JSONError;
         goto exit;

@@ -308,7 +308,7 @@ PlankResult pl_AudioFileWriter_SetMetaDataIOFlags (PlankAudioFileWriterRef p, Pl
 
 PlankAudioFileMetaDataRef pl_AudioFileWriter_GetMetaData (PlankAudioFileWriterRef p)
 {    
-    if (!p->metaData)
+    if (! p->metaData)
         pl_AudioFileMetaData_CreateSharedPtr (&p->metaData);
     
     return p->metaData;
@@ -458,7 +458,7 @@ PlankResult pl_AudioFileWriter_SetFormatCAF (PlankAudioFileWriterRef p, const in
     if (isFloat)
         p->formatInfo.encoding     |= PLANKAUDIOFILE_ENCODING_FLOAT_FLAG;
     
-    if (!isLittleEndian)
+    if (! isLittleEndian)
         p->formatInfo.encoding     |= PLANKAUDIOFILE_ENCODING_BIGENDIAN_FLAG;
     
     p->formatInfo.bitsPerSample     = bitsPerSample;
@@ -805,7 +805,7 @@ PlankResult pl_AudioFileWriter_WriteFrames (PlankAudioFileWriterRef p, const Pla
 {
     PlankResult result = PlankResult_OK;
     
-    if (!p->writeFramesFunction)
+    if (! p->writeFramesFunction)
     {
         result = PlankResult_FunctionsInvalid;
         goto exit;
@@ -882,7 +882,7 @@ static PlankResult pl_AudioFileWriter_WAV_OpenInternal (PlankAudioFileWriterRef 
         goto exit;
     }
 
-    if (!((p->formatInfo.encoding == PLANKAUDIOFILE_ENCODING_PCM_LITTLEENDIAN) ||
+    if (! ((p->formatInfo.encoding == PLANKAUDIOFILE_ENCODING_PCM_LITTLEENDIAN) ||
           (p->formatInfo.encoding == PLANKAUDIOFILE_ENCODING_FLOAT_LITTLEENDIAN)))
     {
         result = PlankResult_AudioFileInavlidType;
@@ -922,7 +922,7 @@ static PlankResult pl_AudioFileWriter_WAV_OpenInternal (PlankAudioFileWriterRef 
         
     iff = pl_IffAudioFileWriter_CreateAndInit();
     
-    if (!iff)
+    if (! iff)
     {
         result = PlankResult_MemoryError;
         goto exit;
@@ -991,7 +991,7 @@ PlankResult pl_AudioFileWriter_WAV_WriteHeader (PlankAudioFileWriterRef p)
     
     if ((result = pl_IffFileWriter_SeekChunk ((PlankIffFileWriterRef)iff, 0, fmt, &chunkInfo, 0)) != PlankResult_OK) goto exit;
     
-    if (!chunkInfo)
+    if (! chunkInfo)
     {
         if ((result = pl_IffFileWriter_WriteChunk ((PlankIffFileWriterRef)iff, 0, fmt, 0, PLANKAUDIOFILE_WAV_HEADER_LENGTH, PLANKIFFFILEWRITER_MODEAPPEND)) != PlankResult_OK) goto exit;
         
@@ -1005,7 +1005,7 @@ PlankResult pl_AudioFileWriter_WAV_WriteHeader (PlankAudioFileWriterRef p)
         p->metaDataChunkPosition = chunkInfo->chunkPos + PLANKAUDIOFILE_WAV_HEADER_LENGTH;
         p->dataPosition = p->metaDataChunkPosition + (p->headerPad > 0 ? p->headerPad + chunkHeaderLength : 0) + chunkHeaderLength + p->dataOffset;
         
-        if (!chunkInfo)
+        if (! chunkInfo)
         {
             result = PlankResult_FileReadError;
             goto exit;
@@ -1081,7 +1081,7 @@ PlankResult pl_AudioFileWriter_WAVEXT_WriteHeader (PlankAudioFileWriterRef p)
     
     if ((result = pl_IffFileWriter_SeekChunk ((PlankIffFileWriterRef)iff, 0, fmt, &chunkInfo, 0)) != PlankResult_OK) goto exit;
     
-    if (!chunkInfo)
+    if (! chunkInfo)
     {
         if ((result = pl_IffFileWriter_WriteChunk ((PlankIffFileWriterRef)iff, 0, fmt, 0, PLANKAUDIOFILE_WAV_HEADER_LENGTH, PLANKIFFFILEWRITER_MODEAPPEND)) != PlankResult_OK) goto exit;
         
@@ -1095,7 +1095,7 @@ PlankResult pl_AudioFileWriter_WAVEXT_WriteHeader (PlankAudioFileWriterRef p)
         p->metaDataChunkPosition = chunkInfo->chunkPos + PLANKAUDIOFILE_WAV_HEADER_LENGTH;
         p->dataPosition = p->metaDataChunkPosition + (p->headerPad > 0 ? p->headerPad + chunkHeaderLength : 0) + chunkHeaderLength + p->dataOffset;
 
-        if (!chunkInfo)
+        if (! chunkInfo)
         {
             result = PlankResult_FileReadError;
             goto exit;
@@ -1164,12 +1164,12 @@ PlankResult pl_AudioFileWriter_WAVRF64_WriteHeader (PlankAudioFileWriterRef p)
 
     dataLength = dataChunkInfo ? dataChunkInfo->chunkLength : 0;
         
-    if (!fmtChunkInfo && !ds64ChunkInfo)
+    if (! fmtChunkInfo && !ds64ChunkInfo)
     {
         if ((result = pl_IffFileWriter_WriteChunk ((PlankIffFileWriterRef)iff, 0, ds64, 0, PLANKAUDIOFILE_WAV_DS64_MINIMUMLENGTH, PLANKIFFFILEWRITER_MODEAPPEND)) != PlankResult_OK) goto exit;
         if ((result = pl_IffFileWriter_WriteChunk ((PlankIffFileWriterRef)iff, 0, fmt, 0, PLANKAUDIOFILE_WAV_FMT_EXTENSIBLE_LENGTH, PLANKIFFFILEWRITER_MODEAPPEND)) != PlankResult_OK) goto exit;
     }
-    else if (!ds64ChunkInfo)
+    else if (! ds64ChunkInfo)
     {
         // we have format but not ds64
         
@@ -1179,7 +1179,7 @@ PlankResult pl_AudioFileWriter_WAVRF64_WriteHeader (PlankAudioFileWriterRef p)
         // seek junk
         if ((result = pl_IffFileWriter_SeekChunk ((PlankIffFileWriterRef)iff, fmtChunkInfo->chunkPos, JUNK, &junkChunkInfo, 0)) != PlankResult_OK) goto exit;
 
-        if (!junkChunkInfo)
+        if (! junkChunkInfo)
         {
             // the junk isn't there
             result = PlankResult_UnknownError;
@@ -1349,7 +1349,7 @@ PlankResult pl_AudioFileWriter_AIFF_WriteHeader (PlankAudioFileWriterRef p)
     
     if ((result = pl_IffFileWriter_SeekChunk ((PlankIffFileWriterRef)iff, 0, COMM, &chunkInfo, 0)) != PlankResult_OK) goto exit;
     
-    if (!chunkInfo)
+    if (! chunkInfo)
     {
         if ((result = pl_IffFileWriter_WriteChunk ((PlankIffFileWriterRef)iff, 0, COMM, 0, PLANKAUDIOFILE_AIFF_COMM_LENGTH, PLANKIFFFILEWRITER_MODEAPPEND)) != PlankResult_OK) goto exit;
         
@@ -1363,7 +1363,7 @@ PlankResult pl_AudioFileWriter_AIFF_WriteHeader (PlankAudioFileWriterRef p)
         p->metaDataChunkPosition = chunkInfo->chunkPos + PLANKAUDIOFILE_AIFF_COMM_LENGTH;
         p->dataPosition = p->metaDataChunkPosition + (p->headerPad > 0 ? p->headerPad + chunkHeaderLength : 0) + chunkHeaderLength + p->dataOffset; // plus blocksize and offset values
         
-        if (!chunkInfo)
+        if (! chunkInfo)
         {
             result = PlankResult_FileReadError;
             goto exit;
@@ -1389,13 +1389,13 @@ PlankResult pl_AudioFileWriter_AIFF_WriteHeader (PlankAudioFileWriterRef p)
     
     if ((result = pl_IffFileWriter_SeekChunk ((PlankIffFileWriterRef)iff, 0, SSND, &chunkInfo, 0)) != PlankResult_OK) goto exit;
     
-    if (!chunkInfo)
+    if (! chunkInfo)
     {
         // write zero blocksize and offset 8 bytes into SSND
         if ((result = pl_IffFileWriter_WriteChunk ((PlankIffFileWriterRef)iff, 0, SSND, 0, 8, PLANKIFFFILEWRITER_MODEAPPEND)) != PlankResult_OK) goto exit;
         if ((result = pl_IffFileWriter_SeekChunk ((PlankIffFileWriterRef)iff, 0, SSND, &chunkInfo, 0)) != PlankResult_OK) goto exit;
         
-        if (!chunkInfo)
+        if (! chunkInfo)
         {
             result = PlankResult_FileReadError;
             goto exit;
@@ -1464,7 +1464,7 @@ static PlankResult pl_AudioFileWriter_AIFC_OpenInternal (PlankAudioFileWriterRef
     {
         if ((result = pl_File_GetMode (file, &mode)) != PlankResult_OK) goto exit;
         
-        if (!(mode & PLANKFILE_BIGENDIAN))
+        if (! (mode & PLANKFILE_BIGENDIAN))
         {
             result = PlankResult_FileInvalid;
             goto exit;
@@ -1533,7 +1533,7 @@ PlankResult pl_AudioFileWriter_AIFC_WriteHeader (PlankAudioFileWriterRef p)
     if ((result = pl_IffFileWriter_WriteChunk ((PlankIffFileWriterRef)iff, 0, FVER, &fver, sizeof (fver), PLANKIFFFILEWRITER_MODEREPLACEGROW)) != PlankResult_OK) goto exit;
     if ((result = pl_IffFileWriter_SeekChunk ((PlankIffFileWriterRef)iff, 0, COMM, &chunkInfo, 0)) != PlankResult_OK) goto exit;
     
-    if (!chunkInfo)
+    if (! chunkInfo)
     {
         if ((result = pl_IffFileWriter_WriteChunk ((PlankIffFileWriterRef)iff, 0, COMM, 0, PLANKAUDIOFILE_AIFC_COMM_LENGTH, PLANKIFFFILEWRITER_MODEAPPEND)) != PlankResult_OK) goto exit;
 
@@ -1547,7 +1547,7 @@ PlankResult pl_AudioFileWriter_AIFC_WriteHeader (PlankAudioFileWriterRef p)
         p->metaDataChunkPosition = chunkInfo->chunkPos + PLANKAUDIOFILE_AIFF_COMM_LENGTH;
         p->dataPosition = p->metaDataChunkPosition + (p->headerPad > 0 ? p->headerPad + 8 : 0) + 8 + p->dataOffset; // plus blocksize and offset values
 
-        if (!chunkInfo)
+        if (! chunkInfo)
         {
             result = PlankResult_FileReadError;
             goto exit;
@@ -1598,13 +1598,13 @@ PlankResult pl_AudioFileWriter_AIFC_WriteHeader (PlankAudioFileWriterRef p)
     
     if ((result = pl_IffFileWriter_SeekChunk ((PlankIffFileWriterRef)iff, 0, SSND, &chunkInfo, 0)) != PlankResult_OK) goto exit;
     
-    if (!chunkInfo)
+    if (! chunkInfo)
     {
         // write zero blocksize and offset 8 bytes
         if ((result = pl_IffFileWriter_WriteChunk ((PlankIffFileWriterRef)iff, 0, SSND, 0, 8, PLANKIFFFILEWRITER_MODEAPPEND)) != PlankResult_OK) goto exit;
         if ((result = pl_IffFileWriter_SeekChunk ((PlankIffFileWriterRef)iff, 0, SSND, &chunkInfo, 0)) != PlankResult_OK) goto exit;
         
-        if (!chunkInfo)
+        if (! chunkInfo)
         {
             result = PlankResult_FileReadError;
             goto exit;
@@ -1673,7 +1673,7 @@ static PlankResult pl_AudioFileWriter_CAF_OpenInternal (PlankAudioFileWriterRef 
     {
         if ((result = pl_File_GetMode (file, &mode)) != PlankResult_OK) goto exit;
         
-        if (!(mode & PLANKFILE_BIGENDIAN))
+        if (! (mode & PLANKFILE_BIGENDIAN))
         {
             result = PlankResult_FileInvalid;
             goto exit;
@@ -1726,7 +1726,7 @@ PlankResult pl_AudioFileWriter_CAF_WriteHeader (PlankAudioFileWriterRef p)
     
     if ((result = pl_IffFileWriter_SeekChunk ((PlankIffFileWriterRef)iff, 0, desc, &chunkInfo, 0)) != PlankResult_OK) goto exit;
     
-    if (!chunkInfo)
+    if (! chunkInfo)
     {
         if ((result = pl_IffFileWriter_WriteChunk ((PlankIffFileWriterRef)iff, 0, desc, 0, PLANKAUDIOFILE_CAF_DESC_LENGTH, PLANKIFFFILEWRITER_MODEAPPEND)) != PlankResult_OK) goto exit;
         
@@ -1740,7 +1740,7 @@ PlankResult pl_AudioFileWriter_CAF_WriteHeader (PlankAudioFileWriterRef p)
         p->metaDataChunkPosition = chunkInfo->chunkPos + PLANKAUDIOFILE_CAF_DESC_LENGTH;
         p->dataPosition = p->metaDataChunkPosition + (p->headerPad > 0 ? p->headerPad + chunkHeaderLength : 0) + chunkHeaderLength + p->dataOffset; // plus edit count
         
-        if (!chunkInfo)
+        if (! chunkInfo)
         {
             result = PlankResult_FileReadError;
             goto exit;
@@ -1752,7 +1752,7 @@ PlankResult pl_AudioFileWriter_CAF_WriteHeader (PlankAudioFileWriterRef p)
     if (p->formatInfo.encoding & PLANKAUDIOFILE_ENCODING_FLOAT_FLAG)
         formatFlags |= PLANKAUDIOFILE_CAF_FLOAT_FLAG;
     
-    if (!(p->formatInfo.encoding & PLANKAUDIOFILE_ENCODING_BIGENDIAN_FLAG))
+    if (! (p->formatInfo.encoding & PLANKAUDIOFILE_ENCODING_BIGENDIAN_FLAG))
         formatFlags |= PLANKAUDIOFILE_CAF_LITTLEENDIAN_FLAG;
     
     if ((result = pl_IffFileWriter_ResizeChunk ((PlankIffFileWriterRef)iff, 0, desc, PLANKAUDIOFILE_CAF_DESC_LENGTH, PLANK_FALSE)) != PlankResult_OK) goto exit;
@@ -1769,13 +1769,13 @@ PlankResult pl_AudioFileWriter_CAF_WriteHeader (PlankAudioFileWriterRef p)
     
     if ((result = pl_IffFileWriter_SeekChunk ((PlankIffFileWriterRef)iff, 0, data, &chunkInfo, 0)) != PlankResult_OK) goto exit;
     
-    if (!chunkInfo)
+    if (! chunkInfo)
     {
         // write the 4 bytes "edit count"
         if ((result = pl_IffFileWriter_WriteChunk ((PlankIffFileWriterRef)iff, 0, data, 0, 4, PLANKIFFFILEWRITER_MODEAPPEND)) != PlankResult_OK) goto exit;
         if ((result = pl_IffFileWriter_SeekChunk ((PlankIffFileWriterRef)iff, 0, data, &chunkInfo, 0)) != PlankResult_OK) goto exit;
         
-        if (!chunkInfo)
+        if (! chunkInfo)
         {
             result = PlankResult_FileReadError;
             goto exit;
@@ -1802,7 +1802,7 @@ static PlankResult pl_AudioFileWriter_W64_OpenInternal (PlankAudioFileWriterRef 
         goto exit;
     }
     
-    if (!((p->formatInfo.encoding == PLANKAUDIOFILE_ENCODING_PCM_LITTLEENDIAN) ||
+    if (! ((p->formatInfo.encoding == PLANKAUDIOFILE_ENCODING_PCM_LITTLEENDIAN) ||
           (p->formatInfo.encoding == PLANKAUDIOFILE_ENCODING_FLOAT_LITTLEENDIAN)))
     {
         result = PlankResult_AudioFileInavlidType;
@@ -1842,7 +1842,7 @@ static PlankResult pl_AudioFileWriter_W64_OpenInternal (PlankAudioFileWriterRef 
     
     iff = pl_IffAudioFileWriter_CreateAndInit();
     
-    if (!iff)
+    if (! iff)
     {
         result = PlankResult_MemoryError;
         goto exit;
@@ -1901,7 +1901,7 @@ PlankResult pl_AudioFileWriter_W64_WriteHeader (PlankAudioFileWriterRef p)
     
     if ((result = pl_IffFileWriter_SeekChunk ((PlankIffFileWriterRef)iff, 0, PLANKAUDIOFILE_W64_FMT_ID, &chunkInfo, 0)) != PlankResult_OK) goto exit;
     
-    if (!chunkInfo)
+    if (! chunkInfo)
     {
         if ((result = pl_IffFileWriter_WriteChunk ((PlankIffFileWriterRef)iff, 0, PLANKAUDIOFILE_W64_FMT_ID, 0, PLANKAUDIOFILE_WAV_FMT_EXTENSIBLE_LENGTH, PLANKIFFFILEWRITER_MODEAPPEND)) != PlankResult_OK) goto exit;
         
@@ -1912,7 +1912,7 @@ PlankResult pl_AudioFileWriter_W64_WriteHeader (PlankAudioFileWriterRef p)
         
         if ((result = pl_IffFileWriter_SeekChunk ((PlankIffFileWriterRef)iff, 0, PLANKAUDIOFILE_W64_FMT_ID, &chunkInfo, 0)) != PlankResult_OK) goto exit;
         
-        if (!chunkInfo)
+        if (! chunkInfo)
         {
             result = PlankResult_FileReadError;
             goto exit;
@@ -2185,7 +2185,7 @@ PlankResult pl_AudioFileWriter_OggVorbis_OpenInternal (PlankAudioFileWriterRef p
         goto exit;
     }
     
-    if (!(p->formatInfo.encoding & PLANKAUDIOFILE_ENCODING_FLOAT_FLAG))
+    if (! (p->formatInfo.encoding & PLANKAUDIOFILE_ENCODING_FLOAT_FLAG))
     {
         result = PlankResult_AudioFileInavlidType;
         goto exit;
@@ -2223,13 +2223,13 @@ PlankResult pl_AudioFileWriter_OggVorbis_OpenInternal (PlankAudioFileWriterRef p
             goto exit;
         }
         
-        if (!(mode & PLANKFILE_BINARY))
+        if (! (mode & PLANKFILE_BINARY))
         {
             result = PlankResult_AudioFileInavlidType;
             goto exit;
         }
         
-        if (!(mode & PLANKFILE_WRITE))
+        if (! (mode & PLANKFILE_WRITE))
         {
             result = PlankResult_AudioFileInavlidType;
             goto exit;
@@ -2258,7 +2258,7 @@ PlankResult pl_AudioFileWriter_OggVorbis_OpenInternal (PlankAudioFileWriterRef p
                                       pl_ClipF (p->formatInfo.quality * 0.1f, -0.1f, 1.f));
     }
     
-    if (!err)
+    if (! err)
     {
         p->peer = ogg;
 
@@ -2519,7 +2519,7 @@ static PlankResult pl_AudioFileWriter_Opus_OpenInternal (PlankAudioFileWriterRef
         goto exit;
     }
     
-    if (!(p->formatInfo.encoding & PLANKAUDIOFILE_ENCODING_FLOAT_FLAG))
+    if (! (p->formatInfo.encoding & PLANKAUDIOFILE_ENCODING_FLOAT_FLAG))
     {
         result = PlankResult_AudioFileInavlidType;
         goto exit;
@@ -2561,13 +2561,13 @@ static PlankResult pl_AudioFileWriter_Opus_OpenInternal (PlankAudioFileWriterRef
             goto exit;
         }
         
-        if (!(mode & PLANKFILE_BINARY))
+        if (! (mode & PLANKFILE_BINARY))
         {
             result = PlankResult_AudioFileInavlidType;
             goto exit;
         }
         
-        if (!(mode & PLANKFILE_WRITE))
+        if (! (mode & PLANKFILE_WRITE))
         {
             result = PlankResult_AudioFileInavlidType;
             goto exit;
@@ -2718,7 +2718,7 @@ static PlankResult pl_AudioFileWriter_Opus_OpenInternal (PlankAudioFileWriterRef
                 
         for (i = 0; i < (numChannels / 2); ++i)
         {                
-            if (!pl_AudioFileFormatInfoChannelIdentifiersArePair (channelIdentifiers[i * 2],
+            if (! pl_AudioFileFormatInfoChannelIdentifiersArePair (channelIdentifiers[i * 2],
                                                                   channelIdentifiers[i * 2 + 1]))
                 break; // pairs must be consecutive unless using vorbis mapping
 
@@ -3054,7 +3054,7 @@ static PlankResult pl_AudioFileWriter_WAV_WriteChunk_bext (PlankAudioFileWriterR
     PlankUI chunkSize;
     PlankLL timeRef;
     
-    if (!p->metaData)
+    if (! p->metaData)
         goto exit;
     
     iff  = (PlankIffFileWriterRef)p->peer;
@@ -3166,7 +3166,7 @@ static PlankResult pl_AudioFileWriter_WAV_WriteChunk_smpl (PlankAudioFileWriterR
     PlankDynamicArrayRef extraSamplerData;
     PlankUI numLoops, i, extraSamplerDataSize;
 
-    if (!p->metaData)
+    if (! p->metaData)
         goto exit;
     
     iff  = (PlankIffFileWriterRef)p->peer;
@@ -3188,7 +3188,7 @@ static PlankResult pl_AudioFileWriter_WAV_WriteChunk_smpl (PlankAudioFileWriterR
 
         if ((result = pl_IffFileWriter_PrepareChunk (iff, p->metaDataChunkPosition, smpl, 0, smplChunkSize)) != PlankResult_OK) goto exit;
         
-        if (!samplePeriod)
+        if (! samplePeriod)
             samplePeriod = 1000000000.0 / p->formatInfo.sampleRate;
     
         if ((result = pl_File_WriteUI ((PlankFileRef)iff, manufacturer)) != PlankResult_OK) goto exit;
@@ -3205,7 +3205,7 @@ static PlankResult pl_AudioFileWriter_WAV_WriteChunk_smpl (PlankAudioFileWriterR
         {
             loop = (PlankAudioFileRegionRef)pl_SharedPtrArray_GetSharedPtr (loopPoints, i);
             
-            if (!loop)
+            if (! loop)
             {
                 result = PlankResult_UnknownError;
                 goto exit;
@@ -3247,7 +3247,7 @@ static PlankResult pl_AudioFileWriter_WAV_WriteChunk_inst (PlankAudioFileWriterR
     PlankUI instChunkSize;
     PlankI baseNote, detune, gain, lowNote, highNote, lowVelocity, highVelocity;
     
-    if (!p->metaData)
+    if (! p->metaData)
         goto exit;
     
     iff  = (PlankIffFileWriterRef)p->peer;
@@ -3296,7 +3296,7 @@ static PlankResult pl_AudioFileWriter_WAV_WriteChunk_cue (PlankAudioFileWriterRe
     int numCues, numRegions, numLoops, totalCues, i;
     PlankFourCharCode dataID;
     
-    if (!p->metaData)
+    if (! p->metaData)
         goto exit;
     
     iff  = (PlankIffFileWriterRef)p->peer;
@@ -3322,7 +3322,7 @@ static PlankResult pl_AudioFileWriter_WAV_WriteChunk_cue (PlankAudioFileWriterRe
         {
             cue = (PlankAudioFileCuePointRef)pl_SharedPtrArray_GetSharedPtr (cuePoints, i);
             
-            if (!cue)
+            if (! cue)
             {
                 result = PlankResult_UnknownError;
                 goto exit;
@@ -3340,7 +3340,7 @@ static PlankResult pl_AudioFileWriter_WAV_WriteChunk_cue (PlankAudioFileWriterRe
         {
             region = (PlankAudioFileRegionRef)pl_SharedPtrArray_GetSharedPtr (regions, i);
             
-            if (!region)
+            if (! region)
             {
                 result = PlankResult_UnknownError;
                 goto exit;
@@ -3358,7 +3358,7 @@ static PlankResult pl_AudioFileWriter_WAV_WriteChunk_cue (PlankAudioFileWriterRe
         {
             loop = (PlankAudioFileRegionRef)pl_SharedPtrArray_GetSharedPtr (loopPoints, i);
 
-            if (!loop)
+            if (! loop)
             {
                 result = PlankResult_UnknownError;
                 goto exit;
@@ -3401,7 +3401,7 @@ static PlankResult pl_AudioFileWriter_WAV_WriteChunk_list (PlankAudioFileWriterR
     const char* string;
     PlankUI stringSize;
     
-    if (!p->metaData)
+    if (! p->metaData)
         goto exit;
     
     list = "list";
@@ -3429,17 +3429,17 @@ static PlankResult pl_AudioFileWriter_WAV_WriteChunk_list (PlankAudioFileWriterR
         {
             cue = (PlankAudioFileCuePointRef)pl_SharedPtrArray_GetSharedPtr (cuePoints, i);
 
-            if (!cue)
+            if (! cue)
             {
                 result = PlankResult_UnknownError;
                 goto exit;
             }
             
             string = pl_AudioFileCuePoint_GetLabel (cue);
-            if (!string) continue;
+            if (! string) continue;
             
             stringSize = (PlankUI)strlen (string) + 1;
-            if (!stringSize) continue;
+            if (! stringSize) continue;
             
             if ((result = pl_File_WriteFourCharCode (&chunkStream, pl_FourCharCode (labl))) != PlankResult_OK) goto exit;
             if ((result = pl_File_WriteUI (&chunkStream, 4 + stringSize + (stringSize & 1))) != PlankResult_OK) goto exit;
@@ -3456,17 +3456,17 @@ static PlankResult pl_AudioFileWriter_WAV_WriteChunk_list (PlankAudioFileWriterR
         {
             region = (PlankAudioFileRegionRef)pl_SharedPtrArray_GetSharedPtr (regions, i);
             
-            if (!region)
+            if (! region)
             {
                 result = PlankResult_UnknownError;
                 goto exit;
             }
             
             string = pl_AudioFileRegion_GetLabel (region);
-            if (!string) continue;
+            if (! string) continue;
             
             stringSize = (PlankUI)strlen (string) + 1;
-            if (!stringSize) continue;
+            if (! stringSize) continue;
             
             if ((result = pl_File_WriteFourCharCode (&chunkStream, pl_FourCharCode (ltxt))) != PlankResult_OK) goto exit;
             if ((result = pl_File_WriteUI (&chunkStream, 4 + 4 + 4 + 2 + 2 + 2 + 2 + stringSize + (stringSize & 1))) != PlankResult_OK) goto exit;
@@ -3569,7 +3569,7 @@ static PlankResult pl_AudioFileWriter_AIFFAIFC_WriteChunk_MARK (PlankAudioFileWr
     PlankUC stringLength;
     int chunkHeaderLength;
     
-    if (!p->metaData)
+    if (! p->metaData)
         goto exit;
     
     iff  = (PlankIffFileWriterRef)p->peer;
@@ -3593,7 +3593,7 @@ static PlankResult pl_AudioFileWriter_AIFFAIFC_WriteChunk_MARK (PlankAudioFileWr
         {
             cue = (PlankAudioFileCuePointRef)pl_SharedPtrArray_GetSharedPtr (cuePoints, i);
             
-            if (!cue)
+            if (! cue)
             {
                 result = PlankResult_UnknownError;
                 goto exit;
@@ -3610,7 +3610,7 @@ static PlankResult pl_AudioFileWriter_AIFFAIFC_WriteChunk_MARK (PlankAudioFileWr
             {
                 if ((result = pl_File_Write (&chunkStream, label, stringLength)) != PlankResult_OK) goto exit;
                 
-                if (!(stringLength & 1)) // inlcudes length byte
+                if (! (stringLength & 1)) // inlcudes length byte
                 {
                     if ((result = pl_File_WriteUC (&chunkStream, 0)) != PlankResult_OK) goto exit;
                 }
@@ -3812,7 +3812,7 @@ static PlankResult pl_AudioFileWriter_CAF_WriteChunk_mark (PlankAudioFileWriterR
 	(void)strings;
 	(void)stringIndices;
     
-    if (!p->metaData)
+    if (! p->metaData)
         goto exit;
     
     iff  = (PlankIffFileWriterRef)p->peer;
@@ -3838,7 +3838,7 @@ static PlankResult pl_AudioFileWriter_CAF_WriteChunk_mark (PlankAudioFileWriterR
         {
             cue = (PlankAudioFileCuePointRef)pl_SharedPtrArray_GetSharedPtr (cuePoints, i);
             
-            if (!cue)
+            if (! cue)
             {
                 result = PlankResult_UnknownError;
                 goto exit;
@@ -3882,7 +3882,7 @@ static PlankResult pl_AudioFileWriter_CAF_WriteChunk_strg (PlankAudioFileWriterR
     const char* stringsData;
     const char* strg;
     
-    if (!p->metaData)
+    if (! p->metaData)
         goto exit;
     
     iff  = (PlankIffFileWriterRef)p->peer;
@@ -3946,7 +3946,7 @@ PlankResult pl_AudioFileWriter_CAF_WritePostDataMetaData (PlankAudioFileWriterRe
     pl_DynamicArray_Init (&stringIndices);
     pl_DynamicArray_Init (&strings);
     
-    if (!p->metaData)
+    if (! p->metaData)
         goto exit;
     
     iff  = (PlankIffFileWriterRef)p->peer;
@@ -3971,7 +3971,7 @@ PlankResult pl_AudioFileWriter_CAF_WritePostDataMetaData (PlankAudioFileWriterRe
             {
                 cue = (PlankAudioFileCuePointRef)pl_SharedPtrArray_GetSharedPtr (cuePoints, i);
                 
-                if (!cue)
+                if (! cue)
                 {
                     result = PlankResult_UnknownError;
                     goto exit;
@@ -3997,7 +3997,7 @@ PlankResult pl_AudioFileWriter_CAF_WritePostDataMetaData (PlankAudioFileWriterRe
             {
                 region = (PlankAudioFileRegionRef)pl_SharedPtrArray_GetSharedPtr (regions, i);
                 
-                if (!region)
+                if (! region)
                 {
                     result = PlankResult_UnknownError;
                     goto exit;
@@ -4023,7 +4023,7 @@ PlankResult pl_AudioFileWriter_CAF_WritePostDataMetaData (PlankAudioFileWriterRe
             {
                 loop = (PlankAudioFileRegionRef)pl_SharedPtrArray_GetSharedPtr (loopPoints, i);
                 
-                if (!loop)
+                if (! loop)
                 {
                     result = PlankResult_UnknownError;
                     goto exit;
@@ -4077,7 +4077,7 @@ static PlankResult pl_AudioFileWriter_Ogg_WriteMetaData (PlankAudioFileWriterRef
     double time;
     int hours, minutes, seconds, millis;
         
-    if (!p->metaData || !(p->metaDataIOFlags & PLANKAUDIOFILEMETADATA_IOFLAGS_CUEPOINTS))
+    if (! p->metaData || !(p->metaDataIOFlags & PLANKAUDIOFILEMETADATA_IOFLAGS_CUEPOINTS))
         goto exit;
     
     cuePoints  = pl_AudioFileMetaData_GetCuePoints (p->metaData);
@@ -4087,7 +4087,7 @@ static PlankResult pl_AudioFileWriter_Ogg_WriteMetaData (PlankAudioFileWriterRef
     {
         cue = (PlankAudioFileCuePointRef)pl_SharedPtrArray_GetSharedPtr (cuePoints, i);
         
-        if (!cue)
+        if (! cue)
         {
             result = PlankResult_UnknownError;
             goto exit;

@@ -232,8 +232,8 @@ public:
         
         Pattern (JSON const& json) throw()
         {            
-            if (!json.isObject()) return;
-            if (!json.isObjectType (PLANK_NEURALPATTERNF_JSON_TYPE)) return;
+            if (! json.isObject()) return;
+            if (! json.isObjectType (PLANK_NEURALPATTERNF_JSON_TYPE)) return;
             if (json.getVersion() > JSON::versionCode (PLANK_NEURALNETWORKF_JSON_VERSION)) return;
             
             JSON inputJson = json[PLANK_NEURALPATTERNF_JSON_INPUT];

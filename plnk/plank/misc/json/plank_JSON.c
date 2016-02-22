@@ -92,13 +92,13 @@ PlankJSONRef pl_JSON_FromFile (PlankFileRef f)
     
     if ((result = pl_File_GetMode (f, &fileMode)) != PlankResult_OK) goto exit;
     
-    if (!(fileMode & PLANKFILE_READ))
+    if (! (fileMode & PLANKFILE_READ))
     {
         result = PlankResult_JSONFileError;
         goto exit;
     }
     
-    if (!(fileMode & PLANKFILE_BINARY))
+    if (! (fileMode & PLANKFILE_BINARY))
     {
         result = PlankResult_JSONFileError;
         goto exit;
@@ -106,7 +106,7 @@ PlankJSONRef pl_JSON_FromFile (PlankFileRef f)
     
     j = (PlankJSONRef)json_load_callback (pl_JSONLoadCallback, f, 0, &jerror);
     
-    if (!j)
+    if (! j)
     {
         j = pl_JSON_Object();
         e = pl_JSON_Object();
@@ -139,19 +139,19 @@ PlankResult pl_JSON_WriteToFile (PlankJSONRef p, PlankFileRef f, const int flags
 
     if ((result = pl_File_GetMode (f, &fileMode)) != PlankResult_OK) goto exit;
     
-    if (!(fileMode & PLANKFILE_WRITE))
+    if (! (fileMode & PLANKFILE_WRITE))
     {
         result = PlankResult_JSONFileError;
         goto exit;
     }
     
-    if (!(fileMode & PLANKFILE_BINARY))
+    if (! (fileMode & PLANKFILE_BINARY))
     {
         result = PlankResult_JSONFileError;
         goto exit;
     }
     
-    if (!p)
+    if (! p)
     {
         result = PlankResult_MemoryError;
         goto exit;
@@ -422,7 +422,7 @@ static PlankResult pl_JSON_EncodedArrayGet (PlankJSONRef p, PlankDynamicArrayRef
                 {
                     j = pl_JSON_ArrayAt (p, i);
                     
-                    if (!pl_JSON_IsString (j))
+                    if (! pl_JSON_IsString (j))
                     {
                         result = PlankResult_JSONError;
                         pl_File_DeInit (&zStream);
@@ -466,7 +466,7 @@ static PlankResult pl_JSON_EncodedArrayGet (PlankJSONRef p, PlankDynamicArrayRef
                 {
                     j = pl_JSON_ArrayAt (p, i);
                     
-                    if (!pl_JSON_IsString (j))
+                    if (! pl_JSON_IsString (j))
                     {
                         result = PlankResult_JSONError;
                         goto exit;
@@ -648,7 +648,7 @@ static PLANK_INLINE_LOW PlankB pl_JSON_IsEncoded (PlankJSONRef p, const char* bi
     const char* key;
     key = json_object_iter_key (json_object_iter ((json_t*)p));
     
-    if (!key)
+    if (! key)
         return PLANK_FALSE;
     else if (binaryKey && ((strcmp (key, binaryKey) == 0)))
         return PLANK_TRUE;

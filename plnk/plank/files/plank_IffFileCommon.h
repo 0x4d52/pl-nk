@@ -146,7 +146,7 @@ static PLANK_INLINE_LOW PlankResult pl_IffFile_InitID (PlankIffFileRef p, const 
     
 	(void)p;
 
-    if (!string)
+    if (! string)
     {
         pl_MemoryZero (chunkID, sizeof (PlankIffID));
         return PlankResult_OK;

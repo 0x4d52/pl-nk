@@ -115,13 +115,13 @@ PlankResult pl_Base64_EncodeFile (PlankBase64Ref p, PlankFileRef outputTextFile,
     if ((result = pl_File_GetMode (outputTextFile, &outputMode)) != PlankResult_OK) goto exit;
     if ((result = pl_File_GetMode (inputBinaryFile, &inputMode)) != PlankResult_OK) goto exit;
     
-    if (!((outputMode & PLANKFILE_WRITE) && (outputMode & ~PLANKFILE_BINARY)))
+    if (! ((outputMode & PLANKFILE_WRITE) && (outputMode & ~PLANKFILE_BINARY)))
     {
         result = PlankResult_FileWriteError;
         goto exit;
     }
     
-    if (!((inputMode & PLANKFILE_READ) && (inputMode & PLANKFILE_BINARY)))
+    if (! ((inputMode & PLANKFILE_READ) && (inputMode & PLANKFILE_BINARY)))
     {
         result = PlankResult_FileReadError;
         goto exit;
@@ -196,13 +196,13 @@ PlankResult pl_Base64_DecodeFile (PlankBase64Ref p, PlankFileRef outputBinaryFil
     if ((result = pl_File_GetMode (inputTextFile, &inputMode)) != PlankResult_OK) goto exit;
     if ((result = pl_File_GetMode (outputBinaryFile, &outputMode)) != PlankResult_OK) goto exit;
     
-    if (!((outputMode & PLANKFILE_WRITE) && (outputMode & PLANKFILE_BINARY)))
+    if (! ((outputMode & PLANKFILE_WRITE) && (outputMode & PLANKFILE_BINARY)))
     {
         result = PlankResult_FileWriteError;
         goto exit;
     }
     
-    if (!((inputMode & PLANKFILE_READ) && (inputMode & ~PLANKFILE_BINARY)))
+    if (! ((inputMode & PLANKFILE_READ) && (inputMode & ~PLANKFILE_BINARY)))
     {
         result = PlankResult_FileReadError;
         goto exit;

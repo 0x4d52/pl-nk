@@ -390,7 +390,7 @@ PlankResult pl_NeuralNodeF_InitFromJSON (PlankNeuralNodeFRef p, PlankNeuralNetwo
     pl_MemoryZero (p, sizeof (PlankNeuralNodeF));
     p->network = network;
     
-    if (!pl_JSON_IsObjectType (j, PLANK_NEURALNODEF_JSON_TYPE))
+    if (! pl_JSON_IsObjectType (j, PLANK_NEURALNODEF_JSON_TYPE))
     {
         result = PlankResult_JSONError;
         goto exit;
@@ -408,7 +408,7 @@ PlankResult pl_NeuralNodeF_InitFromJSON (PlankNeuralNodeFRef p, PlankNeuralNetwo
         goto exit;
     }
     
-    if (!(pl_JSON_IsFloatArrayEncoded (jweights) || (pl_JSON_IsArray (jweights))))
+    if (! (pl_JSON_IsFloatArrayEncoded (jweights) || (pl_JSON_IsArray (jweights))))
     {
         result = PlankResult_JSONError;
         goto exit;

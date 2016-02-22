@@ -628,7 +628,7 @@ static PLANK_INLINE_LOW PlankF80 pl_I2F80 (const PlankUI value)
     { 
         exp = exp >> 1;
         
-        if (!exp) 
+        if (! exp) 
             break;
     }
     

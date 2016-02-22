@@ -138,7 +138,7 @@ PlankResult pl_Path_InitChild (PlankPathRef p, PlankPathRef parentpath, const ch
     
     p->temp[0] = '\0';
     
-    if (!pl_Path_IsDirectory (parentpath))
+    if (! pl_Path_IsDirectory (parentpath))
     {
         result = PlankResult_FilePathInvalid;
         goto exit;
@@ -242,7 +242,7 @@ PlankResult pl_Path_InitSystem (PlankPathRef p, const int systemPath, const char
             cfstring = CFURLCopyFileSystemPath (cfurl, kCFURLPOSIXPathStyle);
             parent = CFStringGetCStringPtr (cfstring, kCFStringEncodingUTF8);
             
-            if (!parent)
+            if (! parent)
             {
                 if (CFStringGetCString (cfstring, temp, 1024, kCFStringEncodingUTF8))
                     parent = temp;

@@ -260,7 +260,7 @@ public:
             {
                 UnitType& inputUnit (units.atUnchecked (unit));
                 
-                if (!inputUnit.wrapAt (channel).shouldBeDeletedNow (info.getTimeStamp()))
+                if (! inputUnit.wrapAt (channel).shouldBeDeletedNow (info.getTimeStamp()))
                 {
                     plonk_assert (inputUnit.getOverlap (channel) == Math<DoubleVariable>::get1());
                     
@@ -402,7 +402,7 @@ public:
 
             while ((inputUnit = queue.pop()) != getDummy())
             {
-                if (!inputUnit.shouldBeDeletedNow (info))
+                if (! inputUnit.shouldBeDeletedNow (info))
                 {
                     plonk_assert (inputUnit.getOverlap (channel) == Math<DoubleVariable>::get1());
 
@@ -442,7 +442,7 @@ public:
                     
                     queue.push (inputUnit);
                 }
-                else if (!data.purgeExpiredUnits)
+                else if (! data.purgeExpiredUnits)
                 {
                     queue.push (inputUnit);
                 }
@@ -687,7 +687,7 @@ public:
             {
                 UnitType& inputUnit (units.atUnchecked (unit));
                 
-                if (!inputUnit.wrapAt (channel).shouldBeDeletedNow (info.getTimeStamp()))
+                if (! inputUnit.wrapAt (channel).shouldBeDeletedNow (info.getTimeStamp()))
                 {
                     plonk_assert (inputUnit.getOverlap (channel) == Math<DoubleVariable>::get1());
                     
