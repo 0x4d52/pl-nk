@@ -140,12 +140,14 @@ PlankResult pl_FFTF_InitWithLength (PlankFFTFRef p, const PlankL length)
         goto exit;
     }
     
-#ifdef PLANK_FFT_VDSP    
+#if defined(PLANK_FFT_VDSP)
     p->peer = vDSP_create_fftsetup (p->lengthLog2, 0);
     p->bufferComplex.realp = p->buffer;
     p->bufferComplex.imagp = p->buffer + p->halfLength;
     p->ifftScale = 1.f / p->length;
     p->fftScale = 0.5f;
+#elif defined(PLANK_FFT_CUSTOM)
+    p->peer = pl_FFTCusomF_CreateAndInitWithLength (p->length, &p->fftScale, &p->ifftScale);
 #else
     p->peer = pl_FFTRealF_CreateAndInitWithLength (p->length);
     p->ifftScale = 1.0f / (int)p->length;
@@ -174,9 +176,11 @@ PlankResult pl_FFTF_DeInit (PlankFFTFRef p)
         goto exit;
     }
     
-#ifdef PLANK_FFT_VDSP
+#if defined(PLANK_FFT_VDSP)
     FFTSetup fftvDSP = (FFTSetup)p->peer;
     vDSP_destroy_fftsetup (fftvDSP);
+#elif defined(PLANK_FFT_CUSTOM)
+    pl_FFTCustomF_Destroy (p->peer);
 #else
     pl_FFTRealF_Destroy (p->peer);
 #endif
@@ -212,7 +216,7 @@ void pl_FFTF_Forward (PlankFFTFRef p, float* output, const float* input)
     const PlankL N = p->length;
     const float scale = p->fftScale;
 
-#ifdef PLANK_FFT_VDSP
+#if defined(PLANK_FFT_VDSP)
     FFTSetup fftvDSP = (FFTSetup)p->peer;
     const PlankL N2 = p->halfLength;
     const PlankL Nlog2 = p->lengthLog2;
@@ -236,7 +240,11 @@ void pl_FFTF_Forward (PlankFFTFRef p, float* output, const float* input)
     
     flip[0] = nyquist;
    #endif
-    
+#elif defined(PLANK_FFT_CUSTOM)
+    if (scale != 1.f)
+        pl_VectorMulF_NN1 (output, output, scale, N);
+
+    pl_FFTCustomF_Forward (p->peer, output, input);
 #else
     if (scale != 1.f)
         pl_VectorMulF_NN1 (output, output, scale, N);
@@ -253,7 +261,7 @@ void pl_FFTF_Inverse (PlankFFTFRef p, float* output, const float* input)
 
     pl_MemoryCopy (buffer, input, sizeof (float) * N);
 
-#ifdef PLANK_FFT_VDSP
+#if defined(PLANK_FFT_VDSP)
     FFTSetup fftvDSP = (FFTSetup)p->peer;
     DSPSplitComplex* bufferComplex = &p->bufferComplex;
     const PlankL N2 = p->halfLength;
@@ -270,6 +278,8 @@ void pl_FFTF_Inverse (PlankFFTFRef p, float* output, const float* input)
     
     vDSP_fft_zrip (fftvDSP, bufferComplex, 1, Nlog2, FFT_INVERSE);
     vDSP_ztoc (bufferComplex, 1, (COMPLEX*)output, 2, N2);
+#elif defined(PLANK_FFT_CUSTOM)
+    pl_FFTCustomF_Inverse (p->peer, output, input);
 #else
     pl_FFTRealF_Inverse (p->peer, output, buffer);
 #endif

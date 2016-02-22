@@ -89,6 +89,9 @@ PLANK_BEGIN_C_LINKAGE
  - Index 126 - Bin 62 Imag
  - Index 127 - Bin 63 Imag
  
+ If you need to use another library to implement the FFT process then you can write your own callbacks:
+ 
+ 
  @defgroup PlankFFTFClass Plank FFTF class
  @ingroup PlankClasses
  @{
@@ -152,6 +155,10 @@ PlankL pl_FFTF_Length (PlankFFTFRef p);
  @return The half FFT size. */
 PlankL pl_FFTF_HalfLength (PlankFFTFRef p);
 
+/** Get log2 of the FFT size.
+ This is just as a convenience as it is already cached for efficiency.
+ @param p The <i>Plank FFTF</i> object.
+ @return The log2 of the FFT size. */
 PlankL pl_FFTF_LengthLog2 (PlankFFTFRef p);
 
 /** Get a pointer to the internal temporary buffer.
@@ -161,6 +168,35 @@ PlankL pl_FFTF_LengthLog2 (PlankFFTFRef p);
  @param p The <i>Plank FFTF</i> object. 
  @return A pointer to the temporary float buffer. */
 float* pl_FFTF_Temp (PlankFFTFRef p);
+
+
+/** Custom creation function for external FFT libs. 
+ @note Implement this somewhere in your code and define PLANK_FFT_CUSTOM in the project.
+ This must return a pointer an allocated data structure for the FFT state.
+ The PlankFFTF class can perfrom scaling for the forward of inverse trasnforms.
+ @param length    The FFT size - this must be a power of 2 or less than 16 (where it will
+                  specify the log2 FFT size e.g., length 8 = pow(2,8) = 256
+ @param fftScale  Scaling to be applied to the input data before a forward transform.
+ @param ifftScale Scaling to be applied to the output data after an inverse transform */
+void* pl_FFTCusomF_CreateAndInitWithLength (const PlankL length, float* fftScale, float* ifftScale);
+
+/** Custom destroy function for external FFT libs. 
+ @note Implement this somewhere in your code and define PLANK_FFT_CUSTOM in the project.
+ This must dellocate memory for your custom process. */
+void pl_FFTCustomF_Destroy (void* fftCustomPeer);
+
+/** Custom forward transform for external FFT libs. 
+ @note Implement this somewhere in your code and define PLANK_FFT_CUSTOM in the project.
+ @param output A pointer to an array of floats to store the result.
+ @param input A pointer to an array of floats holding the input data. */
+void pl_FFTCustomF_Forward (void* fftCustomPeer, float* output, const float* input);
+
+/** Custom inverse transform for external FFT libs. 
+ @note Implement this somewhere in your code and define PLANK_FFT_CUSTOM in the project.
+ @param output A pointer to an array of floats to store the result.
+ @param input A pointer to an array of floats holding the input data. */
+void pl_FFTCustomF_Inverse (void* fftCustomPeer, float* output, const float* input);
+
 
 /// @} // End group PlankFFTFClass
 
