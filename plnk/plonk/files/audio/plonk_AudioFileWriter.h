@@ -511,7 +511,7 @@ public:
                 
                 this->writeFrames (buffer);
             }
-            while (!reader.didHitEOF());
+            while (! reader.didHitEOF());
         }
         else
         {

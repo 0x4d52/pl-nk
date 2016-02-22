@@ -229,7 +229,7 @@ PlankResult pl_LockFreeQueue_Push (PlankLockFreeQueueRef p, const PlankLockFreeQ
 
     pl_LockFreeQueueElement_SetNext (element, (PlankLockFreeQueueElementRef)p);
 
-    while (!success)
+    while (! success)
     {
         tailExtra = pl_AtomicPX_GetExtraUnchecked ((PlankAtomicPXRef)&(p->tail));                            // changed to unchecked
         tailElement = (PlankLockFreeQueueElementRef)pl_AtomicPX_GetUnchecked ((PlankAtomicPXRef)&(p->tail)); // changed to unchecked
@@ -271,7 +271,7 @@ PlankResult pl_LockFreeQueue_Push (PlankLockFreeQueueRef p, const PlankLockFreeQ
 //    
 //    pl_LockFreeQueueElement_SetNext (element, (PlankLockFreeQueueElementRef)p);
 //    
-//    while (!success)
+//    while (! success)
 //    {
 //        tailExtra = pl_AtomicPX_GetExtraUnchecked ((PlankAtomicPXRef)&(p->tail));                            // changed to unchecked
 //        tailElement = (PlankLockFreeQueueElementRef)pl_AtomicPX_GetUnchecked ((PlankAtomicPXRef)&(p->tail)); // changed to unchecked
@@ -315,7 +315,7 @@ PlankResult pl_LockFreeQueue_Push (PlankLockFreeQueueRef p, const PlankLockFreeQ
 //
 //    pl_LockFreeQueueElement_SetNext (element, (PlankLockFreeQueueElementRef)p);
 //    
-//    while (!success)
+//    while (! success)
 //    {
 //        tailExtra = pl_AtomicPX_GetExtraUnchecked ((PlankAtomicPXRef)&(p->tail));                            // changed to unchecked
 //        tailElement = (PlankLockFreeQueueElementRef)pl_AtomicPX_GetUnchecked ((PlankAtomicPXRef)&(p->tail)); // changed to unchecked
@@ -357,7 +357,7 @@ PlankResult pl_LockFreeQueue_Push (PlankLockFreeQueueRef p, const PlankLockFreeQ
 //    
 //    pl_LockFreeQueueElement_SetNext (element, (PlankLockFreeQueueElementRef)pl_AtomicPX_GetUnchecked ((PlankAtomicPXRef)&(p->head)));
 //    
-//    while (!success)
+//    while (! success)
 //    {
 //        tailExtra = pl_AtomicPX_GetExtraUnchecked ((PlankAtomicPXRef)&(p->tail));                            // changed to unchecked
 //        tailElement = (PlankLockFreeQueueElementRef)pl_AtomicPX_GetUnchecked ((PlankAtomicPXRef)&(p->tail)); // changed to unchecked
@@ -394,7 +394,7 @@ PlankResult pl_LockFreeQueue_Pop (PlankLockFreeQueueRef p, PlankLockFreeQueueEle
 	headElement = 0;
     success = PLANK_FALSE;
     
-    while (!success)
+    while (! success)
     {
         headExtra = pl_AtomicPX_GetExtraUnchecked ((PlankAtomicPXRef)&(p->head));       // changed to unchecked
         tailExtra = pl_AtomicPX_GetExtraUnchecked ((PlankAtomicPXRef)&(p->tail));       // changed to unchecked
@@ -452,7 +452,7 @@ exit:
 //	headElement = 0;
 //    success = PLANK_FALSE;
 //    
-//    while (!success)
+//    while (! success)
 //    {
 //        headExtra = pl_AtomicPX_GetExtraUnchecked ((PlankAtomicPXRef)&(p->head));       // changed to unchecked
 //        tailExtra = pl_AtomicPX_GetExtraUnchecked ((PlankAtomicPXRef)&(p->tail));       // changed to unchecked

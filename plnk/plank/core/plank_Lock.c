@@ -162,7 +162,7 @@ void pl_Lock_Wait (PlankLockRef p)
         do
         {
             pthread_cond_wait (&p->condition, &p->mutex);
-        } while (!p->flag);
+        } while (! p->flag);
     }
     
     p->flag = PLANK_FALSE;
@@ -201,7 +201,7 @@ void pl_Lock_WaitTimeout (PlankLockRef p, double time)
                 pthread_mutex_unlock (&p->mutex);
                 return;
             }
-        } while (!p->flag);
+        } while (! p->flag);
 
         p->flag = PLANK_FALSE;
         
@@ -292,7 +292,7 @@ void pl_Lock_Wait (PlankLockRef p)
         do
         {
             pthread_cond_wait (&p->condition, &p->mutex);
-        } while (!p->flag);
+        } while (! p->flag);
     }
     
     p->flag = PLANK_FALSE;

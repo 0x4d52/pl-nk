@@ -154,7 +154,7 @@ static PlankResult pl_SharedPtrCounter_IncrementRefCount (PlankSharedPtrCounterR
         success = pl_AtomicPX_CompareAndSwap ((PlankAtomicPXRef)p,
                                               ptr, oldExtra,
                                               ptr, PLANK_SHAREDPTR_XREFCOUNT(oldExtra, refCount));
-    } while (!success);
+    } while (! success);
     
 #if PLANKSHAREDPTR_DEBUG
     printf("Counter Ref  ++ %p ptr=%p refCount=%lu weakCount=%lu\n", p, ptr, refCount, PLANK_SHAREDPTR_XGETWEAKCOUNT(oldExtra));
@@ -182,7 +182,7 @@ static PlankResult pl_SharedPtrCounter_DecrementRefCount (PlankSharedPtrCounterR
         success = pl_AtomicPX_CompareAndSwap ((PlankAtomicPXRef)p,
                                               oldPtr, oldExtra,
                                               newPtr, PLANK_SHAREDPTR_XREFCOUNT(oldExtra, refCount));
-    } while (!success);
+    } while (! success);
     
 #if PLANKSHAREDPTR_DEBUG
     printf("Counter Ref  -- %p ptr=%p refCount=%lu weakCount=%lu\n", p, oldPtr, refCount, PLANK_SHAREDPTR_XGETWEAKCOUNT(oldExtra));
@@ -215,7 +215,7 @@ static PlankResult pl_SharedPtrCounter_IncrementWeakCount (PlankSharedPtrCounter
         success = pl_AtomicPX_CompareAndSwap ((PlankAtomicPXRef)p,
                                               ptr, oldExtra,
                                               ptr, PLANK_SHAREDPTR_XWEAKCOUNT(oldExtra, weakCount));
-    } while (!success);
+    } while (! success);
     
 #if PLANKSHAREDPTR_DEBUG
     printf("Counter Weak ++ %p ptr=%p refCount=%lu weakCount=%lu\n", p, ptr, PLANK_SHAREDPTR_XGETREFCOUNT(oldExtra), weakCount);
@@ -242,7 +242,7 @@ static PlankResult pl_SharedPtrCounter_DecrementWeakCount (PlankSharedPtrCounter
         success = pl_AtomicPX_CompareAndSwap ((PlankAtomicPXRef)p,
                                               ptr, oldExtra,
                                               ptr, PLANK_SHAREDPTR_XWEAKCOUNT(oldExtra, weakCount));
-    } while (!success);
+    } while (! success);
     
 #if PLANKSHAREDPTR_DEBUG
     printf("Counter Weak -- %p ptr=%p refCount=%lu weakCount=%lu\n", p, ptr, PLANK_SHAREDPTR_XGETREFCOUNT(oldExtra), weakCount);

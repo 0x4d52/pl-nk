@@ -260,7 +260,7 @@ void SmartPointerCounter::incrementRefCount() throw()
         
         success = atom.compareAndSwap (ptr, oldExtra,
                                        ptr, PLANK_SHAREDPTR_XREFCOUNT(oldExtra, refCount));
-    } while (!success);
+    } while (! success);
 }
 
 void SmartPointerCounter::decrementRefCount() throw()
@@ -278,7 +278,7 @@ void SmartPointerCounter::decrementRefCount() throw()
         
         success = atom.compareAndSwap (oldPtr, oldExtra,
                                        newPtr, PLANK_SHAREDPTR_XREFCOUNT(oldExtra, refCount));
-    } while (!success);
+    } while (! success);
     
     if (refCount == 0)
     {
@@ -310,7 +310,7 @@ void SmartPointerCounter::incrementWeakCount() throw()
         
         success = atom.compareAndSwap (ptr, oldExtra,
                                        ptr, PLANK_SHAREDPTR_XWEAKCOUNT(oldExtra, weakCount));
-    } while (!success);
+    } while (! success);
 }
 
 void SmartPointerCounter::decrementWeakCount() throw()
@@ -327,7 +327,7 @@ void SmartPointerCounter::decrementWeakCount() throw()
         
         success = atom.compareAndSwap (ptr, oldExtra,
                                        ptr, PLANK_SHAREDPTR_XWEAKCOUNT(oldExtra, weakCount));
-    } while (!success);
+    } while (! success);
     
     if ((weakCount == 0) && (PLANK_SHAREDPTR_XGETREFCOUNT(oldExtra) == 0))
         delete this;
@@ -357,7 +357,7 @@ void SmartPointerCounter::incrementCounts() throw()
 
         success = atom.compareAndSwap (ptr, oldExtra,
                                        ptr, PLANK_SHAREDPTR_XCOUNTS(refCount, weakCount));
-    } while (!success);
+    } while (! success);
 }
 
 void SmartPointerCounter::decrementCounts() throw()
@@ -378,7 +378,7 @@ void SmartPointerCounter::decrementCounts() throw()
         
         success = atom.compareAndSwap (oldPtr, oldExtra,
                                        newPtr, PLANK_SHAREDPTR_XCOUNTS(refCount, weakCount));
-    } while (!success);
+    } while (! success);
     
     if (refCount == 0)
     {

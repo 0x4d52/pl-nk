@@ -158,7 +158,7 @@ ResultCode ObjectMemoryPools::run() throw()
     int i;
     const double duration = 0.5;
     
-    while (!getShouldExit())
+    while (! getShouldExit())
     {
         for (i = 0; i < NumQueues; ++i)
         {

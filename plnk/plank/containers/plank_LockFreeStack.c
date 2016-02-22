@@ -205,7 +205,7 @@ PlankResult pl_LockFreeStack_Push (PlankLockFreeStackRef p, const PlankLockFreeS
         newExtra = oldExtra + 1;
         
         success = pl_AtomicPX_CompareAndSwap ((PlankAtomicPXRef)&(p->atom), oldPtr, oldExtra, newPtr, newExtra);
-	} while (!success);
+	} while (! success);
     
     pl_AtomicLL_Increment (&p->count);
     
@@ -237,7 +237,7 @@ PlankResult pl_LockFreeStack_Pop (PlankLockFreeStackRef p, PlankLockFreeStackEle
         success = pl_AtomicPX_CompareAndSwap ((PlankAtomicPXRef)&(p->atom), 
                                               headPtr, headExtra, 
                                               nextPtr, nextExtra);
-	} while (!success);
+	} while (! success);
     
     *element = headPtr;
     pl_AtomicLL_Decrement (&p->count);

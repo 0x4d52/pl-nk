@@ -135,7 +135,7 @@ void pl_ThreadSpinLock_Lock (PlankThreadSpinLockRef p)
         if (pl_ThreadSpinLock_TryLock (p))
             return;
     
-    while (!pl_ThreadSpinLock_TryLock (p))
+    while (! pl_ThreadSpinLock_TryLock (p))
         pl_ThreadYield();
 }
 

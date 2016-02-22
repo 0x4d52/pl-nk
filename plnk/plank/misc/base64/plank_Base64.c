@@ -129,7 +129,7 @@ PlankResult pl_Base64_EncodeFile (PlankBase64Ref p, PlankFileRef outputTextFile,
     
     table = pl_Base64Tables()->encoding;
     
-    while (!pl_File_IsEOF (inputBinaryFile))
+    while (! pl_File_IsEOF (inputBinaryFile))
     {
         pad = 0;
                 
@@ -210,7 +210,7 @@ PlankResult pl_Base64_DecodeFile (PlankBase64Ref p, PlankFileRef outputBinaryFil
     
     table = pl_Base64Tables()->decoding;
     
-    while (!pl_File_IsEOF (inputTextFile))
+    while (! pl_File_IsEOF (inputTextFile))
     {
         result = pl_File_Read (inputTextFile, quad, 4, &bytesRead);
         

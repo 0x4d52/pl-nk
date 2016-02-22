@@ -122,7 +122,7 @@ ResultCode ObjectMemoryDeferFree::run() throw()
     const double maxDuration = 0.1;
     double duration = minDuration;
     
-    while (!getShouldExit())
+    while (! getShouldExit())
     {
         plonk_assert (getMemory().getUserData() == this);
 

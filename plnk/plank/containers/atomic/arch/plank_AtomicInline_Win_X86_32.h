@@ -148,7 +148,7 @@ static PLANK_INLINE_LOW PlankI pl_AtomicI_Swap (PlankAtomicIRef p, PlankI newVal
     do {
         oldValue = *(PlankI*)p;
         success = pl_AtomicI_CompareAndSwap (p, oldValue, newValue);
-    } while (!success);
+    } while (! success);
     
     return oldValue;
 }
@@ -162,7 +162,7 @@ static PLANK_INLINE_LOW void pl_AtomicI_SwapOther (PlankAtomicIRef p1, PlankAtom
         value1 = *(PlankI*)p1;
         value2 = *(PlankI*)p2;
         success = pl_AtomicI_CompareAndSwap (p1, value1, value2);
-    } while (!success);
+    } while (! success);
     
     *(PlankI*)p2 = value1;
 }
@@ -235,7 +235,7 @@ static PLANK_INLINE_LOW PlankL pl_AtomicL_Swap (PlankAtomicLRef p, PlankL newVal
     do {
         oldValue = *(PlankL*)p;
         success = pl_AtomicL_CompareAndSwap (p, oldValue, newValue);
-    } while (!success);
+    } while (! success);
     
     return oldValue;
 }
@@ -249,7 +249,7 @@ static PLANK_INLINE_LOW void pl_AtomicL_SwapOther (PlankAtomicLRef p1, PlankAtom
         value1 = *(PlankL*)p1;
         value2 = *(PlankL*)p2;
         success = pl_AtomicL_CompareAndSwap (p1, value1, value2);
-    } while (!success);
+    } while (! success);
     
     *(PlankL*)p2 = value1;
 }
@@ -334,7 +334,7 @@ static PLANK_INLINE_LOW PlankLL pl_AtomicLL_Swap (PlankAtomicLLRef p, PlankLL ne
     do {
         oldValue = *(PlankLL*)p;
         success = pl_AtomicLL_CompareAndSwap (p, oldValue, newValue);
-    } while (!success);
+    } while (! success);
     
     return oldValue;
 }
@@ -348,7 +348,7 @@ static PLANK_INLINE_LOW void pl_AtomicLL_SwapOther (PlankAtomicLLRef p1, PlankAt
         value1 = *(PlankLL*)p1;
         value2 = *(PlankLL*)p2;
         success = pl_AtomicLL_CompareAndSwap (p1, value1, value2);
-    } while (!success);
+    } while (! success);
     
     *(PlankLL*)p2 = value1;
 }
@@ -367,7 +367,7 @@ static PLANK_INLINE_LOW PlankLL pl_AtomicLL_Add (PlankAtomicLLRef p, PlankLL ope
         oldValue = *(PlankLL*)p;
         newValue = oldValue + operand;
         success = pl_AtomicLL_CompareAndSwap (p, oldValue, newValue);
-    } while (!success);
+    } while (! success);
     
     return newValue;    
 }
@@ -432,7 +432,7 @@ static PLANK_INLINE_LOW PlankF pl_AtomicF_Swap (PlankAtomicFRef p, PlankF newVal
     {
         oldValue = *(PlankF*)p;
         success = pl_AtomicF_CompareAndSwap (p, oldValue, newValue);
-    } while (!success);
+    } while (! success);
     
     return oldValue;
 }
@@ -446,7 +446,7 @@ static PLANK_INLINE_LOW void pl_AtomicF_SwapOther (PlankAtomicFRef p1, PlankAtom
         value1 = *(PlankF*)p1;
         value2 = *(PlankF*)p2;
         success = pl_AtomicF_CompareAndSwap (p1, value1, value2);
-    } while (!success);
+    } while (! success);
     
     *(PlankF*)p2 = value1;
 }
@@ -465,7 +465,7 @@ static PLANK_INLINE_LOW PlankF pl_AtomicF_Add (PlankAtomicFRef p, PlankF operand
         oldValue = *(PlankF*)p;
         newValue = oldValue + operand;
         success = pl_AtomicF_CompareAndSwap (p, oldValue, newValue);
-    } while (!success);
+    } while (! success);
     
     return newValue;
 }
@@ -544,7 +544,7 @@ static PLANK_INLINE_LOW PlankD pl_AtomicD_Swap (PlankAtomicDRef p, PlankD newVal
     do {
         oldValue = *(PlankD*)p;
         success = pl_AtomicD_CompareAndSwap (p, oldValue, newValue);
-    } while (!success);
+    } while (! success);
     
     return oldValue;
 }
@@ -558,7 +558,7 @@ static PLANK_INLINE_LOW void pl_AtomicD_SwapOther (PlankAtomicDRef p1, PlankAtom
         value1 = *(PlankD*)p1;
         value2 = *(PlankD*)p2;
         success = pl_AtomicD_CompareAndSwap (p1, value1, value2);
-    } while (!success);
+    } while (! success);
     
     *(PlankD*)p2 = value1;
 }
@@ -577,7 +577,7 @@ static PLANK_INLINE_LOW PlankD pl_AtomicD_Add (PlankAtomicDRef p, PlankD operand
         oldValue = *(PlankD*)p;
         newValue = oldValue + operand;
         success = pl_AtomicD_CompareAndSwap (p, oldValue, newValue);
-    } while (!success);
+    } while (! success);
     
     return newValue;
 }
@@ -642,7 +642,7 @@ static PLANK_INLINE_LOW PlankP pl_AtomicP_Swap (PlankAtomicPRef p, PlankP newPtr
     do {
         oldPtr = *(PlankP*)p;
         success = pl_AtomicP_CompareAndSwap (p, oldPtr, newPtr);
-    } while (!success);
+    } while (! success);
     
     return oldPtr;    
 }
@@ -656,7 +656,7 @@ static PLANK_INLINE_LOW void pl_AtomicP_SwapOther (PlankAtomicPRef p1, PlankAtom
         value1 = *(PlankP*)p1;
         value2 = *(PlankP*)p2;
         success = pl_AtomicP_CompareAndSwap (p1, value1, value2);
-    } while (!success);
+    } while (! success);
     
     *(PlankP*)p2 = value1;
 }
@@ -794,7 +794,7 @@ static PLANK_INLINE_LOW PlankP pl_AtomicPX_SwapAll (PlankAtomicPXRef p, PlankP n
         oldPtr = p->ptr;
         oldExtra = p->extra;
         success = pl_AtomicPX_CompareAndSwap (p, oldPtr, oldExtra, newPtr, newExtra);
-    } while (!success);
+    } while (! success);
     
     if (oldExtraPtr != PLANK_NULL)
         *oldExtraPtr = oldExtra;
@@ -812,7 +812,7 @@ static PLANK_INLINE_LOW PlankP pl_AtomicPX_Swap (PlankAtomicPXRef p, PlankP newP
         oldPtr = p->ptr;
         oldExtra = p->extra;
         success = pl_AtomicPX_CompareAndSwap (p, oldPtr, oldExtra, newPtr, oldExtra + 1);
-    } while (!success);
+    } while (! success);
     
     return oldPtr;
 }
@@ -826,7 +826,7 @@ static PLANK_INLINE_LOW void pl_AtomicPX_SwapOther (PlankAtomicPXRef p1, PlankAt
         tmp1 = *p1;
         tmp2 = *p2;
         success = pl_AtomicPX_CompareAndSwap (p1, tmp1.ptr, tmp1.extra, tmp2.ptr, tmp1.extra + 1);
-    } while (!success);
+    } while (! success);
     
     pl_AtomicPX_Set (p2, tmp1.ptr);
 }
@@ -846,7 +846,7 @@ static PLANK_INLINE_LOW void pl_AtomicPX_Set (PlankAtomicPXRef p, PlankP newPtr)
         oldPtr = p->ptr;
         oldExtra = p->extra;
         success = pl_AtomicPX_CompareAndSwap (p, oldPtr, oldExtra, newPtr, oldExtra + 1);
-    } while (!success);
+    } while (! success);
 }
 
 static PLANK_INLINE_LOW PlankP pl_AtomicPX_Add (PlankAtomicPXRef p, PlankL operand)
@@ -860,7 +860,7 @@ static PLANK_INLINE_LOW PlankP pl_AtomicPX_Add (PlankAtomicPXRef p, PlankL opera
         oldExtra = p->extra;
         newPtr = (PlankUC*)oldPtr + operand;
         success = pl_AtomicPX_CompareAndSwap (p, oldPtr, oldExtra, newPtr, oldExtra + 1);
-    } while (!success);
+    } while (! success);
     
     return newPtr;
 }

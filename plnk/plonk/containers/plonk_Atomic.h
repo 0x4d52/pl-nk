@@ -174,7 +174,7 @@ class AtomicExtended : public AtomicBase<Type>
             do {\
                 oldValue = getValueUnchecked();\
                 success = compareAndSwap (oldValue, newValue > oldValue ? newValue : oldValue);\
-            } while (!success);\
+            } while (! success);\
         }\
         \
         PLONK_INLINE_MID const void setIfSmaller (const Plank##TYPECODE newValue) throw()\
@@ -184,7 +184,7 @@ class AtomicExtended : public AtomicBase<Type>
             do {\
                 oldValue = getValueUnchecked();\
                 success = compareAndSwap (oldValue, newValue < oldValue ? newValue : oldValue);\
-            } while (!success);\
+            } while (! success);\
         }\
         \
         PLONK_INLINE_MID AtomTypeRef getAtomicRef() { return static_cast<AtomTypeRef> (&atomic); }\
@@ -789,7 +789,7 @@ public:
             newAll.separate.value = newValue;
             newAll.separate.extra = oldAll.separate.extra + 1;
             success = atom.compareAndSwap (oldAll.whole, newAll.whole);
-        } while (!success);
+        } while (! success);
         
         return oldAll.separate.value;
     }
@@ -808,7 +808,7 @@ public:
         {
             oldAll.whole = atom.getValueUnchecked();
             success = atom.compareAndSwap (oldAll.whole, fromParts (newValue, newExtra));
-        } while (!success);
+        } while (! success);
         
         if (oldExtraPtr != 0)
             *oldExtraPtr = oldAll.separate.extra;
@@ -879,7 +879,7 @@ public:
             newAll.separate.value = oldAll.separate.value + operand;
             newAll.separate.extra = oldAll.separate.extra + 1;
             success = atom.compareAndSwap (oldAll.whole, newAll.whole);
-        } while (!success);
+        } while (! success);
         
         return newAll.separate.value;
     }
@@ -1009,7 +1009,7 @@ public:
             newAll.separate.value = newValue;
             newAll.separate.extra = oldAll.separate.extra + 1;
             success = atom.compareAndSwap (oldAll.whole, newAll.whole);
-        } while (!success);
+        } while (! success);
         
         return oldAll.separate.value;
     }
@@ -1028,7 +1028,7 @@ public:
         {
             oldAll.whole = atom.getValueUnchecked();
             success = atom.compareAndSwap (oldAll.whole, fromParts (newValue, newExtra));
-        } while (!success);
+        } while (! success);
         
         if (oldExtraPtr != 0)
             *oldExtraPtr = oldAll.separate.extra;
@@ -1099,7 +1099,7 @@ public:
             newAll.separate.value = oldAll.separate.value + operand;
             newAll.separate.extra = oldAll.separate.extra + 1;
             success = atom.compareAndSwap (oldAll.whole, newAll.whole);
-        } while (!success);
+        } while (! success);
         
         return newAll.separate.value;
     }

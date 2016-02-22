@@ -1131,7 +1131,7 @@ PlankResult pl_File_Copy (PlankFileRef p, PlankFileRef source, const PlankLL siz
 
     remaining = (size <= 0) ? (((PlankULL)1 << 63) - 1) : size;
     
-    while (!pl_File_IsEOF (source))
+    while (! pl_File_IsEOF (source))
     {
         result = pl_File_Read (source, buffer, PLANKFILE_COPYCHUNKSIZE, &bytesRead);
         
