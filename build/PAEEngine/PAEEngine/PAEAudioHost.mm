@@ -7,6 +7,7 @@
 //
 
 #import "PAEAudioHost.h"
+#import "PAEEngine.h"
 #import "PAESourceInternal.h"
 
 #include "plonk.h"
@@ -98,6 +99,95 @@ OSStatus preRenderCallbackFunction (void*                      refCon,
 
 @synthesize mainMix = _mainMix;
 
+static dispatch_once_t s_pred;
+
++(void)useOCUDL
+{
+    dispatch_once(&s_pred, ^{
+        [PAEAudioHost registerOCUDL];
+    });
+}
+
++(void)load
+{
+    [PAEAudioHost useOCUDL];
+}
+
++(void)registerOCUDL
+{
+    [[OCUDLManager defaultManager] registerSuffix:@"|~"
+                                         forBlock:^id(NSString *literal, NSString *suffix) {
+                                             return [PAEControl controlWithValue:literal.floatValue];
+                                         }];
+    
+    [[OCUDLManager defaultManager] registerSuffix:@"|-"
+                                         forBlock:^id(NSString *literal, NSString *suffix) {
+                                             return [PAEConstant constantWithValue:literal.floatValue];
+                                         }];
+    
+    [[OCUDLManager defaultManager] registerSuffix:@"|i"
+                                         forBlock:^id(NSString *literal, NSString *suffix) {
+                                             return [PAEAudioInput audioInputWithNumChannels:literal.intValue];
+                                         }];
+    
+    [[OCUDLManager defaultManager] registerSuffix:@"|buf"
+                                         forBlock:^id(NSString *literal, NSString *suffix) {
+                                             return [PAEBuffer bufferNamed:literal];
+                                         }];
+
+    [[OCUDLManager defaultManager] registerSuffix:@"|amp"
+                                         forBlock:^id(NSString *literal, NSString *suffix) {
+                                             NSArray* items = [literal componentsSeparatedByString:@"|"];
+                                             PAEAmplitude* amp;
+                                             
+                                             if (items.count > 0)
+                                                 amp = [PAEAmplitude amplitudeWithNumInputs:((NSString*)items.lastObject).intValue];
+                                             
+                                             if (items.count == 2)
+                                             {
+                                                 NSString* val = items[0];
+                                                 NSString* lastChar = [val substringFromIndex:val.length - 1];
+                                                 
+                                                 if ([lastChar isEqualToString:@"~"])
+                                                 {
+                                                     val = [val substringToIndex:val.length - 1];
+                                                     amp.level.input = [PAEControl controlWithValue:val.floatValue];
+                                                 }
+                                                 else
+                                                 {
+                                                     if ([lastChar isEqualToString:@"-"])
+                                                         val = [val substringToIndex:val.length - 1];
+                                                     
+                                                     amp.level.input = [PAEConstant constantWithValue:val.floatValue];
+                                                 }
+                                             }
+                                             
+                                             return amp;
+                                         }];
+    
+    [[OCUDLManager defaultManager] registerSuffix:@"|sine"
+                                         forBlock:^id(NSString *literal, NSString *suffix) {
+                                             NSArray* items = [literal componentsSeparatedByString:@"|"];
+                                             return items.count == 1 ? [PAESine sineWithFrequency:((NSString*)items[0]).floatValue] :
+                                                    items.count == 2 ? [PAESine sineWithFrequency:((NSString*)items[0]).floatValue amplitude:((NSString*)items[1]).floatValue]
+                                                                     : [PAESine sineWithFrequency:((NSString*)items[0]).floatValue amplitude:((NSString*)items[1]).floatValue offset:((NSString*)items[2]).floatValue];
+                                         }];
+    
+    [[OCUDLManager defaultManager] registerSuffix:@"|saw"
+                                         forBlock:^id(NSString *literal, NSString *suffix) {
+                                             NSArray* items = [literal componentsSeparatedByString:@"|"];
+                                             return items.count == 1 ? [PAESaw sawWithFrequency:((NSString*)items[0]).floatValue] :
+                                                    items.count == 2 ? [PAESaw sawWithFrequency:((NSString*)items[0]).floatValue amplitude:((NSString*)items[1]).floatValue]
+                                                                     : [PAESaw sawWithFrequency:((NSString*)items[0]).floatValue amplitude:((NSString*)items[1]).floatValue offset:((NSString*)items[2]).floatValue];
+                                         }];
+
+    [[OCUDLManager defaultManager] registerSuffix:@"|play"
+                                         forBlock:^id(NSString *literal, NSString *suffix) {
+                                             return [PAEAudioFilePlayer audioFilePlayerNamed:literal];
+                                         }];
+}
+
+
 +(PAEAudioHost*)audioHostWithNumOutputs:(int)numOutputs
 {
     return [[PAEAudioHost alloc] initWithNumOutputs:numOutputs andNumInputs:0];
@@ -110,7 +200,7 @@ OSStatus preRenderCallbackFunction (void*                      refCon,
 
 -(id)initWithNumOutputs:(int)numOutputs andNumInputs:(int)numInputs
 {
-    if (!initialised)
+    if (! initialised)
     {
         initialised = YES;
         NSLog (@"PAEEngine v%s.%08x", PAEENGINE_VERSION, PAEENGINE_BUILD);
@@ -123,10 +213,10 @@ OSStatus preRenderCallbackFunction (void*                      refCon,
         _data.peer = _internal.peer; // after setDelegate:
 
         _numOutputs = plonk::max (numOutputs, 1);
-        _numInputs = plonk::max (numInputs, 0);
+        _numInputs  = plonk::max (numInputs, 0);
         
         _internal.numOutputs = _numOutputs;
-        _internal.numInputs = _numInputs;
+        _internal.numInputs  = _numInputs;
         _internal.preferredGraphBlockSize = 64;
     }
     

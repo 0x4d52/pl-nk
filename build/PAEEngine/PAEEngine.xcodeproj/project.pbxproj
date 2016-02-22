@@ -701,6 +701,12 @@
 		A89939D21AB6B0CD00B730E7 /* PAEProcessCallback.mm in Sources */ = {isa = PBXBuildFile; fileRef = A89939D01AB6B0CD00B730E7 /* PAEProcessCallback.mm */; };
 		A89947CD1A8DF6640097869C /* PAEBuild.h in Headers */ = {isa = PBXBuildFile; fileRef = A89947CC1A8DF6130097869C /* PAEBuild.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A8ABA3311AA26EBE00248ED1 /* PAEBufferCaptureInternal.h in Headers */ = {isa = PBXBuildFile; fileRef = A8ABA3301AA26EBE00248ED1 /* PAEBufferCaptureInternal.h */; };
+		A8DE22321C71F6C600591EF2 /* plonk_RampChannel.h in Headers */ = {isa = PBXBuildFile; fileRef = A8DE22311C71F6C600591EF2 /* plonk_RampChannel.h */; };
+		A8DE22361C721BDC00591EF2 /* OCUDL.h in Headers */ = {isa = PBXBuildFile; fileRef = A8DE22331C721BDC00591EF2 /* OCUDL.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A8DE22371C721BDC00591EF2 /* OCUDLBuiltins.h in Headers */ = {isa = PBXBuildFile; fileRef = A8DE22341C721BDC00591EF2 /* OCUDLBuiltins.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A8DE22381C721BDC00591EF2 /* OCUDLManager.h in Headers */ = {isa = PBXBuildFile; fileRef = A8DE22351C721BDC00591EF2 /* OCUDLManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A8DE223B1C721CA500591EF2 /* OCUDLBuiltins.m in Sources */ = {isa = PBXBuildFile; fileRef = A8DE22391C721CA500591EF2 /* OCUDLBuiltins.m */; };
+		A8DE223C1C721CA500591EF2 /* OCUDLManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A8DE223A1C721CA500591EF2 /* OCUDLManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -1390,6 +1396,12 @@
 		A89939D01AB6B0CD00B730E7 /* PAEProcessCallback.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PAEProcessCallback.mm; sourceTree = "<group>"; };
 		A89947CC1A8DF6130097869C /* PAEBuild.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PAEBuild.h; sourceTree = "<group>"; };
 		A8ABA3301AA26EBE00248ED1 /* PAEBufferCaptureInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAEBufferCaptureInternal.h; sourceTree = "<group>"; };
+		A8DE22311C71F6C600591EF2 /* plonk_RampChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_RampChannel.h; sourceTree = "<group>"; };
+		A8DE22331C721BDC00591EF2 /* OCUDL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OCUDL.h; path = OCUDL/OCUDL.h; sourceTree = "<group>"; };
+		A8DE22341C721BDC00591EF2 /* OCUDLBuiltins.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OCUDLBuiltins.h; path = OCUDL/OCUDLBuiltins.h; sourceTree = "<group>"; };
+		A8DE22351C721BDC00591EF2 /* OCUDLManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OCUDLManager.h; path = OCUDL/OCUDLManager.h; sourceTree = "<group>"; };
+		A8DE22391C721CA500591EF2 /* OCUDLBuiltins.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OCUDLBuiltins.m; path = OCUDL/OCUDLBuiltins.m; sourceTree = "<group>"; };
+		A8DE223A1C721CA500591EF2 /* OCUDLManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OCUDLManager.m; path = OCUDL/OCUDLManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1490,6 +1502,8 @@
 				A86F695A19E1A5A3002B228E /* PAEBufferCapture.mm */,
 				A8850AF91C5B914E00AB2EEA /* PAEConvolve.mm */,
 				A89939D01AB6B0CD00B730E7 /* PAEProcessCallback.mm */,
+				A8DE22391C721CA500591EF2 /* OCUDLBuiltins.m */,
+				A8DE223A1C721CA500591EF2 /* OCUDLManager.m */,
 			);
 			name = private;
 			sourceTree = "<group>";
@@ -1497,6 +1511,9 @@
 		A86F617719E1A4D9002B228E /* public */ = {
 			isa = PBXGroup;
 			children = (
+				A8DE22331C721BDC00591EF2 /* OCUDL.h */,
+				A8DE22341C721BDC00591EF2 /* OCUDLBuiltins.h */,
+				A8DE22351C721BDC00591EF2 /* OCUDLManager.h */,
 				A86F697919E1A5B0002B228E /* PAEBufferCapture.h */,
 				A86F697A19E1A5B0002B228E /* PAEAudioInput.h */,
 				A86F697B19E1A5B0002B228E /* PAEBufferView.h */,
@@ -2575,6 +2592,7 @@
 				A86F67C019E1A58D002B228E /* plonk_ConstantChannel.h */,
 				A86F67C119E1A58D002B228E /* plonk_LinearPanChannel.h */,
 				A86F67C219E1A58D002B228E /* plonk_Mixers.h */,
+				A8DE22311C71F6C600591EF2 /* plonk_RampChannel.h */,
 				A86F67C319E1A58D002B228E /* plonk_MulAddChannel.h */,
 				A86F67C419E1A58D002B228E /* plonk_PatchChannel.h */,
 				A86F67C519E1A58D002B228E /* plonk_QueueChannel.h */,
@@ -2739,6 +2757,9 @@
 				A8850AFC1C5B915D00AB2EEA /* PAEConvolve.h in Headers */,
 				A86F69B019E1A5B0002B228E /* PAEEngine.h in Headers */,
 				A89947CD1A8DF6640097869C /* PAEBuild.h in Headers */,
+				A8DE22361C721BDC00591EF2 /* OCUDL.h in Headers */,
+				A8DE22371C721BDC00591EF2 /* OCUDLBuiltins.h in Headers */,
+				A8DE22381C721BDC00591EF2 /* OCUDLManager.h in Headers */,
 				A86F695B19E1A5A3002B228E /* PAEEngineInternal.h in Headers */,
 				A86F695C19E1A5A3002B228E /* PAESourceInternal.h in Headers */,
 				A86F695D19E1A5A3002B228E /* PAEProcessInternal.h in Headers */,
@@ -3014,6 +3035,7 @@
 				A86F68CF19E1A58D002B228E /* plonk_ReblockChannel.h in Headers */,
 				A86F68EC19E1A58D002B228E /* plonk_FilterShortcuts.h in Headers */,
 				A86F690E19E1A58D002B228E /* plonk_ConstantChannel.h in Headers */,
+				A8DE22321C71F6C600591EF2 /* plonk_RampChannel.h in Headers */,
 				A86F686819E1A58D002B228E /* plink.h in Headers */,
 				A86F665819E1A56B002B228E /* mdct.h in Headers */,
 				A86F667419E1A56B002B228E /* scales.h in Headers */,
@@ -3292,6 +3314,7 @@
 				A86F663219E1A56B002B228E /* tables_NLSF_CB_NB_MB.c in Sources */,
 				A86F65AC19E1A56B002B228E /* http.c in Sources */,
 				A86F660019E1A56B002B228E /* LP_variable_cutoff.c in Sources */,
+				A8DE223C1C721CA500591EF2 /* OCUDLManager.m in Sources */,
 				A86F667E19E1A56B002B228E /* window.c in Sources */,
 				A86F696C19E1A5A3002B228E /* PAEPan.mm in Sources */,
 				A86F681019E1A58D002B228E /* plank_LockFreeLinkedListElement.c in Sources */,
@@ -3418,6 +3441,7 @@
 				A86F65B519E1A56B002B228E /* A2NLSF.c in Sources */,
 				A86F65C119E1A56B002B228E /* code_signs.c in Sources */,
 				A86F65DE19E1A56B002B228E /* find_pitch_lags_FLP.c in Sources */,
+				A8DE223B1C721CA500591EF2 /* OCUDLBuiltins.m in Sources */,
 				A86F68AE19E1A58D002B228E /* plonk_WeakPointer.cpp in Sources */,
 				A86F68FB19E1A58D002B228E /* plonk_IOInfo.cpp in Sources */,
 				A86F662619E1A56B002B228E /* stereo_decode_pred.c in Sources */,

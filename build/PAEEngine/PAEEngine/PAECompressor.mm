@@ -19,6 +19,12 @@
 @end
 
 @implementation PAECompressor
+
+-(NSArray*)controls
+{
+    return @[self.follower,self.attackTime,self.releaseTime,self.threshold,self.ratio,self.control];
+}
+
 +(PAECompressor*)compressorWithNumInputs:(int)numInputs;
 {
     return [[PAECompressor alloc] initWithNumInputs:numInputs];

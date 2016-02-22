@@ -77,7 +77,8 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-/** A sawtooth oscillator. */
+/** A sawtooth oscillator. 
+ @note The osciallator starts at 0 phase and rises in value if frequency is positive. */
 @interface PAESaw : PAESource
 
 /** The oscillator frequency in Hz.
@@ -104,4 +105,10 @@
 
 /** Create a saw oscillator at a particular freuqency and amplitude with an offset. */
 +(PAESaw*)sawWithFrequency:(float)frequency amplitude:(float)amplitude offset:(float)offset;
+
+/** Create a saw oscillator at a particular freuqency, amplitude with an offset, and initial value 
+ @note Useful if you need to set the intial value as a phasor e.g., for PAEBufferLookup */
++(PAESaw*)sawWithFrequency:(float)frequency amplitude:(float)amplitude offset:(float)offset initialValue:(float)value;
+
+
 @end

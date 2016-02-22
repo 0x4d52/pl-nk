@@ -19,6 +19,14 @@
 
 @synthesize map = _map;
 
++(void)load
+{
+    [[OCUDLManager defaultManager] registerSuffix:@"|~"
+                                         forBlock:^id(NSString *literal, NSString *suffix) {
+                                             return [PAEControl controlWithValue:literal.floatValue];
+                                         }];
+}
+
 +(PAEControl*)control
 {
     return [[PAEControl alloc] initWithValue:0.f];

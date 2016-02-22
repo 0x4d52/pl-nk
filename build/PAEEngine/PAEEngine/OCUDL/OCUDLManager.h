@@ -59,7 +59,7 @@ typedef id (^OCUDLBlock)(NSString*, NSString*);
  * @param prefix The prefix.
  * @param class The class to construct when a literal is found.
  */
-- (void)registerPrefix:(NSString*)prefix forClass:(Class<OCUDLClass>)class;
+- (void)registerPrefix:(NSString*)prefix forClass:(Class<OCUDLClass>)cls;
 
 /**
  * Registers a user defined literal for a prefix.
@@ -76,7 +76,7 @@ typedef id (^OCUDLBlock)(NSString*, NSString*);
  * @param suffix The suffix.
  * @param class The class to construct when a literal is found.
  */
-- (void)registerSuffix:(NSString*)suffix forClass:(Class<OCUDLClass>)class;
+- (void)registerSuffix:(NSString*)suffix forClass:(Class<OCUDLClass>)cls;
 
 /**
  * Registers a user defined literal for a suffix.

@@ -16,6 +16,11 @@
 
 @implementation PAESine
 
+-(NSArray*)controls
+{
+    return @[self.frequency,self.amplitude,self.offset];
+}
+
 +(PAESine*)sineWithFrequency:(float)frequency
 {
     return [[PAESine alloc] initWithFrequency:frequency];
@@ -142,6 +147,11 @@
 
 @implementation PAESaw
 
+-(NSArray*)controls
+{
+    return @[self.frequency,self.amplitude,self.offset];
+}
+
 +(PAESaw*)sawWithFrequency:(float)frequency
 {
     return [[PAESaw alloc] initWithFrequency:frequency];
@@ -170,6 +180,11 @@
 +(PAESaw*)sawWithFrequencySource:(PAESource*)frequency amplitudeSource:(PAESource*)amplitude offsetSource:(PAESource*)offset
 {
     return [[PAESaw alloc] initWithFrequencySource:frequency amplitudeSource:amplitude offsetSource:offset];
+}
+
++(PAESaw*)sawWithFrequency:(float)frequency amplitude:(float)amplitude offset:(float)offset initialValue:(float)value
+{
+    return [[PAESaw alloc] initWithFrequency:frequency amplitude:amplitude offset:offset initialValue:value];
 }
 
 -(id)initWithFrequency:(float)frequency
@@ -251,6 +266,22 @@
         self.offset          = [[PAEProcess alloc] initWithNumInputs:1];
         self.offset.input    = offset;
         self.outputUnit      = Saw::ar (self.frequency.patchUnit, self.amplitude.patchUnit, self.offset.patchUnit);
+    }
+    
+    return self;
+}
+
+-(id)initWithFrequency:(float)frequency amplitude:(float)amplitude offset:(float)offset initialValue:(float)value
+{
+    if (self = [super init])
+    {
+        self.frequency       = [[PAEProcess alloc] initWithNumInputs:1];
+        self.frequency.input = [PAEConstant constantWithValue:frequency];
+        self.amplitude       = [[PAEProcess alloc] initWithNumInputs:1];
+        self.amplitude.input = [PAEConstant constantWithValue:amplitude];
+        self.offset          = [[PAEProcess alloc] initWithNumInputs:1];
+        self.offset.input    = [PAEConstant constantWithValue:offset];
+        self.outputUnit      = Saw::ar (self.frequency.patchUnit, self.amplitude.patchUnit, self.offset.patchUnit, value);
     }
     
     return self;

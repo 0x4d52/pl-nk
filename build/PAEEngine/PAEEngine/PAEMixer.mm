@@ -15,6 +15,11 @@
 
 @synthesize sources = _sources;
 
+-(NSArray*)controls
+{
+    return _sources;
+}
+
 +(PAEMixer*)mixerWithSources:(NSArray*)sources
 {
     return [[PAEMixer alloc] initWithSources:sources];

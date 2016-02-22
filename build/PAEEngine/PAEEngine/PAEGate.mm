@@ -17,6 +17,11 @@
 @end
 
 @implementation PAESimpleGate
+-(NSArray*)controls
+{
+    return @[self.follower,self.attackTime,self.releaseTime,self.threshold];
+}
+
 +(PAESimpleGate*)gateWithNumInputs:(int)numInputs;
 {
     return [[PAESimpleGate alloc] initWithNumInputs:numInputs];
@@ -61,6 +66,11 @@
 @end
 
 @implementation PAEGate
+-(NSArray*)controls
+{
+    return @[self.follower,self.attackTime,self.releaseTime,self.attackThreshold,self.releaseThreshold];
+}
+
 +(PAEGate*)gateWithNumInputs:(int)numInputs;
 {
     return [[PAEGate alloc] initWithNumInputs:numInputs];

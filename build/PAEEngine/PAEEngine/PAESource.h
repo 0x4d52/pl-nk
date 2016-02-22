@@ -47,7 +47,7 @@
  This is used as the base class for more specific audio and control sources. 
  You would not normally instantiate a PAESource object but instead create one
  of its subclasses (see class diagram). */
-@interface PAESource : NSObject
+@interface PAESource : NSObject<OCUDLClass>
 
 /** The number of channels in the output of the source. */
 @property (nonatomic, readonly) int numChannels;
@@ -68,6 +68,12 @@
  user applications. */
 @property (nonatomic) NSInteger tag;
 
+/** Get the input controls for this source. */
+@property (nonatomic, strong, readonly) NSArray* controls;
+
+/** Get the input to the source, always nil. */
+@property (strong, nonatomic, readonly) PAESource* input;
+
 /** Get the current output value of a source. */
 -(float)currentValueOnChannel:(int)channel;
 
@@ -79,6 +85,9 @@
 
 /** Get a version of this source with inverted phase. */
 -(PAESource*)sourcePhaseInverted;
+
+/** Get a version of this source with absolute values. */
+-(PAESource*)sourceAbsolute;
 
 /** Create a source by appending channels from two sources. */
 -(PAESource*)sourceWithAppendedChannels:(PAESource*)source;
@@ -107,11 +116,16 @@
 /** Divide this another source by this source and get the result. */
 -(PAESource*)divideBy:(PAESource*)source;
 
+/** Modulo of this and another source.
+ self % other*/
+-(PAESource*)modulo:(PAESource*)source;
+
 /** The maximum of this and another source. */
 -(PAESource*)maximumComparedTo:(PAESource*)source;
 
 /** The minimum of this and another source. */
 -(PAESource*)minimumComparedTo:(PAESource*)source;
+
 
 
 @end

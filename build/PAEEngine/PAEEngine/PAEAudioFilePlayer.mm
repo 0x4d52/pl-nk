@@ -18,6 +18,11 @@
     IntVariable _loopCount;
 }
 
+-(NSArray*)controls
+{
+    return @[self.rate];
+}
+
 +(PAEAudioFilePlayer*)audioFilePlayerNamed:(NSString*)name
 {
     FilePath path (FilePath::system (FilePath::App).child (name.UTF8String).fullpath());

@@ -14,6 +14,11 @@
 @end
 
 @implementation PAEFilterLowPass
+-(NSArray*)controls
+{
+    return @[self.frequency];
+}
+
 +(PAEFilterLowPass*)filterWithNumInputs:(int)numInputs;
 {
     return [[PAEFilterLowPass alloc] initWithNumInputs:numInputs];
@@ -40,6 +45,11 @@
 @end
 
 @implementation PAEFilterResonantLowPass
+-(NSArray*)controls
+{
+    return @[self.frequency,self.q];
+}
+
 +(PAEFilterResonantLowPass*)filterWithNumInputs:(int)numInputs;
 {
     return [[PAEFilterResonantLowPass alloc] initWithNumInputs:numInputs];
@@ -67,6 +77,11 @@
 @end
 
 @implementation PAEFilterHighPass
+-(NSArray*)controls
+{
+    return @[self.frequency];
+}
+
 +(PAEFilterHighPass*)filterWithNumInputs:(int)numInputs;
 {
     return [[PAEFilterHighPass alloc] initWithNumInputs:numInputs];
@@ -113,6 +128,11 @@
 @end
 
 @implementation PAEFilterLowShelf
+-(NSArray*)controls
+{
+    return @[self.frequency,self.slope,self.gain];
+}
+
 +(PAEFilterLowShelf*)filterWithNumInputs:(int)numInputs;
 {
     return [[PAEFilterLowShelf alloc] initWithNumInputs:numInputs];
@@ -144,6 +164,11 @@
 @end
 
 @implementation PAEFilterHighShelf
+-(NSArray*)controls
+{
+    return @[self.frequency,self.slope,self.gain];
+}
+
 +(PAEFilterHighShelf*)filterWithNumInputs:(int)numInputs;
 {
     return [[PAEFilterHighShelf alloc] initWithNumInputs:numInputs];
@@ -175,6 +200,11 @@
 @end
 
 @implementation PAEFilterNotch
+-(NSArray*)controls
+{
+    return @[self.frequency,self.q,self.gain];
+}
+
 +(PAEFilterNotch*)filterWithNumInputs:(int)numInputs;
 {
     return [[PAEFilterNotch alloc] initWithNumInputs:numInputs];
@@ -205,6 +235,11 @@
 @end
 
 @implementation PAEFilterBandPass
+-(NSArray*)controls
+{
+    return @[self.frequency,self.bandwidth];
+}
+
 +(PAEFilterBandPass*)filterWithNumInputs:(int)numInputs;
 {
     return [[PAEFilterBandPass alloc] initWithNumInputs:numInputs];
@@ -233,6 +268,11 @@
 @end
 
 @implementation PAEFilterBandStop
+-(NSArray*)controls
+{
+    return @[self.frequency,self.bandwidth];
+}
+
 +(PAEFilterBandStop*)filterWithNumInputs:(int)numInputs;
 {
     return [[PAEFilterBandStop alloc] initWithNumInputs:numInputs];

@@ -15,6 +15,12 @@
 @end
 
 @implementation PAEDelay
+
+-(NSArray*)controls
+{
+    return @[self.delayTime];
+}
+
 +(PAEDelay*)delayWithNumInputs:(int)numInputs maxDelayTime:(float)maxDelayTime;
 {
     return [[PAEDelay alloc] initWithNumInputs:numInputs maxDelayTime:maxDelayTime];
@@ -47,6 +53,12 @@
 @end
 
 @implementation PAEComb
+
+-(NSArray*)controls
+{
+    return @[self.delayTime,self.feedback];
+}
+
 +(PAEComb*)combWithNumInputs:(int)numInputs maxDelayTime:(float)maxDelayTime;
 {
     return [[PAEComb alloc] initWithNumInputs:numInputs maxDelayTime:maxDelayTime];

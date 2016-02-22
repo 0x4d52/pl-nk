@@ -17,6 +17,11 @@
 
 @synthesize pauseInputOnZero = _pauseInputOnZero;
 
+-(NSArray*)controls
+{
+    return @[self.level];
+}
+
 +(PAEAmplitude*)amplitudeWithNumInputs:(int)numInputs;
 {
     return [[PAEAmplitude alloc] initWithNumInputs:numInputs pauseInputOnZero:NO];

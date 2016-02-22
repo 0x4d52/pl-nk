@@ -14,6 +14,11 @@
 @end
 
 @implementation PAEFollower
+-(NSArray*)controls
+{
+    return @[self.attackTime,self.releaseTime];
+}
+
 +(PAEFollower*)followerWithNumInputs:(int)numInputs;
 {
     return [[PAEFollower alloc] initWithNumInputs:numInputs];

@@ -13,6 +13,12 @@
 @end
 
 @implementation PAESend
+
+-(NSArray*)controls
+{
+    return @[self.send];
+}
+
 +(PAESend*)sendWithNumInputs:(int)numInputs;
 {
     return [[PAESend alloc] initWithNumInputs:numInputs];

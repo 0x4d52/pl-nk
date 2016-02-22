@@ -15,6 +15,11 @@
 
 @implementation PAEBufferLookup
 
+-(NSArray*)controls
+{
+    return @[self.position];
+}
+
 +(PAEBufferLookup*)bufferLookupWithBuffer:(PAEBuffer*)buffer
 {
     return [[PAEBufferLookup alloc] initWithBuffer:buffer];

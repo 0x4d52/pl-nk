@@ -18,6 +18,11 @@
     FloatVariable _rightLevel;
 }
 
+-(NSArray*)controls
+{
+    return @[self.position];
+}
+
 +(PAEPan2*)pan2WithNumInputs:(int)numInputs;
 {
     return [[PAEPan2 alloc] initWithNumInputs:plonk::clip(numInputs, 1, 2)];

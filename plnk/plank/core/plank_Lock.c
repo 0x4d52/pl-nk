@@ -111,7 +111,8 @@ PlankResult pl_Lock_Init (PlankLockRef p)
     pthread_mutexattr_settype (&attr, PTHREAD_MUTEX_RECURSIVE);
     pthread_mutexattr_setprotocol (&attr, PTHREAD_PRIO_INHERIT);
     pthread_mutex_init (&p->mutex, &attr);
-    pthread_cond_init (&p->condition, NULL);    
+    pthread_mutexattr_destroy (&attr);
+    pthread_cond_init (&p->condition, NULL);
     p->flag = PLANK_FALSE;
     
 exit:

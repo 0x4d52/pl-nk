@@ -47,6 +47,7 @@ template<class SampleType> class SawChannelInternal;
 PLONK_CHANNELDATA_DECLARE(SawChannelInternal,SampleType)
 {    
     typedef typename TypeUtility<SampleType>::IndexType FrequencyType;
+    typedef FrequencyType CurrentValueType;
 
     ChannelInternalCore::Data base;
     
@@ -56,7 +57,9 @@ PLONK_CHANNELDATA_DECLARE(SawChannelInternal,SampleType)
 };      
 
 PLONK_CHANNELDATA_SPECIAL(SawChannelInternal,float)
-{    
+{
+    typedef float CurrentValueType;
+
     ChannelInternalCore::Data base;
     
     float currentValue;
@@ -65,7 +68,9 @@ PLONK_CHANNELDATA_SPECIAL(SawChannelInternal,float)
 };        
 
 PLONK_CHANNELDATA_SPECIAL(SawChannelInternal,double)
-{    
+{
+    typedef double CurrentValueType;
+
     ChannelInternalCore::Data base;
     
     double currentValue;
@@ -76,6 +81,7 @@ PLONK_CHANNELDATA_SPECIAL(SawChannelInternal,double)
 PLONK_CHANNELDATA_SPECIAL(SawChannelInternal,short)
 {    
     typedef TypeUtility<short>::IndexType FrequencyType;
+    typedef FrequencyType CurrentValueType;
 
     ChannelInternalCore::Data base;
     
@@ -87,6 +93,7 @@ PLONK_CHANNELDATA_SPECIAL(SawChannelInternal,short)
 PLONK_CHANNELDATA_SPECIAL(SawChannelInternal,int)
 {    
     typedef TypeUtility<int>::IndexType FrequencyType;
+    typedef FrequencyType CurrentValueType;
 
     ChannelInternalCore::Data base;
     
@@ -336,16 +343,18 @@ template<class SampleType>
 class SawUnit
 {
 public:    
-    typedef SawChannelInternal<SampleType>          SawInternal;
-    typedef typename SawInternal::Data              Data;
-    typedef InputDictionary                         Inputs;
-    typedef ChannelBase<SampleType>                 ChannelType;
-    typedef ChannelInternal<SampleType,Data>        Internal;
-    typedef UnitBase<SampleType>                    UnitType;
+    typedef SawChannelInternal<SampleType>              SawInternal;
+    typedef typename SawInternal::Data                  Data;
+    typedef InputDictionary                             Inputs;
+    typedef ChannelBase<SampleType>                     ChannelType;
+    typedef ChannelInternal<SampleType,Data>            Internal;
+    typedef UnitBase<SampleType>                        UnitType;
     
     typedef typename SawInternal::FrequencyType         FrequencyType;
     typedef typename SawInternal::FrequencyUnitType     FrequencyUnitType;
     typedef typename SawInternal::FrequencyBufferType   FrequencyBufferType;
+    
+    typedef typename Data::CurrentValueType             CurrentValueType;
 
     
     static PLONK_INLINE_LOW UnitInfos getInfo() throw()
@@ -374,6 +383,7 @@ public:
     static UnitType ar (FrequencyUnitType const& frequency = FrequencyType (440), 
                         UnitType const& mul = SampleType (1),
                         UnitType const& add = SampleType (0),
+                        CurrentValueType const& initialValue = CurrentValueType (0),
                         BlockSize const& preferredBlockSize = BlockSize::getDefault(),
                         SampleRate const& preferredSampleRate = SampleRate::getDefault()) throw()
     {                
@@ -384,7 +394,7 @@ public:
                 
         const LongLong peak = SampleType (TypeUtility<SampleType>::getTypePeak());
         
-        Data data = { { -1.0, -1.0 }, 0, 0, 0 };
+        Data data = { { -1.0, -1.0 }, initialValue, 0, 0 };
         data.peak = peak;
         data.peak2peak = peak * 2;
         
@@ -397,9 +407,10 @@ public:
     /** Create a control rate sawtooth oscillator. */
     static UnitType kr (FrequencyUnitType const& frequency, 
                         UnitType const& mul = SampleType (1),
-                        UnitType const& add = SampleType (0)) throw()
+                        UnitType const& add = SampleType (0),
+                        CurrentValueType const& initialValue = CurrentValueType (0)) throw()
     {
-        return ar (frequency, mul, add, 
+        return ar (frequency, mul, add, initialValue,
                    BlockSize::getControlRateBlockSize(), 
                    SampleRate::getControlRate());
     }        

@@ -39,6 +39,7 @@
  */
 
 #import "PAEBuild.h"
+#import "OCUDL.h"
 
 #define PAEENGINE_VERSION "0.7.0"
 
@@ -69,4 +70,10 @@ extern const float PAEControlLagTime;
 
 /** A 64-bit integer type. */
 typedef long long PAEInt64;
+
+/** A unary operator function on a float. */
+typedef float (*PAEUnaryOpFunction)(float);
+
+/** A binary operator function on two floats. */
+typedef float (*PAEBinaryOpFunction)(float,float);
 

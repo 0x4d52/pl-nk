@@ -42,6 +42,16 @@
     return self;
 }
 
+-(NSArray*)controls
+{
+    return nil;
+}
+
+-(PAESource*)input
+{
+    return nil;
+}
+
 -(Unit)outputUnit
 {
     return _outputUnitVariable.getValue();
@@ -78,6 +88,13 @@
 {
     PAESource* proxy = [[PAESource alloc] init];
     proxy.outputUnit = _outputUnitVariable.getValue().neg();
+    return proxy;
+}
+
+-(PAESource*)sourceAbsolute
+{
+    PAESource* proxy = [[PAESource alloc] init];
+    proxy.outputUnit = _outputUnitVariable.getValue().abs();
     return proxy;
 }
 
@@ -165,6 +182,13 @@
     return proxy;
 }
 
+-(PAESource*)modulo:(PAESource*)source
+{
+    PAESource* proxy = [[PAESource alloc] init];
+    proxy.outputUnit = _outputUnitVariable.getValue() % source->_outputUnitVariable.getValue();
+    return proxy;
+}
+
 -(PAESource*)maximumComparedTo:(PAESource*)source
 {
     PAESource* proxy = [[PAESource alloc] init];
@@ -178,6 +202,7 @@
     proxy.outputUnit = _outputUnitVariable.getValue().min (source->_outputUnitVariable.getValue());
     return proxy;
 }
+
 
 
 @end

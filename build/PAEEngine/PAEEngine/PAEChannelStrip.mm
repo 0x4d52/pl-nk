@@ -50,6 +50,11 @@
     return _inserts;
 }
 
+-(NSArray*)controls
+{
+    return _inserts;
+}
+
 -(void)setInserts:(NSArray*)inserts
 {
     Unit graph = self.patchUnit;

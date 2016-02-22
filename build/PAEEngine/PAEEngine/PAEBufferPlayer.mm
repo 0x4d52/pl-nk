@@ -18,6 +18,11 @@
     FloatVariable _loopFlag;
 }
 
+-(NSArray*)controls
+{
+    return @[self.rate];
+}
+
 +(PAEBufferPlayer*)bufferPlayerWithBuffer:(PAEBuffer*)buffer
 {
     return [[PAEBufferPlayer alloc] initWithBuffer:buffer];

@@ -102,6 +102,13 @@ typedef vSInt16 PlankVS;
 
 //------------------------------- float ----------------------------------------
 
+static PLANK_INLINE_MID float pl_VectorMeanF_N (const float *a, PlankUL N)
+{
+    float result;
+    vDSP_meanv (a, 1, &result, N);
+    return result;
+}
+
 static PLANK_INLINE_MID void pl_VectorFillF_N1 (float *result, float a, PlankUL N) 
 { 
     vDSP_vfill (&a, result, 1, N); 
@@ -153,40 +160,6 @@ static PLANK_INLINE_MID void pl_VectorAbsF_NN (float *result, const float* a, Pl
 { 
     vDSP_vabs ((float*)a, 1, result, 1, N); 
 }
-
-
-//#ifdef PLANK_IOS
-//// no vForce on iOS
-//static PLANK_INLINE_MID void pl_VectorReciprocalF_NN (float *result, const float* a, PlankUL N) 
-//{ 
-//    float one = 1.f;
-//    vDSP_vfill (&one, result, 1, N); 
-//    vDSP_vdiv (result, 1, (float*)a, 1, result, 1, N); 
-//}
-//
-//PLANK_VECTORUNARYOP_DEFINE(Log2,F)
-//PLANK_VECTORUNARYOP_DEFINE(Sin,F)
-//PLANK_VECTORUNARYOP_DEFINE(Cos,F)
-//PLANK_VECTORUNARYOP_DEFINE(Tan,F)
-//PLANK_VECTORUNARYOP_DEFINE(Asin,F)
-//PLANK_VECTORUNARYOP_DEFINE(Acos,F)
-//PLANK_VECTORUNARYOP_DEFINE(Atan,F)
-//PLANK_VECTORUNARYOP_DEFINE(Sinh,F)
-//PLANK_VECTORUNARYOP_DEFINE(Cosh,F)
-//PLANK_VECTORUNARYOP_DEFINE(Tanh,F)
-//PLANK_VECTORUNARYOP_DEFINE(Sqrt,F)
-//PLANK_VECTORUNARYOP_DEFINE(Log,F)
-//PLANK_VECTORUNARYOP_DEFINE(Log10,F)
-//PLANK_VECTORUNARYOP_DEFINE(Exp,F)
-//PLANK_VECTORUNARYOP_DEFINE(Ceil,F)
-//PLANK_VECTORUNARYOP_DEFINE(Floor,F)
-//
-//PLANK_VECTORBINARYOP_DEFINE(Pow,F)
-//PLANK_VECTORBINARYOP_DEFINE(Atan2,F)
-//#else
-//// use vForce on MacOS
-
-// vForce on MacOS and iOS as of iOS5
 
 static PLANK_INLINE_MID void pl_VectorReciprocalF_NN (float *result, const float* a, PlankUL N)   { const int n = (int)N; vvrecf (result, a, &n); }
 PLANK_VECTORUNARYOP_DEFINE(Log2,F)
@@ -245,7 +218,6 @@ static PLANK_INLINE_MID void pl_VectorAtan2F_N1N (float *result, float a, const 
     vDSP_vfill (&a, result, 1, N); 
     vvatan2f (result, result, b, &n); 
 }
-//#endif
 
 PLANK_VECTORBINARYOP_DEFINE(IsEqualTo,F)
 PLANK_VECTORBINARYOP_DEFINE(IsNotEqualTo,F)
@@ -638,8 +610,12 @@ PLANK_VECTORLOOKUP_DEFINE(F) // vDSP_vtabi uses wrong indices < 10.7.2
 
 //------------------------------- double ---------------------------------------
 
-
-//PLANK_VECTOR_OPS(D)
+static PLANK_INLINE_MID double pl_VectorMeanD_N (const double *a, PlankUL N)
+{
+    double result;
+    vDSP_meanvD (a, 1, &result, N);
+    return result;
+}
 
 static PLANK_INLINE_MID void pl_VectorFillD_N1 (double *result, double a, PlankUL N) 
 { 
@@ -696,40 +672,6 @@ static PLANK_INLINE_MID void pl_VectorAbsD_NN (double *result, const double* a, 
 { 
     vDSP_vabsD ((double*)a, 1, result, 1, N); 
 }
-
-
-//#ifdef PLANK_IOS 
-//// no vForce on iOS
-//static PLANK_INLINE_MID void pl_VectorReciprocalD_NN (double *result, const double* a, PlankUL N) 
-//{ 
-//    double one = 1.0;
-//    vDSP_vfillD (&one, result, 1, N); 
-//    vDSP_vdivD (result, 1, (double*)a, 1, result, 1, N); 
-//}
-//
-//PLANK_VECTORUNARYOP_DEFINE(Log2,D)
-//PLANK_VECTORUNARYOP_DEFINE(Sin,D)
-//PLANK_VECTORUNARYOP_DEFINE(Cos,D)
-//PLANK_VECTORUNARYOP_DEFINE(Tan,D)
-//PLANK_VECTORUNARYOP_DEFINE(Asin,D)
-//PLANK_VECTORUNARYOP_DEFINE(Acos,D)
-//PLANK_VECTORUNARYOP_DEFINE(Atan,D)
-//PLANK_VECTORUNARYOP_DEFINE(Sinh,D)
-//PLANK_VECTORUNARYOP_DEFINE(Cosh,D)
-//PLANK_VECTORUNARYOP_DEFINE(Tanh,D)
-//PLANK_VECTORUNARYOP_DEFINE(Sqrt,D)
-//PLANK_VECTORUNARYOP_DEFINE(Log,D)
-//PLANK_VECTORUNARYOP_DEFINE(Log10,D)
-//PLANK_VECTORUNARYOP_DEFINE(Exp,D)
-//PLANK_VECTORUNARYOP_DEFINE(Ceil,D)
-//PLANK_VECTORUNARYOP_DEFINE(Floor,D)
-//
-//PLANK_VECTORBINARYOP_DEFINE(Pow,D)
-//PLANK_VECTORBINARYOP_DEFINE(Atan2,D)
-//#else
-//// use vForce on MacOS
-
-// vForce on MacOS and iPhone as of iOS5
 
 static PLANK_INLINE_MID void pl_VectorReciprocalD_NN (double *result, const double* a, PlankUL N)   { const int n = (int)N; vvrec (result, a, &n); }
 PLANK_VECTORUNARYOP_DEFINE(Log2,D)
@@ -788,7 +730,6 @@ static PLANK_INLINE_MID void pl_VectorAtan2D_N1N (double *result, double a, cons
     vDSP_vfillD (&a, result, 1, N); 
     vvatan2 (result, result, b, &n); 
 }
-//#endif
 
 PLANK_VECTORBINARYOP_DEFINE(IsEqualTo,D)
 PLANK_VECTORBINARYOP_DEFINE(IsNotEqualTo,D)
@@ -1140,6 +1081,7 @@ PLANK_VECTORCLEAR_DEFINE(I)
 PLANK_VECTORRAMP_DEFINE(I)
 PLANK_VECTORRAMPMUL_DEFINE(I)
 PLANK_VECTORLINE_DEFINE(I)
+PLANK_VECTORMEAN_DEFINE(I)
 
 PLANK_VECTORUNARYOP_DEFINE(Move,I)
 PLANK_VECTORUNARYOP_DEFINE(Inc,I)
