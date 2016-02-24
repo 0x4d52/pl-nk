@@ -16,20 +16,20 @@
  * Redistributions in binary form must reproduce the above copyright
    notice, this list of conditions and the following disclaimer in the
    documentation and/or other materials provided with the distribution.
- * Neither the name of University of the West of England, Bristol nor 
+ * Neither the name of University of the West of England, Bristol nor
    the names of its contributors may be used to endorse or promote products
    derived from this software without specific prior written permission.
  
  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE 
- DISCLAIMED. IN NO EVENT SHALL UNIVERSITY OF THE WEST OF ENGLAND, BRISTOL BE 
- LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR 
- CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE 
- GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) 
- HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT 
- LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT 
- OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
+ WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ DISCLAIMED. IN NO EVENT SHALL UNIVERSITY OF THE WEST OF ENGLAND, BRISTOL BE
+ LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE
+ GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  
  This software makes use of third party libraries. For more information see:
  doc/license.txt included in the distribution.
@@ -48,7 +48,7 @@ PLANK_BEGIN_C_LINKAGE
  a statically alloacted version is not currently available.
  
  This makes use of other underlying libraries on request. By default it uses
- FFTReal (via the Plank FFTRealInternal class). To use vDSP on Mac OS X or iOS 
+ FFTReal (via the Plank FFTRealInternal class). To use vDSP on Mac OS X or iOS
  define the preprocessor macro PLANK_FFT_VDSP.
  
  @code
@@ -98,60 +98,60 @@ PLANK_BEGIN_C_LINKAGE
  */
 
 /** An opaque reference to the <i>Plank FFTF</i> object. */
-typedef struct PlankFFTF* PlankFFTFRef; 
+typedef struct PlankFFTF* PlankFFTFRef;
 
-/** Create and initialise a <i>Plank FFTF</i> object and return an oqaque reference to it. 
+/** Create and initialise a <i>Plank FFTF</i> object and return an oqaque reference to it.
  @return A <i>Plank FFTF</i> object as an opaque reference. */
 PlankFFTFRef pl_FFTF_CreateAndInit();
 
-/** Create a <i>Plank FFTF</i> object and return an oqaque reference to it. 
+/** Create a <i>Plank FFTF</i> object and return an oqaque reference to it.
  @return A <i>Plank FFTF</i> object as an opaque reference. */
 PlankFFTFRef pl_FFTF_Create();
 
-/** Initialise a <i>Plank FFTF</i> object with a default length (PLANKFFTF_DEFAULTLENGTH). 
- @param p The <i>Plank FFTF</i> object. 
+/** Initialise a <i>Plank FFTF</i> object with a default length (PLANKFFTF_DEFAULTLENGTH).
+ @param p The <i>Plank FFTF</i> object.
  @return A result code which will be PlankResult_OK if the operation was completely successful. */
 PlankResult pl_FFTF_Init (PlankFFTFRef p);
 
-/** Initialise a <i>Plank FFTF</i> object. 
- @param p The <i>Plank FFTF</i> object. 
+/** Initialise a <i>Plank FFTF</i> object.
+ @param p The <i>Plank FFTF</i> object.
  @param length  The FFT size - this must be a power of 2 or less than 16 (where it will
                 specify the log2 FFT size e.g., length 8 = pow(2,8) = 256
  @return A result code which will be PlankResult_OK if the operation was completely successful. */
 PlankResult pl_FFTF_InitWithLength (PlankFFTFRef p, const PlankL length);
 
-/** Deinitialise a <i>Plank FFTF</i> object. 
- @param p The <i>Plank FFTF</i> object. 
+/** Deinitialise a <i>Plank FFTF</i> object.
+ @param p The <i>Plank FFTF</i> object.
  @return A result code which will be PlankResult_OK if the operation was completely successful. */
 PlankResult pl_FFTF_DeInit (PlankFFTFRef p);
 
-/** Destroy a <i>Plank FFTF</i> object. 
- @param p The <i>Plank FFTF</i> object. 
+/** Destroy a <i>Plank FFTF</i> object.
+ @param p The <i>Plank FFTF</i> object.
  @return A result code which will be PlankResult_OK if the operation was completely successful. */
 PlankResult pl_FFTF_Destroy (PlankFFTFRef p);
 
 /** Apply the FFT to the input and place the result in output.
- This may be performed in-place (i.e., input and output can point to the same data). 
- @param p The <i>Plank FFTF</i> object. 
- @param output A pointer to an array of floats to store the result. 
+ This may be performed in-place (i.e., input and output can point to the same data).
+ @param p The <i>Plank FFTF</i> object.
+ @param output A pointer to an array of floats to store the result.
  @param input A pointer to an array of floats holding the input data. */
 void pl_FFTF_Forward (PlankFFTFRef p, float* output, const float* input);
 
 /** Apply the inverse-FFT to the input and place the result in output.
- This may be performed in-place (i.e., input and output can point to the same data). 
- @param p The <i>Plank FFTF</i> object. 
- @param output A pointer to an array of floats to store the result. 
+ This may be performed in-place (i.e., input and output can point to the same data).
+ @param p The <i>Plank FFTF</i> object.
+ @param output A pointer to an array of floats to store the result.
  @param input A pointer to an array of floats holding the input data. */
 void pl_FFTF_Inverse (PlankFFTFRef p, float* output, const float* input);
 
-/** Get the FFT size. 
- @param p The <i>Plank FFTF</i> object. 
+/** Get the FFT size.
+ @param p The <i>Plank FFTF</i> object.
  @return The FFT size. */
 PlankL pl_FFTF_Length (PlankFFTFRef p);
 
-/** Get half FFT size. 
- This is just as a convenience as it is already cached for efficiency. 
- @param p The <i>Plank FFTF</i> object. 
+/** Get half FFT size.
+ This is just as a convenience as it is already cached for efficiency.
+ @param p The <i>Plank FFTF</i> object.
  @return The half FFT size. */
 PlankL pl_FFTF_HalfLength (PlankFFTFRef p);
 
@@ -162,15 +162,15 @@ PlankL pl_FFTF_HalfLength (PlankFFTFRef p);
 PlankL pl_FFTF_LengthLog2 (PlankFFTFRef p);
 
 /** Get a pointer to the internal temporary buffer.
- This is an array of floats the size of the FFT. This could 
+ This is an array of floats that is at least the size of the FFT. This could
  be useful as a scratch space to save allocating more memory. Of
- course its contents may be invalidated by any other Plank FFTF calls. 
- @param p The <i>Plank FFTF</i> object. 
+ course its contents may be invalidated by any other Plank FFTF calls.
+ @param p The <i>Plank FFTF</i> object.
  @return A pointer to the temporary float buffer. */
 float* pl_FFTF_Temp (PlankFFTFRef p);
 
-
-/** Custom creation function for external FFT libs. 
+#if defined(PLANK_FFT_CUSTOM) || defined(DOXYGEN)
+/** Custom creation function for external FFT libs.
  @note Implement this somewhere in your code and define PLANK_FFT_CUSTOM in the project.
  This must return a pointer an allocated data structure for the FFT state.
  The PlankFFTF class can perfrom scaling for the forward of inverse trasnforms.
@@ -178,25 +178,26 @@ float* pl_FFTF_Temp (PlankFFTFRef p);
                   specify the log2 FFT size e.g., length 8 = pow(2,8) = 256
  @param fftScale  Scaling to be applied to the input data before a forward transform.
  @param ifftScale Scaling to be applied to the output data after an inverse transform */
-void* pl_FFTCusomF_CreateAndInitWithLength (const PlankL length, float* fftScale, float* ifftScale);
+void* pl_FFTCustomF_CreateAndInitWithLength (const int length, float* fftScale, float* ifftScale, int* bufferSizeRequired);
 
-/** Custom destroy function for external FFT libs. 
+/** Custom destroy function for external FFT libs.
  @note Implement this somewhere in your code and define PLANK_FFT_CUSTOM in the project.
  This must dellocate memory for your custom process. */
 void pl_FFTCustomF_Destroy (void* fftCustomPeer);
 
-/** Custom forward transform for external FFT libs. 
+/** Custom forward transform for external FFT libs.
  @note Implement this somewhere in your code and define PLANK_FFT_CUSTOM in the project.
  @param output A pointer to an array of floats to store the result.
  @param input A pointer to an array of floats holding the input data. */
-void pl_FFTCustomF_Forward (void* fftCustomPeer, float* output, const float* input);
+void pl_FFTCustomF_Forward (void* fftCustomPeer, float* output, const float* input, float* temp);
 
-/** Custom inverse transform for external FFT libs. 
+/** Custom inverse transform for external FFT libs.
  @note Implement this somewhere in your code and define PLANK_FFT_CUSTOM in the project.
  @param output A pointer to an array of floats to store the result.
  @param input A pointer to an array of floats holding the input data. */
-void pl_FFTCustomF_Inverse (void* fftCustomPeer, float* output, const float* input);
+void pl_FFTCustomF_Inverse (void* fftCustomPeer, float* output, const float* input, float* temp);
 
+#endif
 
 /// @} // End group PlankFFTFClass
 
