@@ -359,45 +359,6 @@ static PLANK_INLINE_MID void pl_VectorRampF_N11 (float *result, float a, float b
     ippsVectorSlope_32f (result, (int)N, a, b);
 }
 
-//{
-//    PlankVF vb;
-//    PlankVF *vx;
-//    PlankVF *vy;
-//    PlankUL i, Nvec, Nrem;
-//    float* vbp;
-//    float bv;
-//    
-//    Nrem = N & PLANK_SIMDF_MASK;
-//
-//    if (Nrem == 0)
-//    {
-//        vx  = (PlankVF*)result;
-//        vbp = (float*)&vb;
-//        bv  = b * PLANK_SIMDF_LENGTH;
-//        
-//        for (i = 0; i < PLANK_SIMDF_LENGTH; PLANK_INC(i))
-//        {
-//            vbp[i]    = bv;
-//            *result++ = a;
-//            a += b;
-//        }
-//        
-//        vy   = (PlankVF*)result;
-//        Nvec = (N / PLANK_SIMDF_LENGTH) - 1;
-//        
-//        for (i = 0; i < Nvec; PLANK_INC(i))
-//            *vy++ = *vx++ + vb;
-//    }
-//    else
-//    {
-//        for (i = 0; i < N; PLANK_INC(i))
-//        {
-//            result[i] = a;
-//            a += b;
-//        }
-//    }
-//}
-
 static PLANK_INLINE_MID void pl_VectorRampMulF_N11 (float *result, float a, float b, PlankUL N)
 {
     PlankVF vb;
@@ -501,30 +462,6 @@ static PLANK_INLINE_MID void pl_VectorAddMulF_1NN (float *result, const float* a
     ippsDotProd_32f (a, b, (int)N, result);
 }
 
-//static PLANK_INLINE_MID void pl_VectorZMulF_ZNNNNNN (float *resultReal, float *resultImag,
-//                                                     const float* leftReal, const float* leftImag,
-//                                                     const float* rightReal, const float* rightImag,
-//                                                     PlankUL N)
-//{
-//    PlankUL i;
-//    PlankVF *Vor, *Voi, *Vlr, *Vli, *Vrr, *Vri;
-//    
-//    Vor = (PlankVF*)resultReal;
-//    Voi = (PlankVF*)resultImag;
-//    Vlr = (PlankVF*)leftReal;
-//    Vli = (PlankVF*)leftImag;
-//    Vrr = (PlankVF*)rightReal;
-//    Vri = (PlankVF*)rightImag;
-//    
-//    N = N / 4;
-//    
-//    for (i = 0; i < N; PLANK_INC(i))
-//    {
-//        Vor[i] = PLANK_SIMDF_Sub (PLANK_SIMDF_Mul (Vlr[i], Vrr[i]), PLANK_SIMDF_Mul (Vli[i], Vri[i]));
-//        Voi[i] = PLANK_SIMDF_Add (PLANK_SIMDF_Mul (Vlr[i], Vri[i]), PLANK_SIMDF_Mul (Vli[i], Vrr[i]));
-//    }
-//}
-
 static PLANK_INLINE_MID void pl_VectorZMulF_ZNNNNNN (float *resultReal, float *resultImag,
                                                      const float* leftReal, const float* leftImag,
                                                      const float* rightReal, const float* rightImag,
@@ -584,28 +521,16 @@ static PLANK_INLINE_MID void pl_VectorZMulAddF_ZNNNNNNNN (float *resultReal, flo
     }
 }
 
-
 PLANK_VECTORLOOKUP_DEFINE(F)
-
 
 static PLANK_INLINE_MID void pl_VectorInterleave2F_Nnn (float *result, const float* splitA, const float* splitB, PlankUL n)
 {
-    IppiSize roiSize;
-    roiSize.width  = n * 2;
-    roiSize.height = 1;
-    
-    ippiCopy_32f_C1R (splitA, 1, result, 2, roiSize);
-    ippiCopy_32f_C1R (splitB, 1, result + 1, 2, roiSize);
+    ippsRealToCplx_32f (splitA, splitB, (Ipp32fc*)result, n);
 }
 
 static PLANK_INLINE_MID void pl_VectorDeinterleave2F_nnN (float *resultA, float* resultB, const float* input, PlankUL n)
 {
-    IppiSize roiSize;
-    roiSize.width  = n * 2;
-    roiSize.height = 1;
-    
-    ippiCopy_32f_C1R (input, 2, resultA, 1, roiSize);
-    ippiCopy_32f_C1R (input + 1, 2, resultB, 1, roiSize);
+    ippsCplxToReal_32fc ((const Ipp32fc*)input, resultA, resultB, n);
 }
 
 

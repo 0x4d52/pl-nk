@@ -60,38 +60,37 @@ static PLANK_INLINE_LOW PlankB pl_MemoryCompare (PlankConstantP ptr1, PlankConst
 
 static PLANK_INLINE_LOW PlankResult pl_MemoryZero (PlankP ptr, const PlankUL numBytes)
 {
-    PlankUL i;
-    PlankUC *dstp;
+//    PlankUL i;
+//    PlankUC *dstp;
 
     if (ptr == PLANK_NULL || numBytes == 0)
         return PlankResult_MemoryError;
     
-//    memset (ptr, 0, numBytes);
+    memset (ptr, 0, numBytes);
     
-    dstp = (PlankUC*)ptr;
-
-    for (i = 0; i < numBytes; ++i)
-        dstp[i] = 0;
+//    dstp = (PlankUC*)ptr;
+//    for (i = 0; i < numBytes; ++i)
+//        dstp[i] = 0;
 
     return PlankResult_OK;
 }
 
 static PLANK_INLINE_LOW PlankResult pl_MemoryCopy (PlankP dst, PlankConstantP src, const PlankUL numBytes)
 {    
-    PlankUL i;
-    PlankUC *srcp, *dstp;
+//    PlankUL i;
+//    PlankUC *srcp, *dstp;
     
     if (src == PLANK_NULL || dst == PLANK_NULL || numBytes == 0)
         return PlankResult_MemoryError;
     
-//    memcpy (dst, src, numBytes);
+    memcpy (dst, src, numBytes);
     
-    srcp = (PlankUC*)src;
-    dstp = (PlankUC*)dst;
-    
-    // alignment issue?
-    for (i = 0; i < numBytes; ++i)
-        dstp[i] = srcp[i];
+//    srcp = (PlankUC*)src;
+//    dstp = (PlankUC*)dst;
+//    
+//    // alignment issue?
+//    for (i = 0; i < numBytes; ++i)
+//        dstp[i] = srcp[i];
     
     return PlankResult_OK;    
 }
