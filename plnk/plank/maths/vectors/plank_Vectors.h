@@ -455,10 +455,15 @@
 
 /// @} End group PlankVectorMacros
 
-#if defined(PLANK_VEC_VDSP) //&& !DOXYGEN
-    #include "plank_vDSP.h"
-#elif defined(PLANK_VEC_OTHERLIB) //etc!
-    #include "some other vector lib" // must define PLANK_VEC_CUSTOM
+
+#if defined(PLANK_VEC_CUSTOM)
+    #include "plank_VectorsCustom.h" // the custom vectors header must gave this name and be in the compilter include search paths
+#else
+    #if defined(PLANK_VEC_VDSP)
+        #include "plank_vDSP.h"
+    #elif defined(PLANK_VEC_OTHERLIB)
+        #include "some other vector lib" // must define PLANK_VEC_CUSTOM
+    #endif
 #endif
 
 #if !defined(PLANK_VEC_CUSTOM) || DOXYGEN

@@ -100,6 +100,8 @@ PLANK_BEGIN_C_LINKAGE
 /** An opaque reference to the <i>Plank FFTF</i> object. */
 typedef struct PlankFFTF* PlankFFTFRef;
 
+const char* pl_FFTF_GetInternalEngineName();
+
 /** Create and initialise a <i>Plank FFTF</i> object and return an oqaque reference to it.
  @return A <i>Plank FFTF</i> object as an opaque reference. */
 PlankFFTFRef pl_FFTF_CreateAndInit();
@@ -178,7 +180,7 @@ float* pl_FFTF_Temp (PlankFFTFRef p);
                   specify the log2 FFT size e.g., length 8 = pow(2,8) = 256
  @param fftScale  Scaling to be applied to the input data before a forward transform.
  @param ifftScale Scaling to be applied to the output data after an inverse transform */
-void* pl_FFTCustomF_CreateAndInitWithLength (const int length, float* fftScale, float* ifftScale, int* bufferSizeRequired);
+void* pl_FFTCustomF_CreateAndInitWithLength (const int length, float* fftScale, float* ifftScale);
 
 /** Custom destroy function for external FFT libs.
  @note Implement this somewhere in your code and define PLANK_FFT_CUSTOM in the project.
@@ -196,6 +198,9 @@ void pl_FFTCustomF_Forward (void* fftCustomPeer, float* output, const float* inp
  @param output A pointer to an array of floats to store the result.
  @param input A pointer to an array of floats holding the input data. */
 void pl_FFTCustomF_Inverse (void* fftCustomPeer, float* output, const float* input, float* temp);
+
+const char* pl_FFTCustomF_GetName();
+
 
 #endif
 

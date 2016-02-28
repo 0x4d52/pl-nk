@@ -40,20 +40,51 @@
 #include "plank_FFT.h"
 #include "../maths/vectors/plank_Vectors.h"
 
+// undefine vDSP unless on Mac or iOS
+#if !defined(PLANK_MAC) && !defined(PLANK_IOS)
+    #ifdef PLANK_FFT_VDSP
+    #undef PLANK_FFT_VDSP
+    #endif
+#endif
+
 #ifdef PLANK_FFT_VDSP
+    #ifdef PLANK_FFT_CUSTOM
+    #undef PLANK_FFT_CUSTOM
+    #endif
 
-typedef struct PLANK_FFT_VDSP_Point
-{
-    int evil;
-} PLANK_FFT_VDSP_Point;
+    #ifdef PLANK_FFT_OOURA
+    #undef PLANK_FFT_OOURA
+    #endif
 
-#define Point PLANK_FFT_VDSP_Point
-#define Component PLANK_FFT_VDSP_Component
-#include <Accelerate/Accelerate.h>
-#undef Point
-#undef Component
-#else
-#include "fftreal/plank_FFTRealInternal.h"
+    #ifdef PLANK_FFT_PFFFT
+    #undef PLANK_FFT_PFFFT
+    #endif
+
+    typedef struct PLANK_FFT_VDSP_Point
+    {
+        int evil;
+    } PLANK_FFT_VDSP_Point;
+
+    #define Point PLANK_FFT_VDSP_Point
+    #define Component PLANK_FFT_VDSP_Component
+    #include <Accelerate/Accelerate.h>
+    #undef Point
+    #undef Component
+    #else
+    #include "fftreal/plank_FFTRealInternal.h"
+#endif
+
+
+#ifdef PLANK_FFT_PFFFT
+    #ifdef PLANK_FFT_OOURA
+    #undef PLANK_FFT_OOURA
+    #endif
+
+    #include "../../ext/pffft/pffft.c"
+#endif
+
+#ifdef PLANK_FFT_OOURA
+    #include "../../ext/ooura/ooura.c"
 #endif
 
 #if !DOXYGEN
@@ -71,6 +102,21 @@ typedef struct PlankFFTF
 #endif
 } PlankFFTF;
 #endif
+
+const char* pl_FFTF_GetInternalEngineName()
+{
+#if defined(PLANK_FFT_VDSP)
+    return "vDSP";
+#elif defined(PLANK_FFT_PFFFT)
+    return "PFFFT";
+#elif defined(PLANK_FFT_OOURA)
+    return "OURA";
+#elif defined(PLANK_FFT_CUSTOM)
+    return pl_FFTCustomF_GetName();
+#else
+    return "FFTReal";
+#endif
+}
 
 PlankFFTFRef pl_FFTF_CreateAndInit()
 {
@@ -111,7 +157,6 @@ PlankResult pl_FFTF_InitWithLength (PlankFFTFRef p, const PlankL length)
 {
     PlankResult result = PlankResult_OK;
     PlankMemoryRef m;
-    int bufferSize;
     m = pl_MemoryGlobal();
     
     if (p == PLANK_NULL)
@@ -136,20 +181,22 @@ PlankResult pl_FFTF_InitWithLength (PlankFFTFRef p, const PlankL length)
     
 #if defined(PLANK_FFT_VDSP)
     p->peer = vDSP_create_fftsetup (p->lengthLog2, 0);
-    p->bufferComplex.realp = p->buffer;
-    p->bufferComplex.imagp = p->buffer + p->halfLength;
     p->ifftScale = 1.0f / p->length;
     p->fftScale = 0.5f;
-    bufferSize = (int)p->length;
+#elif defined(PLANK_FFT_PFFFT)
+    p->peer = pffft_new_setup ((int)p->length, PFFFT_REAL);
+    p->ifftScale = 1.0f / (int)p->length;
+    p->fftScale = 1.0f;
+#elif defined(PLANK_FFT_OOURA)
+    p->ifftScale = 2.0f / (int)p->length;
+    p->fftScale = 1.0f;
+    p->peer = ooura_create (p->length);
 #elif defined(PLANK_FFT_CUSTOM)
-    bufferSize = 0;
-    p->peer = pl_FFTCustomF_CreateAndInitWithLength ((int)p->length, &p->fftScale, &p->ifftScale, &bufferSize);
-    bufferSize = pl_MaxI (bufferSize, (int)p->length);
+    p->peer = pl_FFTCustomF_CreateAndInitWithLength ((int)p->length, &p->fftScale, &p->ifftScale);
 #else
     p->peer = pl_FFTRealF_CreateAndInitWithLength (p->length);
     p->ifftScale = 1.0f / (int)p->length;
     p->fftScale = 1.0f;
-    bufferSize = (int)p->length;
 #endif
     
     if (p->peer == PLANK_NULL)
@@ -158,13 +205,18 @@ PlankResult pl_FFTF_InitWithLength (PlankFFTFRef p, const PlankL length)
         goto exit;
     }
     
-    p->buffer = (float*)pl_Memory_AllocateBytes (m, sizeof (float) * bufferSize);
+    p->buffer = (float*)pl_Memory_AllocateBytes (m, sizeof (float) * p->length);
     
     if (p->buffer == PLANK_NULL)
     {
         result = PlankResult_MemoryError;
         goto exit;
     }
+    
+#if defined(PLANK_FFT_VDSP)
+    p->bufferComplex.realp = p->buffer;
+    p->bufferComplex.imagp = p->buffer + p->halfLength;
+#endif
     
 exit:
     return result;
@@ -183,8 +235,11 @@ PlankResult pl_FFTF_DeInit (PlankFFTFRef p)
     }
     
 #if defined(PLANK_FFT_VDSP)
-    FFTSetup fftvDSP = (FFTSetup)p->peer;
-    vDSP_destroy_fftsetup (fftvDSP);
+    vDSP_destroy_fftsetup ((FFTSetup)p->peer);
+#elif defined(PLANK_FFT_PFFFT)
+    pffft_destroy_setup ((PFFFT_Setup*)p->peer);
+#elif defined(PLANK_FFT_OOURA)
+    ooura_destroy((OouraFFT*)p->peer);
 #elif defined(PLANK_FFT_CUSTOM)
     pl_FFTCustomF_Destroy (p->peer);
 #else
@@ -217,12 +272,47 @@ exit:
     return result;
 }
 
+static void pl_FFT_Pack (int halfLength, float* packedOutput, const float* interleavedInput)
+{
+    const float* input;
+    float* real;
+    float* imag;
+    
+    input = interleavedInput;
+    real = packedOutput;
+    imag = packedOutput + halfLength;
+    
+    while (halfLength--)
+    {
+        *real++ = *input++;
+        *imag++ = *input++;
+    }
+}
+
+static void pl_FFT_Unpack (int halfLength, float* interleavedOutput, const float* packedInput)
+{
+    float* output;
+    const float* real;
+    const float* imag;
+    
+    output = interleavedOutput;
+    real = packedInput;
+    imag = packedInput + halfLength;
+    
+    while (halfLength--)
+    {
+        *output++ = *real++;
+        *output++ = *imag++;
+    }
+}
+
+
 void pl_FFTF_Forward (PlankFFTFRef p, float* output, const float* input)
 {
+#if defined(PLANK_FFT_VDSP)
     const PlankL N = p->length;
     const float scale = p->fftScale;
-    
-#if defined(PLANK_FFT_VDSP)
+
     FFTSetup fftvDSP = (FFTSetup)p->peer;
     const PlankL N2 = p->halfLength;
     const PlankL Nlog2 = p->lengthLog2;
@@ -238,23 +328,32 @@ void pl_FFTF_Forward (PlankFFTFRef p, float* output, const float* input)
     vDSP_ctoz ((COMPLEX*)buffer, 2, &outputComplex, 1, N2);
     vDSP_fft_zrip (fftvDSP, &outputComplex, 1, Nlog2, FFT_FORWARD);
     
-#ifdef PLANK_FFT_VDSP_FLIPIMAG
+   #ifdef PLANK_FFT_VDSP_FLIPIMAG
     float* flip = output + N2;
     float nyquist = flip[0];
     
     pl_VectorNegF_NN (flip, flip, N2);
     
     flip[0] = nyquist;
-#endif
+   #endif
+#elif defined(PLANK_FFT_PFFFT)
+    pffft_transform ((PFFFT_Setup*)p->peer, input, output, p->buffer, PFFFT_FORWARD);
+    pffft_zreorder ((PFFFT_Setup*)p->peer, output, p->buffer, PFFFT_FORWARD);
+    pl_FFT_Pack (p->halfLength, output, p->buffer);
+#elif defined(PLANK_FFT_OOURA)
+    pl_MemoryCopy (p->buffer, input, sizeof(float) * p->length);
+    ooura_forward ((OouraFFT*)p->peer, p->buffer);
+    pl_FFT_Pack (p->halfLength, output, p->buffer);
 #elif defined(PLANK_FFT_CUSTOM)
-    if (scale != 1.0f)
-        pl_VectorMulF_NN1 (output, output, scale, N);
-    
+    const PlankL N = p->length;
+    const float scale = p->fftScale;
+
     pl_FFTCustomF_Forward (p->peer, output, input, p->buffer);
-#else
+
     if (scale != 1.0f)
         pl_VectorMulF_NN1 (output, output, scale, N);
-    
+
+#else
     pl_FFTRealF_Forward (p->peer, output, input);
 #endif
 }
@@ -263,31 +362,39 @@ void pl_FFTF_Inverse (PlankFFTFRef p, float* output, const float* input)
 {
     const PlankL N = p->length;
     const float scale = p->ifftScale;
-    float* buffer = p->buffer;
-    
-    pl_MemoryCopy (buffer, input, sizeof (float) * N);
     
 #if defined(PLANK_FFT_VDSP)
     FFTSetup fftvDSP = (FFTSetup)p->peer;
+    float* buffer = p->buffer;
     DSPSplitComplex* bufferComplex = &p->bufferComplex;
     const PlankL N2 = p->halfLength;
     const PlankL Nlog2 = p->lengthLog2;
     
-#ifdef PLANK_FFT_VDSP_FLIPIMAG
+    pl_MemoryCopy (p->buffer, input, sizeof (float) * N);
+    
+   #ifdef PLANK_FFT_VDSP_FLIPIMAG
     float* flip = buffer + N2;
     float nyquist = flip[0];
     
     pl_VectorNegF_NN (flip, flip, N2);
     
     flip[0] = nyquist;
-#endif
+   #endif
     
     vDSP_fft_zrip (fftvDSP, bufferComplex, 1, Nlog2, FFT_INVERSE);
     vDSP_ztoc (bufferComplex, 1, (COMPLEX*)output, 2, N2);
+#elif defined(PLANK_FFT_PFFFT)
+    pl_FFT_Unpack (p->halfLength, p->buffer, input);
+    pffft_zreorder ((PFFFT_Setup*)p->peer, p->buffer, output, PFFFT_BACKWARD);
+    pffft_transform ((PFFFT_Setup*)p->peer, output, output, p->buffer, PFFFT_BACKWARD);
+#elif defined(PLANK_FFT_OOURA)
+    pl_FFT_Unpack (p->halfLength, output, input);
+    ooura_inverse ((OouraFFT*)p->peer, output);
 #elif defined(PLANK_FFT_CUSTOM)
     pl_FFTCustomF_Inverse (p->peer, output, input, p->buffer);
 #else
-    pl_FFTRealF_Inverse (p->peer, output, buffer);
+    pl_MemoryCopy (p->buffer, input, sizeof (float) * N);
+    pl_FFTRealF_Inverse (p->peer, output, p->buffer);
 #endif
     
     if (scale != 1.0f)

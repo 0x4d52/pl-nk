@@ -54,8 +54,8 @@ public:
 	virtual			~FFTReal () {}
 
 	long				get_length () const;
-	void				do_fft (DataType f [], const DataType x []) const;
-	void				do_ifft (const DataType f [], DataType x []) const;
+	void				do_fft (DataType f [], const DataType x []) const throw();
+	void				do_ifft (const DataType f [], DataType x []) const throw();
 	void				rescale (DataType x []) const;
 	DataType *		use_buffer () const;
 
@@ -81,25 +81,25 @@ private:
 	void				init_trigo_osc ();
 
 	ffft_FORCEINLINE const long *
-						get_br_ptr () const;
+						get_br_ptr () const throw();
 	ffft_FORCEINLINE const DataType	*
-						get_trigo_ptr (int level) const;
+						get_trigo_ptr (int level) const throw();
 	ffft_FORCEINLINE long
-						get_trigo_level_index (int level) const;
+						get_trigo_level_index (int level) const throw();
 
-	inline void		compute_fft_general (DataType f [], const DataType x []) const;
-	inline void		compute_direct_pass_1_2 (DataType df [], const DataType x []) const;
-	inline void		compute_direct_pass_3 (DataType df [], const DataType sf []) const;
-	inline void		compute_direct_pass_n (DataType df [], const DataType sf [], int pass) const;
-	inline void		compute_direct_pass_n_lut (DataType df [], const DataType sf [], int pass) const;
-	inline void		compute_direct_pass_n_osc (DataType df [], const DataType sf [], int pass) const;
+	inline void		compute_fft_general (DataType f [], const DataType x []) const throw();
+	inline void		compute_direct_pass_1_2 (DataType df [], const DataType x []) const throw();
+	inline void		compute_direct_pass_3 (DataType df [], const DataType sf []) const throw();
+	inline void		compute_direct_pass_n (DataType df [], const DataType sf [], int pass) const throw();
+	inline void		compute_direct_pass_n_lut (DataType df [], const DataType sf [], int pass) const throw();
+	inline void		compute_direct_pass_n_osc (DataType df [], const DataType sf [], int pass) const throw();
 
-	inline void		compute_ifft_general (const DataType f [], DataType x []) const;
-	inline void		compute_inverse_pass_n (DataType df [], const DataType sf [], int pass) const;
-	inline void		compute_inverse_pass_n_osc (DataType df [], const DataType sf [], int pass) const;
-	inline void		compute_inverse_pass_n_lut (DataType df [], const DataType sf [], int pass) const;
-	inline void		compute_inverse_pass_3 (DataType df [], const DataType sf []) const;
-	inline void		compute_inverse_pass_1_2 (DataType x [], const DataType sf []) const;
+	inline void		compute_ifft_general (const DataType f [], DataType x []) const throw();
+	inline void		compute_inverse_pass_n (DataType df [], const DataType sf [], int pass) const throw();
+	inline void		compute_inverse_pass_n_osc (DataType df [], const DataType sf [], int pass) const throw();
+	inline void		compute_inverse_pass_n_lut (DataType df [], const DataType sf [], int pass) const throw();
+	inline void		compute_inverse_pass_3 (DataType df [], const DataType sf []) const throw();
+	inline void		compute_inverse_pass_1_2 (DataType x [], const DataType sf []) const throw();
 
 	const long		_length;
 	const int		_nbr_bits;

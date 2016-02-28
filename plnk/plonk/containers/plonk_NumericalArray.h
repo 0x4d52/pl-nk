@@ -1351,10 +1351,9 @@ public:
         const int length = this->length();
         
         if (length > 0)
-        {
-            NumericalType *thisArray = this->getArray();
             NumericalArrayFiller<NumericalType>::fill (this->getArray(), value, length);
-        }
+        else
+            plonk_assertfalse;
     }
     
     PLONK_INLINE_LOW NumericalArray (NumericalArray const& copy) throw()
