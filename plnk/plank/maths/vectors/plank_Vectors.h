@@ -300,6 +300,31 @@
         PlankUL i; PLANK_UNUSED(n); for (i = 0; i < N; PLANK_INC(i)) { result[i] = pl_Lookup##TYPECODE (table, index[i]); }\
     }
 
+#define PLANK_VECTORINTERLEAVE2_NAME(TYPECODE) PLANK_VECTOR_NAMEINTERNAL(Interleave2,TYPECODE,_Nnn)
+#define PLANK_VECTORDEINTERLEAVE2_NAME(TYPECODE) PLANK_VECTOR_NAMEINTERNAL(Deinterleave2,TYPECODE,_nnN)
+
+#define PLANK_VECTORINTERLEAVE2_DEFINE(TYPECODE) \
+    /** Interleave two split buffers into the result.
+     @note None of these buffers may alias.
+     @param result  The interleaved output buffer.
+     @param splitA  The first split input buffer.
+     @param splitB  The second split input buffer.
+     @param n       The length of the split buffers, the result should be large enough to accomodate @f$ 2n @f$ */\
+    static PLANK_INLINE_MID void PLANK_VECTORINTERLEAVE2_NAME(TYPECODE) (Plank##TYPECODE *result, const Plank##TYPECODE *splitA, const Plank##TYPECODE *splitB, PlankUL n) {\
+        while(n--) { *result++ = *splitA++; *result++ = *splitB++; }\
+    }
+
+#define PLANK_VECTORDEINTERLEAVE2_DEFINE(TYPECODE) \
+    /** Denterleave a buffer into two split buffers.
+    @note None of these buffers may alias.
+    @param resultA  The first split output buffer.
+    @param resultB  The second split output buffer.
+    @param input    The interleaved input buffer.
+    @param n        The length of the split buffers, the result should be large enough to accomodate @f$ 2n @f$ */\
+    static PLANK_INLINE_MID void PLANK_VECTORDEINTERLEAVE2_NAME(TYPECODE) (Plank##TYPECODE *resultA, Plank##TYPECODE *resultB, const Plank##TYPECODE *input, PlankUL n) {\
+        while(n--) { *resultA++ = *input++; *resultB++ = *input++; }\
+    }
+
 
 #define PLANK_VECTORCONVERT_NAME(DSTTYPECODE,SRCTYPECODE)\
     PLANK_VECTOR_NAMEINTERNAL(Convert,SRCTYPECODE##2##DSTTYPECODE,_NN)
@@ -461,6 +486,8 @@
 #else
     #if defined(PLANK_VEC_VDSP)
         #include "plank_vDSP.h"
+    #elif defined(PLANK_VEC_IPP)
+        #include "plank_vIPP.h"
     #elif defined(PLANK_VEC_OTHERLIB)
         #include "some other vector lib" // must define PLANK_VEC_CUSTOM
     #endif
@@ -502,6 +529,12 @@ PLANK_VECTORZMUL_DEFINE(F)
 PLANK_VECTORZMUL_DEFINE(D)
 PLANK_VECTORZMULADD_DEFINE(F)
 PLANK_VECTORZMULADD_DEFINE(D)
+
+PLANK_VECTORINTERLEAVE2_DEFINE(F)
+PLANK_VECTORDEINTERLEAVE2_DEFINE(F)
+PLANK_VECTORINTERLEAVE2_DEFINE(D)
+PLANK_VECTORDEINTERLEAVE2_DEFINE(D)
+
 
 
 #define PLANK_SIMDF_LENGTH   1 

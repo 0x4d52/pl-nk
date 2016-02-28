@@ -325,7 +325,7 @@ void pl_FFTF_Forward (PlankFFTFRef p, float* output, const float* input)
     if (scale != 1.0f)
         pl_VectorMulF_NN1 (buffer, input, scale, N);
     
-    vDSP_ctoz ((COMPLEX*)buffer, 2, &outputComplex, 1, N2);
+    vDSP_ctoz ((DSPComplex*)buffer, 2, &outputComplex, 1, N2);
     vDSP_fft_zrip (fftvDSP, &outputComplex, 1, Nlog2, FFT_FORWARD);
     
    #ifdef PLANK_FFT_VDSP_FLIPIMAG
@@ -382,7 +382,7 @@ void pl_FFTF_Inverse (PlankFFTFRef p, float* output, const float* input)
    #endif
     
     vDSP_fft_zrip (fftvDSP, bufferComplex, 1, Nlog2, FFT_INVERSE);
-    vDSP_ztoc (bufferComplex, 1, (COMPLEX*)output, 2, N2);
+    vDSP_ztoc (bufferComplex, 1, (DSPComplex*)output, 2, N2);
 #elif defined(PLANK_FFT_PFFFT)
     pl_FFT_Unpack (p->halfLength, p->buffer, input);
     pffft_zreorder ((PFFFT_Setup*)p->peer, p->buffer, output, PFFFT_BACKWARD);

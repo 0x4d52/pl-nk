@@ -135,8 +135,8 @@ static PLANK_INLINE_MID void pl_VectorLineF_N11 (float *result, float a, float b
 }
 
 static PLANK_INLINE_MID void pl_VectorMoveF_NN (float *result, const float* a, PlankUL N) 
-{ 
-    vDSP_mmov ((float*)a, result, N, 1, N, N); 
+{
+    memcpy (result, a, sizeof (float) * N);
 }
 
 static PLANK_INLINE_MID void pl_VectorIncF_NN (float *result, const float* a, PlankUL N) 
@@ -608,6 +608,26 @@ static PLANK_INLINE_MID void pl_VectorLookupF_NnN (float *result, const float* t
 PLANK_VECTORLOOKUP_DEFINE(F) // vDSP_vtabi uses wrong indices < 10.7.2
 #endif
 
+static PLANK_INLINE_MID void pl_VectorInterleave2F_Nnn (float *result, const float* splitA, const float* splitB, PlankUL n)
+{
+    DSPSplitComplex splitComplex;
+    splitComplex.realp = (float*)splitA;
+    splitComplex.imagp = (float*)splitB;
+
+    vDSP_ztoc (&splitComplex, 1, (DSPComplex*)result, 2, n);
+}
+
+static PLANK_INLINE_MID void pl_VectorDeinterleave2F_nnN (float *resultA, float* resultB, const float* input, PlankUL n)
+{
+    DSPSplitComplex splitComplex;
+    splitComplex.realp = resultA;
+    splitComplex.imagp = resultB;
+    
+    vDSP_ctoz ((DSPComplex*)input, 2, &splitComplex, 1, n);
+}
+
+
+
 //------------------------------- double ---------------------------------------
 
 static PLANK_INLINE_MID double pl_VectorMeanD_N (const double *a, PlankUL N)
@@ -648,7 +668,7 @@ static PLANK_INLINE_MID void pl_VectorLineD_N11 (double *result, double a, doubl
 
 static PLANK_INLINE_MID void pl_VectorMoveD_NN (double *result, const double* a, PlankUL N) 
 { 
-    vDSP_mmovD ((double*)a, result, N, 1, N, N); 
+    memcpy (result, a, sizeof (double) * N);
 }
 
 static PLANK_INLINE_MID void pl_VectorIncD_NN (double *result, const double* a, PlankUL N) 
@@ -966,6 +986,26 @@ static PLANK_INLINE_MID void pl_VectorLookupD_NnN (double *result, const double*
 #else
 PLANK_VECTORLOOKUP_DEFINE(D) // vDSP_vtabiD uses wrong indices < 10.7.2
 #endif
+
+
+static PLANK_INLINE_MID void pl_VectorInterleave2D_Nnn (double *result, const double* splitA, const double* splitB, PlankUL n)
+{
+    DSPDoubleSplitComplex splitComplex;
+    splitComplex.realp = (double*)splitA;
+    splitComplex.imagp = (double*)splitB;
+    
+    vDSP_ztocD (&splitComplex, 1, (DSPDoubleComplex*)result, 2, n);
+}
+
+static PLANK_INLINE_MID void pl_VectorDeinterleave2D_nnN (double *resultA, double* resultB, const double* input, PlankUL n)
+{
+    DSPDoubleSplitComplex splitComplex;
+    splitComplex.realp = resultA;
+    splitComplex.imagp = resultB;
+    
+    vDSP_ctozD ((DSPDoubleComplex*)input, 2, &splitComplex, 1, n);
+}
+
 
 
 #undef I
