@@ -39,17 +39,58 @@
 #include "plank_StandardHeader.h"
 #include "plank_Memory.h"
 
-void* pl_MemoryDefaultAllocateBytes (PlankP p, PlankUL size)
-{
-    (void)p;
-    return malloc (size);
-}
+//void* pl_MemoryDefaultAllocateBytes (PlankP p, PlankUL size)
+//{
+//    (void)p;
+//    return malloc (size);
+//}
+//
+//void pl_MemoryDefaultFree (PlankP p, void* ptr)
+//{
+//    (void)p;
+//    free (ptr);
+//}
 
-void pl_MemoryDefaultFree (PlankP p, void* ptr)
-{
-    (void)p;
-    free (ptr);
-}
+//#if 1
+//    void* pl_MemoryDefaultAllocateBytes (PlankP p, PlankUL size)
+//    {
+//        (void)p;
+//        return _mm_malloc (size, PLANK_WIDESIZE);
+//    }
+//
+//    void pl_MemoryDefaultFree (PlankP p, void* ptr)
+//    {
+//        (void)p;
+//        _mm_free (ptr);
+//    }
+//#else
+
+#if PLANK_WIN
+    void* pl_MemoryDefaultAllocateBytes (PlankP p, PlankUL size)
+    {
+        (void)p;
+        return _aligned_malloc (size, PLANK_WIDESIZE);
+    }
+
+    void pl_MemoryDefaultFree (PlankP p, void* ptr)
+    {
+        (void)p;
+        _aligned_free (ptr);
+    }
+#else
+    void* pl_MemoryDefaultAllocateBytes (PlankP p, PlankUL size)
+    {
+        (void)p;
+        return malloc (size);
+    }
+
+    void pl_MemoryDefaultFree (PlankP p, void* ptr)
+    {
+        (void)p;
+        free (ptr);
+    }
+#endif
+
 
 PlankMemoryRef pl_Memory_CreateAndInit()
 {
