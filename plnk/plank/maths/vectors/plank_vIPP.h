@@ -263,93 +263,66 @@ PLANK_VECTORUNARYOP_DEFINE(R2D, F)
 PLANK_VECTORUNARYOP_DEFINE(Distort, F)
 PLANK_VECTORUNARYOP_DEFINE(Zap, F)
 
-#define PLANK_CUSTOM_SIMD_LOOP(OP)\
-    PlankVF* vR;\
-    PlankVF* vA;\
-    PlankVF vB;\
-    PlankUL vN, Nr;\
-    \
-    Nr  = N & PLANK_SIMDF_MASK;\
-    \
-    if (! Nr)\
-    {\
-        vN  = N >> PLANK_SIMDF_SHIFT;\
-        vR  = (PlankVF*)result;\
-        vA  = (PlankVF*)a;\
-        vB  = PLANK_SIMDF_Set(b);\
-        \
-        while (vN--)\
-            *vR++ = PLANK_SIMDF_##OP(*vA++,vB);\
-    }\
-    else\
-    {\
-        while (N--)\
-            *result++ = pl_##OP##F (*a++, b);\
-    }
-
-
 
 static PLANK_INLINE_MID void pl_VectorAddF_NNN (float *result, const float* a, const float* b, PlankUL N)
 {
-    vsAdd ((int)N, a, b, result);
+    ippsAdd_32f (a, b, result, (int)N);
 }
 
 static PLANK_INLINE_MID void pl_VectorAddF_NN1 (float *result, const float* a, float b, PlankUL N)
 {
-    PLANK_CUSTOM_SIMD_LOOP(Add)
+    ippsAddC_32f (a, b, result, (int)N);
 }
 
 static PLANK_INLINE_MID void pl_VectorAddF_N1N (float *result, float a, const float* b, PlankUL N)
 {
-    pl_VectorAddF_NN1 (result, b, a, N);
+    ippsAddC_32f (b, a, result, (int)N);
 }
 
 static PLANK_INLINE_MID void pl_VectorSubF_NNN (float *result, const float* a, const float* b, PlankUL N)
 {
-    vsSub ((int)N, a, b, result);
+    ippsSub_32f (a, b, result, (int)N);
 }
 
 static PLANK_INLINE_MID void pl_VectorSubF_NN1 (float *result, const float* a, float b, PlankUL N)
 {
-    PLANK_CUSTOM_SIMD_LOOP(Sub)
+    ippsSubC_32f (a, b, result, (int)N);
 }
 
 static PLANK_INLINE_MID void pl_VectorSubF_N1N (float *result, float a, const float* b, PlankUL N)
 {
-    pl_VectorSubF_NN1 (result, b, a, N);
+    ippsSubCRev_32f (b, a, result, (int)N);
 }
 
 static PLANK_INLINE_MID void pl_VectorMulF_NNN (float *result, const float* a, const float* b, PlankUL N)
 {
-    vsMul ((int)N, a, b, result);
+    ippsMul_32f (a, b, result, (int)N);
 }
 
 static PLANK_INLINE_MID void pl_VectorMulF_NN1 (float *result, const float* a, float b, PlankUL N)
 {
-    PLANK_CUSTOM_SIMD_LOOP(Mul)
+    ippsMulC_32f (a, b, result, (int)N);
 }
 
 static PLANK_INLINE_MID void pl_VectorMulF_N1N (float *result, float a, const float* b, PlankUL N)
 {
-    pl_VectorMulF_NN1 (result, b, a, N);
+    ippsMulC_32f (b, a, result, (int)N);
 }
 
 static PLANK_INLINE_MID void pl_VectorDivF_NNN (float *result, const float* a, const float* b, PlankUL N)
 {
-    vsDiv ((int)N, a, b, result);
+    ippsDiv_32f (a, b, result, (int)N);
 }
 
 static PLANK_INLINE_MID void pl_VectorDivF_NN1 (float *result, const float* a, float b, PlankUL N)
 {
-    PLANK_CUSTOM_SIMD_LOOP(Div)
+    ippsDivC_32f (a, b, result, (int)N);
 }
 
 static PLANK_INLINE_MID void pl_VectorDivF_N1N (float *result, float a, const float* b, PlankUL N)
 {
-    pl_VectorDivF_NN1 (result, b, a, N);
+    ippsDivCRev_32f (b, a, result, (int)N);
 }
-
-#undef PLANK_CUSTOM_SIMD_LOOP
 
 PLANK_VECTORBINARYOP_DEFINE(Mod,F)
 
