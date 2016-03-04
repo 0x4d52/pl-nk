@@ -384,9 +384,9 @@ PlankResult pl_IffFileWriter_WriteChunk (PlankIffFileWriterRef p, const PlankLL 
     PlankIffID chunkID;
     int idLength;
     
-    result = PlankResult_OK;
+    result     = PlankResult_OK;
     isNewChunk = PLANK_FALSE;
-    idLength = pl_IffFile_ChunkIDLength ((PlankIffFileRef)p);
+    idLength   = pl_IffFile_ChunkIDLength ((PlankIffFileRef)p);
     
     if ((result = pl_IffFile_InitID ((PlankIffFileRef)p, chunkIDstr, &chunkID)) != PlankResult_OK) goto exit;
     if ((result = pl_IffFileWriter_SeekChunk (p, startPosition, chunkIDstr, &origChunkInfo, &isLastChunk)) != PlankResult_OK) goto exit;
@@ -407,8 +407,8 @@ PlankResult pl_IffFileWriter_WriteChunk (PlankIffFileWriterRef p, const PlankLL 
     else
     {
         originalChunkLength = origChunkInfo->chunkLength;
-        chunkDataPos = origChunkInfo->chunkPos;
-        chunkStartPos = chunkDataPos - idLength - p->common.headerInfo.lengthSize;
+        chunkDataPos        = origChunkInfo->chunkPos;
+        chunkStartPos       = chunkDataPos - idLength - p->common.headerInfo.lengthSize;
     }
     
     newChunkInfo.chunkID       = chunkID;

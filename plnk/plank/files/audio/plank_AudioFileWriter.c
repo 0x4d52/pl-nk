@@ -1240,7 +1240,7 @@ PlankResult pl_AudioFileWriter_WAV_WriteFrames (PlankAudioFileWriterRef p, const
     PlankIffFileWriterRef iff;
     
     result = PlankResult_OK;
-    iff  = (PlankIffFileWriterRef)p->peer;
+    iff    = (PlankIffFileWriterRef)p->peer;
     
     if ((result = pl_AudioFileWriter_Iff_WriteFrames (p, convertByteOrder, "data", numFrames, data)) != PlankResult_OK) goto exit;
     
@@ -1954,8 +1954,8 @@ PlankResult pl_AudioFileWriter_Iff_WriteFrames (PlankAudioFileWriterRef p, const
     PlankUC* swapPtr;
     int numSamplesRemaining, numSamplesThisTime, numBufferSamples, bytesPerSample, numBytes, i, numChannels;
     
-    iff = (PlankIffFileWriterRef)p->peer;
-    numChannels = pl_AudioFileFormatInfo_GetNumChannels (&p->formatInfo);
+    iff            = (PlankIffFileWriterRef)p->peer;
+    numChannels    = pl_AudioFileFormatInfo_GetNumChannels (&p->formatInfo);
     bytesPerSample = p->formatInfo.bytesPerFrame / numChannels;
 
     if ((bytesPerSample == 1) || pl_AudioFileWriter_IsEncodingNativeEndian (p))
@@ -1965,9 +1965,9 @@ PlankResult pl_AudioFileWriter_Iff_WriteFrames (PlankAudioFileWriterRef p, const
     }
     else
     {
-        numBufferSamples = (PLANKAUDIOFILEWRITER_BUFFERLENGTH / p->formatInfo.bytesPerFrame) * numChannels;
+        numBufferSamples    = (PLANKAUDIOFILEWRITER_BUFFERLENGTH / p->formatInfo.bytesPerFrame) * numChannels;
         numSamplesRemaining = numFrames * numChannels;
-        ptr = (PlankUC*)data;
+        ptr                 = (PlankUC*)data;
         
         // this is unrolled to help optimisation as this is slower than we want anyway: having to swap endianness...!
         switch (bytesPerSample)

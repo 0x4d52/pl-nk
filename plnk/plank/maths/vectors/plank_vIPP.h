@@ -249,7 +249,7 @@ static PLANK_INLINE_MID void pl_VectorCubedF_NN (float *result, const float* a, 
 
 static PLANK_INLINE_MID void pl_VectorFracF_NN (float *result, const float* a, PlankUL N)
 {
-    vsFrac((int)N, a, result);
+    vsFrac ((int)N, a, result);
 }
 
 PLANK_VECTORUNARYOP_DEFINE(Sign, F)
@@ -629,84 +629,20 @@ PLANK_VECTORUNARYOP_DEFINE(Squared,I)
 PLANK_VECTORUNARYOP_DEFINE(Cubed,I)
 PLANK_VECTORUNARYOP_DEFINE(Sign,I)
 
+
 static PLANK_INLINE_MID void pl_VectorAddI_NNN (int *result, const int* a, const int* b, PlankUL N)
 {
-    PlankUL vN, Nr, i;
-    PlankVI* vResult;
-    PlankVI* vA;
-    PlankVI* vB;
-    
-    vN = N >> PLANK_SIMDI_SHIFT;
-    Nr = N & PLANK_SIMDI_MASK;
-    
-    vResult = (PlankVI*)result;
-    vA = (PlankVI*)a;
-    vB = (PlankVI*)b;
-    
-    for (i = 0; i < vN; ++i)
-        *vResult++ = PLANK_SIMDI_Add(*vA++, *vB++);
-    
-    if (Nr)
-    {
-        result = (int*)vResult;
-        a      = (int*)vA;
-        b      = (int*)vB;
-        
-        for (i = 0; i < Nr; ++i)
-            *result++ = *a++ + *b++;
-    }
+    ippsAdd_32s_Sfs (a, b, result, (int)N, 1);
 }
 
 static PLANK_INLINE_MID void pl_VectorAddI_NN1 (int *result, const int* a, int b, PlankUL N)
 {
-    PlankVI vB;
-    PlankUL vN, Nr, i;
-    PlankVI* vResult;
-    PlankVI* vA;
-    
-    vN      = N >> PLANK_SIMDI_SHIFT;
-    Nr      = N & PLANK_SIMDI_MASK;
-    vResult = (PlankVI*)result;
-    vA      = (PlankVI*)a;
-    vB      = PLANK_SIMDI_Set(b);
-    
-    for (i = 0; i < vN; ++i)
-        *vResult++ = PLANK_SIMDI_Add(*vA++, vB);
-    
-    if (Nr)
-    {
-        result = (int*)vResult;
-        a       = (int*)vA;
-        
-        for (i = 0; i < Nr; ++i)
-            *result++ = *a++ + b;
-    }
+    ippsAddC_32s_Sfs (a, b, result, (int)N, 1);
 }
 
 static PLANK_INLINE_MID void pl_VectorAddI_N1N (int *result, int a, const int* b, PlankUL N)
 {
-    PlankVI vA;
-    PlankUL vN, Nr, i;
-    PlankVI* vResult;
-    PlankVI* vB;
-    
-    vN      = N >> PLANK_SIMDI_SHIFT;
-    Nr      = N & PLANK_SIMDI_MASK;
-    vResult = (PlankVI*)result;
-    vB      = (PlankVI*)b;
-    vA      = PLANK_SIMDI_Set(a);
-    
-    for (i = 0; i < vN; ++i)
-        *vResult++ = PLANK_SIMDI_Add(vA, *vB++);
-    
-    if (Nr)
-    {
-        result = (int*)vResult;
-        b      = (int*)vB;
-        
-        for (i = 0; i < Nr; ++i)
-            *result++ = a + *b++;
-    }
+    ippsAddC_32s_Sfs (b, a, result, (int)N, 1);
 }
 
 

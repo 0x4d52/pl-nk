@@ -45,31 +45,31 @@
  @{
 */
     
-                    //3.14159265358979323846264338327950288419716939937510
-#define PLANK_PI_D    3.1415926535897932384626433832795
-#define PLANK_PI_F    3.14159265358979323846f
-#define PLANK_SQRT2_D 1.41421356237309514547462185873883
-#define PLANK_SQRT2_F 1.41421356237309514547f
-#define PLANK_BILLION_D 1000000000.0
-#define PLANK_BILLION_F 1000000000.0f
-#define PLANK_MILLION_D 1000000.0
-#define PLANK_MILLION_F 1000000.0f
-#define PLANK_440_D   440.0
-#define PLANK_440_F   440.0f
-#define PLANK_360_D   360.0
-#define PLANK_360_F   360.0f
-#define PLANK_69_D    69.0
-#define PLANK_69_F    69.0f
-#define PLANK_20_D    20.0
-#define PLANK_20_F    20.0f
-#define PLANK_12_D    12.0
-#define PLANK_12_F    12.0f
-#define PLANK_2_D     2.0
-#define PLANK_2_F     2.0f
-#define PLANK_1_D     1.0
-#define PLANK_1_F     1.0f
-#define PLANK_0_D     0.0
-#define PLANK_0_F     0.0f
+                                 //3.14159265358979323846264338327950288419716939937510
+#define PLANK_PI_D                 3.1415926535897932384626433832795
+#define PLANK_PI_F                 3.14159265358979323846f
+#define PLANK_SQRT2_D              1.41421356237309514547462185873883
+#define PLANK_SQRT2_F              1.41421356237309514547f
+#define PLANK_BILLION_D   1000000000.0
+#define PLANK_BILLION_F   1000000000.0f
+#define PLANK_MILLION_D      1000000.0
+#define PLANK_MILLION_F      1000000.0f
+#define PLANK_440_D              440.0
+#define PLANK_440_F              440.0f
+#define PLANK_360_D              360.0
+#define PLANK_360_F              360.0f
+#define PLANK_69_D                69.0
+#define PLANK_69_F                69.0f
+#define PLANK_20_D                20.0
+#define PLANK_20_F                20.0f
+#define PLANK_12_D                12.0
+#define PLANK_12_F                12.0f
+#define PLANK_2_D                  2.0
+#define PLANK_2_F                  2.0f
+#define PLANK_1_D                  1.0
+#define PLANK_1_F                  1.0f
+#define PLANK_0_D                  0.0
+#define PLANK_0_F                  0.0f
 
 #define PLANK_CHARPEAK_I CHAR_MAX
 #define PLANK_CHARPEAK_F ((float)PLANK_CHARPEAK_I)
@@ -103,19 +103,6 @@ PlankB pl_IsNanF (float a);
 PlankB pl_IsNanD (double a);
 
 PLANK_END_C_LINKAGE
-
-
-//#if (defined (_WIN32) || defined (_WIN64))
-//static inline PlankB pl_IsInfF (float a)				{ return _finite ((double)a) == 0; }
-//static inline PlankB pl_IsInfD (double a)				{ return _finite (a) == 0; }
-//static inline PlankB pl_IsNanF (float a)				{ return _isnan ((double)a) != 0; }
-//static inline PlankB pl_IsNanD (double a)				{ return _isnan (a) != 0; }
-//#else
-//static inline PlankB pl_IsInfF (float a)				{ return isinf (a); }
-//static inline PlankB pl_IsInfD (double a)				{ return isinf (a); }
-//static inline PlankB pl_IsNanF (float a)				{ return isnan (a); }
-//static inline PlankB pl_IsNanD (double a)				{ return isnan (a); }
-//#endif
 
 
 // unary ops
