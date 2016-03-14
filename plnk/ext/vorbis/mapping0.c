@@ -45,6 +45,7 @@ static void mapping0_free_info(vorbis_info_mapping *i){
   }
 }
 
+#if ! defined (VORBIS_ILOG_DEFINED)
 static int ilog(unsigned int v){
   int ret=0;
   if(v)--v;
@@ -54,6 +55,8 @@ static int ilog(unsigned int v){
   }
   return(ret);
 }
+#define VORBIS_ILOG_DEFINED 1
+#endif
 
 static void mapping0_pack(vorbis_info *vi,vorbis_info_mapping *vm,
                           oggpack_buffer *opb){

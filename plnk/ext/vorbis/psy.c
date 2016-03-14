@@ -840,7 +840,8 @@ float _vp_ampmax_decay(float amp,vorbis_dsp_state *vd){
   return(amp);
 }
 
-static float FLOOR1_fromdB_LOOKUP[256]={
+#if ! defined (VORBIS_FLOOR1_fromdB_LOOKUP_DEFINED)
+static const float FLOOR1_fromdB_LOOKUP[256]={
   1.0649863e-07F, 1.1341951e-07F, 1.2079015e-07F, 1.2863978e-07F,
   1.3699951e-07F, 1.4590251e-07F, 1.5538408e-07F, 1.6548181e-07F,
   1.7623575e-07F, 1.8768855e-07F, 1.9988561e-07F, 2.128753e-07F,
@@ -906,6 +907,9 @@ static float FLOOR1_fromdB_LOOKUP[256]={
   0.64356699F, 0.68538959F, 0.72993007F, 0.77736504F,
   0.82788260F, 0.88168307F, 0.9389798F, 1.F,
 };
+#define VORBIS_FLOOR1_fromdB_LOOKUP_DEFINED 1
+#endif
+
 
 /* this is for per-channel noise normalization */
 static int apsort(const void *a, const void *b){

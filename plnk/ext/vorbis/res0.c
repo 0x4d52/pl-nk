@@ -152,6 +152,7 @@ void res0_free_look(vorbis_look_residue *i){
   }
 }
 
+#if ! defined (VORBIS_ILOG_DEFINED)
 static int ilog(unsigned int v){
   int ret=0;
   while(v){
@@ -160,6 +161,8 @@ static int ilog(unsigned int v){
   }
   return(ret);
 }
+#define VORBIS_ILOG_DEFINED 1
+#endif
 
 static int icount(unsigned int v){
   int ret=0;

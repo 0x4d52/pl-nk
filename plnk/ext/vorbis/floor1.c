@@ -81,6 +81,9 @@ static int ilog(unsigned int v){
   return(ret);
 }
 
+#define VORBIS_ILOG_DEFINED 1
+
+#if ! defined (VORBIS_ILOG2_DEFINED)
 static int ilog2(unsigned int v){
   int ret=0;
   if(v)--v;
@@ -90,6 +93,8 @@ static int ilog2(unsigned int v){
   }
   return(ret);
 }
+#define VORBIS_ILOG2_DEFINED 1
+#endif
 
 static void floor1_pack (vorbis_info_floor *i,oggpack_buffer *opb){
   vorbis_info_floor1 *info=(vorbis_info_floor1 *)i;
@@ -359,6 +364,8 @@ static const float FLOOR1_fromdB_LOOKUP[256]={
   0.64356699F, 0.68538959F, 0.72993007F, 0.77736504F,
   0.82788260F, 0.88168307F, 0.9389798F, 1.F,
 };
+
+#define VORBIS_FLOOR1_fromdB_LOOKUP_DEFINED 1
 
 static void render_line(int n, int x0,int x1,int y0,int y1,float *d){
   int dy=y1-y0;

@@ -34,6 +34,7 @@
 #define GENERAL_VENDOR_STRING "Xiph.Org libVorbis 1.3.3"
 #define ENCODE_VENDOR_STRING "Xiph.Org libVorbis I 20120203 (Omnipresent)"
 
+#if ! defined (VORBIS_ILOG2_DEFINED)
 /* helpers */
 static int ilog2(unsigned int v){
   int ret=0;
@@ -44,6 +45,8 @@ static int ilog2(unsigned int v){
   }
   return(ret);
 }
+#define VORBIS_ILOG2_DEFINED 1
+#endif
 
 static void _v_writestring(oggpack_buffer *o,const char *s, int bytes){
 

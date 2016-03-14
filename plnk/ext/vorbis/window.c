@@ -2095,8 +2095,8 @@ static const float *const vwin[8] = {
   vwin8192,
 };
 
-const float *_vorbis_window_get(int n){
-  return vwin[n];
+float *_vorbis_window_get(int n){
+  return (float*)vwin[n];
 }
 
 void _vorbis_apply_window(float *d,int *winno,long *blocksizes,

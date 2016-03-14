@@ -1,0 +1,26 @@
+#if PLANK_OGGVORBIS
+
+#include "../ext/vorbis/analysis.c"
+#include "../ext/vorbis/bitrate.c"
+#include "../ext/vorbis/block.c"
+#include "../ext/vorbis/codebook.c"
+#include "../ext/vorbis/envelope.c"
+#include "../ext/vorbis/floor0.c"
+#include "../ext/vorbis/floor1.c"
+#include "../ext/vorbis/info.c"
+#include "../ext/vorbis/lookup.c"
+#include "../ext/vorbis/lpc.c"
+#include "../ext/vorbis/lsp.c"
+#include "../ext/vorbis/mapping0.c"
+#include "../ext/vorbis/mdct.c"
+#include "../ext/vorbis/psy.c"
+#include "../ext/vorbis/registry.c"
+#include "../ext/vorbis/res0.c"
+#include "../ext/vorbis/sharedbook.c"
+#include "../ext/vorbis/smallft.c"
+#include "../ext/vorbis/synthesis.c"
+#include "../ext/vorbis/vorbisenc.c"
+#include "../ext/vorbis/vorbisfile.c"
+#include "../ext/vorbis/window.c"
+
+#endif

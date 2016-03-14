@@ -41,6 +41,8 @@ static int ilog2(unsigned int v){
   return(ret);
 }
 
+#define VORBIS_ILOG2_DEFINED 1
+
 /* pcm accumulator examples (not exhaustive):
 
  <-------------- lW ---------------->

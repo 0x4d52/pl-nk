@@ -296,6 +296,7 @@ int vorbis_book_init_encode(codebook *c,const static_codebook *s){
   return(0);
 }
 
+#if ! VORBIS_BITREVERSE_DEFINED
 static ogg_uint32_t bitreverse(ogg_uint32_t x){
   x=    ((x>>16)&0x0000ffffUL) | ((x<<16)&0xffff0000UL);
   x=    ((x>> 8)&0x00ff00ffUL) | ((x<< 8)&0xff00ff00UL);
@@ -303,6 +304,7 @@ static ogg_uint32_t bitreverse(ogg_uint32_t x){
   x=    ((x>> 2)&0x33333333UL) | ((x<< 2)&0xccccccccUL);
   return((x>> 1)&0x55555555UL) | ((x<< 1)&0xaaaaaaaaUL);
 }
+#endif
 
 static int sort32a(const void *a,const void *b){
   return ( **(ogg_uint32_t **)a>**(ogg_uint32_t **)b)-
