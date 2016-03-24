@@ -272,6 +272,7 @@ exit:
     return result;
 }
 
+#if defined (PLANK_FFT_OOURA) || defined (PLANK_FFT_PFFFT)
 static void pl_FFT_Pack (int halfLength, float* packedOutput, const float* interleavedInput)
 {
     const float* input;
@@ -305,7 +306,7 @@ static void pl_FFT_Unpack (int halfLength, float* interleavedOutput, const float
         *output++ = *imag++;
     }
 }
-
+#endif // defined (PLANK_FFT_OOURA) || defined (PLANK_FFT_PFFFT)
 
 void pl_FFTF_Forward (PlankFFTFRef p, float* output, const float* input)
 {
@@ -370,7 +371,7 @@ void pl_FFTF_Inverse (PlankFFTFRef p, float* output, const float* input)
     const PlankL N2 = p->halfLength;
     const PlankL Nlog2 = p->lengthLog2;
     
-    pl_MemoryCopy (p->buffer, input, sizeof (float) * N);
+    pl_MemoryCopy (buffer, input, sizeof (float) * N);
     
    #ifdef PLANK_FFT_VDSP_FLIPIMAG
     float* flip = buffer + N2;

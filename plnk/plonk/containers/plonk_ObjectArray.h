@@ -1495,36 +1495,6 @@ public:
 
     PLONK_OBJECTARROWOPERATOR(ObjectArray);
 
-//    static void deinterleave (ObjectType* dst, const ObjectType* src, const int srcSize, const int numGroups) throw()
-//    {
-//        if (numGroups <= 1)
-//        {
-//            Memory::copy (dst, src, srcSize * sizeof (ObjectType));
-//        }
-//        else
-//        {
-//            plonk_assert (srcSize % numGroups);
-//
-//            const int dstSize = srcSize / numGroups;
-//            int i, j;
-//            
-//            if (numGroups == 2)
-//            {
-//                for (i = 0; i < srcSize; ++i, ++dst, src += 2)
-//                {
-//                    dst[0] = src[0];
-//                    dst[dstSize] = src[1];
-//                }
-//            }
-//            else 
-//            {
-//                for (i = 0; i < srcSize; ++i, ++dst, src += numGroups)
-//                    for (j = 0; j < numGroups; ++j)
-//                        dst[j * dstSize] = src[j];
-//            }
-//        }
-//    }
-
     static void deinterleave (ObjectType* dst, const ObjectType* src, const int srcSize, const int numGroups) throw()
     {
         if (numGroups <= 1)
@@ -1538,7 +1508,7 @@ public:
             
             for (i = 0; i < numGroups; ++i)
             {
-                ObjectType* const dstTemp = dst + srcSize * i;
+                ObjectType* const dstTemp = dst + dstSize * i;
                 const ObjectType* srcTemp = src + i;
                 
                 for (j = 0; j < dstSize; ++j, srcTemp += numGroups)
