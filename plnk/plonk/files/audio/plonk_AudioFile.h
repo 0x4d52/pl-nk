@@ -58,7 +58,7 @@ public:
         FormatMulti                 = PLANKAUDIOFILE_FORMAT_MULTI,
         FormatArray                 = PLANKAUDIOFILE_FORMAT_ARRAY,
         FormatQueue                 = PLANKAUDIOFILE_FORMAT_QUEUE,
-        ForamtCustom                = PLANKAUDIOFILE_FORMAT_CUSTOM
+        FormatCustom                = PLANKAUDIOFILE_FORMAT_CUSTOM
     };
     
     enum EncodingFlag

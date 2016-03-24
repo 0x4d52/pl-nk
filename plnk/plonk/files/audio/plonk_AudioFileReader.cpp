@@ -441,7 +441,7 @@ AudioFile::Format AudioFileReaderInternal::getFormat() const throw()
         case AudioFile::FormatMulti:        return AudioFile::FormatMulti;
         case AudioFile::FormatArray:        return AudioFile::FormatArray;
         case AudioFile::FormatQueue:        return AudioFile::FormatQueue;
-        case AudioFile::ForamtCustom:       return AudioFile::ForamtCustom;
+        case AudioFile::FormatCustom:       return AudioFile::FormatCustom;
         
         default: return AudioFile::FormatInvalid;
     }
