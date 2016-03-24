@@ -177,14 +177,13 @@ void AudioFileReaderInternal::readFrames (NumericalArray<SampleType>& data,
 {        
     typedef NumericalArray<SampleType> Buffer;
     
-    this->hitEndOfFile = false;
+    this->hitEndOfFile       = false;
     this->numChannelsChanged = false;
-    this->audioFileChanged = false;
+    this->audioFileChanged   = false;
+    ResultCode result        = PlankResult_OK;
     
-    ResultCode result = PlankResult_OK;
-    
-    const int dataLength = data.length();
-    int dataRemaining = dataLength;
+    const int dataLength     = data.length();
+    int dataRemaining        = dataLength;
     
     SampleType* dataArray = data.getArray();
     void* const readBufferArray = readBuffer.getArray();
@@ -716,8 +715,7 @@ public:
     
     /** Read frames into a pre-allocated NumericalArray without scaling. 
      @param data    The NumericalArray object to read interleaved frames into. 
-     @param numLoops    How many loops to read, 0 means infinite loops.
-     @return @c true if the array was resized as fewer samples were available, otherwise @c false. */
+     @param numLoops    How many loops to read, 0 means infinite loops. */
     template<class SampleType>
     PLONK_INLINE_LOW void readFramesDirect (NumericalArray<SampleType>& data, IntVariable& numLoops) throw()
     {
