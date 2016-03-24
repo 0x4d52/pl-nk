@@ -202,6 +202,7 @@ public:
             if (filename.atUnchecked (i) == '.')
             {
                 filename.put (i, '\0');
+                filename.setSize (i + 1, true);
                 break;
             }
         }
