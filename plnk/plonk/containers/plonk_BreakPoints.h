@@ -103,36 +103,35 @@ public:
     {
     }
 
-    ShapeType getType() const throw()				{ return type; }
-	float getCurve() const throw()					{ return curve; }
-	void setType (ShapeType const& newType) throw()	{ type = newType; }
-	void setCurve (const float newCurve) throw()	{ type = Numerical; curve = newCurve; }
+    PLONK_INLINE_HIGH ShapeType getType() const throw() { return type; }
+	PLONK_INLINE_HIGH float getCurve() const throw()    { return curve; }
+	void setType (ShapeType const& newType) throw()     { type = newType; }
+	void setCurve (const float newCurve) throw()        { type = Numerical; curve = newCurve; }
 
     template<class ValueType>
-    static PLONK_INLINE_LOW void sustain (ShapeState<ValueType>& shapeState)
+    static PLONK_INLINE_MID void sustain (ShapeState<ValueType>& shapeState)
     {
         shapeState.stepsToTarget = TypeUtility<LongLong>::getTypePeak();
-        shapeState.currentLevel = shapeState.targetLevel;
-        shapeState.shapeType = Shape::Linear;
-        shapeState.curve = 0.0f;
-        shapeState.grow.u.norm = Math<ValueType>::get0();
+        shapeState.currentLevel  = shapeState.targetLevel;
+        shapeState.shapeType     = Shape::Linear;
+        shapeState.curve         = 0.0f;
+        shapeState.grow.u.norm   = Math<ValueType>::get0();
     }
     
     template<class ValueType>
-    static PLONK_INLINE_LOW void initShape (ShapeState<ValueType>& shapeState)
+    static PLONK_INLINE_MID void initShape (ShapeState<ValueType>& shapeState)
     {
-        if (shapeState.shapeType == Shape::Linear)
-            initLinear (shapeState);
-        else if (shapeState.shapeType == Shape::Numerical)
-            initNumerical (shapeState);
-        else if (shapeState.shapeType == Shape::Sine)
-            initSine (shapeState);
-        else
-            initLinear (shapeState);
+        switch (shapeState.shapeType)
+        {
+            case Shape::Linear:    initLinear (shapeState);    break;
+            case Shape::Numerical: initNumerical (shapeState); break;
+            case Shape::Sine:      initSine (shapeState);      break;
+            default:               initLinear (shapeState);    break;
+        }
     }
     
     template<class ValueType>
-    static PLONK_INLINE_LOW ValueType next (ShapeState<ValueType>& shapeState)
+    static PLONK_INLINE_MID ValueType next (ShapeState<ValueType>& shapeState)
     {
         if (shapeState.stepsToTarget == 1)
         {
@@ -144,14 +143,13 @@ public:
         {
             --shapeState.stepsToTarget;
             
-            if (shapeState.shapeType == Shape::Linear)
-                return nextLinear (shapeState);
-            else if (shapeState.shapeType == Shape::Numerical)
-                return nextNumerical (shapeState);
-            else if (shapeState.shapeType == Shape::Sine)
-                return nextSine (shapeState);
-            else
-                return nextLinear (shapeState);
+            switch (shapeState.shapeType)
+            {
+                case Shape::Linear:    return nextLinear (shapeState);
+                case Shape::Numerical: return nextNumerical (shapeState);
+                case Shape::Sine:      return nextSine (shapeState);
+                default:               return nextLinear (shapeState);
+            }
         }
     }
     
@@ -166,14 +164,13 @@ public:
         {
             const int numSamplesThisTime = int (plonk::min (LongLong (numSamples), shapeState.stepsToTarget));
         
-            if (shapeState.shapeType == Shape::Linear)
-                processLinear (shapeState, outputSamples, numSamplesThisTime);
-            else if (shapeState.shapeType == Shape::Numerical)
-                processNumerical (shapeState, outputSamples, numSamplesThisTime);
-            else if (shapeState.shapeType == Shape::Sine)
-                processSine (shapeState, outputSamples, numSamplesThisTime);
-            else
-                processLinear (shapeState, outputSamples, numSamplesThisTime);
+            switch (shapeState.shapeType)
+            {
+                case Shape::Linear:    processLinear (shapeState, outputSamples, numSamplesThisTime);    break;
+                case Shape::Numerical: processNumerical (shapeState, outputSamples, numSamplesThisTime); break;
+                case Shape::Sine:      processSine (shapeState, outputSamples, numSamplesThisTime);      break;
+                default:               processLinear (shapeState, outputSamples, numSamplesThisTime);    break;
+            }
             
             numSamplesRemaining -= numSamplesThisTime;
             outputSamples += numSamplesThisTime;
@@ -181,9 +178,9 @@ public:
             if (numSamplesRemaining > 0)
             {
                 shapeState.stepsToTarget = TypeUtility<LongLong>::getTypePeak();
-                shapeState.currentLevel = shapeState.targetLevel;
-                shapeState.shapeType = Shape::Linear;
-                shapeState.grow.u.norm = 0;
+                shapeState.currentLevel  = shapeState.targetLevel;
+                shapeState.shapeType     = Shape::Linear;
+                shapeState.grow.u.norm   = 0;
             }
         }
     }
@@ -205,15 +202,15 @@ private:
         if ((plonk::abs (shapeState.curve) < 0.001f) || (diff == zero))
         {
             shapeState.shapeType = Shape::Linear;
-            shapeState.curve = 0.0f;
+            shapeState.curve     = 0.0f;
             initLinear (shapeState);
         }
         else
         {
-            const ValueType& one = Math<ValueType>::get1();
-            const ValueType a1 = diff / (one - plonk::exp (shapeState.curve));
-            shapeState.a2.u.norm = shapeState.currentLevel + a1;
-            shapeState.b1.u.norm = a1;
+            const ValueType& one   = Math<ValueType>::get1();
+            const ValueType a1     = diff / (one - plonk::exp (shapeState.curve));
+            shapeState.a2.u.norm   = shapeState.currentLevel + a1;
+            shapeState.b1.u.norm   = a1;
             shapeState.grow.u.norm = plonk::exp (shapeState.curve / ValueType (shapeState.stepsToTarget));
         }
     }
@@ -221,23 +218,24 @@ private:
     template<class ValueType>
     static PLONK_INLINE_LOW void initSine (ShapeState<ValueType>& shapeState) throw()
     {
-        const double pi = Math<double>::getPi();
+        const double pi        = Math<double>::getPi();
         const double piOverTwo = Math<double>::getPi_2();
-        const double half = Math<double>::get0_5();
-        const double two = Math<double>::get2();
-        const double sum = shapeState.targetLevel + shapeState.currentLevel;
-        const double diff = shapeState.targetLevel - shapeState.currentLevel;
-        const double w = pi / double (shapeState.stepsToTarget);
+        const double half      = Math<double>::get0_5();
+        const double two       = Math<double>::get2();
+        const double sum       = shapeState.targetLevel + shapeState.currentLevel;
+        const double diff      = shapeState.targetLevel - shapeState.currentLevel;
+        const double w         = pi / double (shapeState.stepsToTarget);
         
         shapeState.a2.u.dbl = sum * half;
         shapeState.b1.u.dbl = two * plonk::cos (w);
         shapeState.y1.u.dbl = diff * half;
         shapeState.y2.u.dbl = shapeState.y1.u.dbl * plonk::sin (piOverTwo - w);
+        
         shapeState.currentLevel = ValueType (shapeState.a2.u.dbl - shapeState.y1.u.dbl);
     }
     
     template<class ValueType>
-    static PLONK_INLINE_LOW ValueType nextLinear (ShapeState<ValueType>& shapeState) throw()
+    static PLONK_INLINE_MID ValueType nextLinear (ShapeState<ValueType>& shapeState) throw()
     {
         const ValueType result = shapeState.currentLevel;
         shapeState.currentLevel += shapeState.grow.u.norm;
@@ -245,27 +243,27 @@ private:
     }
     
     template<class ValueType>
-    static PLONK_INLINE_LOW ValueType nextNumerical (ShapeState<ValueType>& shapeState) throw()
+    static PLONK_INLINE_MID ValueType nextNumerical (ShapeState<ValueType>& shapeState) throw()
     {
-        const ValueType result = shapeState.currentLevel;
-        shapeState.b1.u.norm *= shapeState.grow.u.norm;
+        const ValueType result  = shapeState.currentLevel;
+        shapeState.b1.u.norm   *= shapeState.grow.u.norm;
         shapeState.currentLevel = shapeState.a2.u.norm - shapeState.b1.u.norm;                    
         return result;
     }
     
     template<class ValueType>
-    static PLONK_INLINE_LOW ValueType nextSine (ShapeState<ValueType>& shapeState) throw()
+    static PLONK_INLINE_MID ValueType nextSine (ShapeState<ValueType>& shapeState) throw()
     {
-        const ValueType result = shapeState.currentLevel;
-        const double y0 = shapeState.b1.u.dbl * shapeState.y1.u.dbl - shapeState.y2.u.dbl;
+        const ValueType result  = shapeState.currentLevel;
+        const double y0         = shapeState.b1.u.dbl * shapeState.y1.u.dbl - shapeState.y2.u.dbl;
         shapeState.currentLevel = ValueType (shapeState.a2.u.dbl - y0);
-        shapeState.y2.u.dbl = shapeState.y1.u.dbl;
-        shapeState.y1.u.dbl = y0;
+        shapeState.y2.u.dbl     = shapeState.y1.u.dbl;
+        shapeState.y1.u.dbl     = y0;
         return result;
     }
     
     template<class ValueType>
-    static PLONK_INLINE_LOW void processLinear (ShapeState<ValueType>& shapeState, ValueType* const outputSamples, const int numSamples) throw()
+    static PLONK_INLINE_MID void processLinear (ShapeState<ValueType>& shapeState, ValueType* const outputSamples, const int numSamples) throw()
     {
         const ValueType& zero = Math<ValueType>::get0();
         
@@ -293,7 +291,7 @@ private:
     }
     
     template<class ValueType>
-    static PLONK_INLINE_LOW void processNumerical (ShapeState<ValueType>& shapeState, ValueType* const outputSamples, const int numSamples) throw()
+    static PLONK_INLINE_MID void processNumerical (ShapeState<ValueType>& shapeState, ValueType* const outputSamples, const int numSamples) throw()
     {        
         if (numSamples == shapeState.stepsToTarget)
         {
@@ -314,7 +312,7 @@ private:
     }
     
     template<class ValueType>
-    static PLONK_INLINE_LOW void processSine (ShapeState<ValueType>& shapeState, ValueType* const outputSamples, const int numSamples) throw()
+    static PLONK_INLINE_MID void processSine (ShapeState<ValueType>& shapeState, ValueType* const outputSamples, const int numSamples) throw()
     {
         if (numSamples == shapeState.stepsToTarget)
         {
