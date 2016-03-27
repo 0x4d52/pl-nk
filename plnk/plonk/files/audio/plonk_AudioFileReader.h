@@ -769,10 +769,19 @@ public:
     PLONK_INLINE_LOW NumericalArray<SampleType> readAllFrames (const bool applyScaling) throw()
     {
         typedef NumericalArray<SampleType> SampleArray;
-        SampleArray data = SampleArray::withSize ((int)getNumFrames() * getNumChannels());
+        
+        const int bufferSize = (int) getNumFrames() * getNumChannels();
+        const int interpSize = 4 * getNumChannels();
+        
+        // slightly larger than we need for interpolation
+        SampleArray data = SampleArray::withSize (bufferSize + interpSize);
+        SampleArray::zeroData (data.getArray() + bufferSize, interpSize);
+        data.setSize (bufferSize, false);
+        
         resetFramePosition();
         IntVariable oneLoop (1);
         getInternal()->readFrames (data, applyScaling, false, oneLoop);
+        
         return data;
     }
 
@@ -789,7 +798,7 @@ public:
     template<class SampleType>
     PLONK_INLINE_LOW operator SignalBase<SampleType> () throw()
     {
-        NumericalArray<SampleType> data = readAllFrames<SampleType> (true);
+        const NumericalArray<SampleType> data = readAllFrames<SampleType> (true);
         return SignalBase<SampleType> (data, getSampleRate(), getNumChannels());
     }
     
@@ -798,7 +807,7 @@ public:
     template<class SampleType>
     PLONK_INLINE_LOW SignalBase<SampleType> getOtherSignal() throw()
     {
-        NumericalArray<SampleType> data = readAllFrames<SampleType> (true);
+        const NumericalArray<SampleType> data = readAllFrames<SampleType> (true);
         return SignalBase<SampleType> (data, getSampleRate(), getNumChannels());
     }
     
