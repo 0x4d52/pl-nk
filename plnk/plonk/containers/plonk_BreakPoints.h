@@ -475,11 +475,11 @@ public:
     typedef ObjectArray<Shape>              ShapeArray;
     typedef NumericalArray<int>             NextArray;
     
-	BreakpointsInternal(LevelsArray const& levels,
-                        TimesArray const& times,
-                        ShapeArray const& shapes,
-                        NextArray const& nextGateOns,
-                        NextArray const& nextGateOffs) throw()
+	BreakpointsInternal (LevelsArray const& levels,
+                         TimesArray const& times,
+                         ShapeArray const& shapes,
+                         NextArray const& nextGateOns,
+                         NextArray const& nextGateOffs) throw()
     :   breakpoints (BreakpointArrayType::withSize (times.length()))
 	{
         plonk_assert (levels.length() >= 2);
@@ -522,17 +522,17 @@ public:
 	{
 	}
     
-    PLONK_INLINE_LOW int getNumBreakpoints() const throw()
+    PLONK_INLINE_MID int getNumBreakpoints() const throw()
     {
         return breakpoints.length();
     }
     
-    PLONK_INLINE_LOW SampleType getStartLevel() const throw()
+    PLONK_INLINE_MID SampleType getStartLevel() const throw()
     {
         return startLevel;
     }
     
-    PLONK_INLINE_LOW const BreakpointArrayType& getBreakpoints() const throw()
+    PLONK_INLINE_MID const BreakpointArrayType& getBreakpoints() const throw()
     {
         return breakpoints; 
     }
@@ -775,27 +775,27 @@ public:
                                 NextArray (lastPoint, BreakpointType::End));
     }
     
-    PLONK_INLINE_LOW int getNumBreakpoints() const throw()
+    PLONK_INLINE_MID int getNumBreakpoints() const throw()
     {
         return this->getInternal()->getNumBreakpoints();
     }
     
-    PLONK_INLINE_LOW SampleType getStartLevel() const throw()
+    PLONK_INLINE_MID SampleType getStartLevel() const throw()
     {
         return this->getInternal()->getStartLevel();
     }
     
-    PLONK_INLINE_LOW const BreakpointType& atUnchecked (const int index) const throw()
+    PLONK_INLINE_MID const BreakpointType& atUnchecked (const int index) const throw()
     {
         return this->getInternal()->getBreakpoints().atUnchecked (index);
     }
     
-    PLONK_INLINE_LOW const BreakpointsBase levelScale (const SampleType amount) const throw()
+    PLONK_INLINE_MID const BreakpointsBase levelScale (const SampleType amount) const throw()
     {
         return this->getInternal()->levelScale (amount);
     }
     
-    PLONK_INLINE_LOW const BreakpointsBase timeScale (const SampleType amount) const throw()
+    PLONK_INLINE_MID const BreakpointsBase timeScale (const SampleType amount) const throw()
     {
         return this->getInternal()->timeScale (amount);
     }
@@ -809,7 +809,6 @@ public:
         
         return duration;
     }
-
     
     SampleType lookup (const double time) const throw()
     {
