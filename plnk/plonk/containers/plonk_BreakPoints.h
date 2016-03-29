@@ -174,7 +174,7 @@ public:
             }
             
             numSamplesRemaining -= numSamplesThisTime;
-            outputSamples += numSamplesThisTime;
+            outputSamples       += numSamplesThisTime;
             
             // too many samples were requested so let's flatten off at the current level
             if (numSamplesRemaining > 0)
@@ -239,7 +239,7 @@ private:
     template<class ValueType>
     static PLONK_INLINE_HIGH ValueType nextLinear (ShapeState<ValueType>& shapeState) throw()
     {
-        const ValueType result = shapeState.currentLevel;
+        const ValueType result   = shapeState.currentLevel;
         shapeState.currentLevel += shapeState.grow.u.norm;
         return result;
     }
