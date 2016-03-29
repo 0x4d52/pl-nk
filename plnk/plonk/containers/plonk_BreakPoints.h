@@ -157,6 +157,7 @@ public:
     static PLONK_INLINE_LOW void processShape (ShapeState<ValueType>& shapeState, ValueType* outputSamples, const int numSamples)
     {
         plonk_assert (outputSamples != &shapeState.currentLevel);
+//        plonk_assert (numSamples <= shapeState.stepsToTarget);  ///<<< this should probably be true too..
         
         int numSamplesRemaining = numSamples;
         
@@ -175,6 +176,7 @@ public:
             numSamplesRemaining -= numSamplesThisTime;
             outputSamples += numSamplesThisTime;
             
+            // too many samples were requested so let's flatten off at the current level
             if (numSamplesRemaining > 0)
             {
                 shapeState.stepsToTarget = TypeUtility<LongLong>::getTypePeak();
@@ -235,7 +237,7 @@ private:
     }
     
     template<class ValueType>
-    static PLONK_INLINE_MID ValueType nextLinear (ShapeState<ValueType>& shapeState) throw()
+    static PLONK_INLINE_HIGH ValueType nextLinear (ShapeState<ValueType>& shapeState) throw()
     {
         const ValueType result = shapeState.currentLevel;
         shapeState.currentLevel += shapeState.grow.u.norm;
@@ -243,7 +245,7 @@ private:
     }
     
     template<class ValueType>
-    static PLONK_INLINE_MID ValueType nextNumerical (ShapeState<ValueType>& shapeState) throw()
+    static PLONK_INLINE_HIGH ValueType nextNumerical (ShapeState<ValueType>& shapeState) throw()
     {
         const ValueType result  = shapeState.currentLevel;
         shapeState.b1.u.norm   *= shapeState.grow.u.norm;
@@ -252,7 +254,7 @@ private:
     }
     
     template<class ValueType>
-    static PLONK_INLINE_MID ValueType nextSine (ShapeState<ValueType>& shapeState) throw()
+    static PLONK_INLINE_HIGH ValueType nextSine (ShapeState<ValueType>& shapeState) throw()
     {
         const ValueType result  = shapeState.currentLevel;
         const double y0         = shapeState.b1.u.dbl * shapeState.y1.u.dbl - shapeState.y2.u.dbl;
