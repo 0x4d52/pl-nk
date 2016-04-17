@@ -64,7 +64,10 @@
 /** The frame stride if you are iterating the raw samples manually. */
 @property (nonatomic, readonly) int frameStride;
 
-/** Create a buffer from an audio file */
+/** Create a buffer from an audio file from a specified path. */
++(PAEBuffer*)bufferFromPath:(NSString*)path;
+
+/** Create a buffer from a named audio file in the app bundle. */
 +(PAEBuffer*)bufferNamed:(NSString*)name;
 
 /** Create an empty buffer with a certain number of sample frames. */

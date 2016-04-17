@@ -181,6 +181,11 @@
     return [[PAEBuffer alloc] initFromPath:[NSString stringWithUTF8String:path.fullpath()]];
 }
 
++(PAEBuffer*)bufferFromPath:(NSString*)path
+{
+    return [[PAEBuffer alloc] initFromPath:path];
+}
+
 -(id)initWithSignal:(Signal)signal
 {
     if (self = [super init])
