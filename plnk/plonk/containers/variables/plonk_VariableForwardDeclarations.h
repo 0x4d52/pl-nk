@@ -54,6 +54,7 @@ template<class Type, PLONK_UNARYOPFUNCTION(Type, op)>       class UnaryOpVariabl
 template<class Type, class OtherType>                       class TypeVariableInternal;
 template<class Type>                                        class ShapeVariableInternal;
 template<class Type>                                        class PatternVariableInternal;
+template<class Type>                                        class MetaVariableInternal;
 
 typedef Variable<float>     FloatVariable;
 typedef Variable<double>    DoubleVariable;

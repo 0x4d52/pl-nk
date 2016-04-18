@@ -72,9 +72,14 @@ public:
     typedef SenderContainer<Internal>       Base;
     typedef ReceiverInternal<Variable>      Receiver;
     typedef Variable                        Sender;
+    typedef Variable                        VariableType;
+    typedef Variable<VariableType>          Meta;
+
     typedef WeakPointerContainer<Variable>  Weak;
     typedef UnitBase<Type>                  UnitType;
 
+
+    
     typedef typename BinaryOpFunctionsHelper<Type>::BinaryOpFunctionsType BinaryOpFunctionsType;
     typedef typename UnaryOpFunctionsHelper<Type>::UnaryOpFunctionsType UnaryOpFunctionsType;
 
@@ -143,9 +148,20 @@ public:
     /** Initialised with a pattern/sequence. */
     template<class OtherType>
     Variable (NumericalArray< Variable<OtherType> > const& pat) throw()
-    :   Base (new TypeVariableInternal<Type,OtherType> (Variable<OtherType> (static_cast< VariableInternalBase<OtherType>* > (new PatternVariableInternal<OtherType> (pat)))))
+    :   Base (new TypeVariableInternal<Type,OtherType> (Variable<OtherType> (static_cast< VariableInternalBase<OtherType>*> (new PatternVariableInternal<OtherType> (pat)))))
     {
         // what a nasty expression!
+    }
+    
+//    template<class OtherType>
+//    static Variable meta (Variable< Variable<OtherType> > const& other) throw()
+//    {
+//        return Variable<OtherType> (static_cast< VariableInternalBase<OtherType>*> (new MetaVariableInternal<OtherType> (other)));
+//    }
+
+    static Variable meta (Meta const& other) throw()
+    {
+        return Variable (static_cast< VariableInternalBase<Type>*> (new MetaVariableInternal<Type> (other)));
     }
     
     /** Create a Variable that converts from one type to another. */

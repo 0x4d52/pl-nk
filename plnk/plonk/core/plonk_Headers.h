@@ -87,6 +87,7 @@
 #include "../containers/variables/plonk_TypeVariable.h"
 #include "../containers/variables/plonk_ShapeVariable.h"
 #include "../containers/variables/plonk_PatternVariable.h"
+#include "../containers/variables/plonk_MetaVariable.h"
 
 #include "../maths/plonk_Constants.h"
 #include "../maths/plonk_Endian.h"

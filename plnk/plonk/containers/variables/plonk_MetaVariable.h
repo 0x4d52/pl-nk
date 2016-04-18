@@ -36,120 +36,52 @@
  -------------------------------------------------------------------------------
  */
 
-#ifndef PLONK_VARIABLEINTERNAL_H
-#define PLONK_VARIABLEINTERNAL_H
+#ifndef PLONK_METAVARIABLE_H
+#define PLONK_METAVARIABLE_H
 
-#include "plonk_VariableForwardDeclarations.h"
-#include "../../core/plonk_Sender.h"
-
+#include "plonk_VariableInternal.h"
 
 template<class Type>
-class VariableInternalBase : public SenderInternal< Variable<Type> >
+class MetaVariableInternal : public VariableInternalBase<Type>
 {
 public:
-    ~VariableInternalBase() { }
-    virtual const Type getValue() const = 0;
-    virtual Type* getValuePtr() { return 0; }
-    virtual const Type nextValue() = 0;
-    virtual void setValue (Type const& newValue) = 0;
-};
+    typedef Variable<Type>         VariableType;
+    typedef Variable<VariableType> MetaType;
 
 
-//------------------------------------------------------------------------------
-
-
-template<class Type>
-class VariableInternal : public VariableInternalBase<Type>
-{
-public:    
-    typedef Variable<Type> Container; 
-    
-    PLONK_INLINE_LOW VariableInternal() throw()
-    :   value (0)
+    MetaVariableInternal (MetaType const& other) throw()
+    :   variable (other)
     {
     }
     
-    PLONK_INLINE_LOW ~VariableInternal()
+    ~MetaVariableInternal()
     {
     }
-    
-    PLONK_INLINE_LOW VariableInternal (Type const& initValue) throw()
-    :   value (initValue)
-    {
-    }
-
+        
     const Type getValue() const throw()
     {
-        return value;
+        return variable.getValue().getValue();
     }
     
     Type* getValuePtr() throw()
     {
-        return &value;
+        VariableType temp = variable.getValue();
+        return temp.getValuePtr();
     }
     
     const Type nextValue() throw()
-    {        
-        return value;
+    {
+        VariableType temp = variable.getValue();
+        return temp.nextValue();
     }
     
     void setValue (Type const& newValue) throw()
     {
-        if (value != newValue)
-        {
-            value = newValue;
-            this->update (Text::getEmpty(), Dynamic::getNull());
-        }
-    }
-    
-    PLONK_INLINE_LOW void swapValues (Type& other) throw()
-    {
-        Type temp = other;
-        other = value;
-        value = temp;
+        plonk_assertfalse;
     }
     
 private:
-    PLONK_ALIGN(PLONK_WORDSIZE) Type value;
+    MetaType variable;
 };
 
-
-template<class Type>
-class VariableInternal<Type&> : public SmartPointer // VariableInternalBase<Type&>
-{
-public:    
-    typedef Variable<Type&> Container; 
-        
-//    VariableInternal (Type const& initValue) throw()
-//    {
-//        value.setValue (initValue.getValue());
-//    }
-    
-    template<class ValueType>
-    VariableInternal (ValueType const& initValue) throw()
-    {
-        setValue (initValue);
-    }
-    
-    Type& getValue() throw()
-    {
-        return value;
-    }
-        
-    template<class ValueType>
-    void setValue (ValueType const& newValue) throw()
-    {
-        value = newValue;
-    }
-    
-    void swapValues (Type& other) throw()
-    {
-        value.swapWith (other);
-    }
-    
-private:
-    Type value;
-};
-
-
-#endif // PLONK_VARIABLEINTERNAL_H
+#endif // PLONK_METAVARIABLE_H

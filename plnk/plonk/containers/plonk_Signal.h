@@ -310,6 +310,19 @@ public:
         return SignalBase (internal);
     }
     
+//    bool operator== (SignalBase const& other) const throw()
+//    {
+//        return (this->getInternal() == other.getInternal())       &&
+//               (this->getNumFrames() == other.getNumFrames())     &&
+//               (this->getNumChannels() == other.getNumChannels()) &&
+//               (this->getInternal()->offset == other.getInternal()->offset);
+//    }
+//    
+//    bool operator!= (SignalBase const& other) const throw()
+//    {
+//        return ! (*this == other);
+//    }
+    
 //    PLONK_INLINE_LOW const Buffers& getBuffers() const throw()
 //    {
 //        return this->getInternal()->buffers;
