@@ -153,17 +153,20 @@ public:
         // what a nasty expression!
     }
     
-//    template<class OtherType>
-//    static Variable meta (Variable< Variable<OtherType> > const& other) throw()
-//    {
-//        return Variable<OtherType> (static_cast< VariableInternalBase<OtherType>*> (new MetaVariableInternal<OtherType> (other)));
-//    }
-
     static Variable meta (Meta const& other) throw()
     {
         return Variable (static_cast< VariableInternalBase<Type>*> (new MetaVariableInternal<Type> (other)));
     }
     
+//    template<class OtherType>
+//    static Variable meta (typename Variable<OtherType>::Meta const& other) throw()
+//    {
+//        typedef typename Variable<OtherType>::Internal OtherInternal;
+//        OtherInternal* const otherInternal (static_cast<OtherInternal*> (new MetaVariableInternal<OtherType> (other)));
+//        Internal* const internal (static_cast<Internal*> (new TypeVariableInternal<Type,OtherType> (Variable<OtherType> (otherInternal))));
+//        return Variable (internal);
+//    }
+
     /** Create a Variable that converts from one type to another. */
     template<class OtherType>
     PLONK_INLINE_LOW Variable (OtherType const& other) throw()
