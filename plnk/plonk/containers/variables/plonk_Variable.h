@@ -155,7 +155,7 @@ public:
     
     static Variable meta (Meta const& other) throw()
     {
-        return Variable (static_cast< VariableInternalBase<Type>*> (new MetaVariableInternal<Type> (other)));
+        return Variable (static_cast<Internal*> (new MetaVariableInternal<Type> (other)));
     }
     
 //    template<class OtherType>
@@ -166,7 +166,17 @@ public:
 //        Internal* const internal (static_cast<Internal*> (new TypeVariableInternal<Type,OtherType> (Variable<OtherType> (otherInternal))));
 //        return Variable (internal);
 //    }
+    
+    static Variable clip (Variable const& source, Type minimumValue, Type maximumValue)
+    {
+        return Variable (static_cast<Internal*> (new ClipVariableInternal<Type> (source, minimumValue, maximumValue)));
+    }
 
+    Variable clip (Type minimumValue, Type maximumValue)
+    {
+        return Variable::clip (*this, minimumValue, maximumValue);
+    }
+    
     /** Create a Variable that converts from one type to another. */
     template<class OtherType>
     PLONK_INLINE_LOW Variable (OtherType const& other) throw()

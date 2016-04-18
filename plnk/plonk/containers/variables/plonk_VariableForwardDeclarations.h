@@ -55,6 +55,7 @@ template<class Type, class OtherType>                       class TypeVariableIn
 template<class Type>                                        class ShapeVariableInternal;
 template<class Type>                                        class PatternVariableInternal;
 template<class Type>                                        class MetaVariableInternal;
+template<class Type>                                        class ClipVariableInternal;
 
 typedef Variable<float>     FloatVariable;
 typedef Variable<double>    DoubleVariable;
