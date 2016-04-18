@@ -74,8 +74,6 @@ public:
         TypeFFTBuffers,
         TypeBlockSize,
         TypeSampleRate,
-//        TypeBlockSizes,
-//        TypeSampleRates,
         TypeBool,
         
         NumIOTypes
@@ -120,6 +118,7 @@ public:
         Loop,           ///< Loop control.
         Minimum,        ///< A minimum (e.g., threshold)
         Maximum,        ///< A maximum (e.g., threshold)
+        SampleCount,    ///< A count in samples
         
         BlockSize,          ///< Audio processing block size.
         SampleRate,         ///< Audio processing sample rate.

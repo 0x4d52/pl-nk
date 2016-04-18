@@ -79,6 +79,7 @@ IOKey::Name IOKey::fromInt (const int value) throw()
         IOKey::Loop,
         IOKey::Minimum,
         IOKey::Maximum,
+        IOKey::SampleCount,
         IOKey::BlockSize,
         IOKey::SampleRate,
         IOKey::FilterSampleRate,
@@ -172,6 +173,7 @@ Text IOKey::getName (const int keyIndex) throw()
         "Loop",
         "Minimum",
         "Maximum",
+        "Sample Count",
         
         "Block Size",
         "Sample Rate",
@@ -255,6 +257,7 @@ IOKey::IOType IOKey::getType (const int keyIndex) throw()
         IOKey::TypeUnit,            //"Loop",
         IOKey::TypeUnit,            //"Minimum",
         IOKey::TypeUnit,            //"Maximum",
+        IOKey::TypeVariable,        //"SampleCount",
         
         IOKey::TypeBlockSize,       //"BlockSize"
         IOKey::TypeSampleRate,      //"SampleRate"
@@ -339,7 +342,8 @@ Text IOKey::getTypeName (const int keyIndex) throw()
         "Unit",             //"Loop",
         "Unit",             //"Minimum",
         "Unit",             //"Maximum",
-        
+        "IntVariable",      //"Sample Count"
+
         "BlockSize",        //"BlockSize"
         "SampleRate",       //"SampleRate"
         "SampleRate",       //"FilterSampleRate"

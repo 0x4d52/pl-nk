@@ -47,10 +47,10 @@ template<class SampleType> class ParamChannelInternal;
 PLONK_CHANNELDATA_DECLARE(ParamChannelInternal,SampleType)
 {
     ChannelInternalCore::Data base;
-    int numSmoothSamples;
     int numSmoothSamplesRemaining;
     bool getValueEverySample;
     SampleType currValue;
+    SampleType targetValue;
     SampleType inc;
 };
 
@@ -104,9 +104,10 @@ public:
     {
         Data& data = this->getState();
         VariableType& variable = this->getInputAsVariable (IOKey::Variable);
+        const int numSmoothSamples = ChannelInternalCore::getInputAs<IntVariable> (IOKey::SampleCount).getValue();
         SampleType value (0);
         
-        if (data.getValueEverySample || data.numSmoothSamples == 0)
+        if (data.getValueEverySample || numSmoothSamples == 0)
         {
             SampleType* const outputSamples = this->getOutputSamples();
             const int outputBufferLength = this->getOutputBuffer().length();
@@ -125,12 +126,13 @@ public:
             
             value = variable.nextValue();
 
-            if (value != data.currValue)
+            if (data.targetValue != value)
             {
+                data.targetValue = value;
                 this->getOutputBuffer().setSize (this->getBlockSize().getValue(), false);
              
-                data.numSmoothSamplesRemaining = data.numSmoothSamples;
-                data.inc = (value - data.currValue) / data.numSmoothSamples;
+                data.numSmoothSamplesRemaining = numSmoothSamples;
+                data.inc = (value - data.currValue) / numSmoothSamples;
             }
             
             if (data.numSmoothSamplesRemaining > 0)
@@ -199,7 +201,7 @@ public:
     {
         const double blockSize = (double)BlockSize::getDefault().getValue();
 
-        return UnitInfo ("Param", "A parameter value.",
+        return UnitInfo ("Param", "A parameter value with smoothing.",
                          
                          // output
                          1, 
@@ -208,26 +210,29 @@ public:
                          
                          // inputs
                          IOKey::Variable,       Measure::None,      0.0,                IOLimit::None,
+                         IOKey::SampleCount,    Measure::Samples,   64.0,               IOLimit::Minimum, Measure::Samples,             0.0,
                          IOKey::BlockSize,      Measure::Samples,   blockSize,          IOLimit::Minimum, Measure::Samples,             1.0,
                          IOKey::End);
     }    
     
     /** Create audio rate parameter. */
     static UnitType ar (VariableType const& variable,
-                        const int numSmoothSamples = 64,
+                        IntVariable const& numSmoothSamples = 64,
                         const bool getValueEverySample = false,
                         BlockSize const& preferredBlockSize = BlockSize::getDefault()) throw()
     {
-        plonk_assert (numSmoothSamples > 0);
+        plonk_assert (numSmoothSamples.getValue() >= 0);
         
         Inputs inputs;
         inputs.put (IOKey::Variable, variable);
+        inputs.put (IOKey::SampleCount, numSmoothSamples);
         
-        Data data = { { -1.0, -1.0 }, numSmoothSamples, 0, getValueEverySample, SampleType (0), SampleType (0) };
+        const SampleType initValue = variable.getValue();
+        Data data = { { -1.0, -1.0 }, 0, getValueEverySample, initValue, initValue, SampleType (0) };
         
-        const SampleRate preferredSampleRate = (preferredBlockSize == BlockSize::getDefault()) ?
-                                                SampleRate::getDefault() :
-                                                (SampleRate::getDefault() / BlockSize::getDefault()) * preferredBlockSize;
+        const SampleRate preferredSampleRate = (preferredBlockSize == BlockSize::getDefault())
+                                             ? SampleRate::getDefault()
+                                             : (SampleRate::getDefault() / BlockSize::getDefault()) * preferredBlockSize;
         
         return UnitType::template createFromInputs<ParamChannelInternalType> (inputs, 
                                                                               data,
@@ -241,8 +246,10 @@ public:
     {
         Inputs inputs;
         inputs.put (IOKey::Variable, variable);
+        inputs.put (IOKey::SampleCount, IntVariable (0));
         
-        Data data = { { -1.0, -1.0 }, 0, 0, getValueEverySample, SampleType (0), SampleType (0) };
+        const SampleType initValue = variable.getValue();
+        Data data = { { -1.0, -1.0 }, 0, getValueEverySample, initValue, initValue, SampleType (0) };
         
         return UnitType::template createFromInputs<ParamChannelInternalType> (inputs, 
                                                                               data, 
