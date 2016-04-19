@@ -292,7 +292,9 @@ public:
 template<class ValueType, class IndexType>
 class InterpLinear : public InterpBase<ValueType,IndexType,1,0>
 {
-public:    
+public:
+    typedef InterpBase<ValueType,IndexType,1,0> Base;
+    
     static PLONK_INLINE_HIGH ValueType interp (ValueType const& value0, ValueType const& value1, IndexType const& frac) throw()
     {
         return value0 + ValueType ((value1 - value0) * frac);
@@ -312,6 +314,7 @@ class InterpLinear<ValueType,int> : public InterpBase<ValueType,int,1,0>
 {
 public:
     typedef int IndexType;
+    typedef InterpBase<ValueType,IndexType,1,0> Base;
     
     static PLONK_INLINE_HIGH ValueType interp (ValueType const& value0, ValueType const& value1, IndexType const& frac) throw()
     {
@@ -330,11 +333,13 @@ template<class ValueType, class IndexType>
 class InterpLagrange3 : public InterpBase<ValueType,IndexType,4,1>
 {
 public:
+    typedef InterpBase<ValueType,IndexType,1,0> Base;
+
     static PLONK_INLINE_HIGH ValueType interp (ValueType const& value_1,
-                                    ValueType const& value0,
-                                    ValueType const& value1,
-                                    ValueType const& value2,
-                                    IndexType const& frac) throw()
+                                               ValueType const& value0,
+                                               ValueType const& value1,
+                                               ValueType const& value2,
+                                               IndexType const& frac) throw()
     {        
         const ValueType half = Math<ValueType>::get0_5();
         const ValueType third = Math<ValueType>::get1_3();
@@ -362,12 +367,14 @@ class InterpLagrange3<ValueType,int> : public InterpBase<ValueType,int,4,1>
 {
 public:
     typedef int IndexType;
+    typedef InterpBase<ValueType,IndexType,1,0> Base;
 
+    
     static PLONK_INLINE_HIGH ValueType interp (ValueType const& value_1,
-                                    ValueType const& value0,
-                                    ValueType const& value1,
-                                    ValueType const& value2,
-                                    IndexType const& frac) throw()
+                                               ValueType const& value0,
+                                               ValueType const& value1,
+                                               ValueType const& value2,
+                                               IndexType const& frac) throw()
     {
         (void)value_1;
         (void)value1;

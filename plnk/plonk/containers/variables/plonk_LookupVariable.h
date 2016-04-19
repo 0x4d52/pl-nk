@@ -41,15 +41,13 @@
 
 #include "plonk_VariableInternal.h"
 
-template<class ArrayValueType, class IndexValueType>
+template<class ArrayValueType, class IndexValueType, class InterpType>
 class LookupVariableInternal : public VariableInternalBase<ArrayValueType>
 {
 public:
     typedef Variable<ArrayValueType>                        VariableType;
     typedef Variable<IndexValueType>                        IndexType;
     typedef NumericalArray<ArrayValueType>                  ArrayType;
-    typedef InterpLinear<ArrayValueType,IndexValueType>     InterpType;
-
 
     LookupVariableInternal (ArrayType const& table, IndexType const& i) throw()
     :   array (table), index (i)
@@ -68,23 +66,30 @@ public:
         {
             return ArrayValueType (0);
         }
-        else if (indexValue <= IndexType (0))
+        else if (index <= IndexType (0))
         {
             return array.atUnchecked (0);
+        }
+        else if (indexValue <= InterpType::getOffsetAsIndex())
+        {
+            const int extension            = InterpType::getExtension();
+            const int offset               = InterpType::getOffset();
+            const ArrayValueType* rawArray = array.getArray();
+
+            ArrayValueType temp[extension];
+            
+            for (int i = 0; i < extension; ++i)
+                temp[i] = ((i - offset) < 0) ? rawArray[0] : rawArray[i];
+            
+            return InterpType::lookup (temp, indexValue);
         }
         else
         {
             const int tableLength1 = tableLength - 1;
-            const IndexType indexMax (tableLength1);
+            const int tableLengthEnd = tableLength - InterpType::getExtension() + InterpType::getOffset();
+            const IndexType indexMax (tableLengthEnd);
 
-            if (indexValue >= indexMax)
-            {
-                return array.atUnchecked (tableLength1);
-            }
-            else
-            {
-                return InterpType::lookup (array.getArray(), indexValue);
-            }
+            return (indexValue >= indexMax) ? array.atUnchecked (tableLength1) : InterpType::lookup (array.getArray(), indexValue);
         }
     }
         

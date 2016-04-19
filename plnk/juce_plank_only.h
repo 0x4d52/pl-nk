@@ -1,0 +1,6 @@
+#ifndef JUCE_PLANK_ONLY_JUCE_H_INCLUDED
+#define JUCE_PLANK_ONLY_JUCE_H_INCLUDED
+
+#include "plank/plank.h"
+
+#endif // JUCE_PLANK_ONLY_JUCE_H_INCLUDED

@@ -161,8 +161,24 @@ public:
     template<class IndexValueType>
     static Variable lookup (NumericalArray<Type> table, Variable<IndexValueType> index) throw()
     {
-        return Variable (static_cast<Internal*> (new LookupVariableInternal<Type, IndexValueType> (table, index)));
+        typedef InterpNone<Type, IndexValueType> InterpType;
+        return Variable (static_cast<Internal*> (new LookupVariableInternal<Type, IndexValueType, InterpType> (table, index)));
     }
+    
+    template<class IndexValueType>
+    static Variable lookupLinear (NumericalArray<Type> table, Variable<IndexValueType> index) throw()
+    {
+        typedef InterpLinear<Type, IndexValueType> InterpType;
+        return Variable (static_cast<Internal*> (new LookupVariableInternal<Type, IndexValueType, InterpType> (table, index)));
+    }
+    
+    template<class IndexValueType>
+    static Variable lookupLagrange3 (NumericalArray<Type> table, Variable<IndexValueType> index) throw()
+    {
+        typedef InterpLagrange3<Type, IndexValueType> InterpType;
+        return Variable (static_cast<Internal*> (new LookupVariableInternal<Type, IndexValueType, InterpType> (table, index)));
+    }
+
 
     static Variable clip (Variable const& source, Type minimumValue, Type maximumValue)
     {
