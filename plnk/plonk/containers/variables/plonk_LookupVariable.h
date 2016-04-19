@@ -52,13 +52,14 @@ public:
     LookupVariableInternal (ArrayType const& table, IndexType const& i) throw()
     :   array (table), index (i)
     {
+        plonk_assert (table.length() >= InterpType::getExtension());
     }
     
     ~LookupVariableInternal()
     {
     }
     
-    const ArrayValueType getValueAtIndex (const IndexType indexValue) const
+    const ArrayValueType getValueAtIndex (const IndexValueType indexValue) const
     {
         const int tableLength = array.length();
         
@@ -85,11 +86,29 @@ public:
         }
         else
         {
-            const int tableLength1 = tableLength - 1;
             const int tableLengthEnd = tableLength - InterpType::getExtension() + InterpType::getOffset();
             const IndexType indexMax (tableLengthEnd);
+            
+            if (indexValue >= indexMax)
+            {
+                const int extension            = InterpType::getExtension();
+                const int offset               = InterpType::getOffset();
+                const ArrayValueType* rawArray = array.getArray();
+                int iIndex                     = (int) indexValue - offset;
+                const int tableLength1         = tableLength - 1;
+                const IndexValueType tempIndex = indexValue - tableLength1 + extension - offset;
 
-            return (indexValue >= indexMax) ? array.atUnchecked (tableLength1) : InterpType::lookup (array.getArray(), indexValue);
+                ArrayValueType temp[extension];
+
+                for (int i = 0; i < extension; ++i, ++iIndex)
+                    temp[i] = (iIndex < tableLength) ? rawArray[i] : rawArray[tableLength1];
+
+                return InterpType::lookup (temp, tempIndex);
+            }
+            else
+            {
+                return InterpType::lookup (array.getArray(), indexValue);
+            }
         }
     }
         
