@@ -89,6 +89,7 @@
 #include "../containers/variables/plonk_PatternVariable.h"
 #include "../containers/variables/plonk_MetaVariable.h"
 #include "../containers/variables/plonk_ClipVariable.h"
+#include "../containers/variables/plonk_LookupVariable.h"
 
 #include "../maths/plonk_Constants.h"
 #include "../maths/plonk_Endian.h"

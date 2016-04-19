@@ -158,15 +158,12 @@ public:
         return Variable (static_cast<Internal*> (new MetaVariableInternal<Type> (other)));
     }
     
-//    template<class OtherType>
-//    static Variable meta (typename Variable<OtherType>::Meta const& other) throw()
-//    {
-//        typedef typename Variable<OtherType>::Internal OtherInternal;
-//        OtherInternal* const otherInternal (static_cast<OtherInternal*> (new MetaVariableInternal<OtherType> (other)));
-//        Internal* const internal (static_cast<Internal*> (new TypeVariableInternal<Type,OtherType> (Variable<OtherType> (otherInternal))));
-//        return Variable (internal);
-//    }
-    
+    template<class IndexValueType>
+    static Variable lookup (NumericalArray<Type> table, Variable<IndexValueType> index) throw()
+    {
+        return Variable (static_cast<Internal*> (new LookupVariableInternal<Type, IndexValueType> (table, index)));
+    }
+
     static Variable clip (Variable const& source, Type minimumValue, Type maximumValue)
     {
         return Variable (static_cast<Internal*> (new ClipVariableInternal<Type> (source, minimumValue, maximumValue)));
