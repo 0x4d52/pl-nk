@@ -56,7 +56,8 @@ template<class Type>                                                    class Sh
 template<class Type>                                                    class PatternVariableInternal;
 template<class Type>                                                    class MetaVariableInternal;
 template<class Type>                                                    class ClipVariableInternal;
-template<class ArrayValueType, class IndexValueType, class InterpType>  class LookupVariableInternal;
+template<class ArrayValueType, class IndexValueType, class InterpType>  class LookupMapVariableInternal;
+template<class ArrayValueType, class IndexValueType, class InterpType>  class LookupWaveVariableInternal;
 
 typedef Variable<float>     FloatVariable;
 typedef Variable<double>    DoubleVariable;

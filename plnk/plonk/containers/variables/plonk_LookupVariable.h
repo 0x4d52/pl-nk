@@ -41,21 +41,23 @@
 
 #include "plonk_VariableInternal.h"
 
+//==============================================================================
+
 template<class ArrayValueType, class IndexValueType, class InterpType>
-class LookupVariableInternal : public VariableInternalBase<ArrayValueType>
+class LookupVariableInternalBase : public VariableInternalBase<ArrayValueType>
 {
 public:
     typedef Variable<ArrayValueType>                        VariableType;
     typedef Variable<IndexValueType>                        IndexType;
     typedef NumericalArray<ArrayValueType>                  ArrayType;
-
-    LookupVariableInternal (ArrayType const& table, IndexType const& i) throw()
+    
+    LookupVariableInternalBase (ArrayType const& table, IndexType const& i) throw()
     :   array (table), index (i)
     {
-        plonk_assert (table.length() >= InterpType::getExtension());
+        plonk_assert (table.length() >= (InterpType::getExtension() + InterpType::getOffset()));
     }
     
-    ~LookupVariableInternal()
+    ~LookupVariableInternalBase()
     {
     }
     
@@ -67,54 +69,22 @@ public:
         {
             return ArrayValueType (0);
         }
-        else if (index <= IndexType (0))
-        {
-            return array.atUnchecked (0);
-        }
-        else if (indexValue <= InterpType::getOffsetAsIndex())
+        else
         {
             const int extension            = InterpType::getExtension();
             const int offset               = InterpType::getOffset();
             const ArrayValueType* rawArray = array.getArray();
-
-            ArrayValueType temp[extension];
+            const int tempLength           = extension + offset + 1;
+            int iIndex                     = (int) (indexValue + tableLength) - offset - tableLength; // so negative rounds correctly
+            const IndexValueType tempIndex = plonk::clip (indexValue - iIndex, IndexValueType (0), IndexValueType (tempLength - 1));
             
-            for (int i = 0; i < extension; ++i)
-                temp[i] = ((i - offset) < 0) ? rawArray[0] : rawArray[i];
+            ArrayValueType temp[tempLength];
             
-            return InterpType::lookup (temp, indexValue);
+            for (int i = 0; i < tempLength; ++i, ++iIndex)
+                temp[i] = rawArray[plonk::clip (iIndex, 0, tableLength - 1)];
+            
+            return InterpType::lookup (temp, tempIndex);
         }
-        else
-        {
-            const int tableLengthEnd = tableLength - InterpType::getExtension() + InterpType::getOffset();
-            const IndexType indexMax (tableLengthEnd);
-            
-            if (indexValue >= indexMax)
-            {
-                const int extension            = InterpType::getExtension();
-                const int offset               = InterpType::getOffset();
-                const ArrayValueType* rawArray = array.getArray();
-                int iIndex                     = (int) indexValue - offset;
-                const int tableLength1         = tableLength - 1;
-                const IndexValueType tempIndex = indexValue - tableLength1 + extension - offset;
-
-                ArrayValueType temp[extension];
-
-                for (int i = 0; i < extension; ++i, ++iIndex)
-                    temp[i] = (iIndex < tableLength) ? rawArray[i] : rawArray[tableLength1];
-
-                return InterpType::lookup (temp, tempIndex);
-            }
-            else
-            {
-                return InterpType::lookup (array.getArray(), indexValue);
-            }
-        }
-    }
-        
-    const ArrayValueType getValue() const throw()
-    {
-        return getValueAtIndex (index.getValue());
     }
     
     ArrayValueType* getValuePtr() throw()
@@ -123,19 +93,92 @@ public:
         return nullptr;
     }
     
-    const ArrayValueType nextValue() throw()
-    {
-        return getValueAtIndex (index.nextValue());
-    }
-    
     void setValue (ArrayValueType const&) throw()
     {
         plonk_assertfalse;
     }
     
-private:
+protected:
     ArrayType array;
     IndexType index;
 };
+
+//==============================================================================
+
+template<class ArrayValueType, class IndexValueType, class InterpType>
+class LookupMapVariableInternal : public LookupVariableInternalBase<ArrayValueType,IndexValueType,InterpType>
+{
+public:
+    typedef LookupVariableInternalBase<ArrayValueType,IndexValueType,InterpType>    Base;
+    typedef Variable<ArrayValueType>                                                VariableType;
+    typedef Variable<IndexValueType>                                                IndexType;
+    typedef NumericalArray<ArrayValueType>                                          ArrayType;
+
+    LookupMapVariableInternal (ArrayType const& table, IndexType const& i) throw()
+    :   Base (table, i)
+    {
+    }
+    
+    ~LookupMapVariableInternal()
+    {
+    }
+    
+    const ArrayValueType getValue() const throw()
+    {
+        return this->getValueAtIndex (this->index.getValue());
+    }
+    
+    const ArrayValueType nextValue() throw()
+    {
+        return this->getValueAtIndex (this->index.nextValue());
+    }
+};
+
+///=============================================================================
+
+template<class ArrayValueType, class IndexValueType, class InterpType>
+class LookupWaveVariableInternal : public LookupVariableInternalBase<ArrayValueType,IndexValueType,InterpType>
+{
+public:
+    typedef LookupVariableInternalBase<ArrayValueType,IndexValueType,InterpType>    Base;
+    typedef Variable<ArrayValueType>                                                VariableType;
+    typedef Variable<IndexValueType>                                                IndexType;
+    typedef NumericalArray<ArrayValueType>                                          ArrayType;
+    
+    LookupWaveVariableInternal (ArrayType const& table, IndexType const& i) throw()
+    :   Base (table, i)
+    {
+    }
+    
+    ~LookupWaveVariableInternal()
+    {
+    }
+    
+    const ArrayValueType getValueAtWarppedIndex (IndexValueType index) const
+    {
+        const IndexValueType tableLength = (IndexValueType) this->array.length();
+        
+        while (index < IndexValueType (0))
+            index += tableLength;
+        
+        while (index >= tableLength)
+            index -= tableLength;
+        
+        return this->getValueAtIndex (index);
+    }
+    
+    const ArrayValueType getValue() const throw()
+    {
+        return getValueAtWarppedIndex (this->index.getValue());
+    }
+    
+    const ArrayValueType nextValue() throw()
+    {
+        return getValueAtWarppedIndex (this->index.nextValue());
+    }
+    
+};
+
+
 
 #endif // PLONK_LOOKUPVARIABLE_H

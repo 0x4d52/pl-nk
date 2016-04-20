@@ -113,6 +113,9 @@ public:
             tempBufferPos = tempBufferPosMax;
         }
         
+#warning todo
+        plonk_assertfalse; // !!! MUST CHECK the InterpType::getExtension() change here!!!
+        
         tempBuffers.atUnchecked (channel).zero();
         tempBuffers.atUnchecked (channel).put (tempBufferPos, sourceValue);
 

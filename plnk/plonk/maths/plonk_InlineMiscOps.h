@@ -292,9 +292,7 @@ public:
 template<class ValueType, class IndexType>
 class InterpLinear : public InterpBase<ValueType,IndexType,1,0>
 {
-public:
-    typedef InterpBase<ValueType,IndexType,1,0> Base;
-    
+public:    
     static PLONK_INLINE_HIGH ValueType interp (ValueType const& value0, ValueType const& value1, IndexType const& frac) throw()
     {
         return value0 + ValueType ((value1 - value0) * frac);
@@ -314,7 +312,6 @@ class InterpLinear<ValueType,int> : public InterpBase<ValueType,int,1,0>
 {
 public:
     typedef int IndexType;
-    typedef InterpBase<ValueType,IndexType,1,0> Base;
     
     static PLONK_INLINE_HIGH ValueType interp (ValueType const& value0, ValueType const& value1, IndexType const& frac) throw()
     {
@@ -330,11 +327,9 @@ public:
 };
 
 template<class ValueType, class IndexType>
-class InterpLagrange3 : public InterpBase<ValueType,IndexType,4,1>
+class InterpLagrange3 : public InterpBase<ValueType,IndexType,3,1>
 {
 public:
-    typedef InterpBase<ValueType,IndexType,1,0> Base;
-
     static PLONK_INLINE_HIGH ValueType interp (ValueType const& value_1,
                                                ValueType const& value0,
                                                ValueType const& value1,
@@ -363,13 +358,11 @@ public:
 };
 
 template<class ValueType>
-class InterpLagrange3<ValueType,int> : public InterpBase<ValueType,int,4,1>
+class InterpLagrange3<ValueType,int> : public InterpBase<ValueType,int,3,1>
 {
 public:
     typedef int IndexType;
-    typedef InterpBase<ValueType,IndexType,1,0> Base;
 
-    
     static PLONK_INLINE_HIGH ValueType interp (ValueType const& value_1,
                                                ValueType const& value0,
                                                ValueType const& value1,
