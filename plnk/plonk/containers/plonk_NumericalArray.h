@@ -94,15 +94,16 @@ public:
         else plonk_assertfalse;
 	}
 	
-	static PLONK_INLINE_MID void geom (NumericalType* const dst,
-                                       const UnsignedLong size,
-                                       const NumericalType start,
-                                       const NumericalType grow) throw()
+	static PLONK_INLINE_MID void exponential (NumericalType* const dst,
+                                              const UnsignedLong size,
+                                              const NumericalType start,
+                                              const NumericalType end) throw()
 	{
         if (size >= 2)
         {                        
             NumericalType currentValue = start;
-            
+            const NumericalType grow = plonk::pow (end / start, NumericalType (1) / (size - 1));
+
             for (int i = 0; i < size; ++i)
             {
                 dst[i] = currentValue;
@@ -1501,6 +1502,22 @@ public:
 		
 		return newArray;		
 	}
+    
+    /** Creates a NumericalArray with a given size (length) using a geometric series for given start and end points. */
+    static NumericalArray<NumericalType> exponential (const int size,
+                                                      const NumericalType start,
+                                                      const NumericalType end) throw()
+    {
+        plonk_assert (size >= 2);
+        
+        const int numValues = size < 2 ? 2 : size;
+        
+        NumericalArray<NumericalType> newArray = NumericalArray<NumericalType>::withSize (numValues);
+        NumericalArrayFiller<NumericalType>::exponential (newArray.getArray(), numValues, start, end);
+        
+        return newArray;		
+    }
+
 	
 	/** Creates a NumericalArray with a given size (length) randomly distributed. 
      Values will be between @c lower and @c upper bounds and uniformly distributed. */
