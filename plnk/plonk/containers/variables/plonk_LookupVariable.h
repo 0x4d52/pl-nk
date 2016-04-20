@@ -61,32 +61,6 @@ public:
     {
     }
     
-    const ArrayValueType getValueAtIndex (const IndexValueType indexValue) const
-    {
-        const int tableLength = array.length();
-        
-        if (tableLength == 0)
-        {
-            return ArrayValueType (0);
-        }
-        else
-        {
-            const int extension            = InterpType::getExtension();
-            const int offset               = InterpType::getOffset();
-            const ArrayValueType* rawArray = array.getArray();
-            const int tempLength           = extension + offset + 1;
-            int iIndex                     = (int) (indexValue + tableLength) - offset - tableLength; // so negative rounds correctly
-            const IndexValueType tempIndex = plonk::clip (indexValue - iIndex, IndexValueType (0), IndexValueType (tempLength - 1));
-            
-            ArrayValueType temp[tempLength];
-            
-            for (int i = 0; i < tempLength; ++i, ++iIndex)
-                temp[i] = rawArray[plonk::clip (iIndex, 0, tableLength - 1)];
-            
-            return InterpType::lookup (temp, tempIndex);
-        }
-    }
-    
     ArrayValueType* getValuePtr() throw()
     {
         plonk_assertfalse;
@@ -123,6 +97,32 @@ public:
     {
     }
     
+    const ArrayValueType getValueAtIndex (const IndexValueType indexValue) const
+    {
+        const int tableLength = this->array.length();
+        
+        if (tableLength == 0)
+        {
+            return ArrayValueType (0);
+        }
+        else
+        {
+            const int extension            = InterpType::getExtension();
+            const int offset               = InterpType::getOffset();
+            const ArrayValueType* rawArray = this->array.getArray();
+            const int tempLength           = extension + offset + 1;
+            int iIndex                     = (int) (indexValue + tableLength) - offset - tableLength; // so negative rounds correctly
+            const IndexValueType tempIndex = plonk::clip (indexValue - iIndex, IndexValueType (0), IndexValueType (tempLength - 1));
+            
+            ArrayValueType temp[tempLength];
+            
+            for (int i = 0; i < tempLength; ++i, ++iIndex)
+                temp[i] = rawArray[plonk::clip (iIndex, 0, tableLength - 1)];
+            
+            return InterpType::lookup (temp, tempIndex);
+        }
+    }
+    
     const ArrayValueType getValue() const throw()
     {
         return this->getValueAtIndex (this->index.getValue());
@@ -154,27 +154,40 @@ public:
     {
     }
     
-    const ArrayValueType getValueAtWarppedIndex (IndexValueType index) const
+    const ArrayValueType getValueAtIndex (const IndexValueType indexValue) const
     {
-        const IndexValueType tableLength = (IndexValueType) this->array.length();
+        const int tableLength = this->array.length();
         
-        while (index < IndexValueType (0))
-            index += tableLength;
-        
-        while (index >= tableLength)
-            index -= tableLength;
-        
-        return this->getValueAtIndex (index);
+        if (tableLength == 0)
+        {
+            return ArrayValueType (0);
+        }
+        else
+        {
+            const int extension            = InterpType::getExtension();
+            const int offset               = InterpType::getOffset();
+            const ArrayValueType* rawArray = this->array.getArray();
+            const int tempLength           = extension + offset + 1;
+            int iIndex                     = (int) (indexValue + tableLength) - offset - tableLength; // so negative rounds correctly
+            const IndexValueType tempIndex = plonk::wrap (indexValue - iIndex, IndexValueType (0), IndexValueType (tempLength - 1));
+            
+            ArrayValueType temp[tempLength];
+            
+            for (int i = 0; i < tempLength; ++i, ++iIndex)
+                temp[i] = rawArray[plonk::wrap (iIndex, 0, tableLength - 1)];
+            
+            return InterpType::lookup (temp, tempIndex);
+        }
     }
     
     const ArrayValueType getValue() const throw()
     {
-        return getValueAtWarppedIndex (this->index.getValue());
+        return this->getValueAtIndex (this->index.getValue());
     }
     
     const ArrayValueType nextValue() throw()
     {
-        return getValueAtWarppedIndex (this->index.nextValue());
+        return this->getValueAtIndex (this->index.nextValue());
     }
     
 };
