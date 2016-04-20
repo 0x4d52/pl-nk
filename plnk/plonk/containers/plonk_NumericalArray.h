@@ -112,6 +112,32 @@ public:
 		}
         else plonk_assertfalse;
 	}
+    
+    static PLONK_INLINE_MID void curve (NumericalType* const dst,
+                                        const UnsignedLong size,
+                                        const NumericalType start,
+                                        const NumericalType end,
+                                        const NumericalType curve) throw()
+    {
+        if (size >= 2)
+        {
+            NumericalType currentValue = start;
+
+            const NumericalType diff   = end - start;
+            const NumericalType a1     = diff / (NumericalType (1) - plonk::exp (curve));
+            const NumericalType a2     = start + a1;
+            const NumericalType grow   = plonk::exp (curve / NumericalType (size - 1));
+            NumericalType b1           = a1;
+
+            for (int i = 0; i < size; ++i)
+            {
+                dst[i]       = currentValue;
+                b1          *= grow;
+                currentValue = a2 - b1;
+            }
+        }
+        else plonk_assertfalse;
+    }
 	
 	static PLONK_INLINE_MID void rand (NumericalType* const dst,
                                        const UnsignedLong size,
@@ -1517,6 +1543,23 @@ public:
         
         return newArray;		
     }
+    
+    /** Creates a NumericalArray with a given size (length) using a exponential or logarithmic curve between start and end points. */
+    static NumericalArray<NumericalType> curve (const int size,
+                                                      const NumericalType start,
+                                                      const NumericalType end,
+                                                      const NumericalType curve) throw()
+    {
+        plonk_assert (size >= 2);
+        
+        const int numValues = size < 2 ? 2 : size;
+        
+        NumericalArray<NumericalType> newArray = NumericalArray<NumericalType>::withSize (numValues);
+        NumericalArrayFiller<NumericalType>::curve (newArray.getArray(), numValues, start, end, curve);
+        
+        return newArray;
+    }
+
 
 	
 	/** Creates a NumericalArray with a given size (length) randomly distributed. 
