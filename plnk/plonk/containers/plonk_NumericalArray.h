@@ -138,6 +138,42 @@ public:
         }
         else plonk_assertfalse;
     }
+    
+    static PLONK_INLINE_MID void sine (NumericalType* const dst,
+                                       const UnsignedLong size,
+                                       const NumericalType start,
+                                       const NumericalType end) throw()
+    {
+        if (size >= 2)
+        {
+            const double pi        = Math<double>::getPi();
+            const double piOverTwo = Math<double>::getPi_2();
+            const double half      = Math<double>::get0_5();
+            const double two       = Math<double>::get2();
+            const double sum       = end + start;
+            const double diff      = end - start;
+            const double w         = pi / double (size - 1);
+            
+            double a2 = sum * half;
+            double b1 = two * plonk::cos (w);
+            double y1 = diff * half;
+            double y2 = y1 * plonk::sin (piOverTwo - w);
+            
+            NumericalType currentValue = NumericalType (a2 - y1);
+            
+            for (int i = 0; i < size; ++i)
+            {
+                dst[i]          = currentValue;
+                const double y0 = b1 * y1 - y2;
+                currentValue    = NumericalType (a2 - y0);
+                y2              = y1;
+                y1              = y0;
+            }
+        }
+        else plonk_assertfalse;
+    }
+
+
 	
 	static PLONK_INLINE_MID void rand (NumericalType* const dst,
                                        const UnsignedLong size,
@@ -1559,10 +1595,23 @@ public:
         
         return newArray;
     }
+    
+    /** Creates a NumericalArray with a given size (length) using a sine curve between start and end points. */
+    static NumericalArray<NumericalType> sine (const int size,
+                                               const NumericalType start,
+                                               const NumericalType end) throw()
+    {
+        plonk_assert (size >= 2);
+        
+        const int numValues = size < 2 ? 2 : size;
+        
+        NumericalArray<NumericalType> newArray = NumericalArray<NumericalType>::withSize (numValues);
+        NumericalArrayFiller<NumericalType>::sine (newArray.getArray(), numValues, start, end);
+        
+        return newArray;
+    }
 
-
-	
-	/** Creates a NumericalArray with a given size (length) randomly distributed. 
+	/** Creates a NumericalArray with a given size (length) randomly distributed.
      Values will be between @c lower and @c upper bounds and uniformly distributed. */
 	static NumericalArray<NumericalType> rand (const int size, 
 											   const NumericalType lower, 
