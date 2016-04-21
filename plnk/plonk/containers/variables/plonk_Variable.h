@@ -153,6 +153,10 @@ public:
         // what a nasty expression!
     }
     
+    /** Effectively a Variable< Variable<Type> >.
+     This allows for dynamic repatching of variables at run time. This is really useful for
+     audio parameters, especially where you want to change custom mappings or modulators while audio is runnin.
+     The ParamUnit in the audio signal path will then smooth out any chnages as necessary. */
     static Variable meta (Meta const& other) throw()
     {
         return Variable (static_cast<Internal*> (new MetaVariableInternal<Type> (other)));

@@ -2405,18 +2405,21 @@ public:
 		return Base::indexOfAny (itemsToSearchFor, startIndex);
 	}
     
+    /** A shortcut to create a Variable mapping (linear) for this arary. */
     template<class OtherType>
     Variable<NumericalType> operator[] (Variable<OtherType> const index) const throw()
     {
         return Variable<OtherType>::mapLinear (*this, index);
     }
     
+    /** Create a Variable mapping (linear) for this arary. */
     template<class OtherType>
     Variable<NumericalType> atLinear (Variable<OtherType> const index) const throw()
     {
         return Variable<OtherType>::mapLinear (*this, index);
     }
     
+    /** Create a Variable mapping (Lagrange 3) for this arary. */
     template<class OtherType>
     Variable<NumericalType> atLagrange3 (Variable<OtherType> const index) const throw()
     {

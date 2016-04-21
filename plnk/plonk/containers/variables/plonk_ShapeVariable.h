@@ -100,7 +100,7 @@ public:
         return result;
     }
     
-    void setValue(Type const& newValue) throw()
+    void setValue (Type const& newValue) throw()
     {
         plonk_assertfalse;
     }
