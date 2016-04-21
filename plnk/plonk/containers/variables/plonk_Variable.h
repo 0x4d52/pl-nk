@@ -162,7 +162,7 @@ public:
      The index is clipped at the bounds of the array
      This is useful for mapping parameter values from one range to another without using trig functions. */
     template<class IndexValueType>
-    static Variable map (NumericalArray<Type> table, Variable<IndexValueType> index) throw()
+    static Variable map (NumericalArray<Type> const& table, Variable<IndexValueType> const& index) throw()
     {
         typedef InterpNone<Type, IndexValueType> InterpType;
         return Variable (static_cast<Internal*> (new LookupMapVariableInternal<Type, IndexValueType, InterpType> (table, index)));
@@ -172,7 +172,7 @@ public:
      The index is clipped at the bounds of the array (taking into account the interpolation scheme).
      This is useful for mapping parameter values from one range to another without using trig functions. */
     template<class IndexValueType>
-    static Variable mapLinear (NumericalArray<Type> table, Variable<IndexValueType> index) throw()
+    static Variable mapLinear (NumericalArray<Type> const& table, Variable<IndexValueType> const& index) throw()
     {
         typedef InterpLinear<Type, IndexValueType> InterpType;
         return Variable (static_cast<Internal*> (new LookupMapVariableInternal<Type, IndexValueType, InterpType> (table, index)));
@@ -182,14 +182,14 @@ public:
      The index is clipped at the bounds of the array (taking into account the interpolation scheme).
      This is useful for mapping parameter values from one range to another without using trig functions. */
     template<class IndexValueType>
-    static Variable mapLagrange3 (NumericalArray<Type> table, Variable<IndexValueType> index) throw()
+    static Variable mapLagrange3 (NumericalArray<Type> const& table, Variable<IndexValueType> const& index) throw()
     {
         typedef InterpLagrange3<Type, IndexValueType> InterpType;
         return Variable (static_cast<Internal*> (new LookupMapVariableInternal<Type, IndexValueType, InterpType> (table, index)));
     }
     
     template<class IndexValueType>
-    static Variable lookup (NumericalArray<Type> table, Variable<IndexValueType> index) throw()
+    static Variable lookup (NumericalArray<Type> const& table, Variable<IndexValueType> const& index) throw()
     {
         typedef InterpNone<Type, IndexValueType> InterpType;
         return Variable (static_cast<Internal*> (new LookupWaveVariableInternal<Type, IndexValueType, InterpType> (table, index)));
@@ -199,14 +199,14 @@ public:
      The index is wrapped at the bounds of the array.
      This is useful for looking up wavetables. */
     template<class IndexValueType>
-    static Variable lookupLinear (NumericalArray<Type> table, Variable<IndexValueType> index) throw()
+    static Variable lookupLinear (NumericalArray<Type> const& table, Variable<IndexValueType> const& index) throw()
     {
         typedef InterpLinear<Type, IndexValueType> InterpType;
         return Variable (static_cast<Internal*> (new LookupWaveVariableInternal<Type, IndexValueType, InterpType> (table, index)));
     }
     
     template<class IndexValueType>
-    static Variable lookupLagrange3 (NumericalArray<Type> table, Variable<IndexValueType> index) throw()
+    static Variable lookupLagrange3 (NumericalArray<Type> const& table, Variable<IndexValueType> const& index) throw()
     {
         typedef InterpLagrange3<Type, IndexValueType> InterpType;
         return Variable (static_cast<Internal*> (new LookupWaveVariableInternal<Type, IndexValueType, InterpType> (table, index)));

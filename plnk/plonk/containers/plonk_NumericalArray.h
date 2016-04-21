@@ -43,6 +43,8 @@
 #include "plonk_ContainerForwardDeclarations.h"
 #include "plonk_DynamicContainer.h"
 
+#include "variables/plonk_VariableForwardDeclarations.h"
+
 #include "../maths/plonk_InlineUnaryOps.h"
 #include "../maths/plonk_InlineBinaryOps.h"
 #include "../maths/plonk_InlineMiscOps.h"
@@ -139,10 +141,10 @@ public:
         else plonk_assertfalse;
     }
     
-    static PLONK_INLINE_MID void sine (NumericalType* const dst,
-                                       const UnsignedLong size,
-                                       const NumericalType start,
-                                       const NumericalType end) throw()
+    static PLONK_INLINE_MID void sineCurve (NumericalType* const dst,
+                                            const UnsignedLong size,
+                                            const NumericalType start,
+                                            const NumericalType end) throw()
     {
         if (size >= 2)
         {
@@ -1597,16 +1599,16 @@ public:
     }
     
     /** Creates a NumericalArray with a given size (length) using a sine curve between start and end points. */
-    static NumericalArray<NumericalType> sine (const int size,
-                                               const NumericalType start,
-                                               const NumericalType end) throw()
+    static NumericalArray<NumericalType> sineCurve (const int size,
+                                                    const NumericalType start,
+                                                    const NumericalType end) throw()
     {
         plonk_assert (size >= 2);
         
         const int numValues = size < 2 ? 2 : size;
         
         NumericalArray<NumericalType> newArray = NumericalArray<NumericalType>::withSize (numValues);
-        NumericalArrayFiller<NumericalType>::sine (newArray.getArray(), numValues, start, end);
+        NumericalArrayFiller<NumericalType>::sineCurve (newArray.getArray(), numValues, start, end);
         
         return newArray;
     }
@@ -2402,6 +2404,37 @@ public:
 	{
 		return Base::indexOfAny (itemsToSearchFor, startIndex);
 	}
+    
+    template<class OtherType>
+    Variable<NumericalType> operator[] (Variable<OtherType> const index) const throw()
+    {
+        return Variable<OtherType>::mapLinear (*this, index);
+    }
+    
+    template<class OtherType>
+    Variable<NumericalType> atLinear (Variable<OtherType> const index) const throw()
+    {
+        return Variable<OtherType>::mapLinear (*this, index);
+    }
+    
+    template<class OtherType>
+    Variable<NumericalType> atLagrange3 (Variable<OtherType> const index) const throw()
+    {
+        return Variable<OtherType>::mapLagrange3 (*this, index);
+    }
+
+    template<class OtherType>
+    Variable<NumericalType> wrapAtLinear (Variable<OtherType> const index) const throw()
+    {
+        return Variable<OtherType>::lookupLinear (*this, index);
+    }
+    
+    template<class OtherType>
+    Variable<NumericalType> wrapAtLagrange3 (Variable<OtherType> const index) const throw()
+    {
+        return Variable<OtherType>::lookupLagrange3 (*this, index);
+    }
+
 	
 	/** Search for a particular sub sequence withing the array. */
 	int indexOf (const NumericalType* items, const int startIndex = 0) const throw()
