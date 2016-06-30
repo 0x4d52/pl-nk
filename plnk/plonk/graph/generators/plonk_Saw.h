@@ -112,18 +112,21 @@ class SawChannelInternal
 :   public ChannelInternal<SampleType, PLONK_CHANNELDATA_NAME(SawChannelInternal,SampleType)>
 {
 public:
-    typedef PLONK_CHANNELDATA_NAME(SawChannelInternal,SampleType)     Data;
-    typedef InputDictionary                                     Inputs;
+    typedef PLONK_CHANNELDATA_NAME(SawChannelInternal,SampleType)   Data;
+    typedef InputDictionary                                         Inputs;
 
-    typedef ChannelBase<SampleType>                             ChannelType;
-    typedef SawChannelInternal<SampleType>                      SawInternal;
-    typedef ChannelInternal<SampleType,Data>                    Internal;
-    typedef ChannelInternalBase<SampleType>                     InternalBase;
-    typedef UnitBase<SampleType>                                UnitType;
+    typedef ChannelBase<SampleType>                                 ChannelType;
+    typedef SawChannelInternal<SampleType>                          SawInternal;
+    typedef ChannelInternal<SampleType,Data>                        Internal;
+    typedef ChannelInternalBase<SampleType>                         InternalBase;
+    typedef UnitBase<SampleType>                                    UnitType;
     
-    typedef typename TypeUtility<SampleType>::IndexType         FrequencyType;
-    typedef UnitBase<FrequencyType>                             FrequencyUnitType;
-    typedef NumericalArray<FrequencyType>                       FrequencyBufferType;
+    typedef typename TypeUtility<SampleType>::IndexType             FrequencyType;
+    typedef UnitBase<FrequencyType>                                 FrequencyUnitType;
+    typedef NumericalArray<FrequencyType>                           FrequencyBufferType;
+    
+    typedef typename Data::CurrentValueType                         CurrentValueType;
+    
 
     SawChannelInternal (Inputs const& inputs, 
                         Data const& data, 
@@ -255,6 +258,8 @@ public:
     typedef UnitBase<float>                 FrequencyUnitType;
     typedef NumericalArray<float>           FrequencyBufferType;
     
+    typedef float                           CurrentValueType;
+
     enum Outputs { Output, NumOutputs };
     enum InputIndices  { Frequency, NumInputs };
     enum Buffers { OutputBuffer, FrequencyBuffer, NumBuffers };
@@ -354,7 +359,7 @@ public:
     typedef typename SawInternal::FrequencyUnitType     FrequencyUnitType;
     typedef typename SawInternal::FrequencyBufferType   FrequencyBufferType;
     
-    typedef typename Data::CurrentValueType             CurrentValueType;
+    typedef typename SawInternal::CurrentValueType      CurrentValueType;
 
     
     static PLONK_INLINE_LOW UnitInfos getInfo() throw()

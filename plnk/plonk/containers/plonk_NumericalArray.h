@@ -2464,7 +2464,7 @@ public:
 	Base replace (const NumericalType *find, NumericalArray const& substitute) const throw()
 	{
 		plonk_assert (find != 0);
-		return Base::replace(NumericalArray (find), substitute);
+		return Base::replace (NumericalArray (find), substitute);
 	}
 	
 	Base replace (const NumericalType *find, const NumericalType *substitute) const throw()
@@ -2477,7 +2477,7 @@ public:
 	ObjectArray2DType split (const NumericalType *delimiters) const throw()
 	{
 		plonk_assert (delimiters != 0);
-		return Base::split (NumericalArray(delimiters));
+		return Base::split (NumericalArray (delimiters));
 	}
 
 	ObjectArray2DType splitSequence (const NumericalType *delimitingSequence) const throw()
