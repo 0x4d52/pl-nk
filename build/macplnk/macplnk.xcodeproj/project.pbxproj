@@ -137,6 +137,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7DF2DF1B1D1175440083A548 /* plonk_ClipVariable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = plonk_ClipVariable.h; sourceTree = "<group>"; };
 		A82416C41590B95A004CA012 /* macplnk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = macplnk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A82416C81590B95A004CA012 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		A82416D01590B95A004CA012 /* macplnk-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "macplnk-Info.plist"; sourceTree = "<group>"; };
@@ -626,7 +627,7 @@
 			isa = PBXGroup;
 			children = (
 				A8F0B761160A5DF900066FFA /* ext */,
-				A87762D918A60A1300460E0F /* src */,
+				A87762D918A60A1300460E0F /* plnk */,
 				A8241855159265F9004CA012 /* AudioHost.cpp */,
 				A8241856159265F9004CA012 /* AudioHost.h */,
 				A82416DA1590B95A004CA012 /* AppDelegate.h */,
@@ -649,7 +650,7 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		A87762D918A60A1300460E0F /* src */ = {
+		A87762D918A60A1300460E0F /* plnk */ = {
 			isa = PBXGroup;
 			children = (
 				A87762DA18A60A1300460E0F /* mainpage.h */,
@@ -657,9 +658,9 @@
 				A877635A18A60A1300460E0F /* plink */,
 				A877636E18A60A1300460E0F /* plonk */,
 			);
-			name = src;
-			path = ../../../src;
-			sourceTree = "<group>";
+			name = plnk;
+			path = ../../plnk;
+			sourceTree = SOURCE_ROOT;
 		};
 		A87762DB18A60A1300460E0F /* plank */ = {
 			isa = PBXGroup;
@@ -708,8 +709,9 @@
 				A877630A18A60A1300460E0F /* plank_ThreadLocalStorage.c */,
 				A877630B18A60A1300460E0F /* plank_ThreadLocalStorage.h */,
 			);
-			path = containers;
-			sourceTree = "<group>";
+			name = containers;
+			path = ../../plnk/plank/containers;
+			sourceTree = SOURCE_ROOT;
 		};
 		A87762DD18A60A1300460E0F /* atomic */ = {
 			isa = PBXGroup;
@@ -1020,6 +1022,7 @@
 		A877638F18A60A1300460E0F /* variables */ = {
 			isa = PBXGroup;
 			children = (
+				7DF2DF1B1D1175440083A548 /* plonk_ClipVariable.h */,
 				A877639018A60A1300460E0F /* plonk_BinaryOpVariable.h */,
 				A877639118A60A1300460E0F /* plonk_PatternVariable.h */,
 				A877639218A60A1300460E0F /* plonk_ShapeVariable.h */,
@@ -1557,7 +1560,7 @@
 				A8DBCBF51A8900500049188A /* portaudio */,
 			);
 			name = ext;
-			path = ../../../src/ext;
+			path = ../../../plnk/ext;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1586,7 +1589,7 @@
 		A82416BB1590B95A004CA012 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0430;
+				LastUpgradeCheck = 0730;
 			};
 			buildConfigurationList = A82416BE1590B95A004CA012 /* Build configuration list for PBXProject "macplnk" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -1779,8 +1782,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LIBRARY = "libc++";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
@@ -1795,7 +1800,7 @@
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				MACOSX_DEPLOYMENT_TARGET = "";
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 			};
@@ -1805,7 +1810,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LIBRARY = "libc++";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -1818,7 +1824,7 @@
 				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				MACOSX_DEPLOYMENT_TARGET = "";
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				SDKROOT = macosx;
 			};
 			name = Release;
@@ -1826,6 +1832,7 @@
 		A82416E31590B95A004CA012 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "macplnk/macplnk-Prefix.pch";
@@ -1833,7 +1840,8 @@
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "macplnk/macplnk-Info.plist";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				PRODUCT_BUNDLE_IDENTIFIER = "uwe.ac.uk.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1842,6 +1850,7 @@
 		A82416E41590B95A004CA012 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "macplnk/macplnk-Prefix.pch";
@@ -1849,7 +1858,8 @@
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "macplnk/macplnk-Info.plist";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				PRODUCT_BUNDLE_IDENTIFIER = "uwe.ac.uk.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

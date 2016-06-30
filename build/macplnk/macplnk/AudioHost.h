@@ -40,8 +40,8 @@
 #ifndef AUDIOHOST_H
 #define AUDIOHOST_H
 
-#include "../../../src/plonk/plonk.h"
-#include "../../../src/plonk/hosts/portaudio/plonk_PortAudioAudioHost.h"
+#include "../../../plnk/plonk/plonk.h"
+#include "../../../plnk/plonk/hosts/portaudio/plonk_PortAudioAudioHost.h"
 
 class AudioHost : public PortAudioAudioHost
 {
